@@ -203,204 +203,284 @@ Pakiet biurowy OpenOffice.org - biblioteki.
 # Internationalization
 #
 %package i18n-ar
-Summary:	OpenOffice.org internationalization
+Summary:	OpenOffice.org - interface in Arabic language
+Summary(pl):	OpenOffice.org - interfejs w jêzyku arabskim
 Group:		Applications/Office
 Requires:	openoffice
 
 %description i18n-ar
-OpenOffice.org is an Open Source, community-developed, multi-platform
-office productivity suite.  This package provides resources containing
-menus and dialogs for various languages.
+This package provides resources containing menus and dialogs in
+Arabic language.
+
+%description i18n-ar -l pl
+Ten pakiet dostarcza zasoby zawieraj±ce menu i okna dialogowe w jêzyku
+arabskim.
 
 %package i18n-ca
-Summary:	OpenOffice.org internationalization
+Summary:	OpenOffice.org - interface in Catalan language
+Summary(pl):	OpenOffice.org - interfejs w jêzyku kataloñskim
 Group:		Applications/Office
 Requires:	openoffice
 
 %description i18n-ca
-OpenOffice.org is an Open Source, community-developed, multi-platform
-office productivity suite.  This package provides resources containing
-menus and dialogs for various languages.
+This package provides resources containing menus and dialogs in
+Catalan language.
+
+%description i18n-ca -l pl
+Ten pakiet dostarcza zasoby zawieraj±ce menu i okna dialogowe w jêzyku
+kataloñskim.
 
 %package i18n-da
-Summary:	OpenOffice.org internationalization
+Summary:	OpenOffice.org - interface in Danish language
+Summary(pl):	OpenOffice.org - interfejs w jêzyku duñskim
 Group:		Applications/Office
 Requires:	openoffice
 
 %description i18n-da
-OpenOffice.org is an Open Source, community-developed, multi-platform
-office productivity suite.  This package provides resources containing
-menus and dialogs for various languages.
+This package provides resources containing menus and dialogs in
+Danish language.
+
+%description i18n-da -l pl
+Ten pakiet dostarcza zasoby zawieraj±ce menu i okna dialogowe w jêzyku
+duñskim.
 
 %package i18n-de
-Summary:	OpenOffice.org internationalization
+Summary:	OpenOffice.org - interface in German language
+Summary(pl):	OpenOffice.org - interfejs w jêzyku niemieckim
 Group:		Applications/Office
 Requires:	openoffice
 
 %description i18n-de
-OpenOffice.org is an Open Source, community-developed, multi-platform
-office productivity suite.  This package provides resources containing
-menus and dialogs for various languages.
+This package provides resources containing menus and dialogs in
+German language.
 
-%package i18n-es
-Summary:	OpenOffice.org internationalization
-Group:		Applications/Office
-Requires:	openoffice
-
-%description i18n-es
-OpenOffice.org is an Open Source, community-developed, multi-platform
-office productivity suite.  This package provides resources containing
-menus and dialogs for various languages.
+%description i18n-de -l pl
+Ten pakiet dostarcza zasoby zawieraj±ce menu i okna dialogowe w jêzyku
+niemieckim.
 
 %package i18n-el
-Summary:	OpenOffice.org internationalization
+Summary:	OpenOffice.org - interface in Greek language
+Summary(pl):	OpenOffice.org - interfejs w jêzyku greckim
 Group:		Applications/Office
 Requires:	openoffice
 
 %description i18n-el
-OpenOffice.org is an Open Source, community-developed, multi-platform
-office productivity suite.  This package provides resources containing
-menus and dialogs for various languages.
+This package provides resources containing menus and dialogs in
+Greek language.
+
+%description i18n-el -l pl
+Ten pakiet dostarcza zasoby zawieraj±ce menu i okna dialogowe w jêzyku
+greckim.
 
 %package i18n-en
-Summary:	OpenOffice.org internationalization
+Summary:	OpenOffice.org - interface in English language
+Summary(pl):	OpenOffice.org - interfejs w jêzyku angielskim
 Group:		Applications/Office
 Requires:	openoffice
 
 %description i18n-en
-OpenOffice.org is an Open Source, community-developed, multi-platform
-office productivity suite.  This package provides resources containing
-menus and dialogs for various languages.
+This package provides resources containing menus and dialogs in
+English language.
+
+%description i18n-en -l pl
+Ten pakiet dostarcza zasoby zawieraj±ce menu i okna dialogowe w jêzyku
+angielskim.
+
+%package i18n-es
+Summary:	OpenOffice.org - interface in Spanish language
+Summary(pl):	OpenOffice.org - interfejs w jêzyku hiszpañskim
+Group:		Applications/Office
+Requires:	openoffice
+
+%description i18n-es
+This package provides resources containing menus and dialogs in
+Spanish language.
+
+%description i18n-es -l pl
+Ten pakiet dostarcza zasoby zawieraj±ce menu i okna dialogowe w jêzyku
+hiszpañskim.
 
 %package i18n-fi
-Summary:	OpenOffice.org internationalization
+Summary:	OpenOffice.org - interface in English language
+Summary(pl):	OpenOffice.org - interfejs w jêzyku angielskim
 Group:		Applications/Office
 Requires:	openoffice
 
 %description i18n-fi
-OpenOffice.org is an Open Source, community-developed, multi-platform
-office productivity suite.  This package provides resources containing
-menus and dialogs for various languages.
+This package provides resources containing menus and dialogs in
+Finnish language.
+
+%description i18n-fi -l pl
+Ten pakiet dostarcza zasoby zawieraj±ce menu i okna dialogowe w jêzyku
+fiñskim.
 
 %package i18n-fr
-Summary:	OpenOffice.org internationalization
+Summary:	OpenOffice.org - interface in French language
+Summary(pl):	OpenOffice.org - interfejs w jêzyku francuskim
 Group:		Applications/Office
 Requires:	openoffice
 
 %description i18n-fr
-OpenOffice.org is an Open Source, community-developed, multi-platform
-office productivity suite.  This package provides resources containing
-menus and dialogs for various languages.
+This package provides resources containing menus and dialogs in
+French language.
+
+%description i18n-fr -l pl
+Ten pakiet dostarcza zasoby zawieraj±ce menu i okna dialogowe w jêzyku
+francuskim.
 
 %package i18n-it
-Summary:	OpenOffice.org internationalization
+Summary:	OpenOffice.org - interface in Italian language
+Summary(pl):	OpenOffice.org - interfejs w jêzyku w³oskim
 Group:		Applications/Office
 Requires:	openoffice
 
 %description i18n-it
-OpenOffice.org is an Open Source, community-developed, multi-platform
-office productivity suite.  This package provides resources containing
-menus and dialogs for various languages.
+This package provides resources containing menus and dialogs in
+Italian language.
+
+%description i18n-it -l pl
+Ten pakiet dostarcza zasoby zawieraj±ce menu i okna dialogowe w jêzyku
+w³oskim.
 
 %package i18n-ja
-Summary:	OpenOffice.org internationalization
+Summary:	OpenOffice.org - interface in Japan language
+Summary(pl):	OpenOffice.org - interfejs w jêzyku japoñskim
 Group:		Applications/Office
 Requires:	openoffice
 
 %description i18n-ja
-OpenOffice.org is an Open Source, community-developed, multi-platform
-office productivity suite.  This package provides resources containing
-menus and dialogs for various languages.
+This package provides resources containing menus and dialogs in
+Japan language.
+
+%description i18n-ja -l pl
+Ten pakiet dostarcza zasoby zawieraj±ce menu i okna dialogowe w jêzyku
+japoñskim.
 
 %package i18n-ko
-Summary:	OpenOffice.org internationalization
+Summary:	OpenOffice.org - interface in Korean language
+Summary(pl):	OpenOffice.org - interfejs w jêzyku koreañskim
 Group:		Applications/Office
 Requires:	openoffice
 
 %description i18n-ko
-OpenOffice.org is an Open Source, community-developed, multi-platform
-office productivity suite.  This package provides resources containing
-menus and dialogs for various languages.
+This package provides resources containing menus and dialogs in
+Korean language.
+
+%description i18n-ko -l pl
+Ten pakiet dostarcza zasoby zawieraj±ce menu i okna dialogowe w jêzyku
+koreañskim.
 
 %package i18n-nl
-Summary:	OpenOffice.org internationalization
+Summary:	OpenOffice.org - interface in Dutch language
+Summary(pl):	OpenOffice.org - interfejs w jêzyku holenderskim
 Group:		Applications/Office
 Requires:	openoffice
 
 %description i18n-nl
-OpenOffice.org is an Open Source, community-developed, multi-platform
-office productivity suite.  This package provides resources containing
-menus and dialogs for various languages.
+This package provides resources containing menus and dialogs in
+Dutch language.
+
+%description i18n-nl -l pl
+Ten pakiet dostarcza zasoby zawieraj±ce menu i okna dialogowe w jêzyku
+holenderskim.
 
 %package i18n-pl
-Summary:	OpenOffice.org internationalization
+Summary:	OpenOffice.org - interface in Polish language
+Summary(pl):	OpenOffice.org - interfejs w jêzyku polskim
 Group:		Applications/Office
 Requires:	openoffice
 
 %description i18n-pl
-OpenOffice.org is an Open Source, community-developed, multi-platform
-office productivity suite.  This package provides resources containing
-menus and dialogs for various languages.
+This package provides resources containing menus and dialogs in
+Polish language.
+
+%description i18n-pl -l pl
+Ten pakiet dostarcza zasoby zawieraj±ce menu i okna dialogowe w jêzyku
+polskim.
 
 %package i18n-pt
-Summary:	OpenOffice.org internationalization
+Summary:	OpenOffice.org - interface in Portuguese language
+Summary(pl):	OpenOffice.org - interfejs w jêzyku portugalskim
 Group:		Applications/Office
 Requires:	openoffice
 
 %description i18n-pt
-OpenOffice.org is an Open Source, community-developed, multi-platform
-office productivity suite.  This package provides resources containing
-menus and dialogs for various languages.
+This package provides resources containing menus and dialogs in
+Portuguese language.
+
+%description i18n-pt -l pl
+Ten pakiet dostarcza zasoby zawieraj±ce menu i okna dialogowe w jêzyku
+portugalskim.
 
 %package i18n-ru
-Summary:	OpenOffice.org internationalization
+Summary:	OpenOffice.org - interface in Russian language
+Summary(pl):	OpenOffice.org - interfejs w jêzyku rosyjskim
 Group:		Applications/Office
 Requires:	openoffice
 
 %description i18n-ru
-OpenOffice.org is an Open Source, community-developed, multi-platform
-office productivity suite.  This package provides resources containing
-menus and dialogs for various languages.
+This package provides resources containing menus and dialogs in
+Russian language.
+
+%description i18n-ru -l pl
+Ten pakiet dostarcza zasoby zawieraj±ce menu i okna dialogowe w jêzyku
+rosyjskim.
 
 %package i18n-sv
-Summary:	OpenOffice.org internationalization
+Summary:	OpenOffice.org - interface in Swedish language
+Summary(pl):	OpenOffice.org - interfejs w jêzyku szwedzkim
 Group:		Applications/Office
 Requires:	openoffice
 
 %description i18n-sv
-OpenOffice.org is an Open Source, community-developed, multi-platform
-office productivity suite.  This package provides resources containing
-menus and dialogs for various languages.
+This package provides resources containing menus and dialogs in
+Swedish language.
+
+%description i18n-sv -l pl
+Ten pakiet dostarcza zasoby zawieraj±ce menu i okna dialogowe w jêzyku
+szwedzkim.
 
 %package i18n-tr
-Summary:	OpenOffice.org internationalization
+Summary:	OpenOffice.org - interface in Turkish language
+Summary(pl):	OpenOffice.org - interfejs w jêzyku tureckim
 Group:		Applications/Office
 Requires:	openoffice
 
 %description i18n-tr
-OpenOffice.org is an Open Source, community-developed, multi-platform
-office productivity suite.  This package provides resources containing
-menus and dialogs for various languages.
+This package provides resources containing menus and dialogs in
+Turkish language.
+
+%description i18n-tr -l pl
+Ten pakiet dostarcza zasoby zawieraj±ce menu i okna dialogowe w jêzyku
+tureckim.
 
 %package i18n-zh_CN
-Summary:	OpenOffice.org internationalization
+Summary:	OpenOffice.org - interface in Chinese language for China
+Summary(pl):	OpenOffice.org - interfejs w jêzyku chiñskim dla Chin
 Group:		Applications/Office
 Requires:	openoffice
 
 %description i18n-zh_CN
-OpenOffice.org is an Open Source, community-developed, multi-platform
-office productivity suite.  This package provides resources containing
-menus and dialogs for various languages.
+This package provides resources containing menus and dialogs in
+Chinese language for China.
+
+%description i18n-zh_CN -l pl
+Ten pakiet dostarcza zasoby zawieraj±ce menu i okna dialogowe w jêzyku
+chiñskim dla Chin.
 
 %package i18n-zh_TW
-Summary:	OpenOffice.org internationalization
+Summary:	OpenOffice.org - interface in Chinese language for Taiwan
+Summary(pl):	OpenOffice.org - interfejs w jêzyku chiñskim dla Tajwanu
 Group:		Applications/Office
 Requires:	openoffice
 
 %description i18n-zh_TW
-OpenOffice.org is an Open Source, community-developed, multi-platform
-office productivity suite.  This package provides resources containing
-menus and dialogs for various languages.
+This package provides resources containing menus and dialogs in
+Chinese language for Taiwan.
+
+%description i18n-zh_TW -l pl
+Ten pakiet dostarcza zasoby zawieraj±ce menu i okna dialogowe w jêzyku
+chiñskim dla Tajwanu.
 
 %prep
 %setup -q -n oo_%{version}_src
@@ -978,9 +1058,9 @@ done
 %files i18n-ca -f i18n-ca
 %files i18n-da -f i18n-da
 %files i18n-de -f i18n-de
-%files i18n-es -f i18n-es
 %files i18n-el -f i18n-el
 %files i18n-en -f i18n-en
+%files i18n-es -f i18n-es
 %files i18n-fi -f i18n-fi
 %files i18n-fr -f i18n-fr
 %files i18n-it -f i18n-it
