@@ -1296,7 +1296,7 @@ for lang in $slanglist; do
 			longlang=$(./bin/openoffice-xlate-lang -l "$olang" 2> /dev/null || /bin/true)
 			[ -z "$longlang" ] && continue
 			longlang=$(echo "${longlang}" | sed -e 's#_.*##g')
-			find $RPM_BUILD_ROOT -type d -name "${olang}*" -printf "%%%%lang(${lang}) %%p\n" | sed -e "s#$RPM_BUILD_ROOT##g" >> ${lang}.lang || /bin/true
+			find $RPM_BUILD_ROOT -type d -name "${longlang}*" -printf "%%%%lang(${lang}) %%p\n" | sed -e "s#$RPM_BUILD_ROOT##g" >> ${lang}.lang || /bin/true
 		done
 	fi
 done
