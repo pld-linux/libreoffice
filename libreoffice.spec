@@ -267,6 +267,7 @@ Patch5:		%{name}-pld-nptl.patch
 Patch6:		%{name}-pld-do-not-overwrite-configopt.patch
 Patch7:		%{name}-pld-package-lang.patch
 Patch8:		%{name}-pld-ooo-build-fix.patch
+Patch9:		%{name}-pld-ooo-build-stderr.patch
 
 URL:		http://www.openoffice.org/
 BuildRequires:	ImageMagick
@@ -1051,6 +1052,7 @@ ZH.
 %patch6 -p1
 %patch7 -p1
 %patch8 -p1
+%patch9 -p1
 
 install -d src
 ln -s %{SOURCE1} src/
