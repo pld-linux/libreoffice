@@ -11,13 +11,14 @@
 Summary:	OpenOffice - powerful office suite
 Summary(pl):	OpenOffice - potê¿ny pakiet biurowy
 Name:		openoffice
-Version:	1.0.0
-Release:	0.7
+Version:	1.0.1
+Release:	0.1
 Epoch:		1
 License:	GPL/LGPL
 Group:		X11/Applications
-#Source0:	http://sf1.mirror.openoffice.org/%{version}/oo_%{version}_source.tar.bz2
-Source0:	http://sf1.mirror.openoffice.org/%{version}/OOo_%{version}_source.tar.bz2
+#Source0:	ftp://ftp.openoffice.pl/%{version}/OOo_%{version}_source.tar.bz2
+#Source0:	http://sf1.mirror.openoffice.org/%{version}/OOo_%{version}_source.tar.bz2
+Source0:	ftp://ftp1.openoffice.pl/pub/OpenOffice.ORG/%{version}/OOo_%{version}_source.tar.bz2
 Source1:	ftp://ftp.cs.man.ac.uk/pub/toby/gpc/gpc231.tar.Z
 Source2:	%{name}-db3.jar
 Source3:	%{name}-rsfile.txt
@@ -45,7 +46,6 @@ Patch12:	%{name}-debug-keepsetup.patch
 Patch13:	%{name}-zipdep.patch
 # Remove GPC from linking to GPL/LGPL OO.o code!
 Patch14:	%{name}-remove-gpc.patch
-Patch15:	%{name}-fontcache-1.5.patch
 # Disable stlport from being built
 Patch16:	%{name}-no-stlport.patch
 
@@ -132,7 +132,7 @@ CXX=%{__cxx}
 GCJ=gcj
 export CC CXX GCJ
 
-%setup -q -n oo_1.0_src
+%setup -q -n oo_1.0.1_src
 %patch0 -p1
 %patch1 -p1
 %patch2 -p1
@@ -144,17 +144,16 @@ export CC CXX GCJ
 %patch6 -p1
 %patch7 -p1
 %patch8 -p1
-%patch9 -p1
+#%patch9 -p1
 %patch10 -p1
 %patch11 -p1
-%patch12 -p0
+#%patch12 -p0
 %patch13 -p1
 %patch14 -p1
-%patch15 -p1
 %patch16 -p1
 %patch17 -p1
 %patch18 -p1
-%patch19 -p1
+#%patch19 -p1
 
 install %{SOURCE1} external
 cd external; tar fxz %{SOURCE1}; cp -fr gpc231/* gpc
