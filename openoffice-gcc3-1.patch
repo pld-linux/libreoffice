@@ -25,7 +25,7 @@
  File gid_File_Lib_Stdc
      BIN_FILE_BODY;
 -    Name               = STRING(libstdc++.so.4.0.0);
-+    Name               = STRING(libstdc++.so.5.0.0);
++    Name               = STRING(libstdc++.so.5.0.1);
      Dir                        = GCFG_BINARY_DIR;
      Styles             = (PACKED, SETUPZIP);
  End
@@ -45,8 +45,8 @@
         $(DESTDIRDLL)$/libgcc_s.so              \
 -       $(DESTDIRDLL)$/libstdc++.so.4           \
 -       $(DESTDIRDLL)$/libstdc++.so.4.0.0
-+       $(DESTDIRDLL)$/libstdc++.so.X           \
-+       $(DESTDIRDLL)$/libstdc++.so.X.Y.Z
++       $(DESTDIRDLL)$/libstdc++.so.5           \
++       $(DESTDIRDLL)$/libstdc++.so.5.0.1
  .ELSE
  ADDITIONAL_DLLS= \
  	$(DESTDIRDLL)$/libgcc_s.so.1 		\
@@ -55,16 +55,16 @@
  .IF "$(CCNUMVER)">="000300010000"
  
 -$(DESTDIRDLL)$/libstdc++.so.4.0.0 : $(DLLOUT)$/libstdc++.so.4.0.0 $(DIRLIST)
-+$(DESTDIRDLL)$/libstdc++.so.X.Y.Z : $(DLLOUT)$/libstdc++.so.X.Y.Z $(DIRLIST)
++$(DESTDIRDLL)$/libstdc++.so.5.0.1 : $(DLLOUT)$/libstdc++.so.5.0.1 $(DIRLIST)
         -rm -f $@
 -       $(GNUCOPY) -p $(DLLOUT)$/libstdc++.so.4.0.0 $@
-+       $(GNUCOPY) -p $(DLLOUT)$/libstdc++.so.X.Y.Z $@
++       $(GNUCOPY) -p $(DLLOUT)$/libstdc++.so.5.0.1 $@
  
 -$(DESTDIRDLL)$/libstdc++.so.4 : $(DESTDIRDLL)$/libstdc++.so.4.0.0 $(DIRLIST)
-+$(DESTDIRDLL)$/libstdc++.so.X : $(DESTDIRDLL)$/libstdc++.so.X.Y.Z $(DIRLIST)
++$(DESTDIRDLL)$/libstdc++.so.5 : $(DESTDIRDLL)$/libstdc++.so.5.0.1 $(DIRLIST)
         -rm -f $@
 -       +ln -s libstdc++.so.4.0.0 $@
-+       +ln -s libstdc++.so.X.Y.Z $@
++       +ln -s libstdc++.so.5.0.1 $@
  
  .ELSE
   
