@@ -13,7 +13,7 @@ diff -urN ooo-build-1.3.5.org/patches/OOO_1_1_3/apply ooo-build-1.3.5/patches/OO
  # Fix ODK Java bits
 diff -urN ooo-build-1.3.5.org/patches/OOO_1_1_3/scresplit.diff ooo-build-1.3.5/patches/OOO_1_1_3/scresplit.diff
 --- ooo-build-1.3.5.org/patches/OOO_1_1_3/scresplit.diff	1970-01-01 01:00:00.000000000 +0100
-+++ ooo-build-1.3.5/patches/OOO_1_1_3/scresplit.diff	2004-10-09 18:45:49.679284503 +0200
++++ ooo-build-1.3.5/patches/OOO_1_1_3/scresplit.diff	2004-10-09 19:21:48.470814047 +0200
 @@ -0,0 +1,118 @@
 +Index: inc/sc.hrc
 +===================================================================
@@ -21,8 +21,8 @@ diff -urN ooo-build-1.3.5.org/patches/OOO_1_1_3/scresplit.diff ooo-build-1.3.5/p
 +retrieving revision 1.35
 +retrieving revision 1.35.288.2
 +diff -u -r1.35 -r1.35.288.2
-+--- inc/sc.hrc	3 Dec 2002 15:26:06 -0000	1.35
-++++ inc/sc.hrc	17 Sep 2004 14:25:38 -0000	1.35.288.2
++--- sc/inc/sc.hrc	3 Dec 2002 15:26:06 -0000	1.35
+++++ sc/inc/sc.hrc	17 Sep 2004 14:25:38 -0000	1.35.288.2
 +@@ -1141,8 +1141,12 @@
 + #define RID_TBXCTL_INSOBJ		(SC_RESOURCE_START+40)
 + #define RID_BMP_REFBTN1			(SC_RESOURCE_START+41)
@@ -55,8 +55,8 @@ diff -urN ooo-build-1.3.5.org/patches/OOO_1_1_3/scresplit.diff ooo-build-1.3.5/p
 +retrieving revision 1.31
 +retrieving revision 1.31.166.2
 +diff -u -r1.31 -r1.31.166.2
-+--- source/core/data/global.cxx	17 Apr 2003 09:54:45 -0000	1.31
-++++ source/core/data/global.cxx	17 Sep 2004 14:25:38 -0000	1.31.166.2
++--- sc/source/core/data/global.cxx	17 Apr 2003 09:54:45 -0000	1.31
+++++ sc/source/core/data/global.cxx	17 Sep 2004 14:25:38 -0000	1.31.166.2
 +@@ -1475,10 +1475,12 @@
 + 	USHORT i,j;
 + 	USHORT nDescBlock[] =
@@ -79,8 +79,8 @@ diff -urN ooo-build-1.3.5.org/patches/OOO_1_1_3/scresplit.diff ooo-build-1.3.5/p
 +retrieving revision 1.76.22.8
 +retrieving revision 1.76.22.8.4.2
 +diff -u -r1.76.22.8 -r1.76.22.8.4.2
-+--- source/ui/src/scfuncs.src	10 Sep 2004 14:45:52 -0000	1.76.22.8
-++++ source/ui/src/scfuncs.src	17 Sep 2004 14:25:39 -0000	1.76.22.8.4.2
++--- sc/source/ui/src/scfuncs.src	10 Sep 2004 14:45:52 -0000	1.76.22.8
+++++ sc/source/ui/src/scfuncs.src	17 Sep 2004 14:25:39 -0000	1.76.22.8.4.2
 +@@ -93,10 +93,16 @@
 +  // RID_SC_FUNCTION_DESCRIPTIONS1
 +  // RID_SC_FUNCTION_DESCRIPTIONS2
