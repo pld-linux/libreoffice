@@ -73,6 +73,7 @@ Patch1:		%{name}-pld-config.patch
 Patch2:		%{name}-pld-package-lang.patch
 Patch3:		%{name}-pld-section.patch
 Patch4:		%{name}-pld-section-gtk.patch
+Patch5:		%{name}-pld-leave-home.patch
 
 URL:		http://www.openoffice.org/
 BuildRequires:	ImageMagick
@@ -856,6 +857,7 @@ chiñskim.
 # disable KDE NWF, OOoCUPS and enable GnomeVFS, GnomeCUPS
 %patch4 -p1
 %endif
+%patch5 -p1
 
 install -d src
 ln -s %{SOURCE1} src/
