@@ -1,5 +1,6 @@
 # NOTE:
-#	- build requires about 8-9GB of disk space
+#	- normal build requires little less than 4GB of disk space
+#	- full debug build requires about 9GB of disk space
 # TODO:
 #	- drop requirement on XFree86-static
 #	- drop requirement on nas-devel
@@ -949,12 +950,18 @@ CONFOPTS=" \
 	--with-lang=ALL \
 	--with-x \
 	--without-fonts \
-	--enable-crashdump=no \
 	--enable-fontconfig \
 	--enable-libsn \
 	--enable-libart \
 	--disable-rpath \
+%if 0%{?debug:1}
+	--enable-debug \
+	--enable-crashdump=yes \
+	--enable-symbols=FULL \
+%else
+	--enable-crashdump=no \
 	--disable-symbols \
+%endif
 	--with-num-cpus=$RPM_BUILD_NR_THREADS
 "
 
