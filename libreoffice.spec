@@ -693,7 +693,7 @@ office productivity suite.  This package provides spell checker dictionaries.
 
 %patch29 -p1
 
-#%%patch30 -p1
+%patch30 -p1
 
 rm -f moz/prj/d.lst
 %patch31 -p1
