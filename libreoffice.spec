@@ -30,8 +30,8 @@ Source1:	ftp://ftp.cs.man.ac.uk/pub/toby/gpc/gpc231.tar.Z
 Source2:	%{name}-rsfile.txt
 Source3:	%{name}-rsfile-local.txt
 Source4:	%{name}-xmlparse.sh
-Source6:	http://www.kernel.pl/~adgor/pld/%{name}-desktopfiles-0.1.tar.bz2
-# Source6-md5:	98b43bd3749bb2f3626e04373f5c2d60
+Source6:	http://www.kernel.pl/~adgor/pld/%{name}-desktopfiles-0.2.tar.bz2
+# Source6-md5:	78ae3bef3e98f711b1afe9fb5717b42e
 Source7:	%{name}-wrapper
 Source8:	%{name}-wrapper-component
 Source10:	%{name}-db3.jar
