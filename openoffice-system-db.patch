@@ -140,7 +140,7 @@
 +.IF "$(GUI)"=="UNX"
 +all:
 +	@echo "Since you're running a real OS, we're assuming you have db..."
-+	+$(COPY) /lib$/libdb-4.0.so $(DLLDEST)
++	+$(COPY) /usr$/lib$/libdb-4.0.so $(DLLDEST)
 +	+$(COPY) /usr$/lib$/libdb_cxx-4.0.so $(DLLDEST)
 +	+$(COPY) /usr$/lib$/libdb_java-4.0.so $(DLLDEST)
 +	+$(COPY) /usr$/share$/java$/db.jar $(DLLDEST)
