@@ -13,6 +13,7 @@
 %bcond_without	icons		# new Ximian icons
 %bcond_without	gnomevfs	# gnome-vfs
 %bcond_with	parallel 	# parallel building
+%bcond_with	nptl	# build with nptl support
 
 # not tested
 %bcond_with	gnomecups	# gnome-cups
@@ -253,6 +254,7 @@ Patch601:	%{name}-system-vera-fonts.patch
 Patch602:	%{name}-externalapp.patch
 
 Patch603:	%{name}-stlport.patch
+Patch604:	%{name}-nptl.patch
 
 URL:		http://www.openoffice.org/
 BuildRequires:	ImageMagick
@@ -1074,6 +1076,7 @@ rm -f moz/prj/d.lst
 #%patch602 -p0
 
 %patch603 -p1
+%{?with_nptl:%patch604 -p1}
 
 # gcc 2 include error hack:
 rm -rf autodoc/source/inc/utility
