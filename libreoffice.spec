@@ -193,7 +193,7 @@ Group:		X11/Libraries
 Provides:	%{name}-libs-interface = %{version}-%{release}
 Provides:	libvcl%{subver}li.so
 Obsoletes:	%{name}-libs-kde
-Requires:	%{name}-libs < %{version}-%{release}
+Requires:	%{name}-libs = %{version}-%{release}
 Requires(post):	%{name}-libs = %{version}-%{release}
 
 %description libs-gtk
