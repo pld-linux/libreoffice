@@ -12,7 +12,7 @@
 
 %define		ver		1.1
 %define		rel		1
-%define		ooobver		1.1.54
+%define		ooobver		1.1.55
 %define		subver		645
 %define		fullver		%{ver}.%{rel}
 %define		dfullver	%(echo %{fullver} | tr . _)
@@ -22,12 +22,12 @@ Summary:	OpenOffice - powerful office suite
 Summary(pl):	OpenOffice - potê¿ny pakiet biurowy
 Name:		openoffice
 Version:	%{fullver}
-Release:	1.4%{?with_kde:.kde}%{!?with_kde:.gtk}
+Release:	1.4.1%{?with_kde:.kde}%{!?with_kde:.gtk}
 Epoch:		1
 License:	GPL/LGPL
 Group:		X11/Applications
 Source0:	http://ooo.ximian.com/packages/OOO_%{dfullver}/ooo-build-%{ooobver}.tar.gz
-# Source0-md5:	22a459b68c2534c2213805d1445d947d
+# Source0-md5:	79e885131d99a0a507eb3ffb7ecf19af
 Source1:	http://ooo.ximian.com/packages/OOO_%{dfullver}/OOO_%{dfullver}.tar.bz2
 # Source1-md5:	550381bc429fbbda54cb84758f14e010
 Source2:	http://ooo.ximian.com/packages/ooo-icons-OOO_1_1-9.tar.gz
@@ -37,9 +37,10 @@ Source3:	http://kde.openoffice.org/files/documents/159/1785/ooo-KDE_icons-OOO_1_
 Source10:	http://ep09.pld-linux.org/~adgor/pld/%{name}-desktopfiles-0.2.tar.bz2
 # Source10-md5:	78ae3bef3e98f711b1afe9fb5717b42e
 
+# we keep these in ooo-build repository
 # PLD splash screen
-Source20:	%{name}-about.bmp
-Source21:	%{name}-intro.bmp
+#Source20:	%{name}-about.bmp
+#Source21:	%{name}-intro.bmp
 
 %define		cftp	http://ftp.services.openoffice.org/pub/OpenOffice.org/contrib
 
@@ -68,18 +69,10 @@ Source410:	%{cftp}/helpcontent/helpcontent_88_unix.tgz
 # Source410-md5:	3b00571318e45965dee0545d86306d65
 
 Patch0:		%{name}-rh-disable-spellcheck-all-langs.patch
-Patch1:		%{name}-pld-stlport.patch
-Patch2:		%{name}-pld-config.patch
-Patch3:		%{name}-pld-copy-all-bmp.patch
-Patch4:		%{name}-pld-ooo-build-ldver.patch
-Patch5:		%{name}-pld-nptl.patch
-Patch6:		%{name}-pld-do-not-overwrite-configopt.patch
-Patch7:		%{name}-pld-package-lang.patch
-Patch8:		%{name}-pld-ooo-build-fix.patch
-Patch9:		%{name}-pld-ooo-build-stderr.patch
-Patch10:	%{name}-pld-sh-tcsh.patch
-Patch11:	%{name}-pld-section.patch
-Patch12:	%{name}-pld-section-gtk.patch
+Patch1:		%{name}-pld-config.patch
+Patch2:		%{name}-pld-package-lang.patch
+Patch3:		%{name}-pld-section.patch
+Patch4:		%{name}-pld-section-gtk.patch
 
 URL:		http://www.openoffice.org/
 BuildRequires:	ImageMagick
@@ -860,17 +853,9 @@ chiñskim.
 %patch1 -p1
 %patch2 -p1
 %patch3 -p1
-%patch4 -p1
-%patch5 -p1
-%patch6 -p1
-%patch7 -p1
-%patch8 -p1
-%patch9 -p1
-%patch10 -p1
-%patch11 -p1
 %if ! %{with kde}
 # disable KDE NWF, OOoCUPS and enable GnomeVFS, GnomeCUPS
-%patch12 -p1
+%patch4 -p1
 %endif
 
 install -d src
@@ -878,8 +863,9 @@ ln -s %{SOURCE1} src/
 ln -s %{SOURCE2} src/
 ln -s %{SOURCE3} src/
 
-ln -s %{SOURCE20} src/openabout_pld.bmp
-ln -s %{SOURCE21} src/openintro_pld.bmp
+# we keep these in ooo-build repository
+#ln -s %{SOURCE20} src/openabout_pld.bmp
+#ln -s %{SOURCE21} src/openintro_pld.bmp
 
 %build
 # Make sure we have /proc mounted - otherwise idlc will fail later.
