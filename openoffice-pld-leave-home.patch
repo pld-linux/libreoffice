@@ -1,0 +1,14 @@
+diff -urN ooo-build-1.1.55.org/bin/build-ooo ooo-build-1.1.55/bin/build-ooo
+--- ooo-build-1.1.55.org/bin/build-ooo	2004-05-06 14:39:57.555752856 +0200
++++ ooo-build-1.1.55/bin/build-ooo	2004-05-06 18:11:43.111214832 +0200
+@@ -439,7 +439,9 @@
+ # Don't do a massive painful install
+ export BUILD_MINIMAL="01";
+ # Embedded python dies without Home set
+-export HOME="";
++if test "z$HOME" = "z"; then
++    export HOME="";
++fi
+ cd $OOBUILDDIR
+ # Import all of the OO.o environment
+ if test "z$DISTRO" = "zWin32"; then
