@@ -1,6 +1,8 @@
 # TODO:
 # 	- everything
 #	- PLD vendor list of patches to apply in patches/*/appply?
+#	- --with-system-myspell + myspell package as in Debian
+#	- --with-system-neon - check compilation
 
 # Conditional build:
 %bcond_with	java		# Java support
@@ -284,6 +286,8 @@ BuildRequires:	libxslt-progs
 BuildRequires:	flex
 BuildRequires:	freetype-devel >= 2.1
 BuildRequires:	libstdc++-devel >= 3.2.1
+BuildRequires:	curl-devel
+BuildRequires:	unixODBC-devel
 BuildRequires:	pam-devel
 BuildRequires:	perl
 BuildRequires:	tcsh
@@ -915,7 +919,6 @@ CONFOPTS=" \
 	--with-system-sane-headers \
 	--with-system-x11-extensions-headers \
 	--with-system-unixodbc-headers \
-	--with-system-myspell \
 	--with-system-db \
 	--with-system-curl \
 	--with-system-freetype \
@@ -1016,7 +1019,7 @@ install -d $RPM_BUILD_ROOT%{_desktopdir}
 bzip2 -dc %{SOURCE6} | tar xf - -C $RPM_BUILD_ROOT%{_desktopdir}
 
 # Add in the regcomp tool since some people need it for 3rd party add-ons
-cp -f build/%{build_release_tag}/solver/%{subver}/unxlng*.pro/bin/regcomp $RPM_BUILD_ROOT%{_libdir}/%{name}/program
+cp -f build/OOO_%{dfullver}/solver/%{subver}/unxlng*.pro/bin/regcomp $RPM_BUILD_ROOT%{_libdir}/%{name}/program
 
 # OOo should not install the Vera fonts, they are Required: now
 rm -rf $RPM_BUILD_ROOT%{_libdir}/%{name}/share/fonts/truetype/*
