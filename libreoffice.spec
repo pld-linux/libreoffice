@@ -1244,30 +1244,31 @@ for lang in $RPM_BUILD_ROOT%{_libdir}/%{name}/share/dict/ooo/*.aff; do
 done
 for lang in $RPM_BUILD_ROOT%{_libdir}/%{name}/share/registry/res/*; do
 	[ ! -d "$lang" ] && continue
-	langlist="$langlist $(echo "$lang" | sed -e 's#.*/\(.*\)#\1#g' -e 's#-.*##g')"
+	langlist="$langlist $(echo "$lang" | sed -e 's#.*/\(.*\)#\1#g')"
 done
 for lang in $RPM_BUILD_ROOT%{_libdir}/%{name}/help/*; do
 	[ ! -d "$lang" ] && continue
-        langlist="$langlist $(echo "$lang" | sed -e 's#.*/\(.*\)#\1#g' -e 's#-.*##g')"
+        langlist="$langlist $(echo "$lang" | sed -e 's#.*/\(.*\)#\1#g')"
 done
-langlist=$(echo "$langlist" | tr ' ' '\n' | sort | uniq | xargs)
-echo "LANGLIST [$langlist]"
+langlist=$(echo "$langlist" | tr ' ' '\n' | sort | uniq)
+slanglist=$(echo "$langlist" | awk -F_ ' { print $1) ' | | awk -F- ' { print $1 } ')
 
-for lang in $langlist; do
-	eval `echo "$lang" | awk -F_ ' { print "FLANG=\"" $1 "\"\nSLANG=\"" $2 "\"\nTLANG=\"" $3 "\""; } '`
-	# we take only first code ie xx_YY -> we take xx
-	nlang="$FLANG"
-	# nlonglang=$(../bin/openoffice-xlate-lang -l "$nlang" 2> /dev/null)
-	echo "%%defattr(644,root,root,755)" >> ${nlang}.lang
+echo "LANGLIST [$langlist]"
+echo "SLANGLIST [$slanglist]"
+
+for lang in $slanglist; do
+	# longlang=$(../bin/openoffice-xlate-lang -l "$lang" 2> /dev/null)
+	echo "%%defattr(644,root,root,755)" >> ${lang}.lang
 	# dictionaries
-	echo "%%lang(${nlang}) %{_libdir}/%{name}/share/dict/ooo/*${lang}*" >> ${nlang}.lang
+	echo "%%lang(${lang}) %{_libdir}/%{name}/share/dict/ooo/*${lang}*" >> ${lang}.lang
 	# files from lang_*_list.txt
-	[ -f build/lang_${nlang}_list.txt ] && sed -e "s#$RPM_BUILD_ROOT#%%lang(${nlang}) #g" build/lang_${nlang}_list.txt >> ${nlang}.lang
+	[ -f build/lang_${lang}_list.txt ] && sed -e "s#$RPM_BUILD_ROOT#%%lang(${lang}) #g" build/lang_${lang}_list.txt >> ${lang}.lang
 	# directories with locale specific content
-	find $RPM_BUILD_ROOT -type d | sed -e "s#$RPM_BUILD_ROOT##g" -e "s#\(.*/${nlang}\)\$#%%lang(${nlang}) \1#g" | grep -E '^%%lang' >> ${nlang}.lang || /bin/true
-	if [ -n "$nlonglang" ]; then
-		find $RPM_BUILD_ROOT -type d | sed -e "s#$RPM_BUILD_ROOT##g" -e "s#\(.*/${nlonglang}\)\$#%%lang(${nlang}) \1#g" | grep -E '^%%lang' >> ${nlang}.lang || /bin/true
-	fi
+	find $RPM_BUILD_ROOT -type d | sed -e "s#$RPM_BUILD_ROOT##g" -e "s#\(.*/${lang}\)\$#%%lang(${lang}) \1#g" | grep -E '^%%lang' >> ${lang}.lang || /bin/true
+	otherlang=$(echo "$langlist" | grep -E "^${lang}(-|_)")
+	for olang in $otherlang; do
+		find $RPM_BUILD_ROOT -type d | sed -e "s#$RPM_BUILD_ROOT##g" -e "s#\(.*/${otherlang}\)\$#%%lang(${lang}) \1#g" | grep -E '^%%lang' >> ${lang}.lang || /bin/true
+	done
 done
 
 
