@@ -1,0 +1,23 @@
+diff -Nur config_office/configure.in config_office.new/configure.in
+--- config_office/configure.in	Mon Feb 19 22:11:07 2001
++++ config_office.new/configure.in	Sun Feb 25 18:59:51 2001
+@@ -690,6 +690,9 @@
+    if test "$_os" = "Linux" -a "$_machine_type" = "i686"; then
+       _jdk_middle=`echo $_jdk | $AWK -F. '{ if ($2 != 2) print "false"; else print "true" }'`
+    fi
++   if test "$_os" = "Linux" -a "$_machine_type" = "i586"; then
++      _jdk_middle=`echo $_jdk | $AWK -F. '{ if ($2 != 2) print "false"; else print "true" }'`
++   fi
+    if test "$_os" = "FreeBSD"; then
+       _jdk_middle=`echo $_jdk | $AWK -F. '{ if ($2 != 2) print "false"; else print "true" }'`
+    fi
+@@ -723,6 +726,9 @@
+       fi
+       if test "$_os" = "Linux"; then
+          if test "$_machine_type" = "i686"; then
++            _jdk_minor=`echo $_jdk | $AWK -F. '{ if ($3 != 2) print "false"; else print "true" }'`
++         fi
++	  if test "$_machine_type" = "i586"; then
+             _jdk_minor=`echo $_jdk | $AWK -F. '{ if ($3 != 2) print "false"; else print "true" }'`
+          fi
+          if test "$_machine_type" = "sparc"; then
