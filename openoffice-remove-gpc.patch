@@ -68,14 +68,14 @@ diff -Naur OOO_STABLE_1.orig/gpc.diff OOO_STABLE_1/gpc.diff
 diff -Naur OOO_STABLE_1.orig/solenv/inc/libs.mk OOO_STABLE_1/solenv/inc/libs.mk
 --- OOO_STABLE_1.orig/solenv/inc/libs.mk	Fri Oct 26 17:14:41 2001
 +++ OOO_STABLE_1/solenv/inc/libs.mk	Wed Apr 24 20:50:33 2002
-@@ -70,7 +70,7 @@
- #externe libs in plattform.mk
+@@ -73,7 +73,7 @@
  #
  
+ ICUI18NLIB=-licui18n -licuuc -licule -licudata
 -GPC3RDLIB=-lgpc
 +GPC3RDLIB=-lgpcl
  SALHELPERLIB=-lsalhelper$(UDK_MAJOR)$(COMID)
- XMLSCRIPTLIB =-lxcr$(UPD)$(DLLPOSTFIX)
+ XMLSCRIPTLIB =-lxcr$(OFFICEUPD)$(DLLPOSTFIX)
  COMPHELPERLIB=-lcomphelp2
 diff -Naur OOO_STABLE_1.orig/vcl/source/gdi/poly2.cxx OOO_STABLE_1/vcl/source/gdi/poly2.cxx
 --- OOO_STABLE_1.orig/vcl/source/gdi/poly2.cxx	Thu Mar 22 16:20:15 2001

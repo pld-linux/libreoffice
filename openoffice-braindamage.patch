@@ -243,188 +243,246 @@
  .ENDIF			# "$(APP10LINKRES)" != ""
 --- oo_1.0_src/solenv/inc/_tg_shl.mk.suxx	Fri Jun 14 11:31:07 2002
 +++ oo_1.0_src/solenv/inc/_tg_shl.mk	Fri Jun 14 11:43:39 2002
-@@ -226,10 +226,10 @@
- 	@-+echo 1 ICON $(SHL1ICON) >> $(MISC)$/$(SHL1DEFAULTRES:b).rc
+@@ -231,15 +231,15 @@
  .ENDIF
  .IF "$(use_shl_versions)" != ""
+ .IF "$(USE_SHELL)"!="4nt"
+-	@-+echo #define VERVARIANT	$(BUILD) >> $(MISC)$/$(SHL1DEFAULTRES:b).rc
+-	@-+echo #define ORG_NAME	$(SHL1TARGET)$(DLLPOST) >> $(MISC)$/$(SHL1DEFAULTRES:b).rc
+-	@-+echo #define INTERNAL_NAME $(SHL1TARGET:b) >> $(MISC)$/$(SHL1DEFAULTRES:b).rc
+-	 @-+echo #include \"shlinfo.rc\" >> $(MISC)$/$(SHL1DEFAULTRES:b).rc
++	@-+echo "#define VERVARIANT"	$(BUILD) >> $(MISC)$/$(SHL1DEFAULTRES:b).rc
++	@-+echo "#define ORG_NAME"	$(SHL1TARGET)$(DLLPOST) >> $(MISC)$/$(SHL1DEFAULTRES:b).rc
++	@-+echo "#define INTERNAL_NAME" $(SHL1TARGET:b) >> $(MISC)$/$(SHL1DEFAULTRES:b).rc
++	 @-+echo "#include \"shlinfo.rc\"" >> $(MISC)$/$(SHL1DEFAULTRES:b).rc
+ .ELSE			# "$(USE_SHELL)"!="4nt"
 -	@-+echo #define VERVARIANT	$(BUILD) >> $(MISC)$/$(SHL1DEFAULTRES:b).rc
 -	@-+echo #define ORG_NAME	$(SHL1TARGET)$(DLLPOST) >> $(MISC)$/$(SHL1DEFAULTRES:b).rc
 -	@-+echo #define INTERNAL_NAME $(SHL1TARGET:b) >> $(MISC)$/$(SHL1DEFAULTRES:b).rc
 -	 @-+echo #include "shlinfo.rc" >> $(MISC)$/$(SHL1DEFAULTRES:b).rc
-+	@-+echo "#define VERVARIANT	$(BUILD)" >> $(MISC)$/$(SHL1DEFAULTRES:b).rc
-+	@-+echo "#define ORG_NAME	$(SHL1TARGET)$(DLLPOST)" >> $(MISC)$/$(SHL1DEFAULTRES:b).rc
-+	@-+echo "#define INTERNAL_NAME $(SHL1TARGET:b)" >> $(MISC)$/$(SHL1DEFAULTRES:b).rc
-+	 @-+echo "#include "\"shlinfo.rc\" >> $(MISC)$/$(SHL1DEFAULTRES:b).rc
++	@-+echo "#define VERVARIANT"	$(BUILD) >> $(MISC)$/$(SHL1DEFAULTRES:b).rc
++	@-+echo "#define ORG_NAME"	$(SHL1TARGET)$(DLLPOST) >> $(MISC)$/$(SHL1DEFAULTRES:b).rc
++	@-+echo "#define INTERNAL_NAME" $(SHL1TARGET:b) >> $(MISC)$/$(SHL1DEFAULTRES:b).rc
++	 @-+echo "#include \"shlinfo.rc\"" >> $(MISC)$/$(SHL1DEFAULTRES:b).rc
+ .ENDIF			# "$(USE_SHELL)"!="4nt"
  .ENDIF			# "$(use_shl_versions)" != ""
  	$(RC) -DWIN32 -I$(SOLARTESDIR) $(INCLUDE) $(RCLINKFLAGS) $(MISC)$/$(SHL1DEFAULTRES:b).rc
- .ENDIF			# "$(SHL1DEFAULTRES)"!=""
-@@ -651,10 +651,10 @@
- 	@-+echo 1 ICON $(SHL2ICON) >> $(MISC)$/$(SHL2DEFAULTRES:b).rc
+@@ -693,15 +693,15 @@
  .ENDIF
  .IF "$(use_shl_versions)" != ""
+ .IF "$(USE_SHELL)"!="4nt"
+-	@-+echo #define VERVARIANT	$(BUILD) >> $(MISC)$/$(SHL2DEFAULTRES:b).rc
+-	@-+echo #define ORG_NAME	$(SHL2TARGET)$(DLLPOST) >> $(MISC)$/$(SHL2DEFAULTRES:b).rc
+-	@-+echo #define INTERNAL_NAME $(SHL2TARGET:b) >> $(MISC)$/$(SHL2DEFAULTRES:b).rc
+-	 @-+echo #include \"shlinfo.rc\" >> $(MISC)$/$(SHL2DEFAULTRES:b).rc
++	@-+echo "#define VERVARIANT"	$(BUILD) >> $(MISC)$/$(SHL2DEFAULTRES:b).rc
++	@-+echo "#define ORG_NAME"	$(SHL2TARGET)$(DLLPOST) >> $(MISC)$/$(SHL2DEFAULTRES:b).rc
++	@-+echo "#define INTERNAL_NAME" $(SHL2TARGET:b) >> $(MISC)$/$(SHL2DEFAULTRES:b).rc
++	 @-+echo "#include \"shlinfo.rc\"" >> $(MISC)$/$(SHL2DEFAULTRES:b).rc
+ .ELSE			# "$(USE_SHELL)"!="4nt"
 -	@-+echo #define VERVARIANT	$(BUILD) >> $(MISC)$/$(SHL2DEFAULTRES:b).rc
 -	@-+echo #define ORG_NAME	$(SHL2TARGET)$(DLLPOST) >> $(MISC)$/$(SHL2DEFAULTRES:b).rc
 -	@-+echo #define INTERNAL_NAME $(SHL2TARGET:b) >> $(MISC)$/$(SHL2DEFAULTRES:b).rc
 -	 @-+echo #include "shlinfo.rc" >> $(MISC)$/$(SHL2DEFAULTRES:b).rc
-+	@-+echo "#define VERVARIANT	$(BUILD)" >> $(MISC)$/$(SHL2DEFAULTRES:b).rc
-+	@-+echo "#define ORG_NAME	$(SHL2TARGET)$(DLLPOST)" >> $(MISC)$/$(SHL2DEFAULTRES:b).rc
-+	@-+echo "#define INTERNAL_NAME $(SHL2TARGET:b)" >> $(MISC)$/$(SHL2DEFAULTRES:b).rc
-+	 @-+echo "#include "\"shlinfo.rc\" >> $(MISC)$/$(SHL2DEFAULTRES:b).rc
++	@-+echo "#define VERVARIANT"	$(BUILD) >> $(MISC)$/$(SHL2DEFAULTRES:b).rc
++	@-+echo "#define ORG_NAME"	$(SHL2TARGET)$(DLLPOST) >> $(MISC)$/$(SHL2DEFAULTRES:b).rc
++	@-+echo "#define INTERNAL_NAME" $(SHL2TARGET:b) >> $(MISC)$/$(SHL2DEFAULTRES:b).rc
++	 @-+echo "#include \"shlinfo.rc\"" >> $(MISC)$/$(SHL2DEFAULTRES:b).rc
+ .ENDIF			# "$(USE_SHELL)"!="4nt"
  .ENDIF			# "$(use_shl_versions)" != ""
  	$(RC) -DWIN32 -I$(SOLARTESDIR) $(INCLUDE) $(RCLINKFLAGS) $(MISC)$/$(SHL2DEFAULTRES:b).rc
- .ENDIF			# "$(SHL2DEFAULTRES)"!=""
-@@ -1076,10 +1076,10 @@
- 	@-+echo 1 ICON $(SHL3ICON) >> $(MISC)$/$(SHL3DEFAULTRES:b).rc
+@@ -1155,15 +1155,15 @@
  .ENDIF
  .IF "$(use_shl_versions)" != ""
+ .IF "$(USE_SHELL)"!="4nt"
+-	@-+echo #define VERVARIANT	$(BUILD) >> $(MISC)$/$(SHL3DEFAULTRES:b).rc
+-	@-+echo #define ORG_NAME	$(SHL3TARGET)$(DLLPOST) >> $(MISC)$/$(SHL3DEFAULTRES:b).rc
+-	@-+echo #define INTERNAL_NAME $(SHL3TARGET:b) >> $(MISC)$/$(SHL3DEFAULTRES:b).rc
+-	 @-+echo #include \"shlinfo.rc\" >> $(MISC)$/$(SHL3DEFAULTRES:b).rc
++	@-+echo "#define VERVARIANT"	$(BUILD) >> $(MISC)$/$(SHL3DEFAULTRES:b).rc
++	@-+echo "#define ORG_NAME"	$(SHL3TARGET)$(DLLPOST) >> $(MISC)$/$(SHL3DEFAULTRES:b).rc
++	@-+echo "#define INTERNAL_NAME" $(SHL3TARGET:b) >> $(MISC)$/$(SHL3DEFAULTRES:b).rc
++	 @-+echo "#include \"shlinfo.rc\"" >> $(MISC)$/$(SHL3DEFAULTRES:b).rc
+ .ELSE			# "$(USE_SHELL)"!="4nt"
 -	@-+echo #define VERVARIANT	$(BUILD) >> $(MISC)$/$(SHL3DEFAULTRES:b).rc
 -	@-+echo #define ORG_NAME	$(SHL3TARGET)$(DLLPOST) >> $(MISC)$/$(SHL3DEFAULTRES:b).rc
 -	@-+echo #define INTERNAL_NAME $(SHL3TARGET:b) >> $(MISC)$/$(SHL3DEFAULTRES:b).rc
 -	 @-+echo #include "shlinfo.rc" >> $(MISC)$/$(SHL3DEFAULTRES:b).rc
-+	@-+echo "#define VERVARIANT	$(BUILD)" >> $(MISC)$/$(SHL3DEFAULTRES:b).rc
-+	@-+echo "#define ORG_NAME	$(SHL3TARGET)$(DLLPOST)" >> $(MISC)$/$(SHL3DEFAULTRES:b).rc
-+	@-+echo "#define INTERNAL_NAME $(SHL3TARGET:b)" >> $(MISC)$/$(SHL3DEFAULTRES:b).rc
-+	 @-+echo "#include "\"shlinfo.rc\" >> $(MISC)$/$(SHL3DEFAULTRES:b).rc
++	@-+echo "#define VERVARIANT"	$(BUILD) >> $(MISC)$/$(SHL3DEFAULTRES:b).rc
++	@-+echo "#define ORG_NAME"	$(SHL3TARGET)$(DLLPOST) >> $(MISC)$/$(SHL3DEFAULTRES:b).rc
++	@-+echo "#define INTERNAL_NAME" $(SHL3TARGET:b) >> $(MISC)$/$(SHL3DEFAULTRES:b).rc
++	 @-+echo "#include \"shlinfo.rc\"" >> $(MISC)$/$(SHL3DEFAULTRES:b).rc
+ .ENDIF			# "$(USE_SHELL)"!="4nt"
  .ENDIF			# "$(use_shl_versions)" != ""
  	$(RC) -DWIN32 -I$(SOLARTESDIR) $(INCLUDE) $(RCLINKFLAGS) $(MISC)$/$(SHL3DEFAULTRES:b).rc
- .ENDIF			# "$(SHL3DEFAULTRES)"!=""
-@@ -1501,10 +1501,10 @@
- 	@-+echo 1 ICON $(SHL4ICON) >> $(MISC)$/$(SHL4DEFAULTRES:b).rc
+@@ -1617,15 +1617,15 @@
  .ENDIF
  .IF "$(use_shl_versions)" != ""
+ .IF "$(USE_SHELL)"!="4nt"
+-	@-+echo #define VERVARIANT	$(BUILD) >> $(MISC)$/$(SHL4DEFAULTRES:b).rc
+-	@-+echo #define ORG_NAME	$(SHL4TARGET)$(DLLPOST) >> $(MISC)$/$(SHL4DEFAULTRES:b).rc
+-	@-+echo #define INTERNAL_NAME $(SHL4TARGET:b) >> $(MISC)$/$(SHL4DEFAULTRES:b).rc
+-	 @-+echo #include \"shlinfo.rc\" >> $(MISC)$/$(SHL4DEFAULTRES:b).rc
++	@-+echo "#define VERVARIANT"	$(BUILD) >> $(MISC)$/$(SHL4DEFAULTRES:b).rc
++	@-+echo "#define ORG_NAME"	$(SHL4TARGET)$(DLLPOST) >> $(MISC)$/$(SHL4DEFAULTRES:b).rc
++	@-+echo "#define INTERNAL_NAME" $(SHL4TARGET:b) >> $(MISC)$/$(SHL4DEFAULTRES:b).rc
++	 @-+echo "#include \"shlinfo.rc\"" >> $(MISC)$/$(SHL4DEFAULTRES:b).rc
+ .ELSE			# "$(USE_SHELL)"!="4nt"
 -	@-+echo #define VERVARIANT	$(BUILD) >> $(MISC)$/$(SHL4DEFAULTRES:b).rc
 -	@-+echo #define ORG_NAME	$(SHL4TARGET)$(DLLPOST) >> $(MISC)$/$(SHL4DEFAULTRES:b).rc
 -	@-+echo #define INTERNAL_NAME $(SHL4TARGET:b) >> $(MISC)$/$(SHL4DEFAULTRES:b).rc
 -	 @-+echo #include "shlinfo.rc" >> $(MISC)$/$(SHL4DEFAULTRES:b).rc
-+	@-+echo "#define VERVARIANT	$(BUILD)" >> $(MISC)$/$(SHL4DEFAULTRES:b).rc
-+	@-+echo "#define ORG_NAME	$(SHL4TARGET)$(DLLPOST)" >> $(MISC)$/$(SHL4DEFAULTRES:b).rc
-+	@-+echo "#define INTERNAL_NAME $(SHL4TARGET:b)" >> $(MISC)$/$(SHL4DEFAULTRES:b).rc
-+	 @-+echo "#include "\"shlinfo.rc\" >> $(MISC)$/$(SHL4DEFAULTRES:b).rc
++	@-+echo "#define VERVARIANT"	$(BUILD) >> $(MISC)$/$(SHL4DEFAULTRES:b).rc
++	@-+echo "#define ORG_NAME"	$(SHL4TARGET)$(DLLPOST) >> $(MISC)$/$(SHL4DEFAULTRES:b).rc
++	@-+echo "#define INTERNAL_NAME" $(SHL4TARGET:b) >> $(MISC)$/$(SHL4DEFAULTRES:b).rc
++	 @-+echo "#include \"shlinfo.rc\"" >> $(MISC)$/$(SHL4DEFAULTRES:b).rc
+ .ENDIF			# "$(USE_SHELL)"!="4nt"
  .ENDIF			# "$(use_shl_versions)" != ""
  	$(RC) -DWIN32 -I$(SOLARTESDIR) $(INCLUDE) $(RCLINKFLAGS) $(MISC)$/$(SHL4DEFAULTRES:b).rc
- .ENDIF			# "$(SHL4DEFAULTRES)"!=""
-@@ -1926,10 +1926,10 @@
- 	@-+echo 1 ICON $(SHL5ICON) >> $(MISC)$/$(SHL5DEFAULTRES:b).rc
+@@ -2079,15 +2079,15 @@
  .ENDIF
  .IF "$(use_shl_versions)" != ""
+ .IF "$(USE_SHELL)"!="4nt"
+-	@-+echo #define VERVARIANT	$(BUILD) >> $(MISC)$/$(SHL5DEFAULTRES:b).rc
+-	@-+echo #define ORG_NAME	$(SHL5TARGET)$(DLLPOST) >> $(MISC)$/$(SHL5DEFAULTRES:b).rc
+-	@-+echo #define INTERNAL_NAME $(SHL5TARGET:b) >> $(MISC)$/$(SHL5DEFAULTRES:b).rc
+-	 @-+echo #include \"shlinfo.rc\" >> $(MISC)$/$(SHL5DEFAULTRES:b).rc
++	@-+echo "#define VERVARIANT"	$(BUILD) >> $(MISC)$/$(SHL5DEFAULTRES:b).rc
++	@-+echo "#define ORG_NAME"	$(SHL5TARGET)$(DLLPOST) >> $(MISC)$/$(SHL5DEFAULTRES:b).rc
++	@-+echo "#define INTERNAL_NAME" $(SHL5TARGET:b) >> $(MISC)$/$(SHL5DEFAULTRES:b).rc
++	 @-+echo "#include \"shlinfo.rc\"" >> $(MISC)$/$(SHL5DEFAULTRES:b).rc
+ .ELSE			# "$(USE_SHELL)"!="4nt"
 -	@-+echo #define VERVARIANT	$(BUILD) >> $(MISC)$/$(SHL5DEFAULTRES:b).rc
 -	@-+echo #define ORG_NAME	$(SHL5TARGET)$(DLLPOST) >> $(MISC)$/$(SHL5DEFAULTRES:b).rc
 -	@-+echo #define INTERNAL_NAME $(SHL5TARGET:b) >> $(MISC)$/$(SHL5DEFAULTRES:b).rc
 -	 @-+echo #include "shlinfo.rc" >> $(MISC)$/$(SHL5DEFAULTRES:b).rc
-+	@-+echo "#define VERVARIANT	$(BUILD)" >> $(MISC)$/$(SHL5DEFAULTRES:b).rc
-+	@-+echo "#define ORG_NAME	$(SHL5TARGET)$(DLLPOST)" >> $(MISC)$/$(SHL5DEFAULTRES:b).rc
-+	@-+echo "#define INTERNAL_NAME $(SHL5TARGET:b)" >> $(MISC)$/$(SHL5DEFAULTRES:b).rc
-+	 @-+echo "#include "\"shlinfo.rc\" >> $(MISC)$/$(SHL5DEFAULTRES:b).rc
++	@-+echo "#define VERVARIANT"	$(BUILD) >> $(MISC)$/$(SHL5DEFAULTRES:b).rc
++	@-+echo "#define ORG_NAME"	$(SHL5TARGET)$(DLLPOST) >> $(MISC)$/$(SHL5DEFAULTRES:b).rc
++	@-+echo "#define INTERNAL_NAME" $(SHL5TARGET:b) >> $(MISC)$/$(SHL5DEFAULTRES:b).rc
++	 @-+echo "#include \"shlinfo.rc\"" >> $(MISC)$/$(SHL5DEFAULTRES:b).rc
+ .ENDIF			# "$(USE_SHELL)"!="4nt"
  .ENDIF			# "$(use_shl_versions)" != ""
  	$(RC) -DWIN32 -I$(SOLARTESDIR) $(INCLUDE) $(RCLINKFLAGS) $(MISC)$/$(SHL5DEFAULTRES:b).rc
- .ENDIF			# "$(SHL5DEFAULTRES)"!=""
-@@ -2351,10 +2351,10 @@
- 	@-+echo 1 ICON $(SHL6ICON) >> $(MISC)$/$(SHL6DEFAULTRES:b).rc
+@@ -2541,15 +2541,15 @@
  .ENDIF
  .IF "$(use_shl_versions)" != ""
+ .IF "$(USE_SHELL)"!="4nt"
+-	@-+echo #define VERVARIANT	$(BUILD) >> $(MISC)$/$(SHL6DEFAULTRES:b).rc
+-	@-+echo #define ORG_NAME	$(SHL6TARGET)$(DLLPOST) >> $(MISC)$/$(SHL6DEFAULTRES:b).rc
+-	@-+echo #define INTERNAL_NAME $(SHL6TARGET:b) >> $(MISC)$/$(SHL6DEFAULTRES:b).rc
+-	 @-+echo #include \"shlinfo.rc\" >> $(MISC)$/$(SHL6DEFAULTRES:b).rc
++	@-+echo "#define VERVARIANT"	$(BUILD) >> $(MISC)$/$(SHL6DEFAULTRES:b).rc
++	@-+echo "#define ORG_NAME"	$(SHL6TARGET)$(DLLPOST) >> $(MISC)$/$(SHL6DEFAULTRES:b).rc
++	@-+echo "#define INTERNAL_NAME" $(SHL6TARGET:b) >> $(MISC)$/$(SHL6DEFAULTRES:b).rc
++	 @-+echo "#include \"shlinfo.rc\"" >> $(MISC)$/$(SHL6DEFAULTRES:b).rc
+ .ELSE			# "$(USE_SHELL)"!="4nt"
 -	@-+echo #define VERVARIANT	$(BUILD) >> $(MISC)$/$(SHL6DEFAULTRES:b).rc
 -	@-+echo #define ORG_NAME	$(SHL6TARGET)$(DLLPOST) >> $(MISC)$/$(SHL6DEFAULTRES:b).rc
 -	@-+echo #define INTERNAL_NAME $(SHL6TARGET:b) >> $(MISC)$/$(SHL6DEFAULTRES:b).rc
 -	 @-+echo #include "shlinfo.rc" >> $(MISC)$/$(SHL6DEFAULTRES:b).rc
-+	@-+echo "#define VERVARIANT	$(BUILD)" >> $(MISC)$/$(SHL6DEFAULTRES:b).rc
-+	@-+echo "#define ORG_NAME	$(SHL6TARGET)$(DLLPOST)" >> $(MISC)$/$(SHL6DEFAULTRES:b).rc
-+	@-+echo "#define INTERNAL_NAME $(SHL6TARGET:b)" >> $(MISC)$/$(SHL6DEFAULTRES:b).rc
-+	 @-+echo "#include "\"shlinfo.rc\" >> $(MISC)$/$(SHL6DEFAULTRES:b).rc
++	@-+echo "#define VERVARIANT"	$(BUILD) >> $(MISC)$/$(SHL6DEFAULTRES:b).rc
++	@-+echo "#define ORG_NAME"	$(SHL6TARGET)$(DLLPOST) >> $(MISC)$/$(SHL6DEFAULTRES:b).rc
++	@-+echo "#define INTERNAL_NAME" $(SHL6TARGET:b) >> $(MISC)$/$(SHL6DEFAULTRES:b).rc
++	 @-+echo "#include \"shlinfo.rc\"" >> $(MISC)$/$(SHL6DEFAULTRES:b).rc
+ .ENDIF			# "$(USE_SHELL)"!="4nt"
  .ENDIF			# "$(use_shl_versions)" != ""
  	$(RC) -DWIN32 -I$(SOLARTESDIR) $(INCLUDE) $(RCLINKFLAGS) $(MISC)$/$(SHL6DEFAULTRES:b).rc
- .ENDIF			# "$(SHL6DEFAULTRES)"!=""
-@@ -2776,10 +2776,10 @@
- 	@-+echo 1 ICON $(SHL7ICON) >> $(MISC)$/$(SHL7DEFAULTRES:b).rc
+@@ -3003,15 +3003,15 @@
  .ENDIF
  .IF "$(use_shl_versions)" != ""
+ .IF "$(USE_SHELL)"!="4nt"
+-	@-+echo #define VERVARIANT	$(BUILD) >> $(MISC)$/$(SHL7DEFAULTRES:b).rc
+-	@-+echo #define ORG_NAME	$(SHL7TARGET)$(DLLPOST) >> $(MISC)$/$(SHL7DEFAULTRES:b).rc
+-	@-+echo #define INTERNAL_NAME $(SHL7TARGET:b) >> $(MISC)$/$(SHL7DEFAULTRES:b).rc
+-	 @-+echo #include \"shlinfo.rc\" >> $(MISC)$/$(SHL7DEFAULTRES:b).rc
++	@-+echo "#define VERVARIANT"	$(BUILD) >> $(MISC)$/$(SHL7DEFAULTRES:b).rc
++	@-+echo "#define ORG_NAME"	$(SHL7TARGET)$(DLLPOST) >> $(MISC)$/$(SHL7DEFAULTRES:b).rc
++	@-+echo "#define INTERNAL_NAME" $(SHL7TARGET:b) >> $(MISC)$/$(SHL7DEFAULTRES:b).rc
++	 @-+echo "#include \"shlinfo.rc\"" >> $(MISC)$/$(SHL7DEFAULTRES:b).rc
+ .ELSE			# "$(USE_SHELL)"!="4nt"
 -	@-+echo #define VERVARIANT	$(BUILD) >> $(MISC)$/$(SHL7DEFAULTRES:b).rc
 -	@-+echo #define ORG_NAME	$(SHL7TARGET)$(DLLPOST) >> $(MISC)$/$(SHL7DEFAULTRES:b).rc
 -	@-+echo #define INTERNAL_NAME $(SHL7TARGET:b) >> $(MISC)$/$(SHL7DEFAULTRES:b).rc
 -	 @-+echo #include "shlinfo.rc" >> $(MISC)$/$(SHL7DEFAULTRES:b).rc
-+	@-+echo "#define VERVARIANT	$(BUILD)" >> $(MISC)$/$(SHL7DEFAULTRES:b).rc
-+	@-+echo "#define ORG_NAME	$(SHL7TARGET)$(DLLPOST)" >> $(MISC)$/$(SHL7DEFAULTRES:b).rc
-+	@-+echo "#define INTERNAL_NAME $(SHL7TARGET:b)" >> $(MISC)$/$(SHL7DEFAULTRES:b).rc
-+	 @-+echo "#include "\"shlinfo.rc\" >> $(MISC)$/$(SHL7DEFAULTRES:b).rc
++	@-+echo "#define VERVARIANT"	$(BUILD) >> $(MISC)$/$(SHL7DEFAULTRES:b).rc
++	@-+echo "#define ORG_NAME"	$(SHL7TARGET)$(DLLPOST) >> $(MISC)$/$(SHL7DEFAULTRES:b).rc
++	@-+echo "#define INTERNAL_NAME" $(SHL7TARGET:b) >> $(MISC)$/$(SHL7DEFAULTRES:b).rc
++	 @-+echo "#include \"shlinfo.rc\"" >> $(MISC)$/$(SHL7DEFAULTRES:b).rc
+ .ENDIF			# "$(USE_SHELL)"!="4nt"
  .ENDIF			# "$(use_shl_versions)" != ""
  	$(RC) -DWIN32 -I$(SOLARTESDIR) $(INCLUDE) $(RCLINKFLAGS) $(MISC)$/$(SHL7DEFAULTRES:b).rc
- .ENDIF			# "$(SHL7DEFAULTRES)"!=""
-@@ -3201,10 +3201,10 @@
- 	@-+echo 1 ICON $(SHL8ICON) >> $(MISC)$/$(SHL8DEFAULTRES:b).rc
+@@ -3465,15 +3465,15 @@
  .ENDIF
  .IF "$(use_shl_versions)" != ""
+ .IF "$(USE_SHELL)"!="4nt"
+-	@-+echo #define VERVARIANT	$(BUILD) >> $(MISC)$/$(SHL8DEFAULTRES:b).rc
+-	@-+echo #define ORG_NAME	$(SHL8TARGET)$(DLLPOST) >> $(MISC)$/$(SHL8DEFAULTRES:b).rc
+-	@-+echo #define INTERNAL_NAME $(SHL8TARGET:b) >> $(MISC)$/$(SHL8DEFAULTRES:b).rc
+-	 @-+echo #include \"shlinfo.rc\" >> $(MISC)$/$(SHL8DEFAULTRES:b).rc
++	@-+echo "#define VERVARIANT"	$(BUILD) >> $(MISC)$/$(SHL8DEFAULTRES:b).rc
++	@-+echo "#define ORG_NAME"	$(SHL8TARGET)$(DLLPOST) >> $(MISC)$/$(SHL8DEFAULTRES:b).rc
++	@-+echo "#define INTERNAL_NAME" $(SHL8TARGET:b) >> $(MISC)$/$(SHL8DEFAULTRES:b).rc
++	 @-+echo "#include \"shlinfo.rc\"" >> $(MISC)$/$(SHL8DEFAULTRES:b).rc
+ .ELSE			# "$(USE_SHELL)"!="4nt"
 -	@-+echo #define VERVARIANT	$(BUILD) >> $(MISC)$/$(SHL8DEFAULTRES:b).rc
 -	@-+echo #define ORG_NAME	$(SHL8TARGET)$(DLLPOST) >> $(MISC)$/$(SHL8DEFAULTRES:b).rc
 -	@-+echo #define INTERNAL_NAME $(SHL8TARGET:b) >> $(MISC)$/$(SHL8DEFAULTRES:b).rc
 -	 @-+echo #include "shlinfo.rc" >> $(MISC)$/$(SHL8DEFAULTRES:b).rc
-+	@-+echo "#define VERVARIANT	$(BUILD)" >> $(MISC)$/$(SHL8DEFAULTRES:b).rc
-+	@-+echo "#define ORG_NAME	$(SHL8TARGET)$(DLLPOST)" >> $(MISC)$/$(SHL8DEFAULTRES:b).rc
-+	@-+echo "#define INTERNAL_NAME $(SHL8TARGET:b)" >> $(MISC)$/$(SHL8DEFAULTRES:b).rc
-+	 @-+echo "#include "\"shlinfo.rc\" >> $(MISC)$/$(SHL8DEFAULTRES:b).rc
++	@-+echo "#define VERVARIANT"	$(BUILD) >> $(MISC)$/$(SHL8DEFAULTRES:b).rc
++	@-+echo "#define ORG_NAME"	$(SHL8TARGET)$(DLLPOST) >> $(MISC)$/$(SHL8DEFAULTRES:b).rc
++	@-+echo "#define INTERNAL_NAME" $(SHL8TARGET:b) >> $(MISC)$/$(SHL8DEFAULTRES:b).rc
++	 @-+echo "#include \"shlinfo.rc\"" >> $(MISC)$/$(SHL8DEFAULTRES:b).rc
+ .ENDIF			# "$(USE_SHELL)"!="4nt"
  .ENDIF			# "$(use_shl_versions)" != ""
  	$(RC) -DWIN32 -I$(SOLARTESDIR) $(INCLUDE) $(RCLINKFLAGS) $(MISC)$/$(SHL8DEFAULTRES:b).rc
- .ENDIF			# "$(SHL8DEFAULTRES)"!=""
-@@ -3626,10 +3626,10 @@
- 	@-+echo 1 ICON $(SHL9ICON) >> $(MISC)$/$(SHL9DEFAULTRES:b).rc
+@@ -3927,15 +3927,15 @@
  .ENDIF
  .IF "$(use_shl_versions)" != ""
+ .IF "$(USE_SHELL)"!="4nt"
+-	@-+echo #define VERVARIANT	$(BUILD) >> $(MISC)$/$(SHL9DEFAULTRES:b).rc
+-	@-+echo #define ORG_NAME	$(SHL9TARGET)$(DLLPOST) >> $(MISC)$/$(SHL9DEFAULTRES:b).rc
+-	@-+echo #define INTERNAL_NAME $(SHL9TARGET:b) >> $(MISC)$/$(SHL9DEFAULTRES:b).rc
+-	 @-+echo #include \"shlinfo.rc\" >> $(MISC)$/$(SHL9DEFAULTRES:b).rc
++	@-+echo "#define VERVARIANT"	$(BUILD) >> $(MISC)$/$(SHL9DEFAULTRES:b).rc
++	@-+echo "#define ORG_NAME"	$(SHL9TARGET)$(DLLPOST) >> $(MISC)$/$(SHL9DEFAULTRES:b).rc
++	@-+echo "#define INTERNAL_NAME" $(SHL9TARGET:b) >> $(MISC)$/$(SHL9DEFAULTRES:b).rc
++	 @-+echo "#include \"shlinfo.rc\"" >> $(MISC)$/$(SHL9DEFAULTRES:b).rc
+ .ELSE			# "$(USE_SHELL)"!="4nt"
 -	@-+echo #define VERVARIANT	$(BUILD) >> $(MISC)$/$(SHL9DEFAULTRES:b).rc
 -	@-+echo #define ORG_NAME	$(SHL9TARGET)$(DLLPOST) >> $(MISC)$/$(SHL9DEFAULTRES:b).rc
 -	@-+echo #define INTERNAL_NAME $(SHL9TARGET:b) >> $(MISC)$/$(SHL9DEFAULTRES:b).rc
 -	 @-+echo #include "shlinfo.rc" >> $(MISC)$/$(SHL9DEFAULTRES:b).rc
-+	@-+echo "#define VERVARIANT	$(BUILD)" >> $(MISC)$/$(SHL9DEFAULTRES:b).rc
-+	@-+echo "#define ORG_NAME	$(SHL9TARGET)$(DLLPOST)" >> $(MISC)$/$(SHL9DEFAULTRES:b).rc
-+	@-+echo "#define INTERNAL_NAME $(SHL9TARGET:b)" >> $(MISC)$/$(SHL9DEFAULTRES:b).rc
-+	 @-+echo "#include "\"shlinfo.rc\" >> $(MISC)$/$(SHL9DEFAULTRES:b).rc
++	@-+echo "#define VERVARIANT"	$(BUILD) >> $(MISC)$/$(SHL9DEFAULTRES:b).rc
++	@-+echo "#define ORG_NAME"	$(SHL9TARGET)$(DLLPOST) >> $(MISC)$/$(SHL9DEFAULTRES:b).rc
++	@-+echo "#define INTERNAL_NAME" $(SHL9TARGET:b) >> $(MISC)$/$(SHL9DEFAULTRES:b).rc
++	 @-+echo "#include \"shlinfo.rc\"" >> $(MISC)$/$(SHL9DEFAULTRES:b).rc
+ .ENDIF			# "$(USE_SHELL)"!="4nt"
  .ENDIF			# "$(use_shl_versions)" != ""
  	$(RC) -DWIN32 -I$(SOLARTESDIR) $(INCLUDE) $(RCLINKFLAGS) $(MISC)$/$(SHL9DEFAULTRES:b).rc
- .ENDIF			# "$(SHL9DEFAULTRES)"!=""
-@@ -4051,10 +4051,10 @@
- 	@-+echo 1 ICON $(SHL10ICON) >> $(MISC)$/$(SHL10DEFAULTRES:b).rc
+@@ -4389,15 +4389,15 @@
  .ENDIF
  .IF "$(use_shl_versions)" != ""
+ .IF "$(USE_SHELL)"!="4nt"
+-	@-+echo #define VERVARIANT	$(BUILD) >> $(MISC)$/$(SHL10DEFAULTRES:b).rc
+-	@-+echo #define ORG_NAME	$(SHL10TARGET)$(DLLPOST) >> $(MISC)$/$(SHL10DEFAULTRES:b).rc
+-	@-+echo #define INTERNAL_NAME $(SHL10TARGET:b) >> $(MISC)$/$(SHL10DEFAULTRES:b).rc
+-	 @-+echo #include \"shlinfo.rc\" >> $(MISC)$/$(SHL10DEFAULTRES:b).rc
++	@-+echo "#define VERVARIANT"	$(BUILD) >> $(MISC)$/$(SHL10DEFAULTRES:b).rc
++	@-+echo "#define ORG_NAME"	$(SHL10TARGET)$(DLLPOST) >> $(MISC)$/$(SHL10DEFAULTRES:b).rc
++	@-+echo "#define INTERNAL_NAME" $(SHL10TARGET:b) >> $(MISC)$/$(SHL10DEFAULTRES:b).rc
++	 @-+echo "#include \"shlinfo.rc\"" >> $(MISC)$/$(SHL10DEFAULTRES:b).rc
+ .ELSE			# "$(USE_SHELL)"!="4nt"
 -	@-+echo #define VERVARIANT	$(BUILD) >> $(MISC)$/$(SHL10DEFAULTRES:b).rc
 -	@-+echo #define ORG_NAME	$(SHL10TARGET)$(DLLPOST) >> $(MISC)$/$(SHL10DEFAULTRES:b).rc
 -	@-+echo #define INTERNAL_NAME $(SHL10TARGET:b) >> $(MISC)$/$(SHL10DEFAULTRES:b).rc
 -	 @-+echo #include "shlinfo.rc" >> $(MISC)$/$(SHL10DEFAULTRES:b).rc
-+	@-+echo "#define VERVARIANT	$(BUILD)" >> $(MISC)$/$(SHL10DEFAULTRES:b).rc
-+	@-+echo "#define ORG_NAME	$(SHL10TARGET)$(DLLPOST)" >> $(MISC)$/$(SHL10DEFAULTRES:b).rc
-+	@-+echo "#define INTERNAL_NAME $(SHL10TARGET:b)" >> $(MISC)$/$(SHL10DEFAULTRES:b).rc
-+	 @-+echo "#include "\"shlinfo.rc\" >> $(MISC)$/$(SHL10DEFAULTRES:b).rc
++	@-+echo "#define VERVARIANT"	$(BUILD) >> $(MISC)$/$(SHL10DEFAULTRES:b).rc
++	@-+echo "#define ORG_NAME"	$(SHL10TARGET)$(DLLPOST) >> $(MISC)$/$(SHL10DEFAULTRES:b).rc
++	@-+echo "#define INTERNAL_NAME" $(SHL10TARGET:b) >> $(MISC)$/$(SHL10DEFAULTRES:b).rc
++	 @-+echo "#include \"shlinfo.rc\"" >> $(MISC)$/$(SHL10DEFAULTRES:b).rc
+ .ENDIF			# "$(USE_SHELL)"!="4nt"
  .ENDIF			# "$(use_shl_versions)" != ""
  	$(RC) -DWIN32 -I$(SOLARTESDIR) $(INCLUDE) $(RCLINKFLAGS) $(MISC)$/$(SHL10DEFAULTRES:b).rc
- .ENDIF			# "$(SHL10DEFAULTRES)"!=""
---- oo_1.0_src/solenv/inc/settings.mk.suxx	Fri Jun 14 11:31:14 2002
-+++ oo_1.0_src/solenv/inc/settings.mk	Fri Jun 14 11:43:58 2002
-@@ -617,14 +617,14 @@
- .IF "$(GUI)"=="UNX"
- 	@+echo \# > $(OUT)$/inc$/myworld.mk
- .ELSE			# "$(GUI)"=="UNX"
--	@+echo # > $(OUT)$/inc$/myworld.mk
-+	@+echo "#" > $(OUT)$/inc$/myworld.mk
- .ENDIF			# "$(GUI)"=="UNX"
- .IF "$(common_build)"!=""
- 	@+$(MKOUT) $(subst,$(OUTPATH),$(COMMON_OUTDIR) $(ROUT))
- .IF "$(GUI)"=="UNX"
- 	@+echo \# > {$(subst,$(OUTPATH),$(COMMON_OUTDIR) $(OUT))}$/inc$/myworld.mk
- .ELSE			# "$(GUI)"=="UNX"
--	@+echo # > {$(subst,$(OUTPATH),$(COMMON_OUTDIR) $(OUT))}$/inc$/myworld.mk
-+	@+echo "#" > {$(subst,$(OUTPATH),$(COMMON_OUTDIR) $(OUT))}$/inc$/myworld.mk
- .ENDIF			# "$(GUI)"=="UNX"
- .ENDIF			# "$(common_build)"!=""
- 
-@@ -638,10 +638,10 @@
- 
- %worldremote.mk :
- 	@+$(MKOUT) -r $(ROUT)
--	@+echo # > $(OUT)$/inc$/myworldremote.mk
-+	@+echo "#" > $(OUT)$/inc$/myworldremote.mk
- .IF "$(common_build)"!=""
- 	@+$(MKOUT) -r $(subst,$(OUTPATH),$(COMMON_OUTDIR) $(ROUT))
--	@+echo # > {$(subst,$(OUTPATH),$(COMMON_OUTDIR) $(OUT))}$/inc$/myworldremote.mk
-+	@+echo "#" > {$(subst,$(OUTPATH),$(COMMON_OUTDIR) $(OUT))}$/inc$/myworldremote.mk
- .ENDIF			# "$(common_build)"!=""
- 
- .INCLUDE .IGNORE : $(OUT)$/inc$/myworldremote.mk
 --- oo_1.0_src/solenv/inc/tg_app.mk.suxx	Fri Jun 14 11:31:29 2002
 +++ oo_1.0_src/solenv/inc/tg_app.mk	Fri Jun 14 11:44:23 2002
 @@ -208,8 +208,8 @@
@@ -454,21 +512,30 @@
  
 --- oo_1.0_src/solenv/inc/tg_shl.mk.suxx	Fri Jun 14 11:31:45 2002
 +++ oo_1.0_src/solenv/inc/tg_shl.mk	Fri Jun 14 11:45:07 2002
-@@ -326,10 +326,10 @@
- 	@-+echo 1 ICON $(SHL$(TNR)ICON) >> $(MISC)$/$(SHL$(TNR)DEFAULTRES:b).rc
+@@ -331,15 +331,15 @@
  .ENDIF
  .IF "$(use_shl_versions)" != ""
+ .IF "$(USE_SHELL)"!="4nt"
+-	@-+echo #define VERVARIANT	$(BUILD) >> $(MISC)$/$(SHL$(TNR)DEFAULTRES:b).rc
+-	@-+echo #define ORG_NAME	$(SHL$(TNR)TARGET)$(DLLPOST) >> $(MISC)$/$(SHL$(TNR)DEFAULTRES:b).rc
+-	@-+echo #define INTERNAL_NAME $(SHL$(TNR)TARGET:b) >> $(MISC)$/$(SHL$(TNR)DEFAULTRES:b).rc
+-	 @-+echo #include \"shlinfo.rc\" >> $(MISC)$/$(SHL$(TNR)DEFAULTRES:b).rc
++	@-+echo "#define VERVARIANT"	$(BUILD) >> $(MISC)$/$(SHL$(TNR)DEFAULTRES:b).rc
++	@-+echo "#define ORG_NAME"	$(SHL$(TNR)TARGET)$(DLLPOST) >> $(MISC)$/$(SHL$(TNR)DEFAULTRES:b).rc
++	@-+echo "#define INTERNAL_NAME" $(SHL$(TNR)TARGET:b) >> $(MISC)$/$(SHL$(TNR)DEFAULTRES:b).rc
++	 @-+echo "#include \"shlinfo.rc\"" >> $(MISC)$/$(SHL$(TNR)DEFAULTRES:b).rc
+ .ELSE			# "$(USE_SHELL)"!="4nt"
 -	@-+echo #define VERVARIANT	$(BUILD) >> $(MISC)$/$(SHL$(TNR)DEFAULTRES:b).rc
 -	@-+echo #define ORG_NAME	$(SHL$(TNR)TARGET)$(DLLPOST) >> $(MISC)$/$(SHL$(TNR)DEFAULTRES:b).rc
 -	@-+echo #define INTERNAL_NAME $(SHL$(TNR)TARGET:b) >> $(MISC)$/$(SHL$(TNR)DEFAULTRES:b).rc
 -	 @-+echo #include "shlinfo.rc" >> $(MISC)$/$(SHL$(TNR)DEFAULTRES:b).rc
-+	@-+echo "#define VERVARIANT	$(BUILD)" >> $(MISC)$/$(SHL$(TNR)DEFAULTRES:b).rc
-+	@-+echo "#define ORG_NAME	$(SHL$(TNR)TARGET)$(DLLPOST)" >> $(MISC)$/$(SHL$(TNR)DEFAULTRES:b).rc
-+	@-+echo "#define INTERNAL_NAME $(SHL$(TNR)TARGET:b)" >> $(MISC)$/$(SHL$(TNR)DEFAULTRES:b).rc
-+	 @-+echo "#include "\"shlinfo.rc\" >> $(MISC)$/$(SHL$(TNR)DEFAULTRES:b).rc
++	@-+echo "#define VERVARIANT"	$(BUILD) >> $(MISC)$/$(SHL$(TNR)DEFAULTRES:b).rc
++	@-+echo "#define ORG_NAME"	$(SHL$(TNR)TARGET)$(DLLPOST) >> $(MISC)$/$(SHL$(TNR)DEFAULTRES:b).rc
++	@-+echo "#define INTERNAL_NAME" $(SHL$(TNR)TARGET:b) >> $(MISC)$/$(SHL$(TNR)DEFAULTRES:b).rc
++	 @-+echo "#include \"shlinfo.rc\"" >> $(MISC)$/$(SHL$(TNR)DEFAULTRES:b).rc
+ .ENDIF			# "$(USE_SHELL)"!="4nt"
  .ENDIF			# "$(use_shl_versions)" != ""
  	$(RC) -DWIN32 -I$(SOLARTESDIR) $(INCLUDE) $(RCLINKFLAGS) $(MISC)$/$(SHL$(TNR)DEFAULTRES:b).rc
- .ENDIF			# "$(SHL$(TNR)DEFAULTRES)"!=""
 --- oo_1.0_src/tools/os2/source/wps/makefile.mk.suxx	Fri Jun 14 11:47:53 2002
 +++ oo_1.0_src/tools/os2/source/wps/makefile.mk	Fri Jun 14 11:48:23 2002
 @@ -211,8 +211,8 @@
