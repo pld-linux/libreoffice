@@ -33,6 +33,7 @@ BuildRequires:	db3-devel
 BuildRequires:	autoconf
 BuildRequires:	automake
 BuildRequires:	flex
+BuildRequires:	pam-devel
 %{?!_with_ibm_java:BuildRequires: jdk = 1.3.1_03}
 %{?_with_ibm_java:BuildRequires: ibm-java-sdk}
 %{?!_with_nest:BuildRequires:	gcc <= 3.0.0}
