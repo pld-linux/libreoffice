@@ -283,8 +283,8 @@ chmod +x solenv/bin/zipdep.pl
 ###################
 %build
 cd oo_%{version}_src
-#%{?!_with_ibm_java:JAVA_HOME="/usr/lib/jdk1.3.1_03"}
-#%{?_with_ibm_java:JAVA_HOME="/usr/lib/IBMJava2-13"}
+#%%{?!_with_ibm_java:JAVA_HOME="/usr/lib/jdk1.3.1_03"}
+#%%{?_with_ibm_java:JAVA_HOME="/usr/lib/IBMJava2-13"}
 CC=%{__cc}
 CXX=%{__cxx}
 GCJ=gcj
@@ -339,7 +339,7 @@ mv f0_061.zip %{installpath}/%{langinst}/normal/f0_061
 
 install -d $RPM_BUILD_ROOT%{_libdir}/openoffice
 
-#%{init_xdisplay}
+#%%{init_xdisplay}
 RESPONSE_FILE=$PWD/rsfile.ins
 OLDPATH="`pwd`"
 cd %{installpath}/%{langinst}/normal/
@@ -400,7 +400,7 @@ EOF
 
 #  ./setup -R:$RESPONSE_FILE
 cd "$OLDPATH"
-#%{kill_xdisplay}
+#%%{kill_xdisplay}
 
 # Copy all localized resources to destination directory
 install -d $RPM_BUILD_ROOT%{_libdir}/openoffice/program/resource
