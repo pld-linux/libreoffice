@@ -33,11 +33,10 @@ License:	GPL/LGPL
 Group:		X11/Applications
 # Source0:	http://ooo.ximian.com/packages/OOO_1_1_2/ooo-build-%{ooobver}.tar.gz
 Source0:	http://ooo.ximian.com/packages/snap/ooo-build-ooo-build-1-3-%{ooobver}-20041112.tar.gz
-# Source0:	ooo-build-ooo-build-1-3-%{ooobver}-20042412.tar.gz
 # Source0-md5:	cc6fd08174597bdd0f1793a6dcc818a7
 # Source1:	http://ooo.ximian.com/packages/OOO_%{dfullver}/OOO_%{dfullver}.tar.bz2
 Source1:	http://mirrors.sunsite.dk/openoffice/stable/%{fullver}/OOo_%{fullver}_source.tar.gz
-# Source1-md5:	f7f13576ad04e6a958dcd9d4cb569538
+# Source1-md5:	20c10db97865ae4c51dc827d668b8939
 Source2:	http://ooo.ximian.com/packages/ooo-icons-OOO_1_1-10.tar.gz
 # Source2-md5:	be79d3cb5f64d2c0ac8a75e65a59cb09
 Source3:	http://kde.openoffice.org/files/documents/159/1975/ooo-KDE_icons-OOO_1_1-0.3.tar.gz
