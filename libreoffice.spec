@@ -2008,8 +2008,6 @@ rm -rf $RPM_BUILD_ROOT%{_libdir}/%{name}/share/fonts/truetype/*
 # Copy fixed OpenSymbol to correct location
 install -d $RPM_BUILD_ROOT%{_fontsdir}/TTF
 install fonts/opens___.ttf $RPM_BUILD_ROOT%{_fontsdir}/TTF
-# %%ghost the fonts.cache-1 file
-touch $RPM_BUILD_ROOT%{_fontsdir}/openoffice/fonts.cache-1
 
 # We don't need spadmin (gtk) or the setup application
 rm -f $RPM_BUILD_ROOT%{_libdir}/%{name}/setup
