@@ -906,11 +906,11 @@ rm -f moz/prj/d.lst
 %patch344 -p0 
 
 # CUPS support
-%patch351 -p0
-%patch352 -p0 
-%patch353 -p0 
+#%patch351 -p0
+#%patch352 -p0 
+#%patch353 -p0 
 #%patch354 -p0
-%patch355 -p0
+#%patch355 -p0
 
 # gui 
 %patch361 -p0 
@@ -932,9 +932,9 @@ rm -f moz/prj/d.lst
 %patch381 -p0
 
 # fontconfig
-%patch391 -p0
-%patch392 -p0
-%patch393 -p0
+#%patch391 -p0
+#%patch392 -p0
+#%patch393 -p0
 
 # gcc 2 include error hack:
 rm -rf autodoc/source/inc/utility
