@@ -1080,10 +1080,10 @@ chmod 755 $RPM_BUILD_ROOT%{_libdir}/%{name}/program/*
 rm -rf $RPM_BUILD_ROOT
 
 %post
-fontpostinst %{name}
+fontpostinst TTF %{_fontsdir}/%{name}
 
 %postun
-fontpostinst %{name}
+fontpostinst TTF %{_fontsdir}/%{name}
 
 %files
 %defattr(644,root,root,755)
