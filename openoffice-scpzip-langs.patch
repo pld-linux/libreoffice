@@ -1,0 +1,45 @@
+--- oo_1.1_src/scptools/source/linker/scpzip.cxx.jj	2001-12-05 08:12:02.000000000 -0500
++++ oo_1.1_src/scptools/source/linker/scpzip.cxx	2003-02-05 09:31:36.000000000 -0500
+@@ -363,6 +363,7 @@ void ZipFile( SiFile* pFile, USHORT nLan
+ 	if( pFile->IsArchive() || pFile->IsPacked() )
+ 	{
+ 		ByteString aPackedname;
++		BOOL makeLink;
+ 		if( bOldSetupZIPStyle && pFile->IsSetupZip() )
+ 			aPackedname = "f_0000";
+ 		else
+@@ -385,7 +386,33 @@ void ZipFile( SiFile* pFile, USHORT nLan
+ 		if( !pFile->IsSetupZip() && aDestination.Exists() )
+ 			aDestination.Kill();
+ 
+-		if( pFile->IsArchive() )
++		makeLink = TRUE;
++		if( nLang == 1 )
++			makeLink = FALSE;
++		else
++		{
++			const char *p, *q;
++
++			p = pFile->GetID().GetBuffer();
++			q = strchr (p, '\0');
++			if (q > p + 5 && strcmp (q - 5, "_Lang") == 0)
++				makeLink = FALSE;
++			else
++			{
++				p = pFile->GetName().GetBuffer();
++				q = strchr (p, '\0');
++				if (q > p + 4 && strcmp (q - 4, ".res") == 0)
++					makeLink = FALSE;
++			}
++		}
++		if ( makeLink )
++		{
++			ByteString linkName = "../../01/normal/";
++
++			linkName += aPackedname;
++			symlink (linkName.GetBuffer(), aDestination.GetFull().GetBuffer());
++		}
++		else if( pFile->IsArchive() )
+ 		{
+ 			SiDirEntry aEntry(aSource);
+ 			FileCopier aCpy( aEntry, aDestination );

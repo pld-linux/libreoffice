@@ -1,0 +1,51 @@
+--- scp/prj/build.lst.orig	2003-07-15 14:35:49.000000000 +0000
++++ scp/prj/build.lst	2003-12-16 13:48:20.000000000 +0000
+@@ -17,5 +17,4 @@
+ cp	scp\source\kde							nmake	-	u	cp_kde NULL
+ cp	scp\source\gnome						nmake	-	u	cp_gnome NULL
+ cp	scp\source\lingu						nmake	-	all	cp_lingu NULL
+-cp	scp\source\python						nmake   -       all     cp_python NULL
+-cp	scp\util								nmake	-	all	cp_util cp_crashrep cp_calc cp_chart cp_draw cp_fonts cp_gbl cp_grffilt cp_impress cp_javafilter cp_math cp_off cp_office_root cp_lingu cp_cde.u cp_kde.u cp_gnome.u cp_python NULL
++cp	scp\util								nmake	-	all	cp_util cp_crashrep cp_calc cp_chart cp_draw cp_fonts cp_gbl cp_grffilt cp_impress cp_javafilter cp_math cp_off cp_office_root cp_lingu cp_cde.u cp_kde.u cp_gnome.u NULL
+--- scp/util/makefile.mk.orig	2003-12-16 13:45:31.000000000 +0000
++++ scp/util/makefile.mk	2003-12-16 13:51:41.000000000 +0000
+@@ -109,8 +109,7 @@
+                 files_chart.par         \
+                 files_grafik.par        \
+                 files_lingu.par         \
+-                dir.par					\
+-                python.par
++                dir.par
+ .IF "$(SOLAR_JAVA)"!=""
+ SCP1FILES +=    module_javafilter.par	\
+                 profile_javafilter.par	\
+@@ -119,8 +118,6 @@
+                 udk_pure_java.par
+ .ENDIF
+ 
+-#python.par
+-
+ .IF "$(GUI)"=="UNX"
+ SCP1FILES += \
+         dir_psprint.par   \
+@@ -134,8 +131,7 @@
+         files_cde.par		\
+         unxbasic_kde.par	\
+         unxbasic_gnome.par	\
+-        unxbasic_cde.par \
+-        unxbasic_python.par
++        unxbasic_cde.par
+ .ELSE
+ SCP1FILES += \
+         basic.par
+@@ -148,9 +144,7 @@
+         system_impress.par      \
+         system_draw.par         \
+         system_math.par         \
+-        system_chart.par	\
+-        winbasic_python.par
+-
++        system_chart.par
+ .ENDIF
+ 
+ .IF "$(ENABLE_CRASHDUMP)" != "" || "$(PRODUCT)" == "" 

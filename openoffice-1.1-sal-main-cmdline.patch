@@ -1,0 +1,140 @@
+--- oo_1.1rc3_src/vcl/unx/source/app/salmain.cxx.sal-main-cmdline	2003-07-31 23:34:39.000000000 -0400
++++ oo_1.1rc3_src/vcl/unx/source/app/salmain.cxx	2003-08-25 04:38:27.000000000 -0400
+@@ -93,6 +93,10 @@ int main( int argc, char *argv[] )
+ 		setrlimit( RLIMIT_NOFILE, &aLimit );
+ 	}
+ 		
++#ifdef LINUX
++    extern void osl_setCommandArgs(sal_Char* aArgs[], sal_uInt32 nArgs);
++    osl_setCommandArgs(argv, argc);
++#endif
+     SVMain();
+ 
+ 	// #75628# avoid calling atexit and fini since this core-dumps if calling pgp-java
+--- oo_1.1rc3_src/sal/inc/sal/main.h.sal-main-cmdline	2001-02-27 05:44:53.000000000 -0500
++++ oo_1.1rc3_src/sal/inc/sal/main.h	2003-08-25 04:37:48.000000000 -0400
+@@ -118,8 +118,18 @@ int WINAPI WinMain( HINSTANCE _hinst, HI
+ 	return sal_main(); \
+ }
+ 
++#elif defined(LINUX)
+ 
+-#else	/* ! SAL_W32 */
++extern "C" void osl_setCommandArgs(sal_Char* aArgs[], sal_uInt32 nArgs);
++
++#define SAL_DEFINE_CRT_ENTRY()					\
++int main(int argc, char *argv[])				\
++{												\
++	osl_setCommandArgs(argv, argc);				\
++	return sal_main();							\
++}
++
++#else	/* ! SAL_W32 && ! LINUX */
+ 
+ #define SAL_DEFINE_CRT_ENTRY() \
+ int main() \
+--- oo_1.1rc3_src/sal/osl/unx/process.c.sal-main-cmdline	2003-07-02 09:34:17.000000000 -0400
++++ oo_1.1rc3_src/sal/osl/unx/process.c	2003-08-25 04:40:23.000000000 -0400
+@@ -308,12 +308,17 @@ sal_Char *getCmdLine()
+ }
+ #endif
+ 
+-#ifdef CMD_ARG_PROC_STREAM
++#if defined( CMD_ARG_PROC_STREAM ) || defined( CMD_ARG_FROM_MAIN )
+ /*
+  *  mfe: this is for Linux
+  *       (and which other Unix flavours?)
+  */
++#ifdef CMD_ARG_PROC_STREAM
+ sal_Char *getCmdLine()
++#else
++#define ALTERNATE_GETCMDLINE alternate_getCmdLine
++static sal_Char *ALTERNATE_GETCMDLINE()
++#endif
+ {
+ 	FILE *fp;
+ 	sal_Char  name[PATH_MAX + 1];
+@@ -450,6 +455,61 @@ sal_Char *getCmdLine()
+ }
+ #endif
+ 
++#ifdef CMD_ARG_FROM_MAIN
++/* Command line arguments copied from main() entry values.  */
++static sal_Char *aCommandArgs = NULL;
++static sal_uInt32 nCommandSize = 0;
++
++sal_Char *getCmdLine()
++{
++	if (aCommandArgs)
++	{
++		sal_Char *pchr = (sal_Char *) malloc(nCommandSize);
++		return pchr && memcpy(pchr, aCommandArgs, nCommandSize) ? pchr : NULL;
++	}
++#ifdef ALTERNATE_GETCMDLINE
++	return ALTERNATE_GETCMDLINE();
++#else
++	return NULL;
++#endif
++}
++
++void osl_setCommandArgs(sal_Char* aArgs[], sal_uInt32 nArgs)
++{
++	sal_uInt32 nArg, nSize = 0;
++
++	for (nArg = 0; nArg < nArgs; nArg++)
++		nSize += strlen(aArgs[nArg]) + 1;
++
++	// NOTE: a sal_Char is always 1 anyway
++	nCommandSize = nSize + 1;
++	aCommandArgs = (sal_Char *) calloc(nCommandSize, sizeof(sal_Char));
++
++	if (aCommandArgs)
++	{
++		sal_Char *pszArgs = aCommandArgs;
++		for (nArg = 0; nArg < nArgs; nArg++)
++		{
++			nSize = strlen(aArgs[nArg]);
++			memcpy(pszArgs, aArgs[nArg], nSize);
++			pszArgs += nSize + 1; // skip '\0';
++		}
++#if 0
++		{
++			pszArgs = aCommandArgs;
++			fprintf(stderr, "osl_setCommandArgs, %d args\n", nArgs);
++			for (nArg = 0; nArg < nArgs; nArg++)
++			{
++				fprintf(stderr, "%u: '%s'\n", nArg, pszArgs);
++				pszArgs += strlen(pszArgs) + 1;
++			}
++		}
++#endif
++	}
++}
++#endif
++ 
++
+ /*******************************************************************
+    !!! Working on byte strings is dangerous because of MBCS see 
+    #104563.
+--- oo_1.1rc3_src/sal/osl/unx/system.h.sal-main-cmdline	2003-07-30 12:04:04.000000000 -0400
++++ oo_1.1rc3_src/sal/osl/unx/system.h	2003-08-25 04:37:48.000000000 -0400
+@@ -135,8 +135,8 @@
+ #	define 	IOCHANNEL_TRANSFER_BSD_RENO
+ #	define	pthread_testcancel()
+ #	define  NO_PTHREAD_PRIORITY
+-#	define  CMD_ARG_PROC_STREAM
+ #	define  CMD_ARG_PROC_NAME			"/proc/%u/cmdline"
++#	define  CMD_ARG_FROM_MAIN
+ #	define  PTHREAD_SIGACTION 			pthread_sigaction
+ #else
+ #   include <shadow.h>
+--- oo_1.1rc3_src/sal/util/sal.map.sal-main-cmdline	2003-04-04 05:46:19.000000000 -0500
++++ oo_1.1rc3_src/sal/util/sal.map	2003-08-25 04:37:48.000000000 -0400
+@@ -51,6 +51,7 @@ UDK_3_0_0 {
+         osl_freeProcessHandle;
+         osl_freeSecurityHandle;
+         osl_getAddrOfSocketAddr;
++        osl_setCommandArgs;
+         osl_getCommandArg;
+         osl_getCommandArgCount;
+         osl_getConfigDir;
