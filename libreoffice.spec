@@ -4,15 +4,13 @@
 
 # TODO:
 # - finish localzation
-# - split into language packages
 # - czech patches from mandrake
-# - add missing dictionaries
 
 Summary:	OpenOffice - powerful office suite
 Summary(pl):	OpenOffice - potê¿ny pakiet biurowy
 Name:		openoffice
 Version:	1.0.2
-Release:	0.92
+Release:	0.93
 Epoch:		1
 License:	GPL/LGPL
 Group:		X11/Applications
@@ -34,42 +32,6 @@ Source103:	ftp://ftp.task.gda.pl/mirror/ftp.openoffice.org/contrib/helpfiles/hel
 Source104:	ftp://ftp.task.gda.pl/mirror/ftp.openoffice.org/contrib/helpfiles/helpcontent_39_unix.tgz
 Source105:	ftp://ftp.task.gda.pl/mirror/ftp.openoffice.org/contrib/helpfiles/helpcontent_46_unix.tgz
 Source106:	ftp://ftp.task.gda.pl/mirror/ftp.openoffice.org/contrib/helpfiles/helpcontent_49_unix.tgz
-
-# Wordbooks: http://whiteboard.openoffice.org/lingucomponent/download_dictionary.html
-# renamed sources from:
-# ftp://ftp.openoffice.pl/OpenOffice.ORG/contrib/dictionaries
-Source201:	%{name}-bg_BG.zip
-Source202:	%{name}-ca_ES.zip
-Source203:	%{name}-cs_CZ.zip
-Source204:	%{name}-da_DK.zip
-Source205:	%{name}-de_CH.zip
-Source206:	%{name}-de_DE.zip
-Source207:	%{name}-el_GR.zip
-Source208:	%{name}-en_CA.zip
-Source209:	%{name}-en_GB.zip
-Source210:	%{name}-en_US.zip
-Source211:	%{name}-es_ES.zip
-Source212:	%{name}-fr_FR.zip
-Source213:	%{name}-ga_IE.zip
-Source214:	%{name}-gl_ES.zip
-Source215:	%{name}-hr_HR.zip
-Source216:	%{name}-hu_HU.zip
-Source217:	%{name}-it_IT.zip
-Source218:	%{name}-lt_LT.zip
-Source219:	%{name}-nb_NO.zip
-Source220:	%{name}-nl_NL.zip
-Source221:	%{name}-nn_NO.zip
-Source222:	%{name}-pl_PL.zip
-Source223:	%{name}-pt_BR.zip
-Source224:	%{name}-pt_PT.zip
-Source225:	%{name}-sk_SK.zip
-Source226:	%{name}-sl_SI.zip
-Source227:	%{name}-sv_SE.zip
-Source228:	%{name}-uk_UA.zip
-Source229:	%{name}-ru_RU.zip
-# This one is special, as there is no country associated with Latin,
-# nor should it be %lang(la).
-Source230:	%{name}-la.zip
 
 # Localization scripts from Mandrake
 Source302:	%{name}-dpack-lang.pl
@@ -180,13 +142,6 @@ Requires:	db3
 %define helplangs  "%{helplangs1},%{helplangs2}"
 
 %define	apps	agenda calc draw fax impress label letter math master memo vcard web writer
-%define	wordbooks1	%{SOURCE201} %{SOURCE202} %{SOURCE203} %{SOURCE204} %{SOURCE205}
-%define wordbooks2	%{SOURCE206} %{SOURCE207} %{SOURCE208} %{SOURCE209} %{SOURCE210}
-%define wordbooks3	%{SOURCE211} %{SOURCE212} %{SOURCE213} %{SOURCE214} %{SOURCE215}
-%define wordbooks4	%{SOURCE216} %{SOURCE217} %{SOURCE218} %{SOURCE219} %{SOURCE220}
-%define wordbooks5	%{SOURCE221} %{SOURCE222} %{SOURCE223} %{SOURCE224} %{SOURCE225}
-%define wordbooks6	%{SOURCE226} %{SOURCE227} %{SOURCE228} %{SOURCE229} %{SOURCE230}
-%define wordbooks	%wordbooks1 %wordbooks2 %wordbooks3 %wordbooks4 %wordbooks5 %wordbooks6
 
 %define	_archbuilddir	unxlngi4.pro
 %define	installpath	instsetoo/%{_archbuilddir}
@@ -445,243 +400,6 @@ OpenOffice.org is an Open Source, community-developed, multi-platform
 office productivity suite.  This package provides resources containing
 menus and dialogs for various languages.
 
-#
-# Dictionaries
-#
-%package dict-bg
-Summary:	OpenOffice.org dictionary
-Group:		Applications/Office
-Requires:	openoffice
-
-%description dict-bg
-OpenOffice.org is an Open Source, community-developed, multi-platform
-office productivity suite.  This package provides spell checker dictionaries.
-
-%package dict-ca
-Summary:	OpenOffice.org dictionary
-Group:		Applications/Office
-Requires:	openoffice
-
-%description dict-ca
-OpenOffice.org is an Open Source, community-developed, multi-platform
-office productivity suite.  This package provides spell checker dictionaries.
-
-%package dict-cs
-Summary:	OpenOffice.org dictionary
-Group:		Applications/Office
-Requires:	openoffice
-
-%description dict-cs
-OpenOffice.org is an Open Source, community-developed, multi-platform
-office productivity suite.  This package provides spell checker dictionaries.
-
-%package dict-da
-Summary:	OpenOffice.org dictionary
-Group:		Applications/Office
-Requires:	openoffice
-
-%description dict-da
-OpenOffice.org is an Open Source, community-developed, multi-platform
-office productivity suite.  This package provides spell checker dictionaries.
-
-%package dict-de
-Summary:	OpenOffice.org dictionary
-Group:		Applications/Office
-Requires:	openoffice
-
-%description dict-de
-OpenOffice.org is an Open Source, community-developed, multi-platform
-office productivity suite.  This package provides spell checker dictionaries.
-
-%package dict-el
-Summary:	OpenOffice.org dictionary
-Group:		Applications/Office
-Requires:	openoffice
-
-%description dict-el
-OpenOffice.org is an Open Source, community-developed, multi-platform
-office productivity suite.  This package provides spell checker dictionaries.
-
-%package dict-en
-Summary:	OpenOffice.org dictionary
-Group:		Applications/Office
-Requires:	openoffice
-
-%description dict-en
-OpenOffice.org is an Open Source, community-developed, multi-platform
-office productivity suite.  This package provides spell checker dictionaries.
-
-%package dict-es
-Summary:	OpenOffice.org dictionary
-Group:		Applications/Office
-Requires:	openoffice
-
-%description dict-es
-OpenOffice.org is an Open Source, community-developed, multi-platform
-office productivity suite.  This package provides spell checker dictionaries.
-
-%package dict-fr
-Summary:	OpenOffice.org dictionary
-Group:		Applications/Office
-Requires:	openoffice
-
-%description dict-fr
-OpenOffice.org is an Open Source, community-developed, multi-platform
-office productivity suite.  This package provides spell checker dictionaries.
-
-%package dict-ga
-Summary:	OpenOffice.org dictionary
-Group:		Applications/Office
-Requires:	openoffice
-
-%description dict-ga
-OpenOffice.org is an Open Source, community-developed, multi-platform
-office productivity suite.  This package provides spell checker dictionaries.
-
-%package dict-gl
-Summary:	OpenOffice.org dictionary
-Group:		Applications/Office
-Requires:	openoffice
-
-%description dict-gl
-OpenOffice.org is an Open Source, community-developed, multi-platform
-office productivity suite.  This package provides spell checker dictionaries.
-
-%package dict-hr
-Summary:	OpenOffice.org dictionary
-Group:		Applications/Office
-Requires:	openoffice
-
-%description dict-hr
-OpenOffice.org is an Open Source, community-developed, multi-platform
-office productivity suite.  This package provides spell checker dictionaries.
-
-%package dict-hu
-Summary:	OpenOffice.org dictionary
-Group:		Applications/Office
-Requires:	openoffice
-
-%description dict-hu
-OpenOffice.org is an Open Source, community-developed, multi-platform
-office productivity suite.  This package provides spell checker dictionaries.
-
-%package dict-it
-Summary:	OpenOffice.org dictionary
-Group:		Applications/Office
-Requires:	openoffice
-
-%description dict-it
-OpenOffice.org is an Open Source, community-developed, multi-platform
-office productivity suite.  This package provides spell checker dictionaries.
-
-%package dict-la
-Summary:	OpenOffice.org dictionary
-Group:		Applications/Office
-Requires:	openoffice
-
-%description dict-la
-OpenOffice.org is an Open Source, community-developed, multi-platform
-office productivity suite.  This package provides spell checker dictionaries.
-
-%package dict-lt
-Summary:	OpenOffice.org dictionary
-Group:		Applications/Office
-Requires:	openoffice
-
-%description dict-lt
-OpenOffice.org is an Open Source, community-developed, multi-platform
-office productivity suite.  This package provides spell checker dictionaries.
-
-%package dict-nb
-Summary:	OpenOffice.org dictionary
-Group:		Applications/Office
-Requires:	openoffice
-
-%description dict-nb
-OpenOffice.org is an Open Source, community-developed, multi-platform
-office productivity suite.  This package provides spell checker dictionaries.
-
-%package dict-nl
-Summary:	OpenOffice.org dictionary
-Group:		Applications/Office
-Requires:	openoffice
-
-%description dict-nl
-OpenOffice.org is an Open Source, community-developed, multi-platform
-office productivity suite.  This package provides spell checker dictionaries.
-
-%package dict-nn
-Summary:	OpenOffice.org dictionary
-Group:		Applications/Office
-Requires:	openoffice
-
-%description dict-nn
-OpenOffice.org is an Open Source, community-developed, multi-platform
-office productivity suite.  This package provides spell checker dictionaries.
-
-%package dict-pl
-Summary:	OpenOffice.org dictionary
-Group:		Applications/Office
-Requires:	openoffice
-
-%description dict-pl
-OpenOffice.org is an Open Source, community-developed, multi-platform
-office productivity suite.  This package provides spell checker dictionaries.
-
-%package dict-pt
-Summary:	OpenOffice.org dictionary
-Group:		Applications/Office
-Requires:	openoffice
-
-%description dict-pt
-OpenOffice.org is an Open Source, community-developed, multi-platform
-office productivity suite.  This package provides spell checker dictionaries.
-
-%package dict-ru
-Summary:	OpenOffice.org dictionary
-Group:		Applications/Office
-Requires:	openoffice
-
-%description dict-ru
-OpenOffice.org is an Open Source, community-developed, multi-platform
-office productivity suite.  This package provides spell checker dictionaries.
-
-%package dict-sk
-Summary:	OpenOffice.org dictionary
-Group:		Applications/Office
-Requires:	openoffice
-
-%description dict-sk
-OpenOffice.org is an Open Source, community-developed, multi-platform
-office productivity suite.  This package provides spell checker dictionaries.
-
-%package dict-sl
-Summary:	OpenOffice.org dictionary
-Group:		Applications/Office
-Requires:	openoffice
-
-%description dict-sl
-OpenOffice.org is an Open Source, community-developed, multi-platform
-office productivity suite.  This package provides spell checker dictionaries.
-
-%package dict-sv
-Summary:	OpenOffice.org dictionary
-Group:		Applications/Office
-Requires:	openoffice
-
-%description dict-sv
-OpenOffice.org is an Open Source, community-developed, multi-platform
-office productivity suite.  This package provides spell checker dictionaries.
-
-%package dict-uk
-Summary:	OpenOffice.org dictionary
-Group:		Applications/Office
-Requires:	openoffice
-
-%description dict-uk
-OpenOffice.org is an Open Source, community-developed, multi-platform
-office productivity suite.  This package provides spell checker dictionaries.
-
 %prep
 %setup -q -n oo_%{version}_src
 %patch0 -p1
@@ -788,12 +506,6 @@ chmod u+rx compile
 %install
 rm -rf $RPM_BUILD_ROOT
 
-# think: f0_061 should contains uui641%{langinst}.res file!
-#cp solver/%{subver}/%{_archbuilddir}/bin/setup_services.rdb solver/%{subver}/%{_archbuilddir}/bin/uno_writerdb.rdb
-#rm -f f0_061
-#zip -j -5 "f0_061" solver/%{subver}/%{_archbuilddir}/bin/uno_writerdb.rdb
-#mv f0_061.zip %{installpath}/%{langinst}/normal/f0_061
-
 install -d $RPM_BUILD_ROOT%{oolib}
 
 if [ -z "$DISPLAY" ]; then
@@ -809,27 +521,6 @@ cd %{installpath}/%{langinst}/normal/
 	cp -f setup.ins setup.ins.oorg
   fi
   cat %{SOURCE2} | sed -e "s|@DESTDIR@|$RPM_BUILD_ROOT%{oolib}|" > $RESPONSE_FILE
-
-  # Add additional wordbooks
-
-  for dict in %{wordbooks} # somepath/de_AT.zip %{SOURCE50}
-   do
-    loc=`echo $dict | sed 's~^.*/%{name}-\([a-zA-Z_]*\).zip$~\1~'`
-###########################
-    perl -ni -e "/^ConfigurationItem gid_Configurationitem_Oo_${loc}_Spellchecker/ .. /^End/ or print" setup.ins
-#	awk "BEGIN { o=1} /^End$/ { if(o==0){o=1}} u^ConfigurationItem gid_Configurationitem_Oo_${loc}_Spellchecker$/ { if (o==1) { o=0} } { if(o==1) { print } }" setup.ins
-    cat >> setup.ins <<EOF
-ConfigurationItem gid_Configurationitem_Oo_${loc}_Spellchecker
-        ModuleID         = gid_Module_Root;
-        Path             = "org.openoffice.Office.Linguistic/ServiceManager/SpellCheckerList";
-        Key                      = "`echo $loc | sed 's/_/-/'`";
-        Value            = "org.openoffice.lingu.MySpellSpellChecker";
-        Styles           = (CFG_STRINGLIST, CREATE);
-End
-
-EOF
-###########################
-  done
 
   # Localize New and Wizard menus and OfficeObjects
   cp -p setup.ins setup.ins.localized
@@ -1046,20 +737,6 @@ done
 echo 'UNO_WRITERDB=$SYSUSERCONFIG/.user60.rdb
 ' >> $RPM_BUILD_ROOT%{oolib}/program/unorc
 
-# Install additional dictionaries
-rm -rf a8ldict
-install -d a8ldict
-install -d $RPM_BUILD_ROOT%{oolib}/share/dict/ooo
-for dict in %{wordbooks}; do
-  loc=`echo $dict | sed 's~^.*/%{name}-\([a-zA-Z_]*\).zip$~\1~'`
-  lang=`echo $loc | sed 's~_.*$~~'`
-  mkdir a8ldict/$loc
-  unzip -j $dict -d a8ldict/$loc/
-  rm -f a8ldict/$loc/hyph_en.dic a8ldict/$loc/standard.dic
-  mv -f a8ldict/$loc/*.aff a8ldict/$loc/*.dic $RPM_BUILD_ROOT%{oolib}/share/dict/ooo/
-#  echo DICT `echo $loc | tr _ ' '` $loc >> $RPM_BUILD_ROOT%{oolib}/share/dict/ooo/dictionary.lst
-done
-
 # Build system in OO SUX
 rm -f $RPM_BUILD_ROOT%{oolib}/program/libstdc++*
 rm -f $RPM_BUILD_ROOT%{oolib}/program/libstlport_gcc.so
@@ -1117,61 +794,6 @@ FindI18N() {
     fi
 }
 
-FindDict() {
-#    $1 - short language name	eg. pl
-#    $2 - long language name	eg. polish
-#    $3... - locale name (?)	eg. pl_PL
-
-    BUILDDIR=%(pwd)
-    LANG="$1"
-
-    echo "%defattr(644,root,root,755)" > "dict-$LANG"
-
-    rm -f dictlst.tmp; touch dictlst.tmp
-    FILE="%{oolib}/share/dict/ooo/hyph_$LANG.dic"    
-    if [ -f "$RPM_BUILD_ROOT/$FILE" ]; then
-	COUNTRY=`echo $3 | cut -d _ -f 2`
-        echo "%lang($LANG) $FILE" >> "dict-$LANG"	
-	echo "HYPH $LANG $COUNTRY hyph_$LANG" >> dictlst.tmp
-    fi
-    
-    FILES1=""; FILES2=""
-    shift; shift
-    while test $# -gt 0; do
-	FILES1="$FILES1 %{oolib}/share/dict/ooo/$1.dic"
-        FILES1="$FILES1 %{oolib}/share/dict/ooo/$1.aff"
-        FILES2="$FILES2 %{oolib}/share/dict/ooo/th_$1.dat"
-	FILES2="$FILES2 %{oolib}/share/dict/ooo/th_$1.idx"
-	shift
-    done    
-    
-    for FILE in $FILES1
-    do
-	if [ -f "$RPM_BUILD_ROOT/$FILE" ]; then
-	    echo "%lang($LANG) $FILE" >> "dict-$LANG"
-	    LOCALE=`basename $FILE | cut -d . -f 1`
-	    COUNTRY=`echo $LOCALE | cut -d _ -f 2`
-	    echo "DICT $LANG $COUNTRY $LOCALE" >> dictlst.tmp
-	fi
-    done
-
-    for FILE in $FILES2
-    do
-	if [ -f "$RPM_BUILD_ROOT/$FILE" ]; then
-	    echo "%lang($LANG) $FILE" >> "dict-$LANG"
-	    LOCALE=`basename $FILE | cut -d . -f 1`
-	    COUNTRY=`echo $LOCALE | cut -d _ -f 3`
-	    echo "THES $LANG $COUNTRY $LOCALE" >> dictlst.tmp
-	fi
-    done
-
-    SIZE=`ls -l dictlst.tmp 2>/dev/null | awk '{ print $5 }'`
-    if [ "$SIZE" -ne 0 ]; then
-        cat dictlst.tmp | sort | uniq > $RPM_BUILD_ROOT%{dictlst}.$LANG
-	echo "%lang($LANG) %{dictlst}.$LANG" >> "dict-$LANG"
-    fi
-}
-
 FindI18N ar arabic 96
 FindI18N ca catalan 37
 FindI18N da danish 45
@@ -1193,206 +815,18 @@ FindI18N tr turkish 90
 FindI18N zh_CN chinese_simplified 86
 FindI18N zh_TW chinese_traditional 88
 
-FindDict bg bulgarian bg_BG
-FindDict ca catalan ca_ES
-FindDict cs czech cs_CZ
-FindDict da danish da_DK
-FindDict de german de_DE de_CH de_AT
-FindDict el greek el_GR
-FindDict en english en_US en_CA en_GB en_ES
-FindDict es spanish es_ES
-FindDict fr french fr_FR
-FindDict ga irish ga_IE
-FindDict gl galician gl_ES
-FindDict hr croatian hr_HR
-FindDict hu hungarian hu_HU
-FindDict it italian it_IT
-FindDict la latin la
-FindDict lt lithuanian lt_LT
-FindDict nb norwegian_bokmaal nb_NO
-FindDict nl dutch nl_NL
-FindDict nn norwegian_nynorsk nn_NO
-FindDict pl polish pl_PL
-FindDict pt portuguese pt_BR pt_PT
-FindDict ru russian ru_RU
-FindDict sk slovak sk_SK
-FindDict sl slovenian sl_SI
-FindDict sv swedish sv_SE
-FindDict uk ukrainian uk_UA
-
 cp %{SOURCE11} $RPM_BUILD_ROOT%{dictlst}-readme
 rm -f $RPM_BUILD_ROOT%{dictlst}
 touch $RPM_BUILD_ROOT%{dictlst}
 
-## Special case - Latin
-echo DICT la ANY la > $RPM_BUILD_ROOT%{dictlst}.la
-# Special case - Austrian German - why?
-#echo DICT de AT de_AT >> $RPM_BUILD_ROOT%{dictlst}.de
-#echo DICT de AT de_DE >> $RPM_BUILD_ROOT%{dictlst}.de
-
+# do not put these files: %{oolib}/share/dict/ooo/* into %files list
+# these files were moved to openoffice-dict packages!
 
 ####################
 ## CLEAN
 ####################
 %clean
 #rm -rf $RPM_BUILD_ROOT
-
-%post dict-bg
-cat %{dictlst}.* | sort | uniq > %{dictlst}
-
-%postun dict-bg
-cat %{dictlst}.* | sort | uniq > %{dictlst}
-
-%post dict-ca
-cat %{dictlst}.* | sort | uniq > %{dictlst}
-
-%postun dict-ca
-cat %{dictlst}.* | sort | uniq > %{dictlst}
-
-%post dict-cs
-cat %{dictlst}.* | sort | uniq > %{dictlst}
-
-%postun dict-cs
-cat %{dictlst}.* | sort | uniq > %{dictlst}
-
-%post dict-da
-cat %{dictlst}.* | sort | uniq > %{dictlst}
-
-%postun dict-da
-cat %{dictlst}.* | sort | uniq > %{dictlst}
-
-%post dict-de
-cat %{dictlst}.* | sort | uniq > %{dictlst}
-
-%postun dict-de
-cat %{dictlst}.* | sort | uniq > %{dictlst}
-
-%post dict-el
-cat %{dictlst}.* | sort | uniq > %{dictlst}
-
-%postun dict-el
-cat %{dictlst}.* | sort | uniq > %{dictlst}
-
-%post dict-en
-cat %{dictlst}.* | sort | uniq > %{dictlst}
-
-%postun dict-en
-cat %{dictlst}.* | sort | uniq > %{dictlst}
-
-%post dict-es
-cat %{dictlst}.* | sort | uniq > %{dictlst}
-
-%postun dict-es
-cat %{dictlst}.* | sort | uniq > %{dictlst}
-
-%post dict-fr
-cat %{dictlst}.* | sort | uniq > %{dictlst}
-
-%postun dict-fr
-cat %{dictlst}.* | sort | uniq > %{dictlst}
-
-%post dict-ga
-cat %{dictlst}.* | sort | uniq > %{dictlst}
-
-%postun dict-ga
-cat %{dictlst}.* | sort | uniq > %{dictlst}
-
-%post dict-gl
-cat %{dictlst}.* | sort | uniq > %{dictlst}
-
-%postun dict-gl
-cat %{dictlst}.* | sort | uniq > %{dictlst}
-
-%post dict-hr
-cat %{dictlst}.* | sort | uniq > %{dictlst}
-
-%postun dict-hr
-cat %{dictlst}.* | sort | uniq > %{dictlst}
-
-%post dict-hu
-cat %{dictlst}.* | sort | uniq > %{dictlst}
-
-%postun dict-hu
-cat %{dictlst}.* | sort | uniq > %{dictlst}
-
-%post dict-it
-cat %{dictlst}.* | sort | uniq > %{dictlst}
-
-%postun dict-it
-cat %{dictlst}.* | sort | uniq > %{dictlst}
-
-%post dict-la
-cat %{dictlst}.* | sort | uniq > %{dictlst}
-
-%postun dict-la
-cat %{dictlst}.* | sort | uniq > %{dictlst}
-
-%post dict-lt
-cat %{dictlst}.* | sort | uniq > %{dictlst}
-
-%postun dict-lt
-cat %{dictlst}.* | sort | uniq > %{dictlst}
-
-%post dict-nb
-cat %{dictlst}.* | sort | uniq > %{dictlst}
-
-%postun dict-nb
-cat %{dictlst}.* | sort | uniq > %{dictlst}
-
-%post dict-nl
-cat %{dictlst}.* | sort | uniq > %{dictlst}
-
-%postun dict-nl
-cat %{dictlst}.* | sort | uniq > %{dictlst}
-
-%post dict-nn
-cat %{dictlst}.* | sort | uniq > %{dictlst}
-
-%postun dict-nn
-cat %{dictlst}.* | sort | uniq > %{dictlst}
-
-%post dict-pl
-cat %{dictlst}.* | sort | uniq > %{dictlst}
-
-%postun dict-pl
-cat %{dictlst}.* | sort | uniq > %{dictlst}
-
-%post dict-pt
-cat %{dictlst}.* | sort | uniq > %{dictlst}
-
-%postun dict-pt
-cat %{dictlst}.* | sort | uniq > %{dictlst}
-
-%post dict-ru
-cat %{dictlst}.* | sort | uniq > %{dictlst}
-
-%postun dict-ru
-cat %{dictlst}.* | sort | uniq > %{dictlst}
-
-%post dict-sk
-cat %{dictlst}.* | sort | uniq > %{dictlst}
-
-%postun dict-sk
-cat %{dictlst}.* | sort | uniq > %{dictlst}
-
-%post dict-sl
-cat %{dictlst}.* | sort | uniq > %{dictlst}
-
-%postun dict-sl
-cat %{dictlst}.* | sort | uniq > %{dictlst}
-
-%post dict-sv
-cat %{dictlst}.* | sort | uniq > %{dictlst}
-
-%postun dict-sv
-cat %{dictlst}.* | sort | uniq > %{dictlst}
-
-%post dict-uk
-cat %{dictlst}.* | sort | uniq > %{dictlst}
-
-%postun dict-uk
-cat %{dictlst}.* | sort | uniq > %{dictlst}
-
 
 ####################
 ## FILES
@@ -1523,30 +957,3 @@ cat %{dictlst}.* | sort | uniq > %{dictlst}
 %files i18n-tr -f i18n-tr
 %files i18n-zh_CN -f i18n-zh_CN
 %files i18n-zh_TW -f i18n-zh_TW
-
-%files dict-bg -f dict-bg
-%files dict-ca -f dict-ca
-%files dict-cs -f dict-cs
-%files dict-da -f dict-da
-%files dict-de -f dict-de
-%files dict-el -f dict-el
-%files dict-en -f dict-en
-%files dict-es -f dict-es
-%files dict-fr -f dict-fr
-%files dict-ga -f dict-ga
-%files dict-gl -f dict-gl
-%files dict-hr -f dict-hr
-%files dict-hu -f dict-hu
-%files dict-it -f dict-it
-%files dict-la -f dict-la
-%files dict-lt -f dict-lt
-%files dict-nb -f dict-nb
-%files dict-nl -f dict-nl
-%files dict-nn -f dict-nn
-%files dict-pl -f dict-pl
-%files dict-pt -f dict-pt
-%files dict-ru -f dict-ru
-%files dict-sk -f dict-sk
-%files dict-sl -f dict-sl
-%files dict-sv -f dict-sv
-%files dict-uk -f dict-uk
