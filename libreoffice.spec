@@ -799,26 +799,27 @@ cat $TMPFILE >> setup.ins
 cd $OOBUILDDIR
 ### end of installation
 
+install -d $RPM_BUILD_ROOT%{oolib}/program/resource
 # Copy all localized resources to destination directory
 FILES=`find solver/%{subver}/%{_archbuilddir}/bin/ -name "*.res" -maxdepth 1 -printf "%%P "`
 for FILE in $FILES
 do
     [ ! -f $RPM_BUILD_ROOT%{oolib}/program/resource/$FILE ] && \
 	cp solver/%{subver}/%{_archbuilddir}/bin/$FILE \
-	    $RPM_BUILD_ROOT%{oolib}/program/resource
+	    $RPM_BUILD_ROOT%{oolib}/program/resource/$FILE
 done
 
-LANGUAGES="%{ARAB} %{CAT} %{CZECH} %{DAN} %{GERM} %{GREEK} %{ENUS}"
-LANGUAGES="$LANGUAGES %{SPAN} %{FINN} %{FREN} %{ITAL} %{JAPN}"
-LANGUAGES="$LANGUAGES %{KOREAN} %{DTCH} %{POL} %{PORT} %{RUSS}"
-LANGUAGES="$LANGUAGES %{SLOVAK} %{SWED} %{TURK} %{CHINSIM} %{CHINTRAD}"
+LANGUAGES_="%{ARAB} %{CAT} %{CZECH} %{DAN} %{GERM} %{GREEK} %{ENUS}"
+LANGUAGES_="$LANGUAGES_ %{SPAN} %{FINN} %{FREN} %{ITAL} %{JAPN}"
+LANGUAGES_="$LANGUAGES_ %{KOREAN} %{DTCH} %{POL} %{PORT} %{RUSS}"
+LANGUAGES_="$LANGUAGES_ %{SLOVAK} %{SWED} %{TURK} %{CHINSIM} %{CHINTRAD}"
 
 # don't care about main_transform.xsl, it looks safe to overwrite
 PREF="`dirname %{SOURCE101}`/helpcontent_"
 SUFX="_unix.tgz"
-for LANG in $LANGUAGES
+for LANG_ in $LANGUAGES_
 do
-    CODE=`cat %{SOURCE9} | grep $LANG | cut -d: -f1`
+    CODE=`cat %{SOURCE9} | grep $LANG_ | cut -d: -f1`
     FILE=$PREF$CODE$SUFX
     if [ -f $FILE ]; then
 	tar zxvf $FILE
@@ -841,7 +842,7 @@ install -m 755 %{SOURCE302} oo_dpack_lang
 install -m 755 %{SOURCE303} oo_fixup_help
 install -m 755 %{SOURCE304} oo_gen_instdb
     
-for res in $LANGUAGES
+for res in $LANGUAGES_
 do
     prefix=`cat %{SOURCE9} | grep ":$res:" | cut -d: -f1`
     isocode=`cat %{SOURCE9} | grep ":$res:" | cut -d: -f2`
