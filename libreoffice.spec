@@ -33,8 +33,8 @@ Epoch:		1
 License:	GPL/LGPL
 Group:		X11/Applications
 #Source0:	http://ooo.ximian.com/packages/OOO_%{dfullver}/ooo-build-%{ooobver}.tar.gz
-Source0:	http://ooo.ximian.com/packages/snap/ooo-build-%{ooobver}-HEAD-20040724.tar.gz
-# Source0-md5:	93bd486b8d17e8ab810542543830fc55
+Source0:	http://ooo.ximian.com/packages/snap/ooo-build-%{ooobver}-HEAD-20040729.tar.gz
+# Source0-md5:	ee3dda3fb1b6093c5e21602f730f5bee
 Source1:	http://ooo.ximian.com/packages/OOO_%{dfullver}/OOO_%{dfullver}.tar.bz2
 # Source1-md5:	627fbce603598a74f9be03f5a1da6d94
 Source2:	http://ooo.ximian.com/packages/ooo-icons-OOO_1_1-9.tar.gz
@@ -89,8 +89,7 @@ Source412:	%{cftp}/helpcontent/helpcontent_90_unix.tgz
 
 Patch0:		%{name}-rh-disable-spellcheck-all-langs.patch
 Patch1:		%{name}-shared-xinerama.patch
-Patch2:		%{name}-build.patch
-Patch3:		%{name}-files.patch
+Patch2:		%{name}-files.patch
 
 URL:		http://www.openoffice.org/
 BuildRequires:	ImageMagick
@@ -120,7 +119,8 @@ BuildRequires:	nas-devel
 BuildRequires:	pam-devel
 BuildRequires:	perl-base
 BuildRequires:	pkgconfig
-BuildRequires:	python-devel
+BuildRequires:	python-devel >= 2.2
+BuildRequires:	python-modules >= 2.2
 BuildRequires:	sane-backends-devel
 BuildRequires:	startup-notification-devel
 BuildRequires:	tcsh
@@ -983,7 +983,6 @@ zuluskim.
 %patch0 -p1
 %patch1 -p1
 %patch2 -p1
-%patch3 -p1
 
 install -d src
 # sources, icons, KDE_icons
