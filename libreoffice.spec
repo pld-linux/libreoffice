@@ -20,7 +20,7 @@ OpenOffice is powerful office suite based on StarOffice.
 OpenOffice jest potê¿nym pakietem biurowym wywodz±cym siê ze StarOffice.
 
 %prep
-%setup -q
+%setup -q -n oo_613_src
 
 %build
 cd config-office
