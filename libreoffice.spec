@@ -22,7 +22,7 @@ Summary:	OpenOffice - powerful office suite
 Summary(pl):	OpenOffice - potê¿ny pakiet biurowy
 Name:		openoffice
 Version:	%{fullver}
-Release:	1.3
+Release:	1.3%{?with_kde:.kde}%{!?with_kde:.gtk}
 Epoch:		1
 License:	GPL/LGPL
 Group:		X11/Applications
