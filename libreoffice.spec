@@ -19,7 +19,8 @@ BuildRequires:	db3-devel
 BuildRequires:	autoconf
 BuildRequires:	automake
 BuildRequires:	flex
-BuildRequires:	jdk = 1.3.1_01
+%{?!_with_ibm_java:BuildRequires: jdk = 1.3.1_01}
+%{?_with_ibm_java:BuildRequires: ibm-java-sdk}
 BuildRequires:	perl
 BuildRequires:	tcsh
 BuildRequires:	unzip
@@ -68,10 +69,14 @@ cd external; tar fxz %{SOURCE1}; cp -fr gpc231/* gpc
 %build
 cd config_office
 autoconf
+
+%{?!_with_ibm_java:JAVA_HOME="/usr/lib/jdk1.3.1_01"}
+%{?_with_ibm_java:JAVA_HOME="/usr/lib/IBMJava2-13"}
 %configure \
-	--with-jdk-home=/usr/lib/jdk1.3.1_01 \
+	--with-jdk-home=$JAVA_HOME \
 	--with-lang=ALL \
 	--with-x
+
 cd ..
 cat <<EOF > compile
 #!/bin/tcsh
