@@ -255,7 +255,6 @@ Source409:      %{cftp}/helpcontent/helpcontent_86_unix.tgz
 Source410:      %{cftp}/helpcontent/helpcontent_88_unix.tgz
 # Source410-md5:	3b00571318e45965dee0545d86306d65
 
-Source498:	%{name}-telephone-country-codes.txt
 Source499:	%{name}-additional-dictionaries.txt
 
 Patch0:		%{name}-rh-disable-spellcheck-all-langs.patch
@@ -993,18 +992,13 @@ for file in \
 done
 cat %{SOURCE499} >> $RPM_BUILD_ROOT%{_libdir}/%{name}/share/dict/ooo/dictionary.lst
 
-getlang() {
-	# $1 - from column no. # $2 - from column value # $3 - to column no.
-	awk -F: "{ split(\$0, A, \":\"); if (A[$1] == \"$2\") print A[$3]; }" %{SOURCE498}
-}
-
 install -d helptmp && cd helptmp || exit 1
 for file in \
 	%{SOURCE400} %{SOURCE401} %{SOURCE402} %{SOURCE403} %{SOURCE404} %{SOURCE405} \
         %{SOURCE406} %{SOURCE407} %{SOURCE408} %{SOURCE409} %{SOURCE410}; do
 		rm -rf *.*
 		nr=$(echo "$file" | sed -e 's#.*_\(.*\)_.*#\1#g')
-		lang=$(getlang "1" "$nr" "2")
+		lang=$(../bin/openoffice-xlate-lang -i "$nr")
 		if [ -z "$lang" ]; then
 			echo "Languge not found for [$file]"
 			exit 1
