@@ -307,11 +307,7 @@ office productivity suite.  This package provides spell checker dictionaries.
 
 
 %prep
-#%setup -q -n oo_%{version}_src
-cd ../BUILD
-if [ -a oo_%{version}_src ]; then rm -rf oo_%{version}_src; fi;
-cp -r oo_%{version}_src.orig oo_%{version}_src
-cd oo_%{version}_src
+%setup -q -n oo_%{version}_src
 %patch0 -p1
 #%patch2 -p1
 
@@ -368,7 +364,6 @@ chmod +x solenv/bin/zipdep.pl
 ## BUILD
 ###################
 %build
-cd oo_%{version}_src
 CC=%{__cc}
 CXX=%{__cxx}
 GCJ=gcj
@@ -414,7 +409,6 @@ chmod u+rx compile
 #########################
 %install
 rm -rf $RPM_BUILD_ROOT
-cd oo_%{version}_src
 
 # think: f0_061 should contains uui641%{langinst}.res file!
 #cp solver/%{subver}/%{_archbuilddir}/bin/setup_services.rdb solver/%{subver}/%{_archbuilddir}/bin/uno_writerdb.rdb
