@@ -138,7 +138,8 @@ Patch120: openoffice-odk-handle-no-solar-java.patch
 Patch121: openoffice-disable-odk-build.patch
 
 # misc patches
-Patch201: openoffice-zoom-combobox.spec
+Patch201: openoffice-zoom-combobox.patch
+Patch202: openoffice-unzip-not-jar.patch 
 
 URL:		http://www.openoffice.org/
 BuildRequires:	STLport-devel >= 4.5.3-6
@@ -154,7 +155,6 @@ BuildRequires:	jar
 BuildRequires:	jdk
 %elseif
 BuildRequires:	libxslt-progs
-BuildRequires:	gcc-java-tools
 %endif
 BuildRequires:	flex
 BuildRequires:	freetype-devel >= 2.1
@@ -812,6 +812,7 @@ rm -f moz/prj/d.lst
 
 # add zoom combobox
 %patch201 -p1 
+%patch202 -p0 
 
 # gcc 2 include error hack:
 rm -rf autodoc/source/inc/utility
