@@ -22,7 +22,7 @@ Summary:	OpenOffice - powerful office suite
 Summary(pl):	OpenOffice - potê¿ny pakiet biurowy
 Name:		openoffice
 Version:	%{fullver}
-Release:	1.1
+Release:	1.2
 Epoch:		1
 License:	GPL/LGPL
 Group:		X11/Applications
@@ -991,6 +991,23 @@ bzip2 -dc %{SOURCE10} | tar xf - -C $RPM_BUILD_ROOT%{_desktopdir}
 # Add in the regcomp tool since some people need it for 3rd party add-ons
 cp -f build/OOO_%{dfullver}/solver/%{subver}/unxlng*.pro/bin/regcomp $RPM_BUILD_ROOT%{_libdir}/%{name}/program
 
+# mimelnk, icons
+install -d $RPM_BUILD_ROOT{%{_datadir}/mimelnk/application,%{_pixmapsdir}}
+
+cp -a build/OOO_%{dfullver}/sysui/desktop/gnome/icons/*/*.png $RPM_BUILD_ROOT%{_pixmapsdir}
+cp -a build/OOO_%{dfullver}/sysui/desktop/gnome/icons/*.png $RPM_BUILD_ROOT%{_pixmapsdir}
+cp -a build/OOO_%{dfullver}/sysui/desktop/kde/vnd*.desktop $RPM_BUILD_ROOT%{_datadir}/mimelnk/application
+
+rm -rf $RPM_BUILD_ROOT%{_libdir}/%{name}/share/kde
+rm -rf $RPM_BUILD_ROOT%{_libdir}/%{name}/share/cde
+rm -rf $RPM_BUILD_ROOT%{_libdir}/%{name}/share/gnome
+rm -rf $RPM_BUILD_ROOT%{_libdir}/%{name}/share/icons
+rm -rf $RPM_BUILD_ROOT%{_datadir}/applnk
+rm -rf $RPM_BUILD_ROOT%{_datadir}/gnome
+
+# Remove dictionaries (in separate pkg)
+rm -rf $RPM_BUILD_ROOT%{_libdir}/%{name}/lib/share/dict/ooo/*
+
 # OOo should not install the Vera fonts, they are Required: now
 rm -rf $RPM_BUILD_ROOT%{_libdir}/%{name}/share/fonts/truetype/*
 
@@ -1012,10 +1029,6 @@ rm -rf $RPM_BUILD_ROOT%{_libdir}/%{name}/program/python-core-*/lib/test
 
 rm -rf $RPM_BUILD_ROOT%{_datadir}/applnk
 rm -rf $RPM_BUILD_ROOT%{_datadir}/gnome
-
-rm -rf $RPM_BUILD_ROOT%{_libdir}/%{name}/share/kde
-rm -rf $RPM_BUILD_ROOT%{_libdir}/%{name}/share/gnome
-rm -rf $RPM_BUILD_ROOT%{_libdir}/%{name}/share/cde
 
 #rm -f $RPM_BUILD_ROOT%{_libdir}/%{name}/program/gnomeint
 
@@ -1092,7 +1105,6 @@ fontpostinst TTF %{_fontsdir}/%{name}
 
 %files
 %defattr(644,root,root,755)
-#%%doc readlicense/source/license/unx/LICENSE
 %doc %{_libdir}/%{name}/LICENSE*
 %doc %{_libdir}/%{name}/*README*
 
@@ -1100,8 +1112,7 @@ fontpostinst TTF %{_fontsdir}/%{name}
 %config %{_sysconfdir}/openoffice/autoresponse.conf
 
 %{_desktopdir}/*.desktop
-#%{_pixmapsdir}/*.png
-#%{_pixmapsdir}/document-icons/*.png
+%{_pixmapsdir}/*.png
 
 %attr(755,root,root) %{_libdir}/%{name}/install-dict
 
@@ -1233,4 +1244,4 @@ fontpostinst TTF %{_fontsdir}/%{name}
 
 %files mimelinks
 %defattr(644,root,root,755)
-#%{_datadir}/mimelnk/application/*
+%{_datadir}/mimelnk/application/*
