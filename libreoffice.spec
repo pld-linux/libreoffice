@@ -1,6 +1,5 @@
 
 # Conditional build:
-# _with_ibm_java	- uses IBM java instead SUN java
 # _with_ra			- build in RA environment
 
 # TODO:
@@ -9,13 +8,12 @@
 # - czech patches from mandrake
 # - correct mirrors
 # - add missing dictionaries
-# - fix ibm java
 
 Summary:	OpenOffice - powerful office suite
 Summary(pl):	OpenOffice - potê¿ny pakiet biurowy
 Name:		openoffice
 Version:	1.0.2
-Release:	0.85
+Release:	0.86
 Epoch:		1
 License:	GPL/LGPL
 Group:		X11/Applications
@@ -146,8 +144,7 @@ BuildRequires:	unzip
 BuildRequires:	zip
 BuildRequires:	zlib-devel
 BuildRequires:	jar
-%{?_with_ibm_java:BuildRequires:	ibm-java-sdk}
-%{?!_with_ibm_java:BuildRequires:	java-sun}
+BuildRequires:	jdk
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 Requires:	%{name}-libs = %{version}-%{release}
@@ -307,8 +304,6 @@ chmod +x solenv/bin/zipdep.pl
 ###################
 %build
 cd oo_%{version}_src
-#%%{?!_with_ibm_java:JAVA_HOME="/usr/lib/jdk1.3.1_03"}
-#%%{?_with_ibm_java:JAVA_HOME="/usr/lib/IBMJava2-13"}
 CC=%{__cc}
 CXX=%{__cxx}
 GCJ=gcj
@@ -356,14 +351,15 @@ chmod u+rx compile
 rm -rf $RPM_BUILD_ROOT
 cd oo_%{version}_src
 
-cp solver/%{subver}/%{_archbuilddir}/bin/setup_services.rdb solver/%{subver}/%{_archbuilddir}/bin/uno_writerdb.rdb
-rm -f f0_061
-zip -j -5 "f0_061" solver/%{subver}/%{_archbuilddir}/bin/uno_writerdb.rdb
-mv f0_061.zip %{installpath}/%{langinst}/normal/f0_061
+# think: f0_061 should contains uui641%{langinst}.res file!
+#cp solver/%{subver}/%{_archbuilddir}/bin/setup_services.rdb solver/%{subver}/%{_archbuilddir}/bin/uno_writerdb.rdb
+#rm -f f0_061
+#zip -j -5 "f0_061" solver/%{subver}/%{_archbuilddir}/bin/uno_writerdb.rdb
+#mv f0_061.zip %{installpath}/%{langinst}/normal/f0_061
 
 install -d $RPM_BUILD_ROOT%{_libdir}/openoffice
 
-#%%{init_xdisplay}
+%{init_xdisplay}
 RESPONSE_FILE=$PWD/rsfile.ins
 OLDPATH="`pwd`"
 cd %{installpath}/%{langinst}/normal/
@@ -419,12 +415,10 @@ EOF
   ) | awk ' $1 ~ /Value/ { l=$0; sub(/^.*= "/,"",l); sub(/";.*$/,"",l); sub(/%PRODUCTNAME/,"OpenOffice.org",l); sub(/%PRODUCTVERSION/,"%{version}",l); n=n+1; str="@@REPLACEME" n "@@"; s="\"" str "\""; sub(/".*"/,s); printf "s|%s|%s|\n", str, l > "Common.xml.sed" } { print } ' \
     >> setup.ins
 
-#  DISPLAY=:$XDISPLAY ./setup -R:$RESPONSE_FILE
-  ./setup -R:$RESPONSE_FILE
+  DISPLAY=:$XDISPLAY ./setup -R:$RESPONSE_FILE
 
-#  ./setup -R:$RESPONSE_FILE
 cd "$OLDPATH"
-#%%{kill_xdisplay}
+%{kill_xdisplay}
 
 # Copy all localized resources to destination directory
 install -d $RPM_BUILD_ROOT%{_libdir}/openoffice/program/resource
@@ -604,7 +598,7 @@ rm -f $RPM_BUILD_ROOT%{_libdir}/openoffice/program/libstlport_gcc.so
 rm -f $RPM_BUILD_ROOT%{_libdir}/openoffice/program/libgcc_s.so.1
 
 
-rm -f $RPM_BUILD_ROOT%{_libdir}/openoffice/share/template/{internal,wizard}
+rm -rf $RPM_BUILD_ROOT%{_libdir}/openoffice/share/template/{internal,wizard}
 
 
 %post
