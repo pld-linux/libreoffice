@@ -1,7 +1,7 @@
 # TODO:
 # 	- everything
 #	- PLD vendor list of patches to apply in patches/*/appply?
-#	- update openoffice-additional-dictionaries.txt
+#	- put helpcontent in proper place
 
 # Conditional build:
 %bcond_with	java		# Java support
@@ -938,12 +938,17 @@ for file in \
 	%{SOURCE218} %{SOURCE219} %{SOURCE220} %{SOURCE221} %{SOURCE222} %{SOURCE223} \
 	%{SOURCE224} %{SOURCE225} %{SOURCE226} %{SOURCE227} %{SOURCE228} %{SOURCE229} \
 	%{SOURCE230} \
-	%{SOURCE300} %{SOURCE301} %{SOURCE302} %{SOURCE303} %{SOURCE304} \
-	%{SOURCE400} %{SOURCE401} %{SOURCE402} %{SOURCE403} %{SOURCE404} %{SOURCE405} \
-	%{SOURCE406} %{SOURCE407} %{SOURCE408} %{SOURCE409} %{SOURCE410}; do
+	%{SOURCE300} %{SOURCE301} %{SOURCE302} %{SOURCE303} %{SOURCE304}; do
 		unzip -o -d $RPM_BUILD_ROOT%{_libdir}/%{name}/share/dict/ooo $file
 done
 cat %{SOURCE499} >> $RPM_BUILD_ROOT%{_libdir}/%{name}/share/dict/ooo/dictionary.lst
+
+for file in \
+	%{SOURCE400} %{SOURCE401} %{SOURCE402} %{SOURCE403} %{SOURCE404} %{SOURCE405} \
+        %{SOURCE406} %{SOURCE407} %{SOURCE408} %{SOURCE409} %{SOURCE410}; do
+		# do something
+		:
+done
 
 install -d $RPM_BUILD_ROOT%{_desktopdir}
 bzip2 -dc %{SOURCE6} | tar xf - -C $RPM_BUILD_ROOT%{_desktopdir}
