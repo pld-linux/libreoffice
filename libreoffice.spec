@@ -13,7 +13,6 @@
 
 # Conditional build:
 %bcond_with	java		# Java support
-%bcond_with	icons_ximian	# Ximian icons instead of KDE one
 
 %define		ver		1.1
 %define		rel		2
@@ -27,17 +26,17 @@ Summary:	OpenOffice - powerful office suite
 Summary(pl):	OpenOffice - potê¿ny pakiet biurowy
 Name:		openoffice
 Version:	%{fullver}
-Release:	2
+Release:	2.1
 Epoch:		1
 License:	GPL/LGPL
 Group:		X11/Applications
-#Source0:	http://ooo.ximian.com/packages/OOO_%{dfullver}/ooo-build-%{ooobver}.tar.gz
-Source0:	http://ooo.ximian.com/packages/snap/ooo-build-%{ooobver}-HEAD-20040731.tar.gz
-# Source0-md5:	f26ce4e63c82096ecf0430a8a014a514
+Source0:	http://ooo.ximian.com/packages/OOO_%{dfullver}/ooo-build-%{ooobver}.tar.gz
+# Source0-md5:	9772e0deeb9f25dca34a71ad321de4cb
+#Source0:	http://ooo.ximian.com/packages/snap/ooo-build-%{ooobver}-HEAD-20040731.tar.gz
 Source1:	http://ooo.ximian.com/packages/OOO_%{dfullver}/OOO_%{dfullver}.tar.bz2
 # Source1-md5:	627fbce603598a74f9be03f5a1da6d94
-Source2:	http://ooo.ximian.com/packages/ooo-icons-OOO_1_1-9.tar.gz
-# Source2-md5:	32a0e62f89ef36a91437fc705fbe6440
+Source2:	http://ooo.ximian.com/packages/ooo-icons-OOO_1_1-10.tar.gz
+# Source2-md5:	be79d3cb5f64d2c0ac8a75e65a59cb09
 Source3:	http://kde.openoffice.org/files/nidaba/documents/159/1929/ooo-KDE_icons-OOO_1_1-0.2.tar.gz
 # Source3-md5:	50486f5208ec5ae7af1dbb8f9e77cb12
 Source10:	oocalc.desktop
@@ -86,9 +85,10 @@ Source411:	%{cftp}/helpcontent/helpcontent_88_unix.tgz
 Source412:	%{cftp}/helpcontent/helpcontent_90_unix.tgz
 # Source412-md5:	9521a01c5817e87178f356762f8cdab5
 
-Patch0:		%{name}-rh-disable-spellcheck-all-langs.patch
-Patch1:		%{name}-shared-xinerama.patch
-Patch2:		%{name}-build.patch
+Patch0:			%{name}-makefile.patch
+#Patch0:		%{name}-rh-disable-spellcheck-all-langs.patch
+#Patch1:		%{name}-shared-xinerama.patch
+#Patch2:		%{name}-build.patch
 # PLD-specific, they ooo-build people don't like it
 Patch3:		%{name}-files.patch
 
@@ -982,8 +982,9 @@ zuluskim.
 %prep
 %setup -q -n ooo-build-%{ooobver}
 %patch0 -p1
-%patch1 -p1
-%patch2 -p1
+#%patch0 -p1 // obsoleted?
+#%patch1 -p1 
+#%patch2 -p1 // obsoleted
 %patch3 -p1
 
 install -d src
@@ -1045,11 +1046,7 @@ CONFOPTS=" \
 	--with-system-xrender \
 	--with-vendor="PLD" \
 	--with-distro="PLD" \
-%if %{with icons_ximian}
-	--with-icons="Ximian" \
-%else
-	--with-icons="KDE" \
-%endif
+	--with-icons=gnome,kde \
 	--enable-gtk \
 	--enable-kde \
 	--with-installed-ooo-dirname=%{name} \
