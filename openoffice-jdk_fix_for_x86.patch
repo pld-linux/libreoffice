@@ -1,0 +1,38 @@
+--- configure.in	Wed Dec 19 02:28:41 2001
++++ configure.in.new	Wed Dec 19 02:25:43 2001
+@@ -654,6 +654,22 @@
+          _jdk_minor="true"
+       fi
+    fi
++   if test "$_os" = "Linux" -a "$_machine_type" = "i586"; then
++      _jdk_middle=`echo $_jdk | $AWK -F. '{ if ($2 != 2) print "false"; else print "true" }'`
++      _jdk_middle3=`echo $_jdk | $AWK -F. '{ if ($2 != 3) print "false"; else print "true" }'`
++
++      if test "$_jdk_middle" = "false" -a "$_jdk_middle3" = "true"; then
++         _jdk_minor="true"
++      fi
++   fi
++   if test "$_os" = "Linux" -a "$_machine_type" = "i386"; then
++      _jdk_middle=`echo $_jdk | $AWK -F. '{ if ($2 != 2) print "false"; else print "true" }'`
++      _jdk_middle3=`echo $_jdk | $AWK -F. '{ if ($2 != 3) print "false"; else print "true" }'`
++
++      if test "$_jdk_middle" = "false" -a "$_jdk_middle3" = "true"; then
++         _jdk_minor="true"
++      fi
++   fi
+    if test "$_os" = "FreeBSD" -o "$_os" = "NetBSD"; then
+       _jdk_middle=`echo $_jdk | $AWK -F. '{ if ($2 != 2) print "false"; else print "true" }'`
+    fi
+@@ -686,6 +702,12 @@
+          if test "$_machine_type" = "i686"; then
+             _jdk_minor=`echo $_jdk | $AWK -F. '{ if ($3 != 2) print "false"; else print "true" }'`
+          fi
++	 if test "$_machine_type" = "i586"; then
++            _jdk_minor=`echo $_jdk | $AWK -F. '{ if ($3 != 2) print "false"; else print "true" }'`
++         fi
++	 if test "$_machine_type" = "i386"; then
++            _jdk_minor=`echo $_jdk | $AWK -F. '{ if ($3 != 2) print "false"; else print "true" }'`
++         fi
+          if test "$_machine_type" = "sparc"; then
+             _jdk_minor=`echo $_jdk | $AWK -F. '{ if ($3 != 2) print "false"; else print "true" }'`
+          fi 
