@@ -1,0 +1,70 @@
+--- oo_1.0.1_src/cppu/inc/uno/lbnames.h.jj	Thu Jul 18 14:41:47 2002
++++ oo_1.0.1_src/cppu/inc/uno/lbnames.h	Thu Jul 18 15:19:43 2002
+@@ -96,12 +96,10 @@ provoking error here, because PP ignores
+ #define __CPPU_ENV gcc2
+ #elif (__GNUC__ == 2)
+ #error "Tested gcc 2 versions are 2.91 and 2.95.  Patch uno/lbnames.h to try your gcc 2 version."
+-#elif (__GNUC__ == 3 && __GNUC_MINOR__ == 0)
++#elif (__GNUC__ == 3 && __GNUC_MINOR__ <= 2)
+ #define	__CPPU_ENV gcc3
+-#elif (__GNUC__ == 3 && __GNUC_MINOR__ == 1)
+-#define __CPPU_ENV gcc3
+ #elif (__GNUC__ == 3)
+-#error "Tested gcc 3 version is <= 3.1.  Patch uno/lbnames.h to try your gcc 3 version."
++#error "Tested gcc 3 version is <= 3.2.  Patch uno/lbnames.h to try your gcc 3 version."
+ #else
+ #error "Supported gcc majors are 2 and 3.  Unsupported gcc major version."
+ #endif /* defined (__GNUC__) */
+--- oo_1.0.1_src/product/inc/scp/udk_basefiles.scp.jj	Fri Jun  7 20:15:12 2002
++++ oo_1.0.1_src/product/inc/scp/udk_basefiles.scp	Thu Jul 18 15:22:54 2002
+@@ -13,9 +13,10 @@ End
+ 
+ #if ( CCNUMVER >= 000300010000 )
+ 
++#ifdef NOTHING
+ File gid_File_Lib_Stdc
+     BIN_FILE_BODY;
+-    Name               = STRING(libstdc++.so.4.0.0);
++    Name               = STRING(libstdc++.so.5.0.0);
+     Dir                        = GCFG_BINARY_DIR;
+     Styles             = (PACKED, SETUPZIP);
+ End
+@@ -27,6 +28,7 @@ Shortcut gid_Shortcut_Lib_Stdc
+     Styles      = (NETWORK,RELATIVE);
+ End
+ 
++#endif
+ #else
+ 
+ File gid_File_Lib_Stdc
+--- oo_1.0.1_src/product/util/makefile.mk.jj	Tue Jun 11 17:09:39 2002
++++ oo_1.0.1_src/product/util/makefile.mk	Thu Jul 18 15:22:00 2002
+@@ -117,8 +117,8 @@ BINDINGDLL=$(COMNAME)_uno
+ ADDITIONAL_DLLS= \
+        $(DESTDIRDLL)$/libgcc_s.so.1            \
+        $(DESTDIRDLL)$/libgcc_s.so              \
+-       $(DESTDIRDLL)$/libstdc++.so.4           \
+-       $(DESTDIRDLL)$/libstdc++.so.4.0.0
++       $(DESTDIRDLL)$/libstdc++.so.X           \
++       $(DESTDIRDLL)$/libstdc++.so.X.Y.Z
+ .ELSE
+ ADDITIONAL_DLLS= \
+ 	$(DESTDIRDLL)$/libgcc_s.so.1 		\
+@@ -500,13 +500,13 @@ $(DESTDIRDLL)$/%$(MY_VERSION_LINKPOSTFIX
+ 
+ .IF "$(CCNUMVER)">="000300010000"
+ 
+-$(DESTDIRDLL)$/libstdc++.so.4.0.0 : $(DLLOUT)$/libstdc++.so.4.0.0 $(DIRLIST)
++$(DESTDIRDLL)$/libstdc++.so.X.Y.Z : $(DLLOUT)$/libstdc++.so.X.Y.Z $(DIRLIST)
+        -rm -f $@
+-       $(GNUCOPY) -p $(DLLOUT)$/libstdc++.so.4.0.0 $@
++       $(GNUCOPY) -p $(DLLOUT)$/libstdc++.so.X.Y.Z $@
+ 
+-$(DESTDIRDLL)$/libstdc++.so.4 : $(DESTDIRDLL)$/libstdc++.so.4.0.0 $(DIRLIST)
++$(DESTDIRDLL)$/libstdc++.so.X : $(DESTDIRDLL)$/libstdc++.so.X.Y.Z $(DIRLIST)
+        -rm -f $@
+-       +ln -s libstdc++.so.4.0.0 $@
++       +ln -s libstdc++.so.X.Y.Z $@
+ 
+ .ELSE
+  
