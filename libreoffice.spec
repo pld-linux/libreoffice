@@ -1267,23 +1267,37 @@ for lang in $slanglist; do
 	echo "%%defattr(644,root,root,755)" >> ${lang}.lang
 	# dictionaries
 	ls $RPM_BUILD_ROOT%{_libdir}/%{name}/share/dict/ooo/*${lang}* 2> /dev/null && echo "%%lang(${lang}) %{_libdir}/%{name}/share/dict/ooo/*${lang}*" >> ${lang}.lang
+
 	# help files
 	ls $RPM_BUILD_ROOT%{_libdir}/%{name}/help/*${lang}* 2> /dev/null && echo "%%lang(${lang}) %{_libdir}/%{name}/help/*${lang}*" >> ${lang}.lang
+
 	# registry res
 	ls $RPM_BUILD_ROOT%{_libdir}/%{name}/share/registry/res/*${lang}* 2> /dev/null && echo "%%lang(${lang}) %{_libdir}/%{name}/share/registry/res/*${lang}*" >> ${lang}.lang
+
 	# files from lang_*_list.txt
 	[ -f build/lang_${lang}_list.txt ] && sed -e "s#$RPM_BUILD_ROOT#%%lang(${lang}) #g" build/lang_${lang}_list.txt >> ${lang}.lang
+
 	# directories with locale specific content
 	find $RPM_BUILD_ROOT -type d | grep -Ev "%{_libdir}/%{name}/(help|share/registry/res/)" | sed -e "s#$RPM_BUILD_ROOT##g" -e "s#\(.*/${lang}\)\$#%%lang(${lang}) \1#g" | grep -E '^%%lang' >> ${lang}.lang || /bin/true
+
+	# locale codes longer than two letters
 	otherlang=$(echo "$langlist" | grep -v "^${lang}\$" | grep -E "^${lang}(-|_)" | xargs)
 	for olang in $otherlang; do
 		find $RPM_BUILD_ROOT -type d | grep -Ev "%{_libdir}/%{name}/(help|share/registry/res/)" | sed -e "s#$RPM_BUILD_ROOT##g" -e "s#\(.*/${otherlang}\)\$#%%lang(${lang}) \1#g" | grep -E '^%%lang' >> ${lang}.lang || /bin/true
 	done
+
 	# full lang name
 	longlang=$(./bin/openoffice-xlate-lang -l "$lang" 2> /dev/null || /bin/true)
 	if [ -n "$longlang" ]; then
 		longlang=$(echo "${longlang}" | sed -e 's#_.*##g')
 		find $RPM_BUILD_ROOT -type d -name "${longlang}*" -printf "%%%%lang(${lang}) %%p\n" | sed -e "s#$RPM_BUILD_ROOT##g" >> ${lang}.lang || /bin/true
+	else
+		for olang in $otherlang; do
+			longlang=$(./bin/openoffice-xlate-lang -l "$olang" 2> /dev/null || /bin/true)
+			[ -z "$longlang" ] && continue
+			longlang=$(echo "${longlang}" | sed -e 's#_.*##g')
+			find $RPM_BUILD_ROOT -type d -name "${olang}*" -printf "%%%%lang(${lang}) %%p\n" | sed -e "s#$RPM_BUILD_ROOT##g" >> ${lang}.lang || /bin/true
+		done
 	fi
 done
 
