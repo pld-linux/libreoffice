@@ -12,12 +12,12 @@
 %bcond_without	fontconf	# fontconfig
 %bcond_without	icons		# new Ximian icons
 %bcond_without	gnomevfs	# gnome-vfs
-%bcond_with	parallel 	# parallel building
-%bcond_with	nptl	# build with nptl support
+%bcond_with	parallel	# parallel building
+%bcond_with	nptl		# build with nptl support
 
 # not tested
 %bcond_with	gnomecups	# gnome-cups
-%bcond_with	i18n 		# i18n bits
+%bcond_with	i18n		# i18n bits
 
 %define		ver		1.1.1
 %define		rel		%{nil}
