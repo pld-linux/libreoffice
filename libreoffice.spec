@@ -15,7 +15,7 @@ Summary:	OpenOffice - powerful office suite
 Summary(pl):	OpenOffice - potê¿ny pakiet biurowy
 Name:		openoffice
 Version:	%{ver}
-Release:	0.2
+Release:	0.3
 Epoch:		1
 License:	GPL/LGPL
 Group:		X11/Applications
@@ -206,8 +206,8 @@ BuildRequires:	XFree86-devel
 BuildRequires:	autoconf
 BuildRequires:	automake
 BuildRequires:	bison >= 1.875-4
-BuildRequires:	db-devel
-BuildRequires:	db-cxx-devel
+BuildRequires:	db4.1-devel
+BuildRequires:	db4.1-cxx-devel
 %if %{with java}
 BuildRequires:	db4.1-java
 BuildRequires:	jar
