@@ -1,15 +1,14 @@
 Summary:	OpenOffice - powerful office suite
 Summary(pl):	OpenOffice - potê¿ny pakiet biurowy
 Name:		openoffice
-Version:	627
+Version:	632
 Release:	1
 Epoch:          1
 License:	GPL/LGPL
 Group:		X11/Applications
 Group(de):	X11/Applikationen
 Group(pl):	X11/Aplikacje
-Source0:	http://a2012.g.akamai.net/7/2012/2064/OpenOffice627/anoncvs.openoffice.org/download/OpenOffice627/oo_%{version}_src.tar.bz2
-Source1:	http://www.sleepycat.com/update/3.2.9/db-3.2.9.tar.gz
+Source0:	http://a2012.g.akamai.net/7/2012/2064/OpenOffice632/anoncvs.openoffice.org/download/OpenOffice632/oo_%{version}_src.tar.bz2
 URL:		http://www.openoffice.org/
 BuildRequires:	XFree86-devel
 BuildRequires:	STLport-devel
@@ -18,6 +17,8 @@ BuildRequires:	STLport-static
 BuildRequires:	flex
 BuildRequires:	tcsh
 BuildRequires:	perl
+BuildRequires:	autoconf
+BuildRequires:	automake
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %define		_prefix		/usr/X11R6
@@ -52,20 +53,11 @@ Do zalet OpenOffice.org mo¿na zaliczyæ:
  * infrastruktura s³u¿±ca do komunikowania siê w ramach projektu.
 
 %prep
-%setup -q -n oo_%{version}_src -a1
+%setup -q -n oo_%{version}_src
 
 %build
 JAVA_HOME="/opt/jdk1.2.2"; export JAVA_HOME
 PATH="$PATH:$JAVA_HOME/bin"; export PATH
-cd db-3.2.9/dist
-%configure \
-    --enable-java \
-    --enable-dynamic
-
-%{__make}
-    
-cd ../..
-install db-3.2.9/java/classes/db.jar external/common/db31.jar
 
 cd config_office
 autoconf
@@ -75,25 +67,19 @@ autoconf
 	--with-lang=ALL
 
 cd ..
-
-./bootstrap
+cat bootstrap | sed -e 's,autogen.sh;configure;make;make install,autogen.sh;configure;make linux;make install,g' > bootstrap.
+mv -f bootstrap. bootstrap
+chmod 744 bootstrap
 
 cat <<EOF > compile
-#!/bin/csh
+#!/bin/tcsh
 source LinuxIntelEnv.Set
-
+./bootstrap
 # you must have a valid & working X DISPLAY setting on the build machine,
 # see http://tools.openoffice.org/troubleshoot.html
 Xvfb :15 &
 setenv DISPLAY	:15
-
 dmake
-# workaround, there seem to be a missing step in the bootstrap
-#cd tools/bootstrp/addexes2
-#dmake
-#cd ../../..
-#cp -p tools/unxlngi3.pro/bin/javadep solenv/unxlngi3/bin/
-#dmake
 EOF
 
 chmod u+rx compile
