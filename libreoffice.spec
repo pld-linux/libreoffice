@@ -77,6 +77,7 @@ Patch3:		%{name}-pld-section.patch
 Patch4:		%{name}-pld-leave-home.patch
 Patch5:		%{name}-pld-parallel-build.patch
 Patch6:		%{name}-pld-kde-nwf-fonts.patch
+Patch7:		%{name}-curl.patch
 
 URL:		http://www.openoffice.org/
 BuildRequires:	ImageMagick
@@ -883,6 +884,7 @@ chiñskim.
 %patch4 -p1
 %patch5 -p1
 %patch6 -p1
+%patch7 -p1
 
 install -d src
 ln -s %{SOURCE1} src/
