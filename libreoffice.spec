@@ -75,14 +75,13 @@ autoconf
 cd ..
 cat <<EOF > compile
 #!/bin/tcsh
-source LinuxIntelEnv.Set
 ./bootstrap
 # you must have a valid & working X DISPLAY setting on the build machine,
 # see http://tools.openoffice.org/troubleshoot.html
 #Xvfb :15 &
 #setenv DISPLAY	:15
-chmod u+rwx \$SOLARENV/\$OUTPATH/bin/dmake
-\$SOLARENV/\$OUTPATH/bin/dmake
+source LinuxIntelEnv.Set
+dmake
 EOF
 
 chmod u+rx compile
