@@ -1,0 +1,19 @@
+--- oo_641c_src/scp/source/global/setupzip.scp	Wed Nov 21 12:27:20 2001
++++ oo_641c_src-new/scp/source/global/setupzip.scp	Tue Jan 29 15:35:37 2002
+@@ -102,6 +102,7 @@
+ UNO_SETUPZIP_LIB_FILE( GID_FILE_LIB_SVL, svl )
+ UNO_SETUPZIP_LIB_FILE( GID_FILE_LIB_UUI, uui )
+ 
++#ifdef NOTHING
+ #endif
+ 
+ File GID_FILE_LIB_STLPORT
+@@ -119,6 +120,8 @@
+             Name            = "stlport_vc6.dll";
+ #endif
+ End
++
++#endif
+ 
+ #if !defined(OSL_PRODUCT) && !defined(IPL_PRODUCT) && !defined(OPL_PRODUCT)
+ 
