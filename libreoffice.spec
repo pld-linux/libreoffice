@@ -150,7 +150,7 @@ BuildRequires:	jar
 BuildRequires:	jdk
 %elseif
 BuildRequires:	libxslt-progs
-BuildRequires:  gcc-java-tools
+BuildRequires:	gcc-java-tools
 %endif
 BuildRequires:	flex
 BuildRequires:	freetype-devel >= 2.1
@@ -982,7 +982,7 @@ do
 	tar zxvf $FILE
 	for file in s*.zip; do
 	    unzip -q -d $RPM_BUILD_ROOT%{oolib}/help/$NAME -o $file
-        done
+	done
 	rm -f *.zip;
     fi
 done
@@ -1068,8 +1068,8 @@ perl -pi -e "/^Installation gid_Installation/ .. /^End/ and s|(SourcePath.*)=.*|
 
 # Disable desktop (KDE, GNOME, CDE) integration for user installs
 for module in GID_MODULE_OPTIONAL_GNOME gid_Module_Optional_Kde gid_Module_Optional_Cde; do
-  perl -pi -e "/^Module $module/ .. /^End/ and s|(Installed.*)=.*|\1= NO;|" \
-    $RPM_BUILD_ROOT%{oolib}/program/instdb.ins
+    perl -pi -e "/^Module $module/ .. /^End/ and s|(Installed.*)=.*|\1= NO;|" \
+	$RPM_BUILD_ROOT%{oolib}/program/instdb.ins
 done
 
 # Fix setup and spadmin symlinks set by OO.org setup program
@@ -1090,8 +1090,8 @@ cat %{SOURCE7} | sed -e "s/@OOVERSION@/%{subver}/" > \
 # Install component wrapper scripts
 install -d $RPM_BUILD_ROOT%{_bindir}
 for app in %{apps}; do
-  cat %{SOURCE8} | sed -e "s/@APP@/${app}/" \
-    > $RPM_BUILD_ROOT%{_bindir}/oo${app}
+    cat %{SOURCE8} | sed -e "s/@APP@/${app}/" \
+	> $RPM_BUILD_ROOT%{_bindir}/oo${app}
 done
 
 echo 'UNO_WRITERDB=$SYSUSERCONFIG/.user60.rdb' \
