@@ -151,6 +151,20 @@ Patch208: openoffice-use-fork.patch
 Patch209: openoffice-print-dialog.patch
 Patch210: openoffice-print-error.patch
 Patch211: openoffice-help-fallback-en.patch
+Patch212: openoffice-crash-bindings.patch
+Patch213: openoffice-crash-mapmode.patch
+Patch214: openoffice-gui-beep-less.patch
+Patch215: openoffice-gui-splash-redraw.patch
+Patch216: openoffice-gui-startup-style.patch
+Patch217: openoffice-gui-sw-scroll.patch
+Patch218: openoffice-gui-tbx-palette.patch
+Patch219: openoffice-gui-vcl-fix-borders.patch
+Patch220: openoffice-init-desktop.patch
+Patch221: openoffice-init-sw.patch
+Patch222: openoffice-ooo111-general-io-error-sxi.patch
+Patch223: openoffice-startup-fix.patch
+Patch224: openoffice-svx-freeze-fix.patch
+Patch225: openoffice-wm-dialog-utility.patch
 
 Patch301: openoffice-splash.patch
 
@@ -865,6 +879,20 @@ rm -f moz/prj/d.lst
 %patch209 -p0
 %patch210 -p0
 %patch211 -p0 
+%patch212 -p0 
+%patch213 -p0
+%patch214 -p0 
+%patch215 -p0 
+%patch216 -p0 
+%patch217 -p0
+%patch218 -p0
+%patch219 -p0
+%patch220 -p0
+%patch221 -p0
+%patch222 -p0
+%patch223 -p0
+%patch224 -p0 
+%patch225 -p0
 
 %patch301 -p1 
 
