@@ -17,7 +17,7 @@
 
 %define		ver		2.0
 %define		rel		0
-%define		ooobver		1.9.78
+%define		ooobver		1.9.78.2
 %define		snap		SRC680
 %define		bver		m78
 %define		subver		645
@@ -36,13 +36,13 @@ Epoch:		1
 License:	GPL/LGPL
 Group:		X11/Applications
 Source0:	http://go-ooo.org/packages/%{snap}/ooo-build-%{ooobver}.tar.gz
-# Source0-md5:	c62230a08d779309dec9c4ce62d50612
+# Source0-md5:	ab8edb5efe097728a6cae9af20424a09
 Source1:	http://go-ooo.org/packages/%{snap}/%{ssnap}-%{bver}-core.tar.bz2
 # Source1-md5:	6a416b4027e6a926c6ae59a284ef353a
 Source2:	http://go-ooo.org/packages/%{snap}/ooo_custom_images-10.tar.bz2
 # Source2-md5:	2956ae858e74f705bd1b1c60dbb328f5
-Source3:	http://go-ooo.org/packages/%{snap}/ooo_crystal_images-2.tar.bz2
-# Source3-md5:	774f20a69ac5d3421dc49b8668a0e146
+Source3:	http://go-ooo.org/packages/%{snap}/ooo_crystal_images-3.tar.bz2
+# Source3-md5:	47db5393264b8b8c875b0a320da8d095
 Source4:	http://go-ooo.org/packages/%{snap}/extras-1.tar.bz2
 # Source4-md5:	c76b1c554529a37975d0149ca8647e7a
 Source10:	oocalc.desktop
@@ -90,8 +90,6 @@ Source411:	%{cftp}/helpcontent/helpcontent_88_unix.tgz
 # Source411-md5:	3b00571318e45965dee0545d86306d65
 Source412:	%{cftp}/helpcontent/helpcontent_90_unix.tgz
 # Source412-md5:	9521a01c5817e87178f356762f8cdab5
-
-Patch0:		%{name}-pld.patch
 
 URL:		http://www.openoffice.org/
 BuildRequires:	ImageMagick
@@ -1830,7 +1828,6 @@ zuluskim.
 
 %prep
 %setup -q -n ooo-build-%{ooobver}
-%patch0 -p1
 
 install -d src
 # sources, icons, KDE_icons
