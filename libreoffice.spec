@@ -169,6 +169,22 @@ Patch362: openoffice-gtk-themeing.patch
 Patch363: openoffice-gui-sc-paste.patch
 Patch364: openoffice-speed-lang-cache.patch
 
+Patch371: openoffice-capitalization.patch
+Patch372: openoffice-gui-font-antialias-size.patch
+Patch373: openoffice-gui-font-default-size.patch
+Patch374: openoffice-gui-font-scale.patch
+Patch375: openoffice-gui-font-size-unbreak.patch
+Patch376: openoffice-gui-fonts-kde.patch
+Patch377: openoffice-gui-ft-21-compat.patch
+Patch378: openoffice-gui-ft-pt-not-pixel.patch
+Patch379: openoffice-gui-ft-set-hint.patch
+Patch380: openoffice-gui-ft-use-system-font.patch
+Patch381: openoffice-gui-scale-ruler.patch
+
+Patch391: openoffice-print-fontconfig.patch
+Patch392: openoffice-print-scale-fix.patch
+Patch393: openoffice-padmin-nofontconfig.patch
+
 URL:		http://www.openoffice.org/
 BuildRequires:	STLport-devel >= 4.5.3-6
 BuildRequires:	XFree86-devel
@@ -868,6 +884,24 @@ rm -f moz/prj/d.lst
 %patch362 -p0
 %patch363 -p0 
 %patch364 -p0 
+
+% fonts
+%patch371 -p0
+%patch372 -p0 
+%patch373 -p0 
+%patch374 -p0
+%patch375 -p0
+%patch376 -p0
+%patch377 -p0
+%patch378 -p0
+%patch379 -p0
+%patch380 -p0 
+%patch381 -p0
+
+# fontconfig
+%patch391 -p0
+%patch392 -p0
+%patch393 -p0
 
 # gcc 2 include error hack:
 rm -rf autodoc/source/inc/utility
