@@ -586,11 +586,10 @@ Portuguese Brazylian language.
 
 %description i18n-pt_BR -l pl
 Ten pakiet dostarcza zasoby zawieraj±ce menu i okna dialogowe w jêzyku
-portugalskim (brazylia).
+portugalskim (odmiana brazylijska).
 
 %files i18n-pt_BR -f i18n-pt_BR
 %endif
-
 
 %define		RUSS		""
 %if %{have_RUSS} == yes
