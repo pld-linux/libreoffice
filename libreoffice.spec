@@ -1,6 +1,3 @@
-# %configure requests jdk1.2.2 but documentation 1.3.1
-%define		jdk_ver		1.3.1_01
-
 Summary:	OpenOffice - powerful office suite
 Summary(pl):	OpenOffice - potê¿ny pakiet biurowy
 Name:		openoffice
@@ -19,7 +16,7 @@ BuildRequires:	XFree86-devel
 BuildRequires:	autoconf
 BuildRequires:	automake
 BuildRequires:	flex
-BuildRequires:	jdk = %{jdk_ver}
+BuildRequires:	jdk = 1.3.1_01
 BuildRequires:	perl
 BuildRequires:	tcsh
 BuildRequires:	unzip
@@ -67,7 +64,7 @@ cd external; tar fxz %{SOURCE1}; cp -fr gpc231/* gpc
 cd config_office
 autoconf
 %configure \
-	--with-jdk-home=/usr/lib/jdk%{jdk_ver} \
+	--with-jdk-home=/usr/lib/jdk1.3.1_01 \
 	--with-lang=ALL \
 	--with-x
 cd ..
@@ -79,7 +76,7 @@ source LinuxIntelEnv.Set
 # see http://tools.openoffice.org/troubleshoot.html
 #Xvfb :15 &
 #setenv DISPLAY	:15
-#dmake
+dmake
 EOF
 
 chmod u+rx compile
