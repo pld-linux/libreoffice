@@ -1,0 +1,22 @@
+--- ooo-build-1.3.0/Makefile.shared.orig	2004-08-18 23:02:17.814757192 +0200
++++ ooo-build-1.3.0/Makefile.shared	2004-08-18 23:02:27.170334928 +0200
+@@ -24,7 +24,7 @@
+ 
+ artwork.install : $(STAMP_DIR)/artwork.install
+ $(STAMP_DIR)/artwork.install : $(OOBUILDDIR)/unpack \
+-			       $(STAMP_DIR)/prebuild \
++			       $(STAMP_DIR)/prebuild 
+ 	cd $(top_srcdir)/bin ; ./install-artwork
+ 	touch $@
+ 
+--- ooo-build-1.3.0/Makefile.in.orig	2004-08-18 23:11:53.477243192 +0200
++++ ooo-build-1.3.0/Makefile.in	2004-08-18 23:12:01.748985696 +0200
+@@ -627,7 +627,7 @@
+ 
+ artwork.install : $(STAMP_DIR)/artwork.install
+ $(STAMP_DIR)/artwork.install : $(OOBUILDDIR)/unpack \
+-			       $(STAMP_DIR)/prebuild \
++			       $(STAMP_DIR)/prebuild
+ 	cd $(top_srcdir)/bin ; ./install-artwork
+ 	touch $@
+ 
