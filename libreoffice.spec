@@ -6,7 +6,7 @@ Summary:	OpenOffice - powerful office suite
 Summary(pl):	OpenOffice - potê¿ny pakiet biurowy
 Name:		openoffice
 Version:	1.0.1
-Release:	0.5
+Release:	0.6
 Epoch:		1
 License:	GPL/LGPL
 Group:		X11/Applications
@@ -19,9 +19,41 @@ Source6:	%{name}-applnk.tar.gz
 Source7:	%{name}-wrapper
 Source8:	%{name}-wrapper-component
 
+Source101:	ftp://ftp.task.gda.pl/mirror/ftp.openoffice.org/contrib/helpfiles/helpcontent_01_unix.tgz
+Source102:	ftp://ftp.task.gda.pl/mirror/ftp.openoffice.org/contrib/helpfiles/helpcontent_33_unix.tgz
+Source103:	ftp://ftp.task.gda.pl/mirror/ftp.openoffice.org/contrib/helpfiles/helpcontent_34_unix.tgz
+Source104:	ftp://ftp.task.gda.pl/mirror/ftp.openoffice.org/contrib/helpfiles/helpcontent_39_unix.tgz
+Source105:	ftp://ftp.task.gda.pl/mirror/ftp.openoffice.org/contrib/helpfiles/helpcontent_46_unix.tgz
+Source106:	ftp://ftp.task.gda.pl/mirror/ftp.openoffice.org/contrib/helpfiles/helpcontent_49_unix.tgz
+
+# Wordbooks: http://whiteboard.openoffice.org/lingucomponent/download_dictionary.html
+Source201:	http://dict.progbits.com/ca_ES.zip
+Source202:	http://dict.progbits.com/cs_CZ.zip
+Source203:	http://dict.progbits.com/da_DK.zip
+Source204:	http://dict.progbits.com/de_CH.zip
+Source205:	http://dict.progbits.com/de_DE.zip
+Source206:	http://dict.progbits.com/el_GR.zip
+Source207:	http://dict.progbits.com/en_CA.zip
+Source208:	http://dict.progbits.com/es_ES.zip
+Source209:	http://dict.progbits.com/fr_FR.zip
+Source210:	http://dict.progbits.com/hr_HR.zip
+Source211:	http://dict.progbits.com/hu_HU.zip
+Source212:	http://dict.progbits.com/it_IT.zip
+Source213:	http://dict.progbits.com/nl_NL.zip
+Source214:	http://dict.progbits.com/pl_PL.zip
+Source215:	http://dict.progbits.com/pt_PT.zip
+Source216:	http://dict.progbits.com/sv_SE.zip
+Source217:	http://dict.progbits.com/bg_BG.zip
+Source218:	http://dict.progbits.com/en_GB.zip
+Source219:	http://dict.progbits.com/pt_BR.zip
+Source220:	http://dict.progbits.com/sk_SK.zip
+
+# This one is special, as there is no country associated with Latin,
+# nor should it be %lang(la).
+Source221:	http://dict.progbits.com/la.zip
+
 Patch0:		%{name}-gcc.patch
 Patch2:		%{name}-mozilla.patch
-Patch4:		%{name}-perl.patch
 # Start using some system libraries:
 Patch5:		%{name}-system-freetype.patch
 Patch6:		%{name}-system-getopt.patch
@@ -40,13 +72,8 @@ Patch14:	%{name}-remove-gpc.patch
 # Disable stlport from being built
 Patch16:	%{name}-no-stlport.patch
 
-# Disable Java applet support
-Patch17:	%{name}-no-java-vm.patch
 # Fix broken inline assembly
 Patch18:	%{name}-asm.patch
-
-# Psuje jave:
-#Patch19:	%{name}-nousrinclude.patch
 
 Patch20:	%{name}-no-mozab.patch
 Patch21:	%{name}-no-mozab2.patch
@@ -96,9 +123,13 @@ Requires:	%{name}-libs = %{version}-%{release}
 Requires:	libstdc++ >= 3.2.1
 Requires:	db
 
-#%define	langs	"ENUS,FREN,GERM,SPAN,ITAL,DTCH,PORT,DAN,GREEK,POL,SWED,TURK,RUSS"
-%define	langs	"ENUS"
+%define	langs	"ENUS,FREN,GERM,SPAN,ITAL,DTCH,PORT,DAN,GREEK,POL,SWED,TURK,RUSS,CZECH"
 %define	apps	agenda calc draw fax impress label letter math master memo vcard web writer
+%define	wordbooks1	%{SOURCE201} %{SOURCE202} %{SOURCE203} %{SOURCE204} %{SOURCE205}
+%define	wordbooks2	%{SOURCE206} %{SOURCE207} %{SOURCE208} %{SOURCE209} %{SOURCE210}
+%define	wordbooks3	%{SOURCE211} %{SOURCE212} %{SOURCE213} %{SOURCE214} %{SOURCE215}
+%define	wordbooks4	%{SOURCE216} %{SOURCE217} %{SOURCE218} %{SOURCE219} %{SOURCE220}
+%define	wordbooks	%{wordbooks1} %{wordbooks2} %{wordbooks3} %{wordbooks4}
 
 %define	_prefix		/usr/X11R6
 %define	_archbuilddir	unxlngi3.pro
@@ -159,7 +190,6 @@ export CC CXX GCJ
 %setup -q -n oo_1.0.1_src
 %patch0 -p1
 %patch2 -p1
-%patch4 -p1
 
 %patch5 -p1
 %patch6 -p1
@@ -171,9 +201,7 @@ export CC CXX GCJ
 %patch13 -p1
 %patch14 -p1
 %patch16 -p1
-%patch17 -p1
 %patch18 -p1
-#%patch19 -p1
 
 %patch20 -p1
 %patch21 -p1
@@ -192,113 +220,35 @@ install %{SOURCE1} external
 cd external; tar fxz %{SOURCE1}; cp -fr gpc231/* gpc
 cd ..
 
-chmod +x solenv/bin/zipdep.pl
-
-
-##################
-# Build fake JDK
-mkdir -p fakejdk/bin fakejdk/include
-cp -a %{SOURCE4} fakejdk/bin/xmlparse
-
-# Create fakejdk/bin/java:
-sed "s~@@~`pwd`~" > fakejdk/bin/java <<"EOF"
-#!/bin/sh
-if [ "$1" = "-version" ]; then
-	echo 'java version "1.3.1_03"' 1>&2
-	exit 0
-fi
-if [ "$4" = org.openoffice.configuration.XMLDefaultGenerator ]; then
-	exec @@/fakejdk/bin/xmlparse "$@"
-fi
-echo "FIXME: Emulate java runtime using gcj here"
-exit 1
-EOF
-chmod +x fakejdk/bin/java fakejdk/bin/xmlparse
-
-
-# Create fakejdk/bin/javac
-sed "s~@@~`pwd`~" > fakejdk/bin/javac <<"EOF"
-#!/bin/sh
-if [ "$1" = "-J-version" ]; then
-	echo 'java version "1.3.1_03"' 1>&2
-	exit 0
-fi
-TEMP=`mktemp -d fakejavac.XXXXXX` || exit 1
-DEST=.
-ANY=""
-while [ $# != 0 ]; do
-	if [ "$1" = "-classpath" ]; then
-		shift
-	elif [ "$1" = "-d" ]; then
-		DEST=$2
-		shift
-	else
-		case "$1" in
-			*.java)
-				C=`basename "$1" .java`
-				grep '^[  ]*package[      ]*[^    ]*[     ]*;[    ]*$' $1 > $TEMP/$C.java
-				echo "public class $C { }" >> $TEMP/$C.java
-				ANY=1
-			;;
-			*)
-				echo "unknown option passed to javac!" 1>&2
-				exit 1
-			;;
-		esac
-	fi
-	shift
-done
-if [ -n "$ANY" ]; then
-	gcj -C -d $DEST $TEMP/*.java
-fi
-rm -rf $TEMP
-exit 0
-EOF
-
-chmod +x fakejdk/bin/javac
-GCJHOME=`gcj -print-search-dirs | sed -n 's/^install:[         ]*//p'`
-cp -f /usr/lib/java/include/linux/j* fakejdk/include
-cp -f /usr/lib/java/include/j* fakejdk/include
-cat fakejdk/include/jni.h | sed s/JDK1_1InitArgs/JDK1_1InitArgs2/ > fakejdk/include/jni2.h
-rm -f fakejdk/include/jni.h
-cat > fakejdk/include/jni.h <<EOF
-#ifndef FAKEJDK_JNI_H
-#define FAKEJDK_JNI_H 1
-#include <jni2.h>
-#include <stdio.h>
-#include <stdarg.h>
-
-#define JNIEXPORT
-#define JNICALL
-
-typedef struct JDK1_1InitArgs
-{
-	jint version;
-	char ** properties;
-	jint checkSource, nativeStackSize, javaStackSize, minHeapSize, maxHeapSize, verifyMode;
-	char *classpath;
-	jint (*vfprintf) (FILE *, const char *, va_list);
-	void (*exit) (jint);
-	void (*abort) (void);
-	jint enableClassGC, enableVerboseGC, disableAsyncGC, verbose;
-	jboolean debugging;
-	jint debugPort;
-} JDK1_1InitArgs;
-
-#define JavaVM_ JavaVM
-#endif
-EOF
-
+install -d solver/%{subver}/%{_archbuilddir}/lib
 cp -f /lib/libgcc_s.so.1* solver/%{subver}/%{_archbuilddir}/lib
 cp /usr/lib/libstdc++.so.5* solver/%{subver}/%{_archbuilddir}/lib
+
+chmod +x solenv/bin/zipdep.pl
+
+# Install localized helpcontent
+cd helpcontent/unx
+# don't care about main_transform.xsl, it looks safe to overwrite
+for file in %{SOURCE101} %{SOURCE102} %{SOURCE103} %{SOURCE104} %{SOURCE105} %{SOURCE106} ; do
+  tar zxvf $file
+done
+for file in s*.zip; do
+  dir=`echo $file | sed -e "s/\(s[a-z]*\)[0-9]*.zip/\1/"`
+  [[ "$dir" = "shared" ]] && dir="common"
+  prefix=`echo $file | sed -e "s/s[a-z]*\([0-9]*\).zip/\1/"`
+#  langname=`perl %{SOURCE6} -l $prefix | tr '[A-Z ]' '[a-z_]'`
+  mkdir -p $dir/$langname
+  unzip -d $dir/$langname -o $file
+done
+rm -f *.zip
+cd ../..
 
 ###################
 ## BUILD
 ###################
 %build
-JAVA_HOME=`pwd`/fakejdk
-%{?!_with_ibm_java:JAVA_HOME="/usr/lib/jdk1.3.1_03"}
-%{?_with_ibm_java:JAVA_HOME="/usr/lib/IBMJava2-13"}
+#%{?!_with_ibm_java:JAVA_HOME="/usr/lib/jdk1.3.1_03"}
+#%{?_with_ibm_java:JAVA_HOME="/usr/lib/IBMJava2-13"}
 JAVA_HOME="/usr/lib/java"
 export JAVA_HOME
 
@@ -320,8 +270,8 @@ EOF
 chmod u+rx prep
 ./prep
 
-install -d solver/641/%{_archbuilddir}/bin
-install /usr/lib/db.jar solver/641/%{_archbuilddir}/bin/db.jar
+install -d solver/%{subver}/%{_archbuilddir}/bin
+install /usr/lib/db.jar solver/%{subver}/%{_archbuilddir}/bin/db.jar
 
 cat <<EOF > compile
 #!/bin/tcsh
@@ -339,9 +289,9 @@ chmod u+rx compile
 rm -rf $RPM_BUILD_ROOT
 install -d $RPM_BUILD_ROOT%{_libdir}/openoffice
 
-cp solver/641/%{_archbuilddir}/bin/setup_services.rdb solver/641/%{_archbuilddir}/bin/uno_writerdb.rdb
+cp solver/%{subver}/%{_archbuilddir}/bin/setup_services.rdb solver/%{subver}/%{_archbuilddir}/bin/uno_writerdb.rdb
 rm -f f0_061
-zip -j -5 "f0_061" solver/641/%{_archbuilddir}/bin/uno_writerdb.rdb
+zip -j -5 "f0_061" solver/%{subver}/%{_archbuilddir}/bin/uno_writerdb.rdb
 mv f0_061.zip %{installpath}/01/normal/f0_061
 
 %{init_xdisplay}
@@ -349,8 +299,27 @@ RESPONSE_FILE=$PWD/rsfile.ins
 (cd %{installpath}/01/normal/;
   cat %{SOURCE2} | sed -e "s|@DESTDIR@|$RPM_BUILD_ROOT%{_libdir}/openoffice|" > $RESPONSE_FILE
 
+  # Add additional wordbooks
+  
+  for dict in %{wordbooks} # somepath/de_AT.zip %{SOURCE50}
+   do
+    loc=`echo $dict | sed 's~^.*/\([a-zA-Z_]*\).zip$~\1~'`
+###########################
+    perl -ni -e "/^ConfigurationItem gid_Configurationitem_Oo_${loc}_Spellchecker/ .. /^End/ or print" setup.ins
+    cat >> setup.ins <<EOF
+ConfigurationItem gid_Configurationitem_Oo_${loc}_Spellchecker
+        ModuleID         = gid_Module_Root;
+        Path             = "org.openoffice.Office.Linguistic/ServiceManager/SpellCheckerList";
+        Key                      = "`echo $loc | sed 's/_/-/'`";
+        Value            = "org.openoffice.lingu.MySpellSpellChecker";
+        Styles           = (CFG_STRINGLIST, CREATE);
+End
+
+EOF
+###########################
+  done
+
   # Localize New and Wizard menus and OfficeObjects
-  [[ ! -f setup.ins.localized ]] && {
   cp -p setup.ins setup.ins.localized
   (
   for i in `( cd ../../; echo [0-9][0-9] ) | sed 's/01 //'`; do
@@ -372,14 +341,11 @@ RESPONSE_FILE=$PWD/rsfile.ins
   done
   ) | awk ' $1 ~ /Value/ { l=$0; sub(/^.*= "/,"",l); sub(/";.*$/,"",l); sub(/%PRODUCTNAME/,"OpenOffice.org",l); sub(/%PRODUCTVERSION/,"%{fullver}",l); n=n+1; str="@@REPLACEME" n "@@"; s="\"" str "\""; sub(/".*"/,s); printf "s|%s|%s|\n", str, l > "Common.xml.sed" } { print } ' \
     >> setup.ins
-  }
 
-  DISPLAY=:$XDISPLAY ./setup -R:$RESPONSE_FILE
-  rm -f $RESPONSE_FILE
+#  DISPLAY=:$XDISPLAY ./setup -R:$RESPONSE_FILE
+  ./setup -R:$RESPONSE_FILE
 )
 %{kill_xdisplay}
-
-
 
 # Remove unnecessary binaries
 for app in %{apps} ; do
@@ -459,13 +425,40 @@ done
 #  tar fxvj %{SOURCE11}
 #)
 
-
 echo 'UNO_WRITERDB=$SYSUSERCONFIG/.user60.rdb
 ' >> $RPM_BUILD_ROOT%{_libdir}/openoffice/program/unorc
 
+# Install additional dictionaries
+rm -rf a8ldict
+mkdir -p a8ldict
+for dict in %{wordbooks}; do
+  loc=`echo $dict | sed 's~^.*/\([a-zA-Z_]*\).zip$~\1~'`
+  lang=`echo $loc | sed 's~_.*$~~'`
+  mkdir a8ldict/$loc
+  unzip $dict -d a8ldict/$loc/
+  rm -f a8ldict/$loc/hyph_en.dic a8ldict/$loc/standard.dic
+  mv -f a8ldict/$loc/*.aff a8ldict/$loc/*.dic $RPM_BUILD_ROOT%{_libdir}/openoffice/share/dict/ooo/
+  echo DICT `echo $loc | tr _ ' '` $loc >> $RPM_BUILD_ROOT%{_libdir}/openoffice/share/dict/ooo/dictionary.lst
+done
+## Special case - Latin
+#mkdir a8ldict/la
+#unzip %{SOURCE50} -d a8ldict/la/
+#mv -f a8ldict/la/*.aff a8ldict/la/*.dic $RPM_BUILD_ROOT%{_libdir}/openoffice/share/dict/ooo/
+echo DICT la ANY la >> $RPM_BUILD_ROOT%{_libdir}/openoffice/share/dict/ooo/dictionary.lst
+# Special case - Austrian German
+echo DICT de AT de_AT >> $RPM_BUILD_ROOT%{_libdir}/openoffice/share/dict/ooo/dictionary.lst
+echo DICT de AT de_DE >> $RPM_BUILD_ROOT%{_libdir}/openoffice/share/dict/ooo/dictionary.lst
 
+%post
 
-
+# Fixup user language to the system set
+lang=$(echo "$LC_MESSAGES" | sed -n "s/\([a-z]*_[A-Z]*\).*/\1/p")
+if [ -n "$lang" -a -e "%{_libdir}/openoffice/help/${lang%%%%_*}" ]; then
+  for item in Linguistic_General_Default_Locale User_User_Language; do
+    perl -pi -e "/^ConfigurationItem gid_Configurationitem_${item}/ .. /^End/ and s|en-US|${lang/_/-}|" \
+      %{_libdir}/openoffice/program/instdb.ins
+  done
+fi
 
 ####################
 ## CLEAN
