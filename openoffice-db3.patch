@@ -31,6 +31,20 @@ diff -Nur oo/config_office/makefile.rc oo.new/config_office/makefile.rc
  	starmath \
  	stoc \
  	store \
+diff -Nur oo/solenv/inc/libs.mk oo.new/solenv/inc/libs.mk
+--- oo/solenv/inc/libs.mk	Fri Oct 26 15:14:41 2001
++++ oo.new/solenv/inc/libs.mk	Mon Apr 15 12:10:25 2002
+@@ -169,8 +169,8 @@
+ ZLIB3RDLIB=-lzlib
+ JPEG3RDLIB=-ljpeglib
+ NEON3RDLIB=-lneon
+-BERKELEYLIB=-ldb-3.2
+-BERKELEYCPPLIB=-ldb_cxx-3.2
++BERKELEYLIB=-ldb-3
++BERKELEYCPPLIB=-ldb_cxx-3
+ SFX2LIB=-lsfx$(UPD)$(DLLPOSTFIX)
+ SFXLIB=-lsfx$(UPD)$(DLLPOSTFIX)
+ SFXDEBUGLIB=
 diff -Nur oo/xmlhelp/source/cxxhelp/provider/databases.cxx oo.new/xmlhelp/source/cxxhelp/provider/databases.cxx
 --- oo/xmlhelp/source/cxxhelp/provider/databases.cxx	Fri Nov 23 17:51:01 2001
 +++ oo.new/xmlhelp/source/cxxhelp/provider/databases.cxx	Mon Apr 15 10:59:50 2002
