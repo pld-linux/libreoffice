@@ -79,6 +79,7 @@ Patch8:		%{name}-pld-ooo-build-fix.patch
 Patch9:		%{name}-pld-ooo-build-stderr.patch
 Patch10:	%{name}-pld-sh-tcsh.patch
 Patch11:	%{name}-pld-section.patch
+Patch12:	%{name}-pld-section-gtk.patch
 
 URL:		http://www.openoffice.org/
 BuildRequires:	ImageMagick
@@ -867,6 +868,10 @@ chiñskim.
 %patch9 -p1
 %patch10 -p1
 %patch11 -p1
+%if ! %{with kde}
+# disable KDE NWF, OOoCUPS and enable GnomeVFS, GnomeCUPS
+%patch12 -p1
+%endif
 
 install -d src
 ln -s %{SOURCE1} src/
@@ -875,11 +880,6 @@ ln -s %{SOURCE3} src/
 
 ln -s %{SOURCE20} src/openabout_pld.bmp
 ln -s %{SOURCE21} src/openintro_pld.bmp
-
-%if ! %{with kde}
-# disable KDE NWF, OOoCUPS and enable GnomeVFS, GnomeCUPS
-sed -i -e 's#\(PLD.*\) KDE, OOoCUPS, \(.*\)#\1 GnomeVFS, GnomeCUPS, \2#g' patches/OOO_%{dfullver}/apply
-%endif
 
 %build
 # Make sure we have /proc mounted - otherwise idlc will fail later.
