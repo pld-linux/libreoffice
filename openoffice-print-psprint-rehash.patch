@@ -91,14 +91,10 @@ diff -u -p -u -r1.11 common_gfx.cxx
      
      return sal_True;
  }
-Index: psprint/source/printergfx/printerjob.cxx
-===================================================================
-RCS file: /cvs/gsl/psprint/source/printergfx/printerjob.cxx,v
-retrieving revision 1.21
-diff -u -p -u -r1.21 printerjob.cxx
---- psprint/source/printergfx/printerjob.cxx	26 Mar 2003 14:24:08 -0000	1.21
-+++ psprint/source/printergfx/printerjob.cxx	29 May 2003 14:28:29 -0000
-@@ -550,17 +550,10 @@ PrinterJob::EndJob ()
+
+--- psprint/source/printergfx/printerjob.cxx	2004-03-30 01:22:47.000000000 +0000
++++ psprint/source/printergfx/printerjob.cxx	2004-03-30 01:24:27.000000000 +0000
+@@ -575,13 +575,7 @@
      }
      else
      {
@@ -106,19 +102,21 @@ diff -u -p -u -r1.21 printerjob.cxx
 -        const rtl::OUString& rPrinter     = m_aLastJobData.m_aPrinterName;
 -        const PrinterInfo&   rPrinterInfo = rPrinterInfoManager.getPrinterInfo (rPrinter);
 -        const rtl::OUString& rCommand     = rPrinterInfo.m_aCommand;
-+      pDestFILE = PrinterInfoManager::get ()->getPipeToPrinter( m_aLastJobData.m_aPrinterName );
- 
+-
 -        const rtl::OString aShellCommand = rtl::OUStringToOString (rCommand, 
 -                                                                   RTL_TEXTENCODING_ISO_8859_1);
--													  
--        pDestFILE = popen (aShellCommand.getStr(), "w");
--        if (pDestFILE == NULL)
--            return sal_False;
-+      if (pDestFILE == NULL)
-+	return sal_False;
-     }
- 
-     /* spool the document parts to the destination */
++        pDestFILE = PrinterInfoManager::get ()->getPipeToPrinter( m_aLastJobData.m_aPrinterName );
+ 													  
+         /* Mac OS X: open a pipe only if we are using (1) Darwin5 LPR printing.
+          *           All other OS X/Darwin cases use spool to file.
+@@ -595,7 +589,6 @@
+            #endif
+            )
+         {
+-            pDestFILE = popen (aShellCommand.getStr(), "w");
+             if (pDestFILE == NULL)
+                 return sal_False;
+         }
 Index: psprint/inc/psprint/printerinfomanager.hxx
 ===================================================================
 RCS file: /cvs/gsl/psprint/inc/psprint/printerinfomanager.hxx,v
