@@ -1,0 +1,29 @@
+diff -urN ooo-build-1.1.52.org/patches/OOO_1_1_1/apply ooo-build-1.1.52/patches/OOO_1_1_1/apply
+--- ooo-build-1.1.52.org/patches/OOO_1_1_1/apply	2004-04-29 15:18:29.885187248 +0200
++++ ooo-build-1.1.52/patches/OOO_1_1_1/apply	2004-04-29 15:21:23.427804760 +0200
+@@ -51,6 +51,9 @@
+ # Use $(CC) for sparc assembler #26255
+ build-sparc-assembler.diff
+ 
++# Build with new stlport
++stlport.patch
++
+ # Fix alignment of long/doubles on Sparc #24059
+ bridges-sparc-alignment.diff
+ 
+diff -urN ooo-build-1.1.52.org/patches/OOO_1_1_1/stlport.patch ooo-build-1.1.52/patches/OOO_1_1_1/stlport.patch
+--- ooo-build-1.1.52.org/patches/OOO_1_1_1/stlport.patch	1970-01-01 01:00:00.000000000 +0100
++++ ooo-build-1.1.52/patches/OOO_1_1_1/stlport.patch	2004-04-29 15:19:45.987617920 +0200
+@@ -0,0 +1,12 @@
++--- sw/source/ui/frmdlg/frmpage.cxx.orig	2004-03-31 14:55:12.000000000 +0000
+++++ sw/source/ui/frmdlg/frmpage.cxx	2004-03-31 14:55:23.000000000 +0000
++@@ -551,7 +551,7 @@
++     const ::std::vector< String >& rPrev, const ::std::vector< String >& rThis,
++     const ::std::vector< String >& rNext, const ::std::vector< String >& rRemain)
++ {
++-    ::std::vector< const String >::iterator aIt;
+++    ::std::vector< String >::iterator aIt;
++     USHORT nEntry = 0;
++     for(aIt = rPrev.begin(); aIt != rPrev.end(); aIt++)
++         nEntry = rBox.InsertEntry(*aIt);
++
