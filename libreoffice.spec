@@ -15,7 +15,7 @@ Summary:	OpenOffice - powerful office suite
 Summary(pl):	OpenOffice - potê¿ny pakiet biurowy
 Name:		openoffice
 Version:	1.0.2
-Release:	0.8
+Release:	0.81
 Epoch:		1
 License:	GPL/LGPL
 Group:		X11/Applications
@@ -38,37 +38,38 @@ Source105:	ftp://ftp.task.gda.pl/mirror/ftp.openoffice.org/contrib/helpfiles/hel
 Source106:	ftp://ftp.task.gda.pl/mirror/ftp.openoffice.org/contrib/helpfiles/helpcontent_49_unix.tgz
 
 # Wordbooks: http://whiteboard.openoffice.org/lingucomponent/download_dictionary.html
-Source201:	ftp://ftp.openoffice.pl/OpenOffice.ORG/contrib/dictionaries/bg_BG.zip
-Source202:	ftp://ftp.openoffice.pl/OpenOffice.ORG/contrib/dictionaries/ca_ES.zip
-Source203:	ftp://ftp.openoffice.pl/OpenOffice.ORG/contrib/dictionaries/cs_CZ.zip
-Source204:	ftp://ftp.openoffice.pl/OpenOffice.ORG/contrib/dictionaries/da_DK.zip
-Source205:	ftp://ftp.openoffice.pl/OpenOffice.ORG/contrib/dictionaries/de_CH.zip
-Source206:	ftp://ftp.openoffice.pl/OpenOffice.ORG/contrib/dictionaries/de_DE.zip
-Source207:	ftp://ftp.openoffice.pl/OpenOffice.ORG/contrib/dictionaries/el_GR.zip
-Source208:	ftp://ftp.openoffice.pl/OpenOffice.ORG/contrib/dictionaries/en_CA.zip
-Source209:	ftp://ftp.openoffice.pl/OpenOffice.ORG/contrib/dictionaries/en_GB.zip
-Source210:	ftp://ftp.openoffice.pl/OpenOffice.ORG/contrib/dictionaries/en_US.zip
-Source211:	ftp://ftp.openoffice.pl/OpenOffice.ORG/contrib/dictionaries/es_ES.zip
-Source212:	ftp://ftp.openoffice.pl/OpenOffice.ORG/contrib/dictionaries/fr_FR.zip
-Source213:	ftp://ftp.openoffice.pl/OpenOffice.ORG/contrib/dictionaries/ga_IE.zip
-Source214:	ftp://ftp.openoffice.pl/OpenOffice.ORG/contrib/dictionaries/gl_ES.zip
-Source215:	ftp://ftp.openoffice.pl/OpenOffice.ORG/contrib/dictionaries/hr_HR.zip
-Source216:	ftp://ftp.openoffice.pl/OpenOffice.ORG/contrib/dictionaries/hu_HU.zip
-Source217:	ftp://ftp.openoffice.pl/OpenOffice.ORG/contrib/dictionaries/it_IT.zip
-Source218:	ftp://ftp.openoffice.pl/OpenOffice.ORG/contrib/dictionaries/lt_LT.zip
-Source219:	ftp://ftp.openoffice.pl/OpenOffice.ORG/contrib/dictionaries/nb_NO.zip
-Source220:	ftp://ftp.openoffice.pl/OpenOffice.ORG/contrib/dictionaries/nl_NL.zip
-Source221:	ftp://ftp.openoffice.pl/OpenOffice.ORG/contrib/dictionaries/nn_NO.zip
-Source222:	ftp://ftp.openoffice.pl/OpenOffice.ORG/contrib/dictionaries/pl_PL.zip
-Source223:	ftp://ftp.openoffice.pl/OpenOffice.ORG/contrib/dictionaries/pt_BR.zip
-Source224:	ftp://ftp.openoffice.pl/OpenOffice.ORG/contrib/dictionaries/pt_PT.zip
-Source225:	ftp://ftp.openoffice.pl/OpenOffice.ORG/contrib/dictionaries/sk_SK.zip
-Source226:	ftp://ftp.openoffice.pl/OpenOffice.ORG/contrib/dictionaries/sl_SI.zip
-Source227:	ftp://ftp.openoffice.pl/OpenOffice.ORG/contrib/dictionaries/sv_SE.zip
-
+# renamed sources from:
+# ftp://ftp.openoffice.pl/OpenOffice.ORG/contrib/dictionaries
+Source201:	%{name}-bg_BG.zip
+Source202:	%{name}-ca_ES.zip
+Source203:	%{name}-cs_CZ.zip
+Source204:	%{name}-da_DK.zip
+Source205:	%{name}-de_CH.zip
+Source206:	%{name}-de_DE.zip
+Source207:	%{name}-el_GR.zip
+Source208:	%{name}-en_CA.zip
+Source209:	%{name}-en_GB.zip
+Source210:	%{name}-en_US.zip
+Source211:	%{name}-es_ES.zip
+Source212:	%{name}-fr_FR.zip
+Source213:	%{name}-ga_IE.zip
+Source214:	%{name}-gl_ES.zip
+Source215:	%{name}-hr_HR.zip
+Source216:	%{name}-hu_HU.zip
+Source217:	%{name}-it_IT.zip
+Source218:	%{name}-lt_LT.zip
+Source219:	%{name}-nb_NO.zip
+Source220:	%{name}-nl_NL.zip
+Source221:	%{name}-nn_NO.zip
+Source222:	%{name}-pl_PL.zip
+Source223:	%{name}-pt_BR.zip
+Source224:	%{name}-pt_PT.zip
+Source225:	%{name}-sk_SK.zip
+Source226:	%{name}-sl_SI.zip
+Source227:	%{name}-sv_SE.zip
 # This one is special, as there is no country associated with Latin,
 # nor should it be %lang(la).
-Source228:	ftp://ftp.openoffice.pl/OpenOffice.ORG/contrib/dictionaries/la.zip
+Source228:	%{name}-la.zip
 
 Patch0:		%{name}-gcc.patch
 #Patch2:		%{name}-mozilla.patch
