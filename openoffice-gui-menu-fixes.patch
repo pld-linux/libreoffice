@@ -103,30 +103,31 @@ diff -u -p -u -r1.93 menu.cxx
                  aSz.Height() += (long)pData->aSz.Height();
 +
 +	    if ( nWidth > nMaxWidth )
-+                nMaxWidth = nWidth;
++		nMaxWidth = nWidth;
          }
      }
  
      if ( !bIsMenuBar )
      {
--        USHORT gfxExtra = std::max( nExtra, 7L ); // #107710# increase space between checkmarks/images/text
+-        USHORT gfxExtra = (USHORT) std::max( nExtra, 7L ); // #107710# increase space between checkmarks/images/text
 -        nCheckPos = (USHORT)nExtra;
 -        nImagePos = (USHORT)(nCheckPos + nFontHeight/2 + gfxExtra );
 -        nTextPos = (USHORT)(nImagePos+aMaxImgSz.Width());
-+        int nCheckWidth = 0;
++	int nCheckWidth = 0;
 +	if ((nMenuFlags & MENU_FLAG_SHOWCHECKIMAGES) || aMaxImgSz.Width() <= 0)
-+	  nCheckWidth = nFontHeight/2 + nExtra;
++		nCheckWidth = nFontHeight/2 + nExtra;
 +	USHORT gfxExtra = std::max( nExtra, 7L ); // #107710# increase space between checkmarks/images/text
-+        nCheckPos = nExtra;
-+        nImagePos = nCheckPos + nCheckWidth;
-+        nTextPos = nImagePos + aMaxImgSz.Width();
++	nCheckPos = nExtra;
++	nImagePos = nCheckPos + nCheckWidth;
++	nTextPos = nImagePos + aMaxImgSz.Width();
++	
          if ( aMaxImgSz.Width() )
              nTextPos += gfxExtra;
  
 -        aSz.Width() = nTextPos + nMaxTextWidth + nExtra + nMaxAccWidth;
 -        aSz.Width() += 10*nExtra;   // etwas mehr...
-+        aSz.Width() = nTextPos + nMaxWidth + nExtra;
-+        aSz.Width() += 4*nExtra;   // a _little_ more ...
++	aSz.Width() = nTextPos + nMaxWidth + nExtra;
++	aSz.Width() += 4*nExtra;   // a _little_ more ...
      }
      else
      {

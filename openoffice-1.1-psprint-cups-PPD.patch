@@ -139,6 +139,5 @@
  			$(SALLIB)			\
 -			-lX11
 +			-lX11 -lcups
- 
- SHL1DEF=	$(MISC)$/$(SHL1TARGET).def
- 
+ IF "$(SOLAR_JAVA)"!=""
+ SHL1STDLIBS+=$(JVMACCESSLIB) 
