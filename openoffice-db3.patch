@@ -31,3 +31,15 @@ diff -Nur oo/config_office/makefile.rc oo.new/config_office/makefile.rc
  	starmath \
  	stoc \
  	store \
+diff -Nur oo/xmlhelp/source/cxxhelp/provider/databases.cxx oo.new/xmlhelp/source/cxxhelp/provider/databases.cxx
+--- oo/xmlhelp/source/cxxhelp/provider/databases.cxx	Fri Nov 23 17:51:01 2001
++++ oo.new/xmlhelp/source/cxxhelp/provider/databases.cxx	Mon Apr 15 10:59:50 2002
+@@ -60,7 +60,7 @@
+  ************************************************************************/
+ 
+ 
+-#include <berkeleydb/db_cxx.h>
++#include <db_cxx.h>
+ #ifndef _VOS_DIAGNOSE_HXX_
+ #include <vos/diagnose.hxx>
+ #endif
