@@ -911,7 +911,7 @@ if [ -z "$RPM_BUILD_NCPUS" ] ; then
 fi
 
 # parallel build is broken
-RPM_BUILD_NCPUS=1
+RPM_BUILD_NCPUS=4
 
 CONFOPTS=" \
 	--with-ccache-allowed \
@@ -975,9 +975,9 @@ cp -r vcl vcl.kde
 sed -i -e "s#\(.*WITH_WIDGETSET.*\)\".*\"\(.*\)#\1\"gtk\"\2#g" LinuxIntelEnv.Set*
 sed -i -e "s#\(.*WIDGETSET_CFLAGS.*\)\".*\"\(.*\)#\1\"`pkg-config --cflags gtk+-2.0 gdk-pixbuf-xlib-2.0` -DWIDGETSET_GTK\"\2#g" LinuxIntelEnv.Set*
 sed -i -e "s#\(.*WIDGETSET_LIBS.*\)\".*\"\(.*\)#\1\"`pkg-config --libs gtk+-2.0 gdk-pixbuf-xlib-2.0`\"\2#g" LinuxIntelEnv.Set*
+. ./Linux*Env.Set.sh || :
 cd vcl
 rm -rf unx*
-. ./LinuxIntelEnv.Set.sh || :
 build
 cd ..
 mv vcl vcl.gtk
