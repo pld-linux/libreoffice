@@ -4,6 +4,9 @@
 #	- some files come from oo build and helpcontent, we must decide
 #	  which one should be used
 #	- cleanups, cleanups and cleanups
+# 	- incorporate ximian patches (mostly done)
+#	- incorporate gnome OOo artwork (icons & more)
+#	- fix system-db patch (db 4.2)
 
 %bcond_without java		# build without java support
 
