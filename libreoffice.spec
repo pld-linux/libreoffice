@@ -274,6 +274,7 @@ URL:		http://www.openoffice.org/
 BuildRequires:	ImageMagick
 BuildRequires:	STLport-devel >= 4.5.3-6
 BuildRequires:	XFree86-devel
+BuildRequires:	XFree86-static
 BuildRequires:	autoconf
 BuildRequires:	automake
 BuildRequires:	bison >= 1.875-4
@@ -306,13 +307,12 @@ BuildRequires:  pkgconfig
 BuildRequires:  startup-notification-devel
 BuildRequires:  libart_lgpl-devel
 BuildRequires:	libgnomecups-devel
+BuildRequires:  gnome-vfs2-devel
 %if %{with kde}
 BuildRequires:	qt-devel
 BuildRequires:	kdelibs-devel
 %else
 BuildRequires:	gtk+2-devel
-BuildRequires:	gnome-vfs2-devel
-BuildRequires:  libbonobo-devel
 %endif
 BuildConflicts:	java-sun = 1.4.2
 Requires:	%{name}-libs = %{epoch}:%{version}-%{release}
