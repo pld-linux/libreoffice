@@ -218,18 +218,18 @@ OpenOffice.org productivity suite - KDE Interface.
 Pakiet biurowy OpenOffice.org - Interfejs KDE.
 
 %package libs-gtk
-Summary:	OpenOffice.org GTK Interface
-Summary(pl):	Interfejs GTK dla OpenOffice.org
+Summary:	OpenOffice.org GTK+ Interface
+Summary(pl):	Interfejs GTK+ dla OpenOffice.org
 Group:		X11/Libraries
 Requires:	%{name}-libs = %{epoch}:%{version}-%{release}
 Obsoletes:	%{name}-i18n-en-gtk
 Obsoletes:	%{name}-i18n-en
 
 %description libs-gtk
-OpenOffice.org productivity suite - GTK Interface.
+OpenOffice.org productivity suite - GTK+ Interface.
 
 %description libs-gtk -l pl
-Pakiet biurowy OpenOffice.org - Interfejs GTK.
+Pakiet biurowy OpenOffice.org - Interfejs GTK+.
 
 %package i18n-af-gtk
 Summary:	OpenOffice.org - interface in Afrikaans language
