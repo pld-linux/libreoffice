@@ -46,7 +46,7 @@ diff -u -p -u -r1.30 appserv.cxx
 +				Reference< com::sun::star::system::XSystemShellExecute > xSystemShell
 +					( ::comphelper::getProcessServiceFactory()->createInstance( DEFINE_CONST_UNICODE("com.sun.star.system.SystemShellExecute" ) ), UNO_QUERY );
 +				if ( xSystemShell.is()) {
-+					rtl::OUString aURI( DEFINE_CONST_UNICODE( "http://www.ximian.com/support" ) );
++					rtl::OUString aURI( DEFINE_CONST_UNICODE( "http://www.pld-linux.org/" ) );
 +					xSystemShell->execute( aURI, ::rtl::OUString(), com::sun::star::system::SystemShellExecuteFlags::DEFAULTS );
 +				}
 +
