@@ -102,6 +102,7 @@ BuildRequires:	automake
 BuildRequires:	bison >= 1.875-4
 BuildRequires:	boost-devel
 BuildRequires:	boost-spirit-devel
+BuildRequires:	boost-mem_fn-devel
 BuildRequires:	cups-devel
 BuildRequires:	curl-devel >= 7.9.8
 BuildRequires:	db-cxx-devel
