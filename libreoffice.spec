@@ -13,7 +13,7 @@ Summary:	OpenOffice - powerful office suite
 Summary(pl):	OpenOffice - potê¿ny pakiet biurowy
 Name:		openoffice
 Version:	%{ver}
-Release:	0.%{rel}.2
+Release:	0.%{rel}.3
 Epoch:		1
 License:	GPL/LGPL
 Group:		X11/Applications
@@ -880,30 +880,23 @@ SUFX="_unix.tgz"
 for L in $LANGS
 do
     CODE=`LangCode 3 $L 1`
+    NAME=`LangCode 3 $L 2`
     FILE=$PREF$CODE$SUFX
+    install -d $RPM_BUILD_ROOT%{oolib}/help/$NAME
     if [ -f $FILE ]; then
 	tar zxvf $FILE
-
 	for file in s*.zip; do
-#	    dir=`echo $file | sed -e "s/\(s[a-z]*\)[0-9]*.zip/\1/"`
-#	    [[ "$dir" = "shared" ]] && dir="common"
-	    prefix=`echo $file | sed -e "s/s[a-z]*\([0-9]*\).zip/\1/"`
-	    langname=`LangCode 1 $prefix 2`
-	    install -d $RPM_BUILD_ROOT%{oolib}/help/$langname
-	    unzip -d $RPM_BUILD_ROOT%{oolib}/help/$langname -o $file
+	    unzip -q -d $RPM_BUILD_ROOT%{oolib}/help/$NAME -o $file
         done
 	rm -f *.zip;
     fi
 done
 cd ..
-mv $RPM_BUILD_ROOT%{oolib}/help/{zh_CN,zh-CN}
-mv $RPM_BUILD_ROOT%{oolib}/help/{zh_TW,zh-TW}
 
 ### Extract language packs
 cd %{installpath}
 install -m 755 %{SOURCE302} oo_dpack_lang
 install -m 755 %{SOURCE303} oo_fixup_help
-install -m 755 %{SOURCE304} oo_gen_instdb
 
 for res in $LANGS
 do
@@ -924,36 +917,23 @@ do
     esac
 
 # link ooo resource files to iso files
-    file1=`find $tempdir/program/resource -name "ooo*.res" -printf "%%P"`
-    file2=`echo $file1 | sed "s|ooo|iso|"`
-    ln -sf $tempdir/program/resource/{$file1,$file2}
+    ln -sf %{oolib}/program/resource/ooo%{subver}$prefix \
+	$tempdir/program/resource/iso%{subver}$prefix
 
-# generate localized instdb.ins files, aka let the right files to
-# be installed for a user installation
-    if [ "$isocode" != "en" ]; then
-	./oo_gen_instdb -d $tempdir -i $prefix/normal/setup.ins \
-    	    -o $tempdir/program/instdb.ins.$isocode -pv "%{version}"
-        perl -pi -e "s|$tempdir|%{oolib}|g" \
-	    $tempdir/program/instdb.ins.$isocode
-    fi
-
-# move files here and there
-    FILES=`find $tempdir -type f -printf "%%P "`
-    for FILE in $FILES
-    do
-	if [ ! -f $RPM_BUILD_ROOT%{oolib}/$FILE ]; then
-	    DIR=`dirname $FILE`
-	    mkdir -p $RPM_BUILD_ROOT%{oolib}/$DIR
-	    cp $tempdir/$FILE $RPM_BUILD_ROOT%{oolib}/$FILE
-	fi
-    done
+    cp -af $tempdir/* $RPM_BUILD_ROOT%{oolib}
     rm -rf $tempdir
 
     HOWMUCH=`ls $RPM_BUILD_ROOT%{oolib}/help/$isocode 2>/dev/null | wc -l`
-    if [ $HOWMUCH -eq 0 ]; then rm -rf $RPM_BUILD_ROOT%{oolib}/help/$isocode; fi
+    if [ $HOWMUCH -eq 0 ]; then 
+	rm -rf $RPM_BUILD_ROOT%{oolib}/help/$isocode
+	ln -sf en $RPM_BUILD_ROOT%{oolib}/help/$isocode
+    fi
 done
 cd $OOBUILDDIR
 
+cp -af $RPM_BUILD_ROOT%{oolib}/help/zh_CN/* $RPM_BUILD_ROOT%{oolib}/help/zh-CN
+cp -af $RPM_BUILD_ROOT%{oolib}/help/zh_TW/* $RPM_BUILD_ROOT%{oolib}/help/zh-TW
+rm -rf $RPM_BUILD_ROOT%{oolib}/help/{zh_CN,zh_TW}
 mv $RPM_BUILD_ROOT%{oolib}/help/{zh-CN,zh_CN}
 mv $RPM_BUILD_ROOT%{oolib}/help/{zh-TW,zh_TW}
 
@@ -1099,13 +1079,7 @@ for L in $LANGS; do
     SVER=%{subver}
 
     AddFiles $lshort "" "" `Multiply %{oolib}/program/resource/ $SVER$lno.res $SUBF`
-    AddFiles $lshort "" "" %{oolib}/program/instdb.ins.$lshort
     AddFiles $lshort "" dir `Multiply %{oolib}/share/registry/res/ "" $lshort $loth`
-
-    if [ ! -d "$RPM_BUILD_ROOT%{oolib}/help/$lshort" ]; then
-	ln -sf %{oolib}/help/en $RPM_BUILD_ROOT%{oolib}/help/$lshort
-	echo "%{oolib}/help/$lshort" >> "i18n-$short"
-    fi
 done
 
 %clean
