@@ -956,6 +956,8 @@ CONFIGURE_OPTIONS="$CONFOPTS"; export CONFIGURE_OPTIONS
 rm -rf $RPM_BUILD_ROOT
 
 DESTDIR=$RPM_BUILD_ROOT; export DESTDIR
+TMP="%{tmpdir}"; export TMP
+TEMP="%{tmpdir}"; export TEMP
 
 %{__make} install \
 	DESTDIR=$RPM_BUILD_ROOT
