@@ -13,7 +13,7 @@ Summary:	OpenOffice - powerful office suite
 Summary(pl):	OpenOffice - potê¿ny pakiet biurowy
 Name:		openoffice
 Version:	1.0.2
-Release:	0.88
+Release:	0.89
 Epoch:		1
 License:	GPL/LGPL
 Group:		X11/Applications
@@ -71,6 +71,8 @@ Source229:	%{name}-ru_RU.zip
 # nor should it be %lang(la).
 Source230:	%{name}-la.zip
 
+Source301:	%{name}-setup
+
 Patch0:		%{name}-gcc.patch
 #Patch2:		%{name}-mozilla.patch
 # Start using some system libraries:
@@ -111,6 +113,8 @@ Patch27:	%{name}-sj2-java.patch
 Patch29:	%{name}-gcc2-95.patch
 Patch30:	%{name}-system-zlib.patch
 Patch31:	%{name}-system-mozilla.patch
+
+Patch32:	%{name}-fix-errno.patch
 
 URL:		http://www.openoffice.org/
 %if %{?_with_ra:0}%{!?_with_ra:1}
@@ -697,6 +701,7 @@ office productivity suite.  This package provides spell checker dictionaries.
 
 rm -f moz/prj/d.lst
 %patch31 -p1
+%patch32 -p1
 
 # gcc 2 include error hack:
 rm -rf autodoc/source/inc/utility
@@ -857,54 +862,7 @@ for file in s*.zip; do
 done
 rm -f *.zip
 
-for file in solver/%{subver}/%{_archbuilddir}/pck/autocorr*.zip
-do
-  [[ -n `echo "$file" | grep "01"` ]] || unzip -o -d $RPM_BUILD_ROOT%{_libdir}/openoffice/share/autocorr $file
-done
-
-for prefix in `(cd solver/%{subver}/%{_archbuilddir}/bin/ ; echo [0-9][0-9] ) | sed s@solver/%{subver}/%{_archbuilddir}/bin/@@ | sed s/01//`
-do
-  language=`cat %{SOURCE9} | grep ^$prefix | cut -d: -f5`
-  lang=`cat %{SOURCE9} | grep ^$prefix | cut -d: -f6`
-
-  install -d $RPM_BUILD_ROOT%{_libdir}/openoffice/share/template/$language/wizard/styles
-  install -d $RPM_BUILD_ROOT%{_libdir}/openoffice/share/template/$language/wizard/web
-  install -d $RPM_BUILD_ROOT%{_libdir}/openoffice/share/template/$language/internal
-
-# WRITEME:
-#  unzip solver/%{subver}/%{_archbuilddir}/pck/palletes$prefix.zip
-#  for p in *.so?
-#  do
-#    mv $p `echo $p | sed s@\\.@_\\.@`
-#  done
-
-  install -d $RPM_BUILD_ROOT%{_libdir}/openoffice/user/autotext/$language
-  install -d $RPM_BUILD_ROOT%{_libdir}/openoffice/share/autotext/$language
-  for file in solver/%{subver}/%{_archbuilddir}/pck/*$prefix.zip
-  do
-    pf=`echo $file | sed s@solver/%{subver}/%{_archbuilddir}/pck/@@ | sed -e 's/[0-9]\+\.zip$//'`
-    if [ -f $file ]
-    then
-    [[ ! "$pf" = "autotextuser" ]] || unzip -o -d $RPM_BUILD_ROOT%{_libdir}/openoffice/user/autotext/$language $file
-    [[ ! "$pf" = "autotextshare" ]] || unzip -o -d $RPM_BUILD_ROOT%{_libdir}/openoffice/share/autotext/$language $file
-# WRITEME:
-#    [[ ! "$pf" = "tpllayoutimpr" ]] || unzip -o -d $RPM_BUILD_ROOT%{_libdir}/openoffice/share/template/$language $file
-#    [[ ! "$pf" = "tplpresntimpr" ]] || unzip -o -d $RPM_BUILD_ROOT%{_libdir}/openoffice/share/template $file
-    [[ ! "$pf" = "tplwizagenda" ]] || unzip -o -d $RPM_BUILD_ROOT%{_libdir}/openoffice/share/template/$language/wizard $file
-    [[ ! "$pf" = "tplwizdesktop" ]] || unzip -o -d $RPM_BUILD_ROOT%{_libdir}/openoffice/share/template/$language/internal $file
-    [[ ! "$pf" = "tplwizfax" ]] || unzip -o -d $RPM_BUILD_ROOT%{_libdir}/openoffice/share/template/$language/wizard $file
-    [[ ! "$pf" = "tplwizhomepage" ]] || unzip -o -d $RPM_BUILD_ROOT%{_libdir}/openoffice/share/template/$language/wizard/web $file
-    [[ ! "$pf" = "tplwizletter" ]] || unzip -o -d $RPM_BUILD_ROOT%{_libdir}/openoffice/share/template/$language/wizard $file
-    [[ ! "$pf" = "tplwizmemo" ]] || unzip -o -d $RPM_BUILD_ROOT%{_libdir}/openoffice/share/template/$language/wizard $file
-    [[ ! "$pf" = "tplwizstyles" ]] || unzip -o -d $RPM_BUILD_ROOT%{_libdir}/openoffice/share/template/$language/wizard/styles $file
-    fi
-# FINDME:
-# /openoffice/share/templates/samples
-
-# CHECKME:
-#??    [[ "$pf" = "wordbook" ]] unzip -d $RPM_BUILD_ROOT%{_libdir}/openoffice/
-  done
-done
+%{SOURCE301} setup2/script/linux/1.0.1/webinstdb.inf DIRTO=$RPM_BUILD_ROOT%{_libdir}/openoffice DIRFROM=%{installpath}/
 
 # Remove unnecessary binaries
 for app in %{apps} ; do
@@ -925,8 +883,8 @@ rm -rf $RPM_BUILD_ROOT%{_libdir}/openoffice/program/libdb_*
 install -d $RPM_BUILD_ROOT%{_datadir}
 install -d $RPM_BUILD_ROOT%{_pixmapsdir}
 mv $RPM_BUILD_ROOT%{_libdir}/openoffice/share/kde/net/mimelnk/share/mimelnk $RPM_BUILD_ROOT%{_datadir}
-mv $RPM_BUILD_ROOT%{_libdir}/openoffice/share/kde/net/mimelnk/share/icons/* $RPM_BUILD_ROOT%{_pixmapsdir}
-mv $RPM_BUILD_ROOT%{_libdir}/openoffice/share/icons/* $RPM_BUILD_ROOT%{_pixmapsdir}
+cp -rf $RPM_BUILD_ROOT%{_libdir}/openoffice/share/kde/net/mimelnk/share/icons/* $RPM_BUILD_ROOT%{_pixmapsdir}
+cp -rf $RPM_BUILD_ROOT%{_libdir}/openoffice/share/icons/* $RPM_BUILD_ROOT%{_pixmapsdir}
 rm -rf $RPM_BUILD_ROOT%{_libdir}/openoffice/share/kde
 rm -rf $RPM_BUILD_ROOT%{_libdir}/openoffice/share/cde
 rm -rf $RPM_BUILD_ROOT%{_libdir}/openoffice/share/gnome
@@ -1053,6 +1011,8 @@ FindI18N() {
 	    echo "%lang($1) $F" >> "i18n-$1"
 	fi	
     done
+
+    unzip -l solver/%{subver}/%{_archbuilddir}/pck/palletes$3.zip | sed "s/.* //" | awk '(flag==1)&&/----/{exit};(flag==1){print;};/----/{flag=1};' >> "i18n-$1"
 }
 
 FindDict() {
