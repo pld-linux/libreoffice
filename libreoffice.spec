@@ -39,6 +39,8 @@ Patch9:		%{name}-clockspersec.patch
 Patch10:	%{name}-psprint-euro.patch
 # Fix config_office/configure
 Patch11:	%{name}-ac.patch
+
+Patch12:	%{name}-debug-keepsetup.patch
 # Hackery around zipdep
 Patch12:	%{name}-zipdep.patch
 # Remove GPC from linking to GPL/LGPL OO.o code!
@@ -72,6 +74,10 @@ BuildRequires:	zip
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %define		_prefix		/usr/X11R6
+
+%{?_with_us:%define installpath instsetoo/unxlngi3.pro/01/normal}
+%{?_with_pl:%define installpath instsetoo/unxlngi3.pro/48/normal}
+%{?_with_de:%define installpath instsetoo/unxlngi3.pro/49/normal}
 
 %description
 OpenOffice.org is an open-source project sponsored by Sun Microsystems
@@ -119,6 +125,7 @@ Do zalet OpenOffice.org mo¿na zaliczyæ:
 %patch10 -p1
 %patch11 -p1
 %patch12 -p1
+%patch12 -p1
 %patch13 -p1
 %patch14 -p1
 
@@ -160,14 +167,14 @@ chmod u+rx compile
 %install
 rm -rf $RPM_BUILD_ROOT
 
-cat <<EOF > install
+#cat <<EOF > install
 #!/bin/tcsh
-source LinuxIntelEnv.Set
-dmake install
-EOF
-
-chmod u+rx install
-./install
+#source LinuxIntelEnv.Set
+#dmake install
+#EOF
+#
+#chmod u+rx install
+#./install
 
 # starting Xvfb
 i=0
@@ -185,10 +192,18 @@ sed -e "s,@DESTDIR@,$RPM_BUILD_ROOT/usr/X11R6/lib/openoffice," \
 	-e "s,@LOGFILE@,$RPM_BUILD_DIR/oo_%{oo_ver}_src/install.log," \
 	install.rs.in > install.rs
 
+cp solver/641/unxlngi3.pro/bin/setup_services.rdb solver/641/unxlngi3.pro/bin/uno_writerdb.rdb
+rm -f f0_062
+zip -j -5 "f0_062" solver/641/unxlngi3.pro/bin/uno_writerdb.rdb
+mv f0_062.zip %{installpath}/f0_062
+
+for FileID in Lib_gcc Lib_Stdc Lib_Mozab_2 Lib_Mozabdrv Mozilla_Runtime; do
+  perl -ni -e "/^(File|Shortcut) gid_(File|Shortcut)_${FileID}/ .. /^End/ or print" %{installpath}/setup.ins
+  perl -pi -e "s/gid_File_${FileID},//g" %{installpath}/setup.ins
+done
+
 # starting installator
-%{?_with_us:DISPLAY=":$i" instsetoo/unxlngi3.pro/01/normal/setup -R:$RPM_BUILD_DIR/oo_%{oo_ver}_src/install.rs}
-%{?_with_pl:DISPLAY=":$i" instsetoo/unxlngi3.pro/48/normal/setup -R:$RPM_BUILD_DIR/oo_%{oo_ver}_src/install.rs}
-%{?_with_de:DISPLAY=":$i" instsetoo/unxlngi3.pro/49/normal/setup -R:$RPM_BUILD_DIR/oo_%{oo_ver}_src/install.rs}
+DISPLAY=":$i" %{installpath}/setup -R:$RPM_BUILD_DIR/oo_%{oo_ver}_src/install.rs
 
 # stopping Xvfb
 #kill $PID
