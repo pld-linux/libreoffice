@@ -1,0 +1,2 @@
+- removed all Group fields translations (our rpm now can handle translating
+  Group field using gettext).
