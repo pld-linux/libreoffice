@@ -1211,10 +1211,6 @@ for lang in $langlist; do
 
 done
 
-# things not catched by automation above
-echo "%{_libdir}/%{name}/program/resource/iso%{subver}01.res" >> en.lang
-echo "%{_libdir}/%{name}/share/wordbook/english/sun.dic" >> en.lang
-
 find $RPM_BUILD_ROOT -type f -name '*.so' -exec chmod 755 "{}" ";"
 chmod 755 $RPM_BUILD_ROOT%{_libdir}/%{name}/program/*
 
@@ -1247,6 +1243,7 @@ fontpostinst TTF %{_fontsdir}/%{name}
 %{_libdir}/%{name}/program/instdb.ins
 
 %dir %{_libdir}/%{name}/program/resource
+%{_libdir}/%{name}/program/resource/iso%{subver}01.res
 
 %dir %{_libdir}/%{name}/help
 %{_libdir}/%{name}/help/en
@@ -1266,6 +1263,8 @@ fontpostinst TTF %{_fontsdir}/%{name}
 %{_libdir}/%{name}/share/samples
 %dir %{_libdir}/%{name}/share/template
 %dir %{_libdir}/%{name}/share/wordbook
+%dir %{_libdir}/%{name}/share/wordbook/english
+%{_libdir}/%{name}/share/wordbook/english/sun.dic
 %{_libdir}/%{name}/share/readme
 
 %dir %{_libdir}/%{name}/share/registry
