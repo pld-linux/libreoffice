@@ -111,14 +111,9 @@ diff -u -3 -p -r1.176 window.cxx
  
      rFont.SetSize( aSize );
  }
-Index: vcl/unx/source/gdi/salgdi.cxx
-===================================================================
-RCS file: /cvs/gsl/vcl/unx/source/gdi/salgdi.cxx,v
-retrieving revision 1.24
-diff -u -p -u -r1.24 salgdi.cxx
---- vcl/unx/source/gdi/salgdi.cxx	15 Apr 2003 16:09:37 -0000	1.24
-+++ vcl/unx/source/gdi/salgdi.cxx	13 May 2003 12:24:22 -0000
-@@ -504,12 +504,6 @@ void SalGraphics::GetResolution( long &r
+--- vcl/unx/source/gdi/salgdi.cxx.orig	2004-03-30 01:30:52.000000000 +0000
++++ vcl/unx/source/gdi/salgdi.cxx	2004-03-30 01:31:05.000000000 +0000
+@@ -503,16 +503,6 @@
  
          rDPIX = pDisplay->GetResolution().A();
          rDPIY = pDisplay->GetResolution().B();
@@ -127,10 +122,14 @@ diff -u -p -u -r1.24 salgdi.cxx
 -            rDPIX = Divide( rDPIX * 96, rDPIY );
 -            rDPIY = 96;
 -        }
--
+-        else if ( rDPIY > 200 )
+-        {
+-            rDPIX = Divide( rDPIX * 200, rDPIY );
+-            rDPIY = 200;
+-        }
+  
  #ifndef _USE_PRINT_EXTENSION_
  	}
- #endif
 Index: vcl/unx/source/app/saldisp.cxx
 ===================================================================
 RCS file: /cvs/gsl/vcl/unx/source/app/saldisp.cxx,v
