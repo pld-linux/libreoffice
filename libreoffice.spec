@@ -5,15 +5,14 @@
 #	  which one should be used
 #	- cleanups, cleanups and cleanups
 # 	- incorporate ximian patches (mostly done)
-#	- copy & paste problem in oocalc (not verified)
 
 # Conditional build:
+%bcond_without	optimalization	# arch optimalization
 %bcond_with	java		# Java support
 %bcond_without	fontconf	# fontconfig
 %bcond_without	icons		# new Ximian icons
 %bcond_without	gnomevfs	# gnome-vfs
 %bcond_with	parallel 	# parallel building
-%bcond_without  optimalization  # without it. that's right 
 
 # not tested
 %bcond_with	gnomecups	# gnome-cups
@@ -22,6 +21,7 @@
 %define		ver		1.1.0
 %define		rel		%{nil}
 %define		fullver		%{ver}%{rel}
+%define		specflags	-fno-strict-aliasing
 
 Summary:	OpenOffice - powerful office suite
 Summary(pl):	OpenOffice - potê¿ny pakiet biurowy
