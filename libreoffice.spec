@@ -258,8 +258,9 @@ Source499:	%{name}-additional-dictionaries.txt
 Patch0:		%{name}-rh-disable-spellcheck-all-langs.patch
 Patch1:		%{name}-pld-stlport.patch
 Patch2:		%{name}-pld-ximian-is-pld.patch
-Patch3:		%{name}-pld-ooo-build-ldver.patch
-Patch4:		%{name}-pld-nptl.patch
+Patch3:		%{name}-pld-copy-all-bmp.patch
+Patch4:		%{name}-pld-ooo-build-ldver.patch
+Patch5:		%{name}-pld-nptl.patch
 
 URL:		http://www.openoffice.org/
 BuildRequires:	ImageMagick
@@ -868,11 +869,15 @@ chiñskim dla Tajwanu.
 %patch2 -p1
 %patch3 -p1
 %patch4 -p1
+%patch5 -p1
 
 install -d src
 ln -s %{SOURCE1} src/
 ln -s %{SOURCE2} src/
 ln -s %{SOURCE3} src/
+
+ln -s %{SOURCE20} src/openabout_pld.bmp
+ln -s %{SOURCE21} src/openintro_pld.bmp
 
 %build
 # Make sure we have /proc mounted - otherwise idlc will fail later.
@@ -945,9 +950,6 @@ CONFOPTS=" \
 
 # main build
 %configure $CONFOPTS
-
-ln -s %{SOURCE20} build/OOO_%{dfullver}/offmgr/ressrc/openabout_pld.bmp
-ln -s %{SOURCE21} build/OOO_%{dfullver}/offmgr/ressrc/openintro_pld.bmp
 
 %{__make}
 
