@@ -1088,8 +1088,8 @@ rm -rf $RPM_BUILD_ROOT%{_datadir}/gnome
 #rm -f $RPM_BUILD_ROOT%{_libdir}/%{name}/program/gnomeint
 
 # some libs creep in somehow
-rm -f %{_libdir}/%{name}/program/filter/libfreetype.so*
-rm -f %{_libdir}/%{name}/program/libstl*.so*
+rm -f $RPM_BUILD_ROOT%{_libdir}/%{name}/program/filter/libfreetype.so*
+rm -f $RPM_BUILD_ROOT%{_libdir}/%{name}/program/libstl*.so*
 
 rm -f $RPM_BUILD_ROOT%{_libdir}/%{name}/program/sopatchlevel.sh
 perl -pi -e 's/^[       ]*LD_LIBRARY_PATH/# LD_LIBRARY_PATH/;s/export LD_LIBRARY_PATH/# export LD_LIBRARY_PATH/' \
