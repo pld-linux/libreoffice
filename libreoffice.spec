@@ -26,7 +26,7 @@ Summary:	OpenOffice - powerful office suite
 Summary(pl):	OpenOffice - potê¿ny pakiet biurowy
 Name:		openoffice
 Version:	%{fullver}
-Release:	4.2
+Release:	4.3
 Epoch:		1
 License:	GPL/LGPL
 Group:		X11/Applications
@@ -2197,6 +2197,8 @@ fontpostinst TTF %{_fontsdir}/%{name}
 %attr(755,root,root) %{_libdir}/%{name}/program/*.so
 %exclude %{_libdir}/%{name}/program/libvclplug_gtk*.so
 %exclude %{_libdir}/%{name}/program/libvclplug_kde*.so
+%exclude %{_libdir}/%{name}/program/libfps_kde.so
+%exclude %{_libdir}/%{name}/program/libfps_gtk.so
 %attr(755,root,root) %{_libdir}/%{name}/program/*.so.*
 %attr(755,root,root) %{_libdir}/%{name}/program/filter/*.so
 
@@ -2208,9 +2210,11 @@ fontpostinst TTF %{_fontsdir}/%{name}
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_libdir}/%{name}/program/kdefilepicker
 %attr(755,root,root) %{_libdir}/%{name}/program/libvclplug_kde*.so
+%attr(755,root,root) %{_libdir}/%{name}/program/libfps_kde.so
 %dir %{_libdir}/%{name}/program/resource.kde
 
 %files libs-gtk -f en.lang.gnome
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_libdir}/%{name}/program/libvclplug_gtk*.so
+%attr(755,root,root) %{_libdir}/%{name}/program/libfps_gtk.so
 %dir %{_libdir}/%{name}/program/resource.gnome
