@@ -26,13 +26,14 @@ Summary:	OpenOffice - powerful office suite
 Summary(pl):	OpenOffice - potê¿ny pakiet biurowy
 Name:		openoffice
 Version:	%{fullver}
-Release:	2.5
+Release:	2.6
 Epoch:		1
 License:	GPL/LGPL
 Group:		X11/Applications
-Source0:	http://ooo.ximian.com/packages/OOO_%{dfullver}/ooo-build-%{ooobver}.tar.gz
-# Source0-md5:	ec2528427ee2d0e1236d845cffdbc9de
-# Source0:        http://ooo.ximian.com/packages/snap/ooo-build-%{ooobver}-HEAD-20040824.tar.gz
+#Source0:	http://ooo.ximian.com/packages/OOO_%{dfullver}/ooo-build-%{ooobver}.tar.gz
+Source0:        http://ooo.ximian.com/packages/snap/ooo-build-%{ooobver}-HEAD-20040902.tar.gz
+# Source0-md5:	a046c39f0563f242efcd9c58209d7314
+#Source0:	ooo-build-%{ooobver}-20040902.tar.bz2
 Source1:	http://ooo.ximian.com/packages/OOO_%{dfullver}/OOO_%{dfullver}.tar.bz2
 # Source1-md5:	627fbce603598a74f9be03f5a1da6d94
 Source2:	http://ooo.ximian.com/packages/ooo-icons-OOO_1_1-10.tar.gz
@@ -88,9 +89,8 @@ Source412:	%{cftp}/helpcontent/helpcontent_90_unix.tgz
 # Source412-md5:	9521a01c5817e87178f356762f8cdab5
 
 Patch0:		%{name}-rh-disable-spellcheck-all-langs.patch
-Patch1:		%{name}-ooo-wrapper.patch
 # PLD-specific, they ooo-build people don't like it
-Patch2:		%{name}-files.patch
+Patch1:		%{name}-files.patch
 
 URL:		http://www.openoffice.org/
 BuildRequires:	ImageMagick
@@ -1832,7 +1832,6 @@ zuluskim.
 %setup -q -n ooo-build-%{ooobver}
 %patch0 -p1
 %patch1 -p1 
-%patch2 -p1
 
 install -d src
 # sources, icons, KDE_icons
