@@ -8,9 +8,12 @@
 #	- incorporate gnome OOo artwork (icons & more)
 #	- copy & paste problem in oocalc
 
-%bcond_with java		# build with java support
-%bcond_without fontconf		# build with fontconfig support
-%bcond_with parallel 	# parallel building
+%bcond_with java		# java support
+%bcond_without fontconf		# fontconfig
+%bcond_with parallel 		# parallel building
+%bcond_with gnomecups		# gnome-cups
+%bcond_with gnomevfs		# gnome-vfs
+%bcond_with icons		# icons bits...
 
 %define		ver		1.1.0
 %define		rel		%{nil}
@@ -20,7 +23,7 @@ Summary:	OpenOffice - powerful office suite
 Summary(pl):	OpenOffice - potê¿ny pakiet biurowy
 Name:		openoffice
 Version:	%{ver}
-Release:	0.5
+Release:	0.6
 Epoch:		1
 License:	GPL/LGPL
 Group:		X11/Applications
@@ -41,7 +44,8 @@ Source10:	%{name}-db3.jar
 Source11:	%{name}-dictionary.lst.readme
 # Source11-md5:	e4c1c2844b4a4cebca33339538da7f1d
 
-#Source12:	http://ooo.ximian.com/packages/ooo-icons-OOO_1_1-6.tar.gz
+Source12:	http://ooo.ximian.com/packages/ooo-icons-OOO_1_1-6.tar.gz
+# Source12-md5:	dedede
 
 %define		helpftp	ftp://openoffice.tu-bs.de/OpenOffice.org/contrib/helpcontent
 Source101:	%{helpftp}/helpcontent_01_unix.tgz
@@ -212,6 +216,39 @@ Patch391: openoffice-print-fontconfig.patch
 Patch392: openoffice-print-scale-fix.patch
 Patch393: openoffice-padmin-nofontconfig.patch
 
+Patch401: openoffice-vfs-content.patch
+Patch402: openoffice-vfs-directory.patch
+Patch403: openoffice-vfs-offapi.patch
+Patch404: openoffice-vfs-provider.patch
+Patch405: openoffice-vfs-stream.patch
+Patch406: openoffice-vfs-ucp-setup.patch
+Patch407: openoffice-vfs-uno-register.patch
+Patch408: openoffice-vfs-uno-uri.patch
+
+Patch401:
+
+Patch411: openoffice-bmp32.patch
+Patch412: openoffice-gui-icon-composite.patch
+Patch413: openoffice-gui-image-load.patch
+Patch414: openoffice-gui-insensitive.patch
+Patch415: openoffice-gui-new-icons.patch
+Patch416: openoffice-gui-symbol-remove.patch
+Patch417: openoffice-gui-tbx-ctrl-bg.patch
+Patch418: openoffice-gui-tbxcust.patch
+Patch419: openoffice-gui-toolbox-large-icons.patch
+Patch420: openoffice-gui-toolbox.patch
+Patch421: openoffice-gui-toolbox-prelight.patch
+Patch422: openoffice-gui-toolbox-tristate.patch
+Patch423: openoffice-help-support.patch
+Patch424: openoffice-icon-masks.patch
+Patch425: openoffice-icon-render.patch
+Patch426: openoffice-speed-bitmap-render.patch
+
+Patch431: openoffice-gui-menu-check-images.patch
+Patch432: openoffice-gui-menu-checkitems.patch
+Patch433: openoffice-gui-menu-check-render.patch
+Patch434: openoffice-gui-menu-fixes.patch
+
 URL:		http://www.openoffice.org/
 BuildRequires:	STLport-devel >= 4.5.3-6
 BuildRequires:	XFree86-devel
@@ -224,12 +261,11 @@ BuildRequires:	db-cxx-devel
 BuildRequires:	db-java
 BuildRequires:	jar
 BuildRequires:	jdk
-%elseif
+%else
 BuildRequires:	libxslt-progs
 %endif
 BuildRequires:	flex
 BuildRequires:	freetype-devel >= 2.1
-#BuildRequires:	gcc-java
 BuildConflicts:	java-sun = 1.4.2
 BuildRequires:	libstdc++-devel >= 3.2.1
 BuildRequires:	pam-devel
@@ -254,8 +290,15 @@ BuildRequires:	pango-static
 BuildRequires:	xft-static
 BuildRequires:	xrender-static
 BuildRequires:	zlib-static
+# more and more...
 BuildRequires:	pkgconfig
 BuildRequires:	startup-notification-devel
+%if %{with gnomevfs} 
+BuildRequires:	gnome-vfs2-devel
+%endif 
+%if %{with gnomecups}
+BuildRequires:	libgnomecups-devel
+%endif
 Requires:	%{name}-libs = %{epoch}:%{version}-%{release}
 Requires:	%{name}-i18n-en = %{epoch}:%{version}-%{release}
 Requires:	%{name}-dict-en
@@ -926,12 +969,14 @@ rm -f moz/prj/d.lst
 #%patch343 -p0 
 #%patch344 -p0 
 
-# CUPS support
-#%patch351 -p0
-#%patch352 -p0 
-#%patch353 -p0 
+%if %{with gnomecups}
+%patch351 -p0
+%patch352 -p0 
+%patch353 -p0 
+# don't disable spadmin
 #%patch354 -p0
-#%patch355 -p0
+%patch355 -p0
+%endif 
 
 # gui 
 %patch361 -p0 
@@ -959,6 +1004,43 @@ rm -f moz/prj/d.lst
 %patch393 -p0
 %endif 
 
+# gnome-vfs
+%if %{with gnomevfs}
+%patch401 -p0
+%patch402 -p0
+%patch403 -p0
+%patch404 -p0
+%patch405 -p0 
+%patch406 -p0
+%patch407 -p0
+%patch408 -p0
+%endif 
+
+# icons....
+%if %{with icons}
+%patch411 -p0
+%patch412 -p0
+%patch413 -p0
+%patch414 -p0
+%patch415 -p0
+%patch416 -p0
+%patch417 -p0
+%patch418 -p0
+#%patch419 -p0
+%patch420 -p0
+%patch421 -p0
+%patch422 -p0
+%patch423 -p0
+%patch424 -p0
+%patch425 -p0
+%patch426 -p0
+
+%patch431 -p0 
+%patch432 -p0 
+%patch433 -p0 
+%patch434 -p0
+%endif
+
 # gcc 2 include error hack:
 rm -rf autodoc/source/inc/utility
 
@@ -975,7 +1057,14 @@ install %{SOURCE402} offmgr/res/openintro_pld.bmp
 
 # bzz... 
 rm -f offmgr/source/offapp/intro/iso.src
-cp offmgr/source/offapp/intro/ooo.src offmgr/source/offapp/intro/iso.src
+cp -f offmgr/source/offapp/intro/ooo.src offmgr/source/offapp/intro/iso.src
+
+# repack SOURCE12 
+tar xvf %{SOURCE12}
+cd ooo-icons-OOO_1_1-6
+tar cf - . | ( cd .. ; tar xvf - )
+cd ..
+rm -rf ooo-icons-OOO_1_1-6
 
 # optimalization
 cd solenv/inc
@@ -1031,7 +1120,7 @@ ENVSCRIPT="LinuxPPCEnv.Set"
 %endif 
 
 %if %{with parallel}
-echo -e "#!/bin/tcsh\nsource $ENVSCRIPT\ncd instsetoo\nbuild.pl -P$RPM_BUILD_NCPUS --all\nexit 0" > compile
+echo -e "#!/bin/tcsh\nsource $ENVSCRIPT\ncd instsetoo\nbuild.pl -P$RPM_BUILD_NCPUS --all\n" > compile
 %else
 echo -e "#!/bin/tcsh\nsource $ENVSCRIPT\ndmake -p -v" > compile
 %endif
