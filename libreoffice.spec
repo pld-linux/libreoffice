@@ -1,7 +1,6 @@
 # TODO:
 # 	- everything
 #	- PLD vendor list of patches to apply in patches/*/appply?
-#	- put helpcontent in proper place
 
 # Conditional build:
 %bcond_with	java		# Java support
@@ -289,13 +288,13 @@ BuildRequires:	unzip
 BuildRequires:	zip
 BuildRequires:	zlib-devel
 # more and more...
+BuildRequires:  pkgconfig
+BuildRequires:  startup-notification-devel
+BuildRequires:  libart_lgpl-devel
 %if %{with kde}
 BuildRequires:	qt-devel
 BuildRequires:	kdelibs-devel
 %else
-BuildRequires:	pkgconfig
-BuildRequires:	startup-notification-devel
-BuildRequires:	libart_lgpl-devel
 BuildRequires:	gtk+2-devel
 BuildRequires:	gnome-vfs2-devel
 BuildRequires:  libbonobo-devel
@@ -310,8 +309,10 @@ Requires:	cups-lib
 Requires:	db
 Requires:	db-cxx
 Requires:	startup-notification
+%if ! %{with kde}
 Requires:	libgnomecups
 Requires:	gnome-vfs2
+%endif
 ExclusiveArch:	%{ix86} sparc ppc
 #Suggested:	chkfontpath
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
