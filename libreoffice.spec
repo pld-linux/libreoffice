@@ -15,8 +15,8 @@
 %bcond_with	java		# Java support
 
 %define		ver		1.1
-%define		rel		2
-%define		ooobver		1.3.5.2
+%define		rel		3
+%define		ooobver		1.3.5.5
 %define		subver		645
 %define		fullver		%{ver}.%{rel}
 %define		dfullver	%(echo %{fullver} | tr . _)
@@ -30,12 +30,12 @@ Release:	5
 Epoch:		1
 License:	GPL/LGPL
 Group:		X11/Applications
-Source0:	http://ooo.ximian.com/packages/OOO_%{dfullver}/ooo-build-%{ooobver}.tar.gz
-# Source0-md5:	a2b37b6b69558ca984f007d7e2e46031
+Source0:	http://ooo.ximian.com/packages/OOO_1_1_2/ooo-build-%{ooobver}.tar.gz
+# Source0-md5:	9f66d153a3d5007c84766576afd81050
 #Source0:	http://ooo.ximian.com/packages/snap/ooo-build-%{ooobver}-HEAD-20040920.tar.gz
 #Source0:	ooo-build-%{ooobver}-20040902.tar.bz2
 Source1:	http://ooo.ximian.com/packages/OOO_%{dfullver}/OOO_%{dfullver}.tar.bz2
-# Source1-md5:	627fbce603598a74f9be03f5a1da6d94
+# Source1-md5:	2695721938e0e249a1f02ec0bf222a8d
 Source2:	http://ooo.ximian.com/packages/ooo-icons-OOO_1_1-10.tar.gz
 # Source2-md5:	be79d3cb5f64d2c0ac8a75e65a59cb09
 Source3:	http://kde.openoffice.org/files/documents/159/1975/ooo-KDE_icons-OOO_1_1-0.3.tar.gz
@@ -74,7 +74,7 @@ Source404:	%{cftp}/helpcontent/helpcontent_39_unix.tgz
 Source405:	%{cftp}/helpcontent/helpcontent_46_unix.tgz
 # Source405-md5:	7b013981edce2fabe4a8751ff64a8d58
 Source406:	%{cftp}/helpcontent/helpcontent_49_unix.tgz
-# Source406-md5:	a39f44ec40f452c963a4a187f31d1acb
+# Source406-md5:	6a2c3301bb75fb8b9dc90c2a63205165
 Source407:	%{cftp}/helpcontent/helpcontent_55_unix.tgz
 # Source407-md5:	804d3ce61e11335193a410aaf9603f8e
 Source408:	%{cftp}/helpcontent/helpcontent_81_unix.tgz
