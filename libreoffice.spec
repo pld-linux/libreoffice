@@ -324,12 +324,14 @@ Summary:	OpenOffice.org mimelinks
 Summary(pl):	Dowi±zania MIME dla OpenOffice.org
 Group:		X11/Applications
 Requires:	%{name} = %{epoch}:%{version}-%{release}
+Requires:	kdelibs
+Conflicts:	kdelibs >= 9:3.1.9
 
 %description mimelinks
-OpenOffice.org mimelinks.
+OpenOffice.org mimelinks for KDE versions =< 3.1.5.
 
 %description mimelinks -l pl
-Dowi±zania MIME dla OpenOffice.org.
+Dowi±zania MIME OpenOffice.org dla wersji KDE =< 3.1.5.
 
 #
 # Internationalization
@@ -1336,16 +1338,6 @@ rm -rf $RPM_BUILD_ROOT
 %{_applnkdir}/Office
 %{_pixmapsdir}/*.png
 %{_pixmapsdir}/document-icons/*.png
-
-%{_pixmapsdir}/locolor/16x16/apps/*.xpm
-%{_pixmapsdir}/locolor/22x22/apps/*.xpm
-%{_pixmapsdir}/locolor/32x32/apps/*.xpm
-%{_pixmapsdir}/hicolor/16x16/apps/*.xpm
-%{_pixmapsdir}/hicolor/22x22/apps/*.xpm
-%{_pixmapsdir}/hicolor/32x32/apps/*.xpm
-%{_pixmapsdir}/hicolor/48x48/apps/*.xpm
-
-
 
 %{oolib}/program/*.rdb
 %{oolib}/program/*.bmp
