@@ -6,7 +6,7 @@
 #	- cleanups, cleanups and cleanups
 # 	- incorporate ximian patches (mostly done)
 #	- incorporate gnome OOo artwork (icons & more)
-#	- fix system-db patch (db 4.2)
+#	- copy & paste problem in oocalc
 
 %bcond_without java		# build without java support
 
@@ -18,7 +18,7 @@ Summary:	OpenOffice - powerful office suite
 Summary(pl):	OpenOffice - potê¿ny pakiet biurowy
 Name:		openoffice
 Version:	%{ver}
-Release:	0.3
+Release:	0.4
 Epoch:		1
 License:	GPL/LGPL
 Group:		X11/Applications
@@ -40,7 +40,6 @@ Source11:	%{name}-dictionary.lst.readme
 # Source11-md5:	e4c1c2844b4a4cebca33339538da7f1d
 
 #Source12:	http://ooo.ximian.com/packages/ooo-icons-OOO_1_1-6.tar.gz
-# Source12-md5:	3f73b262e35011e42d0b4fbfa46c34cd
 
 %define		helpftp	ftp://openoffice.tu-bs.de/OpenOffice.org/contrib/helpcontent
 Source101:	%{helpftp}/helpcontent_01_unix.tgz
@@ -212,10 +211,10 @@ BuildRequires:	XFree86-devel
 BuildRequires:	autoconf
 BuildRequires:	automake
 BuildRequires:	bison >= 1.875-4
-BuildRequires:	db4.1-devel
-BuildRequires:	db4.1-cxx-devel
+BuildRequires:	db-devel
+BuildRequires:	db-cxx-devel
 %if %{with java}
-BuildRequires:	db4.1-java
+BuildRequires:	db-java
 BuildRequires:	jar
 BuildRequires:	jdk
 %elseif
@@ -254,7 +253,7 @@ Requires:	%{name}-i18n-en = %{epoch}:%{version}-%{release}
 Requires:	%{name}-dict-en
 Requires:	libstdc++ >= 3.2.1
 Requires:	db
-Requires:	chkfontpath
+#Requires:	chkfontpath
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 
@@ -940,9 +939,9 @@ rm -f moz/prj/d.lst
 %patch381 -p0
 
 # fontconfig
-#%patch391 -p0
-#%patch392 -p0
-#%patch393 -p0
+%patch391 -p0
+%patch392 -p0
+%patch393 -p0
 
 # gcc 2 include error hack:
 rm -rf autodoc/source/inc/utility
@@ -1322,6 +1321,9 @@ for L in $LANGS; do
     AddFiles $lshort "" "" `Multiply %{oolib}/program/resource/ $SVER$lno.res $SUBF`
     AddFiles $lshort "" dir `Multiply %{oolib}/share/registry/res/ "" $lshort $loth`
 done
+
+install %{SOURCE401} $RPM_BUILD_ROOT%{oolib}/program/about.bmp
+install %{SOURCE402} $RPM_BUILD_ROOT%{oolib}/program/intro.bmp
 
 %clean
 rm -rf $RPM_BUILD_ROOT
