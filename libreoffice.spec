@@ -34,19 +34,14 @@ Group:		X11/Applications
 # Source0:	http://ooo.ximian.com/packages/OOO_1_1_2/ooo-build-%{ooobver}.tar.gz
 Source0:	http://ooo.ximian.com/packages/snap/ooo-build-ooo-build-1-3-%{ooobver}-20041112.tar.gz
 # Source0-md5:	cc6fd08174597bdd0f1793a6dcc818a7
-# Source0-size:	2952279
 Source1:	http://ooo.ximian.com/packages/OOO_%{dfullver}/OOO_%{dfullver}.tar.bz2
 # Source1-md5:	f7f13576ad04e6a958dcd9d4cb569538
-# Source1-size:	163238527
 Source2:	http://ooo.ximian.com/packages/ooo-icons-OOO_1_1-10.tar.gz
 # Source2-md5:	be79d3cb5f64d2c0ac8a75e65a59cb09
-# Source2-size:	1563326
 Source3:	http://kde.openoffice.org/files/documents/159/1975/ooo-KDE_icons-OOO_1_1-0.3.tar.gz
 # Source3-md5:	05ff784fff01c54cd3dd7b975b46bae2
-# Source3-size:	1017540
 Source4:	http://ooo.ximian.com/packages/libwpd-snap-20040823.tar.gz
 # Source4-md5:	c3d8c9f5ae2abbe1b7091817265b9ef3
-# Source4-size:	447710
 Source10:	oocalc.desktop
 Source11:	oodraw.desktop
 Source12:	ooffice.desktop
@@ -68,43 +63,30 @@ Source19:	oowriter.desktop
 # Help content
 Source400:	%{cftp}/helpcontent/helpcontent_01_unix.tgz
 # Source400-md5:	7da2aff674c2c84aba8b21ac2ab16bb6
-# Source400-size:	12052480
 Source401:	%{cftp}/helpcontent/helpcontent_31_unix.tgz
 # Source401-md5:	c7e618e2d9b8bd25cae12954ef2548c9
-# Source401-size:	12073861
 Source402:	%{cftp}/helpcontent/helpcontent_33_unix.tgz
 # Source402-md5:	68d58bc30b485a77c0a0fba08af3aee3
-# Source402-size:	12574720
 Source403:	%{cftp}/helpcontent/helpcontent_34_unix.tgz
 # Source403-md5:	8696bbee3dc4d5b6fd60218123016e29
-# Source403-size:	12554240
 Source404:	%{cftp}/helpcontent/helpcontent_39_unix.tgz
 # Source404-md5:	c2ae86d02f462d2b663d621190f5ef34
-# Source404-size:	12482560
 Source405:	%{cftp}/helpcontent/helpcontent_46_unix.tgz
 # Source405-md5:	7b013981edce2fabe4a8751ff64a8d58
-# Source405-size:	12072960
 Source406:	%{cftp}/helpcontent/helpcontent_49_unix.tgz
 # Source406-md5:	a39f44ec40f452c963a4a187f31d1acb
-# Source406-size:	13649920
 Source407:	%{cftp}/helpcontent/helpcontent_55_unix.tgz
 # Source407-md5:	804d3ce61e11335193a410aaf9603f8e
-# Source407-size:	11549758
 Source408:	%{cftp}/helpcontent/helpcontent_81_unix.tgz
 # Source408-md5:	81b705057a0e14ebcbf02fac4762781a
-# Source408-size:	12902400
 Source409:	%{cftp}/helpcontent/helpcontent_82_unix.tgz
 # Source409-md5:	3121fbd251176d7c7b6e33ecec744c65
-# Source409-size:	12369920
 Source410:	%{cftp}/helpcontent/helpcontent_86_unix.tgz
 # Source410-md5:	aee37935139c5ccd4b6d8abdd2037c66
-# Source410-size:	12769280
 Source411:	%{cftp}/helpcontent/helpcontent_88_unix.tgz
 # Source411-md5:	3b00571318e45965dee0545d86306d65
-# Source411-size:	12953600
 Source412:	%{cftp}/helpcontent/helpcontent_90_unix.tgz
 # Source412-md5:	9521a01c5817e87178f356762f8cdab5
-# Source412-size:	12495734
 
 Patch0:		%{name}-rh-disable-spellcheck-all-langs.patch
 # PLD-specific, they ooo-build people don't like it
