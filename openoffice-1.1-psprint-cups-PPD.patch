@@ -1,0 +1,144 @@
+--- oo_1.1rc3_src/psprint/source/helper/ppdparser.cxx.psprint-cups-PPD	2003-04-15 12:14:50.000000000 -0400
++++ oo_1.1rc3_src/psprint/source/helper/ppdparser.cxx	2003-08-25 07:27:23.000000000 -0400
+@@ -61,6 +61,9 @@
+ #include <stdlib.h>
+ #include <stdio.h>
+ 
++#ifndef __SGI_STL_MAP
++#include <map>
++#endif
+ #ifndef __SGI_STL_HASH_MAP
+ #include <hash_map>
+ #endif
+@@ -83,6 +86,9 @@ struct std::hash< const psp::PPDKey* >
+ #include <osl/file.hxx>
+ #include <osl/process.h>
+ #include <osl/thread.h>
++#include <tools/fsys.hxx>
++#include <rtl/bootstrap.hxx>
++#include <cups/cups.h>
+ 
+ #define PRINTER_PPDDIR "driver"
+ 
+@@ -173,6 +179,52 @@ void PPDParser::initPPDFiles()
+     }
+ }
+ 
++static String GetPPDFileFromCUPS ( const String& rPrinter )
++{
++    String aPPDFile;
++    const char *pPPDFile;
++
++    // Try to get the PPD file from a CUPS server
++    pPPDFile = cupsGetPPD( OString( rPrinter.GetBuffer(),
++                                    rPrinter.Len(),
++                                    RTL_TEXTENCODING_UTF8 ).getStr() );
++    
++    // If found, cache it immediately to the user psprint/drivers directory
++    if ( pPPDFile )
++    {
++        // Get user psprint directory name
++        static OUString aUserPath;
++        static bOnce = false;
++        
++        if ( ! bOnce )
++        {
++            bOnce = true;
++            OUString aIni;
++            osl_getExecutableFile( &aIni.pData );
++            aIni = aIni.copy( 0, aIni.lastIndexOf( SAL_PATHDELIMITER )+1 );
++            aIni += OUString( RTL_CONSTASCII_USTRINGPARAM( SAL_CONFIGFILE( "bootstrap" ) ) );
++            Bootstrap aBootstrap( aIni );
++            aBootstrap.getFrom( OUString( RTL_CONSTASCII_USTRINGPARAM( "UserInstallation" ) ), aUserPath );
++            
++            if( ! aUserPath.compareToAscii( "file://", 7 ) )
++                aUserPath = aUserPath.copy( 7 );
++
++            // The directory is bound to exist since it is created at installation time
++            aUserPath += OUString( RTL_CONSTASCII_USTRINGPARAM( "/user/psprint/" PRINTER_PPDDIR "/" ) );
++        }
++        
++        // Copy and remove temporary PPD file
++        DirEntry aSrcPath( String::CreateFromAscii( pPPDFile ) );
++        DirEntry aDstPath( aUserPath + rPrinter + String::CreateFromAscii( ".PPD" ) );
++        aSrcPath.CopyTo( aDstPath, FSYS_ACTION_COPYFILE );
++        remove( pPPDFile );
++
++        aPPDFile = aDstPath.GetFull();
++    }
++
++    return aPPDFile;
++}
++
+ String PPDParser::getPPDFile( const String& rFile )
+ {
+     INetURLObject aPPD( rFile, INET_PROT_FILE, INetURLObject::ENCODE_ALL );
+@@ -195,6 +247,17 @@ String PPDParser::getPPDFile( const Stri
+         if( it != pAllPPDFiles->end() )
+             aStream.Open( it->second, STREAM_READ );
+     }
++    if ( ! aStream.IsOpen() )
++    {
++        // Try to get the PPD file from a CUPS server
++        String aFile( GetPPDFileFromCUPS( rFile ) );
++
++        if ( aFile.Len() )
++        {
++            aPPD = INetURLObject( aFile, INET_PROT_FILE, INetURLObject::ENCODE_ALL );
++            aStream.Open( aPPD.PathToFileName(), STREAM_READ );
++        }
++    }
+ 
+     String aRet;
+     if( aStream.IsOpen() )
+--- oo_1.1rc3_src/psprint/source/printer/printerinfomanager.cxx.psprint-cups-PPD	2003-08-25 07:29:03.000000000 -0400
++++ oo_1.1rc3_src/psprint/source/printer/printerinfomanager.cxx	2003-08-25 07:24:49.000000000 -0400
+@@ -536,6 +536,37 @@ void PrinterInfoManager::initialize()
+         aPrinter.m_bModified                = false;
+         aPrinter.m_aGroup                   = ByteString( aPrinterName, aEncoding ); //provide group name in case user makes this one permanent in padmin
+ 
++        const PPDParser* pParser = PPDParser::getParser( *it );
++        if ( pParser )
++        {
++            aPrinter.m_bModified           = true;
++            aPrinter.m_aInfo.m_aDriverName = *it;
++            aPrinter.m_aInfo.m_pParser     = pParser;
++            aPrinter.m_aInfo.m_aContext.setParser( pParser );
++
++            fillFontSubstitutions( aPrinter.m_aInfo );
++            // merge PPD values with merge defaults
++            for( int nPPDValueModified = 0; nPPDValueModified < aMergeInfo.m_aContext.countValuesModified(); nPPDValueModified++ )
++            {
++                const PPDKey* pDefKey = aMergeInfo.m_aContext.getModifiedKey( nPPDValueModified );
++                const PPDValue* pDefValue = aMergeInfo.m_aContext.getValue( pDefKey );
++                const PPDKey* pPrinterKey = pDefKey ? aPrinter.m_aInfo.m_pParser->getKey( pDefKey->getKey() ) : NULL;
++                if( pDefKey && pPrinterKey )
++                    // at least the options exist in both PPDs
++                {
++                    if( pDefValue )
++                    {
++                        const PPDValue* pPrinterValue = pPrinterKey->getValue( pDefValue->m_aOption );
++                        if( pPrinterValue )
++                            // the printer has a corresponding option for the key
++                            aPrinter.m_aInfo.m_aContext.setValue( pPrinterKey, pPrinterValue );
++                    }
++                    else
++                        aPrinter.m_aInfo.m_aContext.setValue( pPrinterKey, NULL );
++                }
++            }
++		}
++
+         m_aPrinters[ aPrinterName ] = aPrinter;
+     }
+ }
+--- oo_1.1rc3_src/psprint/util/makefile.mk.psprint-cups-PPD	2003-04-15 10:34:44.000000000 -0400
++++ oo_1.1rc3_src/psprint/util/makefile.mk	2003-08-25 07:23:37.000000000 -0400
+@@ -97,7 +97,7 @@ SHL1STDLIBS=$(UNOTOOLSLIB)		\
+ 			$(TOOLSLIB) 		\
+             $(JVMACCESSLIB)		\
+ 			$(SALLIB)			\
+-			-lX11
++			-lX11 -lcups
+ 
+ SHL1DEF=	$(MISC)$/$(SHL1TARGET).def
+ 
