@@ -69,7 +69,7 @@ Source410:	%{cftp}/helpcontent/helpcontent_88_unix.tgz
 
 Patch0:		%{name}-rh-disable-spellcheck-all-langs.patch
 Patch1:		%{name}-pld-stlport.patch
-Patch2:		%{name}-pld-ximian-is-pld.patch
+Patch2:		%{name}-pld-config.patch
 Patch3:		%{name}-pld-copy-all-bmp.patch
 Patch4:		%{name}-pld-ooo-build-ldver.patch
 Patch5:		%{name}-pld-nptl.patch
@@ -78,6 +78,7 @@ Patch7:		%{name}-pld-package-lang.patch
 Patch8:		%{name}-pld-ooo-build-fix.patch
 Patch9:		%{name}-pld-ooo-build-stderr.patch
 Patch10:	%{name}-pld-sh-tcsh.patch
+Patch11:	%{name}-pld-section.patch
 
 URL:		http://www.openoffice.org/
 BuildRequires:	ImageMagick
@@ -864,6 +865,7 @@ chiñskim.
 %patch8 -p1
 %patch9 -p1
 %patch10 -p1
+%patch11 -p1
 
 install -d src
 ln -s %{SOURCE1} src/
@@ -872,6 +874,11 @@ ln -s %{SOURCE3} src/
 
 ln -s %{SOURCE20} src/openabout_pld.bmp
 ln -s %{SOURCE21} src/openintro_pld.bmp
+
+%if ! %{with kde}
+# disable nwf patch
+sed -i -e 's#\(PLD.*\) KDE, \(.*\)#\1 \2#g' patches/OOO_1_1_1/apply
+%endif
 
 %build
 # Make sure we have /proc mounted - otherwise idlc will fail later.
@@ -914,7 +921,7 @@ CONFOPTS=" \
 	--with-system-curl \
 	--with-system-freetype \
 	--with-vendor="PLD" \
-	--with-distro="Ximian" \
+	--with-distro="PLD" \
 %if %{with kde}
 	--with-icons="KDE" \
 	--with-widgetset=kde \
