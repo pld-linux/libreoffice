@@ -36,30 +36,37 @@ Source105:	ftp://ftp.task.gda.pl/mirror/ftp.openoffice.org/contrib/helpfiles/hel
 Source106:	ftp://ftp.task.gda.pl/mirror/ftp.openoffice.org/contrib/helpfiles/helpcontent_49_unix.tgz
 
 # Wordbooks: http://whiteboard.openoffice.org/lingucomponent/download_dictionary.html
-Source201:	http://dict.progbits.com/ca_ES.zip
-Source202:	http://dict.progbits.com/cs_CZ.zip
-Source203:	http://dict.progbits.com/da_DK.zip
-Source204:	http://dict.progbits.com/de_CH.zip
-Source205:	http://dict.progbits.com/de_DE.zip
-Source206:	http://dict.progbits.com/el_GR.zip
-Source207:	http://dict.progbits.com/en_CA.zip
-Source208:	http://dict.progbits.com/es_ES.zip
-Source209:	http://dict.progbits.com/fr_FR.zip
-Source210:	http://dict.progbits.com/hr_HR.zip
-Source211:	http://dict.progbits.com/hu_HU.zip
-Source212:	http://dict.progbits.com/it_IT.zip
-Source213:	http://dict.progbits.com/nl_NL.zip
-Source214:	http://dict.progbits.com/pl_PL.zip
-Source215:	http://dict.progbits.com/pt_PT.zip
-Source216:	http://dict.progbits.com/sv_SE.zip
-Source217:	http://dict.progbits.com/bg_BG.zip
-Source218:	http://dict.progbits.com/en_GB.zip
-Source219:	http://dict.progbits.com/pt_BR.zip
-Source220:	http://dict.progbits.com/sk_SK.zip
+Source201:	ftp://ftp.openoffice.pl/OpenOffice.ORG/contrib/dictionaries/bg_BG.zip
+Source202:	ftp://ftp.openoffice.pl/OpenOffice.ORG/contrib/dictionaries/ca_ES.zip
+Source203:	ftp://ftp.openoffice.pl/OpenOffice.ORG/contrib/dictionaries/cs_CZ.zip
+Source204:	ftp://ftp.openoffice.pl/OpenOffice.ORG/contrib/dictionaries/da_DK.zip
+Source205:	ftp://ftp.openoffice.pl/OpenOffice.ORG/contrib/dictionaries/de_CH.zip
+Source206:	ftp://ftp.openoffice.pl/OpenOffice.ORG/contrib/dictionaries/de_DE.zip
+Source207:	ftp://ftp.openoffice.pl/OpenOffice.ORG/contrib/dictionaries/el_GR.zip
+Source208:	ftp://ftp.openoffice.pl/OpenOffice.ORG/contrib/dictionaries/en_CA.zip
+Source209:	ftp://ftp.openoffice.pl/OpenOffice.ORG/contrib/dictionaries/en_GB.zip
+Source210:	ftp://ftp.openoffice.pl/OpenOffice.ORG/contrib/dictionaries/en_US.zip
+Source211:	ftp://ftp.openoffice.pl/OpenOffice.ORG/contrib/dictionaries/es_ES.zip
+Source212:	ftp://ftp.openoffice.pl/OpenOffice.ORG/contrib/dictionaries/fr_FR.zip
+Source213:	ftp://ftp.openoffice.pl/OpenOffice.ORG/contrib/dictionaries/ga_IE.zip
+Source214:	ftp://ftp.openoffice.pl/OpenOffice.ORG/contrib/dictionaries/gl_ES.zip
+Source215:	ftp://ftp.openoffice.pl/OpenOffice.ORG/contrib/dictionaries/hr_HR.zip
+Source216:	ftp://ftp.openoffice.pl/OpenOffice.ORG/contrib/dictionaries/hu_HU.zip
+Source217:	ftp://ftp.openoffice.pl/OpenOffice.ORG/contrib/dictionaries/it_IT.zip
+Source218:	ftp://ftp.openoffice.pl/OpenOffice.ORG/contrib/dictionaries/lt_LT.zip
+Source219:	ftp://ftp.openoffice.pl/OpenOffice.ORG/contrib/dictionaries/nb_NO.zip
+Source220:	ftp://ftp.openoffice.pl/OpenOffice.ORG/contrib/dictionaries/nl_NL.zip
+Source221:	ftp://ftp.openoffice.pl/OpenOffice.ORG/contrib/dictionaries/nn_NO.zip
+Source222:	ftp://ftp.openoffice.pl/OpenOffice.ORG/contrib/dictionaries/pl_PL.zip
+Source223:	ftp://ftp.openoffice.pl/OpenOffice.ORG/contrib/dictionaries/pt_BR.zip
+Source224:	ftp://ftp.openoffice.pl/OpenOffice.ORG/contrib/dictionaries/pt_PT.zip
+Source225:	ftp://ftp.openoffice.pl/OpenOffice.ORG/contrib/dictionaries/sk_SK.zip
+Source226:	ftp://ftp.openoffice.pl/OpenOffice.ORG/contrib/dictionaries/sl_SI.zip
+Source227:	ftp://ftp.openoffice.pl/OpenOffice.ORG/contrib/dictionaries/sv_SE.zip
 
 # This one is special, as there is no country associated with Latin,
 # nor should it be %lang(la).
-Source221:	http://dict.progbits.com/la.zip
+Source228:	ftp://ftp.openoffice.pl/OpenOffice.ORG/contrib/dictionaries/la.zip
 
 Patch0:		%{name}-gcc.patch
 Patch2:		%{name}-mozilla.patch
@@ -135,10 +142,12 @@ Requires:	db
 %define	langs	"ENUS,FREN,GERM,SPAN,ITAL,DTCH,PORT,DAN,GREEK,POL,SWED,TURK,RUSS,CZECH"
 %define	apps	agenda calc draw fax impress label letter math master memo vcard web writer
 %define	wordbooks1	%{SOURCE201} %{SOURCE202} %{SOURCE203} %{SOURCE204} %{SOURCE205}
-%define	wordbooks2	%{SOURCE206} %{SOURCE207} %{SOURCE208} %{SOURCE209} %{SOURCE210}
-%define	wordbooks3	%{SOURCE211} %{SOURCE212} %{SOURCE213} %{SOURCE214} %{SOURCE215}
-%define	wordbooks4	%{SOURCE216} %{SOURCE217} %{SOURCE218} %{SOURCE219} %{SOURCE220}
-%define	wordbooks	%{wordbooks1} %{wordbooks2} %{wordbooks3} %{wordbooks4}
+%define wordbooks2	%{SOURCE206} %{SOURCE207} %{SOURCE208} %{SOURCE209} %{SOURCE210}
+%define wordbooks3	%{SOURCE211} %{SOURCE212} %{SOURCE213} %{SOURCE214} %{SOURCE215}
+%define wordbooks4	%{SOURCE216} %{SOURCE217} %{SOURCE218} %{SOURCE219} %{SOURCE220}
+%define wordbooks5	%{SOURCE221} %{SOURCE222} %{SOURCE223} %{SOURCE224} %{SOURCE225}
+%define wordbooks6	%{SOURCE226} %{SOURCE227} %{SOURCE228} 
+%define wordbooks	%wordbooks1 %wordbooks2 %wordbooks3 %wordbooks4 %wordbooks5 %wordbooks6
 
 %define	_prefix		/usr/X11R6
 %define	_archbuilddir	unxlngi3.pro
