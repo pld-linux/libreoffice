@@ -25,7 +25,7 @@ Summary:	OpenOffice - powerful office suite
 Summary(pl):	OpenOffice - potê¿ny pakiet biurowy
 Name:		openoffice
 Version:	%{ver}
-Release:	0.6.2
+Release:	0.6.3
 Epoch:		1
 License:	GPL/LGPL
 Group:		X11/Applications
@@ -262,6 +262,7 @@ Patch507: openoffice-iso8859-2-html.patch
 Patch508: openoffice-buildset.patch
 Patch509: openoffice-vcl-dynamic-Xinerama.patch
 Patch510: openoffice-1.1-psprint-cups-PPD.patch
+Patch511: openoffice-1.1-disable-python-nojava.patch
 
 Patch600: openoffice-freetype_2_1_7.patch
 
@@ -1058,7 +1059,11 @@ rm -f moz/prj/d.lst
 #%patch501 -p1
 %patch502 -p1
 %patch503 -p1
+%if %{with java}
 %patch504 -p0
+%else
+%patch511 -p0
+%endif
 %patch505 -p1
 %patch506 -p1
 %patch507 -p1
