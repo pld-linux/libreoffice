@@ -275,6 +275,7 @@ BuildRequires:	XFree86-devel
 BuildRequires:	autoconf
 BuildRequires:	automake
 BuildRequires:	bison >= 1.875-4
+BuildRequires:	libbonobo-devel
 BuildRequires:	cups-devel
 BuildRequires:	db-devel
 BuildRequires:	db-cxx-devel
