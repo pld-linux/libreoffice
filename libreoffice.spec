@@ -945,7 +945,9 @@ CONFOPTS=" \
 	--with-stlport4-home=/usr \
 	--with-lang=ALL \
 	--with-x \
+	--without-fonts \
 	--enable-crashdump \
+	--enable-fontconfig \
 	--enable-libsn \
 	--enable-libart \
 	--disable-rpath \
