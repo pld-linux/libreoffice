@@ -144,6 +144,8 @@ Patch121: openoffice-disable-odk-build.patch
 Patch201: openoffice-zoom-combobox.patch
 Patch202: openoffice-unzip-not-jar.patch 
 Patch203: openoffice-spell-sv.patch
+Patch204: openoffice-word-count.patch
+Patch205: openoffice-xinerama-extern-c.patch
 
 # ...
 Patch301: openoffice-splash.patch
@@ -820,6 +822,8 @@ rm -f moz/prj/d.lst
 %patch201 -p0
 %patch202 -p0 
 %patch203 -p0
+%patch204 -p0
+%patch205 -p0 
 
 %patch301 -p1 
 
