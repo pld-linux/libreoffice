@@ -25,3 +25,59 @@ diff -urN ooo-build-1.1.57.org/bin/setup.in ooo-build-1.1.57/bin/setup.in
  	echo "Build environment:";
  	set
  fi
+--- ooo-build-1.1.57.org/bin/unpack-orig	2004-05-29 13:44:11.000000000 +0200
++++ ooo-build-1.1.57.org/bin/unpack	2004-05-29 13:42:28.000000000 +0200
+@@ -10,7 +10,7 @@
+ 	exit 0;
+ fi
+ 
+-check-tarball ()
++check_tarball()
+ {
+     echo -n "Looking for $1 ... ";
+     if test ! -f $1; then
+@@ -21,7 +21,7 @@
+     fi
+ }
+ 
+-check-file ()
++check_file()
+ {
+     echo -n "Looking for $1 ... ";
+     if test ! -f $1; then
+@@ -37,26 +37,26 @@
+ 
+ echo "Checking for source packages in $SRCDIR";
+ if test "z$SYSTEM_GCC" = "z"; then
+-    check-tarball $GCC_TARBALL
+-    check-tarball $BINUTILS_TARBALL
++    check_tarball $GCC_TARBALL
++    check_tarball $BINUTILS_TARBALL
+ fi
+ if test "z$ENABLE_JAVA" = "zyes" &&
+     test "z$JDK_HOME" = "z"; then
+-    check-tarball $JDK_TARBALL
++    check_tarball $JDK_TARBALL
+ fi
+-check-tarball $OOO_TARBALL
+-check-tarball $OOO_ICONS_TARBALL
++check_tarball $OOO_TARBALL
++check_tarball $OOO_ICONS_TARBALL
+ 
+ if test "z$BUILD_WIN32" != "z"; then
+-    check-tarball $OOO_SCALED_ICONS_TARBALL
++    check_tarball $OOO_SCALED_ICONS_TARBALL
+ fi
+ 
+ mkdir -p $BUILDDIR
+ cd $BUILDDIR
+ 
+ if test "z$BUILD_WIN32" != "z"; then
+-    check-file $UNICOWS_SRC
+-    check-file $DBGINST_SRC
++    check_file $UNICOWS_SRC
++    check_file $DBGINST_SRC
+ #    check-file $ODMA_SRC
+ fi
+ 
+
