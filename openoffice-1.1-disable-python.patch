@@ -7,8 +7,8 @@
 -cp	scp\source\python						nmake   -       all     cp_python NULL
 -cp	scp\util								nmake	-	all	cp_util cp_crashrep cp_calc cp_chart cp_draw cp_fonts cp_gbl cp_grffilt cp_impress cp_javafilter cp_math cp_off cp_office_root cp_lingu cp_cde.u cp_kde.u cp_gnome.u cp_python NULL
 +cp	scp\util								nmake	-	all	cp_util cp_crashrep cp_calc cp_chart cp_draw cp_fonts cp_gbl cp_grffilt cp_impress cp_javafilter cp_math cp_off cp_office_root cp_lingu cp_cde.u cp_kde.u cp_gnome.u NULL
---- oo_1.1_src/scp/util/makefile.mk.orig	2003-08-21 11:46:53.000000000 +0200
-+++ oo_1.1_src/scp/util/makefile.mk	2004-01-15 14:04:18.719375584 +0100
+--- scp/util/makefile.mk.orig	2003-08-21 11:46:53.000000000 +0200
++++ scp/util/makefile.mk	2004-01-15 14:04:18.719375584 +0100
 @@ -114,12 +114,9 @@
                  files_grafik.par        \
                  files_lingu.par         \
