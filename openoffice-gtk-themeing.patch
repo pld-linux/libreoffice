@@ -60,26 +60,26 @@ diff -u -p -u -r1.5 getstyle-gnome.c
  
          /* Enter the main event loop, and wait for user interaction */
          gtk_main ();
-Index: vcl/unx/source/gdi/getstyle/makefile.mk
-===================================================================
-RCS file: /cvs/gsl/vcl/unx/source/gdi/getstyle/makefile.mk,v
-retrieving revision 1.3
-diff -u -p -u -r1.3 makefile.mk
---- vcl/unx/source/gdi/getstyle/makefile.mk	27 Mar 2003 17:58:57 -0000	1.3
-+++ vcl/unx/source/gdi/getstyle/makefile.mk	13 May 2003 11:28:48 -0000
-@@ -95,10 +95,8 @@ HASGNOME2=TRUE
- 
- ALLTAR: $(BIN)$/getstyle-gnome
- 
--.IF "$(HASGNOME2)"=="TRUE"
--$(BIN)$/getstyle-gnome:
--        +$(COPY) $(GETSTYLE_GNOME) $@
--.ELSE
--$(BIN)$/getstyle-gnome:
--        +$(TOUCH) $@
--.ENDIF
-+$(BIN)$/getstyle-gnome: getstyle-gnome.c
-+	setenv UGLY_HACK_INDEED "$/LD_LIBRARY_PATH"; \
-+	unsetenv LD_LIBRARY_PATH; \
-+	$(CC) `pkg-config --cflags gtk+-2.0` `pkg-config --libs gtk+-2.0` -o $(BIN)$/getstyle-gnome getstyle-gnome.c; \
-+	setenv LD_LIBRARY_PATH "$/UGLY_HACK_INDEED"
+;Index: vcl/unx/source/gdi/getstyle/makefile.mk
+;===================================================================
+;RCS file: /cvs/gsl/vcl/unx/source/gdi/getstyle/makefile.mk,v
+;retrieving revision 1.3
+;diff -u -p -u -r1.3 makefile.mk
+;--- vcl/unx/source/gdi/getstyle/makefile.mk	27 Mar 2003 17:58:57 -0000	1.3
+;+++ vcl/unx/source/gdi/getstyle/makefile.mk	13 May 2003 11:28:48 -0000
+;@@ -95,10 +95,8 @@ HASGNOME2=TRUE
+; 
+; ALLTAR: $(BIN)$/getstyle-gnome
+; 
+;-.IF "$(HASGNOME2)"=="TRUE"
+;-$(BIN)$/getstyle-gnome:
+;-        +$(COPY) $(GETSTYLE_GNOME) $@
+;-.ELSE
+;-$(BIN)$/getstyle-gnome:
+;-        +$(TOUCH) $@
+;-.ENDIF
+;+$(BIN)$/getstyle-gnome: getstyle-gnome.c
+;+	setenv UGLY_HACK_INDEED "$/LD_LIBRARY_PATH"; \
+;+	unsetenv LD_LIBRARY_PATH; \
+;+	$(CC) `pkg-config --cflags gtk+-2.0` `pkg-config --libs gtk+-2.0` -o $(BIN)$/getstyle-gnome getstyle-gnome.c; \
+;+	setenv LD_LIBRARY_PATH "$/UGLY_HACK_INDEED"
