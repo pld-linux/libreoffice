@@ -4,6 +4,6 @@ Name=OpenOffice.org Printer Administration
 Name[de]=OpenOffice.org Drucker Verwaltung
 Name[pl]=Zarządzanie drukarkami OpenOffice.org
 Icon=ooo_printeradmin.png
-Exec=/usr/lib/openoffice/program/spadmin
+Exec=/usr/sbin/oopadmin
 Type=Application
 Categories=Settings;
