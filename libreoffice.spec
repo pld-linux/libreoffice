@@ -156,6 +156,8 @@ Requires:	libstdc++ < 3.2.1
 Requires:	db3
 %endif
 
+%define	_noautoprovfiles	libgcc_s.so.1
+
 %define	langs	"ENUS,FREN,GERM,SPAN,ITAL,DTCH,PORT,DAN,GREEK,POL,SWED,TURK,RUSS,CZECH"
 %define	apps	agenda calc draw fax impress label letter math master memo vcard web writer
 %define	wordbooks1	%{SOURCE201} %{SOURCE202} %{SOURCE203} %{SOURCE204} %{SOURCE205}
