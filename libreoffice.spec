@@ -26,7 +26,7 @@ BuildRequires:	db3-devel
 BuildRequires:	autoconf
 BuildRequires:	automake
 BuildRequires:	flex
-%{?!_with_ibm_java:BuildRequires: jdk = 1.3.1_01}
+%{?!_with_ibm_java:BuildRequires: jdk = 1.3.1_02-2}
 %{?_with_ibm_java:BuildRequires: ibm-java-sdk}
 %{?!_with_nest:BuildRequires:	gcc <= 3.0.0}
 %{?_with_nest:BuildRequires:	gcc2}
@@ -87,7 +87,7 @@ cd config_office
 autoconf
 
 
-%{?!_with_ibm_java:JAVA_HOME="/usr/lib/jdk1.3.1_01"}
+%{?!_with_ibm_java:JAVA_HOME="/usr/lib/jdk1.3.1_02"}
 %{?_with_ibm_java:JAVA_HOME="/usr/lib/IBMJava2-13"}
 %{?_with_nest:CC="gcc2"; CXX="g++2";}
 %configure \
