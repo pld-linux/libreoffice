@@ -17,9 +17,9 @@
 
 %define		ver		2.0
 %define		rel		0
-%define		ooobver		1.9.78.2
+%define		ooobver		1.9.79.1
 %define		snap		SRC680
-%define		bver		m78
+%define		bver		m79
 %define		subver		645
 
 %define		fullver		%{ver}.%{rel}
@@ -36,15 +36,17 @@ Epoch:		1
 License:	GPL/LGPL
 Group:		X11/Applications
 Source0:	http://go-ooo.org/packages/%{snap}/ooo-build-%{ooobver}.tar.gz
-# Source0-md5:	ab8edb5efe097728a6cae9af20424a09
+# Source0-md5:	56758ef028074fdcac9ba6aace970cc4
 Source1:	http://go-ooo.org/packages/%{snap}/%{ssnap}-%{bver}-core.tar.bz2
-# Source1-md5:	6a416b4027e6a926c6ae59a284ef353a
-Source2:	http://go-ooo.org/packages/%{snap}/ooo_custom_images-10.tar.bz2
-# Source2-md5:	2956ae858e74f705bd1b1c60dbb328f5
+# Source1-md5:	c6aca9d683a4a1e86e6f757ba66e1e80
+Source2:	http://go-ooo.org/packages/%{snap}/ooo_custom_images-11.tar.bz2
+# Source2-md5:	c60003db1d5d14000aab29f17b9a99aa
 Source3:	http://go-ooo.org/packages/%{snap}/ooo_crystal_images-3.tar.bz2
 # Source3-md5:	47db5393264b8b8c875b0a320da8d095
 Source4:	http://go-ooo.org/packages/%{snap}/extras-1.tar.bz2
 # Source4-md5:	c76b1c554529a37975d0149ca8647e7a
+Source5:	http://go-ooo.org/packages/libwpd/libwpd-0.8.0.tar.gz
+# Source5-md5:  c76b1c554529a37975d0149ca8647e7a
 Source10:	oocalc.desktop
 Source11:	oodraw.desktop
 Source12:	ooffice.desktop
@@ -1831,7 +1833,7 @@ zuluskim.
 
 install -d src
 # sources, icons, KDE_icons
-ln -sf %{SOURCE1} %{SOURCE2} %{SOURCE3} %{SOURCE4} src
+ln -sf %{SOURCE1} %{SOURCE2} %{SOURCE3} %{SOURCE4} %{SOURCE5} src
 # help files
 ln -sf %{SOURCE400} %{SOURCE401} %{SOURCE402} %{SOURCE403} %{SOURCE404} \
 	%{SOURCE405} %{SOURCE406} %{SOURCE407} %{SOURCE408} %{SOURCE409} \
