@@ -2,7 +2,6 @@
 #	- normal build requires little less than 4GB of disk space
 #	- full debug build requires about 9GB of disk space
 # TODO:
-#	- drop requirement on XFree86-static
 #	- drop requirement on nas-devel
 #	- fix locale names and other locale related things
 #	- --with-system-myspell + myspell package as in Debian
@@ -78,7 +77,6 @@ URL:		http://www.openoffice.org/
 BuildRequires:	ImageMagick
 BuildRequires:	STLport-devel >= 4.5.3-6
 BuildRequires:	XFree86-devel
-#BuildRequires:	XFree86-static
 BuildRequires:	autoconf
 BuildRequires:	automake
 BuildRequires:	bison >= 1.875-4
@@ -114,15 +112,17 @@ BuildRequires:	zlib-devel
 BuildRequires:	qt-devel
 BuildRequires:	kdelibs-devel
 BuildRequires:	gtk+2-devel
+# checked for by ooo-build configure, but not used now
+#BuildRequires:	evolution-data-server-devel >= 0.0.92
+#BuildRequires:	gnome-vfs2-devel >= 2.0
+#BuildRequires:	libxml2-devel >= 2.0
 BuildConflicts:	java-sun = 1.4.2
 Requires(post,postun):	fontpostinst
 Requires:	%{name}-libs = %{epoch}:%{version}-%{release}
 Requires:	%{name}-i18n-en = %{epoch}:%{version}-%{release}
 Requires:	cups-lib
 Requires:	db
-Requires:	db-cxx
 Requires:	libstdc++ >= 5:3.2.1
-Requires:	startup-notification
 ExclusiveArch:	%{ix86} sparc ppc
 #Suggested:	chkfontpath
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
@@ -173,8 +173,8 @@ Summary:	OpenOffice.org KDE Interface
 Summary(pl):	Interfejs KDE dla OpenOffice.org
 Group:		X11/Libraries
 Provides:	%{name}-libs-interface = %{epoch}:%{version}-%{release}
-Provides:	libvcl%{subver}li.so
-Obsoletes:	%{name}-libs-gtk
+#Provides:	libvcl%{subver}li.so
+#Obsoletes:	%{name}-libs-gtk
 Requires:	%{name}-libs = %{epoch}:%{version}-%{release}
 Requires(post,preun):	%{name}-libs = %{epoch}:%{version}-%{release}
 
@@ -189,8 +189,8 @@ Summary:	OpenOffice.org GTK Interface
 Summary(pl):	Interfejs GTK dla OpenOffice.org
 Group:		X11/Libraries
 Provides:	%{name}-libs-interface = %{epoch}:%{version}-%{release}
-Provides:	libvcl%{subver}li.so
-Obsoletes:	%{name}-libs-kde
+#Provides:	libvcl%{subver}li.so
+#Obsoletes:	%{name}-libs-kde
 Requires:	%{name}-libs = %{epoch}:%{version}-%{release}
 Requires(post,preun):	%{name}-libs = %{epoch}:%{version}-%{release}
 
@@ -1005,25 +1005,26 @@ TEMP="%{tmpdir}"; export TEMP
 #install -m755 build/OOO_%{dfullver}/vcl.gtk/unxlngi4.pro/bin/*-gnome \
 #	$RPM_BUILD_ROOT%{_libdir}/%{name}/program/
 
-#install -d helptmp && cd helptmp || exit 1
-#for file in \
-#	%{SOURCE400} %{SOURCE401} %{SOURCE402} %{SOURCE403} %{SOURCE404} %{SOURCE405} \
-#	%{SOURCE406} %{SOURCE407} %{SOURCE408} %{SOURCE409} %{SOURCE410}; do
-#		rm -rf *.*
-#		nr=$(echo "$file" | sed -e 's#.*_\(.*\)_.*#\1#g')
-#		lang=$(../bin/openoffice-xlate-lang -i "$nr")
-#		if [ -z "$lang" ]; then
-#			echo "Languge not found for [$file]"
-#			exit 1
-#		fi
-#		tar zxf "${file}"
-#		for ifile in s*.zip; do
-#			install -d $RPM_BUILD_ROOT%{_libdir}/%{name}/help/${lang}
-#			unzip -q -d $RPM_BUILD_ROOT%{_libdir}/%{name}/help/${lang} -o "$ifile"
-#		done
-#done
-#cd ..
+install -d helptmp && cd helptmp || exit 1
+for file in \
+	%{SOURCE400} %{SOURCE401} %{SOURCE402} %{SOURCE403} %{SOURCE404} %{SOURCE405} \
+	%{SOURCE406} %{SOURCE407} %{SOURCE408} %{SOURCE409} %{SOURCE410}; do
+		rm -rf *.*
+		nr=$(echo "$file" | sed -e 's#.*_\(.*\)_.*#\1#g')
+		lang=$(../bin/openoffice-xlate-lang -i "$nr")
+		if [ -z "$lang" ]; then
+			echo "Languge not found for [$file]"
+			exit 1
+		fi
+		tar zxf "${file}"
+		for ifile in s*.zip; do
+			install -d $RPM_BUILD_ROOT%{_libdir}/%{name}/help/${lang}
+			unzip -q -d $RPM_BUILD_ROOT%{_libdir}/%{name}/help/${lang} -o "$ifile"
+		done
+done
+cd ..
 
+install -d $RPM_BUILD_ROOT%{_sysconfdir}/%{name}
 sed -e 's#DESTINATIONPATH=.*#DESTINATIONPATH=<home>/.openoffice#g' etc/redhat-autoresponse.conf > $RPM_BUILD_ROOT%{_sysconfdir}/%{name}/autoresponse.conf
 
 install -d $RPM_BUILD_ROOT%{_desktopdir}
@@ -1089,38 +1090,38 @@ rm -f $RPM_BUILD_ROOT%{_libdir}/%{name}/program/libgcc_s.so* \
 	$RPM_BUILD_ROOT%{_libdir}/%{name}/program/libstdc++*so*
 
 # Find out locales
-#rm -f *.lang
-#langlist=""
-#for lang in $RPM_BUILD_ROOT%{_libdir}/%{name}/share/registry/res/*; do
-#	[ ! -d "$lang" ] && continue
-#	langlist="$langlist $(echo "$lang" | sed -e 's#.*/\(.*\)#\1#g')"
-#done
-#for lang in $RPM_BUILD_ROOT%{_libdir}/%{name}/help/*; do
-#	[ ! -d "$lang" ] && continue
-#	langlist="$langlist $(echo "$lang" | sed -e 's#.*/\(.*\)#\1#g')"
-#done
-#langlist=$(echo "$langlist" | tr ' ' '\n' | sort | uniq)
-#slanglist=$(echo "$langlist" | awk -F_ ' { print $1 } ' | awk -F- ' { print $1 } ' | sort | uniq | xargs)
-#
-#for lang in $slanglist; do
-#	echo "%%defattr(644,root,root,755)" >> ${lang}.lang
-#
-#	# help files
-#	if (ls $RPM_BUILD_ROOT%{_libdir}/%{name}/help/*${lang}* 2> /dev/null); then
-#		echo "%{_libdir}/%{name}/help/*${lang}*" >> ${lang}.lang
-#		perl -pi -e "s#.*%{_libdir}/%{name}/help/.*${lang}.*##g" build/lang_*_list.txt
-#	fi
-#
-#	# registry res
-#	if (ls $RPM_BUILD_ROOT%{_libdir}/%{name}/share/registry/res/*${lang}* 2> /dev/null); then
-#		echo "%{_libdir}/%{name}/share/registry/res/*${lang}*" >> ${lang}.lang
-#		perl -pi -e "s#.*%{_libdir}/%{name}/share/registry/res/.*${lang}.*##g" build/lang_*_list.txt
-#	fi
-#
-#	# files from lang_*_list.txt
-#	ls build/lang_${lang}*_list.txt 2> /dev/null && sed -e "s#$RPM_BUILD_ROOT##g" build/lang_${lang}*_list.txt >> ${lang}.lang || /bin/true
-#
-#done
+rm -f *.lang
+langlist=""
+for lang in $RPM_BUILD_ROOT%{_libdir}/%{name}/share/registry/res/*; do
+	[ ! -d "$lang" ] && continue
+	langlist="$langlist $(echo "$lang" | sed -e 's#.*/\(.*\)#\1#g')"
+done
+for lang in $RPM_BUILD_ROOT%{_libdir}/%{name}/help/*; do
+	[ ! -d "$lang" ] && continue
+	langlist="$langlist $(echo "$lang" | sed -e 's#.*/\(.*\)#\1#g')"
+done
+langlist=$(echo "$langlist" | tr ' ' '\n' | sort | uniq)
+slanglist=$(echo "$langlist" | awk -F_ ' { print $1 } ' | awk -F- ' { print $1 } ' | sort | uniq | xargs)
+
+for lang in $slanglist; do
+	echo "%%defattr(644,root,root,755)" >> ${lang}.lang
+
+	# help files
+	if (ls $RPM_BUILD_ROOT%{_libdir}/%{name}/help/*${lang}* 2> /dev/null); then
+		echo "%{_libdir}/%{name}/help/*${lang}*" >> ${lang}.lang
+		perl -pi -e "s#.*%{_libdir}/%{name}/help/.*${lang}.*##g" build/lang_*_list.txt
+	fi
+
+	# registry res
+	if (ls $RPM_BUILD_ROOT%{_libdir}/%{name}/share/registry/res/*${lang}* 2> /dev/null); then
+		echo "%{_libdir}/%{name}/share/registry/res/*${lang}*" >> ${lang}.lang
+		perl -pi -e "s#.*%{_libdir}/%{name}/share/registry/res/.*${lang}.*##g" build/lang_*_list.txt
+	fi
+
+	# files from lang_*_list.txt
+	ls build/lang_${lang}*_list.txt 2> /dev/null && sed -e "s#$RPM_BUILD_ROOT##g" build/lang_${lang}*_list.txt >> ${lang}.lang || /bin/true
+
+done
 
 # things not catched by automation above
 #echo "%{_libdir}/%{name}/program/resource/*%{subver}01.res" >> en.lang
@@ -1140,25 +1141,25 @@ fontpostinst TTF %{_fontsdir}/%{name}
 %postun
 fontpostinst TTF %{_fontsdir}/%{name}
 
-%post libs
-if [ -f %{_libdir}/%{name}/program/libvcl%{subver}li-kde.so ]; then
-	ln -sf libvcl%{subver}li-kde.so %{_libdir}/%{name}/program/libvcl%{subver}li.so
-fi
-if [ -f %{_libdir}/%{name}/program/libvcl%{subver}li-gtk.so ]; then
-	ln -sf libvcl%{subver}li-gtk.so %{_libdir}/%{name}/program/libvcl%{subver}li.so
-fi
+#%post libs
+#if [ -f %{_libdir}/%{name}/program/libvcl%{subver}li-kde.so ]; then
+#	ln -sf libvcl%{subver}li-kde.so %{_libdir}/%{name}/program/libvcl%{subver}li.so
+#fi
+#if [ -f %{_libdir}/%{name}/program/libvcl%{subver}li-gtk.so ]; then
+#	ln -sf libvcl%{subver}li-gtk.so %{_libdir}/%{name}/program/libvcl%{subver}li.so
+#fi
 
-%preun libs-kde
-rm -f %{_libdir}/%{name}/program/libvcl%{subver}li.so
+#%preun libs-kde
+#rm -f %{_libdir}/%{name}/program/libvcl%{subver}li.so
 
-%post libs-kde
-ln -sf libvcl%{subver}li-kde.so %{_libdir}/%{name}/program/libvcl%{subver}li.so
+#%post libs-kde
+#ln -sf libvcl%{subver}li-kde.so %{_libdir}/%{name}/program/libvcl%{subver}li.so
 
-%preun libs-gtk
-rm -f %{_libdir}/%{name}/program/libvcl%{subver}li.so
+#%preun libs-gtk
+#rm -f %{_libdir}/%{name}/program/libvcl%{subver}li.so
 
-%post libs-gtk
-ln -sf libvcl%{subver}li-gtk.so %{_libdir}/%{name}/program/libvcl%{subver}li.so
+#%post libs-gtk
+#ln -sf libvcl%{subver}li-gtk.so %{_libdir}/%{name}/program/libvcl%{subver}li.so
 
 %files
 %defattr(644,root,root,755)
@@ -1167,9 +1168,6 @@ ln -sf libvcl%{subver}li-gtk.so %{_libdir}/%{name}/program/libvcl%{subver}li.so
 
 %dir %{_sysconfdir}/openoffice
 %config %{_sysconfdir}/openoffice/autoresponse.conf
-
-%{_desktopdir}/*.desktop
-%{_pixmapsdir}/*.png
 
 %attr(755,root,root) %{_libdir}/%{name}/install-dict
 
@@ -1260,6 +1258,10 @@ ln -sf libvcl%{subver}li-gtk.so %{_libdir}/%{name}/program/libvcl%{subver}li.so
 %{_libdir}/%{name}/share/xslt
 %endif
 
+%{_desktopdir}/*.desktop
+%{_pixmapsdir}/*.png
+%{_mandir}/man1/openoffice.1*
+
 %files libs
 %defattr(644,root,root,755)
 %dir %{_libdir}/%{name}
@@ -1267,7 +1269,8 @@ ln -sf libvcl%{subver}li-gtk.so %{_libdir}/%{name}/program/libvcl%{subver}li.so
 %dir %{_libdir}/%{name}/program/filter
 
 %attr(755,root,root) %{_libdir}/%{name}/program/*.so
-%exclude %{_libdir}/%{name}/program/libvcl*.so
+%exclude %{_libdir}/%{name}/program/libvclplug_gtk*.so
+%exclude %{_libdir}/%{name}/program/libvclplug_kde*.so
 %attr(755,root,root) %{_libdir}/%{name}/program/*.so.*
 %attr(755,root,root) %{_libdir}/%{name}/program/filter/*.so
 
@@ -1277,13 +1280,13 @@ ln -sf libvcl%{subver}li-gtk.so %{_libdir}/%{name}/program/libvcl%{subver}li.so
 
 %files libs-kde
 %defattr(644,root,root,755)
-%attr(755,root,root) %{_libdir}/%{name}/program/libvcl*kde.so
+%attr(755,root,root) %{_libdir}/%{name}/program/libvclplug_kde*.so
 
 %files libs-gtk
 %defattr(644,root,root,755)
-%attr(755,root,root) %{_libdir}/%{name}/program/libvcl*gtk.so
-%attr(755,root,root) %{_libdir}/%{name}/program/getstyle-gnome
-%attr(755,root,root) %{_libdir}/%{name}/program/msgbox-gnome
+%attr(755,root,root) %{_libdir}/%{name}/program/libvclplug_gtk*.so
+#%attr(755,root,root) %{_libdir}/%{name}/program/getstyle-gnome
+#%attr(755,root,root) %{_libdir}/%{name}/program/msgbox-gnome
 
 %files mimelinks
 %defattr(644,root,root,755)
