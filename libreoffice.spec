@@ -166,6 +166,7 @@ Requires:	cups-lib
 Requires:	db
 Requires:	libstdc++ >= 5:3.2.1
 Requires:	mktemp
+Requires:	sed
 ExclusiveArch:	%{ix86} ppc sparc sparcv9
 #Suggested:	chkfontpath
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
