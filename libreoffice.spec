@@ -10,7 +10,7 @@ Summary:	OpenOffice - powerful office suite
 Summary(pl):	OpenOffice - potê¿ny pakiet biurowy
 Name:		openoffice
 Version:	1.0.2
-Release:	0.93
+Release:	0.94
 Epoch:		1
 License:	GPL/LGPL
 Group:		X11/Applications
@@ -119,6 +119,7 @@ BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 Requires:	%{name}-libs = %{version}-%{release}
 Requires:	%{name}-i18n-en = %{version}-%{release}
+Requires:	%{name}-dict-en
 %if %{?_with_ra:0}%{!?_with_ra:1}
 Requires:	libstdc++ >= 3.2.1
 Requires:	db
@@ -819,8 +820,13 @@ cp %{SOURCE11} $RPM_BUILD_ROOT%{dictlst}-readme
 rm -f $RPM_BUILD_ROOT%{dictlst}
 touch $RPM_BUILD_ROOT%{dictlst}
 
-# do not put these files: %{oolib}/share/dict/ooo/* into %files list
-# these files were moved to openoffice-dict packages!
+# remove files which we know that were moved to openoffice-dict.spec
+for file in en_US.aff en_US.dic hyph_da.dic hyph_de.dic hyph_en.dic \
+    hyph_ru.dic th_en_US.dat th_en_US.idx
+do
+    rm -f $RPM_BUILD_ROOT%{oolib}/share/dict/ooo/$file
+done
+
 
 ####################
 ## CLEAN
