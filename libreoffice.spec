@@ -1,16 +1,14 @@
-%define		extraversion	c
-
 Summary:	OpenOffice - powerful office suite
 Summary(pl):	OpenOffice - potê¿ny pakiet biurowy
 Name:		openoffice
-Version:	641
-Release:	2
+Version:	641c
+Release:	1
 Epoch:          1
 License:	GPL/LGPL
 Group:		X11/Applications
 Group(de):	X11/Applikationen
 Group(pl):	X11/Aplikacje
-Source0:	ftp://openoffice@ftp.ists.pwr.wroc.pl/sources/build%{version}%{extraversion}/oo_%{version}%{extraversion}_src.tar.bz2
+Source0:	ftp://openoffice@ftp.ists.pwr.wroc.pl/sources/build%{version}/oo_%{version}_src.tar.bz2
 Source1:	ftp://ftp.cs.man.ac.uk/pub/toby/gpc/gpc231.tar.Z
 Patch0:		%{name}-nostlport.patch
 Patch1:		%{name}-jdk_fix_for_x86.patch
