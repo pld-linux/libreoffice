@@ -274,7 +274,7 @@ Patch601:	%{name}-system-vera-fonts.patch
 Patch602:	%{name}-externalapp.patch
 
 URL:		http://www.openoffice.org/
-BuildRequires:  ImageMagick
+BuildRequires:	ImageMagick
 BuildRequires:	STLport-devel >= 4.5.3-6
 BuildRequires:	STLport-devel < 4.6
 BuildRequires:	XFree86-devel
@@ -305,8 +305,8 @@ BuildRequires:	zlib-devel
 # more and more...
 BuildRequires:	pkgconfig
 BuildRequires:	startup-notification-devel
-BuildRequires:  libart_lgpl-devel
-BuildRequires:  gtk+2-devel
+BuildRequires:	libart_lgpl-devel
+BuildRequires:	gtk+2-devel
 %if %{with gnomevfs} 
 BuildRequires:	gnome-vfs2-devel
 %endif 
@@ -1382,7 +1382,7 @@ rm -rf $RPM_BUILD_ROOT%{oolib}/share/icons
 # Fixup instdb.ins to get rid of $RPM_BUILD_ROOT
 perl -pi -e "s|$RPM_BUILD_ROOT||g" $RPM_BUILD_ROOT%{oolib}/program/instdb.ins
 perl -pi -e "/^Installation gid_Installation/ .. /^End/ and s|(SourcePath.*)=.*|\1= \"%{oolib}/program\";|" \
-  $RPM_BUILD_ROOT%{oolib}/program/instdb.ins
+    $RPM_BUILD_ROOT%{oolib}/program/instdb.ins
 
 # Disable desktop (KDE, GNOME, CDE) integration for user installs
 for module in GID_MODULE_OPTIONAL_GNOME gid_Module_Optional_Kde gid_Module_Optional_Cde; do
@@ -1625,7 +1625,7 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %dir %{oolib}
 %dir %{oolib}/program
-#%%dir %{oolib}/program/components   -- mozilla
+#%%dir %{oolib}/program/components -- mozilla
 %dir %{oolib}/program/filter
 
 %attr(755,root,root) %{oolib}/program/*.so
