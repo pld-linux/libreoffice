@@ -1064,7 +1064,10 @@ ln -s %{SOURCE21} src/openintro_pld.bmp
 
 %build
 # Make sure we have /proc mounted - otherwise idlc will fail later.
-[ -r /proc/version ] || exit 1
+if [ ! -r /proc/version ]; then
+	echo "You need to have /proc mounted in order to build this package!"
+	exit 1
+fi
 
 CC=%{__cc}
 CXX=%{__cxx}
@@ -1259,7 +1262,6 @@ echo "LANGLIST [$langlist]"
 echo "SLANGLIST [$slanglist]"
 
 for lang in $slanglist; do
-	# longlang=$(../bin/openoffice-xlate-lang -l "$lang" 2> /dev/null)
 	echo "%%defattr(644,root,root,755)" >> ${lang}.lang
 	# dictionaries
 	ls $RPM_BUILD_ROOT%{_libdir}/%{name}/share/dict/ooo/*${lang}* 2> /dev/null && echo "%%lang(${lang}) %{_libdir}/%{name}/share/dict/ooo/*${lang}*" >> ${lang}.lang
@@ -1275,6 +1277,12 @@ for lang in $slanglist; do
 	for olang in $otherlang; do
 		find $RPM_BUILD_ROOT -type d | grep -Ev "%{_libdir}/%{name}/(help|share/registry/res/)" | sed -e "s#$RPM_BUILD_ROOT##g" -e "s#\(.*/${otherlang}\)\$#%%lang(${lang}) \1#g" | grep -E '^%%lang' >> ${lang}.lang || /bin/true
 	done
+	# full lang name
+	longlang=$(./bin/openoffice-xlate-lang -l "$lang" 2> /dev/null || /bin/true)
+	if [ -n "$longlang" ]; then
+		longlang=$(echo "${longlang}" | sed -e 's#_.*##g')
+		find $RPM_BUILD_ROOT -type d -name "${longlang}*" -printf "%%%%lang(${lang}) %%p\n" | sed -e "s#$RPM_BUILD_ROOT##g" >> ${lang}.lang || /bin/true
+	fi
 done
 
 
@@ -1371,9 +1379,24 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_libdir}/%{name}/program/ooovirg
 %attr(755,root,root) %{_libdir}/%{name}/program/pagein*
 %attr(755,root,root) %{_libdir}/%{name}/program/python.sh
+%attr(755,root,root) %{_libdir}/%{name}/program/pythonloader.unorc
 %attr(755,root,root) %{_libdir}/%{name}/program/pyunorc
 %attr(755,root,root) %{_libdir}/%{name}/program/regcomp
-%attr(755,root,root) %{_libdir}/%{name}/program/s*
+%attr(755,root,root) %{_libdir}/%{name}/program/sagenda
+%attr(755,root,root) %{_libdir}/%{name}/program/scalc
+%attr(755,root,root) %{_libdir}/%{name}/program/sdraw
+%attr(755,root,root) %{_libdir}/%{name}/program/setup
+%attr(755,root,root) %{_libdir}/%{name}/program/sfax
+%attr(755,root,root) %{_libdir}/%{name}/program/simpress
+%attr(755,root,root) %{_libdir}/%{name}/program/slabel
+%attr(755,root,root) %{_libdir}/%{name}/program/sletter
+%attr(755,root,root) %{_libdir}/%{name}/program/smaster
+%attr(755,root,root) %{_libdir}/%{name}/program/smath
+%attr(755,root,root) %{_libdir}/%{name}/program/smemo
+%attr(755,root,root) %{_libdir}/%{name}/program/soffice
+%attr(755,root,root) %{_libdir}/%{name}/program/svcard
+%attr(755,root,root) %{_libdir}/%{name}/program/sweb
+%attr(755,root,root) %{_libdir}/%{name}/program/swriter
 %attr(755,root,root) %{_libdir}/%{name}/program/getstyle-gnome
 %attr(755,root,root) %{_libdir}/%{name}/program/msgbox-gnome
 %attr(755,root,root) %{_libdir}/%{name}/program/*.py
