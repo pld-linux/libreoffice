@@ -1,8 +1,0 @@
---- instsetoo/prj/build.lst.org	2004-03-30 08:45:34.000000000 +0000
-+++ instsetoo/prj/build.lst	2004-03-30 08:46:48.000000000 +0000
-@@ -1,3 +1,3 @@
--oo	instsetoo	:	UnoControls chaos configmgr cpputools dbaccess desktop eventattacher extensions extras fileaccess forms io package padmin readlicense_oo remotebridges scaddins scp shell ucb wizards officecfg xmlhelp helpcontent MathMLDTD dictionaries bitstream_vera_fonts filter psprint_config i18n_simple fpicker embedserv pyuno crashrep virgule NULL
-+oo	instsetoo	:	UnoControls chaos configmgr cpputools dbaccess desktop eventattacher extensions extras fileaccess forms io package readlicense_oo remotebridges scaddins scp shell ucb wizards officecfg xmlhelp helpcontent MathMLDTD dictionaries bitstream_vera_fonts filter psprint_config i18n_simple fpicker embedserv pyuno virgule NULL
- oo	instsetoo								usr1	-	all	oo_mkout NULL
- oo	instsetoo\util							nmake	-	all	oo_util NULL
-
