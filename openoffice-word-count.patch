@@ -1,0 +1,252 @@
+Index: sw/inc/cmdid.h
+===================================================================
+RCS file: /cvs/sw/sw/inc/cmdid.h,v
+retrieving revision 1.46
+diff -u -p -u -r1.46 cmdid.h
+--- sw/inc/cmdid.h	22 May 2003 08:40:37 -0000	1.46
++++ sw/inc/cmdid.h	31 Jul 2003 17:01:16 -0000
+@@ -749,6 +749,7 @@ Achtung: Ab sofort sind in diesem File k
+ #define FN_MACRO_POPUP				(FN_EXTRA + 37)   /* Alle Macrofunktionen */
+ #define FN_BULLET					(FN_EXTRA + 38)   /* Bullet-Liste */
+ 
++#define FN_WORD_COUNT_DLG                       (FN_EXTRA + 39)
+ 
+ //	Bereich: Gloassaries
+ 
+Index: sw/sdi/swriter.sdi
+===================================================================
+RCS file: /cvs/sw/sw/sdi/swriter.sdi,v
+retrieving revision 1.43
+diff -u -p -u -r1.43 swriter.sdi
+--- sw/sdi/swriter.sdi	22 May 2003 08:42:09 -0000	1.43
++++ sw/sdi/swriter.sdi	31 Jul 2003 17:01:17 -0000
+@@ -8482,6 +8482,29 @@ SfxBoolItem UnderlineDouble FN_UNDERLINE
+ ]
+ 
+ //--------------------------------------------------------------------------
++SfxVoidItem WordCount FN_WORD_COUNT_DLG
++()
++[
++	/* flags: */
++	AutoUpdate = FALSE,
++	Cachable = Cachable,
++	FastCall = FALSE,
++	HasCoreId = FALSE,
++	HasDialog = TRUE,
++	ReadOnlyDoc = TRUE,
++	Toggle = TRUE,
++	Container = FALSE,
++	Asynchron;
++
++	/* config: */
++	AccelConfig = TRUE,
++	MenuConfig = TRUE,
++	StatusBarConfig = FALSE,
++	ToolBoxConfig = TRUE,
++	GroupId = GID_DOCUMENT;
++]
++
++//--------------------------------------------------------------------------
+ SfxVoidItem UnhainFrames FN_FRAME_UNCHAIN
+ 
+ [
+Index: sw/sdi/swslots.src
+===================================================================
+RCS file: /cvs/sw/sw/sdi/swslots.src,v
+retrieving revision 1.109
+diff -u -p -u -r1.109 swslots.src
+--- sw/sdi/swslots.src	17 Jul 2003 11:48:28 -0000	1.109
++++ sw/sdi/swslots.src	31 Jul 2003 17:01:27 -0000
+@@ -3685,6 +3685,52 @@ SfxSlotInfo FN_HYPHENATE_OPT_DLG
+ 	SlotName[ hindi ] = "à¤¹à¤¾à¤‡à¤«à¤¨à¥‡à¤¶à¤¨";
+ 	SlotName[ slovak ] = "Delenie slov";
+ };
++SfxSlotInfo FN_WORD_COUNT_DLG
++{
++	SlotName = "Wörter zählen...";
++	SlotName[ arabic ] = "ÅÍÕÇÆíÇÊ";
++	SlotName[ english ] = "Word count";
++	SlotName[ english_us ] = "Word count";
++	SlotName[ catalan ] = "Comptador de paraules";
++	SlotName[ czech ] = "PoÄ?et slov";
++	SlotName[ danish ] = "OrdoptÃ¦lling";
++	SlotName[ greek ] = "Î?Ï?Î¯Î¸Î¼Î·Ï?Î· Î?Î­Î¾ÎµÏ?Î½";
++	SlotName[ spanish ] = "Contar palabras";
++	SlotName[ estonian ] = "SÃµnade arv";
++	SlotName[ finnish ] = "Laske sanat";
++	SlotName[ french ] = "Statistiques";
++	SlotName[ hindi ] = "à¤¶à¤¬à¥?à¤¦ à¤?à¤¿à¤¨à¥?à¤?";
++	SlotName[ italian ] = "Statistiche";
++	SlotName[ hungarian ] = "Szavak szÃ¡ma";
++	SlotName[ japanese ] = "ã?¯ã?¼ã??ã?«ã?¦ã?³ã??";
++	SlotName[ korean ] = "í?µê³?";
++	SlotName[ norwegian ] = "Ordtelling";
++	SlotName[ dutch ] = "Woorden tellen";
++	SlotName[ polish ] = "Liczba s³ów";
++	SlotName[ portuguese ] = "Contagem palavras";
++	SlotName[ portuguese_brazilian ] = "Contagem palavras";
++	SlotName[ russian ] = "Ð?Ð¾Ð»Ð¸Ñ?ÐµÑ?Ñ?Ð²Ð¾ Ñ?Ð»Ð¾Ð²";
++	SlotName[ slovak ] = "PoÄ?et slov";
++	SlotName[ swedish ] = "OrdrÃ¤kning";
++	SlotName[ turkish ] = "Ýstatistik";
++	SlotName[ chinese_simplified ] = "ç»?è®¡";
++	SlotName[ chinese_traditional ] = "çµ±è¨?";
++/*	--: "Word count" translations
++	az:	"KÉ?lmÉ? MiqdarÄ±"
++	bs:	"Zbir rijeÄ?i"
++	cy:	"Cyfrif geiriau"
++	eu:	"Hitz kopurua"
++	mk:	"Ð?Ñ?Ð¾ÐµÑ?Ðµ Ð½Ð° Ð·Ð±Ð¾Ñ?Ð¾Ð²Ð¸"
++	mt:	"GÄ§add taâ?? kliem"
++	ro:	"NumÄ?rÄ? cuvintele"
++	sl:	"Å tevilo besed"
++	sq:	"Llogariti fjalÃ«t"
++	ta:	"à®?à¯?à®²à¯? à®?à®£à¯?à®£à®¿"
++	uk:	"Ð?Ñ?Ð»Ñ?ÐºÑ?Ñ?Ñ?Ñ? Ñ?Ð»Ñ?Ð²"
++	vi:	"Ä?áº¿m tá»«"
++	wa:	"Contaedje des mots"
++*/
++};
+ SfxSlotInfo FN_IDX_MARK_TO_IDX
+ {
+ 	SlotName = "Indexmarke zum Index";
+Index: sw/sdi/viewsh.sdi
+===================================================================
+RCS file: /cvs/sw/sw/sdi/viewsh.sdi,v
+retrieving revision 1.9
+diff -u -p -u -r1.9 viewsh.sdi
+--- sw/sdi/viewsh.sdi	6 Dec 2002 13:58:48 -0000	1.9
++++ sw/sdi/viewsh.sdi	31 Jul 2003 17:01:27 -0000
+@@ -112,6 +112,12 @@ interface TextEditView : BaseTextEditVie
+ 		StateMethod = GetState ;
+ 		DisableFlags="SW_DISABLE_ON_PROTECTED_CURSOR";
+ 	]
++	FN_WORD_COUNT_DLG // status(final|play)
++	[
++		ExecMethod = ExecLingu ;
++		StateMethod = GetState ;
++		DisableFlags="SW_DISABLE_ON_PROTECTED_CURSOR";
++	];
+ 	FN_CHANGE_PAGENUM // status(final)
+ 	[
+ 		ExecMethod = ExecDlg ;
+Index: sw/source/ui/inc/swmn.hrc
+===================================================================
+RCS file: /cvs/sw/sw/source/ui/inc/swmn.hrc,v
+retrieving revision 1.133
+diff -u -p -u -r1.133 swmn.hrc
+--- sw/source/ui/inc/swmn.hrc	17 Jul 2003 11:58:11 -0000	1.133
++++ sw/source/ui/inc/swmn.hrc	31 Jul 2003 17:02:02 -0000
+@@ -7708,6 +7708,54 @@ MenuItem _MN_EXTRA
+ 				Text[ hindi ] = "~à¤¹à¤¾à¤‡à¤«à¤¨à¥‡à¤¶à¤¨...";
+ 				Text[ slovak ] = "~Delenie slov...";
+ 			};
++ 			MenuItem
++ 			{
++ 				Identifier = FN_WORD_COUNT_DLG ;
++ 				HelpID = FN_WORD_COUNT_DLG ;
++ 				Text = "Wörter zählen..." ;
++				Text [ arabic ] = "ÅÍÕÇÆíÇÊ...";
++				Text [ english ] = "Word count...";
++				Text [ english_us ] = "Word count...";
++				Text [ catalan ] = "Comptador de paraules...";
++				Text [ czech ] = "PoÄ?et slov...";
++				Text [ danish ] = "OrdoptÃ¦lling...";
++				Text [ greek ] = "Î?Ï?Î¯Î¸Î¼Î·Ï?Î· Î?Î­Î¾ÎµÏ?Î½...";
++				Text [ spanish ] = "Contar palabras...";
++				Text [ estonian ] = "SÃµnade arv...";
++				Text [ finnish ] = "Laske sanat...";
++				Text [ french ] = "Statistiques...";
++				Text [ hindi ] = "à¤¶à¤¬à¥?à¤¦ à¤?à¤¿à¤¨à¥?à¤?...";
++				Text [ italian ] = "Statistiche...";
++				Text [ hungarian ] = "Szavak szÃ¡ma...";
++				Text [ japanese ] = "ã?¯ã?¼ã??ã?«ã?¦ã?³ã??...";
++				Text [ korean ] = "í?µê³?...";
++				Text [ norwegian ] = "Ordtelling...";
++				Text [ dutch ] = "Woorden tellen...";
++				Text [ polish ] = "Liczba s³ów...";
++				Text [ portuguese ] = "Contagem palavras...";
++				Text [ portuguese_brazilian ] = "Contagem palavras...";
++				Text [ russian ] = "Ð?Ð¾Ð»Ð¸Ñ?ÐµÑ?Ñ?Ð²Ð¾ Ñ?Ð»Ð¾Ð²...";
++				Text [ slovak ] = "PoÄ?et slov...";
++				Text [ swedish ] = "OrdrÃ¤kning...";
++				Text [ turkish ] = "Ýstatistik...";
++				Text [ chinese_simplified ] = "ç»?è®¡...";
++				Text [ chinese_traditional ] = "çµ±è¨?...";
++/*				--: "Word count" translations
++				az:	"KÉ?lmÉ? MiqdarÄ±"
++				bs:	"Zbir rijeÄ?i"
++				cy:	"Cyfrif geiriau"
++				eu:	"Hitz kopurua"
++				mk:	"Ð?Ñ?Ð¾ÐµÑ?Ðµ Ð½Ð° Ð·Ð±Ð¾Ñ?Ð¾Ð²Ð¸"
++				mt:	"GÄ§add taâ?? kliem"
++				ro:	"NumÄ?rÄ? cuvintele"
++				sl:	"Å tevilo besed"
++				sq:	"Llogariti fjalÃ«t"
++				ta:	"à®?à¯?à®²à¯? à®?à®£à¯?à®£à®¿"
++				uk:	"Ð?Ñ?Ð»Ñ?ÐºÑ?Ñ?Ñ?Ñ? Ñ?Ð»Ñ?Ð²"
++				vi:	"Ä?áº¿m tá»«"
++				wa:	"Contaedje des mots"
++*/
++  			};
+ #endif
+ 			SEPARATOR ;
+ 			MenuItem
+Index: sw/source/ui/uiview/viewling.cxx
+===================================================================
+RCS file: /cvs/sw/sw/source/ui/uiview/viewling.cxx,v
+retrieving revision 1.13
+diff -u -p -u -r1.13 viewling.cxx
+--- sw/source/ui/uiview/viewling.cxx	17 Apr 2003 17:51:30 -0000	1.13
++++ sw/source/ui/uiview/viewling.cxx	7 Aug 2003 12:38:22 -0000
+@@ -105,6 +105,9 @@
+ #ifndef _SVX_DIALMGR_HXX //autogen
+ #include <svx/dialmgr.hxx>
+ #endif
++#ifndef _SFX_DINFDLG_HXX
++#include <sfx2/dinfdlg.hxx>
++#endif
+ #ifndef _SVX_LANGITEM_HXX
+ #include <svx/langitem.hxx>
+ #endif
+@@ -214,6 +217,40 @@ void SwView::ExecLingu(SfxRequest &rReq)
+ 		case FN_HYPHENATE_OPT_DLG:
+ 			HyphenateDocument();
+ 			break;
++	case FN_WORD_COUNT_DLG: {
++
++		SfxObjectShell *pObjectShell = GetObjectShell();
++		if (!pObjectShell)
++			break;
++
++		String aURL, aTitle;
++		SfxDocumentInfo *pTmpDocInfo = new SfxDocumentInfo;
++		*pTmpDocInfo = pObjectShell->GetDocInfo ();
++		pTmpDocInfo->SetReadOnly( true );
++		SfxDocumentInfoItem aDocInfoItem( aURL, *pTmpDocInfo );
++
++		SfxItemSet aSet(GetPool(), SID_DOCINFO, SID_DOCINFO,
++				SID_EXPLORER_PROPS_START, SID_EXPLORER_PROPS_START, 0L );
++		aSet.Put( aDocInfoItem );
++		aSet.Put( SfxStringItem( SID_EXPLORER_PROPS_START, aTitle ) );
++
++		// SwDocShell::CreateDocumentInfoDialog
++		SfxDocumentInfoDialog *pDlg = pObjectShell->CreateDocumentInfoDialog( 0, aSet );
++
++		pDlg->RemoveResetButton();
++		pDlg->RemoveTabPage( TP_DOCINFODESC );
++		pDlg->RemoveTabPage( TP_DOCINFODOC );
++		pDlg->RemoveTabPage( TP_DOCINFOUSER );
++		pDlg->RemoveTabPage( TP_DOCINFORELOAD );
++		pDlg->GetCancelButton().Hide();
++
++		pDlg->Execute(); // discard return value - it's irrelevant.
++
++		delete pDlg;
++		delete pTmpDocInfo;
++		break;
++	}
++		
+ 		default:
+ 			ASSERT(!this, falscher Dispatcher);
+ 			return;
