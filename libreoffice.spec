@@ -2,10 +2,13 @@
 #	- normal build requires little less than 4GB of disk space
 #	- full debug build requires about 9GB of disk space
 # TODO:
+#	- fix version on splash (currently 1.1.1, must be 1.1.2 or just 1.1)
 #	- drop requirement on nas-devel
 #	- fix locale names and other locale related things
 #	- --with-system-myspell + myspell package as in Debian
 #	- --with-system-neon - check compilation (works with 0.23 but not 0.24)
+#	- in gtk version menu highlight has almost the same colour as menu text
+#	- 6 user/config/*.so? files shared between -i18n-en and -i18n-sl
 
 # Conditional build:
 %bcond_with	java		# Java support
@@ -1223,7 +1226,7 @@ fontpostinst TTF %{_fontsdir}/%{name}
 %{_libdir}/%{name}/program/resource/iso%{subver}01.res
 
 %dir %{_libdir}/%{name}/help
-%{_libdir}/%{name}/help/en
+#%{_libdir}/%{name}/help/en
 %{_libdir}/%{name}/help/main_transform.xsl
 
 %dir %{_libdir}/%{name}/share
@@ -1231,7 +1234,10 @@ fontpostinst TTF %{_fontsdir}/%{name}
 %dir %{_libdir}/%{name}/share/autotext
 %{_libdir}/%{name}/share/basic
 %dir %{_libdir}/%{name}/share/bookmark
-%{_libdir}/%{name}/share/config
+%dir %{_libdir}/%{name}/share/config
+%{_libdir}/%{name}/share/config/symbol
+%{_libdir}/%{name}/share/config/webcast
+%{_libdir}/%{name}/share/config/*.xpm
 %dir %{_libdir}/%{name}/share/database
 %dir %{_libdir}/%{name}/share/dict
 %dir %{_libdir}/%{name}/share/dict/ooo
@@ -1239,7 +1245,7 @@ fontpostinst TTF %{_fontsdir}/%{name}
 %{_libdir}/%{name}/share/fonts
 %{_libdir}/%{name}/share/gallery
 %{_libdir}/%{name}/share/psprint
-%{_libdir}/%{name}/share/samples
+%dir %{_libdir}/%{name}/share/samples
 %dir %{_libdir}/%{name}/share/template
 %dir %{_libdir}/%{name}/share/wordbook
 %dir %{_libdir}/%{name}/share/wordbook/english
@@ -1251,19 +1257,27 @@ fontpostinst TTF %{_fontsdir}/%{name}
 %{_libdir}/%{name}/share/registry/data
 %{_libdir}/%{name}/share/registry/schema
 
-%{_libdir}/%{name}/share/autotext/english
-%{_libdir}/%{name}/share/template/english
+#%{_libdir}/%{name}/share/autotext/english
+# XXX: in ooo-build only template/english/wizard/bitmaps is in main?
+#%{_libdir}/%{name}/share/template/english
 %ghost %{_libdir}/%{name}/share/dict/ooo/dictionary.lst
 
 %dir %{_libdir}/%{name}/user
 %dir %{_libdir}/%{name}/user/autotext
 %{_libdir}/%{name}/user/basic
-%{_libdir}/%{name}/user/config
+%dir %{_libdir}/%{name}/user/config
+%{_libdir}/%{name}/user/config/autotbl.fmt
+%{_libdir}/%{name}/user/config/cmyk.soc
+%{_libdir}/%{name}/user/config/gallery.soc
+%{_libdir}/%{name}/user/config/html.soc
+%{_libdir}/%{name}/user/config/standard.so?
+%{_libdir}/%{name}/user/config/sun-color.soc
+%{_libdir}/%{name}/user/config/web.soc
 %{_libdir}/%{name}/user/database
 %{_libdir}/%{name}/user/gallery
 %{_libdir}/%{name}/user/psprint
 
-%{_libdir}/%{name}/user/autotext/english
+#%{_libdir}/%{name}/user/autotext/english
 
 # Programs
 %attr(755,root,root) %{_bindir}/oo*
