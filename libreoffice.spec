@@ -31,9 +31,8 @@ Epoch:		1
 License:	GPL/LGPL
 Group:		X11/Applications
 #Source0:	http://ooo.ximian.com/packages/OOO_%{dfullver}/ooo-build-%{ooobver}.tar.gz
-#Source0:	http://ooo.ximian.com/packages/snap/ooo-build-%{ooobver}-HEAD-20040731.tar.gz
-Source0:	ooo-build-%{ooobver}-20040824.tar.bz2
-# Source0-md5:	043ccc345b56d78c0b0524070e3dce3a
+Source0:	http://ooo.ximian.com/packages/snap/ooo-build-%{ooobver}-HEAD-20040824.tar.gz
+# Source0-md5:	8ac5e46b531d50e516fdad9e0e206044
 Source1:	http://ooo.ximian.com/packages/OOO_%{dfullver}/OOO_%{dfullver}.tar.bz2
 # Source1-md5:	627fbce603598a74f9be03f5a1da6d94
 Source2:	http://ooo.ximian.com/packages/ooo-icons-OOO_1_1-10.tar.gz
