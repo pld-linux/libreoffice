@@ -93,6 +93,8 @@ Source411:	%{cftp}/helpcontent/helpcontent_88_unix.tgz
 Source412:	%{cftp}/helpcontent/helpcontent_90_unix.tgz
 # Source412-md5:	9521a01c5817e87178f356762f8cdab5
 
+Patch0:		%{name}-pld.patch
+
 URL:		http://www.openoffice.org/
 BuildRequires:	ImageMagick
 BuildRequires:	STLport-devel >= 4.5.3-6
@@ -1833,6 +1835,7 @@ zuluskim.
 
 %prep
 %setup -q -n ooo-build-%{ooobver}
+%patch0 -p1
 
 install -d src
 # sources, icons, KDE_icons

@@ -1,26 +1,29 @@
-diff -urN ooo-build-1.9.78.org/bin/build-ooo ooo-build-1.9.78/bin/build-ooo
---- ooo-build-1.9.78.org/bin/build-ooo	2005-02-08 20:15:30.000000000 +0100
-+++ ooo-build-1.9.78/bin/build-ooo	2005-02-12 22:46:42.877076883 +0100
-@@ -6,7 +6,7 @@
- . ./setup
+diff -urN ooo-build-1.9.79.2.2.org/patches/src680/buildfix-lotus.diff ooo-build-1.9.79.2.2/patches/src680/buildfix-lotus.diff
+--- ooo-build-1.9.79.2.2.org/patches/src680/buildfix-lotus.diff	1970-01-01 01:00:00.000000000 +0100
++++ ooo-build-1.9.79.2.2/patches/src680/buildfix-lotus.diff	2005-03-21 19:57:47.508300824 +0100
+@@ -0,0 +1,13 @@
++diff -ur sc/source/filter/lotus/filter.cxx src680-m79/sc/source/filter/lotus/filter.cxx
++--- sc/source/filter/lotus/filter.cxx	2005-03-21 19:55:29.649258000 +0100
+++++ sc/source/filter/lotus/filter.cxx	2005-03-21 19:55:50.209133008 +0100
++@@ -71,7 +71,7 @@
++ 
++ #include <tools/solar.h>
++ #include <string.h>
++-#include <stl/map>
+++#include <map>
++ 
++ #include "filter.hxx"
++ #include "document.hxx"
++
+diff -urN ooo-build-1.9.79.2.2.org/patches/src680-m79/apply ooo-build-1.9.79.2.2/patches/src680-m79/apply
+--- ooo-build-1.9.79.2.2.org/patches/src680-m79/apply	2005-03-17 18:33:16.000000000 +0100
++++ ooo-build-1.9.79.2.2/patches/src680-m79/apply	2005-03-21 19:58:51.997496976 +0100
+@@ -81,6 +81,8 @@
+ # fixes size of some fields in the create table wizard, n#72184; it is already fixed in m84
+ # add a missing period i#45103
+ wizard-table-filed-sizes.diff
++# fix for lotus inclugin
++buildfix-lotus.diff
  
- if test "z$BUILD_WIN32" = "z"; then
--    if ! test -f /proc/kcore; then
-+    if ! test -f /proc/cpuinfo; then
-         echo "Looks like proc isn't mounted - this means almost certain"
-         echo "Java related weird build failure: please check /proc"
-         exit 1;
-diff -urN ooo-build-1.9.78.org/patches/src680-m78/apply ooo-build-1.9.78/patches/src680-m78/apply
---- ooo-build-1.9.78.org/patches/src680-m78/apply	2005-02-10 16:27:47.000000000 +0100
-+++ ooo-build-1.9.78/patches/src680-m78/apply	2005-02-12 22:26:54.861576226 +0100
-@@ -24,6 +24,10 @@
- Debian : DebianBase
- # Ark Linux
- Ark: LinuxCommon, 64bit, ArkOnly
-+# www.pld-linux.org
-+PLDBase: LinuxCommon, NonArkCommon
-+PLD: PLDBase
-+PLD64: PLDBase, 64bit
- # Win32
- Win32 : Win32Common, NovellOnly, NovellOnlyWin32
- 
+ [ Fixes ]
+ # fix the wizards crasher n#10512
