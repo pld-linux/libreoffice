@@ -10,7 +10,7 @@ Summary:	OpenOffice - powerful office suite
 Summary(pl):	OpenOffice - potê¿ny pakiet biurowy
 Name:		openoffice
 Version:	1.0.2
-Release:	0.94
+Release:	0.95.rc1
 Epoch:		1
 License:	GPL/LGPL
 Group:		X11/Applications
@@ -131,16 +131,16 @@ Requires:	db3
 # Languages (English and German are always built)
 # FIXME: split generation of language subpackages, otherwise rpm makes
 # a broken pipe
-%define languages1 "ENUS,FREN,GERM,SPAN,ITAL,DTCH,PORT,SWED,POL,RUSS"
-%define languages2 "DAN,GREEK,TURK,CHINSIM,CHINTRAD,JAPN,KOREAN,CZECH,CAT,FINN"
-%define languages3 "ARAB,SLOVAK"
-%define languages  "%{languages1},%{languages2},%{languages3}"
+%define languages1 ENUS,FREN,GERM,SPAN,ITAL,DTCH,PORT,SWED,POL,RUSS
+%define languages2 DAN,GREEK,TURK,CHINSIM,CHINTRAD,JAPN,KOREAN,CZECH,CAT,FINN
+%define languages3 ARAB,SLOVAK
+%define languages  %{languages1},%{languages2},%{languages3}
 
 # Supported languages for localized help files (others are not
 # complete/advanced enough)
-%define helplangs1 "ENUS,FREN,GERM,SPAN,ITAL,SWED,RUSS,FINN,CZECH,JAPN"
-%define helplangs2 "KOREAN,CHINSIM,CHINTRAD"
-%define helplangs  "%{helplangs1},%{helplangs2}"
+%define helplangs1 ENUS,FREN,GERM,SPAN,ITAL,SWED,RUSS,FINN,CZECH,JAPN
+%define helplangs2 KOREAN,CHINSIM,CHINTRAD
+%define helplangs  %{helplangs1},%{helplangs2}
 
 %define	apps	agenda calc draw fax impress label letter math master memo vcard web writer
 
@@ -473,7 +473,7 @@ autoconf
 %configure2_13 \
 	--with-jdk-home=$JAVA_HOME \
 	--with-stlport4-home=/usr \
-	--with-lang=%{languages} \
+	--with-lang="%{languages}" \
 	--with-x
 
 cd ..
@@ -574,20 +574,28 @@ for file in s*.zip; do
 done
 rm -f *.zip
 
+#
 # Extract language packs
-(cd %{installpath};
-  install -m 755 %{SOURCE302} oo_dpack_lang
-  install -m 755 %{SOURCE303} oo_fixup_help
-  install -m 755 %{SOURCE304} oo_gen_instdb
-  for res in `echo "%{languages}" | sed -e "s/,/ /g"`; do
-    prefix=`cat %{SOURCE9} | grep ":$res:" | cut -d: -f1`
-    isocode=`cat %{SOURCE9} | grep ":$res:" | cut -d: -f2`
-    tempdir=$RPM_BUILD_ROOT%{oolib}-$isocode
-    mkdir -p $tempdir
-    # may extract help files, if known to be localized enough
-    case ",%{helplangs}," in
-    *,$res,*)
-      ./oo_dpack_lang -d=$tempdir -i=$prefix/normal/setup.ins -h
+#
+(
+    cd %{installpath}
+    install -m 755 %{SOURCE302} oo_dpack_lang
+    install -m 755 %{SOURCE303} oo_fixup_help
+    install -m 755 %{SOURCE304} oo_gen_instdb
+    
+    LANGS=`echo "%{languages}" | sed -e "s/,/ /g"`
+    for res in $LANGS
+    do
+	prefix=`cat %{SOURCE9} | grep ":$res:" | cut -d: -f1`
+	isocode=`cat %{SOURCE9} | grep ":$res:" | cut -d: -f2`
+	tempdir=$RPM_BUILD_ROOT%{oolib}-$isocode
+	mkdir -p $tempdir
+
+	# may extract help files, if known to be localized enough
+	case ",%{helplangs}," in
+	*,$res,*)
+    	    ./oo_dpack_lang -d=$tempdir -i=$prefix/normal/setup.ins -h
+
 # TODO: Check this oo_fixup_help thing
 #      # fix permissions
 #      find $tempdir/help/$isocode -type d | xargs chmod 755
@@ -604,62 +612,73 @@ rm -f *.zip
 #      }
 #      ./oo_fixup_help $isocode orig.err.html >$tempdir/help/$isocode/err.html
 #      rm -f orig.err.html
-      find $tempdir/help/$isocode "(" -type f -or -type l ")" -print | \
-        sed -e "s|$RPM_BUILD_ROOT%{oolib}-$isocode|%{oolib}|g" > $FILELIST.help.$isocode.in
-      find $tempdir/help/$isocode -type d -print | \
-        sed -e "s|$RPM_BUILD_ROOT%{oolib}-$isocode|%dir %{oolib}|g" | sort -u >> $FILELIST.help.$isocode.in
-      # keep err.html and custom.css in main l10n package
-#      grep -v "help/$isocode\(\|/\(err.html\|custom.css\)\)$" $FILELIST.help.$isocode.in > $FILELIST.help.$isocode
-      rm -f $FILELIST.help.$isocode.in
-      ;;
-    *)
-      # default, create empty help directory
-      # NOTE: with Patch16 (help-fallback-en) we fallback to English help files
-      ./oo_dpack_lang -d=$tempdir -i=$prefix/normal/setup.ins
-      mkdir -p $tempdir/help/$isocode
-      ;;
-    esac
-    # link ooo resource files to iso files
-    (cd $tempdir/program/resource;
-      file=`echo ooo*.res`
-      ln -sf $file ${file/ooo/iso}
-    )
-    # generate localized instdb.ins files, aka let the right files to
-    # be installed for a user installation
-    [[ "$isocode" != "en" ]] && {
-      ./oo_gen_instdb -d $tempdir \
-        -i $prefix/normal/setup.ins \
-        -o $tempdir/program/instdb.ins.$isocode \
-        -pn "%{name}" -pv "%{version}"
-      perl -pi -e "s|$tempdir|%{oolib}|g" \
-        $tempdir/program/instdb.ins.$isocode
-    }
-    # build file list
-    find $tempdir "(" -type f -or -type l ")" -print | \
-      sed -e "s|$tempdir|%{oolib}|g" > $FILELIST.$isocode
-    find $tempdir -type d -print | \
-      sed -e "s|$tempdir|%dir %{oolib}|g" | sort -u >> $FILELIST.$isocode
-    # remove duplicates from l10n-en package
-    [[ "$isocode" != "en" ]] && {
-      mv $FILELIST.$isocode $FILELIST.$isocode.in
-      perl -e "sub cat_ { local *F; open F, \$_[0] or return; my @l = <F>; wantarray() ? @l : join '', @l };\
-       sub difference2 { my %l; @l{@{\$_[1]}} = (); grep { !exists \$l{\$_} } @{\$_[0]} };\
-       print difference2([ cat_(\"$FILELIST.$isocode.in\") ], [ cat_(\"$FILELIST.en\") ])"\
-        > $FILELIST.$isocode
-      rm -f $FILELIST.$isocode.in
-    }
-    # move files here and there
-    cp -af $tempdir/* $RPM_BUILD_ROOT%{oolib}/
-    rm -rf $tempdir
+	    find $tempdir/help/$isocode "(" -type f -or -type l ")" -print | \
+    		sed -e "s|$RPM_BUILD_ROOT%{oolib}-$isocode|%{oolib}|g" > $FILELIST.help.$isocode.in
+	    find $tempdir/help/$isocode -type d -print | \
+		sed -e "s|$RPM_BUILD_ROOT%{oolib}-$isocode|%dir %{oolib}|g" | sort -u >> $FILELIST.help.$isocode.in
+	    # keep err.html and custom.css in main l10n package
+#    	    grep -v "help/$isocode\(\|/\(err.html\|custom.css\)\)$" $FILELIST.help.$isocode.in > $FILELIST.help.$isocode
+	    rm -f $FILELIST.help.$isocode.in
+	    ;;
+	*)
+	    # default, create empty help directory
+	    # NOTE: with Patch16 (help-fallback-en) we fallback to English help files
+	    ./oo_dpack_lang -d=$tempdir -i=$prefix/normal/setup.ins
+	    mkdir -p $tempdir/help/$isocode
+	    ;;
+	esac
+
+	# link ooo resource files to iso files
+	(
+	    cd $tempdir/program/resource
+            file1=`echo ooo*.res`
+	    file2=`echo $file1 | sed "s|ooo|iso|"`
+	    ln -sf $file1 $file2
+	)
+
+	# generate localized instdb.ins files, aka let the right files to
+	# be installed for a user installation
+	if [ "$isocode" != "en" ]; then
+	    ./oo_gen_instdb -d $tempdir -i $prefix/normal/setup.ins \
+		-o $tempdir/program/instdb.ins.$isocode -pv "%{version}"
+	    perl -pi -e "s|$tempdir|%{oolib}|g" \
+		$tempdir/program/instdb.ins.$isocode
+	fi
+	
+	# build file list
+	find $tempdir "(" -type f -or -type l ")" -print | \
+	    sed -e "s|$tempdir|%{oolib}|g" > $FILELIST.$isocode
+	find $tempdir -type d -print | \
+	    sed -e "s|$tempdir|%dir %{oolib}|g" | sort -u >> $FILELIST.$isocode
+
+	# remove duplicates from l10n-en package
+	if [ "$isocode" != "en" ]; then
+	    mv $FILELIST.$isocode $FILELIST.$isocode.in
+	    perl -e "sub cat_ { local *F; open F, \$_[0] or return; my @l = <F>; wantarray() ? @l : join '', @l }; \
+		sub difference2 { my %l; @l{@{\$_[1]}} = (); grep { !exists \$l{\$_} } @{\$_[0]} }; \
+		print difference2([ cat_(\"$FILELIST.$isocode.in\") ], [ cat_(\"$FILELIST.en\") ])" \
+		> $FILELIST.$isocode
+	    rm -f $FILELIST.$isocode.in
+	fi
+
+	# move files here and there
+	cp -af $tempdir/* $RPM_BUILD_ROOT%{oolib}/
+	rm -rf $tempdir
     
-    HOWMUCH=`ls $RPM_BUILD_ROOT%{oolib}/help/$isocode 2>/dev/null | wc -l`
-    [ "$HOWMUCH" -eq 0 ] && rm -rf $RPM_BUILD_ROOT%{oolib}/help/$isocode
-  done
+	HOWMUCH=`ls $RPM_BUILD_ROOT%{oolib}/help/$isocode 2>/dev/null | wc -l`
+	if [ $HOWMUCH -eq 0 ]; then rm -rf $RPM_BUILD_ROOT%{oolib}/help/$isocode; fi
+    done
 )
 
+mv $RPM_BUILD_ROOT%{oolib}/help/{zh-CN,zh_CN}
+mv $RPM_BUILD_ROOT%{oolib}/help/{zh-TW,zh_TW}
+mv $RPM_BUILD_ROOT%{oolib}/program/instdb.ins.{zh-CN,zh_CN}
+mv $RPM_BUILD_ROOT%{oolib}/program/instdb.ins.{zh-TW,zh_TW}
+
 # Remove unnecessary binaries
-for app in %{apps} ; do
-  rm -f $RPM_BUILD_ROOT%{oolib}/program/s${app}
+for app in %{apps}
+do
+    rm -f $RPM_BUILD_ROOT%{oolib}/program/s${app}
 done
 
 install -d $RPM_BUILD_ROOT%{_applnkdir}
@@ -750,6 +769,7 @@ FindI18N() {
 #    $1 - short language name	eg. pl
 #    $2 - long language name	eg. polish
 #    $3 - digit code		eg. 48
+#    $4 - "strange" shortcut	eg. pol
 
     BUILDDIR=%(pwd)
 
@@ -759,6 +779,7 @@ FindI18N() {
     DIRS="$DIRS %{oolib}/share/autotext/$2"
     DIRS="$DIRS %{oolib}/share/template/$2"
     DIRS="$DIRS %{oolib}/help/$1"
+    DIRS="$DIRS	%{oolib}/share/wordbook/$2"
     
     for DIR in $DIRS
     do
@@ -767,6 +788,15 @@ FindI18N() {
 	fi
     done    
     
+    if [ "$1" = "en" ]; then
+        FILES=`(cd $RPM_BUILD_ROOT%{oolib}/user/config; ls 2>/dev/null | grep -v "_" | grep -v "registry" ||:)`
+    elif [ ! "$1" = "" ]; then
+	FILES=`(cd $RPM_BUILD_ROOT%{oolib}/user/config; ls 2>/dev/null | grep "_$4" ||:)`
+    fi	
+    for FILE in $FILES; do
+        echo "%lang($1) %{oolib}/user/config/$FILE" >> "i18n-$1"
+    done    
+
     SUBF="abp analysis basctl bib cal cnt date dba dbi dbp dbu"
     SUBF="$SUBF dbw dkt egi eme epb epg epn epp eps ept eur for"
     SUBF="$SUBF frm gal imp iso jvm lgd oem ofa oic ooo pcr preload"
@@ -795,26 +825,26 @@ FindI18N() {
     fi
 }
 
-FindI18N ar arabic 96
-FindI18N ca catalan 37
-FindI18N da danish 45
-FindI18N de german 49
-FindI18N es spanish 34
-FindI18N el greek 30
-FindI18N en english 01
-FindI18N fi finnish 35
-FindI18N fr french 33
-FindI18N it italian 39
-FindI18N ja japanese 81
-FindI18N ko korean 82
-FindI18N nl dutch 31
-FindI18N pl polish 48
-FindI18N pt portuguese 03
-FindI18N ru russian 07
-FindI18N sv swedish 46
-FindI18N tr turkish 90
-FindI18N zh_CN chinese_simplified 86
-FindI18N zh_TW chinese_traditional 88
+FindI18N ar arabic 96 ""
+FindI18N ca catalan 37 ""
+FindI18N da danish 45 ""
+FindI18N de german 49 ""
+FindI18N es spanish 34 ""
+FindI18N el greek 30 ""
+FindI18N en english 01 ""
+FindI18N fi finnish 35 ""
+FindI18N fr french 33 ""
+FindI18N it italian 39 ""
+FindI18N ja japanese 81 ""
+FindI18N ko korean 82 ""
+FindI18N nl dutch 31 ""
+FindI18N pl polish 48 "pol"
+FindI18N pt portuguese 03 ""
+FindI18N ru russian 07 "rus"
+FindI18N sv swedish 46 ""
+FindI18N tr turkish 90 ""
+FindI18N zh_CN chinese_simplified 86 ""
+FindI18N zh_TW chinese_traditional 88 ""
 
 cp %{SOURCE11} $RPM_BUILD_ROOT%{dictlst}-readme
 rm -f $RPM_BUILD_ROOT%{dictlst}
@@ -906,7 +936,7 @@ done
 %dir %{oolib}/user
 %dir %{oolib}/user/autotext
 %{oolib}/user/basic
-%{oolib}/user/config
+%{oolib}/user/config/registry
 %{oolib}/user/database
 %{oolib}/user/gallery
 %{oolib}/user/psprint
