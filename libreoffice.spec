@@ -47,8 +47,8 @@ Source12:	ooffice.desktop
 Source13:	ooglobal.desktop
 Source14:	ooimpress.desktop
 Source15:	oomath.desktop
-Source16:	ooooprinteradmin.desktop
-Source17:	oooosetup.desktop
+Source16:	ooprinteradmin.desktop
+Source17:	oosetup.desktop
 Source18:	ooweb.desktop
 Source19:	oowriter.desktop
 
