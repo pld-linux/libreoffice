@@ -16,7 +16,7 @@
 
 %define		ver		1.1
 %define		rel		2
-%define		ooobver		1.3.5
+%define		ooobver		1.3.5.2
 %define		subver		645
 %define		fullver		%{ver}.%{rel}
 %define		dfullver	%(echo %{fullver} | tr . _)
@@ -26,13 +26,13 @@ Summary:	OpenOffice - powerful office suite
 Summary(pl):	OpenOffice - potê¿ny pakiet biurowy
 Name:		openoffice
 Version:	%{fullver}
-Release:	4.1
+Release:	4.2
 Epoch:		1
 License:	GPL/LGPL
 Group:		X11/Applications
-#Source0:	http://ooo.ximian.com/packages/OOO_%{dfullver}/ooo-build-%{ooobver}.tar.gz
-Source0:	http://ooo.ximian.com/packages/snap/ooo-build-%{ooobver}-HEAD-20040920.tar.gz
-# Source0-md5:	6e530e0b26c12bb2f7fe0f65f73ffd80
+Source0:	http://ooo.ximian.com/packages/OOO_%{dfullver}/ooo-build-%{ooobver}.tar.gz
+# Source0-md5:	a2b37b6b69558ca984f007d7e2e46031
+#Source0:	http://ooo.ximian.com/packages/snap/ooo-build-%{ooobver}-HEAD-20040920.tar.gz
 #Source0:	ooo-build-%{ooobver}-20040902.tar.bz2
 Source1:	http://ooo.ximian.com/packages/OOO_%{dfullver}/OOO_%{dfullver}.tar.bz2
 # Source1-md5:	627fbce603598a74f9be03f5a1da6d94
