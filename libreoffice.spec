@@ -1194,7 +1194,6 @@ fontpostinst TTF %{_fontsdir}/%{name}
 # Programs
 %attr(755,root,root) %{_bindir}/oo*
 %attr(755,root,root) %{_libdir}/%{name}/program/*.bin
-%attr(755,root,root) %{_libdir}/%{name}/program/galeon-helper
 %if %{with java}
 %attr(755,root,root) %{_libdir}/%{name}/program/javaldx
 %attr(755,root,root) %{_libdir}/%{name}/program/jvmsetup
