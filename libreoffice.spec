@@ -13,7 +13,7 @@ Summary:	OpenOffice - powerful office suite
 Summary(pl):	OpenOffice - potê¿ny pakiet biurowy
 Name:		openoffice
 Version:	1.0.2
-Release:	0.86
+Release:	0.87
 Epoch:		1
 License:	GPL/LGPL
 Group:		X11/Applications
@@ -218,6 +218,9 @@ OpenOffice.org productivity suite - shared libraries.
 %description libs -l pl
 Pakiet biurowy OpenOffice.org - biblioteki.
 
+#
+# Internationalization
+#
 %package i18n-ar
 Summary:	OpenOffice.org internationalization
 Group:		Applications/Office
@@ -227,15 +230,6 @@ Requires:	openoffice
 OpenOffice.org is an Open Source, community-developed, multi-platform
 office productivity suite.  This package provides resources containing
 menus and dialogs for various languages.
-
-%package dict-bg
-Summary:	OpenOffice.org dictionary
-Group:		Applications/Office
-Requires:	openoffice
-
-%description dict-bg
-OpenOffice.org is an Open Source, community-developed, multi-platform
-office productivity suite.  This package provides spell checker dictionaries.
 
 %package i18n-ca
 Summary:	OpenOffice.org internationalization
@@ -247,24 +241,165 @@ OpenOffice.org is an Open Source, community-developed, multi-platform
 office productivity suite.  This package provides resources containing
 menus and dialogs for various languages.
 
-%package dict-ca
-Summary:	OpenOffice.org dictionary
+%package i18n-da
+Summary:	OpenOffice.org internationalization
 Group:		Applications/Office
 Requires:	openoffice
 
-%description dict-ca
+%description i18n-da
 OpenOffice.org is an Open Source, community-developed, multi-platform
-office productivity suite.  This package provides spell checker dictionaries.
+office productivity suite.  This package provides resources containing
+menus and dialogs for various languages.
 
-%package dict-cs
-Summary:	OpenOffice.org dictionary
+%package i18n-de
+Summary:	OpenOffice.org internationalization
 Group:		Applications/Office
 Requires:	openoffice
 
-%description dict-cs
+%description i18n-de
 OpenOffice.org is an Open Source, community-developed, multi-platform
-office productivity suite.  This package provides spell checker dictionaries.
+office productivity suite.  This package provides resources containing
+menus and dialogs for various languages.
 
+%package i18n-es
+Summary:	OpenOffice.org internationalization
+Group:		Applications/Office
+Requires:	openoffice
+
+%description i18n-es
+OpenOffice.org is an Open Source, community-developed, multi-platform
+office productivity suite.  This package provides resources containing
+menus and dialogs for various languages.
+
+%package i18n-el
+Summary:	OpenOffice.org internationalization
+Group:		Applications/Office
+Requires:	openoffice
+
+%description i18n-el
+OpenOffice.org is an Open Source, community-developed, multi-platform
+office productivity suite.  This package provides resources containing
+menus and dialogs for various languages.
+
+%package i18n-en
+Summary:	OpenOffice.org internationalization
+Group:		Applications/Office
+Requires:	openoffice
+
+%description i18n-en
+OpenOffice.org is an Open Source, community-developed, multi-platform
+office productivity suite.  This package provides resources containing
+menus and dialogs for various languages.
+
+%package i18n-fi
+Summary:	OpenOffice.org internationalization
+Group:		Applications/Office
+Requires:	openoffice
+
+%description i18n-fi
+OpenOffice.org is an Open Source, community-developed, multi-platform
+office productivity suite.  This package provides resources containing
+menus and dialogs for various languages.
+
+%package i18n-fr
+Summary:	OpenOffice.org internationalization
+Group:		Applications/Office
+Requires:	openoffice
+
+%description i18n-fr
+OpenOffice.org is an Open Source, community-developed, multi-platform
+office productivity suite.  This package provides resources containing
+menus and dialogs for various languages.
+
+%package i18n-it
+Summary:	OpenOffice.org internationalization
+Group:		Applications/Office
+Requires:	openoffice
+
+%description i18n-it
+OpenOffice.org is an Open Source, community-developed, multi-platform
+office productivity suite.  This package provides resources containing
+menus and dialogs for various languages.
+
+%package i18n-ja
+Summary:	OpenOffice.org internationalization
+Group:		Applications/Office
+Requires:	openoffice
+
+%description i18n-ja
+OpenOffice.org is an Open Source, community-developed, multi-platform
+office productivity suite.  This package provides resources containing
+menus and dialogs for various languages.
+
+%package i18n-ko
+Summary:	OpenOffice.org internationalization
+Group:		Applications/Office
+Requires:	openoffice
+
+%description i18n-ko
+OpenOffice.org is an Open Source, community-developed, multi-platform
+office productivity suite.  This package provides resources containing
+menus and dialogs for various languages.
+
+%package i18n-nl
+Summary:	OpenOffice.org internationalization
+Group:		Applications/Office
+Requires:	openoffice
+
+%description i18n-nl
+OpenOffice.org is an Open Source, community-developed, multi-platform
+office productivity suite.  This package provides resources containing
+menus and dialogs for various languages.
+
+%package i18n-pl
+Summary:	OpenOffice.org internationalization
+Group:		Applications/Office
+Requires:	openoffice
+
+%description i18n-pl
+OpenOffice.org is an Open Source, community-developed, multi-platform
+office productivity suite.  This package provides resources containing
+menus and dialogs for various languages.
+
+%package i18n-pt
+Summary:	OpenOffice.org internationalization
+Group:		Applications/Office
+Requires:	openoffice
+
+%description i18n-pt
+OpenOffice.org is an Open Source, community-developed, multi-platform
+office productivity suite.  This package provides resources containing
+menus and dialogs for various languages.
+
+%package i18n-ru
+Summary:	OpenOffice.org internationalization
+Group:		Applications/Office
+Requires:	openoffice
+
+%description i18n-ru
+OpenOffice.org is an Open Source, community-developed, multi-platform
+office productivity suite.  This package provides resources containing
+menus and dialogs for various languages.
+
+%package i18n-sv
+Summary:	OpenOffice.org internationalization
+Group:		Applications/Office
+Requires:	openoffice
+
+%description i18n-sv
+OpenOffice.org is an Open Source, community-developed, multi-platform
+office productivity suite.  This package provides resources containing
+menus and dialogs for various languages.
+
+%package i18n-tr
+Summary:	OpenOffice.org internationalization
+Group:		Applications/Office
+Requires:	openoffice
+
+%description i18n-tr
+OpenOffice.org is an Open Source, community-developed, multi-platform
+office productivity suite.  This package provides resources containing
+menus and dialogs for various languages.
 
 %package i18n-zh_CN
 Summary:	OpenOffice.org internationalization
@@ -286,15 +421,179 @@ OpenOffice.org is an Open Source, community-developed, multi-platform
 office productivity suite.  This package provides resources containing
 menus and dialogs for various languages.
 
-%package i18n-pl
-Summary:	OpenOffice.org internationalization
+#
+# Dictionaries
+#
+%package dict-bg
+Summary:	OpenOffice.org dictionary
 Group:		Applications/Office
 Requires:	openoffice
 
-%description i18n-pl
+%description dict-bg
 OpenOffice.org is an Open Source, community-developed, multi-platform
-office productivity suite.  This package provides resources containing
-menus and dialogs for various languages.
+office productivity suite.  This package provides spell checker dictionaries.
+
+%package dict-ca
+Summary:	OpenOffice.org dictionary
+Group:		Applications/Office
+Requires:	openoffice
+
+%description dict-ca
+OpenOffice.org is an Open Source, community-developed, multi-platform
+office productivity suite.  This package provides spell checker dictionaries.
+
+%package dict-cs
+Summary:	OpenOffice.org dictionary
+Group:		Applications/Office
+Requires:	openoffice
+
+%description dict-cs
+OpenOffice.org is an Open Source, community-developed, multi-platform
+office productivity suite.  This package provides spell checker dictionaries.
+
+%package dict-da
+Summary:	OpenOffice.org dictionary
+Group:		Applications/Office
+Requires:	openoffice
+
+%description dict-da
+OpenOffice.org is an Open Source, community-developed, multi-platform
+office productivity suite.  This package provides spell checker dictionaries.
+
+%package dict-de
+Summary:	OpenOffice.org dictionary
+Group:		Applications/Office
+Requires:	openoffice
+
+%description dict-de
+OpenOffice.org is an Open Source, community-developed, multi-platform
+office productivity suite.  This package provides spell checker dictionaries.
+
+%package dict-el
+Summary:	OpenOffice.org dictionary
+Group:		Applications/Office
+Requires:	openoffice
+
+%description dict-el
+OpenOffice.org is an Open Source, community-developed, multi-platform
+office productivity suite.  This package provides spell checker dictionaries.
+
+%package dict-en
+Summary:	OpenOffice.org dictionary
+Group:		Applications/Office
+Requires:	openoffice
+
+%description dict-en
+OpenOffice.org is an Open Source, community-developed, multi-platform
+office productivity suite.  This package provides spell checker dictionaries.
+
+%package dict-es
+Summary:	OpenOffice.org dictionary
+Group:		Applications/Office
+Requires:	openoffice
+
+%description dict-es
+OpenOffice.org is an Open Source, community-developed, multi-platform
+office productivity suite.  This package provides spell checker dictionaries.
+
+%package dict-fr
+Summary:	OpenOffice.org dictionary
+Group:		Applications/Office
+Requires:	openoffice
+
+%description dict-fr
+OpenOffice.org is an Open Source, community-developed, multi-platform
+office productivity suite.  This package provides spell checker dictionaries.
+
+%package dict-ga
+Summary:	OpenOffice.org dictionary
+Group:		Applications/Office
+Requires:	openoffice
+
+%description dict-ga
+OpenOffice.org is an Open Source, community-developed, multi-platform
+office productivity suite.  This package provides spell checker dictionaries.
+
+%package dict-gl
+Summary:	OpenOffice.org dictionary
+Group:		Applications/Office
+Requires:	openoffice
+
+%description dict-gl
+OpenOffice.org is an Open Source, community-developed, multi-platform
+office productivity suite.  This package provides spell checker dictionaries.
+
+%package dict-hr
+Summary:	OpenOffice.org dictionary
+Group:		Applications/Office
+Requires:	openoffice
+
+%description dict-hr
+OpenOffice.org is an Open Source, community-developed, multi-platform
+office productivity suite.  This package provides spell checker dictionaries.
+
+%package dict-hu
+Summary:	OpenOffice.org dictionary
+Group:		Applications/Office
+Requires:	openoffice
+
+%description dict-hu
+OpenOffice.org is an Open Source, community-developed, multi-platform
+office productivity suite.  This package provides spell checker dictionaries.
+
+%package dict-it
+Summary:	OpenOffice.org dictionary
+Group:		Applications/Office
+Requires:	openoffice
+
+%description dict-it
+OpenOffice.org is an Open Source, community-developed, multi-platform
+office productivity suite.  This package provides spell checker dictionaries.
+
+%package dict-la
+Summary:	OpenOffice.org dictionary
+Group:		Applications/Office
+Requires:	openoffice
+
+%description dict-la
+OpenOffice.org is an Open Source, community-developed, multi-platform
+office productivity suite.  This package provides spell checker dictionaries.
+
+%package dict-lt
+Summary:	OpenOffice.org dictionary
+Group:		Applications/Office
+Requires:	openoffice
+
+%description dict-lt
+OpenOffice.org is an Open Source, community-developed, multi-platform
+office productivity suite.  This package provides spell checker dictionaries.
+
+%package dict-nb
+Summary:	OpenOffice.org dictionary
+Group:		Applications/Office
+Requires:	openoffice
+
+%description dict-nb
+OpenOffice.org is an Open Source, community-developed, multi-platform
+office productivity suite.  This package provides spell checker dictionaries.
+
+%package dict-nl
+Summary:	OpenOffice.org dictionary
+Group:		Applications/Office
+Requires:	openoffice
+
+%description dict-nl
+OpenOffice.org is an Open Source, community-developed, multi-platform
+office productivity suite.  This package provides spell checker dictionaries.
+
+%package dict-nn
+Summary:	OpenOffice.org dictionary
+Group:		Applications/Office
+Requires:	openoffice
+
+%description dict-nn
+OpenOffice.org is an Open Source, community-developed, multi-platform
+office productivity suite.  This package provides spell checker dictionaries.
 
 %package dict-pl
 Summary:	OpenOffice.org dictionary
@@ -305,6 +604,59 @@ Requires:	openoffice
 OpenOffice.org is an Open Source, community-developed, multi-platform
 office productivity suite.  This package provides spell checker dictionaries.
 
+%package dict-pt
+Summary:	OpenOffice.org dictionary
+Group:		Applications/Office
+Requires:	openoffice
+
+%description dict-pt
+OpenOffice.org is an Open Source, community-developed, multi-platform
+office productivity suite.  This package provides spell checker dictionaries.
+
+%package dict-ru
+Summary:	OpenOffice.org dictionary
+Group:		Applications/Office
+Requires:	openoffice
+
+%description dict-ru
+OpenOffice.org is an Open Source, community-developed, multi-platform
+office productivity suite.  This package provides spell checker dictionaries.
+
+%package dict-sk
+Summary:	OpenOffice.org dictionary
+Group:		Applications/Office
+Requires:	openoffice
+
+%description dict-sk
+OpenOffice.org is an Open Source, community-developed, multi-platform
+office productivity suite.  This package provides spell checker dictionaries.
+
+%package dict-sl
+Summary:	OpenOffice.org dictionary
+Group:		Applications/Office
+Requires:	openoffice
+
+%description dict-sl
+OpenOffice.org is an Open Source, community-developed, multi-platform
+office productivity suite.  This package provides spell checker dictionaries.
+
+%package dict-sv
+Summary:	OpenOffice.org dictionary
+Group:		Applications/Office
+Requires:	openoffice
+
+%description dict-sv
+OpenOffice.org is an Open Source, community-developed, multi-platform
+office productivity suite.  This package provides spell checker dictionaries.
+
+%package dict-uk
+Summary:	OpenOffice.org dictionary
+Group:		Applications/Office
+Requires:	openoffice
+
+%description dict-uk
+OpenOffice.org is an Open Source, community-developed, multi-platform
+office productivity suite.  This package provides spell checker dictionaries.
 
 %prep
 %setup -q -n oo_%{version}_src
@@ -674,69 +1026,87 @@ FindI18N() {
     
     for DIR in $DIRS
     do
-	[ -d $DIR ] && echo "%lang($1) $DIR" >> "i18n-$1"
+	if [ -d "$RPM_BUILD_ROOT/$DIR" ]; then
+	    echo "%lang($1) $DIR" >> "i18n-$1"
+	fi
     done    
 }
 
 FindDict() {
 #    $1 - short language name	eg. pl
 #    $2 - long language name	eg. polish
-#    $3 - locale name (?)	eg. pl_PL
+#    $3... - locale name (?)	eg. pl_PL
 
     BUILDDIR=%(pwd)
+    LANG="$1"
 
-    echo "%defattr(644,root,root,755)" > "dict-$1"
-    
-    FILES="%{_libdir}/openoffice/share/dict/ooo/$3.dic"
-    FILES="$FILES %{_libdir}/openoffice/share/dict/ooo/$3.dic"
-    FILES="$FILES %{_libdir}/openoffice/share/dict/ooo/$3.aff"
-    FILES="$FILES %{_libdir}/openoffice/share/dict/ooo/hyph_$1.dic"
-    FILES="$FILES %{_libdir}/openoffice/share/dict/ooo/th_$3.dat"
-    FILES="$FILES %{_libdir}/openoffice/share/dict/ooo/th_$3.idx"
+    echo "%defattr(644,root,root,755)" > "dict-$LANG"
+
+    FILES="%{_libdir}/openoffice/share/dict/ooo/hyph_$LANG.dic"    
+    shift; shift
+    while test $# -gt 0; do
+	FILES="$FILES %{_libdir}/openoffice/share/dict/ooo/$1.dic"
+        FILES="$FILES %{_libdir}/openoffice/share/dict/ooo/$1.aff"
+        FILES="$FILES %{_libdir}/openoffice/share/dict/ooo/th_$1.dat"
+	FILES="$FILES %{_libdir}/openoffice/share/dict/ooo/th_$1.idx"
+	shift
+    done    
     
     for FILE in $FILES
     do
-	[ -f $FILE ] && echo "%lang($1) $FILE" >> "dict-$1"
+	if [ -f "$RPM_BUILD_ROOT/$FILE" ]; then
+	    echo "%lang($LANG) $FILE" >> "dict-$LANG"
+	fi
     done    
 }
 
 FindI18N ar arabic
-FindDict bg bulgarian bg_BG
 FindI18N ca catalan
-FindDict ca catalan ca_ES
-FindI18N zh_CN chinese_simplified
-FindI18N zh_TW chinese_traditional
-FindDict cs czech cs_CZ
 FindI18N da danish
-FindDict da danish da_DK
-FindI18N pl polish
-FindDict pl polish pl_PL
 FindI18N de german
-FindDict de_AT german de_AT
-FindDict de_CH german de_CH
-FindDict de_DE german de_DE
+FindI18N es spanish
 FindI18N el greek
-FindDict el greek el_GR
 FindI18N en english
-FindDict en_CA english en_CA
-FindDict en_GB english en_GB
-FindDict en_US english en_US
-FindDict en_ES english en_ES
 FindI18N fi finnish
 FindI18N fr french
+FindI18N it italian
+FindI18N ja japanese
+FindI18N ko korean
+FindI18N nl dutch
+FindI18N pl polish
+FindI18N pt portuguese
+FindI18N ru russian
+FindI18N sv swedish
+FindI18N tr turkish
+FindI18N zh_CN chinese_simplified
+FindI18N zh_TW chinese_traditional
+
+FindDict bg bulgarian bg_BG
+FindDict ca catalan ca_ES
+FindDict cs czech cs_CZ
+FindDict da danish da_DK
+FindDict de german de_AT de_CH de_DE
+FindDict el greek el_GR
+FindDict en english en_CA en_GB en_US en_ES
+FindDict es spanish es_ES
 FindDict fr french fr_FR
 FindDict ga irish ga_IE
-FindI18N nl dutch
 FindDict gl galician gl_ES
 FindDict hr croatian hr_HR
 FindDict hu hungarian hu_HU
-FindI18N it italian
 FindDict it italian it_IT
-FindI18N ja japanese
-FindI18N ko korean
-#!!!
 FindDict la dontknow la
 FindDict lt lithuanian lt_LT
+FindDict nb dontknow nb_NO
+FindDict nl dutch nl_NL
+FindDict nn norwegian_nynorsk nn_NO
+FindDict pl polish pl_PL
+FindDict pt portuguese pt_BR pt_PT
+FindDict ru russian ru_RU
+FindDict sk slovak sk_SK
+FindDict sl slovenian sl_SI
+FindDict sv swedish sv_SE
+FindDict uk ukrainian uk_UA
 
 %post
 
@@ -849,8 +1219,6 @@ fi
 %attr(755,root,root) %{_libdir}/openoffice/program/sopatchlevel.sh
 %attr(755,root,root) %{_libdir}/openoffice/program/spadmin
 
-# just temporary (dictionary list which should be autogenerated)
-%{_libdir}/openoffice/share/dict/ooo/dictionary.lst
 
 %files libs
 %defattr(644,root,root,755)
@@ -865,12 +1233,49 @@ fi
 %attr(755,root,root) %{_libdir}/openoffice/program/filter/*.so
 
 %files i18n-ar -f i18n-ar
-%files i18n-bg -f i18n-bg
 %files i18n-ca -f i18n-ca
-%files dict-ca -f dict-ca
-%files dict-cs -f dict-cs
-
+%files i18n-da -f i18n-da
+%files i18n-de -f i18n-de
+%files i18n-es -f i18n-es
+%files i18n-el -f i18n-el
+%files i18n-en -f i18n-en
+%files i18n-fi -f i18n-fi
+%files i18n-fr -f i18n-fr
+%files i18n-it -f i18n-it
+%files i18n-ja -f i18n-ja
+%files i18n-ko -f i18n-ko
+%files i18n-nl -f i18n-nl
 %files i18n-pl -f i18n-pl
-%files dict-pl -f dict-pl
+%files i18n-pt -f i18n-pt
+%files i18n-ru -f i18n-ru
+%files i18n-sv -f i18n-sv
+%files i18n-tr -f i18n-tr
 %files i18n-zh_CN -f i18n-zh_CN
 %files i18n-zh_TW -f i18n-zh_TW
+
+%files dict-bg -f dict-bg
+%files dict-ca -f dict-ca
+%files dict-cs -f dict-cs
+%files dict-da -f dict-da
+%files dict-de -f dict-de
+%files dict-el -f dict-el
+%files dict-en -f dict-en
+%files dict-es -f dict-es
+%files dict-fr -f dict-fr
+%files dict-ga -f dict-ga
+%files dict-gl -f dict-gl
+%files dict-hr -f dict-hr
+%files dict-hu -f dict-hu
+%files dict-it -f dict-it
+%files dict-la -f dict-la
+%files dict-lt -f dict-lt
+%files dict-nb -f dict-nb
+%files dict-nl -f dict-nl
+%files dict-nn -f dict-nn
+%files dict-pl -f dict-pl
+%files dict-pt -f dict-pt
+%files dict-ru -f dict-ru
+%files dict-sk -f dict-sk
+%files dict-sl -f dict-sl
+%files dict-sv -f dict-sv
+%files dict-uk -f dict-uk
