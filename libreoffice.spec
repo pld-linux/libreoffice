@@ -15,7 +15,7 @@ Summary:	OpenOffice - powerful office suite
 Summary(pl):	OpenOffice - potê¿ny pakiet biurowy
 Name:		openoffice
 Version:	1.0.2
-Release:	0.84
+Release:	0.85
 Epoch:		1
 License:	GPL/LGPL
 Group:		X11/Applications
@@ -685,7 +685,7 @@ fi
 %{_libdir}/openoffice/share/autotext/english
 %{_libdir}/openoffice/share/template/english
 %{_libdir}/openoffice/share/dict/ooo/*en*
-
+%{_libdir}/openoffice/share/dict/ooo/dictionary.lst
 
 %dir %{_libdir}/openoffice/user
 %dir %{_libdir}/openoffice/user/autotext
@@ -730,6 +730,7 @@ fi
 %defattr(644,root,root,755)
 %{_libdir}/openoffice/help/*
 %exclude %{_libdir}/openoffice/help/main_transform.xsl
+%exclude %{_libdir}/openoffice/share/dict/ooo/dictionary.lst
 %{_libdir}/openoffice/share/template/*
 %{_libdir}/openoffice/share/autotext/*
 %{_libdir}/openoffice/user/autotext/*
