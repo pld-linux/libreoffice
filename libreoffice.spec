@@ -33,10 +33,14 @@ BuildRequires:	db3-devel
 BuildRequires:	autoconf
 BuildRequires:	automake
 BuildRequires:	flex
-%{?!_with_ibm_java:BuildRequires: jdk = 1.3.1_02-2}
+%{?!_with_ibm_java:BuildRequires: jdk = 1.3.1_03}
 %{?_with_ibm_java:BuildRequires: ibm-java-sdk}
 %{?!_with_nest:BuildRequires:	gcc <= 3.0.0}
 %{?_with_nest:BuildRequires:	gcc2}
+%{?!_with_nest:BuildRequires:	gcc-c++ <= 3.0.0}
+%{?_with_nest:BuildRequires:	gcc2-c++}
+%{?!_with_nest:BuildRequires:	libstdc++-devel <= 3.0.0}
+%{?_with_nest:BuildRequires:	libstdc++2-devel}
 BuildRequires:	perl
 BuildRequires:	tcsh
 BuildRequires:	unzip
@@ -92,7 +96,7 @@ cd config_office
 #autoconf
 
 
-%{?!_with_ibm_java:JAVA_HOME="/usr/lib/jdk1.3.1_02"}
+%{?!_with_ibm_java:JAVA_HOME="/usr/lib/jdk1.3.1_03"}
 %{?_with_ibm_java:JAVA_HOME="/usr/lib/IBMJava2-13"}
 %configure2_13 \
 	--with-jdk-home=$JAVA_HOME \
