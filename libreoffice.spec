@@ -124,16 +124,15 @@ BuildRequires:	gcc
 BuildRequires:	gcc-c++
 #BuildRequires:	gcc-java
 
-BuildRequires:	STLport-static >= 4.5.3-3
+BuildRequires:	STLport-devel >= 4.5.3-3
 BuildRequires:	XFree86-devel
-BuildRequires:	XFree86-fonts-PEX
-BuildRequires:	XFree86-Xvfb
+#BuildRequires:	XFree86-fonts-PEX
+#BuildRequires:	XFree86-Xvfb
 BuildRequires:	autoconf
 BuildRequires:	automake
 BuildRequires:	bison
 BuildRequires:	flex
 BuildRequires:	freetype-devel >= 2.1
-BuildRequires:	freetype-static
 BuildRequires:	pam-devel
 BuildRequires:	perl
 BuildRequires:	tcsh
@@ -215,12 +214,11 @@ OpenOffice.org productivity suite - shared libraries.
 Pakiet biurowy OpenOffice.org - biblioteki.
 
 %prep
-CC=%{__cc}
-CXX=%{__cxx}
-GCJ=gcj
-export CC CXX GCJ
-
-%setup -q -n oo_%{version}_src
+#%setup -q -n oo_%{version}_src
+cd ../BUILD
+if [ -a oo_%{version}_src ]; then rm -rf oo_%{version}_src; fi;
+cp -r oo_%{version}_src.orig oo_%{version}_src
+cd oo_%{version}_src
 %patch0 -p1
 #%patch2 -p1
 
@@ -271,10 +269,14 @@ chmod +x solenv/bin/zipdep.pl
 ## BUILD
 ###################
 %build
+cd oo_%{version}_src
 #%{?!_with_ibm_java:JAVA_HOME="/usr/lib/jdk1.3.1_03"}
 #%{?_with_ibm_java:JAVA_HOME="/usr/lib/IBMJava2-13"}
+CC=%{__cc}
+CXX=%{__cxx}
+GCJ=gcj
 JAVA_HOME="/usr/lib/java"
-export JAVA_HOME
+export JAVA_HOME CC CXX GCJ
 
 cd config_office
 autoconf
