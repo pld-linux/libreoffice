@@ -1247,7 +1247,7 @@ for lang in $RPM_BUILD_ROOT%{_libdir}/%{name}/help/*; do
 	[ ! -d "$lang" ] && continue
         langlist="$langlist $(echo "$lang" | sed -e 's#.*/\(.*\)#\1#g' -e 's#-.*##g')"
 done
-langlist=$(echo "$langlist" | tr ' ' '\n' | sort | uniq | grep -v '^$')
+langlist=$(echo "$langlist" | tr ' ' '\n' | sort | uniq | xargs)
 echo "LANGLIST [$langlist]"
 
 for lang in $langlist; do
@@ -1255,7 +1255,7 @@ for lang in $langlist; do
 	# we take only first code ie xx_YY -> we take xx
 	nlang="$FLANG"
 	# nlonglang=$(../bin/openoffice-xlate-lang -l "$nlang" 2> /dev/null)
-	echo "%%defattr(644,root,root,755)" > ${nlang}.lang
+	echo "%%defattr(644,root,root,755)" >> ${nlang}.lang
 	# dictionaries
 	echo "%%lang(${nlang}) %{_libdir}/%{name}/share/dict/ooo/*${lang}*" >> ${nlang}.lang
 	# files from lang_*_list.txt
