@@ -14,7 +14,7 @@ Summary:	OpenOffice - powerful office suite
 Summary(pl):	OpenOffice - potê¿ny pakiet biurowy
 Name:		openoffice
 Version:	%{ver}
-Release:	0.%{rel}.1
+Release:	0.%{rel}.2
 Epoch:		1
 License:	GPL/LGPL
 Group:		X11/Applications
@@ -78,6 +78,7 @@ Patch7:		%{name}-freetype-2.1.patch
 # Fix broken makefiles
 Patch8:		%{name}-braindamage.patch
 # Fix config_office/configure
+Patch9:		%{name}-setup-localized-instdb.patch
 #Patch11:	%{name}-ac.patch
 
 # Hackery around zipdep
@@ -696,6 +697,7 @@ chiñskim dla Tajwanu.
 %patch4 -p1
 %patch5 -p1
 %patch7 -p1
+#%patch9 -p1
 
 # Is gpc used at all?? :
 %patch16 -p1
@@ -808,8 +810,9 @@ for i in $DIRS; do
     fi
 done
 
-cat $TMPFILE | awk ' $1 ~ /Value/ { l=$0; sub(/^.*= "/,"",l); sub(/";.*$/,"",l); sub(/%PRODUCTNAME/,"OpenOffice.org",l); sub(/%PRODUCTVERSION/,"%{version}",l); n=n+1; str="@@REPLACEME" n "@@"; s="\"" str "\""; sub(/".*"/,s); printf "s|%s|%s|\n", str, l > "Common.xml.sed" } { print } ' \
-    >> setup.ins
+#cat $TMPFILE | awk ' $1 ~ /Value/ { l=$0; sub(/^.*= "/,"",l); sub(/";.*$/,"",l); sub(/%PRODUCTNAME/,"OpenOffice.org",l); sub(/%PRODUCTVERSION/,"%{version}",l); n=n+1; str="@@REPLACEME" n "@@"; s="\"" str "\""; sub(/".*"/,s); printf "s|%s|%s|\n", str, l > "Common.xml.sed" } { print } ' \
+#    >> setup.ins
+cat $TMPFILE >> setup.ins
 
 if [ -z "$DISPLAY" ]; then
 	DISPLAY=:$XDISPLAY ./setup -R:$RESPONSE_FILE
@@ -822,8 +825,13 @@ cd $OOBUILDDIR
 ### end of installation
 
 # Copy all localized resources to destination directory
-install -d $RPM_BUILD_ROOT%{oolib}/program/resource
-cp -f solver/%{subver}/%{_archbuilddir}/bin/*.res $RPM_BUILD_ROOT%{oolib}/program/resource
+FILES=`find solver/%{subver}/%{_archbuilddir}/bin/ -name "*.res" -maxdepth 1 -printf "%%P "`
+for FILE in $FILES
+do
+    [ ! -f $RPM_BUILD_ROOT%{oolib}/program/resource/$FILE ] && \
+	cp solver/%{subver}/%{_archbuilddir}/bin/$FILE \
+	    $RPM_BUILD_ROOT%{oolib}/program/resource
+done
 
 LANGUAGES="%{ARAB} %{CAT} %{CZECH} %{DAN} %{GERM} %{GREEK} %{ENUS}"
 LANGUAGES="$LANGUAGES %{SPAN} %{FINN} %{FREN} %{ITAL} %{JAPN}"
@@ -843,108 +851,69 @@ do
 done
 
 for file in s*.zip; do
-  dir=`echo $file | sed -e "s/\(s[a-z]*\)[0-9]*.zip/\1/"`
-  [[ "$dir" = "shared" ]] && dir="common"
-  prefix=`echo $file | sed -e "s/s[a-z]*\([0-9]*\).zip/\1/"`
-  langname=`cat %{SOURCE9} | grep ^$prefix | cut -d: -f2`
-  install -d $RPM_BUILD_ROOT%{oolib}/help/$langname
-  unzip -d $RPM_BUILD_ROOT%{oolib}/help/$langname -o $file
+    dir=`echo $file | sed -e "s/\(s[a-z]*\)[0-9]*.zip/\1/"`
+    [[ "$dir" = "shared" ]] && dir="common"
+    prefix=`echo $file | sed -e "s/s[a-z]*\([0-9]*\).zip/\1/"`
+    langname=`cat %{SOURCE9} | grep ^$prefix | cut -d: -f2`
+    install -d $RPM_BUILD_ROOT%{oolib}/help/$langname
+    unzip -d $RPM_BUILD_ROOT%{oolib}/help/$langname -o $file
 done
 rm -f *.zip
 
-#
-# Extract language packs
-#
-OLDPWD=`pwd`
-
-    cd %{installpath}
-    install -m 755 %{SOURCE302} oo_dpack_lang
-    install -m 755 %{SOURCE303} oo_fixup_help
-    install -m 755 %{SOURCE304} oo_gen_instdb
+### Extract language packs
+cd %{installpath}
+install -m 755 %{SOURCE302} oo_dpack_lang
+install -m 755 %{SOURCE303} oo_fixup_help
+install -m 755 %{SOURCE304} oo_gen_instdb
     
-    for res in $LANGUAGES
-    do
-	prefix=`cat %{SOURCE9} | grep ":$res:" | cut -d: -f1`
-	isocode=`cat %{SOURCE9} | grep ":$res:" | cut -d: -f2`
-	tempdir=$RPM_BUILD_ROOT%{oolib}-$isocode
-	mkdir -p $tempdir
+for res in $LANGUAGES
+do
+    prefix=`cat %{SOURCE9} | grep ":$res:" | cut -d: -f1`
+    isocode=`cat %{SOURCE9} | grep ":$res:" | cut -d: -f2`
+    tempdir=$RPM_BUILD_ROOT%{oolib}-$isocode
+    mkdir -p $tempdir
 
-	# may extract help files, if known to be localized enough
-	case ",%{helplangs}," in
-	*,$res,*)
-    	    ./oo_dpack_lang -d=$tempdir -i=$prefix/normal/setup.ins -h
+# may extract help files, if known to be localized enough
+    case ",%{helplangs}," in
+    *,$res,*)
+	./oo_dpack_lang -d=$tempdir -i=$prefix/normal/setup.ins -h
+	;;
+    *)
+	./oo_dpack_lang -d=$tempdir -i=$prefix/normal/setup.ins
+	mkdir -p $tempdir/help/$isocode
+	;;
+    esac
 
-# TODO: Check this oo_fixup_help thing
-#      # fix permissions
-#      find $tempdir/help/$isocode -type d | xargs chmod 755
-#      find $tempdir/help/$isocode -type f | xargs chmod 644
-#      # transmute error file to suggest installation of
-#      # OpenOffice.org-help-* package
-#      mv -f $tempdir/help/$isocode/err.html orig.err.html
-#      # nuke broken <meta http-equiv="..."/> tag and entities in
-#      # Finnish err.html
-#      [[ "$isocode" = "fi" ]] && {
-#        perl -pi -MEncode -MHTML::Entities -pi \
-#             -e 's/<meta\s+http-equiv=[^>]+>//i;' \
-#             -e '$_=Encode::encode_utf8 decode_entities $_' orig.err.html
-#      }
-#      ./oo_fixup_help $isocode orig.err.html >$tempdir/help/$isocode/err.html
-#      rm -f orig.err.html
-	    find $tempdir/help/$isocode "(" -type f -or -type l ")" -print | \
-    		sed -e "s|$RPM_BUILD_ROOT%{oolib}-$isocode|%{oolib}|g" > $FILELIST.help.$isocode.in
-	    find $tempdir/help/$isocode -type d -print | \
-		sed -e "s|$RPM_BUILD_ROOT%{oolib}-$isocode|%dir %{oolib}|g" | sort -u >> $FILELIST.help.$isocode.in
-	    # keep err.html and custom.css in main l10n package
-#    	    grep -v "help/$isocode\(\|/\(err.html\|custom.css\)\)$" $FILELIST.help.$isocode.in > $FILELIST.help.$isocode
-	    rm -f $FILELIST.help.$isocode.in
-	    ;;
-	*)
-	    # default, create empty help directory
-	    # NOTE: with Patch16 (help-fallback-en) we fallback to English help files
-	    ./oo_dpack_lang -d=$tempdir -i=$prefix/normal/setup.ins
-	    mkdir -p $tempdir/help/$isocode
-	    ;;
-	esac
+# link ooo resource files to iso files
+    file1=`find $tempdir/program/resource -name "ooo*.res" -printf "%%P"`
+    file2=`echo $file1 | sed "s|ooo|iso|"`
+    ln -sf $tempdir/program/resource/{$file1,$file2}
 
-	# link ooo resource files to iso files
-        file1=`find $tempdir/program/resource -name "ooo*.res" -printf "%%P"`
-	file2=`echo $file1 | sed "s|ooo|iso|"`
-	ln -sf $tempdir/program/resource/{$file1,$file2}
-
-	# generate localized instdb.ins files, aka let the right files to
-	# be installed for a user installation
-	if [ "$isocode" != "en" ]; then
-	    ./oo_gen_instdb -d $tempdir -i $prefix/normal/setup.ins \
-		-o $tempdir/program/instdb.ins.$isocode -pv "%{version}"
-	    perl -pi -e "s|$tempdir|%{oolib}|g" \
-		$tempdir/program/instdb.ins.$isocode
-	fi
+# generate localized instdb.ins files, aka let the right files to
+# be installed for a user installation
+    if [ "$isocode" != "en" ]; then
+	./oo_gen_instdb -d $tempdir -i $prefix/normal/setup.ins \
+    	    -o $tempdir/program/instdb.ins.$isocode -pv "%{version}"
+        perl -pi -e "s|$tempdir|%{oolib}|g" \
+	    $tempdir/program/instdb.ins.$isocode
+    fi
 	
-	# build file list
-	find $tempdir "(" -type f -or -type l ")" -print | \
-	    sed -e "s|$tempdir|%{oolib}|g" > $FILELIST.$isocode
-	find $tempdir -type d -print | \
-	    sed -e "s|$tempdir|%dir %{oolib}|g" | sort -u >> $FILELIST.$isocode
-
-	# remove duplicates from l10n-en package
-	if [ "$isocode" != "en" ]; then
-	    mv $FILELIST.$isocode $FILELIST.$isocode.in
-	    perl -e "sub cat_ { local *F; open F, \$_[0] or return; my @l = <F>; wantarray() ? @l : join '', @l }; \
-		sub difference2 { my %l; @l{@{\$_[1]}} = (); grep { !exists \$l{\$_} } @{\$_[0]} }; \
-		print difference2([ cat_(\"$FILELIST.$isocode.in\") ], [ cat_(\"$FILELIST.en\") ])" \
-		> $FILELIST.$isocode
-	    rm -f $FILELIST.$isocode.in
+# move files here and there
+    FILES=`find $tempdir -type f -printf "%%P "`
+    for FILE in $FILES
+    do
+	if [ ! -f $RPM_BUILD_ROOT%{oolib}/$FILE ]; then
+	    DIR=`dirname $FILE`
+	    mkdir -p $RPM_BUILD_ROOT%{oolib}/$DIR
+	    cp $tempdir/$FILE $RPM_BUILD_ROOT%{oolib}/$FILE
 	fi
-
-	# move files here and there
-	cp -af $tempdir/* $RPM_BUILD_ROOT%{oolib}/
-	rm -rf $tempdir
-    
-	HOWMUCH=`ls $RPM_BUILD_ROOT%{oolib}/help/$isocode 2>/dev/null | wc -l`
-	if [ $HOWMUCH -eq 0 ]; then rm -rf $RPM_BUILD_ROOT%{oolib}/help/$isocode; fi
     done
-
-cd $OLDPWD
+    rm -rf $tempdir
+    
+    HOWMUCH=`ls $RPM_BUILD_ROOT%{oolib}/help/$isocode 2>/dev/null | wc -l`
+    if [ $HOWMUCH -eq 0 ]; then rm -rf $RPM_BUILD_ROOT%{oolib}/help/$isocode; fi
+done
+cd $OOBUILDDIR
 
 mv $RPM_BUILD_ROOT%{oolib}/help/{zh-CN,zh_CN}
 mv $RPM_BUILD_ROOT%{oolib}/help/{zh-TW,zh_TW}
@@ -977,15 +946,6 @@ rm -rf $RPM_BUILD_ROOT%{oolib}/share/kde
 rm -rf $RPM_BUILD_ROOT%{oolib}/share/cde
 rm -rf $RPM_BUILD_ROOT%{oolib}/share/gnome
 rm -rf $RPM_BUILD_ROOT%{oolib}/share/icons
-
-## Now fixup Common.xml
-#COMMON_XML_SED=$PWD/%{installpath}/%{langinst}/normal/Common.xml.sed
-#OLDPATH="`pwd`"
-#cd $RPM_BUILD_ROOT%{oolib}/share/config/registry/instance/org/openoffice/Office/
-#  sed -e "s|<cfg:string cfg:type=\"string\" cfg:name=\"\([^\"]*\)\"\(>@@REPLACEME.*@@</cfg:\)string>|<cfg:value xml:lang=\"\1\"\2value>|" Common.xml > Common.xml.tmp
-#  sed -f $COMMON_XML_SED Common.xml.tmp > Common.xml
-#  rm -f Common.xml.tmp
-#cd "$OLDPATH"
 
 # Fixup instdb.ins to get rid of $RPM_BUILD_ROOT
 perl -pi -e "s|$RPM_BUILD_ROOT||g" $RPM_BUILD_ROOT%{oolib}/program/instdb.ins
@@ -1021,14 +981,6 @@ install -d $RPM_BUILD_ROOT%{_bindir}
 for app in %{apps}; do
   cat %{SOURCE8} | sed -e "s/@APP@/${app}/" > $RPM_BUILD_ROOT%{_bindir}/oo${app}
 done
-
-## Install new template and gallery content
-#mkdir -p $RPM_BUILD_ROOT%{oolib}/share/template
-#mkdir -p $RPM_BUILD_ROOT%{oolib}/share/gallery
-#(cd $RPM_BUILD_ROOT%{oolib}/share;
-#  tar fxvj %{SOURCE10}
-#  tar fxvj %{SOURCE11}
-#)
 
 echo 'UNO_WRITERDB=$SYSUSERCONFIG/.user60.rdb
 ' >> $RPM_BUILD_ROOT%{oolib}/program/unorc
