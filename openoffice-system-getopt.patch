@@ -8,38 +8,6 @@
  APP3DEPN=   $(OBJ)$/ldump.obj $(OBJ)$/hashtbl.obj
  
  #APP4TARGET=	readmap
---- oo_1.0_src/tools/bootstrp/cprjexe.cxx.systemgo	Fri Oct 20 17:02:47 2000
-+++ oo_1.0_src/tools/bootstrp/cprjexe.cxx	Sun Jun  2 19:29:10 2002
-@@ -62,23 +62,23 @@
- #ifdef WNT
- #define __STDC__ 1
- #ifdef BOOTSTRAPPER
--#include <glibc/posix/getopt.h>
-+#include <getopt.h>
- #else
--#include <glibc/getopt.h>
-+#include <getopt.h>
- #endif
- #endif
- #ifdef UNX
- #ifdef BOOTSTRAPPER
- #ifndef SOLARIS
--#include <glibc/posix/getopt.h>
-+#include <getopt.h>
- #endif
- #ifdef MACOSX
--#include <glibc/posix/getopt.h>
-+#include <getopt.h>
- #endif
- #else
--#include <glibc/config.h>
-+// #include <config.h>
- #ifndef SOLARIS
--#include <glibc/getopt.h>
-+#include <getopt.h>
- #endif
- #endif
- #endif
 --- oo_1.0_src/tools/bootstrp/cppdep.cxx.systemgo	Wed Jun 13 15:43:51 2001
 +++ oo_1.0_src/tools/bootstrp/cppdep.cxx	Sun Jun  2 19:29:10 2002
 @@ -64,18 +64,18 @@
@@ -65,61 +33,6 @@
  #endif
  #endif
  #include <unistd.h>
---- oo_1.0_src/tools/bootstrp/rscdep.cxx.systemgo	Wed Jun 13 15:59:43 2001
-+++ oo_1.0_src/tools/bootstrp/rscdep.cxx	Sun Jun  2 19:29:10 2002
-@@ -69,23 +69,23 @@
- #ifdef WNT
- #define __STDC__ 1
- #ifdef BOOTSTRAPPER
--#include <glibc/posix/getopt.h>
-+#include <getopt.h>
- #else
--#include <glibc/getopt.h>
-+#include <getopt.h>
- #endif
- #endif
- #ifdef UNX
- #ifdef BOOTSTRAPPER
- #ifndef SOLARIS 
--#include <glibc/posix/getopt.h>
-+#include <getopt.h>
- #endif
- #ifdef MACOSX
--#include <glibc/posix/getopt.h>
-+#include <getopt.h>
- #endif
- #else
--#include <glibc/config.h>
-+// #include <config.h>
- #ifndef SOLARIS 
--#include <glibc/getopt.h>
-+#include <getopt.h>
- #endif
- #endif
- #endif
---- oo_1.0_src/tools/bootstrp/static.mk.systemgo	Sun Jun  2 19:49:29 2002
-+++ oo_1.0_src/tools/bootstrp/static.mk	Sun Jun  2 19:49:52 2002
-@@ -95,9 +95,6 @@
- STATIC_LIBS		+= 	aosl.lib							\
- 					artl.lib
- .ENDIF
--.IF "$(UPD)" >= "597"
--STATIC_LIBS		+= 	gnu_getopt.lib
--.ENDIF
- .IF "$(LIBSTLPORT)" != ""
- STATIC_LIBS		+= 	$(LIBSTLPORT)
- .ENDIF
-@@ -137,10 +134,6 @@
- 					-lrtl$(UPD)$(DLLPOSTFIX)
- .ENDIF
- 
--.IF "$(UPD)" >= "597"
--STATIC_LIBS		+= 	-lgnu_getopt
--.ENDIF
--
- .IF "$(COM)"=="C52"
- .IF "$(BUILD_SOSL)"==""
- STATIC_LIBS		+= -lCrun_static
 --- oo_1.0_src/external/glibc/sdfiles/makefile.mk.systemgo	Sun Jun  2 19:47:20 2002
 +++ oo_1.0_src/external/glibc/sdfiles/makefile.mk	Sun Jun  2 19:48:16 2002
 @@ -60,6 +60,13 @@

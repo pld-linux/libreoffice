@@ -40,7 +40,7 @@
  # --- Settings -----------------------------------------------------
  
  .INCLUDE :	settings.mk
-@@ -103,12 +103,10 @@
+@@ -95,14 +106,12 @@
  BUILD_DIR=$(CONFIGURE_DIR)
  BUILD_ACTION=$(GNUMAKE)
  
@@ -49,10 +49,13 @@
  .IF "$(OS)"=="MACOSX"
 -OUT2LIB+=objs$/.libs$/libfreetype.*.dylib
 +OUT2LIB=objs$/.libs$/libfreetype.*.dylib
+ .ELIF "$(OS)"=="FREEBSD"
+-OUT2LIB+=objs$/.libs$/libfreetype.so.9*
++OUT2LIB=objs$/.libs$/libfreetype.so.9*
  .ELSE
 -OUT2LIB+=objs$/.libs$/libfreetype.so.6*
 +OUT2LIB=objs$/.libs$/libfreetype.so.6*
- .ENDIF          # "$(OS)"=="MACOSX"
+ .ENDIF          # "$(OS)"=="MACOSX" || "$(OS)"=="FREEBSD"
  
  .ELSE			# "$(GUI)"=="UNX"
 --- oo_1.0.2_src.orig/solenv/inc/libs.mk	Tue Jan  7 15:22:02 2003

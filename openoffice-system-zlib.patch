@@ -1,13 +1,14 @@
 --- oo_1.0.2_src.orig/zlib/prj/d.lst	Mon Apr 22 17:26:14 2002
 +++ oo_1.0.2_src/zlib/prj/d.lst	Sun Feb 23 00:15:32 2003
-@@ -1,9 +1,10 @@
+@@ -1,10 +1,10 @@
  mkdir: %_DEST%\inc%_EXT%\external\zlib
  
 -..\%__SRC%\inc\zlib.h %_DEST%\inc%_EXT%\external\zlib\zlib.h
+-..\%__SRC%\inc\unzip.h %_DEST%\inc%_EXT%\external\zlib\unzip.h
 -..\%__SRC%\inc\zconf.h %_DEST%\inc%_EXT%\external\zconf.h
 +\usr\include\zlib.h %_DEST%\inc%_EXT%\external\zlib\zlib.h
++\usr\include\unzip.h %_DEST%\inc%_EXT%\external\zlib\unzip.h
 +\usr\include\zconf.h %_DEST%\inc%_EXT%\external\zconf.h
-+\usr\include\zutil.h %_DEST%\inc%_EXT%\external\zutil.h
  
 -..\%__SRC%\lib\libzlib.a %_DEST%\lib%_EXT%\libzlib.a
 +\lib\libz.so* %_DEST%\lib%_EXT%\libz.so*
@@ -128,18 +129,3 @@
  
  	switch (nResult)
  	{
---- oo_1.0.2_src/unzip/inc/unzip.h.system-zlib 2003-01-27 03:43:24.000000000 -0500
-+++ oo_1.0.2_src/unzip/inc/unzip.h 2003-01-27 10:46:21.000000000 -0500
-@@ -827,9 +827,9 @@ int    ReadMemoryByte            __((UWO
- 
- int    explode                   __((void));                    /* explode.c */
- 
--/* [ed] 5/17/02 On OS X, use a different function name to avoid name collisions with
--   indirectly linked system level zip libraries. */
--#ifdef MACOSX
-+/* [ed] 5/17/02 On OS X, use a different function name to avoid name
-+   collisions with indirectly linked system level zip libraries. */
-+#if defined(MACOSX) || defined(LINUX)
- #define inflate OOoinflate
- #endif
- 
