@@ -277,6 +277,7 @@ BuildRequires:	automake
 BuildRequires:	bison >= 1.875-4
 BuildRequires:	db-devel
 BuildRequires:	db-cxx-devel
+BuildRequires:	/usr/bin/getopt
 %if %{with java}
 BuildRequires:	db-java
 BuildRequires:	jar
