@@ -216,7 +216,7 @@ OpenOffice.org productivity suite - shared libraries.
 Pakiet biurowy OpenOffice.org - biblioteki.
 
 %prep
-#%setup -q -n oo_%{version}_src
+%setup -q -n oo_%{version}_src
 cd ../BUILD
 if [ -a oo_%{version}_src ]; then rm -rf oo_%{version}_src; fi;
 cp -r oo_%{version}_src.orig oo_%{version}_src
