@@ -900,7 +900,10 @@ CONFOPTS=" \
 	--with-num-cpus=$RPM_BUILD_NCPUS
 "
 
-./autogen.sh $CONFOPTS
+# for cvs snaps
+[ -x ./autogen.sh ] && ./autogen.sh $CONFOPTS
+
+# main build
 %configure $CONFOPTS
 %{__make}
 
