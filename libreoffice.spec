@@ -382,30 +382,30 @@ Dowi±zania MIME OpenOffice.org dla wersji KDE <= 3.1.5.
 #
 # Internationalization
 #
-%define		have_ARAB	yes
-%define		have_CAT	yes
-%define		have_CZECH	yes
-%define		have_DAN	yes
-%define		have_GERM	yes
-%define		have_GREEK	yes
+#%define		have_ARAB	yes
+#%define		have_CAT	yes
+#%define		have_CZECH	yes
+#%define		have_DAN	yes
+#%define		have_GERM	yes
+#%define		have_GREEK	yes
 # ENUS should be always "yes"
-%define		have_ENUS	yes
-%define		have_SPAN	yes
-%define		have_FINN	yes
-%define		have_FREN	yes
-%define		have_ITAL	yes
-%define		have_JAPN	yes
-%define		have_KOREAN	yes
-%define		have_DTCH	yes
-%define		have_POL	yes
-%define		have_PORT	yes
-%define		have_PORTBR	yes
-%define		have_RUSS	yes
-%define		have_SLOVAK	yes
-%define		have_SWED	yes
-%define		have_TURK	yes
-%define		have_CHINSIM	yes
-%define		have_CHINTRAD	yes
+#%define		have_ENUS	yes
+#%define		have_SPAN	yes
+#%define		have_FINN	yes
+#%define		have_FREN	yes
+#%define		have_ITAL	yes
+#%define		have_JAPN	yes
+#%define		have_KOREAN	yes
+#%define		have_DTCH	yes
+#%define		have_POL	yes
+#%define		have_PORT	yes
+#%define		have_PORTBR	yes
+#%define		have_RUSS	yes
+#%define		have_SLOVAK	yes
+#%define		have_SWED	yes
+#%define		have_TURK	yes
+#%define		have_CHINSIM	yes
+#%define		have_CHINTRAD	yes
 
 %define		ARAB		""
 %if %{have_ARAB} == yes
@@ -1016,7 +1016,7 @@ done
 cd ..
 
 install -d $RPM_BUILD_ROOT%{_desktopdir}
-bzip2 -dc %{SOURCE6} | tar xf - -C $RPM_BUILD_ROOT%{_desktopdir}
+bzip2 -dc %{SOURCE10} | tar xf - -C $RPM_BUILD_ROOT%{_desktopdir}
 
 # Add in the regcomp tool since some people need it for 3rd party add-ons
 cp -f build/OOO_%{dfullver}/solver/%{subver}/unxlng*.pro/bin/regcomp $RPM_BUILD_ROOT%{_libdir}/%{name}/program
