@@ -11,7 +11,6 @@ Group(pl):	X11/Aplikacje
 Source0:	http://a2012.g.akamai.net/7/2012/2064/OpenOffice632/anoncvs.openoffice.org/download/OpenOffice632/oo_%{version}_src.tar.bz2
 URL:		http://www.openoffice.org/
 BuildRequires:	XFree86-devel
-BuildRequires:	STLport-devel
 BuildRequires:	STLport-static
 #BuildRequires:	jdk = 1.2.2
 BuildRequires:	flex
