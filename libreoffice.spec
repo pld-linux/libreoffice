@@ -146,6 +146,7 @@ Patch202: openoffice-unzip-not-jar.patch
 Patch203: openoffice-spell-sv.patch
 Patch204: openoffice-word-count.patch
 Patch205: openoffice-xinerama-extern-c.patch
+Patch206: openoffice-recent-files.patch
 
 # ...
 Patch301: openoffice-splash.patch
@@ -824,6 +825,7 @@ rm -f moz/prj/d.lst
 %patch203 -p0
 %patch204 -p0
 %patch205 -p0 
+%patch206 -p0 
 
 %patch301 -p1 
 
