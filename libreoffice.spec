@@ -935,14 +935,14 @@ rm -f moz/prj/d.lst
 %endif 
 
 %ifarch sparc sparc64
-%patch67
-%patch68
+%patch67 -p0
+%patch68 -p0
 %endif
 
 # no-java patch
 %if %{without java}
 %ifarch sparc sparc64
-%patch66
+%patch66 -p0 
 %endif 
 %patch101 -p0
 %patch102 -p0
