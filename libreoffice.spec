@@ -877,8 +877,8 @@ if [ ! -r /proc/version ]; then
 	exit 1
 fi
 
-CC=%{__cc}
-CXX=%{__cxx}
+CC="%{__cc}"
+CXX="%{__cxx}"
 GCJ=gcj
 JAVA_HOME="/usr/lib/java"
 ENVCFLAGS="%{rpmcflags}"
