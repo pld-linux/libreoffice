@@ -163,10 +163,10 @@ BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %define	apps	agenda calc draw fax impress label letter math master memo vcard web writer
 
-%ifdef %{x86}
+%ifarch %{ix86}
 %define	_archbuilddir	unxlngi4.pro
 %endif
-%ifdef ppc 
+%ifarch ppc 
 %define _archbuilddir 	unxlngppc.pro
 %endif
 %define	installpath	instsetoo/%{_archbuilddir}
@@ -784,7 +784,7 @@ cd config_office
 
 cd ..
 
-%ifarch %{x86}
+%ifarch %{ix86}
 echo -e "#!/bin/tcsh\nsource LinuxIntelEnv.Set\ndmake -p -v\n" > compile
 %endif
 %ifarch ppc
