@@ -23,7 +23,7 @@ Summary:	OpenOffice - powerful office suite
 Summary(pl):	OpenOffice - potê¿ny pakiet biurowy
 Name:		openoffice
 Version:	%{fullver}
-Release:	4
+Release:	5
 Epoch:		1
 License:	GPL/LGPL
 Group:		X11/Applications
@@ -179,7 +179,7 @@ Provides:	%{name}-libs-interface = %{epoch}:%{version}-%{release}
 Provides:	libvcl%{subver}li.so
 Obsoletes:	%{name}-libs-gtk
 Requires:	%{name}-libs = %{epoch}:%{version}-%{release}
-Requires(post):	%{name}-libs = %{epoch}:%{version}-%{release}
+Requires(post,preun):	%{name}-libs = %{epoch}:%{version}-%{release}
 
 %description libs-kde
 OpenOffice.org productivity suite - KDE Interface.
@@ -195,7 +195,7 @@ Provides:	%{name}-libs-interface = %{epoch}:%{version}-%{release}
 Provides:	libvcl%{subver}li.so
 Obsoletes:	%{name}-libs-kde
 Requires:	%{name}-libs = %{epoch}:%{version}-%{release}
-Requires(post):	%{name}-libs = %{epoch}:%{version}-%{release}
+Requires(post,preun):	%{name}-libs = %{epoch}:%{version}-%{release}
 
 %description libs-gtk
 OpenOffice.org productivity suite - GTK Interface.
@@ -1148,6 +1148,14 @@ fontpostinst TTF %{_fontsdir}/%{name}
 
 %postun
 fontpostinst TTF %{_fontsdir}/%{name}
+
+%post libs
+if [ -f %{_libdir}/%{name}/program/libvcl%{subver}li-kde.so ]; then
+	ln -sf libvcl%{subver}li-kde.so %{_libdir}/%{name}/program/libvcl%{subver}li.so
+fi
+if [ -f %{_libdir}/%{name}/program/libvcl%{subver}li-gtk.so ]; then
+	ln -sf libvcl%{subver}li-gtk.so %{_libdir}/%{name}/program/libvcl%{subver}li.so
+fi
 
 %preun libs-kde
 rm -f %{_libdir}/%{name}/program/libvcl%{subver}li.so
