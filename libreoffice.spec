@@ -1,3 +1,8 @@
+
+# Conditional build:
+# _with_ibm_java	- uses IBM java instead SUN java
+# _with_nest		- build for nest envinronment
+
 %define		oo_ver	641d
 Summary:	OpenOffice - powerful office suite
 Summary(pl):	OpenOffice - potê¿ny pakiet biurowy
@@ -22,7 +27,8 @@ BuildRequires:	automake
 BuildRequires:	flex
 %{?!_with_ibm_java:BuildRequires: jdk = 1.3.1_01}
 %{?_with_ibm_java:BuildRequires: ibm-java-sdk}
-BuildRequires:	gcc <= 3.0.0
+%{?!_with_nest:BuildRequires:	gcc <= 3.0.0}
+%{?_with_nest:BuildRequires:	gcc2}
 #BuildRequires:	libgcc
 #BuildRequires:	libstdc++-compat >= 1.0-3
 BuildRequires:	perl
@@ -74,8 +80,10 @@ cd external; tar fxz %{SOURCE1}; cp -fr gpc231/* gpc
 cd config_office
 autoconf
 
+
 %{?!_with_ibm_java:JAVA_HOME="/usr/lib/jdk1.3.1_01"}
 %{?_with_ibm_java:JAVA_HOME="/usr/lib/IBMJava2-13"}
+%{?_with_nest:CC="gcc2"; CXX="g++2";}
 %configure \
 	--with-jdk-home=$JAVA_HOME \
 	--with-stlport4-home=/usr \
@@ -110,7 +118,7 @@ chmod u+rx compile
 rm -rf $RPM_BUILD_ROOT
 
 cat <<EOF > install
-#!/bin/csh
+#!/bin/tcsh
 source LinuxIntelEnv.Set
 dmake install
 EOF
