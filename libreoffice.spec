@@ -91,6 +91,7 @@ BuildRequires:	libstdc++-devel >= 3.2.1
 %else
 BuildRequires:	db3
 BuildRequires:	db3-devel
+BuildRequires:	db3-java
 BuildRequires:	libstdc++-devel < 3.2.1
 %endif
 BuildRequires:	gcc
