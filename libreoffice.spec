@@ -9,11 +9,13 @@ Group:		X11/Applications
 Group(de):	X11/Applikationen
 Group(pl):	X11/Aplikacje
 Source0:	http://a1652.g.akamai.net/7/1652/2064/OpenOffice619/anoncvs.openoffice.org/download/OpenOffice619/oo_%{version}_src.tar.bz2
+Source1:	http://www.sleepycat.com/update/3.2.9/db-3.2.9.tar.gz
+Patch0:		%{name}-i586_javadetect.patch
 URL:		http://www.openoffice.org/
 BuildRequires:	XFree86-devel
 BuildRequires:	STLport-devel
 BuildRequires:	STLport-static
-#BuildRequires:	jdk
+#BuildRequires:	jdk = 1.2.2
 BuildRequires:	flex
 BuildRequires:	tcsh
 BuildRequires:	perl
@@ -49,14 +51,27 @@ Do zalet OpenOffice.org mo¿na zaliczyæ:
  * infrastruktura s³u¿±ca do komunikowania siê w ramach projektu.
 
 %prep
-%setup -q -n oo_%{version}_src
+%setup -q -n oo_%{version}_src -a1
+%patch0 -p0
 
 %build
+JAVA_HOME="/opt/jdk1.2.2"; export JAVA_HOME
+PATH="$PATH:$JAVA_HOME/bin"; export PATH
+cd db-3.2.9/dist
+%configure \
+    --enable-java \
+    --enable-dynamic
+
+%{__make}
+    
+cd ../..
+install db-3.2.9/java/classes/db.jar external/common/db31.jar
+
 cd config_office
-# configure script is buggy, you have to put path to jdk manually
+autoconf
 %configure \
 	--with-stlport4-home=%{_prefix} \
-	--with-jdk-home=/opt/jdk1.3 \
+	--with-jdk-home=$JAVA_HOME \
 	--with-xprint
 
 cd ..
@@ -82,6 +97,9 @@ EOF
 
 chmod u+rx compile
 ./compile
+
+%clean
+rm -rf $RPM_BUILD_ROOT
 
 %install
 rm -rf $RPM_BUILD_ROOT
