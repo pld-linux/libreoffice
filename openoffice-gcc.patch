@@ -21,18 +21,3 @@ diff -Nur oo/cppuhelper/source/gcc2_linux_intel.map oo.new/cppuhelper/source/gcc
  __tiQ24cppu11OWeakObject;
  __tiQ24cppu14OWeakAggObject;
  __tiQ24cppu16OComponentHelper;
-diff -Nur oo/solenv/inc/unxlngi3.mk oo.new/solenv/inc/unxlngi3.mk
---- oo/solenv/inc/unxlngi3.mk	Wed Oct 24 19:21:47 2001
-+++ oo.new/solenv/inc/unxlngi3.mk	Sun Apr 14 23:56:12 2002
-@@ -91,10 +91,7 @@
- # flags for C and C++ Compiler
- # do not use standard header search paths
- # if installed elsewhere
--.IF "$(BUILD_SOSL)"!=""
--CFLAGS=-nostdinc
--.ENDIF
--CFLAGS+=-c $(INCLUDE)
-+CFLAGS=-c $(INCLUDE)
- # flags for the C++ Compiler
- CFLAGSCC= -pipe -mpentiumpro
- # Flags for enabling exception handling
