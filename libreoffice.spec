@@ -1270,8 +1270,10 @@ rm -rf $RPM_BUILD_ROOT
 #%attr(755,root,root) %{oolib}/program/crash_report
 %attr(755,root,root) %{oolib}/program/fromtemplate
 %attr(755,root,root) %{oolib}/program/gnomeint
+%if %{with java}
 %attr(755,root,root) %{oolib}/program/javaldx
 %attr(755,root,root) %{oolib}/program/jvmsetup
+%endif
 %attr(755,root,root) %{oolib}/program/nswrapper
 %attr(755,root,root) %{oolib}/program/pagein*
 %attr(755,root,root) %{oolib}/program/setup
