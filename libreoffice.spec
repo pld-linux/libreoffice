@@ -66,6 +66,7 @@ Do zalet OpenOffice.org mo¿na zaliczyæ:
 %setup -q -n oo_%{oo_ver}_src
 %patch0 -p1
 %patch1 -p1
+%patch2 -p1
 install %{SOURCE1} external
 cd external; tar fxz %{SOURCE1}; cp -fr gpc231/* gpc
 
