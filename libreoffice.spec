@@ -1092,14 +1092,6 @@ TEMP="%{tmpdir}"; export TEMP
 %{__make} install \
 	DESTDIR=$RPM_BUILD_ROOT
 
-#mv $RPM_BUILD_ROOT%{_libdir}/%{name}/program/libvcl%{subver}li.so \
-#	$RPM_BUILD_ROOT%{_libdir}/%{name}/program/libvcl%{subver}li-kde.so
-
-#install -m755 build/OOO_%{dfullver}/vcl.gtk/unxlngi4.pro/lib/libvcl%{subver}li.so \
-#	$RPM_BUILD_ROOT%{_libdir}/%{name}/program/libvcl%{subver}li-gtk.so
-#install -m755 build/OOO_%{dfullver}/vcl.gtk/unxlngi4.pro/bin/*-gnome \
-#	$RPM_BUILD_ROOT%{_libdir}/%{name}/program/
-
 install -d helptmp && cd helptmp || exit 1
 for file in \
 	%{SOURCE400} %{SOURCE401} %{SOURCE402} %{SOURCE403} %{SOURCE404} %{SOURCE405} \
@@ -1193,7 +1185,6 @@ for lang in $RPM_BUILD_ROOT%{_libdir}/%{name}/help/*; do
 	langlist="$langlist $(echo "$lang" | sed -e 's#.*/\(.*\)#\1#g')"
 done
 langlist=$(echo "$langlist" | tr ' ' '\n' | sort | uniq | xargs)
-#slanglist=$(echo "$langlist" | awk -F_ ' { print $1 } ' | awk -F- ' { print $1 } ' | sort | uniq | xargs)
 
 for lang in $langlist; do
 	echo "%%defattr(644,root,root,755)" >> ${lang}.lang
