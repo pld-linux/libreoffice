@@ -1,0 +1,29 @@
+Index: vcl/unx/source/gdi/dtint.cxx
+===================================================================
+RCS file: /cvs/gsl/vcl/unx/source/gdi/dtint.cxx,v
+retrieving revision 1.16
+diff -u -p -u -r1.16 dtint.cxx
+--- vcl/unx/source/gdi/dtint.cxx	28 May 2003 12:33:47 -0000	1.16
++++ vcl/unx/source/gdi/dtint.cxx	4 Nov 2003 10:57:57 -0000
+@@ -573,7 +564,6 @@ void DtIntegrator::GetSystemLook( const 
+                     aStyleSettings.SetAppFont( aFont );
+                     aStyleSettings.SetHelpFont( aFont );
+                     aStyleSettings.SetMenuFont( aFont );
+-                    aStyleSettings.SetToolFont( aFont );
+                     aStyleSettings.SetLabelFont( aFont );
+                     aStyleSettings.SetInfoFont( aFont );
+                     aStyleSettings.SetRadioCheckFont( aFont );
+@@ -581,6 +571,13 @@ void DtIntegrator::GetSystemLook( const 
+                     aStyleSettings.SetFieldFont( aFont );
+                     aStyleSettings.SetIconFont( aFont );
+                     aStyleSettings.SetGroupFont( aFont );
++
++					// We want the tool font to be slightly smaller,
++					// otherwise the ruler gets horribly bloated
++					long nHeight = aFont.GetHeight();
++					nHeight = ( nHeight + 8 ) / 2;
++					aFont.SetHeight( nHeight );
++                    aStyleSettings.SetToolFont( aFont );
+                 }
+                 break;
+             case ToolbarIconSize:

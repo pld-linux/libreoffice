@@ -1,0 +1,154 @@
+
+	We have to use Xft's hard-coded idea of the dpi first, and use
+the builtin toDouble to avoid l10n issues.
+
+--- vcl/unx/source/app/saldisp.cxx	8 Aug 2002 02:49:59 -0000	1.31.2.3
++++ vcl/unx/source/app/saldisp.cxx	14 Jan 2003 20:17:05 -0000
+@@ -833,9 +833,20 @@
+     pVisual_            = new SalVisual( pXVI );
+     aSize_              = Size( DisplayWidth ( pDisp_, nScreen_ ),
+                                 DisplayHeight( pDisp_, nScreen_ ) );
+-    aResolution_        =
++    {
++      const char *value;
++      long dpi = 0;
++      if ((value = XGetDefault (pDisp_, "Xft", "dpi"))) {
++	::rtl::OString str (value);
++	dpi = (long) str.toDouble();
++      }
++      if (dpi > 0)
++        aResolution_ = Pair( dpi, dpi );
++      else
++	aResolution_ =
+         Pair( DPI( aSize_.Width(),  DisplayWidthMM ( pDisp_, nScreen_ ) ),
+               DPI( aSize_.Height(), DisplayHeightMM( pDisp_, nScreen_ ) ) );
++    }
+ 
+     nMaxRequestSize_    = XExtendedMaxRequestSize( pDisp_ ) * 4;
+     if( !nMaxRequestSize_ )
+
+
+
+Index: vcl/source/window/window.cxx
+===================================================================
+RCS file: /cvs/gsl/vcl/source/window/window.cxx,v
+retrieving revision 1.176
+diff -u -3 -p -r1.176 window.cxx
+--- vcl/source/window/window.cxx	1 Jul 2003 14:48:37 -0000	1.176
++++ vcl/source/window/window.cxx	7 Nov 2003 16:01:31 -0000
+@@ -1659,6 +1659,7 @@ void Window::ImplInitResolutionSettings(
+ }
+ 
+ // -----------------------------------------------------------------------
++#include <stdio.h>
+ 
+ void Window::ImplPointToLogic( Font& rFont ) const
+ {
+@@ -1667,17 +1668,21 @@ void Window::ImplPointToLogic( Font& rFo
+ 
+     if ( aSize.Width() )
+     {
+-        aSize.Width() *= mpFrameData->mnFontDPIX;
+-        aSize.Width() += 72/2;
+-        aSize.Width() /= 72;
+-        aSize.Width() *= nScreenFontZoom;
+-        aSize.Width() /= 100;
+-    }
+-    aSize.Height() *= mpFrameData->mnFontDPIY;
+-    aSize.Height() += 72/2;
+-    aSize.Height() /= 72;
+-    aSize.Height() *= nScreenFontZoom;
+-    aSize.Height() /= 100;
++		double t = aSize.Width();
++		t *= nScreenFontZoom;
++		t /= 100.0;
++		t *= mpFrameData->mnFontDPIX;
++		t /= 72.0;
++		t += 0.5;
++		aSize.Width() = (long) t;
++    }
++    double t = aSize.Height();
++    t *= nScreenFontZoom;
++    t /= 100.0;
++    t *= mpFrameData->mnFontDPIY;
++    t /= 72.0;
++    t += 0.5;
++    aSize.Height() = (long) t;
+ 
+     if ( IsMapModeEnabled() )
+         aSize = PixelToLogic( aSize );
+@@ -1697,17 +1702,22 @@ void Window::ImplLogicToPoint( Font& rFo
+ 
+     if ( aSize.Width() )
+     {
+-        aSize.Width() *= 100;
+-        aSize.Width() /= nScreenFontZoom;
+-        aSize.Width() *= 72;
+-        aSize.Width() += mpFrameData->mnFontDPIX/2;
+-        aSize.Width() /= mpFrameData->mnFontDPIX;
+-    }
+-    aSize.Height() *= 100;
+-    aSize.Height() /= nScreenFontZoom;
+-    aSize.Height() *= 72;
+-    aSize.Height() += mpFrameData->mnFontDPIY/2;
+-    aSize.Height() /= mpFrameData->mnFontDPIY;
++		double t = aSize.Width();
++		t -= 0.5;
++		t *= 72.0;
++		t /= mpFrameData->mnFontDPIX;
++		t *= 100.0;
++		t /= nScreenFontZoom;
++		aSize.Width() = (long) t;
++	}
++
++    double t = aSize.Height();
++    t -= 0.5;
++    t *= 72.0;
++    t /= mpFrameData->mnFontDPIY;
++    t *= 100.0;
++    t /= nScreenFontZoom;
++    aSize.Height() = (long) t;
+ 
+     rFont.SetSize( aSize );
+ }
+Index: vcl/unx/source/gdi/salgdi.cxx
+===================================================================
+RCS file: /cvs/gsl/vcl/unx/source/gdi/salgdi.cxx,v
+retrieving revision 1.24
+diff -u -p -u -r1.24 salgdi.cxx
+--- vcl/unx/source/gdi/salgdi.cxx	15 Apr 2003 16:09:37 -0000	1.24
++++ vcl/unx/source/gdi/salgdi.cxx	13 May 2003 12:24:22 -0000
+@@ -504,12 +504,6 @@ void SalGraphics::GetResolution( long &r
+ 
+         rDPIX = pDisplay->GetResolution().A();
+         rDPIY = pDisplay->GetResolution().B();
+-        if ( rDPIY < 96 )
+-        {
+-            rDPIX = Divide( rDPIX * 96, rDPIY );
+-            rDPIY = 96;
+-        }
+-
+ #ifndef _USE_PRINT_EXTENSION_
+ 	}
+ #endif
+Index: vcl/unx/source/app/saldisp.cxx
+===================================================================
+RCS file: /cvs/gsl/vcl/unx/source/app/saldisp.cxx,v
+retrieving revision 1.41
+diff -u -p -u -r1.41 saldisp.cxx
+--- vcl/unx/source/app/saldisp.cxx	28 May 2003 12:33:35 -0000	1.41
++++ vcl/unx/source/app/saldisp.cxx	4 Jun 2003 08:57:54 -0000
+@@ -2948,11 +2948,13 @@ void SalDisplay::GetScreenFontResolution
+     rDPIX = aResolution_.A();
+     rDPIY = aResolution_.B();
+     
++#if 0    
+     if( rDPIY < nThreshold )
+     {
+         rDPIX = Divide( rDPIX * nThreshold, rDPIY );
+         rDPIY = nThreshold;
+     }
++#endif
+ 
+     // #i12705# equalize x- and y-resolution if they are close enough
+     if( rDPIX != rDPIY )

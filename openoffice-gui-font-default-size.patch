@@ -1,0 +1,16 @@
+Index: vcl/source/app/settings.cxx
+===================================================================
+RCS file: /cvs/gsl/vcl/source/app/settings.cxx,v
+retrieving revision 1.38
+diff -u -3 -p -r1.38 settings.cxx
+--- vcl/source/app/settings.cxx	11 Apr 2003 17:27:37 -0000	1.38
++++ vcl/source/app/settings.cxx	23 Oct 2003 15:41:27 -0000
+@@ -592,7 +592,7 @@ ImplStyleData::ImplStyleData( const Impl
+ 
+ void ImplStyleData::SetStandardStyles()
+ {
+-    Font aStdFont( FAMILY_SWISS, Size( 0, 8 ) );
++    Font aStdFont( FAMILY_SWISS, Size( 0, 9 ) );
+     aStdFont.SetCharSet( gsl_getSystemTextEncoding() );
+     aStdFont.SetWeight( WEIGHT_NORMAL );
+     aStdFont.SetName( vcl::DefaultFontConfigItem::get()->getUserInterfaceFont(LANGUAGE_ENGLISH) );

@@ -1,0 +1,16 @@
+Index: vcl/source/window/window.cxx
+===================================================================
+RCS file: /cvs/gsl/vcl/source/window/window.cxx,v
+retrieving revision 1.176
+diff -u -p -u -r1.176 window.cxx
+--- vcl/source/window/window.cxx	1 Jul 2003 14:48:37 -0000	1.176
++++ vcl/source/window/window.cxx	10 Jul 2003 17:40:59 -0000
+@@ -392,7 +392,7 @@ void Window::ImplUpdateGlobalSettings( A
+         rSettings.SetStyleSettings( aStyleSettings );
+     }
+ 
+-    if( 1 )
++    if( 0 ) // This is/was an incredibly broken thing to do
+     {
+         // #97047: Force all fonts except Mneu and Help to a fixed height
+         // to avoid UI scaling due to large fonts

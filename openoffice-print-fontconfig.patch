@@ -1,0 +1,786 @@
+diff -urN psprint-old/inc/psprint/fontmanager.hxx psprint/inc/psprint/fontmanager.hxx
+--- psprint-old/inc/psprint/fontmanager.hxx	2003-10-12 23:44:57.000000000 +0200
++++ psprint/inc/psprint/fontmanager.hxx	2003-10-13 02:19:29.000000000 +0200
+@@ -81,6 +81,13 @@
+ #define ATOM_FAMILYNAME                     2
+ #define ATOM_PSNAME                         3
+ 
++#ifdef FONTCONFIG_FONTS
++extern "C" {
++  struct _FcFontSet;
++  struct _FcPattern;
++};
++#endif
++
+ /*
+  *  some words on metrics: every length returned by PrintFontManager and
+  *  friends are PostScript afm style, that is they are 1/1000 font height
+@@ -300,7 +307,9 @@
+         int                 m_nDirectory;       // atom containing system dependent path
+         rtl::OString      m_aFontFile;        // relative to directory
+         rtl::OString      m_aMetricFile;      // dito
++#ifndef FONTCONFIG_FONTS
+         rtl::OString      m_aXLFD;            // mainly for administration, contains the XLFD from fonts.dir
++#endif
+ 
+         /* note: m_aFontFile and Metric file are not atoms
+            because they should be fairly unique */
+@@ -314,7 +323,9 @@
+     {
+         int					    m_nDirectory;       // atom containing system dependent path
+         rtl::OString          m_aFontFile;        // relative to directory
++#ifndef FONTCONFIG_FONTS
+         rtl::OString          m_aXLFD;            // mainly for administration, contains the XLFD from fonts.dir
++#endif
+         int                     m_nCollectionEntry; // -1 for regular fonts, 0 to ... for fonts stemming from collections
+         unsigned int           m_nTypeFlags;		// from TrueType file; only known use is for copyright flags
+ 
+@@ -339,12 +350,16 @@
+     std::hash_map< fontID, PrintFont* >       m_aFonts;
+     std::hash_map< int, family::type >        m_aFamilyTypes;
+     std::list< rtl::OUString >              m_aPrinterDrivers;
++#ifndef FONTCONFIG_FONTS
+     std::list< rtl::OString >               m_aFontDirectories;
+     std::list< int >							m_aPrivateFontDirectories;
+     utl::MultiAtomProvider*                   m_pAtoms;
+     // for speeding up findFontFileID
+     std::hash_map< rtl::OString, std::set< fontID >, rtl::OStringHash >
+-    											m_aFontFileToFontID;
++					      m_aFontFileToFontID;
++#else
++    utl::MultiAtomProvider*                   m_pAtoms;
++#endif
+ 
+     std::hash_map< rtl::OString, int, rtl::OStringHash >
+     m_aDirToAtom;
+@@ -363,17 +378,39 @@
+     rtl::OString getAfmFile( PrintFont* pFont ) const;
+     rtl::OString getFontFile( PrintFont* pFont ) const;
+ 
++#ifndef FONTCONFIG_FONTS
+     void getFontAttributesFromXLFD( PrintFont* pFont, const ByteString& rXLFD ) const;
++#endif
+ 
+     bool analyzeFontFile( int nDirID, const rtl::OString& rFileName, bool bReadFile, const std::list< rtl::OString >& rXLFDs, std::list< PrintFont* >& rNewFonts ) const;
+     rtl::OUString convertTrueTypeName( void* pNameRecord ) const; // actually a NameRecord* formt font subsetting code
+     void analyzeTrueTypeFamilyName( void* pTTFont, std::list< rtl::OUString >& rnames ) const; // actually a TrueTypeFont* from font subsetting code
+     bool analyzeTrueTypeFile( PrintFont* pFont ) const;
++
++#ifndef FONTCONFIG_FONTS
+     // finds the FIRST id for this font file; there may be more
+     // for TrueType collections
+     fontID findFontFileID( int nDirID, const rtl::OString& rFile ) const;
++#endif
+     fontID findFontBuiltinID( int nPSNameAtom ) const;
+ 
++#ifdef FONTCONFIG_FONTS
++    void getFontAttributesFromFcPattern( PrintFont* pFont, const struct _FcPattern *fc_font ) const;
++    void addFcSystemFont    (struct _FcPattern *fc_pattern);
++    void addFcSystemFontSet (struct _FcFontSet *fc_set);
++    int  addFontFile( const ::rtl::OString& rFilePath, const struct _FcPattern *fc_font, bool bMergeBuiltin );
++#endif
++    void ensureAnalysed( PrintFont* pFont ) const
++    {
++      if ( pFont && pFont->m_nAscend == 0 && pFont->m_nDescend == 0 )
++	{
++	  if (pFont->m_eType == fonttype::TrueType )
++	    analyzeTrueTypeFile( pFont );
++	  else if (pFont->m_eType == fonttype::Type1 )
++            pFont->readAfmMetrics( getAfmFile( pFont ), m_pAtoms );
++	}
++    }
++
+     family::type matchFamilyName( const rtl::OUString& rFamily ) const;
+ 
+     PrintFont* getFont( fontID nID ) const
+@@ -382,14 +419,18 @@
+         it = m_aFonts.find( nID );
+         return it == m_aFonts.end() ? NULL : it->second;
+     }
++#ifndef FONTCONFIG_FONTS
+     ByteString getXLFD( PrintFont* pFont ) const;
++#endif
+     void fillPrintFontInfo( PrintFont* pFont, FastPrintFontInfo& rInfo ) const;
+     void fillPrintFontInfo( PrintFont* pFont, PrintFontInfo& rInfo ) const;
+ 
+     const rtl::OString& getDirectory( int nAtom ) const;
+     int getDirectoryAtom( const rtl::OString& rDirectory, bool bCreate = false );
+ 
++#ifndef FONTCONFIG_FONTS
+     void getServerDirectories(); // get font server directories on e.g. redhat
++#endif
+ 
+     PrintFontManager();
+     ~PrintFontManager();
+@@ -512,11 +553,13 @@
+     void hasVerticalSubstitutions( fontID nFontID, const sal_Unicode* pCharacters,
+         int nCharacters, bool* pHasSubst ) const;
+ 
++#ifndef FONTCONFIG_FONTS
+     // get the XLFD for a font that originated from the X fontpath
+     // note: this may not be the original line that was in the fonts.dir
+     // returns a string for every font, but only TrueType and Type1
+     // fonts originated from the X font path, so check for the font type
+     rtl::OUString getFontXLFD( fontID nFontID ) const;
++#endif
+ 
+     // get a specific fonts metrics
+ 
+@@ -582,6 +625,7 @@
+ 
+     // font administration functions
+ 
++#ifndef FONTCONFIG_FONTS
+     // for importFonts to provide the user feedback
+     class ImportFontCallback
+     {
+@@ -614,6 +658,7 @@
+     bool removeFonts( const std::list< fontID >& rFonts );
+ 
+     bool isPrivateFontFile( fontID ) const;
++#endif
+ 
+     // returns false if there were not any
+     bool getAlternativeFamilyNames( fontID nFont, std::list< rtl::OUString >& rNames ) const;
+diff -urN psprint-old/source/fontmanager/fontmanager.cxx psprint/source/fontmanager/fontmanager.cxx
+--- psprint-old/source/fontmanager/fontmanager.cxx	2003-10-12 23:44:57.000000000 +0200
++++ psprint/source/fontmanager/fontmanager.cxx	2003-10-13 02:23:30.000000000 +0200
+@@ -140,6 +140,11 @@
+ 
+ #include <adobeenc.tab> // get encoding table for AFM metrics
+ 
++#ifdef FONTCONFIG_FONTS
++#include <stdio.h>
++#include <fontconfig/fontconfig.h>
++#endif
++
+ #define PRINTER_METRICDIR "fontmetric"
+ 
+ using namespace utl;
+@@ -159,6 +164,7 @@
+     return nRet;
+ }
+ 
++#ifndef FONTCONFIG_FONTS
+ static italic::type parseItalic( const ByteString& rItalic )
+ {
+     italic::type eItalic = italic::Unknown;
+@@ -170,6 +176,7 @@
+         eItalic = italic::Upright;
+     return eItalic;
+ }
++#endif
+ 
+ // -------------------------------------------------------------------------
+ 
+@@ -210,6 +217,7 @@
+ 
+ // -------------------------------------------------------------------------
+ 
++#ifndef FONTCONFIG_FONTS
+ static width::type parseWidth( const ByteString& rWidth )
+ {
+     width::type eWidth = width::Unknown;
+@@ -237,6 +245,7 @@
+ 
+     return eWidth;
+ }
++#endif
+ 
+ // -------------------------------------------------------------------------
+ 
+@@ -920,6 +929,138 @@
+ }
+ 
+ // -------------------------------------------------------------------------
++#ifdef FONTCONFIG_FONTS
++int PrintFontManager::addFontFile( const OString& rFontPath,
++				   const FcPattern *fc_font,
++				   bool bMergeBuiltin)
++{
++    sal_Int32 idx;
++    ::std::list< PrintFontManager::PrintFont* > aNewFonts;
++
++    idx = rFontPath.lastIndexOf ('/');
++    if (idx < 0)
++      {
++	fprintf (stderr, "Invalid path\n");
++	return;
++      }
++    // Split the directory
++    OString aDir (rFontPath, idx);
++    // And the filename
++    OString aFontFile( rFontPath + idx + 1, rFontPath.getLength() - idx - 1);
++    // And the extension
++    ByteString aExt( aFontFile.copy( aFontFile.lastIndexOf( '.' )+1 ) );
++
++    int nDirID = getDirectoryAtom( aDir, true );
++
++    if( m_pFontCache->getFontCacheFile( nDirID, aDir, aFontFile, aNewFonts ) )
++	{
++#ifdef DEBUG
++		fprintf( stderr, "Hit cache for '%s'", (sal_Char *) rFontPath );
++#endif
++		/* got it from the cache */ ;
++	}
++    else if( aExt.EqualsIgnoreCaseAscii( "pfb" ) || aExt.EqualsIgnoreCaseAscii( "pfa" ) )
++    {
++        // check for corresponding afm metric
++        // first look for an adjacent file
++
++        ByteString aName( aFontFile );
++        aName.Erase( aName.Len()-4 );
++        aName.Append( ".afm" );
++        
++        ByteString aFilePath( aDir );
++        aFilePath.Append( '/' );
++        aFilePath.Append( aName );
++        
++        ByteString aAfmFile;
++        if( access( aFilePath.GetBuffer(), F_OK ) )
++        {
++            // try in subdirectory afm instead
++            aFilePath = aDir;
++            aFilePath.Append( "/afm/" );
++            aFilePath.Append( aName );
++            
++            if( ! access( aFilePath.GetBuffer(), F_OK ) )
++            {
++                aAfmFile = "afm/";
++                aAfmFile += aName;
++            }
++        }
++        else
++            aAfmFile = aName;
++
++        if( aAfmFile.Len() )
++        {
++            Type1FontFile* pFont = new Type1FontFile();
++            pFont->m_nDirectory     = nDirID;
++
++            pFont->m_aFontFile      = aFontFile;
++            pFont->m_aMetricFile    = aAfmFile;
++
++			if (fc_font)
++				getFontAttributesFromFcPattern( pFont, fc_font );
++            else if( ! pFont->readAfmMetrics( getAfmFile( pFont ), m_pAtoms ) )
++            {
++                delete pFont;
++                pFont = NULL;
++            }
++            if( pFont )
++                aNewFonts.push_back( pFont );
++        }
++    }
++    else if( aExt.EqualsIgnoreCaseAscii( "afm" ) )
++    {
++        ByteString aFilePath( aDir );
++        aFilePath.Append( '/' );
++        aFilePath.Append( ByteString( aFontFile ) );
++        BuiltinFont* pFont = new BuiltinFont();
++        pFont->m_nDirectory		= nDirID;
++        pFont->m_aMetricFile	= aFontFile;
++        if( pFont->readAfmMetrics( aFilePath, m_pAtoms ) )
++            aNewFonts.push_back( pFont );
++        else
++            delete pFont;
++    }
++    else if( aExt.EqualsIgnoreCaseAscii( "ttf" ) )
++    {
++        TrueTypeFontFile* pFont     = new TrueTypeFontFile();
++        pFont->m_nDirectory         = nDirID;
++        pFont->m_aFontFile          = aFontFile;
++        pFont->m_nCollectionEntry   = -1;
++
++		if( fc_font )
++			getFontAttributesFromFcPattern( pFont, fc_font );
++        // need to read the font anyway to get aliases
++        if( ! analyzeTrueTypeFile( pFont ) )
++        {
++            delete pFont;
++            pFont = NULL;
++        }
++        else
++            aNewFonts.push_back( pFont );
++    }
++#warning Disabled ttc parsing, do we need to use the 'index' property for 'nCollectionEntry' ?
++
++    for( ::std::list< PrintFont* >::iterator it = aNewFonts.begin(); it != aNewFonts.end(); ++it )
++	{
++		if (!bMergeBuiltin ||
++			!findFontBuiltinID( (*it)->m_nPSName ) )
++		{
++			fontID aFont = m_nNextFontID++;
++			m_aFonts[ aFont ] = *it;
++		}
++		else
++			delete (*it);
++	}
++}
++
++int PrintFontManager::addFontFile( const ::rtl::OString& rFileName, int nFaceNum )
++{
++	// Purely for salgdi3 usage ...
++	return addFontFile( rFileName, NULL, false );
++}
++
++#else
+ 
+ int PrintFontManager::addFontFile( const ::rtl::OString& rFileName, int nFaceNum )
+ {
+@@ -1088,6 +1229,7 @@
+     }
+     return ! rNewFonts.empty();
+ }
++#endif
+ 
+ // -------------------------------------------------------------------------
+ 
+@@ -1106,6 +1248,7 @@
+ 
+ // -------------------------------------------------------------------------
+ 
++#ifndef FONTCONFIG_FONTS
+ fontID PrintFontManager::findFontFileID( int nDirID, const OString& rFontFile ) const
+ {
+     fontID nID = 0;
+@@ -1292,6 +1435,69 @@
+ 
+     return aXLFD;
+ }
++#else /* FONTCONFIG_FONTS */
++
++void PrintFontManager::getFontAttributesFromFcPattern( PrintFont* pFont, const FcPattern *fc_font ) const
++ {
++    FcChar8 *fc_str;
++    int      fc_int;
++
++    if (!FcPatternGetString (fc_font, FC_FAMILY, 0, &fc_str) && fc_str)
++	pFont->m_nFamilyName =
++	  m_pAtoms->getAtom( ATOM_FAMILYNAME,
++			     String( ByteString((sal_Char *) fc_str ), RTL_TEXTENCODING_UTF8 ),
++			     sal_True );
++
++    if (!FcPatternGetInteger (fc_font, FC_WEIGHT, 0, &fc_int))
++      {
++	if (fc_int < FC_WEIGHT_LIGHT)
++	  pFont->m_eWeight = weight::UltraLight;
++	else if (fc_int == FC_WEIGHT_LIGHT)
++	  pFont->m_eWeight = weight::Light;
++	else if (fc_int < FC_WEIGHT_MEDIUM)
++	  pFont->m_eWeight = weight::SemiLight;
++	else if (fc_int == FC_WEIGHT_MEDIUM)
++	  pFont->m_eWeight = weight::Normal;
++	else if (fc_int < FC_WEIGHT_DEMIBOLD)
++	  pFont->m_eWeight = weight::Medium;
++	else if (fc_int == FC_WEIGHT_DEMIBOLD)
++	  pFont->m_eWeight = weight::SemiBold;
++	else if (fc_int <= FC_WEIGHT_BOLD)
++	  pFont->m_eWeight = weight::Bold;
++	else if (fc_int < FC_WEIGHT_BLACK)
++	  pFont->m_eWeight = weight::UltraBold;
++	else
++	  pFont->m_eWeight = weight::Black;
++      }
++
++    if (!FcPatternGetInteger (fc_font, FC_SLANT, 0, &fc_int))
++      {
++	if (fc_int <= FC_SLANT_ROMAN)
++	  pFont->m_eItalic = italic::Upright;
++	else if (fc_int <= FC_SLANT_ITALIC)
++	  pFont->m_eItalic = italic::Italic;
++	else if (fc_int <= FC_SLANT_ITALIC)
++	  pFont->m_eItalic = italic::Oblique;
++      }
++
++    /* FIXME: this used to be parsed from XLFD (parseWidth) */
++    pFont->m_eWidth = width::Normal;
++
++    if (!FcPatternGetInteger (fc_font, FC_SLANT, 0, &fc_int))
++      {
++	if (fc_int > FC_PROPORTIONAL && (fc_int <= FC_MONO ||
++					      fc_int <= FC_CHARCELL))
++	  pFont->m_ePitch = pitch::Fixed;
++	else
++	  pFont->m_ePitch = pitch::Variable;
++      }
++     else
++         pFont->m_ePitch = pitch::Variable;
++
++#warning Missing encoding fixup ! 
++
++ }
++#endif
+ 
+ // -------------------------------------------------------------------------
+ 
+@@ -1552,6 +1758,7 @@
+ 
+ // -------------------------------------------------------------------------
+ 
++#ifndef FONTCONFIG_FONTS
+ static void normPath( ByteString& rPath )
+ {
+     char buf[PATH_MAX];
+@@ -1614,6 +1821,37 @@
+ #endif
+ }
+ 
++#else
++
++void 
++PrintFontManager::addFcSystemFont (struct _FcPattern *fc_pattern)
++ {
++  FcChar8 *fc_str = NULL;
++  if( FcPatternGetString( fc_pattern, FC_FILE, 0, &fc_str ) || !fc_str)
++    return;
++  
++  OString aFileName( (sal_Char *) fc_str );
++
++  addFontFile( aFileName, fc_pattern, false );
++}
++
++void
++PrintFontManager::addFcSystemFontSet( FcFontSet *fc_set )
++{
++  int i;
++  if (!fc_set)
++    return;
++ 
++  for (i = 0; i < fc_set->nfont; i++)
++    {
++      FcPattern *font = fc_set->fonts[i];
++      if (!font)
++         continue;
++      addFcSystemFont( font );
++    }
++}
++#endif
++
+ void PrintFontManager::initialize( void* pInitDisplay )
+ {
+     long aDirEntBuffer[ (sizeof(struct dirent)+_PC_NAME_MAX)+1 ];
+@@ -1639,8 +1877,10 @@
+             delete (*it).second;
+         m_nNextFontID = 1;
+         m_aFonts.clear();
++#ifndef FONTCONFIG_FONTS
+         m_aFontDirectories.clear();
+         m_aPrivateFontDirectories.clear();
++#endif
+     }
+ 
+ #if OSL_DEBUG_LEVEL > 1
+@@ -1656,6 +1896,7 @@
+     aStart = times( &tms );
+ #endif
+ 
++#ifndef FONTCONFIG_FONTS
+     // part one - look for downloadable fonts
+     rtl_TextEncoding aEncoding = osl_getThreadTextEncoding();
+     const ::rtl::OUString &rSalPrivatePath = psp::getFontPath();
+@@ -1864,6 +2105,15 @@
+                 m_pFontCache->markEmptyDir( nDirID );
+         }
+     }
++#else /* FONTCONFIG_FONTS */
++
++    FcConfig *config = FcInitLoadConfigAndFonts();
++    if ( !config)
++      fprintf( stderr, "Can't init fontconfig\n" );
++
++    addFcSystemFontSet( FcConfigGetFonts( config, FcSetSystem ) );
++    addFcSystemFontSet( FcConfigGetFonts( config, FcSetApplication ) );
++#endif
+ 
+ #if OSL_DEBUG_LEVEL > 1
+     aStep1 = times( &tms );
+@@ -1876,8 +2126,9 @@
+     std::list< OString > aEmptyFontsDir;
+     for( std::list< OUString >::const_iterator met_dir_it = aMetricDirs.begin(); met_dir_it != aMetricDirs.end(); ++met_dir_it )
+     {
+-        OString aDir = OUStringToOString( *met_dir_it, aEncoding );
++        OString aDir = OUStringToOString( *met_dir_it, osl_getThreadTextEncoding() );
+ 
++#ifndef FONTCONFIG_FONTS
+         // ask the font cache whether it handles this directory
+         std::list< PrintFont* > aCacheFonts;
+         
+@@ -1907,6 +2158,7 @@
+             }
+             continue;
+         }
++#endif
+ 
+         DIR* pDIR = opendir( aDir.getStr() );
+         if( pDIR )
+@@ -1925,10 +2177,13 @@
+                     && S_ISREG( aStat.st_mode )
+                     )
+                 {
+-                    OString aFileName( pDirEntry->d_name, strlen( pDirEntry->d_name ) );
++                    OString aFileName( aFile );
+                     OString aExt( aFileName.copy( aFileName.lastIndexOf( '.' )+1 ) );
+                     if( aExt.equalsIgnoreAsciiCase( "afm" ) )
+                     {
++#ifdef FONTCONFIG_FONTS
++			    addFontFile( aFileName, NULL, true );
++#else
+                         ::std::list< PrintFont* > aNewFonts;
+ 
+                         analyzeFontFile( nDirID, aFileName, true, aEmptyFontsDir, aNewFonts );
+@@ -1946,6 +2201,7 @@
+                             else
+                                 delete *it;
+                         }
++#endif
+                     }
+                 }
+             }
+@@ -2102,14 +2358,7 @@
+ 
+ void PrintFontManager::fillPrintFontInfo( PrintFont* pFont, PrintFontInfo& rInfo ) const
+ {
+-    if( pFont->m_nAscend == 0 && pFont->m_nDescend == 0 )
+-    {
+-        // might be a truetype font not analyzed or type1 without metrics read
+-        if( pFont->m_eType == fonttype::Type1 )
+-            pFont->readAfmMetrics( getAfmFile( pFont ), m_pAtoms );
+-        else if( pFont->m_eType == fonttype::TrueType )
+-            analyzeTrueTypeFile( pFont );
+-    }
++    ensureAnalysed( pFont );
+ 
+     fillPrintFontInfo( pFont, static_cast< FastPrintFontInfo& >( rInfo ) );
+ 
+@@ -2304,6 +2553,7 @@
+ const ::rtl::OUString& PrintFontManager::getFontFamily( fontID nFontID ) const
+ {
+     PrintFont* pFont = getFont( nFontID );
++    ensureAnalysed( pFont );
+     return m_pAtoms->getString( ATOM_FAMILYNAME, pFont ? pFont->m_nFamilyName : INVALID_ATOM );
+ }
+ 
+@@ -2367,11 +2617,8 @@
+ const ::rtl::OUString& PrintFontManager::getPSName( fontID nFontID ) const
+ {
+     PrintFont* pFont = getFont( nFontID );
+-    if( pFont && pFont->m_nPSName == 0 )
+-    {
+-        if( pFont->m_eType == fonttype::TrueType )
+-            analyzeTrueTypeFile( pFont );
+-    }
++
++    ensureAnalysed( pFont );
+ 
+     return m_pAtoms->getString( ATOM_PSNAME, pFont ? pFont->m_nPSName : INVALID_ATOM );
+ }
+@@ -2390,12 +2637,7 @@
+ int PrintFontManager::getFontAscend( fontID nFontID ) const
+ {
+     PrintFont* pFont = getFont( nFontID );
+-    if( pFont->m_nAscend == 0 && pFont->m_nDescend == 0 )
+-    {
+-        // might be a truetype font not yet analyzed
+-        if( pFont->m_eType == fonttype::TrueType )
+-            analyzeTrueTypeFile( pFont );
+-    }
++    ensureAnalysed( pFont );
+     return pFont->m_nAscend;
+ }
+ 
+@@ -2404,12 +2646,7 @@
+ int PrintFontManager::getFontDescend( fontID nFontID ) const
+ {
+     PrintFont* pFont = getFont( nFontID );
+-    if( pFont->m_nAscend == 0 && pFont->m_nDescend == 0 )
+-    {
+-        // might be a truetype font not yet analyzed
+-        if( pFont->m_eType == fonttype::TrueType )
+-            analyzeTrueTypeFile( pFont );
+-    }
++    ensureAnalysed( pFont );
+     return pFont->m_nDescend;
+ }
+ 
+@@ -2418,12 +2655,7 @@
+ int PrintFontManager::getFontLeading( fontID nFontID ) const
+ {
+     PrintFont* pFont = getFont( nFontID );
+-    if( pFont->m_nAscend == 0 && pFont->m_nDescend == 0 )
+-    {
+-        // might be a truetype font not yet analyzed
+-        if( pFont->m_eType == fonttype::TrueType )
+-            analyzeTrueTypeFile( pFont );
+-    }
++    ensureAnalysed( pFont );
+     return pFont->m_nLeading;
+ }
+ 
+@@ -2432,12 +2664,7 @@
+ bool PrintFontManager::hasVerticalSubstitutions( fontID nFontID ) const
+ {
+     PrintFont* pFont = getFont( nFontID );
+-    if( pFont->m_nAscend == 0 && pFont->m_nDescend == 0 )
+-    {
+-        // might be a truetype font not yet analyzed
+-        if( pFont->m_eType == fonttype::TrueType )
+-            analyzeTrueTypeFile( pFont );
+-    }
++    ensureAnalysed( pFont );
+     return pFont->m_bHaveVerticalSubstitutedGlyphs;
+ }
+ 
+@@ -2447,12 +2674,8 @@
+     const sal_Unicode* pCharacters, int nCharacters, bool* pHasSubst ) const
+ {
+     PrintFont* pFont = getFont( nFontID );
+-    if( pFont->m_nAscend == 0 && pFont->m_nDescend == 0 )
+-    {
+-        // might be a truetype font not yet analyzed
+-        if( pFont->m_eType == fonttype::TrueType )
+-            analyzeTrueTypeFile( pFont );
+-    }
++
++    ensureAnalysed( pFont );
+ 
+     if( ! pFont->m_bHaveVerticalSubstitutedGlyphs )
+         memset( pHasSubst, 0, sizeof(bool)*nCharacters );
+@@ -2471,7 +2694,7 @@
+ }
+ 
+ // -------------------------------------------------------------------------
+-
++#ifndef FONTCONFIG_FONTS
+ OUString PrintFontManager::getFontXLFD( fontID nFontID ) const
+ {
+     PrintFont* pFont = getFont( nFontID );
+@@ -2484,6 +2707,7 @@
+     }
+     return aRet;
+ }
++#endif
+ 
+ // -------------------------------------------------------------------------
+ 
+@@ -2495,6 +2719,7 @@
+     if( ! pFont )
+         return aEmpty;
+ 
++    ensureAnalysed( pFont );
+     if( ! pFont->m_pMetrics || ! pFont->m_pMetrics->m_bKernPairsQueried )
+         pFont->queryMetricPage( 0, m_pAtoms );
+     if( ! pFont->m_pMetrics || ! pFont->m_pMetrics->m_bKernPairsQueried )
+@@ -2548,14 +2773,7 @@
+     if( ! pFont )
+         return false;
+ 
+-    if( pFont->m_nAscend == 0 && pFont->m_nDescend == 0 )
+-    {
+-        // might be a font not yet analyzed
+-        if( pFont->m_eType == fonttype::Type1 )
+-            pFont->readAfmMetrics( getAfmFile( pFont ), m_pAtoms );
+-        else if( pFont->m_eType == fonttype::TrueType )
+-            analyzeTrueTypeFile( pFont );
+-    }
++    ensureAnalysed( pFont );
+ 
+     for( int i = 0; i < nLen; i++ )
+     {
+@@ -2615,7 +2833,7 @@
+ }
+ 
+ // -------------------------------------------------------------------------
+-
++#ifndef FONTCONFIG_FONTS
+ static bool createPath( const ByteString& rPath )
+ {
+     bool bSuccess = false;
+@@ -3245,6 +3463,7 @@
+     }
+     return rNames.begin() != rNames.end();
+ }
++#endif /* FONTCONFIG_FONTS */
+ 
+ // -------------------------------------------------------------------------
+ 
+diff -urN psprint-old/source/fontmanager/makefile.mk psprint/source/fontmanager/makefile.mk
+--- psprint-old/source/fontmanager/makefile.mk	2003-10-12 23:44:57.000000000 +0200
++++ psprint/source/fontmanager/makefile.mk	2003-10-13 02:15:28.000000000 +0200
+@@ -79,6 +79,9 @@
+ 	$(SLO)$/fontcache.obj		\
+ 	$(SLO)$/parseAFM.obj
+ 
++.IF "$(FONTCONFIG_FONTS)" == "YES"
++CFLAGS+=$(FONTCONFIG_CFLAGS) -Wall -DFONTCONFIG_FONTS
++.ENDIF
+ .IF "$(OS)$(CPU)"=="SOLARISI"
+ NOOPTFILES=$(SLO)$/fontmanager.obj
+ .ENDIF
+diff -urN vcl-old/unx/source/gdi/salgdi3.cxx vcl/unx/source/gdi/salgdi3.cxx
+--- vcl-old/unx/source/gdi/salgdi3.cxx	2003-10-13 00:13:43.000000000 +0200
++++ vcl/unx/source/gdi/salgdi3.cxx	2003-10-13 02:08:13.000000000 +0200
+@@ -1778,6 +1778,7 @@
+     else
+ #endif
+     {
++#ifdef NASTY_X_FONTS
+         XlfdStorage* pFonts = _GetDisplay()->GetXlfdList();
+ 
+         for ( int nIdx = 0; nIdx < pFonts->GetCount(); nIdx++ )
+@@ -1790,6 +1791,7 @@
+             pFontData->mbEmbeddable     = FALSE;
+             pList->Add( pFontData );
+         }
++#endif
+ 
+ #ifdef USE_BUILTIN_RASTERIZER
+         aX11GlyphPeer.SetDisplay( maGraphicsData.GetXDisplay(),
+@@ -1838,6 +1840,7 @@
+ 
+ void SalGraphics::GetDevFontSubstList( OutputDevice* pOutDev )
+ {
++#ifndef FONTCONFIG_FONTS
+ #ifndef _USE_PRINT_EXTENSION_
+     if( maGraphicsData.m_pPrinterGfx != NULL )
+     {
+@@ -1849,6 +1852,7 @@
+         }
+     }
+ #endif
++#endif
+ }
+ 
+ // ----------------------------------------------------------------------------
+diff -urN psprint-old/util/makefile.mk psprint/util/makefile.mk
+--- psprint-old/util/makefile.mk	2003-10-12 23:44:57.000000000 +0200
++++ psprint/util/makefile.mk	2003-10-13 03:15:24.000000000 +0200
+@@ -99,6 +99,10 @@
+ 			$(SALLIB)			\
+ 			-lX11
+ 
++.IF "$(FONTCONFIG_FONTS)" == "YES"
++SHL1STDLIBS+=$(FONTCONFIG_LIBS)
++.ENDIF
++
+ SHL1DEF=	$(MISC)$/$(SHL1TARGET).def
+ 
+ .ENDIF      # "$(OS)"=="WNT"
+Index: vcl/unx/source/gdi/makefile.mk
+===================================================================
+RCS file: /cvs/gsl/vcl/unx/source/gdi/vcl/unx/source/gdi/makefile.mk,v
+retrieving revision 1.9
+diff -u -r1.9 vcl/unx/source/gdi/makefile.mk
+--- vcl/unx/source/gdi/makefile.mk	27 Aug 2002 14:52:35 -0000	1.9
++++ vcl/unx/source/gdi/makefile.mk	21 Oct 2003 07:45:28 -0000
+@@ -106,6 +106,10 @@
+ SLOFILES+=$(SLO)$/salprnpsp.obj
+ .ENDIF
+ 
++.IF "$(FONTCONFIG_FONTS)" == "YES"
++CFLAGS+=$(FONTCONFIG_CFLAGS) -DFONTCONFIG_FONTS
++.ENDIF
++
+ .IF "$(OS)"=="SOLARIS"
+ SLOFILES+=$(SLO)$/cdeint.obj
+ ENVCFLAGS+=-DUSE_CDE

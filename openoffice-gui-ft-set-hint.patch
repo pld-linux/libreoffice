@@ -1,0 +1,43 @@
+Index: vcl/source/glyphs/gcach_ftyp.cxx
+===================================================================
+RCS file: /cvs/gsl/vcl/source/glyphs/gcach_ftyp.cxx,v
+retrieving revision 1.91
+diff -u -p -u -r1.91 gcach_ftyp.cxx
+--- vcl/source/glyphs/gcach_ftyp.cxx	28 May 2003 12:31:48 -0000	1.91
++++ vcl/source/glyphs/gcach_ftyp.cxx	4 Jun 2003 11:04:24 -0000
+@@ -904,7 +911,7 @@ void FreetypeServerFont::InitGlyphData( 
+     int nGlyphFlags;
+     SplitGlyphFlags( *this, nGlyphIndex, nGlyphFlags );
+ 
+-    int nLoadFlags = mnLoadFlags;
++    int nLoadFlags = mnLoadFlags | FT_LOAD_TARGET_LIGHT;
+     if( nGlyphFlags & GF_UNHINTED )
+         nLoadFlags |= FT_LOAD_NO_HINTING;
+ 
+@@ -981,7 +988,7 @@ bool FreetypeServerFont::GetGlyphBitmap1
+     int nGlyphFlags;
+     SplitGlyphFlags( *this, nGlyphIndex, nGlyphFlags );
+ 
+-    FT_Int nLoadFlags = mnLoadFlags;
++    FT_Int nLoadFlags = mnLoadFlags | FT_LOAD_TARGET_LIGHT;
+ 
+ #if (FTVERSION >= 2002)
+     // for 0/90/180/270 degree fonts enable autohinting even if not advisable
+@@ -1072,7 +1079,7 @@ bool FreetypeServerFont::GetGlyphBitmap8
+     int nGlyphFlags;
+     SplitGlyphFlags( *this, nGlyphIndex, nGlyphFlags );
+ 
+-    FT_Int nLoadFlags = mnLoadFlags;
++    FT_Int nLoadFlags = mnLoadFlags | FT_LOAD_TARGET_LIGHT;
+ 
+ #if (FTVERSION <= 2004) && !defined(TT_CONFIG_OPTION_BYTECODE_INTERPRETER)
+     // autohinting in FT<=2.0.4 makes antialiased glyphs look worse
+@@ -1600,7 +1607,7 @@ bool FreetypeServerFont::GetGlyphOutline
+     int nGlyphFlags;
+     SplitGlyphFlags( *this, nGlyphIndex, nGlyphFlags );
+ 
+-    FT_Int nLoadFlags = FT_LOAD_NO_HINTING | FT_LOAD_NO_BITMAP;
++    FT_Int nLoadFlags = FT_LOAD_NO_HINTING | FT_LOAD_NO_BITMAP | FT_LOAD_TARGET_LIGHT;
+     FT_Error rc = FT_Load_Glyph( maFaceFT, nGlyphIndex, nLoadFlags );
+     if( rc != FT_Err_Ok )
+         return false;
