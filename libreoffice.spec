@@ -573,7 +573,7 @@ Finnish language.
 Ten pakiet dostarcza zasoby zawieraj±ce menu i okna dialogowe w jêzyku
 fiñskim.
 
-#%files i18n-fi -f fi.lang
+%files i18n-fi -f fi.lang
 
 %package i18n-fr
 Summary:	OpenOffice.org - interface in French language
@@ -846,22 +846,6 @@ Ten pakiet dostarcza zasoby zawieraj±ce menu i okna dialogowe w jêzyku
 portugalskim.
 
 %files i18n-pt -f pt.lang
-
-%package i18n-br
-Summary:	OpenOffice.org - interface in Portuguese Brazylian language
-Summary(pl):	OpenOffice.org - interfejs w jêzyku portugalskim (brazylia)
-Group:		Applications/Office
-Requires:	%{name} = %{epoch}:%{version}-%{release}
-
-%description i18n-br
-This package provides resources containing menus and dialogs in
-Portuguese Brazylian language.
-
-%description i18n-br -l pl
-Ten pakiet dostarcza zasoby zawieraj±ce menu i okna dialogowe w jêzyku
-portugalskim (odmiana brazylijska).
-
-%files i18n-br -f br.lang
 
 %package i18n-ro
 Summary:        OpenOffice.org - interface in RO language
@@ -1157,8 +1141,22 @@ rm -f $RPM_BUILD_ROOT%{_libdir}/%{name}/program/libgcc_s.so* \
 # Find out locales
 rm -f *.lang
 # Take list from dictionaries
+langlist=""
 for lang in $RPM_BUILD_ROOT%{_libdir}/%{name}/share/dict/ooo/*.aff; do
-	lang=$(echo "$lang" | sed -e 's#.*/\(.*\)\.aff#\1#g')
+	langlist="$langlist $(echo "$lang" | sed -e 's#.*/\(.*\)\.aff#\1#g')"
+done
+for lang in $RPM_BUILD_ROOT%{_libdir}/%{name}/share/registry/res/*; do
+	[ ! -d "$lang" ] && continue
+	langlist="$langlist $(echo "$lang" | sed -e 's#.*/\(.*\)#\1#g' -e 's#-.*##g')"
+done
+for lang in $RPM_BUILD_ROOT%{_libdir}/%{name}/help/*; do
+	[ ! -d "$lang" ] && continue
+        langlist="$langlist $(echo "$lang" | sed -e 's#.*/\(.*\)#\1#g' -e 's#-.*##g')"
+done
+langlist=$(echo "$langlist" | tr ' ' '\n' | sort | uniq | grep -v '^$')
+echo "LANGLIST [$langlist]"
+
+for lang in $langlist; do
 	eval `echo "$lang" | awk -F_ ' { print "FLANG=\"" $1 "\"\nSLANG=\"" $2 "\"\nTLANG=\"" $3 "\""; } '`
 	# we take only first code ie xx_YY -> we take xx
 	nlang="$FLANG"
