@@ -120,7 +120,7 @@
 -..\%__SRC%\lib\libdb-3.2.so %_DEST%\lib%_EXT%\libdb-3.2.so
 -..\%__SRC%\lib\libdb_java-3.2.so %_DEST%\lib%_EXT%\libdb_java-3.2.so
 -..\%__SRC%\lib\libdb_cxx-3.2.so %_DEST%\lib%_EXT%\libdb_cxx-3.2.so
-+\lib\libdb-4.0.so %_DEST%\lib%_EXT%\libdb-4.0.so
++\usr\lib\libdb-4.0.so %_DEST%\lib%_EXT%\libdb-4.0.so
 +\usr\lib\libdb_java-4.0.so %_DEST%\lib%_EXT%\libdb_java-4.0.so
 +\usr\lib\libdb_cxx-4.0.so %_DEST%\lib%_EXT%\libdb_cxx-4.0.so
  
@@ -171,46 +171,3 @@
  #endif
  #ifndef _URLPARAMETER_HXX_
  #include <provider/urlparameter.hxx>
---- ooold/scp/source/office/files.scp	Thu Apr 18 12:56:48 2002
-+++ oonew/scp/source/office/files.scp	Mon Apr 22 18:23:15 2002
-@@ -1009,40 +1009,13 @@
- 
- #endif
- 
--File GID_FILE_LIB_DB31
--        BIN_FILE_BODY;
--        Styles          = (PACKED);
--        Dir             = GID_DIR_PROGRAM;
--        #ifdef UNX
--        Name            = "libdb-3.2.so";
--        #else
--        Name            = "libdb32.dll";
--        #endif
--End
--
- #ifdef SOLAR_JAVA
- 
--File GID_FILE_LIB_DBJAVA31
--        BIN_FILE_BODY;
--        Styles          = (PACKED);
--        Dir             = GID_DIR_PROGRAM;
--        #ifdef UNX
--        Name            = "libdb_java-3.2.so";
--        #else
--        Name            = "libdb_java32.dll";
--        #endif
--End
- 
- #endif
- 
- #ifdef UNX
- 
--File GID_FILE_LIB_DB_CXX
--        BIN_FILE_BODY;
--        Styles          = (PACKED);
--        Dir             = GID_DIR_PROGRAM;
--        Name            = "libdb_cxx-3.2.so";
--End
- 
- #endif
- 
