@@ -9,6 +9,8 @@
 #	- --with-system-neon - check compilation (works with 0.23 but not 0.24)
 #	- in gtk version menu highlight has almost the same colour as menu text
 #	- 6 user/config/*.so? files shared between -i18n-en and -i18n-sl
+#	- remove oohtml symlink (there is ooweb),
+#	- add ooglobal symlink and it's ooo-wrapper entry (among calc|draw|impress|math|web|writer)
 
 # Conditional build:
 %bcond_with	java		# Java support
@@ -26,7 +28,7 @@ Summary:	OpenOffice - powerful office suite
 Summary(pl):	OpenOffice - potê¿ny pakiet biurowy
 Name:		openoffice
 Version:	%{fullver}
-Release:	0.1
+Release:	0.2
 Epoch:		1
 License:	GPL/LGPL
 Group:		X11/Applications
@@ -39,8 +41,16 @@ Source2:	http://ooo.ximian.com/packages/ooo-icons-OOO_1_1-9.tar.gz
 # Source2-md5:	32a0e62f89ef36a91437fc705fbe6440
 Source3:	http://kde.openoffice.org/files/nidaba/documents/159/1929/ooo-KDE_icons-OOO_1_1-0.2.tar.gz
 # Source3-md5:	50486f5208ec5ae7af1dbb8f9e77cb12
-Source10:	%{name}-desktopfiles-0.2a.tar.bz2
-# Source10-md5:	ce496b94afa96800d0d365f91106a4d6
+Source10:	oocalc.desktop
+Source11:	oodraw.desktop
+Source12:	ooffice.desktop
+Source13:	ooglobal.desktop
+Source14:	ooimpress.desktop
+Source15:	oomath.desktop
+Source16:	ooooprinteradmin.desktop
+Source17:	oooosetup.desktop
+Source18:	ooweb.desktop
+Source19:	oowriter.desktop
 
 # we keep these in ooo-build repository
 # PLD splash screen
@@ -1104,7 +1114,16 @@ install -d $RPM_BUILD_ROOT%{_sysconfdir}/%{name}
 sed -e 's#DESTINATIONPATH=.*#DESTINATIONPATH=<home>/.openoffice#g' etc/redhat-autoresponse.conf > $RPM_BUILD_ROOT%{_sysconfdir}/%{name}/autoresponse.conf
 
 install -d $RPM_BUILD_ROOT%{_desktopdir}
-bzip2 -dc %{SOURCE10} | tar xf - -C $RPM_BUILD_ROOT%{_desktopdir}
+install %{SOURCE10} $RPM_BUILD_ROOT%{_desktopdir}
+install %{SOURCE11} $RPM_BUILD_ROOT%{_desktopdir}
+install %{SOURCE12} $RPM_BUILD_ROOT%{_desktopdir}
+install %{SOURCE13} $RPM_BUILD_ROOT%{_desktopdir}
+install %{SOURCE14} $RPM_BUILD_ROOT%{_desktopdir}
+install %{SOURCE15} $RPM_BUILD_ROOT%{_desktopdir}
+install %{SOURCE16} $RPM_BUILD_ROOT%{_desktopdir}
+install %{SOURCE17} $RPM_BUILD_ROOT%{_desktopdir}
+install %{SOURCE18} $RPM_BUILD_ROOT%{_desktopdir}
+install %{SOURCE19} $RPM_BUILD_ROOT%{_desktopdir}
 
 # Add in the regcomp tool since some people need it for 3rd party add-ons
 cp -f build/OOO_%{dfullver}/solver/%{subver}/unxlng*.pro/bin/regcomp $RPM_BUILD_ROOT%{_libdir}/%{name}/program
