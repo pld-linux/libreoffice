@@ -263,6 +263,8 @@ Patch508: openoffice-buildset.patch
 Patch509: openoffice-vcl-dynamic-Xinerama.patch
 Patch510: openoffice-1.1-psprint-cups-PPD.patch
 
+Patch600: openoffice-freetype_2_1_7.patch
+
 URL:		http://www.openoffice.org/
 BuildRequires:	STLport-devel >= 4.5.3-6
 BuildRequires:	XFree86-devel
@@ -1063,6 +1065,8 @@ rm -f moz/prj/d.lst
 #%patch508 -p0
 %patch509 -p0
 %patch510 -p1 
+
+%patch600 -p1
 
 # gcc 2 include error hack:
 rm -rf autodoc/source/inc/utility
