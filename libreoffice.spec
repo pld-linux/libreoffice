@@ -170,6 +170,8 @@ Patch222: openoffice-ooo111-general-io-error-sxi.patch
 Patch223: openoffice-startup-fix.patch
 Patch224: openoffice-svx-freeze-fix.patch
 Patch225: openoffice-wm-dialog-utility.patch
+Patch226: openoffice-db-dbcxx.patch
+Patch227: openoffice-fix-parallel-build.patch
 
 Patch301: openoffice-splash.patch
 
@@ -903,6 +905,8 @@ rm -f moz/prj/d.lst
 %patch223 -p0
 %patch224 -p0 
 %patch225 -p0
+%patch226 -p1
+%patch227 -p1
 
 %patch301 -p1 
 
@@ -922,7 +926,7 @@ rm -f moz/prj/d.lst
 # gui 
 %patch361 -p0 
 %patch362 -p0
-#%patch363 -p0 
+%patch363 -p0 
 %patch364 -p0 
 
 # fonts
