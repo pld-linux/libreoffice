@@ -1,7 +1,3 @@
-
-# Conditional build:
-# _with_ra			- build in RA environment
-
 %define		ver		1.1
 %define		rel		rc2
 %define		fullver		%{ver}%{rel}
@@ -10,7 +6,7 @@ Summary:	OpenOffice - powerful office suite
 Summary(pl):	OpenOffice - potê¿ny pakiet biurowy
 Name:		openoffice
 Version:	%{ver}
-Release:	0.%{rel}.2
+Release:	0.%{rel}.3
 Epoch:		1
 License:	GPL/LGPL
 Group:		X11/Applications
@@ -91,7 +87,6 @@ Patch19:	%{name}-no-mozab.patch
 Patch20:	%{name}-no-mozab2.patch
 
 Patch21:	%{name}-system-db.patch
-Patch22:	%{name}-system_ra-db.patch
 
 Patch24:	%{name}-autodoc.patch
 
@@ -109,23 +104,16 @@ Patch63:	%{name}-stlutility.patch
 Patch64:	%{name}-crashrepgtk.patch
 
 URL:		http://www.openoffice.org/
-%if %{?_with_ra:0}%{!?_with_ra:1}
 BuildRequires:	db
 BuildRequires:	db-devel
 BuildRequires:	db-cxx
 BuildRequires:	db-java
 BuildRequires:	libstdc++-devel >= 3.2.1
-%else
-BuildRequires:	db3
-BuildRequires:	db3-devel
-BuildRequires:	db3-java
-BuildRequires:	libstdc++-devel < 3.2.1
-%endif
 BuildRequires:	gcc
 BuildRequires:	gcc-c++
 #BuildRequires:	gcc-java
 
-BuildRequires:	STLport-devel >= 4.5.3-3
+BuildRequires:	STLport-devel >= 4.5.3-6
 BuildRequires:	XFree86-devel
 BuildRequires:	autoconf
 BuildRequires:	automake
@@ -160,12 +148,8 @@ BuildRequires:	zlib-static
 Requires:	%{name}-libs = %{epoch}:%{version}-%{release}
 Requires:	%{name}-i18n-en = %{epoch}:%{version}-%{release}
 Requires:	%{name}-dict-en
-%if %{?_with_ra:0}%{!?_with_ra:1}
 Requires:	libstdc++ >= 3.2.1
 Requires:	db
-%else
-Requires:	libstdc++ < 3.2.1
-Requires:	db3
 %endif
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
@@ -238,7 +222,7 @@ Pakiet biurowy OpenOffice.org - biblioteki.
 # ENUS should be always "yes"
 %define		have_ENUS	yes
 %define		have_SPAN	yes
-%define		have_FINN	no
+%define		have_FINN	yes
 %define		have_FREN	yes
 %define		have_ITAL	yes
 %define		have_JAPN	yes
@@ -708,11 +692,7 @@ chiñskim dla Tajwanu.
 
 %patch19 -p1
 %patch20 -p1
-%if 0%{!?_with_ra:1}
 %patch21 -p1
-%else
-%patch22 -p1
-%endif
 
 %patch30 -p1
 
@@ -731,11 +711,9 @@ install %{SOURCE1} external
 cd external; tar fxz %{SOURCE1}; cp -fr gpc231/* gpc
 cd ..
 
-%if %{?_with_ra:0}%{!?_with_ra:1}
 install -d solver/%{subver}/%{_archbuilddir}/lib
 cp -f /lib/libgcc_s.so.1* solver/%{subver}/%{_archbuilddir}/lib
 cp /usr/lib/libstdc++.so.5* solver/%{subver}/%{_archbuilddir}/lib
-%endif
 
 
 %build
@@ -761,11 +739,7 @@ chmod u+rx prep compile
 ./prep
 
 install -d solver/%{subver}/%{_archbuilddir}/bin
-%if %{?_with_ra:0}%{!?_with_ra:1}
 install /usr/lib/db.jar solver/%{subver}/%{_archbuilddir}/bin/db.jar
-%else
-install %{SOURCE10} solver/%{subver}/%{_archbuilddir}/bin/db.jar
-%endif
 
 ./compile
 
@@ -1101,7 +1075,7 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 #%%doc readlicense/source/license/unx/LICENSE
 %doc %{oolib}/LICENSE*
-%doc %{oolib}/README*
+%doc %{oolib}/*README*
 
 %dir %{_sysconfdir}/openoffice
 %config %{_sysconfdir}/openoffice/autoresponse.conf
@@ -1122,6 +1096,7 @@ rm -rf $RPM_BUILD_ROOT
 
 %{oolib}/program/*.rdb
 %{oolib}/program/*.bmp
+%{oolib}/program/user_registry.xsl
 
 %{oolib}/program/sofficerc
 %{oolib}/program/unorc
