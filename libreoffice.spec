@@ -36,6 +36,7 @@ BuildRequires:	automake
 BuildRequires:	flex
 BuildRequires:	pam-devel
 BuildRequires:	XFree86-fonts-PEX
+BuildRequires:  bison
 %{?!_with_ibm_java:BuildRequires: jdk = 1.3.1_03}
 %{?_with_ibm_java:BuildRequires: ibm-java-sdk}
 %{?!_with_nest:BuildRequires:	gcc <= 3.0.0}
