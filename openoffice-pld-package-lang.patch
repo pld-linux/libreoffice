@@ -1,6 +1,6 @@
 diff -urN ooo-build-1.1.54.org/bin/package-lang ooo-build-1.1.54/bin/package-lang
---- ooo-build-1.1.54.org/bin/package-lang	2004-04-30 02:50:20.270649456 +0200
-+++ ooo-build-1.1.54/bin/package-lang	2004-05-01 01:19:04.193343256 +0200
+--- ooo-build-1.1.54.org/bin/package-lang	2004-04-30 02:50:20.000000000 +0200
++++ ooo-build-1.1.54/bin/package-lang	2004-05-03 15:29:28.605269720 +0200
 @@ -27,6 +27,7 @@
  }
  
@@ -38,17 +38,24 @@ diff -urN ooo-build-1.1.54.org/bin/package-lang ooo-build-1.1.54/bin/package-lan
  				
  				# Try to link file first
  				if(link($fileToCopy,$destFile)) {
-@@ -165,6 +174,9 @@
+@@ -165,6 +174,16 @@
  			    else {
  				my $fileToUnzip = $SolverDir . '/pck/' . $value->{Name};
  				if( -r $fileToUnzip ) {
 +
-+				    # also put archive files into LANGL (TODO)
++				    open(UNZIP, "$UnzipCommand -qq -l $fileToUnzip |");
++				    while (<UNZIP>) {
++					#    907346  08-19-03 20:29   th_fr_FR.dat
++				    	if ($_ =~ m/\s+\d+\s+\d+-\d+-\d+\s+\d+:\d+\s+(\S+)/m) {
++				    	    print LANGL "$outpath/$1\n";
++				    	}
++				    }
++				    close(UNZIP);
 +				    
  				    $action = "Unzip";
  				    system("$UnzipCommand -qq -o $fileToUnzip -d $outpath");
  				}
-@@ -176,12 +188,15 @@
+@@ -176,12 +195,15 @@
  			}
  		    }
  	    }
