@@ -1230,7 +1230,9 @@ fontpostinst TTF %{_fontsdir}/%{name}
 %dir %{_libdir}/%{name}/share/autocorr
 %dir %{_libdir}/%{name}/share/autotext
 %{_libdir}/%{name}/share/basic
+%dir %{_libdir}/%{name}/share/bookmark
 %{_libdir}/%{name}/share/config
+%dir %{_libdir}/%{name}/share/database
 %dir %{_libdir}/%{name}/share/dict
 %dir %{_libdir}/%{name}/share/dict/ooo
 %{_libdir}/%{name}/share/dtd
