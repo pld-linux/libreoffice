@@ -2,10 +2,6 @@
 # Conditional build:
 # _with_ra			- build in RA environment
 
-# TODO:
-# - finish localzation
-# - split %{oolib}/share/registry
-
 %define		ver		1.1
 %define		rel		rc
 %define		fullver		%{ver}%{rel}
@@ -14,7 +10,7 @@ Summary:	OpenOffice - powerful office suite
 Summary(pl):	OpenOffice - potê¿ny pakiet biurowy
 Name:		openoffice
 Version:	%{ver}
-Release:	0.%{rel}.2
+Release:	0.%{rel}.3
 Epoch:		1
 License:	GPL/LGPL
 Group:		X11/Applications
@@ -110,7 +106,6 @@ Patch32:	%{name}-fix-errno.patch
 Patch52:	%{name}-xmlhelp.patch
 
 Patch63:	%{name}-stlutility.patch
-#Patch64:	%{name}-openide.patch
 
 URL:		http://www.openoffice.org/
 %if %{?_with_ra:0}%{!?_with_ra:1}
@@ -131,8 +126,6 @@ BuildRequires:	gcc-c++
 
 BuildRequires:	STLport-devel >= 4.5.3-3
 BuildRequires:	XFree86-devel
-#BuildRequires:	XFree86-fonts-PEX
-BuildRequires:	XFree86-Xvfb
 BuildRequires:	autoconf
 BuildRequires:	automake
 BuildRequires:	bison >= 1.875-4
@@ -172,12 +165,6 @@ BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 %define	installpath	instsetoo/%{_archbuilddir}
 %define	subver		645
 %define	langinst	01
-
-# Find a free display (resources generation requires X) and sets XDISPLAY
-%define init_xdisplay XDISPLAY=0; while /bin/true; do if [ ! -f /tmp/.X$XDISPLAY-lock ]; then sleep 2s; ( /usr/X11R6/bin/Xvfb -ac :$XDISPLAY & 2>&1 > /dev/null); sleep 10s; if [ -f /tmp/.X$XDISPLAY-lock ]; then break; fi; fi; XDISPLAY=$(($XDISPLAY+1)); done
-
-# The virtual X server PID
-%define kill_xdisplay kill $(cat /tmp/.X$XDISPLAY-lock)
 
 %define oolib	%{_libdir}/openoffice
 %define dictlst	%{oolib}/share/dict/ooo/dictionary.lst
@@ -718,7 +705,6 @@ rm -f moz/prj/d.lst
 # 1.1 BETA
 %patch52 -p1
 %patch63 -p1
-#%patch64 -p1
 
 # gcc 2 include error hack:
 rm -rf autodoc/source/inc/utility
@@ -772,10 +758,6 @@ rm -rf $RPM_BUILD_ROOT
 OOBUILDDIR=`pwd`
 install -d $RPM_BUILD_ROOT%{oolib}
 
-if [ -z "$DISPLAY" ]; then
-	%{init_xdisplay}
-fi
-
 ### Instalation
 RESPONSE_FILE=$OOBUILDDIR/rsfile.ins
 cd %{installpath}/%{langinst}/normal/
@@ -787,8 +769,6 @@ cp -f setup.ins$suf1 setup.ins$suf2
 cat %{SOURCE2} | sed -e "s|@DESTDIR@|$RPM_BUILD_ROOT%{oolib}|" > $RESPONSE_FILE
 
 # Localize New and Wizard menus and OfficeObjects
-cp -p setup.ins setup.ins.localized
-
 TMPFILE=setup.pldtmp && rm -f $TMPFILE && touch $TMPFILE
 DIRS=`find ../../ -name "[0-9][0-9]" -and -not -name "%{langinst}" -printf "%%P "`
 for i in $DIRS; do
@@ -814,12 +794,7 @@ done
 #    >> setup.ins
 cat $TMPFILE >> setup.ins
 
-if [ -z "$DISPLAY" ]; then
-	DISPLAY=:$XDISPLAY ./setup -R:$RESPONSE_FILE
-	%{kill_xdisplay}
-else
-	./setup -R:$RESPONSE_FILE
-fi	
+./setup -v -nogui -R:$RESPONSE_FILE
 
 cd $OOBUILDDIR
 ### end of installation
@@ -929,9 +904,6 @@ done
 install -d $RPM_BUILD_ROOT%{_applnkdir}
 gunzip -dc %{SOURCE6} | tar xf - -C $RPM_BUILD_ROOT%{_applnkdir}
 
-## Remove any fake classes
-#rm -rf $RPM_BUILD_ROOT%{oolib}/program/classes
-
 # Remove stuff that should come from system libraries
 rm -rf $RPM_BUILD_ROOT%{oolib}/program/libdb-*
 rm -rf $RPM_BUILD_ROOT%{oolib}/program/libdb_*
@@ -964,26 +936,24 @@ ln -sf %{oolib}/program/setup $RPM_BUILD_ROOT%{oolib}/setup
 ln -sf %{oolib}/program/soffice $RPM_BUILD_ROOT%{oolib}/spadmin
 ln -sf %{oolib}/program/soffice $RPM_BUILD_ROOT%{oolib}/program/spadmin
 
-# Fixup installation directory
-perl -pi -e "s|$RPM_BUILD_ROOT||g" \
-  $RPM_BUILD_ROOT%{oolib}/share/config/registry/instance/org/openoffice/Office/Common.xml
-
 # Install autoresponse file for user installation
 install -d $RPM_BUILD_ROOT%{_sysconfdir}/openoffice
 cat %{SOURCE3} > $RPM_BUILD_ROOT%{_sysconfdir}/openoffice/autoresponse.conf
 
 # Install OpenOffice.org wrapper script
 install -d $RPM_BUILD_ROOT%{_bindir}
-cat %{SOURCE7} | sed -e "s/@OOVERSION@/%{subver}/" > $RPM_BUILD_ROOT%{_bindir}/ooffice
+cat %{SOURCE7} | sed -e "s/@OOVERSION@/%{subver}/" > \
+    $RPM_BUILD_ROOT%{_bindir}/ooffice
 
 # Install component wrapper scripts
 install -d $RPM_BUILD_ROOT%{_bindir}
 for app in %{apps}; do
-  cat %{SOURCE8} | sed -e "s/@APP@/${app}/" > $RPM_BUILD_ROOT%{_bindir}/oo${app}
+  cat %{SOURCE8} | sed -e "s/@APP@/${app}/" \
+    > $RPM_BUILD_ROOT%{_bindir}/oo${app}
 done
 
-echo 'UNO_WRITERDB=$SYSUSERCONFIG/.user60.rdb
-' >> $RPM_BUILD_ROOT%{oolib}/program/unorc
+echo 'UNO_WRITERDB=$SYSUSERCONFIG/.user60.rdb' \
+    >> $RPM_BUILD_ROOT%{oolib}/program/unorc
 
 # Build system in OO SUX
 rm -f $RPM_BUILD_ROOT%{oolib}/program/libstdc++*
@@ -991,97 +961,6 @@ rm -f $RPM_BUILD_ROOT%{oolib}/program/libstlport_gcc.so
 rm -f $RPM_BUILD_ROOT%{oolib}/program/libgcc_s.so.1
 
 rm -rf $RPM_BUILD_ROOT%{oolib}/share/template/{internal,wizard}
-
-# package files
-FindI18N() {
-#	$1 - OpenOffice language name 	eg. POL
-#	$2 - short language name	eg. pl
-#	$3 - long language name		eg. polish
-#	$4 - digit code			eg. 48
-#	$5 - "strange" shortcut		eg. pol
-    [ -z "$1" ] && return
-    shift
-
-    BUILDDIR=%(pwd)
-
-    echo "%defattr(644,root,root,755)" > "i18n-$1"
-    
-    DIRS="%{oolib}/user/autotext/$2"
-    DIRS="$DIRS %{oolib}/share/autotext/$2"
-    DIRS="$DIRS %{oolib}/share/template/$2"
-    DIRS="$DIRS %{oolib}/help/$1"
-    DIRS="$DIRS	%{oolib}/share/wordbook/$2"
-    
-    for DIR in $DIRS
-    do
-	if [ -d "$RPM_BUILD_ROOT/$DIR" ]; then
-	    echo "$DIR" >> "i18n-$1"
-	fi
-    done    
-    
-    PCKDIR=solver/%{subver}/%{_archbuilddir}/pck
-    FILES=""
-    [ -f "$PCKDIR/palettes$3.zip" ] && FILES="`unzip -l $PCKDIR/palettes$3.zip | awk '{ if (($4 != "")&&($4 != "----")&&($4 != "Name")) print $4 }'`"
-    [ "$1" = "en" ] && FILES="$FILES autotbl.fmt `unzip -l $PCKDIR/palettes.zip | awk '{ if (($4 != "")&&($4 != "----")&&($4 != "Name")) print $4 }'`"
-    for FILE in $FILES; do
-        echo "%{oolib}/user/config/$FILE" >> "i18n-$1"
-    done
-
-    FILES=""
-    [ -f "$PCKDIR/autocorr$3.zip" ] && FILES="`unzip -l $PCKDIR/autocorr$3.zip | awk '{ if (($4 != "")&&($4 != "----")&&($4 != "Name")) print $4 }'`"
-    for FILE in $FILES; do
-        echo "%{oolib}/share/autocorr/$FILE" >> "i18n-$1"
-    done
-
-    SUBF="abp analysis basctl bib cal cnt date dba dbi dbp dbu"
-    SUBF="$SUBF dbw dkt egi eme epb epg epn epp eps ept eur for"
-    SUBF="$SUBF frm gal imp iso jvm lgd oem ofa oic ooo pcr preload"
-    SUBF="$SUBF san sc sch sd set set_pp1 sfx sm spa stt svs svt"
-    SUBF="$SUBF svx sw tpl tplx uui vcl wwz com flash fwe pdffilter"
-    SUBF="$SUBF tk xsltdlg"
-    SVER=%{subver}
-    
-    for FILE in $SUBF
-    do
-	F="%{oolib}/program/resource/$FILE$SVER$3.res"
-	if [ -f "$RPM_BUILD_ROOT$F" ]; then
-	    echo "$F" >> "i18n-$1"
-	fi	
-    done
-
-    if [ -f $RPM_BUILD_ROOT/%{oolib}/program/instdb.ins.$1 ]
-    then
-	echo "%{oolib}/program/instdb.ins.$1" >> "i18n-$1"
-    fi
-
-    if [ ! -d "$RPM_BUILD_ROOT%{oolib}/help/$1" ]; then
-	ln -sf %{oolib}/help/en $RPM_BUILD_ROOT%{oolib}/help/$1
-	echo "%{oolib}/help/$1" >> "i18n-$1"
-    fi
-}
-
-FindI18N %{ARAB}	ar arabic 96 ""
-FindI18N %{CAT}		ca catalan 37 ""
-FindI18N %{CZECH}	cs czech 42 ""
-FindI18N %{DAN}		da danish 45 ""
-FindI18N %{GERM}	de german 49 ""
-FindI18N %{SPAN}	es spanish 34 ""
-FindI18N %{GREEK}	el greek 30 ""
-FindI18N %{ENUS}	en english 01 ""
-FindI18N %{FINN}	fi finnish 35 ""
-FindI18N %{FREN}	fr french 33 ""
-FindI18N %{ITAL}	it italian 39 ""
-FindI18N %{JAPN}	ja japanese 81 ""
-FindI18N %{KOREAN}	ko korean 82 ""
-FindI18N %{DTCH}	nl dutch 31 ""
-FindI18N %{POL}		pl polish 48 "pol"
-FindI18N %{PORT}	pt portuguese 03 ""
-FindI18N %{RUSS}	ru russian 07 "rus"
-FindI18N %{SLOVAK}	sk slovak 43 ""
-FindI18N %{SWED}	sv swedish 46 ""
-FindI18N %{TURK}	tr turkish 90 ""
-FindI18N %{CHINSIM}	zh_CN chinese_simplified 86 ""
-FindI18N %{CHINTRAD}	zh_TW chinese_traditional 88 ""
 
 # remove dictionaries
 rm -rf $RPM_BUILD_ROOT%{oolib}/share/dict/ooo/*
@@ -1094,6 +973,107 @@ for file in autodoc cppumaker idlc idlcpp javamaker rdbmaker regcomp \
 do
     cp solver/%{subver}/%{_archbuilddir}/bin/$file $RPM_BUILD_ROOT%{_bindir}
 done
+
+AddFiles() {
+    LOCALE=$1; shift
+    OPTIONS=$1; shift
+    ISDIR=$1; shift
+
+    while [ $# -gt 0 ]
+    do
+	F=$1; shift
+	if [ "$ISDIR" == "dir" ]; then
+	    [ ! -d $RPM_BUILD_ROOT/$F ] && continue
+	else
+	    [ ! -f $RPM_BUILD_ROOT/$F ] && continue
+	fi
+	
+	echo "$OPTIONS $F" >> "i18n-$LOCALE"
+    done
+}
+
+Multiply() {
+    PREFIX=$1; shift
+    SUFIX=$1; shift
+    while [ $# -gt 0 ]
+    do
+	echo "$PREFIX$1$SUFIX"
+	shift
+    done
+}
+
+# package files
+FindI18N() {
+#	$1 - OpenOffice language name 	eg. POL
+#	$2 - short language name	eg. pl
+#	$3 - digit code			eg. 48
+#	$4 - long language name		eg. polish
+#	$5 - "strange" shortcut		eg. pol
+#	$6 - any other name		eg. pl-PL
+    [ -z "$1" ] && return
+    shift
+
+    BUILDDIR=%(pwd)
+
+    echo "%defattr(644,root,root,755)" > "i18n-$1"
+    
+    AddFiles $1 "" dir %{oolib}/user/autotext/$3
+    AddFiles $1 "" dir %{oolib}/share/autotext/$3
+    AddFiles $1 "" dir %{oolib}/share/template/$3
+    AddFiles $1 "" dir %{oolib}/help/$1
+    AddFiles $1 "" dir %{oolib}/share/wordbook/$3
+    
+    PCKDIR=solver/%{subver}/%{_archbuilddir}/pck
+    FILES=""
+    [ -f "$PCKDIR/palettes$2.zip" ] && FILES="`unzip -l $PCKDIR/palettes$2.zip | awk '{ if (($4 != "")&&($4 != "----")&&($4 != "Name")) print $4 }'`"
+    [ "$1" = "en" ] && FILES="$FILES autotbl.fmt `unzip -l $PCKDIR/palettes.zip | awk '{ if (($4 != "")&&($4 != "----")&&($4 != "Name")) print $4 }'`"
+    AddFiles $1 "" "" `Multiply %{oolib}/user/config/ "" $FILES`
+    
+    FILES=""
+    [ -f "$PCKDIR/autocorr$2.zip" ] && FILES="`unzip -l $PCKDIR/autocorr$2.zip | awk '{ if (($4 != "")&&($4 != "----")&&($4 != "Name")) print $4 }'`"
+    AddFiles $1 "" "" `Multiply %{oolib}/share/autocorr/ "" $FILES`
+
+    SUBF="abp analysis basctl bib cal cnt date dba dbi dbp dbu"
+    SUBF="$SUBF dbw dkt egi eme epb epg epn epp eps ept eur for"
+    SUBF="$SUBF frm gal imp iso jvm lgd oem ofa oic ooo pcr preload"
+    SUBF="$SUBF san sc sch sd set set_pp1 sfx sm spa stt svs svt"
+    SUBF="$SUBF svx sw tpl tplx uui vcl wwz com flash fwe pdffilter"
+    SUBF="$SUBF tk xsltdlg"
+    SVER=%{subver}
+
+    AddFiles $1 "" "" `Multiply %{oolib}/program/resource/ $SVER$2.res $SUBF`
+    AddFiles $1 "" "" %{oolib}/program/instdb.ins.$1
+    AddFiles $1 "" dir `Multiply %{oolib}/share/registry/res/ "" $1 $5`
+
+    if [ ! -d "$RPM_BUILD_ROOT%{oolib}/help/$1" ]; then
+	ln -sf %{oolib}/help/en $RPM_BUILD_ROOT%{oolib}/help/$1
+	echo "%{oolib}/help/$1" >> "i18n-$1"
+    fi
+}
+
+FindI18N %{ARAB}	ar	96 arabic		""	""
+FindI18N %{CAT}		ca	37 catalan		""	""
+FindI18N %{CZECH}	cs	42 czech		""	""
+FindI18N %{DAN}		da	45 danish		""	""
+FindI18N %{GERM}	de	49 german		""	""
+FindI18N %{SPAN}	es	34 spanish		""	""
+FindI18N %{GREEK}	el	30 greek		""	""
+FindI18N %{ENUS}	en	01 english		""	"en-US"
+FindI18N %{FINN}	fi	35 finnish		""	""
+FindI18N %{FREN}	fr	33 french		""	""
+FindI18N %{ITAL}	it	39 italian		""	""
+FindI18N %{JAPN}	ja	81 japanese		""	""
+FindI18N %{KOREAN}	ko	82 korean		""	""
+FindI18N %{DTCH}	nl	31 dutch		""	""
+FindI18N %{POL}		pl	48 polish		"pol"	""
+FindI18N %{PORT}	pt	03 portuguese		""	""
+FindI18N %{RUSS}	ru	07 russian		"rus"	""
+FindI18N %{SLOVAK}	sk	43 slovak		""	""
+FindI18N %{SWED}	sv	46 swedish		""	""
+FindI18N %{TURK}	tr	90 turkish		""	""
+FindI18N %{CHINSIM}	zh_CN	86 chinese_simplified	""	"zh-CN"
+FindI18N %{CHINTRAD}	zh_TW	88 chinese_traditional	""	"zh-TW"
+
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -1164,8 +1144,11 @@ rm -rf $RPM_BUILD_ROOT
 %{oolib}/share/wordbook
 %{oolib}/share/readme
 %{oolib}/share/xslt
-# podzieliæ!!!!
-%{oolib}/share/registry
+
+%dir %{oolib}/share/registry
+%dir %{oolib}/share/registry/res
+%{oolib}/share/registry/data
+%{oolib}/share/registry/schema
 
 %{oolib}/share/autotext/english
 %{oolib}/share/template/english
