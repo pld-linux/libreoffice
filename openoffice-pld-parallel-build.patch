@@ -31,11 +31,11 @@ diff -urN ooo-build-1.1.55.org/bin/build-ooo ooo-build-1.1.55/bin/build-ooo
  
 diff -urN ooo-build-1.1.55.org/patches/OOO_1_1/build-parallel-ooficecfg.patch ooo-build-1.1.55/patches/OOO_1_1/build-parallel-ooficecfg.patch
 --- ooo-build-1.1.55.org/patches/OOO_1_1/build-parallel-ooficecfg.patch	1970-01-01 01:00:00.000000000 +0100
-+++ ooo-build-1.1.55/patches/OOO_1_1/build-parallel-ooficecfg.patch	2004-05-07 03:19:30.314640432 +0200
++++ ooo-build-1.1.55/patches/OOO_1_1/build-parallel-ooficecfg.patch	2004-05-07 03:46:21.634682552 +0200
 @@ -0,0 +1,50 @@
 +diff -urN officecfg.org/util/makefile.pmk officecfg/util/makefile.pmk
 +--- officecfg.org/util/makefile.pmk	2004-05-07 02:09:08.906392032 +0200
-++++ officecfg/util/makefile.pmk	2004-05-07 03:18:57.661604448 +0200
+++++ officecfg/util/makefile.pmk	2004-05-07 03:46:13.524915424 +0200
 +@@ -119,21 +119,21 @@
 + # xsltproc already validates against the dtd.  For additional validation,
 + # org.openoffice.configuration.Inspector should be replaced and the
@@ -69,18 +69,18 @@ diff -urN ooo-build-1.1.55.org/patches/OOO_1_1/build-parallel-ooficecfg.patch oo
 + 	$(JAVA) -classpath $(SOLARBINDIR)$/jaxp.jar$(PATH_SEPERATOR)$(SOLARBINDIR)$/parser.jar$(PATH_SEPERATOR)$(CLASSDIR)$/schema.jar -Djavax.xml.parsers.SAXParserFactory=com.sun.xml.parser.SAXParserFactoryImpl org.openoffice.helper.PrettyPrinter $(@:d)$(<:b).tmp $(@:d)$(<:b).xcu
 + .ELSE
 +-	$(SED) 's|xmlns:filehelper="http://www.jclark.com/xt/java/org.openoffice.configuration.FileHelper"||;s|extension-element-prefixes="filehelper"||;s|filehelper:makeAbs(\(.*\))|\1|' < $(PRJ)$/util$/alllang.xsl > $(PRJ)$/util$/alllang2.xsl
-++	$(SED) 's|xmlns:filehelper="http://www.jclark.com/xt/java/org.openoffice.configuration.FileHelper"||;s|extension-element-prefixes="filehelper"||;s|filehelper:makeAbs(\(.*\))|\1|' < $(PRJ)$/util$/alllang.xsl > $(PRJ)$/util$/$(<:b)-$(l)-alllang2.xsl
+++	$(SED) 's|xmlns:filehelper="http://www.jclark.com/xt/java/org.openoffice.configuration.FileHelper"||;s|extension-element-prefixes="filehelper"||;s|filehelper:makeAbs(\(.*\))|\1|' < $(PRJ)$/util$/alllang.xsl > $(PRJ)$/util$/$(<:b)-{$(subst,$/$<, $(subst,$(MISC)$/registry$/res$/, $@))}-alllang2.xsl
 + 	$(XSLTPROC) -o $(@:d)$(<:b).tmp \
 + 	            --stringparam xcs $(PWD)$/$(PRJ)$/registry$/schema$/$(<:d)$(<:b).xcs \
 + 	            --stringparam schemaRoot $(PWD)$/$(PRJ)$/registry$/schema \
 + 	            --stringparam locale {$(subst,$/$<, $(subst,$(MISC)$/registry$/res$/, $@))} \
 +-	            $(PRJ)$/util$/alllang2.xsl $<
-++	            $(PRJ)$/util$/$(<:b)-$(l)-alllang2.xsl $<
+++	            $(PRJ)$/util$/$(<:b)-{$(subst,$/$<, $(subst,$(MISC)$/registry$/res$/, $@))}-alllang2.xsl $<
 + # xsltproc already seems to pretty-print the xml, so
 + # org.openoffice.helper.PrettyPrinter seems to be unnecessary.
 + 	cp $(@:d)$(<:b).tmp $(@:d)$(<:b).xcu
 +-	+$(RM) $(PRJ)$/util$/alllang2.xsl > $(NULLDEV)
-++	+$(RM) $(PRJ)$/util$/$(<:b)-$(l)-alllang2.xsl > $(NULLDEV)
+++	+$(RM) $(PRJ)$/util$/$(<:b)-{$(subst,$/$<, $(subst,$(MISC)$/registry$/res$/, $@))}-alllang2.xsl > $(NULLDEV)
 + .ENDIF
 + 	+$(RM) $(@:d)$(<:b).tmp > $(NULLDEV)
 diff -urN ooo-build-1.1.55.org/patches/OOO_1_1_1/apply ooo-build-1.1.55/patches/OOO_1_1_1/apply
