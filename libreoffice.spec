@@ -320,14 +320,16 @@ chmod u+rx compile
 #########################
 %install
 rm -rf $RPM_BUILD_ROOT
-install -d $RPM_BUILD_ROOT%{_libdir}/openoffice
+cd oo_%{version}_src
 
 cp solver/%{subver}/%{_archbuilddir}/bin/setup_services.rdb solver/%{subver}/%{_archbuilddir}/bin/uno_writerdb.rdb
 rm -f f0_061
 zip -j -5 "f0_061" solver/%{subver}/%{_archbuilddir}/bin/uno_writerdb.rdb
 mv f0_061.zip %{installpath}/%{langinst}/normal/f0_061
 
-%{init_xdisplay}
+install -d $RPM_BUILD_ROOT%{_libdir}/openoffice
+
+#%{init_xdisplay}
 RESPONSE_FILE=$PWD/rsfile.ins
 OLDPATH="`pwd`"
 cd %{installpath}/%{langinst}/normal/
@@ -345,7 +347,8 @@ cd %{installpath}/%{langinst}/normal/
    do
     loc=`echo $dict | sed 's~^.*/\([a-zA-Z_]*\).zip$~\1~'`
 ###########################
-    perl -ni -e "/^ConfigurationItem gid_Configurationitem_Oo_${loc}_Spellchecker/ .. /^End/ or print" setup.ins
+    perl -ni -e "m|^ConfigurationItem gid_Configurationitem_Oo_${loc}_Spellchecker| .. /^End/ or print" setup.ins
+#	awk "BEGIN { o=1} /^End$/ { if(o==0){o=1}} u^ConfigurationItem gid_Configurationitem_Oo_${loc}_Spellchecker$/ { if (o==1) { o=0} } { if(o==1) { print } }" setup.ins
     cat >> setup.ins <<EOF
 ConfigurationItem gid_Configurationitem_Oo_${loc}_Spellchecker
         ModuleID         = gid_Module_Root;
@@ -382,10 +385,12 @@ EOF
   ) | awk ' $1 ~ /Value/ { l=$0; sub(/^.*= "/,"",l); sub(/";.*$/,"",l); sub(/%PRODUCTNAME/,"OpenOffice.org",l); sub(/%PRODUCTVERSION/,"%{version}",l); n=n+1; str="@@REPLACEME" n "@@"; s="\"" str "\""; sub(/".*"/,s); printf "s|%s|%s|\n", str, l > "Common.xml.sed" } { print } ' \
     >> setup.ins
 
-  DISPLAY=:$XDISPLAY ./setup -R:$RESPONSE_FILE
+#  DISPLAY=:$XDISPLAY ./setup -R:$RESPONSE_FILE
+  ./setup -R:$RESPONSE_FILE
+
 #  ./setup -R:$RESPONSE_FILE
 cd "$OLDPATH"
-%{kill_xdisplay}
+#%{kill_xdisplay}
 
 # Copy all localized resources to destination directory
 install -d $RPM_BUILD_ROOT%{_libdir}/openoffice/program/resource
