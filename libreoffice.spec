@@ -1,5 +1,6 @@
+# NOTE:
+#	- build requires about 8-9GB of disk space
 # TODO:
-# 	- everything
 #	- drop requirement on XFree86-static
 #	- drop requirement on nas-devel
 #	- fix locale names and other locale related things
