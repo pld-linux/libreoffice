@@ -192,7 +192,7 @@ cd ..
 ##################
 # Build fake JDK
 mkdir -p fakejdk/bin fakejdk/include
-cp -a openoffice-xmlparse.sh fakejdk/bin/xmlparse
+cp -a %{SOURCE4} fakejdk/bin/xmlparse
 
 # Create fakejdk/bin/java:
 sed "s~@@~`pwd`~" > fakejdk/bin/java <<"EOF"
@@ -207,8 +207,8 @@ fi
 echo "FIXME: Emulate java runtime using gcj here"
 exit 1
 EOF
-
 chmod +x fakejdk/bin/java fakejdk/bin/xmlparse
+
 
 # Create fakejdk/bin/javac
 sed "s~@@~`pwd`~" > fakejdk/bin/javac <<"EOF"
