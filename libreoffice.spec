@@ -145,22 +145,14 @@ Patch107:	%{name}-jvmaccess-handle-no-solar-java.patch
 Patch108:	%{name}-officecfg-xsltproc.patch
 Patch109:	%{name}-psprint-handle-no-solar-java.patch
 Patch110:	%{name}-readlicense-oo-xsltproc.patch
-Patch111:	%{name}-ridljar-handle-no-solar-java.patch
 Patch112:	%{name}-setup2-handle-no-solar-java.patch
 Patch113:	%{name}-sj2-handle-no-solar-java.patch
-Patch114:	%{name}-solenv-set-solar-java-only-if-unset.patch
-Patch115:	%{name}-svg-handle-no-solar-java.patch
-Patch116:	%{name}-xsltfilter-handle-no-solar-java.patch
-Patch117:	%{name}-xsltvalidate-handle-no-solar-java.patch
 Patch118:	%{name}-berkeleydb-no-java-fix.patch 
 Patch119:	%{name}-scp-handle-no-solar-java.patch
-Patch120:	%{name}-odk-handle-no-solar-java.patch 
 Patch121:	%{name}-disable-odk-build.patch
 
 # misc patches
 Patch201:	%{name}-zoom-combobox.patch
-Patch202:	%{name}-unzip-not-jar.patch 
-Patch203:	%{name}-spell-sv.patch
 Patch204:	%{name}-word-count.patch
 Patch206:	%{name}-recent-files.patch
 Patch207:	%{name}-gui-sw-insert-symbol.patch
@@ -168,14 +160,10 @@ Patch208:	%{name}-use-fork.patch
 Patch209:	%{name}-print-dialog.patch
 Patch210:	%{name}-print-error.patch
 Patch211:	%{name}-help-fallback-en.patch
-Patch212:	%{name}-crash-bindings.patch
-Patch213:	%{name}-crash-mapmode.patch
-Patch214:	%{name}-gui-beep-less.patch
 Patch215:	%{name}-gui-splash-redraw.patch
 Patch216:	%{name}-gui-startup-style.patch
 Patch217:	%{name}-gui-sw-scroll.patch
 Patch218:	%{name}-gui-tbx-palette.patch
-Patch219:	%{name}-gui-vcl-fix-borders.patch
 Patch220:	%{name}-init-desktop.patch
 Patch221:	%{name}-init-sw.patch
 Patch222:	%{name}-ooo111-general-io-error-sxi.patch
@@ -202,7 +190,6 @@ Patch353:	%{name}-print-psprint-rehash.patch
 Patch354:	%{name}-print-spadmin-disable.patch
 Patch355:	%{name}-print-type42.patch
 
-Patch361:	%{name}-gnome-desktop-force.patch
 Patch362:	%{name}-gtk-themeing.patch
 Patch363:	%{name}-gui-sc-paste.patch
 Patch364:	%{name}-speed-lang-cache.patch
@@ -220,7 +207,6 @@ Patch380:	%{name}-gui-ft-use-system-font.patch
 Patch381:	%{name}-gui-scale-ruler.patch
 
 Patch391:	%{name}-print-fontconfig.patch
-Patch392:	%{name}-print-scale-fix.patch
 Patch393:	%{name}-padmin-nofontconfig.patch
 
 Patch401:	%{name}-vfs-content.patch
@@ -247,7 +233,6 @@ Patch422:	%{name}-gui-toolbox-tristate.patch
 Patch423:	%{name}-help-support.patch
 Patch424:	%{name}-icon-masks.patch
 Patch425:	%{name}-icon-render.patch
-Patch426:	%{name}-speed-bitmap-render.patch
 
 Patch431:	%{name}-gui-menu-check-images.patch
 Patch432:	%{name}-gui-menu-checkitems.patch
@@ -937,31 +922,32 @@ rm -f moz/prj/d.lst
 %endif 
 # UPDATE/CHECK ME
 #%patch101 -p0
-%patch102 -p0
-%patch103 -p0
+# OBSOLETE
+#%patch102 -p0
+# OBSOLETE
+#%patch103 -p0
 %patch104 -p0
 %patch105 -p0
 %patch106 -p0
 %patch107 -p0
-%patch108 -p0
-%patch109 -p0
-%patch110 -p0
-%patch111 -p0
-%patch112 -p0
-%patch113 -p0
-%patch114 -p0
-%patch115 -p0
-%patch116 -p0
-%patch117 -p0
+# OBSOLETE?
+#%patch108 -p0
+# OBSOLETE?
+#%patch109 -p0
+# OBSOLETE?
+#%patch110 -p0
+# PARTIALLY OBSOLETE/PARIALLY NEEDS UPDATE
+#%patch112 -p0
+# OBSOLETE?
+#%patch113 -p0
 %patch118 -p1 
-%patch119 -p0 
-%patch120 -p0 
-%patch121 -p0 
+# OBSOLETE? yup
+#%patch119 -p0 
+# NEEDS UPDATE
+#%patch121 -p0 
 %endif 
 
 %patch201 -p0
-%patch202 -p0 
-%patch203 -p0
 %patch204 -p0
 %patch206 -p0 
 %patch207 -p0
@@ -969,25 +955,25 @@ rm -f moz/prj/d.lst
 %patch209 -p0
 %patch210 -p0
 %patch211 -p0 
-%patch212 -p0 
-%patch213 -p0
-%patch214 -p0 
 %patch215 -p0 
 %patch216 -p0 
 %patch217 -p0
 %patch218 -p0
-%patch219 -p0
-%patch220 -p0
+# OBSOLETE
+#%patch220 -p0
 %patch221 -p0
-%patch222 -p0
+# CHECK ME
+#%patch222 -p0
 %patch223 -p0
 %patch224 -p0 
 %patch225 -p0
 %patch226 -p1
-%patch227 -p1
+# SEEMS OBSOLETE
+#%patch227 -p1
 %patch228 -p0
 %patch229 -p1 
-%patch230 -p0
+# CHECK ME
+# %patch230 -p0
 %patch231 -p0 
 
 %patch301 -p1 
@@ -1010,7 +996,6 @@ rm -f moz/prj/d.lst
 %endif 
 
 # gui 
-%patch361 -p0 
 %patch362 -p0
 %patch363 -p0 
 %patch364 -p0 
@@ -1031,7 +1016,6 @@ rm -f moz/prj/d.lst
 # fontconfig
 %if %{with fontconf}
 %patch391 -p0
-%patch392 -p0
 %patch393 -p0
 %endif 
 
@@ -1064,7 +1048,6 @@ rm -f moz/prj/d.lst
 %patch423 -p0
 %patch424 -p0
 %patch425 -p0
-%patch426 -p0
 
 %patch431 -p0 
 %patch432 -p0 
@@ -1076,9 +1059,11 @@ rm -f moz/prj/d.lst
 %patch502 -p1
 %patch503 -p1
 %if %{with java}
-%patch504 -p0
+# FIX ME XXX
+#%patch504 -p0
 %else
-%patch511 -p0
+# FIX ME XXX
+#%patch511 -p0
 %endif
 %patch505 -p1
 %patch506 -p1
@@ -1088,7 +1073,8 @@ rm -f moz/prj/d.lst
 %patch510 -p1 
 
 %patch600 -p1
-%patch601 -p1 
+# OBSOLETE due to WITHOUT_FONTS?
+#%patch601 -p1 
 #%patch602 -p0
 
 # gcc 2 include error hack:
