@@ -14,7 +14,7 @@
 
 %define		ver		1.1
 %define		rel		1
-%define		ooobver		1.1.55
+%define		ooobver		1.1.57
 %define		subver		645
 %define		fullver		%{ver}.%{rel}
 %define		dfullver	%(echo %{fullver} | tr . _)
@@ -24,12 +24,12 @@ Summary:	OpenOffice - powerful office suite
 Summary(pl):	OpenOffice - potê¿ny pakiet biurowy
 Name:		openoffice
 Version:	%{fullver}
-Release:	5
+Release:	5.1
 Epoch:		1
 License:	GPL/LGPL
 Group:		X11/Applications
 Source0:	http://ooo.ximian.com/packages/OOO_%{dfullver}/ooo-build-%{ooobver}.tar.gz
-# Source0-md5:	79e885131d99a0a507eb3ffb7ecf19af
+# Source0-md5:	4c7a807a24e6be1126b54479eeb59cac
 Source1:	http://ooo.ximian.com/packages/OOO_%{dfullver}/OOO_%{dfullver}.tar.bz2
 # Source1-md5:	550381bc429fbbda54cb84758f14e010
 Source2:	http://ooo.ximian.com/packages/ooo-icons-OOO_1_1-9.tar.gz
@@ -72,11 +72,7 @@ Source410:	%{cftp}/helpcontent/helpcontent_88_unix.tgz
 
 Patch0:		%{name}-rh-disable-spellcheck-all-langs.patch
 Patch1:		%{name}-pld-config.patch
-Patch2:		%{name}-pld-package-lang.patch
-Patch3:		%{name}-pld-section.patch
-Patch4:		%{name}-pld-leave-home.patch
-Patch5:		%{name}-pld-parallel-build.patch
-Patch6:		%{name}-pld-kde-nwf-fonts.patch
+Patch2:		%{name}-pld-posix-sh.patch
 
 URL:		http://www.openoffice.org/
 BuildRequires:	ImageMagick
@@ -879,10 +875,6 @@ chiñskim.
 %patch0 -p1
 %patch1 -p1
 %patch2 -p1
-%patch3 -p1
-%patch4 -p1
-%patch5 -p1
-%patch6 -p1
 
 install -d src
 ln -s %{SOURCE1} src/
@@ -966,7 +958,7 @@ CONFOPTS=" \
 "
 
 # for cvs snaps
-[ -x ./autogen.sh ] && ./autogen.sh $CONFOPTS
+#[ -x ./autogen.sh ] && ./autogen.sh $CONFOPTS
 
 # build-ooo script will pickup these
 CONFIGURE_OPTIONS="$CONFOPTS"; export CONFIGURE_OPTIONS
@@ -974,7 +966,9 @@ CONFIGURE_OPTIONS="$CONFOPTS"; export CONFIGURE_OPTIONS
 # main build
 %configure $CONFOPTS
 
-%{__make}
+# this limits processing some files but doesn't limit parallel build
+# processes of main OOo build (since OOo uses it's own build system)
+%{__make} -j1
 
 # hack for parallel build
 if [ "$RPM_BUILD_NCPUS" -gt 1 ]; then
