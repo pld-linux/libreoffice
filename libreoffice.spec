@@ -317,7 +317,6 @@ BuildRequires:	gtk+2-devel
 BuildConflicts:	java-sun = 1.4.2
 Requires:	%{name}-libs = %{epoch}:%{version}-%{release}
 Requires:	%{name}-i18n-en = %{epoch}:%{version}-%{release}
-Requires:	%{name}-dict-en
 Requires(post,postun):	fontpostinst
 Requires:	libstdc++ >= 3.2.1
 Requires:	cups-lib
@@ -1266,45 +1265,28 @@ echo "SLANGLIST [$slanglist]"
 for lang in $slanglist; do
 	echo "%%defattr(644,root,root,755)" >> ${lang}.lang
 	# dictionaries
-	ls $RPM_BUILD_ROOT%{_libdir}/%{name}/share/dict/ooo/*${lang}* 2> /dev/null && echo "%%lang(${lang}) %{_libdir}/%{name}/share/dict/ooo/*${lang}*" >> ${lang}.lang
+	ls $RPM_BUILD_ROOT%{_libdir}/%{name}/share/dict/ooo/*${lang}* 2> /dev/null && echo "%%lang(${lang}) %{_libdir}/%{name}/share/dict/ooo/*${lang}*" >> ${lang}.lang || /bin/true
 
 	# help files
-	ls $RPM_BUILD_ROOT%{_libdir}/%{name}/help/*${lang}* 2> /dev/null && echo "%%lang(${lang}) %{_libdir}/%{name}/help/*${lang}*" >> ${lang}.lang
+	if (ls $RPM_BUILD_ROOT%{_libdir}/%{name}/help/*${lang}* 2> /dev/null); then
+		echo "%%lang(${lang}) %{_libdir}/%{name}/help/*${lang}*" >> ${lang}.lang
+		perl -pi -e "s#.*%{_libdir}/%{name}/help/.*${lang}.*##g" build/lang_*_list.txt
+	fi
 
 	# registry res
-	ls $RPM_BUILD_ROOT%{_libdir}/%{name}/share/registry/res/*${lang}* 2> /dev/null && echo "%%lang(${lang}) %{_libdir}/%{name}/share/registry/res/*${lang}*" >> ${lang}.lang
+	if (ls $RPM_BUILD_ROOT%{_libdir}/%{name}/share/registry/res/*${lang}* 2> /dev/null); then
+		echo "%%lang(${lang}) %{_libdir}/%{name}/share/registry/res/*${lang}*" >> ${lang}.lang
+		perl -pi -e "s#.*%{_libdir}/%{name}/share/registry/res/.*${lang}.*##g" build/lang_*_list.txt
+	fi
 
 	# files from lang_*_list.txt
-	ls build/lang_${lang}*_list.txt 2> /dev/null && sed -e "s#$RPM_BUILD_ROOT#%%lang(${lang}) #g" build/lang_${lang}*_list.txt >> ${lang}.lang
+	ls build/lang_${lang}*_list.txt 2> /dev/null && sed -e "s#$RPM_BUILD_ROOT#%%lang(${lang}) #g" build/lang_${lang}*_list.txt >> ${lang}.lang || /bin/true
 
-	# directories with locale specific content
-	find $RPM_BUILD_ROOT -type d | grep -Ev "%{_libdir}/%{name}/(help|share/registry/res/)" | sed -e "s#$RPM_BUILD_ROOT##g" -e "s#\(.*/${lang}\)\$#%%lang(${lang}) \1#g" | grep -E '^%%lang' >> ${lang}.lang || /bin/true
-
-	# locale codes longer than two letters
-	otherlang=$(echo "$langlist" | grep -v "^${lang}\$" | grep -E "^${lang}(-|_)" | xargs)
-	for olang in $otherlang; do
-		find $RPM_BUILD_ROOT -type d | grep -Ev "%{_libdir}/%{name}/(help|share/registry/res/)" | sed -e "s#$RPM_BUILD_ROOT##g" -e "s#\(.*/${otherlang}\)\$#%%lang(${lang}) \1#g" | grep -E '^%%lang' >> ${lang}.lang || /bin/true
-	done
-
-	# full lang name
-	longlang=$(./bin/openoffice-xlate-lang -l "$lang" 2> /dev/null || /bin/true)
-	if [ -n "$longlang" ]; then
-		longlang=$(echo "${longlang}" | sed -e 's#_.*##g')
-		find $RPM_BUILD_ROOT -type d -name "${longlang}*" -printf "%%%%lang(${lang}) %%p\n" | sed -e "s#$RPM_BUILD_ROOT##g" >> ${lang}.lang || /bin/true
-	else
-		sotherlang=""
-		for olang in $otherlang; do
-			longlang=$(./bin/openoffice-xlate-lang -l "$olang" 2> /dev/null || /bin/true)
-			[ -z "$longlang" ] && continue
-			sotherlang="$sotherlang $longlang"
-		done
-		sotherlang=$(echo "$sotherlang" | tr ' ' '\n' | sort | uniq | xargs)
-		for olang in $sotherlang; do
-			find $RPM_BUILD_ROOT -type d -name "${olang}*" -printf "%%%%lang(${lang}) %%p\n" | sed -e "s#$RPM_BUILD_ROOT##g" >> ${lang}.lang || /bin/true
-		done
-	fi
 done
 
+# things not catched by automation above
+echo "%%lang(en) %{_libdir}/%{name}/program/resource/*%{subver}01.res" >> en.lang
+echo "%%lang(en) %{_libdir}/%{name}/share/wordbook/english" >> en.lang
 
 %clean
 rm -rf $RPM_BUILD_ROOT
