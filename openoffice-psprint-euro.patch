@@ -1,0 +1,11 @@
+--- oo_641c_src/psprint/source/printergfx/psheader.ps.psprint-euro	Fri Jul  6 18:10:16 2001
++++ oo_641c_src/psprint/source/printergfx/psheader.ps	Mon Mar  4 11:01:54 2002
+@@ -303,7 +303,7 @@
+     /h /i /j /k /l /m /n /o
+     /p /q /r /s /t /u /v /w
+     /x /y /z /braceleft /bar /braceright /asciitilde /unused
+-    /euro /unused /quotesinglbase /florin /quotedblbase /ellipsis /dagger /daggerdbl
++    /Euro /unused /quotesinglbase /florin /quotedblbase /ellipsis /dagger /daggerdbl
+     /circumflex /perthousand /Scaron /guilsinglleft /OE /unused /zcaron /unused
+     /unused /quoteleft /quoteright /quotedblleft /quotedblright /bullet /endash /emdash
+     /tilde /trademark /scaron /guilsinglright /oe /unused /zcaron /Ydieresis
