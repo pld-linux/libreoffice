@@ -8,7 +8,6 @@
 
 # Conditional build:
 %bcond_with	java		# Java support
-%bcond_without	kde		# do not use KDE framework, use GNOME
 
 %define		ver		1.1
 %define		rel		1
@@ -22,7 +21,7 @@ Summary:	OpenOffice - powerful office suite
 Summary(pl):	OpenOffice - potê¿ny pakiet biurowy
 Name:		openoffice
 Version:	%{fullver}
-Release:	1.4.1%{?with_kde:.kde}%{!?with_kde:.gtk}
+Release:	1.4.2
 Epoch:		1
 License:	GPL/LGPL
 Group:		X11/Applications
@@ -72,9 +71,8 @@ Patch0:		%{name}-rh-disable-spellcheck-all-langs.patch
 Patch1:		%{name}-pld-config.patch
 Patch2:		%{name}-pld-package-lang.patch
 Patch3:		%{name}-pld-section.patch
-Patch4:		%{name}-pld-section-gtk.patch
-Patch5:		%{name}-pld-leave-home.patch
-Patch6:		%{name}-pld-parallel-build.patch
+Patch4:		%{name}-pld-leave-home.patch
+Patch5:		%{name}-pld-parallel-build.patch
 
 URL:		http://www.openoffice.org/
 BuildRequires:	ImageMagick
@@ -113,14 +111,9 @@ BuildRequires:	unixODBC-devel
 BuildRequires:	unzip
 BuildRequires:	zip
 BuildRequires:	zlib-devel
-%if %{with kde}
 BuildRequires:	qt-devel
 BuildRequires:	kdelibs-devel
-%else
-BuildRequires:	libgnomecups-devel
-BuildRequires:	gnome-vfs2-devel
 BuildRequires:	gtk+2-devel
-%endif
 BuildConflicts:	java-sun = 1.4.2
 Requires(post,postun):	fontpostinst
 Requires:	%{name}-libs = %{epoch}:%{version}-%{release}
@@ -130,10 +123,6 @@ Requires:	db
 Requires:	db-cxx
 Requires:	libstdc++ >= 3.2.1
 Requires:	startup-notification
-%if ! %{with kde}
-Requires:	libgnomecups
-Requires:	gnome-vfs2
-%endif
 ExclusiveArch:	%{ix86} sparc ppc
 #Suggested:	chkfontpath
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
@@ -171,12 +160,39 @@ Do zalet OpenOffice.org mo¿na zaliczyæ:
 Summary:	OpenOffice.org shared libraries
 Summary(pl):	Biblioteki dzielone OpenOffice.org
 Group:		X11/Libraries
+Requires:	%{name}-libs-interface = %{version}-%{release}
 
 %description libs
 OpenOffice.org productivity suite - shared libraries.
 
 %description libs -l pl
 Pakiet biurowy OpenOffice.org - biblioteki.
+
+%package libs-kde
+Summary:        OpenOffice.org KDE Interface
+Summary(pl):    Interfejs KDE dla OpenOffice.org
+Group:          X11/Libraries
+Provides:       %{name}-libs-interface = %{version}-%{release}
+Conflicts:      %{name}-libs-gtk
+
+%description libs-kde
+OpenOffice.org productivity suite - KDE Interface.
+
+%description libs-kde -l pl
+Pakiet biurowy OpenOffice.org - Interfejs KDE.
+
+%package libs-gtk
+Summary:        OpenOffice.org GTK Interface
+Summary(pl):    Interfejs GTK dla OpenOffice.org
+Group:          X11/Libraries
+Provides:	%{name}-libs-interface = %{version}-%{release}
+Conflicts:	%{name}-libs-kde
+
+%description libs-gtk
+OpenOffice.org productivity suite - GTK Interface.
+
+%description libs-gtk -l pl
+Pakiet biurowy OpenOffice.org - Interfejs GTK.
 
 %package mimelinks
 Summary:	OpenOffice.org mimelinks
@@ -854,12 +870,8 @@ chiñskim.
 %patch1 -p1
 %patch2 -p1
 %patch3 -p1
-%if ! %{with kde}
-# disable KDE NWF, OOoCUPS and enable GnomeVFS, GnomeCUPS
 %patch4 -p1
-%endif
 %patch5 -p1
-%patch6 -p1
 
 install -d src
 ln -s %{SOURCE1} src/
@@ -914,13 +926,8 @@ CONFOPTS=" \
 	--with-system-nas \
 	--with-vendor="PLD" \
 	--with-distro="PLD" \
-%if %{with kde}
 	--with-icons="KDE" \
 	--with-widgetset=kde \
-%else
-	--with-icons="Ximian" \
-	--with-widgetset=gtk \
-%endif
 	--with-installed-ooo-dirname=%{name} \
 %if %{with java}
 	--enable-java \
@@ -962,6 +969,20 @@ if [ "$RPM_BUILD_NCPUS" -gt 1 ]; then
 	done
 fi
 
+# gtk version
+cd build/OOO_%{dfullver}/
+cp -r vcl vcl.kde
+sed -i -e "s#\(.*WITH_WIDGETSET.*\)\".*\"\(.*\)#\1\"gtk\"\2#g" LinuxIntelEnv.Set*
+sed -i -e "s#\(.*WIDGETSET_CFLAGS.*\)\".*\"\(.*\)#\1\"`pkg-config --cflags gtk+-2.0 gdk-pixbuf-xlib-2.0` -DWIDGETSET_GTK\"\2#g" LinuxIntelEnv.Set*
+sed -i -e "s#\(.*WIDGETSET_LIBS.*\)\".*\"\(.*\)#\1\"`pkg-config --libs gtk+-2.0 gdk-pixbuf-xlib-2.0`\"\2#g" LinuxIntelEnv.Set*
+cd vcl
+rm -rf unx*
+. ./LinuxIntelEnv.Set.sh || :
+build
+cd ..
+mv vcl vcl.gtk
+mv vcl.kde vcl
+
 %install
 rm -rf $RPM_BUILD_ROOT
 
@@ -971,6 +992,14 @@ TEMP="%{tmpdir}"; export TEMP
 
 %{__make} install \
 	DESTDIR=$RPM_BUILD_ROOT
+
+mv $RPM_BUILD_ROOT%{_libdir}/%{name}/program/libvcl%{subver}li.so \
+	$RPM_BUILD_ROOT%{_libdir}/%{name}/program/libvcl%{subver}li-kde.so
+
+install build/OOO_%{dsubver}/vcl.gtk/unxlngi4.pro/lib/libvcl%{subver}li.so \
+	$RPM_BUILD_ROOT%{_libdir}/%{name}/program/libvcl%{subver}li-gtk.so
+install build/OOO_%{dsubver}/vcl.gtk/unxlngi4.pro/bin/*-gnome \
+	$RPM_BUILD_ROOT%{_libdir}/%{name}/program/
 
 install -d helptmp && cd helptmp || exit 1
 for file in \
@@ -1028,12 +1057,6 @@ touch $RPM_BUILD_ROOT%{_datadir}/fonts/openoffice/fonts.cache-1
 
 # We don't need spadmin (gtk) or the setup application
 rm -f $RPM_BUILD_ROOT%{_libdir}/%{name}/setup
-%if %{with kde}
-rm -f $RPM_BUILD_ROOT%{_libdir}/%{name}/program/*-gnome
-%else
-rm -f $RPM_BUILD_ROOT%{_libdir}/%{name}/spadmin
-rm -f $RPM_BUILD_ROOT%{_libdir}/%{name}/program/spadmin
-%endif
 rm -f $RPM_BUILD_ROOT%{_libdir}/%{name}/program/crash_report.bin
 rm -f $RPM_BUILD_ROOT%{_datadir}/applications/openoffice-setup.desktop
 rm -f $RPM_BUILD_ROOT%{_datadir}/applications/openoffice-printeradmin.desktop
@@ -1113,6 +1136,18 @@ fontpostinst TTF %{_fontsdir}/%{name}
 %postun
 fontpostinst TTF %{_fontsdir}/%{name}
 
+%preun libs-kde
+rm -f %{_libdir}/%{name}/program/libvcl%{subver}li.so
+
+%post libs-kde
+ln -s libvcl%{subver}li-kde.so %{_libdir}/%{name}/program/libvcl%{subver}li.so
+
+%preun libs-gtk
+rm -f %{_libdir}/%{name}/program/libvcl%{subver}li.so
+
+%post libs-gtk
+ln -s libvcl%{subver}li-gtk.so %{_libdir}/%{name}/program/libvcl%{subver}li.so
+
 %files
 %defattr(644,root,root,755)
 %doc %{_libdir}/%{name}/LICENSE*
@@ -1129,7 +1164,6 @@ fontpostinst TTF %{_fontsdir}/%{name}
 %{_libdir}/%{name}/program/*.rdb
 %{_libdir}/%{name}/program/*.bmp
 %{_libdir}/%{name}/program/user_registry.xsl
-
 %{_libdir}/%{name}/program/sofficerc
 %{_libdir}/%{name}/program/unorc
 %{_libdir}/%{name}/program/bootstraprc
@@ -1179,14 +1213,8 @@ fontpostinst TTF %{_fontsdir}/%{name}
 
 # Programs
 %attr(755,root,root) %{_bindir}/oo*
-%attr(755,root,root) %{_libdir}/%{name}/program/*.bin
-%if %{with kde}
 %attr(755,root,root) %{_libdir}/%{name}/spadmin
-%attr(755,root,root) %{_libdir}/%{name}/program/spadmin
-%else
-%attr(755,root,root) %{_libdir}/%{name}/program/getstyle-gnome
-%attr(755,root,root) %{_libdir}/%{name}/program/msgbox-gnome
-%endif
+%attr(755,root,root) %{_libdir}/%{name}/program/*.bin
 %if %{with java}
 %attr(755,root,root) %{_libdir}/%{name}/program/javaldx
 %attr(755,root,root) %{_libdir}/%{name}/program/jvmsetup
@@ -1211,6 +1239,7 @@ fontpostinst TTF %{_fontsdir}/%{name}
 %attr(755,root,root) %{_libdir}/%{name}/program/smath
 %attr(755,root,root) %{_libdir}/%{name}/program/smemo
 %attr(755,root,root) %{_libdir}/%{name}/program/soffice
+%attr(755,root,root) %{_libdir}/%{name}/program/spadmin
 %attr(755,root,root) %{_libdir}/%{name}/program/svcard
 %attr(755,root,root) %{_libdir}/%{name}/program/sweb
 %attr(755,root,root) %{_libdir}/%{name}/program/swriter
@@ -1223,12 +1252,23 @@ fontpostinst TTF %{_fontsdir}/%{name}
 %dir %{_libdir}/%{name}/program/filter
 
 %attr(755,root,root) %{_libdir}/%{name}/program/*.so
+%exclude %{_libdir}/%{name}/program/libvcl*.so
 %attr(755,root,root) %{_libdir}/%{name}/program/*.so.*
 %attr(755,root,root) %{_libdir}/%{name}/program/filter/*.so
 
 %dir %{_datadir}/fonts/openoffice
 %{_datadir}/fonts/openoffice/*.ttf
 %ghost %{_datadir}/fonts/openoffice/fonts.cache-1
+
+%files libs-kde
+%defattr(644,root,root,755)
+%attr(755,root,root) %{_libdir}/%{name}/program/libvcl*kde.so
+
+%files libs-gtk
+%defattr(644,root,root,755)
+%attr(755,root,root) %{_libdir}/%{name}/program/libvcl*gtk.so
+%attr(755,root,root) %{_libdir}/%{name}/program/getstyle-gnome
+%attr(755,root,root) %{_libdir}/%{name}/program/msgbox-gnome
 
 %files mimelinks
 %defattr(644,root,root,755)
