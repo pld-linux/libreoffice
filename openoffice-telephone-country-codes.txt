@@ -1,0 +1,23 @@
+01:en:ENUS:English US:english::en-US:
+03:pt:PORT:Portuguese:portuguese:por::
+07:ru:RUSS:Russian:russian:rus::
+30:el:GREEK:Greek:greek:gre::
+31:nl:DTCH:Dutch:dutch:dut::
+33:fr:FREN:French:french:fre::
+34:es:SPAN:Spanish:spanish:spa::
+35:fi:FINN:Finnish:finnish:fin::
+37:ca:CAT:Catalan:catalan:cat::
+39:it:ITAL:Italian:italian:ita::
+42:cs:CZECH:Czech:czech:cze::
+43:sk:SLOVAK:Slovak:slovak:slk::
+45:da:DAN:Danish:danish:dan::
+46:sv:SWED:Swedish:swedish:swe::
+48:pl:POL:Polish:polish:pol::
+49:de:GERM:German:german:ger::
+55:pt_BR:PORTBR:Brazilian:portuguese_brazilian::pt-BR:
+81:ja:JAPN:Japanese:japanese:jap::
+82:ko:KOREAN:Korean:korean:kor::
+86:zh_CN:CHINSIM:Chinese Simplified:chinese_simplified::zh-CN:
+88:zh_TW:CHINTRAD:Chinese Traditional:chinese_traditional::zh-TW:
+90:tr:TURK:Turkish:turkish:tur::
+96:ar:ARAB:Arabic:arabic:ara::
