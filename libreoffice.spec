@@ -1878,6 +1878,9 @@ RPM_BUILD_NR_THREADS="%(echo "%{__make}" | sed -e 's#.*-j\([[:space:]]*[0-9]\+\)
 [ "$RPM_BUILD_NR_THREADS" = "%{__make}" ] && RPM_BUILD_NR_THREADS=1
 
 CONFOPTS=" \
+%ifarch %{ix86} \
+	--with-arch=x86 \
+%endif
 %ifarch ppc
 	--with-arch=ppc \
 %endif
