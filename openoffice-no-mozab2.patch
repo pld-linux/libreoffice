@@ -1,0 +1,38 @@
+--- oo_stable1_cvs20020422_src/scp/source/office/files.scp~	Thu Apr 18 12:56:48 2002
++++ oo_stable1_cvs20020422_src/scp/source/office/files.scp	Mon Apr 22 18:23:15 2002
+@@ -453,17 +453,6 @@
+     Dir             = GID_DIR_PROGRAM;
+ 	Styles			= (PACKED);
+ End
+-File GID_FILE_LIB_MOZABDRV
+-	BIN_FILE_BODY;
+-	#ifdef UNX
+-    Name            = "libmozabdrv2.so";
+-	#else
+-    Name            = "mozabdrv2.dll";
+-	#endif
+-    Dir             = GID_DIR_PROGRAM;
+-	Styles			= (PACKED);
+-End
+-
+ 
+ STD_UNO_LIB_FILE( GID_FILE_LIB_DBU, dbu )
+ STD_UNO_LIB_FILE( GID_FILE_LIB_DBA, dba)
+@@ -849,18 +838,6 @@
+         Name            = "libodbc2.so";
+         #else
+         Name            = "odbc2.dll";
+-        #endif
+-End
+-
+-File GID_FILE_LIB_MOZAB_2
+-        BIN_FILE_BODY;
+-        Styles          = (PACKED,UNO_COMPONENT);
+-        RegistryID      = GID_STARREGISTRY_APPLICAT_RDB;
+-        Dir             = GID_DIR_PROGRAM;
+-        #ifdef UNX
+-        Name            = "libmozab2.so";
+-        #else
+-        Name            = "mozab2.dll";
+         #endif
+ End
