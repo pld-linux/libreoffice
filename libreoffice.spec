@@ -1038,6 +1038,8 @@ ZH language.
 Ten pakiet dostarcza zasoby zawieraj±ce menu i okna dialogowe w jêzyku
 ZH.
 
+%files i18n-zh -f zh.lang
+
 %prep
 %setup -q -n ooo-build-%{ooobver}
 %patch0 -p1
