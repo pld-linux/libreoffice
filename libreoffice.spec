@@ -137,6 +137,7 @@ BuildRequires:	automake
 BuildRequires:	bison
 BuildRequires:	flex
 BuildRequires:	freetype-devel >= 2.1
+BuildRequires:	mozilla-devel
 BuildRequires:	pam-devel
 BuildRequires:	perl
 BuildRequires:	tcsh
@@ -632,11 +633,12 @@ fi
 %{_libdir}/openoffice/program/classes
 %{_libdir}/openoffice/program/resource
 %{_libdir}/openoffice/program/addin
-%{_libdir}/openoffice/program/defaults
 
-%{_libdir}/openoffice/program/component.reg
-%{_libdir}/openoffice/program/components/*.xpt
-%{_libdir}/openoffice/program/components/*.dat
+# mozilla
+#%%{_libdir}/openoffice/program/defaults
+#%%{_libdir}/openoffice/program/component.reg
+#%%{_libdir}/openoffice/program/components/*.xpt
+#%%{_libdir}/openoffice/program/components/*.dat
 
 %{_libdir}/openoffice/help
 %{_libdir}/openoffice/share
@@ -663,10 +665,10 @@ fi
 %defattr(644,root,root,755)
 %dir %{_libdir}/openoffice
 %dir %{_libdir}/openoffice/program
-%dir %{_libdir}/openoffice/program/components
+#%%dir %{_libdir}/openoffice/program/components   -- mozilla
 %dir %{_libdir}/openoffice/program/filter
 
 %attr(755,root,root) %{_libdir}/openoffice/program/*.so
 %attr(755,root,root) %{_libdir}/openoffice/program/*.so.*
-%attr(755,root,root) %{_libdir}/openoffice/program/components/*.so
+#%%attr(755,root,root) %{_libdir}/openoffice/program/components/*.so -- mozilla
 %attr(755,root,root) %{_libdir}/openoffice/program/filter/*.so
