@@ -12,7 +12,7 @@ Summary:	OpenOffice - powerful office suite
 Summary(pl):	OpenOffice - potê¿ny pakiet biurowy
 Name:		openoffice
 Version:	1.0.2
-Release:	0.91
+Release:	0.92
 Epoch:		1
 License:	GPL/LGPL
 Group:		X11/Applications
@@ -26,6 +26,7 @@ Source7:	%{name}-wrapper
 Source8:	%{name}-wrapper-component
 Source9:	%{name}-langs.txt
 Source10:	%{name}-db3.jar
+Source11:	%{name}-dictionary.lst.readme
 
 Source101:	ftp://ftp.task.gda.pl/mirror/ftp.openoffice.org/contrib/helpfiles/helpcontent_01_unix.tgz
 Source102:	ftp://ftp.task.gda.pl/mirror/ftp.openoffice.org/contrib/helpfiles/helpcontent_33_unix.tgz
@@ -199,6 +200,7 @@ Requires:	db3
 %define kill_xdisplay kill $(cat /tmp/.X$XDISPLAY-lock)
 
 %define oolib	%{_libdir}/openoffice
+%define dictlst	%{oolib}/share/dict/ooo/dictionary.lst
 
 %description
 OpenOffice.org is an open-source project sponsored by Sun Microsystems
@@ -1055,17 +1057,8 @@ for dict in %{wordbooks}; do
   unzip -j $dict -d a8ldict/$loc/
   rm -f a8ldict/$loc/hyph_en.dic a8ldict/$loc/standard.dic
   mv -f a8ldict/$loc/*.aff a8ldict/$loc/*.dic $RPM_BUILD_ROOT%{oolib}/share/dict/ooo/
-  echo DICT `echo $loc | tr _ ' '` $loc >> $RPM_BUILD_ROOT%{oolib}/share/dict/ooo/dictionary.lst
+#  echo DICT `echo $loc | tr _ ' '` $loc >> $RPM_BUILD_ROOT%{oolib}/share/dict/ooo/dictionary.lst
 done
-## Special case - Latin
-#mkdir a8ldict/la
-#unzip %{SOURCE50} -d a8ldict/la/
-#mv -f a8ldict/la/*.aff a8ldict/la/*.dic $RPM_BUILD_ROOT%{oolib}/share/dict/ooo/
-echo DICT la ANY la >> $RPM_BUILD_ROOT%{oolib}/share/dict/ooo/dictionary.lst
-# Special case - Austrian German
-echo DICT de AT de_AT >> $RPM_BUILD_ROOT%{oolib}/share/dict/ooo/dictionary.lst
-echo DICT de AT de_DE >> $RPM_BUILD_ROOT%{oolib}/share/dict/ooo/dictionary.lst
-
 
 # Build system in OO SUX
 rm -f $RPM_BUILD_ROOT%{oolib}/program/libstdc++*
@@ -1134,22 +1127,49 @@ FindDict() {
 
     echo "%defattr(644,root,root,755)" > "dict-$LANG"
 
-    FILES="%{oolib}/share/dict/ooo/hyph_$LANG.dic"    
+    rm -f dictlst.tmp; touch dictlst.tmp
+    FILE="%{oolib}/share/dict/ooo/hyph_$LANG.dic"    
+    if [ -f "$RPM_BUILD_ROOT/$FILE" ]; then
+	COUNTRY=`echo $3 | cut -d _ -f 2`
+        echo "%lang($LANG) $FILE" >> "dict-$LANG"	
+	echo "HYPH $LANG $COUNTRY hyph_$LANG" >> dictlst.tmp
+    fi
+    
+    FILES1=""; FILES2=""
     shift; shift
     while test $# -gt 0; do
-	FILES="$FILES %{oolib}/share/dict/ooo/$1.dic"
-        FILES="$FILES %{oolib}/share/dict/ooo/$1.aff"
-        FILES="$FILES %{oolib}/share/dict/ooo/th_$1.dat"
-	FILES="$FILES %{oolib}/share/dict/ooo/th_$1.idx"
+	FILES1="$FILES1 %{oolib}/share/dict/ooo/$1.dic"
+        FILES1="$FILES1 %{oolib}/share/dict/ooo/$1.aff"
+        FILES2="$FILES2 %{oolib}/share/dict/ooo/th_$1.dat"
+	FILES2="$FILES2 %{oolib}/share/dict/ooo/th_$1.idx"
 	shift
     done    
     
-    for FILE in $FILES
+    for FILE in $FILES1
     do
 	if [ -f "$RPM_BUILD_ROOT/$FILE" ]; then
 	    echo "%lang($LANG) $FILE" >> "dict-$LANG"
+	    LOCALE=`basename $FILE | cut -d . -f 1`
+	    COUNTRY=`echo $LOCALE | cut -d _ -f 2`
+	    echo "DICT $LANG $COUNTRY $LOCALE" >> dictlst.tmp
 	fi
-    done    
+    done
+
+    for FILE in $FILES2
+    do
+	if [ -f "$RPM_BUILD_ROOT/$FILE" ]; then
+	    echo "%lang($LANG) $FILE" >> "dict-$LANG"
+	    LOCALE=`basename $FILE | cut -d . -f 1`
+	    COUNTRY=`echo $LOCALE | cut -d _ -f 3`
+	    echo "THES $LANG $COUNTRY $LOCALE" >> dictlst.tmp
+	fi
+    done
+
+    SIZE=`ls -l dictlst.tmp 2>/dev/null | awk '{ print $5 }'`
+    if [ "$SIZE" -ne 0 ]; then
+        cat dictlst.tmp | sort | uniq > $RPM_BUILD_ROOT%{dictlst}.$LANG
+	echo "%lang($LANG) %{dictlst}.$LANG" >> "dict-$LANG"
+    fi
 }
 
 FindI18N ar arabic 96
@@ -1177,9 +1197,9 @@ FindDict bg bulgarian bg_BG
 FindDict ca catalan ca_ES
 FindDict cs czech cs_CZ
 FindDict da danish da_DK
-FindDict de german de_AT de_CH de_DE
+FindDict de german de_DE de_CH de_AT
 FindDict el greek el_GR
-FindDict en english en_CA en_GB en_US en_ES
+FindDict en english en_US en_CA en_GB en_ES
 FindDict es spanish es_ES
 FindDict fr french fr_FR
 FindDict ga irish ga_IE
@@ -1200,11 +1220,178 @@ FindDict sl slovenian sl_SI
 FindDict sv swedish sv_SE
 FindDict uk ukrainian uk_UA
 
+cp %{SOURCE11} $RPM_BUILD_ROOT%{dictlst}-readme
+rm -f $RPM_BUILD_ROOT%{dictlst}
+touch $RPM_BUILD_ROOT%{dictlst}
+
+## Special case - Latin
+echo DICT la ANY la > $RPM_BUILD_ROOT%{dictlst}.la
+# Special case - Austrian German - why?
+#echo DICT de AT de_AT >> $RPM_BUILD_ROOT%{dictlst}.de
+#echo DICT de AT de_DE >> $RPM_BUILD_ROOT%{dictlst}.de
+
+
 ####################
 ## CLEAN
 ####################
 %clean
 #rm -rf $RPM_BUILD_ROOT
+
+%post dict-bg
+cat %{dictlst}.* | sort | uniq > %{dictlst}
+
+%postun dict-bg
+cat %{dictlst}.* | sort | uniq > %{dictlst}
+
+%post dict-ca
+cat %{dictlst}.* | sort | uniq > %{dictlst}
+
+%postun dict-ca
+cat %{dictlst}.* | sort | uniq > %{dictlst}
+
+%post dict-cs
+cat %{dictlst}.* | sort | uniq > %{dictlst}
+
+%postun dict-cs
+cat %{dictlst}.* | sort | uniq > %{dictlst}
+
+%post dict-da
+cat %{dictlst}.* | sort | uniq > %{dictlst}
+
+%postun dict-da
+cat %{dictlst}.* | sort | uniq > %{dictlst}
+
+%post dict-de
+cat %{dictlst}.* | sort | uniq > %{dictlst}
+
+%postun dict-de
+cat %{dictlst}.* | sort | uniq > %{dictlst}
+
+%post dict-el
+cat %{dictlst}.* | sort | uniq > %{dictlst}
+
+%postun dict-el
+cat %{dictlst}.* | sort | uniq > %{dictlst}
+
+%post dict-en
+cat %{dictlst}.* | sort | uniq > %{dictlst}
+
+%postun dict-en
+cat %{dictlst}.* | sort | uniq > %{dictlst}
+
+%post dict-es
+cat %{dictlst}.* | sort | uniq > %{dictlst}
+
+%postun dict-es
+cat %{dictlst}.* | sort | uniq > %{dictlst}
+
+%post dict-fr
+cat %{dictlst}.* | sort | uniq > %{dictlst}
+
+%postun dict-fr
+cat %{dictlst}.* | sort | uniq > %{dictlst}
+
+%post dict-ga
+cat %{dictlst}.* | sort | uniq > %{dictlst}
+
+%postun dict-ga
+cat %{dictlst}.* | sort | uniq > %{dictlst}
+
+%post dict-gl
+cat %{dictlst}.* | sort | uniq > %{dictlst}
+
+%postun dict-gl
+cat %{dictlst}.* | sort | uniq > %{dictlst}
+
+%post dict-hr
+cat %{dictlst}.* | sort | uniq > %{dictlst}
+
+%postun dict-hr
+cat %{dictlst}.* | sort | uniq > %{dictlst}
+
+%post dict-hu
+cat %{dictlst}.* | sort | uniq > %{dictlst}
+
+%postun dict-hu
+cat %{dictlst}.* | sort | uniq > %{dictlst}
+
+%post dict-it
+cat %{dictlst}.* | sort | uniq > %{dictlst}
+
+%postun dict-it
+cat %{dictlst}.* | sort | uniq > %{dictlst}
+
+%post dict-la
+cat %{dictlst}.* | sort | uniq > %{dictlst}
+
+%postun dict-la
+cat %{dictlst}.* | sort | uniq > %{dictlst}
+
+%post dict-lt
+cat %{dictlst}.* | sort | uniq > %{dictlst}
+
+%postun dict-lt
+cat %{dictlst}.* | sort | uniq > %{dictlst}
+
+%post dict-nb
+cat %{dictlst}.* | sort | uniq > %{dictlst}
+
+%postun dict-nb
+cat %{dictlst}.* | sort | uniq > %{dictlst}
+
+%post dict-nl
+cat %{dictlst}.* | sort | uniq > %{dictlst}
+
+%postun dict-nl
+cat %{dictlst}.* | sort | uniq > %{dictlst}
+
+%post dict-nn
+cat %{dictlst}.* | sort | uniq > %{dictlst}
+
+%postun dict-nn
+cat %{dictlst}.* | sort | uniq > %{dictlst}
+
+%post dict-pl
+cat %{dictlst}.* | sort | uniq > %{dictlst}
+
+%postun dict-pl
+cat %{dictlst}.* | sort | uniq > %{dictlst}
+
+%post dict-pt
+cat %{dictlst}.* | sort | uniq > %{dictlst}
+
+%postun dict-pt
+cat %{dictlst}.* | sort | uniq > %{dictlst}
+
+%post dict-ru
+cat %{dictlst}.* | sort | uniq > %{dictlst}
+
+%postun dict-ru
+cat %{dictlst}.* | sort | uniq > %{dictlst}
+
+%post dict-sk
+cat %{dictlst}.* | sort | uniq > %{dictlst}
+
+%postun dict-sk
+cat %{dictlst}.* | sort | uniq > %{dictlst}
+
+%post dict-sl
+cat %{dictlst}.* | sort | uniq > %{dictlst}
+
+%postun dict-sl
+cat %{dictlst}.* | sort | uniq > %{dictlst}
+
+%post dict-sv
+cat %{dictlst}.* | sort | uniq > %{dictlst}
+
+%postun dict-sv
+cat %{dictlst}.* | sort | uniq > %{dictlst}
+
+%post dict-uk
+cat %{dictlst}.* | sort | uniq > %{dictlst}
+
+%postun dict-uk
+cat %{dictlst}.* | sort | uniq > %{dictlst}
 
 
 ####################
@@ -1273,8 +1460,8 @@ FindDict uk ukrainian uk_UA
 
 %{oolib}/share/autotext/english
 %{oolib}/share/template/english
-%{oolib}/share/dict/ooo/*en*
-%{oolib}/share/dict/ooo/dictionary.lst
+%ghost %{oolib}/share/dict/ooo/dictionary.lst
+%{oolib}/share/dict/ooo/dictionary.lst-readme
 
 %dir %{oolib}/user
 %dir %{oolib}/user/autotext
