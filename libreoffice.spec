@@ -15,7 +15,7 @@ Summary:	OpenOffice - powerful office suite
 Summary(pl):	OpenOffice - potê¿ny pakiet biurowy
 Name:		openoffice
 Version:	1.0.2
-Release:	0.7
+Release:	0.8
 Epoch:		1
 License:	GPL/LGPL
 Group:		X11/Applications
@@ -73,6 +73,7 @@ Source228:	ftp://ftp.openoffice.pl/OpenOffice.ORG/contrib/dictionaries/la.zip
 Patch0:		%{name}-gcc.patch
 #Patch2:		%{name}-mozilla.patch
 # Start using some system libraries:
+Patch4:		%{name}-system-stlport.patch
 Patch5:		%{name}-system-freetype.patch
 Patch6:		%{name}-system-getopt.patch
 Patch7:		%{name}-freetype-2.1.patch
@@ -222,6 +223,7 @@ cd oo_%{version}_src
 %patch0 -p1
 #%patch2 -p1
 
+%patch4 -p1
 %patch5 -p1
 %patch6 -p1
 %patch7 -p1
