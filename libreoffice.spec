@@ -9,7 +9,7 @@
 %define		rel		1
 %define		ooobver		1.1.52
 %define		subver		645
-%define		fullver		%{ver}%{?rel:.%{rel}}
+%define		fullver		%{ver}.%{rel}
 %define		dfullver	%(echo %{fullver} | tr . _)
 %define		specflags	-fno-strict-aliasing
 
@@ -24,7 +24,7 @@ Group:		X11/Applications
 Source0:	http://ooo.ximian.com/packages/OOO_%{dfullver}/ooo-build-%{ooobver}.tar.gz
 # Source0-md5:	008d9f13076bc78fdb4e7720d6591bc8
 Source1:	http://ooo.ximian.com/packages/OOO_%{dfullver}/OOO_%{dfullver}.tar.bz2
-# Source1-md5:	c160872edfe791b8b8c17dffa1b62fe0
+# Source1-md5:	550381bc429fbbda54cb84758f14e010
 Source2:	http://ooo.ximian.com/packages/ooo-icons-OOO_1_1-8.tar.gz
 # Source2-md5:	61c9379fa718ee7f36ccd2d70f3649c8
 Source3:	http://ep09.pld-linux.org/~adgor/pld/%{name}-desktopfiles-0.2.tar.bz2
@@ -879,7 +879,7 @@ fi
 	--with-system-gcc \
 	--with-system-zlib \
 	--with-vendor="PLD" \
-	--with-distro="Ac" \
+	--with-distro="Ximian" \
 	--with-icons="KDE" \
 	--with-installed-ooo-dirname=%{name} \
 %if %{with java}
