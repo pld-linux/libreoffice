@@ -26,7 +26,7 @@ Summary:	OpenOffice - powerful office suite
 Summary(pl):	OpenOffice - potê¿ny pakiet biurowy
 Name:		openoffice
 Version:	%{fullver}
-Release:	3
+Release:	4
 Epoch:		1
 License:	GPL/LGPL
 Group:		X11/Applications
@@ -191,7 +191,8 @@ Summary:	OpenOffice.org KDE Interface
 Summary(pl):	Interfejs KDE dla OpenOffice.org
 Group:		X11/Libraries
 Requires:	%{name}-libs = %{epoch}:%{version}-%{release}
-Requires:	%{name}-i18n-en-kde = %{epoch}:%{version}-%{release}
+Obsoletes:	%{name}-i18n-en-kde
+Obsoletes:	%{name}-i18n-en
 
 %description libs-kde
 OpenOffice.org productivity suite - KDE Interface.
@@ -204,7 +205,8 @@ Summary:	OpenOffice.org GTK Interface
 Summary(pl):	Interfejs GTK dla OpenOffice.org
 Group:		X11/Libraries
 Requires:	%{name}-libs = %{epoch}:%{version}-%{release}
-Requires:	%{name}-i18n-en-gtk = %{epoch}:%{version}-%{release}
+Obsoletes:	%{name}-i18n-en-gtk
+Obsoletes:	%{name}-i18n-en
 
 %description libs-gtk
 OpenOffice.org productivity suite - GTK Interface.
@@ -378,23 +380,6 @@ Ten pakiet dostarcza zasoby zawieraj±ce menu i okna dialogowe w jêzyku
 greckim.
 
 %files i18n-el-gtk -f el.lang.gnome
-
-%package i18n-en-gtk
-Summary:	OpenOffice.org - interface in English language
-Summary(pl):	OpenOffice.org - interfejs w jêzyku angielskim
-Group:		Applications/Office
-Requires:	%{name} = %{epoch}:%{version}-%{release}
-Obsoletes:	openoffice-i18n-en
-
-%description i18n-en-gtk
-This package provides resources containing menus and dialogs in
-English language.
-
-%description i18n-en-gtk -l pl
-Ten pakiet dostarcza zasoby zawieraj±ce menu i okna dialogowe w jêzyku
-angielskim.
-
-%files i18n-en-gtk -f en.lang.gnome
 
 %package i18n-es-gtk
 Summary:	OpenOffice.org - interface in Spanish language
@@ -1179,23 +1164,6 @@ Ten pakiet dostarcza zasoby zawieraj±ce menu i okna dialogowe w jêzyku
 greckim.
 
 %files i18n-el-kde -f el.lang.kde
-
-%package i18n-en-kde
-Summary:	OpenOffice.org - interface in English language
-Summary(pl):	OpenOffice.org - interfejs w jêzyku angielskim
-Group:		Applications/Office
-Requires:	%{name} = %{epoch}:%{version}-%{release}
-Obsoletes:	openoffice-i18n-en
-
-%description i18n-en-kde
-This package provides resources containing menus and dialogs in
-English language.
-
-%description i18n-en-kde -l pl
-Ten pakiet dostarcza zasoby zawieraj±ce menu i okna dialogowe w jêzyku
-angielskim.
-
-%files i18n-en-kde -f en.lang.kde
 
 %package i18n-es-kde
 Summary:	OpenOffice.org - interface in Spanish language
@@ -2216,13 +2184,13 @@ fontpostinst TTF %{_fontsdir}/%{name}
 %{_fontsdir}/openoffice/*.ttf
 %ghost %{_fontsdir}/openoffice/fonts.cache-1
 
-%files libs-kde
+%files libs-kde -f en.lang.kde
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_libdir}/%{name}/program/kdefilepicker
 %attr(755,root,root) %{_libdir}/%{name}/program/libvclplug_kde*.so
 %dir %{_libdir}/%{name}/program/resource.kde
 
-%files libs-gtk
+%files libs-gtk -f en.lang.gnome
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_libdir}/%{name}/program/libvclplug_gtk*.so
 %dir %{_libdir}/%{name}/program/resource.gnome
