@@ -43,3 +43,15 @@ diff -Nur oo/xmlhelp/source/cxxhelp/provider/databases.cxx oo.new/xmlhelp/source
  #ifndef _VOS_DIAGNOSE_HXX_
  #include <vos/diagnose.hxx>
  #endif
+diff -Nur oo/xmlhelp/source/cxxhelp/provider/urlparameter.cxx oo.new/xmlhelp/source/cxxhelp/provider/urlparameter.cxx
+--- oo/xmlhelp/source/cxxhelp/provider/urlparameter.cxx	Wed Oct 31 14:08:14 2001
++++ oo.new/xmlhelp/source/cxxhelp/provider/urlparameter.cxx	Mon Apr 15 11:05:50 2002
+@@ -88,7 +88,7 @@
+ #include <sablot/shandler.h>
+ #endif
+ #ifndef _DB_CXX_H_
+-#include <berkeleydb/db_cxx.h>
++#include <db_cxx.h>
+ #endif
+ #ifndef _URLPARAMETER_HXX_
+ #include <provider/urlparameter.hxx>
