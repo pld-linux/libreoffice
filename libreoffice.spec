@@ -24,7 +24,7 @@ OpenOffice jest potê¿nym pakietem biurowym wywodz±cym siê ze StarOffice.
 
 %prep
 %setup -q -n oo_613_src
-cp -fr %{SOURCE1} $RPM_BUILD_DIR
+cp -fr %{SOURCE1} $RPM_BUILD_DIR/oo_613_src
 tar fxz solenv613_linux_intel.tar.gz
 
 %build
@@ -33,9 +33,16 @@ cd config_office
 	--with-stlport4-home=%{_prefix} \
 	--with-jdk-home=/usr/local/lib/jdk
 cd ..
-csh
+
+cat <<EOF > compile
+#!/bin/csh
 source LinuxIntelEnv.Set
-solenv/unxlngi3/bin/dmake
+PATH=$SRC_ROOT/solenv/unxlngi3/bin
+dmake
+EOF
+
+chmod u+rx compile
+./compile
 
 %install
 rm -rf $RPM_BUILD_ROOT
