@@ -3,20 +3,20 @@
 # _with_ra			- build in RA environment
 
 %define		ver		1.1
-%define		rel		rc
+%define		rel		rc2
 %define		fullver		%{ver}%{rel}
 
 Summary:	OpenOffice - powerful office suite
 Summary(pl):	OpenOffice - potê¿ny pakiet biurowy
 Name:		openoffice
 Version:	%{ver}
-Release:	0.%{rel}.3
+Release:	0.%{rel}.1
 Epoch:		1
 License:	GPL/LGPL
 Group:		X11/Applications
 # Previous url: ftp://ftp.openoffice.pl/pub/OpenOffice.ORG/stable/%{fullver}/OOo_%{fullver}_source.tar.bz2
 Source0:	ftp://sunsite.icm.edu.pl/packages/OpenOffice/official/stable/%{fullver}/OOo_%{fullver}_source.tar.bz2
-# Source0-md5:	8096b6f9d9987cac2b20f651a8c2f7d1
+# Source0-md5:	fdf1b41a035b40efb5259f9077dcf36d
 Source1:	ftp://ftp.cs.man.ac.uk/pub/toby/gpc/gpc231.tar.Z
 # Source1-md5:	fdb06fdb5a4670b172f9fb738b717be9
 Source2:	%{name}-rsfile.txt
