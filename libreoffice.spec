@@ -1028,10 +1028,12 @@ cp fonts/opens___.ttf $RPM_BUILD_ROOT%{_datadir}/fonts/openoffice
 # %%ghost the fonts.cache-1 file
 touch $RPM_BUILD_ROOT%{_datadir}/fonts/openoffice/fonts.cache-1
 
-# We don't need spadmin or the setup application
+# We don't need spadmin (gtk) or the setup application
 rm -f $RPM_BUILD_ROOT%{_libdir}/%{name}/setup
+%if ! %{with kde}
 rm -f $RPM_BUILD_ROOT%{_libdir}/%{name}/spadmin
 rm -f $RPM_BUILD_ROOT%{_libdir}/%{name}/program/spadmin
+%endif
 rm -f $RPM_BUILD_ROOT%{_datadir}/applications/openoffice-setup.desktop
 rm -f $RPM_BUILD_ROOT%{_datadir}/applications/openoffice-printeradmin.desktop
 
@@ -1188,6 +1190,10 @@ fontpostinst TTF %{_fontsdir}/%{name}
 # Programs
 %attr(755,root,root) %{_bindir}/oo*
 %attr(755,root,root) %{_libdir}/%{name}/program/*.bin
+%if %{with kde}
+%attr(755,root,root) %{_libdir}/%{name}/spadmin
+%attr(755,root,root) %{_libdir}/%{name}/program/spadmin
+%endif
 %if %{with java}
 %attr(755,root,root) %{_libdir}/%{name}/program/javaldx
 %attr(755,root,root) %{_libdir}/%{name}/program/jvmsetup
