@@ -1,0 +1,9 @@
+[Desktop Entry]
+Encoding=UTF-8
+Name=OpenOffice.org Impress
+Terminal=false
+Icon=ooo_impress.png
+Exec=ooimpress
+Type=Application
+MimeType=application/vnd.sun.xml.impress
+Categories=Office;Presentation;

@@ -1,0 +1,9 @@
+[Desktop Entry]
+Encoding=UTF-8
+Name=OpenOffice.org Calc
+Terminal=false
+Icon=ooo_calc.png
+Exec=oocalc
+Type=Application
+MimeType=application/vnd.sun.xml.calc
+Categories=Office;Spreadsheet;
