@@ -1,0 +1,102 @@
+--- oo/xmloff/source/core/nmspmap.cxx.orig	Fri May 23 20:15:24 2003
++++ oo/xmloff/source/core/nmspmap.cxx	Fri May 23 20:15:46 2003
+@@ -2,9 +2,9 @@
+  *
+  *  $RCSfile$
+  *
+- *  $Revision$
++ *  $Revision$
+  *
+- *  last change: $Author$ $Date$
++ *  last change: $Author$ $Date$
+  *
+  *  The Contents of this file are made available subject to the terms of
+  *  either of the following licenses
+@@ -256,7 +256,7 @@
+ 					sQName.append ( (*aIter).second->sPrefix);
+ 					sQName.append ( sal_Unicode(':') );
+ 					sQName.append ( rLocalName );
+-					OUString *pString = new OUString ( rLocalName ), &rString = sQName.makeStringAndClear();
++					const OUString *pString = new OUString ( rLocalName ), &rString = sQName.makeStringAndClear();
+ 					const_cast < QNameCache * > (&aQNameCache)->operator[] ( QNamePair ( nKey, pString ) ) = rString;
+ 					return rString;
+ 				}
+--- oo/xmloff/source/text/XMLChangeImportContext.cxx.orig	Fri May 23 20:17:24 2003
++++ oo/xmloff/source/text/XMLChangeImportContext.cxx	Fri May 23 20:17:39 2003
+@@ -2,9 +2,9 @@
+  *
+  *  $RCSfile$
+  *
+- *  $Revision$
++ *  $Revision$
+  *
+- *  last change: $Author$ $Date$
++ *  last change: $Author$ $Date$
+  *
+  *  The Contents of this file are made available subject to the terms of
+  *  either of the following licenses
+@@ -133,7 +133,7 @@
+ 			// prepare parameters
+ 			UniReference<XMLTextImportHelper> rHelper = 
+ 				GetImport().GetTextImport();
+-			OUString& rID = xAttrList->getValueByIndex(nAttr);
++			const OUString& rID = xAttrList->getValueByIndex(nAttr);
+ 
+ 			// call for bStart and bEnd (may both be true)
+ 			if (bIsStart)
+@@ -144,7 +144,8 @@
+ 			// outside of paragraph and still open? set open redline ID
+ 			if (bIsOutsideOfParagraph)
+             {
+-                rHelper->SetOpenRedlineId(rID);
++		OUString crID = rID;
++                rHelper->SetOpenRedlineId(crID);
+ 			}
+ 		}
+ 		// else: ignore
+--- oo/xmloff/source/text/XMLChangedRegionImportContext.cxx.orig	Fri May 23 20:18:38 2003
++++ oo/xmloff/source/text/XMLChangedRegionImportContext.cxx	Fri May 23 20:18:52 2003
+@@ -2,9 +2,9 @@
+  *
+  *  $RCSfile$
+  *
+- *  $Revision$
++ *  $Revision$
+  *
+- *  last change: $Author$ $Date$
++ *  last change: $Author$ $Date$
+  *
+  *  The Contents of this file are made available subject to the terms of
+  *  either of the following licenses
+@@ -137,7 +137,7 @@
+ 			GetKeyByAttrName( xAttrList->getNameByIndex(nAttr), 
+ 							  &sLocalName );
+ 
+-        OUString& rValue = xAttrList->getValueByIndex(nAttr);
++        const OUString& rValue = xAttrList->getValueByIndex(nAttr);
+ 		if ( XML_NAMESPACE_TEXT == nPrefix ) 
+         {
+             if( IsXMLToken( sLocalName, XML_ID ) )
+--- oo/xmloff/source/text/txtflde.cxx.orig	Fri May 23 20:24:58 2003
++++ oo/xmloff/source/text/txtflde.cxx	Fri May 23 20:25:20 2003
+@@ -2,9 +2,9 @@
+  *
+  *  $RCSfile$
+  *
+- *  $Revision$
++ *  $Revision$
+  *
+- *  last change: $Author$ $Date$
++ *  last change: $Author$ $Date$
+  *
+  *  The Contents of this file are made available subject to the terms of
+  *  either of the following licenses
+@@ -1506,7 +1506,7 @@
+ 	case FIELD_ID_DATABASE_DISPLAY:
+ 	{
+ 		// get database, table and column name from field master
+-		Reference<XPropertySet> & xMaster = GetMasterPropertySet(rTextField);
++		const Reference<XPropertySet> & xMaster = GetMasterPropertySet(rTextField);
+ 		ProcessString(XML_DATABASE_NAME, 
+ 					  GetStringProperty(sPropertyDataBaseName, xMaster));
+ 		ProcessString(XML_TABLE_NAME,
