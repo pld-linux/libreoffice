@@ -137,6 +137,9 @@ Patch119: openoffice-scp-no-java-fix.patch
 Patch120: openoffice-odk-handle-no-solar-java.patch 
 Patch121: openoffice-disable-odk-build.patch
 
+# misc patches
+Patch201: openoffice-zoom-combobox.spec
+
 URL:		http://www.openoffice.org/
 BuildRequires:	STLport-devel >= 4.5.3-6
 BuildRequires:	XFree86-devel
@@ -806,6 +809,9 @@ rm -f moz/prj/d.lst
 %patch120 -p0 
 %patch121 -p0 
 %endif 
+
+# add zoom combobox
+%patch201 -p1 
 
 # gcc 2 include error hack:
 rm -rf autodoc/source/inc/utility
