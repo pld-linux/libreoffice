@@ -120,6 +120,7 @@ BuildRequires:	fontconfig-devel >= 1.0.1
 BuildRequires:	freetype-devel >= 2.1
 BuildRequires:	libart_lgpl-devel
 BuildRequires:	libstdc++-devel >= 5:3.2.1
+BuildRequires:	libxml2-devel
 BuildRequires:	nas-devel
 BuildRequires:	pam-devel
 BuildRequires:	perl-base
@@ -1893,6 +1894,7 @@ CONFOPTS=" \
 	--with-icons=gnome,kde \
 	--enable-gtk \
 	--enable-kde \
+	--without-binsuffix \
 	--with-installed-ooo-dirname=%{name} \
 %if %{with java}
 	--enable-java \
