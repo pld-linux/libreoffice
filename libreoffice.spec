@@ -149,7 +149,6 @@ Requires:	db
 %define wordbooks6	%{SOURCE226} %{SOURCE227} %{SOURCE228}
 %define wordbooks	%wordbooks1 %wordbooks2 %wordbooks3 %wordbooks4 %wordbooks5 %wordbooks6
 
-%define	_prefix		/usr/X11R6
 %define	_archbuilddir	unxlngi3.pro
 %define	installpath	instsetoo/%{_archbuilddir}
 %define	subver		641
