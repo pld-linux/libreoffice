@@ -120,7 +120,7 @@ BuildRequires:	automake
 BuildRequires:	bison >= 1.875-4
 BuildRequires:	db-devel
 BuildRequires:	db-cxx-devel
-BuildRequires:	db-java
+BuildRequires:	db4.1-java
 BuildRequires:	flex
 BuildRequires:	freetype-devel >= 2.1
 #BuildRequires:	gcc-java
