@@ -5,21 +5,21 @@
 #	  which one should be used
 #	- cleanups, cleanups and cleanups
 
-%define		ver		1.1
-%define		rel		rc4
+%define		ver		1.1.0
+%define		rel		%{nil}
 %define		fullver		%{ver}%{rel}
 
 Summary:	OpenOffice - powerful office suite
 Summary(pl):	OpenOffice - potê¿ny pakiet biurowy
 Name:		openoffice
 Version:	%{ver}
-Release:	0.%{rel}.1
+Release:	0.1
 Epoch:		1
 License:	GPL/LGPL
 Group:		X11/Applications
 # Previous url: ftp://ftp.openoffice.pl/pub/OpenOffice.ORG/stable/%{fullver}/OOo_%{fullver}_source.tar.bz2
 Source0:	ftp://sunsite.icm.edu.pl/packages/OpenOffice/official/stable/%{fullver}/OOo_%{fullver}_source.tar.gz
-# Source0-md5:	5e448089370621155fae292745badace
+# Source0-md5:	bec8b41089ebdad2831f3c456973ad4e
 Source1:	ftp://ftp.cs.man.ac.uk/pub/toby/gpc/gpc231.tar.Z
 # Source1-md5:	fdb06fdb5a4670b172f9fb738b717be9
 Source2:	%{name}-rsfile.txt
