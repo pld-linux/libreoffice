@@ -1,0 +1,37 @@
+--- oo_1.1_src/desktop/source/app/makefile.mk.jj	2003-05-22 10:51:49.000000000 +0200
++++ oo_1.1_src/desktop/source/app/makefile.mk	2003-10-21 18:04:15.000000000 +0200
+@@ -99,10 +99,34 @@ OBJFILES = \
+ 		$(OBJ)$/checkinstall.obj			\
+ 		$(OBJ)$/cmdlinehelp.obj
+ 
++SLOFILES = \
++        $(SLO)$/app.obj						\
++        $(SLO)$/copyright_ascii_sun.obj		\
++        $(SLO)$/copyright_ascii_ooo.obj		\
++        $(SLO)$/lockfile.obj				\
++		$(SLO)$/intro.obj					\
++		$(SLO)$/officeipcthread.obj			\
++		$(SLO)$/appinit.obj					\
++		$(SLO)$/cmdlineargs.obj				\
++		$(SLO)$/oinstanceprovider.obj		\
++		$(SLO)$/opluginframefactory.obj		\
++		$(SLO)$/appsys.obj					\
++		$(SLO)$/desktopresid.obj			\
++		$(SLO)$/dispatchwatcher.obj			\
++		$(SLO)$/ssodlg.obj					\
++		$(SLO)$/ssoinit.obj					\
++		$(SLO)$/configinit.obj				\
++		$(SLO)$/javainteractionhandler.obj	\
++		$(SLO)$/testtool.obj				\
++		$(SLO)$/checkinstall.obj			\
++		$(SLO)$/cmdlinehelp.obj
++
+ .IF "$(GUI)" == "UNX"
+ .IF "$(OS)" != "MACOSX"
+ OBJFILES+= $(OBJ)$/icon_resource_ooo.obj \
+ 	$(OBJ)$/icon_resource_sun.obj
++SLOFILES+= $(SLO)$/icon_resource_ooo.obj \
++	$(SLO)$/icon_resource_sun.obj
+ .ENDIF
+ .ENDIF
+ 
