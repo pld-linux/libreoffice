@@ -15,32 +15,36 @@
 %bcond_with	java		# Java support
 %bcond_with	vfs		# Enable GNOME VFS and Evolution 2 support
 
-%define		ver		1.1
-%define		rel		4
-%define		ooobver		1.3.8
+%define		ver		2.0
+%define		rel		0
+%define		ooobver		1.9.78
+%define		snap		SRC680
+%define		bver		m78
 %define		subver		645
+
 %define		fullver		%{ver}.%{rel}
 %define		dfullver	%(echo %{fullver} | tr . _)
+%define		ssnap		%(echo %{snap} | tr "[A-Z]" "[a-z]")
 %define		specflags	-fno-strict-aliasing
 
-Summary:	OpenOffice - powerful office suite
-Summary(pl):	OpenOffice - potê¿ny pakiet biurowy
-Name:		openoffice
+Summary:	OpenOffice.org - powerful office suite
+Summary(pl):	OpenOffice.org - potê¿ny pakiet biurowy
+Name:		openoffice.org
 Version:	%{fullver}
 Release:	0.1%{?with_vfs:vfs}
 Epoch:		1
 License:	GPL/LGPL
 Group:		X11/Applications
-Source0:	http://ooo.ximian.com/packages/OOO_%{dfullver}/ooo-build-%{ooobver}.tar.gz
-# Source0-md5:	766efafe1d2a606f2f31f4e613244e96
-Source1:	http://ooo.ximian.com/packages/OOO_%{dfullver}/OOO_%{dfullver}.tar.bz2
-# Source1-md5:	7b0e155a91bbbd5c1ce301fb9f06cb26
-Source2:	http://ooo.ximian.com/packages/ooo-icons-OOO_1_1-10.tar.gz
-# Source2-md5:	be79d3cb5f64d2c0ac8a75e65a59cb09
-Source3:	http://kde.openoffice.org/files/documents/159/1975/ooo-KDE_icons-OOO_1_1-0.3.tar.gz
-# Source3-md5:	05ff784fff01c54cd3dd7b975b46bae2
-Source4:	http://ooo.ximian.com/packages/libwpd-snap-20040823.tar.gz
-# Source4-md5:	c3d8c9f5ae2abbe1b7091817265b9ef3
+Source0:	http://go-ooo.org/packages/%{snap}/ooo-build-%{ooobver}.tar.gz
+# Source0-md5:	c62230a08d779309dec9c4ce62d50612
+Source1:	http://go-ooo.org/packages/%{snap}/%{ssnap}-%{bver}-core.tar.bz2
+# Source1-md5:	6a416b4027e6a926c6ae59a284ef353a
+Source2:	http://go-ooo.org/packages/%{snap}/ooo_custom_images-10.tar.bz2
+# Source2-md5:	2956ae858e74f705bd1b1c60dbb328f5
+Source3:	http://go-ooo.org/packages/%{snap}/ooo_crystal_images-2.tar.bz2
+# Source3-md5:	774f20a69ac5d3421dc49b8668a0e146
+Source4:	http://go-ooo.org/packages/%{snap}/extras-1.tar.bz2
+# Source4-md5:	c76b1c554529a37975d0149ca8647e7a
 Source10:	oocalc.desktop
 Source11:	oodraw.desktop
 Source12:	ooffice.desktop
@@ -87,12 +91,6 @@ Source411:	%{cftp}/helpcontent/helpcontent_88_unix.tgz
 Source412:	%{cftp}/helpcontent/helpcontent_90_unix.tgz
 # Source412-md5:	9521a01c5817e87178f356762f8cdab5
 
-Patch0:		%{name}-rh-disable-spellcheck-all-langs.patch
-# PLD-specific, they ooo-build people don't like it
-Patch1:		%{name}-files.patch
-# Enable VFS support during build
-Patch2:		%{name}-vfs.patch
-
 URL:		http://www.openoffice.org/
 BuildRequires:	ImageMagick
 BuildRequires:	STLport-devel >= 4.5.3-6
@@ -138,10 +136,7 @@ BuildRequires:	zlib-devel
 BuildRequires:	qt-devel
 BuildRequires:	kdelibs-devel
 BuildRequires:	gtk+2-devel
-# checked for by ooo-build configure, but not used now
-#BuildRequires:	evolution-data-server-devel >= 0.0.92
-#BuildRequires:	gnome-vfs2-devel >= 2.0
-#BuildRequires:	libxml2-devel >= 2.0
+BuildRequires:	libxml2-devel >= 2.0
 BuildConflicts:	java-sun = 1.4.2
 Requires(post,postun):	fontpostinst
 Requires:	%{name}-libs = %{epoch}:%{version}-%{release}
@@ -1826,15 +1821,6 @@ zuluskim.
 
 %prep
 %setup -q -n ooo-build-%{ooobver}
-#%patch0 -p1
-%patch1 -p1 
-
-# fixed upstream, remove this after 1.3.9
-sed -i -e 's#kannda#kannada#g' bin/openoffice-xlate-lang
-
-%if %{with vfs}
-%patch2 -p1
-%endif
 
 install -d src
 # sources, icons, KDE_icons
@@ -1874,16 +1860,19 @@ RPM_BUILD_NR_THREADS="%(echo "%{__make}" | sed -e 's#.*-j\([[:space:]]*[0-9]\+\)
 [ "$RPM_BUILD_NR_THREADS" = "%{__make}" ] && RPM_BUILD_NR_THREADS=1
 
 CONFOPTS=" \
+	--with-tag=%{ssnap}-%{bver} \
 %ifarch ppc
 	--with-arch=ppc \
 %endif
 %ifarch sparc sparcv9
 	--with-arch=sparc \
 %endif
-	--with-tag=OOO_%{dfullver} \
 	--with-ccache-allowed \
 	--with-system-gcc \
 	--with-system-zlib \
+	--with-system-jpeg \
+	--with-system-libxml \
+	--with-system-python \
 	--with-system-sane-headers \
 	--with-system-x11-extensions-headers \
 	--with-system-unixodbc-headers \
@@ -1895,9 +1884,9 @@ CONFOPTS=" \
 	--with-dynamic-xinerama \
 	--with-vendor="PLD" \
 	--with-distro="PLD" \
-	--with-icons=gnome,kde \
 	--enable-gtk \
 	--enable-kde \
+	--with-images='industrial crystal' \
 	--without-binsuffix \
 	--with-installed-ooo-dirname=%{name} \
 %if %{with java}
@@ -1906,12 +1895,17 @@ CONFOPTS=" \
 %else
 	--disable-java \
 %endif
+%if %{with vfs}
+	--enable-gnome-vfs \
+%endif
+	--with-docdir=%{_docdir}/%{name}-%{version} \
 	--with-python=%{_bindir}/python \
 	--with-stlport4-home=/usr \
 	--with-lang=ALL \
 	--with-x \
 	--without-fonts \
 	--disable-fontooo \
+	--enable-cups \
 	--enable-fontconfig \
 	--enable-libsn \
 	--enable-libart \
