@@ -1,0 +1,11 @@
+--- oo/solenv/inc/tg_compv.mk.orig	Fri May 23 15:35:24 2003
++++ oo/solenv/inc/tg_compv.mk	Fri May 23 15:30:39 2003
+@@ -168,7 +168,7 @@
+ .ENDIF
+ 
+ .IF "$(CCNUMVER)"=="000300030000"
+-LIBSTDCPP3="5.0.3"
++LIBSTDCPP3="5.0.4"
+ SHORTSTDCPP3="5"
+ .ENDIF
+ 
