@@ -1,0 +1,35 @@
+diff -urN ooo-build-1.3.2.org/bin/ooo-wrapper.in ooo-build-1.3.2/bin/ooo-wrapper.in
+--- ooo-build-1.3.2.org/bin/ooo-wrapper.in	2004-08-29 22:33:54.333582984 +0200
++++ ooo-build-1.3.2/bin/ooo-wrapper.in	2004-08-29 22:35:19.000000000 +0200
+@@ -422,10 +422,27 @@
+ 
+ # select the preferred icons set by the running windowmanager
+ unless (defined $icons_set) {
+-    $icons_set="kde" if (-d "$SystemInstallDir/program/resource.kde" &&
+-                         "$ENV{WINDOWMANAGER}" =~ ".*kde\$");
+-    $icons_set="gnome" if (-d "$SystemInstallDir/program/resource.gnome" &&
+-                         "$ENV{WINDOWMANAGER}" =~ ".*gnome\$");
++    if (exists $ENV{WINDOWMANAGER}) {
++        if (-d "$SystemInstallDir/program/resource.kde" &&
++            "$ENV{WINDOWMANAGER}" =~ ".*kde\$") {
++                $icons_set="kde";
++        } elsif (-d "$SystemInstallDir/program/resource.gnome" &&
++            "$ENV{WINDOWMANAGER}" =~ ".*gnome\$") {
++                $icons_set="gnome";
++        }
++    }
++
++    if (not defined $icons_set) {
++        if (-d "$SystemInstallDir/program/resource.default") {
++            $icons_set="default";
++        } elsif (-d "$SystemInstallDir/program/resource.kde") {
++            $icons_set="kde";
++        } elsif (-d "$SystemInstallDir/program/resource.gnome") {
++            $icons_set="gnome";
++        } else {
++            $icons_set="default";
++        }
++    }
+ }
+ 
+ if (defined $icons_set) {
