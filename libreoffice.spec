@@ -50,6 +50,7 @@ BuildRequires:	automake
 BuildRequires:  bison
 BuildRequires:	flex
 BuildRequires:	freetype-devel >= 2.1
+BuildRequires:	freetype-static
 %{?!_with_nest:BuildRequires:	gcc <= 3.0.0}
 %{?_with_nest:BuildRequires:	gcc2}
 %{?!_with_nest:BuildRequires:	gcc-c++ <= 3.0.0}
