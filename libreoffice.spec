@@ -16,7 +16,7 @@
 
 %define		ver		1.1
 %define		rel		2
-%define		ooobver		1.3.4
+%define		ooobver		1.3.5
 %define		subver		645
 %define		fullver		%{ver}.%{rel}
 %define		dfullver	%(echo %{fullver} | tr . _)
@@ -26,13 +26,13 @@ Summary:	OpenOffice - powerful office suite
 Summary(pl):	OpenOffice - potê¿ny pakiet biurowy
 Name:		openoffice
 Version:	%{fullver}
-Release:	4
+Release:	4.1
 Epoch:		1
 License:	GPL/LGPL
 Group:		X11/Applications
 #Source0:	http://ooo.ximian.com/packages/OOO_%{dfullver}/ooo-build-%{ooobver}.tar.gz
-Source0:	http://ooo.ximian.com/packages/snap/ooo-build-%{ooobver}-HEAD-20040911.tar.gz
-# Source0-md5:	17b0a81e1406b7a2b7f0bfe4011f943f
+Source0:	http://ooo.ximian.com/packages/snap/ooo-build-%{ooobver}-HEAD-20040920.tar.gz
+# Source0-md5:	6e530e0b26c12bb2f7fe0f65f73ffd80
 #Source0:	ooo-build-%{ooobver}-20040902.tar.bz2
 Source1:	http://ooo.ximian.com/packages/OOO_%{dfullver}/OOO_%{dfullver}.tar.bz2
 # Source1-md5:	627fbce603598a74f9be03f5a1da6d94
@@ -516,6 +516,23 @@ Ten pakiet dostarcza zasoby zawieraj±ce menu i okna dialogowe w jêzyku
 hebrajskim.
 
 %files i18n-he-gtk -f he.lang.gnome
+
+%package i18n-hi-gtk
+Summary:	OpenOffice.org - interface in Hindi language
+Summary(pl):	OpenOffice.org - interfejs w jêzyku hindi
+Group:		Applications/Office
+Requires:	%{name} = %{epoch}:%{version}-%{release}
+Obsoletes:	openoffice-i18n-hi
+
+%description i18n-hi-gtk
+This package provides resources containing menus and dialogs in
+Hindi language.
+
+%description i18n-hi-gtk -l pl
+Ten pakiet dostarcza zasoby zawieraj±ce menu i okna dialogowe w jêzyku
+hindi.
+
+%files i18n-hi-gtk -f hi.lang.gnome
 
 %package i18n-hr-gtk
 Summary:	OpenOffice.org - interface in Croatian language
@@ -1300,6 +1317,23 @@ Ten pakiet dostarcza zasoby zawieraj±ce menu i okna dialogowe w jêzyku
 hebrajskim.
 
 %files i18n-he-kde -f he.lang.kde
+
+%package i18n-hi-kde
+Summary:	OpenOffice.org - interface in Hindi language
+Summary(pl):	OpenOffice.org - interfejs w jêzyku hindi
+Group:		Applications/Office
+Requires:	%{name} = %{epoch}:%{version}-%{release}
+Obsoletes:	openoffice-i18n-hi
+
+%description i18n-hi-kde
+This package provides resources containing menus and dialogs in
+Hindi language.
+
+%description i18n-hi-kde -l pl
+Ten pakiet dostarcza zasoby zawieraj±ce menu i okna dialogowe w jêzyku
+hindi.
+
+%files i18n-hi-kde -f hi.lang.kde
 
 %package i18n-hr-kde
 Summary:	OpenOffice.org - interface in Croatian language
