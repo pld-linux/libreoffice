@@ -1,0 +1,30 @@
+--- oo_1.0_src/config_office/configure.in~~	Thu May  2 16:48:20 2002
++++ oo_1.0_src/config_office/configure.in	Thu May  2 16:50:49 2002
+@@ -975,9 +975,9 @@
+ dnl ***************************************
+ dnl testing for X libraries and includes...
+ dnl ***************************************
+-if test "$_os" = "Darwin" -a "x$x_includes" = "xno_x_includes"; then
+-   dnl Mac OS X using Aqua graphics. Don't check for X11.
+-elif test "$_os" != "WINNT" ; then
++dnl if test "$_os" = "Darwin" -a "x$x_includes" = "xno_x_includes"; then
++dnl Mac OS X using Aqua graphics. Don't check for X11.
++dnl elif test "$_os" != "WINNT" ; then
+    AC_PATH_X
+    AC_PATH_XTRA
+ 
+@@ -997,10 +997,10 @@
+    CFLAGS=$X_CFLAGS
+    LDFLAGS="$X_LDFLAGS $X_LIBS"
+    AC_CHECK_LIB(X11, XOpenDisplay, x_libs="-lX11 $X_EXTRA_LIBS", [AC_MSG_ERROR([X Development libraries not found])])
+-else
+-   x_includes="no_x_includes"
+-   x_libraries="no_x_libraries"
+-fi
++dnl else
++dnl   x_includes="no_x_includes"
++dnl   x_libraries="no_x_libraries"
++dnl fi
+ dnl ***************************************
+ dnl testing libc version for Linux...
+ dnl ***************************************
