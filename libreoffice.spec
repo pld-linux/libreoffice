@@ -176,6 +176,7 @@ Group:          X11/Libraries
 Provides:       %{name}-libs-interface = %{version}-%{release}
 Provides:	libvcl%{subver}li.so
 Obsoletes:      %{name}-libs-gtk
+Conflicts:	%{name}-libs < %{version}-%{release}
 
 %description libs-kde
 OpenOffice.org productivity suite - KDE Interface.
@@ -190,6 +191,7 @@ Group:          X11/Libraries
 Provides:	%{name}-libs-interface = %{version}-%{release}
 Provides:	libvcl%{subver}li.so
 Obsoletes:	%{name}-libs-kde
+Conflicts:	%{name}-libs < %{version}-%{release}
 
 %description libs-gtk
 OpenOffice.org productivity suite - GTK Interface.
