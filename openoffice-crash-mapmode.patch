@@ -1,0 +1,20 @@
+Index: vcl/source/gdi/mapmod.cxx
+===================================================================
+RCS file: /cvs/gsl/vcl/source/gdi/mapmod.cxx,v
+retrieving revision 1.1.1.1
+diff -u -p -u -r1.1.1.1 mapmod.cxx
+--- vcl/source/gdi/mapmod.cxx	18 Sep 2000 17:05:38 -0000	1.1.1.1
++++ vcl/source/gdi/mapmod.cxx	12 Sep 2003 16:51:13 -0000
+@@ -144,6 +144,12 @@ static ImplMapMode* ImplGetStaticMapMode
+     static long aStaticImplMapModeAry[(MAP_LASTENUMDUMMY)*sizeof(ImplMapMode)/sizeof(long)];
+ #endif
+ 
++	if( eUnit >= MAP_LASTENUMDUMMY )
++	{
++		DBG_ASSERTWARNING( bRelMap, "Completely bogus map unit" );
++        return ((ImplMapMode*)aStaticImplMapModeAry);
++	}
++
+     ImplMapMode* pImplMapMode = ((ImplMapMode*)aStaticImplMapModeAry)+eUnit;
+     if ( !pImplMapMode->mbSimple )
+     {

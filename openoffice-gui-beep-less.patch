@@ -1,0 +1,26 @@
+Index: vcl/unx/source/window/salframe.cxx
+===================================================================
+RCS file: /cvs/gsl/vcl/unx/source/window/salframe.cxx,v
+retrieving revision 1.163
+diff -u -p -u -r1.163 salframe.cxx
+--- vcl/unx/source/window/salframe.cxx	1 Jul 2003 14:49:01 -0000	1.163
++++ vcl/unx/source/window/salframe.cxx	20 Aug 2003 11:03:39 -0000
+@@ -2271,7 +2271,17 @@ bool SalFrame::SetPluginParent( SystemPa
+ // Sound
+ // -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+ void SalFrame::Beep( SoundType eSoundType ) // not fully suported
+-{ _GetDisplay()->Beep(); }
++{
++	switch (eSoundType) {
++	case SOUND_DEFAULT:
++	case SOUND_ERROR:
++		_GetDisplay()->Beep();
++		break;
++	default:
++		// Excessive beeping averted
++		break;
++	}
++}
+ 
+ // Callback
+ // -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=

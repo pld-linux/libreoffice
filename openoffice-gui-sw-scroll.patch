@@ -1,0 +1,24 @@
+Index: sw/source/ui/uiview/viewport.cxx
+===================================================================
+RCS file: /cvs/sw/sw/source/ui/uiview/viewport.cxx,v
+retrieving revision 1.25.160.1
+diff -u -p -u -r1.25.160.1 viewport.cxx
+--- sw/source/ui/uiview/viewport.cxx	22 Aug 2003 12:01:25 -0000	1.25.160.1
++++ sw/source/ui/uiview/viewport.cxx	7 Oct 2003 09:33:04 -0000
+@@ -781,6 +781,7 @@ IMPL_LINK( SwView, ScrollHdl, SwScrollba
+ 		//Hier wieder auskommentieren wenn das mitscrollen nicht gewuenscht ist.
+ 		// JP 21.07.00: the end scrollhandler invalidate the FN_STAT_PAGE,
+ 		// 				so we dont must do it agin.
++ 		long nOldPge = nPgNum;
+ 		EndScrollHdl(pScrollbar);
+ 
+ 		Point aPos( aVisArea.TopLeft() );
+@@ -801,7 +802,7 @@ IMPL_LINK( SwView, ScrollHdl, SwScrollba
+ 			USHORT nPageCnt = pWrtShell->GetPageCnt();
+ 			if( nPageCnt > 1 && Help::IsQuickHelpEnabled() )
+ 			{
+-				if( !nPgNum || nPgNum != nPhNum )
++				if( !nOldPge || nOldPge != nPhNum )
+ 				{
+ 					Rectangle aRect;
+ 					aRect.Left() = pScrollbar->GetParent()->OutputToScreenPixel(

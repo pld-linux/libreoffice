@@ -1,0 +1,15 @@
+Index: sw/source/core/sw3io/sw3imp.cxx
+===================================================================
+RCS file: /cvs/sw/sw/source/core/sw3io/sw3imp.cxx,v
+retrieving revision 1.20
+diff -u -p -u -r1.20 sw3imp.cxx
+--- sw/source/core/sw3io/sw3imp.cxx	4 Jul 2003 13:23:43 -0000	1.20
++++ sw/source/core/sw3io/sw3imp.cxx	3 Oct 2003 08:06:03 -0000
+@@ -360,6 +360,7 @@ Sw3IoImp::Sw3IoImp( Sw3Io& r )
+ 	pRefSdrObjects = 0;
+ #endif
+ 	hBatsFontConv = 0;
++	hMathFontConv = 0;
+ 	Reset();
+ 
+ 	{

@@ -1,0 +1,16 @@
+--- vcl/unx/source/app/wmadaptor.cxx
++++ vcl/unx/source/app/wmadaptor.cxx
+@@ -1399,13 +1399,8 @@
+         switch( eType )
+         {
+             case windowType_Utility:
+-#if 0
+-                // advertise tool windows as dialogues not utilities for now
+-                // due to a bug in metacity 2.4.34 (smaller titlebar font on
+-                // resizable utility windows)
+                 eWMType = m_aWMAtoms[ NET_WM_WINDOW_TYPE_UTILITY ] ? NET_WM_WINDOW_TYPE_UTILITY : NET_WM_WINDOW_TYPE_DIALOG;
+                 break;
+-#endif
+             case windowType_ModelessDialogue:
+             case windowType_ModalDialogue:
+                 eWMType = NET_WM_WINDOW_TYPE_DIALOG;

@@ -1,0 +1,59 @@
+Index: svx/source/svdraw/svdoole2.cxx
+===================================================================
+--- svx/source/svdraw/svdoole2.cxx.orig	2003-06-06 12:44:20.000000000 +0200
++++ svx/source/svdraw/svdoole2.cxx	2003-11-09 15:07:54.000000000 +0100
+@@ -2,9 +2,9 @@
+  *
+  *  $RCSfile$
+  *
+- *  $Revision$
++ *  $Revision$
+  *
+- *  last change: $Author$ $Date$
++ *  last change: $Author$ $Date$
+  *
+  *  The Contents of this file are made available subject to the terms of
+  *  either of the following licenses
+@@ -377,6 +377,8 @@ void SdrOle2Obj::Connect()
+ 			{
+ 				pInfo->SetDeleted(FALSE);
+ 			}
++
++			mpImpl->mbConnected = true;
+ 		}
+ 
+ 		// In Cache einfuegen
+@@ -412,7 +414,6 @@ void SdrOle2Obj::Connect()
+ 			xBC->addModifyListener( xListener );
+ 		}
+ 
+-		mpImpl->mbConnected = true;
+ 	}
+ }
+ 
+@@ -570,7 +571,13 @@ XubString SdrOle2Obj::GetName() const
+ 
+ void SdrOle2Obj::SetPersistName( const String& rPersistName )
+ {
++	if( mpImpl->mbConnected )
++		Disconnect();
++
+     mpImpl->aPersistName = rPersistName;
++
++	Connect();
++
+ 	SetChanged();
+ }
+ 
+@@ -1283,7 +1290,11 @@ const SvInPlaceObjectRef& SdrOle2Obj::Ge
+ 					uno::Reference< util::XModifyListener > xListener( pModifyListener );
+ 					xBC->addModifyListener( xListener );
+ 				}
++
+ 			}
++
++			// we are always connected if we loaded it
++			mpImpl->mbConnected = true;
+ 		}
+ 	}
+ 

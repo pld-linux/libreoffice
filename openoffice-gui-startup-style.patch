@@ -1,0 +1,16 @@
+Index: sfx2/source/appl/appreg.cxx
+===================================================================
+RCS file: /cvs/framework/sfx2/source/appl/appreg.cxx,v
+retrieving revision 1.7
+diff -u -p -u -r1.7 appreg.cxx
+--- sfx2/source/appl/appreg.cxx	11 Oct 2002 15:14:20 -0000	1.7
++++ sfx2/source/appl/appreg.cxx	9 Oct 2003 13:51:03 -0000
+@@ -110,7 +110,7 @@ void SfxApplication::Registrations_Impl(
+ 	SfxMailChildWinWrapper_Impl::RegisterChildWindow();
+ 	SfxMailChildWinWrapper_Impl::RegisterChildWindow();
+     SfxPartChildWnd_Impl::RegisterChildWindow();
+-	SfxTemplateDialogWrapper::RegisterChildWindow(TRUE);
++	SfxTemplateDialogWrapper::RegisterChildWindow();
+ 
+ 	// Controller
+ 	SfxObjectVerbsControl::RegisterControl(SID_OBJECT);
