@@ -12,7 +12,7 @@ Summary:	OpenOffice - powerful office suite
 Summary(pl):	OpenOffice - potê¿ny pakiet biurowy
 Name:		openoffice
 Version:	1.0.0
-Release:	0.4
+Release:	0.5
 Epoch:		1
 License:	GPL/LGPL
 Group:		X11/Applications
@@ -39,6 +39,11 @@ Patch9:		%{name}-clockspersec.patch
 Patch10:	%{name}-psprint-euro.patch
 # Fix config_office/configure
 Patch11:	%{name}-ac.patch
+# Hackery around zipdep
+Patch12:	%{name}-openoffice-zipdep.patch
+# Remove GPC from linking to GPL/LGPL OO.o code!
+Patch13:	%{name}-remove-gpc.patch
+Patch14:	%{name}-fontcache-1.5.patch
 URL:		http://www.openoffice.org/
 BuildRequires:	STLport-static
 BuildRequires:	XFree86-devel
@@ -113,6 +118,9 @@ Do zalet OpenOffice.org mo¿na zaliczyæ:
 %patch9 -p1
 %patch10 -p1
 %patch11 -p1
+%patch12 -p1
+%patch13 -p1
+%patch14 -p1
 
 install %{SOURCE1} external
 cd external; tar fxz %{SOURCE1}; cp -fr gpc231/* gpc
