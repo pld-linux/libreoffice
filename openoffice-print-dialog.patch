@@ -2,35 +2,34 @@ Index: svtools/source/dialogs/printdlg.cxx
 ===================================================================
 RCS file: /cvs/util/svtools/source/dialogs/printdlg.cxx,v
 retrieving revision 1.16
-diff -u -p -u -r1.16 printdlg.cxx
---- svtools/source/dialogs/printdlg.cxx	11 Apr 2003 17:01:36 -0000	1.16
-+++ svtools/source/dialogs/printdlg.cxx	29 May 2003 14:07:34 -0000
-@@ -431,6 +431,9 @@
+--- svtools/source/dialogs/printdlg.cxx.orig	2004-03-30 19:47:51.000000000 +0000
++++ svtools/source/dialogs/printdlg.cxx	2004-03-30 19:51:29.000000000 +0000
+@@ -431,6 +431,10 @@
          {
              try
              {
 +		INetURLObject aLocation( maFiPrintFile.GetText(), INET_PROT_FILE );
++
 +		xFilePicker->setDefaultName( aLocation.GetLastName() );
 +		xFilePicker->setDisplayDirectory ( aLocation.GetPartBeforeLastName() );
  #ifdef UNX
                  // add PostScript and PDF
                  if( ! Application::IsRemoteServer() )
-@@ -455,6 +458,10 @@
- #endif
-                 // add arbitrary files
-                 xFilterMgr->appendFilter( maAllFilterStr, OUString( RTL_CONSTASCII_USTRINGPARAM( "*.*" ) ) );
+@@ -449,6 +453,10 @@
+                         xFilterMgr->appendFilter( OUString( RTL_CONSTASCII_USTRINGPARAM( "PostScript" ) ), OUString( RTL_CONSTASCII_USTRINGPARAM( "*.ps" ) ) );
+                     if( bPDF )
+                         xFilterMgr->appendFilter( OUString( RTL_CONSTASCII_USTRINGPARAM( "Portable Document Format" ) ), OUString( RTL_CONSTASCII_USTRINGPARAM( "*.pdf" ) ) );
 +
-+		String aFilter = pPrinter->GetJobValue( String::CreateFromAscii( "Filter#" ) );
-+		if (aFilter.Len())
-+			xFilterMgr->setCurrentFilter( aFilter );
-             }
-             catch( IllegalArgumentException rExc )
-             {
-@@ -465,6 +472,13 @@
++		    String aFilter = pPrinter->GetJobValue( String::CreateFromAscii( "Filter#" ) );
++		    if (aFilter.Len())
++			    xFilterMgr->setCurrentFilter( aFilter );
+                 }
+ #elif defined WNT
+                 xFilterMgr->appendFilter( OUString( RTL_CONSTASCII_USTRINGPARAM( "*.PRN" ) ), OUString( RTL_CONSTASCII_USTRINGPARAM( "*.prn" ) ) );
+@@ -465,6 +473,12 @@
                  Sequence< OUString > aPathSeq( xFilePicker->getFiles() );
                  INetURLObject aObj( aPathSeq[0] );
                  maFiPrintFile.SetText( aObj.PathToFileName() );
-+
 +#ifdef UNX
 +		Printer* pPrinter = TEMPPRINTER() ? TEMPPRINTER() : mpPrinter;
 +		if ( pPrinter )
@@ -40,4 +39,3 @@ diff -u -p -u -r1.16 printdlg.cxx
                  return true;
              }
              return false;
-
