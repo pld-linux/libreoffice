@@ -1,0 +1,58 @@
+--- oo_1.1_src/scp/util/makefile.mk.orig	2003-08-21 11:46:53.000000000 +0200
++++ oo_1.1_src/scp/util/makefile.mk	2003-11-27 23:00:45.000000000 +0100
+@@ -81,14 +81,13 @@
+ SCP1FILES  =    config.par              \
+                 setuphelp.par           \
+                 module_fat_root.par     \
+-                module.par				\
++                module.par		\
+                 module_calc.par         \
+                 module_impress.par      \
+                 module_draw.par         \
+                 module_math.par         \
+                 module_grafik.par       \
+                 module_lingu.par        \
+-                module_javafilter.par	\
+                 profile.par             \
+                 profile_calc.par        \
+                 profile_impress.par     \
+@@ -96,16 +95,13 @@
+                 profile_math.par        \
+                 profile_chart.par       \
+                 profile_grafik.par      \
+-                profile_javafilter.par	\
+                 setupzip.par            \
+-                readme.par	            \
++                readme.par	        \
+                 udk_base.par            \
+                 udk_bridges.par         \
+-                udk_java.par			\
+-                udk_pure_java.par		\
+-                udk_remote.par			\
+-                udk_complete.par		\
+-                files.par				\
++                udk_remote.par		\
++                udk_complete.par	\
++                files.par		\
+                 files_calc.par          \
+                 files_impress.par       \
+                 files_draw.par          \
+@@ -113,10 +109,17 @@
+                 files_chart.par         \
+                 files_grafik.par        \
+                 files_lingu.par         \
+-                files_javafilter.par	\
+                 dir.par					\
+                 python.par
+ 
++#.IF "$(SOLAR_JAVA)"!=""   
++#		module_javafilter.par	\
++#		profile_javafilter.par	\
++#		files_javafilter.par	\
++#		udk_java.par			\
++#                udk_pure_java.par		\
++#.ENDIF		
++
+ 
+ #python.par
+ 

@@ -1,0 +1,34 @@
+--- berkeleydb/makefile.mk.orig	2003-08-07 20:01:59.000000000 -0700
++++ berkeleydb/makefile.mk	2003-08-07 20:04:49.000000000 -0700
+@@ -80,7 +80,10 @@
+ CONFIGURE_DIR=out
+ #relative to CONFIGURE_DIR
+ CONFIGURE_ACTION=..$/dist$/configure
+-CONFIGURE_FLAGS=--enable-cxx --enable-java --enable-dynamic --enable-shared
++CONFIGURE_FLAGS=--enable-cxx --enable-dynamic --enable-shared
++.IF "$(SOLAR_JAVA)"!=""
++CONFIGURE_FLAGS+=--enable-java
++.ENDIF
+ 
+ BUILD_DIR=$(CONFIGURE_DIR)
+ .IF "$(OS)"=="IRIX"
+@@ -92,7 +95,9 @@
+ 
+ OUT2LIB=$(BUILD_DIR)$/.libs$/libdb*$(DLLPOST)
+ 
++.IF "$(SOLAR_JAVA)"!=""
+ OUT2BIN=java$/classes$/db.jar
++.ENDIF
+ 
+ .ENDIF			# "$(GUI)"=="UNX"
+ 
+@@ -129,7 +134,9 @@
+ 	include$/db_185.h \
+ 	include$/db_cxx.h
+ 
++.IF "$(SOLAR_JAVA)"!=""
+ OUT2CLASS=java$/classes$/db.jar
++.ENDIF
+ 
+ # --- Targets ------------------------------------------------------
+ 

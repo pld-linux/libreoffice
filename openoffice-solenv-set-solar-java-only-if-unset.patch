@@ -1,0 +1,66 @@
+--- solenv/inc/unxlngi3.mk.orig	2003-04-28 09:46:48.000000000 -0700
++++ solenv/inc/unxlngi3.mk	2003-08-18 22:09:12.000000000 -0700
+@@ -64,7 +64,7 @@
+ ASM=
+ AFLAGS=
+ 
+-SOLAR_JAVA=TRUE
++SOLAR_JAVA*=TRUE
+ JAVAFLAGSDEBUG=-g
+ 
+ # filter for supressing verbose messages from linker
+--- solenv/inc/unxlngi4.mk.orig	2003-07-31 01:32:41.000000000 -0700
++++ solenv/inc/unxlngi4.mk	2003-08-18 22:09:12.000000000 -0700
+@@ -64,7 +64,7 @@
+ ASM=
+ AFLAGS=
+ 
+-SOLAR_JAVA=TRUE
++SOLAR_JAVA*=TRUE
+ JAVAFLAGSDEBUG=-g
+ 
+ # filter for supressing verbose messages from linker
+--- solenv/inc/unxlngi5.mk.orig	2003-07-31 01:32:41.000000000 -0700
++++ solenv/inc/unxlngi5.mk	2003-08-18 22:09:12.000000000 -0700
+@@ -64,7 +64,7 @@
+ ASM=
+ AFLAGS=
+ 
+-SOLAR_JAVA=TRUE
++SOLAR_JAVA*=TRUE
+ JAVAFLAGSDEBUG=-g
+ 
+ # filter for supressing verbose messages from linker
+--- solenv/inc/unxlngppc.mk.orig	2003-04-28 09:47:14.000000000 -0700
++++ solenv/inc/unxlngppc.mk	2003-08-18 22:09:12.000000000 -0700
+@@ -65,7 +65,7 @@
+ ASM= 
+ AFLAGS= 
+ 
+-SOLAR_JAVA=TRUE 
++SOLAR_JAVA*=TRUE 
+ JAVAFLAGSDEBUG=-g 
+ 
+ # filter for supressing verbose messages from linker
+--- solenv/inc/unxlngppc4.mk.orig	2003-06-12 03:02:32.000000000 -0700
++++ solenv/inc/unxlngppc4.mk	2003-08-18 22:09:12.000000000 -0700
+@@ -64,7 +64,7 @@
+ ASM=
+ AFLAGS=
+ 
+-SOLAR_JAVA=TRUE
++SOLAR_JAVA*=TRUE
+ JAVAFLAGSDEBUG=-g
+ 
+ # filter for supressing verbose messages from linker
+--- solenv/inc/unxlngs3904.mk.orig	2003-06-12 03:02:43.000000000 -0700
++++ solenv/inc/unxlngs3904.mk	2003-08-18 22:09:12.000000000 -0700
+@@ -64,7 +64,7 @@
+ ASM=
+ AFLAGS=
+ 
+-SOLAR_JAVA=TRUE
++SOLAR_JAVA*=TRUE
+ JAVAFLAGSDEBUG=-g
+ 
+ # filter for supressing verbose messages from linker

@@ -1,0 +1,12 @@
+--- filter/source/xsltvalidate/makefile.mk.orig	2003-08-09 22:07:10.000000000 -0700
++++ filter/source/xsltvalidate/makefile.mk	2003-08-09 22:07:23.000000000 -0700
+@@ -87,7 +87,9 @@
+ #        + $(COPY) $(COPYRECURSE) META-INF $(OUT)$/class$/META-INF
+ # --- Targets ------------------------------------------------------  
+ .INCLUDE :  target.mk 
++.IF "$(SOLAR_JAVA)"!=""
+ $(JAVACLASSFILES) : $(CLASSDIR)
++.ENDIF
+   
+ $(CLASSDIR) :
+ 	$(MKDIR) $(CLASSDIR)

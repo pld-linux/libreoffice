@@ -1,0 +1,145 @@
+--- config_office/configure.in.orig	2003-09-22 11:14:29.000000000 -0700
++++ config_office/configure.in	2003-09-22 11:33:19.000000000 -0700
+@@ -1124,66 +1124,79 @@
+ dnl ===================================================================
+ dnl Checks for JDK.
+ dnl ===================================================================
+-JAVA_HOME=; export JAVA_HOME
+-if test -z "$with_jdk_home"; then
+-   AC_PATH_PROG(JAVAC, javac)
+-   AC_PATH_PROG(JAVA, java)
+-else
+-   _javac_path="$with_jdk_home/bin/javac"
+-   dnl Check if there is a java compiler at all.
+-   if test -x "$_javac_path"; then
+-      JAVAC=$_javac_path
+-	else
+-		AC_MSG_ERROR([$_javac_path not found set with_jdk_home])
++if test "$enable_java" != "no"; then
++   JAVA_HOME=; export JAVA_HOME
++   if test -z "$with_jdk_home"; then
++      AC_PATH_PROG(JAVAC, javac)
++      AC_PATH_PROG(JAVA, java)
++   else
++      _javac_path="$with_jdk_home/bin/javac"
++      dnl Check if there is a java compiler at all.
++      if test -x "$_javac_path"; then
++         JAVAC=$_javac_path
++   	else
++   		AC_MSG_ERROR([$_javac_path not found set with_jdk_home])
++      fi
++      
++      _java_path="$with_jdk_home/bin/java"
++      dnl Check if there is a java interpreter at all.
++      if test -x "$_java_path"; then
++         JAVA=$_java_path
++   	else
++   		AC_MSG_ERROR([$_java_path not found set with_jdk_home])
++      fi
+    fi
++   AC_MSG_CHECKING([the installed JDK])
++   if test "$JAVA"; then
+    
+-   _java_path="$with_jdk_home/bin/java"
+-   dnl Check if there is a java interpreter at all.
+-   if test -x "$_java_path"; then
+-      JAVA=$_java_path
+-	else
+-		AC_MSG_ERROR([$_java_path not found set with_jdk_home])
+-   fi
+-fi
+-AC_MSG_CHECKING([the installed JDK])
+-if test "$JAVA"; then
+-
+-   dnl java -version sends output to stderr!
+-   if test `$JAVA -version 2>&1 | grep -c "Kaffe"` -gt 0; then
+-     
+-     dnl Kaffe specific tests
+-     KAFFE_VER=`$JAVA -version 2>&1 | $EGREP "  Version:" | $SED -r "s/.*  Version: ([[0-9\.]]*).*/\1/"`
+-     if test -z "$KAFFE_VER"; then
+-       AC_MSG_ERROR([looks like Kaffe but version detection failed])
+-     fi
+-     _kaffe_ver=`echo "$KAFFE_VER" | $AWK -F. '{ print (($1 * 100) + $2) * 100 + $3;}'`
+-     if test "$_kaffe_ver" -lt 10100; then
+-        AC_MSG_ERROR([Kaffe is too old ($KAFFE_VER - $_kaffe_ver), you need at least 1.1.0])
+-     fi
+-     JDK=kaffe
+-     
+-     dnl TODO: define some project exclusion variables
+-     
+-     AC_MSG_RESULT([checked (Kaffe $KAFFE_VER)])
+-     AC_MSG_WARN([EXPERIMENTAL: Kaffe is not a full JDK replacement - some projects will fail to compile])
+-     echo "EXPERIMENTAL: Kaffe is not a full JDK replacement - some projects will fail to compile" >>warn
+-   else
+-     
+-     dnl SUN JDK specific tests
+-     _jdk=`$JAVAC -J-version 2>&1 | $AWK -F'"' '{ print \$2 }' | $SED s/[[-A-Za-z]]*//`
+-     _jdk_ver=`echo "$_jdk" | $AWK -F. '{ print (($1 * 100) + $2) * 100 + $3;}'`
+-
+-     if test "$_jdk_ver" -lt 10300; then
+-          AC_MSG_ERROR([JDK is too old, you need at least 1.3])
+-     fi
+-     AC_MSG_RESULT([checked (JDK $_jdk)])
++      dnl java -version sends output to stderr!
++      if test `$JAVA -version 2>&1 | grep -c "Kaffe"` -gt 0; then
++        
++        dnl Kaffe specific tests
++        KAFFE_VER=`$JAVA -version 2>&1 | $EGREP "  Version:" | $SED -r "s/.*  Version: ([[0-9\.]]*).*/\1/"`
++        if test -z "$KAFFE_VER"; then
++          AC_MSG_ERROR([looks like Kaffe but version detection failed])
++        fi
++        _kaffe_ver=`echo "$KAFFE_VER" | $AWK -F. '{ print (($1 * 100) + $2) * 100 + $3;}'`
++        if test "$_kaffe_ver" -lt 10100; then
++           AC_MSG_ERROR([Kaffe is too old ($KAFFE_VER - $_kaffe_ver), you need at least 1.1.0])
++        fi
++        JDK=kaffe
++        
++        dnl TODO: define some project exclusion variables
++        
++        AC_MSG_RESULT([checked (Kaffe $KAFFE_VER)])
++        AC_MSG_WARN([EXPERIMENTAL: Kaffe is not a full JDK replacement - some projects will fail to compile])
++        echo "EXPERIMENTAL: Kaffe is not a full JDK replacement - some projects will fail to compile" >>warn
++      else
++        
++        dnl SUN JDK specific tests
++        _jdk=`$JAVAC -J-version 2>&1 | $AWK -F'"' '{ print \$2 }' | $SED s/[[-A-Za-z]]*//`
++        _jdk_ver=`echo "$_jdk" | $AWK -F. '{ print (($1 * 100) + $2) * 100 + $3;}'`
++   
++        if test "$_jdk_ver" -lt 10300; then
++             AC_MSG_ERROR([JDK is too old, you need at least 1.3])
++        fi
++        AC_MSG_RESULT([checked (JDK $_jdk)])
++      fi
++      JAVA_HOME=`echo $JAVAC | $SED -n "s,//*bin//*javac,,p"`
++   else
++      AC_MSG_ERROR([JAVA not found. You need at least jdk-1.3])
+    fi
+-   JAVA_HOME=`echo $JAVAC | $SED -n "s,//*bin//*javac,,p"`
++   dnl xsltproc not needed with JDK present.
++   XSLTPROC=NO_XSLTPROC
+ else
+-   AC_MSG_ERROR([JAVA not found. You need at least jdk-1.3])
++   dnl Java disabled
++   JAVA_HOME=NO_JAVA_HOME ; export JAVA_HOME
++   dnl Check for xsltproc
++   AC_PATH_PROG(XSLTPROC, xsltproc, no)
++   if test "$XSLTPROC" = "no"; then
++      AC_MSG_ERROR([xsltproc is required when building with --disable-java.])
++   fi
+ fi
+ AC_SUBST(JAVA_HOME)
+ AC_SUBST(JDK)
++AC_SUBST(XSLTPROC)
+ 
+ dnl ===================================================================
+ dnl Checks for specific files.
+--- config_office/set_soenv.in.orig	2003-09-22 11:27:24.000000000 -0700
++++ config_office/set_soenv.in	2003-09-22 11:30:33.000000000 -0700
+@@ -1359,6 +1359,7 @@
+ if ( '@JDK@' ne '' )
+ { ToFile( "JDK",             "@JDK@",            "e" );
+ }
++ToFile( "XSLTPROC",          "@XSLTPROC@",       "e" );
+ ToFile( "ANT_HOME",          "@ANT_HOME@",       "e" );
+ ToFile( "JDKLIB",            $JAVA_LIB,          "e" );
+ ToFile( "STLPORT4",          $STLPORT4,          "e" );

@@ -1,0 +1,274 @@
+--- sj2/source/java/jnihelp.cxx.orig	2003-08-08 20:54:39.000000000 -0700
++++ sj2/source/java/jnihelp.cxx	2003-08-08 20:55:41.000000000 -0700
+@@ -59,6 +59,7 @@
+  *
+  ************************************************************************/
+ 
++#ifdef SOLAR_JAVA
+ #include <cstdarg>
+ #include <tools/debug.hxx>
+ #include <jni.h>       /* where everything is defined */
+@@ -99,3 +100,5 @@
+ 	_xJavaThreadRegister_11->revokeThread();
+   }
+ }
++
++#endif // SOLAR_JAVA
+--- sj2/source/jscpp/sjapplet.cxx.orig	2003-08-08 20:58:19.000000000 -0700
++++ sj2/source/jscpp/sjapplet.cxx	2003-08-08 21:01:41.000000000 -0700
+@@ -60,7 +60,9 @@
+  ************************************************************************/
+ 
+ #include <cstdarg>
++#ifdef SOLAR_JAVA
+ #include <jnihelp.hxx>
++#endif // SOLAR_JAVA
+ 
+ #include <sjapplet.hxx>
+ 
+@@ -79,11 +81,15 @@
+ 
+ using namespace ::rtl;
+ using namespace ::utl;
++#ifdef SOLAR_JAVA
+ using namespace ::sj2;
++#endif // SOLAR_JAVA
+ 
+ using namespace ::com::sun::star::lang;
+ using namespace ::com::sun::star::uno;
++#ifdef SOLAR_JAVA
+ using namespace ::com::sun::star::java;
++#endif // SOLAR_JAVA
+ 
+ SjApplet2::SjApplet2()
+   : _pImpl(new SjApplet2_Impl())
+@@ -346,7 +352,7 @@
+ /*
+  * Java init function to invoke Java runtime using JNI invocation API.
+  */
+-
++#ifdef SOLAR_JAVA
+ void JRE_PropertyChanged( JNIEnv * env, const SvCommandList & rCmdList )
+ {
+ 	jclass pClass = env->FindClass("java/util/Properties");
+@@ -389,6 +395,7 @@
+ 	env->DeleteLocalRef( pProps );
+ 	env->DeleteLocalRef( pClass );
+ }
++#endif // SOLAR_JAVA
+ 
+ // Settings are detected by the JavaVM service
+ // This function is not necessary anymore
+--- sj2/source/jscpp/sjapplet_impl.cxx.orig	2003-08-08 21:06:04.000000000 -0700
++++ sj2/source/jscpp/sjapplet_impl.cxx	2003-08-08 21:24:29.000000000 -0700
+@@ -78,18 +78,24 @@
+ #include <vcl/syschild.hxx>
+ #include <vcl/sysdata.hxx>
+ 
++#ifdef SOLAR_JAVA
+ #include <jnihelp.hxx>
++#endif // SOLAR_JAVA
+ 
+ using namespace ::rtl;
+ using namespace ::osl;
++#ifdef SOLAR_JAVA
+ using namespace ::sj2;
++#endif // SOLAR_JAVA
+ using namespace ::utl;
+ 
++#ifdef SOLAR_JAVA
+ using namespace ::com::sun::star::java;
++#endif // SOLAR_JAVA
+ using namespace ::com::sun::star::lang;
+ using namespace ::com::sun::star::uno;
+ 
+-
++#ifdef SOLAR_JAVA
+ static void testJavaException(JNIEnv * pEnv)  throw(com::sun::star::uno::RuntimeException)
+ {
+ 	jthrowable jtThrowable = pEnv->ExceptionOccurred();
+@@ -114,7 +120,14 @@
+   		throw RuntimeException(ouMessage, Reference<XInterface>());
+ 	}
+ }
++#else // !SOLAR_JAVA
++static void throwException() throw(com::sun::star::uno::RuntimeException)
++{
++	throw RuntimeException(OUString(RTL_CONSTASCII_USTRINGPARAM("Java applets not supported.")), Reference<XInterface>());
++}
++#endif
+ 
++#ifdef SOLAR_JAVA
+ #ifdef UNX
+ struct EmbeddedWindow {
+ 	jobject _joWindow;
+@@ -210,17 +223,22 @@
+ 
+ _joWindow = 0;
+ }
++#endif // SOLAR_JAVA
+ 
+-
+-
++#ifdef SOLAR_JAVA
+ SjApplet2_Impl::SjApplet2_Impl()  throw(com::sun::star::uno::RuntimeException)
+ :	_pJVM(NULL),
+     _joAppletExecutionContext(0),
+     _jcAppletExecutionContext(0)
+ 
+ {}
++#else // !SOLAR_JAVA
++SjApplet2_Impl::SjApplet2_Impl()  throw(com::sun::star::uno::RuntimeException)
++{}
++#endif
+ 
+ SjApplet2_Impl::~SjApplet2_Impl() throw() {
++#ifdef SOLAR_JAVA
+ if (_joAppletExecutionContext) {
+     TKTThreadAttach jenv(_pJVM, _xJavaThreadRegister_11.get());
+ 
+@@ -230,6 +248,7 @@
+     jenv.pEnv->DeleteGlobalRef(_joAppletExecutionContext);
+     jenv.pEnv->DeleteGlobalRef(_jcAppletExecutionContext);
+ 	}
++#endif
+ }
+ 
+ void SjApplet2_Impl::init(Window * pParentWin,
+@@ -238,6 +257,7 @@
+ 						  const SvCommandList & rCmdList)
+ 	throw(com::sun::star::uno::RuntimeException)
+ {
++#ifdef SOLAR_JAVA
+ 	_pParentWin = pParentWin;
+ 
+ 
+@@ -338,11 +358,14 @@
+ 							  joDocBase, joParameters, _pEmbeddedWindow->_joWindow, (jlong)0);                             testJavaException(jenv.pEnv);
+ 	jenv.pEnv->CallVoidMethod(_joAppletExecutionContext, jmAppletExecutionContext_init);                                   testJavaException(jenv.pEnv);
+ 	jenv.pEnv->CallVoidMethod(_joAppletExecutionContext, jmAppletExecutionContext_startUp);                                testJavaException(jenv.pEnv);
+-
++#else // !SOLAR_JAVA
++	throwException();
++#endif
+ }
+ 
+ void SjApplet2_Impl::setSize(const Size & rSize) throw(com::sun::star::uno::RuntimeException)
+ {
++#ifdef SOLAR_JAVA
+ 	TKTThreadAttach jenv(_pJVM, _xJavaThreadRegister_11.get());
+ 
+ 	_pParentWin->SetSizePixel(rSize);
+@@ -350,42 +373,62 @@
+ 	jmethodID jmAppletExecutionContext_resize = jenv.pEnv->GetMethodID(_jcAppletExecutionContext, "appletResize", "(II)V");  testJavaException(jenv.pEnv);
+ 	jenv.pEnv->CallVoidMethod(_joAppletExecutionContext, jmAppletExecutionContext_resize, (jint)rSize.Width(),
+ 							  (jint)rSize.Height());	                                                                     testJavaException(jenv.pEnv);
++#else // !SOLAR_JAVA
++	throwException();
++#endif
+ }
+ 
+ void SjApplet2_Impl::restart() throw(com::sun::star::uno::RuntimeException)
+ {
++#ifdef SOLAR_JAVA
+ 	TKTThreadAttach jenv(_pJVM, _xJavaThreadRegister_11.get());
+ 
+ 	jmethodID jmAppletExecutionContext_restart = jenv.pEnv->GetMethodID(_jcAppletExecutionContext, "restart", "()V");     testJavaException(jenv.pEnv);
+ 	jenv.pEnv->CallVoidMethod(_joAppletExecutionContext, jmAppletExecutionContext_restart);	                                testJavaException(jenv.pEnv);
++#else // !SOLAR_JAVA
++	throwException();
++#endif
+ }
+ 
+ void SjApplet2_Impl::reload() throw(com::sun::star::uno::RuntimeException)
+ {
++#ifdef SOLAR_JAVA
+ 	TKTThreadAttach jenv(_pJVM, _xJavaThreadRegister_11.get());
+ 
+ 	jmethodID jmAppletExecutionContext_reload = jenv.pEnv->GetMethodID(_jcAppletExecutionContext, "reload", "()V"); testJavaException(jenv.pEnv);
+ 	jenv.pEnv->CallVoidMethod(_joAppletExecutionContext, jmAppletExecutionContext_reload); 	                        testJavaException(jenv.pEnv);
++#else // !SOLAR_JAVA
++	throwException();
++#endif
+ }
+ 
+ void SjApplet2_Impl::start() throw(com::sun::star::uno::RuntimeException)
+ {
++#ifdef SOLAR_JAVA
+ 	TKTThreadAttach jenv(_pJVM, _xJavaThreadRegister_11.get());
+ 
+ 	jmethodID jmAppletExecutionContext_sendStart = jenv.pEnv->GetMethodID(_jcAppletExecutionContext, "sendStart", "()V"); testJavaException(jenv.pEnv);
+ 	jenv.pEnv->CallVoidMethod(_joAppletExecutionContext, jmAppletExecutionContext_sendStart);	                          testJavaException(jenv.pEnv);
++#else // !SOLAR_JAVA
++	throwException();
++#endif
+ }
+ 
+ void SjApplet2_Impl::stop() throw(com::sun::star::uno::RuntimeException)
+ {
++#ifdef SOLAR_JAVA
+ 	TKTThreadAttach jenv(_pJVM, _xJavaThreadRegister_11.get());
+ 
+ 	jmethodID jmAppletExecutionContext_sendStop = jenv.pEnv->GetMethodID(_jcAppletExecutionContext, "sendStop", "()V"); testJavaException(jenv.pEnv);
+ 	jenv.pEnv->CallVoidMethod(_joAppletExecutionContext, jmAppletExecutionContext_sendStop); 	                        testJavaException(jenv.pEnv);
++#else // !SOLAR_JAVA
++	throwException();
++#endif
+ }
+ 
+ void SjApplet2_Impl::close() throw(com::sun::star::uno::RuntimeException)
+ {
++#ifdef SOLAR_JAVA
+ 	TKTThreadAttach jenv(_pJVM, _xJavaThreadRegister_11.get());
+ 
+ 	jmethodID jmAppletExecutionContext_shutdown  = jenv.pEnv->GetMethodID(_jcAppletExecutionContext, "shutdown", "()V"); testJavaException(jenv.pEnv);
+@@ -416,5 +459,8 @@
+ 			}
+ 	  	}
+ 	}
++#else // !SOLAR_JAVA
++	throwException();
++#endif
+ }
+ 
+--- sj2/source/jscpp/sjapplet_impl.hxx.orig	2003-08-08 21:24:48.000000000 -0700
++++ sj2/source/jscpp/sjapplet_impl.hxx	2003-08-08 21:35:45.000000000 -0700
+@@ -1,13 +1,15 @@
+ #include <cstdarg>
+ 
+-
++#ifdef SOLAR_JAVA
+ #include <jni.h>
+-
++#endif // SOLAR_JAVA
+ 
+ #include <unotools/processfactory.hxx>
+ 
++#ifdef SOLAR_JAVA
+ #include <com/sun/star/java/XJavaVM.hpp>
+ #include <com/sun/star/java/XJavaThreadRegister_11.hpp>
++#endif // SOLAR_JAVA
+ 
+ #include <com/sun/star/lang/XMultiServiceFactory.hpp>
+ 
+@@ -16,9 +18,12 @@
+ class SvCommandList;
+ class Size;
+ 
++#ifdef SOLAR_JAVA
+ struct EmbeddedWindow;
++#endif // SOLAR_JAVA
+ 
+ struct SjApplet2_Impl {
++#ifdef SOLAR_JAVA
+ 	Window 				* _pParentWin;
+ 
+ 	JavaVM *	_pJVM;
+@@ -29,6 +34,7 @@
+ 
+ 	com::sun::star::uno::Reference<com::sun::star::java::XJavaVM> 					_xJavaVM;
+ 	com::sun::star::uno::Reference<com::sun::star::java::XJavaThreadRegister_11> 	_xJavaThreadRegister_11;
++#endif // SOLAR_JAVA
+ 
+ 	SjApplet2_Impl() throw(com::sun::star::uno::RuntimeException);
+ 	~SjApplet2_Impl() throw();
