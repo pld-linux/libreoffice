@@ -107,17 +107,17 @@ Patch27:	%{name}-sj2-java.patch
 Patch28:	%{name}-gcc3-1.patch
 
 URL:		http://www.openoffice.org/
-BuildRequires:  db
-BuildRequires:  db-devel
-BuildRequires:  db-cxx
-BuildRequires:  db-java
+BuildRequires:	db
+BuildRequires:	db-devel
+BuildRequires:	db-cxx
+BuildRequires:	db-java
 BuildRequires:	STLport-static >= 4.5.3-3
 BuildRequires:	XFree86-devel
 BuildRequires:	XFree86-fonts-PEX
 BuildRequires:	XFree86-Xvfb
 BuildRequires:	autoconf
 BuildRequires:	automake
-BuildRequires:  bison
+BuildRequires:	bison
 BuildRequires:	flex
 BuildRequires:	freetype-devel >= 2.1
 BuildRequires:	freetype-static
@@ -146,7 +146,7 @@ Requires:	db
 %define wordbooks3	%{SOURCE211} %{SOURCE212} %{SOURCE213} %{SOURCE214} %{SOURCE215}
 %define wordbooks4	%{SOURCE216} %{SOURCE217} %{SOURCE218} %{SOURCE219} %{SOURCE220}
 %define wordbooks5	%{SOURCE221} %{SOURCE222} %{SOURCE223} %{SOURCE224} %{SOURCE225}
-%define wordbooks6	%{SOURCE226} %{SOURCE227} %{SOURCE228} 
+%define wordbooks6	%{SOURCE226} %{SOURCE227} %{SOURCE228}
 %define wordbooks	%wordbooks1 %wordbooks2 %wordbooks3 %wordbooks4 %wordbooks5 %wordbooks6
 
 %define	_prefix		/usr/X11R6
@@ -288,7 +288,7 @@ chmod u+rx compile
 ## INSTALL
 #########################
 %install
-#rm -rf $RPM_BUILD_ROOT
+rm -rf $RPM_BUILD_ROOT
 install -d $RPM_BUILD_ROOT%{_libdir}/openoffice
 
 cp solver/%{subver}/%{_archbuilddir}/bin/setup_services.rdb solver/%{subver}/%{_archbuilddir}/bin/uno_writerdb.rdb
@@ -302,7 +302,7 @@ RESPONSE_FILE=$PWD/rsfile.ins
   cat %{SOURCE2} | sed -e "s|@DESTDIR@|$RPM_BUILD_ROOT%{_libdir}/openoffice|" > $RESPONSE_FILE
 
   # Add additional wordbooks
-  
+
   for dict in %{wordbooks} # somepath/de_AT.zip %{SOURCE50}
    do
     loc=`echo $dict | sed 's~^.*/\([a-zA-Z_]*\).zip$~\1~'`
@@ -376,7 +376,7 @@ for prefix in `(cd solver/%{subver}/%{_archbuilddir}/bin/ ; echo [0-9][0-9] ) | 
 do
   language=`cat %{SOURCE9} | grep ^$prefix | cut -d: -f5`
   lang=`cat %{SOURCE9} | grep ^$prefix | cut -d: -f6`
-  
+
   install -d $RPM_BUILD_ROOT%{_libdir}/openoffice/share/template/$language/wizard
   install -d $RPM_BUILD_ROOT%{_libdir}/openoffice/share/template/$language/wizard/styles
   install -d $RPM_BUILD_ROOT%{_libdir}/openoffice/share/template/$language/internal
@@ -470,15 +470,15 @@ perl -pi -e "s|$RPM_BUILD_ROOT||g" \
 
 
 # Install autoresponse file for user installation
-mkdir -p $RPM_BUILD_ROOT%{_sysconfdir}/openoffice
+install -d $RPM_BUILD_ROOT%{_sysconfdir}/openoffice
 cat %{SOURCE3} > $RPM_BUILD_ROOT%{_sysconfdir}/openoffice/autoresponse.conf
 
 # Install OpenOffice.org wrapper script
-mkdir -p $RPM_BUILD_ROOT%{_bindir}
+install -d $RPM_BUILD_ROOT%{_bindir}
 cat %{SOURCE7} | sed -e "s/@OOVERSION@/%{subver}/" > $RPM_BUILD_ROOT%{_bindir}/ooffice
 
 # Install component wrapper scripts
-mkdir -p $RPM_BUILD_ROOT%{_bindir}
+install -d $RPM_BUILD_ROOT%{_bindir}
 for app in %{apps}; do
   cat %{SOURCE8} | sed -e "s/@APP@/${app}/" > $RPM_BUILD_ROOT%{_bindir}/oo${app}
 done
@@ -496,7 +496,7 @@ echo 'UNO_WRITERDB=$SYSUSERCONFIG/.user60.rdb
 
 # Install additional dictionaries
 rm -rf a8ldict
-mkdir -p a8ldict
+install -d a8ldict
 for dict in %{wordbooks}; do
   loc=`echo $dict | sed 's~^.*/\([a-zA-Z_]*\).zip$~\1~'`
   lang=`echo $loc | sed 's~_.*$~~'`
