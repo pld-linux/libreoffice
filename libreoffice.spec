@@ -781,10 +781,10 @@ cd ..
 
 %ifarch %{x86}
 echo -e "#!/bin/tcsh\nsource LinuxIntelEnv.Set\ndmake -p -v\n" > compile
-%fi
+%endif
 %ifarch ppc
 echo -e "#!/bin/tcsh\nsource LinuxPPCEnv.Set\ndmake -p -v\n" > compile
-%fi
+%endif
 echo -e "#!/bin/tcsh\n./bootstrap\n" > prep
 chmod u+rx prep compile
 ./prep
