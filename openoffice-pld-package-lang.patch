@@ -1,6 +1,6 @@
 diff -urN ooo-build-1.1.54.org/bin/package-lang ooo-build-1.1.54/bin/package-lang
 --- ooo-build-1.1.54.org/bin/package-lang	2004-04-30 02:50:20.270649456 +0200
-+++ ooo-build-1.1.54/bin/package-lang	2004-05-01 01:14:56.088060992 +0200
++++ ooo-build-1.1.54/bin/package-lang	2004-05-01 01:19:04.193343256 +0200
 @@ -27,6 +27,7 @@
  }
  
@@ -48,7 +48,7 @@ diff -urN ooo-build-1.1.54.org/bin/package-lang ooo-build-1.1.54/bin/package-lan
  				    $action = "Unzip";
  				    system("$UnzipCommand -qq -o $fileToUnzip -d $outpath");
  				}
-@@ -176,6 +188,7 @@
+@@ -176,12 +188,15 @@
  			}
  		    }
  	    }
@@ -56,11 +56,11 @@ diff -urN ooo-build-1.1.54.org/bin/package-lang ooo-build-1.1.54/bin/package-lan
  
  	print "done";
  
-@@ -194,6 +207,7 @@
+ 	return 0;
+ }
  
- 	print "Building language $txt_name ($std_locale:$a): ";
++system("rm -f $BuildDir/lang_*_list.txt");
++
+ for $a (@Langs) {
+ 	$a eq '01' && next; # English built-in
  
-+	system("rm -f $BuildDir/lang_*_list.txt");
- 	BuildLang ($a);
- 
- 	print "\n";
