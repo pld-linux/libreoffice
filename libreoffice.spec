@@ -1890,6 +1890,7 @@ CONFOPTS=" \
 	--with-system-freetype \
 	--with-system-nas \
 	--with-system-xrender \
+	--with-dynamic-xinerama \
 	--with-vendor="PLD" \
 	--with-distro="PLD" \
 	--with-icons=gnome,kde \
