@@ -1,5 +1,6 @@
 # NOTE:
-#	- build requires about 8-9GB of disk space
+#	- normal build requires little less than 4GB of disk space
+#	- full debug build requires about 9GB of disk space
 # TODO:
 #	- drop requirement on XFree86-static
 #	- drop requirement on nas-devel
@@ -23,7 +24,7 @@ Summary:	OpenOffice - powerful office suite
 Summary(pl):	OpenOffice - potê¿ny pakiet biurowy
 Name:		openoffice
 Version:	%{fullver}
-Release:	4
+Release:	6
 Epoch:		1
 License:	GPL/LGPL
 Group:		X11/Applications
@@ -179,7 +180,7 @@ Provides:	%{name}-libs-interface = %{epoch}:%{version}-%{release}
 Provides:	libvcl%{subver}li.so
 Obsoletes:	%{name}-libs-gtk
 Requires:	%{name}-libs = %{epoch}:%{version}-%{release}
-Requires(post):	%{name}-libs = %{epoch}:%{version}-%{release}
+Requires(post,preun):	%{name}-libs = %{epoch}:%{version}-%{release}
 
 %description libs-kde
 OpenOffice.org productivity suite - KDE Interface.
@@ -195,7 +196,7 @@ Provides:	%{name}-libs-interface = %{epoch}:%{version}-%{release}
 Provides:	libvcl%{subver}li.so
 Obsoletes:	%{name}-libs-kde
 Requires:	%{name}-libs = %{epoch}:%{version}-%{release}
-Requires(post):	%{name}-libs = %{epoch}:%{version}-%{release}
+Requires(post,preun):	%{name}-libs = %{epoch}:%{version}-%{release}
 
 %description libs-gtk
 OpenOffice.org productivity suite - GTK Interface.
@@ -949,12 +950,18 @@ CONFOPTS=" \
 	--with-lang=ALL \
 	--with-x \
 	--without-fonts \
-	--enable-crashdump=no \
 	--enable-fontconfig \
 	--enable-libsn \
 	--enable-libart \
 	--disable-rpath \
+%if 0%{?debug:1}
+	--enable-debug \
+	--enable-crashdump=yes \
+	--enable-symbols=FULL \
+%else
+	--enable-crashdump=no \
 	--disable-symbols \
+%endif
 	--with-num-cpus=$RPM_BUILD_NR_THREADS
 "
 
@@ -986,7 +993,7 @@ cp -af vcl vcl.kde
 cp -a Linux*Env.Set* vcl.kde
 sed -i -e "s#\(.*WITH_WIDGETSET.*\)\".*\"\(.*\)#\1\"gtk\"\2#g" Linux*Env.Set*
 sed -i -e "s#\(.*WIDGETSET_CFLAGS.*\)\".*\"\(.*\)#\1\"`pkg-config --cflags gtk+-2.0 gdk-pixbuf-xlib-2.0` -DWIDGETSET_GTK\"\2#g" Linux*Env.Set*
-sed -i -e "s#\(.*WIDGETSET_LIBS.*\)\".*\"\(.*\)#\1\"`pkg-config --libs gtk+-2.0 gdk-pixbuf-xlib-2.0`\"\2#g" LinuxIntelEnv.Set*
+sed -i -e "s#\(.*WIDGETSET_LIBS.*\)\".*\"\(.*\)#\1\"`pkg-config --libs gtk+-2.0 gdk-pixbuf-xlib-2.0`\"\2#g" Linux*Env.Set*
 set +e
 . ./Linux*Env.Set.sh
 cd vcl
@@ -1148,6 +1155,14 @@ fontpostinst TTF %{_fontsdir}/%{name}
 
 %postun
 fontpostinst TTF %{_fontsdir}/%{name}
+
+%post libs
+if [ -f %{_libdir}/%{name}/program/libvcl%{subver}li-kde.so ]; then
+	ln -sf libvcl%{subver}li-kde.so %{_libdir}/%{name}/program/libvcl%{subver}li.so
+fi
+if [ -f %{_libdir}/%{name}/program/libvcl%{subver}li-gtk.so ]; then
+	ln -sf libvcl%{subver}li-gtk.so %{_libdir}/%{name}/program/libvcl%{subver}li.so
+fi
 
 %preun libs-kde
 rm -f %{_libdir}/%{name}/program/libvcl%{subver}li.so
