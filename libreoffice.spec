@@ -318,6 +318,7 @@ BuildConflicts:	java-sun = 1.4.2
 Requires:	%{name}-libs = %{epoch}:%{version}-%{release}
 Requires:	%{name}-i18n-en = %{epoch}:%{version}-%{release}
 Requires:	%{name}-dict-en
+Requires(post,postun):  fontpostinst
 Requires:	libstdc++ >= 3.2.1
 Requires:	cups-lib
 Requires:	db
@@ -1290,6 +1291,12 @@ done
 %clean
 rm -rf $RPM_BUILD_ROOT
 
+%post
+fontpostinst %{name}
+
+%postun
+fontpostinst %{name}
+
 %files
 %defattr(644,root,root,755)
 #%%doc readlicense/source/license/unx/LICENSE
@@ -1426,6 +1433,10 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_libdir}/%{name}/program/*.so.*
 #%%attr(755,root,root) %{_libdir}/%{name}/program/components/*.so -- mozilla
 %attr(755,root,root) %{_libdir}/%{name}/program/filter/*.so
+
+%dir %{_datadir}/fonts/openoffice
+%{_datadir}/fonts/openoffice/*.ttf
+%ghost %{_datadir}/fonts/openoffice/fonts.cache-1
 
 %files mimelinks
 %defattr(644,root,root,755)
