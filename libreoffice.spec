@@ -148,6 +148,8 @@ Patch204: openoffice-word-count.patch
 Patch206: openoffice-recent-files.patch
 Patch207: openoffice-gui-sw-insert-symbol.patch
 Patch208: openoffice-use-fork.patch
+Patch209: openoffice-print-dialog.patch
+Patch210: openoffice-print-error.patch
 
 Patch301: openoffice-splash.patch
 
@@ -833,6 +835,8 @@ rm -f moz/prj/d.lst
 %patch206 -p0 
 %patch207 -p0
 %patch208 -p0
+%patch209 -p0
+%patch210 -p0
 
 %patch301 -p1 
 

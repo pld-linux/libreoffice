@@ -1,0 +1,44 @@
+Index: svtools/source/dialogs/printdlg.cxx
+===================================================================
+RCS file: /cvs/util/svtools/source/dialogs/printdlg.cxx,v
+retrieving revision 1.16
+diff -u -p -u -r1.16 printdlg.cxx
+--- svtools/source/dialogs/printdlg.cxx	11 Apr 2003 17:01:36 -0000	1.16
++++ svtools/source/dialogs/printdlg.cxx	29 May 2003 14:07:34 -0000
+@@ -432,6 +432,11 @@ bool PrintDialog::ImplGetFilename()
+             aServiceType[0] <<= TemplateDescription::FILESAVE_SIMPLE;
+             xInit->initialize( aServiceType );
+ 
++	    INetURLObject aLocation( maFiPrintFile.GetText(), INET_PROT_FILE );
++
++	    xFilePicker->setDefaultName( aLocation.GetLastName() );
++	    xFilePicker->setDisplayDirectory ( aLocation.GetPartBeforeLastName() );
++
+ #ifdef UNX
+             if( ! Application::IsRemoteServer() )
+                 // sensible only for Unix local
+@@ -452,6 +457,10 @@ bool PrintDialog::ImplGetFilename()
+                         xFilterMgr->appendFilter( OUString( RTL_CONSTASCII_USTRINGPARAM( "PostScript" ) ), OUString( RTL_CONSTASCII_USTRINGPARAM( "*.ps" ) ) );
+                     if( bPDF )
+                         xFilterMgr->appendFilter( OUString( RTL_CONSTASCII_USTRINGPARAM( "Portable Document Format" ) ), OUString( RTL_CONSTASCII_USTRINGPARAM( "*.pdf" ) ) );
++
++		    String aFilter = pPrinter->GetJobValue( String::CreateFromAscii( "Filter#" ) );
++		    if (aFilter.Len())
++			    xFilterMgr->setCurrentFilter( aFilter );
+                 }
+                 catch( IllegalArgumentException& rExc )
+                 {
+@@ -475,6 +484,13 @@ bool PrintDialog::ImplGetFilename()
+                 Sequence< OUString > aPathSeq( xFilePicker->getFiles() );
+ 				INetURLObject aObj( aPathSeq[0] );
+ 				maFiPrintFile.SetText( aObj.PathToFileName() );
++
++#ifdef UNX
++		Printer* pPrinter = TEMPPRINTER() ? TEMPPRINTER() : mpPrinter;
++		if ( pPrinter )
++			pPrinter->SetJobValue( String::CreateFromAscii( "Filter#" ),
++					       xFilterMgr->getCurrentFilter() );
++#endif
+                 return true;
+             }
+         }
