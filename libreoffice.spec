@@ -9,8 +9,8 @@
 #	- copy & paste problem in oocalc
 
 %bcond_with java		# build with java support
-%bcond_with fontconf		# build with fontconfig support
-%bcond_without parallel 	# parallel building
+%bcond_without fontconf		# build with fontconfig support
+%bcond_with parallel 	# parallel building
 
 %define		ver		1.1.0
 %define		rel		%{nil}
