@@ -5,6 +5,8 @@
 #	  which one should be used
 #	- cleanups, cleanups and cleanups
 
+%bcond_without java		# build without java support
+
 %define		ver		1.1.0
 %define		rel		%{nil}
 %define		fullver		%{ver}%{rel}
@@ -13,7 +15,7 @@ Summary:	OpenOffice - powerful office suite
 Summary(pl):	OpenOffice - potê¿ny pakiet biurowy
 Name:		openoffice
 Version:	%{ver}
-Release:	0.1
+Release:	0.2
 Epoch:		1
 License:	GPL/LGPL
 Group:		X11/Applications
@@ -112,6 +114,28 @@ Patch64:	%{name}-crashrepgtk.patch
 # Fix java/ppc problem 
 Patch65:	%{name}-java-ppc.patch 
 
+# Hey, we _really_ want java?
+Patch101: openoffice-allow-no-jdk.patch
+Patch102: openoffice-berkeleydb-handle-no-solar-java.patch
+Patch103: openoffice-desktop-handle-no-solar-java.patch
+Patch104: openoffice-javaunohelper-handle-no-solar-java.patch
+Patch105: openoffice-jni-uno-handle-no-solar-java.patch
+Patch106: openoffice-jurt-handle-no-solar-java.patch
+Patch107: openoffice-jvmaccess-handle-no-solar-java.patch
+Patch108: openoffice-officecfg-xsltproc.patch
+Patch109: openoffice-psprint-handle-no-solar-java.patch
+Patch110: openoffice-readlicense-oo-xsltproc.patch
+Patch111: openoffice-ridljar-handle-no-solar-java.patch
+Patch112: openoffice-setup2-handle-no-solar-java.patch
+Patch113: openoffice-sj2-handle-no-solar-java.patch
+Patch114: openoffice-solenv-set-solar-java-only-if-unset.patch
+Patch115: openoffice-svg-handle-no-solar-java.patch
+Patch116: openoffice-xsltfilter-handle-no-solar-java.patch
+Patch117: openoffice-xsltvalidate-handle-no-solar-java.patch
+Patch118: openoffice-berkeleydb-no-java-fix.patch 
+Patch119: openoffice-scp-no-java-fix.patch
+Patch120: openoffice-odk-no-java.patch
+
 URL:		http://www.openoffice.org/
 BuildRequires:	STLport-devel >= 4.5.3-6
 BuildRequires:	XFree86-devel
@@ -120,13 +144,17 @@ BuildRequires:	automake
 BuildRequires:	bison >= 1.875-4
 BuildRequires:	db-devel
 BuildRequires:	db-cxx-devel
+%if %{with java}
 BuildRequires:	db4.1-java
+BuildRequires:	jar
+BuildRequires:	jdk
+%elseif
+BuildRequires:	libxslt-progs
+%endif
 BuildRequires:	flex
 BuildRequires:	freetype-devel >= 2.1
 #BuildRequires:	gcc-java
-BuildRequires:	jar
 BuildConflicts:	java-sun = 1.4.2
-BuildRequires:	jdk
 BuildRequires:	libstdc++-devel >= 3.2.1
 BuildRequires:	pam-devel
 BuildRequires:	perl
@@ -752,6 +780,30 @@ rm -f moz/prj/d.lst
 %patch65 -p1 
 %endif 
 
+# no-java patch
+%if %{without java}
+%patch101 -p0
+%patch102 -p0
+%patch103 -p0
+%patch104 -p0
+%patch105 -p0
+%patch106 -p0
+%patch107 -p0
+%patch108 -p0
+%patch109 -p0
+%patch110 -p0
+%patch111 -p0
+%patch112 -p0
+%patch113 -p0
+%patch114 -p0
+%patch115 -p0
+%patch116 -p0
+%patch117 -p0
+%patch118 -p1 
+%patch119 -p1 
+%patch120 -p1 
+%endif 
+
 # gcc 2 include error hack:
 rm -rf autodoc/source/inc/utility
 
@@ -786,7 +838,11 @@ export JAVA_HOME CC CXX GCJ CFLAGS CXXFLAGS
 cd config_office
 %{__autoconf}
 %configure2_13 \
+%if %{without java}
+	--disable-java \
+%elseif
 	--with-jdk-home=$JAVA_HOME \
+%endif
 	--with-stlport4-home=/usr \
 	--with-lang=ALL \
 	--with-x
@@ -804,7 +860,9 @@ chmod u+rx prep compile
 ./prep
 
 install -d solver/%{subver}/%{_archbuilddir}/bin
+%if %{with java}
 install /usr/lib/db.jar solver/%{subver}/%{_archbuilddir}/bin/db.jar
+%endif 
 
 ./compile
 
