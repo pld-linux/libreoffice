@@ -1,0 +1,53 @@
+--- ooo-build-1.3.0/patches/OOO_1_1_2/apply.orig	2004-07-22 20:46:36.000000000 +0200
++++ ooo-build-1.3.0/patches/OOO_1_1_2/apply	2004-07-22 20:48:12.000000000 +0200
+@@ -756,6 +756,9 @@
+ # splash
+ pld-splash.diff
+ 
++# shared libXinerama
++xinerama-shared.diff
++
+ #######################################################
+ [ ArkOnly ]
+ 
+--- ooo-build-1.3.0/patches/OOO_1_1/xinerama-shared.diff.orig	1970-01-01 01:00:00.000000000 +0100
++++ ooo-build-1.3.0/patches/OOO_1_1/xinerama-shared.diff	2004-07-22 20:43:12.000000000 +0200
+@@ -0,0 +1,38 @@
++--- vcl/util/makefile.mk	15 Aug 2003 11:26:42 -0000	1.47.10.1
+++++ vcl/util/makefile.mk	27 Nov 2003 17:52:05 -0000
++@@ -293,9 +293,7 @@
++ .IF "$(USE_XPRINT)" == "TRUE"
++ SHL1STDLIBS += -lXp -lXext -lSM -lICE -lX11
++ .ELSE
++-.IF "$(CPU)" == "I"
++-SHL1STDLIBS += -Wl,-Bstatic -lXinerama -Wl,-Bdynamic 
++-.ENDIF
+++SHL1STDLIBS += -lXinerama
++ SHL1STDLIBS += -lXext -lSM -lICE -lX11
++ .ENDIF          # "$(USE_XPRINT)" == "TRUE"
++ .ENDIF          # "$(OS)"=="SOLARIS"
++Index: saldisp.cxx
++===================================================================
++RCS file: /cvs/gsl/vcl/unx/source/app/saldisp.cxx,v
++retrieving revision 1.44.10.2
++diff -u -r1.44.10.2 saldisp.cxx
++--- vcl/unx/source/app/saldisp.cxx	9 Jan 2004 18:14:00 -0000	1.44.10.2
+++++ vcl/unx/source/app/saldisp.cxx	29 May 2004 17:38:17 -0000
++@@ -235,7 +235,7 @@
++ 
++ #include <X11/Xatom.h>
++ #ifndef SOLARIS
++-#if defined(X86) || defined(MACOSX)
+++#if defined(LINUX) || defined(MACOSX)
++ #include <X11/extensions/Xinerama.h>
++ #endif
++ #endif
++@@ -3067,7 +3067,7 @@
++     }
++     osl_unloadModule( hModule );
++ #else
++-#if defined( X86 ) || defined( MACOSX )
+++#if defined( LINUX ) || defined( MACOSX )
++     if( XineramaIsActive( pDisp_ ) )
++     {
++         int nFramebuffers = 1;
