@@ -1006,7 +1006,8 @@ rm -rf $RPM_BUILD_ROOT%{_datadir}/applnk
 rm -rf $RPM_BUILD_ROOT%{_datadir}/gnome
 
 # Remove dictionaries (in separate pkg)
-rm -rf $RPM_BUILD_ROOT%{_libdir}/%{name}/lib/share/dict/ooo/*
+rm -rf $RPM_BUILD_ROOT%{_libdir}/%{name}/share/dict/ooo/*
+touch $RPM_BUILD_ROOT%{_libdir}/%{name}/share/dict/ooo/dictionary.lst
 
 # OOo should not install the Vera fonts, they are Required: now
 rm -rf $RPM_BUILD_ROOT%{_libdir}/%{name}/share/fonts/truetype/*
@@ -1198,6 +1199,7 @@ fontpostinst TTF %{_fontsdir}/%{name}
 %attr(755,root,root) %{_libdir}/%{name}/program/scalc
 %attr(755,root,root) %{_libdir}/%{name}/program/sdraw
 %attr(755,root,root) %{_libdir}/%{name}/program/setup
+%{_libdir}/%{name}/program/setuprc
 %attr(755,root,root) %{_libdir}/%{name}/program/sfax
 %attr(755,root,root) %{_libdir}/%{name}/program/simpress
 %attr(755,root,root) %{_libdir}/%{name}/program/slabel
