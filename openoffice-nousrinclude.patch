@@ -8,7 +8,7 @@
 -{
 -	$SOLARINC            .= $I.$USR.$INCLUDE;
 -}
-+$SOLARINC .= $I.$SRC_ROOT.$ds.'fakejdk'.$ds.'include';
++$SOLARINC .= $I.'$JAVA_HOME'.$INCLUDE;
  $SOLARINC	     .= $STLPORT_stlport;
  if ($platform eq "$Linux")
  {
