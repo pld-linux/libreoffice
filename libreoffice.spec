@@ -150,6 +150,7 @@ BuildRequires:	jar
 BuildRequires:	jdk
 %elseif
 BuildRequires:	libxslt-progs
+BuildRequires:  gcc-java-tools
 %endif
 BuildRequires:	flex
 BuildRequires:	freetype-devel >= 2.1
@@ -871,6 +872,12 @@ install /usr/lib/db.jar solver/%{subver}/%{_archbuilddir}/bin/db.jar
 rm -rf $RPM_BUILD_ROOT
 
 OOBUILDDIR=`pwd`
+
+%if %{without java}
+LD_LIBRARY_PATH="$OOBUILDDIR/solver/%{subver}/%{_archbuilddir}/lib/"
+export LD_LIBRARY_PATH
+%endif 
+
 install -d $RPM_BUILD_ROOT%{oolib}
 
 LangCode() {
@@ -1018,6 +1025,10 @@ do
     fi
 done
 cd $OOBUILDDIR
+
+%if %{without java}
+install solver/%{subver}/%{_archbuilddir}/lib/libj%{subver}* $RPM_BUILD_ROOT%{oolib}/program/
+%endif
 
 cp -af $RPM_BUILD_ROOT%{oolib}/help/zh_CN/* $RPM_BUILD_ROOT%{oolib}/help/zh-CN
 cp -af $RPM_BUILD_ROOT%{oolib}/help/zh_TW/* $RPM_BUILD_ROOT%{oolib}/help/zh-TW
