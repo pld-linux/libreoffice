@@ -66,6 +66,10 @@ Patch22:	%{name}-system-db.patch
 Patch23:	%{name}-udm.patch
 Patch24:	%{name}-autodoc.patch
 
+Patch25:	%{name}-xmlsearch.patch
+Patch26:	%{name}-config-java.patch
+Patch27:	%{name}-sj2-java.patch
+
 URL:		http://www.openoffice.org/
 BuildRequires:  db4
 BuildRequires:  db4-devel
@@ -75,22 +79,19 @@ BuildRequires:	STLport-static
 BuildRequires:	XFree86-devel
 BuildRequires:	XFree86-fonts-PEX
 BuildRequires:	XFree86-Xvfb
-BuildRequires:	db3-devel
+#BuildRequires:	db3-devel
 BuildRequires:	autoconf
 BuildRequires:	automake
 BuildRequires:  bison
 BuildRequires:	flex
 BuildRequires:	freetype-devel >= 2.1
 BuildRequires:	freetype-static
-%{?!_with_nest:BuildRequires:	gcc <= 3.0.0}
-%{?_with_nest:BuildRequires:	gcc2 <= 3.0.0}
-%{?!_with_nest:BuildRequires:	gcc-c++ <= 3.0.0}
-%{?_with_nest:BuildRequires:	gcc2-c++ <= 3.0.0}
-BuildRequires:	gcc-java
+BuildRequires:	gcc
+BuildRequires:	gcc-c++
+#BuildRequires:	gcc-java
 %{?_with_ibm_java:BuildRequires:	ibm-java-sdk}
-%{?!_with_ibm_java:BuildRequires:	jdk = 1.3.1_03}
-%{?!_with_nest:BuildRequires:	libstdc++-devel <= 3.0.0}
-%{?_with_nest:BuildRequires:	libstdc++2-devel}
+%{?!_with_ibm_java:BuildRequires:	java-sun}
+BuildRequires:	libstdc++-devel
 BuildRequires:	pam-devel
 BuildRequires:	perl
 BuildRequires:	tcsh
@@ -102,13 +103,19 @@ BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 #%define		langs		"ENUS,FREN,GERM,SPAN,ITAL,DTCH,PORT,DAN,GREEK,POL,SWED,TURK,RUSS"
 %define		langs		"ENUS"
 
+
+#%define		oo_ver	1.0
+
 %define		_prefix		/usr/X11R6
 %define		_archbuilddir	unxlngi3.pro
 %define		installpath	instsetoo/%{_archbuilddir}
-
-#%define		oo_ver	1.0
 %define subver	641
-%define archbuilddir unxlngi3.pro
+
+# Find a free display (resources generation requires X) and sets XDISPLAY
+%define init_xdisplay XDISPLAY=0; while /bin/true; do if [ ! -f /tmp/.X$XDISPLAY-lock ]; then sleep 2s; ( /usr/X11R6/bin/Xvfb -ac :$XDISPLAY & 2>&1 > /dev/null); sleep 10s; if [ -f /tmp/.X$XDISPLAY-lock ]; then break; fi; fi; XDISPLAY=$(($XDISPLAY+1)); done
+
+# The virtual X server PID
+%define kill_xdisplay kill $(cat /tmp/.X$XDISPLAY-lock)
 
 #%{?_with_us:%define installpath instsetoo/unxlngi3.pro/01/normal}
 #%{?_with_pl:%define installpath instsetoo/unxlngi3.pro/48/normal}
@@ -182,6 +189,9 @@ export CC CXX GCJ
 
 %patch23 -p1
 %patch24 -p1
+%patch25 -p1
+%patch26 -p1
+%patch27 -p1
 
 rm -rf autodoc/source/inc/utility
 
@@ -253,8 +263,8 @@ EOF
 
 chmod +x fakejdk/bin/javac
 GCJHOME=`gcj -print-search-dirs | sed -n 's/^install:[         ]*//p'`
-cp -f /usr/include/jdk/linux/j* fakejdk/include
-cp -f /usr/include/jdk/j* fakejdk/include
+cp -f /usr/lib/java/include/linux/j* fakejdk/include
+cp -f /usr/lib/java/include/j* fakejdk/include
 cat fakejdk/include/jni.h | sed s/JDK1_1InitArgs/JDK1_1InitArgs2/ > fakejdk/include/jni2.h
 rm -f fakejdk/include/jni.h
 cat > fakejdk/include/jni.h <<EOF
@@ -290,13 +300,14 @@ EOF
 ###################
 %build
 JAVA_HOME=`pwd`/fakejdk
+%{?!_with_ibm_java:JAVA_HOME="/usr/lib/jdk1.3.1_03"}
+%{?_with_ibm_java:JAVA_HOME="/usr/lib/IBMJava2-13"}
+JAVA_HOME="/usr/lib/java"
 export JAVA_HOME
 
 cd config_office
 autoconf
 
-#%{?!_with_ibm_java:JAVA_HOME="/usr/lib/jdk1.3.1_03"}
-#%{?_with_ibm_java:JAVA_HOME="/usr/lib/IBMJava2-13"}
 %configure2_13 \
 	--with-jdk-home=$JAVA_HOME \
 	--with-stlport4-home=/usr \
@@ -312,8 +323,8 @@ EOF
 chmod u+rx prep
 ./prep
 
-install -d solver/641/unxlngi3.pro/bin
-install %{SOURCE2} solver/641/unxlngi3.pro/bin/db.jar
+install -d solver/641/%{_archbuilddir}/bin
+install /usr/lib/db.jar solver/641/%{_archbuilddir}/bin/db.jar
 
 cat <<EOF > compile
 #!/bin/tcsh
@@ -331,55 +342,85 @@ chmod u+rx compile
 rm -rf $RPM_BUILD_ROOT
 install -d $RPM_BUILD_ROOT%{_libdir}/openoffice
 
-#cat <<EOF > install
-#!/bin/tcsh
-#source LinuxIntelEnv.Set
-#dmake install
-#EOF
-#
-#chmod u+rx install
-#./install
-
-# starting Xvfb
-i=0
-while [ -f /tmp/.X$i-lock ]; do
-	i=$(($i+1))
-done
-
-/usr/X11R6/bin/Xvfb :$i & 
-PID=$!
-sleep 5
-
-# preparing to start installator
-cp -f %{SOURCE3} $RPM_BUILD_DIR/oo_%{version}_src/install.rs.in
-sed -e "s,@DESTDIR@,$RPM_BUILD_ROOT%{_libdir}/openoffice," \
-	-e "s,@LOGFILE@,$RPM_BUILD_DIR/oo_%{version}_src/install.log," \
-	install.rs.in > install.rs
-
-cp solver/641/unxlngi3.pro/bin/setup_services.rdb solver/641/unxlngi3.pro/bin/uno_writerdb.rdb
+cp solver/641/%{_archbuilddir}/bin/setup_services.rdb solver/641/%{_archbuilddir}/bin/uno_writerdb.rdb
 rm -f f0_061
-zip -j -5 "f0_061" solver/641/unxlngi3.pro/bin/uno_writerdb.rdb
+zip -j -5 "f0_061" solver/641/%{_archbuilddir}/bin/uno_writerdb.rdb
 mv f0_061.zip %{installpath}/01/normal/f0_061
 
-cp %{installpath}/01/normal/setup.ins %{installpath}/01/normal/setup.ins.orig
-for FileID in Lib_gcc Lib_Stdc Lib_Mozab_2 Lib_Mozabdrv Mozilla_Runtime; do
-  perl -ni -e "/^(File|Shortcut) gid_(File|Shortcut)_${FileID}/ .. /^End/ or print" %{installpath}/01/normal/setup.ins
-  perl -pi -e "s/gid_File_${FileID},//g" %{installpath}/01/normal/setup.ins
-done
+%{init_xdisplay}
+RESPONSE_FILE=$PWD/rsfile.ins
+(cd %{installpath}/01/normal/;
+  cat %{SOURCE3} | sed -e "s|@DESTDIR@|$RPM_BUILD_ROOT%{_libdir}/openoffice|" > $RESPONSE_FILE
 
-# starting installator
-DISPLAY=":$i" %{installpath}/01/normal/setup -R:$RPM_BUILD_DIR/oo_%{version}_src/install.rs
+  # Localize New and Wizard menus and OfficeObjects
+  [[ ! -f setup.ins.localized ]] && {
+  cp -p setup.ins setup.ins.localized
+  (
+  for i in `( cd ../../; echo [0-9][0-9] ) | sed 's/01 //'`; do
+    if [ -f ../../$i/normal/setup.ins ]; then
+      CONV=cat
+      case "$i" in
+      3[347]|4[69]) # fr, es, la, sv, de are latin1 encoded
+	CONV="iconv -f ISO-8859-1// -t UTF-8//";;
+      3[19]|45|90) # nl, it, da, tr are unknown, no characters above <U007F>
+	;;
+      0[37]|30|4[28]) # pt, ru, el, cs, pl are already UTF-8 encoded
+	;;
+      esac
+      grep -A6 'gid_Configurationitem_Common_\(Objectnames.*_Name\|Menus_.*Titel\)' \
+	../../$i/normal/setup.ins | $CONV \
+	| sed "s/^--//;/^ConfigurationItem/s/\(Name\|Titel\)/$i&/"
+      echo
+    fi
+  done
+  ) | awk ' $1 ~ /Value/ { l=$0; sub(/^.*= "/,"",l); sub(/";.*$/,"",l); sub(/%PRODUCTNAME/,"OpenOffice.org",l); sub(/%PRODUCTVERSION/,"%{fullver}",l); n=n+1; str="@@REPLACEME" n "@@"; s="\"" str "\""; sub(/".*"/,s); printf "s|%s|%s|\n", str, l > "Common.xml.sed" } { print } ' \
+    >> setup.ins
+  }
 
-#cp solver/641/unxlngi3.pro/bin/uno_writerdb.rdb $RPM_BUILD_ROOT%{_libdir}/openoffice/program
+  DISPLAY=:$XDISPLAY ./setup -R:$RESPONSE_FILE
+  rm -f $RESPONSE_FILE
+)
+%{kill_xdisplay}
 
-# stopping Xvfb
-#kill $PID
+# Now fixup Common.xml
+COMMON_XML_SED=$PWD/%{installpath}/01/normal/Common.xml.sed
+(cd $RPM_BUILD_ROOT%{_libdir}/openoffice/share/config/registry/instance/org/openoffice/Office/;
+  sed -e "s|<cfg:string cfg:type=\"string\" cfg:name=\"\([^\"]*\)\"\(>@@REPLACEME.*@@</cfg:\)string>|<cfg:value xml:lang=\"\1\"\2value>|" Common.xml > Common.xml.tmp
+  sed -f $COMMON_XML_SED Common.xml.tmp > Common.xml
+  rm -f Common.xml.tmp
+)
+
+# Fixup instdb.ins to get rid of $RPM_BUILD_ROOT
+perl -pi -e "s|$RPM_BUILD_ROOT||g" \
+  $RPM_BUILD_ROOT%{_libdir}/openoffice/program/instdb.ins
+perl -pi -e "/^Installation gid_Installation/ .. /^End/ and s|(SourcePath.*)=.*|\1= \"%{_libdir}/openoffice/program\";|" \
+  $RPM_BUILD_ROOT%{_libdir}/openoffice/program/instdb.ins
 
 # Fix setup and spadmin symlinks set by OO.org setup program
 # (must have absolute symlinks)
 ln -sf %{_libdir}/openoffice/program/setup $RPM_BUILD_ROOT%{_libdir}/openoffice/setup
 ln -sf %{_libdir}/openoffice/program/soffice $RPM_BUILD_ROOT%{_libdir}/openoffice/spadmin
 ln -sf %{_libdir}/openoffice/program/soffice $RPM_BUILD_ROOT%{_libdir}/openoffice/program/spadmin
+
+# Fixup installation directory
+perl -pi -e "s|$RPM_BUILD_ROOT||g" \
+  $RPM_BUILD_ROOT%{_libdir}/openoffice/share/config/registry/instance/org/openoffice/Office/Common.xml
+
+# Recreate registry cache
+#cat > ./build-create-cache.command << EOF
+#\$CXXCOMP -g \$SOLARINC $RPM_OPT_FLAGS -fno-for-scope -fpermissive \
+#	  -fexceptions -fno-enforce-eh-specs \$SOLARDEF %{SOURCE14} \
+#	  -o ./createcache -L\$SOLARVER/\$UPD/\$INPATH/lib \
+#	  -Wl,-rpath,\$SOLARVER/\$UPD/\$INPATH/lib -lcfgmgr2
+#EOF
+#/bin/tcsh -f -c "source %{build_env}; source build-create-cache.command"
+#rm -rf %{buildroot}%{_libdir}/openoffice/share/config/registry/cache
+#for arg in `cd %{buildroot}%{_libdir}/openoffice/share/config/registry/instance; \
+#	    find . -name \*.xml | \
+#	    sed 's~\.xml$~~;s~/~.~g;s~^\.\.~/~'`; do
+#  ./createcache %{buildroot}%{_libdir}/openoffice/program/applicat.rdb \
+#		%{buildroot}%{_libdir}/openoffice/share/config/registry $arg
+#done
 
 ## FIXME: (gb) 6.0.41-3mdk: workaround for English wordbook, move them
 ## to share/ directory
@@ -389,9 +430,9 @@ ln -sf %{_libdir}/openoffice/program/soffice $RPM_BUILD_ROOT%{_libdir}/openoffic
 rm -rf $RPM_BUILD_ROOT%{_libdir}/openoffice/program/classes
 
 # Remove stuff that should come from system libraries
-rm -rf	$RPM_BUILD_ROOT%{_libdir}/openoffice/program/libdb-?.?.so \
-	$RPM_BUILD_ROOT%{_libdir}/openoffice/program/libdb_cxx-?.?.so \
-	$RPM_BUILD_ROOT%{_libdir}/openoffice/program/libdb_java-?.?.so
+rm -rf	$RPM_BUILD_ROOT%{_libdir}/openoffice/program/libdb-* \
+	$RPM_BUILD_ROOT%{_libdir}/openoffice/program/libdb_cxx-* \
+	$RPM_BUILD_ROOT%{_libdir}/openoffice/program/libdb_java-*
 
 # Fix openoffice/share/kde/net/applnk paths
 # mkdir -p %{buildroot}%{_libdir}/openoffice/share/kde/net/applnk/Office
@@ -417,10 +458,6 @@ for dir in %{buildroot}%{_libdir}/openoffice/share/gnome/net %{buildroot}%{_libd
     fi
   done
 done
-
-# Fixup installation directory
-perl -pi -e "s|%{buildroot}||g" %{buildroot}%{_libdir}/openoffice/share/config/registry/instance/org/openoffice/Office/Common.xml
-
 
 # Install autoresponse file for user installation
 mkdir -p %{buildroot}%{_sysconfdir}/openoffice
@@ -448,7 +485,7 @@ done
 
 # Unpack KDE applnk files, icons and MIME associations
 mkdir -p %{buildroot}%{_datadir}/applnk/Office/OpenOffice.org
-(cd ./solver/%{subver}/%{archbuilddir}/pck/;
+(cd ./solver/%{subver}/%{_archbuilddir}/pck/;
   for app in group calc draw impress math writer; do
     unzip -d %{buildroot}%{_datadir}/applnk/Office/OpenOffice.org ookdeapp${app}.zip
     if [ "$app" == "group" ]; then
@@ -472,7 +509,7 @@ mkdir -p %{buildroot}%{_datadir}/applnk/Office/OpenOffice.org
 
 # Unpack GNOME files
 mkdir -p %{buildroot}%{_datadir}/gnome/apps/Applications/OpenOffice.org
-(cd ./solver/%{subver}/%{archbuilddir}/pck/;
+(cd ./solver/%{subver}/%{_archbuilddir}/pck/;
   for app in group calc draw impress math writer; do
     unzip -d %{buildroot}%{_datadir}/gnome/apps/Applications/OpenOffice.org oognomeapp${app}.zip
     if [ "$app" == "group" ]; then
@@ -507,10 +544,6 @@ mkdir -p %{buildroot}%{_datadir}/pixmaps
 
 echo 'UNO_WRITERDB=$SYSUSERCONFIG/.user60.rdb
 ' >> $RPM_BUILD_ROOT%{_libdir}/openoffice/program/unorc
-
-
-
-
 
 
 
