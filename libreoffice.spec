@@ -30,15 +30,18 @@ Release:	2.1
 Epoch:		1
 License:	GPL/LGPL
 Group:		X11/Applications
-Source0:	http://ooo.ximian.com/packages/OOO_%{dfullver}/ooo-build-%{ooobver}.tar.gz
-# Source0-md5:	9772e0deeb9f25dca34a71ad321de4cb
+#Source0:	http://ooo.ximian.com/packages/OOO_%{dfullver}/ooo-build-%{ooobver}.tar.gz
 #Source0:	http://ooo.ximian.com/packages/snap/ooo-build-%{ooobver}-HEAD-20040731.tar.gz
+Source0:	ooo-build-%{ooobver}-20040824.tar.bz2
+# Source0-md5:	043ccc345b56d78c0b0524070e3dce3a
 Source1:	http://ooo.ximian.com/packages/OOO_%{dfullver}/OOO_%{dfullver}.tar.bz2
 # Source1-md5:	627fbce603598a74f9be03f5a1da6d94
 Source2:	http://ooo.ximian.com/packages/ooo-icons-OOO_1_1-10.tar.gz
 # Source2-md5:	be79d3cb5f64d2c0ac8a75e65a59cb09
-Source3:	http://kde.openoffice.org/files/nidaba/documents/159/1929/ooo-KDE_icons-OOO_1_1-0.2.tar.gz
-# Source3-md5:	50486f5208ec5ae7af1dbb8f9e77cb12
+Source3:	http://kde.openoffice.org/files/documents/159/1975/ooo-KDE_icons-OOO_1_1-0.3.tar.gz
+# Source3-md5:	05ff784fff01c54cd3dd7b975b46bae2
+Source4:	http://ooo.ximian.com/packages/libwpd-snap-20040823.tar.gz
+# Source4-md5:	c3d8c9f5ae2abbe1b7091817265b9ef3
 Source10:	oocalc.desktop
 Source11:	oodraw.desktop
 Source12:	ooffice.desktop
@@ -85,7 +88,7 @@ Source411:	%{cftp}/helpcontent/helpcontent_88_unix.tgz
 Source412:	%{cftp}/helpcontent/helpcontent_90_unix.tgz
 # Source412-md5:	9521a01c5817e87178f356762f8cdab5
 
-Patch0:			%{name}-makefile.patch
+#Patch0:			%{name}-makefile.patch
 #Patch0:		%{name}-rh-disable-spellcheck-all-langs.patch
 #Patch1:		%{name}-shared-xinerama.patch
 #Patch2:		%{name}-build.patch
@@ -981,7 +984,7 @@ zuluskim.
 
 %prep
 %setup -q -n ooo-build-%{ooobver}
-%patch0 -p1
+#%patch0 -p1
 #%patch0 -p1 // obsoleted?
 #%patch1 -p1 
 #%patch2 -p1 // obsoleted
@@ -989,7 +992,7 @@ zuluskim.
 
 install -d src
 # sources, icons, KDE_icons
-ln -sf %{SOURCE1} %{SOURCE2} %{SOURCE3} src
+ln -sf %{SOURCE1} %{SOURCE2} %{SOURCE3} %{SOURCE4} src
 # help files
 ln -sf %{SOURCE400} %{SOURCE401} %{SOURCE402} %{SOURCE403} %{SOURCE404} \
 	%{SOURCE405} %{SOURCE406} %{SOURCE407} %{SOURCE408} %{SOURCE409} \
@@ -1047,7 +1050,7 @@ CONFOPTS=" \
 	--with-vendor="PLD" \
 	--with-distro="PLD" \
 	--with-icons=gnome,kde \
-	--enable-gtk \
+	--enable-gnome \
 	--enable-kde \
 	--with-installed-ooo-dirname=%{name} \
 %if %{with java}
@@ -1352,7 +1355,7 @@ fontpostinst TTF %{_fontsdir}/%{name}
 
 %attr(755,root,root) %{_libdir}/%{name}/program/*.so
 %exclude %{_libdir}/%{name}/program/libvclplug_gtk*.so
-%exclude %{_libdir}/%{name}/program/libvclplug_kde*.so
+#%exclude %{_libdir}/%{name}/program/libvclplug_kde*.so
 %attr(755,root,root) %{_libdir}/%{name}/program/*.so.*
 %attr(755,root,root) %{_libdir}/%{name}/program/filter/*.so
 
