@@ -32,7 +32,7 @@ cd config_office
 %configure \
 	--with-stlport4-home=%{_prefix} \
 	--with-jdk-home=/opt/jdk1.3 \
-	--enable-xprint
+	--with-xprint
 
 cd ..
 
@@ -41,6 +41,7 @@ cd ..
 cat <<EOF > compile
 #!/bin/csh
 source LinuxIntelEnv.Set
+setenv DISPLAY :0
 dmake
 cd tools/bootstrp/addexes2
 dmake
