@@ -96,11 +96,8 @@ Patch18:	%{name}-asm.patch
 Patch20:	%{name}-no-mozab.patch
 Patch21:	%{name}-no-mozab2.patch
 
-%if %{?_with_nest:1}%{!?_with_nest:0}
 Patch22:	%{name}-system-db.patch
-%else
 Patch22:	%{name}-system_ra-db.patch
-%endif
 
 Patch23:	%{name}-udm.patch
 Patch24:	%{name}-autodoc.patch
@@ -109,10 +106,6 @@ Patch25:	%{name}-xmlsearch.patch
 #Patch26:	%{name}-config-java.patch
 Patch27:	%{name}-sj2-java.patch
 
-# Correct liniking with new libstc++
-%if %{?_with_nest:1}%{!?_with_nest:0}
-#Patch28:	%{name}-gcc3-1.patch
-%endif
 Patch29:	%{name}-gcc2-95.patch
 
 URL:		http://www.openoffice.org/
