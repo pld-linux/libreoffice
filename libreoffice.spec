@@ -27,7 +27,7 @@ Summary:	OpenOffice - powerful office suite
 Summary(pl):	OpenOffice - potê¿ny pakiet biurowy
 Name:		openoffice
 Version:	%{ver}
-Release:	0.6.5
+Release:	0.6.6
 Epoch:		1
 License:	GPL/LGPL
 Group:		X11/Applications
@@ -329,6 +329,7 @@ Requires:	libgnomecups
 %if %{with gnomevfs}
 Requires:	gnome-vfs2
 %endif
+ExclusiveArch:	%{ix86} sparc ppc
 #Suggested:	chkfontpath
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
