@@ -1,0 +1,12 @@
+diff -urN ooo-build-1.1.54.org/patches/OOO_1_1/crash-escherex.diff ooo-build-1.1.54/patches/OOO_1_1/crash-escherex.diff
+--- ooo-build-1.1.54.org/patches/OOO_1_1/crash-escherex.diff	2004-04-30 02:50:23.167209112 +0200
++++ ooo-build-1.1.54/patches/OOO_1_1/crash-escherex.diff	2004-05-01 20:17:19.790834296 +0200
+@@ -94,7 +94,7 @@
+  #ifndef _COM_SUN_STAR_BEANS_XPROPERTYSTATE_HPP_
+  #include <com/sun/star/beans/XPropertyState.hpp>
+  #endif
+-+#include <stl/vector>
+++#include <vector>
+  
+  		/*Record Name       FBT-Value   Instance                  Contents                                                          Wrd Exl PPt Ver*/
+  // In der Mickysoft-Doku heissen die msofbt... statt ESCHER_...
