@@ -614,18 +614,18 @@ litewskim.
 #%files i18n-lt -f lt.lang
 
 %package i18n-med
-Summary:	OpenOffice.org - interface in MED language
-Summary(pl):	OpenOffice.org - interfejs w jêzyku MED
+Summary:	OpenOffice.org - interface in Melpa language
+Summary(pl):	OpenOffice.org - interfejs w jêzyku melpa
 Group:		Applications/Office
 Requires:	%{name} = %{epoch}:%{version}-%{release}
 
 %description i18n-med
 This package provides resources containing menus and dialogs in
-MED language.
+Melpa language.
 
 %description i18n-med -l pl
 Ten pakiet dostarcza zasoby zawieraj±ce menu i okna dialogowe w jêzyku
-MED.
+melpa.
 
 #%files i18n-med -f med.lang
 
@@ -669,11 +669,11 @@ Requires:	%{name} = %{epoch}:%{version}-%{release}
 
 %description i18n-nb
 This package provides resources containing menus and dialogs in
-Norwegian language.
+Norwegian Bokmaal language.
 
 %description i18n-nb -l pl
 Ten pakiet dostarcza zasoby zawieraj±ce menu i okna dialogowe w jêzyku
-norweskim.
+norweskim w odmianie Bokmaal.
 
 #%files i18n-nb -f nb.lang
 
