@@ -56,7 +56,8 @@ Patch17:	%{name}-no-java-vm.patch
 # Fix broken inline assembly
 Patch18:	%{name}-asm.patch
 
-Patch19:	%{name}-nousrinclude.patch
+# Psuje jave:
+#Patch19:	%{name}-nousrinclude.patch
 
 Patch20:	%{name}-no-mozab.patch
 Patch21:	%{name}-no-mozab2.patch
@@ -70,12 +71,15 @@ Patch25:	%{name}-xmlsearch.patch
 Patch26:	%{name}-config-java.patch
 Patch27:	%{name}-sj2-java.patch
 
+# correct liniking with new libstc++
+Patch28:	%{name}-gcc3-1.patch
+
 URL:		http://www.openoffice.org/
-BuildRequires:  db4
-BuildRequires:  db4-devel
-BuildRequires:  db4-cxx
-BuildRequires:  db4-java
-BuildRequires:	STLport-static
+BuildRequires:  db
+BuildRequires:  db-devel
+BuildRequires:  db-cxx
+BuildRequires:  db-java
+BuildRequires:	STLport-static >= 4.5.3-3
 BuildRequires:	XFree86-devel
 BuildRequires:	XFree86-fonts-PEX
 BuildRequires:	XFree86-Xvfb
@@ -181,7 +185,7 @@ export CC CXX GCJ
 %patch16 -p1
 %patch17 -p1
 %patch18 -p1
-%patch19 -p1
+#%patch19 -p1
 
 %patch20 -p1
 %patch21 -p1
@@ -192,6 +196,7 @@ export CC CXX GCJ
 %patch25 -p1
 %patch26 -p1
 %patch27 -p1
+%patch28 -p1
 
 rm -rf autodoc/source/inc/utility
 
@@ -200,6 +205,7 @@ cd external; tar fxz %{SOURCE1}; cp -fr gpc231/* gpc
 cd ..
 
 chmod +x solenv/bin/zipdep.pl
+
 
 ##################
 # Build fake JDK
@@ -294,6 +300,9 @@ typedef struct JDK1_1InitArgs
 #define JavaVM_ JavaVM
 #endif
 EOF
+
+cp -f /lib/libgcc_s.so.1* solver/%{subver}/%{_archbuilddir}/lib
+cp /usr/lib/libstdc++.so.5* solver/%{subver}/%{_archbuilddir}/lib
 
 ###################
 ## BUILD
@@ -669,6 +678,13 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_libdir}/openoffice/program/filter/*.so
 %attr(644,root,root) %{_libdir}/openoffice/program/addin/source
 %attr(644,root,root) %{_libdir}/openoffice/program/resource/*
+
+%attr(644,root,root) %{_libdir}/openoffice/program/component.reg
+%attr(755,root,root) %{_libdir}/openoffice/program/components/*.so
+%attr(644,root,root) %{_libdir}/openoffice/program/components/*.xpt
+%attr(644,root,root) %{_libdir}/openoffice/program/components/*.dat
+
+%{_libdir}/openoffice/program/defaults
 
 %{_libdir}/openoffice/help
 %{_libdir}/openoffice/share
