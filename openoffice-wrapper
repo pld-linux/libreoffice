@@ -29,7 +29,7 @@ else
   # run the automated setup
   lang=$(eval $(locale); echo "$LC_MESSAGES" | sed -n "s/\([a-z]*\)_.*/\1/p")
   if [ -n "$lang" -a -e "/usr/lib/openoffice/help/${lang%%%%_*}" ]; then
-    /usr/lib/openoffice/program/setup -R:/etc/openoffice/autoresponse.conf -LANG=$lang
+    /usr/lib/openoffice/program/setup -R:/etc/openoffice/autoresponse.conf -LANG:$lang
   else
     /usr/lib/openoffice/program/setup -R:/etc/openoffice/autoresponse.conf
   fi
