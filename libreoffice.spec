@@ -278,7 +278,7 @@ Patch602:	%{name}-externalapp.patch
 URL:		http://www.openoffice.org/
 BuildRequires:	ImageMagick
 BuildRequires:	STLport-devel >= 4.5.3-6
-BuildRequires:	STLport-devel < 4.6
+BuildRequires:	STLport-devel < 2:4.6
 BuildRequires:	XFree86-devel
 BuildRequires:	autoconf
 BuildRequires:	automake
