@@ -1275,7 +1275,7 @@ for lang in $slanglist; do
 	ls $RPM_BUILD_ROOT%{_libdir}/%{name}/share/registry/res/*${lang}* 2> /dev/null && echo "%%lang(${lang}) %{_libdir}/%{name}/share/registry/res/*${lang}*" >> ${lang}.lang
 
 	# files from lang_*_list.txt
-	[ -f build/lang_${lang}_list.txt ] && sed -e "s#$RPM_BUILD_ROOT#%%lang(${lang}) #g" build/lang_${lang}_list.txt >> ${lang}.lang
+	ls build/lang_${lang}*_list.txt 2> /dev/null && sed -e "s#$RPM_BUILD_ROOT#%%lang(${lang}) #g" build/lang_${lang}*_list.txt >> ${lang}.lang
 
 	# directories with locale specific content
 	find $RPM_BUILD_ROOT -type d | grep -Ev "%{_libdir}/%{name}/(help|share/registry/res/)" | sed -e "s#$RPM_BUILD_ROOT##g" -e "s#\(.*/${lang}\)\$#%%lang(${lang}) \1#g" | grep -E '^%%lang' >> ${lang}.lang || /bin/true
