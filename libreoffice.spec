@@ -164,6 +164,11 @@ Patch353: openoffice-print-psprint-rehash.patch
 Patch354: openoffice-print-spadmin-disable.patch
 Patch355: openoffice-print-type42.patch
 
+Patch361: openoffice-gnome-desktop-force.patch
+Patch362: openoffice-gtk-themeing.patch
+Patch363: openoffice-gui-sc-paste.patch
+Patch364: openoffice-speed-lang-cache.patch
+
 URL:		http://www.openoffice.org/
 BuildRequires:	STLport-devel >= 4.5.3-6
 BuildRequires:	XFree86-devel
@@ -857,6 +862,12 @@ rm -f moz/prj/d.lst
 %patch353 -p0 
 #%patch354 -p0
 %patch355 -p0
+
+# gui 
+%patch361 -p0 
+%patch362 -p0
+%patch363 -p0 
+%patch364 -p0 
 
 # gcc 2 include error hack:
 rm -rf autodoc/source/inc/utility
