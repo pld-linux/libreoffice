@@ -1,0 +1,27 @@
+Index: bin/build-ooo
+===================================================================
+RCS file: /cvs/gnome/ooo-build/bin/build-ooo,v
+retrieving revision 1.87
+retrieving revision 1.88
+diff -u -u -r1.87 -r1.88
+--- openoffice/bin/build-ooo	21 Jun 2004 15:39:16 -0000	1.87
++++ openoffice/bin/build-ooo	7 Jul 2004 09:57:30 -0000	1.88
+@@ -85,7 +85,7 @@
+ 
+ 
+ # build vcl module for the non-default widget sets if any
+-if test "${OOO_WIDGET_SETS/*,*/comma}" = "comma" ; then
++if (echo "${OOO_WIDGET_SETS}" | grep -q ",") ; then
+ 
+     echo 'Builiding support for the non-default native widget sets'
+ 
+@@ -104,7 +104,8 @@
+ 	    # configure
+ 	    IFS="$IFS_saved"
+ 	    cd $OOBUILDDIR/config_office
+-	    ./configure $CONFIGURE_OPTIONS --with-widgetset="${widgetset/original/}" || exit 1;
++	    ./configure $CONFIGURE_OPTIONS \
++	    	`[ "${widgetset}" != "original" ] && echo "--with-widgetset=\"${widgetset}\""` || exit 1;
+ 
+ 	    # import the updated OO.o environment
+ 	    if test "z$DISTRO" = "zWin32"; then
