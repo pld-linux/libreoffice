@@ -5,7 +5,6 @@
 # TODO:
 # - finish localzation
 # - split %{oolib}/share/registry
-# - fix bison for gcc 3.3
 
 %define		ver		1.1
 %define		rel		rc
@@ -36,21 +35,34 @@ Source10:	%{name}-db3.jar
 # Source10-md5:	0d15818dea3099eed42b4be9950c69ad
 Source11:	%{name}-dictionary.lst.readme
 # Source11-md5:	e4c1c2844b4a4cebca33339538da7f1d
-Source12:	ftp://sunsite.informatik.rwth-aachen.de/pub/mirror/OpenOffice/stable/1.1beta2_sdk/OOo_1.1beta2_LinuxIntel_odk.tar.gz
-# Source12-md5:	c9f465b613245807a209e10f0f6b8a07
 
-Source101:	ftp://ftp.task.gda.pl/mirror/ftp.openoffice.org/contrib/helpfiles/helpcontent_01_unix.tgz
+%define		helpftp	ftp://openoffice.tu-bs.de/OpenOffice.org/contrib/helpcontent
+Source101:	%{helpftp}/helpcontent_01_unix.tgz
 # Source101-md5:	ff3eb5095a74ae7a9b2918ef5874288f
-Source102:	ftp://ftp.task.gda.pl/mirror/ftp.openoffice.org/contrib/helpfiles/helpcontent_33_unix.tgz
-# Source102-md5:	20dcbf3211c20afb27fc5677ab8f69e5
-Source103:	ftp://ftp.task.gda.pl/mirror/ftp.openoffice.org/contrib/helpfiles/helpcontent_34_unix.tgz
-# Source103-md5:	ba6adc71dc5cb766dd75f5b13a7c6bc8
-Source104:	ftp://ftp.task.gda.pl/mirror/ftp.openoffice.org/contrib/helpfiles/helpcontent_39_unix.tgz
-# Source104-md5:	4c33e3f9f8a64be68c63f33ff1e0e4a7
-Source105:	ftp://ftp.task.gda.pl/mirror/ftp.openoffice.org/contrib/helpfiles/helpcontent_46_unix.tgz
-# Source105-md5:	5183879d8b57850d433351cb8a5634a8
-Source106:	ftp://ftp.task.gda.pl/mirror/ftp.openoffice.org/contrib/helpfiles/helpcontent_49_unix.tgz
-# Source106-md5:	68f0db91bb091065a4795d47d6ae0b0b
+Source107:	%{helpftp}/helpcontent_07_unix.tgz
+# Source107-md5:	e3ab37cbf2407d909953f06467b27611
+Source133:	%{helpftp}/helpcontent_33_unix.tgz
+# Source133-md5:	20dcbf3211c20afb27fc5677ab8f69e5
+Source134:	%{helpftp}/helpcontent_34_unix.tgz
+# Source134-md5:	ba6adc71dc5cb766dd75f5b13a7c6bc8
+Source135:	%{helpftp}/helpcontent_35_unix.tgz
+# Source135-md5:	cf90274a2e46ddd04422c08157575780
+Source139:	%{helpftp}/helpcontent_39_unix.tgz
+# Source139-md5:	4c33e3f9f8a64be68c63f33ff1e0e4a7
+Source142:	%{helpftp}/helpcontent_42_unix.tgz
+# Source142-md5:	a7bcb51e5bff1673b32113308a026563
+Source146:	%{helpftp}/helpcontent_46_unix.tgz
+# Source146-md5:	5183879d8b57850d433351cb8a5634a8
+Source149:	%{helpftp}/helpcontent_49_unix.tgz
+# Source149-md5:	68f0db91bb091065a4795d47d6ae0b0b
+Source181:	%{helpftp}/helpcontent_81_unix.tgz
+# Source181-md5:	df731e483114e1433f799160b2baa942
+Source182:	%{helpftp}/helpcontent_82_unix.tgz
+# Source182-md5:	ea45780e3027317ec6b4f38f009b579b
+Source186:	%{helpftp}/helpcontent_86_unix.tgz
+# Source186-md5:	ea0debc121b6912a42cdc24e1b99b625
+Source188:	%{helpftp}/helpcontent_88_unix.tgz
+# Source188-md5:	260a17a84a16c18b4371a84b95cea2cb
 
 # Localization scripts from Mandrake
 Source302:	%{name}-dpack-lang.pl
@@ -122,7 +134,7 @@ BuildRequires:	XFree86-devel
 BuildRequires:	XFree86-Xvfb
 BuildRequires:	autoconf
 BuildRequires:	automake
-BuildRequires:	bison
+BuildRequires:	bison >= 1.875-4
 BuildRequires:	flex
 BuildRequires:	freetype-devel >= 2.1
 BuildRequires:	pam-devel
@@ -146,19 +158,9 @@ Requires:	libstdc++ < 3.2.1
 Requires:	db3
 %endif
 
-%define sdkpath OpenOffice.org1.0.2_Beta_SDK
-
-# Languages (English and German are always built)
-# FIXME: split generation of language subpackages, otherwise rpm makes
-# a broken pipe
-%define languages1 ENUS,FREN,GERM,SPAN,ITAL,DTCH,PORT,SWED,POL,RUSS
-%define languages2 DAN,GREEK,TURK,CHINSIM,CHINTRAD,JAPN,KOREAN,CZECH,CAT,FINN
-%define languages3 ARAB,SLOVAK
-%define languages  %{languages1},%{languages2},%{languages3}
-
 # Supported languages for localized help files (others are not
 # complete/advanced enough)
-%define helplangs1 ENUS,FREN,GERM,SPAN,ITAL,SWED,RUSS,FINN,CZECH,JAPN
+%define helplangs1 ENUS,FREN,GERM,SPAN,ITAL,SWED,RUSS,CZECH,JAPN
 %define helplangs2 KOREAN,CHINSIM,CHINTRAD
 %define helplangs  %{helplangs1},%{helplangs2}
 
@@ -221,11 +223,38 @@ Pakiet biurowy OpenOffice.org - biblioteki.
 #
 # Internationalization
 #
+%define		have_ARAB	yes
+%define		have_CAT	yes
+%define		have_CZECH	yes
+%define		have_DAN	yes
+%define		have_GERM	yes
+%define		have_GREEK	yes
+# ENUS should be always "yes"
+%define		have_ENUS	yes
+%define		have_SPAN	yes
+%define		have_FINN	no
+%define		have_FREN	yes
+%define		have_ITAL	yes
+%define		have_JAPN	yes
+%define		have_KOREAN	yes
+%define		have_DTCH	yes
+%define		have_POL	yes
+%define		have_PORT	yes
+%define		have_RUSS	yes
+%define		have_SLOVAK	yes
+%define		have_SWED	yes
+%define		have_TURK	yes
+%define		have_CHINSIM	yes
+%define		have_CHINTRAD	yes
+
+%define		ARAB		""
+%if %{have_ARAB} == yes
+%define		ARAB		ARAB
 %package i18n-ar
 Summary:	OpenOffice.org - interface in Arabic language
 Summary(pl):	OpenOffice.org - interfejs w jêzyku arabskim
 Group:		Applications/Office
-Requires:	%{name}
+Requires:	%{name} = %{epoch}:%{version}-%{release}
 
 %description i18n-ar
 This package provides resources containing menus and dialogs in
@@ -235,11 +264,17 @@ Arabic language.
 Ten pakiet dostarcza zasoby zawieraj±ce menu i okna dialogowe w jêzyku
 arabskim.
 
+%files i18n-ar -f i18n-ar
+%endif
+
+%define		CAT		""
+%if %{have_CAT} == yes
+%define		CAT		CAT
 %package i18n-ca
 Summary:	OpenOffice.org - interface in Catalan language
 Summary(pl):	OpenOffice.org - interfejs w jêzyku kataloñskim
 Group:		Applications/Office
-Requires:	%{name}
+Requires:	%{name} = %{epoch}:%{version}-%{release}
 
 %description i18n-ca
 This package provides resources containing menus and dialogs in
@@ -249,11 +284,17 @@ Catalan language.
 Ten pakiet dostarcza zasoby zawieraj±ce menu i okna dialogowe w jêzyku
 kataloñskim.
 
+%files i18n-ca -f i18n-ca
+%endif
+
+%define		CZECH		""
+%if %{have_CZECH} == yes
+%define		CZECH		CZECH
 %package i18n-cs
 Summary:	OpenOffice.org - interface in Czech language
 Summary(pl):	OpenOffice.org - interfejs w jêzyku czeskim
 Group:		Applications/Office
-Requires:	%{name}
+Requires:	%{name} = %{epoch}:%{version}-%{release}
 
 %description i18n-cs
 This package provides resources containing menus and dialogs in
@@ -263,11 +304,17 @@ Czech language.
 Ten pakiet dostarcza zasoby zawieraj±ce menu i okna dialogowe w jêzyku
 czeskim.
 
+%files i18n-cs -f i18n-cs
+%endif
+
+%define		DAN		""
+%if %{have_DAN} == yes
+%define		DAN		DAN
 %package i18n-da
 Summary:	OpenOffice.org - interface in Danish language
 Summary(pl):	OpenOffice.org - interfejs w jêzyku duñskim
 Group:		Applications/Office
-Requires:	%{name}
+Requires:	%{name} = %{epoch}:%{version}-%{release}
 
 %description i18n-da
 This package provides resources containing menus and dialogs in
@@ -277,11 +324,17 @@ Danish language.
 Ten pakiet dostarcza zasoby zawieraj±ce menu i okna dialogowe w jêzyku
 duñskim.
 
+%files i18n-da -f i18n-da
+%endif
+
+%define		GERM		""
+%if %{have_GERM} == yes
+%define		GERM		GERM
 %package i18n-de
 Summary:	OpenOffice.org - interface in German language
 Summary(pl):	OpenOffice.org - interfejs w jêzyku niemieckim
 Group:		Applications/Office
-Requires:	%{name}
+Requires:	%{name} = %{epoch}:%{version}-%{release}
 
 %description i18n-de
 This package provides resources containing menus and dialogs in
@@ -291,11 +344,17 @@ German language.
 Ten pakiet dostarcza zasoby zawieraj±ce menu i okna dialogowe w jêzyku
 niemieckim.
 
+%files i18n-de -f i18n-de
+%endif
+
+%define		GREEK		""
+%if %{have_GREEK} == yes
+%define		GREEK		GREEK
 %package i18n-el
 Summary:	OpenOffice.org - interface in Greek language
 Summary(pl):	OpenOffice.org - interfejs w jêzyku greckim
 Group:		Applications/Office
-Requires:	%{name}
+Requires:	%{name} = %{epoch}:%{version}-%{release}
 
 %description i18n-el
 This package provides resources containing menus and dialogs in
@@ -305,11 +364,17 @@ Greek language.
 Ten pakiet dostarcza zasoby zawieraj±ce menu i okna dialogowe w jêzyku
 greckim.
 
+%files i18n-el -f i18n-el
+%endif
+
+%define		ENUS		""
+%if %{have_ENUS} == yes
+%define		ENUS		ENUS
 %package i18n-en
 Summary:	OpenOffice.org - interface in English language
 Summary(pl):	OpenOffice.org - interfejs w jêzyku angielskim
 Group:		Applications/Office
-Requires:	%{name}
+Requires:	%{name} = %{epoch}:%{version}-%{release}
 
 %description i18n-en
 This package provides resources containing menus and dialogs in
@@ -319,11 +384,17 @@ English language.
 Ten pakiet dostarcza zasoby zawieraj±ce menu i okna dialogowe w jêzyku
 angielskim.
 
+%files i18n-en -f i18n-en
+%endif
+
+%define		SPAN		""
+%if %{have_SPAN} == yes
+%define		SPAN		SPAN
 %package i18n-es
 Summary:	OpenOffice.org - interface in Spanish language
 Summary(pl):	OpenOffice.org - interfejs w jêzyku hiszpañskim
 Group:		Applications/Office
-Requires:	%{name}
+Requires:	%{name} = %{epoch}:%{version}-%{release}
 
 %description i18n-es
 This package provides resources containing menus and dialogs in
@@ -333,11 +404,17 @@ Spanish language.
 Ten pakiet dostarcza zasoby zawieraj±ce menu i okna dialogowe w jêzyku
 hiszpañskim.
 
+%files i18n-es -f i18n-es
+%endif
+
+%define		FINN		""
+%if %{have_FINN} == yes
+%define		FINN		FINN
 %package i18n-fi
 Summary:	OpenOffice.org - interface in English language
 Summary(pl):	OpenOffice.org - interfejs w jêzyku angielskim
 Group:		Applications/Office
-Requires:	%{name}
+Requires:	%{name} = %{epoch}:%{version}-%{release}
 
 %description i18n-fi
 This package provides resources containing menus and dialogs in
@@ -347,11 +424,17 @@ Finnish language.
 Ten pakiet dostarcza zasoby zawieraj±ce menu i okna dialogowe w jêzyku
 fiñskim.
 
+%files i18n-fi -f i18n-fi
+%endif
+
+%define		FREN		""
+%if %{have_FREN} == yes
+%define		FREN		FREN
 %package i18n-fr
 Summary:	OpenOffice.org - interface in French language
 Summary(pl):	OpenOffice.org - interfejs w jêzyku francuskim
 Group:		Applications/Office
-Requires:	%{name}
+Requires:	%{name} = %{epoch}:%{version}-%{release}
 
 %description i18n-fr
 This package provides resources containing menus and dialogs in
@@ -361,11 +444,17 @@ French language.
 Ten pakiet dostarcza zasoby zawieraj±ce menu i okna dialogowe w jêzyku
 francuskim.
 
+%files i18n-fr -f i18n-fr
+%endif
+
+%define		ITAL		""
+%if %{have_ITAL} == yes
+%define		ITAL		ITAL
 %package i18n-it
 Summary:	OpenOffice.org - interface in Italian language
 Summary(pl):	OpenOffice.org - interfejs w jêzyku w³oskim
 Group:		Applications/Office
-Requires:	%{name}
+Requires:	%{name} = %{epoch}:%{version}-%{release}
 
 %description i18n-it
 This package provides resources containing menus and dialogs in
@@ -375,11 +464,17 @@ Italian language.
 Ten pakiet dostarcza zasoby zawieraj±ce menu i okna dialogowe w jêzyku
 w³oskim.
 
+%files i18n-it -f i18n-it
+%endif
+
+%define		JAPN		""
+%if %{have_JAPN} == yes
+%define		JAPN		JAPN
 %package i18n-ja
 Summary:	OpenOffice.org - interface in Japan language
 Summary(pl):	OpenOffice.org - interfejs w jêzyku japoñskim
 Group:		Applications/Office
-Requires:	%{name}
+Requires:	%{name} = %{epoch}:%{version}-%{release}
 
 %description i18n-ja
 This package provides resources containing menus and dialogs in
@@ -389,11 +484,17 @@ Japan language.
 Ten pakiet dostarcza zasoby zawieraj±ce menu i okna dialogowe w jêzyku
 japoñskim.
 
+%files i18n-ja -f i18n-ja
+%endif
+
+%define		KOREAN		""
+%if %{have_KOREAN} == yes
+%define		KOREAN		KOREAN
 %package i18n-ko
 Summary:	OpenOffice.org - interface in Korean language
 Summary(pl):	OpenOffice.org - interfejs w jêzyku koreañskim
 Group:		Applications/Office
-Requires:	%{name}
+Requires:	%{name} = %{epoch}:%{version}-%{release}
 
 %description i18n-ko
 This package provides resources containing menus and dialogs in
@@ -403,11 +504,17 @@ Korean language.
 Ten pakiet dostarcza zasoby zawieraj±ce menu i okna dialogowe w jêzyku
 koreañskim.
 
+%files i18n-ko -f i18n-ko
+%endif
+
+%define		DTCH		""
+%if %{have_DTCH}
+%define		DTCH		DTCH
 %package i18n-nl
 Summary:	OpenOffice.org - interface in Dutch language
 Summary(pl):	OpenOffice.org - interfejs w jêzyku holenderskim
 Group:		Applications/Office
-Requires:	%{name}
+Requires:	%{name} = %{epoch}:%{version}-%{release}
 
 %description i18n-nl
 This package provides resources containing menus and dialogs in
@@ -417,11 +524,17 @@ Dutch language.
 Ten pakiet dostarcza zasoby zawieraj±ce menu i okna dialogowe w jêzyku
 holenderskim.
 
+%files i18n-nl -f i18n-nl
+%endif
+
+%define		POL		""
+%if %{have_POL} == yes
+%define		POL		POL
 %package i18n-pl
 Summary:	OpenOffice.org - interface in Polish language
 Summary(pl):	OpenOffice.org - interfejs w jêzyku polskim
 Group:		Applications/Office
-Requires:	%{name}
+Requires:	%{name} = %{epoch}:%{version}-%{release}
 
 %description i18n-pl
 This package provides resources containing menus and dialogs in
@@ -431,11 +544,17 @@ Polish language.
 Ten pakiet dostarcza zasoby zawieraj±ce menu i okna dialogowe w jêzyku
 polskim.
 
+%files i18n-pl -f i18n-pl
+%endif
+
+%define		PORT		""
+%if %{have_PORT} == yes
+%define		PORT		PORT
 %package i18n-pt
 Summary:	OpenOffice.org - interface in Portuguese language
 Summary(pl):	OpenOffice.org - interfejs w jêzyku portugalskim
 Group:		Applications/Office
-Requires:	%{name}
+Requires:	%{name} = %{epoch}:%{version}-%{release}
 
 %description i18n-pt
 This package provides resources containing menus and dialogs in
@@ -445,11 +564,17 @@ Portuguese language.
 Ten pakiet dostarcza zasoby zawieraj±ce menu i okna dialogowe w jêzyku
 portugalskim.
 
+%files i18n-pt -f i18n-pt
+%endif
+
+%define		RUSS		""
+%if %{have_RUSS} == yes
+%define		RUSS		RUSS
 %package i18n-ru
 Summary:	OpenOffice.org - interface in Russian language
 Summary(pl):	OpenOffice.org - interfejs w jêzyku rosyjskim
 Group:		Applications/Office
-Requires:	%{name}
+Requires:	%{name} = %{epoch}:%{version}-%{release}
 
 %description i18n-ru
 This package provides resources containing menus and dialogs in
@@ -459,11 +584,37 @@ Russian language.
 Ten pakiet dostarcza zasoby zawieraj±ce menu i okna dialogowe w jêzyku
 rosyjskim.
 
+%files i18n-ru -f i18n-ru
+%endif
+
+%define		SLOVAK		""
+%if %{have_SLOVAK} == yes
+%define		SLOVAK		SLOVAK
+%package i18n-sk
+Summary:	OpenOffice.org - interface in Slovak language
+Summary(pl):	OpenOffice.org - interfejs w jêzyku s³owackim
+Group:		Applications/Office
+Requires:	%{name} = %{epoch}:%{version}-%{release}
+
+%description i18n-sk
+This package provides resources containing menus and dialogs in
+Slovak language.
+
+%description i18n-sk -l pl
+Ten pakiet dostarcza zasoby zawieraj±ce menu i okna dialogowe w jêzyku
+s³owackim.
+
+%files i18n-sk -f i18n-sk
+%endif
+
+%define		SWED		""
+%if %{have_SWED} == yes
+%define		SWED		SWED
 %package i18n-sv
 Summary:	OpenOffice.org - interface in Swedish language
 Summary(pl):	OpenOffice.org - interfejs w jêzyku szwedzkim
 Group:		Applications/Office
-Requires:	%{name}
+Requires:	%{name} = %{epoch}:%{version}-%{release}
 
 %description i18n-sv
 This package provides resources containing menus and dialogs in
@@ -473,11 +624,17 @@ Swedish language.
 Ten pakiet dostarcza zasoby zawieraj±ce menu i okna dialogowe w jêzyku
 szwedzkim.
 
+%files i18n-sv -f i18n-sv
+%endif
+
+%define		TURK		""
+%if %{have_TURK} == yes
+%define		TURK		TURK
 %package i18n-tr
 Summary:	OpenOffice.org - interface in Turkish language
 Summary(pl):	OpenOffice.org - interfejs w jêzyku tureckim
 Group:		Applications/Office
-Requires:	%{name}
+Requires:	%{name} = %{epoch}:%{version}-%{release}
 
 %description i18n-tr
 This package provides resources containing menus and dialogs in
@@ -487,11 +644,17 @@ Turkish language.
 Ten pakiet dostarcza zasoby zawieraj±ce menu i okna dialogowe w jêzyku
 tureckim.
 
+%files i18n-tr -f i18n-tr
+%endif
+
+%define		CHINSIM		""
+%if %{have_CHINSIM} == yes
+%define		CHINSIM		CHINSIM
 %package i18n-zh_CN
 Summary:	OpenOffice.org - interface in Chinese language for China
 Summary(pl):	OpenOffice.org - interfejs w jêzyku chiñskim dla Chin
 Group:		Applications/Office
-Requires:	%{name}
+Requires:	%{name} = %{epoch}:%{version}-%{release}
 
 %description i18n-zh_CN
 This package provides resources containing menus and dialogs in
@@ -501,11 +664,17 @@ Chinese language for China.
 Ten pakiet dostarcza zasoby zawieraj±ce menu i okna dialogowe w jêzyku
 chiñskim dla Chin.
 
+%files i18n-zh_CN -f i18n-zh_CN
+%endif
+
+%define		CHINTRAD		""
+%if %{have_CHINTRAD} == yes
+%define		CHINTRAD		CHINTRAD
 %package i18n-zh_TW
 Summary:	OpenOffice.org - interface in Chinese language for Taiwan
 Summary(pl):	OpenOffice.org - interfejs w jêzyku chiñskim dla Tajwanu
 Group:		Applications/Office
-Requires:	%{name}
+Requires:	%{name} = %{epoch}:%{version}-%{release}
 
 %description i18n-zh_TW
 This package provides resources containing menus and dialogs in
@@ -514,6 +683,9 @@ Chinese language for Taiwan.
 %description i18n-zh_TW -l pl
 Ten pakiet dostarcza zasoby zawieraj±ce menu i okna dialogowe w jêzyku
 chiñskim dla Tajwanu.
+
+%files i18n-zh_TW -f i18n-zh_TW
+%endif
 
 %prep
 %setup -q -n oo_%{fullver}_src
@@ -558,9 +730,7 @@ cp -f /lib/libgcc_s.so.1* solver/%{subver}/%{_archbuilddir}/lib
 cp /usr/lib/libstdc++.so.5* solver/%{subver}/%{_archbuilddir}/lib
 %endif
 
-###################
-## BUILD
-###################
+
 %build
 CC=%{__cc}
 CXX=%{__cxx}
@@ -570,20 +740,17 @@ export JAVA_HOME CC CXX GCJ
 
 cd config_office
 autoconf
-
 %configure2_13 \
 	--with-jdk-home=$JAVA_HOME \
 	--with-stlport4-home=/usr \
-	--with-lang="%{languages}" \
+	--with-lang=ALL \
 	--with-x
 
 cd ..
 
-cat <<EOF > prep
-#!/bin/tcsh
-./bootstrap
-EOF
-chmod u+rx prep
+echo -e "#!/bin/tcsh\nsource LinuxIntelEnv.Set\ndmake -p -v\n" > compile
+echo -e "#!/bin/tcsh\n./bootstrap\n" > prep
+chmod u+rx prep compile
 ./prep
 
 install -d solver/%{subver}/%{_archbuilddir}/bin
@@ -593,58 +760,54 @@ install /usr/lib/db.jar solver/%{subver}/%{_archbuilddir}/bin/db.jar
 install %{SOURCE10} solver/%{subver}/%{_archbuilddir}/bin/db.jar
 %endif
 
-cat <<EOF > compile
-#!/bin/tcsh
-source LinuxIntelEnv.Set
-dmake -p -v
-EOF
-chmod u+rx compile
 ./compile
 
 
-#########################
-## INSTALL
-#########################
 %install
 rm -rf $RPM_BUILD_ROOT
 
+OOBUILDDIR=`pwd`
 install -d $RPM_BUILD_ROOT%{oolib}
 
 if [ -z "$DISPLAY" ]; then
 	%{init_xdisplay}
 fi
-RESPONSE_FILE=$PWD/rsfile.ins
-OLDPATH="`pwd`"
-cd %{installpath}/%{langinst}/normal/
-  # --short-circuit support
-  if [ -f setup.ins.oorg ]; then
-	cp -f setup.ins.oorg setup.ins
-  else
-	cp -f setup.ins setup.ins.oorg
-  fi
-  cat %{SOURCE2} | sed -e "s|@DESTDIR@|$RPM_BUILD_ROOT%{oolib}|" > $RESPONSE_FILE
 
-  # Localize New and Wizard menus and OfficeObjects
-  cp -p setup.ins setup.ins.localized
-  (
-  for i in `( cd ../../; echo [0-9][0-9] ) | sed 's/%{langinst} //'`; do
+### Instalation
+RESPONSE_FILE=$OOBUILDDIR/rsfile.ins
+cd %{installpath}/%{langinst}/normal/
+
+# --short-circuit support
+suf1="" && suf2=".orig" && [ -f setup.ins.orig ] && suf1=".orig" && suf2=""
+cp -f setup.ins$suf1 setup.ins$suf2
+
+cat %{SOURCE2} | sed -e "s|@DESTDIR@|$RPM_BUILD_ROOT%{oolib}|" > $RESPONSE_FILE
+
+# Localize New and Wizard menus and OfficeObjects
+cp -p setup.ins setup.ins.localized
+
+TMPFILE=setup.pldtmp && rm -f $TMPFILE && touch $TMPFILE
+DIRS=`find ../../ -name "[0-9][0-9]" -and -not -name "%{langinst}" -printf "%%P "`
+for i in $DIRS; do
     if [ -f ../../$i/normal/setup.ins ]; then
-      CONV=cat
-      case "$i" in
-      3[347]|4[69]) # fr, es, la, sv, de are latin1 encoded
-	CONV="iconv -f ISO-8859-1// -t UTF-8//";;
-      3[19]|45|90) # nl, it, da, tr are unknown, no characters above <U007F>
-	;;
-      0[37]|30|4[28]) # pt, ru, el, cs, pl are already UTF-8 encoded
-	;;
-      esac
-      grep -A6 'gid_Configurationitem_Common_\(Objectnames.*_Name\|Menus_.*Titel\)' \
-	../../$i/normal/setup.ins | $CONV \
-	| sed "s/^--//;/^ConfigurationItem/s/\(Name\|Titel\)/$i&/"
-      echo
+	CONV=cat
+	case "$i" in
+	3[347]|4[69]) # fr, es, la, sv, de are latin1 encoded
+	    CONV="iconv -f ISO-8859-1// -t UTF-8//";;
+	3[19]|45|90) # nl, it, da, tr are unknown, no characters above <U007F>
+	    ;;
+	0[37]|30|4[28]) # pt, ru, el, cs, pl are already UTF-8 encoded
+	    ;;
+	esac
+	    
+	grep -A6 'gid_Configurationitem_Common_\(Objectnames.*_Name\|Menus_.*Titel\)' \
+	    ../../$i/normal/setup.ins | $CONV \
+	    | sed "s/^--//;/^ConfigurationItem/s/\(Name\|Titel\)/$i&/" >> $TMPFILE
+	echo >> $TMPFILE
     fi
-  done
-  ) | awk ' $1 ~ /Value/ { l=$0; sub(/^.*= "/,"",l); sub(/";.*$/,"",l); sub(/%PRODUCTNAME/,"OpenOffice.org",l); sub(/%PRODUCTVERSION/,"%{version}",l); n=n+1; str="@@REPLACEME" n "@@"; s="\"" str "\""; sub(/".*"/,s); printf "s|%s|%s|\n", str, l > "Common.xml.sed" } { print } ' \
+done
+
+cat $TMPFILE | awk ' $1 ~ /Value/ { l=$0; sub(/^.*= "/,"",l); sub(/";.*$/,"",l); sub(/%PRODUCTNAME/,"OpenOffice.org",l); sub(/%PRODUCTVERSION/,"%{version}",l); n=n+1; str="@@REPLACEME" n "@@"; s="\"" str "\""; sub(/".*"/,s); printf "s|%s|%s|\n", str, l > "Common.xml.sed" } { print } ' \
     >> setup.ins
 
 if [ -z "$DISPLAY" ]; then
@@ -654,17 +817,30 @@ else
 	./setup -R:$RESPONSE_FILE
 fi	
 
-cd "$OLDPATH"
+cd $OOBUILDDIR
+### end of installation
 
 # Copy all localized resources to destination directory
 install -d $RPM_BUILD_ROOT%{oolib}/program/resource
 cp -f solver/%{subver}/%{_archbuilddir}/bin/*.res $RPM_BUILD_ROOT%{oolib}/program/resource
 
+LANGUAGES="%{ARAB} %{CAT} %{CZECH} %{DAN} %{GERM} %{GREEK} %{ENUS}"
+LANGUAGES="$LANGUAGES %{SPAN} %{FINN} %{FREN} %{ITAL} %{JAPN}"
+LANGUAGES="$LANGUAGES %{KOREAN} %{DTCH} %{POL} %{PORT} %{RUSS}"
+LANGUAGES="$LANGUAGES %{SLOVAK} %{SWED} %{TURK} %{CHINSIM} %{CHINTRAD}"
+
 # don't care about main_transform.xsl, it looks safe to overwrite
-for file in %{SOURCE101} %{SOURCE102} %{SOURCE103} %{SOURCE104} %{SOURCE105} %{SOURCE106}
+PREF="`dirname %{SOURCE101}`/helpcontent_"
+SUFX="_unix.tgz"
+for LANG in $LANGUAGES
 do
-  tar zxvf $file
+    CODE=`cat %{SOURCE9} | grep $LANG | cut -d: -f1`
+    FILE=$PREF$CODE$SUFX
+    if [ -f $FILE ]; then
+	tar zxvf $FILE
+    fi
 done
+
 for file in s*.zip; do
   dir=`echo $file | sed -e "s/\(s[a-z]*\)[0-9]*.zip/\1/"`
   [[ "$dir" = "shared" ]] && dir="common"
@@ -678,14 +854,14 @@ rm -f *.zip
 #
 # Extract language packs
 #
-(
+OLDPWD=`pwd`
+
     cd %{installpath}
     install -m 755 %{SOURCE302} oo_dpack_lang
     install -m 755 %{SOURCE303} oo_fixup_help
     install -m 755 %{SOURCE304} oo_gen_instdb
     
-    LANGS=`echo "%{languages}" | sed -e "s/,/ /g"`
-    for res in $LANGS
+    for res in $LANGUAGES
     do
 	prefix=`cat %{SOURCE9} | grep ":$res:" | cut -d: -f1`
 	isocode=`cat %{SOURCE9} | grep ":$res:" | cut -d: -f2`
@@ -730,12 +906,9 @@ rm -f *.zip
 	esac
 
 	# link ooo resource files to iso files
-	(
-	    cd $tempdir/program/resource
-            file1=`echo ooo*.res`
-	    file2=`echo $file1 | sed "s|ooo|iso|"`
-	    ln -sf $file1 $file2
-	)
+        file1=`find $tempdir/program/resource -name "ooo*.res" -printf "%%P"`
+	file2=`echo $file1 | sed "s|ooo|iso|"`
+	ln -sf $tempdir/program/resource/{$file1,$file2}
 
 	# generate localized instdb.ins files, aka let the right files to
 	# be installed for a user installation
@@ -769,7 +942,8 @@ rm -f *.zip
 	HOWMUCH=`ls $RPM_BUILD_ROOT%{oolib}/help/$isocode 2>/dev/null | wc -l`
 	if [ $HOWMUCH -eq 0 ]; then rm -rf $RPM_BUILD_ROOT%{oolib}/help/$isocode; fi
     done
-)
+
+cd $OLDPWD
 
 mv $RPM_BUILD_ROOT%{oolib}/help/{zh-CN,zh_CN}
 mv $RPM_BUILD_ROOT%{oolib}/help/{zh-TW,zh_TW}
@@ -867,10 +1041,13 @@ rm -rf $RPM_BUILD_ROOT%{oolib}/share/template/{internal,wizard}
 
 # package files
 FindI18N() {
-#    $1 - short language name	eg. pl
-#    $2 - long language name	eg. polish
-#    $3 - digit code		eg. 48
-#    $4 - "strange" shortcut	eg. pol
+#	$1 - OpenOffice language name 	eg. POL
+#	$2 - short language name	eg. pl
+#	$3 - long language name		eg. polish
+#	$4 - digit code			eg. 48
+#	$5 - "strange" shortcut		eg. pol
+    [ -z "$1" ] && return
+    shift
 
     BUILDDIR=%(pwd)
 
@@ -885,18 +1062,23 @@ FindI18N() {
     for DIR in $DIRS
     do
 	if [ -d "$RPM_BUILD_ROOT/$DIR" ]; then
-	    echo "%lang($1) $DIR" >> "i18n-$1"
+	    echo "$DIR" >> "i18n-$1"
 	fi
     done    
     
-    if [ "$1" = "en" ]; then
-        FILES=`(cd $RPM_BUILD_ROOT%{oolib}/user/config; ls 2>/dev/null | grep -v "_" | grep -v "registry" ||:)`
-    elif [ ! "$1" = "" ]; then
-	FILES=`(cd $RPM_BUILD_ROOT%{oolib}/user/config; ls 2>/dev/null | grep "_$4" ||:)`
-    fi	
+    PCKDIR=solver/%{subver}/%{_archbuilddir}/pck
+    FILES=""
+    [ -f "$PCKDIR/palettes$3.zip" ] && FILES="`unzip -l $PCKDIR/palettes$3.zip | awk '{ if (($4 != "")&&($4 != "----")&&($4 != "Name")) print $4 }'`"
+    [ "$1" = "en" ] && FILES="$FILES autotbl.fmt `unzip -l $PCKDIR/palettes.zip | awk '{ if (($4 != "")&&($4 != "----")&&($4 != "Name")) print $4 }'`"
     for FILE in $FILES; do
-        echo "%lang($1) %{oolib}/user/config/$FILE" >> "i18n-$1"
-    done    
+        echo "%{oolib}/user/config/$FILE" >> "i18n-$1"
+    done
+
+    FILES=""
+    [ -f "$PCKDIR/autocorr$3.zip" ] && FILES="`unzip -l $PCKDIR/autocorr$3.zip | awk '{ if (($4 != "")&&($4 != "----")&&($4 != "Name")) print $4 }'`"
+    for FILE in $FILES; do
+        echo "%{oolib}/share/autocorr/$FILE" >> "i18n-$1"
+    done
 
     SUBF="abp analysis basctl bib cal cnt date dba dbi dbp dbu"
     SUBF="$SUBF dbw dkt egi eme epb epg epn epp eps ept eur for"
@@ -910,71 +1092,59 @@ FindI18N() {
     do
 	F="%{oolib}/program/resource/$FILE$SVER$3.res"
 	if [ -f "$RPM_BUILD_ROOT$F" ]; then
-	    echo "%lang($1) $F" >> "i18n-$1"
+	    echo "$F" >> "i18n-$1"
 	fi	
     done
 
     if [ -f $RPM_BUILD_ROOT/%{oolib}/program/instdb.ins.$1 ]
     then
-	echo "%lang($1) %{oolib}/program/instdb.ins.$1" >> "i18n-$1"
+	echo "%{oolib}/program/instdb.ins.$1" >> "i18n-$1"
     fi
 
-    unzip -l solver/%{subver}/%{_archbuilddir}/pck/palletes$3.zip | sed "s/.* //" | awk '(flag==1)&&/----/{exit};(flag==1){print;};/----/{flag=1};' >> "i18n-$1"
-    
     if [ ! -d "$RPM_BUILD_ROOT%{oolib}/help/$1" ]; then
 	ln -sf %{oolib}/help/en $RPM_BUILD_ROOT%{oolib}/help/$1
-	echo "%lang($1) %{oolib}/help/$1" >> "i18n-$1"
+	echo "%{oolib}/help/$1" >> "i18n-$1"
     fi
 }
 
-FindI18N ar arabic 96 ""
-FindI18N ca catalan 37 ""
-FindI18N cs czech 42 ""
-FindI18N da danish 45 ""
-FindI18N de german 49 ""
-FindI18N es spanish 34 ""
-FindI18N el greek 30 ""
-FindI18N en english 01 ""
-FindI18N fi finnish 35 ""
-FindI18N fr french 33 ""
-FindI18N it italian 39 ""
-FindI18N ja japanese 81 ""
-FindI18N ko korean 82 ""
-FindI18N nl dutch 31 ""
-FindI18N pl polish 48 "pol"
-FindI18N pt portuguese 03 ""
-FindI18N ru russian 07 "rus"
-FindI18N sv swedish 46 ""
-FindI18N tr turkish 90 ""
-FindI18N zh_CN chinese_simplified 86 ""
-FindI18N zh_TW chinese_traditional 88 ""
+FindI18N %{ARAB}	ar arabic 96 ""
+FindI18N %{CAT}		ca catalan 37 ""
+FindI18N %{CZECH}	cs czech 42 ""
+FindI18N %{DAN}		da danish 45 ""
+FindI18N %{GERM}	de german 49 ""
+FindI18N %{SPAN}	es spanish 34 ""
+FindI18N %{GREEK}	el greek 30 ""
+FindI18N %{ENUS}	en english 01 ""
+FindI18N %{FINN}	fi finnish 35 ""
+FindI18N %{FREN}	fr french 33 ""
+FindI18N %{ITAL}	it italian 39 ""
+FindI18N %{JAPN}	ja japanese 81 ""
+FindI18N %{KOREAN}	ko korean 82 ""
+FindI18N %{DTCH}	nl dutch 31 ""
+FindI18N %{POL}		pl polish 48 "pol"
+FindI18N %{PORT}	pt portuguese 03 ""
+FindI18N %{RUSS}	ru russian 07 "rus"
+FindI18N %{SLOVAK}	sk slovak 43 ""
+FindI18N %{SWED}	sv swedish 46 ""
+FindI18N %{TURK}	tr turkish 90 ""
+FindI18N %{CHINSIM}	zh_CN chinese_simplified 86 ""
+FindI18N %{CHINTRAD}	zh_TW chinese_traditional 88 ""
 
+# remove dictionaries
+rm -rf $RPM_BUILD_ROOT%{oolib}/share/dict/ooo/*
 cp %{SOURCE11} $RPM_BUILD_ROOT%{dictlst}-readme
-rm -f $RPM_BUILD_ROOT%{dictlst}
 touch $RPM_BUILD_ROOT%{dictlst}
 
-# remove files which we know that were moved to openoffice-dict.spec
-for file in en_US.aff en_US.dic hyph_da.dic hyph_de.dic hyph_en.dic \
-    hyph_ru.dic th_en_US.dat th_en_US.idx
-do
-    rm -f $RPM_BUILD_ROOT%{oolib}/share/dict/ooo/$file
-done
-
 # move to devel ???
-for file in autodoc cppumaker idlc idlcpp javamaker rdbmaker regcomp regmerge regview uno xml2cmp
+for file in autodoc cppumaker idlc idlcpp javamaker rdbmaker regcomp \
+    regmerge regview uno xml2cmp
 do
     cp solver/%{subver}/%{_archbuilddir}/bin/$file $RPM_BUILD_ROOT%{_bindir}
 done
 
-####################
-## CLEAN
-####################
 %clean
-#rm -rf $RPM_BUILD_ROOT
+rm -rf $RPM_BUILD_ROOT
 
-####################
-## FILES
-####################
 %files
 %defattr(644,root,root,755)
 #%%doc readlicense/source/license/unx/LICENSE
@@ -1012,6 +1182,7 @@ done
 
 %dir %{oolib}/program/resource
 %{oolib}/program/resource/bmp.res
+%{oolib}/program/resource/crash_dump.res
 %{oolib}/program/resource/testtool.res
 
 # mozilla
@@ -1025,7 +1196,7 @@ done
 %{oolib}/help/main_transform.xsl
 
 %dir %{oolib}/share
-%{oolib}/share/autocorr
+%dir %{oolib}/share/autocorr
 %dir %{oolib}/share/autotext
 %{oolib}/share/basic
 %{oolib}/share/config
@@ -1064,11 +1235,13 @@ done
 %attr(755,root,root) %{oolib}/spadmin
 
 %attr(755,root,root) %{oolib}/program/*.bin
+%attr(755,root,root) %{oolib}/program/crash_report
 %attr(755,root,root) %{oolib}/program/fromtemplate
 %attr(755,root,root) %{oolib}/program/gnomeint
 %attr(755,root,root) %{oolib}/program/javaldx
 %attr(755,root,root) %{oolib}/program/jvmsetup
 %attr(755,root,root) %{oolib}/program/nswrapper
+%attr(755,root,root) %{oolib}/program/pagein*
 %attr(755,root,root) %{oolib}/program/setup
 %attr(755,root,root) %{oolib}/program/soffice
 %attr(755,root,root) %{oolib}/program/sopatchlevel.sh
@@ -1100,25 +1273,3 @@ done
 %attr(755,root,root) %{oolib}/program/*.so.*
 #%%attr(755,root,root) %{oolib}/program/components/*.so -- mozilla
 %attr(755,root,root) %{oolib}/program/filter/*.so
-
-%files i18n-ar -f i18n-ar
-%files i18n-ca -f i18n-ca
-%files i18n-cs -f i18n-cs
-%files i18n-da -f i18n-da
-%files i18n-de -f i18n-de
-%files i18n-el -f i18n-el
-%files i18n-en -f i18n-en
-%files i18n-es -f i18n-es
-%files i18n-fi -f i18n-fi
-%files i18n-fr -f i18n-fr
-%files i18n-it -f i18n-it
-%files i18n-ja -f i18n-ja
-%files i18n-ko -f i18n-ko
-%files i18n-nl -f i18n-nl
-%files i18n-pl -f i18n-pl
-%files i18n-pt -f i18n-pt
-%files i18n-ru -f i18n-ru
-%files i18n-sv -f i18n-sv
-%files i18n-tr -f i18n-tr
-%files i18n-zh_CN -f i18n-zh_CN
-%files i18n-zh_TW -f i18n-zh_TW
