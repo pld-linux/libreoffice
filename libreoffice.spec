@@ -127,7 +127,6 @@ BuildRequires:	libxml2-devel
 BuildRequires:	libjpeg-devel
 BuildRequires:	nas-devel
 BuildRequires:	neon-devel
-BuildRequires:	mozilla-devel
 BuildRequires:	openldap-devel
 BuildRequires:	pam-devel
 BuildRequires:	perl-base
@@ -1903,7 +1902,6 @@ CONFOPTS=" \
 	--with-system-nas \
 	--with-system-xrender \
 	--with-system-expat \
-	--with-system-mozilla \
 	--with-system-sablot \
 	--with-system-boost \
 	--with-system-neon \
@@ -1930,6 +1928,7 @@ CONFOPTS=" \
 	--with-lang=ALL \
 	--with-x \
 	--without-fonts \
+	--disable-mozilla \
 	--disable-fontooo \
 	--enable-openldap \
 	--enable-cups \
