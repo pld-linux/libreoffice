@@ -39,7 +39,7 @@ diff -urN ooo-build-1.1.54.org/patches/OOO_1_1_1/apply ooo-build-1.1.54/patches/
  RHShrike : RedHatBase, RHShrikeOnly, OldLibArt
  KDE : LinuxCommon, NativeWidgets, StartupNotification, ODKFixes
  SuSE : SuSEOnly, LinuxCommon, KDE, GlobalDesktopFiles, VBABits
-+PLD: PLDOnly, LinuxCommon, KDE, GnomeVFS, OOoCUPS, GlobalDesktopFiles, StartupNotification, ODKFixes, VBABits
++PLD: PLDOnly, LinuxCommon, KDE, GnomeVFS, GnomeCUPS, GlobalDesktopFiles, StartupNotification, ODKFixes, VBABits
  # somewhat odder:
  Win32 : Common, ODKFixes, VBABits, Win32Only
  
