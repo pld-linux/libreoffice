@@ -1829,6 +1829,9 @@ zuluskim.
 #%patch0 -p1
 %patch1 -p1 
 
+# fixed upstream, remove this after 1.3.9
+sed -i -e 's#kannda#kannada#g' bin/openoffice-xlate-lang
+
 %if %{with vfs}
 %patch2 -p1
 %endif
