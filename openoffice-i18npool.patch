@@ -21,3 +21,60 @@
  	ParseResult res1, res2;
  	// Bug #100323#, since parseAnyToken does not take length as parameter, we have to copy
  	// it to a temp. string.
+--- oo/i18npool/source/collator/collatorImpl.cxx.orig	Fri May 23 18:08:23 2003
++++ oo/i18npool/source/collator/collatorImpl.cxx	Fri May 23 18:08:56 2003
+@@ -2,9 +2,9 @@
+  *
+  *  $RCSfile$
+  *
+- *  $Revision$
++ *  $Revision$
+  *
+- *  last change: $Author$ $Date$
++ *  last change: $Author$ $Date$
+  *
+  *  The Contents of this file are made available subject to the terms of
+  *  either of the following licenses
+@@ -118,7 +118,7 @@
+ sal_Int32 SAL_CALL
+ CollatorImpl::loadDefaultCollator(const lang::Locale& rLocale, sal_Int32 collatorOptions) throw(RuntimeException)
+ {
+-    Sequence< Implementation > &imp = localedata->getCollatorImplementations(rLocale);
++    const Sequence< Implementation > &imp = localedata->getCollatorImplementations(rLocale);
+     for (sal_Int16 i = 0; i < imp.getLength(); i++)
+         if (imp[i].isDefault)
+             return loadCollatorAlgorithm(imp[i].unoID, rLocale, collatorOptions);
+@@ -156,7 +156,7 @@
+ CollatorImpl::listCollatorAlgorithms( const lang::Locale& rLocale ) throw(RuntimeException)
+ {
+     nLocale = rLocale;
+-    Sequence< Implementation > &imp = localedata->getCollatorImplementations(rLocale);
++    const Sequence< Implementation > &imp = localedata->getCollatorImplementations(rLocale);
+     Sequence< OUString > list(imp.getLength());
+ 
+     for (sal_Int32 i = 0; i < imp.getLength(); i++) {
+--- oo/i18npool/source/collator/collator_icu.cxx.orig	Fri May 23 18:09:27 2003
++++ oo/i18npool/source/collator/collator_icu.cxx	Fri May 23 18:09:40 2003
+@@ -2,9 +2,9 @@
+  *
+  *  $RCSfile$
+  *
+- *  $Revision$
++ *  $Revision$
+  *
+- *  last change: $Author$ $Date$
++ *  last change: $Author$ $Date$
+  *
+  *  The Contents of this file are made available subject to the terms of
+  *  either of the following licenses
+@@ -93,8 +93,8 @@
+ {
+ 	if (collator) {
+ 	    if (tranModules & TransliterationModules_IGNORE_KANA) {
+-		OUString& s1 = ignore->transliterateString2String(str1, off1, len1);
+-		OUString& s2 = ignore->transliterateString2String(str2, off2, len2);
++		const OUString& s1 = ignore->transliterateString2String(str1, off1, len1);
++		const OUString& s2 = ignore->transliterateString2String(str2, off2, len2);
+ 		return collator->compare(s1.getStr(), s1.getLength(), s2.getStr(), s2.getLength());
+ 	    }
+ 	    else
