@@ -12,7 +12,7 @@ Summary:	OpenOffice - powerful office suite
 Summary(pl):	OpenOffice - potê¿ny pakiet biurowy
 Name:		openoffice
 Version:	1.0.0
-Release:	0.3
+Release:	0.4
 Epoch:		1
 License:	GPL/LGPL
 Group:		X11/Applications
@@ -26,25 +26,29 @@ Patch1:		%{name}-db3.patch
 Patch2:		%{name}-mozilla.patch
 Patch3:		%{name}-nest.patch
 Patch4:		%{name}-perl.patch
+Patch5:		%{name}-system-freetype.patch
+Patch6:		%{name}-system-getopt.patch
+Patch7:		%{name}-freetype-2.1.patch
 URL:		http://www.openoffice.org/
 BuildRequires:	STLport-static
 BuildRequires:	XFree86-devel
+BuildRequires:	XFree86-fonts-PEX
 BuildRequires:	XFree86-Xvfb
 BuildRequires:	db3-devel
 BuildRequires:	autoconf
 BuildRequires:	automake
-BuildRequires:	flex
-BuildRequires:	pam-devel
-BuildRequires:	XFree86-fonts-PEX
 BuildRequires:  bison
-%{?!_with_ibm_java:BuildRequires: jdk = 1.3.1_03}
-%{?_with_ibm_java:BuildRequires: ibm-java-sdk}
+BuildRequires:	flex
+BuildRequires:	freetype-devel >= 2.1
 %{?!_with_nest:BuildRequires:	gcc <= 3.0.0}
 %{?_with_nest:BuildRequires:	gcc2}
 %{?!_with_nest:BuildRequires:	gcc-c++ <= 3.0.0}
 %{?_with_nest:BuildRequires:	gcc2-c++}
+%{?_with_ibm_java:BuildRequires:	ibm-java-sdk}
+%{?!_with_ibm_java:BuildRequires:	jdk = 1.3.1_03}
 %{?!_with_nest:BuildRequires:	libstdc++-devel <= 3.0.0}
 %{?_with_nest:BuildRequires:	libstdc++2-devel}
+BuildRequires:	pam-devel
 BuildRequires:	perl
 BuildRequires:	tcsh
 BuildRequires:	unzip
@@ -91,6 +95,9 @@ Do zalet OpenOffice.org mo¿na zaliczyæ:
 %patch3 -p1
 %endif
 %patch4 -p1
+%patch5 -p1
+%patch6 -p1
+%patch7 -p1
 
 
 install %{SOURCE1} external
