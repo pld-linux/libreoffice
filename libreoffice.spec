@@ -218,27 +218,92 @@ OpenOffice.org productivity suite - shared libraries.
 %description libs -l pl
 Pakiet biurowy OpenOffice.org - biblioteki.
 
-%package i18n-unsorted
+%package i18n-ar
 Summary:	OpenOffice.org internationalization
 Group:		Applications/Office
 Requires:	openoffice
 
-%description i18n-unsorted
+%description i18n-ar
 OpenOffice.org is an Open Source, community-developed, multi-platform
-office productivity suite.  This package provides spell checker dictionaries
-and resources containing menus and dialogs for various languages.
-You need to install this to use OpenOffice.org.
+office productivity suite.  This package provides resources containing
+menus and dialogs for various languages.
+
+%package dict-bg
+Summary:	OpenOffice.org dictionary
+Group:		Applications/Office
+Requires:	openoffice
+
+%description dict-bg
+OpenOffice.org is an Open Source, community-developed, multi-platform
+office productivity suite.  This package provides spell checker dictionaries.
+
+%package i18n-ca
+Summary:	OpenOffice.org internationalization
+Group:		Applications/Office
+Requires:	openoffice
+
+%description i18n-ca
+OpenOffice.org is an Open Source, community-developed, multi-platform
+office productivity suite.  This package provides resources containing
+menus and dialogs for various languages.
+
+%package dict-ca
+Summary:	OpenOffice.org dictionary
+Group:		Applications/Office
+Requires:	openoffice
+
+%description dict-ca
+OpenOffice.org is an Open Source, community-developed, multi-platform
+office productivity suite.  This package provides spell checker dictionaries.
+
+%package dict-cs
+Summary:	OpenOffice.org dictionary
+Group:		Applications/Office
+Requires:	openoffice
+
+%description dict-cs
+OpenOffice.org is an Open Source, community-developed, multi-platform
+office productivity suite.  This package provides spell checker dictionaries.
+
+
+%package i18n-zh_CN
+Summary:	OpenOffice.org internationalization
+Group:		Applications/Office
+Requires:	openoffice
+
+%description i18n-zh_CN
+OpenOffice.org is an Open Source, community-developed, multi-platform
+office productivity suite.  This package provides resources containing
+menus and dialogs for various languages.
+
+%package i18n-zh_TW
+Summary:	OpenOffice.org internationalization
+Group:		Applications/Office
+Requires:	openoffice
+
+%description i18n-zh_TW
+OpenOffice.org is an Open Source, community-developed, multi-platform
+office productivity suite.  This package provides resources containing
+menus and dialogs for various languages.
 
 %package i18n-pl
-Summary: OpenOffice.org internationalization
-Group: Applications/Office
+Summary:	OpenOffice.org internationalization
+Group:		Applications/Office
 Requires:	openoffice
 
 %description i18n-pl
 OpenOffice.org is an Open Source, community-developed, multi-platform
-office productivity suite.  This package provides spell checker dictionaries
-and resources containing menus and dialogs for various languages.
-You need to install this to use OpenOffice.org.
+office productivity suite.  This package provides resources containing
+menus and dialogs for various languages.
+
+%package dict-pl
+Summary:	OpenOffice.org dictionary
+Group:		Applications/Office
+Requires:	openoffice
+
+%description dict-pl
+OpenOffice.org is an Open Source, community-developed, multi-platform
+office productivity suite.  This package provides spell checker dictionaries.
 
 
 %prep
@@ -597,9 +662,87 @@ rm -f $RPM_BUILD_ROOT%{_libdir}/openoffice/program/libstdc++*
 rm -f $RPM_BUILD_ROOT%{_libdir}/openoffice/program/libstlport_gcc.so
 rm -f $RPM_BUILD_ROOT%{_libdir}/openoffice/program/libgcc_s.so.1
 
-
 rm -rf $RPM_BUILD_ROOT%{_libdir}/openoffice/share/template/{internal,wizard}
 
+# package files
+FindI18N() {
+#    $1 - short language name	eg. pl
+#    $2 - long language name	eg. polish
+
+    BUILDDIR=%(pwd)
+
+    echo "%defattr(644,root,root,755)" > "i18n-$1"
+    
+    DIRS="%{_libdir}/openoffice/user/autotext/$2"
+    DIRS="$DIRS %{_libdir}/openoffice/share/autotext/$2"
+    DIRS="$DIRS %{_libdir}/openoffice/share/template/$2"
+    DIRS="$DIRS %{_libdir}/openoffice/help/$1"
+    
+    for DIR in $DIRS
+    do
+	[ -d $DIR ] && echo "%lang($1) $DIR" >> "i18n-$1"
+    done    
+}
+
+FindDict() {
+#    $1 - short language name	eg. pl
+#    $2 - long language name	eg. polish
+#    $3 - locale name (?)	eg. pl_PL
+
+    BUILDDIR=%(pwd)
+
+    echo "%defattr(644,root,root,755)" > "dict-$1"
+    
+    FILES="%{_libdir}/openoffice/share/dict/ooo/$3.dic"
+    FILES="$FILES %{_libdir}/openoffice/share/dict/ooo/$3.dic"
+    FILES="$FILES %{_libdir}/openoffice/share/dict/ooo/$3.aff"
+    FILES="$FILES %{_libdir}/openoffice/share/dict/ooo/hyph_$1.dic"
+    FILES="$FILES %{_libdir}/openoffice/share/dict/ooo/th_$3.dat"
+    FILES="$FILES %{_libdir}/openoffice/share/dict/ooo/th_$3.idx"
+    
+    for FILE in $FILES
+    do
+	[ -f $FILE ] && echo "%lang($1) $FILE" >> "dict-$1"
+    done    
+}
+
+FindI18N ar arabic
+FindDict bg bulgarian bg_BG
+FindI18N ca catalan
+FindDict ca catalan ca_ES
+FindI18N zh_CN chinese_simplified
+FindI18N zh_TW chinese_traditional
+FindDict cs czech cs_CZ
+FindI18N da danish
+FindDict da danish da_DK
+FindI18N pl polish
+FindDict pl polish pl_PL
+FindI18N de german
+FindDict de_AT german de_AT
+FindDict de_CH german de_CH
+FindDict de_DE german de_DE
+FindI18N el greek
+FindDict el greek el_GR
+FindI18N en english
+FindDict en_CA english en_CA
+FindDict en_GB english en_GB
+FindDict en_US english en_US
+FindDict en_ES english en_ES
+FindI18N fi finnish
+FindI18N fr french
+FindDict fr french fr_FR
+FindDict ga irish ga_IE
+FindI18N nl dutch
+FindDict gl galician gl_ES
+FindDict hr croatian hr_HR
+FindDict hu hungarian hu_HU
+FindI18N it italian
+FindDict it italian it_IT
+FindI18N ja japanese
+FindI18N ko korean
+#!!!
+FindDict la dontknow la
+FindDict lt lithuanian lt_LT
 
 %post
 
@@ -712,6 +855,9 @@ fi
 %attr(755,root,root) %{_libdir}/openoffice/program/sopatchlevel.sh
 %attr(755,root,root) %{_libdir}/openoffice/program/spadmin
 
+# just temporary (dictionary list which should be autogenerated)
+%{_libdir}/openoffice/share/dict/ooo/dictionary.lst
+
 %files libs
 %defattr(644,root,root,755)
 %dir %{_libdir}/openoffice
@@ -724,35 +870,13 @@ fi
 #%%attr(755,root,root) %{_libdir}/openoffice/program/components/*.so -- mozilla
 %attr(755,root,root) %{_libdir}/openoffice/program/filter/*.so
 
-%files i18n-unsorted
-%defattr(644,root,root,755)
-%{_libdir}/openoffice/help/*
-%exclude %{_libdir}/openoffice/help/main_transform.xsl
-%exclude %{_libdir}/openoffice/share/dict/ooo/dictionary.lst
-%{_libdir}/openoffice/share/template/*
-%{_libdir}/openoffice/share/autotext/*
-%{_libdir}/openoffice/user/autotext/*
-%{_libdir}/openoffice/share/dict/ooo/*
+%files i18n-ar -f i18n-ar
+%files i18n-bg -f i18n-bg
+%files i18n-ca -f i18n-ca
+%files dict-ca -f dict-ca
+%files dict-cs -f dict-cs
 
-# This goes with binaries (default language :)
-
-%exclude %{_libdir}/openoffice/help/en
-%exclude %{_libdir}/openoffice/share/template/english
-%exclude %{_libdir}/openoffice/share/autotext/english
-%exclude %{_libdir}/openoffice/user/autotext/english
-%exclude %{_libdir}/openoffice/share/dict/ooo/*en*
-
-# This would have been the default language if it weren't for those
-# bloody imperialists.
-
-%exclude %{_libdir}/openoffice/share/template/polish
-%exclude %{_libdir}/openoffice/share/autotext/polish
-%exclude %{_libdir}/openoffice/user/autotext/polish
-%exclude %{_libdir}/openoffice/share/dict/ooo/*pl*
-
-%files i18n-pl
-%defattr(644,root,root,755)
-%{_libdir}/openoffice/share/template/polish
-%{_libdir}/openoffice/share/autotext/polish
-%{_libdir}/openoffice/user/autotext/polish
-%{_libdir}/openoffice/share/dict/ooo/*pl*
+%files i18n-pl -f i18n-pl
+%files dict-pl -f dict-pl
+%files i18n-zh_CN -f i18n-zh_CN
+%files i18n-zh_TW -f i18n-zh_TW
