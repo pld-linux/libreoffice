@@ -31,7 +31,8 @@ Source10:	%{name}-db3.jar
 # Source10-md5:	0d15818dea3099eed42b4be9950c69ad
 Source11:	%{name}-dictionary.lst.readme
 # Source11-md5:	e4c1c2844b4a4cebca33339538da7f1d
-Source12:	OOo_1.0.2beta2_LinuxIntel_odk.tar.gz
+Source12:	ftp://sunsite.informatik.rwth-aachen.de/pub/mirror/OpenOffice/stable/1.1beta2_sdk/OOo_1.1beta2_LinuxIntel_odk.tar.gz
+# Source12-md5:	c9f465b613245807a209e10f0f6b8a07
 
 Source101:	ftp://ftp.task.gda.pl/mirror/ftp.openoffice.org/contrib/helpfiles/helpcontent_01_unix.tgz
 # Source101-md5:	ff3eb5095a74ae7a9b2918ef5874288f
