@@ -918,7 +918,7 @@ if [ -z "$RPM_BUILD_NCPUS" ] ; then
 	fi
 fi
 
-# parallel build is broken
+# parallel build is broken above 4 NCPUS so use 4 as max
 RPM_BUILD_NCPUS=1
 
 CONFOPTS=" \
