@@ -1251,7 +1251,7 @@ for lang in $RPM_BUILD_ROOT%{_libdir}/%{name}/help/*; do
         langlist="$langlist $(echo "$lang" | sed -e 's#.*/\(.*\)#\1#g')"
 done
 langlist=$(echo "$langlist" | tr ' ' '\n' | sort | uniq)
-slanglist=$(echo "$langlist" | awk -F_ ' { print $1 } ' | awk -F- ' { print $1 } ')
+slanglist=$(echo "$langlist" | awk -F_ ' { print $1 } ' | awk -F- ' { print $1 } ' | sort | uniq | xargs)
 
 echo "LANGLIST [$langlist]"
 echo "SLANGLIST [$slanglist]"
@@ -1260,14 +1260,18 @@ for lang in $slanglist; do
 	# longlang=$(../bin/openoffice-xlate-lang -l "$lang" 2> /dev/null)
 	echo "%%defattr(644,root,root,755)" >> ${lang}.lang
 	# dictionaries
-	echo "%%lang(${lang}) %{_libdir}/%{name}/share/dict/ooo/*${lang}*" >> ${lang}.lang
+	ls $RPM_BUILD_ROOT%{_libdir}/%{name}/share/dict/ooo/*${lang}* 2> /dev/null && echo "%%lang(${lang}) %{_libdir}/%{name}/share/dict/ooo/*${lang}*" >> ${lang}.lang
+	# help files
+	ls $RPM_BUILD_ROOT%{_libdir}/%{name}/help/*${lang}* 2> /dev/null && echo "%%lang(${lang}) %{_libdir}/%{name}/help/*${lang}*" >> ${lang}.lang
+	# registry res
+	ls $RPM_BUILD_ROOT%{_libdir}/%{name}/share/registry/res/*${lang}* 2> /dev/null && echo "%%lang(${lang}) %{_libdir}/%{name}/share/registry/res/*${lang}*" >> ${lang}.lang
 	# files from lang_*_list.txt
 	[ -f build/lang_${lang}_list.txt ] && sed -e "s#$RPM_BUILD_ROOT#%%lang(${lang}) #g" build/lang_${lang}_list.txt >> ${lang}.lang
 	# directories with locale specific content
-	find $RPM_BUILD_ROOT -type d | sed -e "s#$RPM_BUILD_ROOT##g" -e "s#\(.*/${lang}\)\$#%%lang(${lang}) \1#g" | grep -E '^%%lang' >> ${lang}.lang || /bin/true
-	otherlang=$(echo "$langlist" | grep -E "^${lang}(-|_)")
+	find $RPM_BUILD_ROOT -type d | grep -Ev "%{_libdir}/%{name}/(help|share/registry/res/)" | sed -e "s#$RPM_BUILD_ROOT##g" -e "s#\(.*/${lang}\)\$#%%lang(${lang}) \1#g" | grep -E '^%%lang' >> ${lang}.lang || /bin/true
+	otherlang=$(echo "$langlist" | grep -v "^${lang}\$" | grep -E "^${lang}(-|_)" | xargs)
 	for olang in $otherlang; do
-		find $RPM_BUILD_ROOT -type d | sed -e "s#$RPM_BUILD_ROOT##g" -e "s#\(.*/${otherlang}\)\$#%%lang(${lang}) \1#g" | grep -E '^%%lang' >> ${lang}.lang || /bin/true
+		find $RPM_BUILD_ROOT -type d | grep -Ev "%{_libdir}/%{name}/(help|share/registry/res/)" | sed -e "s#$RPM_BUILD_ROOT##g" -e "s#\(.*/${otherlang}\)\$#%%lang(${lang}) \1#g" | grep -E '^%%lang' >> ${lang}.lang || /bin/true
 	done
 done
 
@@ -1287,6 +1291,8 @@ rm -rf $RPM_BUILD_ROOT
 %{_desktopdir}/*.desktop
 #%{_pixmapsdir}/*.png
 #%{_pixmapsdir}/document-icons/*.png
+
+%attr(755,root,root) %{_libdir}/%{name}/install-dict
 
 %{_libdir}/%{name}/program/*.rdb
 %{_libdir}/%{name}/program/*.bmp
@@ -1344,6 +1350,7 @@ rm -rf $RPM_BUILD_ROOT
 %dir %{_libdir}/%{name}/user
 %dir %{_libdir}/%{name}/user/autotext
 %{_libdir}/%{name}/user/basic
+%{_libdir}/%{name}/user/config
 %{_libdir}/%{name}/user/database
 %{_libdir}/%{name}/user/gallery
 %{_libdir}/%{name}/user/psprint
@@ -1352,26 +1359,22 @@ rm -rf $RPM_BUILD_ROOT
 
 # Programs
 %attr(755,root,root) %{_bindir}/oo*
-
-#%attr(755,root,root) %{_libdir}/%{name}/setup
-#%attr(755,root,root) %{_libdir}/%{name}/spadmin
-
 %attr(755,root,root) %{_libdir}/%{name}/program/*.bin
-#%attr(755,root,root) %{_libdir}/%{name}/program/crash_report
-#%attr(755,root,root) %{_libdir}/%{name}/program/fromtemplate
-#%attr(755,root,root) %{_libdir}/%{name}/program/gnomeint
+%attr(755,root,root) %{_libdir}/%{name}/program/galeon-helper
 %if %{with java}
 %attr(755,root,root) %{_libdir}/%{name}/program/javaldx
 %attr(755,root,root) %{_libdir}/%{name}/program/jvmsetup
 %endif
 %attr(755,root,root) %{_libdir}/%{name}/program/nswrapper
+%attr(755,root,root) %{_libdir}/%{name}/program/ooovirg
 %attr(755,root,root) %{_libdir}/%{name}/program/pagein*
-%attr(755,root,root) %{_libdir}/%{name}/program/setup
-%attr(755,root,root) %{_libdir}/%{name}/program/soffice
-#%attr(755,root,root) %{_libdir}/%{name}/program/sopatchlevel.sh
-#%attr(755,root,root) %{_libdir}/%{name}/program/spadmin
+%attr(755,root,root) %{_libdir}/%{name}/program/python.sh
+%attr(755,root,root) %{_libdir}/%{name}/program/pyunorc
+%attr(755,root,root) %{_libdir}/%{name}/program/regcomp
+%attr(755,root,root) %{_libdir}/%{name}/program/s*
 %attr(755,root,root) %{_libdir}/%{name}/program/getstyle-gnome
 %attr(755,root,root) %{_libdir}/%{name}/program/msgbox-gnome
+%attr(755,root,root) %{_libdir}/%{name}/program/*.py
 
 # %files devel ?????????
 #%attr(755,root,root) %{_bindir}/autodoc
