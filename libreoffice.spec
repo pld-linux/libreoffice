@@ -264,6 +264,7 @@ Patch3:		%{name}-pld-copy-all-bmp.patch
 Patch4:		%{name}-pld-ooo-build-ldver.patch
 Patch5:		%{name}-pld-nptl.patch
 Patch6:		%{name}-pld-do-not-overwrite-configopt.patch
+Patch7:		%{name}-pld-package-lang.patch
 
 URL:		http://www.openoffice.org/
 BuildRequires:	ImageMagick
@@ -877,6 +878,7 @@ chiñskim dla Tajwanu.
 %patch4 -p1
 %patch5 -p1
 %patch6 -p1
+%patch7 -p1
 
 install -d src
 ln -s %{SOURCE1} src/
