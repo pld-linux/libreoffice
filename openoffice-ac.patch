@@ -4,6 +4,7 @@
  dnl ***************************************
  dnl testing for X libraries and includes...
  dnl ***************************************
+
 -if test "$_os" = "Darwin" -a "x$x_includes" = "xno_x_includes"; then
 -   dnl Mac OS X using Aqua graphics. Don't check for X11.
 -   :
@@ -28,3 +29,12 @@
  dnl ***************************************
  dnl testing libc version for Linux...
  dnl ***************************************
+@@ -1202,7 +1202,7 @@
+ 
+ # Executing the set_soenv script to setup the environment variables.
+ if test -z "$enable_check_only"; then
+-   './set_soenv' $COMPATH $_gcc_include_path $_gxx_include_path $JAVA_HOME $TCSH $PERL $x_libraries $x_includes $_LOCAL_SOLENV $_LOCAL_SOLVER $upd $CYGWIN $STLPORT4 $enable_xprint $with_lang $with_asm_home $with_unzip_home $WITH_MINGWIN $with_use_shell $USE_GCC3
++   './set_soenv' NO_GCC $_gcc_include_path $_gxx_include_path $JAVA_HOME $TCSH $PERL $x_libraries $x_includes $_LOCAL_SOLENV $_LOCAL_SOLVER $upd $CYGWIN $STLPORT4 $enable_xprint $with_lang $with_asm_home $with_unzip_home $WITH_MINGWIN $with_use_shell $USE_GCC3
+ else
+    echo
+    echo Test Complete
