@@ -1,11 +1,12 @@
---- oo_1.1.1_src/sw/source/ui/frmdlg/frmpage.cxx.orig	2004-03-31 13:13:00.000000000 +0000
-+++ oo_1.1.1_src/sw/source/ui/frmdlg/frmpage.cxx	2004-03-31 13:13:29.000000000 +0000
+--- oo_1.1.1_src/sw/source/ui/frmdlg/frmpage.cxx.orig	2004-03-31 14:55:12.000000000 +0000
++++ oo_1.1.1_src/sw/source/ui/frmdlg/frmpage.cxx	2004-03-31 14:55:23.000000000 +0000
 @@ -551,7 +551,7 @@
      const ::std::vector< String >& rPrev, const ::std::vector< String >& rThis,
      const ::std::vector< String >& rNext, const ::std::vector< String >& rRemain)
  {
--    ::std::vector< String >::iterator aIt;
-+    ::std::vector< const String >::iterator aIt;
+-    ::std::vector< const String >::iterator aIt;
++    ::std::vector< String >::iterator aIt;
      USHORT nEntry = 0;
      for(aIt = rPrev.begin(); aIt != rPrev.end(); aIt++)
          nEntry = rBox.InsertEntry(*aIt);
+
