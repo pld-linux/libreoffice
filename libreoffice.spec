@@ -334,10 +334,10 @@ Requires:	kdelibs
 Conflicts:	kdelibs >= 9:3.1.9
 
 %description mimelinks
-OpenOffice.org mimelinks for KDE versions =< 3.1.5.
+OpenOffice.org mimelinks for KDE versions <= 3.1.5.
 
 %description mimelinks -l pl
-Dowi±zania MIME OpenOffice.org dla wersji KDE =< 3.1.5.
+Dowi±zania MIME OpenOffice.org dla wersji KDE <= 3.1.5.
 
 #
 # Internationalization
@@ -1481,4 +1481,5 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{oolib}/program/filter/*.so
 
 %files mimelinks
+%defattr(644,root,root,755)
 %{_datadir}/mimelnk/application/*
