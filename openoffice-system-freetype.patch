@@ -55,3 +55,15 @@
  .ENDIF          # "$(OS)"=="MACOSX"
  
  .ELSE			# "$(GUI)"=="UNX"
+--- oo_1.0.2_src.orig/solenv/inc/libs.mk	Tue Jan  7 15:22:02 2003
++++ oo_1.0.2_src/solenv/inc/libs.mk	Thu Feb 13 17:29:26 2003
+@@ -131,7 +131,7 @@
+ VCLLIBST=-lvcl
+ VCLLIB=$(SVLIB)
+ FREETYPELIB=-lfreetype
+-FREETYPELIBST=$(STATIC) -lfreetype $(DYNAMIC)
++FREETYPELIBST=$(DYNAMIC) -lfreetype $(DYNAMIC)
+ XPLIB=-l_xp
+ TKLIB=-ltk$(OFFICEUPD)$(DLLPOSTFIX)
+ SVTOOLLIB=-lsvt$(OFFICEUPD)$(DLLPOSTFIX)
+
