@@ -603,27 +603,24 @@ chmod u+rx compile
 #########################
 %install
 rm -rf $RPM_BUILD_ROOT
-
-install -d $RPM_BUILD_ROOT%{oolib}
-
-
+install -d $RPM_BUILD_ROOT{%{_bindir},%{_sysconfdir}/openoffice,%{_datadir}/%{name}/{xml,include} \
+	$RPM_BUILD_ROOT{%{_applnkdir},%{_pixmapsdir}} \
+	$RPM_BUILD_ROOT%{oolib}/program/resource
 
 #########################
 # DEVEL STUFF
-install -d $RPM_BUILD_ROOT%{_bindir}
-install -d $RPM_BUILD_ROOT%{_datadir}/%{name}
 
 tar zxvf %{SOURCE12}
 
 cat %{sdkpath}/setsdkenv_unix.in | \
-    sed "s#@OO_SDK_HOME@#%{_datadir}/%{name}#" |\
-    sed "s#@OFFICE_HOME@#%{_datadir}/openoffice#" |\
-    sed "s#@OO_SDK_MAKE_HOME@#%{_bindir}#" |\
-    sed "s#@OO_SDK_CPP_HOME@#%{_bindir}#" |\
-    sed "s#@OO_SDK_CPP_HOME@#%{_includedir}/stlport#" |\
-    sed "s#@OO_SDK_JAVA_HOME@#%{_libdir}/java#" |\
-    sed "s#@OO_SDK_ANT_HOME@##" |\
-    sed "s#@SDK_AUTO_DEPLOYMENT@#YES#" > $RPM_BUILD_ROOT%{_bindir}/oosdkenv
+	sed "s#@OO_SDK_HOME@#%{_datadir}/%{name}#" |\
+	sed "s#@OFFICE_HOME@#%{_datadir}/openoffice#" |\
+	sed "s#@OO_SDK_MAKE_HOME@#%{_bindir}#" |\
+	sed "s#@OO_SDK_CPP_HOME@#%{_bindir}#" |\
+	sed "s#@OO_SDK_CPP_HOME@#%{_includedir}/stlport#" |\
+	sed "s#@OO_SDK_JAVA_HOME@#%{_libdir}/java#" |\
+	sed "s#@OO_SDK_ANT_HOME@##" |\
+	sed "s#@SDK_AUTO_DEPLOYMENT@#YES#" > $RPM_BUILD_ROOT%{_bindir}/oosdkenv
 
 cp %{sdkpath}/linux/lib/libofficebean.so $RPM_BUILD_ROOT%{oolib}
 
@@ -634,8 +631,6 @@ cp solver/%{subver}/%{_archbuilddir}/lib/librmcxt.so* $RPM_BUILD_ROOT%{oolib}
 cp -rf %{sdkpath}/classes $RPM_BUILD_ROOT%{_datadir}/%{name}
 cp -rf %{sdkpath}/settings $RPM_BUILD_ROOT%{_datadir}/%{name}
 cp -rf %{sdkpath}/examples $RPM_BUILD_ROOT%{_datadir}/%{name}
-
-install -d $RPM_BUILD_ROOT%{_datadir}/%{name}/xml
 
 cp solver/%{subver}/%{_archbuilddir}/xml/acceptor.xml $RPM_BUILD_ROOT%{_datadir}/%{name}/xml
 cp solver/%{subver}/%{_archbuilddir}/xml/corefl.xml $RPM_BUILD_ROOT%{_datadir}/%{name}/xml
@@ -661,7 +656,6 @@ cp solver/%{subver}/%{_archbuilddir}/xml/proxyfac.xml $RPM_BUILD_ROOT%{_datadir}
 cp solver/%{subver}/%{_archbuilddir}/xml/simreg.xml $RPM_BUILD_ROOT%{_datadir}/%{name}/xml
 cp solver/%{subver}/%{_archbuilddir}/xml/tcv.xml $RPM_BUILD_ROOT%{_datadir}/%{name}/xml
 
-install -d $RPM_BUILD_ROOT%{_datadir}/%{name}/include
 
 cp -rf solver/%{subver}/%{_archbuilddir}/inc/bridges $RPM_BUILD_ROOT%{_datadir}/%{name}/include
 cp -rf solver/%{subver}/%{_archbuilddir}/inc/com $RPM_BUILD_ROOT%{_datadir}/%{name}/include
@@ -727,21 +721,20 @@ fi
 cd "$OLDPATH"
 
 # Copy all localized resources to destination directory
-install -d $RPM_BUILD_ROOT%{oolib}/program/resource
 cp -f solver/%{subver}/%{_archbuilddir}/bin/*.res $RPM_BUILD_ROOT%{oolib}/program/resource
 
 # don't care about main_transform.xsl, it looks safe to overwrite
 for file in %{SOURCE101} %{SOURCE102} %{SOURCE103} %{SOURCE104} %{SOURCE105} %{SOURCE106}
 do
-  tar zxvf $file
+	tar zxvf $file
 done
 for file in s*.zip; do
-  dir=`echo $file | sed -e "s/\(s[a-z]*\)[0-9]*.zip/\1/"`
-  [[ "$dir" = "shared" ]] && dir="common"
-  prefix=`echo $file | sed -e "s/s[a-z]*\([0-9]*\).zip/\1/"`
-  langname=`cat %{SOURCE9} | grep ^$prefix | cut -d: -f2`
-  install -d $RPM_BUILD_ROOT%{oolib}/help/$langname
-  unzip -d $RPM_BUILD_ROOT%{oolib}/help/$langname -o $file
+	dir=`echo $file | sed -e "s/\(s[a-z]*\)[0-9]*.zip/\1/"`
+	[[ "$dir" = "shared" ]] && dir="common"
+	prefix=`echo $file | sed -e "s/s[a-z]*\([0-9]*\).zip/\1/"`
+	langname=`cat %{SOURCE9} | grep ^$prefix | cut -d: -f2`
+	install -d $RPM_BUILD_ROOT%{oolib}/help/$langname
+	unzip -d $RPM_BUILD_ROOT%{oolib}/help/$langname -o $file
 done
 rm -f *.zip
 
@@ -752,9 +745,9 @@ OLDPATH="`pwd`"
 NEWPATH="$OLDPATH/%{installpath}"
 cd $NEWPATH
 
-    install -m 755 %{SOURCE302} oo_dpack_lang
-    install -m 755 %{SOURCE303} oo_fixup_help
-    install -m 755 %{SOURCE304} oo_gen_instdb
+    install %{SOURCE302} oo_dpack_lang
+    install %{SOURCE303} oo_fixup_help
+    install %{SOURCE304} oo_gen_instdb
 
     LANGS=`echo "%{languages}" | sed -e "s/,/ /g"`
     for res in $LANGS
@@ -861,10 +854,9 @@ mv $RPM_BUILD_ROOT%{oolib}/program/instdb.ins.{zh-TW,zh_TW}
 # Remove unnecessary binaries
 for app in %{apps}
 do
-    rm -f $RPM_BUILD_ROOT%{oolib}/program/s${app}
+	rm -f $RPM_BUILD_ROOT%{oolib}/program/s${app}
 done
 
-install -d $RPM_BUILD_ROOT%{_applnkdir}
 gunzip -dc %{SOURCE6} | tar xf - -C $RPM_BUILD_ROOT%{_applnkdir}
 
 ## Remove any fake classes
@@ -875,8 +867,6 @@ rm -rf $RPM_BUILD_ROOT%{oolib}/program/libdb-*
 rm -rf $RPM_BUILD_ROOT%{oolib}/program/libdb_*
 
 # Fix GNOME & KDE
-install -d $RPM_BUILD_ROOT%{_datadir}
-install -d $RPM_BUILD_ROOT%{_pixmapsdir}
 mv $RPM_BUILD_ROOT%{oolib}/share/kde/net/mimelnk/share/mimelnk $RPM_BUILD_ROOT%{_datadir}
 cp -rf $RPM_BUILD_ROOT%{oolib}/share/kde/net/mimelnk/share/icons/* $RPM_BUILD_ROOT%{_pixmapsdir}
 cp -rf $RPM_BUILD_ROOT%{oolib}/share/icons/* $RPM_BUILD_ROOT%{_pixmapsdir}
@@ -889,20 +879,21 @@ rm -rf $RPM_BUILD_ROOT%{oolib}/share/icons
 COMMON_XML_SED=$PWD/%{installpath}/%{langinst}/normal/Common.xml.sed
 OLDPATH="`pwd`"
 cd $RPM_BUILD_ROOT%{oolib}/share/config/registry/instance/org/openoffice/Office/
-  sed -e "s|<cfg:string cfg:type=\"string\" cfg:name=\"\([^\"]*\)\"\(>@@REPLACEME.*@@</cfg:\)string>|<cfg:value xml:lang=\"\1\"\2value>|" Common.xml > Common.xml.tmp
-  sed -f $COMMON_XML_SED Common.xml.tmp > Common.xml
-  rm -f Common.xml.tmp
+	sed -e "s|<cfg:string cfg:type=\"string\" cfg:name=\"\([^\"]*\)\"\(>@@REPLACEME.*@@</cfg:\)string>|<cfg:value xml:lang=\"\1\"\2value>|" \
+		Common.xml > Common.xml.tmp
+	sed -f $COMMON_XML_SED Common.xml.tmp > Common.xml
+	rm -f Common.xml.tmp
 cd "$OLDPATH"
 
 # Fixup instdb.ins to get rid of $RPM_BUILD_ROOT
 perl -pi -e "s|$RPM_BUILD_ROOT||g" $RPM_BUILD_ROOT%{oolib}/program/instdb.ins
 perl -pi -e "/^Installation gid_Installation/ .. /^End/ and s|(SourcePath.*)=.*|\1= \"%{oolib}/program\";|" \
-  $RPM_BUILD_ROOT%{oolib}/program/instdb.ins
+	$RPM_BUILD_ROOT%{oolib}/program/instdb.ins
 
 # Disable desktop (KDE, GNOME, CDE) integration for user installs
 for module in GID_MODULE_OPTIONAL_GNOME gid_Module_Optional_Kde gid_Module_Optional_Cde; do
-  perl -pi -e "/^Module $module/ .. /^End/ and s|(Installed.*)=.*|\1= NO;|" \
-    $RPM_BUILD_ROOT%{oolib}/program/instdb.ins
+	perl -pi -e "/^Module $module/ .. /^End/ and s|(Installed.*)=.*|\1= NO;|" \
+		$RPM_BUILD_ROOT%{oolib}/program/instdb.ins
 done
 
 # Fix setup and spadmin symlinks set by OO.org setup program
@@ -913,20 +904,17 @@ ln -sf %{oolib}/program/soffice $RPM_BUILD_ROOT%{oolib}/program/spadmin
 
 # Fixup installation directory
 perl -pi -e "s|$RPM_BUILD_ROOT||g" \
-  $RPM_BUILD_ROOT%{oolib}/share/config/registry/instance/org/openoffice/Office/Common.xml
+	$RPM_BUILD_ROOT%{oolib}/share/config/registry/instance/org/openoffice/Office/Common.xml
 
 # Install autoresponse file for user installation
-install -d $RPM_BUILD_ROOT%{_sysconfdir}/openoffice
 cat %{SOURCE3} > $RPM_BUILD_ROOT%{_sysconfdir}/openoffice/autoresponse.conf
 
 # Install OpenOffice.org wrapper script
-install -d $RPM_BUILD_ROOT%{_bindir}
 cat %{SOURCE7} | sed -e "s/@OOVERSION@/%{subver}/" > $RPM_BUILD_ROOT%{_bindir}/ooffice
 
 # Install component wrapper scripts
-install -d $RPM_BUILD_ROOT%{_bindir}
 for app in %{apps}; do
-  cat %{SOURCE8} | sed -e "s/@APP@/${app}/" > $RPM_BUILD_ROOT%{_bindir}/oo${app}
+	cat %{SOURCE8} | sed -e "s/@APP@/${app}/" > $RPM_BUILD_ROOT%{_bindir}/oo${app}
 done
 
 ## Install new template and gallery content
