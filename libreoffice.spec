@@ -1074,6 +1074,9 @@ done
 echo "%%lang(en) %{_libdir}/%{name}/program/resource/*%{subver}01.res" >> en.lang
 echo "%%lang(en) %{_libdir}/%{name}/share/wordbook/english" >> en.lang
 
+find $RPM_BUILD_ROOT -type f -name '*.so' -exec chmod 755 "{}" ";"
+chmod 755 $RPM_BUILD_ROOT%{_libdir}/%{name}/program/*
+
 %clean
 rm -rf $RPM_BUILD_ROOT
 
