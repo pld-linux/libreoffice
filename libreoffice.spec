@@ -18,6 +18,7 @@ Source2:	%{name}-db3.jar
 Patch0:		%{name}-gcc.patch
 Patch1:		%{name}-db3.patch
 Patch2:		%{name}-mozilla.patch
+Patch3:		%{name}-nest.patch
 URL:		http://www.openoffice.org/
 BuildRequires:	STLport-static
 BuildRequires:	XFree86-devel
@@ -73,6 +74,11 @@ Do zalet OpenOffice.org mo¿na zaliczyæ:
 %patch0 -p1
 %patch1 -p1
 %patch2 -p1
+%if%{?_with_nest:1}%{!?_with_nest:0}
+%patch3 -p1
+%endif
+
+
 install %{SOURCE1} external
 cd external; tar fxz %{SOURCE1}; cp -fr gpc231/* gpc
 
@@ -104,10 +110,6 @@ install %{SOURCE2} solver/641/unxlngi3.pro/bin/db.jar
 
 cat <<EOF > compile
 #!/bin/tcsh
-# you must have a valid & working X DISPLAY setting on the build machine,
-# see http://tools.openoffice.org/troubleshoot.html
-#Xvfb :15 &
-#setenv DISPLAY	:15
 source LinuxIntelEnv.Set
 dmake -p -v
 EOF
@@ -126,17 +128,16 @@ EOF
 chmod u+rx install
 ./install
 
-install -d $RPM_BUILD_ROOT{%{_bindir},%{_libdir},%{_datadir}/%{name}}
-
-install solver/%{version}/unxlngi3.pro/bin/*.{bin,exe}		$RPM_BUILD_ROOT%{_bindir}
-install solver/%{version}/unxlngi3.pro/lib/*.so		 	$RPM_BUILD_ROOT%{_libdir}
-cp -fr solver/%{version}/unxlngi3.pro/{par,pck,rdb,res,xml}	$RPM_BUILD_ROOT%{_datadir}/%{name}
+#install -d $RPM_BUILD_ROOT{%{_bindir},%{_libdir},%{_datadir}/%{name}}
+#install solver/%{version}/unxlngi3.pro/bin/*.{bin,exe}		$RPM_BUILD_ROOT%{_bindir}
+#install solver/%{version}/unxlngi3.pro/lib/*.so		 	$RPM_BUILD_ROOT%{_libdir}
+#cp -fr solver/%{version}/unxlngi3.pro/{par,pck,rdb,res,xml}	$RPM_BUILD_ROOT%{_datadir}/%{name}
 
 %clean
 rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(644,root,root,755)
-%attr(755,root,root) %{_bindir}/*
-%attr(755,root,root) %{_libdir}/*
-%{_datadir}/%{name}
+#%attr(755,root,root) %{_bindir}/*
+#%attr(755,root,root) %{_libdir}/*
+#%{_datadir}/%{name}
