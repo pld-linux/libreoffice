@@ -23,7 +23,7 @@ Summary:	OpenOffice - powerful office suite
 Summary(pl):	OpenOffice - potê¿ny pakiet biurowy
 Name:		openoffice
 Version:	%{fullver}
-Release:	3.2
+Release:	4
 Epoch:		1
 License:	GPL/LGPL
 Group:		X11/Applications
@@ -163,7 +163,7 @@ Do zalet OpenOffice.org mo¿na zaliczyæ:
 Summary:	OpenOffice.org shared libraries
 Summary(pl):	Biblioteki dzielone OpenOffice.org
 Group:		X11/Libraries
-Requires:	%{name}-libs-interface = %{version}-%{release}
+Requires:	%{name}-libs-interface = %{epoch}:%{version}-%{release}
 
 %description libs
 OpenOffice.org productivity suite - shared libraries.
@@ -175,11 +175,11 @@ Pakiet biurowy OpenOffice.org - biblioteki.
 Summary:	OpenOffice.org KDE Interface
 Summary(pl):	Interfejs KDE dla OpenOffice.org
 Group:		X11/Libraries
-Provides:	%{name}-libs-interface = %{version}-%{release}
+Provides:	%{name}-libs-interface = %{epoch}:%{version}-%{release}
 Provides:	libvcl%{subver}li.so
 Obsoletes:	%{name}-libs-gtk
-Requires:	%{name}-libs = %{version}-%{release}
-Requires(post):	%{name}-libs = %{version}-%{release}
+Requires:	%{name}-libs = %{epoch}:%{version}-%{release}
+Requires(post):	%{name}-libs = %{epoch}:%{version}-%{release}
 
 %description libs-kde
 OpenOffice.org productivity suite - KDE Interface.
@@ -191,11 +191,11 @@ Pakiet biurowy OpenOffice.org - Interfejs KDE.
 Summary:	OpenOffice.org GTK Interface
 Summary(pl):	Interfejs GTK dla OpenOffice.org
 Group:		X11/Libraries
-Provides:	%{name}-libs-interface = %{version}-%{release}
+Provides:	%{name}-libs-interface = %{epoch}:%{version}-%{release}
 Provides:	libvcl%{subver}li.so
 Obsoletes:	%{name}-libs-kde
-Requires:	%{name}-libs = %{version}-%{release}
-Requires(post):	%{name}-libs = %{version}-%{release}
+Requires:	%{name}-libs = %{epoch}:%{version}-%{release}
+Requires(post):	%{name}-libs = %{epoch}:%{version}-%{release}
 
 %description libs-gtk
 OpenOffice.org productivity suite - GTK Interface.
