@@ -34,27 +34,39 @@ diff -urN ooo-build-1.1.54.org/patches/OOO_1_1/pld-splash.diff ooo-build-1.1.54/
 + Bitmap RID_DEFAULTINTRO
 diff -urN ooo-build-1.1.54.org/patches/OOO_1_1_1/apply ooo-build-1.1.54/patches/OOO_1_1_1/apply
 --- ooo-build-1.1.54.org/patches/OOO_1_1_1/apply	2004-04-30 02:50:24.000000000 +0200
-+++ ooo-build-1.1.54/patches/OOO_1_1_1/apply	2004-05-04 18:43:59.859172944 +0200
++++ ooo-build-1.1.54/patches/OOO_1_1_1/apply	2004-05-04 21:55:55.382547296 +0200
 @@ -22,6 +22,7 @@
  RHShrike : RedHatBase, RHShrikeOnly, OldLibArt
  KDE : LinuxCommon, NativeWidgets, StartupNotification, ODKFixes
  SuSE : SuSEOnly, LinuxCommon, KDE, GlobalDesktopFiles, VBABits
-+PLD: PLDOnly, LinuxCommon, KDE, GnomeVFS, GnomeCUPS, GlobalDesktopFiles, StartupNotification, ODKFixes, VBABits
++PLD: PLDOnly, LinuxCommon, KDE, GnomeVFS, OOoCUPS, GlobalDesktopFiles, StartupNotification, ODKFixes, VBABits
  # somewhat odder:
  Win32 : Common, ODKFixes, VBABits, Win32Only
  
-@@ -643,7 +644,15 @@
+@@ -305,7 +306,7 @@
+ gui-ft-pt-not-pixel.diff
+ gui-ft-use-system-font.diff
+ 
+-[ XimianOnly, RedHatOnly ]
++[ XimianOnly, RedHatOnly, PLDOnly ]
+ # Disable custom staroffice printer admin thing & broken crashdialog bits
+ module-buildset.diff
+ 
+@@ -639,11 +640,18 @@
+ # drop pyuno bits
+ disable-pyuno.diff
+ 
++[ SuSEOnly, PLDOnly ]
++
+ # resolution independant printing bits
  print-resolution-generic.diff
  
  #######################################################
 +[ PLDOnly ]
- 
++
 +# splash
 +pld-splash.diff
-+
-+# resolution independant printing bits
-+print-resolution-generic.diff
-+
+ 
 +#######################################################
  [ Win32Only ]
  
