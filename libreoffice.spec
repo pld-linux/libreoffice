@@ -945,6 +945,7 @@ CONFOPTS=" \
 	--enable-fontconfig \
 	--enable-libsn \
 	--enable-libart \
+	--disable-mozilla \
 	--disable-rpath \
 %if 0%{?debug:1}
 	--enable-debug \
