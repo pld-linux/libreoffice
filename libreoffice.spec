@@ -721,7 +721,7 @@ chiñskim dla Tajwanu.
 %endif
 
 %prep
-%setup -q -n oo_%{fullver}_src
+%setup -q -n oo_1.1_src
 #%patch0 -p1
 #%patch2 -p1
 
