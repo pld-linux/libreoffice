@@ -1,34 +1,26 @@
 
 # Conditional build:
 # _with_ibm_java	- uses IBM java instead SUN java
-# _with_nest		- build for nest envinronment
-
-# _with_us		- 01 US translation
-# _with_pl		- 48 PL translation
-# _with_de		- 49 DE translation
 
 Summary:	OpenOffice - powerful office suite
 Summary(pl):	OpenOffice - potê¿ny pakiet biurowy
 Name:		openoffice
 Version:	1.0.1
-Release:	0.4
+Release:	0.5
 Epoch:		1
 License:	GPL/LGPL
 Group:		X11/Applications
-#Source0:	ftp://ftp.openoffice.pl/%{version}/OOo_%{version}_source.tar.bz2
-#Source0:	http://sf1.mirror.openoffice.org/%{version}/OOo_%{version}_source.tar.bz2
 Source0:	ftp://ftp1.openoffice.pl/pub/OpenOffice.ORG/stable/%{version}/OOo_%{version}_source.tar.bz2
 Source1:	ftp://ftp.cs.man.ac.uk/pub/toby/gpc/gpc231.tar.Z
-Source2:	%{name}-db3.jar
-Source3:	%{name}-rsfile.txt
+Source2:	%{name}-rsfile.txt
+Source3:	%{name}-rsfile-local.txt
 Source4:	%{name}-xmlparse.sh
-Source5:	%{name}-rsfile-local.txt
-Source6:	%{name}-png48x48.tar.bz2
+Source6:	%{name}-applnk.tar.gz
 Source7:	%{name}-wrapper
+Source8:	%{name}-wrapper-component
+
 Patch0:		%{name}-gcc.patch
-Patch1:		%{name}-db3.patch
 Patch2:		%{name}-mozilla.patch
-Patch3:		%{name}-nest.patch
 Patch4:		%{name}-perl.patch
 # Start using some system libraries:
 Patch5:		%{name}-system-freetype.patch
@@ -36,14 +28,11 @@ Patch6:		%{name}-system-getopt.patch
 Patch7:		%{name}-freetype-2.1.patch
 # Fix broken makefiles
 Patch8:		%{name}-braindamage.patch
-# Add jj patch for CLK_TCK -> CLOCKS_PER_SEC
-Patch9:		%{name}-clockspersec.patch
 # Fix psprint /euro to /Euro
 Patch10:	%{name}-psprint-euro.patch
 # Fix config_office/configure
 Patch11:	%{name}-ac.patch
 
-#Patch12:	%{name}-debug-keepsetup.patch
 # Hackery around zipdep
 Patch13:	%{name}-zipdep.patch
 # Remove GPC from linking to GPL/LGPL OO.o code!
@@ -71,7 +60,7 @@ Patch25:	%{name}-xmlsearch.patch
 Patch26:	%{name}-config-java.patch
 Patch27:	%{name}-sj2-java.patch
 
-# correct liniking with new libstc++
+# Correct liniking with new libstc++
 Patch28:	%{name}-gcc3-1.patch
 
 URL:		http://www.openoffice.org/
@@ -83,7 +72,6 @@ BuildRequires:	STLport-static >= 4.5.3-3
 BuildRequires:	XFree86-devel
 BuildRequires:	XFree86-fonts-PEX
 BuildRequires:	XFree86-Xvfb
-#BuildRequires:	db3-devel
 BuildRequires:	autoconf
 BuildRequires:	automake
 BuildRequires:  bison
@@ -93,41 +81,35 @@ BuildRequires:	freetype-static
 BuildRequires:	gcc
 BuildRequires:	gcc-c++
 #BuildRequires:	gcc-java
-%{?_with_ibm_java:BuildRequires:	ibm-java-sdk}
-%{?!_with_ibm_java:BuildRequires:	java-sun}
-BuildRequires:	libstdc++-devel
+BuildRequires:	libstdc++-devel >= 3.2.1
 BuildRequires:	pam-devel
 BuildRequires:	perl
 BuildRequires:	tcsh
 BuildRequires:	unzip
 BuildRequires:	zip
 BuildRequires:	jar
+%{?_with_ibm_java:BuildRequires:	ibm-java-sdk}
+%{?!_with_ibm_java:BuildRequires:	java-sun}
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
-#%define		langs		"ENUS,FREN,GERM,SPAN,ITAL,DTCH,PORT,DAN,GREEK,POL,SWED,TURK,RUSS"
-%define		langs		"ENUS"
+Requires:	%{name}-libs = %{version}-%{release}
+Requires:	libstdc++ >= 3.2.1
+Requires:	db
 
+#%define	langs	"ENUS,FREN,GERM,SPAN,ITAL,DTCH,PORT,DAN,GREEK,POL,SWED,TURK,RUSS"
+%define	langs	"ENUS"
+%define	apps	agenda calc draw fax impress label letter math master memo vcard web writer
 
-#%define		oo_ver	1.0
-
-%define		_prefix		/usr/X11R6
-%define		_archbuilddir	unxlngi3.pro
-%define		installpath	instsetoo/%{_archbuilddir}
-%define subver	641
+%define	_prefix		/usr/X11R6
+%define	_archbuilddir	unxlngi3.pro
+%define	installpath	instsetoo/%{_archbuilddir}
+%define	subver	641
 
 # Find a free display (resources generation requires X) and sets XDISPLAY
 %define init_xdisplay XDISPLAY=0; while /bin/true; do if [ ! -f /tmp/.X$XDISPLAY-lock ]; then sleep 2s; ( /usr/X11R6/bin/Xvfb -ac :$XDISPLAY & 2>&1 > /dev/null); sleep 10s; if [ -f /tmp/.X$XDISPLAY-lock ]; then break; fi; fi; XDISPLAY=$(($XDISPLAY+1)); done
 
 # The virtual X server PID
 %define kill_xdisplay kill $(cat /tmp/.X$XDISPLAY-lock)
-
-#%{?_with_us:%define installpath instsetoo/unxlngi3.pro/01/normal}
-#%{?_with_pl:%define installpath instsetoo/unxlngi3.pro/48/normal}
-#%{?_with_de:%define installpath instsetoo/unxlngi3.pro/49/normal}
-
-#%{?_with_us:%define langs ENUS}
-#%{?_with_pl:%define langs POL}
-#%{?_with_de:%define langs DTCH}
 
 %description
 OpenOffice.org is an open-source project sponsored by Sun Microsystems
@@ -158,6 +140,16 @@ Do zalet OpenOffice.org mo¿na zaliczyæ:
  - kontrola CVS,
  - infrastruktura s³u¿±ca do komunikowania siê w ramach projektu.
 
+%package libs
+Summary:	OpenOffice.org shared libraries
+Group:		X11/Applications
+
+%description libs
+OpenOffice.org productivity suite - shared libraries
+
+%description libs -l pl
+Pakiet biurowy OpenOffice.org - biblioteki
+
 %prep
 CC=%{__cc}
 CXX=%{__cxx}
@@ -166,20 +158,16 @@ export CC CXX GCJ
 
 %setup -q -n oo_1.0.1_src
 %patch0 -p1
-%patch1 -p1
 %patch2 -p1
-%if%{?_with_nest:1}%{!?_with_nest:0}
-%patch3 -p1
-%endif
 %patch4 -p1
+
 %patch5 -p1
 %patch6 -p1
 %patch7 -p1
+
 %patch8 -p1
-#%patch9 -p1
 %patch10 -p1
 %patch11 -p1
-#%patch12 -p0
 %patch13 -p1
 %patch14 -p1
 %patch16 -p1
@@ -359,7 +347,7 @@ mv f0_061.zip %{installpath}/01/normal/f0_061
 %{init_xdisplay}
 RESPONSE_FILE=$PWD/rsfile.ins
 (cd %{installpath}/01/normal/;
-  cat %{SOURCE3} | sed -e "s|@DESTDIR@|$RPM_BUILD_ROOT%{_libdir}/openoffice|" > $RESPONSE_FILE
+  cat %{SOURCE2} | sed -e "s|@DESTDIR@|$RPM_BUILD_ROOT%{_libdir}/openoffice|" > $RESPONSE_FILE
 
   # Localize New and Wizard menus and OfficeObjects
   [[ ! -f setup.ins.localized ]] && {
@@ -391,6 +379,34 @@ RESPONSE_FILE=$PWD/rsfile.ins
 )
 %{kill_xdisplay}
 
+
+
+# Remove unnecessary binaries
+for app in %{apps} ; do
+  rm -f $RPM_BUILD_ROOT%{_libdir}/openoffice/program/s${app}
+done
+
+install -d $RPM_BUILD_ROOT%{_applnkdir}
+gunzip -dc %{SOURCE6} | tar xf - -C $RPM_BUILD_ROOT%{_applnkdir}
+
+## Remove any fake classes
+#rm -rf $RPM_BUILD_ROOT%{_libdir}/openoffice/program/classes
+
+# Remove stuff that should come from system libraries
+rm -rf $RPM_BUILD_ROOT%{_libdir}/openoffice/program/libdb-*
+rm -rf $RPM_BUILD_ROOT%{_libdir}/openoffice/program/libdb_*
+
+# Fix GNOME & KDE
+install -d $RPM_BUILD_ROOT%{_datadir}
+install -d $RPM_BUILD_ROOT%{_applnk}
+install -d $RPM_BUILD_ROOT%{_pixmapsdir}
+mv $RPM_BUILD_ROOT%{_libdir}/openoffice/share/kde/net/mimelnk/share/* $RPM_BUILD_ROOT%{_datadir}
+mv $RPM_BUILD_ROOT%{_libdir}/openoffice/share/icons/* $RPM_BUILD_ROOT%{_pixmapsdir}
+rm -rf $RPM_BUILD_ROOT%{_libdir}/openoffice/share/kde
+rm -rf $RPM_BUILD_ROOT%{_libdir}/openoffice/share/cde
+rm -rf $RPM_BUILD_ROOT%{_libdir}/openoffice/share/gnome
+rm -rf $RPM_BUILD_ROOT%{_libdir}/openoffice/share/icons
+
 # Now fixup Common.xml
 COMMON_XML_SED=$PWD/%{installpath}/01/normal/Common.xml.sed
 (cd $RPM_BUILD_ROOT%{_libdir}/openoffice/share/config/registry/instance/org/openoffice/Office/;
@@ -400,10 +416,15 @@ COMMON_XML_SED=$PWD/%{installpath}/01/normal/Common.xml.sed
 )
 
 # Fixup instdb.ins to get rid of $RPM_BUILD_ROOT
-perl -pi -e "s|$RPM_BUILD_ROOT||g" \
-  $RPM_BUILD_ROOT%{_libdir}/openoffice/program/instdb.ins
+perl -pi -e "s|$RPM_BUILD_ROOT||g" $RPM_BUILD_ROOT%{_libdir}/openoffice/program/instdb.ins
 perl -pi -e "/^Installation gid_Installation/ .. /^End/ and s|(SourcePath.*)=.*|\1= \"%{_libdir}/openoffice/program\";|" \
   $RPM_BUILD_ROOT%{_libdir}/openoffice/program/instdb.ins
+
+# Disable desktop (KDE, GNOME, CDE) integration for user installs
+for module in GID_MODULE_OPTIONAL_GNOME gid_Module_Optional_Kde gid_Module_Optional_Cde; do
+  perl -pi -e "/^Module $module/ .. /^End/ and s|(Installed.*)=.*|\1= NO;|" \
+    $RPM_BUILD_ROOT%{_libdir}/openoffice/program/instdb.ins
+done
 
 # Fix setup and spadmin symlinks set by OO.org setup program
 # (must have absolute symlinks)
@@ -415,137 +436,25 @@ ln -sf %{_libdir}/openoffice/program/soffice $RPM_BUILD_ROOT%{_libdir}/openoffic
 perl -pi -e "s|$RPM_BUILD_ROOT||g" \
   $RPM_BUILD_ROOT%{_libdir}/openoffice/share/config/registry/instance/org/openoffice/Office/Common.xml
 
-# Recreate registry cache
-#cat > ./build-create-cache.command << EOF
-#\$CXXCOMP -g \$SOLARINC $RPM_OPT_FLAGS -fno-for-scope -fpermissive \
-#	  -fexceptions -fno-enforce-eh-specs \$SOLARDEF %{SOURCE14} \
-#	  -o ./createcache -L\$SOLARVER/\$UPD/\$INPATH/lib \
-#	  -Wl,-rpath,\$SOLARVER/\$UPD/\$INPATH/lib -lcfgmgr2
-#EOF
-#/bin/tcsh -f -c "source %{build_env}; source build-create-cache.command"
-#rm -rf %{buildroot}%{_libdir}/openoffice/share/config/registry/cache
-#for arg in `cd %{buildroot}%{_libdir}/openoffice/share/config/registry/instance; \
-#	    find . -name \*.xml | \
-#	    sed 's~\.xml$~~;s~/~.~g;s~^\.\.~/~'`; do
-#  ./createcache %{buildroot}%{_libdir}/openoffice/program/applicat.rdb \
-#		%{buildroot}%{_libdir}/openoffice/share/config/registry $arg
-#done
-
-## FIXME: (gb) 6.0.41-3mdk: workaround for English wordbook, move them
-## to share/ directory
-#cp $RPM_BUILD_ROOT%{_libdir}/openoffice/user/wordbook/* $RPM_BUILD_ROOT%{_libdir}/openoffice/share/wordbook/english/
-
-# Remove any fake classes
-rm -rf $RPM_BUILD_ROOT%{_libdir}/openoffice/program/classes
-
-# Remove stuff that should come from system libraries
-rm -rf	$RPM_BUILD_ROOT%{_libdir}/openoffice/program/libdb-* \
-	$RPM_BUILD_ROOT%{_libdir}/openoffice/program/libdb_cxx-* \
-	$RPM_BUILD_ROOT%{_libdir}/openoffice/program/libdb_java-*
-
-# Fix openoffice/share/kde/net/applnk paths
-# mkdir -p %{buildroot}%{_libdir}/openoffice/share/kde/net/applnk/Office
-mv "%{buildroot}%{_libdir}/openoffice/share/kde/net/applnk/OpenOffice.org 1.0.1" "%{buildroot}%{_libdir}/openoffice/share/kde/net/applnk/OpenOffice.org"
-perl -pi -e "/^Module gid_Module_Optional_Kde/ .. /^End/ and s|YES|NO|g" %{buildroot}%{_libdir}/openoffice/program/instdb.ins
-perl -pi -e "/^Installation gid_Installation/ .. /^End/ and s|%{buildroot}||g" %{buildroot}%{_libdir}/openoffice/program/instdb.ins
-# perl -pi -e "/^/ .. /^/ and s|||g" %{buildroot}%{_libdir}/openoffice/program/instdb.ins
-perl -pi -e "/^Directory GID_DIR_HOME_GNOME_APPS_STAR/ .. /^End/ and s|OpenOffice\.org\ 1\.0\.1|OpenOffice\.org|g" %{buildroot}%{_libdir}/openoffice/program/instdb.ins
-perl -pi -e "/^Directory gid_Dir_Share_Kde_Net_Applnk_Star/ .. /^End/ and s|OpenOffice\.org\ 1\.0\.1|OpenOffice\.org|g" %{buildroot}%{_libdir}/openoffice/program/instdb.ins
-perl -pi -e "/^Directory gid_Dir_Kde2_Share_Applnk_Star/ .. /^End/ and s|OpenOffice\.org\ 1\.0\.1|OpenOffice\.org|g" %{buildroot}%{_libdir}/openoffice/program/instdb.ins
-perl -pi -e "/^Procedure GID_PROCEDURE_KDE_INST_FOR_REDHAT/ .. /^End/ and s|OpenOffice\.org\ 1\.0\.1|OpenOffice\.org|g" %{buildroot}%{_libdir}/openoffice/program/instdb.ins
-perl -pi -e "/^Procedure GID_PROCEDURE_KDE_DEINSTALL_FOR_REDHAT/ .. /^End/ and s|OpenOffice\.org\ 1\.0\.1|OpenOffice\.org|g" %{buildroot}%{_libdir}/openoffice/program/instdb.ins
-perl -pi -e "/^Procedure GID_PROCEDURE_GNOME_INSTALL/ .. /^End/ and s|OpenOffice\.org\ 1\.0\.1|OpenOffice\.org|g" %{buildroot}%{_libdir}/openoffice/program/instdb.ins
-
-# Fix paths in GNOME and KDE .desktop files
-for dir in %{buildroot}%{_libdir}/openoffice/share/gnome/net %{buildroot}%{_libdir}/openoffice/share/kde/net/applnk/OpenOffice.org; do
-  for file in $(ls -1A ${dir}); do
-    # fix all %{buildroot} occurances
-    perl -pi -e "s|%{buildroot}||g" ${dir}/${file}
-    # catch group calc draw impress math writer cases
-    if [ "$file" == "drawing.desktop" ] || [ "$file" == "mathdoc.desktop" ] || [ "$file" == "presentation.desktop" ] || [ "$file" == "spreadsheet.desktop" ] || [ "$file" == "textdoc.desktop" ]; then
-      perl -pi -e "s|%{_libdir}/openoffice/program/s|%{_bindir}/oo|" ${dir}/${file}
-    fi
-  done
-done
 
 # Install autoresponse file for user installation
-mkdir -p %{buildroot}%{_sysconfdir}/openoffice
-cat %{SOURCE5} > %{buildroot}%{_sysconfdir}/openoffice/autoresponse.conf
-chmod 644 %{buildroot}%{_sysconfdir}/openoffice/autoresponse.conf
+mkdir -p $RPM_BUILD_ROOT%{_sysconfdir}/openoffice
+cat %{SOURCE3} > $RPM_BUILD_ROOT%{_sysconfdir}/openoffice/autoresponse.conf
 
 # Install OpenOffice.org wrapper script
-mkdir -p %{buildroot}%{_bindir}
-cat %{SOURCE7} | sed -e "s/<OOVERSION>/%{subver}/" > %{buildroot}%{_bindir}/ooffice
-chmod 755 %{buildroot}%{_bindir}/ooffice
+mkdir -p $RPM_BUILD_ROOT%{_bindir}
+cat %{SOURCE7} | sed -e "s/@OOVERSION@/%{subver}/" > $RPM_BUILD_ROOT%{_bindir}/ooffice
 
 # Install component wrapper scripts
-mkdir -p %{buildroot}%{_bindir}
-for app in calc draw impress math writer; do
-cat > %{buildroot}%{_bindir}/oo${app} << EOF
-#!/bin/sh
-if [ -z "\$1" ]; then
-  exec %{_bindir}/ooffice private:factory/s${app}
-else
-  exec %{_bindir}/ooffice "\$@"
-fi
-EOF
-chmod +x %{buildroot}%{_bindir}/oo${app}
+mkdir -p $RPM_BUILD_ROOT%{_bindir}
+for app in %{apps}; do
+  cat %{SOURCE8} | sed -e "s/@APP@/${app}/" > $RPM_BUILD_ROOT%{_bindir}/oo${app}
 done
 
-# Unpack KDE applnk files, icons and MIME associations
-mkdir -p %{buildroot}%{_datadir}/applnk/Office/OpenOffice.org
-(cd ./solver/%{subver}/%{_archbuilddir}/pck/;
-  for app in group calc draw impress math writer; do
-    unzip -d %{buildroot}%{_datadir}/applnk/Office/OpenOffice.org ookdeapp${app}.zip
-    if [ "$app" == "group" ]; then
-      for file in $(unzip -l ookdeapp${app}.zip | awk -- ' /[a-z]*\.[a-y]+/ {print $4}'); do
-        perl -pi -e "s|\<progpath\>|%{_libdir}/openoffice|" %{buildroot}%{_datadir}/applnk/Office/OpenOffice.org/$file
-        perl -pi -e "s|\<singleproductname\>|OpenOffice\.org|" %{buildroot}%{_datadir}/applnk/Office/OpenOffice.org/$file
-      done
-    else
-      for file in $(unzip -l ookdeapp${app}.zip | awk -- ' /[a-z]*\.[a-y]+/ {print $4}'); do
-# DS!       perl -pi -e "s|Exec=.*s([a-z]*).|Exec=\"%{_bindir}/oo\1\"|" %{buildroot}%{_datadir}/applnk/Office/OpenOffice.org/$file
-        perl -pi -e "s|\<progpath\>/program/s|%{_bindir}/oo|" %{buildroot}%{_datadir}/applnk/Office/OpenOffice.org/$file
-        perl -pi -e "s|\<singleproductname\>|OpenOffice\.org|" %{buildroot}%{_datadir}/applnk/Office/OpenOffice.org/$file
-      done
-    fi
-    unzip -d %{buildroot}%{_prefix} ookde${app}.zip
-    for file in $(unzip -l ookde${app}.zip | awk -- ' /[a-z]+\.desktop/ {print $4}'); do
-      perl -pi -e "s|\<singleproductname\>|OpenOffice\.org|" %{buildroot}%{_prefix}/$file
-    done
-  done
-)
-
-# Unpack GNOME files
-mkdir -p %{buildroot}%{_datadir}/gnome/apps/Applications/OpenOffice.org
-(cd ./solver/%{subver}/%{_archbuilddir}/pck/;
-  for app in group calc draw impress math writer; do
-    unzip -d %{buildroot}%{_datadir}/gnome/apps/Applications/OpenOffice.org oognomeapp${app}.zip
-    if [ "$app" == "group" ]; then
-      for file in $(unzip -l ookdeapp${app}.zip | awk -- ' /[a-z]*\.[a-y]+/ {print $4}'); do
-        perl -pi -e "s|\<progpath\>|%{_libdir}/openoffice|" %{buildroot}%{_datadir}/gnome/apps/Applications/OpenOffice.org/$file
-        perl -pi -e "s|\<singleproductname\>|OpenOffice\.org|" %{buildroot}%{_datadir}/gnome/apps/Applications/OpenOffice.org/$file
-      done
-    else
-      for file in $(unzip -l ookdeapp${app}.zip | awk -- ' /[a-z]*\.[a-y]+/ {print $4}'); do
-        perl -pi -e "s|\<progpath\>/program/s|%{_bindir}/oo|" %{buildroot}%{_datadir}/gnome/apps/Applications/OpenOffice.org/$file
-        perl -pi -e "s|\<progpath\>|%{_libdir}/openoffice|" %{buildroot}%{_datadir}/gnome/apps/Applications/OpenOffice.org/$file
-        perl -pi -e "s|\<singleproductname\>|OpenOffice\.org|" %{buildroot}%{_datadir}/gnome/apps/Applications/OpenOffice.org/$file
-      done
-    fi
-  done
-)
-
-# Extract 48x48 PNGs for use by GNOME and Nautilus (Nautilus needs pngs under %{_datadir}/pixmaps)
-mkdir -p %{buildroot}%{_datadir}/pixmaps
-(cd %{buildroot}%{_datadir}/pixmaps/;
-  tar fxvj %{SOURCE6}
-)
-
 ## Install new template and gallery content
-#mkdir -p %{buildroot}%{_libdir}/openoffice/share/template
-#mkdir -p %{buildroot}%{_libdir}/openoffice/share/gallery
-#(cd %{buildroot}%{_libdir}/openoffice/share;
+#mkdir -p $RPM_BUILD_ROOT%{_libdir}/openoffice/share/template
+#mkdir -p $RPM_BUILD_ROOT%{_libdir}/openoffice/share/gallery
+#(cd $RPM_BUILD_ROOT%{_libdir}/openoffice/share;
 #  tar fxvj %{SOURCE10}
 #  tar fxvj %{SOURCE11}
 #)
@@ -570,72 +479,30 @@ rm -rf $RPM_BUILD_ROOT
 ####################
 %files
 %defattr(644,root,root,755)
-%doc readlicense/source/license/unx/LICENSE
+#%doc readlicense/source/license/unx/LICENSE
+%doc %{_libdir}/openoffice/LICENSE*
+%doc %{_libdir}/openoffice/README*
+
 #%doc licenses/{README.gpc,COPYING,COPYING.LIB}
-#
-%attr(755,root,root) %{_bindir}/ooffice
-%attr(755,root,root) %{_bindir}/oocalc
-%attr(755,root,root) %{_bindir}/oodraw
-%attr(755,root,root) %{_bindir}/ooimpress
-%attr(755,root,root) %{_bindir}/oomath
-%attr(755,root,root) %{_bindir}/oowriter
-#
-%dir %{_sysconfdir}/openoffice/
+#%attr(644,root,root) %{_libdir}/openoffice/LICENSE*
+#%attr(644,root,root) %{_libdir}/openoffice/README*
+
+#%dir %{_sysconfdir}/openoffice/
 %config %{_sysconfdir}/openoffice/autoresponse.conf
-#
-%dir %{_datadir}/applnk/
-%dir %{_datadir}/applnk/Office/
-%dir %{_datadir}/applnk/Office/OpenOffice.org/
-%{_datadir}/applnk/Office/OpenOffice.org/textdoc.desktop
-%{_datadir}/applnk/Office/OpenOffice.org/spreadsheet.desktop
-%{_datadir}/applnk/Office/OpenOffice.org/presentation.desktop
-%{_datadir}/applnk/Office/OpenOffice.org/drawing.desktop
-%{_datadir}/applnk/Office/OpenOffice.org/mathdoc.desktop
-%{_datadir}/applnk/Office/OpenOffice.org/setup.desktop
-%{_datadir}/applnk/Office/OpenOffice.org/printeradmin.desktop
-%{_datadir}/applnk/Office/OpenOffice.org/.order
-%{_datadir}/applnk/Office/OpenOffice.org/.directory
-%dir %{_datadir}/mimelnk/
-%dir %{_datadir}/mimelnk/application/
-%{_datadir}/mimelnk/application/*.desktop
-%dir %{_datadir}/icons/locolor/
-%dir %{_datadir}/icons/locolor/16x16/
-%dir %{_datadir}/icons/locolor/16x16/apps/
+
+%{_applnkdir}/Office
+%{_pixmapsdir}
+
 %{_datadir}/icons/locolor/16x16/apps/*.xpm
-%dir %{_datadir}/icons/locolor/32x32/
-%dir %{_datadir}/icons/locolor/32x32/apps/
 %{_datadir}/icons/locolor/32x32/apps/*.xpm
-%dir %{_datadir}/icons/hicolor/
-%dir %{_datadir}/icons/hicolor/32x32/
-%dir %{_datadir}/icons/hicolor/32x32/apps/
 %{_datadir}/icons/hicolor/32x32/apps/*.xpm
-%dir %{_datadir}/icons/hicolor/48x48/
-%dir %{_datadir}/icons/hicolor/48x48/apps/
 %{_datadir}/icons/hicolor/48x48/apps/*.xpm
-%dir %{_datadir}/pixmaps/
-%{_datadir}/pixmaps/*.png
-#
-%dir %{_datadir}/gnome/
-%dir %{_datadir}/gnome/apps/
-%dir %{_datadir}/gnome/apps/Applications/
-%dir %{_datadir}/gnome/apps/Applications/OpenOffice.org/
-%{_datadir}/gnome/apps/Applications/OpenOffice.org/textdoc.desktop
-%{_datadir}/gnome/apps/Applications/OpenOffice.org/spreadsheet.desktop
-%{_datadir}/gnome/apps/Applications/OpenOffice.org/presentation.desktop
-%{_datadir}/gnome/apps/Applications/OpenOffice.org/drawing.desktop
-%{_datadir}/gnome/apps/Applications/OpenOffice.org/mathdoc.desktop
-%{_datadir}/gnome/apps/Applications/OpenOffice.org/setup.desktop
-%{_datadir}/gnome/apps/Applications/OpenOffice.org/printeradmin.desktop
-%{_datadir}/gnome/apps/Applications/OpenOffice.org/.order
-%{_datadir}/gnome/apps/Applications/OpenOffice.org/.directory
-#
 
-%attr(644,root,root) %{_libdir}/openoffice/LICENSE*
-%attr(644,root,root) %{_libdir}/openoffice/README*
-%attr(755,root,root) %{_libdir}/openoffice/setup
-%attr(755,root,root) %{_libdir}/openoffice/spadmin
+%{_datadir}/mimelnk/application/*
 
-# Program
+%{_libdir}/openoffice/program/classes
+
+%attr(644,root,root) %{_libdir}/openoffice/program/*.rdb
 %attr(644,root,root) %{_libdir}/openoffice/program/*.bmp
 %attr(644,root,root) %{_libdir}/openoffice/program/sofficerc
 %attr(644,root,root) %{_libdir}/openoffice/program/unorc
@@ -643,44 +510,9 @@ rm -rf $RPM_BUILD_ROOT
 %attr(644,root,root) %{_libdir}/openoffice/program/configmgrrc
 %attr(644,root,root) %{_libdir}/openoffice/program/instdb.ins
 
-%attr(644,root,root) %{_libdir}/openoffice/program/*.rdb
-
-%attr(755,root,root) %{_libdir}/openoffice/program/*.so
-%attr(755,root,root) %{_libdir}/openoffice/program/*.so.*
-%attr(755,root,root) %{_libdir}/openoffice/program/fromtemplate
-%attr(755,root,root) %{_libdir}/openoffice/program/gnomeint
-%attr(755,root,root) %{_libdir}/openoffice/program/javaldx
-%attr(755,root,root) %{_libdir}/openoffice/program/jvmsetup
-%attr(755,root,root) %{_libdir}/openoffice/program/jvmsetup.bin
-%attr(755,root,root) %{_libdir}/openoffice/program/nswrapper
-%attr(755,root,root) %{_libdir}/openoffice/program/pluginapp.bin
-%attr(755,root,root) %{_libdir}/openoffice/program/sagenda
-%attr(755,root,root) %{_libdir}/openoffice/program/scalc
-%attr(755,root,root) %{_libdir}/openoffice/program/sdraw
-%attr(755,root,root) %{_libdir}/openoffice/program/setup
-%attr(755,root,root) %{_libdir}/openoffice/program/setup.bin
-%attr(755,root,root) %{_libdir}/openoffice/program/sfax
-%attr(755,root,root) %{_libdir}/openoffice/program/simpress
-%attr(755,root,root) %{_libdir}/openoffice/program/slabel
-%attr(755,root,root) %{_libdir}/openoffice/program/sletter
-%attr(755,root,root) %{_libdir}/openoffice/program/smaster
-%attr(755,root,root) %{_libdir}/openoffice/program/smath
-%attr(755,root,root) %{_libdir}/openoffice/program/smemo
-%attr(755,root,root) %{_libdir}/openoffice/program/soffice
-%attr(755,root,root) %{_libdir}/openoffice/program/soffice.bin
-%attr(755,root,root) %{_libdir}/openoffice/program/sopatchlevel.sh
-%attr(755,root,root) %{_libdir}/openoffice/program/spadmin
-%attr(755,root,root) %{_libdir}/openoffice/program/spadmin.bin
-%attr(755,root,root) %{_libdir}/openoffice/program/svcard
-%attr(755,root,root) %{_libdir}/openoffice/program/sweb
-%attr(755,root,root) %{_libdir}/openoffice/program/swriter
-
-%attr(755,root,root) %{_libdir}/openoffice/program/filter/*.so
-%attr(644,root,root) %{_libdir}/openoffice/program/addin/source
 %attr(644,root,root) %{_libdir}/openoffice/program/resource/*
-
+%attr(644,root,root) %{_libdir}/openoffice/program/addin/source
 %attr(644,root,root) %{_libdir}/openoffice/program/component.reg
-%attr(755,root,root) %{_libdir}/openoffice/program/components/*.so
 %attr(644,root,root) %{_libdir}/openoffice/program/components/*.xpt
 %attr(644,root,root) %{_libdir}/openoffice/program/components/*.dat
 
@@ -689,3 +521,27 @@ rm -rf $RPM_BUILD_ROOT
 %{_libdir}/openoffice/help
 %{_libdir}/openoffice/share
 %{_libdir}/openoffice/user
+
+# Programs
+%attr(755,root,root) %{_bindir}/*
+
+%attr(755,root,root) %{_libdir}/openoffice/setup
+%attr(755,root,root) %{_libdir}/openoffice/spadmin
+
+%attr(755,root,root) %{_libdir}/openoffice/program/*.bin
+%attr(755,root,root) %{_libdir}/openoffice/program/fromtemplate
+%attr(755,root,root) %{_libdir}/openoffice/program/gnomeint
+%attr(755,root,root) %{_libdir}/openoffice/program/javaldx
+%attr(755,root,root) %{_libdir}/openoffice/program/jvmsetup
+%attr(755,root,root) %{_libdir}/openoffice/program/nswrapper
+%attr(755,root,root) %{_libdir}/openoffice/program/setup
+%attr(755,root,root) %{_libdir}/openoffice/program/soffice
+%attr(755,root,root) %{_libdir}/openoffice/program/sopatchlevel.sh
+%attr(755,root,root) %{_libdir}/openoffice/program/spadmin
+
+%files libs
+%defattr(644,root,root,755)
+%attr(755,root,root) %{_libdir}/openoffice/program/filter/*.so
+%attr(755,root,root) %{_libdir}/openoffice/program/components/*.so
+%attr(755,root,root) %{_libdir}/openoffice/program/*.so
+%attr(755,root,root) %{_libdir}/openoffice/program/*.so.*
