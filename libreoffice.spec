@@ -30,6 +30,7 @@ Patch5:		%{name}-system-freetype.patch
 Patch6:		%{name}-system-getopt.patch
 Patch7:		%{name}-freetype-2.1.patch
 Patch8:		%{name}-braindamage.patch
+Patch9:		%{name}-clockspersec.patch
 URL:		http://www.openoffice.org/
 BuildRequires:	STLport-static
 BuildRequires:	XFree86-devel
@@ -100,6 +101,7 @@ Do zalet OpenOffice.org mo¿na zaliczyæ:
 %patch6 -p1
 %patch7 -p1
 %patch8 -p1
+%patch9 -p1
 
 
 install %{SOURCE1} external
