@@ -108,8 +108,7 @@ BuildRequires:	db-cxx-devel
 BuildRequires:	db-devel
 BuildRequires:	/usr/bin/getopt
 %if %{with vfs}
-BuildRequires:	glib2-devel
-BuildRequires:	gnome-vfs2
+BuildRequires:	gnome-vfs2-devel
 %endif
 %if %{with java}
 BuildRequires:	db-java >= 4.2.52-4
