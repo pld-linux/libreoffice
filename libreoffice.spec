@@ -5,15 +5,17 @@
 #	  which one should be used
 #	- cleanups, cleanups and cleanups
 # 	- incorporate ximian patches (mostly done)
-#	- incorporate gnome OOo artwork (icons & more)
-#	- copy & paste problem in oocalc
+#	- copy & paste problem in oocalc (not verified)
 
 %bcond_with java		# java support
 %bcond_without fontconf		# fontconfig
+%bcond_without icons		# new Ximian icons
+%bcond_without gnomevfs		# gnome-vfs
 %bcond_with parallel 		# parallel building
+
+# not tested
 %bcond_with gnomecups		# gnome-cups
-%bcond_with gnomevfs		# gnome-vfs
-%bcond_with icons		# icons bits...
+%bcond_with i18n 		# i18n bits
 
 %define		ver		1.1.0
 %define		rel		%{nil}
@@ -82,6 +84,8 @@ Source304:	%{name}-create-instdb.pl
 
 Source401:	%{name}-about.bmp
 Source402:	%{name}-intro.bmp
+
+Source411:	%{name}-scale-icons
 
 #Patch0:		%{name}-gcc.patch
 #Patch2:		%{name}-mozilla.patch
@@ -181,6 +185,7 @@ Patch227: openoffice-fix-parallel-build.patch
 Patch228: openoffice-thread-yield.patch
 Patch229: openoffice-prelink-friendly.patch
 Patch230: openoffice-svtools-dep.patch
+Patch231: openoffice-crashrep-nogtk.patch
 
 Patch301: openoffice-splash.patch
 
@@ -291,17 +296,21 @@ BuildRequires:	zlib-static
 # more and more...
 BuildRequires:	pkgconfig
 BuildRequires:	startup-notification-devel
+BuildRequires:  libart_lgpl-devel
 %if %{with gnomevfs} 
 BuildRequires:	gnome-vfs2-devel
 %endif 
 %if %{with gnomecups}
 BuildRequires:	libgnomecups-devel
+BuildRequires:	cups-devel
 %endif
+BuildRequires:  ImageMagick
 Requires:	%{name}-libs = %{epoch}:%{version}-%{release}
 Requires:	%{name}-i18n-en = %{epoch}:%{version}-%{release}
 Requires:	%{name}-dict-en
 Requires:	libstdc++ >= 3.2.1
 Requires:	db
+Requires:	db-cxx
 Requires:	startup-notification
 #Suggested:	chkfontpath
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
@@ -958,14 +967,17 @@ rm -f moz/prj/d.lst
 %patch228 -p0
 %patch229 -p1 
 %patch230 -p0
+%patch231 -p0 
 
 %patch301 -p1 
 
 # i18n support (?)
-#%patch341 -p0 
-#%patch342 -p0
-#%patch343 -p0 
-#%patch344 -p0 
+%if %{with i18}
+%patch341 -p0 
+%patch342 -p0
+%patch343 -p0 
+%patch344 -p0 
+%endif 
 
 %if %{with gnomecups}
 %patch351 -p0
@@ -1060,11 +1072,11 @@ cp -f offmgr/source/offapp/intro/ooo.src offmgr/source/offapp/intro/iso.src
 # repack SOURCE12 
 tar xvzf %{SOURCE12}
 %if %{with icons}
-cd ooo-icons-OOO_1_1-6
-tar cf - . | ( cd .. ; tar xvf - )
-cd ..
-rm -rf ooo-icons-OOO_1_1-6
-%endif
+install %{SOURCE411} scale-icons
+chmod a+x scale-icons
+./scale-icons `pwd`
+cp -Rvf ooo-icons-OOO_1_1-6/* .
+%endif 
 
 # optimalization
 cd solenv/inc
@@ -1141,10 +1153,11 @@ rm -rf $RPM_BUILD_ROOT
 
 OOBUILDDIR=`pwd`
 
-%if %{without java}
-LD_LIBRARY_PATH="$OOBUILDDIR/solver/%{subver}/%{_archbuilddir}/lib/"
-export LD_LIBRARY_PATH
-%endif 
+# ugly hack, already fixed
+#%if %{without java}
+#LD_LIBRARY_PATH="$OOBUILDDIR/solver/%{subver}/%{_archbuilddir}/lib/"
+#export LD_LIBRARY_PATH
+#%endif 
 
 install -d $RPM_BUILD_ROOT%{oolib}
 
@@ -1294,9 +1307,10 @@ do
 done
 cd $OOBUILDDIR
 
-%if %{without java}
-install solver/%{subver}/%{_archbuilddir}/lib/libj%{subver}* $RPM_BUILD_ROOT%{oolib}/program/
-%endif
+# ugly hack, already fixed
+#%if %{without java}
+#install solver/%{subver}/%{_archbuilddir}/lib/libj%{subver}* $RPM_BUILD_ROOT%{oolib}/program/
+#%endif
 
 cp -af $RPM_BUILD_ROOT%{oolib}/help/zh_CN/* $RPM_BUILD_ROOT%{oolib}/help/zh-CN
 cp -af $RPM_BUILD_ROOT%{oolib}/help/zh_TW/* $RPM_BUILD_ROOT%{oolib}/help/zh-TW
