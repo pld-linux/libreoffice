@@ -128,6 +128,8 @@ ExclusiveArch:	%{ix86} sparc ppc
 #Suggested:	chkfontpath
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
+%define		_javalibdir	/usr/share/java
+
 %description
 OpenOffice.org is an open-source project sponsored by Sun Microsystems
 and hosted by CollabNet. In October of 2000, Sun released the source
@@ -898,11 +900,12 @@ CC="%{__cc}"
 CXX="%{__cxx}"
 GCJ=gcj
 JAVA_HOME="/usr/lib/java"
+DB_JAR="%{_javalibdir}/db.jar"
 ENVCFLAGS="%{rpmcflags}"
 ENVCFLAGSCXX="%{rpmcflags}"
 DESTDIR=$RPM_BUILD_ROOT
 IGNORE_MANIFEST_CHANGES=1
-export JAVA_HOME CC CXX GCJ ENVCFLAGS ENVCFLAGSCXX DESTDIR IGNORE_MANIFEST_CHANGES
+export JAVA_HOME DB_JAR CC CXX GCJ ENVCFLAGS ENVCFLAGSCXX DESTDIR IGNORE_MANIFEST_CHANGES
 
 if [ -z "$RPM_BUILD_NCPUS" ] ; then
 	if [ -x /usr/bin/getconf ] ; then
