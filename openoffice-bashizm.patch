@@ -25,3 +25,15 @@ diff -u -u -r1.87 -r1.88
  
  	    # import the updated OO.o environment
  	    if test "z$DISTRO" = "zWin32"; then
+diff -u -u -r1.30 -r1.31
+--- openoffice/bin/package-ooo	6 Jul 2004 13:37:53 -0000	1.30
++++ openoffice/bin/package-ooo	7 Jul 2004 23:24:25 -0000	1.31
+@@ -155,7 +155,7 @@
+ echo "Done";
+ 
+ # install vcl module for more widget sets if needed
+-if test "${OOO_WIDGET_SETS/*,*/comma}" = "comma" ; then
++if (echo "${OOO_WIDGET_SETS}" | grep -q ",") ; then
+     IFS_saved="$IFS"
+     IFS=","
+     for widgetset in ${OOO_WIDGET_SETS} ; do
