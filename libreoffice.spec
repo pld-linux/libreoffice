@@ -16,6 +16,7 @@ Epoch:		1
 License:	GPL/LGPL
 Group:		X11/Applications
 Source0:	ftp://ftp1.openoffice.pl/pub/OpenOffice.ORG/stable/%{version}/OOo_%{version}_source.tar.bz2
+# Source0-md5:	c1d9a96fa644968a76f9b4fbd3f18cf2
 Source1:	ftp://ftp.cs.man.ac.uk/pub/toby/gpc/gpc231.tar.Z
 Source2:	%{name}-rsfile.txt
 Source3:	%{name}-rsfile-local.txt
