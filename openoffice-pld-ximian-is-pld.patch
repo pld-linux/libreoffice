@@ -1,0 +1,25 @@
+diff -urN ooo-build-1.1.53.org/patches/OOO_1_1/ximian-splash.diff ooo-build-1.1.53/patches/OOO_1_1/ximian-splash.diff
+--- ooo-build-1.1.53.org/patches/OOO_1_1/ximian-splash.diff	2004-04-29 16:54:35.932614800 +0200
++++ ooo-build-1.1.53/patches/OOO_1_1/ximian-splash.diff	2004-04-29 16:55:27.929710040 +0200
+@@ -12,10 +12,10 @@
+ -#ifdef BUILD_SPECIAL
+ -#define OOO_VENDOR "Sun Microsystems Inc."
+ +#if 1
+-+#define OOO_VENDOR "Novell, Inc."
+++#define OOO_VENDOR "PLD Linux"
+  #define OOO_LICENSE "LGPL"
+ -#define OOO_INTRO "openintro_sun.bmp"
+-+#define OOO_INTRO "openintro_ximian.bmp"
+++#define OOO_INTRO "openintro_pld.bmp"
+  #else
+  //#define OOO_VENDOR "my company"
+  #define OOO_LICENSE "LGPL"
+@@ -24,7 +24,7 @@
+  Bitmap RID_DEFAULT_ABOUT_BMP_LOGO
+  {
+ -	File = "openabout.bmp" ;
+-+	File = "openabout_ximian.bmp" ;
+++	File = "openabout_pld.bmp" ;
+  };
+  
+  Bitmap RID_DEFAULTINTRO
