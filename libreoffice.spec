@@ -1158,13 +1158,13 @@ fontpostinst TTF %{_fontsdir}/%{name}
 rm -f %{_libdir}/%{name}/program/libvcl%{subver}li.so
 
 %post libs-kde
-ln -s libvcl%{subver}li-kde.so %{_libdir}/%{name}/program/libvcl%{subver}li.so
+ln -sf libvcl%{subver}li-kde.so %{_libdir}/%{name}/program/libvcl%{subver}li.so
 
 %preun libs-gtk
 rm -f %{_libdir}/%{name}/program/libvcl%{subver}li.so
 
 %post libs-gtk
-ln -s libvcl%{subver}li-gtk.so %{_libdir}/%{name}/program/libvcl%{subver}li.so
+ln -sf libvcl%{subver}li-gtk.so %{_libdir}/%{name}/program/libvcl%{subver}li.so
 
 %files
 %defattr(644,root,root,755)
