@@ -748,17 +748,30 @@ rm -f *.zip
 #
 # Extract language packs
 #
-(
-    cd %{installpath}
+OLDPATH="`pwd`"
+NEWPATH="$OLDPATH/%{installpath}"
+cd $NEWPATH
+
     install -m 755 %{SOURCE302} oo_dpack_lang
     install -m 755 %{SOURCE303} oo_fixup_help
     install -m 755 %{SOURCE304} oo_gen_instdb
-    
+
     LANGS=`echo "%{languages}" | sed -e "s/,/ /g"`
     for res in $LANGS
     do
+	# don't make it for CAT, CZECH, FINN, SLOVAK
+	case $res in
+	CAT|CZECH|FINN|SLOVAK)
+	    continue
+	    ;;
+	*)
+	    ;;
+	esac	
+    
+	cd $NEWPATH
 	prefix=`cat %{SOURCE9} | grep ":$res:" | cut -d: -f1`
 	isocode=`cat %{SOURCE9} | grep ":$res:" | cut -d: -f2`
+	
 	tempdir=$RPM_BUILD_ROOT%{oolib}-$isocode
 	mkdir -p $tempdir
 
@@ -800,13 +813,12 @@ rm -f *.zip
 	esac
 
 	# link ooo resource files to iso files
-	(
-	    cd $tempdir/program/resource
+	cd $tempdir/program/resource
             file1=`echo ooo*.res`
 	    file2=`echo $file1 | sed "s|ooo|iso|"`
 	    ln -sf $file1 $file2
-	)
-
+		
+	cd $NEWPATH
 	# generate localized instdb.ins files, aka let the right files to
 	# be installed for a user installation
 	if [ "$isocode" != "en" ]; then
@@ -839,7 +851,7 @@ rm -f *.zip
 	HOWMUCH=`ls $RPM_BUILD_ROOT%{oolib}/help/$isocode 2>/dev/null | wc -l`
 	if [ $HOWMUCH -eq 0 ]; then rm -rf $RPM_BUILD_ROOT%{oolib}/help/$isocode; fi
     done
-)
+cd "$OLDPATH"
 
 mv $RPM_BUILD_ROOT%{oolib}/help/{zh-CN,zh_CN}
 mv $RPM_BUILD_ROOT%{oolib}/help/{zh-TW,zh_TW}
