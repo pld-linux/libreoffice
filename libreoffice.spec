@@ -230,7 +230,7 @@ Pakiet biurowy OpenOffice.org - biblioteki.
 Summary:	OpenOffice.org - interface in Arabic language
 Summary(pl):	OpenOffice.org - interfejs w jêzyku arabskim
 Group:		Applications/Office
-Requires:	openoffice
+Requires:	%{name}
 
 %description i18n-ar
 This package provides resources containing menus and dialogs in
@@ -244,7 +244,7 @@ arabskim.
 Summary:	OpenOffice.org - interface in Catalan language
 Summary(pl):	OpenOffice.org - interfejs w jêzyku kataloñskim
 Group:		Applications/Office
-Requires:	openoffice
+Requires:	%{name}
 
 %description i18n-ca
 This package provides resources containing menus and dialogs in
@@ -258,7 +258,7 @@ kataloñskim.
 Summary:	OpenOffice.org - interface in Czech language
 Summary(pl):	OpenOffice.org - interfejs w jêzyku czeskim
 Group:		Applications/Office
-Requires:	openoffice
+Requires:	%{name}
 
 %description i18n-cs
 This package provides resources containing menus and dialogs in
@@ -272,7 +272,7 @@ czeskim.
 Summary:	OpenOffice.org - interface in Danish language
 Summary(pl):	OpenOffice.org - interfejs w jêzyku duñskim
 Group:		Applications/Office
-Requires:	openoffice
+Requires:	%{name}
 
 %description i18n-da
 This package provides resources containing menus and dialogs in
@@ -286,7 +286,7 @@ duñskim.
 Summary:	OpenOffice.org - interface in German language
 Summary(pl):	OpenOffice.org - interfejs w jêzyku niemieckim
 Group:		Applications/Office
-Requires:	openoffice
+Requires:	%{name}
 
 %description i18n-de
 This package provides resources containing menus and dialogs in
@@ -300,7 +300,7 @@ niemieckim.
 Summary:	OpenOffice.org - interface in Greek language
 Summary(pl):	OpenOffice.org - interfejs w jêzyku greckim
 Group:		Applications/Office
-Requires:	openoffice
+Requires:	%{name}
 
 %description i18n-el
 This package provides resources containing menus and dialogs in
@@ -314,7 +314,7 @@ greckim.
 Summary:	OpenOffice.org - interface in English language
 Summary(pl):	OpenOffice.org - interfejs w jêzyku angielskim
 Group:		Applications/Office
-Requires:	openoffice
+Requires:	%{name}
 
 %description i18n-en
 This package provides resources containing menus and dialogs in
@@ -328,7 +328,7 @@ angielskim.
 Summary:	OpenOffice.org - interface in Spanish language
 Summary(pl):	OpenOffice.org - interfejs w jêzyku hiszpañskim
 Group:		Applications/Office
-Requires:	openoffice
+Requires:	%{name}
 
 %description i18n-es
 This package provides resources containing menus and dialogs in
@@ -342,7 +342,7 @@ hiszpañskim.
 Summary:	OpenOffice.org - interface in English language
 Summary(pl):	OpenOffice.org - interfejs w jêzyku angielskim
 Group:		Applications/Office
-Requires:	openoffice
+Requires:	%{name}
 
 %description i18n-fi
 This package provides resources containing menus and dialogs in
@@ -356,7 +356,7 @@ fiñskim.
 Summary:	OpenOffice.org - interface in French language
 Summary(pl):	OpenOffice.org - interfejs w jêzyku francuskim
 Group:		Applications/Office
-Requires:	openoffice
+Requires:	%{name}
 
 %description i18n-fr
 This package provides resources containing menus and dialogs in
@@ -370,7 +370,7 @@ francuskim.
 Summary:	OpenOffice.org - interface in Italian language
 Summary(pl):	OpenOffice.org - interfejs w jêzyku w³oskim
 Group:		Applications/Office
-Requires:	openoffice
+Requires:	%{name}
 
 %description i18n-it
 This package provides resources containing menus and dialogs in
@@ -384,7 +384,7 @@ w³oskim.
 Summary:	OpenOffice.org - interface in Japan language
 Summary(pl):	OpenOffice.org - interfejs w jêzyku japoñskim
 Group:		Applications/Office
-Requires:	openoffice
+Requires:	%{name}
 
 %description i18n-ja
 This package provides resources containing menus and dialogs in
@@ -398,7 +398,7 @@ japoñskim.
 Summary:	OpenOffice.org - interface in Korean language
 Summary(pl):	OpenOffice.org - interfejs w jêzyku koreañskim
 Group:		Applications/Office
-Requires:	openoffice
+Requires:	%{name}
 
 %description i18n-ko
 This package provides resources containing menus and dialogs in
@@ -412,7 +412,7 @@ koreañskim.
 Summary:	OpenOffice.org - interface in Dutch language
 Summary(pl):	OpenOffice.org - interfejs w jêzyku holenderskim
 Group:		Applications/Office
-Requires:	openoffice
+Requires:	%{name}
 
 %description i18n-nl
 This package provides resources containing menus and dialogs in
@@ -426,7 +426,7 @@ holenderskim.
 Summary:	OpenOffice.org - interface in Polish language
 Summary(pl):	OpenOffice.org - interfejs w jêzyku polskim
 Group:		Applications/Office
-Requires:	openoffice
+Requires:	%{name}
 
 %description i18n-pl
 This package provides resources containing menus and dialogs in
@@ -440,7 +440,7 @@ polskim.
 Summary:	OpenOffice.org - interface in Portuguese language
 Summary(pl):	OpenOffice.org - interfejs w jêzyku portugalskim
 Group:		Applications/Office
-Requires:	openoffice
+Requires:	%{name}
 
 %description i18n-pt
 This package provides resources containing menus and dialogs in
@@ -454,7 +454,7 @@ portugalskim.
 Summary:	OpenOffice.org - interface in Russian language
 Summary(pl):	OpenOffice.org - interfejs w jêzyku rosyjskim
 Group:		Applications/Office
-Requires:	openoffice
+Requires:	%{name}
 
 %description i18n-ru
 This package provides resources containing menus and dialogs in
@@ -468,7 +468,7 @@ rosyjskim.
 Summary:	OpenOffice.org - interface in Swedish language
 Summary(pl):	OpenOffice.org - interfejs w jêzyku szwedzkim
 Group:		Applications/Office
-Requires:	openoffice
+Requires:	%{name}
 
 %description i18n-sv
 This package provides resources containing menus and dialogs in
@@ -482,7 +482,7 @@ szwedzkim.
 Summary:	OpenOffice.org - interface in Turkish language
 Summary(pl):	OpenOffice.org - interfejs w jêzyku tureckim
 Group:		Applications/Office
-Requires:	openoffice
+Requires:	%{name}
 
 %description i18n-tr
 This package provides resources containing menus and dialogs in
@@ -496,7 +496,7 @@ tureckim.
 Summary:	OpenOffice.org - interface in Chinese language for China
 Summary(pl):	OpenOffice.org - interfejs w jêzyku chiñskim dla Chin
 Group:		Applications/Office
-Requires:	openoffice
+Requires:	%{name}
 
 %description i18n-zh_CN
 This package provides resources containing menus and dialogs in
@@ -510,7 +510,7 @@ chiñskim dla Chin.
 Summary:	OpenOffice.org - interface in Chinese language for Taiwan
 Summary(pl):	OpenOffice.org - interfejs w jêzyku chiñskim dla Tajwanu
 Group:		Applications/Office
-Requires:	openoffice
+Requires:	%{name}
 
 %description i18n-zh_TW
 This package provides resources containing menus and dialogs in
