@@ -154,9 +154,9 @@ diff -Nur oo/xmlhelp/source/cxxhelp/provider/urlparameter.cxx oo.new/xmlhelp/sou
 -BERKELEYCPPLIB=-ldb_cxx-3.2
 +BERKELEYLIB=-ldb-4.1
 +BERKELEYCPPLIB=-ldb_cxx-4.1
+ CURLLIB=-lcurl
  SFX2LIB=-lsfx$(UPD)$(DLLPOSTFIX)
  SFXLIB=-lsfx$(UPD)$(DLLPOSTFIX)
- SFXDEBUGLIB=
 --- oo_1.0_src/berkeleydb/prj/d.lst.systemdb	Fri May 31 17:38:58 2002
 +++ oo_1.0_src/berkeleydb/prj/d.lst	Fri May 31 17:42:14 2002
 @@ -1,18 +1,20 @@
