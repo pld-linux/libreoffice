@@ -135,7 +135,9 @@ Patch64:	%{name}-crashrepgtk.patch
 Patch65:	%{name}-java-ppc.patch 
 
 # sparc fixes
-Patch66:	%{name}-sparc.patch
+Patch66:	%{name}-sparc-aurora.patch
+Patch67:	%{name}-sparc-boost.patch
+Patch68:	%{name}-sparc-assembler.patch
 
 # Hey, we _really_ want java?
 Patch101:	%{name}-allow-no-jdk.patch
@@ -931,9 +933,13 @@ rm -f moz/prj/d.lst
 %patch65 -p1 
 %endif 
 
+%ifarch sparc sparc64
+%patch67
+%patch68
+%endif
+
 # no-java patch
 %if %{without java}
-# try build on sparc...
 %ifarch sparc sparc64
 %patch66
 %endif 
