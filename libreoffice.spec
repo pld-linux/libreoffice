@@ -971,12 +971,13 @@ if [ "$RPM_BUILD_NCPUS" -gt 1 ]; then
 	while [ "$doit" -eq 1 ]; do
 		echo "Waiting one more time..."
 		FCH=$(nice -n 20 find . -type f ! -mmin +3 -print 2> /dev/null | wc -l)
-		[ "$FCH" -eq 0 ] && doit=0 || /bin/true
+		[ "$FCH" -eq 0 ] && doit=0 || :
 	done
 fi
 
 # gtk version
 cd build/OOO_%{dfullver}/
+chmod -R u+rwX vcl
 cp -af vcl vcl.kde
 sed -i -e "s#\(.*WITH_WIDGETSET.*\)\".*\"\(.*\)#\1\"gtk\"\2#g" LinuxIntelEnv.Set*
 sed -i -e "s#\(.*WIDGETSET_CFLAGS.*\)\".*\"\(.*\)#\1\"`pkg-config --cflags gtk+-2.0 gdk-pixbuf-xlib-2.0` -DWIDGETSET_GTK\"\2#g" Linux*Env.Set*
