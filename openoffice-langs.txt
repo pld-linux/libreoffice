@@ -9,6 +9,7 @@
 37:ca:CAT:Catalan:catalan:cat
 39:it:ITAL:Italian:italian:ita
 42:cs:CZECH:Czech:czech:cze
+43:sk:SLOVAK:Slovak:slovak:slk
 45:da:DAN:Danish:danish:dan
 46:sv:SWED:Swedish:swedish:swe
 48:pl:POL:Polish:polish:pol
