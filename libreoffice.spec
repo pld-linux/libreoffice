@@ -305,6 +305,7 @@ BuildRequires:	zlib-devel
 BuildRequires:  pkgconfig
 BuildRequires:  startup-notification-devel
 BuildRequires:  libart_lgpl-devel
+BuildRequires:	libgnomecups-devel
 %if %{with kde}
 BuildRequires:	qt-devel
 BuildRequires:	kdelibs-devel
@@ -312,7 +313,6 @@ BuildRequires:	kdelibs-devel
 BuildRequires:	gtk+2-devel
 BuildRequires:	gnome-vfs2-devel
 BuildRequires:  libbonobo-devel
-BuildRequires:	libgnomecups-devel
 %endif
 BuildConflicts:	java-sun = 1.4.2
 Requires:	%{name}-libs = %{epoch}:%{version}-%{release}
