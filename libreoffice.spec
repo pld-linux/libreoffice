@@ -115,8 +115,8 @@ Patch27:	%{name}-sj2-java.patch
 Patch29:	%{name}-gcc2-95.patch
 Patch30:	%{name}-system-zlib.patch
 Patch31:	%{name}-system-mozilla.patch
-
 Patch32:	%{name}-fix-errno.patch
+Patch33:	%{name}-setup-localized-instdb.patch
 
 URL:		http://www.openoffice.org/
 %if %{?_with_ra:0}%{!?_with_ra:1}
@@ -717,6 +717,7 @@ office productivity suite.  This package provides spell checker dictionaries.
 rm -f moz/prj/d.lst
 %patch31 -p1
 %patch32 -p1
+%patch33 -p1
 
 # gcc 2 include error hack:
 rm -rf autodoc/source/inc/utility
@@ -1105,6 +1106,11 @@ FindI18N() {
 	fi	
     done
 
+    if [ -f $RPM_BUILD_ROOT/%{_libdir}/openoffice/program/instdb.ins.$1 ]
+    then
+	echo "%lang($1) %{_libdir}/openoffice/program/instdb.ins.$1" >> "i18n-$1"
+    fi
+
     unzip -l solver/%{subver}/%{_archbuilddir}/pck/palletes$3.zip | sed "s/.* //" | awk '(flag==1)&&/----/{exit};(flag==1){print;};/----/{flag=1};' >> "i18n-$1"
 }
 
@@ -1183,17 +1189,6 @@ FindDict sk slovak sk_SK
 FindDict sl slovenian sl_SI
 FindDict sv swedish sv_SE
 FindDict uk ukrainian uk_UA
-
-%post
-
-# Fixup user language to the system set
-lang=$(echo "$LC_MESSAGES" | sed -n "s/\([a-z]*_[A-Z]*\).*/\1/p")
-if [ -n "$lang" -a -e "%{_libdir}/openoffice/help/${lang%%%%_*}" ]; then
-  for item in Linguistic_General_Default_Locale User_User_Language; do
-    perl -pi -e "/^ConfigurationItem gid_Configurationitem_${item}/ .. /^End/ and s|en-US|${lang/_/-}|" \
-      %{_libdir}/openoffice/program/instdb.ins
-  done
-fi
 
 ####################
 ## CLEAN
