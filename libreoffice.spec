@@ -214,20 +214,6 @@ OpenOffice.org productivity suite - GTK Interface.
 %description libs-gtk -l pl
 Pakiet biurowy OpenOffice.org - Interfejs GTK.
 
-%package mimelinks
-Summary:	OpenOffice.org mimelinks
-Summary(pl):	Dowi±zania MIME dla OpenOffice.org
-Group:		X11/Applications
-Requires:	%{name} = %{epoch}:%{version}-%{release}
-Requires:	kdelibs
-Conflicts:	kdelibs >= 9:3.1.9
-
-%description mimelinks
-OpenOffice.org mimelinks for KDE versions <= 3.1.5.
-
-%description mimelinks -l pl
-Dowi±zania MIME OpenOffice.org dla wersji KDE <= 3.1.5.
-
 %package i18n-af-gtk
 Summary:	OpenOffice.org - interface in Afrikaans language
 Summary(pl):	OpenOffice.org - interfejs w jêzyku afrykanerskim
@@ -2228,7 +2214,3 @@ fontpostinst TTF %{_fontsdir}/%{name}
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_libdir}/%{name}/program/libvclplug_gtk*.so
 %dir %{_libdir}/%{name}/program/resource.gnome
-
-%files mimelinks
-%defattr(644,root,root,755)
-%{_datadir}/mimelnk/application/*
