@@ -39,6 +39,9 @@ Source10:	%{name}-db3.jar
 Source11:	%{name}-dictionary.lst.readme
 # Source11-md5:	e4c1c2844b4a4cebca33339538da7f1d
 
+#Source12:	http://ooo.ximian.com/packages/ooo-icons-OOO_1_1-6.tar.gz
+# Source12-md5:	3f73b262e35011e42d0b4fbfa46c34cd
+
 %define		helpftp	ftp://openoffice.tu-bs.de/OpenOffice.org/contrib/helpcontent
 Source101:	%{helpftp}/helpcontent_01_unix.tgz
 # Source101-md5:	ff3eb5095a74ae7a9b2918ef5874288f
@@ -818,6 +821,8 @@ chiñskim dla Tajwanu.
 
 %prep
 %setup -q -n oo_1.1_src
+#%setup1 -q -n oo_1.1_src
+
 #%patch0 -p1
 #%patch2 -p1
 
@@ -916,7 +921,7 @@ rm -f moz/prj/d.lst
 # gui 
 %patch361 -p0 
 %patch362 -p0
-%patch363 -p0 
+#%patch363 -p0 
 %patch364 -p0 
 
 # fonts
