@@ -29,8 +29,8 @@ Epoch:		1
 License:	GPL/LGPL
 Group:		X11/Applications
 #Source0:	http://ooo.ximian.com/packages/OOO_%{dfullver}/ooo-build-%{ooobver}.tar.gz
-Source0:	http://ooo.ximian.com/packages/snap/ooo-build-%{ooobver}-HEAD-20040716.tar.gz
-# Source0-md5:	54e7a91fe1a4d07711fa5521e5f127d1
+Source0:	http://ooo.ximian.com/packages/snap/ooo-build-%{ooobver}-HEAD-20040722.tar.gz
+# Source0-md5:	fe33e6930ff41f956438c47ecb84612e
 Source1:	http://ooo.ximian.com/packages/OOO_%{dfullver}/OOO_%{dfullver}.tar.bz2
 # Source1-md5:	627fbce603598a74f9be03f5a1da6d94
 Source2:	http://ooo.ximian.com/packages/ooo-icons-OOO_1_1-9.tar.gz
@@ -72,13 +72,13 @@ Source410:	%{cftp}/helpcontent/helpcontent_88_unix.tgz
 # Source410-md5:	3b00571318e45965dee0545d86306d65
 
 Patch0:		%{name}-rh-disable-spellcheck-all-langs.patch
-Patch1:		%{name}-curl.patch
+Patch1:		%{name}-shared-xinerama.patch
 
 URL:		http://www.openoffice.org/
 BuildRequires:	ImageMagick
 BuildRequires:	STLport-devel >= 4.5.3-6
 BuildRequires:	XFree86-devel
-BuildRequires:	XFree86-static
+#BuildRequires:	XFree86-static
 BuildRequires:	autoconf
 BuildRequires:	automake
 BuildRequires:	bison >= 1.875-4
@@ -98,7 +98,7 @@ BuildRequires:	flex
 BuildRequires:	fontconfig-devel >= 1.0.1
 BuildRequires:	freetype-devel >= 2.1
 BuildRequires:	libart_lgpl-devel
-BuildRequires:	libstdc++-devel >= 3.2.1
+BuildRequires:	libstdc++-devel >= 5:3.2.1
 BuildRequires:	nas-devel
 BuildRequires:	pam-devel
 BuildRequires:	perl-base
@@ -121,7 +121,7 @@ Requires:	%{name}-i18n-en = %{epoch}:%{version}-%{release}
 Requires:	cups-lib
 Requires:	db
 Requires:	db-cxx
-Requires:	libstdc++ >= 3.2.1
+Requires:	libstdc++ >= 5:3.2.1
 Requires:	startup-notification
 ExclusiveArch:	%{ix86} sparc ppc
 #Suggested:	chkfontpath
