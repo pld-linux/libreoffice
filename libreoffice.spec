@@ -28,8 +28,8 @@ Epoch:		1
 License:	GPL/LGPL
 Group:		X11/Applications
 #Source0:	http://ooo.ximian.com/packages/OOO_%{dfullver}/ooo-build-%{ooobver}.tar.gz
-Source0:	http://ooo.ximian.com/packages/snap/ooo-build-%{ooobver}-HEAD-20040722.tar.gz
-# Source0-md5:	fe33e6930ff41f956438c47ecb84612e
+Source0:	http://ooo.ximian.com/packages/snap/ooo-build-%{ooobver}-HEAD-20040724.tar.gz
+# Source0-md5:	93bd486b8d17e8ab810542543830fc55
 Source1:	http://ooo.ximian.com/packages/OOO_%{dfullver}/OOO_%{dfullver}.tar.bz2
 # Source1-md5:	627fbce603598a74f9be03f5a1da6d94
 Source2:	http://ooo.ximian.com/packages/ooo-icons-OOO_1_1-9.tar.gz
@@ -76,6 +76,8 @@ Source412:	%{cftp}/helpcontent/helpcontent_90_unix.tgz
 
 Patch0:		%{name}-rh-disable-spellcheck-all-langs.patch
 Patch1:		%{name}-shared-xinerama.patch
+Patch2:		%{name}-build.patch
+Patch3:		%{name}-files.patch
 
 URL:		http://www.openoffice.org/
 BuildRequires:	ImageMagick
@@ -967,13 +969,19 @@ zuluskim.
 %setup -q -n ooo-build-%{ooobver}
 %patch0 -p1
 %patch1 -p1
+%patch2 -p1
+%patch3 -p1
 
+# is long name correct?
 echo '55:pt-BR:portuguese_brazilian' >> bin/openoffice-xlate-lang
 
 install -d src
-ln -s %{SOURCE1} src/
-ln -s %{SOURCE2} src/
-ln -s %{SOURCE3} src/
+# sources, icons, KDE_icons
+ln -sf %{SOURCE1} %{SOURCE2} %{SOURCE3} src
+# help files
+ln -sf %{SOURCE400} %{SOURCE401} %{SOURCE402} %{SOURCE403} %{SOURCE404} \
+	%{SOURCE405} %{SOURCE406} %{SOURCE407} %{SOURCE408} %{SOURCE409} \
+	%{SOURCE410} %{SOURCE411} %{SOURCE412} src
 
 # we keep these in ooo-build repository
 #ln -s %{SOURCE20} src/openabout_pld.bmp
@@ -1092,26 +1100,6 @@ TEMP="%{tmpdir}"; export TEMP
 %{__make} install \
 	DESTDIR=$RPM_BUILD_ROOT
 
-install -d helptmp && cd helptmp || exit 1
-for file in \
-	%{SOURCE400} %{SOURCE401} %{SOURCE402} %{SOURCE403} %{SOURCE404} %{SOURCE405} \
-	%{SOURCE406} %{SOURCE407} %{SOURCE408} %{SOURCE409} %{SOURCE410} %{SOURCE411} \
-	%{SOURCE412}; do
-		rm -rf *.*
-		nr=$(echo "$file" | sed -e 's#.*_\(.*\)_.*#\1#g')
-		lang=$(../bin/openoffice-xlate-lang -i "$nr")
-		if [ -z "$lang" ]; then
-			echo "Languge not found for [$file]"
-			exit 1
-		fi
-		tar zxf "${file}"
-		for ifile in s*.zip; do
-			install -d $RPM_BUILD_ROOT%{_libdir}/%{name}/help/${lang}
-			unzip -q -d $RPM_BUILD_ROOT%{_libdir}/%{name}/help/${lang} -o "$ifile"
-		done
-done
-cd ..
-
 install -d $RPM_BUILD_ROOT%{_sysconfdir}/%{name}
 sed -e 's#DESTINATIONPATH=.*#DESTINATIONPATH=<home>/.openoffice#g' etc/redhat-autoresponse.conf > $RPM_BUILD_ROOT%{_sysconfdir}/%{name}/autoresponse.conf
 
@@ -1144,7 +1132,7 @@ rm -rf $RPM_BUILD_ROOT%{_libdir}/%{name}/share/fonts/truetype/*
 
 # Copy fixed OpenSymbol to correct location
 install -d $RPM_BUILD_ROOT%{_fontsdir}/openoffice
-cp fonts/opens___.ttf $RPM_BUILD_ROOT%{_fontsdir}/openoffice
+install fonts/opens___.ttf $RPM_BUILD_ROOT%{_fontsdir}/openoffice
 # %%ghost the fonts.cache-1 file
 touch $RPM_BUILD_ROOT%{_fontsdir}/openoffice/fonts.cache-1
 
@@ -1175,40 +1163,41 @@ rm -f $RPM_BUILD_ROOT%{_libdir}/%{name}/program/libgcc_s.so* \
 
 # Find out locales
 rm -f *.lang
-langlist=""
-for lang in $RPM_BUILD_ROOT%{_libdir}/%{name}/share/registry/res/*; do
-	[ ! -d "$lang" ] && continue
-	langlist="$langlist $(echo "$lang" | sed -e 's#.*/\(.*\)#\1#g')"
-done
-for lang in $RPM_BUILD_ROOT%{_libdir}/%{name}/help/*; do
-	[ ! -d "$lang" ] && continue
-	langlist="$langlist $(echo "$lang" | sed -e 's#.*/\(.*\)#\1#g')"
-done
-langlist=$(echo "$langlist" | tr ' ' '\n' | sort | uniq | xargs)
+langlist="`bin/openoffice-xlate-lang -i all`"
+#for lang in $RPM_BUILD_ROOT%{_libdir}/%{name}/share/registry/res/*; do
+#	[ ! -d "$lang" ] && continue
+#	langlist="$langlist $(echo "$lang" | sed -e 's#.*/\(.*\)#\1#g')"
+#done
+#for lang in $RPM_BUILD_ROOT%{_libdir}/%{name}/help/*; do
+#	[ ! -d "$lang" ] && continue
+#	langlist="$langlist $(echo "$lang" | sed -e 's#.*/\(.*\)#\1#g')"
+#done
+#langlist=$(echo "$langlist" | tr ' ' '\n' | sort | uniq | xargs)
 
 for lang in $langlist; do
-	echo "%%defattr(644,root,root,755)" >> ${lang}.lang
+	echo "%%defattr(644,root,root,755)" > ${lang}.lang
 
 	# help files
-	if (ls $RPM_BUILD_ROOT%{_libdir}/%{name}/help/${lang} 2> /dev/null); then
-		echo "%{_libdir}/%{name}/help/${lang}" >> ${lang}.lang
-		perl -pi -e "s#.*%{_libdir}/%{name}/help/${lang}/.*##g" build/lang_*_list.txt
+	if [ -f build/help_${lang}_list.txt ]; then
+		cat build/help_${lang}_list.txt > ${lang}.lang
 	fi
 
+	if [ -f build/lang_${lang}_list.txt ]; then
+		cat build/lang_${lang}_list.txt >> ${lang}.lang
+	fi
 	# registry res
-	if [ "lang" = "en" ]; then
-		rlang="en-US"
-	else
-		rlang="$lang"
-	fi
-	if (ls $RPM_BUILD_ROOT%{_libdir}/%{name}/share/registry/res/${rlang} 2> /dev/null); then
-		echo "%{_libdir}/%{name}/share/registry/res/${lang}" >> ${rlang}.lang
-		perl -pi -e "s#.*%{_libdir}/%{name}/share/registry/res/${rlang}/.*##g" build/lang_*_list.txt
-	fi
+#	if [ "lang" = "en" ]; then
+#		rlang="en-US"
+#	else
+#		rlang="$lang"
+#	fi
+#	if (ls $RPM_BUILD_ROOT%{_libdir}/%{name}/share/registry/res/${rlang} 2> /dev/null); then
+#		echo "%{_libdir}/%{name}/share/registry/res/${lang}" >> ${rlang}.lang
+#		perl -pi -e "s#.*%{_libdir}/%{name}/share/registry/res/${rlang}/.*##g" build/lang_*_list.txt
+#	fi
 
 	# files from lang_*_list.txt
-	ls build/lang_${lang}_list.txt 2> /dev/null && sed -e "s#$RPM_BUILD_ROOT##g" build/lang_${lang}_list.txt >> ${lang}.lang || /bin/true
-
+#	ls build/lang_${lang}_list.txt 2> /dev/null && sed -e "s#$RPM_BUILD_ROOT##g" build/lang_${lang}_list.txt >> ${lang}.lang || /bin/true
 done
 
 find $RPM_BUILD_ROOT -type f -name '*.so' -exec chmod 755 "{}" ";"
@@ -1325,7 +1314,7 @@ fontpostinst TTF %{_fontsdir}/%{name}
 
 %{_desktopdir}/*.desktop
 %{_pixmapsdir}/*.png
-%{_mandir}/man1/openoffice.1*
+%{_mandir}/man1/o*.1*
 
 %files libs
 %defattr(644,root,root,755)
