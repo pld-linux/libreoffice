@@ -1,0 +1,547 @@
+Index: vcl/source/gdi/impbmp.cxx
+===================================================================
+RCS file: /cvs/oo/gsl/vcl/source/gdi/impbmp.cxx,v
+retrieving revision 1.1.1.1
+diff -u -r1.1.1.1 impbmp.cxx
+--- vcl/source/gdi/impbmp.cxx	2000/09/18 17:05:37	1.1.1.1
++++ vcl/source/gdi/impbmp.cxx	2002/11/05 20:13:01
+@@ -177,7 +177,7 @@
+ #endif
+ 		nBitCount = mpSalBitmap->GetBitCount();
+ 
+-	return( ( nBitCount <= 1 ) ? 1 : ( nBitCount <= 4 ) ? 4 : ( nBitCount <= 8 ) ? 8 : 24 );
++	return( ( nBitCount <= 1 ) ? 1 : ( nBitCount <= 4 ) ? 4 : ( nBitCount <= 8 ) ? 8 : ( nBitCount <= 24 ) ? 24 : 32 );
+ }
+ 
+ // -----------------------------------------------------------------------
+Index: vcl/unx/source/gdi/salbmp.cxx
+===================================================================
+RCS file: /cvs/oo/gsl/vcl/unx/source/gdi/salbmp.cxx,v
+retrieving revision 1.8
+diff -u -r1.8 salbmp.cxx
+--- vcl/unx/source/gdi/salbmp.cxx	2001/09/11 15:52:22	1.8
++++ vcl/unx/source/gdi/salbmp.cxx	2002/11/05 20:13:05
+@@ -150,7 +150,7 @@
+ 
+ BitmapBuffer* SalBitmap::ImplCreateDIB( const Size& rSize, USHORT nBitCount, const BitmapPalette& rPal )
+ {
+-	DBG_ASSERT( nBitCount == 1 || nBitCount == 4 || nBitCount == 8 || nBitCount == 24, "Unsupported BitCount!" );
++	DBG_ASSERT( nBitCount == 1 || nBitCount == 4 || nBitCount == 8 || nBitCount == 24 || nBitCount == 32, "Unsupported BitCount!" );
+ 
+ 	BitmapBuffer* pDIB;
+ 
+@@ -169,9 +169,10 @@
+ 				case( 1 ): pDIB->mnFormat |= BMP_FORMAT_1BIT_MSB_PAL; break;
+ 				case( 4 ): pDIB->mnFormat |= BMP_FORMAT_4BIT_MSN_PAL; break;
+ 				case( 8 ): pDIB->mnFormat |= BMP_FORMAT_8BIT_PAL; break;
++				case( 24 ): pDIB->mnFormat |= BMP_FORMAT_24BIT_TC_BGR; break;
+ 			
+ 				default:
+-					pDIB->mnFormat |= BMP_FORMAT_24BIT_TC_BGR;
++					pDIB->mnFormat |= BMP_FORMAT_32BIT_TC_BGRA;
+ 				break;
+ 			}
+ 
+@@ -802,8 +803,10 @@
+ 				nBitCount = 4;
+ 			else if( nBitCount <= 8 )
+ 				nBitCount = 8;
+-			else
++			else if ( nBitCount <= 24)
+ 				nBitCount = 24;
++			else
++				nBitCount = 32;
+ 		}
+ 	}
+ 	else
+Index: svtools/bmpmaker/bmpcore.cxx
+===================================================================
+RCS file: /cvs/util/svtools/bmpmaker/bmpcore.cxx,v
+retrieving revision 1.12
+diff -u -p -u -r1.12 bmpcore.cxx
+--- svtools/bmpmaker/bmpcore.cxx	24 Apr 2003 13:01:46 -0000	1.12
++++ svtools/bmpmaker/bmpcore.cxx	26 Sep 2003 10:58:13 -0000
+@@ -107,7 +107,8 @@ void BmpCreator::ImplCreate( SvStream& r
+                              const ::std::vector< DirEntry >& rInDirs, 
+                              const DirEntry& rOut, 
+                              const String& rName, 
+-                             const LangInfo& rLang )
++                             const LangInfo& rLang,
++							 const Color& rMaskColor)
+ {
+     const sal_uInt32    nOldPos = pSRS->Tell();
+    	const char*         pCollectFile = getenv( "BMP_COLLECT_FILE" );
+@@ -215,7 +216,7 @@ void BmpCreator::ImplCreate( SvStream& r
+ 			            SvFileStream    aIStm( aFileName, STREAM_READ );
+ 			            aIStm >> aBmp;
+                         aIStm.Close();
+-                        
++
+                         if( pCollectStm && !aBmp.IsEmpty() )
+                         {
+                             const ByteString aCollectString( aFileName, RTL_TEXTENCODING_ASCII_US );
+@@ -237,6 +238,26 @@ void BmpCreator::ImplCreate( SvStream& r
+ 				}
+                 else
+                 {
++				    if (aBmp.GetBitCount () != 32)
++					{
++						aBmp.Convert (BMP_CONVERSION_32BIT);
++
++						BitmapWriteAccess *pUpd = aBmp.AcquireWriteAccess();
++						
++						for( long nY = 0; nY < aSize.Height(); nY++ ) {
++								for( long nX = 0; nX < aSize.Width(); nX++ ) {
++										BitmapColor aCol;
++										aCol = pUpd->GetPixel( nY, nX );
++										if( aCol == rMaskColor )
++												pUpd->SetAlpha( nY, nX, 0 );
++										else
++												pUpd->SetAlpha( nY, nX, 255 );
++								}
++						}
++
++						aBmp.ReleaseAccess( pUpd );
++					}
++						
+ 		            if( aTotalBmp.IsEmpty() )
+ 		            {
+                         // first bitmap determines metrics of total bitmap
+@@ -267,6 +286,15 @@ void BmpCreator::ImplCreate( SvStream& r
+                                 aBmp.Convert( BMP_CONVERSION_24BIT );
+                         
+ 				            aTotalBmp.CopyPixel( aDst, aSrc, &aBmp );
++
++							BitmapReadAccess *pSrc = aBmp.AcquireWriteAccess();
++							BitmapWriteAccess *pDst = aTotalBmp.AcquireWriteAccess();
++							for( long nY = 0; nY < aSize.Height(); nY++ )
++									for( long nX = 0; nX < aSize.Width(); nX++ )
++											pDst->SetAlpha( nY, nX + aDst.Left(), pSrc->GetAlpha( nY, nX ) );
++							aTotalBmp.ReleaseAccess( pDst );
++							aBmp.ReleaseAccess( pSrc );
++							
+                             aValidBmpBitVector[ n ] = true;
+                         }
+ 		            }
+@@ -335,6 +363,13 @@ void BmpCreator::ImplCreate( SvStream& r
+ 
+ // -----------------------------------------------------------------------------
+ 
++static sal_Int32 GetColorVal( const ByteString &rLine )
++{
++    ByteString aVal( rLine.GetToken( 1, '=' ) );
++	aVal.EraseLeadingChars();
++	return aVal.ToInt32() / 256;
++}
++
+ void BmpCreator::Create( const String& rSRSName, 
+                          const ::std::vector< String >& rInDirs,
+ 			             const String& rOutName, 
+@@ -395,6 +430,8 @@ void BmpCreator::Create( const String& r
+ 
+ 			const String aName( aText.GetToken( 1, '"' ) );
+ 
++			Color aMaskColor;
++
+ 			do
+ 			{
+ 				if( !bLangDep &&
+@@ -405,6 +442,13 @@ void BmpCreator::Create( const String& r
+ 					bLangDep = TRUE;
+ 				}
+ 
++				if( aByteText.Search( "Red" ) != STRING_NOTFOUND )
++					aMaskColor.SetRed( GetColorVal( aByteText ) );
++				if( aByteText.Search( "Green" ) != STRING_NOTFOUND )
++					aMaskColor.SetGreen( GetColorVal( aByteText ) );
++				if( aByteText.Search( "Blue" ) != STRING_NOTFOUND )
++					aMaskColor.SetBlue( GetColorVal( aByteText ) );
++
+ 				if (!pSRS->ReadLine(aByteText))
+ 					 break;
+ 			}
+@@ -415,7 +459,7 @@ void BmpCreator::Create( const String& r
+ 			if( aText.Len() )
+ 			{
+ 				bDone = TRUE;
+- 				ImplCreate( *pSRS, aInDirs, aOutDir, aName, rLang );
++ 				ImplCreate( *pSRS, aInDirs, aOutDir, aName, rLang, aMaskColor );
+ 			}
+ 			else if( ( rLang.mnLangNum != 49 ) && !bLangDep )
+ 			{
+
+Index: vcl/source/gdi/bitmap.cxx
+===================================================================
+RCS file: /cvs/gsl/vcl/source/gdi/bitmap.cxx,v
+retrieving revision 1.7
+diff -u -p -u -r1.7 bitmap.cxx
+--- vcl/source/gdi/bitmap.cxx	24 Apr 2003 14:56:22 -0000	1.7
++++ vcl/source/gdi/bitmap.cxx	12 Sep 2003 14:18:51 -0000
+@@ -980,7 +984,9 @@ BOOL Bitmap::CopyPixel( const Rectangle&
+ 			{
+ 				long nNextIndex = 0L;
+ 
+-				if( ( nSrcBitCount == 24 ) && ( nDstBitCount < 24 ) )
++				if (nSrcBitCount == 32 && nDstBitCount < 32)
++					Convert (BMP_CONVERSION_32BIT);
++				else if( ( nSrcBitCount == 24 ) && ( nDstBitCount < 24 ) )
+ 					Convert( BMP_CONVERSION_24BIT );
+ 				else if( ( nSrcBitCount == 8 ) && ( nDstBitCount < 8 ) )
+ 				{
+@@ -1772,20 +1778,58 @@ Bitmap Bitmap::CreateDisplayBitmap( Outp
+ 
+ // ------------------------------------------------------------------
+ 
++static BYTE doSaturate( BYTE c, BYTE i)
++{
++    int v = 1.2 * c - 0.2 * i;
++	if( v < 0 )
++        return 0;
++	else if( v > 255 )
++        return 255;
++	else
++        return v;
++}
++
+ Bitmap Bitmap::GetColorTransformedBitmap( BmpColorMode eColorMode ) const
+ {
+     Bitmap  aRet( *this );
+-    Color*  pSrcColors = NULL;
+-    Color*  pDstColors = NULL;
+-    ULONG   nColorCount = 0;
+-
+-    Image::GetColorTransformArrays( (ImageColorTransform) eColorMode, pSrcColors, pDstColors, nColorCount );
+ 
+-    if( nColorCount && pSrcColors && pDstColors )
+-        aRet.Replace( pSrcColors, pDstColors, nColorCount ); 
++    if (eColorMode == BMP_COLOR_HIGHCONTRAST && GetBitCount() >= 24) {
+ 
+-    delete[] pSrcColors;
+-    delete[] pDstColors;
++	    // Yet another special case for icons
++	    BitmapReadAccess* pAcc = AcquireReadAccess();
++	    BitmapWriteAccess* pDis = aRet.AcquireWriteAccess();
++
++	    Size aSize = GetSizePixel();
++
++	    for( long nY = 0; nY < aSize.Height(); nY++ ) {
++		    for( long nX = 0; nX < aSize.Width(); nX++ ) {
++			    BitmapColor col = pAcc->GetPixel( nY, nX );
++			    BYTE i = ( col.GetRed() * 0.3 + // magic numbers from gdk-pixbuf
++						   col.GetGreen() * 0.59 +
++						   col.GetBlue () * 0.11 );
++			    col.SetRed   (doSaturate ( col.GetRed(), i ) );
++			    col.SetGreen (doSaturate ( col.GetGreen(), i ) );
++			    col.SetBlue  (doSaturate ( col.GetBlue(), i ) );
++			    pDis->SetPixel( nY, nX, col );
++		    }
++	    }
++
++	    aRet.ReleaseAccess( pDis );
++	    ReleaseAccess( pAcc );
++    } else {
++	
++		Color*  pSrcColors = NULL;
++	    Color*  pDstColors = NULL;
++	    ULONG   nColorCount = 0;
++	    
++	    Image::GetColorTransformArrays( (ImageColorTransform) eColorMode, pSrcColors, pDstColors, nColorCount );
++	    
++	    if( nColorCount && pSrcColors && pDstColors )
++		    aRet.Replace( pSrcColors, pDstColors, nColorCount ); 
++	    
++	    delete[] pSrcColors;
++	    delete[] pDstColors;
++    }
+ 
+     return aRet;
+ }
+Index: vcl/inc/bitmap.hxx
+===================================================================
+RCS file: /cvs/gsl/vcl/inc/bitmap.hxx,v
+retrieving revision 1.8
+diff -u -p -u -r1.8 bitmap.hxx
+--- vcl/inc/bitmap.hxx	24 Apr 2003 14:56:11 -0000	1.8
++++ vcl/inc/bitmap.hxx	13 Sep 2003 10:30:56 -0000
+@@ -125,7 +125,8 @@ enum BmpConversion
+     BMP_CONVERSION_24BIT = 7,
+     BMP_CONVERSION_4BIT_TRANS = 8,
+     BMP_CONVERSION_8BIT_TRANS = 9,
+-    BMP_CONVERSION_GHOSTED = 10
++    BMP_CONVERSION_GHOSTED = 10,
++    BMP_CONVERSION_32BIT = 11
+ };
+ 
+ // ------------------------------------------------------------------------
+@@ -389,6 +390,7 @@ public:
+ 	ULONG					GetChecksum() const;
+ 
+     Bitmap                  CreateDisplayBitmap( OutputDevice* pDisplay );
++    Bitmap                  GetAlphaMask() const;
+     Bitmap                  GetColorTransformedBitmap( BmpColorMode eColorMode ) const;
+ 
+ 	static const BitmapPalette& GetGreyPalette( USHORT nEntries );
+Index: svtools/bmpmaker/bmpcore.hxx
+===================================================================
+RCS file: /cvs/util/svtools/bmpmaker/bmpcore.hxx,v
+retrieving revision 1.3
+diff -u -p -u -r1.3 bmpcore.hxx
+--- svtools/bmpmaker/bmpcore.hxx	30 Oct 2002 16:27:55 -0000	1.3
++++ svtools/bmpmaker/bmpcore.hxx	13 Sep 2003 11:10:27 -0000
+@@ -112,7 +112,8 @@ private:
+                                 const ::std::vector< DirEntry >& rInDirs, 
+                                 const DirEntry& rOut, 
+                                 const String& rName, 
+-                                const LangInfo& rLang );
++                                const LangInfo& rLang,
++								const Color& rMaskColor );
+ 
+ protected:
+ 
+Index: vcl/inc/bmpacc.hxx
+===================================================================
+RCS file: /cvs/gsl/vcl/inc/bmpacc.hxx,v
+retrieving revision 1.3
+diff -u -p -u -r1.3 bmpacc.hxx
+--- vcl/inc/bmpacc.hxx	28 Jun 2001 13:08:49 -0000	1.3
++++ vcl/inc/bmpacc.hxx	24 Sep 2003 16:36:25 -0000
+@@ -203,6 +203,7 @@ public:
+     inline BitmapColor          GetPixel( long nY, long nX ) const;
+ 	inline BitmapColor			GetColor( long nY, long nX ) const;
+ 	inline BYTE					GetLuminance( long nY, long nX ) const;
++    inline BYTE                 GetAlpha( long nY, long nX ) const;
+ };
+ 
+ // ---------------------
+@@ -235,6 +236,7 @@ public:
+     inline void                 SetPaletteColor( USHORT nColor, const BitmapColor& rBitmapColor );
+ 
+     inline void                 SetPixel( long nY, long nX, const BitmapColor& rBitmapColor );
++    inline void                 SetAlpha( long nY, long nX, const BYTE nAlpha );
+ 
+     inline void                 SetLineColor( const BitmapColor& rColor );
+     inline const BitmapColor&   GetLineColor() const;
+@@ -455,6 +457,16 @@ inline BYTE BitmapReadAccess::GetLuminan
+ 
+ // ------------------------------------------------------------------
+ 
++inline BYTE BitmapReadAccess::GetAlpha( long nY, long nX ) const
++{
++    if( maBitmap.GetBitCount() != 32 )
++		return 255;
++	else
++        return mpScanBuf[ nY ] [ ( nX << 2 ) + 3 ];
++}
++
++// ------------------------------------------------------------------
++
+ inline BitmapWriteAccess::BitmapWriteAccess( Bitmap& rBitmap ) :
+             BitmapReadAccess( rBitmap, TRUE ),
+             maLineColor     ( 0, 0, 0 ),
+@@ -541,6 +553,12 @@ inline void BitmapWriteAccess::SetPixel(
+     BMP_ASSERT( nX < mpBuffer->mnWidth, "x-coordinate out of range!" );
+     BMP_ASSERT( nY < mpBuffer->mnHeight, "y-coordinate out of range!" );
+     mFncSetPixel( mpScanBuf[ nY ], nX, rBitmapColor, maColorMask );
++}
++
++inline void BitmapWriteAccess::SetAlpha( long nY, long nX, const BYTE nAlpha )
++{
++    if( maBitmap.GetBitCount() == 32 )
++		mpScanBuf[ nY ] [ ( nX << 2 ) + 3 ] = nAlpha;
+ }
+ 
+ #endif // _SV_BMPACC_HXX
+Index: vcl/source/gdi/bmpacc2.cxx
+===================================================================
+RCS file: /cvs/gsl/vcl/source/gdi/bmpacc2.cxx,v
+retrieving revision 1.2
+diff -u -p -u -r1.2 bmpacc2.cxx
+--- vcl/source/gdi/bmpacc2.cxx	28 Jun 2001 13:10:36 -0000	1.2
++++ vcl/source/gdi/bmpacc2.cxx	24 Sep 2003 16:36:49 -0000
+@@ -277,7 +278,7 @@ IMPL_FORMAT_GETPIXEL( _32BIT_TC_ABGR )
+ 
+ IMPL_FORMAT_SETPIXEL( _32BIT_TC_ABGR )
+ {
+-	*( pScanline = pScanline + ( nX << 2 ) )++ = 0;
++    pScanline += ( nX << 2 ) + 1;
+ 	*pScanline++ = rBitmapColor.GetBlue();
+ 	*pScanline++ = rBitmapColor.GetGreen();
+ 	*pScanline = rBitmapColor.GetRed();
+@@ -300,7 +302,7 @@ IMPL_FORMAT_GETPIXEL( _32BIT_TC_ARGB )
+ 
+ IMPL_FORMAT_SETPIXEL( _32BIT_TC_ARGB )
+ {
+-	*( pScanline = pScanline + ( nX << 2 ) )++ = 0;
++    pScanline = pScanline + ( nX << 2 ) + 1;
+ 	*pScanline++ = rBitmapColor.GetRed();
+ 	*pScanline++ = rBitmapColor.GetGreen();
+ 	*pScanline = rBitmapColor.GetBlue();
+@@ -326,7 +328,6 @@ IMPL_FORMAT_SETPIXEL( _32BIT_TC_BGRA )
+ 	*( pScanline = pScanline + ( nX << 2 ) )++ = rBitmapColor.GetBlue();
+ 	*pScanline++ = rBitmapColor.GetGreen();
+ 	*pScanline++ = rBitmapColor.GetRed();
+-	*pScanline = 0;
+ }
+ 
+ // ------------------------------------------------------------------
+@@ -349,7 +350,6 @@ IMPL_FORMAT_SETPIXEL( _32BIT_TC_RGBA )
+ 	*( pScanline = pScanline + ( nX << 2 ) )++ = rBitmapColor.GetRed();
+ 	*pScanline++ = rBitmapColor.GetGreen();
+ 	*pScanline++ = rBitmapColor.GetBlue();
+-	*pScanline = 0;
+ }
+ 
+ // ------------------------------------------------------------------
+Index: vcl/source/gdi/bitmap3.cxx
+===================================================================
+RCS file: /cvs/gsl/vcl/source/gdi/bitmap3.cxx,v
+retrieving revision 1.3
+diff -u -p -u -r1.3 bitmap3.cxx
+--- vcl/source/gdi/bitmap3.cxx	27 Aug 2001 12:57:08 -0000	1.3
++++ vcl/source/gdi/bitmap3.cxx	24 Sep 2003 16:39:29 -0000
+@@ -401,6 +401,13 @@ BOOL Bitmap::Convert( BmpConversion eCon
+ 			bRet = ImplConvertGhosted();
+ 		break;
+ 
++		case BMP_CONVERSION_32BIT:
++			if (nBitCount < 32)
++				bRet = ImplConvertUp (32, FALSE);
++			else
++				bRet = TRUE;
++			break;
++
+ 		default:
+ 			DBG_ERROR( "Bitmap::Convert(): Unsupported conversion" );
+ 		break;
+@@ -1074,7 +1081,8 @@ BOOL Bitmap::ImplScaleInterpolate( const
+ 		BitmapReadAccess*	pReadAcc = AcquireReadAccess();
+ 		long				nWidth = pReadAcc->Width();
+ 		long				nHeight = pReadAcc->Height();
+-		Bitmap				aNewBmp( Size( nNewWidth, nHeight ), 24 );
++		Bitmap				aNewBmp( Size( nNewWidth, nHeight ),
++							 GetBitCount() == 32 ? 32 : 24 );
+ 		BitmapWriteAccess*	pWriteAcc = aNewBmp.AcquireWriteAccess();
+ 		long*				pLutInt;
+ 		long*				pLutFrac;
+@@ -1184,7 +1192,8 @@ BOOL Bitmap::ImplScaleInterpolate( const
+ 			bRet = FALSE;
+ 			ImplAssignWithSize( aNewBmp );
+ 			pReadAcc = AcquireReadAccess();
+-			aNewBmp = Bitmap( Size( nNewWidth, nNewHeight ), 24 );
++			aNewBmp = Bitmap( Size( nNewWidth, nNewHeight ),
++					  GetBitCount() == 32 ? 32 : 24 );
+ 			pWriteAcc = aNewBmp.AcquireWriteAccess();
+ 
+ 			if( pReadAcc && pWriteAcc )
+Index: vcl/source/gdi/bitmap2.cxx
+===================================================================
+RCS file: /cvs/gsl/vcl/source/gdi/bitmap2.cxx,v
+retrieving revision 1.4
+diff -u -p -u -r1.4 bitmap2.cxx
+--- vcl/source/gdi/bitmap2.cxx	24 Apr 2003 13:17:58 -0000	1.4
++++ vcl/source/gdi/bitmap2.cxx	24 Sep 2003 16:40:07 -0000
+@@ -204,7 +204,8 @@ BOOL Bitmap::ImplReadDIB( SvStream& rISt
+ 	{
+ 		USHORT nBitCount = ( aHeader.nBitCount <= 1 ) ? 1 :
+ 						   ( aHeader.nBitCount <= 4 ) ? 4 :
+-						   ( aHeader.nBitCount <= 8 ) ? 8 : 24;
++						   ( aHeader.nBitCount <= 8 ) ? 8 : 
++						   ( aHeader.nBitCount <= 24 ) ? 24 : 32;
+ 
+ 		const Size			aSizePixel( aHeader.nWidth, aHeader.nHeight );
+ 		BitmapPalette		aDummyPal;
+@@ -640,6 +641,7 @@ BOOL Bitmap::ImplReadDIBBits( SvStream& 
+ 					ColorMask	aMask( nRMask, nGMask, nBMask );
+ 					BitmapColor aColor;
+ 					UINT32* 	pTmp32;
++					UINT32      nCol;
+ 
+ 					for( long nY = rHeader.nHeight - 1L; nY >= 0L; nY-- )
+ 					{
+@@ -647,8 +649,10 @@ BOOL Bitmap::ImplReadDIBBits( SvStream& 
+ 
+ 						for( long nX = 0L; nX < nWidth; nX++ )
+ 						{
+-							aMask.GetColorFor32Bit( aColor, (BYTE*) pTmp32++ );
++							BYTE *pPix = (BYTE *) pTmp32++;
++							aMask.GetColorFor32Bit( aColor, pPix );
+ 							rAcc.SetPixel( nY, nX, aColor );
++							rAcc.SetAlpha( nY, nX, pPix[ 3 ] );
+ 						}
+ 					}
+ 				}
+@@ -1009,6 +1013,27 @@ BOOL Bitmap::ImplWriteDIBBits( SvStream&
+ 				}
+ 				break;
+ 
++				case 24:
++				{
++					BitmapColor aPixelColor;
++
++					for( long nY = nHeight - 1; nY >= 0L; nY-- )
++					{
++						pTmp = pBuf;
++
++						for( long nX = 0L; nX < nWidth; nX++ )
++						{
++							aPixelColor = rAcc.GetPixel( nY, nX );
++							*pTmp++ = aPixelColor.GetBlue();
++							*pTmp++ = aPixelColor.GetGreen();
++							*pTmp++ = aPixelColor.GetRed();
++						}
++
++						rOStm.Write( pBuf, nAlignedWidth );
++					}
++				}
++				break;
++
+ 				default:
+ 				{
+ 					BitmapColor aPixelColor;
+@@ -1023,6 +1048,7 @@ BOOL Bitmap::ImplWriteDIBBits( SvStream&
+ 							*pTmp++ = aPixelColor.GetBlue();
+ 							*pTmp++ = aPixelColor.GetGreen();
+ 							*pTmp++ = aPixelColor.GetRed();
++							*pTmp++ = rAcc.GetAlpha( nY, nX );
+ 						}
+ 
+ 						rOStm.Write( pBuf, nAlignedWidth );
+@@ -1038,6 +1064,38 @@ BOOL Bitmap::ImplWriteDIBBits( SvStream&
+ 	rImageSize = rOStm.Tell() - rImageSize;
+ 
+ 	return( rOStm.GetError() == 0UL );
++}
++
++// ------------------------------------------------------------------
++
++Bitmap
++Bitmap::GetAlphaMask() const
++{
++	if( GetBitCount() < 32 )
++        return Bitmap();
++
++    Size aSize = GetSizePixel();
++    Bitmap aAlpha( aSize, 8, &GetGreyPalette( 256 ) );
++
++	aAlpha.Erase( COL_WHITE );
++
++	BitmapReadAccess *pSrc = AcquireReadAccess();
++	BitmapWriteAccess *pDst = aAlpha.AcquireWriteAccess();
++
++	for( long nY = 0; nY < aSize.Height(); nY++ )
++	{
++		for( long nX = 0; nX < aSize.Width(); nX++ )
++		{
++            BitmapColor aCol;
++			aCol = pSrc->GetPixel( nY, nX );
++			pDst->SetPixel( nY, nX, BitmapColor( 255 - pSrc->GetAlpha( nY, nX ) ) );
++		}
++	}
++	
++	ReleaseAccess( pSrc );
++	ReleaseAccess( pDst );
++		
++	return aAlpha;
+ }
+ 
+ // ------------------------------------------------------------------

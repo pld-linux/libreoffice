@@ -1,0 +1,69 @@
+Index: vcl/source/gdi/bitmapex.cxx
+===================================================================
+--- vcl/source/gdi/bitmapex.cxx.orig	2003-04-11 19:28:27.000000000 +0200
++++ vcl/source/gdi/bitmapex.cxx	2003-10-22 22:42:23.000000000 +0200
+@@ -113,6 +113,12 @@ BitmapEx::BitmapEx( const Bitmap& rBmp )
+ 		eTransparent( TRANSPARENT_NONE ),
+ 		bAlpha		( FALSE )
+ {
++    if (aBitmap.GetBitCount () == 32)
++	{
++        eTransparent = TRANSPARENT_BITMAP;
++		bAlpha = TRUE;
++		aMask = aBitmap.GetAlphaMask();
++	}
+ }
+ 
+ // ------------------------------------------------------------------
+@@ -124,12 +130,8 @@ BitmapEx::BitmapEx( const Bitmap& rBmp, 
+ 		eTransparent	( !rMask ? TRANSPARENT_NONE : TRANSPARENT_BITMAP ),
+ 		bAlpha			( FALSE )
+ {
+-    // #105489# Ensure a mask is exactly one bit deep
+     if( !!aMask && aMask.GetBitCount() != 1 )
+-    {
+-        OSL_TRACE("BitmapEx: forced mask to monochrome");
+-        aMask.ImplMakeMono( 255 );
+-    }
++		bAlpha = TRUE;
+ }
+ 
+ // ------------------------------------------------------------------
+@@ -152,7 +154,13 @@ BitmapEx::BitmapEx( const Bitmap& rBmp, 
+ 		eTransparent		( TRANSPARENT_BITMAP ),
+ 		bAlpha				( FALSE )
+ {
+-	aMask = aBitmap.CreateMask( aTransparentColor );
++    if( rBmp.GetBitCount() > 24 )
++	{
++        aMask = rBmp.GetAlphaMask();
++		bAlpha = TRUE;
++	}
++	else
++	    aMask = aBitmap.CreateMask( aTransparentColor );
+ }
+ 
+ // ------------------------------------------------------------------
+@@ -287,12 +295,7 @@ BitmapEx BitmapEx::GetColorTransformedBi
+ 
+ Bitmap BitmapEx::GetMask() const
+ {
+-	Bitmap aRet( aMask );
+-
+-	if( IsAlpha() )
+-		aRet.ImplMakeMono( 255 );
+-
+-	return aRet;
++	return Bitmap( aMask );
+ }
+ 
+ // ------------------------------------------------------------------
+@@ -395,7 +398,7 @@ BOOL BitmapEx::Scale( const double& rSca
+ 		bRet = aBitmap.Scale( rScaleX, rScaleY, nScaleFlag );
+ 
+ 		if( bRet && ( eTransparent == TRANSPARENT_BITMAP ) && !!aMask )
+-			aMask.Scale( rScaleX, rScaleY, BMP_SCALE_FAST );
++			aMask.Scale( rScaleX, rScaleY, aMask.GetBitCount() == 1 ? BMP_SCALE_FAST : nScaleFlag);
+ 
+ 		aBitmapSize = aBitmap.GetSizePixel();
+ 	}

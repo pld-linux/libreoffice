@@ -1,0 +1,94 @@
+Index: vcl/unx/source/gdi/salgdi2.cxx
+===================================================================
+RCS file: /cvs/gsl/vcl/unx/source/gdi/salgdi2.cxx,v
+retrieving revision 1.18
+diff -u -p -u -r1.18 salgdi2.cxx
+--- vcl/unx/source/gdi/salgdi2.cxx	10 Jun 2003 14:31:08 -0000	1.18
++++ vcl/unx/source/gdi/salgdi2.cxx	14 Oct 2003 13:12:49 -0000
+@@ -775,10 +775,13 @@ void SalGraphics::DrawBitmap( const SalT
+         XGCValues			aOldVal, aNewVal;
+         int					nValues = GCForeground | GCBackground;
+ 
+-        // set foreground/background values for 1Bit bitmaps
+-        XGetGCValues( pXDisp, aGC, nValues, &aOldVal );
+-        aNewVal.foreground = rColMap.GetWhitePixel(), aNewVal.background = rColMap.GetBlackPixel();
+-        XChangeGC( pXDisp, aGC, nValues, &aNewVal );
++		if( rSalBitmap.GetBitCount() == 1 )
++		{
++				// set foreground/background values for 1Bit bitmaps
++				XGetGCValues( pXDisp, aGC, nValues, &aOldVal );
++				aNewVal.foreground = rColMap.GetWhitePixel(), aNewVal.background = rColMap.GetBlackPixel();
++				XChangeGC( pXDisp, aGC, nValues, &aNewVal );
++		}
+ 
+ #if defined(_USE_PRINT_EXTENSION_)
+ 		rSalBitmap.ImplDraw( pSalDisp, aDrawable, nDepth, *pPosAry,  aGC );
+@@ -786,7 +789,8 @@ void SalGraphics::DrawBitmap( const SalT
+ 		rSalBitmap.ImplDraw( aDrawable, nDepth, *pPosAry, aGC );
+ #endif
+ 
+-        XChangeGC( pXDisp, aGC, nValues, &aOldVal );
++		if( rSalBitmap.GetBitCount() == 1 )
++				XChangeGC( pXDisp, aGC, nValues, &aOldVal );
+         XFlush( pXDisp );
+ 
+ #ifndef _USE_PRINT_EXTENSION_
+@@ -1058,12 +1062,7 @@ SalBitmap *SalGraphics::GetBitmap( long 
+         if( &_GetDisplay()->GetColormap() != &_GetColormap() )
+             nBitCount = 1;
+ 
+-
+-#if defined(_USE_PRINT_EXTENSION_)
+-        pSalBitmap->ImplCreateFromDrawable( _GetDisplay(), _GetDrawable(), nBitCount, nX, nY, nDX, nDY );
+-#else
+-        pSalBitmap->ImplCreateFromDrawable( _GetDrawable(), nBitCount, nX, nY, nDX, nDY );
+-#endif
++		pSalBitmap->ImplCreateLocalFromDrawable( _GetDrawable(), nBitCount, nX, nY, nDX, nDY );
+         return pSalBitmap;
+ 
+ #ifndef _USE_PRINT_EXTENSION_
+Index: vcl/unx/inc/salbmp.hxx
+===================================================================
+RCS file: /cvs/gsl/vcl/unx/inc/salbmp.hxx,v
+retrieving revision 1.3
+diff -u -p -u -r1.3 salbmp.hxx
+--- vcl/unx/inc/salbmp.hxx	29 Aug 2001 16:14:00 -0000	1.3
++++ vcl/unx/inc/salbmp.hxx	14 Oct 2003 13:13:18 -0000
+@@ -123,6 +124,12 @@ public:
+ 											long nX, long nY, 
+ 											long nWidth, long nHeight );
+ 
++	BOOL			ImplCreateLocalFromDrawable( 
++											Drawable aDrawable, 
++											long nDrawableDepth,
++											long nX, long nY, 
++											long nWidth, long nHeight );
++
+ 	XImage*			ImplCreateXImage( 
+ 											SalDisplay* pSalDisp, long nDepth, 
+ 									  		const SalTwoRect& rTwoRect ) const;
+Index: vcl/unx/source/gdi/salbmp.cxx
+===================================================================
+RCS file: /cvs/gsl/vcl/unx/source/gdi/salbmp.cxx,v
+retrieving revision 1.8
+diff -u -p -u -r1.8 salbmp.cxx
+--- vcl/unx/source/gdi/salbmp.cxx	11 Sep 2001 15:52:22 -0000	1.8
++++ vcl/unx/source/gdi/salbmp.cxx	14 Oct 2003 13:13:48 -0000
+@@ -502,6 +506,17 @@ BOOL SalBitmap::ImplCreateFromDrawable( 
+ // -----------------------------------------------------------------------------
+ #endif
+ 
++BOOL SalBitmap::ImplCreateLocalFromDrawable(  Drawable aDrawable, long nDrawableDepth, 
++											  long nX, long nY, long nWidth, long nHeight )
++{
++	Destroy();
++
++	if( aDrawable && nWidth && nHeight && nDrawableDepth )
++        mpDIB = ImplCreateDIB( aDrawable, nDrawableDepth, nX, nY, nWidth, nHeight );
++
++	return( mpDIB != NULL );
++}
++
+ BOOL 
+ SalBitmap::SnapShot (Display* pDisplay, XLIB_Window hWindow)
+ {

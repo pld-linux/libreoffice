@@ -1,0 +1,164 @@
+Index: vcl/inc/menu.hxx
+===================================================================
+RCS file: /cvs/gsl/vcl/inc/menu.hxx,v
+retrieving revision 1.26
+diff -u -p -u -r1.26 menu.hxx
+--- vcl/inc/menu.hxx	24 Apr 2003 16:29:29 -0000	1.26
++++ vcl/inc/menu.hxx	20 May 2003 11:37:16 -0000
+@@ -139,9 +139,10 @@ typedef USHORT MenuItemBits;
+ #define MIB_HELP				((MenuItemBits)0x0010)
+ #define MIB_POPUPSELECT 		((MenuItemBits)0x0020)
+ 
+-#define MENU_FLAG_NOAUTOMNEMONICS		0x0001
+-#define MENU_FLAG_HIDEDISABLEDENTRIES	0x0002
+-
++#define MENU_FLAG_NOAUTOMNEMONICS     0x0001
++#define MENU_FLAG_HIDEDISABLEDENTRIES 0x0002
++#define MENU_FLAG_SHOWCHECKIMAGES     0x0004
++  
+ // --------
+ // - Menu -
+ // --------
+Index: sfx2/source/toolbox/tbxchild.cxx
+===================================================================
+RCS file: /cvs/framework/sfx2/source/toolbox/tbxchild.cxx,v
+retrieving revision 1.33
+diff -u -p -u -r1.33 tbxchild.cxx
+--- sfx2/source/toolbox/tbxchild.cxx	4 Apr 2003 17:38:56 -0000	1.33
++++ sfx2/source/toolbox/tbxchild.cxx	20 May 2003 11:38:20 -0000
+@@ -940,6 +940,9 @@ void SfxToolbox::Command ( const Command
+ 		SfxUInt16Item aConfigItem ( SID_CONFIGITEMID, pMgr->GetType() );
+ 		SfxUInt16Item *pItem = &aConfigItem;
+ 
++		pItemMenu->SetMenuFlags (pItemMenu->GetMenuFlags () | 
++ 					 MENU_FLAG_SHOWCHECKIMAGES);
++
+         Point aPoint( rCEvt.GetMousePosPixel() );
+         USHORT nId = aPop.Execute( aPoint, this, (const SfxPoolItem*)pItem, 0L );
+ 
+Index: vcl/source/window/menu.cxx
+===================================================================
+RCS file: /cvs/gsl/vcl/source/window/menu.cxx,v
+retrieving revision 1.93
+diff -u -p -u -r1.93 menu.cxx
+--- vcl/source/window/menu.cxx	24 Apr 2003 16:32:17 -0000	1.93
++++ vcl/source/window/menu.cxx	20 May 2003 13:21:01 -0000
+@@ -1863,8 +1863,7 @@ Size Menu::ImplCalcSize( Window* pWin )
+ 
+     Size aSz;
+     Size aMaxImgSz;
+-    long nMaxTextWidth = 0;
+-    long nMaxAccWidth = 0;
++    long nMaxWidth = 0;
+     long nMinMenuItemHeight = nFontHeight;
+ 
+ 	const StyleSettings& rSettings = pWin->GetSettings().GetStyleSettings();
+@@ -1895,6 +1894,7 @@ Size Menu::ImplCalcSize( Window* pWin )
+ 
+         if ( ImplIsVisible( n ) )
+         {
++            long nWidth = 0;
+ 
+             // Separator
+             if ( !bIsMenuBar && ( pData->eType == MENUITEM_SEPARATOR ) )
+@@ -1919,8 +1919,6 @@ Size Menu::ImplCalcSize( Window* pWin )
+             if ( (pData->eType == MENUITEM_STRING) || (pData->eType == MENUITEM_STRINGIMAGE) )
+             {
+                 long nTextWidth = pWin->GetCtrlTextWidth( pData->aText );
+-                if ( nTextWidth > nMaxTextWidth )
+-                    nMaxTextWidth = nTextWidth;
+                 long nTextHeight = pWin->GetTextHeight();
+ 
+ //                if ( nTextHeight > pData->aSz.Height() )
+@@ -1936,6 +1934,7 @@ Size Menu::ImplCalcSize( Window* pWin )
+                 }
+ 				else
+ 					pData->aSz.Height() = std::max( std::max( nTextHeight, pData->aSz.Height() ), nMinMenuItemHeight );
++		nWidth += nTextWidth;
+             }
+ 
+             // Accel
+@@ -1944,15 +1943,14 @@ Size Menu::ImplCalcSize( Window* pWin )
+                 String aName = pData->aAccelKey.GetName();
+                 long nAccWidth = pWin->GetTextWidth( aName );
+                 nAccWidth += nExtra;
+-                if ( nAccWidth > nMaxAccWidth )
+-                    nMaxAccWidth = nAccWidth;
++		nWidth += nAccWidth;
+             }
+ 
+             // SubMenu?
+             if ( !bIsMenuBar && pData->pSubMenu )
+             {
+-                if ( nFontHeight > nMaxAccWidth )
+-                    nMaxAccWidth = nFontHeight;
++                if ( nFontHeight > nWidth )
++                    nWidth += nFontHeight;
+ 
+ 				pData->aSz.Height() = std::max( std::max( nFontHeight, pData->aSz.Height() ), nMinMenuItemHeight );
+ 
+@@ -1964,20 +1962,26 @@ Size Menu::ImplCalcSize( Window* pWin )
+ 
+             if ( !bIsMenuBar )
+                 aSz.Height() += (long)pData->aSz.Height();
++
++	    if ( nWidth > nMaxWidth )
++                nMaxWidth = nWidth;
+         }
+     }
+ 
+     if ( !bIsMenuBar )
+     {
+-        USHORT gfxExtra = std::max( nExtra, 7L ); // #107710# increase space between checkmarks/images/text
+-        nCheckPos = (USHORT)nExtra;
+-        nImagePos = (USHORT)(nCheckPos + nFontHeight/2 + gfxExtra );
+-        nTextPos = (USHORT)(nImagePos+aMaxImgSz.Width());
++        int nCheckWidth = 0;
++	if ((nMenuFlags & MENU_FLAG_SHOWCHECKIMAGES) || aMaxImgSz.Width() <= 0)
++	  nCheckWidth = nFontHeight/2 + nExtra;
++	USHORT gfxExtra = std::max( nExtra, 7L ); // #107710# increase space between checkmarks/images/text
++        nCheckPos = nExtra;
++        nImagePos = nCheckPos + nCheckWidth;
++        nTextPos = nImagePos + aMaxImgSz.Width();
+         if ( aMaxImgSz.Width() )
+             nTextPos += gfxExtra;
+ 
+-        aSz.Width() = nTextPos + nMaxTextWidth + nExtra + nMaxAccWidth;
+-        aSz.Width() += 10*nExtra;   // etwas mehr...
++        aSz.Width() = nTextPos + nMaxWidth + nExtra;
++        aSz.Width() += 4*nExtra;   // a _little_ more ...
+     }
+     else
+     {
+@@ -2057,10 +2061,15 @@ void Menu::ImplPaint( Window* pWin, USHO
+                 // Image:
+                 if ( !bLayout && !bIsMenuBar && ( ( pData->eType == MENUITEM_IMAGE ) || ( pData->eType == MENUITEM_STRINGIMAGE ) ) )
+                 {
++		  // Don't render an image for a check thing
++		  if ((nMenuFlags & MENU_FLAG_SHOWCHECKIMAGES) ||
++                     (!(pData->nBits & (MIB_RADIOCHECK | MIB_CHECKABLE | MIB_AUTOCHECK)) && !pData->bChecked))
++		  {
+                     aTmpPos.Y() = aPos.Y();
+                     aTmpPos.X() = aPos.X() + nImagePos;
+                     aTmpPos.Y() += (pData->aSz.Height()-pData->aImage.GetSizePixel().Height())/2;
+                     pWin->DrawImage( aTmpPos, pData->aImage, nImageStyle );
++		  }
+                 }
+ 
+                 // Text:
+@@ -3973,6 +3982,7 @@ void MenuFloatingWindow::Paint( const Re
+         ImplDrawScroller( TRUE );
+         ImplDrawScroller( FALSE );
+     }
++    SetFillColor (GetSettings ().GetStyleSettings ().GetMenuColor ());
+     pMenu->ImplPaint( this, nScrollerHeight, ImplGetStartY() );
+     if ( nHighlightedItem != ITEMPOS_INVALID )
+         HighlightItem( nHighlightedItem, TRUE );
+@@ -4604,6 +4614,7 @@ BOOL MenuBarWindow::ImplHandleKeyEvent( 
+ 
+ void MenuBarWindow::Paint( const Rectangle& rRect )
+ {
++    SetFillColor (GetSettings ().GetStyleSettings ().GetMenuColor ());
+     pMenu->ImplPaint( this, 0 );
+     if ( nHighlightedItem != ITEMPOS_INVALID )
+         HighlightItem( nHighlightedItem, TRUE );

@@ -1,0 +1,115 @@
+Index: sfx2/source/appl/app.src
+===================================================================
+RCS file: /cvs/framework/sfx2/source/appl/app.src,v
+retrieving revision 1.85
+diff -u -p -u -r1.85 app.src
+--- sfx2/source/appl/app.src	26 May 2003 08:28:00 -0000	1.85
++++ sfx2/source/appl/app.src	4 Jun 2003 10:03:31 -0000
+@@ -3590,9 +3590,12 @@ ToolBox RID_ENVTOOLBOX
+ 		SID_EXPLORER_SEARCHORIGINAL;\
+ 		SID_EXPLORER_DETAILS;\
+ 		SID_EXPLORER_ICONS;\
+-    };\
++		SID_HELPINDEX;\
++		SID_HELP_SUPPORTPAGE;\
++		SID_ABOUT;\
++	};\
+ 	IdCount = {\
+-        40;\
++        43;\
+ 	};
+ 
+ #ifndef IMAGE_STDBTN_COLOR
+Index: sw/source/ui/app/app.src
+===================================================================
+RCS file: /cvs/sw/sw/source/ui/app/app.src,v
+retrieving revision 1.88
+diff -u -p -u -r1.88 app.src
+--- sw/source/ui/app/app.src	26 May 2003 08:14:25 -0000	1.88
++++ sw/source/ui/app/app.src	4 Jun 2003 10:04:39 -0000
+@@ -325,11 +325,13 @@ String STR_PAGE_COUNT_MACRO
+ 		FN_INSERT_CAPTION;\
+ 		FN_INSERT_REF_FIELD;\
+         FN_INSERT_REGION;\
+-										\
++		SID_HELPINDEX;\
++		SID_HELP_SUPPORTPAGE;\
++		SID_ABOUT;\
+ 										\
+ 		};								\
+ 	IdCount = { 						\
+-        165;                            \
++        168;                            \
+ 	};
+ 
+ 
+Index: sc/source/ui/src/toolbox.src
+===================================================================
+RCS file: /cvs/sc/sc/source/ui/src/toolbox.src,v
+retrieving revision 1.53
+diff -u -p -u -r1.53 toolbox.src
+--- sc/source/ui/src/toolbox.src	26 May 2003 08:09:27 -0000	1.53
++++ sc/source/ui/src/toolbox.src	4 Jun 2003 10:05:23 -0000
+@@ -1896,9 +1896,15 @@ FloatingWindow RID_TBXCTL_INSOBJ
+ 		SID_ATTR_GRAF_CROP;\
+ 		SID_ENABLE_HYPHENATION;			/* 26087	*/	\
+         SID_ATTR_ZOOM; \
++		SID_PRINTPREVIEW;\
++		SID_HELPINDEX;\
++		SID_HELP_SUPPORTPAGE;\
++		SID_ABOUT;\
++               SID_DELETE_CONTENTS;\
++               SID_SELECTALL;\
+     };                                                  \
+     IdCount = {                                         \
+-        163;                                            \
++        169;                                            \
+     };
+ 
+ 
+Index: sd/source/ui/app/app.src
+===================================================================
+RCS file: /cvs/graphics/sd/source/ui/app/app.src,v
+retrieving revision 1.20
+diff -u -p -u -r1.20 app.src
+--- sd/source/ui/app/app.src	26 May 2003 08:08:02 -0000	1.20
++++ sd/source/ui/app/app.src	4 Jun 2003 10:06:12 -0000
+@@ -395,9 +395,16 @@
+ 			SID_HYPHENATION;\
+ 			SID_THESAURUS;\
+ 			SID_AUTOSPELL_CHECK;\
++               SID_INSERT_FLD_DATE_FIX;\
++               SID_INSERT_FLD_TIME_FIX;\
++               SID_INSERT_FLD_AUTHOR;\
++               SID_INSERT_FLD_PAGE;\
++		SID_HELPINDEX;\
++		SID_HELP_SUPPORTPAGE;\
++		SID_ABOUT;\
+     };\
+     IdCount = {\
+-        285;\
++        292;\
+     };
+ 
+ 
+Index: offmgr/source/offapp/app/app.src
+===================================================================
+RCS file: /cvs/framework/offmgr/source/offapp/app/app.src,v
+retrieving revision 1.89
+diff -u -p -u -r1.89 app.src
+--- offmgr/source/offapp/app/app.src	2 Jul 2003 15:02:49 -0000	1.89
++++ offmgr/source/offapp/app/app.src	9 Jul 2003 08:27:26 -0000
+@@ -930,9 +930,12 @@ ErrorBox RID_ERRBOX_MODULENOTINSTALLED
+ 		SID_DIA;                    \
+ 		SID_HIDE_SLIDE;             \
+ 		SID_CHOOSE_POLYGON;         \
++		SID_HELPINDEX;		    \
++		SID_HELP_SUPPORTPAGE;	    \
++		SID_ABOUT;                  \
+ 	};\
+ 	IdCount = {\
+-        101;\
++        104;\
+ 	};
+ #ifndef IMAGE_STDBTN_COLOR
+ #define IMAGE_STDBTN_COLOR Color { Red = 0xC000; Green = 0xC000; Blue = 0xC000; }

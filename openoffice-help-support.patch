@@ -1,0 +1,64 @@
+Index: svx/inc/globlmn.hrc
+===================================================================
+RCS file: /cvs/graphics/svx/inc/globlmn.hrc,v
+retrieving revision 1.117
+diff -u -p -u -r1.117 globlmn.hrc
+--- svx/inc/globlmn.hrc	22 May 2003 08:57:45 -0000	1.117
++++ svx/inc/globlmn.hrc	4 Jun 2003 10:10:34 -0000
+@@ -5283,10 +5283,6 @@
+                 {\
+ 					ITEM_HELP_SUPPORTPAGE\
+ 				};\
+-				MenuItem\
+-                {\
+-					ITEM_HELP_ONLINE_REGISTRATION\
+-				};\
+                 MenuItem\
+                 {\
+                     Separator = TRUE ; \
+Index: sfx2/source/appl/appserv.cxx
+===================================================================
+RCS file: /cvs/framework/sfx2/source/appl/appserv.cxx,v
+retrieving revision 1.30
+diff -u -p -u -r1.30 appserv.cxx
+--- sfx2/source/appl/appserv.cxx	4 Apr 2003 17:33:45 -0000	1.30
++++ sfx2/source/appl/appserv.cxx	4 Jun 2003 10:13:06 -0000
+@@ -126,6 +126,12 @@
+ #ifndef _SV_HELP_HXX
+ #include <vcl/help.hxx>
+ #endif
++#ifndef _COM_SUN_STAR_SYSTEM_XSYSTEMSHELLEXECUTE_HPP_
++#include <com/sun/star/system/XSystemShellExecute.hpp>
++#endif
++#ifndef _COM_SUN_STAR_SYSTEM_SYSTEMSHELLEXECUTEFLAGS_HPP_
++#include <com/sun/star/system/SystemShellExecuteFlags.hpp>
++#endif
+ 
+ #include <svtools/pathoptions.hxx>
+ #include <svtools/helpopt.hxx>
+@@ -602,9 +608,24 @@ void SfxApplication::MiscExec_Impl( SfxR
+ 			break;
+ 		}
+ 
++		case SID_HELP_SUPPORTPAGE:
++		{
++			try {
++				Reference< com::sun::star::system::XSystemShellExecute > xSystemShell
++					( ::comphelper::getProcessServiceFactory()->createInstance( DEFINE_CONST_UNICODE("com.sun.star.system.SystemShellExecute" ) ), UNO_QUERY );
++				if ( xSystemShell.is()) {
++					rtl::OUString aURI( DEFINE_CONST_UNICODE( "http://www.ximian.com/support" ) );
++					xSystemShell->execute( aURI, ::rtl::OUString(), com::sun::star::system::SystemShellExecuteFlags::DEFAULTS );
++				}
++
++				break;
++			} catch (const ::com::sun::star::uno::Exception &) {
++ 			}
++			/* drop through on exception */
++		}
++
+ 		// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+ 		case SID_HELPINDEX:
+-		case SID_HELP_SUPPORTPAGE:
+ 		{
+ 			Help* pHelp = Application::GetHelp();
+ 			if ( pHelp )

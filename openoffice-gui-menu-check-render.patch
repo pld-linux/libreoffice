@@ -1,0 +1,393 @@
+Index: vcl/source/window/menu.cxx
+===================================================================
+RCS file: /cvs/gsl/vcl/source/window/menu.cxx,v
+retrieving revision 1.96
+diff -u -p -u -r1.96 menu.cxx
+--- vcl/source/window/menu.cxx	12 Jun 2003 07:51:30 -0000	1.96
++++ vcl/source/window/menu.cxx	6 Aug 2003 16:44:44 -0000
+@@ -171,6 +171,339 @@
+ 
+ #include <map>
+ 
++
++#include <ctype.h>
++#include <stdio.h>
++
++#include <salbtype.hxx>
++#include <bmpacc.hxx>
++
++#include "menu-checkbox-off.xpm"
++#include "menu-checkbox-on.xpm"
++#include "menu-radio-off.xpm"
++#include "menu-radio-on.xpm"
++
++static void
++rgb_to_hls (double *r,
++            double *g,
++            double *b)
++{
++	double min;
++	double max;
++	double red;
++	double green;
++	double blue;
++	double h, l, s;
++	double delta;
++  
++	red = *r;
++	green = *g;
++	blue = *b;
++  
++	if (red > green) {
++		if (red > blue)
++			max = red;
++		else
++			max = blue;
++      
++		if (green < blue)
++			min = green;
++		else
++			min = blue;
++    } else {
++		if (green > blue)
++			max = green;
++		else
++			max = blue;
++      
++		if (red < blue)
++			min = red;
++		else
++			min = blue;
++    }
++  
++	l = (max + min) / 2;
++	s = 0;
++	h = 0;
++  
++	if (max != min) {
++		if (l <= 0.5)
++			s = (max - min) / (max + min);
++		else
++			s = (max - min) / (2 - max - min);
++      
++		delta = max -min;
++		if (red == max)
++			h = (green - blue) / delta;
++		else if (green == max)
++			h = 2 + (blue - red) / delta;
++		else if (blue == max)
++			h = 4 + (red - green) / delta;
++      
++		h *= 60;
++		if (h < 0.0)
++			h += 360;
++    }
++  
++	*r = h;
++	*g = l;
++	*b = s;
++}
++
++static void
++hls_to_rgb (double *h,
++            double *l,
++            double *s)
++{
++	double hue;
++	double lightness;
++	double saturation;
++	double m1, m2;
++	double r, g, b;
++  
++	lightness = *l;
++	saturation = *s;
++  
++	if (lightness <= 0.5)
++		m2 = lightness * (1 + saturation);
++	else
++		m2 = lightness + saturation - lightness * saturation;
++	m1 = 2 * lightness - m2;
++  
++	if (saturation == 0) {
++		*h = lightness;
++		*l = lightness;
++		*s = lightness;
++    } else {
++		hue = *h + 120;
++		while (hue > 360)
++			hue -= 360;
++		while (hue < 0)
++			hue += 360;
++      
++		if (hue < 60)
++			r = m1 + (m2 - m1) * hue / 60;
++		else if (hue < 180)
++			r = m2;
++		else if (hue < 240)
++			r = m1 + (m2 - m1) * (240 - hue) / 60;
++		else
++			r = m1;
++      
++		hue = *h;
++		while (hue > 360)
++			hue -= 360;
++		while (hue < 0)
++			hue += 360;
++      
++		if (hue < 60)
++			g = m1 + (m2 - m1) * hue / 60;
++		else if (hue < 180)
++			g = m2;
++		else if (hue < 240)
++			g = m1 + (m2 - m1) * (240 - hue) / 60;
++		else
++			g = m1;
++      
++		hue = *h - 120;
++		while (hue > 360)
++			hue -= 360;
++		while (hue < 0)
++			hue += 360;
++      
++		if (hue < 60)
++			b = m1 + (m2 - m1) * hue / 60;
++		else if (hue < 180)
++			b = m2;
++		else if (hue < 240)
++			b = m1 + (m2 - m1) * (240 - hue) / 60;
++		else
++			b = m1;
++      
++		*h = r;
++		*l = g;
++		*s = b;
++    }
++}
++
++/* Does some weird shading from the bg and fg colors and puts the result in (ir, ig, ib) */
++static void
++shade_rgb (int *ir, int *ig, int *ib, const Color &fg_color, const Color &bg_color, double value)
++{
++	double r, g, b;
++	double f_r, f_g, f_b;
++
++	r = bg_color.GetRed () / 255.0;
++	g = bg_color.GetGreen () / 255.0;
++	b = bg_color.GetBlue () / 255.0;
++
++	f_r = fg_color.GetRed () / 255.0;
++	f_g = fg_color.GetGreen () / 255.0;
++	f_b = fg_color.GetBlue () / 255.0;
++
++	rgb_to_hls (&r, &g, &b);
++	rgb_to_hls (&f_r, &f_g, &f_b);
++
++	/* now green is the lightness */
++
++	g = (g - f_g) * value + f_g;
++	if (g > 1.0)
++		g = 1.0;
++	else if (g < 0.0)
++		g = 0.0;
++
++	hls_to_rgb (&r, &g, &b);
++
++	*ir = (r * 255.0) + 0.5;
++	*ig = (g * 255.0) + 0.5;
++	*ib = (b * 255.0) + 0.5;
++}
++
++/* Takes a grayscale XPM and shades it into a Bitmap */
++static Bitmap *
++create_shaded_bitmap (char **xpm, const Color &fg_color, const Color &bg_color)
++{
++	char *line;
++	int width, height, n_colors, color_len;
++	int palette[256]; /* 0xRRGGBBAA */
++	Bitmap *bitmap;
++	BitmapWriteAccess *wa;
++	int i;
++	int y;
++	int br, bg, bb;
++
++	line = xpm[0];
++
++	if (sscanf (line, "%d%d%d%d", &width, &height, &n_colors, &color_len) != 4)
++		return NULL;
++
++	if (color_len != 1)
++		return NULL;
++
++	/* Read the palette */
++
++	for (i = 0; i < 256; i++)
++		palette[i] = 0;
++
++	for (i = 0; i < n_colors; i++) {
++		char *p;
++		int color_id;
++		int color;
++		BOOL is_transparent;
++
++		line = xpm[i + 1];
++		p = line;
++
++		color_id = *p++;
++
++		while (*p && isspace (*p))
++			p++;
++
++		if (*p != 'c')
++			return NULL;
++
++		p++;
++
++		while (*p && isspace (*p))
++			p++;
++
++		color = 0;
++		is_transparent = TRUE;
++
++		if (*p == '#') {
++			p++;
++			is_transparent = FALSE;
++
++			while (*p) {
++				color = (color << 4);
++
++				if (*p >= '0' && *p <= '9')
++					color += *p - '0';
++				else if (*p >= 'A' && *p <= 'Z')
++					color += *p - 'A' + 10;
++				else
++					break;
++
++				p++;
++			}
++		}
++
++		color = color << 8;
++		if (!is_transparent)
++			color = color | 0xFF;
++
++		palette[color_id] = color;
++	}
++
++	/* Create the bitmap */
++
++	bitmap = new Bitmap (Size (width, height), 24);
++	if (!bitmap)
++		return NULL;
++
++	wa = bitmap->AcquireWriteAccess ();
++	if (!wa) {
++		delete bitmap;
++		return NULL;
++	}
++
++	br = bg_color.GetRed ();
++	bg = bg_color.GetGreen ();
++	bb = bg_color.GetBlue ();
++
++	for (y = 0; y < height; y++) {
++		int x;
++
++		line = xpm[y + n_colors + 1];
++
++		for (x = 0; x < width; x++) {
++			int color;
++			double gray;
++			int r, g, b, a;
++			int tmp;
++
++			color = palette[line[x]];
++			gray = ((color & 0xFF00) >> 8) / 254.0; /* who knows why that is the maximum value in the files */
++			a = color & 0xFF;
++
++			shade_rgb (&r, &g, &b, fg_color, bg_color, gray);
++
++			tmp = (r - br) * a;
++			r = br + ((tmp + (tmp >> 8) + 0x80) >> 8);
++
++			tmp = (g - bg) * a;
++			g = bg + ((tmp + (tmp >> 8) + 0x80) >> 8);
++
++			tmp = (b - bb) * a;
++			b = bb + ((tmp + (tmp >> 8) + 0x80) >> 8);
++
++			wa->SetPixel (y, x, BitmapColor (r, g, b));
++		}
++	}
++
++	bitmap->ReleaseAccess (wa);
++
++	return bitmap;
++}
++
++/* Generates the appropriate image for a check or radio menu item */
++static Bitmap *
++create_option_bitmap (BOOL is_radio, BOOL is_active, const Color &fg_color, const Color &bg_color)
++{
++	static char **xpms[] = {
++		menu_checkbox_off_xpm,
++		menu_checkbox_on_xpm,
++		menu_radio_off_xpm,
++		menu_radio_on_xpm
++	};
++
++	char **xpm;
++
++	xpm = xpms[(is_radio ? 2 : 0) | (is_active ? 1 : 0)];
++
++	return create_shaded_bitmap (xpm, fg_color, bg_color);
++}
++
+ namespace vcl
+ {
+ 
+@@ -2093,6 +2435,7 @@ void Menu::ImplPaint( Window* pWin, USHO
+                 }
+ 
+                 // CheckMark
++#if 0
+                 if ( !bLayout && !bIsMenuBar && pData->bChecked )
+                 {
+                     Rectangle aRect;
+@@ -2116,6 +2459,37 @@ void Menu::ImplPaint( Window* pWin, USHO
+                     }
+                     aDecoView.DrawSymbol( aRect, eSymbol, pWin->GetTextColor(), nSymbolStyle );
+                 }
++#endif
++                if ( !bIsMenuBar
++		     && !pData->pSubMenu
++		     && ( pData->bChecked || (pData->nBits & (MIB_RADIOCHECK | MIB_CHECKABLE | MIB_AUTOCHECK)) ) )
++                {
++			Bitmap *bitmap;
++			BOOL is_radio;
++			BOOL is_active;
++			const StyleSettings &settings = pWin->GetSettings().GetStyleSettings();
++			
++			is_radio = (pData->nBits & MIB_RADIOCHECK) != 0;
++			is_active = pData->bChecked;
++			
++			bitmap = create_option_bitmap (is_radio,
++						       is_active,
++						       settings.GetMenuTextColor (),
++						       pWin->GetFillColor ());
++			
++			if (bitmap) {
++				Point p;
++				int text_yofs;
++				
++				text_yofs = (pData->aSz.Height() - nFontHeight) / 2;
++				
++				p.X () = aPos.X () + nCheckPos;
++				p.Y () = aPos.Y () + text_yofs + nFontHeight / 2 - bitmap->GetSizePixel ().Height () / 2;
++				
++				pWin->DrawBitmap (p, *bitmap);
++				delete bitmap;
++			}
++                }
+ 
+                 // SubMenu?
+                 if ( !bLayout && !bIsMenuBar && pData->pSubMenu )
