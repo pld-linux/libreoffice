@@ -125,6 +125,7 @@ BuildRequires:	nas-devel
 BuildRequires:	pam-devel
 BuildRequires:	perl-base
 BuildRequires:	pkgconfig
+BuildRequires:	python >= 2.2
 BuildRequires:	python-devel >= 2.2
 BuildRequires:	python-modules >= 2.2
 BuildRequires:	sane-backends-devel
