@@ -1,0 +1,130 @@
+--- oo_1.0.2_src.orig/zlib/prj/d.lst	Mon Apr 22 17:26:14 2002
++++ oo_1.0.2_src/zlib/prj/d.lst	Sun Feb 23 00:15:32 2003
+@@ -1,9 +1,10 @@
+ mkdir: %_DEST%\inc%_EXT%\external\zlib
+ 
+-..\%__SRC%\inc\zlib.h %_DEST%\inc%_EXT%\external\zlib\zlib.h
+-..\%__SRC%\inc\zconf.h %_DEST%\inc%_EXT%\external\zconf.h
++\usr\include\zlib.h %_DEST%\inc%_EXT%\external\zlib\zlib.h
++\usr\include\zconf.h %_DEST%\inc%_EXT%\external\zconf.h
++\usr\include\zutil.h %_DEST%\inc%_EXT%\external\zutil.h
+ 
+-..\%__SRC%\lib\libzlib.a %_DEST%\lib%_EXT%\libzlib.a
++\lib\libz.so* %_DEST%\lib%_EXT%\libz.so*
+ ..\%__SRC%\slb\zlib.lib %_DEST%\lib%_EXT%\zlib.lib
+ ..\%__SRC%\slb\zlib.lin %_DEST%\lib%_EXT%\zlib.lin
+ 
+--- oo_1.0.2_src/solenv/inc/libs.mk~	Thu Feb 13 17:46:00 2003
++++ oo_1.0.2_src/solenv/inc/libs.mk	Sun Feb 23 00:25:42 2003
+@@ -171,7 +171,7 @@
+ LNGLIB=-llng$(OFFICEUPD)$(DLLPOSTFIX)
+ EXPAT3RDLIB=-lexpat_xmlparse -lexpat_xmltok
+ EXPATASCII3RDLIB=-lascii_expat_xmlparse -lexpat_xmltok
+-ZLIB3RDLIB=-lzlib
++ZLIB3RDLIB=-lz
+ JPEG3RDLIB=-ljpeglib
+ NEON3RDLIB=-lneon
+ BERKELEYLIB=-ldb-4.1
+--- oo_1.0.2_src.orig/package/source/zipapi/Deflater.cxx	Thu Nov 15 20:16:11 2001
++++ oo_1.0.2_src/package/source/zipapi/Deflater.cxx	Tue Feb 25 15:53:38 2003
+@@ -150,7 +150,7 @@
+ 		pStream->avail_in  = nLength;
+ 		pStream->avail_out = nNewLength;
+ 
+-		nResult = z_deflateParams(pStream, nLevel, nStrategy);
++		nResult = deflateParams(pStream, nLevel, nStrategy);
+ 		switch (nResult)
+ 		{
+ 			case Z_OK:
+@@ -174,7 +174,7 @@
+ 		pStream->avail_in  = nLength;
+ 		pStream->avail_out = nNewLength;
+ 
+-		nResult = z_deflate(pStream, bFinish ? Z_FINISH : Z_NO_FLUSH);
++		nResult = deflate(pStream, bFinish ? Z_FINISH : Z_NO_FLUSH);
+ 		switch (nResult)
+ 		{
+ 			case Z_STREAM_END:
+@@ -220,7 +220,7 @@
+ 	{
+ 		// do error handling
+ 	}
+-	sal_Int32 nResult = z_deflateSetDictionary(pStream, (const unsigned char*)rBuffer.getConstArray()+nOffset, nLength);
++	sal_Int32 nResult = deflateSetDictionary(pStream, (const unsigned char*)rBuffer.getConstArray()+nOffset, nLength);
+ }
+ void SAL_CALL Deflater::setDictionary( const uno::Sequence< sal_Int8 >& rBuffer ) 
+ {
+@@ -230,7 +230,7 @@
+ 		VOS_DEBUG_ONLY("No stream!");
+ 		
+ 	}
+-	sal_Int32 nResult = z_deflateSetDictionary(pStream, (const unsigned char*)rBuffer.getConstArray(), rBuffer.getLength());
++	sal_Int32 nResult = deflateSetDictionary(pStream, (const unsigned char*)rBuffer.getConstArray(), rBuffer.getLength());
+ }
+ void SAL_CALL Deflater::setStrategy( sal_Int32 nNewStrategy ) 
+ {
+@@ -295,7 +295,7 @@
+ }
+ void SAL_CALL Deflater::reset(  ) 
+ {
+-	z_deflateReset(pStream);
++	deflateReset(pStream);
+ 	bFinish = sal_False;
+ 	bFinished = sal_False;
+ 	nOffset = nLength = 0;
+@@ -304,7 +304,7 @@
+ {
+ 	if (pStream != NULL)
+ 	{
+-		z_deflateEnd(pStream);
++		deflateEnd(pStream);
+ 		delete pStream;
+ 	}
+ 	pStream = NULL;
+--- oo_1.0.2_src.orig/package/source/zipapi/Inflater.cxx	Thu Nov 15 20:17:02 2001
++++ oo_1.0.2_src/package/source/zipapi/Inflater.cxx	Tue Feb 25 16:17:19 2003
+@@ -133,7 +133,7 @@
+ 	{
+ 		// do error handling
+ 	}
+-	z_inflateSetDictionary(pStream, (const unsigned char*)rBuffer.getConstArray() + nNewOffset, 
++	inflateSetDictionary(pStream, (const unsigned char*)rBuffer.getConstArray() + nNewOffset, 
+ 				  nNewLength);
+ }
+ 
+@@ -143,7 +143,7 @@
+ 	{
+ 		// do error handling
+ 	}
+-	z_inflateSetDictionary(pStream, (const unsigned char*)rBuffer.getConstArray(), 
++	inflateSetDictionary(pStream, (const unsigned char*)rBuffer.getConstArray(), 
+ 				   rBuffer.getLength());
+ }
+ 
+@@ -202,7 +202,7 @@
+ 
+ void SAL_CALL Inflater::reset(  ) 
+ {
+-	z_inflateReset(pStream);
++	inflateReset(pStream);
+ 	bFinish = bNeedDict = bFinished = sal_False;
+ 	nOffset = nLength = 0;
+ }
+@@ -211,7 +211,7 @@
+ {
+ 	if (pStream != NULL)
+ 	{
+-		z_inflateEnd(pStream);
++		inflateEnd(pStream);
+ 		delete pStream;
+ 	}
+ 	pStream = NULL;
+@@ -225,7 +225,7 @@
+ 	pStream->next_out  = reinterpret_cast < unsigned char* > ( rBuffer.getArray() + nNewOffset );
+ 	pStream->avail_out = nNewLength;
+ 
+-	nResult = ::z_inflate(pStream, bFinish ? Z_SYNC_FLUSH : Z_PARTIAL_FLUSH);
++	nResult = ::inflate(pStream, bFinish ? Z_SYNC_FLUSH : Z_PARTIAL_FLUSH);
+ 
+ 	switch (nResult)
+ 	{
