@@ -68,7 +68,6 @@ cd config_office
 autoconf
 %configure \
 	--with-jdk-home=/usr/lib/jdk%{jdk_ver} \
-	--with-stlport4-home=/usr \
 	--with-lang=ALL \
 	--with-x
 cd ..
