@@ -2,7 +2,6 @@
 #	- normal build requires little less than 4GB of disk space
 #	- full debug build requires about 9GB of disk space
 # TODO:
-#	- wait for nearest ooo-build snap (with --with-arch support)
 #	- drop requirement on nas-devel
 #	- fix locale names and other locale related things
 #	- --with-system-myspell + myspell package as in Debian
@@ -33,8 +32,8 @@ Epoch:		1
 License:	GPL/LGPL
 Group:		X11/Applications
 #Source0:	http://ooo.ximian.com/packages/OOO_%{dfullver}/ooo-build-%{ooobver}.tar.gz
-Source0:	http://ooo.ximian.com/packages/snap/ooo-build-%{ooobver}-HEAD-20040729.tar.gz
-# Source0-md5:	ee3dda3fb1b6093c5e21602f730f5bee
+Source0:	http://ooo.ximian.com/packages/snap/ooo-build-%{ooobver}-HEAD-20040730.tar.gz
+# Source0-md5:	34a0fab5e5e2c50606054d7bc7a67eed
 Source1:	http://ooo.ximian.com/packages/OOO_%{dfullver}/OOO_%{dfullver}.tar.bz2
 # Source1-md5:	627fbce603598a74f9be03f5a1da6d94
 Source2:	http://ooo.ximian.com/packages/ooo-icons-OOO_1_1-9.tar.gz
