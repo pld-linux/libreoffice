@@ -1044,11 +1044,13 @@ FindI18N() {
     SUBF="$SUBF frm gal imp iso jvm lgd oem ofa oic ooo pcr preload"
     SUBF="$SUBF san sc sch sd set set_pp1 sfx sm spa stt svs svt"
     SUBF="$SUBF svx sw tpl tplx uui vcl wwz"
+    SVER=%{subver}
     
     for FILE in $SUBF
     do
-	if [ -f "$RPM_BUILD_ROOT%{_libdir}/openoffice/program/resource/$FILE%{subver}$3.res" ]; then
-	    echo "%lang($1) %{_libdir}/openoffice/program/resource/$FILE%{subver}$3.res" >> "i18n-$1"
+	F="%{_libdir}/openoffice/program/resource/$FILE$SVER$3.res"
+	if [ -f "$RPM_BUILD_ROOT$F" ]; then
+	    echo "%lang($1) $F" >> "i18n-$1"
 	fi	
     done
 }
