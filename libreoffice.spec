@@ -781,7 +781,7 @@ for i in $DIRS; do
 	0[37]|30|4[28]) # pt, ru, el, cs, pl are already UTF-8 encoded
 	    ;;
 	esac
-	    
+
 	grep -A6 'gid_Configurationitem_Common_\(Objectnames.*_Name\|Menus_.*Titel\)' \
 	    ../../$i/normal/setup.ins | $CONV \
 	    | sed "s/^--//;/^ConfigurationItem/s/\(Name\|Titel\)/$i&/" >> $TMPFILE
@@ -840,7 +840,7 @@ cd %{installpath}
 install -m 755 %{SOURCE302} oo_dpack_lang
 install -m 755 %{SOURCE303} oo_fixup_help
 install -m 755 %{SOURCE304} oo_gen_instdb
-    
+
 for res in $LANGUAGES_
 do
     prefix=`cat %{SOURCE9} | grep ":$res:" | cut -d: -f1`
@@ -872,7 +872,7 @@ do
         perl -pi -e "s|$tempdir|%{oolib}|g" \
 	    $tempdir/program/instdb.ins.$isocode
     fi
-	
+
 # move files here and there
     FILES=`find $tempdir -type f -printf "%%P "`
     for FILE in $FILES
@@ -884,7 +884,7 @@ do
 	fi
     done
     rm -rf $tempdir
-    
+
     HOWMUCH=`ls $RPM_BUILD_ROOT%{oolib}/help/$isocode 2>/dev/null | wc -l`
     if [ $HOWMUCH -eq 0 ]; then rm -rf $RPM_BUILD_ROOT%{oolib}/help/$isocode; fi
 done
@@ -987,7 +987,7 @@ AddFiles() {
 	else
 	    [ ! -f $RPM_BUILD_ROOT/$F ] && continue
 	fi
-	
+
 	echo "$OPTIONS $F" >> "i18n-$LOCALE"
     done
 }
@@ -1016,19 +1016,19 @@ FindI18N() {
     BUILDDIR=%(pwd)
 
     echo "%defattr(644,root,root,755)" > "i18n-$1"
-    
+
     AddFiles $1 "" dir %{oolib}/user/autotext/$3
     AddFiles $1 "" dir %{oolib}/share/autotext/$3
     AddFiles $1 "" dir %{oolib}/share/template/$3
     AddFiles $1 "" dir %{oolib}/help/$1
     AddFiles $1 "" dir %{oolib}/share/wordbook/$3
-    
+
     PCKDIR=solver/%{subver}/%{_archbuilddir}/pck
     FILES=""
     [ -f "$PCKDIR/palettes$2.zip" ] && FILES="`unzip -l $PCKDIR/palettes$2.zip | awk '{ if (($4 != "")&&($4 != "----")&&($4 != "Name")) print $4 }'`"
     [ "$1" = "en" ] && FILES="$FILES autotbl.fmt `unzip -l $PCKDIR/palettes.zip | awk '{ if (($4 != "")&&($4 != "----")&&($4 != "Name")) print $4 }'`"
     AddFiles $1 "" "" `Multiply %{oolib}/user/config/ "" $FILES`
-    
+
     FILES=""
     [ -f "$PCKDIR/autocorr$2.zip" ] && FILES="`unzip -l $PCKDIR/autocorr$2.zip | awk '{ if (($4 != "")&&($4 != "----")&&($4 != "Name")) print $4 }'`"
     AddFiles $1 "" "" `Multiply %{oolib}/share/autocorr/ "" $FILES`
