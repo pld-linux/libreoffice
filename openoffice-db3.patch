@@ -1,0 +1,11 @@
+diff -Nur oo_641_src/makefile.mk oo_641_src/makefile.mk
+--- oo_641_src/makefile.mk	Wed Dec 19 03:36:20 2001
++++ oo_641_src/makefile.mk.new	Wed Dec 19 11:10:11 2001
+@@ -155,7 +155,6 @@
+ 	so3 \
+ 	soltools \
+ 	sot \
+-	berkeleydb \
+ 	starmath \
+ 	stoc \
+ 	store \
