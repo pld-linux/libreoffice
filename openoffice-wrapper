@@ -27,7 +27,7 @@ else
   # rename old .sversonrc
   [ -f $HOME/.sversionrc ] && mv $HOME/.sversionrc $HOME/.sversionrc.old
   # run the automated setup
-  /usr/X11R6/lib/openoffice/program/setup -R:/etc/openoffice/autoresponse.conf
+  /usr/lib/openoffice/program/setup -R:/etc/openoffice/autoresponse.conf
   echo "DONE"
 fi
 
@@ -36,7 +36,7 @@ fi
 if [ ! -e "$OOHOME/user/wordbook/dictionary.lst" ]
 then
 (cd $OOHOME/user/wordbook;
-  for file in /usr/X11R6/lib/openoffice/share/wordbook/english/en_US.???; do
+  for file in /usr/lib/openoffice/share/wordbook/english/en_US.???; do
     ln -s $file .
   done
   echo "DICT en US en_US" > dictionary.lst
@@ -47,7 +47,7 @@ fi
 # (dictionary.lst is bound to exist, see above)
 lang=$(sed -n "/LC_MESSAGES=\([a-z]*_[A-Z]*\).*/s//\1/p" /etc/sysconfig/i18n)
 if ! grep -q "$lang" "$OOHOME/user/wordbook/dictionary.lst"; then
-  if [ -f "/usr/X11R6/lib/myspell/$lang.aff" ]; then
+  if [ -f "/usr/lib/myspell/$lang.aff" ]; then
   (cd $OOHOME/user/wordbook;
     for file in /usr/lib/myspell/$lang.???; do
       ln -sf $file .
@@ -62,11 +62,11 @@ chkfontpath="/usr/sbin/chkfontpath"
 if [ -x "$chkfontpath" ]; then
   fontpath=$($chkfontpath | perl -ne '/[0-9]+: (.*)/ and print "$1;"')
 else
-  ttf_fontpath="/usr/X11R6/lib/X11/fonts/TTF;/usr/share/fonts/default/TrueType"
+  ttf_fontpath="/usr/share/fonts/TTF;/usr/share/fonts/default/TrueType"
   for fontdir in /usr/share/fonts/ttf/*; do
     ttf_fontpath="$ttf_fontpath;$fontdir"
   done
-  type1_fontpath="/usr/X11R6/lib/X11/fonts/Type1;/usr/share/fonts/default/Type1"
+  type1_fontpath="/usr/share/fonts/Type1;/usr/share/fonts/default/Type1"
   fontpath="$ttf_fontpath;$type1_fontpath"
 fi
 SAL_FONTPATH_USER="$fontpath;$SAL_FONTPATH_USER"
