@@ -1,0 +1,27 @@
+diff -urN ooo-build-1.1.55.org/bin/build-ooo ooo-build-1.1.55/bin/build-ooo
+--- ooo-build-1.1.55.org/bin/build-ooo	2004-05-06 23:22:35.741584000 +0200
++++ ooo-build-1.1.55/bin/build-ooo	2004-05-06 23:28:44.127580816 +0200
+@@ -467,7 +467,13 @@
+ cd instsetoo || exit 1;
+ EXTRA_BUILD_FLAGS=
+ if test $BUILD_NCPUS -gt 1; then
+-    EXTRA_BUILD_FLAGS=-P$BUILD_NCPUS
++    if test $BUILD_NCPUS -lt 3; then
++	EXTRA_BUILD_FLAGS=-P$BUILD_NCPUS
++    else
++	# limit to 2/2 only
++	EXTRA_BUILD_FLAGS_PRE="-P2"
++	EXTRA_BUILD_FLAGS_POST="-- -P2"
++    fi
+ fi
+ if test "z$BUILD_WIN32" == "z"; then
+     EXTRA_BUILD_FLAGS="$EXTRA_BUILD_FLAGS --dlv_switch link"
+@@ -475,7 +481,7 @@
+ 
+ # Accelerate straight-through compiles by not building / using dependencies
+ export nodep=1
+-perl $SOLARENV/bin/build.pl --all $EXTRA_BUILD_FLAGS || exit 1;
++perl $SOLARENV/bin/build.pl $EXTRA_BUILD_FLAGS_PRE --all $EXTRA_BUILD_FLAGS $EXTRA_BUILD_FLAGS_POST || exit 1;
+ 
+ touch $OOBUILDDIR/$STAMP || exit 1;
+ 
