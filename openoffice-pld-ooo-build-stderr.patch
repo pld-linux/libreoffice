@@ -1,0 +1,28 @@
+diff -urN ooo-build-1.1.54.org/bin/openoffice-xlate-lang ooo-build-1.1.54/bin/openoffice-xlate-lang
+--- ooo-build-1.1.54.org/bin/openoffice-xlate-lang	2004-04-30 02:50:20.269649608 +0200
++++ ooo-build-1.1.54/bin/openoffice-xlate-lang	2004-05-02 22:05:24.067686992 +0200
+@@ -44,15 +44,15 @@
+ sub usage {
+     my $errmsg = shift;
+     my $errcode = shift;
+-    print "$progname: $errmsg\n" if $errmsg;
+-    print "$progname: Converts between prefix codes, iso codes and langnames\n";
+-    print " Usage: $progname (-i|-l|-p|-h) <code>|all\n";
+-    print "  -i <code>: convert prefix to iso code (ex: 03 -> pt)\n";
+-    print "  -l <code>: convert iso code to language name (ex: pt -> portuguese)\n";
+-    print "  -p <code>: convert iso code to prefix (ex: pt -> 03)\n";
+-    print "  the code can either be an iso code, a prefix or even a language name\n";
+-    print "  The special code \"all\" asks for all possible values.\n\n";
+-    print "  -h : print this help\n";
++    print STDERR "$progname: $errmsg\n" if $errmsg;
++    print STDERR "$progname: Converts between prefix codes, iso codes and langnames\n";
++    print STDERR " Usage: $progname (-i|-l|-p|-h) <code>|all\n";
++    print STDERR "  -i <code>: convert prefix to iso code (ex: 03 -> pt)\n";
++    print STDERR "  -l <code>: convert iso code to language name (ex: pt -> portuguese)\n";
++    print STDERR "  -p <code>: convert iso code to prefix (ex: pt -> 03)\n";
++    print STDERR "  the code can either be an iso code, a prefix or even a language name\n";
++    print STDERR "  The special code \"all\" asks for all possible values.\n\n";
++    print STDERR "  -h : print this help\n";
+     exit $errcode;
+ }
+ 
