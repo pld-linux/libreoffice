@@ -963,6 +963,11 @@ do
     rm -f $RPM_BUILD_ROOT%{oolib}/share/dict/ooo/$file
 done
 
+# move to devel ???
+for file in autodoc cppumaker idlc idlcpp javamaker rdbmaker regcomp regmerge regview uno xml2cmp
+do
+    cp solver/%{subver}/%{_archbuilddir}/bin/$file $RPM_BUILD_ROOT%{_bindir}
+done
 
 ####################
 ## CLEAN
@@ -1073,6 +1078,19 @@ done
 %attr(755,root,root) %{oolib}/program/spadmin
 %attr(755,root,root) %{oolib}/program/getstyle-gnome
 %attr(755,root,root) %{oolib}/program/msgbox-gnome
+
+# %files devel ?????????
+%attr(755,root,root) %{_bindir}/autodoc
+%attr(755,root,root) %{_bindir}/cppumaker
+%attr(755,root,root) %{_bindir}/idlc
+%attr(755,root,root) %{_bindir}/idlcpp
+%attr(755,root,root) %{_bindir}/javamaker
+%attr(755,root,root) %{_bindir}/rdbmaker
+%attr(755,root,root) %{_bindir}/regcomp
+%attr(755,root,root) %{_bindir}/regmerge
+%attr(755,root,root) %{_bindir}/regview
+%attr(755,root,root) %{_bindir}/uno
+%attr(755,root,root) %{_bindir}/xml2cmp
 
 %files libs
 %defattr(644,root,root,755)
