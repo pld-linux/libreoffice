@@ -12,7 +12,7 @@ Summary:	OpenOffice - powerful office suite
 Summary(pl):	OpenOffice - potê¿ny pakiet biurowy
 Name:		openoffice
 Version:	1.0.0
-Release:	0.5
+Release:	0.6
 Epoch:		1
 License:	GPL/LGPL
 Group:		X11/Applications
@@ -46,6 +46,8 @@ Patch13:	%{name}-zipdep.patch
 # Remove GPC from linking to GPL/LGPL OO.o code!
 Patch14:	%{name}-remove-gpc.patch
 Patch15:	%{name}-fontcache-1.5.patch
+# Disable stlport from being built
+Patch16:	%{name}-no-stlport.patch
 URL:		http://www.openoffice.org/
 BuildRequires:	STLport-static
 BuildRequires:	XFree86-devel
@@ -62,8 +64,8 @@ BuildRequires:	freetype-static
 %{?_with_nest:BuildRequires:	gcc2}
 %{?!_with_nest:BuildRequires:	gcc-c++ <= 3.0.0}
 %{?_with_nest:BuildRequires:	gcc2-c++}
-%{?_with_ibm_java:BuildRequires:	ibm-java-sdk}
-%{?!_with_ibm_java:BuildRequires:	jdk = 1.3.1_03}
+#%{?_with_ibm_java:BuildRequires:	ibm-java-sdk}
+#%{?!_with_ibm_java:BuildRequires:	jdk = 1.3.1_03}
 %{?!_with_nest:BuildRequires:	libstdc++-devel <= 3.0.0}
 %{?_with_nest:BuildRequires:	libstdc++2-devel}
 BuildRequires:	pam-devel
@@ -128,16 +130,112 @@ Do zalet OpenOffice.org mo¿na zaliczyæ:
 %patch13 -p1
 %patch14 -p1
 %patch15 -p1
+%patch16 -p1
 
 install %{SOURCE1} external
 cd external; tar fxz %{SOURCE1}; cp -fr gpc231/* gpc
 
+##################
+# Build fake JDK
+mkdir -p fakejdk/bin fakejdk/include
+cp -a %{SOURCE4} fakejdk/bin/xmlparse
+
+# Create fakejdk/bin/java:
+sed "s~@@~`pwd`~" > fakejdk/bin/java <<"EOF"
+#!/bin/sh
+if [ "$1" = "-version" ]; then
+	echo 'java version "1.3.1_03"' 1>&2
+	exit 0
+fi
+if [ "$4" = org.openoffice.configuration.XMLDefaultGenerator ]; then
+	exec @@/fakejdk/bin/xmlparse "$@"
+fi
+echo "FIXME: Emulate java runtime using gcj here"
+exit 1
+EOF
+
+chmod +x fakejdk/bin/java fakejdk/bin/xmlparse
+
+# Create fakejdk/bin/javac
+sed "s~@@~`pwd`~" > fakejdk/bin/javac <<"EOF"
+#!/bin/sh
+if [ "$1" = "-J-version" ]; then
+	echo 'java version "1.3.1_03"' 1>&2
+	exit 0
+fi
+TEMP=`mktemp -d fakejavac.XXXXXX` || exit 1
+DEST=.
+ANY=""
+while [ $# != 0 ]; do
+	if [ "$1" = "-classpath" ]; then
+		shift
+	elif [ "$1" = "-d" ]; then
+		DEST=$2
+		shift
+	else
+		case "$1" in
+			*.java)
+				C=`basename "$1" .java`
+				grep '^[  ]*package[      ]*[^    ]*[     ]*;[    ]*$' $1 > $TEMP/$C.java
+				echo "public class $C { }" >> $TEMP/$C.java
+				ANY=1
+			;;
+			*)
+				echo "unknown option passed to javac!" 1>&2
+				exit 1
+			;;
+		esac
+	fi
+	shift
+done
+if [ -n "$ANY" ]; then
+	$GCJ -C -d $DEST $TEMP/*.java
+fi
+rm -rf $TEMP
+exit 0
+EOF
+
+chmod +x fakejdk/bin/javac
+GCJHOME=`$GCJ -print-search-dirs | sed -n 's/^install:[         ]*//p'`
+ln -sf $GCJHOME/include/j* fakejdk/include/
+rm -f fakejdk/include/jni.h
+cat > fakejdk/include/jni.h <<EOF
+#ifndef FAKEJDK_JNI_H
+#define FAKEJDK_JNI_H 1
+#include_next <jni.h>
+#include <stdio.h>
+#include <stdarg.h>
+
+#define JNIEXPORT
+#define JNICALL
+
+typedef struct JDK1_1InitArgs
+{
+	jint version;
+	char ** properties;
+	jint checkSource, nativeStackSize, javaStackSize, minHeapSize, maxHeapSize, verifyMode;
+	char *classpath;
+	jint (*vfprintf) (FILE *, const char *, va_list);
+	void (*exit) (jint);
+	void (*abort) (void);
+	jint enableClassGC, enableVerboseGC, disableAsyncGC, verbose;
+	jboolean debugging;
+	jint debugPort;
+} JDK1_1InitArgs;
+
+#define JavaVM_ JavaVM
+#endif
+EOF
+
 %build
+JAVA_HOME=`pwd`/fakejdk
+export $JAVA_HOME
+
 cd config_office
 autoconf
 
-%{?!_with_ibm_java:JAVA_HOME="/usr/lib/jdk1.3.1_03"}
-%{?_with_ibm_java:JAVA_HOME="/usr/lib/IBMJava2-13"}
+#%{?!_with_ibm_java:JAVA_HOME="/usr/lib/jdk1.3.1_03"}
+#%{?_with_ibm_java:JAVA_HOME="/usr/lib/IBMJava2-13"}
 %configure2_13 \
 	--with-jdk-home=$JAVA_HOME \
 	--with-stlport4-home=/usr \
