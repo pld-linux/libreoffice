@@ -30,8 +30,8 @@ diff -u -p -u -r1.16 printdlg.cxx
                  {
 @@ -475,6 +484,13 @@ bool PrintDialog::ImplGetFilename()
                  Sequence< OUString > aPathSeq( xFilePicker->getFiles() );
- 				INetURLObject aObj( aPathSeq[0] );
- 				maFiPrintFile.SetText( aObj.PathToFileName() );
+                 INetURLObject aObj( aPathSeq[0] );
+                 maFiPrintFile.SetText( aObj.PathToFileName() );
 +
 +#ifdef UNX
 +		Printer* pPrinter = TEMPPRINTER() ? TEMPPRINTER() : mpPrinter;
