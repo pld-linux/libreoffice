@@ -13,8 +13,8 @@
 %bcond_with	icons_ximian	# Ximian icons instead of KDE one
 
 %define		ver		1.1
-%define		rel		1
-%define		ooobver		1.1.59
+%define		rel		2
+%define		ooobver		1.1.59.1
 %define		subver		645
 %define		fullver		%{ver}.%{rel}
 %define		dfullver	%(echo %{fullver} | tr . _)
@@ -24,14 +24,14 @@ Summary:	OpenOffice - powerful office suite
 Summary(pl):	OpenOffice - potê¿ny pakiet biurowy
 Name:		openoffice
 Version:	%{fullver}
-Release:	5.3
+Release:	5.4
 Epoch:		1
 License:	GPL/LGPL
 Group:		X11/Applications
 Source0:	http://ooo.ximian.com/packages/OOO_%{dfullver}/ooo-build-%{ooobver}.tar.gz
 # Source0-md5:	e4bfe9586a8c8018d18742c45e728ccc
 Source1:	http://ooo.ximian.com/packages/OOO_%{dfullver}/OOO_%{dfullver}.tar.bz2
-# Source1-md5:	550381bc429fbbda54cb84758f14e010
+# Source1-md5:	627fbce603598a74f9be03f5a1da6d94
 Source2:	http://ooo.ximian.com/packages/ooo-icons-OOO_1_1-9.tar.gz
 # Source2-md5:	32a0e62f89ef36a91437fc705fbe6440
 Source3:	http://kde.openoffice.org/files/documents/159/1785/ooo-KDE_icons-OOO_1_1-0.1.tar.gz
@@ -910,6 +910,7 @@ RPM_BUILD_NR_THREADS="%(echo "%{__make}" | sed -e 's#.*-j\([[:space:]]*[0-9]\+\)
 [ "$RPM_BUILD_NR_THREADS" != "%{__make}" -a "$RPM_BUILD_NR_THREADS" -gt 4 ] && RPM_BUILD_NR_THREADS=4 || RPM_BUILD_NR_THREADS=1
 
 CONFOPTS=" \
+	--with-tag=OOO_%{dfullver} \
 	--with-ccache-allowed \
 	--with-system-gcc \
 	--with-system-zlib \
@@ -927,7 +928,7 @@ CONFOPTS=" \
 %else
 	--with-icons="KDE" \
 %endif
-	--with-widgetset=kde \
+	--with-widgetset=original,kde,gtk \
 	--with-installed-ooo-dirname=%{name} \
 %if %{with java}
 	--enable-java \
@@ -940,6 +941,7 @@ CONFOPTS=" \
 	--with-lang=ALL \
 	--with-x \
 	--without-fonts \
+	--disable-fontooo \
 	--enable-fontconfig \
 	--enable-libsn \
 	--enable-libart \
@@ -956,7 +958,7 @@ CONFOPTS=" \
 "
 
 # for cvs snaps
-#[ -x ./autogen.sh ] && ./autogen.sh $CONFOPTS
+[ -x ./autogen.sh ] && ./autogen.sh $CONFOPTS
 
 # build-ooo script will pickup these
 CONFIGURE_OPTIONS="$CONFOPTS"; export CONFIGURE_OPTIONS
