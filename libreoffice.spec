@@ -16,7 +16,7 @@
 
 %define		ver		1.1
 %define		rel		2
-%define		ooobver		1.3.0
+%define		ooobver		1.3.2
 %define		subver		645
 %define		fullver		%{ver}.%{rel}
 %define		dfullver	%(echo %{fullver} | tr . _)
@@ -30,9 +30,9 @@ Release:	2.1
 Epoch:		1
 License:	GPL/LGPL
 Group:		X11/Applications
-#Source0:	http://ooo.ximian.com/packages/OOO_%{dfullver}/ooo-build-%{ooobver}.tar.gz
-Source0:	http://ooo.ximian.com/packages/snap/ooo-build-%{ooobver}-HEAD-20040824.tar.gz
-# Source0-md5:	8ac5e46b531d50e516fdad9e0e206044
+Source0:	http://ooo.ximian.com/packages/OOO_%{dfullver}/ooo-build-%{ooobver}.tar.gz
+# Source0-md5:	ec2528427ee2d0e1236d845cffdbc9de
+# Source0:        http://ooo.ximian.com/packages/snap/ooo-build-%{ooobver}-HEAD-20040824.tar.gz
 Source1:	http://ooo.ximian.com/packages/OOO_%{dfullver}/OOO_%{dfullver}.tar.bz2
 # Source1-md5:	627fbce603598a74f9be03f5a1da6d94
 Source2:	http://ooo.ximian.com/packages/ooo-icons-OOO_1_1-10.tar.gz
@@ -1048,7 +1048,7 @@ CONFOPTS=" \
 	--with-vendor="PLD" \
 	--with-distro="PLD" \
 	--with-icons=gnome,kde \
-	--enable-gnome \
+	--enable-gtk \
 	--enable-kde \
 	--with-installed-ooo-dirname=%{name} \
 %if %{with java}
