@@ -182,7 +182,6 @@ Patch301:	%{name}-splash.patch
 Patch341:	%{name}-i18n-sal.patch
 Patch342:	%{name}-i18n-rehash.patch
 Patch343:	%{name}-i18n-cleanup.patch
-Patch344:	%{name}-i18n-search-all.patch
 
 Patch351:	%{name}-print-cups.patch
 Patch352:	%{name}-print-generic-gui.patch
@@ -982,7 +981,6 @@ rm -f moz/prj/d.lst
 %patch341 -p0 
 %patch342 -p0
 %patch343 -p0 
-%patch344 -p0 
 %endif 
 
 %if %{with gnomecups}
