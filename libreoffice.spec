@@ -12,7 +12,7 @@ Summary:	OpenOffice - powerful office suite
 Summary(pl):	OpenOffice - potê¿ny pakiet biurowy
 Name:		openoffice
 Version:	1.0.0
-Release:	0.1
+Release:	0.2
 Epoch:		1
 License:	GPL/LGPL
 Group:		X11/Applications
@@ -75,7 +75,7 @@ Do zalet OpenOffice.org mo¿na zaliczyæ:
  - infrastruktura s³u¿±ca do komunikowania siê w ramach projektu.
 
 %prep
-%setup -q -n oo_%{oo_ver}_src
+%setup -q -n oo_1.0_src
 %patch0 -p1
 %patch1 -p1
 %patch2 -p1
@@ -89,12 +89,12 @@ cd external; tar fxz %{SOURCE1}; cp -fr gpc231/* gpc
 
 %build
 cd config_office
-autoconf
+#autoconf
 
 
 %{?!_with_ibm_java:JAVA_HOME="/usr/lib/jdk1.3.1_02"}
 %{?_with_ibm_java:JAVA_HOME="/usr/lib/IBMJava2-13"}
-%configure \
+%configure2_13 \
 	--with-jdk-home=$JAVA_HOME \
 	--with-stlport4-home=/usr \
 	--with-lang=ALL \
