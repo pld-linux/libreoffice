@@ -116,7 +116,7 @@ install -d $RPM_BUILD_ROOT{%{_bindir},%{_libdir},%{_datadir}/%{name}}
 
 install solver/%{version}/unxlngi3.pro/bin/*.{bin,exe}		$RPM_BUILD_ROOT%{_bindir}
 install solver/%{version}/unxlngi3.pro/lib/*.so		 	$RPM_BUILD_ROOT%{_libdir}
-cp -fr solver/%{version}/unxlngi3.pro/lib/{par,pck,rdb,res,xml}	$RPM_BUILD_ROOT%{_datadir}/%{name}
+cp -fr solver/%{version}/unxlngi3.pro/{par,pck,rdb,res,xml}	$RPM_BUILD_ROOT%{_datadir}/%{name}
 
 %clean
 rm -rf $RPM_BUILD_ROOT
