@@ -23,8 +23,8 @@ BuildRequires:	flex
 %{?!_with_ibm_java:BuildRequires: jdk = 1.3.1_01}
 %{?_with_ibm_java:BuildRequires: ibm-java-sdk}
 BuildRequires:	gcc <= 3.0.0
-BuildRequires:	libgcc
-BuildRequires:	libstdc++-compat >= 1.0-3
+#BuildRequires:	libgcc
+#BuildRequires:	libstdc++-compat >= 1.0-3
 BuildRequires:	perl
 BuildRequires:	tcsh
 BuildRequires:	unzip
