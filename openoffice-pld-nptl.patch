@@ -1,0 +1,59 @@
+diff -urN ooo-build-1.1.54.org/patches/OOO_1_1/build-with-nptl.patch ooo-build-1.1.54/patches/OOO_1_1/build-with-nptl.patch
+--- ooo-build-1.1.54.org/patches/OOO_1_1/build-with-nptl.patch	1970-01-01 01:00:00.000000000 +0100
++++ ooo-build-1.1.54/patches/OOO_1_1/build-with-nptl.patch	2004-04-30 02:15:05.645121400 +0200
+@@ -0,0 +1,42 @@
++--- sal/osl/unx/semaphor.c.jj	2003-08-28 10:24:23.736357952 +0100
+++++ sal/osl/unx/semaphor.c	2003-08-28 10:24:26.260974152 +0100
++@@ -79,7 +79,7 @@
++ /* osl_createSemaphore  */
++ /*****************************************************************************/
++ 
++-#ifdef LINUX
+++#if 0
++ /* sem_t from glibc-2.1 (/usr/include/semaphore.h) */ 
++ 
++ typedef struct {
++@@ -100,7 +100,7 @@
++      * larger of both
++      * XXX
++      */
++-#ifdef LINUX
+++#if 0
++ 	if ( sizeof(glibc_21_sem_t) > sizeof(sem_t) )
++ 		Semaphore= malloc(sizeof(glibc_21_sem_t));
++ 	else
++--- tools/source/solar/solar.c.jj	2003-08-28 11:50:57.589772216 +0100
+++++ tools/source/solar/solar.c	2003-08-28 11:50:05.167741576 +0100
++@@ -577,7 +577,7 @@
++ 
++   {
++ 	char* p = NULL;
++-	InfoMemoryAccess( p );
+++	/*InfoMemoryAccess( p );*/
++ 	p = (char*)&p;
++ 	InfoMemoryAccess( p );
++ 	InfoMemoryTypeAccess( t_short );
++--- neon/neon.patch.jj	2003-10-04 10:32:18.341106008 +0100
+++++ neon/neon.patch	2003-10-04 10:32:49.123426384 +0100
++@@ -19,7 +19,7 @@
++ ! 
++ ! /* Define as __inline if that's what the C compiler calls it.  */
++ ! #ifdef UNX
++-! #define inline
+++! #define inline inline
++ ! #endif
++ ! 
++ ! /* Define if you need to in order for stat and other things to work.  */
+diff -urN ooo-build-1.1.54.org/patches/OOO_1_1_1/apply ooo-build-1.1.54/patches/OOO_1_1_1/apply
+--- ooo-build-1.1.54.org/patches/OOO_1_1_1/apply	2004-04-29 19:04:20.867124864 +0200
++++ ooo-build-1.1.54/patches/OOO_1_1_1/apply	2004-04-30 02:15:33.588873304 +0200
+@@ -122,6 +122,9 @@
+ # Add an ooo-build version in ProductExtension
+ version-strike.diff
+ 
++# Allow building with NPTL enabled
++build-with-nptl.patch
++
+ [ ODKFixes ]
+ 
+ # Fix ODK Java bits
