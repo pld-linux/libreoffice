@@ -27,15 +27,13 @@ Summary:	OpenOffice - powerful office suite
 Summary(pl):	OpenOffice - potê¿ny pakiet biurowy
 Name:		openoffice
 Version:	%{ver}
-Release:	0.1
+Release:	0.2
 Epoch:		1
 License:	GPL/LGPL
 Group:		X11/Applications
 # Previous url: ftp://ftp.openoffice.pl/pub/OpenOffice.ORG/stable/%{fullver}/OOo_%{fullver}_source.tar.bz2
 Source0:	ftp://sunsite.icm.edu.pl/packages/OpenOffice/official/stable/%{fullver}/OOo_%{fullver}_source.tar.bz2
 # Source0-md5:	1919ec0ef5d3e8fe4b0a4910856d8987
-Source1:	ftp://ftp.cs.man.ac.uk/pub/toby/gpc/gpc231.tar.Z
-# Source1-md5:	fdb06fdb5a4670b172f9fb738b717be9
 Source2:	%{name}-rsfile.txt
 Source3:	%{name}-rsfile-local.txt
 Source4:	%{name}-xmlparse.sh
@@ -288,6 +286,7 @@ BuildRequires:	pkgconfig
 BuildRequires:	startup-notification-devel
 BuildRequires:	libart_lgpl-devel
 BuildRequires:	gtk+2-devel
+BuildRequires:	libbonobo-devel
 %if %{with gnomevfs} 
 BuildRequires:	gnome-vfs2-devel
 %endif 
@@ -1079,10 +1078,6 @@ rm -f moz/prj/d.lst
 # gcc 2 include error hack:
 rm -rf autodoc/source/inc/utility
 
-install %{SOURCE1} external
-cd external; tar fxz %{SOURCE1}; cp -fr gpc231/* gpc
-cd ..
-
 install -d solver/%{subver}/%{_archbuilddir}/lib
 cp -f /lib/libgcc_s.so.1* solver/%{subver}/%{_archbuilddir}/lib
 cp /usr/lib/libstdc++.so.5* solver/%{subver}/%{_archbuilddir}/lib
@@ -1137,7 +1132,8 @@ cd config_office
 	--with-stlport4-home=/usr \
 	--with-lang=ALL \
 	--with-x \
-	--enable-libsn
+	--enable-libsn \
+	--enable-libart
 
 cd ..
 
