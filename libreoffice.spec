@@ -328,14 +328,14 @@ rm -f f0_062
 zip -j -5 "f0_062" solver/641/unxlngi3.pro/bin/uno_writerdb.rdb
 mv f0_062.zip %{installpath}/01/normal/f0_062
 
-cp setup.ins setup.ins.orig
+cp %{installpath}/01/normal/setup.ins %{installpath}/01/normal/setup.ins.orig
 for FileID in Lib_gcc Lib_Stdc Lib_Mozab_2 Lib_Mozabdrv Mozilla_Runtime; do
   perl -ni -e "/^(File|Shortcut) gid_(File|Shortcut)_${FileID}/ .. /^End/ or print" %{installpath}/01/normal/setup.ins
   perl -pi -e "s/gid_File_${FileID},//g" %{installpath}/01/normal/setup.ins
 done
 
 # starting installator
-DISPLAY=":$i" %{installpath}/setup -R:$RPM_BUILD_DIR/oo_%{oo_ver}_src/install.rs
+DISPLAY=":$i" %{installpath}/01/normal/setup -R:$RPM_BUILD_DIR/oo_%{oo_ver}_src/install.rs
 
 # stopping Xvfb
 #kill $PID
