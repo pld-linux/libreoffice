@@ -1,14 +1,58 @@
-diff -uNr vcl.old/unx/source/gdi/gcach_xpeer.hxx vcl/unx/source/gdi/gcach_xpeer.hxx
---- oo/vcl.old/unx/source/gdi/gcach_xpeer.hxx	Fri Feb 15 18:00:58 2002
-+++ oo/vcl/unx/source/gdi/gcach_xpeer.hxx	Sat Mar 29 21:11:46 2003
-@@ -65,8 +65,10 @@
- #include <glyphcache.hxx>
+--- oo/vcl/unx/source/gdi/salgdi2.cxx.orig	Fri May 23 18:44:38 2003
++++ oo/vcl/unx/source/gdi/salgdi2.cxx	Fri May 23 18:50:05 2003
+@@ -410,8 +410,8 @@
+ 		Scanline			mpScanAccess;
+ 		sal_Int32			mnScanOffset;
  
- #define Region XLIB_Region
-+#define Cursor XID
- #include <X11/extensions/Xrender.h>
- #undef Region
-+#undef Cursor
+-		sal_uInt32			ColorOf (BitmapColor& rColor) const;
+-		sal_uInt8			GrayOf  (BitmapColor& rColor) const;
++		sal_uInt32			ColorOf (const BitmapColor& rColor) const;
++		sal_uInt8			GrayOf  (const BitmapColor& rColor) const;
  
- class X11GlyphPeer
- : public GlyphCachePeer
+ 							SalPrinterBmp ();
+ 
+@@ -536,7 +536,7 @@
+ }
+ 
+ sal_uInt32
+-SalPrinterBmp::ColorOf (BitmapColor& rColor) const
++SalPrinterBmp::ColorOf (const BitmapColor& rColor) const
+ {
+ 	if (rColor.IsIndex())
+ 		return ColorOf (mpBmpBuffer->maPalette[rColor.GetIndex()]);
+@@ -547,7 +547,7 @@
+ }
+ 
+ sal_uInt8
+-SalPrinterBmp::GrayOf (BitmapColor& rColor) const
++SalPrinterBmp::GrayOf (const BitmapColor& rColor) const
+ {
+ 	if (rColor.IsIndex())
+ 		return GrayOf (mpBmpBuffer->maPalette[rColor.GetIndex()]);
+@@ -573,7 +573,7 @@
+ SalPrinterBmp::GetPixelRGB (sal_uInt32 nRow, sal_uInt32 nColumn) const
+ {
+ 	Scanline pScan = mpScanAccess + nRow * mnScanOffset;
+-	BitmapColor& aColor = mpFncGetPixel (pScan, nColumn, mpBmpBuffer->maColorMask);
++	const BitmapColor& aColor = mpFncGetPixel (pScan, nColumn, mpBmpBuffer->maColorMask);
+ 
+ 	return ColorOf (aColor);
+ }
+@@ -582,7 +582,7 @@
+ SalPrinterBmp::GetPixelGray (sal_uInt32 nRow, sal_uInt32 nColumn) const
+ {
+ 	Scanline pScan = mpScanAccess + nRow * mnScanOffset;
+-	BitmapColor& aColor = mpFncGetPixel (pScan, nColumn, mpBmpBuffer->maColorMask);
++	const BitmapColor& aColor = mpFncGetPixel (pScan, nColumn, mpBmpBuffer->maColorMask);
+ 
+ 	return GrayOf (aColor);
+ }
+@@ -591,7 +591,7 @@
+ SalPrinterBmp::GetPixelIdx (sal_uInt32 nRow, sal_uInt32 nColumn) const
+ {
+ 	Scanline pScan = mpScanAccess + nRow * mnScanOffset;
+-	BitmapColor& aColor = mpFncGetPixel (pScan, nColumn, mpBmpBuffer->maColorMask);
++	const BitmapColor& aColor = mpFncGetPixel (pScan, nColumn, mpBmpBuffer->maColorMask);
+ 
+ 	if (aColor.IsIndex())
+ 		return aColor.GetIndex();
