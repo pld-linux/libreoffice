@@ -48,10 +48,14 @@ Patch14:	%{name}-remove-gpc.patch
 Patch15:	%{name}-fontcache-1.5.patch
 # Disable stlport from being built
 Patch16:	%{name}-no-stlport.patch
+
 # Disable Java applet support
 Patch17:	%{name}-no-java-vm.patch
 # Fix broken inline assembly
 Patch18:	%{name}-asm.patch
+
+Patch19:	%{name}-nousrinclude.patch
+
 URL:		http://www.openoffice.org/
 BuildRequires:	STLport-static
 BuildRequires:	XFree86-devel
@@ -150,6 +154,7 @@ export CC CXX GCJ
 %patch16 -p1
 %patch17 -p1
 %patch18 -p1
+%patch19 -p1
 
 install %{SOURCE1} external
 cd external; tar fxz %{SOURCE1}; cp -fr gpc231/* gpc
