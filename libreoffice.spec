@@ -6,14 +6,13 @@
 # - finish localzation
 # - split into language packages
 # - czech patches from mandrake
-# - correct mirrors
 # - add missing dictionaries
 
 Summary:	OpenOffice - powerful office suite
 Summary(pl):	OpenOffice - potê¿ny pakiet biurowy
 Name:		openoffice
 Version:	1.0.2
-Release:	0.89
+Release:	0.90
 Epoch:		1
 License:	GPL/LGPL
 Group:		X11/Applications
@@ -71,7 +70,10 @@ Source229:	%{name}-ru_RU.zip
 # nor should it be %lang(la).
 Source230:	%{name}-la.zip
 
-Source301:	%{name}-setup
+# Localization scripts from Mandrake
+Source302:	%{name}-dpack-lang.pl
+Source303:	%{name}-transmute-help-errfile.pl
+Source304:	%{name}-create-instdb.pl
 
 Patch0:		%{name}-gcc.patch
 #Patch2:		%{name}-mozilla.patch
@@ -143,6 +145,7 @@ BuildRequires:	flex
 BuildRequires:	freetype-devel >= 2.1
 BuildRequires:	pam-devel
 BuildRequires:	perl
+BuildRequires:	perl(XML::Twig)
 BuildRequires:	tcsh
 BuildRequires:	unzip
 BuildRequires:	zip
@@ -161,8 +164,20 @@ Requires:	libstdc++ < 3.2.1
 Requires:	db3
 %endif
 
+# Languages (English and German are always built)
+# FIXME: split generation of language subpackages, otherwise rpm makes
+# a broken pipe
+%define languages1 "ENUS,FREN,GERM,SPAN,ITAL,DTCH,PORT,SWED,POL,RUSS"
+%define languages2 "DAN,GREEK,TURK,CHINSIM,CHINTRAD,JAPN,KOREAN,CZECH,CAT,FINN"
+%define languages3 "ARAB,SLOVAK"
+%define languages  "%{languages1},%{languages2},%{languages3}"
 
-%define	langs	"ENUS,FREN,GERM,SPAN,ITAL,DTCH,PORT,DAN,GREEK,POL,SWED,TURK,RUSS,CZECH"
+# Supported languages for localized help files (others are not
+# complete/advanced enough)
+%define helplangs1 "ENUS,FREN,GERM,SPAN,ITAL,SWED,RUSS,FINN,CZECH,JAPN"
+%define helplangs2 "KOREAN,CHINSIM,CHINTRAD"
+%define helplangs  "%{helplangs1},%{helplangs2}"
+
 %define	apps	agenda calc draw fax impress label letter math master memo vcard web writer
 %define	wordbooks1	%{SOURCE201} %{SOURCE202} %{SOURCE203} %{SOURCE204} %{SOURCE205}
 %define wordbooks2	%{SOURCE206} %{SOURCE207} %{SOURCE208} %{SOURCE209} %{SOURCE210}
@@ -734,7 +749,7 @@ autoconf
 %configure2_13 \
 	--with-jdk-home=$JAVA_HOME \
 	--with-stlport4-home=/usr \
-	--with-lang=%{langs} \
+	--with-lang=%{languages} \
 	--with-x
 
 cd ..
@@ -862,7 +877,85 @@ for file in s*.zip; do
 done
 rm -f *.zip
 
-%{SOURCE301} setup2/script/linux/1.0.1/webinstdb.inf DIRTO=$RPM_BUILD_ROOT%{_libdir}/openoffice DIRFROM=%{installpath}/
+# Extract language packs
+(cd %{installpath};
+  install -m 755 %{SOURCE302} oo_dpack_lang
+  install -m 755 %{SOURCE303} oo_fixup_help
+  install -m 755 %{SOURCE304} oo_gen_instdb
+  for res in `echo "%{languages}" | sed -e "s/,/ /g"`; do
+    prefix=`cat %{SOURCE9} | grep ":$res:" | cut -d: -f1`
+    isocode=`cat %{SOURCE9} | grep ":$res:" | cut -d: -f2`
+    tempdir=$RPM_BUILD_ROOT%{_libdir}/openoffice-$isocode
+    mkdir -p $tempdir
+    # may extract help files, if known to be localized enough
+    case ",%{helplangs}," in
+    *,$res,*)
+      ./oo_dpack_lang -d=$tempdir -i=$prefix/normal/setup.ins -h
+# TODO: Check this oo_fixup_help thing
+#      # fix permissions
+#      find $tempdir/help/$isocode -type d | xargs chmod 755
+#      find $tempdir/help/$isocode -type f | xargs chmod 644
+#      # transmute error file to suggest installation of
+#      # OpenOffice.org-help-* package
+#      mv -f $tempdir/help/$isocode/err.html orig.err.html
+#      # nuke broken <meta http-equiv="..."/> tag and entities in
+#      # Finnish err.html
+#      [[ "$isocode" = "fi" ]] && {
+#        perl -pi -MEncode -MHTML::Entities -pi \
+#             -e 's/<meta\s+http-equiv=[^>]+>//i;' \
+#             -e '$_=Encode::encode_utf8 decode_entities $_' orig.err.html
+#      }
+#      ./oo_fixup_help $isocode orig.err.html >$tempdir/help/$isocode/err.html
+#      rm -f orig.err.html
+      find $tempdir/help/$isocode "(" -type f -or -type l ")" -print | \
+        sed -e "s|$RPM_BUILD_ROOT%{_libdir}/openoffice-$isocode|%{_libdir}/openoffice|g" > $FILELIST.help.$isocode.in
+      find $tempdir/help/$isocode -type d -print | \
+        sed -e "s|$RPM_BUILD_ROOT%{_libdir}/openoffice-$isocode|%dir %{_libdir}/openoffice|g" | sort -u >> $FILELIST.help.$isocode.in
+      # keep err.html and custom.css in main l10n package
+#      grep -v "help/$isocode\(\|/\(err.html\|custom.css\)\)$" $FILELIST.help.$isocode.in > $FILELIST.help.$isocode
+      rm -f $FILELIST.help.$isocode.in
+      ;;
+    *)
+      # default, create empty help directory
+      # NOTE: with Patch16 (help-fallback-en) we fallback to English help files
+      ./oo_dpack_lang -d=$tempdir -i=$prefix/normal/setup.ins
+      mkdir -p $tempdir/help/$isocode
+      ;;
+    esac
+    # link ooo resource files to iso files
+    (cd $tempdir/program/resource;
+      file=`echo ooo*.res`
+      ln -sf $file ${file/ooo/iso}
+    )
+    # generate localized instdb.ins files, aka let the right files to
+    # be installed for a user installation
+    [[ "$isocode" != "en" ]] && {
+      ./oo_gen_instdb -d $tempdir \
+        -i $prefix/normal/setup.ins \
+        -o $tempdir/program/instdb.ins.$isocode \
+        -pn "%{name}" -pv "%{version}"
+      perl -pi -e "s|$tempdir|%{_libdir}/openoffice|g" \
+        $tempdir/program/instdb.ins.$isocode
+    }
+    # build file list
+    find $tempdir "(" -type f -or -type l ")" -print | \
+      sed -e "s|$tempdir|%{_libdir}/openoffice|g" > $FILELIST.$isocode
+    find $tempdir -type d -print | \
+      sed -e "s|$tempdir|%dir %{_libdir}/openoffice|g" | sort -u >> $FILELIST.$isocode
+    # remove duplicates from l10n-en package
+    [[ "$isocode" != "en" ]] && {
+      mv $FILELIST.$isocode $FILELIST.$isocode.in
+      perl -e "sub cat_ { local *F; open F, \$_[0] or return; my @l = <F>; wantarray() ? @l : join '', @l };\
+       sub difference2 { my %l; @l{@{\$_[1]}} = (); grep { !exists \$l{\$_} } @{\$_[0]} };\
+       print difference2([ cat_(\"$FILELIST.$isocode.in\") ], [ cat_(\"$FILELIST.en\") ])"\
+        > $FILELIST.$isocode
+      rm -f $FILELIST.$isocode.in
+    }
+    # move files here and there
+    cp -af $tempdir/* $RPM_BUILD_ROOT%{_libdir}/openoffice/
+    rm -rf $tempdir
+  done
+)
 
 # Remove unnecessary binaries
 for app in %{apps} ; do
