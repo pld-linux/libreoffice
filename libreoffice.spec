@@ -107,6 +107,7 @@ URL:		http://www.openoffice.org/
 BuildRequires:	db
 BuildRequires:	db-devel
 BuildRequires:	db-cxx
+BuildRequires:	db-cxx-devel
 BuildRequires:	db-java
 BuildRequires:	libstdc++-devel >= 3.2.1
 BuildRequires:	gcc
