@@ -5,16 +5,3 @@
  moz	moz					usr1	-	all	moz_mkout NULL
 -moz	moz\zipped			nmake	-	all	moz_zipped NULL
 +
---- oo_1.0.2_src.orig/scp/source/office/files.scp	Fri Nov  1 09:41:26 2002
-+++ oo_1.0.2_src/scp/source/office/files.scp	Thu Feb 27 17:15:23 2003
-@@ -3040,10 +3017,4 @@
- 
- #endif                                  // of #ifdef SOLAR_JAVA
- 
--File GID_FILE_MOZILLA_RUNTIME
--        BIN_FILE_BODY;
--        Styles = (ARCHIVE);
--        Dir    = GID_DIR_PROGRAM;
--        Name	= "mozruntime.zip";
--End
- 

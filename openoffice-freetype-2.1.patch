@@ -11,6 +11,6 @@
 +#define NEXT_Long(x)	FT_NEXT_LONG(x)
 +#endif
 +
- // Glyph Flags
- #define GF_NONE     0
- #define GF_ROTMASK  3
+ // -----------------------------------------------------------------------
+ 
+ static FT_Library aLibFT = 0;

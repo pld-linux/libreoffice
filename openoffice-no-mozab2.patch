@@ -1,6 +1,6 @@
 --- oo/scp/source/office/files.scp.orig	Fri May  9 14:18:37 2003
 +++ oo/scp/source/office/files.scp	Sat May 24 21:59:07 2003
-@@ -394,16 +394,6 @@
+@@ -429,16 +429,6 @@
      Dir             = GID_DIR_PROGRAM;
  	Styles			= (PACKED);
  End
@@ -17,7 +17,7 @@
  
  
  STD_UNO_LIB_FILE( GID_FILE_LIB_DBU, dbu )
-@@ -755,18 +745,6 @@
+@@ -790,18 +780,6 @@
          #endif
  End
  
@@ -33,17 +33,17 @@
 -        #endif
 -End
 -
- File GID_FILE_LIB_SDBC_2
-         TXT_FILE_BODY;
-         Styles          = (PACKED,UNO_COMPONENT);
-@@ -3040,10 +3018,4 @@
+ #ifdef UNX
+ 
+ File GID_FILE_LIB_EVOAB_1
+@@ -3214,10 +3192,3 @@
+ #endif
  
  #endif                                  // of #ifdef SOLAR_JAVA
- 
+-
 -File GID_FILE_MOZILLA_RUNTIME
--        BIN_FILE_BODY;
+-        TXT_FILE_BODY;
 -        Styles = (ARCHIVE);
 -        Dir    = GID_DIR_PROGRAM;
 -        Name	= "mozruntime.zip";
 -End
- 

@@ -129,3 +129,17 @@
  
  	switch (nResult)
  	{
+--- oo.orig/crashrep/source/unx/makefile.mk	Tue Jul 15 08:41:05 2003
++++ oo/crashrep/source/unx/makefile.mk	Tue Jul 15 09:03:35 2003
+@@ -100,9 +100,9 @@
+ APP1TARGET=$(TARGET)
+ APP1OBJS=$(OBJFILES)
+ .IF "$(COM)" == "GCC"
+-APP1STDLIBS=$(GTKLINKFLAGS) `pkg-config $(ONLYMODLIBS) --libs gtk+-2.0` -lpng -lzlib -ljpeg -ltiff -Wl,-Bdynamic -lXext -lX11 -ldl -lnsl
++APP1STDLIBS=$(GTKLINKFLAGS) `pkg-config $(ONLYMODLIBS) --libs gtk+-2.0` -lpng -lz -ljpeg -ltiff -Wl,-Bdynamic -lXext -lX11 -ldl -lnsl
+ .ELSE
+-APP1STDLIBS=$(GTKLINKFLAGS) `pkg-config $(ONLYMODLIBS) --libs gtk+-2.0` -lpng -lzlib -ljpeg -ltiff -Bdynamic -lXext -lX11 -ldl -lsocket -lnsl
++APP1STDLIBS=$(GTKLINKFLAGS) `pkg-config $(ONLYMODLIBS) --libs gtk+-2.0` -lpng -lz -ljpeg -ltiff -Bdynamic -lXext -lX11 -ldl -lsocket -lnsl
+ .ENDIF
+ 
+ ALL: ALLTAR $(BIN)$/crash_dump.res.01
