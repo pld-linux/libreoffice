@@ -31,7 +31,7 @@ OpenOffice jest potê¿nym pakietem biurowym wywodz±cym siê ze StarOffice.
 cd config_office
 %configure \
 	--with-stlport4-home=%{_prefix} \
-	--with-jdk-home=/usr/local/lib/jdk \
+	--with-jdk-home=/opt/jdk1.3 \
 	--enable-xprint
 
 cd ..
@@ -41,6 +41,11 @@ cd ..
 cat <<EOF > compile
 #!/bin/csh
 source LinuxIntelEnv.Set
+dmake
+cd tools/bootstrp/addexes2
+dmake
+cd ../../..
+cp -p tools/unxlngi3.pro/bin/javadep solenv/unxlngi3/bin/
 dmake
 EOF
 
