@@ -1019,10 +1019,13 @@ touch $RPM_BUILD_ROOT%{_datadir}/fonts/openoffice/fonts.cache-1
 
 # We don't need spadmin (gtk) or the setup application
 rm -f $RPM_BUILD_ROOT%{_libdir}/%{name}/setup
-%if ! %{with kde}
+%if %{with kde}
+rm -f $RPM_BUILD_ROOT%{_libdir}/%{name}/program/*-gnome
+%else
 rm -f $RPM_BUILD_ROOT%{_libdir}/%{name}/spadmin
 rm -f $RPM_BUILD_ROOT%{_libdir}/%{name}/program/spadmin
 %endif
+rm -f $RPM_BUILD_ROOT%{_libdir}/%{name}/program/crash_report.bin
 rm -f $RPM_BUILD_ROOT%{_datadir}/applications/openoffice-setup.desktop
 rm -f $RPM_BUILD_ROOT%{_datadir}/applications/openoffice-printeradmin.desktop
 
@@ -1124,18 +1127,7 @@ fontpostinst TTF %{_fontsdir}/%{name}
 %{_libdir}/%{name}/program/configmgrrc
 %{_libdir}/%{name}/program/instdb.ins
 
-# dirs/trees
-#%{_libdir}/%{name}/program/classes
-
 %dir %{_libdir}/%{name}/program/resource
-#%{_libdir}/%{name}/program/resource/bmp.res
-#%{_libdir}/%{name}/program/resource/crash_dump.res
-
-# mozilla
-#%%{_libdir}/%{name}/program/defaults
-#%%{_libdir}/%{name}/program/component.reg
-#%%{_libdir}/%{name}/program/components/*.xpt
-#%%{_libdir}/%{name}/program/components/*.dat
 
 %dir %{_libdir}/%{name}/help
 %{_libdir}/%{name}/help/en
@@ -1156,7 +1148,6 @@ fontpostinst TTF %{_fontsdir}/%{name}
 %dir %{_libdir}/%{name}/share/template
 %dir %{_libdir}/%{name}/share/wordbook
 %{_libdir}/%{name}/share/readme
-#%{_libdir}/%{name}/share/xslt
 
 %dir %{_libdir}/%{name}/share/registry
 %dir %{_libdir}/%{name}/share/registry/res
@@ -1183,6 +1174,9 @@ fontpostinst TTF %{_fontsdir}/%{name}
 %if %{with kde}
 %attr(755,root,root) %{_libdir}/%{name}/spadmin
 %attr(755,root,root) %{_libdir}/%{name}/program/spadmin
+%else
+%attr(755,root,root) %{_libdir}/%{name}/program/getstyle-gnome
+%attr(755,root,root) %{_libdir}/%{name}/program/msgbox-gnome
 %endif
 %if %{with java}
 %attr(755,root,root) %{_libdir}/%{name}/program/javaldx
@@ -1211,33 +1205,16 @@ fontpostinst TTF %{_fontsdir}/%{name}
 %attr(755,root,root) %{_libdir}/%{name}/program/svcard
 %attr(755,root,root) %{_libdir}/%{name}/program/sweb
 %attr(755,root,root) %{_libdir}/%{name}/program/swriter
-%attr(755,root,root) %{_libdir}/%{name}/program/getstyle-gnome
-%attr(755,root,root) %{_libdir}/%{name}/program/msgbox-gnome
 %attr(755,root,root) %{_libdir}/%{name}/program/*.py
-
-# %files devel ?????????
-#%attr(755,root,root) %{_bindir}/autodoc
-#%attr(755,root,root) %{_bindir}/cppumaker
-#%attr(755,root,root) %{_bindir}/idlc
-#%attr(755,root,root) %{_bindir}/idlcpp
-#%attr(755,root,root) %{_bindir}/javamaker
-#%attr(755,root,root) %{_bindir}/rdbmaker
-#%attr(755,root,root) %{_bindir}/regcomp
-#%attr(755,root,root) %{_bindir}/regmerge
-#%attr(755,root,root) %{_bindir}/regview
-#%attr(755,root,root) %{_bindir}/uno
-#%attr(755,root,root) %{_bindir}/xml2cmp
 
 %files libs
 %defattr(644,root,root,755)
 %dir %{_libdir}/%{name}
 %dir %{_libdir}/%{name}/program
-#%%dir %{_libdir}/%{name}/program/components -- mozilla
 %dir %{_libdir}/%{name}/program/filter
 
 %attr(755,root,root) %{_libdir}/%{name}/program/*.so
 %attr(755,root,root) %{_libdir}/%{name}/program/*.so.*
-#%%attr(755,root,root) %{_libdir}/%{name}/program/components/*.so -- mozilla
 %attr(755,root,root) %{_libdir}/%{name}/program/filter/*.so
 
 %dir %{_datadir}/fonts/openoffice
