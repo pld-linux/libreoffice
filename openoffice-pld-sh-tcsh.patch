@@ -1,0 +1,36 @@
+diff -urN ooo-build-1.1.54.org/bin/ooo-wrapper.in ooo-build-1.1.54/bin/ooo-wrapper.in
+--- ooo-build-1.1.54.org/bin/ooo-wrapper.in	2004-04-30 02:50:19.000000000 +0200
++++ ooo-build-1.1.54/bin/ooo-wrapper.in	2004-05-04 02:09:44.175215400 +0200
+@@ -317,7 +317,7 @@
+     my $setup_cmd = "LD_LIBRARY_PATH=$SystemInstallDir:$SystemInstallDir/program " .
+                     "$SetupProgram -R:$SetupConfig -v -nogui";
+     if (!$Debug) {
+-	$setup_cmd .= " >& ~/.openoffice-install-log";
++	$setup_cmd .= " > ~/.openoffice-install-log 2>&1";
+     }
+ 
+     clean_symlinks (\%config);
+diff -urN ooo-build-1.1.54.org/bin/owner ooo-build-1.1.54/bin/owner
+--- ooo-build-1.1.54.org/bin/owner	2004-04-30 02:50:19.000000000 +0200
++++ ooo-build-1.1.54/bin/owner	2004-05-04 02:09:56.015415416 +0200
+@@ -24,7 +24,7 @@
+     exit 0;
+ }
+ 
+-system('cvs --version >& /dev/null') && die "Can't find cvs tool";
++system('cvs --version > /dev/null 2>&1') && die "Can't find cvs tool";
+ 
+ # Synchronous - but so is life.
+ sub get_owner($$)
+diff -urN ooo-build-1.1.54.org/bin/package-ooo ooo-build-1.1.54/bin/package-ooo
+--- ooo-build-1.1.54.org/bin/package-ooo	2004-04-30 02:50:19.000000000 +0200
++++ ooo-build-1.1.54/bin/package-ooo	2004-05-04 02:09:03.069464424 +0200
+@@ -145,7 +145,7 @@
+ Cflags: -I\${includeddir}" > $PREFIX/lib/pkgconfig/openoffice$BINSUFFIX.pc
+ fi
+ 
+-INSTALLER_PATH="`tcsh -c "cd $OOBUILDDIR; source $OOBUILDDIR/*.Set; echo \"$OOBUILDDIR/instsetoo/\\$INPATH/01/normal\""`";
++INSTALLER_PATH="`tcsh -f -c "cd $OOBUILDDIR; source $OOBUILDDIR/*.Set; echo \"$OOBUILDDIR/instsetoo/\\$INPATH/01/normal\""`";
+ export DISPLAY=''; # clobber;
+ echo "Execute from $INSTALLER_PATH to $OOINSTDIR [$LANG]";
+ cd $INSTALLER_PATH || exit 1;
