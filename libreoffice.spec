@@ -1,3 +1,10 @@
+# TODO:
+#	- check for correct values for PORTBR
+#	- spec can use helpcontent* files not mentioned in SourceXX (bug)
+#	- some files come from oo build and helpcontent, we must decide
+#	  which one should be used
+#	- cleanups, cleanups and cleanups
+
 %define		ver		1.1
 %define		rel		rc3
 %define		fullver		%{ver}%{rel}
@@ -6,7 +13,7 @@ Summary:	OpenOffice - powerful office suite
 Summary(pl):	OpenOffice - potê¿ny pakiet biurowy
 Name:		openoffice
 Version:	%{ver}
-Release:	0.%{rel}.1
+Release:	0.%{rel}.2
 Epoch:		1
 License:	GPL/LGPL
 Group:		X11/Applications
@@ -22,7 +29,6 @@ Source6:	%{name}-applnk.tar.gz
 # Source6-md5:	bb67af38dfd5aa98ee9490c0c452478c
 Source7:	%{name}-wrapper
 Source8:	%{name}-wrapper-component
-Source9:	%{name}-langs.txt
 Source10:	%{name}-db3.jar
 # Source10-md5:	0d15818dea3099eed42b4be9950c69ad
 Source11:	%{name}-dictionary.lst.readme
@@ -237,6 +243,7 @@ Dowi±zania MIME dla OpenOffice.org.
 %define		have_DTCH	yes
 %define		have_POL	yes
 %define		have_PORT	yes
+%define		have_PORTBR	yes
 %define		have_RUSS	yes
 %define		have_SLOVAK	yes
 %define		have_SWED	yes
@@ -564,6 +571,27 @@ portugalskim.
 %files i18n-pt -f i18n-pt
 %endif
 
+%define		PORTBR		""
+%if %{have_PORTBR} == yes
+%define		PORTBR		PORTBR
+%package i18n-pt_BR
+Summary:	OpenOffice.org - interface in Portuguese Brazylian language
+Summary(pl):	OpenOffice.org - interfejs w jêzyku portugalskim (brazylia)
+Group:		Applications/Office
+Requires:	%{name} = %{epoch}:%{version}-%{release}
+
+%description i18n-pt_BR
+This package provides resources containing menus and dialogs in
+Portuguese Brazylian language.
+
+%description i18n-pt_BR -l pl
+Ten pakiet dostarcza zasoby zawieraj±ce menu i okna dialogowe w jêzyku
+portugalskim (brazylia).
+
+%files i18n-pt_BR -f i18n-pt_BR
+%endif
+
+
 %define		RUSS		""
 %if %{have_RUSS} == yes
 %define		RUSS		RUSS
@@ -757,6 +785,43 @@ rm -rf $RPM_BUILD_ROOT
 OOBUILDDIR=`pwd`
 install -d $RPM_BUILD_ROOT%{oolib}
 
+LangCode() {
+# $1 - from column no.
+# $2 - from column value
+# $3 - to column no.
+
+l="\n\
+01:en:ENUS:English US:english::en-US:\n\
+03:pt:PORT:Portuguese:portuguese:por::\n\
+07:ru:RUSS:Russian:russian:rus::\n\
+30:el:GREEK:Greek:greek:gre::\n\
+31:nl:DTCH:Dutch:dutch:dut::\n\
+33:fr:FREN:French:french:fre::\n\
+34:es:SPAN:Spanish:spanish:spa::\n\
+35:fi:FINN:Finnish:finnish:fin::\n\
+37:ca:CAT:Catalan:catalan:cat::\n\
+39:it:ITAL:Italian:italian:ita::\n\
+42:cs:CZECH:Czech:czech:cze::\n\
+43:sk:SLOVAK:Slovak:slovak:slk::\n\
+45:da:DAN:Danish:danish:dan::\n\
+46:sv:SWED:Swedish:swedish:swe::\n\
+48:pl:POL:Polish:polish:pol::\n\
+49:de:GERM:German:german:ger::\n\
+55:pt_BR:PORTBR:Brazilian:portuguese_brazilian::pt-BR:\n\
+81:ja:JAPN:Japanese:japanese:jap::\n\
+82:ko:KOREAN:Korean:korean:kor::\n\
+86:zh_CN:CHINSIM:Chinese Simplified:chinese_simplified::zh-CN:\n\
+88:zh_TW:CHINTRAD:Chinese Traditional:chinese_traditional::zh-TW:\n\
+90:tr:TURK:Turkish:turkish:tur::\n\
+96:ar:ARAB:Arabic:arabic:ara::\n"
+
+echo $l | awk -F: "{ split(\$0, A, \":\"); if (A[$1] == \"$2\") print A[$3]; }"
+}
+
+LANGS="%{ARAB} %{CAT} %{CZECH} %{DAN} %{GERM} %{GREEK} %{ENUS} %{SPAN} %{FINN}
+%{FREN} %{ITAL} %{JAPN} %{KOREAN} %{DTCH} %{POL} %{PORT} %{PORTBR} %{RUSS}
+%{SLOVAK} %{SWED} %{TURK} %{CHINSIM} %{CHINTRAD}"
+
 ### Instalation
 RESPONSE_FILE=$OOBUILDDIR/rsfile.ins
 cd %{installpath}/%{langinst}/normal/
@@ -808,32 +873,31 @@ do
 	    $RPM_BUILD_ROOT%{oolib}/program/resource/$FILE
 done
 
-LANGUAGES_="%{ARAB} %{CAT} %{CZECH} %{DAN} %{GERM} %{GREEK} %{ENUS}"
-LANGUAGES_="$LANGUAGES_ %{SPAN} %{FINN} %{FREN} %{ITAL} %{JAPN}"
-LANGUAGES_="$LANGUAGES_ %{KOREAN} %{DTCH} %{POL} %{PORT} %{RUSS}"
-LANGUAGES_="$LANGUAGES_ %{SLOVAK} %{SWED} %{TURK} %{CHINSIM} %{CHINTRAD}"
-
 # don't care about main_transform.xsl, it looks safe to overwrite
+rm -rf helptmp; mkdir helptmp; cd helptmp
 PREF="`dirname %{SOURCE101}`/helpcontent_"
 SUFX="_unix.tgz"
-for LANG_ in $LANGUAGES_
+for L in $LANGS
 do
-    CODE=`cat %{SOURCE9} | grep $LANG_ | cut -d: -f1`
+    CODE=`LangCode 3 $L 1`
     FILE=$PREF$CODE$SUFX
     if [ -f $FILE ]; then
 	tar zxvf $FILE
+
+	for file in s*.zip; do
+#	    dir=`echo $file | sed -e "s/\(s[a-z]*\)[0-9]*.zip/\1/"`
+#	    [[ "$dir" = "shared" ]] && dir="common"
+	    prefix=`echo $file | sed -e "s/s[a-z]*\([0-9]*\).zip/\1/"`
+	    langname=`LangCode 1 $prefix 2`
+	    install -d $RPM_BUILD_ROOT%{oolib}/help/$langname
+	    unzip -d $RPM_BUILD_ROOT%{oolib}/help/$langname -o $file
+        done
+	rm -f *.zip;
     fi
 done
-
-for file in s*.zip; do
-    dir=`echo $file | sed -e "s/\(s[a-z]*\)[0-9]*.zip/\1/"`
-    [[ "$dir" = "shared" ]] && dir="common"
-    prefix=`echo $file | sed -e "s/s[a-z]*\([0-9]*\).zip/\1/"`
-    langname=`cat %{SOURCE9} | grep ^$prefix | cut -d: -f2`
-    install -d $RPM_BUILD_ROOT%{oolib}/help/$langname
-    unzip -d $RPM_BUILD_ROOT%{oolib}/help/$langname -o $file
-done
-rm -f *.zip
+cd ..
+mv $RPM_BUILD_ROOT%{oolib}/help/{zh_CN,zh-CN}
+mv $RPM_BUILD_ROOT%{oolib}/help/{zh_TW,zh-TW}
 
 ### Extract language packs
 cd %{installpath}
@@ -841,10 +905,10 @@ install -m 755 %{SOURCE302} oo_dpack_lang
 install -m 755 %{SOURCE303} oo_fixup_help
 install -m 755 %{SOURCE304} oo_gen_instdb
 
-for res in $LANGUAGES_
+for res in $LANGS
 do
-    prefix=`cat %{SOURCE9} | grep ":$res:" | cut -d: -f1`
-    isocode=`cat %{SOURCE9} | grep ":$res:" | cut -d: -f2`
+    prefix=`LangCode 3 $res 1`
+    isocode=`LangCode 3 $res 2`
     tempdir=$RPM_BUILD_ROOT%{oolib}-$isocode
     mkdir -p $tempdir
 
@@ -892,8 +956,6 @@ cd $OOBUILDDIR
 
 mv $RPM_BUILD_ROOT%{oolib}/help/{zh-CN,zh_CN}
 mv $RPM_BUILD_ROOT%{oolib}/help/{zh-TW,zh_TW}
-mv $RPM_BUILD_ROOT%{oolib}/program/instdb.ins.{zh-CN,zh_CN}
-mv $RPM_BUILD_ROOT%{oolib}/program/instdb.ins.{zh-TW,zh_TW}
 
 # Remove unnecessary binaries
 for app in %{apps}
@@ -907,6 +969,7 @@ gunzip -dc %{SOURCE6} | tar xf - -C $RPM_BUILD_ROOT%{_applnkdir}
 # Remove stuff that should come from system libraries
 rm -rf $RPM_BUILD_ROOT%{oolib}/program/libdb-*
 rm -rf $RPM_BUILD_ROOT%{oolib}/program/libdb_*
+rm -rf $RPM_BUILD_ROOT%{oolib}/program/filter/libfreetype*
 
 # Fix GNOME & KDE
 install -d $RPM_BUILD_ROOT%{_datadir}
@@ -974,6 +1037,7 @@ do
     cp solver/%{subver}/%{_archbuilddir}/bin/$file $RPM_BUILD_ROOT%{_bindir}
 done
 
+
 AddFiles() {
     LOCALE=$1; shift
     OPTIONS=$1; shift
@@ -1003,77 +1067,46 @@ Multiply() {
 }
 
 # package files
-FindI18N() {
-#	$1 - OpenOffice language name 	eg. POL
-#	$2 - short language name	eg. pl
-#	$3 - digit code			eg. 48
-#	$4 - long language name		eg. polish
-#	$5 - "strange" shortcut		eg. pol
-#	$6 - any other name		eg. pl-PL
-    [ -z "$1" ] && return
-    shift
+for L in $LANGS; do
+    lshort=`LangCode 3 $L 2`
+    lno=`LangCode 3 $L 1`
+    lname=`LangCode 3 $L 5`
+    lres=`LangCode 3 $L 6`
+    loth=`LangCode 3 $L 7`
 
-    BUILDDIR=%(pwd)
+    echo "%defattr(644,root,root,755)" > "i18n-$lshort"
 
-    echo "%defattr(644,root,root,755)" > "i18n-$1"
-
-    AddFiles $1 "" dir %{oolib}/user/autotext/$3
-    AddFiles $1 "" dir %{oolib}/share/autotext/$3
-    AddFiles $1 "" dir %{oolib}/share/template/$3
-    AddFiles $1 "" dir %{oolib}/help/$1
-    AddFiles $1 "" dir %{oolib}/share/wordbook/$3
+    AddFiles $lshort "" dir %{oolib}/user/autotext/$lname
+    AddFiles $lshort "" dir %{oolib}/share/autotext/$lname
+    AddFiles $lshort "" dir %{oolib}/share/template/$lname
+    AddFiles $lshort "" dir %{oolib}/help/$lshort
+    AddFiles $lshort "" dir %{oolib}/share/wordbook/$lname
 
     PCKDIR=solver/%{subver}/%{_archbuilddir}/pck
     FILES=""
-    [ -f "$PCKDIR/palettes$2.zip" ] && FILES="`unzip -l $PCKDIR/palettes$2.zip | awk '{ if (($4 != "")&&($4 != "----")&&($4 != "Name")) print $4 }'`"
-    [ "$1" = "en" ] && FILES="$FILES autotbl.fmt `unzip -l $PCKDIR/palettes.zip | awk '{ if (($4 != "")&&($4 != "----")&&($4 != "Name")) print $4 }'`"
-    AddFiles $1 "" "" `Multiply %{oolib}/user/config/ "" $FILES`
+    [ -f "$PCKDIR/palettes$lno.zip" ] && FILES="`unzip -l $PCKDIR/palettes$lno.zip | awk '{ if (($lres != "")&&($lres != "----")&&($lres != "Name")) print $lres }'`"
+    [ "$lshort" = "en" ] && FILES="$FILES autotbl.fmt `unzip -l $PCKDIR/palettes.zip | awk '{ if (($lres != "")&&($lres != "----")&&($lres != "Name")) print $lres }'`"
+    AddFiles $lshort "" "" `Multiply %{oolib}/user/config/ "" $FILES`
 
     FILES=""
-    [ -f "$PCKDIR/autocorr$2.zip" ] && FILES="`unzip -l $PCKDIR/autocorr$2.zip | awk '{ if (($4 != "")&&($4 != "----")&&($4 != "Name")) print $4 }'`"
-    AddFiles $1 "" "" `Multiply %{oolib}/share/autocorr/ "" $FILES`
+    [ -f "$PCKDIR/autocorr$lno.zip" ] && FILES="`unzip -l $PCKDIR/autocorr$lno.zip | awk '{ if (($lres != "")&&($lres != "----")&&($lres != "Name")) print $lres }'`"
+    AddFiles $lshort "" "" `Multiply %{oolib}/share/autocorr/ "" $FILES`
 
-    SUBF="abp analysis basctl bib cal cnt date dba dbi dbp dbu"
-    SUBF="$SUBF dbw dkt egi eme epb epg epn epp eps ept eur for"
-    SUBF="$SUBF frm gal imp iso jvm lgd oem ofa oic ooo pcr preload"
-    SUBF="$SUBF san sc sch sd set set_pp1 sfx sm spa stt svs svt"
-    SUBF="$SUBF svx sw tpl tplx uui vcl wwz com flash fwe pdffilter"
-    SUBF="$SUBF tk xsltdlg"
+    SUBF="abp analysis basctl bib cal cnt date dba dbi dbp dbu dbw dkt egi eme
+    epb epg epn epp eps ept eur for frm gal imp iso jvm lgd oem ofa oic ooo pcr
+    preload san sc sch sd set set_pp1 sfx sm spa stt svs svt svx sw tpl tplx uui
+    vcl wwz com flash fwe pdffilter tk xsltdlg"
     SVER=%{subver}
 
-    AddFiles $1 "" "" `Multiply %{oolib}/program/resource/ $SVER$2.res $SUBF`
-    AddFiles $1 "" "" %{oolib}/program/instdb.ins.$1
-    AddFiles $1 "" dir `Multiply %{oolib}/share/registry/res/ "" $1 $5`
+    AddFiles $lshort "" "" `Multiply %{oolib}/program/resource/ $SVER$lno.res $SUBF`
+    AddFiles $lshort "" "" %{oolib}/program/instdb.ins.$lshort
+    AddFiles $lshort "" dir `Multiply %{oolib}/share/registry/res/ "" $lshort $loth`
 
-    if [ ! -d "$RPM_BUILD_ROOT%{oolib}/help/$1" ]; then
-	ln -sf %{oolib}/help/en $RPM_BUILD_ROOT%{oolib}/help/$1
-	echo "%{oolib}/help/$1" >> "i18n-$1"
+    if [ ! -d "$RPM_BUILD_ROOT%{oolib}/help/$lshort" ]; then
+	ln -sf %{oolib}/help/en $RPM_BUILD_ROOT%{oolib}/help/$lshort
+	echo "%{oolib}/help/$lshort" >> "i18n-$short"
     fi
-}
-
-FindI18N %{ARAB}	ar	96 arabic		""	""
-FindI18N %{CAT}		ca	37 catalan		""	""
-FindI18N %{CZECH}	cs	42 czech		""	""
-FindI18N %{DAN}		da	45 danish		""	""
-FindI18N %{GERM}	de	49 german		""	""
-FindI18N %{SPAN}	es	34 spanish		""	""
-FindI18N %{GREEK}	el	30 greek		""	""
-FindI18N %{ENUS}	en	01 english		""	"en-US"
-FindI18N %{FINN}	fi	35 finnish		""	""
-FindI18N %{FREN}	fr	33 french		""	""
-FindI18N %{ITAL}	it	39 italian		""	""
-FindI18N %{JAPN}	ja	81 japanese		""	""
-FindI18N %{KOREAN}	ko	82 korean		""	""
-FindI18N %{DTCH}	nl	31 dutch		""	""
-FindI18N %{POL}		pl	48 polish		"pol"	""
-FindI18N %{PORT}	pt	03 portuguese		""	""
-FindI18N %{RUSS}	ru	07 russian		"rus"	""
-FindI18N %{SLOVAK}	sk	43 slovak		""	""
-FindI18N %{SWED}	sv	46 swedish		""	""
-FindI18N %{TURK}	tr	90 turkish		""	""
-FindI18N %{CHINSIM}	zh_CN	86 chinese_simplified	""	"zh-CN"
-FindI18N %{CHINTRAD}	zh_TW	88 chinese_traditional	""	"zh-TW"
-
+done
 
 %clean
 rm -rf $RPM_BUILD_ROOT
