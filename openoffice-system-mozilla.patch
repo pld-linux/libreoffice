@@ -7,7 +7,7 @@
 +
 --- oo_1.0.2_src.orig/scp/source/office/files.scp	Fri Nov  1 09:41:26 2002
 +++ oo_1.0.2_src/scp/source/office/files.scp	Thu Feb 27 17:15:23 2003
-@ -3040,10 +3017,4 @@
+@@ -3040,10 +3017,4 @@
  
  #endif                                  // of #ifdef SOLAR_JAVA
  
