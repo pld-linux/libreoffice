@@ -750,13 +750,25 @@ install -d solver/%{subver}/%{_archbuilddir}/lib
 cp -f /lib/libgcc_s.so.1* solver/%{subver}/%{_archbuilddir}/lib
 cp /usr/lib/libstdc++.so.5* solver/%{subver}/%{_archbuilddir}/lib
 
+# optimalization
+cd solenv/inc
+for i in *.mk
+do
+	cat $i | sed \
+		-e 's/-mpentium/%{rpmcflags}/' \
+		-e 's/-mpentiumpro/%{rpmcflags}/' \
+		-e 's/-mcpu=pentiumpro/%{rpmcflags}/' > $i.new
+	mv -f $i.new $i
+done
 
 %build
 CC=%{__cc}
 CXX=%{__cxx}
 GCJ=gcj
 JAVA_HOME="/usr/lib/java"
-export JAVA_HOME CC CXX GCJ
+CFLAGS="%{rpmcflags}"
+CXXFLAGS="%{rpmcflags}"
+export JAVA_HOME CC CXX GCJ CFLAGS CXXFLAGS
 
 cd config_office
 %{__autoconf}
