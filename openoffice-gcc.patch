@@ -10,6 +10,17 @@ diff -Nur oo/config_office/set_soenv.1 oo.new/config_office/set_soenv.1
        chomp( $answer );
        if ( $answer eq "y" || $answer eq "Y" ) 
        {  $GCC_HOME = GetValue( "Please enter the gcc 2.95.2 --prefix value: " );
+diff -Nur oo/cppuhelper/source/gcc2_linux_intel.map oo.new/cppuhelper/source/gcc2_linux_intel.map
+--- oo/cppuhelper/source/gcc2_linux_intel.map	Tue Sep  4 11:03:09 2001
++++ oo.new/cppuhelper/source/gcc2_linux_intel.map	Mon Apr 15 00:52:56 2002
+@@ -45,7 +45,6 @@
+ __Q53com3sun4star3uno19WeakReferenceHelperRCQ53com3sun4star3unot9Reference1ZQ53com3sun4star3uno10XInterface;
+ __as__Q53com3sun4star3uno19WeakReferenceHelperRCQ53com3sun4star3uno19WeakReferenceHelper;
+ __bss_start;
+-__pure_virtual;
+ __tiQ24cppu11OWeakObject;
+ __tiQ24cppu14OWeakAggObject;
+ __tiQ24cppu16OComponentHelper;
 diff -Nur oo/solenv/inc/unxlngi3.mk oo.new/solenv/inc/unxlngi3.mk
 --- oo/solenv/inc/unxlngi3.mk	Wed Oct 24 19:21:47 2001
 +++ oo.new/solenv/inc/unxlngi3.mk	Sun Apr 14 23:56:12 2002
