@@ -1,31 +1,34 @@
-diff -urN ooo-build-1.1.55.org/bin/build-ooo ooo-build-1.1.55/bin/build-ooo
---- ooo-build-1.1.55.org/bin/build-ooo	2004-05-06 23:22:35.741584000 +0200
-+++ ooo-build-1.1.55/bin/build-ooo	2004-05-06 23:46:10.783464936 +0200
-@@ -467,7 +467,17 @@
- cd instsetoo || exit 1;
- EXTRA_BUILD_FLAGS=
- if test $BUILD_NCPUS -gt 1; then
--    EXTRA_BUILD_FLAGS=-P$BUILD_NCPUS
-+    if test $BUILD_NCPUS -lt 3; then
-+	EXTRA_BUILD_FLAGS=-P2
-+    elif test $BUILD_NCPUS -lt 7; then
-+	# limit to 2/2 only
-+	EXTRA_BUILD_FLAGS_PRE="-P2"
-+	EXTRA_BUILD_FLAGS_POST="-- -P2"
-+    else
-+	# limit to 4/4 only
-+	EXTRA_BUILD_FLAGS_PRE="-P4"
-+	EXTRA_BUILD_FLAGS_POST="-- -P4"
-+    fi
- fi
- if test "z$BUILD_WIN32" == "z"; then
-     EXTRA_BUILD_FLAGS="$EXTRA_BUILD_FLAGS --dlv_switch link"
-@@ -475,7 +485,7 @@
+diff -urN ooo-build-1.1.55.org/patches/OOO_1_1/build-solenv.diff ooo-build-1.1.55/patches/OOO_1_1/build-solenv.diff
+--- ooo-build-1.1.55.org/patches/OOO_1_1/build-solenv.diff	1970-01-01 01:00:00.000000000 +0100
++++ ooo-build-1.1.55/patches/OOO_1_1/build-solenv.diff	2004-05-07 00:45:06.016027896 +0200
+@@ -0,0 +1,17 @@
++diff -urN solenv.org/bin/build.pl solenv/bin/build.pl
++--- solenv.org/bin/build.pl	2004-05-07 00:42:48.995858128 +0200
+++++ solenv/bin/build.pl	2004-05-07 00:44:52.622064088 +0200
++@@ -1053,7 +1053,13 @@
++     if (($pid = waitpid( -1, &WNOHANG)) > 0) {
++ 		&store_error($pid, $?) if ($?);
++ 		&clear_from_child($pid);
+++    } else {
+++	my $errno = 0;
+++	if ($errno == ECHILD) {
+++	    return;
+++	};
++     };
+++    
++ 	while(&children_number() >= $QuantityToBuild) {
++         sleep 1;
++         &handle_dead_children;
+diff -urN ooo-build-1.1.55.org/patches/OOO_1_1_1/apply ooo-build-1.1.55/patches/OOO_1_1_1/apply
+--- ooo-build-1.1.55.org/patches/OOO_1_1_1/apply	2004-05-06 23:22:36.236508760 +0200
++++ ooo-build-1.1.55/patches/OOO_1_1_1/apply	2004-05-07 00:45:36.972321824 +0200
+@@ -666,6 +666,9 @@
+ # splash
+ pld-splash.diff
  
- # Accelerate straight-through compiles by not building / using dependencies
- export nodep=1
--perl $SOLARENV/bin/build.pl --all $EXTRA_BUILD_FLAGS || exit 1;
-+perl $SOLARENV/bin/build.pl $EXTRA_BUILD_FLAGS_PRE --all $EXTRA_BUILD_FLAGS $EXTRA_BUILD_FLAGS_POST || exit 1;
- 
- touch $OOBUILDDIR/$STAMP || exit 1;
++# testing parallel build
++build-solenv.diff
++
+ #######################################################
+ [ ArkOnly ]
  
