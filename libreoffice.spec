@@ -124,7 +124,7 @@ Do zalet OpenOffice.org mo¿na zaliczyæ:
 %patch9 -p1
 %patch10 -p1
 %patch11 -p1
-%patch12 -p1
+%patch12 -p0
 %patch13 -p1
 %patch14 -p1
 %patch15 -p1
