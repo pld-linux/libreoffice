@@ -27,13 +27,13 @@ Summary:	OpenOffice - powerful office suite
 Summary(pl):	OpenOffice - potê¿ny pakiet biurowy
 Name:		openoffice
 Version:	%{fullver}
-Release:	1%{?with_vfs:vfs}
+Release:	2%{?with_vfs:vfs}
 Epoch:		1
 License:	GPL/LGPL
 Group:		X11/Applications
 # Source0:	http://ooo.ximian.com/packages/OOO_1_1_2/ooo-build-%{ooobver}.tar.gz
-Source0:	http://ooo.ximian.com/packages/snap/ooo-build-%{ooobver}-ooo-build-1-3-20041015.tar.gz
-# Source0-md5:	78231f49923e1a7ea01ceb98a314f371
+Source0:	http://ooo.ximian.com/packages/snap/ooo-build-ooo-build-1-3-%{ooobver}-20041112.tar.gz
+# Source0-md5:	cc6fd08174597bdd0f1793a6dcc818a7
 # Source0-size:	2952279
 Source1:	http://ooo.ximian.com/packages/OOO_%{dfullver}/OOO_%{dfullver}.tar.bz2
 # Source1-md5:	f7f13576ad04e6a958dcd9d4cb569538
