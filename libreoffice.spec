@@ -83,8 +83,9 @@ BuildRequires:	autoconf
 BuildRequires:	automake
 BuildRequires:	bison >= 1.875-4
 BuildRequires:	cups-devel
-BuildRequires:	db-devel
+BuildRequires:	curl-devel
 BuildRequires:	db-cxx-devel
+BuildRequires:	db-devel
 BuildRequires:	/usr/bin/getopt
 %if %{with java}
 BuildRequires:	db-java
@@ -94,23 +95,22 @@ BuildRequires:	jdk
 BuildRequires:	libxslt-progs
 %endif
 BuildRequires:	flex
+BuildRequires:	fontconfig-devel >= 1.0.1
 BuildRequires:	freetype-devel >= 2.1
+BuildRequires:	libart_lgpl-devel
 BuildRequires:	libstdc++-devel >= 3.2.1
-BuildRequires:	curl-devel
-BuildRequires:	unixODBC-devel
 BuildRequires:	nas-devel
-BuildRequires:	sane-backends-devel
 BuildRequires:	pam-devel
+BuildRequires:	perl-base
+BuildRequires:	pkgconfig
 BuildRequires:	python-devel
-BuildRequires:	perl
+BuildRequires:	sane-backends-devel
+BuildRequires:	startup-notification-devel
 BuildRequires:	tcsh
+BuildRequires:	unixODBC-devel
 BuildRequires:	unzip
 BuildRequires:	zip
 BuildRequires:	zlib-devel
-# more and more...
-BuildRequires:	pkgconfig
-BuildRequires:	startup-notification-devel
-BuildRequires:	libart_lgpl-devel
 %if %{with kde}
 BuildRequires:	qt-devel
 BuildRequires:	kdelibs-devel
@@ -120,13 +120,13 @@ BuildRequires:	gnome-vfs2-devel
 BuildRequires:	gtk+2-devel
 %endif
 BuildConflicts:	java-sun = 1.4.2
+Requires(post,postun):	fontpostinst
 Requires:	%{name}-libs = %{epoch}:%{version}-%{release}
 Requires:	%{name}-i18n-en = %{epoch}:%{version}-%{release}
-Requires(post,postun):	fontpostinst
-Requires:	libstdc++ >= 3.2.1
 Requires:	cups-lib
 Requires:	db
 Requires:	db-cxx
+Requires:	libstdc++ >= 3.2.1
 Requires:	startup-notification
 %if ! %{with kde}
 Requires:	libgnomecups
@@ -135,7 +135,6 @@ Requires:	gnome-vfs2
 ExclusiveArch:	%{ix86} sparc ppc
 #Suggested:	chkfontpath
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
-
 
 %description
 OpenOffice.org is an open-source project sponsored by Sun Microsystems
