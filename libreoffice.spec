@@ -93,10 +93,10 @@ Patch16:	%{name}-no-stlport.patch
 # Fix broken inline assembly
 Patch18:	%{name}-asm.patch
 
-Patch20:	%{name}-no-mozab.patch
-Patch21:	%{name}-no-mozab2.patch
+Patch19:	%{name}-no-mozab.patch
+Patch20:	%{name}-no-mozab2.patch
 
-Patch22:	%{name}-system-db.patch
+Patch21:	%{name}-system-db.patch
 Patch22:	%{name}-system_ra-db.patch
 
 Patch23:	%{name}-udm.patch
@@ -236,9 +236,13 @@ export CC CXX GCJ
 %patch16 -p1
 %patch18 -p1
 
+%patch19 -p1
 %patch20 -p1
+%if 0%{!?_with_ra:1}
 %patch21 -p1
+%else
 %patch22 -p1
+%endif
 
 %patch23 -p1
 %patch24 -p1
