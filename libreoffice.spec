@@ -13,7 +13,7 @@ Summary:	OpenOffice - powerful office suite
 Summary(pl):	OpenOffice - potê¿ny pakiet biurowy
 Name:		openoffice
 Version:	1.0.2
-Release:	0.87
+Release:	0.88
 Epoch:		1
 License:	GPL/LGPL
 Group:		X11/Applications
@@ -148,6 +148,7 @@ BuildRequires:	jdk
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 Requires:	%{name}-libs = %{version}-%{release}
+Requires:	%{name}-i18n-en = %{version}-%{release}
 %if %{?_with_ra:0}%{!?_with_ra:1}
 Requires:	libstdc++ >= 3.2.1
 Requires:	db
@@ -1014,6 +1015,7 @@ rm -rf $RPM_BUILD_ROOT%{_libdir}/openoffice/share/template/{internal,wizard}
 FindI18N() {
 #    $1 - short language name	eg. pl
 #    $2 - long language name	eg. polish
+#    $3 - digit code		eg. 48
 
     BUILDDIR=%(pwd)
 
@@ -1030,6 +1032,19 @@ FindI18N() {
 	    echo "%lang($1) $DIR" >> "i18n-$1"
 	fi
     done    
+    
+    SUBF="abp analysis basctl bib cal cnt date dba dbi dbp dbu"
+    SUBF="$SUBF dbw dkt egi eme epb epg epn epp eps ept eur for"
+    SUBF="$SUBF frm gal imp iso jvm lgd oem ofa oic ooo pcr preload"
+    SUBF="$SUBF san sc sch sd set set_pp1 sfx sm spa stt svs svt"
+    SUBF="$SUBF svx sw tpl tplx uui vcl wwz"
+    
+    for FILE in $SUBF
+    do
+	if [ -f "$RPM_BUILD_ROOT%{_libdir}/openoffice/program/resource/$FILE%{subver}$3.res" ]; then
+	    echo "%lang($1) %{_libdir}/openoffice/program/resource/$FILE%{subver}$3.res" >> "i18n-$1"
+	fi	
+    done
 }
 
 FindDict() {
@@ -1060,26 +1075,26 @@ FindDict() {
     done    
 }
 
-FindI18N ar arabic
-FindI18N ca catalan
-FindI18N da danish
-FindI18N de german
-FindI18N es spanish
-FindI18N el greek
-FindI18N en english
-FindI18N fi finnish
-FindI18N fr french
-FindI18N it italian
-FindI18N ja japanese
-FindI18N ko korean
-FindI18N nl dutch
-FindI18N pl polish
-FindI18N pt portuguese
-FindI18N ru russian
-FindI18N sv swedish
-FindI18N tr turkish
-FindI18N zh_CN chinese_simplified
-FindI18N zh_TW chinese_traditional
+FindI18N ar arabic 96
+FindI18N ca catalan 37
+FindI18N da danish 45
+FindI18N de german 49
+FindI18N es spanish 34
+FindI18N el greek 30
+FindI18N en english 01
+FindI18N fi finnish 35
+FindI18N fr french 33
+FindI18N it italian 39
+FindI18N ja japanese 81
+FindI18N ko korean 82
+FindI18N nl dutch 31
+FindI18N pl polish 48
+FindI18N pt portuguese 03
+FindI18N ru russian 07
+FindI18N sv swedish 46
+FindI18N tr turkish 90
+FindI18N zh_CN chinese_simplified 86
+FindI18N zh_TW chinese_traditional 88
 
 FindDict bg bulgarian bg_BG
 FindDict ca catalan ca_ES
@@ -1159,8 +1174,11 @@ fi
 
 # dirs/trees
 %{_libdir}/openoffice/program/classes
-%{_libdir}/openoffice/program/resource
 %{_libdir}/openoffice/program/addin
+
+%dir %{_libdir}/openoffice/program/resource
+%{_libdir}/openoffice/program/resource/bmp.res
+%{_libdir}/openoffice/program/resource/testtool.res
 
 # mozilla
 #%%{_libdir}/openoffice/program/defaults
