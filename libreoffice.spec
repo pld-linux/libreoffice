@@ -987,23 +987,6 @@ if [ "$RPM_BUILD_NCPUS" -gt 1 ]; then
 	done
 fi
 
-# gtk version
-cd build/OOO_%{dfullver}
-chmod -R u+rwX vcl
-cp -af vcl vcl.kde
-cp -a Linux*Env.Set* vcl.kde
-sed -i -e "s#\(.*WITH_WIDGETSET.*\)\".*\"\(.*\)#\1\"gtk\"\2#g" Linux*Env.Set*
-sed -i -e "s#\(.*WIDGETSET_CFLAGS.*\)\".*\"\(.*\)#\1\"`pkg-config --cflags gtk+-2.0 gdk-pixbuf-xlib-2.0` -DWIDGETSET_GTK\"\2#g" Linux*Env.Set*
-sed -i -e "s#\(.*WIDGETSET_LIBS.*\)\".*\"\(.*\)#\1\"`pkg-config --libs gtk+-2.0 gdk-pixbuf-xlib-2.0`\"\2#g" Linux*Env.Set*
-set +e
-. ./Linux*Env.Set.sh
-cd vcl
-rm -rf unxlng*
-build
-cd ..
-mv vcl vcl.gtk
-mv vcl.kde vcl
-
 %install
 rm -rf $RPM_BUILD_ROOT
 
@@ -1017,32 +1000,32 @@ TEMP="%{tmpdir}"; export TEMP
 %{__make} install \
 	DESTDIR=$RPM_BUILD_ROOT
 
-mv $RPM_BUILD_ROOT%{_libdir}/%{name}/program/libvcl%{subver}li.so \
-	$RPM_BUILD_ROOT%{_libdir}/%{name}/program/libvcl%{subver}li-kde.so
+#mv $RPM_BUILD_ROOT%{_libdir}/%{name}/program/libvcl%{subver}li.so \
+#	$RPM_BUILD_ROOT%{_libdir}/%{name}/program/libvcl%{subver}li-kde.so
 
-install -m755 build/OOO_%{dfullver}/vcl.gtk/unxlngi4.pro/lib/libvcl%{subver}li.so \
-	$RPM_BUILD_ROOT%{_libdir}/%{name}/program/libvcl%{subver}li-gtk.so
-install -m755 build/OOO_%{dfullver}/vcl.gtk/unxlngi4.pro/bin/*-gnome \
-	$RPM_BUILD_ROOT%{_libdir}/%{name}/program/
+#install -m755 build/OOO_%{dfullver}/vcl.gtk/unxlngi4.pro/lib/libvcl%{subver}li.so \
+#	$RPM_BUILD_ROOT%{_libdir}/%{name}/program/libvcl%{subver}li-gtk.so
+#install -m755 build/OOO_%{dfullver}/vcl.gtk/unxlngi4.pro/bin/*-gnome \
+#	$RPM_BUILD_ROOT%{_libdir}/%{name}/program/
 
-install -d helptmp && cd helptmp || exit 1
-for file in \
-	%{SOURCE400} %{SOURCE401} %{SOURCE402} %{SOURCE403} %{SOURCE404} %{SOURCE405} \
-	%{SOURCE406} %{SOURCE407} %{SOURCE408} %{SOURCE409} %{SOURCE410}; do
-		rm -rf *.*
-		nr=$(echo "$file" | sed -e 's#.*_\(.*\)_.*#\1#g')
-		lang=$(../bin/openoffice-xlate-lang -i "$nr")
-		if [ -z "$lang" ]; then
-			echo "Languge not found for [$file]"
-			exit 1
-		fi
-		tar zxf "${file}"
-		for ifile in s*.zip; do
-			install -d $RPM_BUILD_ROOT%{_libdir}/%{name}/help/${lang}
-			unzip -q -d $RPM_BUILD_ROOT%{_libdir}/%{name}/help/${lang} -o "$ifile"
-		done
-done
-cd ..
+#install -d helptmp && cd helptmp || exit 1
+#for file in \
+#	%{SOURCE400} %{SOURCE401} %{SOURCE402} %{SOURCE403} %{SOURCE404} %{SOURCE405} \
+#	%{SOURCE406} %{SOURCE407} %{SOURCE408} %{SOURCE409} %{SOURCE410}; do
+#		rm -rf *.*
+#		nr=$(echo "$file" | sed -e 's#.*_\(.*\)_.*#\1#g')
+#		lang=$(../bin/openoffice-xlate-lang -i "$nr")
+#		if [ -z "$lang" ]; then
+#			echo "Languge not found for [$file]"
+#			exit 1
+#		fi
+#		tar zxf "${file}"
+#		for ifile in s*.zip; do
+#			install -d $RPM_BUILD_ROOT%{_libdir}/%{name}/help/${lang}
+#			unzip -q -d $RPM_BUILD_ROOT%{_libdir}/%{name}/help/${lang} -o "$ifile"
+#		done
+#done
+#cd ..
 
 sed -e 's#DESTINATIONPATH=.*#DESTINATIONPATH=<home>/.openoffice#g' etc/redhat-autoresponse.conf > $RPM_BUILD_ROOT%{_sysconfdir}/%{name}/autoresponse.conf
 
@@ -1109,44 +1092,44 @@ rm -f $RPM_BUILD_ROOT%{_libdir}/%{name}/program/libgcc_s.so* \
 	$RPM_BUILD_ROOT%{_libdir}/%{name}/program/libstdc++*so*
 
 # Find out locales
-rm -f *.lang
-langlist=""
-for lang in $RPM_BUILD_ROOT%{_libdir}/%{name}/share/registry/res/*; do
-	[ ! -d "$lang" ] && continue
-	langlist="$langlist $(echo "$lang" | sed -e 's#.*/\(.*\)#\1#g')"
-done
-for lang in $RPM_BUILD_ROOT%{_libdir}/%{name}/help/*; do
-	[ ! -d "$lang" ] && continue
-	langlist="$langlist $(echo "$lang" | sed -e 's#.*/\(.*\)#\1#g')"
-done
-langlist=$(echo "$langlist" | tr ' ' '\n' | sort | uniq)
-slanglist=$(echo "$langlist" | awk -F_ ' { print $1 } ' | awk -F- ' { print $1 } ' | sort | uniq | xargs)
-
-for lang in $slanglist; do
-	echo "%%defattr(644,root,root,755)" >> ${lang}.lang
-
-	# help files
-	if (ls $RPM_BUILD_ROOT%{_libdir}/%{name}/help/*${lang}* 2> /dev/null); then
-		echo "%{_libdir}/%{name}/help/*${lang}*" >> ${lang}.lang
-		perl -pi -e "s#.*%{_libdir}/%{name}/help/.*${lang}.*##g" build/lang_*_list.txt
-	fi
-
-	# registry res
-	if (ls $RPM_BUILD_ROOT%{_libdir}/%{name}/share/registry/res/*${lang}* 2> /dev/null); then
-		echo "%{_libdir}/%{name}/share/registry/res/*${lang}*" >> ${lang}.lang
-		perl -pi -e "s#.*%{_libdir}/%{name}/share/registry/res/.*${lang}.*##g" build/lang_*_list.txt
-	fi
-
-	# files from lang_*_list.txt
-	ls build/lang_${lang}*_list.txt 2> /dev/null && sed -e "s#$RPM_BUILD_ROOT##g" build/lang_${lang}*_list.txt >> ${lang}.lang || /bin/true
-
-done
+#rm -f *.lang
+#langlist=""
+#for lang in $RPM_BUILD_ROOT%{_libdir}/%{name}/share/registry/res/*; do
+#	[ ! -d "$lang" ] && continue
+#	langlist="$langlist $(echo "$lang" | sed -e 's#.*/\(.*\)#\1#g')"
+#done
+#for lang in $RPM_BUILD_ROOT%{_libdir}/%{name}/help/*; do
+#	[ ! -d "$lang" ] && continue
+#	langlist="$langlist $(echo "$lang" | sed -e 's#.*/\(.*\)#\1#g')"
+#done
+#langlist=$(echo "$langlist" | tr ' ' '\n' | sort | uniq)
+#slanglist=$(echo "$langlist" | awk -F_ ' { print $1 } ' | awk -F- ' { print $1 } ' | sort | uniq | xargs)
+#
+#for lang in $slanglist; do
+#	echo "%%defattr(644,root,root,755)" >> ${lang}.lang
+#
+#	# help files
+#	if (ls $RPM_BUILD_ROOT%{_libdir}/%{name}/help/*${lang}* 2> /dev/null); then
+#		echo "%{_libdir}/%{name}/help/*${lang}*" >> ${lang}.lang
+#		perl -pi -e "s#.*%{_libdir}/%{name}/help/.*${lang}.*##g" build/lang_*_list.txt
+#	fi
+#
+#	# registry res
+#	if (ls $RPM_BUILD_ROOT%{_libdir}/%{name}/share/registry/res/*${lang}* 2> /dev/null); then
+#		echo "%{_libdir}/%{name}/share/registry/res/*${lang}*" >> ${lang}.lang
+#		perl -pi -e "s#.*%{_libdir}/%{name}/share/registry/res/.*${lang}.*##g" build/lang_*_list.txt
+#	fi
+#
+#	# files from lang_*_list.txt
+#	ls build/lang_${lang}*_list.txt 2> /dev/null && sed -e "s#$RPM_BUILD_ROOT##g" build/lang_${lang}*_list.txt >> ${lang}.lang || /bin/true
+#
+#done
 
 # things not catched by automation above
-echo "%{_libdir}/%{name}/program/resource/*%{subver}01.res" >> en.lang
-echo "%{_libdir}/%{name}/share/wordbook/english" >> en.lang
-echo "%{_libdir}/%{name}/share/autocorr/acor1033.dat" >> en.lang
-echo "%{_libdir}/%{name}/share/autocorr/acor2057.dat" >> en.lang
+#echo "%{_libdir}/%{name}/program/resource/*%{subver}01.res" >> en.lang
+#echo "%{_libdir}/%{name}/share/wordbook/english" >> en.lang
+#echo "%{_libdir}/%{name}/share/autocorr/acor1033.dat" >> en.lang
+#echo "%{_libdir}/%{name}/share/autocorr/acor2057.dat" >> en.lang
 
 find $RPM_BUILD_ROOT -type f -name '*.so' -exec chmod 755 "{}" ";"
 chmod 755 $RPM_BUILD_ROOT%{_libdir}/%{name}/program/*
