@@ -2,7 +2,7 @@
 # -----------------------------------------
 # OpenOffice wrapper script for OpenOffice.org
 # -----------------------------------------
-# (based on Mandrake & Red Hat)
+# (based on Mandrake & Red Hat & Debian)
 
 OOVERSION=@OOVERSION@
 OOVERSIONRC="$HOME/.sversionrc"
@@ -33,9 +33,26 @@ else
   [ -f $HOME/.sversionrc ] && mv $HOME/.sversionrc $HOME/.sversionrc.old
   # run the automated setup
   lang=$(eval $(locale); echo "$LC_MESSAGES" | sed -n "s/\([a-z]*\)_.*/\1/p")
-  /usr/lib/openoffice/program/setup -R:/etc/openoffice/autoresponse.conf -d:$OOHOME -LANGUAGE:$lang
+  /usr/lib/openoffice/program/setup -R:/etc/openoffice/autoresponse.conf -d:$OOHOME
+  cat > $OOHOME/user/registry/data/org/openoffice/Setup.xcu << EOF
+<?xml version="1.0" encoding="UTF-8"?>
+<oor:component-data xmlns:oor="http://openoffice.org/2001/registry" xmlns:xs="http://www.w3.org/2001/XMLSchema" oor:name="Setup" oor:package="org.openoffice">
+ <node oor:name="Office">
+  <prop oor:name="ooSetupInstallPath" oor:type="xs:string">
+   <value>$OOHOME/user</value>
+  </prop>
+ </node>
+ <node oor:name="L10N">
+  <prop oor:name="ooLocale" oor:type="xs:string">
+   <value>$lang</value>
+  </prop>
+ </node>
+</oor:component-data>  
+EOF
   echo "DONE"
 fi
 
 echo "Starting OpenOffice.org..."
+LANG=$lang
+export LANG
 exec $OOHOME/soffice "$@"
