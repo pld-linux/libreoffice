@@ -26,7 +26,7 @@ Source2:	%{name}-rsfile.txt
 Source3:	%{name}-rsfile-local.txt
 Source4:	%{name}-xmlparse.sh
 Source6:	%{name}-applnk.tar.gz
-# Source6-md5:	bb67af38dfd5aa98ee9490c0c452478c
+# Source6-md5:	577bc34d026c951653fbef752d1b5d85
 Source7:	%{name}-wrapper
 Source8:	%{name}-wrapper-component
 Source10:	%{name}-db3.jar
