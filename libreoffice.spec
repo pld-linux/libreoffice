@@ -1060,11 +1060,7 @@ rm -f $RPM_BUILD_ROOT%{_libdir}/%{name}/program/libgcc_s.so* \
 
 # Find out locales
 rm -f *.lang
-# Take list from dictionaries
 langlist=""
-for lang in $RPM_BUILD_ROOT%{_libdir}/%{name}/share/dict/ooo/*.aff; do
-	langlist="$langlist $(echo "$lang" | sed -e 's#.*/\(.*\)\.aff#\1#g')"
-done
 for lang in $RPM_BUILD_ROOT%{_libdir}/%{name}/share/registry/res/*; do
 	[ ! -d "$lang" ] && continue
 	langlist="$langlist $(echo "$lang" | sed -e 's#.*/\(.*\)#\1#g')"
@@ -1075,9 +1071,6 @@ for lang in $RPM_BUILD_ROOT%{_libdir}/%{name}/help/*; do
 done
 langlist=$(echo "$langlist" | tr ' ' '\n' | sort | uniq)
 slanglist=$(echo "$langlist" | awk -F_ ' { print $1 } ' | awk -F- ' { print $1 } ' | sort | uniq | xargs)
-
-echo "LANGLIST [$langlist]"
-echo "SLANGLIST [$slanglist]"
 
 for lang in $slanglist; do
 	echo "%%defattr(644,root,root,755)" >> ${lang}.lang
