@@ -44,3 +44,94 @@ diff -u -u -r1.30 -r1.31
      # Must remove the ./instsetoo/$ARCHITECTURE/*/normal/install scripts
      # as they conflict with the normal system install binary
      rm -f $OOBUILDDIR/instsetoo/$ARCHITECTURE/*/normal/install
+--- openoffice/dev/null	1970-01-01 01:00:00.000000000 +0100
++++ openoffice/bin/install-dictionaries	2004-07-06 02:28:20.471312936 +0200
+@@ -0,0 +1,88 @@
++#!/bin/sh
++
++
++DICTDIR=$OOINSTDIR/share/dict/ooo
++
++if (! test -d $DICTDIR); then
++    echo "Cannot find $DICTDIR; make sure you installed OOo first"
++    exit 1;
++fi
++
++
++# the available dictionaries
++DICTS="hyph_cs_CZ
++	hyph_es_ES
++	hyph_fi_FI
++	hyph_fr_FR
++	hyph_ga_IE
++	hyph_hu_HU
++	hyph_is_IS
++	hyph_it_IT
++	hyph_lt_LT
++	hyph_nl_NL
++	hyph_pl_PL
++	hyph_pt_PT
++	hyph_sk_SK
++	hyph_sv_SE
++	hyph_uk_UA
++	thes_de_DE"
++
++for DICT in $DICTS ; do
++  if test -f $SRCDIR/$DICT.tar.bz2 ; then
++    echo "Unpacking $DICT dictionary..."
++    mkdir -m 755 -p $DOCDIR/dictionaries
++    TMPDIR=`mktemp -d /tmp/ooo-build.dict.XXXXXX`
++    tar -xjf $SRCDIR/$DICT.tar.bz2 -C $TMPDIR || exit 1;
++    chmod 644 $TMPDIR/*.* || exit 1;
++    
++    DICTNAME=${DICT/thes/th}
++
++    test -f $TMPDIR/$DICTNAME.dic && mv $TMPDIR/$DICTNAME.dic $DICTDIR/
++    test -f $TMPDIR/$DICTNAME.dat && mv $TMPDIR/$DICTNAME.dat $DICTDIR/
++    test -f $TMPDIR/$DICTNAME.idx && mv $TMPDIR/$DICTNAME.idx $DICTDIR/
++    mv $TMPDIR/*.* $DOCDIR/dictionaries || exit 1;
++    rmdir $TMPDIR || exit 1; 
++  else
++    echo "Warning: $DICT dictionary is not available..."
++  fi
++done
++
++echo "Creating dictionary.lst..."
++cd $DICTDIR
++> dictionary.lst
++
++# Dictionaries
++for i in *.aff; do
++    # does any exist?
++    if test "z$i" != 'z*.aff' ; then
++	LANGUAGE=`echo $i | cut -b1-2`
++	COUNTRY=`echo $i | cut -b4-5`
++	FULL=`echo $i | cut -b1-5`
++
++	echo "DICT $LANGUAGE $COUNTRY $FULL" >> dictionary.lst
++    fi
++done
++
++# Hyphenation tables
++for i in hyph*.dic; do
++    # does any exist?
++    if test "z$i" != 'zhyph*.dic' ; then
++	LANGUAGE=`echo $i | cut -b6-7`
++	COUNTRY=`echo $i | cut -b9-10`
++	FULL=`echo $i | cut -b6-10`
++
++	echo "HYPH $LANGUAGE $COUNTRY $FULL" >> dictionary.lst
++    fi
++done
++
++# Thesauruses
++for i in th*.dat; do
++    # does any exist?
++    if test "z$i" != 'zth*.dat' ; then
++	LANGUAGE=`echo $i | cut -b4-5`
++	COUNTRY=`echo $i | cut -b7-8`
++	FULL=`echo $i | cut -b1-8`
++
++	echo "THES $LANGUAGE $COUNTRY $FULL" >> dictionary.lst
++    fi
++done
