@@ -106,6 +106,7 @@ Patch32:	%{name}-fix-errno.patch
 Patch52:	%{name}-xmlhelp.patch
 
 Patch63:	%{name}-stlutility.patch
+Patch64:	%{name}-crashrepgtk.patch
 
 URL:		http://www.openoffice.org/
 %if %{?_with_ra:0}%{!?_with_ra:1}
@@ -140,6 +141,22 @@ BuildRequires:	zlib-devel
 BuildRequires:	jar
 BuildRequires:	jdk
 BuildConflicts:	java-sun = 1.4.2
+# gtk crashreport static requirements:
+BuildRequires:	atk-static
+BuildRequires:	expat-static
+BuildRequires:	fontconfig-static
+BuildRequires:	freetype-static
+BuildRequires:	glib2-static
+BuildRequires:	glibc-static
+BuildRequires:	gtk+2-static
+BuildRequires:	libjpeg-static
+BuildRequires:	libpng-static
+BuildRequires:	libtiff-static
+BuildRequires:	pango-static
+BuildRequires:	XFree86-static
+BuildRequires:	xft-static
+BuildRequires:	xrender-static
+BuildRequires:	zlib-static
 Requires:	%{name}-libs = %{epoch}:%{version}-%{release}
 Requires:	%{name}-i18n-en = %{epoch}:%{version}-%{release}
 Requires:	%{name}-dict-en
@@ -705,6 +722,7 @@ rm -f moz/prj/d.lst
 # 1.1 BETA
 %patch52 -p1
 %patch63 -p1
+%patch64 -p1
 
 # gcc 2 include error hack:
 rm -rf autodoc/source/inc/utility
