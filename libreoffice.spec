@@ -8,7 +8,9 @@
 #	- incorporate gnome OOo artwork (icons & more)
 #	- copy & paste problem in oocalc
 
-%bcond_with java		# build without java support
+%bcond_with java		# build with java support
+%bcond_with fontconf		# build with fontconfig support
+%bcond_without parallel 	# parallel building
 
 %define		ver		1.1.0
 %define		rel		%{nil}
@@ -260,7 +262,7 @@ Requires:	%{name}-dict-en
 Requires:	libstdc++ >= 3.2.1
 Requires:	db
 Requires:	startup-notification
-#Requires:	chkfontpath
+#Suggested:	chkfontpath
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 
@@ -951,9 +953,11 @@ rm -f moz/prj/d.lst
 %patch381 -p0
 
 # fontconfig
+%if %{with fontconf}
 %patch391 -p0
 %patch392 -p0
 %patch393 -p0
+%endif 
 
 # gcc 2 include error hack:
 rm -rf autodoc/source/inc/utility
@@ -1020,11 +1024,18 @@ if [ -z "$RPM_BUILD_NCPUS" ] ; then
 fi
 
 %ifarch %{ix86}
-echo -e "#!/bin/tcsh\nsource LinuxIntelEnv.Set\ncd instsetoo\nbuild.pl -P$RPM_BUILD_NCPUS --all\nexit 0" > compile
-%endif
+ENVSCRIPT="LinuxIntelEnv.Set"
+%endif 
 %ifarch ppc
-echo -e "#!/bin/tcsh\nsource LinuxPPCEnv.Set\ncd instsetoo\nbuild.pl -P$RPM_BUILD_NCPUS --all\nexit 0" > compile
+ENVSCRIPT="LinuxPPCEnv.Set"
+%endif 
+
+%if %{with parallel}
+echo -e "#!/bin/tcsh\nsource $ENVSCRIPT\ncd instsetoo\nbuild.pl -P$RPM_BUILD_NCPUS --all\nexit 0" > compile
+%else
+echo -e "#!/bin/tcsh\nsource $ENVSCRIPT\ndmake -p -v" > compile
 %endif
+
 echo -e "#!/bin/tcsh\n./bootstrap\n" > prep
 chmod u+rx prep compile
 ./prep
