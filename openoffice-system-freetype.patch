@@ -1,0 +1,44 @@
+--- oo_1.0_src/freetype/prj/d.lst.systemft	Fri May 31 17:48:49 2002
++++ oo_1.0_src/freetype/prj/d.lst	Fri May 31 17:51:22 2002
+@@ -2,14 +2,14 @@
+ mkdir: %_DEST%\inc%_EXT%\freetype\config
+ mkdir: %_DEST%\inc%_EXT%\freetype\internal
+ 
+-..\%__SRC%\inc\ft2build.h %_DEST%\inc%_EXT%\ft2build.h
+-..\%__SRC%\inc\*.h %_DEST%\inc%_EXT%\freetype\*.h
+-..\%__SRC%\inc\config\*.h %_DEST%\inc%_EXT%\freetype\config\*.h
+-..\%__SRC%\inc\internal\*.h %_DEST%\inc%_EXT%\freetype\internal\*.h
++\usr\include\ft2build.h %_DEST%\inc%_EXT%\ft2build.h
++\usr\include\freetype2\freetype\*.h %_DEST%\inc%_EXT%\freetype\*.h
++\usr\include\freetype2\freetype\config\*.h %_DEST%\inc%_EXT%\freetype\config\*.h
++\usr\include\freetype2\freetype\internal\*.h %_DEST%\inc%_EXT%\freetype\internal\*.h
+ 
+-..\%__SRC%\lib\*.so.* %_DEST%\lib%_EXT%\*.so.*
++\usr\lib\libfreetype.so.* %_DEST%\lib%_EXT%\libfreetype.so.*
+ ..\%__SRC%\lib\*.dylib %_DEST%\lib%_EXT%\*.dylib
+-..\%__SRC%\lib\*.a %_DEST%\lib%_EXT%\*.a
++\usr\lib\libfreetype.a %_DEST%\lib%_EXT%\libfreetype.a
+ 
+ ..\%__SRC%\lib\freetype.lib %_DEST%\lib%_EXT%\freetype.lib
+ 
+--- oo_1.0_src/freetype/makefile.mk.systemft	Tue Feb 26 12:21:37 2002
++++ oo_1.0_src/freetype/makefile.mk	Fri May 31 17:48:37 2002
+@@ -65,6 +65,18 @@
+ PRJNAME=so_freetype
+ TARGET=so_freetype
+ 
++# --- Hack to get system freetype ----------------------------------
++.IF "$(GUI)"=="UNX"
++all:
++	@echo "         An already available installation of freetype should exist on your system."
++	@echo "         Therefore the version provided here does not need to be built in addition."
++
++	+$(COPY) /usr$/lib$/libfreetype.so.6* $(DLLDEST)
++	+$(COPY) /usr$/lib$/libfreetype.a $(DLLDEST)
++	+$(COPY) -r /usr$/include$/freetype2$/freetype $(DLLDEST)$/..$/inc
++	+$(COPY) -r /usr$/include$/ft2build.h $(DLLDEST)$/..$/inc$/freetype
++.ENDIF
++
+ # --- Settings -----------------------------------------------------
+ 
+ .INCLUDE :	settings.mk
