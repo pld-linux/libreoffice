@@ -1,6 +1,25 @@
-diff -urN ooo-build-1.1.53.org/patches/OOO_1_1/ximian-splash.diff ooo-build-1.1.53/patches/OOO_1_1/ximian-splash.diff
---- ooo-build-1.1.53.org/patches/OOO_1_1/ximian-splash.diff	2004-04-29 16:54:35.932614800 +0200
-+++ ooo-build-1.1.53/patches/OOO_1_1/ximian-splash.diff	2004-04-29 16:55:27.929710040 +0200
+diff -urN ooo-build-1.1.54.org/bin/ooo-wrapper.in ooo-build-1.1.54/bin/ooo-wrapper.in
+--- ooo-build-1.1.54.org/bin/ooo-wrapper.in	2004-04-30 02:50:19.000000000 +0200
++++ ooo-build-1.1.54/bin/ooo-wrapper.in	2004-05-04 11:46:33.758758960 +0200
+@@ -57,13 +57,8 @@
+ 
+ my ($UserInstallDir, $SetupConfig);
+ 
+-if ( $VendorName eq "RedHat" ) {
+-    # Define user installation directory
+-    $UserInstallDir = "$ENV{HOME}/.rhopenoffice$ConfigSuffix";
+-} else {
+-    # Define user installation directory
+-    $UserInstallDir = "$ENV{HOME}/.xopenoffice$ConfigSuffix";
+-}
++# Define user installation directory
++$UserInstallDir = "$ENV{HOME}/.openoffice";
+ 
+ # Define setup autoresponse file for user installation
+ $SetupConfig = "/etc/openoffice/autoresponse$BinSuffix.conf";
+diff -urN ooo-build-1.1.54.org/patches/OOO_1_1/ximian-splash.diff ooo-build-1.1.54/patches/OOO_1_1/ximian-splash.diff
+--- ooo-build-1.1.54.org/patches/OOO_1_1/ximian-splash.diff	2004-04-30 02:50:23.000000000 +0200
++++ ooo-build-1.1.54/patches/OOO_1_1/ximian-splash.diff	2004-05-04 11:46:07.203795928 +0200
 @@ -12,10 +12,10 @@
  -#ifdef BUILD_SPECIAL
  -#define OOO_VENDOR "Sun Microsystems Inc."
