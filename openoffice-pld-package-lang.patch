@@ -47,3 +47,13 @@ diff -urN ooo-build-1.1.54.org/bin/package-lang ooo-build-1.1.54/bin/package-lan
  
  	print "done";
  
+diff -urN ooo-build-1.1.54.org/Makefile.am ooo-build-1.1.54/Makefile.am
+--- ooo-build-1.1.54.org/Makefile.am	2004-04-30 02:50:22.268345760 +0200
++++ ooo-build-1.1.54/Makefile.am	2004-05-01 00:47:50.397203568 +0200
+@@ -15,3 +15,6 @@
+ 	intltool-extract.in
+ 
+ ACLOCAL_AMFLAGS = -I m4
++
++clean-generic:
++	rm -f lang_*_list.txt
