@@ -109,6 +109,9 @@ Patch52:	%{name}-xmlhelp.patch
 Patch63:	%{name}-stlutility.patch
 Patch64:	%{name}-crashrepgtk.patch
 
+# Fix java/ppc problem 
+Patch65:	%{name}-java-ppc.patch 
+
 URL:		http://www.openoffice.org/
 BuildRequires:	STLport-devel >= 4.5.3-6
 BuildRequires:	XFree86-devel
@@ -152,6 +155,7 @@ Requires:	%{name}-i18n-en = %{epoch}:%{version}-%{release}
 Requires:	%{name}-dict-en
 Requires:	libstdc++ >= 3.2.1
 Requires:	db
+Requires:	chkfontpath
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 
@@ -742,6 +746,11 @@ rm -f moz/prj/d.lst
 %patch52 -p1
 %patch63 -p1
 %patch64 -p1
+
+# java/ppc: broken native threads?
+%ifarch ppc
+%patch65 -p1 
+%endif 
 
 # gcc 2 include error hack:
 rm -rf autodoc/source/inc/utility
