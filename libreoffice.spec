@@ -61,14 +61,18 @@ Source405:	%{cftp}/helpcontent/helpcontent_46_unix.tgz
 # Source405-md5:	7b013981edce2fabe4a8751ff64a8d58
 Source406:	%{cftp}/helpcontent/helpcontent_49_unix.tgz
 # Source406-md5:	a39f44ec40f452c963a4a187f31d1acb
-Source407:	%{cftp}/helpcontent/helpcontent_81_unix.tgz
-# Source407-md5:	81b705057a0e14ebcbf02fac4762781a
-Source408:	%{cftp}/helpcontent/helpcontent_82_unix.tgz
-# Source408-md5:	3121fbd251176d7c7b6e33ecec744c65
-Source409:	%{cftp}/helpcontent/helpcontent_86_unix.tgz
-# Source409-md5:	aee37935139c5ccd4b6d8abdd2037c66
-Source410:	%{cftp}/helpcontent/helpcontent_88_unix.tgz
-# Source410-md5:	3b00571318e45965dee0545d86306d65
+Source407:	%{cftp}/helpcontent/helpcontent_55_unix.tgz
+# Source407-md5:	804d3ce61e11335193a410aaf9603f8e
+Source408:	%{cftp}/helpcontent/helpcontent_81_unix.tgz
+# Source408-md5:	81b705057a0e14ebcbf02fac4762781a
+Source409:	%{cftp}/helpcontent/helpcontent_82_unix.tgz
+# Source409-md5:	3121fbd251176d7c7b6e33ecec744c65
+Source410:	%{cftp}/helpcontent/helpcontent_86_unix.tgz
+# Source410-md5:	aee37935139c5ccd4b6d8abdd2037c66
+Source411:	%{cftp}/helpcontent/helpcontent_88_unix.tgz
+# Source411-md5:	3b00571318e45965dee0545d86306d65
+Source412:	%{cftp}/helpcontent/helpcontent_90_unix.tgz
+# Source412-md5:	9521a01c5817e87178f356762f8cdab5
 
 Patch0:		%{name}-rh-disable-spellcheck-all-langs.patch
 Patch1:		%{name}-shared-xinerama.patch
@@ -160,7 +164,6 @@ Do zalet OpenOffice.org mo¿na zaliczyæ:
 Summary:	OpenOffice.org shared libraries
 Summary(pl):	Biblioteki dzielone OpenOffice.org
 Group:		X11/Libraries
-Requires:	%{name}-libs-interface = %{epoch}:%{version}-%{release}
 
 %description libs
 OpenOffice.org productivity suite - shared libraries.
@@ -172,11 +175,7 @@ Pakiet biurowy OpenOffice.org - biblioteki.
 Summary:	OpenOffice.org KDE Interface
 Summary(pl):	Interfejs KDE dla OpenOffice.org
 Group:		X11/Libraries
-Provides:	%{name}-libs-interface = %{epoch}:%{version}-%{release}
-#Provides:	libvcl%{subver}li.so
-#Obsoletes:	%{name}-libs-gtk
 Requires:	%{name}-libs = %{epoch}:%{version}-%{release}
-Requires(post,preun):	%{name}-libs = %{epoch}:%{version}-%{release}
 
 %description libs-kde
 OpenOffice.org productivity suite - KDE Interface.
@@ -188,11 +187,7 @@ Pakiet biurowy OpenOffice.org - Interfejs KDE.
 Summary:	OpenOffice.org GTK Interface
 Summary(pl):	Interfejs GTK dla OpenOffice.org
 Group:		X11/Libraries
-Provides:	%{name}-libs-interface = %{epoch}:%{version}-%{release}
-#Provides:	libvcl%{subver}li.so
-#Obsoletes:	%{name}-libs-kde
 Requires:	%{name}-libs = %{epoch}:%{version}-%{release}
-Requires(post,preun):	%{name}-libs = %{epoch}:%{version}-%{release}
 
 %description libs-gtk
 OpenOffice.org productivity suite - GTK Interface.
@@ -228,7 +223,7 @@ Afrikaans language.
 Ten pakiet dostarcza zasoby zawieraj±ce menu i okna dialogowe w jêzyku
 afrykanerskim.
 
-#%files i18n-af -f af.lang
+%files i18n-af -f af.lang
 
 %package i18n-ar
 Summary:	OpenOffice.org - interface in Arabic language
@@ -308,7 +303,7 @@ Cymraeg language.
 Ten pakiet dostarcza zasoby zawieraj±ce menu i okna dialogowe w jêzyku
 walijskim.
 
-#%files i18n-cy -f cy.lang
+%files i18n-cy -f cy.lang
 
 %package i18n-da
 Summary:	OpenOffice.org - interface in Danish language
@@ -485,6 +480,22 @@ Ten pakiet dostarcza zasoby zawieraj±ce menu i okna dialogowe w jêzyku
 galicyjskim.
 
 #%files i18n-gl -f gl.lang
+
+%package i18n-he
+Summary:	OpenOffice.org - interface in Hebrew language
+Summary(pl):	OpenOffice.org - interfejs w jêzyku hebrajskim
+Group:		Applications/Office
+Requires:	%{name} = %{epoch}:%{version}-%{release}
+
+%description i18n-he
+This package provides resources containing menus and dialogs in
+Hebrew language.
+
+%description i18n-he -l pl
+Ten pakiet dostarcza zasoby zawieraj±ce menu i okna dialogowe w jêzyku
+hebrajskim.
+
+%files i18n-he -f he.lang
 
 %package i18n-hr
 Summary:	OpenOffice.org - interface in Croatian language
@@ -692,7 +703,7 @@ Norwegian Bokmaal language.
 Ten pakiet dostarcza zasoby zawieraj±ce menu i okna dialogowe w jêzyku
 norweskim w odmianie Bokmaal.
 
-#%files i18n-nb -f nb.lang
+%files i18n-nb -f nb.lang
 
 %package i18n-nl
 Summary:	OpenOffice.org - interface in Dutch language
@@ -709,6 +720,38 @@ Ten pakiet dostarcza zasoby zawieraj±ce menu i okna dialogowe w jêzyku
 holenderskim.
 
 %files i18n-nl -f nl.lang
+
+%package i18n-nn
+Summary:	OpenOffice.org - interface in Norwegian Nynorsk language
+Summary(pl):	OpenOffice.org - interfejs w jêzyku norweskim (odmiana Nynorsk)
+Group:		Applications/Office
+Requires:	%{name} = %{epoch}:%{version}-%{release}
+
+%description i18n-nn
+This package provides resources containing menus and dialogs in
+Norwegian Nynorsk language.
+
+%description i18n-nn -l pl
+Ten pakiet dostarcza zasoby zawieraj±ce menu i okna dialogowe w jêzyku
+norweskim w odmianie Nynorsk.
+
+%files i18n-nn -f nn.lang
+
+%package i18n-nso
+Summary:	OpenOffice.org - interface in Northern Sotho language
+Summary(pl):	OpenOffice.org - interfejs w jêzyku ludu Soto
+Group:		Applications/Office
+Requires:	%{name} = %{epoch}:%{version}-%{release}
+
+%description i18n-nso
+This package provides resources containing menus and dialogs in
+Northern Sotho language.
+
+%description i18n-nso -l pl
+Ten pakiet dostarcza zasoby zawieraj±ce menu i okna dialogowe w jêzyku
+ludu Soto.
+
+%files i18n-nso -f ns.lang
 
 %package i18n-pl
 Summary:	OpenOffice.org - interface in Polish language
@@ -741,6 +784,22 @@ Ten pakiet dostarcza zasoby zawieraj±ce menu i okna dialogowe w jêzyku
 portugalskim.
 
 %files i18n-pt -f pt.lang
+
+%package i18n-pt_BR
+Summary:	OpenOffice.org - interface in Brazilian Portuguese language
+Summary(pl):	OpenOffice.org - interfejs w jêzyku portugalskim dla Brazylii
+Group:		Applications/Office
+Requires:	%{name} = %{epoch}:%{version}-%{release}
+
+%description i18n-pt_BR
+This package provides resources containing menus and dialogs in
+Brazilian Portuguese language.
+
+%description i18n-pt_BR -l pl
+Ten pakiet dostarcza zasoby zawieraj±ce menu i okna dialogowe w jêzyku
+portugalskim dla Brazylii.
+
+%files i18n-pt_BR -f pt-BR.lang
 
 %package i18n-ro
 Summary:	OpenOffice.org - interface in Romanian language
@@ -854,26 +913,62 @@ ukraiñskim.
 
 #%files i18n-uk -f uk.lang
 
-%package i18n-zh
-Summary:	OpenOffice.org - interface in Chinese language
-Summary(pl):	OpenOffice.org - interfejs w jêzyku chiñskim
+%package i18n-zh_CN
+Summary:	OpenOffice.org - interface in Chinese language for China
+Summary(pl):	OpenOffice.org - interfejs w jêzyku chiñskim dla Chin
+Group:		Applications/Office
+Requires:	%{name} = %{epoch}:%{version}-%{release}
+Obsoletes:	openoffice-i18n-zh
+
+%description i18n-zh_CN
+This package provides resources containing menus and dialogs in
+Chinese language for China.
+
+%description i18n-zh_CN -l pl
+Ten pakiet dostarcza zasoby zawieraj±ce menu i okna dialogowe w jêzyku
+chiñskim dla Chin.
+
+%files i18n-zh_CN -f zh-CN.lang
+
+%package i18n-zh_TW
+Summary:	OpenOffice.org - interface in Chinese language for Taiwan
+Summary(pl):	OpenOffice.org - interfejs w jêzyku chiñskim dla Tajwanu
+Group:		Applications/Office
+Requires:	%{name} = %{epoch}:%{version}-%{release}
+Obsoletes:	openoffice-i18n-zh
+
+%description i18n-zh_TW
+This package provides resources containing menus and dialogs in
+Chinese language for Taiwan.
+
+%description i18n-zh_TW -l pl
+Ten pakiet dostarcza zasoby zawieraj±ce menu i okna dialogowe w jêzyku
+chiñskim dla Tajwanu.
+
+%files i18n-zh_TW -f zh-TW.lang
+
+%package i18n-zu
+Summary:	OpenOffice.org - interface in Zulu language
+Summary(pl):	OpenOffice.org - interfejs w jêzyku zuluskim
 Group:		Applications/Office
 Requires:	%{name} = %{epoch}:%{version}-%{release}
 
-%description i18n-zh
+%description i18n-zu
 This package provides resources containing menus and dialogs in
-Chinese language.
+Zulu language.
 
-%description i18n-zh -l pl
+%description i18n-zu -l pl
 Ten pakiet dostarcza zasoby zawieraj±ce menu i okna dialogowe w jêzyku
-chiñskim.
+zuluskim.
 
-%files i18n-zh -f zh.lang
+%files i18n-zu -f zu.lang
 
 %prep
 %setup -q -n ooo-build-%{ooobver}
 %patch0 -p1
 %patch1 -p1
+
+echo '55:pt-BR:portuguese_brazilian' >> bin/openoffice-xlate-lang
 
 install -d src
 ln -s %{SOURCE1} src/
@@ -1008,7 +1103,8 @@ TEMP="%{tmpdir}"; export TEMP
 install -d helptmp && cd helptmp || exit 1
 for file in \
 	%{SOURCE400} %{SOURCE401} %{SOURCE402} %{SOURCE403} %{SOURCE404} %{SOURCE405} \
-	%{SOURCE406} %{SOURCE407} %{SOURCE408} %{SOURCE409} %{SOURCE410}; do
+	%{SOURCE406} %{SOURCE407} %{SOURCE408} %{SOURCE409} %{SOURCE410} %{SOURCE411} \
+	%{SOURCE412}; do
 		rm -rf *.*
 		nr=$(echo "$file" | sed -e 's#.*_\(.*\)_.*#\1#g')
 		lang=$(../bin/openoffice-xlate-lang -i "$nr")
@@ -1055,10 +1151,10 @@ touch $RPM_BUILD_ROOT%{_libdir}/%{name}/share/dict/ooo/dictionary.lst
 rm -rf $RPM_BUILD_ROOT%{_libdir}/%{name}/share/fonts/truetype/*
 
 # Copy fixed OpenSymbol to correct location
-install -d $RPM_BUILD_ROOT%{_datadir}/fonts/openoffice
-cp fonts/opens___.ttf $RPM_BUILD_ROOT%{_datadir}/fonts/openoffice
+install -d $RPM_BUILD_ROOT%{_fontsdir}/openoffice
+cp fonts/opens___.ttf $RPM_BUILD_ROOT%{_fontsdir}/openoffice
 # %%ghost the fonts.cache-1 file
-touch $RPM_BUILD_ROOT%{_datadir}/fonts/openoffice/fonts.cache-1
+touch $RPM_BUILD_ROOT%{_fontsdir}/openoffice/fonts.cache-1
 
 # We don't need spadmin (gtk) or the setup application
 rm -f $RPM_BUILD_ROOT%{_libdir}/%{name}/setup
@@ -1066,16 +1162,12 @@ rm -f $RPM_BUILD_ROOT%{_libdir}/%{name}/program/crash_report.bin
 rm -f $RPM_BUILD_ROOT%{_datadir}/applications/openoffice-setup.desktop
 rm -f $RPM_BUILD_ROOT%{_datadir}/applications/openoffice-printeradmin.desktop
 
-# Remove some python cruft
-rm -rf $RPM_BUILD_ROOT%{_libdir}/%{name}/program/python-core-*/lib/test
-
 rm -rf $RPM_BUILD_ROOT%{_datadir}/applnk
 rm -rf $RPM_BUILD_ROOT%{_datadir}/gnome
 
 #rm -f $RPM_BUILD_ROOT%{_libdir}/%{name}/program/gnomeint
 
 # some libs creep in somehow
-rm -f $RPM_BUILD_ROOT%{_libdir}/%{name}/program/filter/libfreetype.so*
 rm -f $RPM_BUILD_ROOT%{_libdir}/%{name}/program/libstl*.so*
 
 rm -f $RPM_BUILD_ROOT%{_libdir}/%{name}/program/sopatchlevel.sh
@@ -1100,10 +1192,10 @@ for lang in $RPM_BUILD_ROOT%{_libdir}/%{name}/help/*; do
 	[ ! -d "$lang" ] && continue
 	langlist="$langlist $(echo "$lang" | sed -e 's#.*/\(.*\)#\1#g')"
 done
-langlist=$(echo "$langlist" | tr ' ' '\n' | sort | uniq)
-slanglist=$(echo "$langlist" | awk -F_ ' { print $1 } ' | awk -F- ' { print $1 } ' | sort | uniq | xargs)
+langlist=$(echo "$langlist" | tr ' ' '\n' | sort | uniq | xargs)
+#slanglist=$(echo "$langlist" | awk -F_ ' { print $1 } ' | awk -F- ' { print $1 } ' | sort | uniq | xargs)
 
-for lang in $slanglist; do
+for lang in $langlist; do
 	echo "%%defattr(644,root,root,755)" >> ${lang}.lang
 
 	# help files
@@ -1124,10 +1216,8 @@ for lang in $slanglist; do
 done
 
 # things not catched by automation above
-#echo "%{_libdir}/%{name}/program/resource/*%{subver}01.res" >> en.lang
-#echo "%{_libdir}/%{name}/share/wordbook/english" >> en.lang
-#echo "%{_libdir}/%{name}/share/autocorr/acor1033.dat" >> en.lang
-#echo "%{_libdir}/%{name}/share/autocorr/acor2057.dat" >> en.lang
+echo "%{_libdir}/%{name}/program/resource/iso%{subver}01.res" >> en.lang
+echo "%{_libdir}/%{name}/share/wordbook/english/sun.dic" >> en.lang
 
 find $RPM_BUILD_ROOT -type f -name '*.so' -exec chmod 755 "{}" ";"
 chmod 755 $RPM_BUILD_ROOT%{_libdir}/%{name}/program/*
@@ -1135,31 +1225,11 @@ chmod 755 $RPM_BUILD_ROOT%{_libdir}/%{name}/program/*
 %clean
 rm -rf $RPM_BUILD_ROOT
 
-%post
+%post libs
 fontpostinst TTF %{_fontsdir}/%{name}
 
-%postun
+%postun libs
 fontpostinst TTF %{_fontsdir}/%{name}
-
-#%post libs
-#if [ -f %{_libdir}/%{name}/program/libvcl%{subver}li-kde.so ]; then
-#	ln -sf libvcl%{subver}li-kde.so %{_libdir}/%{name}/program/libvcl%{subver}li.so
-#fi
-#if [ -f %{_libdir}/%{name}/program/libvcl%{subver}li-gtk.so ]; then
-#	ln -sf libvcl%{subver}li-gtk.so %{_libdir}/%{name}/program/libvcl%{subver}li.so
-#fi
-
-#%preun libs-kde
-#rm -f %{_libdir}/%{name}/program/libvcl%{subver}li.so
-
-#%post libs-kde
-#ln -sf libvcl%{subver}li-kde.so %{_libdir}/%{name}/program/libvcl%{subver}li.so
-
-#%preun libs-gtk
-#rm -f %{_libdir}/%{name}/program/libvcl%{subver}li.so
-
-#%post libs-gtk
-#ln -sf libvcl%{subver}li-gtk.so %{_libdir}/%{name}/program/libvcl%{subver}li.so
 
 %files
 %defattr(644,root,root,755)
@@ -1274,9 +1344,9 @@ fontpostinst TTF %{_fontsdir}/%{name}
 %attr(755,root,root) %{_libdir}/%{name}/program/*.so.*
 %attr(755,root,root) %{_libdir}/%{name}/program/filter/*.so
 
-%dir %{_datadir}/fonts/openoffice
-%{_datadir}/fonts/openoffice/*.ttf
-%ghost %{_datadir}/fonts/openoffice/fonts.cache-1
+%dir %{_fontsdir}/openoffice
+%{_fontsdir}/openoffice/*.ttf
+%ghost %{_fontsdir}/openoffice/fonts.cache-1
 
 %files libs-kde
 %defattr(644,root,root,755)
