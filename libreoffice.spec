@@ -1175,7 +1175,7 @@ rm -rf $RPM_BUILD_ROOT
 %{oolib}/share/psprint
 %{oolib}/share/samples
 %dir %{oolib}/share/template
-%{oolib}/share/wordbook
+%dir %{oolib}/share/wordbook
 %{oolib}/share/readme
 #%{oolib}/share/xslt
 
