@@ -149,8 +149,13 @@ Patch206: openoffice-recent-files.patch
 Patch207: openoffice-gui-sw-insert-symbol.patch
 Patch208: openoffice-use-fork.patch
 
-# ...
 Patch301: openoffice-splash.patch
+
+Patch351: openoffice-print-cups.patch
+Patch352: openoffice-print-generic-gui.patch
+Patch353: openoffice-print-psprint-rehash.patch
+Patch354: openoffice-print-spadmin-disable.patch
+Patch355: openoffice-print-type42.patch
 
 URL:		http://www.openoffice.org/
 BuildRequires:	STLport-devel >= 4.5.3-6
@@ -830,6 +835,13 @@ rm -f moz/prj/d.lst
 %patch208 -p0
 
 %patch301 -p1 
+
+# CUPS support
+%patch351 -p0
+%patch352 -p0 
+%patch353 -p0 
+#%patch354 -p0
+%patch355 -p0
 
 # gcc 2 include error hack:
 rm -rf autodoc/source/inc/utility
