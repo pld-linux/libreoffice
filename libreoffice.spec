@@ -953,6 +953,15 @@ CONFIGURE_OPTIONS="$CONFOPTS"; export CONFIGURE_OPTIONS
 
 %{__make}
 
+# hack for parallel build
+if [ "$RPM_BUILD_NCPUS" -gt 1 ]; then
+	doit=1
+	while [ "$doit" -eq 1 ]; then
+		FCH=$(nice -n 20 find . -type f ! -mmin +3 -print | wc -l)
+		[ "$FCH" -eq 0 ] && doit=0
+	done
+fi
+
 %install
 rm -rf $RPM_BUILD_ROOT
 
