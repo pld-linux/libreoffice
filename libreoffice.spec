@@ -25,6 +25,7 @@ Source8:	%{name}-wrapper-component
 Source9:	%{name}-langs.txt
 Source10:	%{name}-db3.jar
 Source11:	%{name}-dictionary.lst.readme
+Source12:	OOo_1.0.2beta_LinuxIntel_odk.tar.gz
 
 Source101:	ftp://ftp.task.gda.pl/mirror/ftp.openoffice.org/contrib/helpfiles/helpcontent_01_unix.tgz
 Source102:	ftp://ftp.task.gda.pl/mirror/ftp.openoffice.org/contrib/helpfiles/helpcontent_33_unix.tgz
@@ -129,6 +130,8 @@ Requires:	libstdc++ < 3.2.1
 Requires:	db3
 %endif
 
+%define sdkpath OpenOffice.org1.0.2_Beta_SDK
+
 # Languages (English and German are always built)
 # FIXME: split generation of language subpackages, otherwise rpm makes
 # a broken pipe
@@ -198,6 +201,18 @@ OpenOffice.org productivity suite - shared libraries.
 
 %description libs -l pl
 Pakiet biurowy OpenOffice.org - biblioteki.
+
+%package devel
+Summary:	OpenOffice.org - header files and development documentation
+Summary(pl):	OpenOffice.org - pliki nag³ówkowe i dokumentacja do kdelibs
+Group:		X11/Development/Libraries
+Requires:	%{name}-libs = %{version}
+
+%description devel
+OpenOffice.org productivity suite - header files and development documentation.
+
+%description devel -l pl
+Pakiet biurowy OpenOffice.org - pliki nag³ówkowe i dokumentacja do kdelibs.
 
 #
 # Internationalization
@@ -589,6 +604,80 @@ chmod u+rx compile
 rm -rf $RPM_BUILD_ROOT
 
 install -d $RPM_BUILD_ROOT%{oolib}
+
+
+
+#########################
+# DEVEL STUFF
+install -d $RPM_BUILD_ROOT%{_bindir}
+install -d $RPM_BUILD_ROOT%{_datadir}/%{name}
+
+tar zxvf %{SOURCE12}
+
+cat %{sdkpath}/setsdkenv_unix.in | \
+    sed "s#@OO_SDK_HOME@#%{_datadir}/%{name}#" |\
+    sed "s#@OFFICE_HOME@#%{_datadir}/openoffice#" |\
+    sed "s#@OO_SDK_MAKE_HOME@#%{_bindir}#" |\
+    sed "s#@OO_SDK_CPP_HOME@#%{_bindir}#" |\
+    sed "s#@OO_SDK_CPP_HOME@#%{_includedir}/stlport#" |\
+    sed "s#@OO_SDK_JAVA_HOME@#%{_libdir}/java#" |\
+    sed "s#@OO_SDK_ANT_HOME@##" |\
+    sed "s#@SDK_AUTO_DEPLOYMENT@#YES#" > $RPM_BUILD_ROOT%{_bindir}/oosdkenv
+
+cp %{sdkpath}/linux/lib/libofficebean.so $RPM_BUILD_ROOT%{oolib}
+
+cp solver/%{subver}/%{_archbuilddir}/lib/libjuh.so $RPM_BUILD_ROOT%{oolib}
+cp solver/%{subver}/%{_archbuilddir}/lib/libprot_uno_uno.so $RPM_BUILD_ROOT%{oolib}
+cp solver/%{subver}/%{_archbuilddir}/lib/librmcxt.so* $RPM_BUILD_ROOT%{oolib}
+
+cp -rf %{sdkpath}/classes $RPM_BUILD_ROOT%{_datadir}/%{name}
+cp -rf %{sdkpath}/settings $RPM_BUILD_ROOT%{_datadir}/%{name}
+cp -rf %{sdkpath}/examples $RPM_BUILD_ROOT%{_datadir}/%{name}
+
+install -d $RPM_BUILD_ROOT%{_datadir}/%{name}/xml
+
+cp solver/%{subver}/%{_archbuilddir}/xml/acceptor.xml $RPM_BUILD_ROOT%{_datadir}/%{name}/xml
+cp solver/%{subver}/%{_archbuilddir}/xml/corefl.xml $RPM_BUILD_ROOT%{_datadir}/%{name}/xml
+cp solver/%{subver}/%{_archbuilddir}/xml/dynamicloader.xml $RPM_BUILD_ROOT%{_datadir}/%{name}/xml
+cp solver/%{subver}/%{_archbuilddir}/xml/invadp.xml $RPM_BUILD_ROOT%{_datadir}/%{name}/xml
+cp solver/%{subver}/%{_archbuilddir}/xml/module-description.dtd $RPM_BUILD_ROOT%{_datadir}/%{name}/xml
+cp solver/%{subver}/%{_archbuilddir}/xml/rdbtdp.xml $RPM_BUILD_ROOT%{_datadir}/%{name}/xml
+cp solver/%{subver}/%{_archbuilddir}/xml/smgr.xml $RPM_BUILD_ROOT%{_datadir}/%{name}/xml
+cp solver/%{subver}/%{_archbuilddir}/xml/tdmgr.xml $RPM_BUILD_ROOT%{_datadir}/%{name}/xml
+cp solver/%{subver}/%{_archbuilddir}/xml/brdgfctr.xml $RPM_BUILD_ROOT%{_datadir}/%{name}/xml
+cp solver/%{subver}/%{_archbuilddir}/xml/cpld.xml $RPM_BUILD_ROOT%{_datadir}/%{name}/xml
+cp solver/%{subver}/%{_archbuilddir}/xml/impreg.xml $RPM_BUILD_ROOT%{_datadir}/%{name}/xml
+cp solver/%{subver}/%{_archbuilddir}/xml/inv.xml $RPM_BUILD_ROOT%{_datadir}/%{name}/xml
+cp solver/%{subver}/%{_archbuilddir}/xml/namingservice.xml $RPM_BUILD_ROOT%{_datadir}/%{name}/xml
+cp solver/%{subver}/%{_archbuilddir}/xml/remotebridge.xml $RPM_BUILD_ROOT%{_datadir}/%{name}/xml
+cp solver/%{subver}/%{_archbuilddir}/xml/stm.xml $RPM_BUILD_ROOT%{_datadir}/%{name}/xml
+cp solver/%{subver}/%{_archbuilddir}/xml/uuresolver.xml $RPM_BUILD_ROOT%{_datadir}/%{name}/xml
+cp solver/%{subver}/%{_archbuilddir}/xml/connectr.xml $RPM_BUILD_ROOT%{_datadir}/%{name}/xml
+cp solver/%{subver}/%{_archbuilddir}/xml/defreg.xml $RPM_BUILD_ROOT%{_datadir}/%{name}/xml
+cp solver/%{subver}/%{_archbuilddir}/xml/insp.xml $RPM_BUILD_ROOT%{_datadir}/%{name}/xml
+cp solver/%{subver}/%{_archbuilddir}/xml/jen.xml $RPM_BUILD_ROOT%{_datadir}/%{name}/xml
+cp solver/%{subver}/%{_archbuilddir}/xml/proxyfac.xml $RPM_BUILD_ROOT%{_datadir}/%{name}/xml
+cp solver/%{subver}/%{_archbuilddir}/xml/simreg.xml $RPM_BUILD_ROOT%{_datadir}/%{name}/xml
+cp solver/%{subver}/%{_archbuilddir}/xml/tcv.xml $RPM_BUILD_ROOT%{_datadir}/%{name}/xml
+
+install -d $RPM_BUILD_ROOT%{_datadir}/%{name}/include
+
+cp -rf solver/%{subver}/%{_archbuilddir}/inc/bridges $RPM_BUILD_ROOT%{_datadir}/%{name}/include
+cp -rf solver/%{subver}/%{_archbuilddir}/inc/com $RPM_BUILD_ROOT%{_datadir}/%{name}/include
+cp -rf solver/%{subver}/%{_archbuilddir}/inc/cppu $RPM_BUILD_ROOT%{_datadir}/%{name}/include
+cp -rf solver/%{subver}/%{_archbuilddir}/inc/cppuhelper $RPM_BUILD_ROOT%{_datadir}/%{name}/include
+cp -rf solver/%{subver}/%{_archbuilddir}/inc/osl $RPM_BUILD_ROOT%{_datadir}/%{name}/include
+cp -rf solver/%{subver}/%{_archbuilddir}/inc/rtl $RPM_BUILD_ROOT%{_datadir}/%{name}/include
+cp -rf solver/%{subver}/%{_archbuilddir}/inc/sal $RPM_BUILD_ROOT%{_datadir}/%{name}/include
+cp -rf solver/%{subver}/%{_archbuilddir}/inc/salhelper $RPM_BUILD_ROOT%{_datadir}/%{name}/include
+cp -rf solver/%{subver}/%{_archbuilddir}/inc/store $RPM_BUILD_ROOT%{_datadir}/%{name}/include
+cp -rf solver/%{subver}/%{_archbuilddir}/inc/typelib $RPM_BUILD_ROOT%{_datadir}/%{name}/include
+cp -rf solver/%{subver}/%{_archbuilddir}/inc/uno $RPM_BUILD_ROOT%{_datadir}/%{name}/include
+cp -rf solver/%{subver}/%{_archbuilddir}/inc/udkversion.mk $RPM_BUILD_ROOT%{_datadir}/%{name}/include
+
+cp -rf solver/%{subver}/%{_archbuilddir}/idl $RPM_BUILD_ROOT%{_datadir}/%{name}
+# END OF DEVEL STUFF
+#########################
 
 if [ -z "$DISPLAY" ]; then
 	%{init_xdisplay}
@@ -1025,7 +1114,7 @@ done
 %{oolib}/user/autotext/english
 
 # Programs
-%attr(755,root,root) %{_bindir}/*
+%attr(755,root,root) %{_bindir}/oo*
 
 %attr(755,root,root) %{oolib}/setup
 %attr(755,root,root) %{oolib}/spadmin
@@ -1053,6 +1142,12 @@ done
 %attr(755,root,root) %{oolib}/program/*.so.*
 #%%attr(755,root,root) %{oolib}/program/components/*.so -- mozilla
 %attr(755,root,root) %{oolib}/program/filter/*.so
+
+%files devel
+%defattr(644,root,root,755)
+%doc %{sdkpath}/docs/*
+%attr(755,root,root) %{_bindir}/oosdkenv
+%{_datadir}/%{name}
 
 %files i18n-ar -f i18n-ar
 %files i18n-ca -f i18n-ca
