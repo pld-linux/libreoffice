@@ -1,0 +1,12 @@
+diff -u -p -u -r1.1 SGENPRT.PS
+--- psprint_config/configuration/ppds/SGENPRT.PS
++++ psprint_config/configuration/ppds/SGENPRT.PS
+@@ -28,6 +28,8 @@
+ *NickName: "Generic Printer"
+ *PCFileName: "SGENPRT.PPD"
+ 
++*% CUPS can cope, and fixes some symbol issues
++*TTRasterizer: Type42
+ 
+ *% ===== Basic Capabilities and Defaults =====
+ 

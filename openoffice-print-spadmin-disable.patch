@@ -1,0 +1,22 @@
+Index: scp/source/psprint/files_psprint.scp
+===================================================================
+RCS file: /cvs/installation/scp/source/psprint/files_psprint.scp,v
+retrieving revision 1.16
+diff -u -p -u -r1.16 files_psprint.scp
+--- scp/source/psprint/files_psprint.scp	16 Jul 2003 18:17:25 -0000	1.16
++++ scp/source/psprint/files_psprint.scp	28 Jul 2003 17:00:18 -0000
+@@ -283,6 +283,8 @@ File GID_FILE_SHARE_PSPRINT_FONTMETRIC_B
+         Styles                  = (DELETE_ONLY,CHECK_TIMESTAMP);
+ End
+ 
++#if 0 /* kill spadmin */
++
+ #ifndef SRV_PRODUCT
+ 
+ File GID_FILE_BIN_SPADMIN_BIN
+@@ -333,3 +335,4 @@ STD_RES_FILE( GID_FILE_RES_SPA, spa )
+ 
+ #endif
+ 
++#endif /* kill spadmin */
+\ No newline at end of file

@@ -1,0 +1,422 @@
+Index: psprint/inc/psprint/printergfx.hxx
+===================================================================
+RCS file: /cvs/gsl/psprint/inc/psprint/printergfx.hxx,v
+retrieving revision 1.10
+diff -u -p -u -r1.10 printergfx.hxx
+--- psprint/inc/psprint/printergfx.hxx	26 Mar 2003 14:24:02 -0000	1.10
++++ psprint/inc/psprint/printergfx.hxx	29 May 2003 14:27:22 -0000
+@@ -237,6 +237,8 @@ private:            
+     osl::File*      mpPageHeader;
+     osl::File*      mpPageBody;
+ 
++    void            InitForPrinter( const rtl::OUString &rPrinter );
++
+     void            TranslateCoordinates (sal_Int32 &rXOut, sal_Int32 &rYOut, 
+                                           sal_Int32 nXIn, sal_Int32 nYIn )
+     { rXOut = nXIn; rYOut = nYIn; }
+Index: psprint/source/printer/jobdata.cxx
+===================================================================
+RCS file: /cvs/gsl/psprint/source/printer/jobdata.cxx,v
+retrieving revision 1.2
+diff -u -p -u -r1.2 jobdata.cxx
+--- psprint/source/printer/jobdata.cxx	19 Jun 2002 10:53:34 -0000	1.2
++++ psprint/source/printer/jobdata.cxx	29 May 2003 14:27:54 -0000
+@@ -205,9 +205,7 @@ bool JobData::constructFromStreamBuffer(
+         {
+             if( bPrinter )
+             {
+-                PrinterInfoManager& rManager = PrinterInfoManager::get();
+-                const PrinterInfo& rInfo = rManager.getPrinterInfo( rJobData.m_aPrinterName );
+-                rJobData.m_pParser = PPDParser::getParser( rInfo.m_aDriverName );
++	        rJobData.m_pParser = PrinterInfoManager::get()->getParserForPrinter( rJobData.m_aPrinterName );
+                 if( rJobData.m_pParser )
+                 {
+                     rJobData.m_aContext.setParser( rJobData.m_pParser );
+Index: psprint/source/printergfx/common_gfx.cxx
+===================================================================
+RCS file: /cvs/gsl/psprint/source/printergfx/common_gfx.cxx,v
+retrieving revision 1.11
+diff -u -p -u -r1.11 common_gfx.cxx
+--- psprint/source/printergfx/common_gfx.cxx	26 Mar 2003 14:24:07 -0000	1.11
++++ psprint/source/printergfx/common_gfx.cxx	29 May 2003 14:28:17 -0000
+@@ -102,6 +102,17 @@ GraphicsStatus::GraphicsStatus() :
+  * non graphics graphics routines
+  */
+ 
++void
++PrinterGfx::InitForPrinter( const ::rtl::OUString &rPrinter )
++{
++  const PPDParser *pParser = PrinterInfoManager::get()->getParserForPrinter( rPrinter );
++    
++  mpFontSubstitutes = PrinterInfoManager::get()->getFontSubstitutesForPrinter( rPrinter );
++  
++  mbUploadPS42Fonts = pParser ? ( pParser->isType42Capable() ? sal_True : sal_False ) : sal_False;
++}
++
++
+ sal_Bool
+ PrinterGfx::Init (PrinterJob &rPrinterJob)
+ {
+@@ -113,14 +124,8 @@ PrinterGfx::Init (PrinterJob &rPrinterJo
+     
+     mnDpi = rPrinterJob.GetResolution();
+     rPrinterJob.GetScale (mfScaleX, mfScaleY);
+-    const PrinterInfo& rInfo( PrinterInfoManager::get().getPrinterInfo( rPrinterJob.GetPrinterName() ) );
+-    if( mpFontSubstitutes )
+-        delete const_cast< ::std::hash_map<fontID,fontID>* >(mpFontSubstitutes);
+-    if( rInfo.m_bPerformFontSubstitution )
+-        mpFontSubstitutes = new ::std::hash_map< fontID, fontID >( rInfo.m_aFontSubstitutions );
+-    else
+-        mpFontSubstitutes = NULL;
+-    mbUploadPS42Fonts = rInfo.m_pParser ? ( rInfo.m_pParser->isType42Capable() ? sal_True : sal_False ) : sal_False;
++
++    InitForPrinter( rPrinterJob.GetPrinterName() );
+ 
+     return sal_True;
+ }
+@@ -137,6 +142,7 @@ PrinterGfx::Init (const JobData& rData)
+     mnDpi           = nRes;
+     mfScaleX        = (double)72.0 / (double)mnDpi;
+     mfScaleY        = (double)72.0 / (double)mnDpi;
++#if 0
+     const PrinterInfo& rInfo( PrinterInfoManager::get().getPrinterInfo( rData.m_aPrinterName ) );
+     if( mpFontSubstitutes )
+         delete const_cast< ::std::hash_map<fontID,fontID>* >(mpFontSubstitutes);
+@@ -145,6 +151,8 @@ PrinterGfx::Init (const JobData& rData)
+     else
+         mpFontSubstitutes = NULL;
+     mbUploadPS42Fonts = rInfo.m_pParser ? ( rInfo.m_pParser->isType42Capable() ? sal_True : sal_False ) : sal_False;
++#endif
++    InitForPrinter( rData.m_aPrinterName );
+     
+     return sal_True;
+ }
+Index: psprint/source/printergfx/printerjob.cxx
+===================================================================
+RCS file: /cvs/gsl/psprint/source/printergfx/printerjob.cxx,v
+retrieving revision 1.21
+diff -u -p -u -r1.21 printerjob.cxx
+--- psprint/source/printergfx/printerjob.cxx	26 Mar 2003 14:24:08 -0000	1.21
++++ psprint/source/printergfx/printerjob.cxx	29 May 2003 14:28:29 -0000
+@@ -550,17 +550,10 @@ PrinterJob::EndJob ()
+     }
+     else
+     {
+-        const PrinterInfoManager& rPrinterInfoManager = PrinterInfoManager::get ();
+-        const rtl::OUString& rPrinter     = m_aLastJobData.m_aPrinterName;
+-        const PrinterInfo&   rPrinterInfo = rPrinterInfoManager.getPrinterInfo (rPrinter);
+-        const rtl::OUString& rCommand     = rPrinterInfo.m_aCommand;
++      pDestFILE = PrinterInfoManager::get ()->getPipeToPrinter( m_aLastJobData.m_aPrinterName );
+ 
+-        const rtl::OString aShellCommand = rtl::OUStringToOString (rCommand, 
+-                                                                   RTL_TEXTENCODING_ISO_8859_1);
+-													  
+-        pDestFILE = popen (aShellCommand.getStr(), "w");
+-        if (pDestFILE == NULL)
+-            return sal_False;
++      if (pDestFILE == NULL)
++	return sal_False;
+     }
+ 
+     /* spool the document parts to the destination */
+Index: psprint/inc/psprint/printerinfomanager.hxx
+===================================================================
+RCS file: /cvs/gsl/psprint/inc/psprint/printerinfomanager.hxx,v
+retrieving revision 1.4
+diff -u -p -u -r1.4 printerinfomanager.hxx
+--- psprint/inc/psprint/printerinfomanager.hxx	10 Jun 2003 14:34:28 -0000	1.4
++++ psprint/inc/psprint/printerinfomanager.hxx	20 Jun 2003 14:47:18 -0000
+@@ -83,6 +83,20 @@
+ 
+ namespace psp
+ {
++class PrinterInfoManager
++{
++  static PrinterInfoManager *pGlobalManager;
++protected:
++  static void set (PrinterInfoManager *pManager) { pGlobalManager = pManager; }
++public:
++  static PrinterInfoManager *get ();
++  virtual const PPDParser *getParserForPrinter( ::rtl::OUString rPrinter );
++  virtual ::std::hash_map< fontID, fontID > *getFontSubstitutesForPrinter( ::rtl::OUString rPrinter );
++  virtual FILE *getPipeToPrinter( ::rtl::OUString rPrinter );
++};
++
++namespace lpr
++{
+ 
+ class SystemQueueInfo;
+ 
+@@ -115,7 +129,7 @@ struct PrinterInfo : JobData
+     m_aFontSubstitutions;
+ };
+ 
+-class PrinterInfoManager
++class PrinterInfoManagerLpr : ::psp::PrinterInfoManager
+ {
+     // needed for checkPrintersChanged: files (not necessarily existant)
+     // and their last known modification time
+@@ -155,8 +169,8 @@ class PrinterInfoManager
+ 
+     SystemQueueInfo*					m_pQueueInfo;
+ 
+-    PrinterInfoManager();
+-    ~PrinterInfoManager();
++    PrinterInfoManagerLpr();
++    ~PrinterInfoManagerLpr();
+ 
+     void initialize();
+ 
+@@ -214,8 +228,14 @@ public:
+         
+     // similar but returnse whole commandlines
+     void getSystemPrintCommands( ::std::list< ::rtl::OUString >& rCommands );
++
++    virtual const PPDParser *getParserForPrinter( ::rtl::OUString rPrinter );
++    virtual ::std::hash_map< fontID, fontID > *getFontSubstitutesForPrinter( ::rtl::OUString rPrinter );
++    virtual FILE *getPipeToPrinter( ::rtl::OUString rPrinter );
+ };
++
++} // namespace lpr
+     
+-} // namespace
++} // namespace psp
+ 
+ #endif // _PSPRINT_PRINTERINFOMANAGER_HXX_
+Index: psprint/source/printer/printerinfomanager.cxx
+===================================================================
+RCS file: /cvs/gsl/psprint/source/printer/printerinfomanager.cxx,v
+retrieving revision 1.19
+diff -u -p -u -r1.19 printerinfomanager.cxx
+--- psprint/source/printer/printerinfomanager.cxx	12 Jun 2003 11:08:59 -0000	1.19
++++ psprint/source/printer/printerinfomanager.cxx	23 Jun 2003 13:28:10 -0000
+@@ -62,6 +62,7 @@
+ #include <unistd.h>
+ #include <sys/wait.h>
+ #include <signal.h>
++#include <stdio.h>
+ 
+ #include <tools/urlobj.hxx>
+ #include <tools/stream.hxx>
+@@ -81,10 +82,41 @@
+ using namespace psp;
+ using namespace rtl;
+ using namespace osl;
++using namespace lpr;
+ 
+ namespace psp
+ {
+-class SystemQueueInfo : public Thread
++
++PrinterInfoManager *::psp::PrinterInfoManager::pGlobalManager = NULL;
++
++const ::psp::PPDParser *
++PrinterInfoManager::getParserForPrinter( ::rtl::OUString rPrinter )
++{
++  fprintf( stderr, "error, base PrinterInfoManager::getParserForPrinter\n" );
++  return NULL;
++}
++
++::std::hash_map< fontID, fontID > *
++PrinterInfoManager::getFontSubstitutesForPrinter( ::rtl::OUString rPrinter )
++{ // font mapping tables are a terrible idea.
++  fprintf( stderr, "error, base PrinterInfoManager::getFontSubstitutesForPrinter\n" );
++  return NULL;
++}
++
++::psp::PrinterInfoManager *
++PrinterInfoManager::get ()
++{
++  return pGlobalManager;
++}
++
++FILE *
++PrinterInfoManager::getPipeToPrinter( ::rtl::OUString rPrinter )
++{
++  fprintf( stderr, "error, base PrinterInfoManager::getPipeToPrinter\n" );
++  return NULL;
++}
++
++class psp::lpr::SystemQueueInfo : public Thread
+ {
+     mutable Mutex				m_aMutex;
+     bool						m_bChanged;
+@@ -106,21 +138,21 @@ class SystemQueueInfo : public Thread
+ } // namespace
+ 
+ /*
+- *  class PrinterInfoManager
++ *  class PrinterInfoManagerLpr
+  */
+ 
+ // -----------------------------------------------------------------
+ 
+-PrinterInfoManager& PrinterInfoManager::get()
++PrinterInfoManager& PrinterInfoManagerLpr::get()
+ {
+-    static PrinterInfoManager aManager;
++    static PrinterInfoManagerLpr aManager;
+ 
+     return aManager;
+ }
+ 
+ // -----------------------------------------------------------------
+ 
+-PrinterInfoManager::PrinterInfoManager()
++PrinterInfoManagerLpr::PrinterInfoManagerLpr()
+ {
+     m_pQueueInfo = new SystemQueueInfo();
+     initialize();
+@@ -128,14 +160,14 @@ PrinterInfoManager::PrinterInfoManager()
+ 
+ // -----------------------------------------------------------------
+ 
+-PrinterInfoManager::~PrinterInfoManager()
++PrinterInfoManagerLpr::~PrinterInfoManagerLpr()
+ {
+     delete m_pQueueInfo;
+ }
+ 
+ // -----------------------------------------------------------------
+ 
+-bool PrinterInfoManager::checkPrintersChanged()
++bool PrinterInfoManagerLpr::checkPrintersChanged()
+ {
+     // check if files were created, deleted or modified since initialize()
+ 
+@@ -172,7 +204,7 @@ bool PrinterInfoManager::checkPrintersCh
+ 
+ // -----------------------------------------------------------------
+ 
+-void PrinterInfoManager::initialize()
++void PrinterInfoManagerLpr::initialize()
+ {
+     rtl_TextEncoding aEncoding = gsl_getSystemTextEncoding();
+     m_aPrinters.clear();
+@@ -542,7 +574,7 @@ void PrinterInfoManager::initialize()
+ 
+ // -----------------------------------------------------------------
+ 
+-void PrinterInfoManager::listPrinters( ::std::list< OUString >& rList ) const
++void PrinterInfoManagerLpr::listPrinters( ::std::list< OUString >& rList ) const
+ {
+     ::std::hash_map< OUString, Printer, OUStringHash >::const_iterator it;
+     rList.clear();
+@@ -552,7 +584,7 @@ void PrinterInfoManager::listPrinters( :
+ 
+ // -----------------------------------------------------------------
+ 
+-const PrinterInfo& PrinterInfoManager::getPrinterInfo( const OUString& rPrinter ) const
++const PrinterInfo& PrinterInfoManagerLpr::getPrinterInfo( const OUString& rPrinter ) const
+ {
+     static PrinterInfo aEmptyInfo;
+     ::std::hash_map< OUString, Printer, OUStringHash >::const_iterator it = m_aPrinters.find( rPrinter );
+@@ -564,7 +596,7 @@ const PrinterInfo& PrinterInfoManager::g
+ 
+ // -----------------------------------------------------------------
+ 
+-void PrinterInfoManager::changePrinterInfo( const OUString& rPrinter, const PrinterInfo& rNewInfo )
++void PrinterInfoManagerLpr::changePrinterInfo( const OUString& rPrinter, const PrinterInfo& rNewInfo )
+ {
+     ::std::hash_map< OUString, Printer, OUStringHash >::iterator it = m_aPrinters.find( rPrinter );
+ 
+@@ -593,7 +625,7 @@ static bool checkWriteability( const OUS
+     return bRet;
+ }
+ 
+-bool PrinterInfoManager::writePrinterConfig()
++bool PrinterInfoManagerLpr::writePrinterConfig()
+ {
+     // find at least one writeable config
+     ::std::hash_map< OUString, Config*, OUStringHash > files;
+@@ -724,7 +756,7 @@ bool PrinterInfoManager::writePrinterCon
+ 
+ // -----------------------------------------------------------------
+ 
+-bool PrinterInfoManager::addPrinter( const OUString& rPrinterName, const OUString& rDriverName )
++bool PrinterInfoManagerLpr::addPrinter( const OUString& rPrinterName, const OUString& rDriverName )
+ {
+     bool bSuccess = false;
+ 
+@@ -769,7 +801,7 @@ bool PrinterInfoManager::addPrinter( con
+ 
+ // -----------------------------------------------------------------
+ 
+-bool PrinterInfoManager::removePrinter( const OUString& rPrinterName, bool bCheckOnly )
++bool PrinterInfoManagerLpr::removePrinter( const OUString& rPrinterName, bool bCheckOnly )
+ {
+     bool bSuccess = true;
+ 
+@@ -823,7 +855,7 @@ bool PrinterInfoManager::removePrinter( 
+ 
+ // -----------------------------------------------------------------
+ 
+-bool PrinterInfoManager::setDefaultPrinter( const OUString& rPrinterName )
++bool PrinterInfoManagerLpr::setDefaultPrinter( const OUString& rPrinterName )
+ {
+     bool bSuccess = false;
+ 
+@@ -841,7 +873,7 @@ bool PrinterInfoManager::setDefaultPrint
+ 
+ // -----------------------------------------------------------------
+ 
+-void PrinterInfoManager::fillFontSubstitutions( PrinterInfo& rInfo ) const
++void PrinterInfoManagerLpr::fillFontSubstitutions( PrinterInfo& rInfo ) const
+ {
+     PrintFontManager& rFontManager( PrintFontManager::get() );
+     rInfo.m_aFontSubstitutions.clear();
+@@ -938,7 +970,7 @@ void PrinterInfoManager::fillFontSubstit
+ 
+ // -----------------------------------------------------------------
+ 
+-void PrinterInfoManager::getSystemPrintCommands( std::list< OUString >& rCommands )
++void PrinterInfoManagerLpr::getSystemPrintCommands( std::list< OUString >& rCommands )
+ {
+     if( m_pQueueInfo->hasChanged() )
+     {
+@@ -957,7 +989,7 @@ void PrinterInfoManager::getSystemPrintC
+     }
+ }
+ 
+-const std::list< OUString >& PrinterInfoManager::getSystemPrintQueues()
++const std::list< OUString >& PrinterInfoManagerLpr::getSystemPrintQueues()
+ {
+     if( m_pQueueInfo->hasChanged() )
+     {
+@@ -1097,4 +1129,36 @@ void SystemQueueInfo::run()
+         m_aQueues	= aSysPrintQueues;
+         m_aCommand	= aPrintCommand;
+     }
++}
++
++// --- untested, just to show willing ---
++
++const PPDParser *
++PrinterInfoManagerLpr::getParserForPrinter( ::rtl::OUString rPrinter )
++{
++  PrinterInfo rInfo( getPrinterInfo( rPrinter ) );
++  return rInfo.m_pParser;
++}
++
++::std::hash_map< fontID, fontID > *
++PrinterInfoManagerLpr::getFontSubstitutesForPrinter( ::rtl::OUString rPrinter )
++{
++  PrinterInfo rInfo( getPrinterInfo( rPrinter ) );
++
++  if( !rInfo.m_bPerformFontSubstitution )
++    return NULL;
++
++  return new ::std::hash_map< fontID, fontID >( rInfo.m_aFontSubstitutions );
++}
++
++FILE *
++PrinterInfoManagerLpr::getPipeToPrinter( ::rtl::OUString rPrinter )
++{
++  const PrinterInfo&   rPrinterInfo = getPrinterInfo (rPrinter);
++  const rtl::OUString& rCommand     = rPrinterInfo.m_aCommand;
++  
++  const rtl::OString aShellCommand = rtl::OUStringToOString
++    ( rCommand, RTL_TEXTENCODING_ISO_8859_1);
++  
++  return popen (aShellCommand.getStr(), "w");
+ }
