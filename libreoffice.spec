@@ -39,8 +39,8 @@ Source2:	http://ooo.ximian.com/packages/ooo-icons-OOO_1_1-9.tar.gz
 # Source2-md5:	32a0e62f89ef36a91437fc705fbe6440
 Source3:	http://kde.openoffice.org/files/nidaba/documents/159/1929/ooo-KDE_icons-OOO_1_1-0.2.tar.gz
 # Source3-md5:	50486f5208ec5ae7af1dbb8f9e77cb12
-Source10:	http://ep09.pld-linux.org/~adgor/pld/%{name}-desktopfiles-0.2.tar.bz2
-# Source10-md5:	78ae3bef3e98f711b1afe9fb5717b42e
+Source10:	%{name}-desktopfiles-0.2a.tar.bz2
+# Source10-md5:	ce496b94afa96800d0d365f91106a4d6
 
 # we keep these in ooo-build repository
 # PLD splash screen
