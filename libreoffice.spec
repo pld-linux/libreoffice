@@ -122,8 +122,8 @@ BuildRequires:	libart_lgpl-devel
 BuildRequires:	qt-devel
 BuildRequires:	kdelibs-devel
 %else
-BuildRequires:  libgnomecups-devel
-BuildRequires:  gnome-vfs2-devel
+BuildRequires:	libgnomecups-devel
+BuildRequires:	gnome-vfs2-devel
 BuildRequires:	gtk+2-devel
 %endif
 BuildConflicts:	java-sun = 1.4.2
