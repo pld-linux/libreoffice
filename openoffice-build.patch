@@ -46,3 +46,35 @@
  			echo ".so man1/openoffice$BINSUFFIX.1" >| $MANDIR/man1/oo${app}$BINSUFFIX.1;
  		fi
  	done
+--- ooo-build-1.3.0/bin/openoffice-xlate-lang.orig	2004-07-27 00:33:10.000000000 +0200
++++ ooo-build-1.3.0/bin/openoffice-xlate-lang	2004-07-27 00:33:33.000000000 +0200
+@@ -109,10 +109,10 @@
+ 1;
+ 
+ __DATA__
+-01:en:english_us
++01:en:english
+ 03:pt:portuguese
+ 07:ru:russian
+-26:ns:northern_sotho
++26:ns:northernsotho
+ 27:af:afrikaans
+ 28:zu:zulu
+ 30:el:greek
+@@ -127,13 +127,14 @@
+ 43:sk:slovak
+ 45:da:danish
+ 46:sv:swedish
+-47:nb:norwegian_bokmal
++47:nb:norwegian
+ 48:pl:polish
+ 49:de:german
+ 50:sl:slovenian
+ 53:cy:welsh
++55:pt-BR:portuguese_brazilian
+ 77:et:estonian
+-79:nn:nowegian_nynorsk
++79:nn:norwegian_nynorsk
+ 81:ja:japanese
+ 82:ko:korean
+ 86:zh-CN:chinese_simplified
