@@ -191,7 +191,7 @@ Summary:	OpenOffice.org KDE Interface
 Summary(pl):	Interfejs KDE dla OpenOffice.org
 Group:		X11/Libraries
 Requires:	%{name}-libs = %{epoch}:%{version}-%{release}
-Requires:	%{name}-i18n-kde-en = %{epoch}:%{version}-%{release}
+Requires:	%{name}-i18n-en-kde = %{epoch}:%{version}-%{release}
 
 %description libs-kde
 OpenOffice.org productivity suite - KDE Interface.
@@ -204,7 +204,7 @@ Summary:	OpenOffice.org GTK Interface
 Summary(pl):	Interfejs GTK dla OpenOffice.org
 Group:		X11/Libraries
 Requires:	%{name}-libs = %{epoch}:%{version}-%{release}
-Requires:	%{name}-i18n-gtk-en = %{epoch}:%{version}-%{release}
+Requires:	%{name}-i18n-en-gtk = %{epoch}:%{version}-%{release}
 
 %description libs-gtk
 OpenOffice.org productivity suite - GTK Interface.
