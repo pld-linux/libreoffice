@@ -1,16 +1,17 @@
 Summary:	OpenOffice - powerful office suite
 Summary(pl):	OpenOffice - potê¿ny pakiet biurowy
 Name:		openoffice
-Version:	6.13
+Version:	619
 Release:	1
+Epoch:          1
 License:	GPL/LGPL
 Group:		X11/Applications
 Group(de):	X11/Applikationen
 Group(pl):	X11/Aplikacje
-Source0:	ftp://a1388.g.akamai.net/7/1388/2064/OpenOffice613/anoncvs.openoffice.org/download/OpenOffice613/oo_613_src.tar.bz2
-Source1:	ftp://a1388.g.akamai.net/7/1388/2064/OpenOffice613/anoncvs.openoffice.org/download/solenv613_linux_intel.tar.gz
+Source0:	http://a1652.g.akamai.net/7/1652/2064/OpenOffice619/anoncvs.openoffice.org/download/OpenOffice619/oo_%{version}_src.tar.bz2
 URL:		http://www.openoffice.org/
 BuildRequires:	STLport-devel
+BuildRequires:	STLport-static
 #BuildRequires:	jdk
 BuildRequires:	perl
 BuildRequires:	tcsh
@@ -23,18 +24,18 @@ OpenOffice is powerful office suite based on StarOffice.
 OpenOffice jest potê¿nym pakietem biurowym wywodz±cym siê ze StarOffice.
 
 %prep
-%setup -q -n oo_613_src
-cp -fr %{SOURCE1} $RPM_BUILD_DIR/oo_613_src
-tar fxz solenv613_linux_intel.tar.gz
+%setup -q -n oo_%{version}_src
 
 %build
 cd config_office
 %configure \
 	--with-stlport4-home=%{_prefix} \
-	--with-jdk-home=/usr/local/lib/jdk
+	--with-jdk-home=/usr/local/lib/jdk \
+	--enable-xprint
+
 cd ..
 
-echo "setenv PATH \${PATH}:\${SRC_ROOT}/solenv/unxlngi3/bin" >> LinuxIntelEnv.Set
+./bootstrap
 
 cat <<EOF > compile
 #!/bin/csh
