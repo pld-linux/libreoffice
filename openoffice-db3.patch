@@ -1,6 +1,6 @@
-diff -Nur oo_641_src/berkeleydb/makefile.mk oo_641_src/berkeleydb/makefile.mk
---- oo_641_src/berkeleydb/makefile.mk	Wed Dec 19 16:04:28 2001
-+++ oo_641_src/berkeleydbmakefile.mk.new	Wed Dec 19 16:11:30 2001
+diff -Nur oo/berkeleydb/makefile.mk oo.new/berkeleydb/makefile.mk
+--- oo/berkeleydb/makefile.mk	Fri Feb  8 16:18:17 2002
++++ oo.new/berkeleydb/makefile.mk	Sun Apr 14 23:56:12 2002
 @@ -117,12 +117,12 @@
  
  .INCLUDE : set_ext.mk
@@ -20,9 +20,9 @@ diff -Nur oo_641_src/berkeleydb/makefile.mk oo_641_src/berkeleydb/makefile.mk
 +#ALLTAR : TG_DELIVER
 +#.ENDIF			# "$(BUILD_SOSL)"!=""
  
-diff -Nur oo_641_src/config_office/makefile.rc oo_641_src/config_office/makefile.rc
---- oo_641_src/config_office/makefile.rc	Fri Oct 19 19:05:42 2001
-+++ oo_641_src/config_office/makefile.rc.new	Wed Dec 19 11:47:12 2001
+diff -Nur oo/config_office/makefile.rc oo.new/config_office/makefile.rc
+--- oo/config_office/makefile.rc	Fri Oct 19 17:25:23 2001
++++ oo.new/config_office/makefile.rc	Sun Apr 14 23:56:12 2002
 @@ -155,7 +155,6 @@
  	so3 \
  	soltools \

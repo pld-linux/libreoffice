@@ -1,0 +1,27 @@
+diff -Nur oo/config_office/set_soenv.1 oo.new/config_office/set_soenv.1
+--- oo/config_office/set_soenv.1	Wed Mar 20 19:10:58 2002
++++ oo.new/config_office/set_soenv.1	Sun Apr 14 23:56:12 2002
+@@ -657,7 +657,7 @@
+ {  if ( $ARGV[ 0 ] eq $no_gcc) 
+    {  AddWarning( "set_soenv", "Autoconf did not find correct gcc compiler, prompted for value" );
+       printf "Did you build gcc 2.95.2 from source using the --prefix and --enable-shared flags (y/n)?: ";
+-      my $answer = <STDIN>; 
++      my $answer = "n"; 
+       chomp( $answer );
+       if ( $answer eq "y" || $answer eq "Y" ) 
+       {  $GCC_HOME = GetValue( "Please enter the gcc 2.95.2 --prefix value: " );
+diff -Nur oo/solenv/inc/unxlngi3.mk oo.new/solenv/inc/unxlngi3.mk
+--- oo/solenv/inc/unxlngi3.mk	Wed Oct 24 19:21:47 2001
++++ oo.new/solenv/inc/unxlngi3.mk	Sun Apr 14 23:56:12 2002
+@@ -91,10 +91,7 @@
+ # flags for C and C++ Compiler
+ # do not use standard header search paths
+ # if installed elsewhere
+-.IF "$(BUILD_SOSL)"!=""
+-CFLAGS=-nostdinc
+-.ENDIF
+-CFLAGS+=-c $(INCLUDE)
++CFLAGS=-c $(INCLUDE)
+ # flags for the C++ Compiler
+ CFLAGSCC= -pipe -mpentiumpro
+ # Flags for enabling exception handling
