@@ -9,6 +9,7 @@ License:	GPL/LGPL
 Group:		X11/Applications
 Source0:	http://sf1.mirror.openoffice.org/%{oo_ver}/oo_%{oo_ver}_src.tar.bz2
 Source1:	ftp://ftp.cs.man.ac.uk/pub/toby/gpc/gpc231.tar.Z
+Source2:	%{name}-db3.jar
 Patch0:		%{name}-gcc.patch
 Patch1:		%{name}-db3.patch
 URL:		http://www.openoffice.org/
@@ -63,6 +64,8 @@ Do zalet OpenOffice.org mo¿na zaliczyæ:
 %patch1 -p1
 install %{SOURCE1} external
 cd external; tar fxz %{SOURCE1}; cp -fr gpc231/* gpc
+install -d solver/641/unxlngi3.pro/bin
+install %{SOURCE2} solver/641/unxlngi3.pro/bin/db.jar
 
 %build
 cd config_office
