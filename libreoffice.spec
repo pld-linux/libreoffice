@@ -978,10 +978,11 @@ if [ "$RPM_BUILD_NCPUS" -gt 1 ]; then
 fi
 
 # gtk version
-cd build/OOO_%{dfullver}/
+cd build/OOO_%{dfullver}
 chmod -R u+rwX vcl
 cp -af vcl vcl.kde
-sed -i -e "s#\(.*WITH_WIDGETSET.*\)\".*\"\(.*\)#\1\"gtk\"\2#g" LinuxIntelEnv.Set*
+cp -a Linux*Env.Set* vcl.kde
+sed -i -e "s#\(.*WITH_WIDGETSET.*\)\".*\"\(.*\)#\1\"gtk\"\2#g" Linux*Env.Set*
 sed -i -e "s#\(.*WIDGETSET_CFLAGS.*\)\".*\"\(.*\)#\1\"`pkg-config --cflags gtk+-2.0 gdk-pixbuf-xlib-2.0` -DWIDGETSET_GTK\"\2#g" Linux*Env.Set*
 sed -i -e "s#\(.*WIDGETSET_LIBS.*\)\".*\"\(.*\)#\1\"`pkg-config --libs gtk+-2.0 gdk-pixbuf-xlib-2.0`\"\2#g" LinuxIntelEnv.Set*
 set +e
