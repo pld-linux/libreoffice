@@ -23,7 +23,7 @@ Summary:	OpenOffice - powerful office suite
 Summary(pl):	OpenOffice - potê¿ny pakiet biurowy
 Name:		openoffice
 Version:	%{fullver}
-Release:	3
+Release:	3.1
 Epoch:		1
 License:	GPL/LGPL
 Group:		X11/Applications
@@ -177,7 +177,8 @@ Group:		X11/Libraries
 Provides:	%{name}-libs-interface = %{version}-%{release}
 Provides:	libvcl%{subver}li.so
 Obsoletes:	%{name}-libs-gtk
-Conflicts:	%{name}-libs < %{version}-%{release}
+Requires:	%{name}-libs = %{version}-%{release}
+Requires(post):	%{name}-libs = %{version}-%{release}
 
 %description libs-kde
 OpenOffice.org productivity suite - KDE Interface.
@@ -192,7 +193,8 @@ Group:		X11/Libraries
 Provides:	%{name}-libs-interface = %{version}-%{release}
 Provides:	libvcl%{subver}li.so
 Obsoletes:	%{name}-libs-kde
-Conflicts:	%{name}-libs < %{version}-%{release}
+Requires:	%{name}-libs < %{version}-%{release}
+Requires(post):	%{name}-libs = %{version}-%{release}
 
 %description libs-gtk
 OpenOffice.org productivity suite - GTK Interface.
@@ -1165,10 +1167,6 @@ rm -f %{_libdir}/%{name}/program/libvcl%{subver}li.so
 
 %post libs-gtk
 ln -sf libvcl%{subver}li-gtk.so %{_libdir}/%{name}/program/libvcl%{subver}li.so
-
-%triggerpostun libs -- openoffice-libs <= 1.1.1-2
-[ -f %{_libdir}/%{name}/program/libvcl%{subver}li-kde.so ] && ln -sf libvcl%{subver}li-kde.so %{_libdir}/%{name}/program/libvcl%{subver}li.so
-[ -f %{_libdir}/%{name}/program/libvcl%{subver}li-gtk.so ] && ln -sf libvcl%{subver}li-gtk.so %{_libdir}/%{name}/program/libvcl%{subver}li.so
 
 %files
 %defattr(644,root,root,755)
