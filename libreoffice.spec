@@ -12,7 +12,7 @@ Summary:	OpenOffice - powerful office suite
 Summary(pl):	OpenOffice - potê¿ny pakiet biurowy
 Name:		openoffice
 Version:	1.0.0
-Release:	0.6
+Release:	0.7
 Epoch:		1
 License:	GPL/LGPL
 Group:		X11/Applications
@@ -73,6 +73,7 @@ BuildRequires:	perl
 BuildRequires:	tcsh
 BuildRequires:	unzip
 BuildRequires:	zip
+BuildRequires:	gcc-java
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %define		_prefix		/usr/X11R6
@@ -115,6 +116,11 @@ Do zalet OpenOffice.org mo¿na zaliczyæ:
  - infrastruktura s³u¿±ca do komunikowania siê w ramach projektu.
 
 %prep
+CC=%{__cc}
+CXX=%{__cxx}
+GCJ=gcj
+export CC CXX GCJ
+
 %setup -q -n oo_1.0_src
 %patch0 -p1
 %patch1 -p1
@@ -138,11 +144,7 @@ Do zalet OpenOffice.org mo¿na zaliczyæ:
 
 install %{SOURCE1} external
 cd external; tar fxz %{SOURCE1}; cp -fr gpc231/* gpc
-
-CC=gcc
-CXX=g++
-GCJ=gcj
-export CC CXX GCJ
+cd ..
 
 ##################
 # Build fake JDK
@@ -238,7 +240,7 @@ EOF
 
 %build
 JAVA_HOME=`pwd`/fakejdk
-export $JAVA_HOME
+export JAVA_HOME
 
 cd config_office
 autoconf
