@@ -1099,7 +1099,7 @@ tar xvzf %{SOURCE12}
 install %{SOURCE411} scale-icons
 chmod a+x scale-icons
 ./scale-icons `pwd`
-cp -Rvf ooo-icons-OOO_1_1-6/* .
+cp -Rvf ooo-icons-OOO_1_1-8/* .
 %endif 
 
 %if %{with optimalization}
