@@ -1,6 +1,7 @@
 # TODO:
 # 	- everything
 #	- PLD vendor list of patches to apply in patches/*/appply?
+#	- update openoffice-additional-dictionaries.txt
 
 # Conditional build:
 %bcond_with	java		# Java support
@@ -250,7 +251,10 @@ Source409:      %{cftp}/helpcontent/helpcontent_86_unix.tgz
 Source410:      %{cftp}/helpcontent/helpcontent_88_unix.tgz
 # Source410-md5:	3b00571318e45965dee0545d86306d65
 
+Source499:	%{name}-additional-dictionaries.txt
+
 Patch0:		%{name}-rh-disable-spellcheck-all-langs.patch
+Patch1:		%{name}-pld-stlport.patch
 
 URL:		http://www.openoffice.org/
 BuildRequires:	ImageMagick
@@ -848,7 +852,7 @@ chiñskim dla Tajwanu.
 %prep
 %setup -q -n ooo-build-%{ooobver}
 %patch0 -p1
-
+%patch1 -p1
 
 install -d src
 ln -s %{SOURCE1} src/
@@ -875,7 +879,7 @@ if [ -z "$RPM_BUILD_NCPUS" ] ; then
 	fi
 fi
 
-%configure \
+CONFOPTS=" \
 	--with-system-gcc \
 	--with-system-zlib \
 	--with-vendor="PLD" \
@@ -894,7 +898,10 @@ fi
 	--enable-libsn \
 	--enable-libart \
 	--with-num-cpus=$RPM_BUILD_NCPUS
+"
 
+./autogen.sh $CONFOPTS
+%configure $CONFOPTS
 %{__make}
 
 %install
@@ -904,6 +911,75 @@ DESTDIR=$RPM_BUILD_ROOT; export DESTDIR
 
 %{__make} install \
 	DESTDIR=$RPM_BUILD_ROOT
+
+for file in \
+	%{SOURCE100} %{SOURCE101} %{SOURCE102} %{SOURCE103} %{SOURCE104} %{SOURCE105} \
+	%{SOURCE106} %{SOURCE107} %{SOURCE108} %{SOURCE109} %{SOURCE110} %{SOURCE111} \
+	%{SOURCE112} %{SOURCE113} %{SOURCE114} %{SOURCE115} %{SOURCE116} %{SOURCE117} \
+	%{SOURCE118} %{SOURCE119} %{SOURCE120} %{SOURCE121} %{SOURCE122} %{SOURCE123} \
+	%{SOURCE124} %{SOURCE125} %{SOURCE126} %{SOURCE127} %{SOURCE128} %{SOURCE129} \
+	%{SOURCE130} %{SOURCE131} %{SOURCE132} %{SOURCE133} %{SOURCE134} %{SOURCE135} \
+	%{SOURCE136} %{SOURCE137} %{SOURCE138} %{SOURCE139} %{SOURCE110} %{SOURCE141} \
+	%{SOURCE142} %{SOURCE143} %{SOURCE144} %{SOURCE145} %{SOURCE146} %{SOURCE147} \
+	%{SOURCE148} %{SOURCE149} %{SOURCE150} %{SOURCE151} %{SOURCE152} %{SOURCE153} \
+	%{SOURCE154} %{SOURCE155} \
+	%{SOURCE200} %{SOURCE201} %{SOURCE202} %{SOURCE203} %{SOURCE204} %{SOURCE205} \
+	%{SOURCE206} %{SOURCE207} %{SOURCE208} %{SOURCE209} %{SOURCE210} %{SOURCE211} \
+	%{SOURCE212} %{SOURCE213} %{SOURCE214} %{SOURCE215} %{SOURCE216} %{SOURCE217} \
+	%{SOURCE218} %{SOURCE219} %{SOURCE220} %{SOURCE221} %{SOURCE222} %{SOURCE223} \
+	%{SOURCE224} %{SOURCE225} %{SOURCE226} %{SOURCE227} %{SOURCE228} %{SOURCE229} \
+	%{SOURCE230} \
+	%{SOURCE300} %{SOURCE301} %{SOURCE302} %{SOURCE303} %{SOURCE304} \
+	%{SOURCE400} %{SOURCE401} %{SOURCE402} %{SOURCE403} %{SOURCE404} %{SOURCE405} \
+	%{SOURCE406} %{SOURCE407} %{SOURCE408} %{SOURCE409} %{SOURCE410}; do
+		unzip -o -d $RPM_BUILD_ROOT%{_libdir}/%{name}/share/dict/ooo $file
+done
+cat %{SOURCE499} >> $RPM_BUILD_ROOT%{_libdir}/%{name}/share/dict/ooo/dictionary.lst
+
+# Add in the regcomp tool since some people need it for 3rd party add-ons
+cp -f build/%{build_release_tag}/solver/%{subver}/unxlng*.pro/bin/regcomp $RPM_BUILD_ROOT%{_libdir}/%{name}/program
+
+# OOo should not install the Vera fonts, they are Required: now
+rm -rf $RPM_BUILD_ROOT%{_libdir}/%{name}/share/fonts/truetype/*
+
+# Copy fixed OpenSymbol to correct location
+install -d $RPM_BUILD_ROOT%{_datadir}/fonts/openoffice
+cp fonts/opens___.ttf $RPM_BUILD_ROOT%{_datadir}/fonts/openoffice
+# %%ghost the fonts.cache-1 file
+touch $RPM_BUILD_ROOT%{_datadir}/fonts/openoffice/fonts.cache-1
+
+# We don't need spadmin or the setup application
+rm -f $RPM_BUILD_ROOT%{_libdir}/%{name}/setup
+rm -f $RPM_BUILD_ROOT%{_libdir}/%{name}/spadmin
+rm -f $RPM_BUILD_ROOT%{_libdir}/%{name}/program/spadmin
+rm -f $RPM_BUILD_ROOT%{_datadir}/applications/openoffice-setup.desktop
+rm -f $RPM_BUILD_ROOT%{_datadir}/applications/openoffice-printeradmin.desktop
+
+# Remove some python cruft
+rm -rf $RPM_BUILD_ROOT%{_libdir}/%{name}/program/python-core-*/lib/test
+
+rm -rf $RPM_BUILD_ROOT%{_datadir}/applnk
+rm -rf $RPM_BUILD_ROOT%{_datadir}/gnome
+
+rm -rf $RPM_BUILD_ROOT%{_libdir}/%{name}/share/kde
+rm -rf $RPM_BUILD_ROOT%{_libdir}/%{name}/share/gnome
+rm -rf $RPM_BUILD_ROOT%{_libdir}/%{name}/share/cde
+
+#rm -f $RPM_BUILD_ROOT%{_libdir}/%{name}/program/gnomeint
+
+# Freetype creeps in somehow
+rm -f %{_libdir}/%{name}/program/filter/libfreetype.so*
+
+rm -f $RPM_BUILD_ROOT%{_libdir}/%{name}/program/sopatchlevel.sh
+perl -pi -e 's/^[       ]*LD_LIBRARY_PATH/# LD_LIBRARY_PATH/;s/export LD_LIBRARY_PATH/# export LD_LIBRARY_PATH/' \
+  $RPM_BUILD_ROOT%{_libdir}/%{name}/program/setup
+
+# Remove setup log
+rm -f $RPM_BUILD_ROOT%{_libdir}/%{name}/program/setup.log
+
+# Remove copied system libraries
+rm -f $RPM_BUILD_ROOT%{_libdir}/%{name}/program/libgcc_s.so* \
+         $RPM_BUILD_ROOT%{_libdir}/%{name}/program/libstdc++*so*
 
 %clean
 rm -rf $RPM_BUILD_ROOT
