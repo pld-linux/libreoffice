@@ -109,7 +109,7 @@ Patch32:	%{name}-fix-errno.patch
 Patch52:	%{name}-xmlhelp.patch
 
 Patch63:	%{name}-stlutility.patch
-Patch64:	%{name}-openide.patch
+#Patch64:	%{name}-openide.patch
 
 URL:		http://www.openoffice.org/
 %if %{?_with_ra:0}%{!?_with_ra:1}
@@ -145,8 +145,7 @@ BuildRequires:	zip
 BuildRequires:	zlib-devel
 BuildRequires:	jar
 BuildRequires:	jdk
-BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
-
+BuildConflicts:	java-sun = 1.4.2
 Requires:	%{name}-libs = %{epoch}:%{version}-%{release}
 Requires:	%{name}-i18n-en = %{epoch}:%{version}-%{release}
 Requires:	%{name}-dict-en
@@ -157,6 +156,8 @@ Requires:	db
 Requires:	libstdc++ < 3.2.1
 Requires:	db3
 %endif
+BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
+
 
 # Supported languages for localized help files (others are not
 # complete/advanced enough)
@@ -715,7 +716,7 @@ rm -f moz/prj/d.lst
 # 1.1 BETA
 %patch52 -p1
 %patch63 -p1
-%patch64 -p1
+#%patch64 -p1
 
 # gcc 2 include error hack:
 rm -rf autodoc/source/inc/utility
