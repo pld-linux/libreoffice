@@ -1,0 +1,3 @@
+- Release: 0.91
+- s/%%{_libdir}\/openoffice/%%{_libdir}/%{name}
+- create links to help files if localized not exist
