@@ -42,10 +42,10 @@ Patch11:	%{name}-ac.patch
 
 Patch12:	%{name}-debug-keepsetup.patch
 # Hackery around zipdep
-Patch12:	%{name}-zipdep.patch
+Patch13:	%{name}-zipdep.patch
 # Remove GPC from linking to GPL/LGPL OO.o code!
-Patch13:	%{name}-remove-gpc.patch
-Patch14:	%{name}-fontcache-1.5.patch
+Patch14:	%{name}-remove-gpc.patch
+Patch15:	%{name}-fontcache-1.5.patch
 URL:		http://www.openoffice.org/
 BuildRequires:	STLport-static
 BuildRequires:	XFree86-devel
@@ -125,9 +125,9 @@ Do zalet OpenOffice.org mo¿na zaliczyæ:
 %patch10 -p1
 %patch11 -p1
 %patch12 -p1
-%patch12 -p1
 %patch13 -p1
 %patch14 -p1
+%patch15 -p1
 
 install %{SOURCE1} external
 cd external; tar fxz %{SOURCE1}; cp -fr gpc231/* gpc
