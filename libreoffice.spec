@@ -69,6 +69,9 @@ Source302:	%{name}-dpack-lang.pl
 Source303:	%{name}-transmute-help-errfile.pl
 Source304:	%{name}-create-instdb.pl
 
+Source401:	%{name}-about.bmp
+Source402:	%{name}-intro.bmp
+
 #Patch0:		%{name}-gcc.patch
 #Patch2:		%{name}-mozilla.patch
 # Start using some system libraries:
@@ -140,6 +143,10 @@ Patch121: openoffice-disable-odk-build.patch
 # misc patches
 Patch201: openoffice-zoom-combobox.patch
 Patch202: openoffice-unzip-not-jar.patch 
+Patch203: openoffice-spell-sv.patch
+
+# ...
+Patch301: openoffice-splash.patch
 
 URL:		http://www.openoffice.org/
 BuildRequires:	STLport-devel >= 4.5.3-6
@@ -810,9 +817,11 @@ rm -f moz/prj/d.lst
 %patch121 -p0 
 %endif 
 
-# add zoom combobox
 %patch201 -p1 
 %patch202 -p0 
+%patch203 -p0
+
+%patch301 -p1 
 
 # gcc 2 include error hack:
 rm -rf autodoc/source/inc/utility
@@ -824,6 +833,9 @@ cd ..
 install -d solver/%{subver}/%{_archbuilddir}/lib
 cp -f /lib/libgcc_s.so.1* solver/%{subver}/%{_archbuilddir}/lib
 cp /usr/lib/libstdc++.so.5* solver/%{subver}/%{_archbuilddir}/lib
+
+install %{SOURCE401} offmgr/res/openabout_pld.bmp
+install %{SOURCE402} offmgr/res/openintro_pld.bmp
 
 # optimalization
 cd solenv/inc
