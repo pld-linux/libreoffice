@@ -33,7 +33,7 @@ else
   [ -f $HOME/.sversionrc ] && mv $HOME/.sversionrc $HOME/.sversionrc.old
   # run the automated setup
   lang=$(eval $(locale); echo "$LC_MESSAGES" | sed -n "s/\([a-z]*\)_.*/\1/p")
-  /usr/lib/openoffice/program/setup -R:/etc/openoffice/autoresponse.conf -d:$OOHOME -LANG:$lang  
+  /usr/lib/openoffice/program/setup -R:/etc/openoffice/autoresponse.conf -d:$OOHOME -LANGUAGE:$lang
   echo "DONE"
 fi
 
