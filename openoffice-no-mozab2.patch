@@ -1,49 +1,59 @@
 --- oo/scp/source/office/files.scp.orig	Fri May  9 14:18:37 2003
 +++ oo/scp/source/office/files.scp	Sat May 24 21:59:07 2003
-@@ -429,16 +429,6 @@
-     Dir             = GID_DIR_PROGRAM;
+@@ -433,19 +433,6 @@
  	Styles			= (PACKED);
  End
+ 
+-#ifndef MACOSX
 -File GID_FILE_LIB_MOZABDRV
 -	TXT_FILE_BODY;
 -	#ifdef UNX
--    Name            = "libmozabdrv2.so";
+-    Name            = STRING(CONCAT2(libmozabdrv2,UNXSUFFIX));
 -	#else
 -    Name            = "mozabdrv2.dll";
 -	#endif
 -    Dir             = GID_DIR_PROGRAM;
 -	Styles			= (PACKED);
 -End
- 
- 
+-#endif
+-
  STD_UNO_LIB_FILE( GID_FILE_LIB_DBU, dbu )
-@@ -790,18 +780,6 @@
+ STD_UNO_LIB_FILE( GID_FILE_LIB_DBA, dba)
+ 
+@@ -795,20 +782,6 @@
          #endif
  End
  
+-#ifndef MACOSX
 -File GID_FILE_LIB_MOZAB_2
 -        TXT_FILE_BODY;
 -        Styles          = (PACKED,UNO_COMPONENT);
 -        RegistryID      = GID_STARREGISTRY_SERVICES_RDB;
 -        Dir             = GID_DIR_PROGRAM;
 -        #ifdef UNX
--        Name            = "libmozab2.so";
+-        Name            = STRING(CONCAT2(libmozab2,UNXSUFFIX));
 -        #else
 -        Name            = "mozab2.dll";
 -        #endif
 -End
+-#endif
 -
  #ifdef UNX
  
  File GID_FILE_LIB_EVOAB_1
-@@ -3214,10 +3192,3 @@
- #endif
+@@ -3242,15 +3215,6 @@
  
- #endif                                  // of #ifdef SOLAR_JAVA
--
+ #endif
+                                   // of #ifdef SOLAR_JAVA
+-#ifndef MACOSX
 -File GID_FILE_MOZILLA_RUNTIME
 -        TXT_FILE_BODY;
 -        Styles = (ARCHIVE);
 -        Dir    = GID_DIR_PROGRAM;
 -        Name	= "mozruntime.zip";
 -End
+-#endif
+-
+ File GID_FILE_HTML_THIRDPARTYLICENSEREADME
+         Name   = "THIRDPARTYLICENSEREADME.html";
+         Dir    = PREDEFINED_PROGDIR; 

@@ -1,143 +1,27 @@
-diff -Nur oo/config_office/makefile.rc oo.new/config_office/makefile.rc
---- oo/config_office/makefile.rc	Fri Oct 19 17:25:23 2001
-+++ oo.new/config_office/makefile.rc	Sun Apr 14 23:56:12 2002
-@@ -155,7 +155,6 @@
- 	so3 \
- 	soltools \
- 	sot \
--	berkeleydb \
- 	starmath \
- 	stoc \
- 	store \
-diff -Nur oo/xmlhelp/source/cxxhelp/provider/databases.cxx oo.new/xmlhelp/source/cxxhelp/provider/databases.cxx
---- oo/xmlhelp/source/cxxhelp/provider/databases.cxx	Fri Nov 23 17:51:01 2001
-+++ oo.new/xmlhelp/source/cxxhelp/provider/databases.cxx	Mon Apr 15 10:59:50 2002
-@@ -60,7 +60,7 @@
-  ************************************************************************/
+diff -Nur oo.orig/berkeleydb/makefile.mk oo.chng/berkeleydb/makefile.mk
+--- oo.orig/berkeleydb/makefile.mk	Thu Jun 12 11:50:38 2003
++++ oo.chng/berkeleydb/makefile.mk	Wed Jul 30 19:14:32 2003
+@@ -65,6 +65,16 @@
+ PRJNAME=so_berkeleydb
+ TARGET=so_berkeleydb
  
++# --- Hack to get system db libraries ------------------------------
++.IF "$(GUI)"=="UNX"
++all:
++	@echo "Since you're running a real OS, we're assuming you have db..."
++	+$(COPY) /usr$/lib$/libdb-4.1.so $(DLLDEST)
++	+$(COPY) /usr$/lib$/libdb_cxx-4.1.so $(DLLDEST)
++	+$(COPY) /usr$/lib$/libdb_java-4.1.so $(DLLDEST)
++	+$(COPY) /usr$/lib$/db.jar $(DLLDEST)
++.ENDIF
++
+ # --- Settings -----------------------------------------------------
  
--#include <berkeleydb/db_cxx.h>
-+#include <db_cxx.h>
- #ifndef _VOS_DIAGNOSE_HXX_
- #include <vos/diagnose.hxx>
- #endif
-diff -Nur oo/xmlhelp/source/cxxhelp/provider/urlparameter.cxx oo.new/xmlhelp/source/cxxhelp/provider/urlparameter.cxx
---- oo/xmlhelp/source/cxxhelp/provider/urlparameter.cxx	Wed Oct 31 14:08:14 2001
-+++ oo.new/xmlhelp/source/cxxhelp/provider/urlparameter.cxx	Mon Apr 15 11:05:50 2002
-@@ -88,7 +88,7 @@
- #include <sablot/shandler.h>
- #endif
- #ifndef _DB_CXX_H_
--#include <berkeleydb/db_cxx.h>
-+#include <db_cxx.h>
- #endif
- #ifndef _URLPARAMETER_HXX_
- #include <provider/urlparameter.hxx>
---- oo_1.0_src/setup2/script/linux/1.0.0/webinstdb.inf.systemdb	Fri May 31 17:46:36 2002
-+++ oo_1.0_src/setup2/script/linux/1.0.0/webinstdb.inf	Fri May 31 17:47:08 2002
-@@ -6687,7 +6687,7 @@
- End
- 
- File gid_File_Lib_Db31
--	Name		 = "libdb-3.1.so";
-+	Name		 = "libdb-4.1.so";
- 	PackedName	 = "f_0352";
- 	Size		 = 458008;
- 	Dir			 = gid_Dir_Program;
-@@ -6700,7 +6700,7 @@
- End
- 
- File gid_File_Lib_Dbjava31
--	Name		 = "libdb_java-3.1.so";
-+	Name		 = "libdb_java-4.1.so";
- 	PackedName	 = "f_0353";
- 	Size		 = 506820;
- 	Dir			 = gid_Dir_Program;
---- oo_1.0_src/setup2/script/linux/1.0.1/webinstdb.inf.systemdb	Fri May 31 17:47:16 2002
-+++ oo_1.0_src/setup2/script/linux/1.0.1/webinstdb.inf	Fri May 31 17:47:27 2002
-@@ -7474,7 +7474,7 @@
- End
- 
- File gid_File_Lib_Db31
--	Name		 = "libdb-3.1.so";
-+	Name		 = "libdb-4.1.so";
- 	PackedName	 = "f_0358";
- 	Size		 = 458008;
- 	DownloadSize = 196814;
-@@ -7488,7 +7488,7 @@
- End
- 
- File gid_File_Lib_Dbjava31
--	Name		 = "libdb_java-3.1.so";
-+	Name		 = "libdb_java-4.1.so";
- 	PackedName	 = "f_0359";
- 	Size		 = 506820;
- 	DownloadSize = 212931;
---- oo_1.0_src/setup2/script/linux/1.1.1/webinstdb.inf.systemdb	Fri May 31 17:47:37 2002
-+++ oo_1.0_src/setup2/script/linux/1.1.1/webinstdb.inf	Fri May 31 17:47:48 2002
-@@ -7512,7 +7512,7 @@
- End
- 
- File gid_File_Lib_Db31
--	Name		 = "libdb-3.1.so";
-+	Name		 = "libdb-4.1.so";
- 	PackedName	 = "f_0361";
- 	Size		 = 458008;
- 	DownloadSize = 196814;
-@@ -7526,7 +7526,7 @@
- End
- 
- File gid_File_Lib_Dbjava31
--	Name		 = "libdb_java-3.1.so";
-+	Name		 = "libdb_java-4.1.so";
- 	PackedName	 = "f_0362";
- 	Size		 = 506820;
- 	DownloadSize = 212931;
---- oo_1.0_src/scp/source/office/files.scp.systemdb	Fri May 31 17:43:01 2002
-+++ oo_1.0_src/scp/source/office/files.scp	Fri May 31 17:43:37 2002
-@@ -994,7 +994,7 @@
-         Styles          = (PACKED);
-         Dir             = GID_DIR_PROGRAM;
-         #ifdef UNX
--        Name            = "libdb-3.2.so";
-+        Name            = "libdb-4.1.so";
-         #else
-         Name            = "libdb32.dll";
-         #endif
-@@ -1007,7 +1007,7 @@
-         Styles          = (PACKED);
-         Dir             = GID_DIR_PROGRAM;
-         #ifdef UNX
--        Name            = "libdb_java-3.2.so";
-+        Name            = "libdb_java-4.1.so";
-         #else
-         Name            = "libdb_java32.dll";
-         #endif
-@@ -1021,7 +1021,7 @@
-         BIN_FILE_BODY;
-         Styles          = (PACKED);
-         Dir             = GID_DIR_PROGRAM;
--        Name            = "libdb_cxx-3.2.so";
-+        Name            = "libdb_cxx-4.1.so";
- End
- 
- #endif
---- oo_1.0_src/solenv/inc/libs.mk.systemdb	Fri May 31 17:43:57 2002
-+++ oo_1.0_src/solenv/inc/libs.mk	Fri May 31 17:45:32 2002
-@@ -169,8 +169,8 @@
- ZLIB3RDLIB=-lzlib
- JPEG3RDLIB=-ljpeglib
- NEON3RDLIB=-lneon
--BERKELEYLIB=-ldb-3.2
--BERKELEYCPPLIB=-ldb_cxx-3.2
-+BERKELEYLIB=-ldb-4.1
-+BERKELEYCPPLIB=-ldb_cxx-4.1
- CURLLIB=-lcurl
- SFX2LIB=-lsfx$(UPD)$(DLLPOSTFIX)
- SFXLIB=-lsfx$(UPD)$(DLLPOSTFIX)
---- oo_1.0_src/berkeleydb/prj/d.lst.systemdb	Fri May 31 17:38:58 2002
-+++ oo_1.0_src/berkeleydb/prj/d.lst	Fri May 31 17:42:14 2002
-@@ -1,18 +1,20 @@
+ .INCLUDE :	settings.mk
+diff -Nur oo.orig/berkeleydb/prj/d.lst oo.chng/berkeleydb/prj/d.lst
+--- oo.orig/berkeleydb/prj/d.lst	Mon Jul 14 20:43:57 2003
++++ oo.chng/berkeleydb/prj/d.lst	Wed Jul 30 19:13:27 2003
+@@ -1,15 +1,17 @@
  mkdir: %_DEST%\inc%_EXT%\berkeleydb
  
 -..\%__SRC%\inc\db_cxx.h %_DEST%\inc%_EXT%\berkeleydb\db_cxx.h
@@ -159,34 +43,136 @@ diff -Nur oo/xmlhelp/source/cxxhelp/provider/urlparameter.cxx oo.new/xmlhelp/sou
 +\usr\lib\libdb_java-4.1.so %_DEST%\lib%_EXT%\libdb_java-4.1.so
 +\usr\lib\libdb_cxx-4.1.so %_DEST%\lib%_EXT%\libdb_cxx-4.1.so
  
+ ..\%__SRC%\lib\libdb-3.2.dylib %_DEST%\lib%_EXT%\libdb-3.2.dylib
+ ..\%__SRC%\lib\libdb_java-3.2.dylib %_DEST%\lib%_EXT%\libdb_java-3.2.dylib
+@@ -18,5 +20,5 @@
  ..\%__SRC%\bin\libdb32.dll %_DEST%\bin%_EXT%\libdb32.dll
  ..\%__SRC%\bin\libdb_java32.dll %_DEST%\bin%_EXT%\libdb_java32.dll
  
 -..\%__SRC%\bin\db.jar %_DEST%\bin%_EXT%\db.jar
 +\usr\share\java\db.jar %_DEST%\bin%_EXT%\db.jar
  
---- oo_1.0_src/berkeleydb/makefile.mk.systemdb	Fri May 31 17:34:42 2002
-+++ oo_1.0_src/berkeleydb/makefile.mk	Fri May 31 17:38:51 2002
-@@ -65,6 +65,16 @@
- PRJNAME=so_berkeleydb
- TARGET=so_berkeleydb
+diff -Nur oo.orig/config_office/makefile.rc oo.chng/config_office/makefile.rc
+--- oo.orig/config_office/makefile.rc	Mon Jul  7 16:46:29 2003
++++ oo.chng/config_office/makefile.rc	Wed Jul 30 19:05:47 2003
+@@ -159,7 +159,6 @@
+ 	so3 \
+ 	soltools \
+ 	sot \
+-	berkeleydb \
+ 	starmath \
+ 	stoc \
+ 	store \
+diff -Nur oo.orig/scp/source/office/files.scp oo.chng/scp/source/office/files.scp
+--- oo.orig/scp/source/office/files.scp	Wed Jul 30 15:28:10 2003
++++ oo.chng/scp/source/office/files.scp	Wed Jul 30 19:09:56 2003
+@@ -983,7 +983,7 @@
+         Styles          = (PACKED);
+         Dir             = GID_DIR_PROGRAM;
+         #ifdef UNX
+-        Name            = STRING(CONCAT2(libdb-3.2,UNXSUFFIX));
++        Name            = STRING(CONCAT2(libdb-4.1,UNXSUFFIX));
+         #else
+         Name            = "libdb32.dll";
+         #endif
+@@ -996,7 +996,7 @@
+         Styles          = (PACKED);
+         Dir             = GID_DIR_PROGRAM;
+         #ifdef UNX
+-        Name            = STRING(CONCAT2(libdb_java-3.2,UNXSUFFIX));
++        Name            = STRING(CONCAT2(libdb_java-4.1,UNXSUFFIX));
+         #else
+         Name            = "libdb_java32.dll";
+         #endif
+@@ -1010,7 +1010,7 @@
+         TXT_FILE_BODY;
+         Styles          = (PACKED);
+         Dir             = GID_DIR_PROGRAM;
+-        Name            = STRING(CONCAT2(libdb_cxx-3.2,UNXSUFFIX));
++        Name            = STRING(CONCAT2(libdb_cxx-4.1,UNXSUFFIX));
+ End
  
-+# --- Hack to get system db libraries ------------------------------
-+.IF "$(GUI)"=="UNX"
-+all:
-+	@echo "Since you're running a real OS, we're assuming you have db..."
-+	+$(COPY) /usr$/lib$/libdb-4.1.so $(DLLDEST)
-+	+$(COPY) /usr$/lib$/libdb_cxx-4.1.so $(DLLDEST)
-+	+$(COPY) /usr$/lib$/libdb_java-4.1.so $(DLLDEST)
-+	+$(COPY) /usr$/lib$/db.jar $(DLLDEST)
-+.ENDIF
-+
- # --- Settings -----------------------------------------------------
+ #endif
+diff -Nur oo.orig/setup2/script/linux/1.0.0/webinstdb.inf oo.chng/setup2/script/linux/1.0.0/webinstdb.inf
+--- oo.orig/setup2/script/linux/1.0.0/webinstdb.inf	Thu May 24 08:45:47 2001
++++ oo.chng/setup2/script/linux/1.0.0/webinstdb.inf	Wed Jul 30 19:08:11 2003
+@@ -6687,7 +6687,7 @@
+ End
  
- .INCLUDE :	settings.mk
-diff -uNr xmlhelp.old/source/com/sun/star/help/CreateDb.java xmlhelp/source/com/sun/star/help/CreateDb.java
---- oo/xmlhelp.old/source/com/sun/star/help/CreateDb.java	Wed Dec  4 15:19:26 2002
-+++ oo/xmlhelp/source/com/sun/star/help/CreateDb.java	Wed Dec  4 15:47:07 2002
+ File gid_File_Lib_Db31
+-	Name		 = "libdb-3.1.so";
++	Name		 = "libdb-4.1.so";
+ 	PackedName	 = "f_0352";
+ 	Size		 = 458008;
+ 	Dir			 = gid_Dir_Program;
+@@ -6700,7 +6700,7 @@
+ End
+ 
+ File gid_File_Lib_Dbjava31
+-	Name		 = "libdb_java-3.1.so";
++	Name		 = "libdb_java-4.1.so";
+ 	PackedName	 = "f_0353";
+ 	Size		 = 506820;
+ 	Dir			 = gid_Dir_Program;
+diff -Nur oo.orig/setup2/script/linux/1.0.1/webinstdb.inf oo.chng/setup2/script/linux/1.0.1/webinstdb.inf
+--- oo.orig/setup2/script/linux/1.0.1/webinstdb.inf	Thu May 17 16:46:41 2001
++++ oo.chng/setup2/script/linux/1.0.1/webinstdb.inf	Wed Jul 30 19:08:31 2003
+@@ -7474,7 +7474,7 @@
+ End
+ 
+ File gid_File_Lib_Db31
+-	Name		 = "libdb-3.1.so";
++	Name		 = "libdb-4.1.so";
+ 	PackedName	 = "f_0358";
+ 	Size		 = 458008;
+ 	DownloadSize = 196814;
+@@ -7488,7 +7488,7 @@
+ End
+ 
+ File gid_File_Lib_Dbjava31
+-	Name		 = "libdb_java-3.1.so";
++	Name		 = "libdb_java-4.1.so";
+ 	PackedName	 = "f_0359";
+ 	Size		 = 506820;
+ 	DownloadSize = 212931;
+diff -Nur oo.orig/setup2/script/linux/1.1.1/webinstdb.inf oo.chng/setup2/script/linux/1.1.1/webinstdb.inf
+--- oo.orig/setup2/script/linux/1.1.1/webinstdb.inf	Wed Sep 19 14:58:58 2001
++++ oo.chng/setup2/script/linux/1.1.1/webinstdb.inf	Wed Jul 30 19:08:50 2003
+@@ -7512,7 +7512,7 @@
+ End
+ 
+ File gid_File_Lib_Db31
+-	Name		 = "libdb-3.1.so";
++	Name		 = "libdb-4.1.so";
+ 	PackedName	 = "f_0361";
+ 	Size		 = 458008;
+ 	DownloadSize = 196814;
+@@ -7526,7 +7526,7 @@
+ End
+ 
+ File gid_File_Lib_Dbjava31
+-	Name		 = "libdb_java-3.1.so";
++	Name		 = "libdb_java-4.1.so";
+ 	PackedName	 = "f_0362";
+ 	Size		 = 506820;
+ 	DownloadSize = 212931;
+diff -Nur oo.orig/solenv/inc/libs.mk oo.chng/solenv/inc/libs.mk
+--- oo.orig/solenv/inc/libs.mk	Wed Jul 30 15:28:09 2003
++++ oo.chng/solenv/inc/libs.mk	Wed Jul 30 19:11:20 2003
+@@ -176,8 +176,8 @@
+ ZLIB3RDLIB=-lzlib
+ JPEG3RDLIB=-ljpeglib
+ NEON3RDLIB=-lneon
+-BERKELEYLIB=-ldb-3.2
+-BERKELEYCPPLIB=-ldb_cxx-3.2
++BERKELEYLIB=-ldb-4.1
++BERKELEYCPPLIB=-ldb_cxx-4.1
+ CURLLIB=-lcurl
+ SFX2LIB=-lsfx$(OFFICEUPD)$(DLLPOSTFIX)
+ SFXLIB=-lsfx$(OFFICEUPD)$(DLLPOSTFIX)
+diff -Nur oo.orig/xmlhelp/source/com/sun/star/help/CreateDb.java oo.chng/xmlhelp/source/com/sun/star/help/CreateDb.java
+--- oo.orig/xmlhelp/source/com/sun/star/help/CreateDb.java	Mon Nov 20 13:08:42 2000
++++ oo.chng/xmlhelp/source/com/sun/star/help/CreateDb.java	Wed Jul 30 19:16:26 2003
 @@ -37,7 +37,7 @@
  		table.set_errpfx( "HelpAccess" );
  		try
@@ -205,9 +191,9 @@ diff -uNr xmlhelp.old/source/com/sun/star/help/CreateDb.java xmlhelp/source/com/
        		StringDbt key = new StringDbt(key1);
        		StringDbt data = new StringDbt(data1);
        		try
-diff -uNr xmlhelp.old/source/com/sun/star/help/HelpDatabases.java xmlhelp/source/com/sun/star/help/HelpDatabases.java
---- oo/xmlhelp.old/source/com/sun/star/help/HelpDatabases.java	Wed Dec  4 15:19:26 2002
-+++ oo/xmlhelp/source/com/sun/star/help/HelpDatabases.java	Wed Dec  4 15:46:17 2002
+diff -Nur oo.orig/xmlhelp/source/com/sun/star/help/HelpDatabases.java oo.chng/xmlhelp/source/com/sun/star/help/HelpDatabases.java
+--- oo.orig/xmlhelp/source/com/sun/star/help/HelpDatabases.java	Thu Mar 27 19:07:28 2003
++++ oo.chng/xmlhelp/source/com/sun/star/help/HelpDatabases.java	Wed Jul 30 19:18:28 2003
 @@ -239,7 +239,7 @@
  				table = new Db( null,0 );
  
@@ -235,9 +221,9 @@ diff -uNr xmlhelp.old/source/com/sun/star/help/HelpDatabases.java xmlhelp/source
  				Dbc cursor = table.cursor( null,0 );
  				StringDbt key = new StringDbt();
  				StringDbt data = new StringDbt();
-diff -uNr xmlhelp.old/source/com/sun/star/help/HelpIndexer.java xmlhelp/source/com/sun/star/help/HelpIndexer.java
---- oo/xmlhelp.old/source/com/sun/star/help/HelpIndexer.java	Wed Dec  4 15:19:26 2002
-+++ oo/xmlhelp/source/com/sun/star/help/HelpIndexer.java	Wed Dec  4 15:46:49 2002
+diff -Nur oo.orig/xmlhelp/source/com/sun/star/help/HelpIndexer.java oo.chng/xmlhelp/source/com/sun/star/help/HelpIndexer.java
+--- oo.orig/xmlhelp/source/com/sun/star/help/HelpIndexer.java	Thu Mar 27 19:07:28 2003
++++ oo.chng/xmlhelp/source/com/sun/star/help/HelpIndexer.java	Wed Jul 30 19:18:47 2003
 @@ -150,7 +150,7 @@
                      		+ _module
                         		+ ".db";
@@ -265,31 +251,52 @@ diff -uNr xmlhelp.old/source/com/sun/star/help/HelpIndexer.java xmlhelp/source/c
  
              for( int i = 0; i < list.length; ++i )
              {
-diff -uNr xmlhelp.old/source/cxxhelp/provider/databases.cxx xmlhelp/source/cxxhelp/provider/databases.cxx
---- oo/xmlhelp.old/source/cxxhelp/provider/databases.cxx	Wed Dec  4 15:19:26 2002
-+++ oo/xmlhelp/source/cxxhelp/provider/databases.cxx	Wed Dec  4 15:33:41 2002
-@@ -495,7 +495,11 @@
+diff -Nur oo.orig/xmlhelp/source/cxxhelp/provider/databases.cxx oo.chng/xmlhelp/source/cxxhelp/provider/databases.cxx
+--- oo.orig/xmlhelp/source/cxxhelp/provider/databases.cxx	Fri Apr  4 19:09:36 2003
++++ oo.chng/xmlhelp/source/cxxhelp/provider/databases.cxx	Wed Jul 30 19:23:11 2003
+@@ -60,7 +60,7 @@
+  ************************************************************************/
+ 
+ 
+-#include <berkeleydb/db_cxx.h>
++#include <db_cxx.h>
+ #ifndef _VOS_DIAGNOSE_HXX_
+ #include <vos/diagnose.hxx>
+ #endif
+@@ -497,7 +497,11 @@
  		
  		rtl::OString fileName( fileNameOU.getStr(),fileNameOU.getLength(),osl_getThreadTextEncoding() );
  		
--		if( table->open( fileName.getStr(),0,DB_BTREE,DB_RDONLY,0644 ) )
 +#if ((DB_VERSION_MAJOR * 10 + DB_VERSION_MINOR) >= 41)
-+     		if( table->open( NULL, fileName.getStr(),0,DB_BTREE,DB_RDONLY,0644 ) )
++		if( table->open( NULL, fileName.getStr(),0,DB_BTREE,DB_RDONLY,0644 ) )
 +#else
-+     		if( table->open( fileName.getStr(),0,DB_BTREE,DB_RDONLY,0644 ) )
-+#endif
+ 		if( table->open( fileName.getStr(),0,DB_BTREE,DB_RDONLY,0644 ) )
++#endif		
  		{
  			table->close( 0 );
  			delete table;
-@@ -709,7 +713,11 @@
+@@ -711,7 +715,12 @@
                                 osl_getThreadTextEncoding() );
  		
  		Db table(0,DB_CXX_NO_EXCEPTIONS);
++
 +#if ((DB_VERSION_MAJOR * 10 + DB_VERSION_MINOR) >= 41)
-+		if( 0 == table.open( NULL, fileName.getStr(),0,DB_BTREE,DB_RDONLY,0644 ) )
++		if( 0 == table.open( NULL,fileName.getStr(),0,DB_BTREE,DB_RDONLY,0644 ) )
 +#else
  		if( 0 == table.open( fileName.getStr(),0,DB_BTREE,DB_RDONLY,0644 ) )
-+#endif
++#endif		
  		{   
  			std::vector<KeywordInfo::KeywordElement> aVector;
  			Db* idmap = getBerkeley( Database,Language );
+diff -Nur oo.orig/xmlhelp/source/cxxhelp/provider/urlparameter.cxx oo.chng/xmlhelp/source/cxxhelp/provider/urlparameter.cxx
+--- oo.orig/xmlhelp/source/cxxhelp/provider/urlparameter.cxx	Fri Jun 27 11:09:21 2003
++++ oo.chng/xmlhelp/source/cxxhelp/provider/urlparameter.cxx	Wed Jul 30 19:07:08 2003
+@@ -94,7 +94,7 @@
+ #include <sablot/shandler.h>
+ #endif
+ #ifndef _DB_CXX_H_
+-#include <berkeleydb/db_cxx.h>
++#include <db_cxx.h>
+ #endif
+ #ifndef _URLPARAMETER_HXX_
+ #include <provider/urlparameter.hxx>

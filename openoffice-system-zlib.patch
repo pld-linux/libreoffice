@@ -1,33 +1,18 @@
---- oo_1.0.2_src.orig/zlib/prj/d.lst	Mon Apr 22 17:26:14 2002
-+++ oo_1.0.2_src/zlib/prj/d.lst	Sun Feb 23 00:15:32 2003
-@@ -1,10 +1,10 @@
- mkdir: %_DEST%\inc%_EXT%\external\zlib
+diff -Nur oo.orig/crashrep/source/unx/makefile.mk oo.chng/crashrep/source/unx/makefile.mk
+--- oo.orig/crashrep/source/unx/makefile.mk	Wed Jul 16 16:05:44 2003
++++ oo.chng/crashrep/source/unx/makefile.mk	Wed Jul 30 19:44:14 2003
+@@ -115,7 +115,7 @@
+ APP2TARGET=$(TARGET2)
+ APP2OBJS=$(OBJFILES)
  
--..\%__SRC%\inc\zlib.h %_DEST%\inc%_EXT%\external\zlib\zlib.h
--..\%__SRC%\inc\unzip.h %_DEST%\inc%_EXT%\external\zlib\unzip.h
--..\%__SRC%\inc\zconf.h %_DEST%\inc%_EXT%\external\zconf.h
-+\usr\include\zlib.h %_DEST%\inc%_EXT%\external\zlib\zlib.h
-+\usr\include\unzip.h %_DEST%\inc%_EXT%\external\zlib\unzip.h
-+\usr\include\zconf.h %_DEST%\inc%_EXT%\external\zconf.h
- 
--..\%__SRC%\lib\libzlib.a %_DEST%\lib%_EXT%\libzlib.a
-+\lib\libz.so* %_DEST%\lib%_EXT%\libz.so*
- ..\%__SRC%\slb\zlib.lib %_DEST%\lib%_EXT%\zlib.lib
- ..\%__SRC%\slb\zlib.lin %_DEST%\lib%_EXT%\zlib.lin
- 
---- oo_1.0.2_src/solenv/inc/libs.mk~	Thu Feb 13 17:46:00 2003
-+++ oo_1.0.2_src/solenv/inc/libs.mk	Sun Feb 23 00:25:42 2003
-@@ -171,7 +171,7 @@
- LNGLIB=-llng$(OFFICEUPD)$(DLLPOSTFIX)
- EXPAT3RDLIB=-lexpat_xmlparse -lexpat_xmltok
- EXPATASCII3RDLIB=-lascii_expat_xmlparse -lexpat_xmltok
--ZLIB3RDLIB=-lzlib
-+ZLIB3RDLIB=-lz
- JPEG3RDLIB=-ljpeglib
- NEON3RDLIB=-lneon
- BERKELEYLIB=-ldb-4.1
---- oo_1.0.2_src.orig/package/source/zipapi/Deflater.cxx	Thu Nov 15 20:16:11 2001
-+++ oo_1.0.2_src/package/source/zipapi/Deflater.cxx	Tue Feb 25 15:53:38 2003
+-APP2STDLIBS=$(STATIC) `pkg-config --only-mod-libs --libs gtk+-2.0` -lpng -lzlib -ljpeg -ltiff $(DYNAMIC) -lXext -lX11 -ldl -lnsl
++APP2STDLIBS=$(STATIC) `pkg-config --only-mod-libs --libs gtk+-2.0` -lpng -lz -ljpeg -ltiff $(DYNAMIC) -lXext -lX11 -ldl -lnsl
+ .IF "$(OS)" == "SOLARIS"
+ APP2STDLIBS+=-lsocket
+ .ENDIF
+diff -Nur oo.orig/package/source/zipapi/Deflater.cxx oo.chng/package/source/zipapi/Deflater.cxx
+--- oo.orig/package/source/zipapi/Deflater.cxx	Thu Nov 15 21:16:11 2001
++++ oo.chng/package/source/zipapi/Deflater.cxx	Wed Jul 30 19:42:34 2003
 @@ -150,7 +150,7 @@
  		pStream->avail_in  = nLength;
  		pStream->avail_out = nNewLength;
@@ -82,8 +67,9 @@
  		delete pStream;
  	}
  	pStream = NULL;
---- oo_1.0.2_src.orig/package/source/zipapi/Inflater.cxx	Thu Nov 15 20:17:02 2001
-+++ oo_1.0.2_src/package/source/zipapi/Inflater.cxx	Tue Feb 25 16:17:19 2003
+diff -Nur oo.orig/package/source/zipapi/Inflater.cxx oo.chng/package/source/zipapi/Inflater.cxx
+--- oo.orig/package/source/zipapi/Inflater.cxx	Thu Nov 15 21:17:02 2001
++++ oo.chng/package/source/zipapi/Inflater.cxx	Wed Jul 30 19:43:20 2003
 @@ -133,7 +133,7 @@
  	{
  		// do error handling
@@ -129,17 +115,33 @@
  
  	switch (nResult)
  	{
---- oo.orig/crashrep/source/unx/makefile.mk	Tue Jul 15 08:41:05 2003
-+++ oo/crashrep/source/unx/makefile.mk	Tue Jul 15 09:03:35 2003
-@@ -100,9 +100,9 @@
- APP1TARGET=$(TARGET)
- APP1OBJS=$(OBJFILES)
- .IF "$(COM)" == "GCC"
--APP1STDLIBS=$(GTKLINKFLAGS) `pkg-config $(ONLYMODLIBS) --libs gtk+-2.0` -lpng -lzlib -ljpeg -ltiff -Wl,-Bdynamic -lXext -lX11 -ldl -lnsl
-+APP1STDLIBS=$(GTKLINKFLAGS) `pkg-config $(ONLYMODLIBS) --libs gtk+-2.0` -lpng -lz -ljpeg -ltiff -Wl,-Bdynamic -lXext -lX11 -ldl -lnsl
- .ELSE
--APP1STDLIBS=$(GTKLINKFLAGS) `pkg-config $(ONLYMODLIBS) --libs gtk+-2.0` -lpng -lzlib -ljpeg -ltiff -Bdynamic -lXext -lX11 -ldl -lsocket -lnsl
-+APP1STDLIBS=$(GTKLINKFLAGS) `pkg-config $(ONLYMODLIBS) --libs gtk+-2.0` -lpng -lz -ljpeg -ltiff -Bdynamic -lXext -lX11 -ldl -lsocket -lnsl
- .ENDIF
+diff -Nur oo.orig/solenv/inc/libs.mk oo.chng/solenv/inc/libs.mk
+--- oo.orig/solenv/inc/libs.mk	Wed Jul 30 19:35:35 2003
++++ oo.chng/solenv/inc/libs.mk	Wed Jul 30 19:41:03 2003
+@@ -173,7 +173,7 @@
+ LNGLIB=-llng$(OFFICEUPD)$(DLLPOSTFIX)
+ EXPAT3RDLIB=-lexpat_xmlparse -lexpat_xmltok
+ EXPATASCII3RDLIB=-lascii_expat_xmlparse -lexpat_xmltok
+-ZLIB3RDLIB=-lzlib
++ZLIB3RDLIB=-lz
+ JPEG3RDLIB=-ljpeglib
+ NEON3RDLIB=-lneon
+ BERKELEYLIB=-ldb-4.1
+diff -Nur oo.orig/zlib/prj/d.lst oo.chng/zlib/prj/d.lst
+--- oo.orig/zlib/prj/d.lst	Mon Aug 26 12:00:28 2002
++++ oo.chng/zlib/prj/d.lst	Wed Jul 30 19:40:21 2003
+@@ -1,10 +1,10 @@
+ mkdir: %_DEST%\inc%_EXT%\external\zlib
  
- ALL: ALLTAR $(BIN)$/crash_dump.res.01
+-..\%__SRC%\inc\zlib.h %_DEST%\inc%_EXT%\external\zlib\zlib.h
+-..\%__SRC%\inc\unzip.h %_DEST%\inc%_EXT%\external\zlib\unzip.h
+-..\%__SRC%\inc\zconf.h %_DEST%\inc%_EXT%\external\zconf.h
++\usr\include\zlib.h %_DEST%\inc%_EXT%\external\zlib\zlib.h
++\usr\include\unzip.h %_DEST%\inc%_EXT%\external\zlib\unzip.h
++\usr\include\zconf.h %_DEST%\inc%_EXT%\external\zconf.h
+ 
+-..\%__SRC%\lib\libzlib.a %_DEST%\lib%_EXT%\libzlib.a
++\lib\libz.so* %_DEST%\lib%_EXT%\libz.so*
+ ..\%__SRC%\slb\zlib.lib %_DEST%\lib%_EXT%\zlib.lib
+ ..\%__SRC%\slb\zlib.lin %_DEST%\lib%_EXT%\zlib.lin
+ 
