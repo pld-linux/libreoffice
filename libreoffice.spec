@@ -56,7 +56,19 @@ Patch18:	%{name}-asm.patch
 
 Patch19:	%{name}-nousrinclude.patch
 
+Patch20:	%{name}-no-mozab.patch
+Patch21:	%{name}-no-mozab2.patch
+
+Patch22:	%{name}-system-db.patch
+
+Patch23:	%{name}-udm.patch
+Patch24:	%{name}-autodoc.patch
+
 URL:		http://www.openoffice.org/
+BuildRequires:  db4
+BuildRequires:  db4-devel
+BuildRequires:  db4-cxx
+BuildRequires:  db4-java
 BuildRequires:	STLport-static
 BuildRequires:	XFree86-devel
 BuildRequires:	XFree86-fonts-PEX
@@ -69,14 +81,14 @@ BuildRequires:	flex
 BuildRequires:	freetype-devel >= 2.1
 BuildRequires:	freetype-static
 %{?!_with_nest:BuildRequires:	gcc <= 3.0.0}
-%{?_with_nest:BuildRequires:	gcc2}
+%{?_with_nest:BuildRequires:	gcc >= 3.0.0}
 %{?!_with_nest:BuildRequires:	gcc-c++ <= 3.0.0}
-%{?_with_nest:BuildRequires:	gcc2-c++}
+%{?_with_nest:BuildRequires:	gcc-c++ >= 3.0.0}
 BuildRequires:	gcc-java
 %{?_with_ibm_java:BuildRequires:	ibm-java-sdk}
 %{?!_with_ibm_java:BuildRequires:	jdk = 1.3.1_03}
 %{?!_with_nest:BuildRequires:	libstdc++-devel <= 3.0.0}
-%{?_with_nest:BuildRequires:	libstdc++2-devel}
+%{?_with_nest:BuildRequires:	libstdc++-devel}
 BuildRequires:	pam-devel
 BuildRequires:	perl
 BuildRequires:	tcsh
@@ -84,7 +96,8 @@ BuildRequires:	unzip
 BuildRequires:	zip
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
-%define		langs		"ENUS,FREN,GERM,SPAN,ITAL,DTCH,PORT,DAN,GREEK,POL,SWED,TURK,RUSS"
+#%define		langs		"ENUS,FREN,GERM,SPAN,ITAL,DTCH,PORT,DAN,GREEK,POL,SWED,TURK,RUSS"
+%define		langs		"ENUS"
 
 %define		_prefix		/usr/X11R6
 %define		_archbuilddir	unxlngi3.pro
@@ -153,7 +166,16 @@ export CC CXX GCJ
 %patch16 -p1
 %patch17 -p1
 %patch18 -p1
-#%patch19 -p1
+%patch19 -p1
+
+%patch20 -p1
+%patch21 -p1
+%patch22 -p1
+
+%patch23 -p1
+%patch24 -p1
+
+rm -rf autodoc/source/inc/utility
 
 install %{SOURCE1} external
 cd external; tar fxz %{SOURCE1}; cp -fr gpc231/* gpc
@@ -162,7 +184,7 @@ cd ..
 ##################
 # Build fake JDK
 mkdir -p fakejdk/bin fakejdk/include
-cp -a %{SOURCE4} fakejdk/bin/xmlparse
+cp -a openoffice-xmlparse.sh fakejdk/bin/xmlparse
 
 # Create fakejdk/bin/java:
 sed "s~@@~`pwd`~" > fakejdk/bin/java <<"EOF"
@@ -213,20 +235,22 @@ while [ $# != 0 ]; do
 	shift
 done
 if [ -n "$ANY" ]; then
-	$GCJ -C -d $DEST $TEMP/*.java
+	gcj -C -d $DEST $TEMP/*.java
 fi
 rm -rf $TEMP
 exit 0
 EOF
 
 chmod +x fakejdk/bin/javac
-GCJHOME=`$GCJ -print-search-dirs | sed -n 's/^install:[         ]*//p'`
-ln -sf $GCJHOME/include/j* fakejdk/include/
+GCJHOME=`gcj -print-search-dirs | sed -n 's/^install:[         ]*//p'`
+cp -f /usr/include/jdk/linux/j* fakejdk/include
+cp -f /usr/include/jdk/j* fakejdk/include
+cat fakejdk/include/jni.h | sed s/JDK1_1InitArgs/JDK1_1InitArgs2/ > fakejdk/include/jni2.h
 rm -f fakejdk/include/jni.h
 cat > fakejdk/include/jni.h <<EOF
 #ifndef FAKEJDK_JNI_H
 #define FAKEJDK_JNI_H 1
-#include_next <jni.h>
+#include <jni2.h>
 #include <stdio.h>
 #include <stdarg.h>
 
@@ -255,14 +279,14 @@ EOF
 ## BUILD
 ###################
 %build
-#JAVA_HOME=`pwd`/fakejdk
-#export JAVA_HOME
+JAVA_HOME=`pwd`/fakejdk
+export JAVA_HOME
 
 cd config_office
 autoconf
 
-%{?!_with_ibm_java:JAVA_HOME="/usr/lib/jdk1.3.1_03"}
-%{?_with_ibm_java:JAVA_HOME="/usr/lib/IBMJava2-13"}
+#%{?!_with_ibm_java:JAVA_HOME="/usr/lib/jdk1.3.1_03"}
+#%{?_with_ibm_java:JAVA_HOME="/usr/lib/IBMJava2-13"}
 %configure2_13 \
 	--with-jdk-home=$JAVA_HOME \
 	--with-stlport4-home=/usr \
@@ -317,9 +341,9 @@ PID=$!
 sleep 5
 
 # preparing to start installator
-cp -f %{SOURCE3} $RPM_BUILD_DIR/oo_%{oo_ver}_src/install.rs.in
+cp -f %{SOURCE3} $RPM_BUILD_DIR/oo_%{version}_src/install.rs.in
 sed -e "s,@DESTDIR@,$RPM_BUILD_ROOT%{_libdir}/openoffice," \
-	-e "s,@LOGFILE@,$RPM_BUILD_DIR/oo_%{oo_ver}_src/install.log," \
+	-e "s,@LOGFILE@,$RPM_BUILD_DIR/oo_%{version}_src/install.log," \
 	install.rs.in > install.rs
 
 cp solver/641/unxlngi3.pro/bin/setup_services.rdb solver/641/unxlngi3.pro/bin/uno_writerdb.rdb
@@ -334,7 +358,7 @@ for FileID in Lib_gcc Lib_Stdc Lib_Mozab_2 Lib_Mozabdrv Mozilla_Runtime; do
 done
 
 # starting installator
-DISPLAY=":$i" %{installpath}/01/normal/setup -R:$RPM_BUILD_DIR/oo_%{oo_ver}_src/install.rs
+DISPLAY=":$i" %{installpath}/01/normal/setup -R:$RPM_BUILD_DIR/oo_%{version}_src/install.rs
 
 # stopping Xvfb
 #kill $PID
