@@ -963,7 +963,7 @@ CONFIGURE_OPTIONS="$CONFOPTS"; export CONFIGURE_OPTIONS
 # hack for parallel build
 if [ "$RPM_BUILD_NCPUS" -gt 1 ]; then
 	doit=1
-	while [ "$doit" -eq 1 ]; then
+	while [ "$doit" -eq 1 ]; do
 		echo "Waiting one more time..."
 		FCH=$(nice -n 20 find . -type f ! -mmin +3 -print 2> /dev/null | wc -l)
 		[ "$FCH" -eq 0 ] && doit=0
@@ -972,13 +972,13 @@ fi
 
 # gtk version
 cd build/OOO_%{dfullver}/
-cp -r vcl vcl.kde
+cp -af vcl vcl.kde
 sed -i -e "s#\(.*WITH_WIDGETSET.*\)\".*\"\(.*\)#\1\"gtk\"\2#g" LinuxIntelEnv.Set*
 sed -i -e "s#\(.*WIDGETSET_CFLAGS.*\)\".*\"\(.*\)#\1\"`pkg-config --cflags gtk+-2.0 gdk-pixbuf-xlib-2.0` -DWIDGETSET_GTK\"\2#g" Linux*Env.Set*
 sed -i -e "s#\(.*WIDGETSET_LIBS.*\)\".*\"\(.*\)#\1\"`pkg-config --libs gtk+-2.0 gdk-pixbuf-xlib-2.0`\"\2#g" LinuxIntelEnv.Set*
 . ./Linux*Env.Set.sh || :
 cd vcl
-rm -rf unx*
+rm -rf unxlng*
 build
 cd ..
 mv vcl vcl.gtk
@@ -997,9 +997,9 @@ TEMP="%{tmpdir}"; export TEMP
 mv $RPM_BUILD_ROOT%{_libdir}/%{name}/program/libvcl%{subver}li.so \
 	$RPM_BUILD_ROOT%{_libdir}/%{name}/program/libvcl%{subver}li-kde.so
 
-install build/OOO_%{dsubver}/vcl.gtk/unxlngi4.pro/lib/libvcl%{subver}li.so \
+install build/OOO_%{dfullver}/vcl.gtk/unxlngi4.pro/lib/libvcl%{subver}li.so \
 	$RPM_BUILD_ROOT%{_libdir}/%{name}/program/libvcl%{subver}li-gtk.so
-install build/OOO_%{dsubver}/vcl.gtk/unxlngi4.pro/bin/*-gnome \
+install build/OOO_%{dfullver}/vcl.gtk/unxlngi4.pro/bin/*-gnome \
 	$RPM_BUILD_ROOT%{_libdir}/%{name}/program/
 
 install -d helptmp && cd helptmp || exit 1
