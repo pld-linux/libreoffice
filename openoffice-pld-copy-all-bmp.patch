@@ -1,0 +1,26 @@
+diff -urN ooo-build-1.1.54.org/bin/build-ooo ooo-build-1.1.54/bin/build-ooo
+--- ooo-build-1.1.54.org/bin/build-ooo	2004-04-30 02:50:20.269649608 +0200
++++ ooo-build-1.1.54/bin/build-ooo	2004-04-30 02:51:35.686184552 +0200
+@@ -224,19 +224,9 @@
+ fi
+ # -- cut --
+ 
+-# For RH distributions, if we have the splash & about screens,
+-# copy them into the source dir
+-if test "z$VENDORNAME" = "zRedHat"; then
+-	mkdir -p $OOBUILDDIR/offmgr/res
+-	cp $SRCDIR/openabout_redhat.bmp $OOBUILDDIR/offmgr/res/
+-	cp $SRCDIR/openintro_redhat.bmp $OOBUILDDIR/offmgr/res/
+-fi
+-# Same for SuSE.
+-if test "z$VENDORNAME" = "zSuSE"; then
+-	mkdir -p $OOBUILDDIR/offmgr/res
+-	cp $SRCDIR/openabout_suse.bmp $OOBUILDDIR/offmgr/res/
+-	cp $SRCDIR/openintro_suse.bmp $OOBUILDDIR/offmgr/res/
+-fi
++# Copy all splash & about screens even if some won't be used
++cp $SRCDIR/openabout_*.bmp $OOBUILDDIR/offmgr/res/
++cp $SRCDIR/openintro_*.bmp $OOBUILDDIR/offmgr/res/
+ 
+ # Checkout / Update source:
+ if (test "z$2" = "z--checkout") || !(test -f $OOBUILDDIR/$STAMP); then
