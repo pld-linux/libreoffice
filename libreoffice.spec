@@ -13,6 +13,7 @@
 
 # Conditional build:
 %bcond_with	java		# Java support
+%bcond_with	vfs		# Enable GNOME VFS and Evolution 2 support
 
 %define		ver		1.1
 %define		rel		3
@@ -26,7 +27,7 @@ Summary:	OpenOffice - powerful office suite
 Summary(pl):	OpenOffice - potê¿ny pakiet biurowy
 Name:		openoffice
 Version:	%{fullver}
-Release:	1
+Release:	1%{?with_vfs:vfs}
 Epoch:		1
 License:	GPL/LGPL
 Group:		X11/Applications
@@ -108,6 +109,8 @@ Source412:	%{cftp}/helpcontent/helpcontent_90_unix.tgz
 Patch0:		%{name}-rh-disable-spellcheck-all-langs.patch
 # PLD-specific, they ooo-build people don't like it
 Patch1:		%{name}-files.patch
+# Enable VFS support during build
+Patch2:		%{name}-vfs.patch
 
 URL:		http://www.openoffice.org/
 BuildRequires:	ImageMagick
@@ -121,6 +124,9 @@ BuildRequires:	curl-devel
 BuildRequires:	db-cxx-devel
 BuildRequires:	db-devel
 BuildRequires:	/usr/bin/getopt
+%if %{with vfs}
+BuildRequires:	gnome-vfs2
+%endif
 %if %{with java}
 BuildRequires:	db-java >= 4.2.52-4
 BuildRequires:	jar
@@ -1837,6 +1843,10 @@ zuluskim.
 %setup -q -n ooo-build-%{ooobver}
 %patch0 -p1
 %patch1 -p1 
+
+%if %{with vfs}
+%patch2 -p1
+%endif
 
 install -d src
 # sources, icons, KDE_icons
