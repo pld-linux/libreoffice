@@ -40,7 +40,7 @@ Patch10:	%{name}-psprint-euro.patch
 # Fix config_office/configure
 Patch11:	%{name}-ac.patch
 # Hackery around zipdep
-Patch12:	%{name}-openoffice-zipdep.patch
+Patch12:	%{name}-zipdep.patch
 # Remove GPC from linking to GPL/LGPL OO.o code!
 Patch13:	%{name}-remove-gpc.patch
 Patch14:	%{name}-fontcache-1.5.patch
