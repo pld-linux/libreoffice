@@ -275,6 +275,7 @@ BuildRequires:	XFree86-devel
 BuildRequires:	autoconf
 BuildRequires:	automake
 BuildRequires:	bison >= 1.875-4
+BuildRequires:	cups-devel
 BuildRequires:	db-devel
 BuildRequires:	db-cxx-devel
 BuildRequires:	/usr/bin/getopt
@@ -304,7 +305,6 @@ BuildRequires:	gnome-vfs2-devel
 %endif 
 %if %{with gnomecups}
 BuildRequires:	libgnomecups-devel
-BuildRequires:	cups-devel
 %endif
 BuildConflicts:	java-sun = 1.4.2
 Requires:	%{name}-libs = %{epoch}:%{version}-%{release}
