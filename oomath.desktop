@@ -5,5 +5,5 @@ Terminal=false
 Icon=ooo_math.png
 Exec=oomath
 Type=Application
-MimeType=application/vnd.sun.xml.math
+MimeType=application/vnd.stardivision.writer.math;application/vnd.sun.xml.writer.math
 Categories=Office;X-Misc;

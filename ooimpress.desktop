@@ -5,5 +5,5 @@ Terminal=false
 Icon=ooo_impress.png
 Exec=ooimpress
 Type=Application
-MimeType=application/vnd.sun.xml.impress
+MimeType=application/mspowerpoint;application/vnd.ms-powerpoint;application/x-mspowerpoint;application/vnd.stardivision.impress;application/vnd.sun.xml.impress;application/vnd.stardivision.impress.template;application/vnd.sun.xml.impress.template
 Categories=Office;Presentation;
