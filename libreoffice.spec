@@ -944,7 +944,7 @@ CONFOPTS=" \
 	--with-lang=ALL \
 	--with-x \
 	--without-fonts \
-	--enable-crashdump \
+	--enable-crashdump=no \
 	--enable-fontconfig \
 	--enable-libsn \
 	--enable-libart \
