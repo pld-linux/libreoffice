@@ -64,7 +64,8 @@ autoconf
 %configure \
 	--with-stlport4-home=/usr \
 	--with-jdk-home=$JAVA_HOME \
-	--with-lang=ALL
+	--with-lang=ALL \
+	--with-x
 
 cd ..
 cat bootstrap | sed -e 's,autogen.sh;configure;make;make install,autogen.sh;configure;make linux;make install,g' > bootstrap.
