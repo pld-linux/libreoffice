@@ -33,7 +33,7 @@ Summary:	OpenOffice - powerful office suite
 Summary(pl):	OpenOffice - potê¿ny pakiet biurowy
 Name:		openoffice
 Version:	%{fullver}
-Release:	8
+Release:	9
 Epoch:		1
 License:	GPL/LGPL
 Group:		X11/Applications
@@ -1176,16 +1176,26 @@ if [ -f %{_libdir}/%{name}/program/libvcl%{verarch}-gtk.so ]; then
 fi
 
 %preun libs-kde
-[ "$1" = "0" ] && rm -f %{_libdir}/%{name}/program/libvcl%{verarch}.so
+[ "$1" != 0 ] || rm -f %{_libdir}/%{name}/program/libvcl%{verarch}.so
 
 %post libs-kde
 ln -sf libvcl%{verarch}-kde.so %{_libdir}/%{name}/program/libvcl%{verarch}.so
 
 %preun libs-gtk
-[ "$1" = "0" ] && rm -f %{_libdir}/%{name}/program/libvcl%{verarch}.so
+[ "$1" != 0 ] || rm -f %{_libdir}/%{name}/program/libvcl%{verarch}.so
 
 %post libs-gtk
 ln -sf libvcl%{verarch}-gtk.so %{_libdir}/%{name}/program/libvcl%{verarch}.so
+
+%triggerpostun libs-kde -- openoffice-libs-kde < 1.1.1-9
+if [ -f %{_libdir}/%{name}/program/libvcl%{verarch}-kde.so ]; then
+	ln -sf libvcl%{verarch}-kde.so %{_libdir}/%{name}/program/libvcl%{verarch}.so
+fi
+
+%triggerpostun libs-gtk -- openoffice-libs-gtk < 1.1.1-9
+if [ -f %{_libdir}/%{name}/program/libvcl%{verarch}-gtk.so ]; then
+	ln -sf libvcl%{verarch}-gtk.so %{_libdir}/%{name}/program/libvcl%{verarch}.so
+fi
 
 %files
 %defattr(644,root,root,755)
