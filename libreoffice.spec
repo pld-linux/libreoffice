@@ -134,6 +134,9 @@ Patch64:	%{name}-crashrepgtk.patch
 # Fix java/ppc problem 
 Patch65:	%{name}-java-ppc.patch 
 
+# sparc fixes
+Patch66:	%{name}-sparc.patch
+
 # Hey, we _really_ want java?
 Patch101:	%{name}-allow-no-jdk.patch
 Patch102:	%{name}-berkeleydb-handle-no-solar-java.patch
@@ -342,6 +345,9 @@ BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 %endif
 %ifarch ppc 
 %define _archbuilddir 	unxlngppc.pro
+%endif
+%ifarch sparc sparc64 
+%define _archbuilddir 	unxlngs.pro
 %endif
 %define	installpath	instsetoo/%{_archbuilddir}
 %define	subver		645
@@ -928,6 +934,10 @@ rm -f moz/prj/d.lst
 
 # no-java patch
 %if %{without java}
+# try build on sparc...
+%ifarch sparc sparc64
+%patch66
+%endif 
 %patch101 -p0
 %patch102 -p0
 %patch103 -p0
@@ -1164,6 +1174,9 @@ ENVSCRIPT="LinuxIntelEnv.Set"
 %ifarch ppc
 ENVSCRIPT="LinuxPPCEnv.Set"
 %endif 
+%ifarch sparc sparc64
+ENVSCRIPT="LinuxSparcEnv.Set"
+%endif
 
 %if %{with parallel}
 echo -e "#!/bin/tcsh\nsource $ENVSCRIPT\ncd instsetoo\nbuild.pl -P$RPM_BUILD_NCPUS --all\n exit 0\n" > compile
