@@ -771,7 +771,9 @@ rm -rf $RPM_BUILD_ROOT
 
 install -d $RPM_BUILD_ROOT%{_libdir}/openoffice
 
-%{init_xdisplay}
+if [ -z "$DISPLAY" ]; then
+	%{init_xdisplay}
+fi
 RESPONSE_FILE=$PWD/rsfile.ins
 OLDPATH="`pwd`"
 cd %{installpath}/%{langinst}/normal/
@@ -827,10 +829,14 @@ EOF
   ) | awk ' $1 ~ /Value/ { l=$0; sub(/^.*= "/,"",l); sub(/";.*$/,"",l); sub(/%PRODUCTNAME/,"OpenOffice.org",l); sub(/%PRODUCTVERSION/,"%{version}",l); n=n+1; str="@@REPLACEME" n "@@"; s="\"" str "\""; sub(/".*"/,s); printf "s|%s|%s|\n", str, l > "Common.xml.sed" } { print } ' \
     >> setup.ins
 
-  DISPLAY=:$XDISPLAY ./setup -R:$RESPONSE_FILE
+if [ -z "$DISPLAY" ]; then
+	DISPLAY=:$XDISPLAY ./setup -R:$RESPONSE_FILE
+	%{kill_xdisplay}
+else
+	./setup -R:$RESPONSE_FILE
+fi	
 
 cd "$OLDPATH"
-%{kill_xdisplay}
 
 # Copy all localized resources to destination directory
 install -d $RPM_BUILD_ROOT%{_libdir}/openoffice/program/resource
