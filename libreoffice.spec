@@ -407,7 +407,7 @@ fiñskim.
 
 %package i18n-fo
 Summary:	OpenOffice.org - interface in Faroese language
-Summary(pl):	OpenOffice.org - interfejs w jêzyku FO
+Summary(pl):	OpenOffice.org - interfejs w jêzyku farerskim
 Group:		Applications/Office
 Requires:	%{name} = %{epoch}:%{version}-%{release}
 
@@ -417,7 +417,7 @@ Faroese language.
 
 %description i18n-fo -l pl
 Ten pakiet dostarcza zasoby zawieraj±ce menu i okna dialogowe w jêzyku
-FO.
+farerskim.
 
 #%files i18n-fo -f fo.lang
 
