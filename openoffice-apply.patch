@@ -1,0 +1,78 @@
+diff -urN ooo-build-1.3.3.org/patches/OOO_1_1_2/apply ooo-build-1.3.3/patches/OOO_1_1_2/apply
+--- ooo-build-1.3.3.org/patches/OOO_1_1_2/apply	2004-09-08 12:10:11.860771872 +0200
++++ ooo-build-1.3.3/patches/OOO_1_1_2/apply	2004-09-08 12:10:56.239025352 +0200
+@@ -832,6 +832,17 @@
+ # hackish system-libstdc++ patch
+ system-libstdcpp.diff
+ 
++# FIXME: ooo-res seems to be needed only for "Local Installation"
++# which is not well supported with multiple localizations anyway
++# ooo-res is copied to the really used iso-res by gid_Procedure_Copy_Iso_Res
++# this patch updates the procedure to delete the unused ooo-res
++# won't be needed in OOo, version 2.0, #28285
++scp-no-ooo-res.diff
++
++#######################################################
++
++[ NovellOnly, PLDOnly ]
++
+ # mark the files in share/template/<lang>/wizard/bitmap as lang specific
+ build-wizard-bitmap-scp.diff
+ 
+@@ -845,17 +856,6 @@
+ # RPM is not able to replace a directory with the symlink within an update.
+ resmgr-resource-path.diff
+ 
+-# FIXME: ooo-res seems to be needed only for "Local Installation"
+-# which is not well supported with multiple localizations anyway
+-# ooo-res is copied to the really used iso-res by gid_Procedure_Copy_Iso_Res
+-# this patch updates the procedure to delete the unused ooo-res
+-# won't be needed in OOo, version 2.0, #28285
+-scp-no-ooo-res.diff
+-
+-#######################################################
+-
+-[ NovellOnly, PLDOnly ]
+-
+ # Push fonts into the ps stream always
+ print-type42.diff
+ 
+diff -urN ooo-build-1.3.3.org/patches/OOO_1_1_3/apply ooo-build-1.3.3/patches/OOO_1_1_3/apply
+--- ooo-build-1.3.3.org/patches/OOO_1_1_3/apply	2004-09-08 12:10:11.870770352 +0200
++++ ooo-build-1.3.3/patches/OOO_1_1_3/apply	2004-09-08 12:11:19.814441344 +0200
+@@ -770,6 +770,17 @@
+ # hackish system-libstdc++ patch
+ system-libstdcpp.diff
+ 
++# FIXME: ooo-res seems to be needed only for "Local Installation"
++# which is not well supported with multiple localizations anyway
++# ooo-res is copied to the really used iso-res by gid_Procedure_Copy_Iso_Res
++# this patch updates the procedure to delete the unused ooo-res
++# won't be needed with OOo, version 2.0, #28285
++scp-no-ooo-res.diff
++
++#######################################################
++
++[ NovellOnly, PLDOnly ]
++
+ # mark the files in share/template/<lang>/wizard/bitmap as lang specific
+ build-wizard-bitmap-scp.diff
+ 
+@@ -783,17 +794,6 @@
+ # RPM is not able to replace a directory with the symlink within an update.
+ resmgr-resource-path.diff
+ 
+-# FIXME: ooo-res seems to be needed only for "Local Installation"
+-# which is not well supported with multiple localizations anyway
+-# ooo-res is copied to the really used iso-res by gid_Procedure_Copy_Iso_Res
+-# this patch updates the procedure to delete the unused ooo-res
+-# won't be needed with OOo, version 2.0, #28285
+-scp-no-ooo-res.diff
+-
+-#######################################################
+-
+-[ NovellOnly, PLDOnly ]
+-
+ # Push fonts into the ps stream always
+ print-type42.diff
+ 
