@@ -15,3 +15,16 @@
     AC_PATH_X
     AC_PATH_XTRA
  
+@@ -998,10 +998,10 @@
+    CFLAGS=$X_CFLAGS
+    LDFLAGS="$X_LDFLAGS $X_LIBS"
+    AC_CHECK_LIB(X11, XOpenDisplay, x_libs="-lX11 $X_EXTRA_LIBS", [AC_MSG_ERROR([X Development libraries not found])])
+-else
++dnl else
+    x_includes="no_x_includes"
+    x_libraries="no_x_libraries"
+-fi
++dnl fi
+ dnl ***************************************
+ dnl testing libc version for Linux...
+ dnl ***************************************
