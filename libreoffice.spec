@@ -15,6 +15,7 @@ Group:		X11/Applications
 Source0:	http://sf1.mirror.openoffice.org/%{oo_ver}/oo_%{oo_ver}_src.tar.bz2
 Source1:	ftp://ftp.cs.man.ac.uk/pub/toby/gpc/gpc231.tar.Z
 Source2:	%{name}-db3.jar
+Source3:	%{name}-rsfile.txt
 Patch0:		%{name}-gcc.patch
 Patch1:		%{name}-db3.patch
 Patch2:		%{name}-mozilla.patch
@@ -22,6 +23,7 @@ Patch3:		%{name}-nest.patch
 URL:		http://www.openoffice.org/
 BuildRequires:	STLport-static
 BuildRequires:	XFree86-devel
+BuildRequires:	XFree86-Xvfb
 BuildRequires:	db3-devel
 BuildRequires:	autoconf
 BuildRequires:	automake
@@ -89,7 +91,6 @@ autoconf
 
 %{?!_with_ibm_java:JAVA_HOME="/usr/lib/jdk1.3.1_02"}
 %{?_with_ibm_java:JAVA_HOME="/usr/lib/IBMJava2-13"}
-%{?_with_nest:CC="gcc2"; CXX="g++2";}
 %configure \
 	--with-jdk-home=$JAVA_HOME \
 	--with-stlport4-home=/usr \
@@ -126,18 +127,32 @@ dmake install
 EOF
 
 chmod u+rx install
-./install
+#./install
 
-#install -d $RPM_BUILD_ROOT{%{_bindir},%{_libdir},%{_datadir}/%{name}}
-#install solver/%{version}/unxlngi3.pro/bin/*.{bin,exe}		$RPM_BUILD_ROOT%{_bindir}
-#install solver/%{version}/unxlngi3.pro/lib/*.so		 	$RPM_BUILD_ROOT%{_libdir}
-#cp -fr solver/%{version}/unxlngi3.pro/{par,pck,rdb,res,xml}	$RPM_BUILD_ROOT%{_datadir}/%{name}
+# starting Xvfb
+i=0
+while [ -f /tmp/.X$i-lock ]; do
+	i=$(($i+1))
+done
+
+/usr/X11R6/bin/Xvfb :$i & 
+sleep 5
+PID=$!
+
+# preparing to start installator
+cp -f %{SOURCE3} $RPM_BUILD_DIR/oo_%{oo_ver}_src/install.rs.in
+sed -e "s,@DESTDIR@,$RPM_BUILD_ROOT/usr/X11R6/lib/openoffice," \
+	-e "s,@LOGFILE@,$RPM_BUILD_DIR/oo_%{oo_ver}_src/install.log," \
+	install.rs.in > install.rs
+
+# starting installator
+DISPLAY=":$i" instsetoo/unxlngi3.pro/01/normal/setup -R:$RPM_BUILD_DIR/oo_%{oo_ver}_src/install.rs
+
+# stopping Xvfb
+kill $PID
 
 %clean
 rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(644,root,root,755)
-#%attr(755,root,root) %{_bindir}/*
-#%attr(755,root,root) %{_libdir}/*
-#%{_datadir}/%{name}
