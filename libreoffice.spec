@@ -1024,9 +1024,8 @@ DB_JAR="%{_javadir}/db.jar"
 export JAVA_HOME DB_JAR GCJ
 %endif
 
-# parallel build is broken above 4 NCPUS so use 4 as max
 RPM_BUILD_NR_THREADS="%(echo "%{__make}" | sed -e 's#.*-j\([[:space:]]*[0-9]\+\)#\1#g' | xargs)"
-[ "$RPM_BUILD_NR_THREADS" != "%{__make}" -a "$RPM_BUILD_NR_THREADS" -gt 4 ] && RPM_BUILD_NR_THREADS=4 || RPM_BUILD_NR_THREADS=1
+[ "$RPM_BUILD_NR_THREADS" = "%{__make}" ] && RPM_BUILD_NR_THREADS=1
 
 CONFOPTS=" \
 %ifarch ppc
@@ -1078,7 +1077,7 @@ CONFOPTS=" \
 	--enable-crashdump=no \
 	--disable-symbols \
 %endif
-	--with-num-cpus=$RPM_BUILD_NR_THREADS
+	--with-num-jobs=$RPM_BUILD_NR_THREADS
 "
 
 # for cvs snaps
