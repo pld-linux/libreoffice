@@ -978,7 +978,7 @@ for file in \
 		tar zxf "${file}"
 		for ifile in s*.zip; do
 			install -d $RPM_BUILD_ROOT%{_libdir}/%{name}/help/${lang}
-			unzip -q -d $RPM_BUILD_ROOT%{_libdir}/%{name}/help/${lang} -o "$file"
+			unzip -q -d $RPM_BUILD_ROOT%{_libdir}/%{name}/help/${lang} -o "$ifile"
 		done
 done
 cd ..
