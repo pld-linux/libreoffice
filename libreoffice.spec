@@ -24,7 +24,7 @@
 
 %define		fullver		%{ver}.%{rel}
 %define		dfullver	%(echo %{fullver} | tr . _)
-%define		ssnap		%(echo %{snap} | tr '[A-Z]' '[a-z]')
+%define		ssnap		%(echo %{snap} | tr SRC src)
 %define		specflags	-fno-strict-aliasing
 
 Summary:	OpenOffice.org - powerful office suite
