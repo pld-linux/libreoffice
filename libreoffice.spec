@@ -145,8 +145,9 @@ Patch201: openoffice-zoom-combobox.patch
 Patch202: openoffice-unzip-not-jar.patch 
 Patch203: openoffice-spell-sv.patch
 Patch204: openoffice-word-count.patch
-Patch205: openoffice-xinerama-extern-c.patch
 Patch206: openoffice-recent-files.patch
+Patch207: openoffice-gui-sw-insert-symbol.patch
+Patch208: openoffice-use-fork.patch
 
 # ...
 Patch301: openoffice-splash.patch
@@ -824,8 +825,9 @@ rm -f moz/prj/d.lst
 %patch202 -p0 
 %patch203 -p0
 %patch204 -p0
-%patch205 -p0 
 %patch206 -p0 
+%patch207 -p0
+%patch208 -p0
 
 %patch301 -p1 
 
