@@ -1,0 +1,38 @@
+diff -urN ooo-build-1.1.55.org/patches/OOO_1_1/system-curl.diff ooo-build-1.1.55/patches/OOO_1_1/system-curl.diff
+--- ooo-build-1.1.55.org/patches/OOO_1_1/system-curl.diff	2004-07-22 00:14:28.000000000 +0200
++++ ooo-build-1.1.55/patches/OOO_1_1/system-curl.diff	2004-07-22 00:19:45.000000000 +0200
+@@ -54,3 +54,34 @@
+  namespace ftp {
+  
+  	/** Forward declarations.
++diff -u -r1.2 ftphandleprovider.hxx
++--- ucb/source/ucp/ftp/ftphandleprovider.hxx	15 Oct 2002 09:21:17 -0000	1.2
+++++ ucb/source/ucp/ftp/ftphandleprovider.hxx	20 Jul 2004 22:02:48 -0000
++@@ -1,5 +1,5 @@
++ #include <rtl/ustring.hxx>
++-#include <curl/types.h>
+++#include <curl/curl.h>
++ 
++ namespace ftp {
++ 	
++Index: ftploaderthread.hxx
++===================================================================
++RCS file: /cvs/ucb/ucb/source/ucp/ftp/ftploaderthread.hxx,v
++retrieving revision 1.5
++diff -u -r1.5 ftploaderthread.hxx
++--- ucb/source/ucp/ftp/ftploaderthread.hxx	28 Aug 2002 07:23:14 -0000	1.5
+++++ ucb/source/ucp/ftp/ftploaderthread.hxx	20 Jul 2004 22:02:48 -0000
++@@ -71,11 +71,10 @@
++ #ifndef _OSL_THREAD_H_
++ #include <osl/thread.h>
++ #endif
++-#ifndef __CURL_TYPES_H
++-#include <curl/types.h>
+++#ifndef __CURL_CURL_H
+++#include <curl/curl.h>
++ #endif
++ 
++-
++ namespace ftp {
++ 	
++ 	/** A loaderthread acts as factory for CURL-handles,
