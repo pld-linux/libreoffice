@@ -1,7 +1,7 @@
 
 # Conditional build:
 # _with_ibm_java	- uses IBM java instead SUN java
-# _with_nest
+# _with_ra			- build in RA environment
 
 # TODO:
 # - finish localzation
@@ -109,7 +109,7 @@ Patch27:	%{name}-sj2-java.patch
 Patch29:	%{name}-gcc2-95.patch
 
 URL:		http://www.openoffice.org/
-%if %{?_with_nest:1}%{!?_with_nest:0}
+%if %{?_with_ra:0}%{!?_with_ra:1}
 BuildRequires:	db
 BuildRequires:	db-devel
 BuildRequires:	db-cxx
@@ -145,7 +145,7 @@ BuildRequires:	jar
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 Requires:	%{name}-libs = %{version}-%{release}
-%if %{?_with_nest:1}%{!?_with_nest:0}
+%if %{?_with_ra:0}%{!?_with_ra:1}
 Requires:	libstdc++ >= 3.2.1
 Requires:	db
 %else
@@ -245,7 +245,6 @@ export CC CXX GCJ
 %patch25 -p1
 #%patch26 -p1
 %patch27 -p1
-#%{?_with_nest:%patch28 -p1}
 
 %patch29 -p1
 
@@ -256,7 +255,7 @@ install %{SOURCE1} external
 cd external; tar fxz %{SOURCE1}; cp -fr gpc231/* gpc
 cd ..
 
-%if %{?_with_nest:1}%{!?_with_nest:0}
+%if %{?_with_ra:0}%{!?_with_ra:1}
 install -d solver/%{subver}/%{_archbuilddir}/lib
 cp -f /lib/libgcc_s.so.1* solver/%{subver}/%{_archbuilddir}/lib
 cp /usr/lib/libstdc++.so.5* solver/%{subver}/%{_archbuilddir}/lib
@@ -292,7 +291,7 @@ chmod u+rx prep
 ./prep
 
 install -d solver/%{subver}/%{_archbuilddir}/bin
-%if %{?_with_nest:1}%{!?_with_nest:0}
+%if %{?_with_ra:0}%{!?_with_ra:1}
 install /usr/lib/db.jar solver/%{subver}/%{_archbuilddir}/bin/db.jar
 %else
 install %{SOURCE10} solver/%{subver}/%{_archbuilddir}/bin/db.jar
