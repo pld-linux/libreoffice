@@ -14,7 +14,7 @@
 
 %define		ver		1.1
 %define		rel		2
-%define		ooobver		1.1.60
+%define		ooobver		1.1.61
 %define		subver		645
 %define		fullver		%{ver}.%{rel}
 %define		dfullver	%(echo %{fullver} | tr . _)
@@ -29,7 +29,7 @@ Epoch:		1
 License:	GPL/LGPL
 Group:		X11/Applications
 Source0:	http://ooo.ximian.com/packages/OOO_%{dfullver}/ooo-build-%{ooobver}.tar.gz
-# Source0-md5:	02ec567fcaff657c9927fe7bd82ab7dd
+# Source0-md5:	6ab5f5c7adcc250c2cb2a5ec16d0dd06
 Source1:	http://ooo.ximian.com/packages/OOO_%{dfullver}/OOO_%{dfullver}.tar.bz2
 # Source1-md5:	627fbce603598a74f9be03f5a1da6d94
 Source2:	http://ooo.ximian.com/packages/ooo-icons-OOO_1_1-9.tar.gz
@@ -72,7 +72,6 @@ Source410:	%{cftp}/helpcontent/helpcontent_88_unix.tgz
 
 Patch0:		%{name}-rh-disable-spellcheck-all-langs.patch
 Patch1:		%{name}-pld-config.patch
-Patch2:		%{name}-missing.patch
 
 URL:		http://www.openoffice.org/
 BuildRequires:	ImageMagick
@@ -874,7 +873,6 @@ chiñskim.
 %setup -q -n ooo-build-%{ooobver}
 %patch0 -p1
 %patch1 -p1
-%patch2 -p1
 
 install -d src
 ln -s %{SOURCE1} src/
