@@ -12,7 +12,7 @@ Summary:	OpenOffice - powerful office suite
 Summary(pl):	OpenOffice - potê¿ny pakiet biurowy
 Name:		openoffice
 Version:	1.0.2
-Release:	0.90
+Release:	0.91
 Epoch:		1
 License:	GPL/LGPL
 Group:		X11/Applications
@@ -197,6 +197,8 @@ Requires:	db3
 
 # The virtual X server PID
 %define kill_xdisplay kill $(cat /tmp/.X$XDISPLAY-lock)
+
+%define oolib	%{_libdir}/openoffice
 
 %description
 OpenOffice.org is an open-source project sponsored by Sun Microsystems
@@ -790,7 +792,7 @@ rm -rf $RPM_BUILD_ROOT
 #zip -j -5 "f0_061" solver/%{subver}/%{_archbuilddir}/bin/uno_writerdb.rdb
 #mv f0_061.zip %{installpath}/%{langinst}/normal/f0_061
 
-install -d $RPM_BUILD_ROOT%{_libdir}/openoffice
+install -d $RPM_BUILD_ROOT%{oolib}
 
 if [ -z "$DISPLAY" ]; then
 	%{init_xdisplay}
@@ -804,7 +806,7 @@ cd %{installpath}/%{langinst}/normal/
   else
 	cp -f setup.ins setup.ins.oorg
   fi
-  cat %{SOURCE2} | sed -e "s|@DESTDIR@|$RPM_BUILD_ROOT%{_libdir}/openoffice|" > $RESPONSE_FILE
+  cat %{SOURCE2} | sed -e "s|@DESTDIR@|$RPM_BUILD_ROOT%{oolib}|" > $RESPONSE_FILE
 
   # Add additional wordbooks
 
@@ -860,8 +862,8 @@ fi
 cd "$OLDPATH"
 
 # Copy all localized resources to destination directory
-install -d $RPM_BUILD_ROOT%{_libdir}/openoffice/program/resource
-cp -f solver/%{subver}/%{_archbuilddir}/bin/*.res $RPM_BUILD_ROOT%{_libdir}/openoffice/program/resource
+install -d $RPM_BUILD_ROOT%{oolib}/program/resource
+cp -f solver/%{subver}/%{_archbuilddir}/bin/*.res $RPM_BUILD_ROOT%{oolib}/program/resource
 
 # don't care about main_transform.xsl, it looks safe to overwrite
 for file in %{SOURCE101} %{SOURCE102} %{SOURCE103} %{SOURCE104} %{SOURCE105} %{SOURCE106}
@@ -873,8 +875,8 @@ for file in s*.zip; do
   [[ "$dir" = "shared" ]] && dir="common"
   prefix=`echo $file | sed -e "s/s[a-z]*\([0-9]*\).zip/\1/"`
   langname=`cat %{SOURCE9} | grep ^$prefix | cut -d: -f2`
-  install -d $RPM_BUILD_ROOT%{_libdir}/openoffice/help/$langname
-  unzip -d $RPM_BUILD_ROOT%{_libdir}/openoffice/help/$langname -o $file
+  install -d $RPM_BUILD_ROOT%{oolib}/help/$langname
+  unzip -d $RPM_BUILD_ROOT%{oolib}/help/$langname -o $file
 done
 rm -f *.zip
 
@@ -886,7 +888,7 @@ rm -f *.zip
   for res in `echo "%{languages}" | sed -e "s/,/ /g"`; do
     prefix=`cat %{SOURCE9} | grep ":$res:" | cut -d: -f1`
     isocode=`cat %{SOURCE9} | grep ":$res:" | cut -d: -f2`
-    tempdir=$RPM_BUILD_ROOT%{_libdir}/openoffice-$isocode
+    tempdir=$RPM_BUILD_ROOT%{oolib}-$isocode
     mkdir -p $tempdir
     # may extract help files, if known to be localized enough
     case ",%{helplangs}," in
@@ -909,9 +911,9 @@ rm -f *.zip
 #      ./oo_fixup_help $isocode orig.err.html >$tempdir/help/$isocode/err.html
 #      rm -f orig.err.html
       find $tempdir/help/$isocode "(" -type f -or -type l ")" -print | \
-        sed -e "s|$RPM_BUILD_ROOT%{_libdir}/openoffice-$isocode|%{_libdir}/openoffice|g" > $FILELIST.help.$isocode.in
+        sed -e "s|$RPM_BUILD_ROOT%{oolib}-$isocode|%{oolib}|g" > $FILELIST.help.$isocode.in
       find $tempdir/help/$isocode -type d -print | \
-        sed -e "s|$RPM_BUILD_ROOT%{_libdir}/openoffice-$isocode|%dir %{_libdir}/openoffice|g" | sort -u >> $FILELIST.help.$isocode.in
+        sed -e "s|$RPM_BUILD_ROOT%{oolib}-$isocode|%dir %{oolib}|g" | sort -u >> $FILELIST.help.$isocode.in
       # keep err.html and custom.css in main l10n package
 #      grep -v "help/$isocode\(\|/\(err.html\|custom.css\)\)$" $FILELIST.help.$isocode.in > $FILELIST.help.$isocode
       rm -f $FILELIST.help.$isocode.in
@@ -935,14 +937,14 @@ rm -f *.zip
         -i $prefix/normal/setup.ins \
         -o $tempdir/program/instdb.ins.$isocode \
         -pn "%{name}" -pv "%{version}"
-      perl -pi -e "s|$tempdir|%{_libdir}/openoffice|g" \
+      perl -pi -e "s|$tempdir|%{oolib}|g" \
         $tempdir/program/instdb.ins.$isocode
     }
     # build file list
     find $tempdir "(" -type f -or -type l ")" -print | \
-      sed -e "s|$tempdir|%{_libdir}/openoffice|g" > $FILELIST.$isocode
+      sed -e "s|$tempdir|%{oolib}|g" > $FILELIST.$isocode
     find $tempdir -type d -print | \
-      sed -e "s|$tempdir|%dir %{_libdir}/openoffice|g" | sort -u >> $FILELIST.$isocode
+      sed -e "s|$tempdir|%dir %{oolib}|g" | sort -u >> $FILELIST.$isocode
     # remove duplicates from l10n-en package
     [[ "$isocode" != "en" ]] && {
       mv $FILELIST.$isocode $FILELIST.$isocode.in
@@ -953,66 +955,69 @@ rm -f *.zip
       rm -f $FILELIST.$isocode.in
     }
     # move files here and there
-    cp -af $tempdir/* $RPM_BUILD_ROOT%{_libdir}/openoffice/
+    cp -af $tempdir/* $RPM_BUILD_ROOT%{oolib}/
     rm -rf $tempdir
+    
+    HOWMUCH=`ls $RPM_BUILD_ROOT%{oolib}/help/$isocode 2>/dev/null | wc -l`
+    [ "$HOWMUCH" -eq 0 ] && rm -rf $RPM_BUILD_ROOT%{oolib}/help/$isocode
   done
 )
 
 # Remove unnecessary binaries
 for app in %{apps} ; do
-  rm -f $RPM_BUILD_ROOT%{_libdir}/openoffice/program/s${app}
+  rm -f $RPM_BUILD_ROOT%{oolib}/program/s${app}
 done
 
 install -d $RPM_BUILD_ROOT%{_applnkdir}
 gunzip -dc %{SOURCE6} | tar xf - -C $RPM_BUILD_ROOT%{_applnkdir}
 
 ## Remove any fake classes
-#rm -rf $RPM_BUILD_ROOT%{_libdir}/openoffice/program/classes
+#rm -rf $RPM_BUILD_ROOT%{oolib}/program/classes
 
 # Remove stuff that should come from system libraries
-rm -rf $RPM_BUILD_ROOT%{_libdir}/openoffice/program/libdb-*
-rm -rf $RPM_BUILD_ROOT%{_libdir}/openoffice/program/libdb_*
+rm -rf $RPM_BUILD_ROOT%{oolib}/program/libdb-*
+rm -rf $RPM_BUILD_ROOT%{oolib}/program/libdb_*
 
 # Fix GNOME & KDE
 install -d $RPM_BUILD_ROOT%{_datadir}
 install -d $RPM_BUILD_ROOT%{_pixmapsdir}
-mv $RPM_BUILD_ROOT%{_libdir}/openoffice/share/kde/net/mimelnk/share/mimelnk $RPM_BUILD_ROOT%{_datadir}
-cp -rf $RPM_BUILD_ROOT%{_libdir}/openoffice/share/kde/net/mimelnk/share/icons/* $RPM_BUILD_ROOT%{_pixmapsdir}
-cp -rf $RPM_BUILD_ROOT%{_libdir}/openoffice/share/icons/* $RPM_BUILD_ROOT%{_pixmapsdir}
-rm -rf $RPM_BUILD_ROOT%{_libdir}/openoffice/share/kde
-rm -rf $RPM_BUILD_ROOT%{_libdir}/openoffice/share/cde
-rm -rf $RPM_BUILD_ROOT%{_libdir}/openoffice/share/gnome
-rm -rf $RPM_BUILD_ROOT%{_libdir}/openoffice/share/icons
+mv $RPM_BUILD_ROOT%{oolib}/share/kde/net/mimelnk/share/mimelnk $RPM_BUILD_ROOT%{_datadir}
+cp -rf $RPM_BUILD_ROOT%{oolib}/share/kde/net/mimelnk/share/icons/* $RPM_BUILD_ROOT%{_pixmapsdir}
+cp -rf $RPM_BUILD_ROOT%{oolib}/share/icons/* $RPM_BUILD_ROOT%{_pixmapsdir}
+rm -rf $RPM_BUILD_ROOT%{oolib}/share/kde
+rm -rf $RPM_BUILD_ROOT%{oolib}/share/cde
+rm -rf $RPM_BUILD_ROOT%{oolib}/share/gnome
+rm -rf $RPM_BUILD_ROOT%{oolib}/share/icons
 
 # Now fixup Common.xml
 COMMON_XML_SED=$PWD/%{installpath}/%{langinst}/normal/Common.xml.sed
 OLDPATH="`pwd`"
-cd $RPM_BUILD_ROOT%{_libdir}/openoffice/share/config/registry/instance/org/openoffice/Office/
+cd $RPM_BUILD_ROOT%{oolib}/share/config/registry/instance/org/openoffice/Office/
   sed -e "s|<cfg:string cfg:type=\"string\" cfg:name=\"\([^\"]*\)\"\(>@@REPLACEME.*@@</cfg:\)string>|<cfg:value xml:lang=\"\1\"\2value>|" Common.xml > Common.xml.tmp
   sed -f $COMMON_XML_SED Common.xml.tmp > Common.xml
   rm -f Common.xml.tmp
 cd "$OLDPATH"
 
 # Fixup instdb.ins to get rid of $RPM_BUILD_ROOT
-perl -pi -e "s|$RPM_BUILD_ROOT||g" $RPM_BUILD_ROOT%{_libdir}/openoffice/program/instdb.ins
-perl -pi -e "/^Installation gid_Installation/ .. /^End/ and s|(SourcePath.*)=.*|\1= \"%{_libdir}/openoffice/program\";|" \
-  $RPM_BUILD_ROOT%{_libdir}/openoffice/program/instdb.ins
+perl -pi -e "s|$RPM_BUILD_ROOT||g" $RPM_BUILD_ROOT%{oolib}/program/instdb.ins
+perl -pi -e "/^Installation gid_Installation/ .. /^End/ and s|(SourcePath.*)=.*|\1= \"%{oolib}/program\";|" \
+  $RPM_BUILD_ROOT%{oolib}/program/instdb.ins
 
 # Disable desktop (KDE, GNOME, CDE) integration for user installs
 for module in GID_MODULE_OPTIONAL_GNOME gid_Module_Optional_Kde gid_Module_Optional_Cde; do
   perl -pi -e "/^Module $module/ .. /^End/ and s|(Installed.*)=.*|\1= NO;|" \
-    $RPM_BUILD_ROOT%{_libdir}/openoffice/program/instdb.ins
+    $RPM_BUILD_ROOT%{oolib}/program/instdb.ins
 done
 
 # Fix setup and spadmin symlinks set by OO.org setup program
 # (must have absolute symlinks)
-ln -sf %{_libdir}/openoffice/program/setup $RPM_BUILD_ROOT%{_libdir}/openoffice/setup
-ln -sf %{_libdir}/openoffice/program/soffice $RPM_BUILD_ROOT%{_libdir}/openoffice/spadmin
-ln -sf %{_libdir}/openoffice/program/soffice $RPM_BUILD_ROOT%{_libdir}/openoffice/program/spadmin
+ln -sf %{oolib}/program/setup $RPM_BUILD_ROOT%{oolib}/setup
+ln -sf %{oolib}/program/soffice $RPM_BUILD_ROOT%{oolib}/spadmin
+ln -sf %{oolib}/program/soffice $RPM_BUILD_ROOT%{oolib}/program/spadmin
 
 # Fixup installation directory
 perl -pi -e "s|$RPM_BUILD_ROOT||g" \
-  $RPM_BUILD_ROOT%{_libdir}/openoffice/share/config/registry/instance/org/openoffice/Office/Common.xml
+  $RPM_BUILD_ROOT%{oolib}/share/config/registry/instance/org/openoffice/Office/Common.xml
 
 # Install autoresponse file for user installation
 install -d $RPM_BUILD_ROOT%{_sysconfdir}/openoffice
@@ -1029,45 +1034,45 @@ for app in %{apps}; do
 done
 
 ## Install new template and gallery content
-#mkdir -p $RPM_BUILD_ROOT%{_libdir}/openoffice/share/template
-#mkdir -p $RPM_BUILD_ROOT%{_libdir}/openoffice/share/gallery
-#(cd $RPM_BUILD_ROOT%{_libdir}/openoffice/share;
+#mkdir -p $RPM_BUILD_ROOT%{oolib}/share/template
+#mkdir -p $RPM_BUILD_ROOT%{oolib}/share/gallery
+#(cd $RPM_BUILD_ROOT%{oolib}/share;
 #  tar fxvj %{SOURCE10}
 #  tar fxvj %{SOURCE11}
 #)
 
 echo 'UNO_WRITERDB=$SYSUSERCONFIG/.user60.rdb
-' >> $RPM_BUILD_ROOT%{_libdir}/openoffice/program/unorc
+' >> $RPM_BUILD_ROOT%{oolib}/program/unorc
 
 # Install additional dictionaries
 rm -rf a8ldict
 install -d a8ldict
-install -d $RPM_BUILD_ROOT%{_libdir}/openoffice/share/dict/ooo
+install -d $RPM_BUILD_ROOT%{oolib}/share/dict/ooo
 for dict in %{wordbooks}; do
   loc=`echo $dict | sed 's~^.*/%{name}-\([a-zA-Z_]*\).zip$~\1~'`
   lang=`echo $loc | sed 's~_.*$~~'`
   mkdir a8ldict/$loc
   unzip -j $dict -d a8ldict/$loc/
   rm -f a8ldict/$loc/hyph_en.dic a8ldict/$loc/standard.dic
-  mv -f a8ldict/$loc/*.aff a8ldict/$loc/*.dic $RPM_BUILD_ROOT%{_libdir}/openoffice/share/dict/ooo/
-  echo DICT `echo $loc | tr _ ' '` $loc >> $RPM_BUILD_ROOT%{_libdir}/openoffice/share/dict/ooo/dictionary.lst
+  mv -f a8ldict/$loc/*.aff a8ldict/$loc/*.dic $RPM_BUILD_ROOT%{oolib}/share/dict/ooo/
+  echo DICT `echo $loc | tr _ ' '` $loc >> $RPM_BUILD_ROOT%{oolib}/share/dict/ooo/dictionary.lst
 done
 ## Special case - Latin
 #mkdir a8ldict/la
 #unzip %{SOURCE50} -d a8ldict/la/
-#mv -f a8ldict/la/*.aff a8ldict/la/*.dic $RPM_BUILD_ROOT%{_libdir}/openoffice/share/dict/ooo/
-echo DICT la ANY la >> $RPM_BUILD_ROOT%{_libdir}/openoffice/share/dict/ooo/dictionary.lst
+#mv -f a8ldict/la/*.aff a8ldict/la/*.dic $RPM_BUILD_ROOT%{oolib}/share/dict/ooo/
+echo DICT la ANY la >> $RPM_BUILD_ROOT%{oolib}/share/dict/ooo/dictionary.lst
 # Special case - Austrian German
-echo DICT de AT de_AT >> $RPM_BUILD_ROOT%{_libdir}/openoffice/share/dict/ooo/dictionary.lst
-echo DICT de AT de_DE >> $RPM_BUILD_ROOT%{_libdir}/openoffice/share/dict/ooo/dictionary.lst
+echo DICT de AT de_AT >> $RPM_BUILD_ROOT%{oolib}/share/dict/ooo/dictionary.lst
+echo DICT de AT de_DE >> $RPM_BUILD_ROOT%{oolib}/share/dict/ooo/dictionary.lst
 
 
 # Build system in OO SUX
-rm -f $RPM_BUILD_ROOT%{_libdir}/openoffice/program/libstdc++*
-rm -f $RPM_BUILD_ROOT%{_libdir}/openoffice/program/libstlport_gcc.so
-rm -f $RPM_BUILD_ROOT%{_libdir}/openoffice/program/libgcc_s.so.1
+rm -f $RPM_BUILD_ROOT%{oolib}/program/libstdc++*
+rm -f $RPM_BUILD_ROOT%{oolib}/program/libstlport_gcc.so
+rm -f $RPM_BUILD_ROOT%{oolib}/program/libgcc_s.so.1
 
-rm -rf $RPM_BUILD_ROOT%{_libdir}/openoffice/share/template/{internal,wizard}
+rm -rf $RPM_BUILD_ROOT%{oolib}/share/template/{internal,wizard}
 
 # package files
 FindI18N() {
@@ -1079,10 +1084,10 @@ FindI18N() {
 
     echo "%defattr(644,root,root,755)" > "i18n-$1"
     
-    DIRS="%{_libdir}/openoffice/user/autotext/$2"
-    DIRS="$DIRS %{_libdir}/openoffice/share/autotext/$2"
-    DIRS="$DIRS %{_libdir}/openoffice/share/template/$2"
-    DIRS="$DIRS %{_libdir}/openoffice/help/$1"
+    DIRS="%{oolib}/user/autotext/$2"
+    DIRS="$DIRS %{oolib}/share/autotext/$2"
+    DIRS="$DIRS %{oolib}/share/template/$2"
+    DIRS="$DIRS %{oolib}/help/$1"
     
     for DIR in $DIRS
     do
@@ -1100,18 +1105,23 @@ FindI18N() {
     
     for FILE in $SUBF
     do
-	F="%{_libdir}/openoffice/program/resource/$FILE$SVER$3.res"
+	F="%{oolib}/program/resource/$FILE$SVER$3.res"
 	if [ -f "$RPM_BUILD_ROOT$F" ]; then
 	    echo "%lang($1) $F" >> "i18n-$1"
 	fi	
     done
 
-    if [ -f $RPM_BUILD_ROOT/%{_libdir}/openoffice/program/instdb.ins.$1 ]
+    if [ -f $RPM_BUILD_ROOT/%{oolib}/program/instdb.ins.$1 ]
     then
-	echo "%lang($1) %{_libdir}/openoffice/program/instdb.ins.$1" >> "i18n-$1"
+	echo "%lang($1) %{oolib}/program/instdb.ins.$1" >> "i18n-$1"
     fi
 
     unzip -l solver/%{subver}/%{_archbuilddir}/pck/palletes$3.zip | sed "s/.* //" | awk '(flag==1)&&/----/{exit};(flag==1){print;};/----/{flag=1};' >> "i18n-$1"
+    
+    if [ ! -d "$RPM_BUILD_ROOT%{oolib}/help/$1" ]; then
+	ln -sf %{oolib}/help/en $RPM_BUILD_ROOT%{oolib}/help/$1
+	echo "%lang($1) %{oolib}/help/$1" >> "i18n-$1"
+    fi
 }
 
 FindDict() {
@@ -1124,13 +1134,13 @@ FindDict() {
 
     echo "%defattr(644,root,root,755)" > "dict-$LANG"
 
-    FILES="%{_libdir}/openoffice/share/dict/ooo/hyph_$LANG.dic"    
+    FILES="%{oolib}/share/dict/ooo/hyph_$LANG.dic"    
     shift; shift
     while test $# -gt 0; do
-	FILES="$FILES %{_libdir}/openoffice/share/dict/ooo/$1.dic"
-        FILES="$FILES %{_libdir}/openoffice/share/dict/ooo/$1.aff"
-        FILES="$FILES %{_libdir}/openoffice/share/dict/ooo/th_$1.dat"
-	FILES="$FILES %{_libdir}/openoffice/share/dict/ooo/th_$1.idx"
+	FILES="$FILES %{oolib}/share/dict/ooo/$1.dic"
+        FILES="$FILES %{oolib}/share/dict/ooo/$1.aff"
+        FILES="$FILES %{oolib}/share/dict/ooo/th_$1.dat"
+	FILES="$FILES %{oolib}/share/dict/ooo/th_$1.idx"
 	shift
     done    
     
@@ -1203,8 +1213,8 @@ FindDict uk ukrainian uk_UA
 %files
 %defattr(644,root,root,755)
 #%%doc readlicense/source/license/unx/LICENSE
-%doc %{_libdir}/openoffice/LICENSE*
-%doc %{_libdir}/openoffice/README*
+%doc %{oolib}/LICENSE*
+%doc %{oolib}/README*
 
 %dir %{_sysconfdir}/openoffice
 %config %{_sysconfdir}/openoffice/autoresponse.conf
@@ -1219,92 +1229,92 @@ FindDict uk ukrainian uk_UA
 
 %{_datadir}/mimelnk/application/*
 
-%{_libdir}/openoffice/program/*.rdb
-%{_libdir}/openoffice/program/*.bmp
+%{oolib}/program/*.rdb
+%{oolib}/program/*.bmp
 
-%{_libdir}/openoffice/program/sofficerc
-%{_libdir}/openoffice/program/unorc
-%{_libdir}/openoffice/program/bootstraprc
-%{_libdir}/openoffice/program/configmgrrc
-%{_libdir}/openoffice/program/instdb.ins
+%{oolib}/program/sofficerc
+%{oolib}/program/unorc
+%{oolib}/program/bootstraprc
+%{oolib}/program/configmgrrc
+%{oolib}/program/instdb.ins
 
 # dirs/trees
-%{_libdir}/openoffice/program/classes
-%{_libdir}/openoffice/program/addin
+%{oolib}/program/classes
+%{oolib}/program/addin
 
-%dir %{_libdir}/openoffice/program/resource
-%{_libdir}/openoffice/program/resource/bmp.res
-%{_libdir}/openoffice/program/resource/testtool.res
+%dir %{oolib}/program/resource
+%{oolib}/program/resource/bmp.res
+%{oolib}/program/resource/testtool.res
 
 # mozilla
-#%%{_libdir}/openoffice/program/defaults
-#%%{_libdir}/openoffice/program/component.reg
-#%%{_libdir}/openoffice/program/components/*.xpt
-#%%{_libdir}/openoffice/program/components/*.dat
+#%%{oolib}/program/defaults
+#%%{oolib}/program/component.reg
+#%%{oolib}/program/components/*.xpt
+#%%{oolib}/program/components/*.dat
 
-%dir %{_libdir}/openoffice/help
-%{_libdir}/openoffice/help/en
-%{_libdir}/openoffice/help/main_transform.xsl
+%dir %{oolib}/help
+%{oolib}/help/en
+%{oolib}/help/main_transform.xsl
 
-%dir %{_libdir}/openoffice/share
-%{_libdir}/openoffice/share/autocorr
-%dir %{_libdir}/openoffice/share/autotext
-%{_libdir}/openoffice/share/basic
-%{_libdir}/openoffice/share/config
-%dir %{_libdir}/openoffice/share/dict
-%dir %{_libdir}/openoffice/share/dict/ooo
-%{_libdir}/openoffice/share/dtd
-%{_libdir}/openoffice/share/fonts
-%{_libdir}/openoffice/share/gallery
-%{_libdir}/openoffice/share/psprint
-%{_libdir}/openoffice/share/samples
-%dir %{_libdir}/openoffice/share/template
-%{_libdir}/openoffice/share/wordbook
+%dir %{oolib}/share
+%{oolib}/share/autocorr
+%dir %{oolib}/share/autotext
+%{oolib}/share/basic
+%{oolib}/share/config
+%dir %{oolib}/share/dict
+%dir %{oolib}/share/dict/ooo
+%{oolib}/share/dtd
+%{oolib}/share/fonts
+%{oolib}/share/gallery
+%{oolib}/share/psprint
+%{oolib}/share/samples
+%dir %{oolib}/share/template
+%{oolib}/share/wordbook
 
-%{_libdir}/openoffice/share/autotext/english
-%{_libdir}/openoffice/share/template/english
-%{_libdir}/openoffice/share/dict/ooo/*en*
-%{_libdir}/openoffice/share/dict/ooo/dictionary.lst
+%{oolib}/share/autotext/english
+%{oolib}/share/template/english
+%{oolib}/share/dict/ooo/*en*
+%{oolib}/share/dict/ooo/dictionary.lst
 
-%dir %{_libdir}/openoffice/user
-%dir %{_libdir}/openoffice/user/autotext
-%{_libdir}/openoffice/user/basic
-%{_libdir}/openoffice/user/config
-%{_libdir}/openoffice/user/database
-%{_libdir}/openoffice/user/gallery
-%{_libdir}/openoffice/user/psprint
+%dir %{oolib}/user
+%dir %{oolib}/user/autotext
+%{oolib}/user/basic
+%{oolib}/user/config
+%{oolib}/user/database
+%{oolib}/user/gallery
+%{oolib}/user/psprint
 
-%{_libdir}/openoffice/user/autotext/english
+%{oolib}/user/autotext/english
 
 # Programs
 %attr(755,root,root) %{_bindir}/*
 
-%attr(755,root,root) %{_libdir}/openoffice/setup
-%attr(755,root,root) %{_libdir}/openoffice/spadmin
+%attr(755,root,root) %{oolib}/setup
+%attr(755,root,root) %{oolib}/spadmin
 
-%attr(755,root,root) %{_libdir}/openoffice/program/*.bin
-%attr(755,root,root) %{_libdir}/openoffice/program/fromtemplate
-%attr(755,root,root) %{_libdir}/openoffice/program/gnomeint
-%attr(755,root,root) %{_libdir}/openoffice/program/javaldx
-%attr(755,root,root) %{_libdir}/openoffice/program/jvmsetup
-%attr(755,root,root) %{_libdir}/openoffice/program/nswrapper
-%attr(755,root,root) %{_libdir}/openoffice/program/setup
-%attr(755,root,root) %{_libdir}/openoffice/program/soffice
-%attr(755,root,root) %{_libdir}/openoffice/program/sopatchlevel.sh
-%attr(755,root,root) %{_libdir}/openoffice/program/spadmin
+%attr(755,root,root) %{oolib}/program/*.bin
+%attr(755,root,root) %{oolib}/program/fromtemplate
+%attr(755,root,root) %{oolib}/program/gnomeint
+%attr(755,root,root) %{oolib}/program/javaldx
+%attr(755,root,root) %{oolib}/program/jvmsetup
+%attr(755,root,root) %{oolib}/program/nswrapper
+%attr(755,root,root) %{oolib}/program/setup
+%attr(755,root,root) %{oolib}/program/soffice
+%attr(755,root,root) %{oolib}/program/sopatchlevel.sh
+%attr(755,root,root) %{oolib}/program/spadmin
 
 
 %files libs
 %defattr(644,root,root,755)
-%dir %{_libdir}/openoffice
-%dir %{_libdir}/openoffice/program
-#%%dir %{_libdir}/openoffice/program/components   -- mozilla
-%dir %{_libdir}/openoffice/program/filter
+%dir %{oolib}
+%dir %{oolib}/program
+#%%dir %{oolib}/program/components   -- mozilla
+%dir %{oolib}/program/filter
 
-%attr(755,root,root) %{_libdir}/openoffice/program/*.so
-%attr(755,root,root) %{_libdir}/openoffice/program/*.so.*
-#%%attr(755,root,root) %{_libdir}/openoffice/program/components/*.so -- mozilla
-%attr(755,root,root) %{_libdir}/openoffice/program/filter/*.so
+%attr(755,root,root) %{oolib}/program/*.so
+%attr(755,root,root) %{oolib}/program/*.so.*
+#%%attr(755,root,root) %{oolib}/program/components/*.so -- mozilla
+%attr(755,root,root) %{oolib}/program/filter/*.so
 
 %files i18n-ar -f i18n-ar
 %files i18n-ca -f i18n-ca
