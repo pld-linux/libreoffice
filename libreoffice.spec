@@ -1,5 +1,6 @@
 # NOTE:
-#	- build requires about 8-9GB of disk space
+#	- normal build requires little less than 4GB of disk space
+#	- full debug build requires about 9GB of disk space
 # TODO:
 #	- drop requirement on XFree86-static
 #	- drop requirement on nas-devel
@@ -15,6 +16,15 @@
 %define		rel		1
 %define		ooobver		1.1.55
 %define		subver		645
+%ifarch %{ix86}
+%define		verarch		%{subver}li
+%endif
+%ifarch ppc
+%define		verarch		%{subver}lp
+%endif
+%ifarch sparc sparcv9
+%define		verarch		%{subver}ls
+%endif
 %define		fullver		%{ver}.%{rel}
 %define		dfullver	%(echo %{fullver} | tr . _)
 %define		specflags	-fno-strict-aliasing
@@ -23,7 +33,7 @@ Summary:	OpenOffice - powerful office suite
 Summary(pl):	OpenOffice - potê¿ny pakiet biurowy
 Name:		openoffice
 Version:	%{fullver}
-Release:	4
+Release:	8
 Epoch:		1
 License:	GPL/LGPL
 Group:		X11/Applications
@@ -76,6 +86,7 @@ Patch3:		%{name}-pld-section.patch
 Patch4:		%{name}-pld-leave-home.patch
 Patch5:		%{name}-pld-parallel-build.patch
 Patch6:		%{name}-pld-kde-nwf-fonts.patch
+Patch7:		%{name}-curl.patch
 
 URL:		http://www.openoffice.org/
 BuildRequires:	ImageMagick
@@ -176,10 +187,10 @@ Summary:	OpenOffice.org KDE Interface
 Summary(pl):	Interfejs KDE dla OpenOffice.org
 Group:		X11/Libraries
 Provides:	%{name}-libs-interface = %{epoch}:%{version}-%{release}
-Provides:	libvcl%{subver}li.so
+Provides:	libvcl%{verarch}.so
 Obsoletes:	%{name}-libs-gtk
 Requires:	%{name}-libs = %{epoch}:%{version}-%{release}
-Requires(post):	%{name}-libs = %{epoch}:%{version}-%{release}
+Requires(post,preun):	%{name}-libs = %{epoch}:%{version}-%{release}
 
 %description libs-kde
 OpenOffice.org productivity suite - KDE Interface.
@@ -192,10 +203,10 @@ Summary:	OpenOffice.org GTK Interface
 Summary(pl):	Interfejs GTK dla OpenOffice.org
 Group:		X11/Libraries
 Provides:	%{name}-libs-interface = %{epoch}:%{version}-%{release}
-Provides:	libvcl%{subver}li.so
+Provides:	libvcl%{verarch}.so
 Obsoletes:	%{name}-libs-kde
 Requires:	%{name}-libs = %{epoch}:%{version}-%{release}
-Requires(post):	%{name}-libs = %{epoch}:%{version}-%{release}
+Requires(post,preun):	%{name}-libs = %{epoch}:%{version}-%{release}
 
 %description libs-gtk
 OpenOffice.org productivity suite - GTK Interface.
@@ -882,6 +893,7 @@ chiñskim.
 %patch4 -p1
 %patch5 -p1
 %patch6 -p1
+%patch7 -p1
 
 install -d src
 ln -s %{SOURCE1} src/
@@ -949,12 +961,18 @@ CONFOPTS=" \
 	--with-lang=ALL \
 	--with-x \
 	--without-fonts \
-	--enable-crashdump=no \
 	--enable-fontconfig \
 	--enable-libsn \
 	--enable-libart \
 	--disable-rpath \
+%if 0%{?debug:1}
+	--enable-debug \
+	--enable-crashdump=yes \
+	--enable-symbols=FULL \
+%else
+	--enable-crashdump=no \
 	--disable-symbols \
+%endif
 	--with-num-cpus=$RPM_BUILD_NR_THREADS
 "
 
@@ -986,7 +1004,7 @@ cp -af vcl vcl.kde
 cp -a Linux*Env.Set* vcl.kde
 sed -i -e "s#\(.*WITH_WIDGETSET.*\)\".*\"\(.*\)#\1\"gtk\"\2#g" Linux*Env.Set*
 sed -i -e "s#\(.*WIDGETSET_CFLAGS.*\)\".*\"\(.*\)#\1\"`pkg-config --cflags gtk+-2.0 gdk-pixbuf-xlib-2.0` -DWIDGETSET_GTK\"\2#g" Linux*Env.Set*
-sed -i -e "s#\(.*WIDGETSET_LIBS.*\)\".*\"\(.*\)#\1\"`pkg-config --libs gtk+-2.0 gdk-pixbuf-xlib-2.0`\"\2#g" LinuxIntelEnv.Set*
+sed -i -e "s#\(.*WIDGETSET_LIBS.*\)\".*\"\(.*\)#\1\"`pkg-config --libs gtk+-2.0 gdk-pixbuf-xlib-2.0`\"\2#g" Linux*Env.Set*
 set +e
 . ./Linux*Env.Set.sh
 cd vcl
@@ -1006,11 +1024,11 @@ TEMP="%{tmpdir}"; export TEMP
 %{__make} install \
 	DESTDIR=$RPM_BUILD_ROOT
 
-mv $RPM_BUILD_ROOT%{_libdir}/%{name}/program/libvcl%{subver}li.so \
-	$RPM_BUILD_ROOT%{_libdir}/%{name}/program/libvcl%{subver}li-kde.so
+mv $RPM_BUILD_ROOT%{_libdir}/%{name}/program/libvcl%{verarch}.so \
+	$RPM_BUILD_ROOT%{_libdir}/%{name}/program/libvcl%{verarch}-kde.so
 
-install -m755 build/OOO_%{dfullver}/vcl.gtk/unxlngi4.pro/lib/libvcl%{subver}li.so \
-	$RPM_BUILD_ROOT%{_libdir}/%{name}/program/libvcl%{subver}li-gtk.so
+install -m755 build/OOO_%{dfullver}/vcl.gtk/unxlngi4.pro/lib/libvcl%{verarch}.so \
+	$RPM_BUILD_ROOT%{_libdir}/%{name}/program/libvcl%{verarch}-gtk.so
 install -m755 build/OOO_%{dfullver}/vcl.gtk/unxlngi4.pro/bin/*-gnome \
 	$RPM_BUILD_ROOT%{_libdir}/%{name}/program/
 
@@ -1149,17 +1167,25 @@ fontpostinst TTF %{_fontsdir}/%{name}
 %postun
 fontpostinst TTF %{_fontsdir}/%{name}
 
+%post libs
+if [ -f %{_libdir}/%{name}/program/libvcl%{verarch}-kde.so ]; then
+	ln -sf libvcl%{verarch}-kde.so %{_libdir}/%{name}/program/libvcl%{verarch}.so
+fi
+if [ -f %{_libdir}/%{name}/program/libvcl%{verarch}-gtk.so ]; then
+	ln -sf libvcl%{verarch}-gtk.so %{_libdir}/%{name}/program/libvcl%{verarch}.so
+fi
+
 %preun libs-kde
-rm -f %{_libdir}/%{name}/program/libvcl%{subver}li.so
+rm -f %{_libdir}/%{name}/program/libvcl%{verarch}.so
 
 %post libs-kde
-ln -sf libvcl%{subver}li-kde.so %{_libdir}/%{name}/program/libvcl%{subver}li.so
+ln -sf libvcl%{verarch}-kde.so %{_libdir}/%{name}/program/libvcl%{verarch}.so
 
 %preun libs-gtk
-rm -f %{_libdir}/%{name}/program/libvcl%{subver}li.so
+rm -f %{_libdir}/%{name}/program/libvcl%{verarch}.so
 
 %post libs-gtk
-ln -sf libvcl%{subver}li-gtk.so %{_libdir}/%{name}/program/libvcl%{subver}li.so
+ln -sf libvcl%{verarch}-gtk.so %{_libdir}/%{name}/program/libvcl%{verarch}.so
 
 %files
 %defattr(644,root,root,755)
