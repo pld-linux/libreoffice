@@ -136,7 +136,7 @@ Patch115: openoffice-svg-handle-no-solar-java.patch
 Patch116: openoffice-xsltfilter-handle-no-solar-java.patch
 Patch117: openoffice-xsltvalidate-handle-no-solar-java.patch
 Patch118: openoffice-berkeleydb-no-java-fix.patch 
-Patch119: openoffice-scp-no-java-fix.patch
+Patch119: openoffice-scp-handle-no-solar-java.patch
 Patch120: openoffice-odk-handle-no-solar-java.patch 
 Patch121: openoffice-disable-odk-build.patch
 
@@ -812,7 +812,7 @@ rm -f moz/prj/d.lst
 %patch116 -p0
 %patch117 -p0
 %patch118 -p1 
-%patch119 -p1 
+%patch119 -p0 
 %patch120 -p0 
 %patch121 -p0 
 %endif 
