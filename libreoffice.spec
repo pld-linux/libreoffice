@@ -64,6 +64,7 @@ BuildRequires:	freetype-static
 %{?_with_nest:BuildRequires:	gcc2}
 %{?!_with_nest:BuildRequires:	gcc-c++ <= 3.0.0}
 %{?_with_nest:BuildRequires:	gcc2-c++}
+BuildRequires:	gcc-java
 #%{?_with_ibm_java:BuildRequires:	ibm-java-sdk}
 #%{?!_with_ibm_java:BuildRequires:	jdk = 1.3.1_03}
 %{?!_with_nest:BuildRequires:	libstdc++-devel <= 3.0.0}
@@ -73,18 +74,20 @@ BuildRequires:	perl
 BuildRequires:	tcsh
 BuildRequires:	unzip
 BuildRequires:	zip
-BuildRequires:	gcc-java
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
+%define		langs		"ENUS,FREN,GERM,SPAN,ITAL,DTCH,PORT,DAN,GREEK,POL,SWED,TURK,RUSS"
+
 %define		_prefix		/usr/X11R6
+%define		_archbuilddir	unxlngi3.pro
+%define		installpath	instsetoo/%{_archbuilddir}
+#%{?_with_us:%define installpath instsetoo/unxlngi3.pro/01/normal}
+#%{?_with_pl:%define installpath instsetoo/unxlngi3.pro/48/normal}
+#%{?_with_de:%define installpath instsetoo/unxlngi3.pro/49/normal}
 
-%{?_with_us:%define installpath instsetoo/unxlngi3.pro/01/normal}
-%{?_with_pl:%define installpath instsetoo/unxlngi3.pro/48/normal}
-%{?_with_de:%define installpath instsetoo/unxlngi3.pro/49/normal}
-
-%{?_with_us:%define langs ENUS}
-%{?_with_pl:%define langs POL}
-%{?_with_de:%define langs DTCH}
+#%{?_with_us:%define langs ENUS}
+#%{?_with_pl:%define langs POL}
+#%{?_with_de:%define langs DTCH}
 
 %description
 OpenOffice.org is an open-source project sponsored by Sun Microsystems
@@ -238,6 +241,9 @@ typedef struct JDK1_1InitArgs
 #endif
 EOF
 
+###################
+## BUILD
+###################
 %build
 JAVA_HOME=`pwd`/fakejdk
 export JAVA_HOME
@@ -273,8 +279,13 @@ EOF
 chmod u+rx compile
 ./compile
 
+
+#########################
+## INSTALL
+#########################
 %install
 rm -rf $RPM_BUILD_ROOT
+install -d $RPM_BUILD_ROOT%{_libdir}/openoffice
 
 #cat <<EOF > install
 #!/bin/tcsh
@@ -297,18 +308,19 @@ sleep 5
 
 # preparing to start installator
 cp -f %{SOURCE3} $RPM_BUILD_DIR/oo_%{oo_ver}_src/install.rs.in
-sed -e "s,@DESTDIR@,$RPM_BUILD_ROOT/usr/X11R6/lib/openoffice," \
+sed -e "s,@DESTDIR@,$RPM_BUILD_ROOT%{_libdir}/openoffice," \
 	-e "s,@LOGFILE@,$RPM_BUILD_DIR/oo_%{oo_ver}_src/install.log," \
 	install.rs.in > install.rs
 
 cp solver/641/unxlngi3.pro/bin/setup_services.rdb solver/641/unxlngi3.pro/bin/uno_writerdb.rdb
 rm -f f0_062
 zip -j -5 "f0_062" solver/641/unxlngi3.pro/bin/uno_writerdb.rdb
-mv f0_062.zip %{installpath}/f0_062
+mv f0_062.zip %{installpath}/01/normal/f0_062
 
+cp setup.ins setup.ins.orig
 for FileID in Lib_gcc Lib_Stdc Lib_Mozab_2 Lib_Mozabdrv Mozilla_Runtime; do
-  perl -ni -e "/^(File|Shortcut) gid_(File|Shortcut)_${FileID}/ .. /^End/ or print" %{installpath}/setup.ins
-  perl -pi -e "s/gid_File_${FileID},//g" %{installpath}/setup.ins
+  perl -ni -e "/^(File|Shortcut) gid_(File|Shortcut)_${FileID}/ .. /^End/ or print" %{installpath}/01/normal/setup.ins
+  perl -pi -e "s/gid_File_${FileID},//g" %{installpath}/01/normal/setup.ins
 done
 
 # starting installator
@@ -317,8 +329,53 @@ DISPLAY=":$i" %{installpath}/setup -R:$RPM_BUILD_DIR/oo_%{oo_ver}_src/install.rs
 # stopping Xvfb
 #kill $PID
 
+# Fix setup and spadmin symlinks set by OO.org setup program
+# (must have absolute symlinks)
+ln -sf %{_libdir}/openoffice/program/setup $RPM_BUILD_ROOT%{_libdir}/openoffice/setup
+ln -sf %{_libdir}/openoffice/program/soffice $RPM_BUILD_ROOT%{_libdir}/openoffice/spadmin
+ln -sf %{_libdir}/openoffice/program/soffice $RPM_BUILD_ROOT%{_libdir}/openoffice/program/spadmin
+
+# FIXME: (gb) 6.0.41-3mdk: workaround for English wordbook, move them
+# to share/ directory
+cp $RPM_BUILD_ROOT%{_libdir}/openoffice/user/wordbook/* $RPM_BUILD_ROOT%{_libdir}/openoffice/share/wordbook/english/
+
+# Remove any fake classes
+rm -rf $RPM_BUILD_ROOT%{_libdir}/openoffice/program/classes
+
+# Remove stuff that should come from system libraries
+rm -rf	$RPM_BUILD_ROOT%{_libdir}/openoffice/program/libdb-?.?.so \
+	$RPM_BUILD_ROOT%{_libdir}/openoffice/program/libdb_cxx-?.?.so \
+	$RPM_BUILD_ROOT%{_libdir}/openoffice/program/libdb_java-?.?.so
+
+# Well... this shouldn't be neccessary...
+## File lists are necessary for language packs
+#FILELIST=$PWD/filelist
+#find $RPM_BUILD_ROOT%{_libdir}/openoffice "(" -type f -or -type l ")" -print | \
+#  sed -e "s|$RPM_BUILD_ROOT||g" > $FILELIST
+#
+#DIRLIST=$PWD/dirlist
+#find $RPM_BUILD_ROOT%{_libdir}/openoffice -type d -print |
+#  sed -e "s|$RPM_BUILD_ROOT||g" | sort -u > $DIRLIST
+
+####################
+## CLEAN
+####################
 %clean
 rm -rf $RPM_BUILD_ROOT
 
+
+####################
+## FILES
+####################
 %files
 %defattr(644,root,root,755)
+%doc readlicense/source/license/unx/LICENSE
+%doc licenses/{README.gpc,COPYING,COPYING.LIB}
+#
+%{_bindir}/ooffice
+%{_bindir}/oocalc
+%{_bindir}/oodraw
+%{_bindir}/ooimpress
+%{_bindir}/oomath
+%{_bindir}/oowriter
+#
