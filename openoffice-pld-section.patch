@@ -1,0 +1,61 @@
+diff -urN ooo-build-1.1.54.org/patches/OOO_1_1/pld-splash.diff ooo-build-1.1.54/patches/OOO_1_1/pld-splash.diff
+--- ooo-build-1.1.54.org/patches/OOO_1_1/pld-splash.diff	1970-01-01 01:00:00.000000000 +0100
++++ ooo-build-1.1.54/patches/OOO_1_1/pld-splash.diff	2004-05-04 18:44:40.162045976 +0200
+@@ -0,0 +1,30 @@
++Index: offmgr/source/offapp/intro/ooo.src
++===================================================================
++RCS file: /cvs/framework/offmgr/source/offapp/intro/Attic/ooo.src,v
++retrieving revision 1.44.16.7
++diff -u -p -u -r1.44.16.7 ooo.src
++--- offmgr/source/offapp/intro/ooo.src	19 Feb 2004 15:38:23 -0000	1.44.16.7
+++++ offmgr/source/offapp/intro/ooo.src	15 Mar 2004 23:07:54 -0000
++@@ -76,10 +76,10 @@
++ #include "app.hrc"
++ #include "intro.hrc"
++ 
++-#ifdef BUILD_SPECIAL
++-#define OOO_VENDOR "Sun Microsystems Inc."
+++#if 1
+++#define OOO_VENDOR "PLD/Linux"
++ #define OOO_LICENSE "LGPL"
++-#define OOO_INTRO "openintro_sun.bmp"
+++#define OOO_INTRO "openintro_pld.bmp"
++ #else
++ //#define OOO_VENDOR "my company"
++ #define OOO_LICENSE "LGPL"
++@@ -88,7 +88,7 @@
++ 
++ Bitmap RID_DEFAULT_ABOUT_BMP_LOGO
++ {
++-	File = "openabout.bmp" ;
+++	File = "openabout_pld.bmp" ;
++ };
++ 
++ Bitmap RID_DEFAULTINTRO
+diff -urN ooo-build-1.1.54.org/patches/OOO_1_1_1/apply ooo-build-1.1.54/patches/OOO_1_1_1/apply
+--- ooo-build-1.1.54.org/patches/OOO_1_1_1/apply	2004-04-30 02:50:24.000000000 +0200
++++ ooo-build-1.1.54/patches/OOO_1_1_1/apply	2004-05-04 18:43:59.859172944 +0200
+@@ -22,6 +22,7 @@
+ RHShrike : RedHatBase, RHShrikeOnly, OldLibArt
+ KDE : LinuxCommon, NativeWidgets, StartupNotification, ODKFixes
+ SuSE : SuSEOnly, LinuxCommon, KDE, GlobalDesktopFiles, VBABits
++PLD: PLDOnly, LinuxCommon, KDE, GnomeVFS, GnomeCUPS, GlobalDesktopFiles, StartupNotification, ODKFixes, VBABits
+ # somewhat odder:
+ Win32 : Common, ODKFixes, VBABits, Win32Only
+ 
+@@ -643,7 +644,15 @@
+ print-resolution-generic.diff
+ 
+ #######################################################
++[ PLDOnly ]
+ 
++# splash
++pld-splash.diff
++
++# resolution independant printing bits
++print-resolution-generic.diff
++
++#######################################################
+ [ Win32Only ]
+ 
+ # A number of nasty VS.Net 2003 fixes #27980
