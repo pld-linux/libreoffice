@@ -1,40 +1,99 @@
---- oo_1.0_src/sj2/source/jscpp/makefile.mk.jj	Tue Apr 10 15:56:22 2001
-+++ oo_1.0_src/sj2/source/jscpp/makefile.mk	Sun Jun  2 23:18:41 2002
-@@ -91,7 +91,7 @@ CXXFILES=	\
+diff -uNr jscpp.bak/makefile.mk jscpp/makefile.mk
+--- oo_1.0_src/sj2/source/jscpp.bak/makefile.mk	Wed Dec  4 00:26:56 2002
++++ oo_1.0_src/sj2/source/jscpp/makefile.mk	Thu Dec  5 18:34:06 2002
+@@ -2,9 +2,9 @@
+ #
+ #   $RCSfile$
+ #
+-#   $Revision$
++#   $Revision$
+ #
+-#   last change: $Author$ $Date$
++#   last change: $Author$ $Date$
+ #
+ #   The Contents of this file are made available subject to the terms of
+ #   either of the following licenses
+@@ -68,10 +68,6 @@
  
- SLOFILES=	\
- 	$(SLO)$/sjapplet.obj						\
--	$(SLO)$/sjapplet_impl.obj
-+	$(SLO)$/sjapplet_impl2.obj
+ .INCLUDE :  $(PRJ)$/util$/makefile.pmk
  
- # .IF "$(GUI)"=="WNT"
- # SLOFILES +=	$(SLO)$/sun_awt_windows_package.obj
---- oo_1.0_src/sj2/source/jscpp/sjapplet_impl2.cxx.jj	Sun Jun  2 23:18:47 2002
-+++ oo_1.0_src/sj2/source/jscpp/sjapplet_impl2.cxx	Sun Jun  2 23:27:20 2002
-@@ -0,0 +1,26 @@
-+#include "sjapplet_impl.hxx"
+-UNOUCRDEP=$(SOLARBINDIR)$/applicat.rdb
+-UNOUCRRDB=$(SOLARBINDIR)$/applicat.rdb
+-UNOUCROUT=$(OUT)$/inc
+-
+ # --- Files --------------------------------------------------------
+ 
+ UNOTYPES= \
+diff -uNr jscpp.bak/sjapplet_impl.cxx jscpp/sjapplet_impl.cxx
+--- oo_1.0_src/sj2/source/jscpp.bak/sjapplet_impl.cxx	Tue Feb 19 12:36:18 2002
++++ oo_1.0_src/sj2/source/jscpp/sjapplet_impl.cxx	Thu Dec  5 18:34:06 2002
+@@ -2,9 +2,9 @@
+  *
+  *  $RCSfile$
+  *
+- *  $Revision$
++ *  $Revision$
+  *
+- *  last change: $Author$ $Date$
++ *  last change: $Author$ $Date$
+  *
+  *  The Contents of this file are made available subject to the terms of
+  *  either of the following licenses
+@@ -133,10 +133,10 @@
+     pEnv->CallStaticObjectMethod(jcToolkit, jmToolkit_getDefaultToolkit);           testJavaException(pEnv);
+ 	
+     jclass jcMotifAppletViewer = pEnv->FindClass(
+-                        "sun/plugin/navig/motif/MotifAppletViewer");                testJavaException(pEnv);
++                        "sun/plugin/navig/motif/MotifAppletViewer");
+     if(pEnv->ExceptionOccurred())
+     {
+-        pEnv->ExceptionClear();
++		pEnv->ExceptionClear();
+         jcMotifAppletViewer = pEnv->FindClass(
+                         "sun/plugin/viewer/MNetscapePluginContext");                testJavaException(pEnv);
+     }
+@@ -226,11 +226,11 @@
+ if (_joAppletExecutionContext) {
+     TKTThreadAttach jenv(_pJVM, _xJavaThreadRegister_11.get());
+ 
+-		_pEmbeddedWindow->dispose(jenv.pEnv);
+-		delete _pEmbeddedWindow;
++    _pEmbeddedWindow->dispose(jenv.pEnv);
++    delete _pEmbeddedWindow;
+ 		
+-		jenv.pEnv->DeleteGlobalRef(_joAppletExecutionContext);
+-		jenv.pEnv->DeleteGlobalRef(_jcAppletExecutionContext);
++    jenv.pEnv->DeleteGlobalRef(_joAppletExecutionContext);
++    jenv.pEnv->DeleteGlobalRef(_jcAppletExecutionContext);
+ 	}
+ }
+ 
+@@ -244,7 +244,7 @@
+ 
+ 
+     // Java URL erzeugen
+-	OUString url = rDocBase.GetMainURL();
++	OUString url = rDocBase.GetMainURL(INetURLObject::DECODE_TO_IURI);
+ 	
+ 	if(!url.getLength())
+ 		url = OUString(RTL_CONSTASCII_USTRINGPARAM("file:///"));
+@@ -340,6 +340,7 @@
+ 							  joDocBase, joParameters, _pEmbeddedWindow->_joWindow, (jlong)0);                             testJavaException(jenv.pEnv);
+ 	jenv.pEnv->CallVoidMethod(_joAppletExecutionContext, jmAppletExecutionContext_init);                                   testJavaException(jenv.pEnv);
+ 	jenv.pEnv->CallVoidMethod(_joAppletExecutionContext, jmAppletExecutionContext_startUp);                                testJavaException(jenv.pEnv);
 +
-+#include <rtl/ustring>
-+
-+SjApplet2_Impl::SjApplet2_Impl() throw(com::sun::star::uno::RuntimeException)
-+: _pJVM(NULL), _joAppletExecutionContext(0), _jcAppletExecutionContext(0) {}
-+
-+SjApplet2_Impl::~SjApplet2_Impl() throw() {}
-+
-+using namespace ::rtl;
-+using namespace ::com::sun::star::uno;
-+
-+void SjApplet2_Impl::init(Window * pParentWin,
-+			  const com::sun::star::uno::Reference<com::sun::star::lang::XMultiServiceFactory> & smgr,
-+			  const INetURLObject & rDocBase,
-+			  const SvCommandList & rCmdList) throw(com::sun::star::uno::RuntimeException)
-+{
-+  throw RuntimeException(OUString(RTL_CONSTASCII_USTRINGPARAM("sjapplet_impl2.cxx: java vm not supported")), Reference<XInterface>());
-+}
-+
-+void SjApplet2_Impl::setSize(const Size & rSize) throw(com::sun::star::uno::RuntimeException) {}
-+void SjApplet2_Impl::restart() throw(com::sun::star::uno::RuntimeException) {}
-+void SjApplet2_Impl::reload() throw(com::sun::star::uno::RuntimeException) {}
-+void SjApplet2_Impl::start() throw(com::sun::star::uno::RuntimeException) {}
-+void SjApplet2_Impl::stop() throw(com::sun::star::uno::RuntimeException) {}
-+void SjApplet2_Impl::close() throw(com::sun::star::uno::RuntimeException) {}
+ }
+ 
+ void SjApplet2_Impl::setSize(const Size & rSize) throw(com::sun::star::uno::RuntimeException)
+@@ -391,6 +392,11 @@
+ 
+ 	jmethodID jmAppletExecutionContext_shutdown  = jenv.pEnv->GetMethodID(_jcAppletExecutionContext, "shutdown", "()V"); testJavaException(jenv.pEnv);
+ 	jenv.pEnv->CallVoidMethod(_joAppletExecutionContext, jmAppletExecutionContext_shutdown);	                         testJavaException(jenv.pEnv);
++	
++	jmethodID jmWaitForDispose= jenv.pEnv->GetMethodID(_jcAppletExecutionContext,"waitForDispose","()V");
++    testJavaException(jenv.pEnv);
++    //blocks until the applet has destroyed itself and the container was disposed (stardiv.applet.AppletExecutionContext.dispose)
++	jenv.pEnv->CallVoidMethod(_joAppletExecutionContext, jmWaitForDispose);
+ 
+ 	if( _pParentWin )
+ 	{

@@ -1,7 +1,7 @@
 diff -Nur oo/connectivity/source/drivers/mozab/makefile.mk oo.new/connectivity/source/drivers/mozab/makefile.mk
 --- oo/connectivity/source/drivers/mozab/makefile.mk	Mon Mar 11 16:07:41 2002
 +++ oo.new/connectivity/source/drivers/mozab/makefile.mk	Sun Apr 21 14:35:50 2002
-@@ -85,12 +85,12 @@
+@@ -92,13 +92,13 @@
  ENABLE_EXCEPTIONS=TRUE
  LDUMP=ldump2.exe
  # --- Settings ----------------------------------
@@ -13,12 +13,73 @@ diff -Nur oo/connectivity/source/drivers/mozab/makefile.mk oo.new/connectivity/s
 +#.ENDIF
  
 -.INCLUDE : settings.mk
--.INCLUDE :  $(PRJ)$/version.mk
 +#.INCLUDE : settings.mk
+ 
+-.INCLUDE :  $(PRJ)$/version.mk
 +#.INCLUDE :  $(PRJ)$/version.mk
  
  
  # --- Recursiveness  ---------------------------------------------------
+@@ -114,10 +114,10 @@
+ 
+ # --- MOZAB BASE Library -----------------------------------
+ 
+-SHL1VERSIONMAP= $(TARGET).map
+-.IF "$(OS)"!="FREEBSD"
+-SHL1TARGET=	$(TARGET)$(MOZAB_MAJOR)
+-.ENDIF
++#SHL1VERSIONMAP= $(TARGET).map
++#.IF "$(OS)"!="FREEBSD"
++#SHL1TARGET=	$(TARGET)$(MOZAB_MAJOR)
++#.ENDIF
+ SHL1OBJS=$(SLOFILES)
+ SHL1STDLIBS=\
+ 	$(CPPULIB)					\
+@@ -188,27 +188,27 @@
+ 
+ # --- Targets ----------------------------------
+ 
+-.INCLUDE : target.mk
++#.INCLUDE : target.mk
+ 
+ # --- filter file ------------------------------
+ 
+-.IF "$(depend)"==""
++#.IF "$(depend)"==""
+ 
+-$(MISC)$/$(SHL1TARGET).flt: makefile.mk
+-	@echo ------------------------------
+-    @echo CLEAR_THE_FILE	> $@
+-	@echo _TI				>>$@
+-	@echo _real				>>$@
+-.ENDIF
+-
+-.IF "$(depend)"==""
+-
+-$(MISC)$/$(SHL2TARGET).flt: makefile.mk
+-	@echo ------------------------------
+-    @echo CLEAR_THE_FILE	> $@
+-	@echo _TI				>>$@
+-	@echo _real				>>$@
+-.ENDIF
++#$(MISC)$/$(SHL1TARGET).flt: makefile.mk
++#	@echo ------------------------------
++#    @echo CLEAR_THE_FILE	> $@
++#	@echo _TI				>>$@
++#	@echo _real				>>$@
++#.ENDIF
++
++#.IF "$(depend)"==""
++
++#$(MISC)$/$(SHL2TARGET).flt: makefile.mk
++#	@echo ------------------------------
++#    @echo CLEAR_THE_FILE	> $@
++#	@echo _TI				>>$@
++#	@echo _real				>>$@
++#.ENDIF
+ 
+ killdpc: 
+ 	-+$(RM) $(DPCTARGET)
 @@ -106,10 +106,10 @@
  
  # --- MOZAB BASE Library -----------------------------------
