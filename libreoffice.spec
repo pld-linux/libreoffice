@@ -1080,10 +1080,10 @@ for lang in $slanglist; do
 done
 
 # things not catched by automation above
-echo "%%lang(en) %{_libdir}/%{name}/program/resource/*%{subver}01.res" >> en.lang
-echo "%%lang(en) %{_libdir}/%{name}/share/wordbook/english" >> en.lang
-echo "%%lang(en) %{_libdir}/%{name}/share/autocorr/acor1033.dat" >> en.lang
-echo "%%lang(en) %{_libdir}/%{name}/share/autocorr/acor2057.dat" >> en.lang
+echo "%{_libdir}/%{name}/program/resource/*%{subver}01.res" >> en.lang
+echo "%{_libdir}/%{name}/share/wordbook/english" >> en.lang
+echo "%{_libdir}/%{name}/share/autocorr/acor1033.dat" >> en.lang
+echo "%{_libdir}/%{name}/share/autocorr/acor2057.dat" >> en.lang
 
 find $RPM_BUILD_ROOT -type f -name '*.so' -exec chmod 755 "{}" ";"
 chmod 755 $RPM_BUILD_ROOT%{_libdir}/%{name}/program/*
