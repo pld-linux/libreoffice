@@ -118,12 +118,12 @@ BuildRequires:	zlib-devel
 BuildRequires:	pkgconfig
 BuildRequires:	startup-notification-devel
 BuildRequires:	libart_lgpl-devel
-BuildRequires:	libgnomecups-devel
-BuildRequires:	gnome-vfs2-devel
 %if %{with kde}
 BuildRequires:	qt-devel
 BuildRequires:	kdelibs-devel
 %else
+BuildRequires:  libgnomecups-devel
+BuildRequires:  gnome-vfs2-devel
 BuildRequires:	gtk+2-devel
 %endif
 BuildConflicts:	java-sun = 1.4.2
@@ -878,8 +878,8 @@ ln -s %{SOURCE20} src/openabout_pld.bmp
 ln -s %{SOURCE21} src/openintro_pld.bmp
 
 %if ! %{with kde}
-# disable nwf patch
-sed -i -e 's#\(PLD.*\) KDE, \(.*\)#\1 \2#g' patches/OOO_%{dfullver}/apply
+# disable KDE NWF, OOoCUPS and enable GnomeVFS, GnomeCUPS
+sed -i -e 's#\(PLD.*\) KDE, OOoCUPS, \(.*\)#\1 GnomeVFS, GnomeCUPS, \2#g' patches/OOO_%{dfullver}/apply
 %endif
 
 %build
