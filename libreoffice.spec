@@ -11,7 +11,7 @@ Summary:	OpenOffice - powerful office suite
 Summary(pl):	OpenOffice - potê¿ny pakiet biurowy
 Name:		openoffice
 Version:	1.0.1
-Release:	0.2
+Release:	0.4
 Epoch:		1
 License:	GPL/LGPL
 Group:		X11/Applications
@@ -83,14 +83,14 @@ BuildRequires:	flex
 BuildRequires:	freetype-devel >= 2.1
 BuildRequires:	freetype-static
 %{?!_with_nest:BuildRequires:	gcc <= 3.0.0}
-%{?_with_nest:BuildRequires:	gcc >= 3.0.0}
+%{?_with_nest:BuildRequires:	gcc2 <= 3.0.0}
 %{?!_with_nest:BuildRequires:	gcc-c++ <= 3.0.0}
-%{?_with_nest:BuildRequires:	gcc-c++ >= 3.0.0}
+%{?_with_nest:BuildRequires:	gcc2-c++ <= 3.0.0}
 BuildRequires:	gcc-java
 %{?_with_ibm_java:BuildRequires:	ibm-java-sdk}
 %{?!_with_ibm_java:BuildRequires:	jdk = 1.3.1_03}
 %{?!_with_nest:BuildRequires:	libstdc++-devel <= 3.0.0}
-%{?_with_nest:BuildRequires:	libstdc++-devel}
+%{?_with_nest:BuildRequires:	libstdc++2-devel}
 BuildRequires:	pam-devel
 BuildRequires:	perl
 BuildRequires:	tcsh
@@ -188,6 +188,8 @@ rm -rf autodoc/source/inc/utility
 install %{SOURCE1} external
 cd external; tar fxz %{SOURCE1}; cp -fr gpc231/* gpc
 cd ..
+
+chmod +x solenv/bin/zipdep.pl
 
 ##################
 # Build fake JDK
@@ -368,7 +370,7 @@ done
 # starting installator
 DISPLAY=":$i" %{installpath}/01/normal/setup -R:$RPM_BUILD_DIR/oo_%{version}_src/install.rs
 
-cp solver/641/unxlngi3.pro/bin/uno_writerdb.rdb $RPM_BUILD_ROOT%{_libdir}/openoffice/program
+#cp solver/641/unxlngi3.pro/bin/uno_writerdb.rdb $RPM_BUILD_ROOT%{_libdir}/openoffice/program
 
 # stopping Xvfb
 #kill $PID
@@ -503,7 +505,8 @@ mkdir -p %{buildroot}%{_datadir}/pixmaps
 #)
 
 
-
+echo 'UNO_WRITERDB=$SYSUSERCONFIG/.user60.rdb
+' >> $RPM_BUILD_ROOT%{_libdir}/openoffice/program/unorc
 
 
 
