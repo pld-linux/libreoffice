@@ -153,6 +153,11 @@ Patch210: openoffice-print-error.patch
 
 Patch301: openoffice-splash.patch
 
+Patch341: openoffice-i18n-sal.patch
+Patch342: openoffice-i18n-rehash.patch
+Patch343: openoffice-i18n-cleanup.patch
+Patch344: openoffice-i18n-search-all.patch
+
 Patch351: openoffice-print-cups.patch
 Patch352: openoffice-print-generic-gui.patch
 Patch353: openoffice-print-psprint-rehash.patch
@@ -839,6 +844,12 @@ rm -f moz/prj/d.lst
 %patch210 -p0
 
 %patch301 -p1 
+
+# i18n support (?)
+%patch341 -p0 
+%patch342 -p0
+%patch343 -p0 
+%patch344 -p0 
 
 # CUPS support
 %patch351 -p0
