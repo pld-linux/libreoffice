@@ -1,7 +1,7 @@
 --- oo_641c_src/solenv/inc/_tg_zip.mk.zipdep	Fri Nov  2 18:59:44 2001
 +++ oo_641c_src/solenv/inc/_tg_zip.mk	Sat Feb 16 16:59:57 2002
 @@ -163,7 +163,8 @@
- 	+-zipdep $(ZIP2FLAGS) $@ $(foreach,j,$(ZIP2LIST) $(subst,LANGDIR,$(longlang_{$(subst,$(BIN)$/$(ZIP2TARGET), $(@:db))}) $j )) >> $(MISC)$/$(TARGET).$(PWD:f).$(@:b).dpzz
+ 	+-$(ZIPDEP) $(ZIP2FLAGS) $@ $(foreach,j,$(ZIP2LIST) "{$(subst,LANGDIR,$(longlang_{$(subst,$(BIN)$/$(ZIP2TARGET), $(@:db))}) $j )}") $(avoid_cvs_dir) >> $(MISC)$/$(TARGET).$(PWD:f).$(@:b).dpzz
  .ENDIF			# "$(ZIP2DIR)" != ""
  .ENDIF			# "$(common_build_zip)"!=""
 -	@+echo $@ : makefile.mk >> $(MISC)$/$(TARGET).$(PWD:f).$(@:b).dpzz
