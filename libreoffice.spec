@@ -971,7 +971,7 @@ if [ "$RPM_BUILD_NCPUS" -gt 1 ]; then
 	while [ "$doit" -eq 1 ]; do
 		echo "Waiting one more time..."
 		FCH=$(nice -n 20 find . -type f ! -mmin +3 -print 2> /dev/null | wc -l)
-		[ "$FCH" -eq 0 ] && doit=0
+		[ "$FCH" -eq 0 ] && doit=0 || /bin/true
 	done
 fi
 
