@@ -2,11 +2,19 @@
 # Conditional build:
 # _with_ibm_java	- uses IBM java instead SUN java
 
+# TODO:
+# - finish localzation
+# - split into language packages
+# - czech patches from mandrake
+# - correct mirrors
+# - add missing dictionaries
+# - fix ibm java
+
 Summary:	OpenOffice - powerful office suite
 Summary(pl):	OpenOffice - potê¿ny pakiet biurowy
 Name:		openoffice
 Version:	1.0.1
-Release:	0.6
+Release:	0.7
 Epoch:		1
 License:	GPL/LGPL
 Group:		X11/Applications
@@ -18,6 +26,7 @@ Source4:	%{name}-xmlparse.sh
 Source6:	%{name}-applnk.tar.gz
 Source7:	%{name}-wrapper
 Source8:	%{name}-wrapper-component
+Source9:	%{name}-langs.txt
 
 Source101:	ftp://ftp.task.gda.pl/mirror/ftp.openoffice.org/contrib/helpfiles/helpcontent_01_unix.tgz
 Source102:	ftp://ftp.task.gda.pl/mirror/ftp.openoffice.org/contrib/helpfiles/helpcontent_33_unix.tgz
@@ -134,7 +143,8 @@ Requires:	db
 %define	_prefix		/usr/X11R6
 %define	_archbuilddir	unxlngi3.pro
 %define	installpath	instsetoo/%{_archbuilddir}
-%define	subver	641
+%define	subver		641
+%define	langinst	01
 
 # Find a free display (resources generation requires X) and sets XDISPLAY
 %define init_xdisplay XDISPLAY=0; while /bin/true; do if [ ! -f /tmp/.X$XDISPLAY-lock ]; then sleep 2s; ( /usr/X11R6/bin/Xvfb -ac :$XDISPLAY & 2>&1 > /dev/null); sleep 10s; if [ -f /tmp/.X$XDISPLAY-lock ]; then break; fi; fi; XDISPLAY=$(($XDISPLAY+1)); done
@@ -226,23 +236,6 @@ cp /usr/lib/libstdc++.so.5* solver/%{subver}/%{_archbuilddir}/lib
 
 chmod +x solenv/bin/zipdep.pl
 
-# Install localized helpcontent
-cd helpcontent/unx
-# don't care about main_transform.xsl, it looks safe to overwrite
-for file in %{SOURCE101} %{SOURCE102} %{SOURCE103} %{SOURCE104} %{SOURCE105} %{SOURCE106} ; do
-  tar zxvf $file
-done
-for file in s*.zip; do
-  dir=`echo $file | sed -e "s/\(s[a-z]*\)[0-9]*.zip/\1/"`
-  [[ "$dir" = "shared" ]] && dir="common"
-  prefix=`echo $file | sed -e "s/s[a-z]*\([0-9]*\).zip/\1/"`
-#  langname=`perl %{SOURCE6} -l $prefix | tr '[A-Z ]' '[a-z_]'`
-  mkdir -p $dir/$langname
-  unzip -d $dir/$langname -o $file
-done
-rm -f *.zip
-cd ../..
-
 ###################
 ## BUILD
 ###################
@@ -286,17 +279,17 @@ chmod u+rx compile
 ## INSTALL
 #########################
 %install
-rm -rf $RPM_BUILD_ROOT
+#rm -rf $RPM_BUILD_ROOT
 install -d $RPM_BUILD_ROOT%{_libdir}/openoffice
 
 cp solver/%{subver}/%{_archbuilddir}/bin/setup_services.rdb solver/%{subver}/%{_archbuilddir}/bin/uno_writerdb.rdb
 rm -f f0_061
 zip -j -5 "f0_061" solver/%{subver}/%{_archbuilddir}/bin/uno_writerdb.rdb
-mv f0_061.zip %{installpath}/01/normal/f0_061
+mv f0_061.zip %{installpath}/%{langinst}/normal/f0_061
 
 %{init_xdisplay}
 RESPONSE_FILE=$PWD/rsfile.ins
-(cd %{installpath}/01/normal/;
+(cd %{installpath}/%{langinst}/normal/;
   cat %{SOURCE2} | sed -e "s|@DESTDIR@|$RPM_BUILD_ROOT%{_libdir}/openoffice|" > $RESPONSE_FILE
 
   # Add additional wordbooks
@@ -322,7 +315,7 @@ EOF
   # Localize New and Wizard menus and OfficeObjects
   cp -p setup.ins setup.ins.localized
   (
-  for i in `( cd ../../; echo [0-9][0-9] ) | sed 's/01 //'`; do
+  for i in `( cd ../../; echo [0-9][0-9] ) | sed 's/%{langinst} //'`; do
     if [ -f ../../$i/normal/setup.ins ]; then
       CONV=cat
       case "$i" in
@@ -339,13 +332,78 @@ EOF
       echo
     fi
   done
-  ) | awk ' $1 ~ /Value/ { l=$0; sub(/^.*= "/,"",l); sub(/";.*$/,"",l); sub(/%PRODUCTNAME/,"OpenOffice.org",l); sub(/%PRODUCTVERSION/,"%{fullver}",l); n=n+1; str="@@REPLACEME" n "@@"; s="\"" str "\""; sub(/".*"/,s); printf "s|%s|%s|\n", str, l > "Common.xml.sed" } { print } ' \
+  ) | awk ' $1 ~ /Value/ { l=$0; sub(/^.*= "/,"",l); sub(/";.*$/,"",l); sub(/%PRODUCTNAME/,"OpenOffice.org",l); sub(/%PRODUCTVERSION/,"%{version}",l); n=n+1; str="@@REPLACEME" n "@@"; s="\"" str "\""; sub(/".*"/,s); printf "s|%s|%s|\n", str, l > "Common.xml.sed" } { print } ' \
     >> setup.ins
 
 #  DISPLAY=:$XDISPLAY ./setup -R:$RESPONSE_FILE
-  ./setup -R:$RESPONSE_FILE
+#  ./setup -R:$RESPONSE_FILE
 )
 %{kill_xdisplay}
+
+# Copy all localized resources to destination directory
+cp -f solver/%{subver}/%{_archbuilddir}/bin/*.res $RPM_BUILD_ROOT%{_libdir}/openoffice/program/resource
+
+# don't care about main_transform.xsl, it looks safe to overwrite
+for file in %{SOURCE101} %{SOURCE102} %{SOURCE103} %{SOURCE104} %{SOURCE105} %{SOURCE106}
+do
+  tar zxvf $file
+done
+for file in s*.zip; do
+  dir=`echo $file | sed -e "s/\(s[a-z]*\)[0-9]*.zip/\1/"`
+  [[ "$dir" = "shared" ]] && dir="common"
+  prefix=`echo $file | sed -e "s/s[a-z]*\([0-9]*\).zip/\1/"`
+  langname=`cat %{SOURCE9} | grep ^$prefix | cut -d: -f2`
+  unzip -d $RPM_BUILD_ROOT%{_libdir}/openoffice/help/$langname -o $file
+done
+rm -f *.zip
+
+
+for file in solver/%{subver}/%{_archbuilddir}/pck/autocorr*.zip
+do
+  [[ -z `echo "$file" | grep "01"` ]] && unzip -o -d $RPM_BUILD_ROOT%{_libdir}/openoffice/share/autocorr $file
+done
+
+for prefix in `(cd solver/%{subver}/%{_archbuilddir}/bin/ ; echo [0-9][0-9] ) | sed s@solver/%{subver}/%{_archbuilddir}/bin/@@ | sed s/01//`
+do
+  language=`cat %{SOURCE9} | grep ^$prefix | cut -d: -f5`
+  lang=`cat %{SOURCE9} | grep ^$prefix | cut -d: -f6`
+  
+  install -d $RPM_BUILD_ROOT%{_libdir}/openoffice/share/template/$language/wizard
+  install -d $RPM_BUILD_ROOT%{_libdir}/openoffice/share/template/$language/wizard/styles
+  install -d $RPM_BUILD_ROOT%{_libdir}/openoffice/share/template/$language/internal
+
+# WRITEME:
+#  unzip solver/%{subver}/%{_archbuilddir}/pck/palletes$prefix.zip
+#  for p in *.so?
+#  do
+#    mv $p `echo $p | sed s@\\.@_\\.@`
+#  done
+
+  for file in solver/%{subver}/%{_archbuilddir}/pck/*$prefix.zip
+  do
+    pf=`$file | sed s@solver/%{subver}/%{_archbuilddir}/pck/@@ | sed s/[0-9]*// | sed s/.zip//` | sed s/01//
+    if [ -f $file ]
+    then
+    [[ ! "$pf" = "autotextuser" ]] && unzip -o -d $RPM_BUILD_ROOT%{_libdir}/openoffice/user/autotext/$language $file
+    [[ ! "$pf" = "autotextshare" ]] && unzip -o -d $RPM_BUILD_ROOT%{_libdir}/openoffice/share/autotext/$language $file
+# WRITEME:
+#    [[ ! "$pf" = "tpllayoutimpr" ]] && unzip -o -d $RPM_BUILD_ROOT%{_libdir}/openoffice/share/template/$language $file
+#    [[ ! "$pf" = "tplpresntimpr" ]] && unzip -o -d $RPM_BUILD_ROOT%{_libdir}/openoffice/share/template $file
+    [[ ! "$pf" = "tplwizagenda" ]] && unzip -o -d $RPM_BUILD_ROOT%{_libdir}/openoffice/share/template/$language/wizard $file
+    [[ ! "$pf" = "tplwizdesktop" ]] && unzip -o -d $RPM_BUILD_ROOT%{_libdir}/openoffice/share/template/$language/internal $file
+    [[ ! "$pf" = "tplwizfax" ]] && unzip -o -d $RPM_BUILD_ROOT%{_libdir}/openoffice/share/template/$language/wizard $file
+    [[ ! "$pf" = "tplwizhomepage" ]] && unzip -o -d $RPM_BUILD_ROOT%{_libdir}/openoffice/share/template/$language/wizard/web $file
+    [[ ! "$pf" = "tplwizletter" ]] && unzip -o -d $RPM_BUILD_ROOT%{_libdir}/openoffice/share/template/$language/wizard $file
+    [[ ! "$pf" = "tplwizmemo" ]] && unzip -o -d $RPM_BUILD_ROOT%{_libdir}/openoffice/share/template/$language/wizard $file
+    [[ ! "$pf" = "tplwizstyles" ]] && unzip -o -d $RPM_BUILD_ROOT%{_libdir}/openoffice/share/template/$language/wizard/styles $file
+    fi
+# FINDME:
+# /openoffice/share/templates/samples
+
+# CHECKME:
+#??    [[ "$pf" = "wordbook" ]] unzip -d $RPM_BUILD_ROOT%{_libdir}/openoffice/
+  done
+done
 
 # Remove unnecessary binaries
 for app in %{apps} ; do
@@ -364,7 +422,6 @@ rm -rf $RPM_BUILD_ROOT%{_libdir}/openoffice/program/libdb_*
 
 # Fix GNOME & KDE
 install -d $RPM_BUILD_ROOT%{_datadir}
-install -d $RPM_BUILD_ROOT%{_applnk}
 install -d $RPM_BUILD_ROOT%{_pixmapsdir}
 mv $RPM_BUILD_ROOT%{_libdir}/openoffice/share/kde/net/mimelnk/share/* $RPM_BUILD_ROOT%{_datadir}
 mv $RPM_BUILD_ROOT%{_libdir}/openoffice/share/icons/* $RPM_BUILD_ROOT%{_pixmapsdir}
@@ -374,7 +431,7 @@ rm -rf $RPM_BUILD_ROOT%{_libdir}/openoffice/share/gnome
 rm -rf $RPM_BUILD_ROOT%{_libdir}/openoffice/share/icons
 
 # Now fixup Common.xml
-COMMON_XML_SED=$PWD/%{installpath}/01/normal/Common.xml.sed
+COMMON_XML_SED=$PWD/%{installpath}/%{langinst}/normal/Common.xml.sed
 (cd $RPM_BUILD_ROOT%{_libdir}/openoffice/share/config/registry/instance/org/openoffice/Office/;
   sed -e "s|<cfg:string cfg:type=\"string\" cfg:name=\"\([^\"]*\)\"\(>@@REPLACEME.*@@</cfg:\)string>|<cfg:value xml:lang=\"\1\"\2value>|" Common.xml > Common.xml.tmp
   sed -f $COMMON_XML_SED Common.xml.tmp > Common.xml
