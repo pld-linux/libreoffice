@@ -174,7 +174,7 @@ Summary:        OpenOffice.org KDE Interface
 Summary(pl):    Interfejs KDE dla OpenOffice.org
 Group:          X11/Libraries
 Provides:       %{name}-libs-interface = %{version}-%{release}
-Conflicts:      %{name}-libs-gtk
+Obsoletes:      %{name}-libs-gtk
 
 %description libs-kde
 OpenOffice.org productivity suite - KDE Interface.
@@ -187,7 +187,7 @@ Summary:        OpenOffice.org GTK Interface
 Summary(pl):    Interfejs GTK dla OpenOffice.org
 Group:          X11/Libraries
 Provides:	%{name}-libs-interface = %{version}-%{release}
-Conflicts:	%{name}-libs-kde
+Obsoletes:	%{name}-libs-kde
 
 %description libs-gtk
 OpenOffice.org productivity suite - GTK Interface.
