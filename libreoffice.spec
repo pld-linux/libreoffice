@@ -308,7 +308,6 @@ BuildRequires:	libart_lgpl-devel
 BuildRequires:	gtk+2-devel
 %if %{with gnomevfs} 
 BuildRequires:	gnome-vfs2-devel
-BuildRequires:  libbonobo-devel
 %endif 
 %if %{with gnomecups}
 BuildRequires:	libgnomecups-devel
