@@ -120,7 +120,6 @@ diff -u -p -u -r1.93 menu.cxx
 +	nCheckPos = nExtra;
 +	nImagePos = nCheckPos + nCheckWidth;
 +	nTextPos = nImagePos + aMaxImgSz.Width();
-+	
          if ( aMaxImgSz.Width() )
              nTextPos += gfxExtra;
  
