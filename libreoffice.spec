@@ -617,9 +617,11 @@ chmod u+rx compile
 #########################
 %install
 rm -rf $RPM_BUILD_ROOT
-install -d $RPM_BUILD_ROOT{%{_bindir},%{_sysconfdir}/openoffice,%{_datadir}/%{name}/{xml,include} \
-	$RPM_BUILD_ROOT{%{_applnkdir},%{_pixmapsdir}} \
-	$RPM_BUILD_ROOT%{oolib}/program/resource
+install -d $RPM_BUILD_ROOT{%{_bindir},%{_sysconfdir}/openoffice}
+install -d $RPM_BUILD_ROOT%{_datadir}/%{name}/{xml,include} 
+install -d $RPM_BUILD_ROOT%{_applnkdir}
+install -d $RPM_BUILD_ROOT%{_pixmapsdir}
+install -d $RPM_BUILD_ROOT%{oolib}/program/resource
 
 #########################
 # DEVEL STUFF
@@ -1070,6 +1072,7 @@ done
 %{_pixmapsdir}/hicolor/48x48/apps/*.xpm
 
 %{_datadir}/mimelnk/application/*
+%exclude %{_datadir}/mimelnk/application/vnd.sun.xml*
 
 %{oolib}/program/*.rdb
 %{oolib}/program/*.bmp
