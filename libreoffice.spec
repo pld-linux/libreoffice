@@ -67,9 +67,11 @@ Source224:	%{name}-pt_PT.zip
 Source225:	%{name}-sk_SK.zip
 Source226:	%{name}-sl_SI.zip
 Source227:	%{name}-sv_SE.zip
+Source228:	%{name}-uk_UA.zip
+Source229:	%{name}-ru_RU.zip
 # This one is special, as there is no country associated with Latin,
 # nor should it be %lang(la).
-Source228:	%{name}-la.zip
+Source230:	%{name}-la.zip
 
 Patch0:		%{name}-gcc.patch
 #Patch2:		%{name}-mozilla.patch
@@ -165,7 +167,7 @@ Requires:	db3
 %define wordbooks3	%{SOURCE211} %{SOURCE212} %{SOURCE213} %{SOURCE214} %{SOURCE215}
 %define wordbooks4	%{SOURCE216} %{SOURCE217} %{SOURCE218} %{SOURCE219} %{SOURCE220}
 %define wordbooks5	%{SOURCE221} %{SOURCE222} %{SOURCE223} %{SOURCE224} %{SOURCE225}
-%define wordbooks6	%{SOURCE226} %{SOURCE227} %{SOURCE228}
+%define wordbooks6	%{SOURCE226} %{SOURCE227} %{SOURCE228} %{SOURCE229} %{SOURCE230}
 %define wordbooks	%wordbooks1 %wordbooks2 %wordbooks3 %wordbooks4 %wordbooks5 %wordbooks6
 
 %define	_archbuilddir	unxlngi4.pro
