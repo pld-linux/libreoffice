@@ -28,7 +28,7 @@ diff -u -u -r1.66 -r1.68
 +			       --with-widget-sets=original,kde,gtk";
 +	fi
      else
-+	echo "CONFIGURE_OPTIONS=\"$CONFIGURE_OPTIONS\"" > ./setup.configure
++	echo "CONFIGURE_OPTIONS=\"`echo \"$CONFIGURE_OPTIONS\" | xargs`\"" > ./setup.configure
  	echo "Using configure options from the environment";
      fi
  fi
