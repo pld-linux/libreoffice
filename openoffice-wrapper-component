@@ -2,6 +2,6 @@
 if [ -z $1 ]; then
   exec ooffice private:factory/s@APP@
 else
-  exec ooffice $@
+  exec ooffice "$@"
 fi
 EOF
