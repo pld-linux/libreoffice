@@ -150,7 +150,6 @@ Requires:	%{name}-i18n-en = %{epoch}:%{version}-%{release}
 Requires:	%{name}-dict-en
 Requires:	libstdc++ >= 3.2.1
 Requires:	db
-%endif
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 
