@@ -1,6 +1,28 @@
-diff -Nur oo_641_src/makefile.mk oo_641_src/makefile.mk
---- oo_641_src/makefile.mk	Wed Dec 19 03:36:20 2001
-+++ oo_641_src/makefile.mk.new	Wed Dec 19 11:10:11 2001
+diff -Nur oo_641_src/berkeleydb/makefile.mk oo_641_src/berkeleydb/makefile.mk
+--- oo_641_src/berkeleydb/makefile.mk	Wed Dec 19 16:04:28 2001
++++ oo_641_src/berkeleydbmakefile.mk.new	Wed Dec 19 16:11:30 2001
+@@ -117,12 +117,12 @@
+ 
+ .INCLUDE : set_ext.mk
+ .INCLUDE :	target.mk
+-.INCLUDE :	tg_ext.mk
++#.INCLUDE :	tg_ext.mk
+ 
+-TG_DELIVER : $(INPATH)$/misc$/build$/so_predeliver
+-		$(DELIVER)
++#TG_DELIVER : $(INPATH)$/misc$/build$/so_predeliver
++#		$(DELIVER)
+ 
+-.IF "$(BUILD_SOSL)"!=""
+-ALLTAR : TG_DELIVER
+-.ENDIF			# "$(BUILD_SOSL)"!=""
++#.IF "$(BUILD_SOSL)"!=""
++#ALLTAR : TG_DELIVER
++#.ENDIF			# "$(BUILD_SOSL)"!=""
+ 
+diff -Nur oo_641_src/config_office/makefile.rc oo_641_src/config_office/makefile.rc
+--- oo_641_src/config_office/makefile.rc	Fri Oct 19 19:05:42 2001
++++ oo_641_src/config_office/makefile.rc.new	Wed Dec 19 11:47:12 2001
 @@ -155,7 +155,6 @@
  	so3 \
  	soltools \
