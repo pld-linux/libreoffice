@@ -1,0 +1,19 @@
+--- officecfg/registry/data/org/openoffice/Office/Common.xcu
++++ officecfg/registry/data/org/openoffice/Office/Common.xcu
+@@ -107,13 +107,13 @@
+   </node>
+   <node oor:name="ExternalApps">
+     <prop oor:name="http" oor:op="replace" oor:type="xs:string">
+-      <value/>
++      <value>mozilla</value>
+     </prop>
+     <prop oor:name="https" oor:op="replace" oor:type="xs:string">
+-      <value/>
++      <value>mozilla</value>
+     </prop>
+     <prop oor:name="ftp" oor:op="replace" oor:type="xs:string">
+-      <value/>
++      <value>mozilla</value>
+     </prop>
+     <prop oor:name="file" oor:op="replace" oor:type="xs:string">
+       <value/>
