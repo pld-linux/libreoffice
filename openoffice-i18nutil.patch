@@ -1,0 +1,22 @@
+--- oo/i18nutil/source/utility/tg_compv.mk.orig	Fri May 23 15:35:24 2003
++++ oo/i18nutil/source/utility/tg_compv.mk	Fri May 23 15:30:39 2003
+@@ -168,7 +168,7 @@
+ .ENDIF
+ 
+ .IF "$(CCNUMVER)"=="000300030000"
+-LIBSTDCPP3="5.0.3"
++LIBSTDCPP3="5.0.4"
+ SHORTSTDCPP3="5"
+ .ENDIF
+ 
+--- oo/cppu/inc/com/sun/star/uno/Sequence.hxx.orig	Fri May 23 17:09:06 2003
++++ oo/cppu/inc/com/sun/star/uno/Sequence.hxx	Fri May 23 17:08:42 2003
+@@ -227,7 +227,7 @@
+ 	if (! ::com::sun::star::uno::Sequence< E >::s_pType)
+ 	{
+ 		const ::com::sun::star::uno::Type & rElementType = ::getCppuType(
+-			(::com::sun::star::uno::Sequence< E >::ElementType *)0 );
++			(typename ::com::sun::star::uno::Sequence< E >::ElementType *)0 );
+ 		::typelib_static_sequence_type_init(
+ 			& ::com::sun::star::uno::Sequence< E >::s_pType,
+ 			rElementType.getTypeLibType() );
