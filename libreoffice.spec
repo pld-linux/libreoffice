@@ -34,7 +34,7 @@ Group:		X11/Applications
 Source0:	http://ooo.ximian.com/packages/snap/ooo-build-%{ooobver}-ooo-build-1-3-20041006.tar.gz
 # Source0-md5:	a2af065f5c4db882be4067259fd58ac6
 Source1:	http://ooo.ximian.com/packages/OOO_%{dfullver}/OOO_%{dfullver}.tar.bz2
-# Source1-md5:	2695721938e0e249a1f02ec0bf222a8d
+# Source1-md5:	f7f13576ad04e6a958dcd9d4cb569538
 Source2:	http://ooo.ximian.com/packages/ooo-icons-OOO_1_1-10.tar.gz
 # Source2-md5:	be79d3cb5f64d2c0ac8a75e65a59cb09
 Source3:	http://kde.openoffice.org/files/documents/159/1975/ooo-KDE_icons-OOO_1_1-0.3.tar.gz
