@@ -8,6 +8,7 @@
 
 # Conditional build:
 %bcond_with	java		# Java support
+%bcond_with	icons_ximian	# Ximian icons instead of KDE one
 
 %define		ver		1.1
 %define		rel		1
@@ -926,7 +927,11 @@ CONFOPTS=" \
 	--with-system-nas \
 	--with-vendor="PLD" \
 	--with-distro="PLD" \
+%if %{with icons_ximian}
+	--with-icons="Ximian" \
+%else
 	--with-icons="KDE" \
+%endif
 	--with-widgetset=kde \
 	--with-installed-ooo-dirname=%{name} \
 %if %{with java}
