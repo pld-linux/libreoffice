@@ -72,6 +72,7 @@ Source410:	%{cftp}/helpcontent/helpcontent_88_unix.tgz
 
 Patch0:		%{name}-rh-disable-spellcheck-all-langs.patch
 Patch1:		%{name}-pld-config.patch
+Patch2:		%{name}-pld-posix-sh.patch
 
 URL:		http://www.openoffice.org/
 BuildRequires:	ImageMagick
@@ -873,6 +874,7 @@ chiñskim.
 %setup -q -n ooo-build-%{ooobver}
 %patch0 -p1
 %patch1 -p1
+%patch2 -p1
 
 install -d src
 ln -s %{SOURCE1} src/
