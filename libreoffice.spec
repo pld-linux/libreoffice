@@ -104,33 +104,29 @@ Patch63:	%{name}-stlutility.patch
 Patch64:	%{name}-crashrepgtk.patch
 
 URL:		http://www.openoffice.org/
-BuildRequires:	db
-BuildRequires:	db-devel
-BuildRequires:	db-cxx
-BuildRequires:	db-cxx-devel
-BuildRequires:	db-java
-BuildRequires:	libstdc++-devel >= 3.2.1
-BuildRequires:	gcc
-BuildRequires:	gcc-c++
-#BuildRequires:	gcc-java
-
 BuildRequires:	STLport-devel >= 4.5.3-6
 BuildRequires:	XFree86-devel
 BuildRequires:	autoconf
 BuildRequires:	automake
 BuildRequires:	bison >= 1.875-4
+BuildRequires:	db-devel
+BuildRequires:	db-cxx-devel
+BuildRequires:	db-java
 BuildRequires:	flex
 BuildRequires:	freetype-devel >= 2.1
+#BuildRequires:	gcc-java
+BuildRequires:	jar
+BuildConflicts:	java-sun = 1.4.2
+BuildRequires:	jdk
+BuildRequires:	libstdc++-devel >= 3.2.1
 BuildRequires:	pam-devel
 BuildRequires:	perl
 BuildRequires:	tcsh
 BuildRequires:	unzip
 BuildRequires:	zip
 BuildRequires:	zlib-devel
-BuildRequires:	jar
-BuildRequires:	jdk
-BuildConflicts:	java-sun = 1.4.2
 # gtk crashreport static requirements:
+BuildRequires:	XFree86-static
 BuildRequires:	atk-static
 BuildRequires:	expat-static
 BuildRequires:	fontconfig-static
@@ -142,7 +138,6 @@ BuildRequires:	libjpeg-static
 BuildRequires:	libpng-static
 BuildRequires:	libtiff-static
 BuildRequires:	pango-static
-BuildRequires:	XFree86-static
 BuildRequires:	xft-static
 BuildRequires:	xrender-static
 BuildRequires:	zlib-static
@@ -212,11 +207,15 @@ Pakiet biurowy OpenOffice.org - biblioteki.
 
 %package mimelinks
 Summary:	OpenOffice.org mimelinks
+Summary(pl):	Dowi±zania MIME dla OpenOffice.org
 Group:		X11/Applications
 Requires:	%{name} = %{epoch}:%{version}-%{release}
 
 %description mimelinks
-OpenOffice.org mimelinks
+OpenOffice.org mimelinks.
+
+%description mimelinks -l pl
+Dowi±zania MIME dla OpenOffice.org.
 
 #
 # Internationalization
