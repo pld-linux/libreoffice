@@ -16,16 +16,16 @@
 +--- vcl/util/makefile.mk	15 Aug 2003 11:26:42 -0000	1.47.10.1
 ++++ vcl/util/makefile.mk	27 Nov 2003 17:52:05 -0000
 +@@ -293,9 +293,7 @@
-+ .IF "$(USE_XPRINT)" == "TRUE"
-+ SHL1STDLIBS += -lXp -lXext -lSM -lICE -lX11
-+ .ELSE
++ SHL2STDLIBS += -lXext -lSM -lICE -lX11
++ # Others
++ .ELSE           # "$(OS)"=="SOLARIS"
 +-.IF "$(CPU)" == "I"
-+-SHL1STDLIBS += -Wl,-Bstatic -lXinerama -Wl,-Bdynamic 
-+-.ENDIF
-++SHL1STDLIBS += -lXinerama
-+ SHL1STDLIBS += -lXext -lSM -lICE -lX11
-+ .ENDIF          # "$(USE_XPRINT)" == "TRUE"
++-SHL2STDLIBS += -Wl,-Bstatic -lXinerama -Wl,-Bdynamic 
++-.ENDIF 			# "$(CPU)=="I"
+++SHL2STDLIBS += -lXinerama
++ SHL2STDLIBS += -lXext -lSM -lICE -lX11
 + .ENDIF          # "$(OS)"=="SOLARIS"
++ 
 +Index: saldisp.cxx
 +===================================================================
 +RCS file: /cvs/gsl/vcl/unx/source/app/saldisp.cxx,v
