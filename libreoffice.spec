@@ -2150,6 +2150,7 @@ fontpostinst TTF %{_fontsdir}/%{name}
 
 # Programs
 %attr(755,root,root) %{_bindir}/oo*
+%attr(755,root,root) %{_sbindir}/oopadmin
 %attr(755,root,root) %{_libdir}/%{name}/spadmin
 %attr(755,root,root) %{_libdir}/%{name}/program/*.bin
 %attr(755,root,root) %{_libdir}/%{name}/program/fromtemplate
@@ -2181,6 +2182,7 @@ fontpostinst TTF %{_fontsdir}/%{name}
 %attr(755,root,root) %{_libdir}/%{name}/program/*.py
 
 %if %{with java}
+%attr(755,root,root) %{_sbindir}/oojvmsetup
 %attr(755,root,root) %{_libdir}/%{name}/program/javaldx
 %attr(755,root,root) %{_libdir}/%{name}/program/jvmsetup
 %{_libdir}/%{name}/program/classes
