@@ -1,17 +1,18 @@
+%define		oo_ver	641d
 Summary:	OpenOffice - powerful office suite
 Summary(pl):	OpenOffice - potê¿ny pakiet biurowy
 Name:		openoffice
-Version:	641c
+Version:	0.641d
 Release:	1
 Epoch:		1
 License:	GPL/LGPL
 Group:		X11/Applications
-Source0:	ftp://openoffice@ftp.ists.pwr.wroc.pl/sources/build%{version}/oo_%{version}_src.tar.bz2
+Source0:	http://sf1.mirror.openoffice.org/%{oo_ver}/oo_%{oo_ver}_src.tar.bz2
 Source1:	ftp://ftp.cs.man.ac.uk/pub/toby/gpc/gpc231.tar.Z
-Patch0:		%{name}-nostlport.patch
-Patch1:		%{name}-jdk_fix_for_x86.patch
-Patch2:		%{name}-db3.patch
+Patch0:		%{name}-gcc.patch
+Patch1:		%{name}-db3.patch
 URL:		http://www.openoffice.org/
+BuildRequires:	STLport-static
 BuildRequires:	XFree86-devel
 BuildRequires:	db3-devel
 BuildRequires:	autoconf
@@ -57,10 +58,9 @@ Do zalet OpenOffice.org mo¿na zaliczyæ:
  - infrastruktura s³u¿±ca do komunikowania siê w ramach projektu.
 
 %prep
-%setup -q -n oo_%{version}_src
+%setup -q -n oo_%{oo_ver}_src
 %patch0 -p1
 %patch1 -p1
-%patch2 -p1
 install %{SOURCE1} external
 cd external; tar fxz %{SOURCE1}; cp -fr gpc231/* gpc
 
@@ -72,6 +72,7 @@ autoconf
 %{?_with_ibm_java:JAVA_HOME="/usr/lib/IBMJava2-13"}
 %configure \
 	--with-jdk-home=$JAVA_HOME \
+	--with-stlport4-home=/usr \
 	--with-lang=ALL \
 	--with-x
 
@@ -84,7 +85,7 @@ cat <<EOF > compile
 #Xvfb :15 &
 #setenv DISPLAY	:15
 source LinuxIntelEnv.Set
-dmake
+dmake -p -v
 EOF
 
 chmod u+rx compile
