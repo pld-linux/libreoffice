@@ -1,0 +1,286 @@
+diff -Naur OOO_STABLE_1.orig/config_office/configure.in OOO_STABLE_1/config_office/configure.in
+--- OOO_STABLE_1.orig/config_office/configure.in	Wed Apr 24 20:54:58 2002
++++ OOO_STABLE_1/config_office/configure.in	Wed Apr 24 20:55:18 2002
+@@ -1073,23 +1073,23 @@
+ dnl Test for the presence of the required gpc.{c,h} files
+ dnl ===================================================================
+ 
+-AC_MSG_CHECKING([GPC files])
+-if test -f ../external/gpc/gpc.h; then
+-	HAVE_GPC_H="yes"
+-else
+-	HAVE_GPC_H="no"
+-fi
+-if test -f ../external/gpc/gpc.c; then
+-	HAVE_GPC_C="yes"
+-else
+-	HAVE_GPC_C="no"
+-fi
++dnl AC_MSG_CHECKING([GPC files])
++dnl if test -f ../external/gpc/gpc.h; then
++dnl 	HAVE_GPC_H="yes"
++dnl else
++dnl 	HAVE_GPC_H="no"
++dnl fi
++dnl if test -f ../external/gpc/gpc.c; then
++dnl 	HAVE_GPC_C="yes"
++dnl else
++dnl 	HAVE_GPC_C="no"
++dnl fi
+ 
+-if test "$HAVE_GPC_H" = "yes" -a "$HAVE_GPC_C" = "yes"; then
+-	AC_MSG_RESULT([GPC files found])
+-else
+-	AC_MSG_ERROR([GPC files not found])
+-fi
++dnl if test "$HAVE_GPC_H" = "yes" -a "$HAVE_GPC_C" = "yes"; then
++dnl 	AC_MSG_RESULT([GPC files found])
++dnl else
++dnl 	AC_MSG_ERROR([GPC files not found])
++dnl fi
+ 
+ dnl ===================================================================
+ dnl Setting up the environment.
+diff -Naur OOO_STABLE_1.orig/external/prj/build.lst OOO_STABLE_1/external/prj/build.lst
+--- OOO_STABLE_1.orig/external/prj/build.lst	Fri Jan 11 19:47:18 2002
++++ OOO_STABLE_1/external/prj/build.lst	Wed Apr 24 20:50:33 2002
+@@ -8,8 +8,6 @@
+ es	external\expat\rtufiles\xmltok	nmake	-	all	ex_expatxmltok  NULL
+ es	external\glibc		nmake	-	all	es_glibc NULL
+ es	external\glibc\rtufiles	nmake	-	all	es_glibcrtu es_glibc NULL
+-es	external\gpc		nmake	-	u	es_gpc NULL
+-es      external\gpc            nmake   -       w       es_gpc NULL
+ es	external\jpeg		nmake 	-	all	es_jpeg NULL
+ es	external\jpeg\rtufiles	nmake	-	all	es_jpegrtu es_jpeg NULL
+ es	external\npsdk		nmake	-	all	es_npsdk NULL
+diff -Naur OOO_STABLE_1.orig/external/prj/d.lst OOO_STABLE_1/external/prj/d.lst
+--- OOO_STABLE_1.orig/external/prj/d.lst	Tue Jun 26 15:07:02 2001
++++ OOO_STABLE_1/external/prj/d.lst	Wed Apr 24 20:55:24 2002
+@@ -7,7 +7,6 @@
+ mkdir: %_DEST%\inc%_EXT%\external\freetype\config
+ mkdir: %_DEST%\inc%_EXT%\external\freetype\internal
+ mkdir: %_DEST%\inc%_EXT%\external\glibc
+-mkdir: %_DEST%\inc%_EXT%\external\gpc
+ mkdir: %_DEST%\inc%_EXT%\external\jpeg
+ mkdir: %_DEST%\inc%_EXT%\external\npsdk
+ mkdir: %_DEST%\inc%_EXT%\external\odbc
+diff -Naur OOO_STABLE_1.orig/gpc.diff OOO_STABLE_1/gpc.diff
+diff -Naur OOO_STABLE_1.orig/solenv/inc/libs.mk OOO_STABLE_1/solenv/inc/libs.mk
+--- OOO_STABLE_1.orig/solenv/inc/libs.mk	Fri Oct 26 17:14:41 2001
++++ OOO_STABLE_1/solenv/inc/libs.mk	Wed Apr 24 20:50:33 2002
+@@ -70,7 +70,7 @@
+ #externe libs in plattform.mk
+ #
+ 
+-GPC3RDLIB=-lgpc
++GPC3RDLIB=-lgpcl
+ SALHELPERLIB=-lsalhelper$(UDK_MAJOR)$(COMID)
+ XMLSCRIPTLIB =-lxcr$(UPD)$(DLLPOSTFIX)
+ COMPHELPERLIB=-lcomphelp2
+diff -Naur OOO_STABLE_1.orig/vcl/source/gdi/poly2.cxx OOO_STABLE_1/vcl/source/gdi/poly2.cxx
+--- OOO_STABLE_1.orig/vcl/source/gdi/poly2.cxx	Thu Mar 22 16:20:15 2001
++++ OOO_STABLE_1/vcl/source/gdi/poly2.cxx	Wed Apr 24 20:55:25 2002
+@@ -61,12 +61,12 @@
+ 
+ #define _SV_POLY2_CXX
+ 
+-#ifndef __gpc_h
+-extern "C" 
+-{
+-	#include <external/gpc/gpc.h> 
+-}
+-#endif
++// #ifndef __gpc_h
++// extern "C" 
++// {
++// 	#include <external/gpc/gpc.h> 
++// }
++// #endif
+ 
+ #ifdef W31
+ #include <tools/svwin.h>
+@@ -406,107 +406,108 @@
+ 
+ void PolyPolygon::GetIntersection( const PolyPolygon& rPolyPoly, PolyPolygon& rResult ) const
+ {	
+-	ImplDoOperation( rPolyPoly, rResult, GPC_INT );
++  ImplDoOperation( rPolyPoly, rResult, /* GPC_INT */ 0 );
+ }
+ 
+ // -----------------------------------------------------------------------
+ 
+ void PolyPolygon::GetUnion( const PolyPolygon& rPolyPoly, PolyPolygon& rResult ) const
+ {
+-	ImplDoOperation( rPolyPoly, rResult, GPC_UNION );
++  ImplDoOperation( rPolyPoly, rResult, /* GPC_UNION */ 0 );
+ }
+ 
+ // -----------------------------------------------------------------------
+ 
+ void PolyPolygon::GetDifference( const PolyPolygon& rPolyPoly, PolyPolygon& rResult ) const
+ {
+-	ImplDoOperation( rPolyPoly, rResult, GPC_DIFF );
++  ImplDoOperation( rPolyPoly, rResult, /* GPC_DIFF */ 0 );
+ }
+ 
+ // -----------------------------------------------------------------------
+ 
+ void PolyPolygon::GetXOR( const PolyPolygon& rPolyPoly, PolyPolygon& rResult ) const
+ {
+-	ImplDoOperation( rPolyPoly, rResult, GPC_XOR );
++  ImplDoOperation( rPolyPoly, rResult, /* GPC_XOR */ 0 );
+ }
+ 
+ // -----------------------------------------------------------------------
+ 
+ void* PolyPolygon::ImplCreateGPCPolygon() const
+ {
+-	gpc_polygon* pRet = new gpc_polygon;
+-
+-	pRet->num_contours = 0;
+-	pRet->hole = NULL;
+-	pRet->contour = NULL;
+-
+-	for( USHORT i = 0, nCount = Count(); i < nCount; i++ )
+-	{
+-		const Polygon&	rPoly = GetObject( i );
+-		const USHORT	nSize = rPoly.GetSize();
+-
+-		if( nSize > 1 )
+-		{
+-			gpc_vertex_list aVertexList;
+-			gpc_vertex*		pVertex;
+-
+-			aVertexList.num_vertices = nSize;
+-			aVertexList.vertex = pVertex = new gpc_vertex[ nSize ];
+-
+-			for( USHORT nPos = 0; nPos < nSize; nPos++, pVertex++ )
+-			{
+-				const Point& rPoint = rPoly[ nPos ];
+-				pVertex->x = rPoint.X();
+-				pVertex->y = rPoint.Y();
+-			}
++// 	gpc_polygon* pRet = new gpc_polygon;
+ 
+-			gpc_add_contour( pRet, &aVertexList, 0 );
+-			delete[] aVertexList.vertex;
+-		}
+-	}
++// 	pRet->num_contours = 0;
++// 	pRet->hole = NULL;
++// 	pRet->contour = NULL;
++
++// 	for( USHORT i = 0, nCount = Count(); i < nCount; i++ )
++// 	{
++// 		const Polygon&	rPoly = GetObject( i );
++// 		const USHORT	nSize = rPoly.GetSize();
++
++// 		if( nSize > 1 )
++// 		{
++// 			gpc_vertex_list aVertexList;
++// 			gpc_vertex*		pVertex;
++
++// 			aVertexList.num_vertices = nSize;
++// 			aVertexList.vertex = pVertex = new gpc_vertex[ nSize ];
++
++// 			for( USHORT nPos = 0; nPos < nSize; nPos++, pVertex++ )
++// 			{
++// 				const Point& rPoint = rPoly[ nPos ];
++// 				pVertex->x = rPoint.X();
++// 				pVertex->y = rPoint.Y();
++// 			}
++
++// 			gpc_add_contour( pRet, &aVertexList, 0 );
++// 			delete[] aVertexList.vertex;
++// 		}
++// 	}
+ 
+-	return pRet;
++// 	return pRet;
++  return NULL;
+ }
+ 
+ // -----------------------------------------------------------------------
+ 
+ void PolyPolygon::ImplDoOperation( const PolyPolygon& rPolyPoly, PolyPolygon& rResult, ULONG nOperation ) const
+ {
+-	gpc_polygon* pGPCPoly1 = (gpc_polygon*) ImplCreateGPCPolygon();
+-	gpc_polygon* pGPCPoly2 = (gpc_polygon*) rPolyPoly.ImplCreateGPCPolygon();
+-	gpc_polygon* pResult = new gpc_polygon;
+-
+-	pResult->num_contours = 0;
+-	pResult->hole = NULL;
+-	pResult->contour = NULL;
++// 	gpc_polygon* pGPCPoly1 = (gpc_polygon*) ImplCreateGPCPolygon();
++// 	gpc_polygon* pGPCPoly2 = (gpc_polygon*) rPolyPoly.ImplCreateGPCPolygon();
++// 	gpc_polygon* pResult = new gpc_polygon;
++
++// 	pResult->num_contours = 0;
++// 	pResult->hole = NULL;
++// 	pResult->contour = NULL;
+ 
+-	gpc_polygon_clip( (gpc_op) nOperation, pGPCPoly1, pGPCPoly2, pResult );
++// 	gpc_polygon_clip( (gpc_op) nOperation, pGPCPoly1, pGPCPoly2, pResult );
+ 
+ 	rResult.Clear();
+ 
+-	for( int i = 0; i < pResult->num_contours; i++ )
+-	{
+-		gpc_vertex_list&	rVertexList = pResult->contour[ i ];
+-		Polygon				aPoly( rVertexList.num_vertices );
+-
+-		for( int j = 0; j < rVertexList.num_vertices; j++ )
+-		{
+-			Point& rPt = aPoly[ j ];
+-			rPt.X() = FRound( rVertexList.vertex[ j ].x );
+-			rPt.Y() = FRound( rVertexList.vertex[ j ].y );
+-		}
+-
+-		rResult.Insert( aPoly );
+-	}
++// 	for( int i = 0; i < pResult->num_contours; i++ )
++// 	{
++// 		gpc_vertex_list&	rVertexList = pResult->contour[ i ];
++// 		Polygon				aPoly( rVertexList.num_vertices );
++
++// 		for( int j = 0; j < rVertexList.num_vertices; j++ )
++// 		{
++// 			Point& rPt = aPoly[ j ];
++// 			rPt.X() = FRound( rVertexList.vertex[ j ].x );
++// 			rPt.Y() = FRound( rVertexList.vertex[ j ].y );
++// 		}
++
++// 		rResult.Insert( aPoly );
++// 	}
+ 
+-	gpc_free_polygon( pGPCPoly1 );
+-	delete pGPCPoly1;
++// 	gpc_free_polygon( pGPCPoly1 );
++// 	delete pGPCPoly1;
+ 
+-	gpc_free_polygon( pGPCPoly2 );
+-	delete pGPCPoly2;
++// 	gpc_free_polygon( pGPCPoly2 );
++// 	delete pGPCPoly2;
+ 
+-	gpc_free_polygon( pResult );
+-	delete pResult;
++// 	gpc_free_polygon( pResult );
++// 	delete pResult;
+ }
+ 
+ // -----------------------------------------------------------------------
+diff -Naur OOO_STABLE_1.orig/vcl/util/makefile.mk OOO_STABLE_1/vcl/util/makefile.mk
+--- OOO_STABLE_1.orig/vcl/util/makefile.mk	Fri Feb 15 14:44:54 2002
++++ OOO_STABLE_1/vcl/util/makefile.mk	Wed Apr 24 20:55:25 2002
+@@ -214,8 +214,8 @@
+             $(UCBHELPERLIB)     \
+             $(CPPULIB)          \
+             $(UNOTOOLSLIB)      \
+-            $(COMPHELPERLIB)    \
+-            $(GPC3RDLIB)
++            $(COMPHELPERLIB)
++#           $(GPC3RDLIB)
+ 
+ .IF "$(OS)$(CPU)"=="SOLARISS"
+ SHL1VERSIONMAP=libvcl641ss.so.mapfile
