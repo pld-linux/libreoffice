@@ -1118,9 +1118,9 @@ FindDict gl galician gl_ES
 FindDict hr croatian hr_HR
 FindDict hu hungarian hu_HU
 FindDict it italian it_IT
-FindDict la dontknow la
+FindDict la latin la
 FindDict lt lithuanian lt_LT
-FindDict nb dontknow nb_NO
+FindDict nb norwegian_bokmaal nb_NO
 FindDict nl dutch nl_NL
 FindDict nn norwegian_nynorsk nn_NO
 FindDict pl polish pl_PL
