@@ -1076,7 +1076,7 @@ for lang in $RPM_BUILD_ROOT%{_libdir}/%{name}/share/dict/ooo/*.aff; do
 	# nlonglang=$(../bin/openoffice-xlate-lang -l "$nlang" 2> /dev/null)
 	echo "%%defattr(644,root,root,755)" > ${nlang}.lang
 	# dictionaries
-	echo "%%lang(${blang}) %{_libdir}/%{name}/share/dict/ooo/*${lang}*" >> ${nlang}.lang
+	echo "%%lang(${nlang}) %{_libdir}/%{name}/share/dict/ooo/*${lang}*" >> ${nlang}.lang
 	# files from lang_*_list.txt
 	[ -f build/lang_${nlang}_list.txt ] && sed -e "s#$RPM_BUILD_ROOT#%%lang(${nlang}) #g" build/lang_${nlang}_list.txt >> ${nlang}.lang
 	# directories with locale specific content
