@@ -345,9 +345,9 @@ cd %{installpath}/%{langinst}/normal/
 
   for dict in %{wordbooks} # somepath/de_AT.zip %{SOURCE50}
    do
-    loc=`echo $dict | sed 's~^.*/\([a-zA-Z_]*\).zip$~\1~'`
+    loc=`echo $dict | sed 's~^.*/%{name}-\([a-zA-Z_]*\).zip$~\1~'`
 ###########################
-    perl -ni -e "m|^ConfigurationItem gid_Configurationitem_Oo_${loc}_Spellchecker| .. /^End/ or print" setup.ins
+    perl -ni -e "/^ConfigurationItem gid_Configurationitem_Oo_${loc}_Spellchecker/ .. /^End/ or print" setup.ins
 #	awk "BEGIN { o=1} /^End$/ { if(o==0){o=1}} u^ConfigurationItem gid_Configurationitem_Oo_${loc}_Spellchecker$/ { if (o==1) { o=0} } { if(o==1) { print } }" setup.ins
     cat >> setup.ins <<EOF
 ConfigurationItem gid_Configurationitem_Oo_${loc}_Spellchecker
@@ -546,10 +546,10 @@ rm -rf a8ldict
 install -d a8ldict
 install -d $RPM_BUILD_ROOT%{_libdir}/openoffice/share/dict/ooo
 for dict in %{wordbooks}; do
-  loc=`echo $dict | sed 's~^.*/\([a-zA-Z_]*\).zip$~\1~'`
+  loc=`echo $dict | sed 's~^.*/%{name}-\([a-zA-Z_]*\).zip$~\1~'`
   lang=`echo $loc | sed 's~_.*$~~'`
   mkdir a8ldict/$loc
-  unzip $dict -d a8ldict/$loc/
+  unzip -j $dict -d a8ldict/$loc/
   rm -f a8ldict/$loc/hyph_en.dic a8ldict/$loc/standard.dic
   mv -f a8ldict/$loc/*.aff a8ldict/$loc/*.dic $RPM_BUILD_ROOT%{_libdir}/openoffice/share/dict/ooo/
   echo DICT `echo $loc | tr _ ' '` $loc >> $RPM_BUILD_ROOT%{_libdir}/openoffice/share/dict/ooo/dictionary.lst
@@ -562,6 +562,12 @@ echo DICT la ANY la >> $RPM_BUILD_ROOT%{_libdir}/openoffice/share/dict/ooo/dicti
 # Special case - Austrian German
 echo DICT de AT de_AT >> $RPM_BUILD_ROOT%{_libdir}/openoffice/share/dict/ooo/dictionary.lst
 echo DICT de AT de_DE >> $RPM_BUILD_ROOT%{_libdir}/openoffice/share/dict/ooo/dictionary.lst
+
+
+# Build system in OO SUX
+rm -f $RPM_BUILD_ROOT%{_libdir}/openoffice/program/libstdc++*
+rm -f $RPM_BUILD_ROOT%{_libdir}/openoffice/program/libstlport_gcc.so
+
 
 %post
 
