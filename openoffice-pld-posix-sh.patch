@@ -1,3 +1,18 @@
+diff -urN ooo-build-1.1.57.org/bin/build-ooo ooo-build-1.1.57/bin/build-ooo
+--- ooo-build-1.1.57.org/bin/build-ooo	2004-05-28 15:51:05.254538280 +0200
++++ ooo-build-1.1.57/bin/build-ooo	2004-05-28 16:35:32.158107312 +0200
+@@ -40,9 +40,9 @@
+ cd $OOBUILDDIR
+ # Import all of the OO.o environment
+ if test "z$DISTRO" = "zWin32"; then
+-    source $OOBUILDDIR/*.set.sh
++    . $OOBUILDDIR/*.set.sh
+ else
+-    source $OOBUILDDIR/*.Set.sh
++    . $OOBUILDDIR/*.Set.sh
+ fi
+ # Copy in missing libraries if we just built them
+ if test "z$SYSTEM_GCC" = "z"; then
 diff -urN ooo-build-1.1.57.org/bin/setup.in ooo-build-1.1.57/bin/setup.in
 --- ooo-build-1.1.57.org/bin/setup.in	2004-05-28 15:51:05.256537976 +0200
 +++ ooo-build-1.1.57/bin/setup.in	2004-05-28 15:51:20.493221648 +0200
