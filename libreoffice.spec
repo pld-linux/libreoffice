@@ -48,213 +48,213 @@ Source100:	%{cftp}/dictionaries/af_ZA.zip
 # Source100-md5:	f05f0cf5ffcdb4ceab933bca1596ce34
 Source101:	%{cftp}/dictionaries/bg_BG.zip
 # Source101-md5:	0619620e36b1a9a45995f939d765fd3e
-Source102:      %{cftp}/dictionaries/ca_ES.zip
+Source102:	%{cftp}/dictionaries/ca_ES.zip
 # Source102-md5:	6cea81b3e1101fb277062e7eef4ff720
-Source103:      %{cftp}/dictionaries/cs_CZ.zip
+Source103:	%{cftp}/dictionaries/cs_CZ.zip
 # Source103-md5:	b8d4a6943ec18300a9b0047d2540209e
-Source104:      %{cftp}/dictionaries/cy_GB.zip
+Source104:	%{cftp}/dictionaries/cy_GB.zip
 # Source104-md5:	accdb94f38555af45a54494e046a88f3
-Source105:      %{cftp}/dictionaries/da_DK.zip
+Source105:	%{cftp}/dictionaries/da_DK.zip
 # Source105-md5:	c46cd29fb20190f944b5893825b30243
-Source106:      %{cftp}/dictionaries/de_AT.zip
+Source106:	%{cftp}/dictionaries/de_AT.zip
 # Source106-md5:	fdee257cc4e9d49968048a6e3edec91a
-Source107:      %{cftp}/dictionaries/de_CH.zip
+Source107:	%{cftp}/dictionaries/de_CH.zip
 # Source107-md5:	2da60dd02b5a62f1a5c8b9e4a3a7fe4d
-Source108:      %{cftp}/dictionaries/de_DE_comb.zip
+Source108:	%{cftp}/dictionaries/de_DE_comb.zip
 # Source108-md5:	7bc797d02c2a9f6a6af13bf2d1f813e8
-Source109:      %{cftp}/dictionaries/de_DE_neu.zip
+Source109:	%{cftp}/dictionaries/de_DE_neu.zip
 # Source109-md5:	53d898fcad816feb23777e426de58f5e
-Source110:      %{cftp}/dictionaries/de_DE.zip
+Source110:	%{cftp}/dictionaries/de_DE.zip
 # Source110-md5:	9eb02aad372bcd12209e761762ffb10a
-Source111:      %{cftp}/dictionaries/el_GR.zip
+Source111:	%{cftp}/dictionaries/el_GR.zip
 # Source111-md5:	86e612d5cc243bdd0f09c919c9487c64
-Source112:      %{cftp}/dictionaries/en_AU.zip
+Source112:	%{cftp}/dictionaries/en_AU.zip
 # Source112-md5:	c39f529173d8bb0e15b1fade11dfe780
-Source113:      %{cftp}/dictionaries/en_CA.zip
+Source113:	%{cftp}/dictionaries/en_CA.zip
 # Source113-md5:	c14942ea471a5182f376802c68933880
-Source114:      %{cftp}/dictionaries/en_EN.zip
+Source114:	%{cftp}/dictionaries/en_EN.zip
 # Source114-md5:	500a057f13d2a4aa9a4f0d8e2de92fa0
-Source115:      %{cftp}/dictionaries/en_GB.zip
+Source115:	%{cftp}/dictionaries/en_GB.zip
 # Source115-md5:	31736e7e88a2cc94e17ac7d9b1ad580f
-Source116:      %{cftp}/dictionaries/en_NZ.zip
+Source116:	%{cftp}/dictionaries/en_NZ.zip
 # Source116-md5:	8ac9e6640d132de29571f81d33012bb8
-Source117:      %{cftp}/dictionaries/en_US.zip
+Source117:	%{cftp}/dictionaries/en_US.zip
 # Source117-md5:	523914f52e4040f51d804df4fb449544
-Source118:      %{cftp}/dictionaries/es_ES.zip
+Source118:	%{cftp}/dictionaries/es_ES.zip
 # Source118-md5:	09da802fdc3361ef46fdbf7da661e08f
-Source119:      %{cftp}/dictionaries/es_MX.zip
+Source119:	%{cftp}/dictionaries/es_MX.zip
 # Source119-md5:	1a8b2d34033f3d4c8e51892084e9d6fa
-Source120:      %{cftp}/dictionaries/fi_FI.zip
+Source120:	%{cftp}/dictionaries/fi_FI.zip
 # Source120-md5:	7925825d1a344755858ae9b69366303b
-Source121:      %{cftp}/dictionaries/fo_FO.zip
+Source121:	%{cftp}/dictionaries/fo_FO.zip
 # Source121-md5:	647b7b31d02fbdb33f4f309a5da4b838
-Source122:      %{cftp}/dictionaries/fr_BE.zip
+Source122:	%{cftp}/dictionaries/fr_BE.zip
 # Source122-md5:	63a9d20757795b157136999075ff599a
-Source123:      %{cftp}/dictionaries/fr_FR.zip
+Source123:	%{cftp}/dictionaries/fr_FR.zip
 # Source123-md5:	904d799ab36df32cc598a8dc7990649f
-Source124:      %{cftp}/dictionaries/ga_IE.zip
+Source124:	%{cftp}/dictionaries/ga_IE.zip
 # Source124-md5:	f9bb3343d14fab214cffff654586d7d1
-Source125:      %{cftp}/dictionaries/gl_ES.zip
+Source125:	%{cftp}/dictionaries/gl_ES.zip
 # Source125-md5:	7270162479a5efc8e6acdc61d625fa26
-Source126:      %{cftp}/dictionaries/hr_HR.zip
+Source126:	%{cftp}/dictionaries/hr_HR.zip
 # Source126-md5:	5c5d0479b0fb7e7d2b5e0533cc2e370b
-Source127:      %{cftp}/dictionaries/hu_HU.zip
+Source127:	%{cftp}/dictionaries/hu_HU.zip
 # Source127-md5:	e697bbd1025a7f11716d7988fcfba778
-Source128:      %{cftp}/dictionaries/ia.zip
+Source128:	%{cftp}/dictionaries/ia.zip
 # Source128-md5:	b7b91df66071a5761054a5e5337b5aa9
-Source129:      %{cftp}/dictionaries/id_ID.zip
+Source129:	%{cftp}/dictionaries/id_ID.zip
 # Source129-md5:	4151dd63aa18c487fc58b4f6435afe69
-Source130:      %{cftp}/dictionaries/is_IS.zip
+Source130:	%{cftp}/dictionaries/is_IS.zip
 # Source130-md5:	bef105aec65714d13517415bff58c0b9
-Source131:      %{cftp}/dictionaries/it_IT.zip
+Source131:	%{cftp}/dictionaries/it_IT.zip
 # Source131-md5:	0d21eeea237108d70430cb5a7e1ce61a
-Source132:      %{cftp}/dictionaries/la.zip
+Source132:	%{cftp}/dictionaries/la.zip
 # Source132-md5:	52ab1f91dbf6ae75c509f0dc995e20de
-Source133:      %{cftp}/dictionaries/lt_LT.zip
+Source133:	%{cftp}/dictionaries/lt_LT.zip
 # Source133-md5:	3590ba02288c9092340101dca3ddc132
-Source134:      %{cftp}/dictionaries/Math_es_ES.zip
+Source134:	%{cftp}/dictionaries/Math_es_ES.zip
 # Source134-md5:	07a0341691647b312ba11b2ba34c18ce
-Source135:      %{cftp}/dictionaries/mi_NZ.zip
+Source135:	%{cftp}/dictionaries/mi_NZ.zip
 # Source135-md5:	f691ca67df4570821f931574295715b5
-Source136:      %{cftp}/dictionaries/ms_MY.zip
+Source136:	%{cftp}/dictionaries/ms_MY.zip
 # Source136-md5:	f1db7ff9dd8be247e1bca30042dba115
-Source137:      %{cftp}/dictionaries/nb_NO.zip
+Source137:	%{cftp}/dictionaries/nb_NO.zip
 # Source137-md5:	8868ade2fae74e7c07f6f30479e654d1
-Source138:      %{cftp}/dictionaries/nl_med.zip
+Source138:	%{cftp}/dictionaries/nl_med.zip
 # Source138-md5:	c5acbe50d9fcfc575295fa6f12b0bf00
-Source139:      %{cftp}/dictionaries/nl_NL.zip
+Source139:	%{cftp}/dictionaries/nl_NL.zip
 # Source139-md5:	caab73fe1aaf03a59860765e0b7637f8
-Source140:      %{cftp}/dictionaries/nn_NO.zip
+Source140:	%{cftp}/dictionaries/nn_NO.zip
 # Source140-md5:	9a2826b88207e25135caa8481bebf5ad
-Source141:      %{cftp}/dictionaries/no_NO.zip
+Source141:	%{cftp}/dictionaries/no_NO.zip
 # Source141-md5:	4af191480fa97dba2b9e996436531f10
-Source142:      %{cftp}/dictionaries/pl_PL.zip
+Source142:	%{cftp}/dictionaries/pl_PL.zip
 # Source142-md5:	92639866d223e19b6469678e12dffe12
-Source143:      %{cftp}/dictionaries/pt_BR.zip
+Source143:	%{cftp}/dictionaries/pt_BR.zip
 # Source143-md5:	83aa4540283c0049c27271576890fd88
-Source144:      %{cftp}/dictionaries/pt_PT.zip
+Source144:	%{cftp}/dictionaries/pt_PT.zip
 # Source144-md5:	6f44ed7caf6846dca9d539bb390719c4
-Source145:      %{cftp}/dictionaries/ro_RO.zip
+Source145:	%{cftp}/dictionaries/ro_RO.zip
 # Source145-md5:	c8a56b8d79450dcb3ca68c6987da1930
-Source146:      %{cftp}/dictionaries/ru_RU_0.zip
+Source146:	%{cftp}/dictionaries/ru_RU_0.zip
 # Source146-md5:	a5d5be04dd6180072a27090ed586427f
-Source147:      %{cftp}/dictionaries/ru_RU_ie.zip
+Source147:	%{cftp}/dictionaries/ru_RU_ie.zip
 # Source147-md5:	f1e43d1d398a08761ac9a995b408ae22
-Source148:      %{cftp}/dictionaries/ru_RU_io.zip
+Source148:	%{cftp}/dictionaries/ru_RU_io.zip
 # Source148-md5:	23b346fae3b118fcb93ba9acb83d906a
-Source149:      %{cftp}/dictionaries/ru_RU_ye.zip
+Source149:	%{cftp}/dictionaries/ru_RU_ye.zip
 # Source149-md5:	f166fb2b195cc3c6581fc84a6591eb59
-Source150:      %{cftp}/dictionaries/ru_RU_yo.zip
+Source150:	%{cftp}/dictionaries/ru_RU_yo.zip
 # Source150-md5:	0eed06136f9beffa21f2d5406c54b10e
-Source151:      %{cftp}/dictionaries/ru_RU.zip
+Source151:	%{cftp}/dictionaries/ru_RU.zip
 # Source151-md5:	67da1e4d594de554a9184568235ab301
-Source152:      %{cftp}/dictionaries/sk_SK.zip
+Source152:	%{cftp}/dictionaries/sk_SK.zip
 # Source152-md5:	572a5674c6f1777de2eacaae60110266
-Source153:      %{cftp}/dictionaries/sl_SI.zip
+Source153:	%{cftp}/dictionaries/sl_SI.zip
 # Source153-md5:	a79c19d16bc26349bbded16b410616a8
-Source154:      %{cftp}/dictionaries/sv_SE.zip
+Source154:	%{cftp}/dictionaries/sv_SE.zip
 # Source154-md5:	8d9c49a43bfbecec6962c1344914dc8d
-Source155:      %{cftp}/dictionaries/uk_UA.zip
+Source155:	%{cftp}/dictionaries/uk_UA.zip
 # Source155-md5:	a0ae3b331ae5566a330d1bccc4a95791
 
 # Hypenation Dictionaries
 Source200:	%{cftp}/dictionaries/hyph_bg_BG.zip
 # Source200-md5:	c9a456317214bc336d764e9d94bdd3d2
-Source201:      %{cftp}/dictionaries/hyph_cs_CZ.zip
+Source201:	%{cftp}/dictionaries/hyph_cs_CZ.zip
 # Source201-md5:	7dc7192fb3c141db6518c54781df6846
-Source202:      %{cftp}/dictionaries/hyph_da_DK.zip
+Source202:	%{cftp}/dictionaries/hyph_da_DK.zip
 # Source202-md5:	c398f568793bc62982f1179f2db0c119
-Source203:      %{cftp}/dictionaries/hyph_de_CH.zip
+Source203:	%{cftp}/dictionaries/hyph_de_CH.zip
 # Source203-md5:	d8c4f525869c46cc52185356271121ab
-Source204:      %{cftp}/dictionaries/hyph_de_DE.zip
+Source204:	%{cftp}/dictionaries/hyph_de_DE.zip
 # Source204-md5:	b58540aed1323894242c9c2ff9c51913
-Source205:      %{cftp}/dictionaries/hyph_el_GR.zip
+Source205:	%{cftp}/dictionaries/hyph_el_GR.zip
 # Source205-md5:	6fde4ac4ec263432b0cc45e6ad4fdec5
-Source206:      %{cftp}/dictionaries/hyph_en_AU.zip
+Source206:	%{cftp}/dictionaries/hyph_en_AU.zip
 # Source206-md5:	54e447e19a8ed73331afee93415ffaab
-Source207:      %{cftp}/dictionaries/hyph_en_CA.zip
+Source207:	%{cftp}/dictionaries/hyph_en_CA.zip
 # Source207-md5:	2f03411f2a8335a84b64a0d7255518de
-Source208:      %{cftp}/dictionaries/hyph_en_GB.zip
+Source208:	%{cftp}/dictionaries/hyph_en_GB.zip
 # Source208-md5:	1c9bda9ce2b52246ecdb7107998cbeec
-Source209:      %{cftp}/dictionaries/hyph_en_NZ.zip
+Source209:	%{cftp}/dictionaries/hyph_en_NZ.zip
 # Source209-md5:	54e447e19a8ed73331afee93415ffaab
-Source210:      %{cftp}/dictionaries/hyph_en_US.zip
+Source210:	%{cftp}/dictionaries/hyph_en_US.zip
 # Source210-md5:	54e447e19a8ed73331afee93415ffaab
-Source211:      %{cftp}/dictionaries/hyph_es_ES.zip
+Source211:	%{cftp}/dictionaries/hyph_es_ES.zip
 # Source211-md5:	7fc4be41cf7b6cdadd7dfbf56c701551
-Source212:      %{cftp}/dictionaries/hyph_es_MX.zip
+Source212:	%{cftp}/dictionaries/hyph_es_MX.zip
 # Source212-md5:	f0e308d132801b593925b14bb5905bb8
-Source213:      %{cftp}/dictionaries/hyph_fi_FI.zip
+Source213:	%{cftp}/dictionaries/hyph_fi_FI.zip
 # Source213-md5:	1fc88b865f919a9323d72843e860e266
-Source214:      %{cftp}/dictionaries/hyph_fr_BE.zip
+Source214:	%{cftp}/dictionaries/hyph_fr_BE.zip
 # Source214-md5:	4548b4c184377148109538892b5e6dea
-Source215:      %{cftp}/dictionaries/hyph_fr_FR.zip
+Source215:	%{cftp}/dictionaries/hyph_fr_FR.zip
 # Source215-md5:	eb13ba5b369e72bc45f5762745ca4471
-Source216:      %{cftp}/dictionaries/hyph_ga_IE.zip
+Source216:	%{cftp}/dictionaries/hyph_ga_IE.zip
 # Source216-md5:	bd410dd925853de0dc7e5e117ac2555d
-Source217:      %{cftp}/dictionaries/hyph_hu_HU.zip
+Source217:	%{cftp}/dictionaries/hyph_hu_HU.zip
 # Source217-md5:	09fde61c70a7b1c53e22d08b763a5b80
-Source218:      %{cftp}/dictionaries/hyph_id_ID.zip
+Source218:	%{cftp}/dictionaries/hyph_id_ID.zip
 # Source218-md5:	41b1f922c4d5b3d02987074e0d6bb6ee
-Source219:      %{cftp}/dictionaries/hyph_is_IS.zip
+Source219:	%{cftp}/dictionaries/hyph_is_IS.zip
 # Source219-md5:	448230e966bdf68d5f8abffd18480402
-Source220:      %{cftp}/dictionaries/hyph_it_IT.zip
+Source220:	%{cftp}/dictionaries/hyph_it_IT.zip
 # Source220-md5:	db546e7bb7cf72fc3c751e70f83ed659
-Source221:      %{cftp}/dictionaries/hyph_lt_LT.zip
+Source221:	%{cftp}/dictionaries/hyph_lt_LT.zip
 # Source221-md5:	6d90a1e831f639137077879dacb596cb
-Source222:      %{cftp}/dictionaries/hyph_nl_NL.zip
+Source222:	%{cftp}/dictionaries/hyph_nl_NL.zip
 # Source222-md5:	ba5c271337479a8f8ddc2a3d6a99b37b
-Source223:      %{cftp}/dictionaries/hyph_pl_PL.zip
+Source223:	%{cftp}/dictionaries/hyph_pl_PL.zip
 # Source223-md5:	2f81a155d8aa7479c912ae019eb5bae0
-Source224:      %{cftp}/dictionaries/hyph_pt_BR.zip
+Source224:	%{cftp}/dictionaries/hyph_pt_BR.zip
 # Source224-md5:	aec223b5efc1e231015ebd2ae9c359e6
-Source225:      %{cftp}/dictionaries/hyph_pt_PT.zip
+Source225:	%{cftp}/dictionaries/hyph_pt_PT.zip
 # Source225-md5:	327989bbbfc9f9d56eb772427a344eb3
-Source226:      %{cftp}/dictionaries/hyph_ru_RU.zip
+Source226:	%{cftp}/dictionaries/hyph_ru_RU.zip
 # Source226-md5:	f8a8b8a368bc7394b5a4060082c44bb4
-Source227:      %{cftp}/dictionaries/hyph_sk_SK.zip
+Source227:	%{cftp}/dictionaries/hyph_sk_SK.zip
 # Source227-md5:	89ad655afadb78f6ceb87d9e1e3a675f
-Source228:      %{cftp}/dictionaries/hyph_sl_SI.zip
+Source228:	%{cftp}/dictionaries/hyph_sl_SI.zip
 # Source228-md5:	1a9ae1d95f0f12a7909c1d4e2c5fd8e1
-Source229:      %{cftp}/dictionaries/hyph_sv_SE.zip
+Source229:	%{cftp}/dictionaries/hyph_sv_SE.zip
 # Source229-md5:	a1c31b48cbf570bb05f22e98dacb9e17
-Source230:      %{cftp}/dictionaries/hyph_uk_UA.zip
+Source230:	%{cftp}/dictionaries/hyph_uk_UA.zip
 # Source230-md5:	b87fc9d4668dac5b5bd7b943aee85efd
 
 # Thesaurus Dictionaries
 Source300:	%{cftp}/dictionaries/thes_bg_BG.zip
 # Source300-md5:	630ec215fcf655b99429ca7c97667b8d
-Source301:      %{cftp}/dictionaries/thes_de_DE.zip
+Source301:	%{cftp}/dictionaries/thes_de_DE.zip
 # Source301-md5:	ffe02a241bbe6acfb9992f49b40360b9
-Source302:      %{cftp}/dictionaries/thes_en_US.zip
+Source302:	%{cftp}/dictionaries/thes_en_US.zip
 # Source302-md5:	6262581a06eacc011ec4d87534721b0e
-Source303:      %{cftp}/dictionaries/thes_fr_FR.zip
+Source303:	%{cftp}/dictionaries/thes_fr_FR.zip
 # Source303-md5:	061d832c6a6537a61770d3e065e0b1bb
-Source304:      %{cftp}/dictionaries/thes_hu_HU.zip
+Source304:	%{cftp}/dictionaries/thes_hu_HU.zip
 # Source304-md5:	20e4bfe680999629270e1e8b7e2534e5
 
 # Help content
-Source400:      %{cftp}/helpcontent/helpcontent_01_unix.tgz
+Source400:	%{cftp}/helpcontent/helpcontent_01_unix.tgz
 # Source400-md5:	7da2aff674c2c84aba8b21ac2ab16bb6
-Source401:      %{cftp}/helpcontent/helpcontent_31_unix.tgz
+Source401:	%{cftp}/helpcontent/helpcontent_31_unix.tgz
 # Source401-md5:	c7e618e2d9b8bd25cae12954ef2548c9
-Source402:      %{cftp}/helpcontent/helpcontent_33_unix.tgz
+Source402:	%{cftp}/helpcontent/helpcontent_33_unix.tgz
 # Source402-md5:	68d58bc30b485a77c0a0fba08af3aee3
-Source403:      %{cftp}/helpcontent/helpcontent_34_unix.tgz
+Source403:	%{cftp}/helpcontent/helpcontent_34_unix.tgz
 # Source403-md5:	8696bbee3dc4d5b6fd60218123016e29
-Source404:      %{cftp}/helpcontent/helpcontent_39_unix.tgz
+Source404:	%{cftp}/helpcontent/helpcontent_39_unix.tgz
 # Source404-md5:	c2ae86d02f462d2b663d621190f5ef34
-Source405:      %{cftp}/helpcontent/helpcontent_46_unix.tgz
+Source405:	%{cftp}/helpcontent/helpcontent_46_unix.tgz
 # Source405-md5:	7b013981edce2fabe4a8751ff64a8d58
-Source406:      %{cftp}/helpcontent/helpcontent_49_unix.tgz
+Source406:	%{cftp}/helpcontent/helpcontent_49_unix.tgz
 # Source406-md5:	a39f44ec40f452c963a4a187f31d1acb
-Source407:      %{cftp}/helpcontent/helpcontent_81_unix.tgz
+Source407:	%{cftp}/helpcontent/helpcontent_81_unix.tgz
 # Source407-md5:	81b705057a0e14ebcbf02fac4762781a
-Source408:      %{cftp}/helpcontent/helpcontent_82_unix.tgz
+Source408:	%{cftp}/helpcontent/helpcontent_82_unix.tgz
 # Source408-md5:	3121fbd251176d7c7b6e33ecec744c65
-Source409:      %{cftp}/helpcontent/helpcontent_86_unix.tgz
+Source409:	%{cftp}/helpcontent/helpcontent_86_unix.tgz
 # Source409-md5:	aee37935139c5ccd4b6d8abdd2037c66
-Source410:      %{cftp}/helpcontent/helpcontent_88_unix.tgz
+Source410:	%{cftp}/helpcontent/helpcontent_88_unix.tgz
 # Source410-md5:	3b00571318e45965dee0545d86306d65
 
 Source499:	%{name}-additional-dictionaries.txt
@@ -303,11 +303,11 @@ BuildRequires:	unzip
 BuildRequires:	zip
 BuildRequires:	zlib-devel
 # more and more...
-BuildRequires:  pkgconfig
-BuildRequires:  startup-notification-devel
-BuildRequires:  libart_lgpl-devel
+BuildRequires:	pkgconfig
+BuildRequires:	startup-notification-devel
+BuildRequires:	libart_lgpl-devel
 BuildRequires:	libgnomecups-devel
-BuildRequires:  gnome-vfs2-devel
+BuildRequires:	gnome-vfs2-devel
 %if %{with kde}
 BuildRequires:	qt-devel
 BuildRequires:	kdelibs-devel
@@ -318,7 +318,7 @@ BuildConflicts:	java-sun = 1.4.2
 Requires:	%{name}-libs = %{epoch}:%{version}-%{release}
 Requires:	%{name}-i18n-en = %{epoch}:%{version}-%{release}
 Requires:	%{name}-dict-en
-Requires(post,postun):  fontpostinst
+Requires(post,postun):	fontpostinst
 Requires:	libstdc++ >= 3.2.1
 Requires:	cups-lib
 Requires:	db
@@ -404,10 +404,10 @@ afrykanerskim.
 %files i18n-af -f af.lang
 
 %package i18n-ar
-Summary:        OpenOffice.org - interface in Arabic language
-Summary(pl):    OpenOffice.org - interfejs w jêzyku arabskim
-Group:          Applications/Office
-Requires:       %{name} = %{epoch}:%{version}-%{release}
+Summary:	OpenOffice.org - interface in Arabic language
+Summary(pl):	OpenOffice.org - interfejs w jêzyku arabskim
+Group:		Applications/Office
+Requires:	%{name} = %{epoch}:%{version}-%{release}
 
 %description i18n-ar
 This package provides resources containing menus and dialogs in
@@ -468,10 +468,10 @@ czeskim.
 %files i18n-cs -f cs.lang
 
 %package i18n-cy
-Summary:        OpenOffice.org - interface in Cymraeg language
-Summary(pl):    OpenOffice.org - interfejs w jêzyku walijskim
-Group:          Applications/Office
-Requires:       %{name} = %{epoch}:%{version}-%{release}
+Summary:	OpenOffice.org - interface in Cymraeg language
+Summary(pl):	OpenOffice.org - interfejs w jêzyku walijskim
+Group:		Applications/Office
+Requires:	%{name} = %{epoch}:%{version}-%{release}
 
 %description i18n-cy
 This package provides resources containing menus and dialogs in
@@ -564,10 +564,10 @@ hiszpañskim.
 %files i18n-es -f es.lang
 
 %package i18n-et
-Summary:        OpenOffice.org - interface in Estonian language
-Summary(pl):    OpenOffice.org - interfejs w jêzyku estoñskim
-Group:          Applications/Office
-Requires:       %{name} = %{epoch}:%{version}-%{release}
+Summary:	OpenOffice.org - interface in Estonian language
+Summary(pl):	OpenOffice.org - interfejs w jêzyku estoñskim
+Group:		Applications/Office
+Requires:	%{name} = %{epoch}:%{version}-%{release}
 
 %description i18n-et
 This package provides resources containing menus and dialogs in
@@ -596,10 +596,10 @@ fiñskim.
 %files i18n-fi -f fi.lang
 
 %package i18n-fo
-Summary:        OpenOffice.org - interface in FO language
-Summary(pl):    OpenOffice.org - interfejs w jêzyku FO
-Group:          Applications/Office
-Requires:       %{name} = %{epoch}:%{version}-%{release}
+Summary:	OpenOffice.org - interface in FO language
+Summary(pl):	OpenOffice.org - interfejs w jêzyku FO
+Group:		Applications/Office
+Requires:	%{name} = %{epoch}:%{version}-%{release}
 
 %description i18n-fo
 This package provides resources containing menus and dialogs in
@@ -628,10 +628,10 @@ francuskim.
 %files i18n-fr -f fr.lang
 
 %package i18n-ga
-Summary:        OpenOffice.org - interface in Irish language
-Summary(pl):    OpenOffice.org - interfejs w jêzyku irlandzkim
-Group:          Applications/Office
-Requires:       %{name} = %{epoch}:%{version}-%{release}
+Summary:	OpenOffice.org - interface in Irish language
+Summary(pl):	OpenOffice.org - interfejs w jêzyku irlandzkim
+Group:		Applications/Office
+Requires:	%{name} = %{epoch}:%{version}-%{release}
 
 %description i18n-ga
 This package provides resources containing menus and dialogs in
@@ -644,10 +644,10 @@ irlandzkim.
 %files i18n-ga -f ga.lang
 
 %package i18n-gl
-Summary:        OpenOffice.org - interface in Galician language
-Summary(pl):    OpenOffice.org - interfejs w jêzyku galicyjskim
-Group:          Applications/Office
-Requires:       %{name} = %{epoch}:%{version}-%{release}
+Summary:	OpenOffice.org - interface in Galician language
+Summary(pl):	OpenOffice.org - interfejs w jêzyku galicyjskim
+Group:		Applications/Office
+Requires:	%{name} = %{epoch}:%{version}-%{release}
 
 %description i18n-gl
 This package provides resources containing menus and dialogs in
@@ -660,10 +660,10 @@ galicyjskim.
 %files i18n-gl -f gl.lang
 
 %package i18n-hr
-Summary:        OpenOffice.org - interface in Croatian language
-Summary(pl):    OpenOffice.org - interfejs w jêzyku chorwackim
-Group:          Applications/Office
-Requires:       %{name} = %{epoch}:%{version}-%{release}
+Summary:	OpenOffice.org - interface in Croatian language
+Summary(pl):	OpenOffice.org - interfejs w jêzyku chorwackim
+Group:		Applications/Office
+Requires:	%{name} = %{epoch}:%{version}-%{release}
 
 %description i18n-hr
 This package provides resources containing menus and dialogs in
@@ -676,10 +676,10 @@ chorwackim.
 %files i18n-hr -f hr.lang
 
 %package i18n-hu
-Summary:        OpenOffice.org - interface in Hungarian language
-Summary(pl):    OpenOffice.org - interfejs w jêzyku wêgierskim
-Group:          Applications/Office
-Requires:       %{name} = %{epoch}:%{version}-%{release}
+Summary:	OpenOffice.org - interface in Hungarian language
+Summary(pl):	OpenOffice.org - interfejs w jêzyku wêgierskim
+Group:		Applications/Office
+Requires:	%{name} = %{epoch}:%{version}-%{release}
 
 %description i18n-hu
 This package provides resources containing menus and dialogs in
@@ -692,10 +692,10 @@ wêgierskim.
 %files i18n-hu -f hu.lang
 
 %package i18n-ia
-Summary:        OpenOffice.org - interface in IA language
-Summary(pl):    OpenOffice.org - interfejs w jêzyku IA
-Group:          Applications/Office
-Requires:       %{name} = %{epoch}:%{version}-%{release}
+Summary:	OpenOffice.org - interface in IA language
+Summary(pl):	OpenOffice.org - interfejs w jêzyku IA
+Group:		Applications/Office
+Requires:	%{name} = %{epoch}:%{version}-%{release}
 
 %description i18n-ia
 This package provides resources containing menus and dialogs in
@@ -708,10 +708,10 @@ IA.
 %files i18n-ia -f ia.lang
 
 %package i18n-id
-Summary:        OpenOffice.org - interface in Indonesian language
-Summary(pl):    OpenOffice.org - interfejs w jêzyku indonezyjskim
-Group:          Applications/Office
-Requires:       %{name} = %{epoch}:%{version}-%{release}
+Summary:	OpenOffice.org - interface in Indonesian language
+Summary(pl):	OpenOffice.org - interfejs w jêzyku indonezyjskim
+Group:		Applications/Office
+Requires:	%{name} = %{epoch}:%{version}-%{release}
 
 %description i18n-id
 This package provides resources containing menus and dialogs in
@@ -740,10 +740,10 @@ w³oskim.
 %files i18n-it -f it.lang
 
 %package i18n-ja
-Summary:        OpenOffice.org - interface in Japan language
-Summary(pl):    OpenOffice.org - interfejs w jêzyku japoñskim
-Group:          Applications/Office
-Requires:       %{name} = %{epoch}:%{version}-%{release}
+Summary:	OpenOffice.org - interface in Japan language
+Summary(pl):	OpenOffice.org - interfejs w jêzyku japoñskim
+Group:		Applications/Office
+Requires:	%{name} = %{epoch}:%{version}-%{release}
 
 %description i18n-ja
 This package provides resources containing menus and dialogs in
@@ -756,10 +756,10 @@ japoñskim.
 %files i18n-ja -f ja.lang
 
 %package i18n-ko
-Summary:        OpenOffice.org - interface in Korean language
-Summary(pl):    OpenOffice.org - interfejs w jêzyku koreañskim
-Group:          Applications/Office
-Requires:       %{name} = %{epoch}:%{version}-%{release}
+Summary:	OpenOffice.org - interface in Korean language
+Summary(pl):	OpenOffice.org - interfejs w jêzyku koreañskim
+Group:		Applications/Office
+Requires:	%{name} = %{epoch}:%{version}-%{release}
 
 %description i18n-ko
 This package provides resources containing menus and dialogs in
@@ -772,10 +772,10 @@ koreañskim.
 %files i18n-ko -f ko.lang
 
 %package i18n-la
-Summary:        OpenOffice.org - interface in LA language
-Summary(pl):    OpenOffice.org - interfejs w jêzyku LA
-Group:          Applications/Office
-Requires:       %{name} = %{epoch}:%{version}-%{release}
+Summary:	OpenOffice.org - interface in LA language
+Summary(pl):	OpenOffice.org - interfejs w jêzyku LA
+Group:		Applications/Office
+Requires:	%{name} = %{epoch}:%{version}-%{release}
 
 %description i18n-la
 This package provides resources containing menus and dialogs in
@@ -788,10 +788,10 @@ LA.
 %files i18n-la -f la.lang
 
 %package i18n-lt
-Summary:        OpenOffice.org - interface in Lithuanian language
-Summary(pl):    OpenOffice.org - interfejs w jêzyku litewskim
-Group:          Applications/Office
-Requires:       %{name} = %{epoch}:%{version}-%{release}
+Summary:	OpenOffice.org - interface in Lithuanian language
+Summary(pl):	OpenOffice.org - interfejs w jêzyku litewskim
+Group:		Applications/Office
+Requires:	%{name} = %{epoch}:%{version}-%{release}
 
 %description i18n-lt
 This package provides resources containing menus and dialogs in
@@ -804,10 +804,10 @@ litewskim.
 %files i18n-lt -f lt.lang
 
 %package i18n-med
-Summary:        OpenOffice.org - interface in MED language
-Summary(pl):    OpenOffice.org - interfejs w jêzyku MED
-Group:          Applications/Office
-Requires:       %{name} = %{epoch}:%{version}-%{release}
+Summary:	OpenOffice.org - interface in MED language
+Summary(pl):	OpenOffice.org - interfejs w jêzyku MED
+Group:		Applications/Office
+Requires:	%{name} = %{epoch}:%{version}-%{release}
 
 %description i18n-med
 This package provides resources containing menus and dialogs in
@@ -852,10 +852,10 @@ malajskim.
 %files i18n-ms -f ms.lang
 
 %package i18n-nb
-Summary:        OpenOffice.org - interface in Norwegian Bokmaal language
-Summary(pl):    OpenOffice.org - interfejs w jêzyku norweskim (odmiana Bokmaal)
-Group:          Applications/Office
-Requires:       %{name} = %{epoch}:%{version}-%{release}
+Summary:	OpenOffice.org - interface in Norwegian Bokmaal language
+Summary(pl):	OpenOffice.org - interfejs w jêzyku norweskim (odmiana Bokmaal)
+Group:		Applications/Office
+Requires:	%{name} = %{epoch}:%{version}-%{release}
 
 %description i18n-nb
 This package provides resources containing menus and dialogs in
@@ -916,10 +916,10 @@ portugalskim.
 %files i18n-pt -f pt.lang
 
 %package i18n-ro
-Summary:        OpenOffice.org - interface in Romanian language
-Summary(pl):    OpenOffice.org - interfejs w jêzyku rumuñskim
-Group:          Applications/Office
-Requires:       %{name} = %{epoch}:%{version}-%{release}
+Summary:	OpenOffice.org - interface in Romanian language
+Summary(pl):	OpenOffice.org - interfejs w jêzyku rumuñskim
+Group:		Applications/Office
+Requires:	%{name} = %{epoch}:%{version}-%{release}
 
 %description i18n-ro
 This package provides resources containing menus and dialogs in
@@ -964,10 +964,10 @@ s³owackim.
 %files i18n-sk -f sk.lang
 
 %package i18n-sl
-Summary:        OpenOffice.org - interface in Slovenian language
-Summary(pl):    OpenOffice.org - interfejs w jêzyku s³oweñskim
-Group:          Applications/Office
-Requires:       %{name} = %{epoch}:%{version}-%{release}
+Summary:	OpenOffice.org - interface in Slovenian language
+Summary(pl):	OpenOffice.org - interfejs w jêzyku s³oweñskim
+Group:		Applications/Office
+Requires:	%{name} = %{epoch}:%{version}-%{release}
 
 %description i18n-sl
 This package provides resources containing menus and dialogs in
@@ -996,10 +996,10 @@ szwedzkim.
 %files i18n-sv -f sv.lang
 
 %package i18n-tr
-Summary:        OpenOffice.org - interface in Turkish language
-Summary(pl):    OpenOffice.org - interfejs w jêzyku tureckim
-Group:          Applications/Office
-Requires:       %{name} = %{epoch}:%{version}-%{release}
+Summary:	OpenOffice.org - interface in Turkish language
+Summary(pl):	OpenOffice.org - interfejs w jêzyku tureckim
+Group:		Applications/Office
+Requires:	%{name} = %{epoch}:%{version}-%{release}
 
 %description i18n-tr
 This package provides resources containing menus and dialogs in
@@ -1028,10 +1028,10 @@ ukraiñskim.
 %files i18n-uk -f uk.lang
 
 %package i18n-zh
-Summary:        OpenOffice.org - interface in Chinese language
-Summary(pl):    OpenOffice.org - interfejs w jêzyku chiñskim
-Group:          Applications/Office
-Requires:       %{name} = %{epoch}:%{version}-%{release}
+Summary:	OpenOffice.org - interface in Chinese language
+Summary(pl):	OpenOffice.org - interfejs w jêzyku chiñskim
+Group:		Applications/Office
+Requires:	%{name} = %{epoch}:%{version}-%{release}
 
 %description i18n-zh
 This package provides resources containing menus and dialogs in
@@ -1178,7 +1178,7 @@ cat %{SOURCE499} >> $RPM_BUILD_ROOT%{_libdir}/%{name}/share/dict/ooo/dictionary.
 install -d helptmp && cd helptmp || exit 1
 for file in \
 	%{SOURCE400} %{SOURCE401} %{SOURCE402} %{SOURCE403} %{SOURCE404} %{SOURCE405} \
-        %{SOURCE406} %{SOURCE407} %{SOURCE408} %{SOURCE409} %{SOURCE410}; do
+	%{SOURCE406} %{SOURCE407} %{SOURCE408} %{SOURCE409} %{SOURCE410}; do
 		rm -rf *.*
 		nr=$(echo "$file" | sed -e 's#.*_\(.*\)_.*#\1#g')
 		lang=$(../bin/openoffice-xlate-lang -i "$nr")
@@ -1233,14 +1233,14 @@ rm -f %{_libdir}/%{name}/program/filter/libfreetype.so*
 
 rm -f $RPM_BUILD_ROOT%{_libdir}/%{name}/program/sopatchlevel.sh
 perl -pi -e 's/^[       ]*LD_LIBRARY_PATH/# LD_LIBRARY_PATH/;s/export LD_LIBRARY_PATH/# export LD_LIBRARY_PATH/' \
-  $RPM_BUILD_ROOT%{_libdir}/%{name}/program/setup
+	$RPM_BUILD_ROOT%{_libdir}/%{name}/program/setup
 
 # Remove setup log
 rm -f $RPM_BUILD_ROOT%{_libdir}/%{name}/program/setup.log
 
 # Remove copied system libraries
 rm -f $RPM_BUILD_ROOT%{_libdir}/%{name}/program/libgcc_s.so* \
-         $RPM_BUILD_ROOT%{_libdir}/%{name}/program/libstdc++*so*
+	$RPM_BUILD_ROOT%{_libdir}/%{name}/program/libstdc++*so*
 
 # Find out locales
 rm -f *.lang
@@ -1255,7 +1255,7 @@ for lang in $RPM_BUILD_ROOT%{_libdir}/%{name}/share/registry/res/*; do
 done
 for lang in $RPM_BUILD_ROOT%{_libdir}/%{name}/help/*; do
 	[ ! -d "$lang" ] && continue
-        langlist="$langlist $(echo "$lang" | sed -e 's#.*/\(.*\)#\1#g')"
+	langlist="$langlist $(echo "$lang" | sed -e 's#.*/\(.*\)#\1#g')"
 done
 langlist=$(echo "$langlist" | tr ' ' '\n' | sort | uniq)
 slanglist=$(echo "$langlist" | awk -F_ ' { print $1 } ' | awk -F- ' { print $1 } ' | sort | uniq | xargs)
