@@ -23,7 +23,7 @@ Summary:	OpenOffice - powerful office suite
 Summary(pl):	OpenOffice - potê¿ny pakiet biurowy
 Name:		openoffice
 Version:	%{fullver}
-Release:	2
+Release:	3
 Epoch:		1
 License:	GPL/LGPL
 Group:		X11/Applications
@@ -1165,6 +1165,10 @@ rm -f %{_libdir}/%{name}/program/libvcl%{subver}li.so
 
 %post libs-gtk
 ln -sf libvcl%{subver}li-gtk.so %{_libdir}/%{name}/program/libvcl%{subver}li.so
+
+%triggerpostun libs -- openoffice-libs <= 1.1.1-2
+[ -f %{_libdir}/%{name}/program/libvcl%{subver}li-kde.so ] && ln -sf libvcl%{subver}li-kde.so %{_libdir}/%{name}/program/libvcl%{subver}li.so
+[ -f %{_libdir}/%{name}/program/libvcl%{subver}li-gtk.so ] && ln -sf libvcl%{subver}li-gtk.so %{_libdir}/%{name}/program/libvcl%{subver}li.so
 
 %files
 %defattr(644,root,root,755)
