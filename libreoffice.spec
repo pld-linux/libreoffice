@@ -912,19 +912,9 @@ DB_JAR="%{_javadir}/db.jar"
 export JAVA_HOME DB_JAR GCJ
 %endif
 
-if [ -z "$RPM_BUILD_NCPUS" ] ; then
-	if [ -x /usr/bin/getconf ] ; then
-		RPM_BUILD_NCPUS=$(/usr/bin/getconf _NPROCESSORS_ONLN)
-		if [ $RPM_BUILD_NCPUS -eq 0 ] ; then
-			RPM_BUILD_NCPUS=1
-		fi
-	else
-		RPM_BUILD_NCPUS=1
-	fi
-fi
-
 # parallel build is broken above 4 NCPUS so use 4 as max
-RPM_BUILD_NCPUS=1
+RPM_BUILD_NR_THREADS=%(echo "%{__make}" | sed -e 's#.*-j\([0-9]\+\)#\1#g')
+[ -n "$RPM_BUILD_NR_THREADS" -a "$RPM_BUILD_NR_THREADS" -gt 4 ] && RPM_BUILD_NR_THREADS=4 || RPM_BUILD_NR_THREADS=1
 
 CONFOPTS=" \
 	--with-ccache-allowed \
@@ -963,7 +953,7 @@ CONFOPTS=" \
 	--enable-libart \
 	--disable-rpath \
 	--disable-symbols \
-	--with-num-cpus=$RPM_BUILD_NCPUS
+	--with-num-cpus=$RPM_BUILD_NR_THREADS
 "
 
 # for cvs snaps
@@ -983,7 +973,7 @@ if [ "$RPM_BUILD_NCPUS" -gt 1 ]; then
 	while [ "$doit" -eq 1 ]; do
 		echo "Waiting one more time..."
 		FCH=$(nice -n 20 find . -type f ! -mmin +3 -print 2> /dev/null | wc -l)
-		[ "$FCH" -eq 0 ] && doit=0 || :
+		[ "$FCH" -eq 0 ] && doit=0 || sleep 30
 	done
 fi
 
