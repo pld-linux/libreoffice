@@ -1,0 +1,20 @@
+Index: svx/source/stbctrls/pszctrl.cxx
+===================================================================
+RCS file: /cvs/graphics/svx/source/stbctrls/pszctrl.cxx,v
+retrieving revision 1.5
+diff -u -r1.5 pszctrl.cxx
+--- svx/source/stbctrls/pszctrl.cxx	10 Jul 2001 11:22:50 -0000	1.5
++++ svx/source/stbctrls/pszctrl.cxx	6 Dec 2002 16:41:37 -0000
+@@ -143,10 +143,9 @@
+ 		eInUnit = FUNIT_100TH_MM;
+ 
+ 	String sMetric;
+-	LocaleDataWrapper aLocaleWrapper( ::comphelper::getProcessServiceFactory(), Application::GetSettings().GetLocale() );
+-	const sal_Unicode cSep = aLocaleWrapper.getNumDecimalSep().GetChar(0);
++	const sal_Unicode cSep = Application::GetSettings().GetLocaleDataWrapper().getNumDecimalSep().GetChar(0);
+ 	long nConvVal = MetricField::ConvertValue( nVal * 100, 0L, 0,
+-											   eInUnit, eOutUnit );
++						   eInUnit, eOutUnit );
+ 
+ 	if ( nConvVal < 0 && ( nConvVal / 100 == 0 ) )
+ 		sMetric += '-';

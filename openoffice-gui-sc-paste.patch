@@ -1,0 +1,71 @@
+Index: sc/source/ui/view/viewfun5.cxx
+===================================================================
+RCS file: /cvs/sc/sc/source/ui/view/viewfun5.cxx,v
+retrieving revision 1.18
+diff -u -r1.18 viewfun5.cxx
+--- sc/source/ui/view/viewfun5.cxx	7 Nov 2001 12:49:49 -0000	1.18
++++ sc/source/ui/view/viewfun5.cxx	12 Dec 2002 13:12:57 -0000
+@@ -120,6 +120,9 @@
+ #include "tabvwsh.hxx"		//	wegen GetViewFrame
+ #include "compiler.hxx"
+ 
++#include "asciiopt.hxx"
++#include "vcl/msgbox.hxx"
++
+ #ifndef _SFXVIEWFRM_HXX //autogen
+ #include <sfx2/viewfrm.hxx>
+ #endif
+@@ -131,6 +134,8 @@
+ 
+ //------------------------------------------------------------------
+ 
++#include <stdio.h>
++
+ BOOL ScViewFunc::PasteDataFormat( ULONG nFormatId,
+ 					const uno::Reference<datatransfer::XTransferable>& rxTransferable,
+ 					USHORT nPosX, USHORT nPosY, Point* pLogicPos, BOOL bLink )
+@@ -268,12 +273,41 @@
+ 			ScAddress aPos( nPosX, nPosY, GetViewData()->GetTabNo() );
+ 			ScImportExport aObj( GetViewData()->GetDocument(), aPos );
+ 
+-            ::rtl::OUString aStr;
++			::rtl::OUString aStr;
+ 			SotStorageStreamRef xStream;
+ 			if ( aDataHelper.GetSotStorageStream( nFormatId, xStream ) && xStream.Is() )
+ 				bRet = aObj.ImportStream( *xStream, nFormatId );
+-			else if ( aDataHelper.GetString( nFormatId, aStr ) )
+-				bRet = aObj.ImportString( aStr, nFormatId );
++
++			else if ( aDataHelper.GetString( nFormatId, aStr ) ) {
++
++			  sal_Int32 newln;
++			  newln = aStr.indexOf ('\n');
++/*			  ::rtl::OString tmpStr = OUStringToOString
++			      ( aStr, RTL_TEXTENCODING_UTF8 );
++			  fprintf (stderr, "String is '%s' (%d) [%d]\n",
++				   tmpStr.getStr (), tmpStr.getLength(), newln); */
++			  if (newln >= 0 && newln != aStr.getLength () - 1) { // do dialog
++				// FIXME: split me out - if only C++ 'private' didn't suck rocks.
++
++				SvMemoryStream aStrm( (void*)aStr.getStr(), aStr.getLength() * sizeof(sal_Unicode), STREAM_READ );
++				aStrm.SetStreamCharSet( RTL_TEXTENCODING_UNICODE );
++				// Hack - copied from impex.cxx - we need a helper to do this [!]
++				aStrm.SetEndianSwap( FALSE );
++
++				ScImportAsciiDlg* pDlg = new ScImportAsciiDlg
++				  ( NULL, String::CreateFromAscii("Pasted Data"), &aStrm );
++
++				if (pDlg->Execute() == RET_OK) {
++				  ScAsciiOptions aOptions;
++				  pDlg->GetOptions( aOptions );
++				  aObj.SetExtOptions( aOptions );
++
++				  bRet = aObj.ImportString( aStr, nFormatId );
++				} else
++				  bRet = FALSE;
++			  } else
++			    bRet = aObj.ImportString( aStr, nFormatId );
++			}
+ 
+ 			InvalidateAttribs();
+ 			GetViewData()->UpdateInputHandler();

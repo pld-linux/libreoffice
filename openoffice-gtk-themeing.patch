@@ -1,0 +1,85 @@
+? vcl/util/vcl-gcc3.map
+Index: vcl/source/src/msgbox.bmp
+===================================================================
+RCS file: /cvs/gsl/vcl/source/src/msgbox.bmp,v
+retrieving revision 1.1.1.1
+diff -u -p -u -r1.1.1.1 msgbox.bmp
+Binary files /tmp/cvsM6aind and msgbox.bmp differ
+Index: vcl/unx/source/gdi/getstyle/getstyle-gnome.c
+===================================================================
+RCS file: /cvs/gsl/vcl/unx/source/gdi/getstyle/getstyle-gnome.c,v
+retrieving revision 1.5
+diff -u -p -u -r1.5 getstyle-gnome.c
+--- vcl/unx/source/gdi/getstyle/getstyle-gnome.c	27 Mar 2003 17:58:57 -0000	1.5
++++ vcl/unx/source/gdi/getstyle/getstyle-gnome.c	13 May 2003 11:28:48 -0000
+@@ -139,6 +139,25 @@ void printColor( int eStyle, GdkColor* p
+                   pColor->blue/256 );
+ }
+ 
++/* We special case menu items because they use a "menuitem" detail field when
++ * calling gtk_paint_flat_box().
++ */
++void
++printMenuColors (void)
++{
++	GtkWidget *item;
++	GtkStyle *style;
++
++	item = gtk_menu_item_new ();
++	gtk_widget_ensure_style (item);
++
++	style = gtk_rc_get_style (item);
++	printColor (MenuHighlightColor, &style->bg[GTK_STATE_PRELIGHT]);
++	printColor (MenuHighlightTextColor, &style->fg[GTK_STATE_PRELIGHT]);
++
++	gtk_widget_destroy (item);
++}
++
+ void printFont( int eStyle, PangoFontDescription* pFont )
+ {
+     PangoWeight eWeight;
+@@ -194,6 +213,8 @@ void printVCLStyle( GtkWidget* widget )
+         printColor( HighlightTextColor, &pStyle->text[GTK_STATE_SELECTED] );
+         printColor( FieldColor, &pStyle->base[GTK_STATE_NORMAL] );
+         printColor( WindowColor, &pStyle->base[GTK_STATE_NORMAL] );
++ 	printColor( CheckedColor, &pStyle->bg[GTK_STATE_ACTIVE] );
++	printMenuColors();
+         
+         printFont( UIFont, pStyle->font_desc );
+ 
+@@ -299,8 +319,10 @@ int main (int argc, char **argv)
+ #endif
+ 
+         /* realize the widgets, do not show it to avoid flicker */
+-        gtk_widget_realize(mainwin);
+-        gtk_widget_realize(toolbar);
++	gtk_widget_ensure_style( mainwin );
++	gtk_widget_ensure_style( toolbar );
++        gtk_widget_realize( mainwin );
++        gtk_widget_realize( toolbar );
+ 
+         /* Enter the main event loop, and wait for user interaction */
+         gtk_main ();
+Index: vcl/unx/source/gdi/getstyle/makefile.mk
+===================================================================
+RCS file: /cvs/gsl/vcl/unx/source/gdi/getstyle/makefile.mk,v
+retrieving revision 1.3
+diff -u -p -u -r1.3 makefile.mk
+--- vcl/unx/source/gdi/getstyle/makefile.mk	27 Mar 2003 17:58:57 -0000	1.3
++++ vcl/unx/source/gdi/getstyle/makefile.mk	13 May 2003 11:28:48 -0000
+@@ -95,10 +95,8 @@ HASGNOME2=TRUE
+ 
+ ALLTAR: $(BIN)$/getstyle-gnome
+ 
+-.IF "$(HASGNOME2)"=="TRUE"
+-$(BIN)$/getstyle-gnome:
+-        +$(COPY) $(GETSTYLE_GNOME) $@
+-.ELSE
+-$(BIN)$/getstyle-gnome:
+-        +$(TOUCH) $@
+-.ENDIF
++$(BIN)$/getstyle-gnome: getstyle-gnome.c
++	setenv UGLY_HACK_INDEED "$/LD_LIBRARY_PATH"; \
++	unsetenv LD_LIBRARY_PATH; \
++	$(CC) `pkg-config --cflags gtk+-2.0` `pkg-config --libs gtk+-2.0` -o $(BIN)$/getstyle-gnome getstyle-gnome.c; \
++	setenv LD_LIBRARY_PATH "$/UGLY_HACK_INDEED"
