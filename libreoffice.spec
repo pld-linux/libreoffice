@@ -134,7 +134,8 @@ Patch116: openoffice-xsltfilter-handle-no-solar-java.patch
 Patch117: openoffice-xsltvalidate-handle-no-solar-java.patch
 Patch118: openoffice-berkeleydb-no-java-fix.patch 
 Patch119: openoffice-scp-no-java-fix.patch
-Patch120: openoffice-odk-no-java.patch
+Patch120: openoffice-odk-handle-no-solar-java.patch 
+Patch121: openoffice-disable-odk-build.patch
 
 URL:		http://www.openoffice.org/
 BuildRequires:	STLport-devel >= 4.5.3-6
@@ -802,7 +803,8 @@ rm -f moz/prj/d.lst
 %patch117 -p0
 %patch118 -p1 
 %patch119 -p1 
-%patch120 -p1 
+%patch120 -p0 
+%patch121 -p0 
 %endif 
 
 # gcc 2 include error hack:
