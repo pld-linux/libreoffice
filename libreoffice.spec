@@ -4,7 +4,7 @@
 #	- drop requirement on nas-devel
 #	- fix locale names and other locale related things
 #	- --with-system-myspell + myspell package as in Debian
-#	- --with-system-neon - check compilation
+#	- --with-system-neon - check compilation (works with 0.23 but not 0.24)
 
 # Conditional build:
 %bcond_with	java		# Java support
@@ -22,7 +22,7 @@ Summary:	OpenOffice - powerful office suite
 Summary(pl):	OpenOffice - potê¿ny pakiet biurowy
 Name:		openoffice
 Version:	%{fullver}
-Release:	1.3.1%{?with_kde:.kde}%{!?with_kde:.gtk}
+Release:	1.4%{?with_kde:.kde}%{!?with_kde:.gtk}
 Epoch:		1
 License:	GPL/LGPL
 Group:		X11/Applications
