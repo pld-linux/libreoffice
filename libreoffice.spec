@@ -1,3 +1,6 @@
+# %configure requests jdk1.2.2 but documentation 1.3.1
+%define		jdk_ver		1.3.1_01
+
 Summary:	OpenOffice - powerful office suite
 Summary(pl):	OpenOffice - potê¿ny pakiet biurowy
 Name:		openoffice
@@ -10,12 +13,13 @@ Group(de):	X11/Applikationen
 Group(pl):	X11/Aplikacje
 Source0:	ftp://openoffice@ftp.ists.pwr.wroc.pl/sources/build%{version}b/oo_%{version}_src.tar.bz2
 Source1:	ftp://ftp.cs.man.ac.uk/pub/toby/gpc/gpc231.tar.Z
+Patch0:		%{name}-nostlport.patch
 URL:		http://www.openoffice.org/
 BuildRequires:	XFree86-devel
 BuildRequires:	autoconf
 BuildRequires:	automake
 BuildRequires:	flex
-BuildRequires:	jdk = 1.3.1_01
+BuildRequires:	jdk = %{jdk_ver}
 BuildRequires:	perl
 BuildRequires:	tcsh
 BuildRequires:	unzip
@@ -55,6 +59,7 @@ Do zalet OpenOffice.org mo¿na zaliczyæ:
 
 %prep
 %setup -q -n oo_%{version}_src
+%patch0 -p1
 install %{SOURCE1} external
 cd external; tar fxz %{SOURCE1}; cp -fr gpc231/* gpc
 
@@ -62,7 +67,7 @@ cd external; tar fxz %{SOURCE1}; cp -fr gpc231/* gpc
 cd config_office
 autoconf
 %configure \
-	--with-jdk-home=/usr/lib/jdk1.3.1_01 \
+	--with-jdk-home=/usr/lib/jdk%{jdk_ver} \
 	--with-stlport4-home=/usr \
 	--with-lang=ALL \
 	--with-x
