@@ -1081,7 +1081,7 @@ rm -f moz/prj/d.lst
 
 %patch600 -p1
 %patch601 -p1 
-%patch602 -p0
+#%patch602 -p0
 
 # gcc 2 include error hack:
 rm -rf autodoc/source/inc/utility
