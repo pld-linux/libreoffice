@@ -23,7 +23,7 @@ Summary:	OpenOffice - powerful office suite
 Summary(pl):	OpenOffice - potê¿ny pakiet biurowy
 Name:		openoffice
 Version:	%{fullver}
-Release:	3.1
+Release:	3.2
 Epoch:		1
 License:	GPL/LGPL
 Group:		X11/Applications
@@ -75,6 +75,7 @@ Patch2:		%{name}-pld-package-lang.patch
 Patch3:		%{name}-pld-section.patch
 Patch4:		%{name}-pld-leave-home.patch
 Patch5:		%{name}-pld-parallel-build.patch
+Patch6:		%{name}-pld-kde-nwf-fonts.patch
 
 URL:		http://www.openoffice.org/
 BuildRequires:	ImageMagick
@@ -880,6 +881,7 @@ chiñskim.
 %patch3 -p1
 %patch4 -p1
 %patch5 -p1
+%patch6 -p1
 
 install -d src
 ln -s %{SOURCE1} src/
