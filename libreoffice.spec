@@ -955,7 +955,7 @@ FindI18N() {
     for DIR in $DIRS
     do
 	if [ -d "$RPM_BUILD_ROOT/$DIR" ]; then
-	    echo "%lang($1) $DIR" >> "i18n-$1"
+	    echo "$DIR" >> "i18n-$1"
 	fi
     done    
     
@@ -965,7 +965,7 @@ FindI18N() {
 	FILES=`(cd $RPM_BUILD_ROOT%{oolib}/user/config; ls 2>/dev/null | grep "_$4" ||:)`
     fi	
     for FILE in $FILES; do
-        echo "%lang($1) %{oolib}/user/config/$FILE" >> "i18n-$1"
+        echo "%{oolib}/user/config/$FILE" >> "i18n-$1"
     done    
 
     SUBF="abp analysis basctl bib cal cnt date dba dbi dbp dbu"
@@ -979,20 +979,20 @@ FindI18N() {
     do
 	F="%{oolib}/program/resource/$FILE$SVER$3.res"
 	if [ -f "$RPM_BUILD_ROOT$F" ]; then
-	    echo "%lang($1) $F" >> "i18n-$1"
+	    echo "$F" >> "i18n-$1"
 	fi	
     done
 
     if [ -f $RPM_BUILD_ROOT/%{oolib}/program/instdb.ins.$1 ]
     then
-	echo "%lang($1) %{oolib}/program/instdb.ins.$1" >> "i18n-$1"
+	echo "%{oolib}/program/instdb.ins.$1" >> "i18n-$1"
     fi
 
     unzip -l solver/%{subver}/%{_archbuilddir}/pck/palletes$3.zip | sed "s/.* //" | awk '(flag==1)&&/----/{exit};(flag==1){print;};/----/{flag=1};' >> "i18n-$1"
     
     if [ ! -d "$RPM_BUILD_ROOT%{oolib}/help/$1" ]; then
 	ln -sf %{oolib}/help/en $RPM_BUILD_ROOT%{oolib}/help/$1
-	echo "%lang($1) %{oolib}/help/$1" >> "i18n-$1"
+	echo "%{oolib}/help/$1" >> "i18n-$1"
     fi
 }
 
