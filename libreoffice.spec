@@ -262,6 +262,7 @@ Patch506: openoffice-1.1-sal-main-cmdline.patch
 Patch507: openoffice-iso8859-2-html.patch
 Patch508: openoffice-buildset.patch
 Patch509: openoffice-vcl-dynamic-Xinerama.patch
+Patch510: openoffice-1.1-psprint-cups-PPD.patch
 
 URL:		http://www.openoffice.org/
 BuildRequires:	STLport-devel >= 4.5.3-6
@@ -1077,6 +1078,7 @@ rm -f moz/prj/d.lst
 %patch507 -p1
 #%patch508 -p0
 %patch509 -p0
+%patch510 -p1 
 
 # gcc 2 include error hack:
 rm -rf autodoc/source/inc/utility
@@ -1159,7 +1161,7 @@ ENVSCRIPT="LinuxPPCEnv.Set"
 %endif 
 
 %if %{with parallel}
-echo -e "#!/bin/tcsh\nsource $ENVSCRIPT\ncd instsetoo\nbuild.pl -P$RPM_BUILD_NCPUS --all\n" > compile
+echo -e "#!/bin/tcsh\nsource $ENVSCRIPT\ncd instsetoo\nbuild.pl -P$RPM_BUILD_NCPUS --all\n exit 0\n" > compile
 %else
 echo -e "#!/bin/tcsh\nsource $ENVSCRIPT\ndmake -p -v" > compile
 %endif
@@ -1179,12 +1181,6 @@ install /usr/lib/db.jar solver/%{subver}/%{_archbuilddir}/bin/db.jar
 rm -rf $RPM_BUILD_ROOT
 
 OOBUILDDIR=`pwd`
-
-# ugly hack, already fixed
-#%if %{without java}
-#LD_LIBRARY_PATH="$OOBUILDDIR/solver/%{subver}/%{_archbuilddir}/lib/"
-#export LD_LIBRARY_PATH
-#%endif 
 
 install -d $RPM_BUILD_ROOT%{oolib}
 
@@ -1333,11 +1329,6 @@ do
     fi
 done
 cd $OOBUILDDIR
-
-# ugly hack, already fixed
-#%if %{without java}
-#install solver/%{subver}/%{_archbuilddir}/lib/libj%{subver}* $RPM_BUILD_ROOT%{oolib}/program/
-#%endif
 
 cp -af $RPM_BUILD_ROOT%{oolib}/help/zh_CN/* $RPM_BUILD_ROOT%{oolib}/help/zh-CN
 cp -af $RPM_BUILD_ROOT%{oolib}/help/zh_TW/* $RPM_BUILD_ROOT%{oolib}/help/zh-TW
