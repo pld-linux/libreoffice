@@ -1,5 +1,5 @@
---- configure.in	Wed Dec 19 02:28:41 2001
-+++ configure.in.new	Wed Dec 19 02:25:43 2001
+--- oo_641_src/config_office/configure.in	Wed Dec 19 02:28:41 2001
++++ oo_641_src/config_office/configure.in.new	Wed Dec 19 02:25:43 2001
 @@ -654,6 +654,22 @@
           _jdk_minor="true"
        fi
