@@ -1,0 +1,14 @@
+diff -uNr vcl.old/unx/source/gdi/gcach_xpeer.hxx vcl/unx/source/gdi/gcach_xpeer.hxx
+--- oo/vcl.old/unx/source/gdi/gcach_xpeer.hxx	Fri Feb 15 18:00:58 2002
++++ oo/vcl/unx/source/gdi/gcach_xpeer.hxx	Sat Mar 29 21:11:46 2003
+@@ -65,8 +65,10 @@
+ #include <glyphcache.hxx>
+ 
+ #define Region XLIB_Region
++#define Cursor XID
+ #include <X11/extensions/Xrender.h>
+ #undef Region
++#undef Cursor
+ 
+ class X11GlyphPeer
+ : public GlyphCachePeer
