@@ -152,10 +152,10 @@
  .IF "$(OS)" == "WNT"
 --- oo_1.0_src/external/prj/d.lst.systemgo	Sun Jun  2 19:48:45 2002
 +++ oo_1.0_src/external/prj/d.lst	Sun Jun  2 19:49:02 2002
-@@ -54,8 +54,6 @@
- ..\%__SRC%\lib\libexpat_xmltok.a %_DEST%\lib%_EXT%\libexpat_xmltok.a
- ..\%__SRC%\lib\libexpat_xmlparse.a %_DEST%\lib%_EXT%\libexpat_xmlparse.a
- ..\%__SRC%\lib\libascii_expat_xmlparse.a %_DEST%\lib%_EXT%\libascii_expat_xmlparse.a
+@@ -46,8 +46,6 @@
+ 
+ ..\%__SRC%\slo\np* %_DEST%\lib%_EXT%\*
+ ..\%__SRC%\slo\PluginNew.* %_DEST%\lib%_EXT%\*
 -..\%__SRC%\slb\gnu_getopt.lib %_DEST%\lib%_EXT%\gnu_getopt.lib
 -..\%__SRC%\lib\libgnu_getopt.a %_DEST%\lib%_EXT%\libgnu_getopt.a
  ..\%__SRC%\slb\zlib.lib %_DEST%\lib%_EXT%\zlib.lib
