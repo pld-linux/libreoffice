@@ -16,7 +16,7 @@ diff -urN ooo-build-1.1.55.org/patches/OOO_1_1/nativewidgets-vcl.diff ooo-build-
  +    
 -+    // Do not set the height, it does not look good
 -+    // rFont.SetHeight( qFontInfo.pointSize() );
-++    rFont.SetHeight( qFontInfo.pixelSize() );
+++    rFont.SetHeight( qFontInfo.pointSize() );
  +    
  +    rFont.SetItalic( qFontInfo.italic()? ITALIC_NORMAL: ITALIC_NONE );
  +    
