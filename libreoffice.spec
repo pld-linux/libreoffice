@@ -911,7 +911,6 @@ RPM_BUILD_NR_THREADS="%(echo "%{__make}" | sed -e 's#.*-j\([[:space:]]*[0-9]\+\)
 CONFOPTS=" \
 	--with-tag=OOO_%{dfullver} \
 	--with-ccache-allowed \
-	--with-system-libs \
 	--with-system-gcc \
 	--with-system-zlib \
 	--with-system-sane-headers \
