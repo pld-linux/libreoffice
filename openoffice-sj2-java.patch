@@ -45,7 +45,7 @@
      /*
      ** interface cachable methods
 --- oo_1.0.1_src/sj2/stardiv/applet/AppletViewer.java.old	Mon Sep 18 18:54:03 2000
-+++ oo_1.0.1_src/sj2/stardiv/applet/AppletViewer.java	Fri Nov  1 21:46:41 2002
++++ oo_1.0.1_src/sj2/stardiv/app/AppletViewer.java	Fri Nov  1 21:46:41 2002
 @@ -2,9 +2,9 @@
   *
   *  $RCSfile$
