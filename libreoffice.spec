@@ -1061,6 +1061,23 @@ rm -f $RPM_BUILD_ROOT%{_libdir}/%{name}/program/setup.log
 rm -f $RPM_BUILD_ROOT%{_libdir}/%{name}/program/libgcc_s.so* \
          $RPM_BUILD_ROOT%{_libdir}/%{name}/program/libstdc++*so*
 
+# Find out locales
+rm -f *.lang
+# Take list from dictionaries
+for lang in $RPM_BUILD_ROOT%{_libdir}/%{name}/share/dict/ooo/*.aff; do
+	eval `echo "$lang" | sed -e 's#.*/\(.*\)\.aff#\1#g' | awk -F_ ' { print "FLANG=\"" $1 "\"\nSLANG=\"" $2 "\"\nTLANG=\"" $3; "\""; } '`
+	# we take only first code ie xx_YY -> we take xx
+	nlang="$FLANG"
+	# nlonglang=$(../bin/openoffice-xlate-lang -l "$nlang" 2> /dev/null)
+	echo "%%defattr(644,root,root,755)" > ${nlang}.lang
+	[ -f build/lang_${nlang}_list.txt ] && sed -e "s#$RPM_BUILD_ROOT#%%lang(${nlang}) #g" build/lang_${nlang}_list.txt >> ${nlang}.lang
+	find $RPM_BUILD_ROOT -type d | sed -e "s#$RPM_BUILD_ROOT##g" -e "s#\(.*/${nlang}\)\$#%%lang(${nlang}) \1#g" | grep -E '^%%lang' >> ${nlang}.lang
+	if [ -n "$nlonglang" ]; then
+		find $RPM_BUILD_ROOT -type d | sed -e "s#$RPM_BUILD_ROOT##g" -e "s#\(.*/${nlonglang}\)\$#%%lang(${nlang}) \1#g" | grep -E '^%%lang' >> ${nlang}.lang
+	fi
+done
+
+
 %clean
 rm -rf $RPM_BUILD_ROOT
 
