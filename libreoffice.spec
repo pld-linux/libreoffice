@@ -245,6 +245,7 @@ BuildRequires:	pango-static
 BuildRequires:	xft-static
 BuildRequires:	xrender-static
 BuildRequires:	zlib-static
+BuildRequires:  pkgconfig
 Requires:	%{name}-libs = %{epoch}:%{version}-%{release}
 Requires:	%{name}-i18n-en = %{epoch}:%{version}-%{release}
 Requires:	%{name}-dict-en
