@@ -170,12 +170,12 @@ OpenOffice.org productivity suite - shared libraries.
 Pakiet biurowy OpenOffice.org - biblioteki.
 
 %package libs-kde
-Summary:        OpenOffice.org KDE Interface
-Summary(pl):    Interfejs KDE dla OpenOffice.org
-Group:          X11/Libraries
-Provides:       %{name}-libs-interface = %{version}-%{release}
+Summary:	OpenOffice.org KDE Interface
+Summary(pl):	Interfejs KDE dla OpenOffice.org
+Group:		X11/Libraries
+Provides:	%{name}-libs-interface = %{version}-%{release}
 Provides:	libvcl%{subver}li.so
-Obsoletes:      %{name}-libs-gtk
+Obsoletes:	%{name}-libs-gtk
 Conflicts:	%{name}-libs < %{version}-%{release}
 
 %description libs-kde
@@ -185,9 +185,9 @@ OpenOffice.org productivity suite - KDE Interface.
 Pakiet biurowy OpenOffice.org - Interfejs KDE.
 
 %package libs-gtk
-Summary:        OpenOffice.org GTK Interface
-Summary(pl):    Interfejs GTK dla OpenOffice.org
-Group:          X11/Libraries
+Summary:	OpenOffice.org GTK Interface
+Summary(pl):	Interfejs GTK dla OpenOffice.org
+Group:		X11/Libraries
 Provides:	%{name}-libs-interface = %{version}-%{release}
 Provides:	libvcl%{subver}li.so
 Obsoletes:	%{name}-libs-kde
@@ -907,10 +907,10 @@ export JAVA_HOME CC CXX GCJ ENVCFLAGS ENVCFLAGSCXX DESTDIR IGNORE_MANIFEST_CHANG
 if [ -z "$RPM_BUILD_NCPUS" ] ; then
 	if [ -x /usr/bin/getconf ] ; then
 		RPM_BUILD_NCPUS=$(/usr/bin/getconf _NPROCESSORS_ONLN)
-		if [ $RPM_BUILD_NCPUS -eq 0 ] ; then 
+		if [ $RPM_BUILD_NCPUS -eq 0 ] ; then
 			RPM_BUILD_NCPUS=1
 		fi
-	else 
+	else
 		RPM_BUILD_NCPUS=1
 	fi
 fi
