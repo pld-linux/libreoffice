@@ -255,10 +255,11 @@ Patch600:	%{name}-freetype_2_1_7.patch
 Patch601:	%{name}-system-vera-fonts.patch
 Patch602:	%{name}-externalapp.patch
 
+Patch603:	%{name}-stlport.patch
+
 URL:		http://www.openoffice.org/
 BuildRequires:	ImageMagick
 BuildRequires:	STLport-devel >= 4.5.3-6
-BuildRequires:	STLport-devel < 2:4.6
 BuildRequires:	XFree86-devel
 BuildRequires:	autoconf
 BuildRequires:	automake
@@ -1074,6 +1075,8 @@ rm -f moz/prj/d.lst
 # OBSOLETE due to WITHOUT_FONTS?
 #%patch601 -p1 
 #%patch602 -p0
+
+%patch603 -p1
 
 # gcc 2 include error hack:
 rm -rf autodoc/source/inc/utility
