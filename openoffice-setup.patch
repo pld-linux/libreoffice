@@ -1,0 +1,22 @@
+Index: bin/setup.in
+===================================================================
+RCS file: /cvs/gnome/ooo-build/bin/setup.in,v
+retrieving revision 1.66
+diff -u -u -r1.66 setup.in
+--- openoffice/bin/setup.in	3 Jul 2004 02:14:36 -0000	1.66
++++ openoffice/bin/setup.in	7 Jul 2004 16:09:45 -0000
+@@ -79,7 +79,13 @@
+ 		       --with-system-freetype --disable-mozilla \
+ 		       --with-widget-sets=original,kde,gtk";
+     else
+-	echo "Using configure options from the environment";
++	if [ -s ./setup.configure ]; then
++		. ./setup.configure
++		echo "Using configure options from the ./setup.configure file";
++	else
++		echo "CONFIGURE_OPTIONS=\"$CONFIGURE_OPTIONS\"" > ./setup.configure
++		echo "Using configure options from the environment";
++	fi
+     fi
+ fi
+ 
