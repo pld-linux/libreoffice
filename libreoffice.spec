@@ -45,7 +45,7 @@ Source11:	%{name}-dictionary.lst.readme
 # Source11-md5:	e4c1c2844b4a4cebca33339538da7f1d
 
 Source12:	http://ooo.ximian.com/packages/ooo-icons-OOO_1_1-6.tar.gz
-# Source12-md5:	dedede
+# Source12-md5:	3f73b262e35011e42d0b4fbfa46c34cd
 
 %define		helpftp	ftp://openoffice.tu-bs.de/OpenOffice.org/contrib/helpcontent
 Source101:	%{helpftp}/helpcontent_01_unix.tgz
@@ -224,8 +224,6 @@ Patch405: openoffice-vfs-stream.patch
 Patch406: openoffice-vfs-ucp-setup.patch
 Patch407: openoffice-vfs-uno-register.patch
 Patch408: openoffice-vfs-uno-uri.patch
-
-Patch401:
 
 Patch411: openoffice-bmp32.patch
 Patch412: openoffice-gui-icon-composite.patch
@@ -1060,11 +1058,13 @@ rm -f offmgr/source/offapp/intro/iso.src
 cp -f offmgr/source/offapp/intro/ooo.src offmgr/source/offapp/intro/iso.src
 
 # repack SOURCE12 
-tar xvf %{SOURCE12}
+tar xvzf %{SOURCE12}
+%if %{with icons}
 cd ooo-icons-OOO_1_1-6
 tar cf - . | ( cd .. ; tar xvf - )
 cd ..
 rm -rf ooo-icons-OOO_1_1-6
+%endif
 
 # optimalization
 cd solenv/inc
