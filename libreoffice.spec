@@ -1,6 +1,7 @@
 
 # Conditional build:
 # _with_ibm_java	- uses IBM java instead SUN java
+# _with_nest
 
 # TODO:
 # - finish localzation
@@ -13,7 +14,7 @@
 Summary:	OpenOffice - powerful office suite
 Summary(pl):	OpenOffice - potê¿ny pakiet biurowy
 Name:		openoffice
-Version:	1.0.1
+Version:	1.0.2
 Release:	0.7
 Epoch:		1
 License:	GPL/LGPL
@@ -27,6 +28,7 @@ Source6:	%{name}-applnk.tar.gz
 Source7:	%{name}-wrapper
 Source8:	%{name}-wrapper-component
 Source9:	%{name}-langs.txt
+Source10:	%{name}-db3.jar
 
 Source101:	ftp://ftp.task.gda.pl/mirror/ftp.openoffice.org/contrib/helpfiles/helpcontent_01_unix.tgz
 Source102:	ftp://ftp.task.gda.pl/mirror/ftp.openoffice.org/contrib/helpfiles/helpcontent_33_unix.tgz
@@ -69,7 +71,7 @@ Source227:	ftp://ftp.openoffice.pl/OpenOffice.ORG/contrib/dictionaries/sv_SE.zip
 Source228:	ftp://ftp.openoffice.pl/OpenOffice.ORG/contrib/dictionaries/la.zip
 
 Patch0:		%{name}-gcc.patch
-Patch2:		%{name}-mozilla.patch
+#Patch2:		%{name}-mozilla.patch
 # Start using some system libraries:
 Patch5:		%{name}-system-freetype.patch
 Patch6:		%{name}-system-getopt.patch
@@ -79,10 +81,10 @@ Patch8:		%{name}-braindamage.patch
 # Fix psprint /euro to /Euro
 Patch10:	%{name}-psprint-euro.patch
 # Fix config_office/configure
-Patch11:	%{name}-ac.patch
+#Patch11:	%{name}-ac.patch
 
 # Hackery around zipdep
-Patch13:	%{name}-zipdep.patch
+#Patch13:	%{name}-zipdep.patch
 # Remove GPC from linking to GPL/LGPL OO.o code!
 Patch14:	%{name}-remove-gpc.patch
 # Disable stlport from being built
@@ -94,23 +96,41 @@ Patch18:	%{name}-asm.patch
 Patch20:	%{name}-no-mozab.patch
 Patch21:	%{name}-no-mozab2.patch
 
+%if %{?_with_nest:1}%{!?_with_nest:0}
 Patch22:	%{name}-system-db.patch
+%else
+Patch22:	%{name}-system_ra-db.patch
+%endif
 
 Patch23:	%{name}-udm.patch
 Patch24:	%{name}-autodoc.patch
 
 Patch25:	%{name}-xmlsearch.patch
-Patch26:	%{name}-config-java.patch
+#Patch26:	%{name}-config-java.patch
 Patch27:	%{name}-sj2-java.patch
 
 # Correct liniking with new libstc++
-Patch28:	%{name}-gcc3-1.patch
+%if %{?_with_nest:1}%{!?_with_nest:0}
+#Patch28:	%{name}-gcc3-1.patch
+%endif
+Patch29:	%{name}-gcc2-95.patch
 
 URL:		http://www.openoffice.org/
+%if %{?_with_nest:1}%{!?_with_nest:0}
 BuildRequires:	db
 BuildRequires:	db-devel
 BuildRequires:	db-cxx
 BuildRequires:	db-java
+BuildRequires:	libstdc++-devel >= 3.2.1
+%else
+BuildRequires:	db3
+BuildRequires:	db3-devel
+BuildRequires:	libstdc++-devel < 3.2.1
+%endif
+BuildRequires:	gcc
+BuildRequires:	gcc-c++
+#BuildRequires:	gcc-java
+
 BuildRequires:	STLport-static >= 4.5.3-3
 BuildRequires:	XFree86-devel
 BuildRequires:	XFree86-fonts-PEX
@@ -121,10 +141,6 @@ BuildRequires:	bison
 BuildRequires:	flex
 BuildRequires:	freetype-devel >= 2.1
 BuildRequires:	freetype-static
-BuildRequires:	gcc
-BuildRequires:	gcc-c++
-#BuildRequires:	gcc-java
-BuildRequires:	libstdc++-devel >= 3.2.1
 BuildRequires:	pam-devel
 BuildRequires:	perl
 BuildRequires:	tcsh
@@ -136,8 +152,13 @@ BuildRequires:	jar
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 Requires:	%{name}-libs = %{version}-%{release}
+%if %{?_with_nest:1}%{!?_with_nest:0}
 Requires:	libstdc++ >= 3.2.1
 Requires:	db
+%else
+Requires:	libstdc++ < 3.2.1
+Requires:	db3
+%endif
 
 %define	langs	"ENUS,FREN,GERM,SPAN,ITAL,DTCH,PORT,DAN,GREEK,POL,SWED,TURK,RUSS,CZECH"
 %define	apps	agenda calc draw fax impress label letter math master memo vcard web writer
@@ -205,9 +226,9 @@ CXX=%{__cxx}
 GCJ=gcj
 export CC CXX GCJ
 
-%setup -q -n oo_1.0.1_src
+%setup -q -n oo_%{version}_src
 %patch0 -p1
-%patch2 -p1
+#%patch2 -p1
 
 %patch5 -p1
 %patch6 -p1
@@ -215,8 +236,8 @@ export CC CXX GCJ
 
 %patch8 -p1
 %patch10 -p1
-%patch11 -p1
-%patch13 -p1
+#%patch11 -p1
+#%patch13 -p1
 %patch14 -p1
 %patch16 -p1
 %patch18 -p1
@@ -228,19 +249,24 @@ export CC CXX GCJ
 %patch23 -p1
 %patch24 -p1
 %patch25 -p1
-%patch26 -p1
+#%patch26 -p1
 %patch27 -p1
-%patch28 -p1
+#%{?_with_nest:%patch28 -p1}
 
+%patch29 -p1
+
+# gcc 2 include error hack:
 rm -rf autodoc/source/inc/utility
 
 install %{SOURCE1} external
 cd external; tar fxz %{SOURCE1}; cp -fr gpc231/* gpc
 cd ..
 
+%if %{?_with_nest:1}%{!?_with_nest:0}
 install -d solver/%{subver}/%{_archbuilddir}/lib
 cp -f /lib/libgcc_s.so.1* solver/%{subver}/%{_archbuilddir}/lib
 cp /usr/lib/libstdc++.so.5* solver/%{subver}/%{_archbuilddir}/lib
+%endif
 
 chmod +x solenv/bin/zipdep.pl
 
@@ -272,7 +298,11 @@ chmod u+rx prep
 ./prep
 
 install -d solver/%{subver}/%{_archbuilddir}/bin
+%if %{?_with_nest:1}%{!?_with_nest:0}
 install /usr/lib/db.jar solver/%{subver}/%{_archbuilddir}/bin/db.jar
+%else
+install %{SOURCE10} solver/%{subver}/%{_archbuilddir}/bin/db.jar
+%endif
 
 cat <<EOF > compile
 #!/bin/tcsh
@@ -290,10 +320,10 @@ chmod u+rx compile
 rm -rf $RPM_BUILD_ROOT
 install -d $RPM_BUILD_ROOT%{_libdir}/openoffice
 
-cp solver/%{subver}/%{_archbuilddir}/bin/setup_services.rdb solver/%{subver}/%{_archbuilddir}/bin/uno_writerdb.rdb
-rm -f f0_061
-zip -j -5 "f0_061" solver/%{subver}/%{_archbuilddir}/bin/uno_writerdb.rdb
-mv f0_061.zip %{installpath}/%{langinst}/normal/f0_061
+#cp solver/%{subver}/%{_archbuilddir}/bin/setup_services.rdb solver/%{subver}/%{_archbuilddir}/bin/uno_writerdb.rdb
+#rm -f f0_061
+#zip -j -5 "f0_061" solver/%{subver}/%{_archbuilddir}/bin/uno_writerdb.rdb
+#mv f0_061.zip %{installpath}/%{langinst}/normal/f0_061
 
 %{init_xdisplay}
 RESPONSE_FILE=$PWD/rsfile.ins
@@ -343,7 +373,7 @@ EOF
   ) | awk ' $1 ~ /Value/ { l=$0; sub(/^.*= "/,"",l); sub(/";.*$/,"",l); sub(/%PRODUCTNAME/,"OpenOffice.org",l); sub(/%PRODUCTVERSION/,"%{version}",l); n=n+1; str="@@REPLACEME" n "@@"; s="\"" str "\""; sub(/".*"/,s); printf "s|%s|%s|\n", str, l > "Common.xml.sed" } { print } ' \
     >> setup.ins
 
-#  DISPLAY=:$XDISPLAY ./setup -R:$RESPONSE_FILE
+  DISPLAY=:$XDISPLAY ./setup -R:$RESPONSE_FILE
 #  ./setup -R:$RESPONSE_FILE
 )
 %{kill_xdisplay}
