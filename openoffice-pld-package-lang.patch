@@ -1,16 +1,18 @@
 diff -urN ooo-build-1.1.54.org/bin/package-lang ooo-build-1.1.54/bin/package-lang
 --- ooo-build-1.1.54.org/bin/package-lang	2004-04-30 02:50:20.270649456 +0200
-+++ ooo-build-1.1.54/bin/package-lang	2004-05-01 00:44:40.321099528 +0200
-@@ -117,6 +117,8 @@
++++ ooo-build-1.1.54/bin/package-lang	2004-05-01 01:11:01.139778560 +0200
+@@ -117,6 +117,10 @@
  
  sub BuildLang {
  	my $lang = shift;
 +	my $lang_iso = `$Xlate -i $lang`;
-+	my $BaseDir = $setup_vars{'TOOLSDIR'};
++	chomp ($lang_iso);
++	$lang_iso =~ s/\r//;
++	my $BaseDir = $setup_vars{'BUILDDIR'};
  	my $SetupDir = $setup_vars{'OOBUILDDIR'} . "/instsetoo/$Target/$lang/normal";
  	my $SolverDir = $setup_vars{'OOBUILDDIR'} . "/solver/$Id/$Target";
  	my $SetupConf = "$SetupDir/setup.ins";
-@@ -135,6 +137,9 @@
+@@ -135,6 +139,9 @@
  	die "$UnzipCommand not found, please set the full path to the unzip command\n" if
  	    ( ! -x "$UnzipCommand" );
  
@@ -20,7 +22,7 @@ diff -urN ooo-build-1.1.54.org/bin/package-lang ooo-build-1.1.54/bin/package-lan
  	while (my ($key, $value) = each (%{$setup->{File}})) {
  		if ($value->{PackedName}) {
  			# Find language-specific candidates
-@@ -152,6 +157,8 @@
+@@ -152,6 +159,8 @@
  				if( -f $destFile ) {
  				    unlink $destFile or die "Can't delete $destFile";
  				}
@@ -29,7 +31,7 @@ diff -urN ooo-build-1.1.54.org/bin/package-lang ooo-build-1.1.54/bin/package-lan
  				
  				# Try to link file first
  				if(link($fileToCopy,$destFile)) {
-@@ -165,6 +172,9 @@
+@@ -165,6 +174,9 @@
  			    else {
  				my $fileToUnzip = $SolverDir . '/pck/' . $value->{Name};
  				if( -r $fileToUnzip ) {
@@ -39,7 +41,7 @@ diff -urN ooo-build-1.1.54.org/bin/package-lang ooo-build-1.1.54/bin/package-lan
  				    $action = "Unzip";
  				    system("$UnzipCommand -qq -o $fileToUnzip -d $outpath");
  				}
-@@ -176,6 +186,7 @@
+@@ -176,6 +188,7 @@
  			}
  		    }
  	    }
@@ -47,13 +49,3 @@ diff -urN ooo-build-1.1.54.org/bin/package-lang ooo-build-1.1.54/bin/package-lan
  
  	print "done";
  
-diff -urN ooo-build-1.1.54.org/Makefile.am ooo-build-1.1.54/Makefile.am
---- ooo-build-1.1.54.org/Makefile.am	2004-04-30 02:50:22.268345760 +0200
-+++ ooo-build-1.1.54/Makefile.am	2004-05-01 00:47:50.397203568 +0200
-@@ -15,3 +15,6 @@
- 	intltool-extract.in
- 
- ACLOCAL_AMFLAGS = -I m4
-+
-+clean-generic:
-+	rm -f lang_*_list.txt
