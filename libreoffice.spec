@@ -1,260 +1,256 @@
 # TODO:
-#	- check for correct values for PORTBR
-#	- spec can use helpcontent* files not mentioned in SourceXX (bug)
-#	- some files come from oo build and helpcontent, we must decide
-#	  which one should be used
-#	- cleanups, cleanups and cleanups
-# 	- incorporate ximian patches (mostly done)
+# 	- everything
+#	- PLD vendor list of patches to apply in patches/*/appply?
 
 # Conditional build:
-%bcond_without	optimalization	# arch optimalization
 %bcond_with	java		# Java support
-%bcond_without	fontconf	# fontconfig
-%bcond_without	icons		# new Ximian icons
-%bcond_without	gnomevfs	# gnome-vfs
-%bcond_with	parallel	# parallel building
-%bcond_with	nptl		# build with nptl support
 
-# not tested
-%bcond_with	gnomecups	# gnome-cups
-%bcond_with	i18n		# i18n bits
-
-%define		ver		1.1.1
-%define		rel		%{nil}
-%define		fullver		%{ver}%{rel}
+%define		ver		1.1
+%define		rel		1
+%define		ooobver		1.1.52
+%define		subver		645
+%define		fullver		%{ver}%{?rel:.%{rel}}
+%define		dfullver	%(echo %{fullver} | tr . _)
 %define		specflags	-fno-strict-aliasing
 
 Summary:	OpenOffice - powerful office suite
 Summary(pl):	OpenOffice - potê¿ny pakiet biurowy
 Name:		openoffice
-Version:	%{ver}
-Release:	1%{?i18n:+i18n}
+Version:	%{fullver}
+Release:	1.1
 Epoch:		1
 License:	GPL/LGPL
 Group:		X11/Applications
-# Previous url: ftp://ftp.openoffice.pl/pub/OpenOffice.ORG/stable/%{fullver}/OOo_%{fullver}_source.tar.bz2
-Source0:	ftp://sunsite.icm.edu.pl/packages/OpenOffice/official/stable/%{fullver}/OOo_%{fullver}_source.tar.bz2
-# Source0-md5:	1919ec0ef5d3e8fe4b0a4910856d8987
-Source2:	%{name}-rsfile.txt
-Source3:	%{name}-rsfile-local.txt
-Source4:	%{name}-xmlparse.sh
-Source6:	http://ep09.pld-linux.org/~adgor/pld/%{name}-desktopfiles-0.2.tar.bz2
-# Source6-md5:	78ae3bef3e98f711b1afe9fb5717b42e
-Source7:	%{name}-wrapper
-Source8:	%{name}-wrapper-component
-Source10:	%{name}-db3.jar
-# Source10-md5:	0d15818dea3099eed42b4be9950c69ad
-Source11:	%{name}-dictionary.lst.readme
-# Source11-md5:	e4c1c2844b4a4cebca33339538da7f1d
+Source0:	http://ooo.ximian.com/packages/OOO_%{dfullver}/ooo-build-%{ooobver}.tar.gz
+# Source0-md5:	008d9f13076bc78fdb4e7720d6591bc8
+Source1:	http://ooo.ximian.com/packages/OOO_%{dfullver}/OOO_%{dfullver}.tar.bz2
+# Source1-md5:	c160872edfe791b8b8c17dffa1b62fe0
+Source2:	http://ooo.ximian.com/packages/ooo-icons-OOO_1_1-8.tar.gz
+# Source2-md5:	61c9379fa718ee7f36ccd2d70f3649c8
+Source3:	http://ep09.pld-linux.org/~adgor/pld/%{name}-desktopfiles-0.2.tar.bz2
+# Source3-md5:	78ae3bef3e98f711b1afe9fb5717b42e
 
-Source12:	http://ooo.ximian.com/packages/ooo-icons-OOO_1_1-8.tar.gz
-# Source12-md5:	61c9379fa718ee7f36ccd2d70f3649c8
+# PLD splash screen
+Source4:	%{name}-about.bmp
+Source5:	%{name}-intro.bmp
 
-%define		helpftp	ftp://openoffice.tu-bs.de/OpenOffice.org/contrib/helpcontent
-Source101:	%{helpftp}/helpcontent_01_unix.tgz
-# Source101-md5:	ff3eb5095a74ae7a9b2918ef5874288f
-Source107:	%{helpftp}/helpcontent_07_unix.tgz
-# Source107-md5:	e3ab37cbf2407d909953f06467b27611
-Source133:	%{helpftp}/helpcontent_33_unix.tgz
-# Source133-md5:	20dcbf3211c20afb27fc5677ab8f69e5
-Source134:	%{helpftp}/helpcontent_34_unix.tgz
-# Source134-md5:	ba6adc71dc5cb766dd75f5b13a7c6bc8
-Source135:	%{helpftp}/helpcontent_35_unix.tgz
-# Source135-md5:	cf90274a2e46ddd04422c08157575780
-Source139:	%{helpftp}/helpcontent_39_unix.tgz
-# Source139-md5:	4c33e3f9f8a64be68c63f33ff1e0e4a7
-Source142:	%{helpftp}/helpcontent_42_unix.tgz
-# Source142-md5:	a7bcb51e5bff1673b32113308a026563
-Source146:	%{helpftp}/helpcontent_46_unix.tgz
-# Source146-md5:	5183879d8b57850d433351cb8a5634a8
-Source149:	%{helpftp}/helpcontent_49_unix.tgz
-# Source149-md5:	68f0db91bb091065a4795d47d6ae0b0b
-Source181:	%{helpftp}/helpcontent_81_unix.tgz
-# Source181-md5:	df731e483114e1433f799160b2baa942
-Source182:	%{helpftp}/helpcontent_82_unix.tgz
-# Source182-md5:	ea45780e3027317ec6b4f38f009b579b
-Source186:	%{helpftp}/helpcontent_86_unix.tgz
-# Source186-md5:	ea0debc121b6912a42cdc24e1b99b625
-Source188:	%{helpftp}/helpcontent_88_unix.tgz
-# Source188-md5:	260a17a84a16c18b4371a84b95cea2cb
+%define		cftp	http://ftp.services.openoffice.org/pub/OpenOffice.org/contrib
 
-# Localization scripts from Mandrake
-Source302:	%{name}-dpack-lang.pl
-Source303:	%{name}-transmute-help-errfile.pl
-Source304:	%{name}-create-instdb.pl
+# Dictionaries
+Source100:	%{cftp}/dictionaries/af_ZA.zip
+# Source100-md5:	f05f0cf5ffcdb4ceab933bca1596ce34
+Source101:	%{cftp}/dictionaries/bg_BG.zip
+# Source101-md5:	0619620e36b1a9a45995f939d765fd3e
+Source102:      %{cftp}/dictionaries/ca_ES.zip
+# Source102-md5:	6cea81b3e1101fb277062e7eef4ff720
+Source103:      %{cftp}/dictionaries/cs_CZ.zip
+# Source103-md5:	b8d4a6943ec18300a9b0047d2540209e
+Source104:      %{cftp}/dictionaries/cy_GB.zip
+# Source104-md5:	accdb94f38555af45a54494e046a88f3
+Source105:      %{cftp}/dictionaries/da_DK.zip
+# Source105-md5:	c46cd29fb20190f944b5893825b30243
+Source106:      %{cftp}/dictionaries/de_AT.zip
+# Source106-md5:	fdee257cc4e9d49968048a6e3edec91a
+Source107:      %{cftp}/dictionaries/de_CH.zip
+# Source107-md5:	2da60dd02b5a62f1a5c8b9e4a3a7fe4d
+Source108:      %{cftp}/dictionaries/de_DE_comb.zip
+# Source108-md5:	7bc797d02c2a9f6a6af13bf2d1f813e8
+Source109:      %{cftp}/dictionaries/de_DE_neu.zip
+# Source109-md5:	53d898fcad816feb23777e426de58f5e
+Source110:      %{cftp}/dictionaries/de_DE.zip
+# Source110-md5:	9eb02aad372bcd12209e761762ffb10a
+Source111:      %{cftp}/dictionaries/el_GR.zip
+# Source111-md5:	86e612d5cc243bdd0f09c919c9487c64
+Source112:      %{cftp}/dictionaries/en_AU.zip
+# Source112-md5:	c39f529173d8bb0e15b1fade11dfe780
+Source113:      %{cftp}/dictionaries/en_CA.zip
+# Source113-md5:	c14942ea471a5182f376802c68933880
+Source114:      %{cftp}/dictionaries/en_EN.zip
+# Source114-md5:	500a057f13d2a4aa9a4f0d8e2de92fa0
+Source115:      %{cftp}/dictionaries/en_GB.zip
+# Source115-md5:	31736e7e88a2cc94e17ac7d9b1ad580f
+Source116:      %{cftp}/dictionaries/en_NZ.zip
+# Source116-md5:	8ac9e6640d132de29571f81d33012bb8
+Source117:      %{cftp}/dictionaries/en_US.zip
+# Source117-md5:	523914f52e4040f51d804df4fb449544
+Source118:      %{cftp}/dictionaries/es_ES.zip
+# Source118-md5:	09da802fdc3361ef46fdbf7da661e08f
+Source119:      %{cftp}/dictionaries/es_MX.zip
+# Source119-md5:	1a8b2d34033f3d4c8e51892084e9d6fa
+Source120:      %{cftp}/dictionaries/fi_FI.zip
+# Source120-md5:	7925825d1a344755858ae9b69366303b
+Source121:      %{cftp}/dictionaries/fo_FO.zip
+# Source121-md5:	647b7b31d02fbdb33f4f309a5da4b838
+Source122:      %{cftp}/dictionaries/fr_BE.zip
+# Source122-md5:	63a9d20757795b157136999075ff599a
+Source123:      %{cftp}/dictionaries/fr_FR.zip
+# Source123-md5:	904d799ab36df32cc598a8dc7990649f
+Source124:      %{cftp}/dictionaries/ga_IE.zip
+# Source124-md5:	f9bb3343d14fab214cffff654586d7d1
+Source125:      %{cftp}/dictionaries/gl_ES.zip
+# Source125-md5:	7270162479a5efc8e6acdc61d625fa26
+Source126:      %{cftp}/dictionaries/hr_HR.zip
+# Source126-md5:	5c5d0479b0fb7e7d2b5e0533cc2e370b
+Source127:      %{cftp}/dictionaries/hu_HU.zip
+# Source127-md5:	e697bbd1025a7f11716d7988fcfba778
+Source128:      %{cftp}/dictionaries/ia.zip
+# Source128-md5:	b7b91df66071a5761054a5e5337b5aa9
+Source129:      %{cftp}/dictionaries/id_ID.zip
+# Source129-md5:	4151dd63aa18c487fc58b4f6435afe69
+Source130:      %{cftp}/dictionaries/is_IS.zip
+# Source130-md5:	bef105aec65714d13517415bff58c0b9
+Source131:      %{cftp}/dictionaries/it_IT.zip
+# Source131-md5:	0d21eeea237108d70430cb5a7e1ce61a
+Source132:      %{cftp}/dictionaries/la.zip
+# Source132-md5:	52ab1f91dbf6ae75c509f0dc995e20de
+Source133:      %{cftp}/dictionaries/lt_LT.zip
+# Source133-md5:	3590ba02288c9092340101dca3ddc132
+Source134:      %{cftp}/dictionaries/Math_es_ES.zip
+# Source134-md5:	07a0341691647b312ba11b2ba34c18ce
+Source135:      %{cftp}/dictionaries/mi_NZ.zip
+# Source135-md5:	f691ca67df4570821f931574295715b5
+Source136:      %{cftp}/dictionaries/ms_MY.zip
+# Source136-md5:	f1db7ff9dd8be247e1bca30042dba115
+Source137:      %{cftp}/dictionaries/nb_NO.zip
+# Source137-md5:	8868ade2fae74e7c07f6f30479e654d1
+Source138:      %{cftp}/dictionaries/nl_med.zip
+# Source138-md5:	c5acbe50d9fcfc575295fa6f12b0bf00
+Source139:      %{cftp}/dictionaries/nl_NL.zip
+# Source139-md5:	caab73fe1aaf03a59860765e0b7637f8
+Source140:      %{cftp}/dictionaries/nn_NO.zip
+# Source140-md5:	9a2826b88207e25135caa8481bebf5ad
+Source141:      %{cftp}/dictionaries/no_NO.zip
+# Source141-md5:	4af191480fa97dba2b9e996436531f10
+Source142:      %{cftp}/dictionaries/pl_PL.zip
+# Source142-md5:	92639866d223e19b6469678e12dffe12
+Source143:      %{cftp}/dictionaries/pt_BR.zip
+# Source143-md5:	83aa4540283c0049c27271576890fd88
+Source144:      %{cftp}/dictionaries/pt_PT.zip
+# Source144-md5:	6f44ed7caf6846dca9d539bb390719c4
+Source145:      %{cftp}/dictionaries/ro_RO.zip
+# Source145-md5:	c8a56b8d79450dcb3ca68c6987da1930
+Source146:      %{cftp}/dictionaries/ru_RU_0.zip
+# Source146-md5:	a5d5be04dd6180072a27090ed586427f
+Source147:      %{cftp}/dictionaries/ru_RU_ie.zip
+# Source147-md5:	f1e43d1d398a08761ac9a995b408ae22
+Source148:      %{cftp}/dictionaries/ru_RU_io.zip
+# Source148-md5:	23b346fae3b118fcb93ba9acb83d906a
+Source149:      %{cftp}/dictionaries/ru_RU_ye.zip
+# Source149-md5:	f166fb2b195cc3c6581fc84a6591eb59
+Source150:      %{cftp}/dictionaries/ru_RU_yo.zip
+# Source150-md5:	0eed06136f9beffa21f2d5406c54b10e
+Source151:      %{cftp}/dictionaries/ru_RU.zip
+# Source151-md5:	67da1e4d594de554a9184568235ab301
+Source152:      %{cftp}/dictionaries/sk_SK.zip
+# Source152-md5:	572a5674c6f1777de2eacaae60110266
+Source153:      %{cftp}/dictionaries/sl_SI.zip
+# Source153-md5:	a79c19d16bc26349bbded16b410616a8
+Source154:      %{cftp}/dictionaries/sv_SE.zip
+# Source154-md5:	8d9c49a43bfbecec6962c1344914dc8d
+Source155:      %{cftp}/dictionaries/uk_UA.zip
+# Source155-md5:	a0ae3b331ae5566a330d1bccc4a95791
 
-Source401:	%{name}-about.bmp
-Source402:	%{name}-intro.bmp
+# Hypenation Dictionaries
+Source200:	%{cftp}/dictionaries/hyph_bg_BG.zip
+# Source200-md5:	c9a456317214bc336d764e9d94bdd3d2
+Source201:      %{cftp}/dictionaries/hyph_cs_CZ.zip
+# Source201-md5:	7dc7192fb3c141db6518c54781df6846
+Source202:      %{cftp}/dictionaries/hyph_da_DK.zip
+# Source202-md5:	c398f568793bc62982f1179f2db0c119
+Source203:      %{cftp}/dictionaries/hyph_de_CH.zip
+# Source203-md5:	d8c4f525869c46cc52185356271121ab
+Source204:      %{cftp}/dictionaries/hyph_de_DE.zip
+# Source204-md5:	b58540aed1323894242c9c2ff9c51913
+Source205:      %{cftp}/dictionaries/hyph_el_GR.zip
+# Source205-md5:	6fde4ac4ec263432b0cc45e6ad4fdec5
+Source206:      %{cftp}/dictionaries/hyph_en_AU.zip
+# Source206-md5:	54e447e19a8ed73331afee93415ffaab
+Source207:      %{cftp}/dictionaries/hyph_en_CA.zip
+# Source207-md5:	2f03411f2a8335a84b64a0d7255518de
+Source208:      %{cftp}/dictionaries/hyph_en_GB.zip
+# Source208-md5:	1c9bda9ce2b52246ecdb7107998cbeec
+Source209:      %{cftp}/dictionaries/hyph_en_NZ.zip
+# Source209-md5:	54e447e19a8ed73331afee93415ffaab
+Source210:      %{cftp}/dictionaries/hyph_en_US.zip
+# Source210-md5:	54e447e19a8ed73331afee93415ffaab
+Source211:      %{cftp}/dictionaries/hyph_es_ES.zip
+# Source211-md5:	7fc4be41cf7b6cdadd7dfbf56c701551
+Source212:      %{cftp}/dictionaries/hyph_es_MX.zip
+# Source212-md5:	f0e308d132801b593925b14bb5905bb8
+Source213:      %{cftp}/dictionaries/hyph_fi_FI.zip
+# Source213-md5:	1fc88b865f919a9323d72843e860e266
+Source214:      %{cftp}/dictionaries/hyph_fr_BE.zip
+# Source214-md5:	4548b4c184377148109538892b5e6dea
+Source215:      %{cftp}/dictionaries/hyph_fr_FR.zip
+# Source215-md5:	eb13ba5b369e72bc45f5762745ca4471
+Source216:      %{cftp}/dictionaries/hyph_ga_IE.zip
+# Source216-md5:	bd410dd925853de0dc7e5e117ac2555d
+Source217:      %{cftp}/dictionaries/hyph_hu_HU.zip
+# Source217-md5:	09fde61c70a7b1c53e22d08b763a5b80
+Source218:      %{cftp}/dictionaries/hyph_id_ID.zip
+# Source218-md5:	41b1f922c4d5b3d02987074e0d6bb6ee
+Source219:      %{cftp}/dictionaries/hyph_is_IS.zip
+# Source219-md5:	448230e966bdf68d5f8abffd18480402
+Source220:      %{cftp}/dictionaries/hyph_it_IT.zip
+# Source220-md5:	db546e7bb7cf72fc3c751e70f83ed659
+Source221:      %{cftp}/dictionaries/hyph_lt_LT.zip
+# Source221-md5:	6d90a1e831f639137077879dacb596cb
+Source222:      %{cftp}/dictionaries/hyph_nl_NL.zip
+# Source222-md5:	ba5c271337479a8f8ddc2a3d6a99b37b
+Source223:      %{cftp}/dictionaries/hyph_pl_PL.zip
+# Source223-md5:	2f81a155d8aa7479c912ae019eb5bae0
+Source224:      %{cftp}/dictionaries/hyph_pt_BR.zip
+# Source224-md5:	aec223b5efc1e231015ebd2ae9c359e6
+Source225:      %{cftp}/dictionaries/hyph_pt_PT.zip
+# Source225-md5:	327989bbbfc9f9d56eb772427a344eb3
+Source226:      %{cftp}/dictionaries/hyph_ru_RU.zip
+# Source226-md5:	f8a8b8a368bc7394b5a4060082c44bb4
+Source227:      %{cftp}/dictionaries/hyph_sk_SK.zip
+# Source227-md5:	89ad655afadb78f6ceb87d9e1e3a675f
+Source228:      %{cftp}/dictionaries/hyph_sl_SI.zip
+# Source228-md5:	1a9ae1d95f0f12a7909c1d4e2c5fd8e1
+Source229:      %{cftp}/dictionaries/hyph_sv_SE.zip
+# Source229-md5:	a1c31b48cbf570bb05f22e98dacb9e17
+Source230:      %{cftp}/dictionaries/hyph_uk_UA.zip
+# Source230-md5:	b87fc9d4668dac5b5bd7b943aee85efd
 
-Source411:	%{name}-scale-icons
+# Thesaurus Dictionaries
+Source300:	%{cftp}/dictionaries/thes_bg_BG.zip
+# Source300-md5:	630ec215fcf655b99429ca7c97667b8d
+Source301:      %{cftp}/dictionaries/thes_de_DE.zip
+# Source301-md5:	ffe02a241bbe6acfb9992f49b40360b9
+Source302:      %{cftp}/dictionaries/thes_en_US.zip
+# Source302-md5:	6262581a06eacc011ec4d87534721b0e
+Source303:      %{cftp}/dictionaries/thes_fr_FR.zip
+# Source303-md5:	061d832c6a6537a61770d3e065e0b1bb
+Source304:      %{cftp}/dictionaries/thes_hu_HU.zip
+# Source304-md5:	20e4bfe680999629270e1e8b7e2534e5
 
-#Patch0:		%{name}-gcc.patch
-#Patch2:		%{name}-mozilla.patch
-# Start using some system libraries:
-Patch4:		%{name}-system-stlport.patch
-Patch5:		%{name}-system-freetype.patch
-Patch7:		%{name}-freetype-2.1.patch
-# Fix broken makefiles
-Patch8:		%{name}-braindamage.patch
-# Fix config_office/configure
-Patch9:		%{name}-setup-localized-instdb.patch
-#Patch11:	%{name}-ac.patch
+# Help content
+Source400:      %{cftp}/helpcontent/helpcontent_01_unix.tgz
+# Source400-md5:	7da2aff674c2c84aba8b21ac2ab16bb6
+Source401:      %{cftp}/helpcontent/helpcontent_31_unix.tgz
+# Source401-md5:	c7e618e2d9b8bd25cae12954ef2548c9
+Source402:      %{cftp}/helpcontent/helpcontent_33_unix.tgz
+# Source402-md5:	68d58bc30b485a77c0a0fba08af3aee3
+Source403:      %{cftp}/helpcontent/helpcontent_34_unix.tgz
+# Source403-md5:	8696bbee3dc4d5b6fd60218123016e29
+Source404:      %{cftp}/helpcontent/helpcontent_39_unix.tgz
+# Source404-md5:	c2ae86d02f462d2b663d621190f5ef34
+Source405:      %{cftp}/helpcontent/helpcontent_46_unix.tgz
+# Source405-md5:	7b013981edce2fabe4a8751ff64a8d58
+Source406:      %{cftp}/helpcontent/helpcontent_49_unix.tgz
+# Source406-md5:	a39f44ec40f452c963a4a187f31d1acb
+Source407:      %{cftp}/helpcontent/helpcontent_81_unix.tgz
+# Source407-md5:	81b705057a0e14ebcbf02fac4762781a
+Source408:      %{cftp}/helpcontent/helpcontent_82_unix.tgz
+# Source408-md5:	3121fbd251176d7c7b6e33ecec744c65
+Source409:      %{cftp}/helpcontent/helpcontent_86_unix.tgz
+# Source409-md5:	aee37935139c5ccd4b6d8abdd2037c66
+Source410:      %{cftp}/helpcontent/helpcontent_88_unix.tgz
+# Source410-md5:	3b00571318e45965dee0545d86306d65
 
-# Hackery around zipdep
-#Patch13:	%{name}-zipdep.patch
-# Remove GPC from linking to GPL/LGPL OO.o code!
-Patch14:	%{name}-remove-gpc.patch
-# Disable stlport from being built
-Patch16:	%{name}-no-stlport.patch
-
-# Fix broken inline assembly
-Patch18:	%{name}-asm.patch
-
-Patch19:	%{name}-no-mozab.patch
-Patch20:	%{name}-no-mozab2.patch
-
-Patch21:	%{name}-system-db.patch
-
-Patch24:	%{name}-autodoc.patch
-
-Patch25:	%{name}-xmlsearch.patch
-Patch27:	%{name}-sj2-java.patch
-
-Patch29:	%{name}-gcc2-95.patch
-Patch30:	%{name}-system-zlib.patch
-Patch31:	%{name}-system-mozilla.patch
-Patch32:	%{name}-fix-errno.patch
-
-# Fix java/ppc problem 
-Patch65:	%{name}-java-ppc.patch 
-
-# sparc fixes
-Patch66:	%{name}-sparc-aurora.patch
-Patch67:	%{name}-sparc-boost.patch
-Patch68:	%{name}-sparc-assembler.patch
-
-# Hey, we _really_ want java?
-Patch101:	%{name}-allow-no-jdk.patch
-Patch102:	%{name}-berkeleydb-handle-no-solar-java.patch
-Patch103:	%{name}-desktop-handle-no-solar-java.patch
-Patch104:	%{name}-javaunohelper-handle-no-solar-java.patch
-Patch105:	%{name}-jni-uno-handle-no-solar-java.patch
-Patch106:	%{name}-jurt-handle-no-solar-java.patch
-Patch107:	%{name}-jvmaccess-handle-no-solar-java.patch
-Patch108:	%{name}-officecfg-xsltproc.patch
-Patch109:	%{name}-psprint-handle-no-solar-java.patch
-Patch110:	%{name}-readlicense-oo-xsltproc.patch
-Patch112:	%{name}-setup2-handle-no-solar-java.patch
-Patch113:	%{name}-sj2-handle-no-solar-java.patch
-Patch118:	%{name}-berkeleydb-no-java-fix.patch 
-Patch119:	%{name}-scp-handle-no-solar-java.patch
-Patch121:	%{name}-disable-odk-build.patch
-
-# misc patches
-Patch201:	%{name}-zoom-combobox.patch
-Patch204:	%{name}-word-count.patch
-Patch206:	%{name}-recent-files.patch
-Patch207:	%{name}-gui-sw-insert-symbol.patch
-Patch208:	%{name}-use-fork.patch
-Patch209:	%{name}-print-dialog.patch
-Patch210:	%{name}-print-error.patch
-Patch211:	%{name}-help-fallback-en.patch
-Patch215:	%{name}-gui-splash-redraw.patch
-Patch216:	%{name}-gui-startup-style.patch
-Patch217:	%{name}-gui-sw-scroll.patch
-Patch218:	%{name}-gui-tbx-palette.patch
-Patch220:	%{name}-init-desktop.patch
-Patch221:	%{name}-init-sw.patch
-Patch222:	%{name}-ooo111-general-io-error-sxi.patch
-Patch223:	%{name}-startup-fix.patch
-Patch224:	%{name}-svx-freeze-fix.patch
-Patch225:	%{name}-wm-dialog-utility.patch
-Patch226:	%{name}-db-dbcxx.patch
-Patch227:	%{name}-fix-parallel-build.patch
-Patch228:	%{name}-thread-yield.patch
-Patch229:	%{name}-prelink-friendly.patch
-Patch230:	%{name}-svtools-dep.patch
-Patch231:	%{name}-crashrep-nogtk.patch
-
-Patch301:	%{name}-splash.patch
-
-Patch341:	%{name}-i18n-sal.patch
-Patch342:	%{name}-i18n-rehash.patch
-Patch343:	%{name}-i18n-cleanup.patch
-
-Patch351:	%{name}-print-cups.patch
-Patch352:	%{name}-print-generic-gui.patch
-Patch353:	%{name}-print-psprint-rehash.patch
-Patch354:	%{name}-print-spadmin-disable.patch
-Patch355:	%{name}-print-type42.patch
-
-Patch362:	%{name}-gtk-themeing.patch
-Patch363:	%{name}-gui-sc-paste.patch
-Patch364:	%{name}-speed-lang-cache.patch
-
-Patch371:	%{name}-capitalization.patch
-Patch372:	%{name}-gui-font-antialias-size.patch
-Patch373:	%{name}-gui-font-default-size.patch
-Patch374:	%{name}-gui-font-scale.patch
-Patch375:	%{name}-gui-font-size-unbreak.patch
-Patch376:	%{name}-gui-fonts-kde.patch
-Patch377:	%{name}-gui-ft-21-compat.patch
-Patch378:	%{name}-gui-ft-pt-not-pixel.patch
-Patch379:	%{name}-gui-ft-set-hint.patch
-Patch380:	%{name}-gui-ft-use-system-font.patch
-Patch381:	%{name}-gui-scale-ruler.patch
-
-Patch391:	%{name}-print-fontconfig.patch
-Patch393:	%{name}-padmin-nofontconfig.patch
-
-Patch401:	%{name}-vfs-content.patch
-Patch402:	%{name}-vfs-directory.patch
-Patch403:	%{name}-vfs-offapi.patch
-Patch404:	%{name}-vfs-provider.patch
-Patch405:	%{name}-vfs-stream.patch
-Patch406:	%{name}-vfs-ucp-setup.patch
-Patch407:	%{name}-vfs-uno-register.patch
-Patch408:	%{name}-vfs-uno-uri.patch
-
-Patch411:	%{name}-bmp32.patch
-Patch412:	%{name}-gui-icon-composite.patch
-Patch413:	%{name}-gui-image-load.patch
-Patch414:	%{name}-gui-insensitive.patch
-Patch415:	%{name}-gui-new-icons.patch
-Patch416:	%{name}-gui-symbol-remove.patch
-Patch417:	%{name}-gui-tbx-ctrl-bg.patch
-Patch418:	%{name}-gui-tbxcust.patch
-Patch419:	%{name}-gui-toolbox-large-icons.patch
-Patch420:	%{name}-gui-toolbox.patch
-Patch421:	%{name}-gui-toolbox-prelight.patch
-Patch422:	%{name}-gui-toolbox-tristate.patch
-Patch423:	%{name}-help-support.patch
-Patch424:	%{name}-icon-masks.patch
-Patch425:	%{name}-icon-render.patch
-
-Patch431:	%{name}-gui-menu-check-images.patch
-Patch432:	%{name}-gui-menu-checkitems.patch
-Patch433:	%{name}-gui-menu-check-render.patch
-Patch434:	%{name}-gui-menu-fixes.patch
-
-Patch501:	%{name}-1.0.1-so-ooo-coexist.patch
-Patch502:	%{name}-1.0.2-sal-sigsegv.patch
-Patch503:	%{name}-scpzip-langs.patch
-Patch504:	%{name}-1.1-disable-python.patch
-Patch505:	%{name}-1.1-psprint-pdf-drivers.patch
-Patch506:	%{name}-1.1-sal-main-cmdline.patch
-Patch507:	%{name}-iso8859-2-html.patch
-Patch508:	%{name}-buildset.patch
-Patch509:	%{name}-vcl-dynamic-Xinerama.patch
-Patch510:	%{name}-1.1-psprint-cups-PPD.patch
-Patch511:	%{name}-1.1-disable-python-nojava.patch
-
-Patch600:	%{name}-freetype_2_1_7.patch
-Patch601:	%{name}-system-vera-fonts.patch
-Patch602:	%{name}-externalapp.patch
-
-Patch603:	%{name}-stlport.patch
-Patch604:	%{name}-nptl.patch
+Patch0:		%{name}-rh-disable-spellcheck-all-langs.patch
 
 URL:		http://www.openoffice.org/
 BuildRequires:	ImageMagick
@@ -288,13 +284,9 @@ BuildRequires:	pkgconfig
 BuildRequires:	startup-notification-devel
 BuildRequires:	libart_lgpl-devel
 BuildRequires:	gtk+2-devel
-%if %{with gnomevfs} 
 BuildRequires:	gnome-vfs2-devel
 BuildRequires:  libbonobo-devel
-%endif 
-%if %{with gnomecups}
 BuildRequires:	libgnomecups-devel
-%endif
 BuildConflicts:	java-sun = 1.4.2
 Requires:	%{name}-libs = %{epoch}:%{version}-%{release}
 Requires:	%{name}-i18n-en = %{epoch}:%{version}-%{release}
@@ -304,40 +296,12 @@ Requires:	cups-lib
 Requires:	db
 Requires:	db-cxx
 Requires:	startup-notification
-%if %{with gnomecups}
 Requires:	libgnomecups
-%endif
-%if %{with gnomevfs}
 Requires:	gnome-vfs2
-%endif
 ExclusiveArch:	%{ix86} sparc ppc
 #Suggested:	chkfontpath
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
-
-# Supported languages for localized help files (others are not
-# complete/advanced enough)
-%define helplangs1 ENUS,FREN,GERM,SPAN,ITAL,SWED,RUSS,CZECH,JAPN
-%define helplangs2 KOREAN,CHINSIM,CHINTRAD
-%define helplangs  %{helplangs1},%{helplangs2}
-
-%define	apps	agenda calc draw fax impress label letter math master memo vcard web writer
-
-%ifarch %{ix86}
-%define	_archbuilddir	unxlngi4.pro
-%endif
-%ifarch ppc 
-%define _archbuilddir 	unxlngppc.pro
-%endif
-%ifarch sparc sparc64 
-%define _archbuilddir 	unxlngs.pro
-%endif
-%define	installpath	instsetoo/%{_archbuilddir}
-%define	subver		645
-%define	langinst	01
-
-%define oolib	%{_libdir}/openoffice
-%define dictlst	%{oolib}/share/dict/ooo/dictionary.lst
 
 %description
 OpenOffice.org is an open-source project sponsored by Sun Microsystems
@@ -882,237 +846,13 @@ chiñskim dla Tajwanu.
 %endif
 
 %prep
-%setup -q -n oo_%{ver}_src
-#%setup1 -q -n oo_1.1_src
+%setup -q -n ooo-build-%{ooobver}
+%patch0 -p1
 
-#%patch0 -p1
-#%patch2 -p1
 
-%patch4 -p1
-%patch5 -p1
-%patch7 -p1
-#%patch9 -p1
-
-# Is gpc used at all?? :
-%patch16 -p1
-
-%patch19 -p1
-#%patch20 -p1
-%patch21 -p1
-
-# obsoleted by --with-system-zlib?
-#%patch30 -p1
-
-rm -f moz/prj/d.lst
-%patch31 -p1
-
-# java/ppc: broken native threads?
-%ifarch ppc
-%patch65 -p1 
-%endif 
-
-%ifarch sparc sparc64
-%patch67 -p0
-%patch68 -p0
-%endif
-
-# no-java patch
-%if %{without java}
-%ifarch sparc sparc64
-%patch66 -p0 
-%endif 
-# UPDATE/CHECK ME
-#%patch101 -p0
-# OBSOLETE
-#%patch102 -p0
-# OBSOLETE
-#%patch103 -p0
-%patch104 -p0
-%patch105 -p0
-%patch106 -p0
-%patch107 -p0
-# OBSOLETE?
-#%patch108 -p0
-# OBSOLETE?
-#%patch109 -p0
-# OBSOLETE?
-#%patch110 -p0
-# PARTIALLY OBSOLETE/PARIALLY NEEDS UPDATE
-#%patch112 -p0
-# OBSOLETE?
-#%patch113 -p0
-%patch118 -p1 
-# OBSOLETE? yup
-#%patch119 -p0 
-%patch121 -p0 
-%endif 
-
-%patch201 -p0
-%patch204 -p0
-%patch206 -p0 
-%patch207 -p0
-%patch208 -p0
-%patch209 -p0
-%patch210 -p0
-%patch211 -p0 
-%patch215 -p0 
-%patch216 -p0 
-%patch217 -p0
-%patch218 -p0
-# OBSOLETE
-#%patch220 -p0
-%patch221 -p0
-# CHECK ME
-#%patch222 -p0
-%patch223 -p0
-%patch224 -p0 
-%patch225 -p0
-%patch226 -p1
-# SEEMS OBSOLETE
-#%patch227 -p1
-%patch228 -p0
-%patch229 -p1 
-%patch230 -p0
-%patch231 -p0 
-
-%patch301 -p1 
-
-# i18n support (?)
-%if %{with i18n}
-%patch341 -p0 
-%patch342 -p0
-%patch343 -p0 
-%endif 
-
-%if %{with gnomecups}
-%patch351 -p0
-%patch352 -p0 
-%patch353 -p0 
-# don't disable spadmin
-#%patch354 -p0
-%patch355 -p0
-%endif 
-
-# gui 
-%patch362 -p0
-%patch363 -p0 
-%patch364 -p0 
-
-# fonts
-%patch371 -p0
-%patch372 -p0 
-%patch373 -p0 
-%patch374 -p0
-%patch375 -p0
-%patch376 -p0
-%patch377 -p0
-%patch378 -p0
-%patch379 -p0
-%patch380 -p0 
-%patch381 -p0
-
-# fontconfig
-%if %{with fontconf}
-%patch391 -p0
-%patch393 -p0
-%endif 
-
-# gnome-vfs
-%if %{with gnomevfs}
-%patch401 -p0
-%patch402 -p0
-%patch403 -p0
-%patch404 -p0
-%patch405 -p0 
-%patch406 -p0
-%patch407 -p0
-%patch408 -p0
-%endif 
-
-# icons....
-%if %{with icons}
-%patch411 -p0
-%patch412 -p0
-%patch413 -p0
-%patch414 -p0
-%patch415 -p0
-%patch416 -p0
-%patch417 -p0
-%patch418 -p0
-#%patch419 -p0
-%patch420 -p0
-%patch421 -p0
-%patch422 -p0
-%patch423 -p0
-%patch424 -p0
-%patch425 -p0
-
-%patch431 -p0 
-%patch432 -p0 
-%patch433 -p0 
-%patch434 -p0
-%endif
-
-#%patch501 -p1
-%patch502 -p1
-%patch503 -p1
-%if %{with java}
-# FIX ME XXX
-#%patch504 -p0
-%else
-# FIX ME XXX
-#%patch511 -p0
-%endif
-%patch505 -p1
-%patch506 -p1
-%patch507 -p1
-#%patch508 -p0
-%patch509 -p0
-%patch510 -p1 
-
-%patch600 -p1
-# OBSOLETE due to WITHOUT_FONTS?
-#%patch601 -p1 
-#%patch602 -p0
-
-%patch603 -p1
-%{?with_nptl:%patch604 -p1}
-
-# gcc 2 include error hack:
-rm -rf autodoc/source/inc/utility
-
-install -d solver/%{subver}/%{_archbuilddir}/lib
-cp -f /lib/libgcc_s.so.1* solver/%{subver}/%{_archbuilddir}/lib
-cp /usr/lib/libstdc++.so.5* solver/%{subver}/%{_archbuilddir}/lib
-
-install %{SOURCE401} offmgr/res/openabout_pld.bmp
-install %{SOURCE402} offmgr/res/openintro_pld.bmp
-
-# bzz... 
-rm -f offmgr/source/offapp/intro/iso.src
-cp -f offmgr/source/offapp/intro/ooo.src offmgr/source/offapp/intro/iso.src
-
-# repack SOURCE12 
-tar xvzf %{SOURCE12}
-%if %{with icons}
-install %{SOURCE411} scale-icons
-chmod a+x scale-icons
-./scale-icons `pwd`
-cp -Rvf ooo-icons-OOO_1_1-8/* .
-%endif 
-
-%if %{with optimalization}
-# optimalization
-cd solenv/inc
-for i in *.mk
-do
-	cat $i | sed \
-		-e 's/-mpentium/%{rpmcflags}/' \
-		-e 's/-mpentiumpro/%{rpmcflags}/' \
-		-e 's/-mcpu=pentiumpro/%{rpmcflags}/' > $i.new
-	mv -f $i.new $i
-done
-%endif 
+install -d src
+ln -s %{SOURCE1} src/
+ln -s %{SOURCE2} src/
 
 %build
 CC=%{__cc}
@@ -1121,24 +861,8 @@ GCJ=gcj
 JAVA_HOME="/usr/lib/java"
 CFLAGS="%{rpmcflags}"
 CXXFLAGS="%{rpmcflags}"
-export JAVA_HOME CC CXX GCJ CFLAGS CXXFLAGS
-
-cd config_office
-%{__autoconf}
-%configure2_13 \
-%if %{with java}
-	--with-jdk-home=$JAVA_HOME \
-%else
-	--disable-java \
-%endif
-	--with-system-zlib \
-	--with-stlport4-home=/usr \
-	--with-lang=ALL \
-	--with-x \
-	--enable-libsn \
-	--enable-libart
-
-cd ..
+DESTDIR=$RPM_BUILD_ROOT
+export JAVA_HOME CC CXX GCJ CFLAGS CXXFLAGS DESTDIR
 
 if [ -z "$RPM_BUILD_NCPUS" ] ; then
 	if [ -x /usr/bin/getconf ] ; then
@@ -1151,342 +875,35 @@ if [ -z "$RPM_BUILD_NCPUS" ] ; then
 	fi
 fi
 
-%ifarch %{ix86}
-ENVSCRIPT="LinuxIntelEnv.Set"
-%endif 
-%ifarch ppc
-ENVSCRIPT="LinuxPPCEnv.Set"
-%endif 
-%ifarch sparc sparc64
-ENVSCRIPT="LinuxSparcEnv.Set"
-%endif
-
-%if %{with parallel}
-echo -e "#!/bin/tcsh\nsource $ENVSCRIPT\ncd instsetoo\nbuild.pl -P$RPM_BUILD_NCPUS --all\n exit 0\n" > compile
-%else
-echo -e "#!/bin/tcsh\nsource $ENVSCRIPT\ndmake -p -v" > compile
-%endif
-
-echo -e "#!/bin/tcsh\n./bootstrap\n" > prep
-chmod u+rx prep compile
-./prep
-
-install -d solver/%{subver}/%{_archbuilddir}/bin
+%configure \
+	--with-system-gcc \
+	--with-system-zlib \
+	--with-vendor="PLD" \
+	--with-distro="Ac" \
+	--with-icons="KDE" \
+	--with-installed-ooo-dirname=%{name} \
 %if %{with java}
-install /usr/lib/db.jar solver/%{subver}/%{_archbuilddir}/bin/db.jar
-%endif 
+	--enable-java \
+	--with-jdk-home=$JAVA_HOME \
+%else
+	--disable-java \
+%endif
+	--with-stlport4-home=/usr \
+	--with-lang=ALL \
+	--with-x \
+	--enable-libsn \
+	--enable-libart \
+	--with-num-cpus=$RPM_BUILD_NCPUS
 
-./compile
+%{__make}
 
 %install
 rm -rf $RPM_BUILD_ROOT
 
-OOBUILDDIR=`pwd`
+DESTDIR=$RPM_BUILD_ROOT; export DESTDIR
 
-install -d $RPM_BUILD_ROOT%{oolib}
-
-LangCode() {
-# $1 - from column no.
-# $2 - from column value
-# $3 - to column no.
-
-l="\n\
-01:en:ENUS:English US:english::en-US:\n\
-03:pt:PORT:Portuguese:portuguese:por::\n\
-07:ru:RUSS:Russian:russian:rus::\n\
-30:el:GREEK:Greek:greek:gre::\n\
-31:nl:DTCH:Dutch:dutch:dut::\n\
-33:fr:FREN:French:french:fre::\n\
-34:es:SPAN:Spanish:spanish:spa::\n\
-35:fi:FINN:Finnish:finnish:fin::\n\
-37:ca:CAT:Catalan:catalan:cat::\n\
-39:it:ITAL:Italian:italian:ita::\n\
-42:cs:CZECH:Czech:czech:cze::\n\
-43:sk:SLOVAK:Slovak:slovak:slk::\n\
-45:da:DAN:Danish:danish:dan::\n\
-46:sv:SWED:Swedish:swedish:swe::\n\
-48:pl:POL:Polish:polish:pol::\n\
-49:de:GERM:German:german:ger::\n\
-55:pt_BR:PORTBR:Brazilian:portuguese_brazilian::pt-BR:\n\
-81:ja:JAPN:Japanese:japanese:jap::\n\
-82:ko:KOREAN:Korean:korean:kor::\n\
-86:zh_CN:CHINSIM:Chinese Simplified:chinese_simplified::zh-CN:\n\
-88:zh_TW:CHINTRAD:Chinese Traditional:chinese_traditional::zh-TW:\n\
-90:tr:TURK:Turkish:turkish:tur::\n\
-96:ar:ARAB:Arabic:arabic:ara::\n"
-
-echo -e $l | awk -F: "{ split(\$0, A, \":\"); if (A[$1] == \"$2\") print A[$3]; }"
-}
-
-LANGS="%{ARAB} %{CAT} %{CZECH} %{DAN} %{GERM} %{GREEK} %{ENUS} %{SPAN} %{FINN}
-%{FREN} %{ITAL} %{JAPN} %{KOREAN} %{DTCH} %{POL} %{PORT} %{PORTBR} %{RUSS}
-%{SLOVAK} %{SWED} %{TURK} %{CHINSIM} %{CHINTRAD}"
-
-### Instalation
-RESPONSE_FILE=$OOBUILDDIR/rsfile.ins
-cd %{installpath}/%{langinst}/normal/
-
-# --short-circuit support
-suf1="" && suf2=".orig" && [ -f setup.ins.orig ] && suf1=".orig" && suf2=""
-cp -f setup.ins$suf1 setup.ins$suf2
-
-cat %{SOURCE2} | sed -e "s|@DESTDIR@|$RPM_BUILD_ROOT%{oolib}|" > $RESPONSE_FILE
-
-# Localize New and Wizard menus and OfficeObjects
-TMPFILE=setup.pldtmp && rm -f $TMPFILE && touch $TMPFILE
-DIRS=`find ../../ -name "[0-9][0-9]" -and -not -name "%{langinst}" -printf "%%P "`
-for i in $DIRS; do
-    if [ -f ../../$i/normal/setup.ins ]; then
-	CONV=cat
-	case "$i" in
-	3[347]|4[69]) # fr, es, la, sv, de are latin1 encoded
-	    CONV="iconv -f ISO-8859-1// -t UTF-8//";;
-	3[19]|45|90) # nl, it, da, tr are unknown, no characters above <U007F>
-	    ;;
-	0[37]|30|4[28]) # pt, ru, el, cs, pl are already UTF-8 encoded
-	    ;;
-	esac
-
-	grep -A6 'gid_Configurationitem_Common_\(Objectnames.*_Name\|Menus_.*Titel\)' \
-	    ../../$i/normal/setup.ins | $CONV \
-	    | sed "s/^--//;/^ConfigurationItem/s/\(Name\|Titel\)/$i&/" >> $TMPFILE
-	echo >> $TMPFILE
-    fi
-done
-
-#cat $TMPFILE | awk ' $1 ~ /Value/ { l=$0; sub(/^.*= "/,"",l); sub(/";.*$/,"",l); sub(/%PRODUCTNAME/,"OpenOffice.org",l); sub(/%PRODUCTVERSION/,"%{version}",l); n=n+1; str="@@REPLACEME" n "@@"; s="\"" str "\""; sub(/".*"/,s); printf "s|%s|%s|\n", str, l > "Common.xml.sed" } { print } ' \
-#    >> setup.ins
-cat $TMPFILE >> setup.ins
-
-./setup -v -nogui -R:$RESPONSE_FILE
-
-cd $OOBUILDDIR
-### end of installation
-
-install -d $RPM_BUILD_ROOT%{oolib}/program/resource
-# Copy all localized resources to destination directory
-FILES=`find solver/%{subver}/%{_archbuilddir}/bin/ -name "*.res" -maxdepth 1 -printf "%%P "`
-for FILE in $FILES
-do
-    [ ! -f $RPM_BUILD_ROOT%{oolib}/program/resource/$FILE ] && \
-	cp solver/%{subver}/%{_archbuilddir}/bin/$FILE \
-	    $RPM_BUILD_ROOT%{oolib}/program/resource/$FILE
-done
-
-# don't care about main_transform.xsl, it looks safe to overwrite
-rm -rf helptmp; mkdir helptmp; cd helptmp
-PREF="`dirname %{SOURCE101}`/helpcontent_"
-SUFX="_unix.tgz"
-for L in $LANGS
-do
-    CODE=`LangCode 3 $L 1`
-    NAME=`LangCode 3 $L 2`
-    FILE=$PREF$CODE$SUFX
-    install -d $RPM_BUILD_ROOT%{oolib}/help/$NAME
-    if [ -f $FILE ]; then
-	tar zxvf $FILE
-	for file in s*.zip; do
-	    unzip -q -d $RPM_BUILD_ROOT%{oolib}/help/$NAME -o $file
-	done
-	rm -f *.zip;
-    fi
-done
-cd ..
-
-### Extract language packs
-cd %{installpath}
-install -m 755 %{SOURCE302} oo_dpack_lang
-install -m 755 %{SOURCE303} oo_fixup_help
-
-for res in $LANGS
-do
-    prefix=`LangCode 3 $res 1`
-    isocode=`LangCode 3 $res 2`
-    tempdir=$RPM_BUILD_ROOT%{oolib}-$isocode
-    mkdir -p $tempdir
-
-# may extract help files, if known to be localized enough
-    case ",%{helplangs}," in
-    *,$res,*)
-	./oo_dpack_lang -d=$tempdir -i=$prefix/normal/setup.ins -h
-	;;
-    *)
-	./oo_dpack_lang -d=$tempdir -i=$prefix/normal/setup.ins
-	mkdir -p $tempdir/help/$isocode
-	;;
-    esac
-
-# link ooo resource files to iso files
-    ln -sf %{oolib}/program/resource/ooo%{subver}$prefix \
-	$tempdir/program/resource/iso%{subver}$prefix
-
-    cp -af $tempdir/* $RPM_BUILD_ROOT%{oolib}
-    rm -rf $tempdir
-
-    HOWMUCH=`ls $RPM_BUILD_ROOT%{oolib}/help/$isocode 2>/dev/null | wc -l`
-    if [ $HOWMUCH -eq 0 ]; then 
-	rm -rf $RPM_BUILD_ROOT%{oolib}/help/$isocode
-	ln -sf en $RPM_BUILD_ROOT%{oolib}/help/$isocode
-    fi
-done
-cd $OOBUILDDIR
-
-cp -af $RPM_BUILD_ROOT%{oolib}/help/zh_CN/* $RPM_BUILD_ROOT%{oolib}/help/zh-CN
-cp -af $RPM_BUILD_ROOT%{oolib}/help/zh_TW/* $RPM_BUILD_ROOT%{oolib}/help/zh-TW
-rm -rf $RPM_BUILD_ROOT%{oolib}/help/{zh_CN,zh_TW}
-mv $RPM_BUILD_ROOT%{oolib}/help/{zh-CN,zh_CN}
-mv $RPM_BUILD_ROOT%{oolib}/help/{zh-TW,zh_TW}
-
-# Remove unnecessary binaries
-for app in %{apps}
-do
-    rm -f $RPM_BUILD_ROOT%{oolib}/program/s${app}
-done
-
-install -d $RPM_BUILD_ROOT%{_desktopdir}
-bzip2 -dc %{SOURCE6} | tar xf - -C $RPM_BUILD_ROOT%{_desktopdir}
-
-# Remove stuff that should come from system libraries
-rm -rf $RPM_BUILD_ROOT%{oolib}/program/libdb-*
-rm -rf $RPM_BUILD_ROOT%{oolib}/program/libdb_*
-rm -rf $RPM_BUILD_ROOT%{oolib}/program/filter/libfreetype*
-
-# Fix GNOME & KDE
-install -d $RPM_BUILD_ROOT%{_datadir}
-install -d $RPM_BUILD_ROOT%{_pixmapsdir}
-mv $RPM_BUILD_ROOT%{oolib}/share/kde/net/share/mimelnk $RPM_BUILD_ROOT%{_datadir}
-cp -rf $RPM_BUILD_ROOT%{oolib}/share/kde/net/share/icons/* $RPM_BUILD_ROOT%{_pixmapsdir}
-cp -rf $RPM_BUILD_ROOT%{oolib}/share/icons/* $RPM_BUILD_ROOT%{_pixmapsdir}
-rm -rf $RPM_BUILD_ROOT%{oolib}/share/kde
-rm -rf $RPM_BUILD_ROOT%{oolib}/share/cde
-rm -rf $RPM_BUILD_ROOT%{oolib}/share/gnome
-rm -rf $RPM_BUILD_ROOT%{oolib}/share/icons
-
-# Fixup instdb.ins to get rid of $RPM_BUILD_ROOT
-perl -pi -e "s|$RPM_BUILD_ROOT||g" $RPM_BUILD_ROOT%{oolib}/program/instdb.ins
-perl -pi -e "/^Installation gid_Installation/ .. /^End/ and s|(SourcePath.*)=.*|\1= \"%{oolib}/program\";|" \
-    $RPM_BUILD_ROOT%{oolib}/program/instdb.ins
-
-# Disable desktop (KDE, GNOME, CDE) integration for user installs
-for module in GID_MODULE_OPTIONAL_GNOME gid_Module_Optional_Kde gid_Module_Optional_Cde; do
-    perl -pi -e "/^Module $module/ .. /^End/ and s|(Installed.*)=.*|\1= NO;|" \
-	$RPM_BUILD_ROOT%{oolib}/program/instdb.ins
-done
-
-# Fix setup and spadmin symlinks set by OO.org setup program
-# (must have absolute symlinks)
-ln -sf %{oolib}/program/setup $RPM_BUILD_ROOT%{oolib}/setup
-ln -sf %{oolib}/program/soffice $RPM_BUILD_ROOT%{oolib}/spadmin
-ln -sf %{oolib}/program/soffice $RPM_BUILD_ROOT%{oolib}/program/spadmin
-
-# Install autoresponse file for user installation
-install -d $RPM_BUILD_ROOT%{_sysconfdir}/openoffice
-cat %{SOURCE3} > $RPM_BUILD_ROOT%{_sysconfdir}/openoffice/autoresponse.conf
-
-# Install OpenOffice.org wrapper script
-install -d $RPM_BUILD_ROOT%{_bindir}
-cat %{SOURCE7} | sed -e "s/@OOVERSION@/%{subver}/" > \
-    $RPM_BUILD_ROOT%{_bindir}/ooffice
-
-# Install component wrapper scripts
-install -d $RPM_BUILD_ROOT%{_bindir}
-for app in %{apps}; do
-    cat %{SOURCE8} | sed -e "s/@APP@/${app}/" \
-	> $RPM_BUILD_ROOT%{_bindir}/oo${app}
-done
-
-echo 'UNO_WRITERDB=$SYSUSERCONFIG/.user60.rdb' \
-    >> $RPM_BUILD_ROOT%{oolib}/program/unorc
-
-# Build system in OO SUX
-rm -f $RPM_BUILD_ROOT%{oolib}/program/libstdc++*
-rm -f $RPM_BUILD_ROOT%{oolib}/program/libstlport_gcc.so
-rm -f $RPM_BUILD_ROOT%{oolib}/program/libgcc_s.so.1
-
-rm -rf $RPM_BUILD_ROOT%{oolib}/share/template/{internal,wizard}
-
-# remove dictionaries
-rm -rf $RPM_BUILD_ROOT%{oolib}/share/dict/ooo/*
-cp %{SOURCE11} $RPM_BUILD_ROOT%{dictlst}-readme
-touch $RPM_BUILD_ROOT%{dictlst}
-
-# move to devel ???
-for file in cppumaker idlc idlcpp javamaker rdbmaker regcomp \
-    regmerge regview uno xml2cmp
-do
-    cp solver/%{subver}/%{_archbuilddir}/bin/$file $RPM_BUILD_ROOT%{_bindir}
-done
-
-
-AddFiles() {
-    LOCALE=$1; shift
-    OPTIONS=$1; shift
-    ISDIR=$1; shift
-
-    while [ $# -gt 0 ]
-    do
-	F=$1; shift
-	if [ "$ISDIR" == "dir" ]; then
-	    [ ! -d $RPM_BUILD_ROOT/$F ] && continue
-	else
-	    [ ! -f $RPM_BUILD_ROOT/$F ] && continue
-	fi
-
-	echo "$OPTIONS $F" >> "i18n-$LOCALE"
-    done
-}
-
-Multiply() {
-    PREFIX=$1; shift
-    SUFIX=$1; shift
-    while [ $# -gt 0 ]
-    do
-	echo "$PREFIX$1$SUFIX"
-	shift
-    done
-}
-
-# package files
-for L in $LANGS; do
-    lshort=`LangCode 3 $L 2`
-    lno=`LangCode 3 $L 1`
-    lname=`LangCode 3 $L 5`
-    lres=`LangCode 3 $L 6`
-    loth=`LangCode 3 $L 7`
-
-    echo "%defattr(644,root,root,755)" > "i18n-$lshort"
-
-    AddFiles $lshort "" dir %{oolib}/user/autotext/$lname
-    AddFiles $lshort "" dir %{oolib}/share/autotext/$lname
-    AddFiles $lshort "" dir %{oolib}/share/template/$lname
-    AddFiles $lshort "" dir %{oolib}/help/$lshort
-    AddFiles $lshort "" dir %{oolib}/share/wordbook/$lname
-
-    PCKDIR=solver/%{subver}/%{_archbuilddir}/pck
-    FILES=""
-    [ -f "$PCKDIR/palettes$lno.zip" ] && FILES="`unzip -l $PCKDIR/palettes$lno.zip | awk '{ if (($lres != "")&&($lres != "----")&&($lres != "Name")) print $lres }'`"
-    [ "$lshort" = "en" ] && FILES="$FILES autotbl.fmt `unzip -l $PCKDIR/palettes.zip | awk '{ if (($lres != "")&&($lres != "----")&&($lres != "Name")) print $lres }'`"
-    AddFiles $lshort "" "" `Multiply %{oolib}/user/config/ "" $FILES`
-
-    FILES=""
-    [ -f "$PCKDIR/autocorr$lno.zip" ] && FILES="`unzip -l $PCKDIR/autocorr$lno.zip | awk '{ if (($lres != "")&&($lres != "----")&&($lres != "Name")) print $lres }'`"
-    AddFiles $lshort "" "" `Multiply %{oolib}/share/autocorr/ "" $FILES`
-
-    SUBF="abp analysis basctl bib cal cnt date dba dbi dbp dbu dbw dkt egi eme
-    epb epg epn epp eps ept eur for frm gal imp iso jvm lgd oem ofa oic ooo pcr
-    preload san sc sch sd set set_pp1 sfx sm spa stt svs svt svx sw tpl tplx uui
-    vcl wwz com flash fwe pdffilter tk xsltdlg"
-    SVER=%{subver}
-
-    AddFiles $lshort "" "" `Multiply %{oolib}/program/resource/ $SVER$lno.res $SUBF`
-    AddFiles $lshort "" dir `Multiply %{oolib}/share/registry/res/ "" $lshort $loth`
-done
-
-install %{SOURCE401} $RPM_BUILD_ROOT%{oolib}/program/about.bmp
-install %{SOURCE402} $RPM_BUILD_ROOT%{oolib}/program/intro.bmp
-
-# clean some fucked files
-rm -rf $RPM_BUILD_ROOT%{oolib}/share/fonts/truetype/Vera*.ttf
+%{__make} install \
+	DESTDIR=$RPM_BUILD_ROOT
 
 %clean
 rm -rf $RPM_BUILD_ROOT
