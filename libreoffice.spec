@@ -88,7 +88,9 @@ Source412:	%{cftp}/helpcontent/helpcontent_90_unix.tgz
 
 Patch0:		%{name}-rh-disable-spellcheck-all-langs.patch
 Patch1:		%{name}-shared-xinerama.patch
-Patch2:		%{name}-files.patch
+Patch2:		%{name}-build.patch
+# PLD-specific, they ooo-build people don't like it
+Patch3:		%{name}-files.patch
 
 URL:		http://www.openoffice.org/
 BuildRequires:	ImageMagick
@@ -982,6 +984,7 @@ zuluskim.
 %patch0 -p1
 %patch1 -p1
 %patch2 -p1
+%patch3 -p1
 
 install -d src
 # sources, icons, KDE_icons
