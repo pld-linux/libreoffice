@@ -10,7 +10,6 @@
 #	- 6 user/config/*.so? files shared between -i18n-en and -i18n-sl
 #	- remove oohtml symlink (there is ooweb),
 #	- add ooglobal symlink and it's ooo-wrapper entry (among calc|draw|impress|math|web|writer)
-# - SECURITY: http://securitytracker.com/alerts/2004/Sep/1011205.html
 
 # Conditional build:
 %bcond_with	java		# Java support
