@@ -149,3 +149,25 @@
  # --- Settings -----------------------------------------------------
  
  .INCLUDE :	settings.mk
+--- ooold/xmlhelp/source/cxxhelp/provider/databases.cxx	Mon Aug  5 10:53:34 2002
++++ oonew/xmlhelp/source/cxxhelp/provider/databases.cxx	Mon Aug  5 10:52:03 2002
+@@ -60,7 +60,7 @@
+  ************************************************************************/
+ 
+ 
+-#include <db_cxx.h>
++#include <db4/db_cxx.h>
+ #ifndef _VOS_DIAGNOSE_HXX_
+ #include <vos/diagnose.hxx>
+ #endif
+--- ooold/xmlhelp/source/cxxhelp/provider/urlparameter.cxx	Mon Aug  5 10:53:37 2002
++++ oonew/xmlhelp/source/cxxhelp/provider/urlparameter.cxx	Mon Aug  5 10:52:19 2002
+@@ -88,7 +88,7 @@
+ #include <sablot/shandler.h>
+ #endif
+ #ifndef _DB_CXX_H_
+-#include <db_cxx.h>
++#include <db4/db_cxx.h>
+ #endif
+ #ifndef _URLPARAMETER_HXX_
+ #include <provider/urlparameter.hxx>
