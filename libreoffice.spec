@@ -326,6 +326,9 @@ Requires:	libstdc++ >= 3.2.1
 Requires:	db
 Requires:	db-cxx
 Requires:	startup-notification
+%if %{with gnomecups}
+Requires:	libgnomecups
+%endif
 #Suggested:	chkfontpath
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
@@ -1072,7 +1075,7 @@ rm -f moz/prj/d.lst
 %patch505 -p1
 %patch506 -p1
 %patch507 -p1
-%patch508 -p0
+#%patch508 -p0
 %patch509 -p0
 
 # gcc 2 include error hack:
