@@ -1,16 +1,16 @@
 #!/bin/sh
 # -----------------------------------------
-# Red Hat wrapper script for OpenOffice.org
+# OpenOffice wrapper script for OpenOffice.org
 # -----------------------------------------
-# (based on Mandrake wrapper script for 641c)
+# (based on Mandrake & Red Hat)
 
-OOVERSION=<OOVERSION>
+OOVERSION=@OOVERSION@
 OOVERSIONRC="$HOME/.sversionrc"
 OOHOME="$HOME/.openoffice"
 
 # Remove any entry in .sversionrc if not already installed from RPM
 if [ -f "$OOVERSIONRC" ]; then
-  oohome=$(cat $OOVERSIONRC | tr '\r' '\n' | perl -n -e "m|^OpenOffice.org ${OOVERSION}=file://(.*)$| and print \$1")
+  oohome=$(cat $OOVERSIONRC | tr '\r' '\n' | grep "^OpenOffice.org ${OOVERSION}" |  sed "s|^OpenOffice.org ${OOVERSION}=file://||")
   if [ -n "$oohome" -a "$oohome" != "$OOHOME" ]; then
     cp $OOVERSIONRC $OOVERSIONRC.orig
     perl -ni -e "m|file://${oohome}| or print" $OOVERSIONRC
@@ -18,25 +18,23 @@ if [ -f "$OOVERSIONRC" ]; then
 fi
 
 # Issue a workstation-type installation for the user, if necessary
-echo -n "Checking for existing user installation ...   "
+echo -n "Checking for existing user installation... "
 if [ -d "$OOHOME" ] && [ -e "$OOHOME/soffice" ] && [ -e "$OOHOME/spadmin" ] ; then
-  echo "...   FOUND"
+  echo "FOUND"
 else
-  echo "...   NOT FOUND"
-  echo -n "Performing first-time installation for user ...   "
+  echo "NOT FOUND"
+  echo -n "Performing first-time installation for user... "
   # rename old .sversonrc
-  mv $HOME/.sversionrc $HOME/.sversionrc.old
+  [ -f $HOME/.sversionrc ] && mv $HOME/.sversionrc $HOME/.sversionrc.old
   # run the automated setup
   /usr/X11R6/lib/openoffice/program/setup -R:/etc/openoffice/autoresponse.conf
-  # make the user/work link and use "My Documents" directory
-  mkdir -p $HOME/"My Documents"
-  ln -s $HOME/"My Documents" $OOHOME/user/work
-  echo "...   DONE"
+  echo "DONE"
 fi
 
 # Fix up English wordbook (check dictionary.lst because user may have
 # removed en_US dictionary afterward)
-if [ ! -e "$OOHOME/user/wordbook/dictionary.lst" ]; then
+if [ ! -e "$OOHOME/user/wordbook/dictionary.lst" ]
+then
 (cd $OOHOME/user/wordbook;
   for file in /usr/X11R6/lib/openoffice/share/wordbook/english/en_US.???; do
     ln -s $file .
@@ -80,5 +78,5 @@ SAL_FONTPATH_USER=$(echo "$SAL_FONTPATH_USER" | sed -e "s|/usr/share/fonts/ja/Tr
 SAL_FONTPATH_USER=$(echo "$SAL_FONTPATH_USER" | sed -e "s|/usr/share/fonts/zh_TW/TrueType;||g")
 
 export SAL_FONTPATH_USER
-  echo "Starting OpenOffice.org ..."
+echo "Starting OpenOffice.org..."
 exec $OOHOME/soffice "$@"
