@@ -1,0 +1,12 @@
+diff -urN ooo-build-1.1.57.org/bin/setup.in ooo-build-1.1.57/bin/setup.in
+--- ooo-build-1.1.57.org/bin/setup.in	2004-05-28 15:51:05.256537976 +0200
++++ ooo-build-1.1.57/bin/setup.in	2004-05-28 15:51:20.493221648 +0200
+@@ -206,7 +206,7 @@
+ echo " OOo-Bonobo: '$ENABLE_BONOBO'"
+ echo " Icons:      '$OOO_ICONS_VER'"
+ 
+-if !(test "z$WITH_SRC" = "z"); then
++if test "z$WITH_SRC" != "z"; then
+ 	echo "Build environment:";
+ 	set
+ fi
