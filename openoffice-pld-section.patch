@@ -1,6 +1,6 @@
 diff -urN ooo-build-1.1.55.org/patches/OOO_1_1/module-buildset-crashrep.diff ooo-build-1.1.55/patches/OOO_1_1/module-buildset-crashrep.diff
 --- ooo-build-1.1.55.org/patches/OOO_1_1/module-buildset-crashrep.diff	1970-01-01 01:00:00.000000000 +0100
-+++ ooo-build-1.1.55/patches/OOO_1_1/module-buildset-crashrep.diff	2004-05-06 14:35:24.773222104 +0200
++++ ooo-build-1.1.55/patches/OOO_1_1/module-buildset-crashrep.diff	2004-05-13 03:04:38.203467760 +0200
 @@ -0,0 +1,12 @@
 +Index: instsetoo/prj/build.lst
 +===================================================================
@@ -15,8 +15,8 @@ diff -urN ooo-build-1.1.55.org/patches/OOO_1_1/module-buildset-crashrep.diff ooo
 + oo	instsetoo								usr1	-	all	oo_mkout NULL
 + oo	instsetoo\util							nmake	-	all	oo_util NULL
 diff -urN ooo-build-1.1.55.org/patches/OOO_1_1/module-buildset.diff ooo-build-1.1.55/patches/OOO_1_1/module-buildset.diff
---- ooo-build-1.1.55.org/patches/OOO_1_1/module-buildset.diff	2004-05-06 14:20:54.820475024 +0200
-+++ ooo-build-1.1.55/patches/OOO_1_1/module-buildset.diff	2004-05-06 14:35:44.910160824 +0200
+--- ooo-build-1.1.55.org/patches/OOO_1_1/module-buildset.diff	2004-05-13 03:04:20.769118184 +0200
++++ ooo-build-1.1.55/patches/OOO_1_1/module-buildset.diff	2004-05-13 03:04:38.205467456 +0200
 @@ -6,7 +6,7 @@
  --- instsetoo/prj/build.lst	28 Jan 2004 17:14:21 -0000	1.15.10.1
  +++ instsetoo/prj/build.lst	4 Mar 2004 10:39:17 -0000
@@ -27,8 +27,8 @@ diff -urN ooo-build-1.1.55.org/patches/OOO_1_1/module-buildset.diff ooo-build-1.
   oo	instsetoo								usr1	-	all	oo_mkout NULL
   oo	instsetoo\util							nmake	-	all	oo_util NULL
 diff -urN ooo-build-1.1.55.org/patches/OOO_1_1_1/apply ooo-build-1.1.55/patches/OOO_1_1_1/apply
---- ooo-build-1.1.55.org/patches/OOO_1_1_1/apply	2004-05-06 14:20:54.879466056 +0200
-+++ ooo-build-1.1.55/patches/OOO_1_1_1/apply	2004-05-06 14:38:30.354009536 +0200
+--- ooo-build-1.1.55.org/patches/OOO_1_1_1/apply	2004-05-13 03:04:20.850105872 +0200
++++ ooo-build-1.1.55/patches/OOO_1_1_1/apply	2004-05-13 03:13:27.246041064 +0200
 @@ -315,7 +315,11 @@
  gui-ft-use-system-font.diff
  
@@ -51,3 +51,29 @@ diff -urN ooo-build-1.1.55.org/patches/OOO_1_1_1/apply ooo-build-1.1.55/patches/
  build-instsetoo-lang.diff
  
  [ DebianOnly ]
+@@ -646,12 +650,6 @@
+ # Add SuSE specific /opt/kde3 path for dtint search
+ # gui-kde-dtint.diff - obsoleted by native-widget work.
+ 
+-# hackish system-libstdc++ patch
+-system-libstdcpp.diff
+-
+-# in case the system is panicing
+-gui-font-paranoid-fallback.diff
+-
+ # drop pyuno bits
+ disable-pyuno.diff
+ 
+@@ -660,6 +658,12 @@
+ # resolution independant printing bits
+ print-resolution-generic.diff
+ 
++# hackish system-libstdc++ patch
++system-libstdcpp.diff
++
++# in case the system is panicing
++gui-font-paranoid-fallback.diff
++
+ #######################################################
+ [ PLDOnly ]
+ 
