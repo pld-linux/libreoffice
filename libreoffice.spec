@@ -845,7 +845,7 @@ l="\n\
 90:tr:TURK:Turkish:turkish:tur::\n\
 96:ar:ARAB:Arabic:arabic:ara::\n"
 
-echo $l | awk -F: "{ split(\$0, A, \":\"); if (A[$1] == \"$2\") print A[$3]; }"
+echo -e $l | awk -F: "{ split(\$0, A, \":\"); if (A[$1] == \"$2\") print A[$3]; }"
 }
 
 LANGS="%{ARAB} %{CAT} %{CZECH} %{DAN} %{GERM} %{GREEK} %{ENUS} %{SPAN} %{FINN}
