@@ -1,23 +1,25 @@
 Summary:	OpenOffice - powerful office suite
 Summary(pl):	OpenOffice - potê¿ny pakiet biurowy
 Name:		openoffice
-Version:	632
+Version:	641
 Release:	1
 Epoch:          1
 License:	GPL/LGPL
 Group:		X11/Applications
 Group(de):	X11/Applikationen
 Group(pl):	X11/Aplikacje
-Source0:	http://a2012.g.akamai.net/7/2012/2064/OpenOffice632/anoncvs.openoffice.org/download/OpenOffice632/oo_%{version}_src.tar.bz2
+Source0:	ftp://openoffice@ftp.ists.pwr.wroc.pl/sources/build%{version}b/oo_%{version}_src.tar.bz2
+Source1:	ftp://ftp.cs.man.ac.uk/pub/toby/gpc/gpc231.tar.Z
 URL:		http://www.openoffice.org/
 BuildRequires:	XFree86-devel
-BuildRequires:	STLport-static
-#BuildRequires:	jdk = 1.2.2
-BuildRequires:	flex
-BuildRequires:	tcsh
-BuildRequires:	perl
 BuildRequires:	autoconf
 BuildRequires:	automake
+BuildRequires:	flex
+BuildRequires:	jdk = 1.3.1_01
+BuildRequires:	perl
+BuildRequires:	tcsh
+BuildRequires:	unzip
+BuildRequires:	zip
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %define		_prefix		/usr/X11R6
@@ -53,33 +55,27 @@ Do zalet OpenOffice.org mo¿na zaliczyæ:
 
 %prep
 %setup -q -n oo_%{version}_src
+install %{SOURCE1} external
+cd external; tar fxz %{SOURCE1}; cp -fr gpc231/* gpc
 
 %build
-JAVA_HOME="/opt/jdk1.2.2"; export JAVA_HOME
-PATH="$PATH:$JAVA_HOME/bin"; export PATH
-
 cd config_office
 autoconf
 %configure \
+	--with-jdk-home=/usr/lib/jdk1.3.1_01 \
 	--with-stlport4-home=/usr \
-	--with-jdk-home=$JAVA_HOME \
 	--with-lang=ALL \
 	--with-x
-
 cd ..
-cat bootstrap | sed -e 's,autogen.sh;configure;make;make install,autogen.sh;configure;make linux;make install,g' > bootstrap.
-mv -f bootstrap. bootstrap
-chmod 744 bootstrap
-
 cat <<EOF > compile
 #!/bin/tcsh
 source LinuxIntelEnv.Set
 ./bootstrap
 # you must have a valid & working X DISPLAY setting on the build machine,
 # see http://tools.openoffice.org/troubleshoot.html
-Xvfb :15 &
-setenv DISPLAY	:15
-dmake
+#Xvfb :15 &
+#setenv DISPLAY	:15
+#dmake
 EOF
 
 chmod u+rx compile
