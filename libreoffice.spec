@@ -3,7 +3,7 @@ Summary:	OpenOffice - powerful office suite
 Summary(pl):	OpenOffice - potê¿ny pakiet biurowy
 Name:		openoffice
 Version:	0.641d
-Release:	1
+Release:	0.1
 Epoch:		1
 License:	GPL/LGPL
 Group:		X11/Applications
@@ -21,6 +21,9 @@ BuildRequires:	automake
 BuildRequires:	flex
 %{?!_with_ibm_java:BuildRequires: jdk = 1.3.1_01}
 %{?_with_ibm_java:BuildRequires: ibm-java-sdk}
+BuildRequires:	gcc <= 3.0.0
+BuildRequires:	libgcc
+BuildRequires:	libstdc++-compat >= 1.0-3
 BuildRequires:	perl
 BuildRequires:	tcsh
 BuildRequires:	unzip
@@ -77,13 +80,20 @@ autoconf
 	--with-lang=ALL \
 	--with-x
 
+cd ..
+
+cat <<EOF > prep
+#!/bin/tcsh
+./bootstrap
+EOF
+chmod u+rx prep
+./prep
+
 install -d solver/641/unxlngi3.pro/bin
 install %{SOURCE2} solver/641/unxlngi3.pro/bin/db.jar
 
-cd ..
 cat <<EOF > compile
 #!/bin/tcsh
-./bootstrap
 # you must have a valid & working X DISPLAY setting on the build machine,
 # see http://tools.openoffice.org/troubleshoot.html
 #Xvfb :15 &
@@ -91,7 +101,6 @@ cat <<EOF > compile
 source LinuxIntelEnv.Set
 dmake -p -v
 EOF
-
 chmod u+rx compile
 ./compile
 
