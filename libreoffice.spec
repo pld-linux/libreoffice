@@ -1,16 +1,15 @@
 Summary:	OpenOffice - powerful office suite
 Summary(pl):	OpenOffice - potê¿ny pakiet biurowy
 Name:		openoffice
-Version:	619
-Release:	0.1
+Version:	627
+Release:	1
 Epoch:          1
 License:	GPL/LGPL
 Group:		X11/Applications
 Group(de):	X11/Applikationen
 Group(pl):	X11/Aplikacje
-Source0:	http://a1652.g.akamai.net/7/1652/2064/OpenOffice619/anoncvs.openoffice.org/download/OpenOffice619/oo_%{version}_src.tar.bz2
+Source0:	http://a2012.g.akamai.net/7/2012/2064/OpenOffice627/anoncvs.openoffice.org/download/OpenOffice627/oo_%{version}_src.tar.bz2
 Source1:	http://www.sleepycat.com/update/3.2.9/db-3.2.9.tar.gz
-Patch0:		%{name}-i586_javadetect.patch
 URL:		http://www.openoffice.org/
 BuildRequires:	XFree86-devel
 BuildRequires:	STLport-devel
@@ -54,7 +53,6 @@ Do zalet OpenOffice.org mo¿na zaliczyæ:
 
 %prep
 %setup -q -n oo_%{version}_src -a1
-%patch0 -p0
 
 %build
 JAVA_HOME="/opt/jdk1.2.2"; export JAVA_HOME
@@ -74,7 +72,7 @@ autoconf
 %configure \
 	--with-stlport4-home=/usr \
 	--with-jdk-home=$JAVA_HOME \
-	--with-xprint
+	--with-lang=ALL
 
 cd ..
 
@@ -86,15 +84,16 @@ source LinuxIntelEnv.Set
 
 # you must have a valid & working X DISPLAY setting on the build machine,
 # see http://tools.openoffice.org/troubleshoot.html
-setenv DISPLAY :0
-dmake
+Xvfb :15 &
+setenv DISPLAY	:15
 
+dmake
 # workaround, there seem to be a missing step in the bootstrap
-cd tools/bootstrp/addexes2
-dmake
-cd ../../..
-cp -p tools/unxlngi3.pro/bin/javadep solenv/unxlngi3/bin/
-dmake
+#cd tools/bootstrp/addexes2
+#dmake
+#cd ../../..
+#cp -p tools/unxlngi3.pro/bin/javadep solenv/unxlngi3/bin/
+#dmake
 EOF
 
 chmod u+rx compile
