@@ -16,7 +16,7 @@
 
 %define		ver		1.1
 %define		rel		2
-%define		ooobver		1.3.2
+%define		ooobver		1.3.3
 %define		subver		645
 %define		fullver		%{ver}.%{rel}
 %define		dfullver	%(echo %{fullver} | tr . _)
@@ -31,8 +31,8 @@ Epoch:		1
 License:	GPL/LGPL
 Group:		X11/Applications
 #Source0:	http://ooo.ximian.com/packages/OOO_%{dfullver}/ooo-build-%{ooobver}.tar.gz
-Source0:        http://ooo.ximian.com/packages/snap/ooo-build-%{ooobver}-HEAD-20040902.tar.gz
-# Source0-md5:	a046c39f0563f242efcd9c58209d7314
+Source0:        http://ooo.ximian.com/packages/snap/ooo-build-%{ooobver}-HEAD-20040905.tar.gz
+# Source0-md5:	73d16eb8752155fd1f65db147f1d159b
 #Source0:	ooo-build-%{ooobver}-20040902.tar.bz2
 Source1:	http://ooo.ximian.com/packages/OOO_%{dfullver}/OOO_%{dfullver}.tar.bz2
 # Source1-md5:	627fbce603598a74f9be03f5a1da6d94
