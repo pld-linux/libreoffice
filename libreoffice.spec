@@ -17,7 +17,7 @@
 
 %define		ver		2.0
 %define		rel		0
-%define		ooobver		1.9.79.2
+%define		ooobver		1.9.79.2.2
 %define		snap		SRC680
 %define		bver		m79
 %define		subver		645
@@ -36,13 +36,13 @@ Epoch:		1
 License:	GPL/LGPL
 Group:		X11/Applications
 Source0:	http://go-ooo.org/packages/%{snap}/ooo-build-%{ooobver}.tar.gz
-# Source0-md5:	4a62c6169fbad14a32be8515631d5050
+# Source0-md5:	e5fd24d970b0c459c45787df373e073d
 Source1:	http://go-ooo.org/packages/%{snap}/%{ssnap}-%{bver}-core.tar.bz2
 # Source1-md5:	c6aca9d683a4a1e86e6f757ba66e1e80
-Source2:	http://go-ooo.org/packages/%{snap}/ooo_custom_images-12.tar.bz2
-# Source2-md5:	fede7c0667bde6f7cf11f8f1bfd621dc
-Source3:	http://go-ooo.org/packages/%{snap}/ooo_crystal_images-4.tar.bz2
-# Source3-md5:	b5f83e3f1c782e556836f5f9a8c7c4b7
+Source2:	http://go-ooo.org/packages/%{snap}/ooo_custom_images-13.tar.bz2
+# Source2-md5:	2480af7f890c8175c7f9e183a1b39ed2
+Source3:	http://go-ooo.org/packages/%{snap}/ooo_crystal_images-5.tar.bz2
+# Source3-md5:	040be799b20ccec2791e04a152d97cc3
 Source4:	http://go-ooo.org/packages/%{snap}/extras-1.tar.bz2
 # Source4-md5:	c76b1c554529a37975d0149ca8647e7a
 Source5:	http://go-ooo.org/packages/libwpd/libwpd-0.8.0.tar.gz
@@ -125,6 +125,9 @@ BuildRequires:	libart_lgpl-devel
 BuildRequires:	libstdc++-devel >= 5:3.2.1
 BuildRequires:	libxml2-devel
 BuildRequires:	libjpeg-devel
+BuildRequires:	nss-devel
+BuildRequires:	nspr-devel
+BuildRequires:	mozilla-devel
 BuildRequires:	nas-devel
 BuildRequires:	neon-devel
 BuildRequires:	openldap-devel
@@ -1904,6 +1907,7 @@ CONFOPTS=" \
 	--with-system-sablot \
 	--with-system-boost \
 	--with-system-neon \
+	--with-system-mozilla \
 	--with-dynamic-xinerama \
 	--with-vendor="${DISTRO}" \
 	--with-distro="${DISTRO}" \
@@ -1929,7 +1933,6 @@ CONFOPTS=" \
 	--without-fonts \
 	--without-gpc \
 	--disable-epm \
-	--disable-mozilla \
 	--disable-fontooo \
 	--enable-openldap \
 	--enable-cups \
