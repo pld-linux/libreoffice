@@ -8,7 +8,7 @@
 
 %define		ver		1.1
 %define		rel		1
-%define		ooobver		1.1.52
+%define		ooobver		1.1.53
 %define		subver		645
 %define		fullver		%{ver}.%{rel}
 %define		dfullver	%(echo %{fullver} | tr . _)
@@ -23,17 +23,18 @@ Epoch:		1
 License:	GPL/LGPL
 Group:		X11/Applications
 Source0:	http://ooo.ximian.com/packages/OOO_%{dfullver}/ooo-build-%{ooobver}.tar.gz
-# Source0-md5:	008d9f13076bc78fdb4e7720d6591bc8
+# Source0-md5:	ef3ddb2cbdbe029b3b1cbdd1d82cea8c
 Source1:	http://ooo.ximian.com/packages/OOO_%{dfullver}/OOO_%{dfullver}.tar.bz2
 # Source1-md5:	550381bc429fbbda54cb84758f14e010
-Source2:	http://ooo.ximian.com/packages/ooo-icons-OOO_1_1-8.tar.gz
-# Source2-md5:	61c9379fa718ee7f36ccd2d70f3649c8
-Source3:	http://ep09.pld-linux.org/~adgor/pld/%{name}-desktopfiles-0.2.tar.bz2
-# Source3-md5:	78ae3bef3e98f711b1afe9fb5717b42e
+Source2:	http://ooo.ximian.com/packages/ooo-icons-OOO_1_1-9.tar.gz
+# Source2-md5:	32a0e62f89ef36a91437fc705fbe6440
+Source3:	http://kde.openoffice.org/files/documents/159/1785/ooo-KDE_icons-OOO_1_1-0.1.tar.gz
+# Source3-md5:	5157d4453d17cae586ce24989d34357a
+Source10:	http://ep09.pld-linux.org/~adgor/pld/%{name}-desktopfiles-0.2.tar.bz2
 
 # PLD splash screen
-Source4:	%{name}-about.bmp
-Source5:	%{name}-intro.bmp
+Source20:	%{name}-about.bmp
+Source21:	%{name}-intro.bmp
 
 %define		cftp	http://ftp.services.openoffice.org/pub/OpenOffice.org/contrib
 
@@ -857,6 +858,7 @@ chiñskim dla Tajwanu.
 install -d src
 ln -s %{SOURCE1} src/
 ln -s %{SOURCE2} src/
+ln -s %{SOURCE3} src/
 
 %build
 CC=%{__cc}
