@@ -212,13 +212,14 @@ Do zalet OpenOffice.org mo¿na zaliczyæ:
 
 %package libs
 Summary:	OpenOffice.org shared libraries
-Group:		X11/Applications
+Summary(pl):	Biblioteki dzielone OpenOffice.org
+Group:		X11/Libraries
 
 %description libs
-OpenOffice.org productivity suite - shared libraries
+OpenOffice.org productivity suite - shared libraries.
 
 %description libs -l pl
-Pakiet biurowy OpenOffice.org - biblioteki
+Pakiet biurowy OpenOffice.org - biblioteki.
 
 %prep
 CC=%{__cc}
@@ -320,14 +321,21 @@ chmod u+rx compile
 rm -rf $RPM_BUILD_ROOT
 install -d $RPM_BUILD_ROOT%{_libdir}/openoffice
 
-#cp solver/%{subver}/%{_archbuilddir}/bin/setup_services.rdb solver/%{subver}/%{_archbuilddir}/bin/uno_writerdb.rdb
-#rm -f f0_061
-#zip -j -5 "f0_061" solver/%{subver}/%{_archbuilddir}/bin/uno_writerdb.rdb
-#mv f0_061.zip %{installpath}/%{langinst}/normal/f0_061
+cp solver/%{subver}/%{_archbuilddir}/bin/setup_services.rdb solver/%{subver}/%{_archbuilddir}/bin/uno_writerdb.rdb
+rm -f f0_061
+zip -j -5 "f0_061" solver/%{subver}/%{_archbuilddir}/bin/uno_writerdb.rdb
+mv f0_061.zip %{installpath}/%{langinst}/normal/f0_061
 
 %{init_xdisplay}
 RESPONSE_FILE=$PWD/rsfile.ins
-(cd %{installpath}/%{langinst}/normal/;
+OLDPATH="`pwd`"
+cd %{installpath}/%{langinst}/normal/
+  # --short-circuit support
+  if [ -f setup.ins.oorg ]; then
+	cp -f setup.ins.oorg setup.ins
+  else
+	cp -f setup.ins setup.ins.oorg
+  fi
   cat %{SOURCE2} | sed -e "s|@DESTDIR@|$RPM_BUILD_ROOT%{_libdir}/openoffice|" > $RESPONSE_FILE
 
   # Add additional wordbooks
@@ -375,7 +383,7 @@ EOF
 
   DISPLAY=:$XDISPLAY ./setup -R:$RESPONSE_FILE
 #  ./setup -R:$RESPONSE_FILE
-)
+cd "$OLDPATH"
 %{kill_xdisplay}
 
 # Copy all localized resources to destination directory
@@ -392,14 +400,14 @@ for file in s*.zip; do
   [[ "$dir" = "shared" ]] && dir="common"
   prefix=`echo $file | sed -e "s/s[a-z]*\([0-9]*\).zip/\1/"`
   langname=`cat %{SOURCE9} | grep ^$prefix | cut -d: -f2`
+  install -d $RPM_BUILD_ROOT%{_libdir}/openoffice/help/$langname
   unzip -d $RPM_BUILD_ROOT%{_libdir}/openoffice/help/$langname -o $file
 done
 rm -f *.zip
 
-
 for file in solver/%{subver}/%{_archbuilddir}/pck/autocorr*.zip
 do
-  [[ -z `echo "$file" | grep "01"` ]] && unzip -o -d $RPM_BUILD_ROOT%{_libdir}/openoffice/share/autocorr $file
+  [[ -n `echo "$file" | grep "01"` ]] || unzip -o -d $RPM_BUILD_ROOT%{_libdir}/openoffice/share/autocorr $file
 done
 
 for prefix in `(cd solver/%{subver}/%{_archbuilddir}/bin/ ; echo [0-9][0-9] ) | sed s@solver/%{subver}/%{_archbuilddir}/bin/@@ | sed s/01//`
@@ -407,8 +415,8 @@ do
   language=`cat %{SOURCE9} | grep ^$prefix | cut -d: -f5`
   lang=`cat %{SOURCE9} | grep ^$prefix | cut -d: -f6`
 
-  install -d $RPM_BUILD_ROOT%{_libdir}/openoffice/share/template/$language/wizard
   install -d $RPM_BUILD_ROOT%{_libdir}/openoffice/share/template/$language/wizard/styles
+  install -d $RPM_BUILD_ROOT%{_libdir}/openoffice/share/template/$language/wizard/web
   install -d $RPM_BUILD_ROOT%{_libdir}/openoffice/share/template/$language/internal
 
 # WRITEME:
@@ -418,23 +426,25 @@ do
 #    mv $p `echo $p | sed s@\\.@_\\.@`
 #  done
 
+  install -d $RPM_BUILD_ROOT%{_libdir}/openoffice/user/autotext/$language
+  install -d $RPM_BUILD_ROOT%{_libdir}/openoffice/share/autotext/$language
   for file in solver/%{subver}/%{_archbuilddir}/pck/*$prefix.zip
   do
-    pf=`$file | sed s@solver/%{subver}/%{_archbuilddir}/pck/@@ | sed s/[0-9]*// | sed s/.zip//` | sed s/01//
+    pf=`echo $file | sed s@solver/%{subver}/%{_archbuilddir}/pck/@@ | sed -e 's/[0-9]\+\.zip$//'`
     if [ -f $file ]
     then
-    [[ ! "$pf" = "autotextuser" ]] && unzip -o -d $RPM_BUILD_ROOT%{_libdir}/openoffice/user/autotext/$language $file
-    [[ ! "$pf" = "autotextshare" ]] && unzip -o -d $RPM_BUILD_ROOT%{_libdir}/openoffice/share/autotext/$language $file
+    [[ ! "$pf" = "autotextuser" ]] || unzip -o -d $RPM_BUILD_ROOT%{_libdir}/openoffice/user/autotext/$language $file
+    [[ ! "$pf" = "autotextshare" ]] || unzip -o -d $RPM_BUILD_ROOT%{_libdir}/openoffice/share/autotext/$language $file
 # WRITEME:
-#    [[ ! "$pf" = "tpllayoutimpr" ]] && unzip -o -d $RPM_BUILD_ROOT%{_libdir}/openoffice/share/template/$language $file
-#    [[ ! "$pf" = "tplpresntimpr" ]] && unzip -o -d $RPM_BUILD_ROOT%{_libdir}/openoffice/share/template $file
-    [[ ! "$pf" = "tplwizagenda" ]] && unzip -o -d $RPM_BUILD_ROOT%{_libdir}/openoffice/share/template/$language/wizard $file
-    [[ ! "$pf" = "tplwizdesktop" ]] && unzip -o -d $RPM_BUILD_ROOT%{_libdir}/openoffice/share/template/$language/internal $file
-    [[ ! "$pf" = "tplwizfax" ]] && unzip -o -d $RPM_BUILD_ROOT%{_libdir}/openoffice/share/template/$language/wizard $file
-    [[ ! "$pf" = "tplwizhomepage" ]] && unzip -o -d $RPM_BUILD_ROOT%{_libdir}/openoffice/share/template/$language/wizard/web $file
-    [[ ! "$pf" = "tplwizletter" ]] && unzip -o -d $RPM_BUILD_ROOT%{_libdir}/openoffice/share/template/$language/wizard $file
-    [[ ! "$pf" = "tplwizmemo" ]] && unzip -o -d $RPM_BUILD_ROOT%{_libdir}/openoffice/share/template/$language/wizard $file
-    [[ ! "$pf" = "tplwizstyles" ]] && unzip -o -d $RPM_BUILD_ROOT%{_libdir}/openoffice/share/template/$language/wizard/styles $file
+#    [[ ! "$pf" = "tpllayoutimpr" ]] || unzip -o -d $RPM_BUILD_ROOT%{_libdir}/openoffice/share/template/$language $file
+#    [[ ! "$pf" = "tplpresntimpr" ]] || unzip -o -d $RPM_BUILD_ROOT%{_libdir}/openoffice/share/template $file
+    [[ ! "$pf" = "tplwizagenda" ]] || unzip -o -d $RPM_BUILD_ROOT%{_libdir}/openoffice/share/template/$language/wizard $file
+    [[ ! "$pf" = "tplwizdesktop" ]] || unzip -o -d $RPM_BUILD_ROOT%{_libdir}/openoffice/share/template/$language/internal $file
+    [[ ! "$pf" = "tplwizfax" ]] || unzip -o -d $RPM_BUILD_ROOT%{_libdir}/openoffice/share/template/$language/wizard $file
+    [[ ! "$pf" = "tplwizhomepage" ]] || unzip -o -d $RPM_BUILD_ROOT%{_libdir}/openoffice/share/template/$language/wizard/web $file
+    [[ ! "$pf" = "tplwizletter" ]] || unzip -o -d $RPM_BUILD_ROOT%{_libdir}/openoffice/share/template/$language/wizard $file
+    [[ ! "$pf" = "tplwizmemo" ]] || unzip -o -d $RPM_BUILD_ROOT%{_libdir}/openoffice/share/template/$language/wizard $file
+    [[ ! "$pf" = "tplwizstyles" ]] || unzip -o -d $RPM_BUILD_ROOT%{_libdir}/openoffice/share/template/$language/wizard/styles $file
     fi
 # FINDME:
 # /openoffice/share/templates/samples
@@ -462,7 +472,8 @@ rm -rf $RPM_BUILD_ROOT%{_libdir}/openoffice/program/libdb_*
 # Fix GNOME & KDE
 install -d $RPM_BUILD_ROOT%{_datadir}
 install -d $RPM_BUILD_ROOT%{_pixmapsdir}
-mv $RPM_BUILD_ROOT%{_libdir}/openoffice/share/kde/net/mimelnk/share/* $RPM_BUILD_ROOT%{_datadir}
+mv $RPM_BUILD_ROOT%{_libdir}/openoffice/share/kde/net/mimelnk/share/mimelnk $RPM_BUILD_ROOT%{_datadir}
+mv $RPM_BUILD_ROOT%{_libdir}/openoffice/share/kde/net/mimelnk/share/icons/* $RPM_BUILD_ROOT%{_pixmapsdir}
 mv $RPM_BUILD_ROOT%{_libdir}/openoffice/share/icons/* $RPM_BUILD_ROOT%{_pixmapsdir}
 rm -rf $RPM_BUILD_ROOT%{_libdir}/openoffice/share/kde
 rm -rf $RPM_BUILD_ROOT%{_libdir}/openoffice/share/cde
@@ -471,11 +482,12 @@ rm -rf $RPM_BUILD_ROOT%{_libdir}/openoffice/share/icons
 
 # Now fixup Common.xml
 COMMON_XML_SED=$PWD/%{installpath}/%{langinst}/normal/Common.xml.sed
-(cd $RPM_BUILD_ROOT%{_libdir}/openoffice/share/config/registry/instance/org/openoffice/Office/;
+OLDPATH="`pwd`"
+cd $RPM_BUILD_ROOT%{_libdir}/openoffice/share/config/registry/instance/org/openoffice/Office/
   sed -e "s|<cfg:string cfg:type=\"string\" cfg:name=\"\([^\"]*\)\"\(>@@REPLACEME.*@@</cfg:\)string>|<cfg:value xml:lang=\"\1\"\2value>|" Common.xml > Common.xml.tmp
   sed -f $COMMON_XML_SED Common.xml.tmp > Common.xml
   rm -f Common.xml.tmp
-)
+cd "$OLDPATH"
 
 # Fixup instdb.ins to get rid of $RPM_BUILD_ROOT
 perl -pi -e "s|$RPM_BUILD_ROOT||g" $RPM_BUILD_ROOT%{_libdir}/openoffice/program/instdb.ins
@@ -497,7 +509,6 @@ ln -sf %{_libdir}/openoffice/program/soffice $RPM_BUILD_ROOT%{_libdir}/openoffic
 # Fixup installation directory
 perl -pi -e "s|$RPM_BUILD_ROOT||g" \
   $RPM_BUILD_ROOT%{_libdir}/openoffice/share/config/registry/instance/org/openoffice/Office/Common.xml
-
 
 # Install autoresponse file for user installation
 install -d $RPM_BUILD_ROOT%{_sysconfdir}/openoffice
@@ -527,6 +538,7 @@ echo 'UNO_WRITERDB=$SYSUSERCONFIG/.user60.rdb
 # Install additional dictionaries
 rm -rf a8ldict
 install -d a8ldict
+install -d $RPM_BUILD_ROOT%{_libdir}/openoffice/share/dict/ooo
 for dict in %{wordbooks}; do
   loc=`echo $dict | sed 's~^.*/\([a-zA-Z_]*\).zip$~\1~'`
   lang=`echo $loc | sed 's~_.*$~~'`
@@ -568,44 +580,41 @@ rm -rf $RPM_BUILD_ROOT
 ####################
 %files
 %defattr(644,root,root,755)
-#%doc readlicense/source/license/unx/LICENSE
+%doc readlicense/source/license/unx/LICENSE
 %doc %{_libdir}/openoffice/LICENSE*
 %doc %{_libdir}/openoffice/README*
 
-#%doc licenses/{README.gpc,COPYING,COPYING.LIB}
-#%attr(644,root,root) %{_libdir}/openoffice/LICENSE*
-#%attr(644,root,root) %{_libdir}/openoffice/README*
-
-#%dir %{_sysconfdir}/openoffice/
+%dir %{_sysconfdir}/openoffice
 %config %{_sysconfdir}/openoffice/autoresponse.conf
 
 %{_applnkdir}/Office
-%{_pixmapsdir}
+%{_pixmapsdir}/*.png
 
-%{_datadir}/icons/locolor/16x16/apps/*.xpm
-%{_datadir}/icons/locolor/32x32/apps/*.xpm
-%{_datadir}/icons/hicolor/32x32/apps/*.xpm
-%{_datadir}/icons/hicolor/48x48/apps/*.xpm
+%{_pixmapsdir}/locolor/16x16/apps/*.xpm
+%{_pixmapsdir}/locolor/32x32/apps/*.xpm
+%{_pixmapsdir}/hicolor/32x32/apps/*.xpm
+%{_pixmapsdir}/hicolor/48x48/apps/*.xpm
 
 %{_datadir}/mimelnk/application/*
 
+%{_libdir}/openoffice/program/*.rdb
+%{_libdir}/openoffice/program/*.bmp
+
+%{_libdir}/openoffice/program/sofficerc
+%{_libdir}/openoffice/program/unorc
+%{_libdir}/openoffice/program/bootstraprc
+%{_libdir}/openoffice/program/configmgrrc
+%{_libdir}/openoffice/program/instdb.ins
+
+# dirs/trees
 %{_libdir}/openoffice/program/classes
-
-%attr(644,root,root) %{_libdir}/openoffice/program/*.rdb
-%attr(644,root,root) %{_libdir}/openoffice/program/*.bmp
-%attr(644,root,root) %{_libdir}/openoffice/program/sofficerc
-%attr(644,root,root) %{_libdir}/openoffice/program/unorc
-%attr(644,root,root) %{_libdir}/openoffice/program/bootstraprc
-%attr(644,root,root) %{_libdir}/openoffice/program/configmgrrc
-%attr(644,root,root) %{_libdir}/openoffice/program/instdb.ins
-
-%attr(644,root,root) %{_libdir}/openoffice/program/resource/*
-%attr(644,root,root) %{_libdir}/openoffice/program/addin/source
-%attr(644,root,root) %{_libdir}/openoffice/program/component.reg
-%attr(644,root,root) %{_libdir}/openoffice/program/components/*.xpt
-%attr(644,root,root) %{_libdir}/openoffice/program/components/*.dat
-
+%{_libdir}/openoffice/program/resource
+%{_libdir}/openoffice/program/addin
 %{_libdir}/openoffice/program/defaults
+
+%{_libdir}/openoffice/program/component.reg
+%{_libdir}/openoffice/program/components/*.xpt
+%{_libdir}/openoffice/program/components/*.dat
 
 %{_libdir}/openoffice/help
 %{_libdir}/openoffice/share
@@ -630,7 +639,12 @@ rm -rf $RPM_BUILD_ROOT
 
 %files libs
 %defattr(644,root,root,755)
-%attr(755,root,root) %{_libdir}/openoffice/program/filter/*.so
-%attr(755,root,root) %{_libdir}/openoffice/program/components/*.so
+%dir %{_libdir}/openoffice
+%dir %{_libdir}/openoffice/program
+%dir %{_libdir}/openoffice/program/components
+%dir %{_libdir}/openoffice/program/filter
+
 %attr(755,root,root) %{_libdir}/openoffice/program/*.so
 %attr(755,root,root) %{_libdir}/openoffice/program/*.so.*
+%attr(755,root,root) %{_libdir}/openoffice/program/components/*.so
+%attr(755,root,root) %{_libdir}/openoffice/program/filter/*.so
