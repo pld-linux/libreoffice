@@ -1007,6 +1007,9 @@ mv vcl.kde vcl
 %install
 rm -rf $RPM_BUILD_ROOT
 
+# limit to single process installation, it's safe at least
+sed -i -e 's#^BUILD_NCPUS=.*#BUILD_NCPUS=1#g' bin/setup
+
 DESTDIR=$RPM_BUILD_ROOT; export DESTDIR
 TMP="%{tmpdir}"; export TMP
 TEMP="%{tmpdir}"; export TEMP
