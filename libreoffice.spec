@@ -1164,15 +1164,6 @@ rm -f $RPM_BUILD_ROOT%{_libdir}/%{name}/program/libgcc_s.so* \
 # Find out locales
 rm -f *.lang
 langlist="`bin/openoffice-xlate-lang -i all`"
-#for lang in $RPM_BUILD_ROOT%{_libdir}/%{name}/share/registry/res/*; do
-#	[ ! -d "$lang" ] && continue
-#	langlist="$langlist $(echo "$lang" | sed -e 's#.*/\(.*\)#\1#g')"
-#done
-#for lang in $RPM_BUILD_ROOT%{_libdir}/%{name}/help/*; do
-#	[ ! -d "$lang" ] && continue
-#	langlist="$langlist $(echo "$lang" | sed -e 's#.*/\(.*\)#\1#g')"
-#done
-#langlist=$(echo "$langlist" | tr ' ' '\n' | sort | uniq | xargs)
 
 for lang in $langlist; do
 	echo "%%defattr(644,root,root,755)" > ${lang}.lang
@@ -1185,19 +1176,6 @@ for lang in $langlist; do
 	if [ -f build/lang_${lang}_list.txt ]; then
 		cat build/lang_${lang}_list.txt >> ${lang}.lang
 	fi
-	# registry res
-#	if [ "lang" = "en" ]; then
-#		rlang="en-US"
-#	else
-#		rlang="$lang"
-#	fi
-#	if (ls $RPM_BUILD_ROOT%{_libdir}/%{name}/share/registry/res/${rlang} 2> /dev/null); then
-#		echo "%{_libdir}/%{name}/share/registry/res/${lang}" >> ${rlang}.lang
-#		perl -pi -e "s#.*%{_libdir}/%{name}/share/registry/res/${rlang}/.*##g" build/lang_*_list.txt
-#	fi
-
-	# files from lang_*_list.txt
-#	ls build/lang_${lang}_list.txt 2> /dev/null && sed -e "s#$RPM_BUILD_ROOT##g" build/lang_${lang}_list.txt >> ${lang}.lang || /bin/true
 done
 
 find $RPM_BUILD_ROOT -type f -name '*.so' -exec chmod 755 "{}" ";"
