@@ -1,0 +1,10 @@
+--- oo_1.0_src/psprint/source/fontmanager/fontcache.cxx.fontcache	Wed Mar  6 11:09:10 2002
++++ oo_1.0_src/psprint/source/fontmanager/fontcache.cxx	Fri Apr 12 13:39:43 2002
+@@ -466,6 +466,7 @@
+     pTo->m_aAliases			= pFrom->m_aAliases;
+     pTo->m_nPSName			= pFrom->m_nPSName;
+     pTo->m_eItalic			= pFrom->m_eItalic;
++    pTo->m_eWeight			= pFrom->m_eWeight;
+     pTo->m_eWidth			= pFrom->m_eWidth;
+     pTo->m_ePitch			= pFrom->m_ePitch;
+     pTo->m_aEncoding		= pFrom->m_aEncoding;
