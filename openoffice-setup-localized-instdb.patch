@@ -1,0 +1,60 @@
+--- oo_1.0.1_src/setup2/inc/main.hxx.setup-localized-instdb	2002-05-31 12:05:00.000000000 +0200
++++ oo_1.0.1_src/setup2/inc/main.hxx	2002-09-03 14:19:40.000000000 +0200
+@@ -165,6 +165,7 @@ private:
+ 	ByteString			m_aParamDestPath;
+ 	ByteString			m_aParamFollowApp;
+ 	ByteString			m_SetupIniSourcePath;
++	ByteString			m_aInstDBLanguageSuffix;
+ 	int				  	m_nLanguage;
+ 	USHORT 				m_nWorkStationCnt;
+ 	USHORT 				m_nWorkStationIdx;
+--- oo_1.0.1_src/setup2/source/ui/main.cxx.setup-localized-instdb	2002-07-15 01:20:24.000000000 +0200
++++ oo_1.0.1_src/setup2/source/ui/main.cxx	2002-09-03 15:12:15.000000000 +0200
+@@ -1294,6 +1294,13 @@ UniString SetupApp::ReadParams()
+ 			}
+ 			else
+ 			//////////////////////////////////////
++			//	LANG:(instdb.ins language suffix)
++			if( aParamPrefix == "LANG:" )
++			{
++				m_aInstDBLanguageSuffix = aParamPostfix;
++			}
++			else
++			//////////////////////////////////////
+ 			//	SDUMP
+ 			if( aParamName == "SDUMP" )
+ 			{
+@@ -1401,6 +1408,12 @@ BOOL SetupApp::FindAndReadScript()
+ 	BOOL bWorkstation = FALSE;
+ 
+ 	ByteString aScriptName( SETUP_INSTDB_FILE );
++	if ( m_aInstDBLanguageSuffix.Len() )
++	{
++		aScriptName += ".";
++		aScriptName += m_aInstDBLanguageSuffix;
++	}
++
+ 	SiDirEntry aScript (m_pEnv->GetStartPath());
+ 	aScript += aScriptName;
+ 
+@@ -1410,6 +1423,20 @@ BOOL SetupApp::FindAndReadScript()
+ 		aScript += aScriptName;
+ 	}
+ 
++	// Fallback to default script
++	if( !aScript.Exists() && m_aInstDBLanguageSuffix.Len() )
++	{
++		aScriptName.Assign( SETUP_INSTDB_FILE );
++		aScript = SiDirEntry( m_pEnv->GetStartPath() );
++		aScript += aScriptName;
++
++		while( (!aScript.Exists()) && (aScript.Level() > 2) )
++		{
++			aScript = aScript[2];
++			aScript += aScriptName;
++		}
++	}
++
+ 	if( aScript.Exists() )
+ 	{
+ 		m_pEnv->SetFirstInstallation(FALSE);
