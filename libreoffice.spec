@@ -779,7 +779,12 @@ cd config_office
 
 cd ..
 
+%ifarch %{x86}
 echo -e "#!/bin/tcsh\nsource LinuxIntelEnv.Set\ndmake -p -v\n" > compile
+%fi
+%ifarch ppc
+echo -e "#!/bin/tcsh\nsource LinuxPPCEnv.Set\ndmake -p -v\n" > compile
+%fi
 echo -e "#!/bin/tcsh\n./bootstrap\n" > prep
 chmod u+rx prep compile
 ./prep
