@@ -911,7 +911,7 @@ if [ -z "$RPM_BUILD_NCPUS" ] ; then
 fi
 
 # parallel build is broken
-RPM_BUILD_NCPUS=4
+RPM_BUILD_NCPUS=1
 
 CONFOPTS=" \
 	--with-ccache-allowed \
@@ -964,7 +964,8 @@ CONFIGURE_OPTIONS="$CONFOPTS"; export CONFIGURE_OPTIONS
 if [ "$RPM_BUILD_NCPUS" -gt 1 ]; then
 	doit=1
 	while [ "$doit" -eq 1 ]; then
-		FCH=$(nice -n 20 find . -type f ! -mmin +3 -print | wc -l)
+		echo "Waiting one more time..."
+		FCH=$(nice -n 20 find . -type f ! -mmin +3 -print 2> /dev/null | wc -l)
 		[ "$FCH" -eq 0 ] && doit=0
 	done
 fi
