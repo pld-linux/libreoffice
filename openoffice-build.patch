@@ -140,3 +140,44 @@ diff -urN ooo-build-1.3.5.org/patches/vclplug/vcl-util.diff ooo-build-1.3.5/patc
  +SHL4TARGET=vclplug_gtk$(UPD)$(DLLPOSTFIX)
  +SHL4IMPLIB=igtk_plug_
  +SHL4LIBS=$(LIB4TARGET)
+Index: bin/package-ooo
+===================================================================
+RCS file: /cvs/gnome/ooo-build/bin/package-ooo,v
+retrieving revision 1.51
+diff -u -u -r1.51 package-ooo
+--- ooo-build.org/bin/package-ooo	24 Sep 2004 17:43:51 -0000	1.51
++++ ooo-build/bin/package-ooo	10 Oct 2004 14:03:37 -0000
+@@ -52,6 +52,33 @@
+     cat <<EOT >$2
+ #!/bin/sh
+ 
++# Keep in ~sync with ooo-wrapper
++
++SystemInstallDir="$OOINSTBASE"
++
++if [ -n "\$GNOME_DESKTOP_SESSION_ID" -a -d "\$SystemInstallDir/program/resource.gnome" ]; then
++    icon_set="gnome"
++elif [ -n "\$KDE_FULL_SESSION" -a -d "\$SystemInstallDir/program/resource.kde" ]; then
++    icon_set="kde"
++fi
++
++if [ -z "\$icon_set" ]; then
++    if [ -d "\$SystemInstallDir/program/resource.default" ]; then
++	icon_set="default"
++    elif [ -d "\$SystemInstallDir/program/resource.kde" ]; then
++	icon_set="kde"
++    elif [ -d "\$SystemInstallDir/program/resource.gnome" ]; then
++	icon_set="gnome"
++    else
++	icon_set="default"
++    fi
++fi
++    
++if [ -d "\$SystemInstallDir/program/resource.\$icon_set" ]; then
++    OOO_PREFERRED_RESOURCE_PATH="\$SystemInstallDir/program/resource.\$icon_set"
++    export OOO_PREFERRED_RESOURCE_PATH
++fi
++
+ exec "$1" "\$@"
+ EOT
+     chmod 755 $2
