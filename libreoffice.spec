@@ -2,6 +2,7 @@
 # 	- everything
 #	- PLD vendor list of patches to apply in patches/*/appply?
 #	- drop requirement on XFree86-static
+#	- drop requirement on nas-devel
 #	- fix locale names and other locale related things
 #	- --with-system-myspell + myspell package as in Debian
 #	- --with-system-neon - check compilation
@@ -104,6 +105,7 @@ BuildRequires:	freetype-devel >= 2.1
 BuildRequires:	libstdc++-devel >= 3.2.1
 BuildRequires:	curl-devel
 BuildRequires:	unixODBC-devel
+BuildRequires:	nas-devel
 BuildRequires:	sane-backends-devel
 BuildRequires:	pam-devel
 BuildRequires:	python-devel
@@ -920,6 +922,7 @@ CONFOPTS=" \
 	--with-system-db \
 	--with-system-curl \
 	--with-system-freetype \
+	--with-system-nas \
 	--with-vendor="PLD" \
 	--with-distro="PLD" \
 %if %{with kde}
