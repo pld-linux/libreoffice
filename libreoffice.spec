@@ -7,16 +7,21 @@
 # - split %{oolib}/share/registry
 # - fix bison for gcc 3.3
 
+%define		ver		1.1
+%define		rel		rc
+%define		fullver		%{ver}%{rel}
+
 Summary:	OpenOffice - powerful office suite
 Summary(pl):	OpenOffice - potê¿ny pakiet biurowy
 Name:		openoffice
-Version:	1.1beta2
-Release:	0.95.rc1
+Version:	%{ver}
+Release:	0.%{rel}.1
 Epoch:		1
 License:	GPL/LGPL
 Group:		X11/Applications
-Source0:	ftp://ftp1.openoffice.pl/pub/OpenOffice.ORG/stable/%{version}/OOo_%{version}_source.tar.bz2
-# Source0-md5:	c1d9a96fa644968a76f9b4fbd3f18cf2
+# Previous url: ftp://ftp.openoffice.pl/pub/OpenOffice.ORG/stable/%{fullver}/OOo_%{fullver}_source.tar.bz2
+Source0:	ftp://sunsite.icm.edu.pl/packages/OpenOffice/official/stable/%{fullver}/OOo_%{fullver}_source.tar.bz2
+# Source0-md5:	8096b6f9d9987cac2b20f651a8c2f7d1
 Source1:	ftp://ftp.cs.man.ac.uk/pub/toby/gpc/gpc231.tar.Z
 # Source1-md5:	fdb06fdb5a4670b172f9fb738b717be9
 Source2:	%{name}-rsfile.txt
@@ -89,20 +94,10 @@ Patch30:	%{name}-system-zlib.patch
 Patch31:	%{name}-system-mozilla.patch
 Patch32:	%{name}-fix-errno.patch
 
-
-# beta 1.1:
-Patch51:	%{name}-solenv.patch
 Patch52:	%{name}-xmlhelp.patch
-Patch53:	%{name}-i18nutil.patch
-Patch54:	%{name}-i18npool.patch
-Patch55:	%{name}-ea.patch
-Patch56:	%{name}-vcl.patch
-Patch57:	%{name}-xmloff.patch
-Patch58:	%{name}-svx.patch
-Patch59:	%{name}-starmath.patch
-Patch60:	%{name}-sch.patch
-Patch61:	%{name}-sc.patch
-Patch62:	%{name}-sw.patch
+
+Patch63:	%{name}-stlutility.patch
+Patch64:	%{name}-openide.patch
 
 URL:		http://www.openoffice.org/
 %if %{?_with_ra:0}%{!?_with_ra:1}
@@ -123,7 +118,7 @@ BuildRequires:	gcc-c++
 
 BuildRequires:	STLport-devel >= 4.5.3-3
 BuildRequires:	XFree86-devel
-BuildRequires:	XFree86-fonts-PEX
+#BuildRequires:	XFree86-fonts-PEX
 BuildRequires:	XFree86-Xvfb
 BuildRequires:	autoconf
 BuildRequires:	automake
@@ -171,7 +166,7 @@ Requires:	db3
 
 %define	_archbuilddir	unxlngi4.pro
 %define	installpath	instsetoo/%{_archbuilddir}
-%define	subver		644
+%define	subver		645
 %define	langinst	01
 
 # Find a free display (resources generation requires X) and sets XDISPLAY
@@ -521,8 +516,7 @@ Ten pakiet dostarcza zasoby zawieraj±ce menu i okna dialogowe w jêzyku
 chiñskim dla Tajwanu.
 
 %prep
-#cd ../BUILD/ooo_1.1beta2_src
-%setup -q -n ooo_%{version}_src
+%setup -q -n oo_%{fullver}_src
 #%patch0 -p1
 #%patch2 -p1
 
@@ -547,18 +541,9 @@ rm -f moz/prj/d.lst
 %patch31 -p1
 
 # 1.1 BETA
-%patch51 -p1
 %patch52 -p1
-%patch53 -p1
-%patch54 -p1
-%patch55 -p1
-%patch56 -p1
-%patch57 -p1
-%patch58 -p1
-%patch59 -p1
-%patch60 -p1
-%patch61 -p1
-%patch62 -p1
+%patch63 -p1
+%patch64 -p1
 
 # gcc 2 include error hack:
 rm -rf autodoc/source/inc/utility
