@@ -1,0 +1,36 @@
+diff -Nur oo.orig/odk/source/OOSupport/org/netbeans/modules/openoffice/wizard/OOAddInCreateIterator.java oo/odk/source/OOSupport/org/netbeans/modules/openoffice/wizard/OOAddInCreateIterator.java
+--- oo.orig/odk/source/OOSupport/org/netbeans/modules/openoffice/wizard/OOAddInCreateIterator.java	Mon Jul 14 22:14:32 2003
++++ oo/odk/source/OOSupport/org/netbeans/modules/openoffice/wizard/OOAddInCreateIterator.java	Mon Jul 14 22:14:57 2003
+@@ -200,7 +200,7 @@
+         index--;
+     }
+     
+-    public org.openide.WizardDescriptor$Panel current() {
++    public org.openide.WizardDescriptor.Panel current() {
+         return panels[index];
+     }
+     
+diff -Nur oo.orig/odk/source/OOSupport/org/netbeans/modules/openoffice/wizard/OOIDLWizardIterator.java oo/odk/source/OOSupport/org/netbeans/modules/openoffice/wizard/OOIDLWizardIterator.java
+--- oo.orig/odk/source/OOSupport/org/netbeans/modules/openoffice/wizard/OOIDLWizardIterator.java	Tue Sep  3 18:25:06 2002
++++ oo/odk/source/OOSupport/org/netbeans/modules/openoffice/wizard/OOIDLWizardIterator.java	Mon Jul 14 22:15:08 2003
+@@ -207,7 +207,7 @@
+    index--;
+   }
+ 
+-  public org.openide.WizardDescriptor$Panel current()
++  public org.openide.WizardDescriptor.Panel current()
+    {
+      return panels[index];
+    }
+diff -Nur oo.orig/odk/source/OOSupport/org/netbeans/modules/openoffice/wizard/OOServiceCreateIterator.java oo/odk/source/OOSupport/org/netbeans/modules/openoffice/wizard/OOServiceCreateIterator.java
+--- oo.orig/odk/source/OOSupport/org/netbeans/modules/openoffice/wizard/OOServiceCreateIterator.java	Wed Mar 26 14:40:24 2003
++++ oo/odk/source/OOSupport/org/netbeans/modules/openoffice/wizard/OOServiceCreateIterator.java	Mon Jul 14 22:15:20 2003
+@@ -214,7 +214,7 @@
+         index--;
+     }
+     
+-    public org.openide.WizardDescriptor$Panel current() {
++    public org.openide.WizardDescriptor.Panel current() {
+         return panels[index];
+     }
+     
