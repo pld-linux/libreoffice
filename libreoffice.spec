@@ -350,6 +350,7 @@ EOF
 %{kill_xdisplay}
 
 # Copy all localized resources to destination directory
+install -d $RPM_BUILD_ROOT%{_libdir}/openoffice/program/resource
 cp -f solver/%{subver}/%{_archbuilddir}/bin/*.res $RPM_BUILD_ROOT%{_libdir}/openoffice/program/resource
 
 # don't care about main_transform.xsl, it looks safe to overwrite
