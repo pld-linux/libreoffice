@@ -81,6 +81,8 @@ Patch30:	%{name}-system-zlib.patch
 Patch31:	%{name}-system-mozilla.patch
 Patch32:	%{name}-fix-errno.patch
 Patch33:	%{name}-setup-localized-instdb.patch
+# i hate %%{ix86} oriented patch 
+Patch34:	%{name}-system-stlport2.patch
 
 URL:		http://www.openoffice.org/
 %if %{?_with_ra:0}%{!?_with_ra:1}
@@ -148,7 +150,13 @@ Requires:	db3
 
 %define	apps	agenda calc draw fax impress label letter math master memo vcard web writer
 
+%ifarch %{ix86}
 %define	_archbuilddir	unxlngi4.pro
+%endif 
+%ifarch ppc
+%define	_archbuilddir	unxlngppc.pro
+%endif
+
 %define	installpath	instsetoo/%{_archbuilddir}
 %define	subver		641
 %define	langinst	01
@@ -504,6 +512,7 @@ chiñskim dla Tajwanu.
 #%patch2 -p1
 
 %patch4 -p1
+%patch34 -p1
 %patch5 -p1
 %patch6 -p1
 %patch7 -p1
@@ -591,7 +600,12 @@ install %{SOURCE10} solver/%{subver}/%{_archbuilddir}/bin/db.jar
 
 cat <<EOF > compile
 #!/bin/tcsh
+%ifarch %{ix86}
 source LinuxIntelEnv.Set
+%endif
+%ifarch ppc
+source LinuxPPCEnv.Set
+%endif
 dmake -p -v
 EOF
 chmod u+rx compile
