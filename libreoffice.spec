@@ -2198,7 +2198,7 @@ fontpostinst TTF %{_fontsdir}/%{name}
 %exclude %{_libdir}/%{name}/program/libvclplug_gtk*.so
 %exclude %{_libdir}/%{name}/program/libvclplug_kde*.so
 %exclude %{_libdir}/%{name}/program/libfps_kde.so
-%exclude %{_libdir}/%{name}/program/libfps_gtk.so
+%exclude %{_libdir}/%{name}/program/libfps_gnome.so
 %attr(755,root,root) %{_libdir}/%{name}/program/*.so.*
 %attr(755,root,root) %{_libdir}/%{name}/program/filter/*.so
 
@@ -2216,5 +2216,5 @@ fontpostinst TTF %{_fontsdir}/%{name}
 %files libs-gtk -f en.lang.gnome
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_libdir}/%{name}/program/libvclplug_gtk*.so
-%attr(755,root,root) %{_libdir}/%{name}/program/libfps_gtk.so
+%attr(755,root,root) %{_libdir}/%{name}/program/libfps_gnome.so
 %dir %{_libdir}/%{name}/program/resource.gnome
