@@ -4,12 +4,13 @@
 
 # TODO:
 # - finish localzation
-# - czech patches from mandrake
+# - split %{oolib}/share/registry
+# - fix bison for gcc 3.3
 
 Summary:	OpenOffice - powerful office suite
 Summary(pl):	OpenOffice - potê¿ny pakiet biurowy
 Name:		openoffice
-Version:	1.0.2
+Version:	1.1beta2
 Release:	0.95.rc1
 Epoch:		1
 License:	GPL/LGPL
@@ -25,7 +26,7 @@ Source8:	%{name}-wrapper-component
 Source9:	%{name}-langs.txt
 Source10:	%{name}-db3.jar
 Source11:	%{name}-dictionary.lst.readme
-Source12:	ftp://ftp.stardiv.de/pub/OpenOffice.org/developer/1.0.2beta_odk/OOo_1.0.2beta_LinuxIntel_odk.tar.gz
+Source12:	OOo_1.0.2beta2_LinuxIntel_odk.tar.gz
 
 Source101:	ftp://ftp.task.gda.pl/mirror/ftp.openoffice.org/contrib/helpfiles/helpcontent_01_unix.tgz
 Source102:	ftp://ftp.task.gda.pl/mirror/ftp.openoffice.org/contrib/helpfiles/helpcontent_33_unix.tgz
@@ -39,17 +40,14 @@ Source302:	%{name}-dpack-lang.pl
 Source303:	%{name}-transmute-help-errfile.pl
 Source304:	%{name}-create-instdb.pl
 
-Patch0:		%{name}-gcc.patch
+#Patch0:		%{name}-gcc.patch
 #Patch2:		%{name}-mozilla.patch
 # Start using some system libraries:
 Patch4:		%{name}-system-stlport.patch
 Patch5:		%{name}-system-freetype.patch
-Patch6:		%{name}-system-getopt.patch
 Patch7:		%{name}-freetype-2.1.patch
 # Fix broken makefiles
 Patch8:		%{name}-braindamage.patch
-# Fix psprint /euro to /Euro
-Patch10:	%{name}-psprint-euro.patch
 # Fix config_office/configure
 #Patch11:	%{name}-ac.patch
 
@@ -69,20 +67,30 @@ Patch20:	%{name}-no-mozab2.patch
 Patch21:	%{name}-system-db.patch
 Patch22:	%{name}-system_ra-db.patch
 
-Patch23:	%{name}-udm.patch
 Patch24:	%{name}-autodoc.patch
 
 Patch25:	%{name}-xmlsearch.patch
-#Patch26:	%{name}-config-java.patch
 Patch27:	%{name}-sj2-java.patch
 
 Patch29:	%{name}-gcc2-95.patch
 Patch30:	%{name}-system-zlib.patch
 Patch31:	%{name}-system-mozilla.patch
 Patch32:	%{name}-fix-errno.patch
-Patch33:	%{name}-setup-localized-instdb.patch
-# i hate %%{ix86} oriented patch 
-Patch34:	%{name}-system-stlport2.patch
+
+
+# beta 1.1:
+Patch51:	%{name}-solenv.patch
+Patch52:	%{name}-xmlhelp.patch
+Patch53:	%{name}-i18nutil.patch
+Patch54:	%{name}-i18npool.patch
+Patch55:	%{name}-ea.patch
+Patch56:	%{name}-vcl.patch
+Patch57:	%{name}-xmloff.patch
+Patch58:	%{name}-svx.patch
+Patch59:	%{name}-starmath.patch
+Patch60:	%{name}-sch.patch
+Patch61:	%{name}-sc.patch
+Patch62:	%{name}-sw.patch
 
 URL:		http://www.openoffice.org/
 %if %{?_with_ra:0}%{!?_with_ra:1}
@@ -112,7 +120,6 @@ BuildRequires:	flex
 BuildRequires:	freetype-devel >= 2.1
 BuildRequires:	pam-devel
 BuildRequires:	perl
-BuildRequires:	perl(XML::Twig)
 BuildRequires:	tcsh
 BuildRequires:	unzip
 BuildRequires:	zip
@@ -150,15 +157,9 @@ Requires:	db3
 
 %define	apps	agenda calc draw fax impress label letter math master memo vcard web writer
 
-%ifarch %{ix86}
 %define	_archbuilddir	unxlngi4.pro
-%endif 
-%ifarch ppc
-%define	_archbuilddir	unxlngppc.pro
-%endif
-
 %define	installpath	instsetoo/%{_archbuilddir}
-%define	subver		641
+%define	subver		644
 %define	langinst	01
 
 # Find a free display (resources generation requires X) and sets XDISPLAY
@@ -210,19 +211,6 @@ OpenOffice.org productivity suite - shared libraries.
 %description libs -l pl
 Pakiet biurowy OpenOffice.org - biblioteki.
 
-%package devel
-Summary:	OpenOffice.org - header files and development documentation
-Summary(pl):	OpenOffice.org - pliki nag³ówkowe i dokumentacja
-Group:		X11/Development/Libraries
-Requires:	%{name}-libs = %{version}
-
-%description devel
-OpenOffice.org productivity suite - header files and development
-documentation.
-
-%description devel -l pl
-Pakiet biurowy OpenOffice.org - pliki nag³ówkowe i dokumentacja.
-
 #
 # Internationalization
 #
@@ -253,6 +241,20 @@ Catalan language.
 %description i18n-ca -l pl
 Ten pakiet dostarcza zasoby zawieraj±ce menu i okna dialogowe w jêzyku
 kataloñskim.
+
+%package i18n-cs
+Summary:	OpenOffice.org - interface in Czech language
+Summary(pl):	OpenOffice.org - interfejs w jêzyku czeskim
+Group:		Applications/Office
+Requires:	openoffice
+
+%description i18n-cs
+This package provides resources containing menus and dialogs in
+Czech language.
+
+%description i18n-cs -l pl
+Ten pakiet dostarcza zasoby zawieraj±ce menu i okna dialogowe w jêzyku
+czeskim.
 
 %package i18n-da
 Summary:	OpenOffice.org - interface in Danish language
@@ -507,23 +509,17 @@ Ten pakiet dostarcza zasoby zawieraj±ce menu i okna dialogowe w jêzyku
 chiñskim dla Tajwanu.
 
 %prep
-%setup -q -n oo_%{version}_src
-%patch0 -p1
+#cd ../BUILD/ooo_1.1beta2_src
+%setup -q -n ooo_%{version}_src
+#%patch0 -p1
 #%patch2 -p1
 
 %patch4 -p1
-%patch34 -p1
 %patch5 -p1
-%patch6 -p1
 %patch7 -p1
 
-%patch8 -p1
-%patch10 -p1
-#%patch11 -p1
-#%patch13 -p1
-%patch14 -p1
+# Is gpc used at all?? :
 %patch16 -p1
-%patch18 -p1
 
 %patch19 -p1
 %patch20 -p1
@@ -533,20 +529,24 @@ chiñskim dla Tajwanu.
 %patch22 -p1
 %endif
 
-%patch23 -p1
-%patch24 -p1
-%patch25 -p1
-#%patch26 -p1
-%patch27 -p1
-
-%patch29 -p1
-
 %patch30 -p1
 
 rm -f moz/prj/d.lst
 %patch31 -p1
-%patch32 -p1
-%patch33 -p1
+
+# 1.1 BETA
+%patch51 -p1
+%patch52 -p1
+%patch53 -p1
+%patch54 -p1
+%patch55 -p1
+%patch56 -p1
+%patch57 -p1
+%patch58 -p1
+%patch59 -p1
+%patch60 -p1
+%patch61 -p1
+%patch62 -p1
 
 # gcc 2 include error hack:
 rm -rf autodoc/source/inc/utility
@@ -560,8 +560,6 @@ install -d solver/%{subver}/%{_archbuilddir}/lib
 cp -f /lib/libgcc_s.so.1* solver/%{subver}/%{_archbuilddir}/lib
 cp /usr/lib/libstdc++.so.5* solver/%{subver}/%{_archbuilddir}/lib
 %endif
-
-chmod +x solenv/bin/zipdep.pl
 
 ###################
 ## BUILD
@@ -600,12 +598,7 @@ install %{SOURCE10} solver/%{subver}/%{_archbuilddir}/bin/db.jar
 
 cat <<EOF > compile
 #!/bin/tcsh
-%ifarch %{ix86}
 source LinuxIntelEnv.Set
-%endif
-%ifarch ppc
-source LinuxPPCEnv.Set
-%endif
 dmake -p -v
 EOF
 chmod u+rx compile
@@ -617,78 +610,8 @@ chmod u+rx compile
 #########################
 %install
 rm -rf $RPM_BUILD_ROOT
-install -d $RPM_BUILD_ROOT{%{_bindir},%{_sysconfdir}/openoffice}
-install -d $RPM_BUILD_ROOT%{_datadir}/%{name}/{xml,include} 
-install -d $RPM_BUILD_ROOT%{_applnkdir}
-install -d $RPM_BUILD_ROOT%{_pixmapsdir}
-install -d $RPM_BUILD_ROOT%{oolib}/program/resource
 
-#########################
-# DEVEL STUFF
-
-tar zxvf %{SOURCE12}
-
-cat %{sdkpath}/setsdkenv_unix.in | \
-	sed "s#@OO_SDK_HOME@#%{_datadir}/%{name}#" |\
-	sed "s#@OFFICE_HOME@#%{_datadir}/openoffice#" |\
-	sed "s#@OO_SDK_MAKE_HOME@#%{_bindir}#" |\
-	sed "s#@OO_SDK_CPP_HOME@#%{_bindir}#" |\
-	sed "s#@OO_SDK_CPP_HOME@#%{_includedir}/stlport#" |\
-	sed "s#@OO_SDK_JAVA_HOME@#%{_libdir}/java#" |\
-	sed "s#@OO_SDK_ANT_HOME@##" |\
-	sed "s#@SDK_AUTO_DEPLOYMENT@#YES#" > $RPM_BUILD_ROOT%{_bindir}/oosdkenv
-
-cp %{sdkpath}/linux/lib/libofficebean.so $RPM_BUILD_ROOT%{oolib}
-
-cp solver/%{subver}/%{_archbuilddir}/lib/libjuh.so $RPM_BUILD_ROOT%{oolib}
-cp solver/%{subver}/%{_archbuilddir}/lib/libprot_uno_uno.so $RPM_BUILD_ROOT%{oolib}
-cp solver/%{subver}/%{_archbuilddir}/lib/librmcxt.so* $RPM_BUILD_ROOT%{oolib}
-
-cp -rf %{sdkpath}/classes $RPM_BUILD_ROOT%{_datadir}/%{name}
-cp -rf %{sdkpath}/settings $RPM_BUILD_ROOT%{_datadir}/%{name}
-cp -rf %{sdkpath}/examples $RPM_BUILD_ROOT%{_datadir}/%{name}
-
-cp solver/%{subver}/%{_archbuilddir}/xml/acceptor.xml $RPM_BUILD_ROOT%{_datadir}/%{name}/xml
-cp solver/%{subver}/%{_archbuilddir}/xml/corefl.xml $RPM_BUILD_ROOT%{_datadir}/%{name}/xml
-cp solver/%{subver}/%{_archbuilddir}/xml/dynamicloader.xml $RPM_BUILD_ROOT%{_datadir}/%{name}/xml
-cp solver/%{subver}/%{_archbuilddir}/xml/invadp.xml $RPM_BUILD_ROOT%{_datadir}/%{name}/xml
-cp solver/%{subver}/%{_archbuilddir}/xml/module-description.dtd $RPM_BUILD_ROOT%{_datadir}/%{name}/xml
-cp solver/%{subver}/%{_archbuilddir}/xml/rdbtdp.xml $RPM_BUILD_ROOT%{_datadir}/%{name}/xml
-cp solver/%{subver}/%{_archbuilddir}/xml/smgr.xml $RPM_BUILD_ROOT%{_datadir}/%{name}/xml
-cp solver/%{subver}/%{_archbuilddir}/xml/tdmgr.xml $RPM_BUILD_ROOT%{_datadir}/%{name}/xml
-cp solver/%{subver}/%{_archbuilddir}/xml/brdgfctr.xml $RPM_BUILD_ROOT%{_datadir}/%{name}/xml
-cp solver/%{subver}/%{_archbuilddir}/xml/cpld.xml $RPM_BUILD_ROOT%{_datadir}/%{name}/xml
-cp solver/%{subver}/%{_archbuilddir}/xml/impreg.xml $RPM_BUILD_ROOT%{_datadir}/%{name}/xml
-cp solver/%{subver}/%{_archbuilddir}/xml/inv.xml $RPM_BUILD_ROOT%{_datadir}/%{name}/xml
-cp solver/%{subver}/%{_archbuilddir}/xml/namingservice.xml $RPM_BUILD_ROOT%{_datadir}/%{name}/xml
-cp solver/%{subver}/%{_archbuilddir}/xml/remotebridge.xml $RPM_BUILD_ROOT%{_datadir}/%{name}/xml
-cp solver/%{subver}/%{_archbuilddir}/xml/stm.xml $RPM_BUILD_ROOT%{_datadir}/%{name}/xml
-cp solver/%{subver}/%{_archbuilddir}/xml/uuresolver.xml $RPM_BUILD_ROOT%{_datadir}/%{name}/xml
-cp solver/%{subver}/%{_archbuilddir}/xml/connectr.xml $RPM_BUILD_ROOT%{_datadir}/%{name}/xml
-cp solver/%{subver}/%{_archbuilddir}/xml/defreg.xml $RPM_BUILD_ROOT%{_datadir}/%{name}/xml
-cp solver/%{subver}/%{_archbuilddir}/xml/insp.xml $RPM_BUILD_ROOT%{_datadir}/%{name}/xml
-cp solver/%{subver}/%{_archbuilddir}/xml/jen.xml $RPM_BUILD_ROOT%{_datadir}/%{name}/xml
-cp solver/%{subver}/%{_archbuilddir}/xml/proxyfac.xml $RPM_BUILD_ROOT%{_datadir}/%{name}/xml
-cp solver/%{subver}/%{_archbuilddir}/xml/simreg.xml $RPM_BUILD_ROOT%{_datadir}/%{name}/xml
-cp solver/%{subver}/%{_archbuilddir}/xml/tcv.xml $RPM_BUILD_ROOT%{_datadir}/%{name}/xml
-
-
-cp -rf solver/%{subver}/%{_archbuilddir}/inc/bridges $RPM_BUILD_ROOT%{_datadir}/%{name}/include
-cp -rf solver/%{subver}/%{_archbuilddir}/inc/com $RPM_BUILD_ROOT%{_datadir}/%{name}/include
-cp -rf solver/%{subver}/%{_archbuilddir}/inc/cppu $RPM_BUILD_ROOT%{_datadir}/%{name}/include
-cp -rf solver/%{subver}/%{_archbuilddir}/inc/cppuhelper $RPM_BUILD_ROOT%{_datadir}/%{name}/include
-cp -rf solver/%{subver}/%{_archbuilddir}/inc/osl $RPM_BUILD_ROOT%{_datadir}/%{name}/include
-cp -rf solver/%{subver}/%{_archbuilddir}/inc/rtl $RPM_BUILD_ROOT%{_datadir}/%{name}/include
-cp -rf solver/%{subver}/%{_archbuilddir}/inc/sal $RPM_BUILD_ROOT%{_datadir}/%{name}/include
-cp -rf solver/%{subver}/%{_archbuilddir}/inc/salhelper $RPM_BUILD_ROOT%{_datadir}/%{name}/include
-cp -rf solver/%{subver}/%{_archbuilddir}/inc/store $RPM_BUILD_ROOT%{_datadir}/%{name}/include
-cp -rf solver/%{subver}/%{_archbuilddir}/inc/typelib $RPM_BUILD_ROOT%{_datadir}/%{name}/include
-cp -rf solver/%{subver}/%{_archbuilddir}/inc/uno $RPM_BUILD_ROOT%{_datadir}/%{name}/include
-cp -rf solver/%{subver}/%{_archbuilddir}/inc/udkversion.mk $RPM_BUILD_ROOT%{_datadir}/%{name}/include
-
-cp -rf solver/%{subver}/%{_archbuilddir}/idl $RPM_BUILD_ROOT%{_datadir}/%{name}
-# END OF DEVEL STUFF
-#########################
+install -d $RPM_BUILD_ROOT%{oolib}
 
 if [ -z "$DISPLAY" ]; then
 	%{init_xdisplay}
@@ -737,50 +660,38 @@ fi
 cd "$OLDPATH"
 
 # Copy all localized resources to destination directory
+install -d $RPM_BUILD_ROOT%{oolib}/program/resource
 cp -f solver/%{subver}/%{_archbuilddir}/bin/*.res $RPM_BUILD_ROOT%{oolib}/program/resource
 
 # don't care about main_transform.xsl, it looks safe to overwrite
 for file in %{SOURCE101} %{SOURCE102} %{SOURCE103} %{SOURCE104} %{SOURCE105} %{SOURCE106}
 do
-	tar zxvf $file
+  tar zxvf $file
 done
 for file in s*.zip; do
-	dir=`echo $file | sed -e "s/\(s[a-z]*\)[0-9]*.zip/\1/"`
-	[[ "$dir" = "shared" ]] && dir="common"
-	prefix=`echo $file | sed -e "s/s[a-z]*\([0-9]*\).zip/\1/"`
-	langname=`cat %{SOURCE9} | grep ^$prefix | cut -d: -f2`
-	install -d $RPM_BUILD_ROOT%{oolib}/help/$langname
-	unzip -d $RPM_BUILD_ROOT%{oolib}/help/$langname -o $file
+  dir=`echo $file | sed -e "s/\(s[a-z]*\)[0-9]*.zip/\1/"`
+  [[ "$dir" = "shared" ]] && dir="common"
+  prefix=`echo $file | sed -e "s/s[a-z]*\([0-9]*\).zip/\1/"`
+  langname=`cat %{SOURCE9} | grep ^$prefix | cut -d: -f2`
+  install -d $RPM_BUILD_ROOT%{oolib}/help/$langname
+  unzip -d $RPM_BUILD_ROOT%{oolib}/help/$langname -o $file
 done
 rm -f *.zip
 
 #
 # Extract language packs
 #
-OLDPATH="`pwd`"
-NEWPATH="$OLDPATH/%{installpath}"
-cd $NEWPATH
-
-    install %{SOURCE302} oo_dpack_lang
-    install %{SOURCE303} oo_fixup_help
-    install %{SOURCE304} oo_gen_instdb
-
+(
+    cd %{installpath}
+    install -m 755 %{SOURCE302} oo_dpack_lang
+    install -m 755 %{SOURCE303} oo_fixup_help
+    install -m 755 %{SOURCE304} oo_gen_instdb
+    
     LANGS=`echo "%{languages}" | sed -e "s/,/ /g"`
     for res in $LANGS
     do
-	# don't make it for CAT, CZECH, FINN, SLOVAK
-	case $res in
-	CAT|CZECH|FINN|SLOVAK)
-	    continue
-	    ;;
-	*)
-	    ;;
-	esac	
-    
-	cd $NEWPATH
 	prefix=`cat %{SOURCE9} | grep ":$res:" | cut -d: -f1`
 	isocode=`cat %{SOURCE9} | grep ":$res:" | cut -d: -f2`
-	
 	tempdir=$RPM_BUILD_ROOT%{oolib}-$isocode
 	mkdir -p $tempdir
 
@@ -822,12 +733,13 @@ cd $NEWPATH
 	esac
 
 	# link ooo resource files to iso files
-	cd $tempdir/program/resource
+	(
+	    cd $tempdir/program/resource
             file1=`echo ooo*.res`
 	    file2=`echo $file1 | sed "s|ooo|iso|"`
 	    ln -sf $file1 $file2
-		
-	cd $NEWPATH
+	)
+
 	# generate localized instdb.ins files, aka let the right files to
 	# be installed for a user installation
 	if [ "$isocode" != "en" ]; then
@@ -860,7 +772,7 @@ cd $NEWPATH
 	HOWMUCH=`ls $RPM_BUILD_ROOT%{oolib}/help/$isocode 2>/dev/null | wc -l`
 	if [ $HOWMUCH -eq 0 ]; then rm -rf $RPM_BUILD_ROOT%{oolib}/help/$isocode; fi
     done
-cd "$OLDPATH"
+)
 
 mv $RPM_BUILD_ROOT%{oolib}/help/{zh-CN,zh_CN}
 mv $RPM_BUILD_ROOT%{oolib}/help/{zh-TW,zh_TW}
@@ -870,9 +782,10 @@ mv $RPM_BUILD_ROOT%{oolib}/program/instdb.ins.{zh-TW,zh_TW}
 # Remove unnecessary binaries
 for app in %{apps}
 do
-	rm -f $RPM_BUILD_ROOT%{oolib}/program/s${app}
+    rm -f $RPM_BUILD_ROOT%{oolib}/program/s${app}
 done
 
+install -d $RPM_BUILD_ROOT%{_applnkdir}
 gunzip -dc %{SOURCE6} | tar xf - -C $RPM_BUILD_ROOT%{_applnkdir}
 
 ## Remove any fake classes
@@ -883,33 +796,34 @@ rm -rf $RPM_BUILD_ROOT%{oolib}/program/libdb-*
 rm -rf $RPM_BUILD_ROOT%{oolib}/program/libdb_*
 
 # Fix GNOME & KDE
-mv $RPM_BUILD_ROOT%{oolib}/share/kde/net/mimelnk/share/mimelnk $RPM_BUILD_ROOT%{_datadir}
-cp -rf $RPM_BUILD_ROOT%{oolib}/share/kde/net/mimelnk/share/icons/* $RPM_BUILD_ROOT%{_pixmapsdir}
+install -d $RPM_BUILD_ROOT%{_datadir}
+install -d $RPM_BUILD_ROOT%{_pixmapsdir}
+mv $RPM_BUILD_ROOT%{oolib}/share/kde/net/share/mimelnk $RPM_BUILD_ROOT%{_datadir}
+cp -rf $RPM_BUILD_ROOT%{oolib}/share/kde/net/share/icons/* $RPM_BUILD_ROOT%{_pixmapsdir}
 cp -rf $RPM_BUILD_ROOT%{oolib}/share/icons/* $RPM_BUILD_ROOT%{_pixmapsdir}
 rm -rf $RPM_BUILD_ROOT%{oolib}/share/kde
 rm -rf $RPM_BUILD_ROOT%{oolib}/share/cde
 rm -rf $RPM_BUILD_ROOT%{oolib}/share/gnome
 rm -rf $RPM_BUILD_ROOT%{oolib}/share/icons
 
-# Now fixup Common.xml
-COMMON_XML_SED=$PWD/%{installpath}/%{langinst}/normal/Common.xml.sed
-OLDPATH="`pwd`"
-cd $RPM_BUILD_ROOT%{oolib}/share/config/registry/instance/org/openoffice/Office/
-	sed -e "s|<cfg:string cfg:type=\"string\" cfg:name=\"\([^\"]*\)\"\(>@@REPLACEME.*@@</cfg:\)string>|<cfg:value xml:lang=\"\1\"\2value>|" \
-		Common.xml > Common.xml.tmp
-	sed -f $COMMON_XML_SED Common.xml.tmp > Common.xml
-	rm -f Common.xml.tmp
-cd "$OLDPATH"
+## Now fixup Common.xml
+#COMMON_XML_SED=$PWD/%{installpath}/%{langinst}/normal/Common.xml.sed
+#OLDPATH="`pwd`"
+#cd $RPM_BUILD_ROOT%{oolib}/share/config/registry/instance/org/openoffice/Office/
+#  sed -e "s|<cfg:string cfg:type=\"string\" cfg:name=\"\([^\"]*\)\"\(>@@REPLACEME.*@@</cfg:\)string>|<cfg:value xml:lang=\"\1\"\2value>|" Common.xml > Common.xml.tmp
+#  sed -f $COMMON_XML_SED Common.xml.tmp > Common.xml
+#  rm -f Common.xml.tmp
+#cd "$OLDPATH"
 
 # Fixup instdb.ins to get rid of $RPM_BUILD_ROOT
 perl -pi -e "s|$RPM_BUILD_ROOT||g" $RPM_BUILD_ROOT%{oolib}/program/instdb.ins
 perl -pi -e "/^Installation gid_Installation/ .. /^End/ and s|(SourcePath.*)=.*|\1= \"%{oolib}/program\";|" \
-	$RPM_BUILD_ROOT%{oolib}/program/instdb.ins
+  $RPM_BUILD_ROOT%{oolib}/program/instdb.ins
 
 # Disable desktop (KDE, GNOME, CDE) integration for user installs
 for module in GID_MODULE_OPTIONAL_GNOME gid_Module_Optional_Kde gid_Module_Optional_Cde; do
-	perl -pi -e "/^Module $module/ .. /^End/ and s|(Installed.*)=.*|\1= NO;|" \
-		$RPM_BUILD_ROOT%{oolib}/program/instdb.ins
+  perl -pi -e "/^Module $module/ .. /^End/ and s|(Installed.*)=.*|\1= NO;|" \
+    $RPM_BUILD_ROOT%{oolib}/program/instdb.ins
 done
 
 # Fix setup and spadmin symlinks set by OO.org setup program
@@ -920,17 +834,20 @@ ln -sf %{oolib}/program/soffice $RPM_BUILD_ROOT%{oolib}/program/spadmin
 
 # Fixup installation directory
 perl -pi -e "s|$RPM_BUILD_ROOT||g" \
-	$RPM_BUILD_ROOT%{oolib}/share/config/registry/instance/org/openoffice/Office/Common.xml
+  $RPM_BUILD_ROOT%{oolib}/share/config/registry/instance/org/openoffice/Office/Common.xml
 
 # Install autoresponse file for user installation
+install -d $RPM_BUILD_ROOT%{_sysconfdir}/openoffice
 cat %{SOURCE3} > $RPM_BUILD_ROOT%{_sysconfdir}/openoffice/autoresponse.conf
 
 # Install OpenOffice.org wrapper script
+install -d $RPM_BUILD_ROOT%{_bindir}
 cat %{SOURCE7} | sed -e "s/@OOVERSION@/%{subver}/" > $RPM_BUILD_ROOT%{_bindir}/ooffice
 
 # Install component wrapper scripts
+install -d $RPM_BUILD_ROOT%{_bindir}
 for app in %{apps}; do
-	cat %{SOURCE8} | sed -e "s/@APP@/${app}/" > $RPM_BUILD_ROOT%{_bindir}/oo${app}
+  cat %{SOURCE8} | sed -e "s/@APP@/${app}/" > $RPM_BUILD_ROOT%{_bindir}/oo${app}
 done
 
 ## Install new template and gallery content
@@ -971,7 +888,7 @@ FindI18N() {
     for DIR in $DIRS
     do
 	if [ -d "$RPM_BUILD_ROOT/$DIR" ]; then
-	    echo "$DIR" >> "i18n-$1"
+	    echo "%lang($1) $DIR" >> "i18n-$1"
 	fi
     done    
     
@@ -981,39 +898,41 @@ FindI18N() {
 	FILES=`(cd $RPM_BUILD_ROOT%{oolib}/user/config; ls 2>/dev/null | grep "_$4" ||:)`
     fi	
     for FILE in $FILES; do
-        echo "%{oolib}/user/config/$FILE" >> "i18n-$1"
+        echo "%lang($1) %{oolib}/user/config/$FILE" >> "i18n-$1"
     done    
 
     SUBF="abp analysis basctl bib cal cnt date dba dbi dbp dbu"
     SUBF="$SUBF dbw dkt egi eme epb epg epn epp eps ept eur for"
     SUBF="$SUBF frm gal imp iso jvm lgd oem ofa oic ooo pcr preload"
     SUBF="$SUBF san sc sch sd set set_pp1 sfx sm spa stt svs svt"
-    SUBF="$SUBF svx sw tpl tplx uui vcl wwz"
+    SUBF="$SUBF svx sw tpl tplx uui vcl wwz com flash fwe pdffilter"
+    SUBF="$SUBF tk xsltdlg"
     SVER=%{subver}
     
     for FILE in $SUBF
     do
 	F="%{oolib}/program/resource/$FILE$SVER$3.res"
 	if [ -f "$RPM_BUILD_ROOT$F" ]; then
-	    echo "$F" >> "i18n-$1"
+	    echo "%lang($1) $F" >> "i18n-$1"
 	fi	
     done
 
     if [ -f $RPM_BUILD_ROOT/%{oolib}/program/instdb.ins.$1 ]
     then
-	echo "%{oolib}/program/instdb.ins.$1" >> "i18n-$1"
+	echo "%lang($1) %{oolib}/program/instdb.ins.$1" >> "i18n-$1"
     fi
 
     unzip -l solver/%{subver}/%{_archbuilddir}/pck/palletes$3.zip | sed "s/.* //" | awk '(flag==1)&&/----/{exit};(flag==1){print;};/----/{flag=1};' >> "i18n-$1"
     
     if [ ! -d "$RPM_BUILD_ROOT%{oolib}/help/$1" ]; then
 	ln -sf %{oolib}/help/en $RPM_BUILD_ROOT%{oolib}/help/$1
-	echo "%{oolib}/help/$1" >> "i18n-$1"
+	echo "%lang($1) %{oolib}/help/$1" >> "i18n-$1"
     fi
 }
 
 FindI18N ar arabic 96 ""
 FindI18N ca catalan 37 ""
+FindI18N cs czech 42 ""
 FindI18N da danish 45 ""
 FindI18N de german 49 ""
 FindI18N es spanish 34 ""
@@ -1065,14 +984,17 @@ done
 
 %{_applnkdir}/Office
 %{_pixmapsdir}/*.png
+%{_pixmapsdir}/document-icons/*.png
 
 %{_pixmapsdir}/locolor/16x16/apps/*.xpm
+%{_pixmapsdir}/locolor/22x22/apps/*.xpm
 %{_pixmapsdir}/locolor/32x32/apps/*.xpm
+%{_pixmapsdir}/hicolor/16x16/apps/*.xpm
+%{_pixmapsdir}/hicolor/22x22/apps/*.xpm
 %{_pixmapsdir}/hicolor/32x32/apps/*.xpm
 %{_pixmapsdir}/hicolor/48x48/apps/*.xpm
 
 %{_datadir}/mimelnk/application/*
-%exclude %{_datadir}/mimelnk/application/vnd.sun.xml*
 
 %{oolib}/program/*.rdb
 %{oolib}/program/*.bmp
@@ -1085,7 +1007,6 @@ done
 
 # dirs/trees
 %{oolib}/program/classes
-%{oolib}/program/addin
 
 %dir %{oolib}/program/resource
 %{oolib}/program/resource/bmp.res
@@ -1115,6 +1036,10 @@ done
 %{oolib}/share/samples
 %dir %{oolib}/share/template
 %{oolib}/share/wordbook
+%{oolib}/share/readme
+%{oolib}/share/xslt
+# podzieliæ!!!!
+%{oolib}/share/registry
 
 %{oolib}/share/autotext/english
 %{oolib}/share/template/english
@@ -1124,8 +1049,6 @@ done
 %dir %{oolib}/user
 %dir %{oolib}/user/autotext
 %{oolib}/user/basic
-%dir %{oolib}/user/config
-%{oolib}/user/config/registry
 %{oolib}/user/database
 %{oolib}/user/gallery
 %{oolib}/user/psprint
@@ -1148,7 +1071,8 @@ done
 %attr(755,root,root) %{oolib}/program/soffice
 %attr(755,root,root) %{oolib}/program/sopatchlevel.sh
 %attr(755,root,root) %{oolib}/program/spadmin
-
+%attr(755,root,root) %{oolib}/program/getstyle-gnome
+%attr(755,root,root) %{oolib}/program/msgbox-gnome
 
 %files libs
 %defattr(644,root,root,755)
@@ -1162,14 +1086,9 @@ done
 #%%attr(755,root,root) %{oolib}/program/components/*.so -- mozilla
 %attr(755,root,root) %{oolib}/program/filter/*.so
 
-%files devel
-%defattr(644,root,root,755)
-%doc %{sdkpath}/docs/*
-%attr(755,root,root) %{_bindir}/oosdkenv
-%{_datadir}/%{name}
-
 %files i18n-ar -f i18n-ar
 %files i18n-ca -f i18n-ca
+%files i18n-cs -f i18n-cs
 %files i18n-da -f i18n-da
 %files i18n-de -f i18n-de
 %files i18n-el -f i18n-el
