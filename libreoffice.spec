@@ -15,7 +15,7 @@ Summary:	OpenOffice - powerful office suite
 Summary(pl):	OpenOffice - potê¿ny pakiet biurowy
 Name:		openoffice
 Version:	1.0.2
-Release:	0.83
+Release:	0.84
 Epoch:		1
 License:	GPL/LGPL
 Group:		X11/Applications
@@ -219,11 +219,11 @@ OpenOffice.org productivity suite - shared libraries.
 %description libs -l pl
 Pakiet biurowy OpenOffice.org - biblioteki.
 
-%package i18n
+%package i18n-unsorted
 Summary: OpenOffice.org internationalization
 Group: Applications/Office
 
-%description i18n
+%description i18n-unsorted
 OpenOffice.org is an Open Source, community-developed, multi-platform
 office productivity suite.  This package provides spell checker dictionaries
 and resources containing menus and dialogs for various languages.
@@ -589,6 +589,9 @@ rm -f $RPM_BUILD_ROOT%{_libdir}/openoffice/program/libstlport_gcc.so
 rm -f $RPM_BUILD_ROOT%{_libdir}/openoffice/program/libgcc_s.so.1
 
 
+rm -f $RPM_BUILD_ROOT%{_libdir}/openoffice/share/template/{internal,wizard}
+
+
 %post
 
 # Fixup user language to the system set
@@ -649,9 +652,39 @@ fi
 #%%{_libdir}/openoffice/program/components/*.xpt
 #%%{_libdir}/openoffice/program/components/*.dat
 
-%{_libdir}/openoffice/help
-%{_libdir}/openoffice/share
-%{_libdir}/openoffice/user
+%dir %{_libdir}/openoffice/help
+%{_libdir}/openoffice/help/en
+%{_libdir}/openoffice/help/main_transform.xsl
+
+%dir %{_libdir}/openoffice/share
+%{_libdir}/openoffice/share/autocorr
+%dir %{_libdir}/openoffice/share/autotext
+%{_libdir}/openoffice/share/basic
+%{_libdir}/openoffice/share/config
+%dir %{_libdir}/openoffice/share/dict
+%dir %{_libdir}/openoffice/share/dict/ooo
+%{_libdir}/openoffice/share/dtd
+%{_libdir}/openoffice/share/fonts
+%{_libdir}/openoffice/share/gallery
+%{_libdir}/openoffice/share/psprint
+%{_libdir}/openoffice/share/samples
+%dir %{_libdir}/openoffice/share/template
+%{_libdir}/openoffice/share/wordbook
+
+%{_libdir}/openoffice/share/autotext/english
+%{_libdir}/openoffice/share/template/english
+%{_libdir}/openoffice/share/dict/ooo/*en*
+
+
+%dir %{_libdir}/openoffice/user
+%dir %{_libdir}/openoffice/user/autotext
+%{_libdir}/openoffice/user/basic
+%{_libdir}/openoffice/user/config
+%{_libdir}/openoffice/user/database
+%{_libdir}/openoffice/user/gallery
+%{_libdir}/openoffice/user/psprint
+
+%{_libdir}/openoffice/user/autotext/english
 
 # Programs
 %attr(755,root,root) %{_bindir}/*
@@ -682,5 +715,19 @@ fi
 #%%attr(755,root,root) %{_libdir}/openoffice/program/components/*.so -- mozilla
 %attr(755,root,root) %{_libdir}/openoffice/program/filter/*.so
 
-#%%files i18n
-#%%defattr(644,root,root,755)
+%files i18n-unsorted
+%defattr(644,root,root,755)
+%{_libdir}/openoffice/help/*
+%exclude %{_libdir}/openoffice/help/en
+%exclude %{_libdir}/openoffice/help/main_transform.xsl
+
+%{_libdir}/openoffice/share/template/*
+%{_libdir}/openoffice/share/autotext/*
+%exclude %{_libdir}/openoffice/share/template/english
+%exclude %{_libdir}/openoffice/share/autotext/english
+
+%{_libdir}/openoffice/user/autotext/*
+%exclude %{_libdir}/openoffice/user/autotext/english
+
+%{_libdir}/openoffice/share/dict/ooo/*
+%exclude %{_libdir}/openoffice/share/dict/ooo/*en*
