@@ -140,8 +140,8 @@ BuildRequires:	jar
 BuildRequires:	jdk
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
-Requires:	%{name}-libs = %{version}-%{release}
-Requires:	%{name}-i18n-en = %{version}-%{release}
+Requires:	%{name}-libs = %{epoch}:%{version}-%{release}
+Requires:	%{name}-i18n-en = %{epoch}:%{version}-%{release}
 Requires:	%{name}-dict-en
 %if %{?_with_ra:0}%{!?_with_ra:1}
 Requires:	libstdc++ >= 3.2.1
