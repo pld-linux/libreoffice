@@ -110,6 +110,7 @@ Patch27:	%{name}-sj2-java.patch
 
 Patch29:	%{name}-gcc2-95.patch
 Patch30:	%{name}-system-zlib.patch
+Patch31:	%{name}-system-mozilla.patch
 
 URL:		http://www.openoffice.org/
 %if %{?_with_ra:0}%{!?_with_ra:1}
@@ -257,7 +258,10 @@ cd oo_%{version}_src
 
 %patch29 -p1
 
-%patch30 -p1
+#%%patch30 -p1
+
+rm -f moz/prj/d.lst
+%patch31 -p1
 
 # gcc 2 include error hack:
 rm -rf autodoc/source/inc/utility
@@ -598,7 +602,7 @@ fi
 ####################
 %files
 %defattr(644,root,root,755)
-%doc readlicense/source/license/unx/LICENSE
+#%%doc readlicense/source/license/unx/LICENSE
 %doc %{_libdir}/openoffice/LICENSE*
 %doc %{_libdir}/openoffice/README*
 
