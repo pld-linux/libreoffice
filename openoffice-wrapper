@@ -6,7 +6,12 @@
 
 OOVERSION=@OOVERSION@
 OOVERSIONRC="$HOME/.sversionrc"
-OOHOME="$HOME/.openoffice"
+
+if [ ! -z "$CONFIG_DIR" ]; then
+    OOHOME="$HOME/$CONFIG_DIR/openoffice"
+else
+    OOHOME="$HOME/.openoffice"
+fi
 
 # Remove any entry in .sversionrc if not already installed from RPM
 if [ -f "$OOVERSIONRC" ]; then
@@ -29,9 +34,9 @@ else
   # run the automated setup
   lang=$(eval $(locale); echo "$LC_MESSAGES" | sed -n "s/\([a-z]*\)_.*/\1/p")
   if [ -n "$lang" -a -e "/usr/lib/openoffice/help/${lang%%%%_*}" ]; then
-    /usr/lib/openoffice/program/setup -R:/etc/openoffice/autoresponse.conf -LANG:$lang
+    /usr/lib/openoffice/program/setup -R:/etc/openoffice/autoresponse.conf -d:$OOHOME -LANG:$lang
   else
-    /usr/lib/openoffice/program/setup -R:/etc/openoffice/autoresponse.conf
+    /usr/lib/openoffice/program/setup -R:/etc/openoffice/autoresponse.conf -d:$OOHOME
   fi
   echo "DONE"
 fi
