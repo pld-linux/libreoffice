@@ -1123,10 +1123,10 @@ export JAVA_HOME CC CXX GCJ CFLAGS CXXFLAGS
 cd config_office
 %{__autoconf}
 %configure2_13 \
-%if %{without java}
-	--disable-java \
-%elseif
+%if %{with java}
 	--with-jdk-home=$JAVA_HOME \
+%elseif
+	--disable-java \
 %endif
 	--with-stlport4-home=/usr \
 	--with-lang=ALL \
