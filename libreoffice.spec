@@ -220,8 +220,9 @@ OpenOffice.org productivity suite - shared libraries.
 Pakiet biurowy OpenOffice.org - biblioteki.
 
 %package i18n-unsorted
-Summary: OpenOffice.org internationalization
-Group: Applications/Office
+Summary:	OpenOffice.org internationalization
+Group:		Applications/Office
+Requires:	openoffice
 
 %description i18n-unsorted
 OpenOffice.org is an Open Source, community-developed, multi-platform
@@ -232,6 +233,7 @@ You need to install this to use OpenOffice.org.
 %package i18n-pl
 Summary: OpenOffice.org internationalization
 Group: Applications/Office
+Requires:	openoffice
 
 %description i18n-pl
 OpenOffice.org is an Open Source, community-developed, multi-platform
