@@ -1,0 +1,22 @@
+diff -urN ooo-build-1.1.55.org/patches/OOO_1_1/nativewidgets-vcl.diff ooo-build-1.1.55/patches/OOO_1_1/nativewidgets-vcl.diff
+--- ooo-build-1.1.55.org/patches/OOO_1_1/nativewidgets-vcl.diff	2004-05-13 03:04:20.750121072 +0200
++++ ooo-build-1.1.55/patches/OOO_1_1/nativewidgets-vcl.diff	2004-05-13 10:44:07.808250768 +0200
+@@ -6846,7 +6846,7 @@
+ unchanged:
+ --- /dev/null	2003-09-23 19:59:22.000000000 +0200
+ +++ vcl/unx/source/gdi/salnativewidgets-kde.cxx	2004-03-03 15:32:34.000000000 +0100
+-@@ -0,0 +1,1633 @@
++@@ -0,0 +1,1632 @@
+ +/*************************************************************************
+ + *
+ + *  $RCSfile$
+@@ -8319,8 +8319,7 @@
+ +    
+ +    rFont.SetName( String( qFontInfo.family().utf8(), RTL_TEXTENCODING_UTF8 ) );
+ +    
+-+    // Do not set the height, it does not look good
+-+    // rFont.SetHeight( qFontInfo.pointSize() );
+++    rFont.SetHeight( qFontInfo.pixelSize() );
+ +    
+ +    rFont.SetItalic( qFontInfo.italic()? ITALIC_NORMAL: ITALIC_NONE );
+ +    
