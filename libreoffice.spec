@@ -16,6 +16,15 @@
 %define		rel		1
 %define		ooobver		1.1.55
 %define		subver		645
+%ifarch %{ix86}
+%define		verarch		%{subver}li
+%endif
+%ifarch ppc
+%define		verarch		%{subver}lp
+%endif
+%ifarch sparc sparcv9
+%define		verarch		%{subver}ls
+%endif
 %define		fullver		%{ver}.%{rel}
 %define		dfullver	%(echo %{fullver} | tr . _)
 %define		specflags	-fno-strict-aliasing
@@ -178,7 +187,7 @@ Summary:	OpenOffice.org KDE Interface
 Summary(pl):	Interfejs KDE dla OpenOffice.org
 Group:		X11/Libraries
 Provides:	%{name}-libs-interface = %{epoch}:%{version}-%{release}
-Provides:	libvcl%{subver}li.so
+Provides:	libvcl%{verarch}.so
 Obsoletes:	%{name}-libs-gtk
 Requires:	%{name}-libs = %{epoch}:%{version}-%{release}
 Requires(post,preun):	%{name}-libs = %{epoch}:%{version}-%{release}
@@ -194,7 +203,7 @@ Summary:	OpenOffice.org GTK Interface
 Summary(pl):	Interfejs GTK dla OpenOffice.org
 Group:		X11/Libraries
 Provides:	%{name}-libs-interface = %{epoch}:%{version}-%{release}
-Provides:	libvcl%{subver}li.so
+Provides:	libvcl%{verarch}.so
 Obsoletes:	%{name}-libs-kde
 Requires:	%{name}-libs = %{epoch}:%{version}-%{release}
 Requires(post,preun):	%{name}-libs = %{epoch}:%{version}-%{release}
@@ -1015,11 +1024,11 @@ TEMP="%{tmpdir}"; export TEMP
 %{__make} install \
 	DESTDIR=$RPM_BUILD_ROOT
 
-mv $RPM_BUILD_ROOT%{_libdir}/%{name}/program/libvcl%{subver}li.so \
-	$RPM_BUILD_ROOT%{_libdir}/%{name}/program/libvcl%{subver}li-kde.so
+mv $RPM_BUILD_ROOT%{_libdir}/%{name}/program/libvcl%{verarch}.so \
+	$RPM_BUILD_ROOT%{_libdir}/%{name}/program/libvcl%{verarch}-kde.so
 
-install -m755 build/OOO_%{dfullver}/vcl.gtk/unxlngi4.pro/lib/libvcl%{subver}li.so \
-	$RPM_BUILD_ROOT%{_libdir}/%{name}/program/libvcl%{subver}li-gtk.so
+install -m755 build/OOO_%{dfullver}/vcl.gtk/unxlngi4.pro/lib/libvcl%{verarch}.so \
+	$RPM_BUILD_ROOT%{_libdir}/%{name}/program/libvcl%{verarch}-gtk.so
 install -m755 build/OOO_%{dfullver}/vcl.gtk/unxlngi4.pro/bin/*-gnome \
 	$RPM_BUILD_ROOT%{_libdir}/%{name}/program/
 
@@ -1159,24 +1168,24 @@ fontpostinst TTF %{_fontsdir}/%{name}
 fontpostinst TTF %{_fontsdir}/%{name}
 
 %post libs
-if [ -f %{_libdir}/%{name}/program/libvcl%{subver}li-kde.so ]; then
-	ln -sf libvcl%{subver}li-kde.so %{_libdir}/%{name}/program/libvcl%{subver}li.so
+if [ -f %{_libdir}/%{name}/program/libvcl%{verarch}-kde.so ]; then
+	ln -sf libvcl%{verarch}-kde.so %{_libdir}/%{name}/program/libvcl%{verarch}.so
 fi
-if [ -f %{_libdir}/%{name}/program/libvcl%{subver}li-gtk.so ]; then
-	ln -sf libvcl%{subver}li-gtk.so %{_libdir}/%{name}/program/libvcl%{subver}li.so
+if [ -f %{_libdir}/%{name}/program/libvcl%{verarch}-gtk.so ]; then
+	ln -sf libvcl%{verarch}-gtk.so %{_libdir}/%{name}/program/libvcl%{verarch}.so
 fi
 
 %preun libs-kde
-rm -f %{_libdir}/%{name}/program/libvcl%{subver}li.so
+rm -f %{_libdir}/%{name}/program/libvcl%{verarch}.so
 
 %post libs-kde
-ln -sf libvcl%{subver}li-kde.so %{_libdir}/%{name}/program/libvcl%{subver}li.so
+ln -sf libvcl%{verarch}-kde.so %{_libdir}/%{name}/program/libvcl%{verarch}.so
 
 %preun libs-gtk
-rm -f %{_libdir}/%{name}/program/libvcl%{subver}li.so
+rm -f %{_libdir}/%{name}/program/libvcl%{verarch}.so
 
 %post libs-gtk
-ln -sf libvcl%{subver}li-gtk.so %{_libdir}/%{name}/program/libvcl%{subver}li.so
+ln -sf libvcl%{verarch}-gtk.so %{_libdir}/%{name}/program/libvcl%{verarch}.so
 
 %files
 %defattr(644,root,root,755)
