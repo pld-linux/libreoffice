@@ -22,7 +22,7 @@ Summary:	OpenOffice - powerful office suite
 Summary(pl):	OpenOffice - potê¿ny pakiet biurowy
 Name:		openoffice
 Version:	%{fullver}
-Release:	1.4.2
+Release:	1.5
 Epoch:		1
 License:	GPL/LGPL
 Group:		X11/Applications
@@ -174,6 +174,7 @@ Summary:        OpenOffice.org KDE Interface
 Summary(pl):    Interfejs KDE dla OpenOffice.org
 Group:          X11/Libraries
 Provides:       %{name}-libs-interface = %{version}-%{release}
+Provides:	libvcl%{subver}li.so
 Obsoletes:      %{name}-libs-gtk
 
 %description libs-kde
@@ -187,6 +188,7 @@ Summary:        OpenOffice.org GTK Interface
 Summary(pl):    Interfejs GTK dla OpenOffice.org
 Group:          X11/Libraries
 Provides:	%{name}-libs-interface = %{version}-%{release}
+Provides:	libvcl%{subver}li.so
 Obsoletes:	%{name}-libs-kde
 
 %description libs-gtk
