@@ -877,7 +877,7 @@ ln -s %{SOURCE21} src/openintro_pld.bmp
 
 %if ! %{with kde}
 # disable nwf patch
-sed -i -e 's#\(PLD.*\) KDE, \(.*\)#\1 \2#g' patches/OOO_1_1_1/apply
+sed -i -e 's#\(PLD.*\) KDE, \(.*\)#\1 \2#g' patches/OOO_%{dfullver}/apply
 %endif
 
 %build
