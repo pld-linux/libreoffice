@@ -4,7 +4,6 @@
  dnl ***************************************
  dnl testing for X libraries and includes...
  dnl ***************************************
-
 -if test "$_os" = "Darwin" -a "x$x_includes" = "xno_x_includes"; then
 -   dnl Mac OS X using Aqua graphics. Don't check for X11.
 -   :
@@ -21,10 +20,12 @@
     LDFLAGS="$X_LDFLAGS $X_LIBS"
     AC_CHECK_LIB(X11, XOpenDisplay, x_libs="-lX11 $X_EXTRA_LIBS", [AC_MSG_ERROR([X Development libraries not found])])
 -else
-+dnl else
-    x_includes="no_x_includes"
-    x_libraries="no_x_libraries"
+-   x_includes="no_x_includes"
+-   x_libraries="no_x_libraries"
 -fi
++dnl else
++dnl   x_includes="no_x_includes"
++dnl   x_libraries="no_x_libraries"
 +dnl fi
  dnl ***************************************
  dnl testing libc version for Linux...
