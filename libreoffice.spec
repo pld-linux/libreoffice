@@ -293,6 +293,7 @@ BuildRequires:	curl-devel
 BuildRequires:	unixODBC-devel
 BuildRequires:	sane-backends-devel
 BuildRequires:	pam-devel
+BuildRequires:	python-devel
 BuildRequires:	perl
 BuildRequires:	tcsh
 BuildRequires:	unzip
