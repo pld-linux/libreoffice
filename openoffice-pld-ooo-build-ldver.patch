@@ -1,0 +1,15 @@
+diff -urN ooo-build-1.1.54.org/bin/build-ooo ooo-build-1.1.54/bin/build-ooo
+--- ooo-build-1.1.54.org/bin/build-ooo	2004-04-29 19:04:12.396412608 +0200
++++ ooo-build-1.1.54/bin/build-ooo	2004-04-29 19:06:22.411647288 +0200
+@@ -395,8 +395,9 @@
+ # Warning - do not edit, this is a temporary file, see build-ooo
+ # Many Java files have 8bit char-set comments, javac barfs on them in utf8 locales
+ export LANG="C";
+-# Many Java's can't cope with the NPTL on Linux.
+-export LD_ASSUME_KERNEL="2.2.5";
++# Many Java's can't cope with the NPTL on Linux so we try to use lowest possible kernel.
++LD_ASSUME_KERNEL=2.2.5 /bin/true 2> /dev/null || LD_ASSUME_KERNEL=2.4.10 /bin/true 2> /dev/null || LD_ASSUME_KERNEL=2.6.0 2> /dev/null || unset LD_ASSUME_KERNEL
++export LD_ASSUME_KERNEL
+ # Don't do a massive painful install
+ export BUILD_MINIMAL="01";
+ # Embedded python dies without Home set
