@@ -1170,11 +1170,24 @@ for lang in $langlist; do
 
 	# help files
 	if [ -f build/help_${lang}_list.txt ]; then
-		cat build/help_${lang}_list.txt > ${lang}.lang
+		cat build/help_${lang}_list.txt >> ${lang}.lang
 	fi
 
-	if [ -f build/lang_${lang}_list.txt ]; then
-		cat build/lang_${lang}_list.txt >> ${lang}.lang
+	lfile="build/lang_${lang}_list.txt"
+	if [ -f ${lfile} ]; then
+		longlang="`bin/openoffice-xlate-lang -l ${lang} | sed -e 's/english_us/english/;s/norwegian_bokmal/norwegian/;s/northern_sotho/northernsotho/;s/nowegian_nynorsk/norwegian_nynorsk/'`"
+		# share/*/${longlang}
+		grep "^%%dir.*/${longlang}/\$" ${lfile} > tmp.lang
+		# share/registry/res/${lang} (but en-US for en)
+		grep "^%%dir.*/res/${lang}[^/]*/\$" ${lfile} >> tmp.lang
+		# ... translate %dir into whole tree, handle special wordbook/english case
+		sed -e 's,^%%dir ,,;s,\(wordbook/english/\)$,\1soffice.dic,;s,/$,,' tmp.lang >> ${lang}.lang
+		# program/resource/*${code}.res
+		grep '/program/resource/.*res$' ${lfile} >> ${lang}.lang
+		# share/autocorr/acor${somecodes}.dat (if exist)
+		grep '/autocorr/acor.*dat$' ${lfile} >> ${lang}.lang || :
+		# user/config/* (if exist, without parent directory)
+		grep '/user/config/..*' ${lfile} >> ${lang}.lang || :
 	fi
 done
 
