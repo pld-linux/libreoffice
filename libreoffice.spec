@@ -914,6 +914,7 @@ fi
 RPM_BUILD_NCPUS=1
 
 CONFOPTS=" \
+	--with-ccache-allowed \
 	--with-system-gcc \
 	--with-system-zlib \
 	--with-system-sane-headers \
