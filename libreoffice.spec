@@ -90,7 +90,7 @@ BuildRequires:	db-cxx-devel
 BuildRequires:	db-devel
 BuildRequires:	/usr/bin/getopt
 %if %{with java}
-BuildRequires:	db-java
+BuildRequires:	db-java >= 4.2.52-4
 BuildRequires:	jar
 BuildRequires:	jdk
 %else
