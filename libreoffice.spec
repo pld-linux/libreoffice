@@ -81,6 +81,10 @@ BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 %{?_with_pl:%define installpath instsetoo/unxlngi3.pro/48/normal}
 %{?_with_de:%define installpath instsetoo/unxlngi3.pro/49/normal}
 
+%{?_with_us:%define langs ENUS}
+%{?_with_pl:%define langs POL}
+%{?_with_de:%define langs DTCH}
+
 %description
 OpenOffice.org is an open-source project sponsored by Sun Microsystems
 and hosted by CollabNet. In October of 2000, Sun released the source
@@ -239,7 +243,7 @@ autoconf
 %configure2_13 \
 	--with-jdk-home=$JAVA_HOME \
 	--with-stlport4-home=/usr \
-	--with-lang=ALL \
+	--with-lang=%{langs} \
 	--with-x
 
 cd ..
