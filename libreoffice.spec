@@ -1879,7 +1879,7 @@ export CC CXX ENVCFLAGS ENVCFLAGSCXX DESTDIR IGNORE_MANIFEST_CHANGES
 
 %if %{with java}
 GCJ=gcj
-JAVA_HOME="/usr/lib/java"
+JAVA_HOME=%{_libdir}/java
 DB_JAR="%{_javadir}/db.jar"
 export JAVA_HOME DB_JAR GCJ
 %endif
