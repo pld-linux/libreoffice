@@ -1928,6 +1928,8 @@ CONFOPTS=" \
 	--with-lang=ALL \
 	--with-x \
 	--without-fonts \
+	--without-gpc \
+	--disable-epm \
 	--disable-mozilla \
 	--disable-fontooo \
 	--enable-openldap \
