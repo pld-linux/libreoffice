@@ -1,0 +1,14 @@
+diff -uNr oo.old/config_office/set_soenv.1 oo/config_office/set_soenv.1
+--- oo.old/config_office/set_soenv.1	Wed Jul  3 22:44:19 2002
++++ oo/config_office/set_soenv.1	Wed Jul  3 22:35:35 2002
+@@ -579,7 +579,9 @@
+ {  AddWarning( "set_soenv", "makefile.rc not found in config_office/. Could not copy to SRC_ROOT." );
+ }
+ else
+-{  `cp -f makefile.rc $SRC_ROOT/makefile.mk`;
++{
++  my $tempik;
++  $tempik=`cp -f makefile.rc $SRC_ROOT/makefile.mk`;
+ }
+ 
+ # 2. Java home directory.
