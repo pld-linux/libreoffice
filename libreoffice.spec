@@ -163,7 +163,12 @@ BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %define	apps	agenda calc draw fax impress label letter math master memo vcard web writer
 
+%ifdef %{x86}
 %define	_archbuilddir	unxlngi4.pro
+%endif
+%ifdef ppc 
+%define _archbuilddir 	unxlngppc.pro
+%endif
 %define	installpath	instsetoo/%{_archbuilddir}
 %define	subver		645
 %define	langinst	01
