@@ -1953,7 +1953,8 @@ CONFOPTS=" \
 # build-ooo script will pickup these
 CONFIGURE_OPTIONS="$CONFOPTS"; export CONFIGURE_OPTIONS
 
-:> distro-configs/Common.conf distro-configs/Common.conf.in
+:> distro-configs/Common.conf
+:> distro-configs/Common.conf.in
 echo "$CONFOPTS" > distro-configs/${DISTRO}.conf
 
 # main build
