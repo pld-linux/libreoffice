@@ -1199,19 +1199,24 @@ for lang in $langlist; do
 	echo "%%defattr(644,root,root,755)" >> ${lang}.lang
 
 	# help files
-	if (ls $RPM_BUILD_ROOT%{_libdir}/%{name}/help/*${lang}* 2> /dev/null); then
-		echo "%{_libdir}/%{name}/help/*${lang}*" >> ${lang}.lang
-		perl -pi -e "s#.*%{_libdir}/%{name}/help/.*${lang}.*##g" build/lang_*_list.txt
+	if (ls $RPM_BUILD_ROOT%{_libdir}/%{name}/help/${lang} 2> /dev/null); then
+		echo "%{_libdir}/%{name}/help/${lang}" >> ${lang}.lang
+		perl -pi -e "s#.*%{_libdir}/%{name}/help/${lang}/.*##g" build/lang_*_list.txt
 	fi
 
 	# registry res
-	if (ls $RPM_BUILD_ROOT%{_libdir}/%{name}/share/registry/res/*${lang}* 2> /dev/null); then
-		echo "%{_libdir}/%{name}/share/registry/res/*${lang}*" >> ${lang}.lang
-		perl -pi -e "s#.*%{_libdir}/%{name}/share/registry/res/.*${lang}.*##g" build/lang_*_list.txt
+	if [ "lang" = "en" ]; then
+		rlang="en-US"
+	else
+		rlang="$lang"
+	fi
+	if (ls $RPM_BUILD_ROOT%{_libdir}/%{name}/share/registry/res/${rlang} 2> /dev/null); then
+		echo "%{_libdir}/%{name}/share/registry/res/${lang}" >> ${rlang}.lang
+		perl -pi -e "s#.*%{_libdir}/%{name}/share/registry/res/${rlang}/.*##g" build/lang_*_list.txt
 	fi
 
 	# files from lang_*_list.txt
-	ls build/lang_${lang}*_list.txt 2> /dev/null && sed -e "s#$RPM_BUILD_ROOT##g" build/lang_${lang}*_list.txt >> ${lang}.lang || /bin/true
+	ls build/lang_${lang}_list.txt 2> /dev/null && sed -e "s#$RPM_BUILD_ROOT##g" build/lang_${lang}_list.txt >> ${lang}.lang || /bin/true
 
 done
 
