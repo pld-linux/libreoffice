@@ -23,7 +23,7 @@ Summary:	OpenOffice - powerful office suite
 Summary(pl):	OpenOffice - potê¿ny pakiet biurowy
 Name:		openoffice
 Version:	%{fullver}
-Release:	1.5
+Release:	2
 Epoch:		1
 License:	GPL/LGPL
 Group:		X11/Applications
@@ -1233,10 +1233,6 @@ ln -sf libvcl%{subver}li-gtk.so %{_libdir}/%{name}/program/libvcl%{subver}li.so
 %attr(755,root,root) %{_bindir}/oo*
 %attr(755,root,root) %{_libdir}/%{name}/spadmin
 %attr(755,root,root) %{_libdir}/%{name}/program/*.bin
-%if %{with java}
-%attr(755,root,root) %{_libdir}/%{name}/program/javaldx
-%attr(755,root,root) %{_libdir}/%{name}/program/jvmsetup
-%endif
 %attr(755,root,root) %{_libdir}/%{name}/program/nswrapper
 %attr(755,root,root) %{_libdir}/%{name}/program/ooovirg
 %attr(755,root,root) %{_libdir}/%{name}/program/pagein*
@@ -1262,6 +1258,13 @@ ln -sf libvcl%{subver}li-gtk.so %{_libdir}/%{name}/program/libvcl%{subver}li.so
 %attr(755,root,root) %{_libdir}/%{name}/program/sweb
 %attr(755,root,root) %{_libdir}/%{name}/program/swriter
 %attr(755,root,root) %{_libdir}/%{name}/program/*.py
+
+%if %{with java}
+%attr(755,root,root) %{_libdir}/%{name}/program/javaldx
+%attr(755,root,root) %{_libdir}/%{name}/program/jvmsetup
+%{_libdir}/%{name}/program/classes
+%{_libdir}/%{name}/share/xslt
+%endif
 
 %files libs
 %defattr(644,root,root,755)
