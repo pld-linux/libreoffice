@@ -74,7 +74,7 @@ Source404:	%{cftp}/helpcontent/helpcontent_39_unix.tgz
 Source405:	%{cftp}/helpcontent/helpcontent_46_unix.tgz
 # Source405-md5:	7b013981edce2fabe4a8751ff64a8d58
 Source406:	%{cftp}/helpcontent/helpcontent_49_unix.tgz
-# Source406-md5:	6a2c3301bb75fb8b9dc90c2a63205165
+# Source406-md5:	a39f44ec40f452c963a4a187f31d1acb
 Source407:	%{cftp}/helpcontent/helpcontent_55_unix.tgz
 # Source407-md5:	804d3ce61e11335193a410aaf9603f8e
 Source408:	%{cftp}/helpcontent/helpcontent_81_unix.tgz
