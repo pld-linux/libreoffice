@@ -943,8 +943,7 @@ rm -f moz/prj/d.lst
 %patch118 -p1 
 # OBSOLETE? yup
 #%patch119 -p0 
-# NEEDS UPDATE
-#%patch121 -p0 
+%patch121 -p0 
 %endif 
 
 %patch201 -p0
@@ -972,8 +971,7 @@ rm -f moz/prj/d.lst
 #%patch227 -p1
 %patch228 -p0
 %patch229 -p1 
-# CHECK ME
-# %patch230 -p0
+%patch230 -p0
 %patch231 -p0 
 
 %patch301 -p1 
