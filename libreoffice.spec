@@ -26,7 +26,7 @@ Summary:	OpenOffice - powerful office suite
 Summary(pl):	OpenOffice - potê¿ny pakiet biurowy
 Name:		openoffice
 Version:	%{fullver}
-Release:	2.2
+Release:	2.3
 Epoch:		1
 License:	GPL/LGPL
 Group:		X11/Applications
@@ -87,12 +87,10 @@ Source411:	%{cftp}/helpcontent/helpcontent_88_unix.tgz
 Source412:	%{cftp}/helpcontent/helpcontent_90_unix.tgz
 # Source412-md5:	9521a01c5817e87178f356762f8cdab5
 
-#Patch0:			%{name}-makefile.patch
-#Patch0:		%{name}-rh-disable-spellcheck-all-langs.patch
-#Patch1:		%{name}-shared-xinerama.patch
-#Patch2:		%{name}-build.patch
+Patch0:		%{name}-rh-disable-spellcheck-all-langs.patch
+Patch1:		%{name}-ooo-wrapper.patch
 # PLD-specific, they ooo-build people don't like it
-Patch3:		%{name}-files.patch
+Patch2:		%{name}-files.patch
 
 URL:		http://www.openoffice.org/
 BuildRequires:	ImageMagick
@@ -983,11 +981,9 @@ zuluskim.
 
 %prep
 %setup -q -n ooo-build-%{ooobver}
-#%patch0 -p1
-#%patch0 -p1 // obsoleted?
-#%patch1 -p1 
-#%patch2 -p1 // obsoleted
-%patch3 -p1
+%patch0 -p1
+%patch1 -p1 
+%patch2 -p1
 
 install -d src
 # sources, icons, KDE_icons
