@@ -229,6 +229,17 @@ office productivity suite.  This package provides spell checker dictionaries
 and resources containing menus and dialogs for various languages.
 You need to install this to use OpenOffice.org.
 
+%package i18n-pl
+Summary: OpenOffice.org internationalization
+Group: Applications/Office
+
+%description i18n-pl
+OpenOffice.org is an Open Source, community-developed, multi-platform
+office productivity suite.  This package provides spell checker dictionaries
+and resources containing menus and dialogs for various languages.
+You need to install this to use OpenOffice.org.
+
+
 %prep
 #%setup -q -n oo_%{version}_src
 cd ../BUILD
@@ -718,16 +729,31 @@ fi
 %files i18n-unsorted
 %defattr(644,root,root,755)
 %{_libdir}/openoffice/help/*
-%exclude %{_libdir}/openoffice/help/en
 %exclude %{_libdir}/openoffice/help/main_transform.xsl
-
 %{_libdir}/openoffice/share/template/*
 %{_libdir}/openoffice/share/autotext/*
+%{_libdir}/openoffice/user/autotext/*
+%{_libdir}/openoffice/share/dict/ooo/*
+
+# This goes with binaries (default language :)
+
+%exclude %{_libdir}/openoffice/help/en
 %exclude %{_libdir}/openoffice/share/template/english
 %exclude %{_libdir}/openoffice/share/autotext/english
-
-%{_libdir}/openoffice/user/autotext/*
 %exclude %{_libdir}/openoffice/user/autotext/english
-
-%{_libdir}/openoffice/share/dict/ooo/*
 %exclude %{_libdir}/openoffice/share/dict/ooo/*en*
+
+# This would have been the default language if it weren't for those
+# bloody imperialists.
+
+%exclude %{_libdir}/openoffice/share/template/polish
+%exclude %{_libdir}/openoffice/share/autotext/polish
+%exclude %{_libdir}/openoffice/user/autotext/polish
+%exclude %{_libdir}/openoffice/share/dict/ooo/*pl*
+
+%files i18n-pl
+%defattr(644,root,root,755)
+%{_libdir}/openoffice/share/template/polish
+%{_libdir}/openoffice/share/autotext/polish
+%{_libdir}/openoffice/user/autotext/polish
+%{_libdir}/openoffice/share/dict/ooo/*pl*
