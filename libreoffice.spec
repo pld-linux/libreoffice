@@ -1052,9 +1052,6 @@ echo "SLANGLIST [$slanglist]"
 
 for lang in $slanglist; do
 	echo "%%defattr(644,root,root,755)" >> ${lang}.lang
-	# dictionaries
-	ls $RPM_BUILD_ROOT%{_libdir}/%{name}/share/dict/ooo/*${lang}* 2> /dev/null && echo "%%lang(${lang}) %{_libdir}/%{name}/share/dict/ooo/*${lang}*" >> ${lang}.lang || /bin/true
-
 	# help files
 	if (ls $RPM_BUILD_ROOT%{_libdir}/%{name}/help/*${lang}* 2> /dev/null); then
 		echo "%%lang(${lang}) %{_libdir}/%{name}/help/*${lang}*" >> ${lang}.lang
