@@ -24,7 +24,7 @@
 
 %define		fullver		%{ver}.%{rel}
 %define		dfullver	%(echo %{fullver} | tr . _)
-%define		ssnap		%(echo %{snap} | tr "[A-Z]" "[a-z]")
+%define		ssnap		%(echo %{snap} | tr '[A-Z]' '[a-z]')
 %define		specflags	-fno-strict-aliasing
 
 Summary:	OpenOffice.org - powerful office suite
@@ -91,6 +91,8 @@ Source411:	%{cftp}/helpcontent/helpcontent_88_unix.tgz
 Source412:	%{cftp}/helpcontent/helpcontent_90_unix.tgz
 # Source412-md5:	9521a01c5817e87178f356762f8cdab5
 
+Patch0:		%{name}-pld.patch
+
 URL:		http://www.openoffice.org/
 BuildRequires:	ImageMagick
 BuildRequires:	STLport-devel >= 4.5.3-6
@@ -98,8 +100,10 @@ BuildRequires:	XFree86-devel
 BuildRequires:	autoconf
 BuildRequires:	automake
 BuildRequires:	bison >= 1.875-4
+BuildRequires:	boost-devel
+BuildRequires:	boost-spirit-devel
 BuildRequires:	cups-devel
-BuildRequires:	curl-devel
+BuildRequires:	curl-devel >= 7.9.8
 BuildRequires:	db-cxx-devel
 BuildRequires:	db-devel
 BuildRequires:	/usr/bin/getopt
@@ -119,21 +123,26 @@ BuildRequires:	freetype-devel >= 2.1
 BuildRequires:	libart_lgpl-devel
 BuildRequires:	libstdc++-devel >= 5:3.2.1
 BuildRequires:	libxml2-devel
+BuildRequires:	libjpeg-devel
 BuildRequires:	nas-devel
+BuildRequires:	neon-devel
+BuildRequires:	mozilla-devel
+BuildRequires:	openldap-devel
 BuildRequires:	pam-devel
 BuildRequires:	perl-base
+BuildRequires:	perl-Archive-Zip
 BuildRequires:	pkgconfig
 BuildRequires:	python >= 2.2
 BuildRequires:	python-devel >= 2.2
 BuildRequires:	python-modules >= 2.2
+BuildRequires:	sablotron-devel
 BuildRequires:	sane-backends-devel
-BuildRequires:	startup-notification-devel
+BuildRequires:	startup-notification-devel >= 0.5
 BuildRequires:	tcsh
 BuildRequires:	unixODBC-devel
 BuildRequires:	unzip
 BuildRequires:	zip
 BuildRequires:	zlib-devel
-BuildRequires:	qt-devel
 BuildRequires:	kdelibs-devel
 BuildRequires:	gtk+2-devel
 BuildRequires:	libxml2-devel >= 2.0
@@ -1821,6 +1830,7 @@ zuluskim.
 
 %prep
 %setup -q -n ooo-build-%{ooobver}
+%patch0 -p1
 
 install -d src
 # sources, icons, KDE_icons
@@ -1836,10 +1846,16 @@ ln -sf %{SOURCE400} %{SOURCE401} %{SOURCE402} %{SOURCE403} %{SOURCE404} \
 
 %build
 # Make sure we have /proc mounted - otherwise idlc will fail later.
-if [ ! -r /proc/version ]; then
+if [ ! -r /proc/cpuinfo ]; then
 	echo "You need to have /proc mounted in order to build this package!"
 	exit 1
 fi
+
+%ifarch amd64 sparc64 ppc64 alpha
+DISTRO="PLD64"
+%else
+DISTRO="PLD"
+%endif
 
 CC="%{__cc}"
 CXX="%{__cxx}"
@@ -1847,7 +1863,9 @@ ENVCFLAGS="%{rpmcflags}"
 ENVCFLAGSCXX="%{rpmcflags}"
 DESTDIR=$RPM_BUILD_ROOT
 IGNORE_MANIFEST_CHANGES=1
-export CC CXX ENVCFLAGS ENVCFLAGSCXX DESTDIR IGNORE_MANIFEST_CHANGES
+QTINC="%{_includedir}/qt"
+QTLIB="%{_libdir}"
+export CC CXX ENVCFLAGS ENVCFLAGSCXX DESTDIR IGNORE_MANIFEST_CHANGES DISTRO QTINC QTLIB
 
 %if %{with java}
 GCJ=gcj
@@ -1860,7 +1878,6 @@ RPM_BUILD_NR_THREADS="%(echo "%{__make}" | sed -e 's#.*-j\([[:space:]]*[0-9]\+\)
 [ "$RPM_BUILD_NR_THREADS" = "%{__make}" ] && RPM_BUILD_NR_THREADS=1
 
 CONFOPTS=" \
-	--with-tag=%{ssnap}-%{bver} \
 %ifarch ppc
 	--with-arch=ppc \
 %endif
@@ -1875,15 +1892,20 @@ CONFOPTS=" \
 	--with-system-python \
 	--with-system-sane-headers \
 	--with-system-x11-extensions-headers \
-	--with-system-unixodbc-headers \
+	--with-system-odbc-headers \
 	--with-system-db \
 	--with-system-curl \
 	--with-system-freetype \
 	--with-system-nas \
 	--with-system-xrender \
+	--with-system-expat \
+	--with-system-mozilla \
+	--with-system-sablot \
+	--with-system-boost \
+	--with-system-neon \
 	--with-dynamic-xinerama \
-	--with-vendor="PLD" \
-	--with-distro="PLD" \
+	--with-vendor="${DISTRO}" \
+	--with-distro="${DISTRO}" \
 	--enable-gtk \
 	--enable-kde \
 	--with-images='industrial crystal' \
@@ -1900,16 +1922,16 @@ CONFOPTS=" \
 %endif
 	--with-docdir=%{_docdir}/%{name}-%{version} \
 	--with-python=%{_bindir}/python \
-	--with-stlport4-home=/usr \
+	--with-stlport4=/usr \
 	--with-lang=ALL \
 	--with-x \
 	--without-fonts \
 	--disable-fontooo \
+	--enable-openldap \
 	--enable-cups \
 	--enable-fontconfig \
 	--enable-libsn \
 	--enable-libart \
-	--disable-mozilla \
 	--disable-rpath \
 %if 0%{?debug:1}
 	--enable-debug \
@@ -1928,7 +1950,7 @@ CONFOPTS=" \
 # build-ooo script will pickup these
 CONFIGURE_OPTIONS="$CONFOPTS"; export CONFIGURE_OPTIONS
 
-echo "$CONFOPTS" > distro-configs/PLD.conf
+echo "$CONFOPTS" > distro-configs/${DISTRO}.conf
 
 # main build
 %configure \
