@@ -1,10 +1,10 @@
 diff -urN ooo-build-1.1.55.org/patches/OOO_1_1/system-curl.diff ooo-build-1.1.55/patches/OOO_1_1/system-curl.diff
 --- ooo-build-1.1.55.org/patches/OOO_1_1/system-curl.diff	2004-07-22 00:14:28.000000000 +0200
 +++ ooo-build-1.1.55/patches/OOO_1_1/system-curl.diff	2004-07-22 00:19:45.000000000 +0200
-@@ -54,3 +54,34 @@
-  namespace ftp {
-  
-  	/** Forward declarations.
+@@ -67,3 +67,34 @@
+  SHL1DEF=$(MISC)$/$(SHL1TARGET).def
+  SHL1LIBS= \
+  	$(LIB1TARGET)
 +diff -u -r1.2 ftphandleprovider.hxx
 +--- ucb/source/ucp/ftp/ftphandleprovider.hxx	15 Oct 2002 09:21:17 -0000	1.2
 ++++ ucb/source/ucp/ftp/ftphandleprovider.hxx	20 Jul 2004 22:02:48 -0000
