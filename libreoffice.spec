@@ -7,12 +7,12 @@
 # _with_pl		- 48 PL translation
 # _with_de		- 49 DE translation
 
-#%define		oo_ver	641d
+#%define		oo_ver	1.0
 Summary:	OpenOffice - powerful office suite
 Summary(pl):	OpenOffice - potê¿ny pakiet biurowy
 Name:		openoffice
 Version:	1.0.0
-Release:	0.2
+Release:	0.3
 Epoch:		1
 License:	GPL/LGPL
 Group:		X11/Applications
@@ -25,6 +25,7 @@ Patch0:		%{name}-gcc.patch
 Patch1:		%{name}-db3.patch
 Patch2:		%{name}-mozilla.patch
 Patch3:		%{name}-nest.patch
+Patch4:		%{name}-perl.patch
 URL:		http://www.openoffice.org/
 BuildRequires:	STLport-static
 BuildRequires:	XFree86-devel
@@ -34,6 +35,7 @@ BuildRequires:	autoconf
 BuildRequires:	automake
 BuildRequires:	flex
 BuildRequires:	pam-devel
+BuildRequires:	XFree86-fonts-PEX
 %{?!_with_ibm_java:BuildRequires: jdk = 1.3.1_03}
 %{?_with_ibm_java:BuildRequires: ibm-java-sdk}
 %{?!_with_nest:BuildRequires:	gcc <= 3.0.0}
@@ -87,6 +89,7 @@ Do zalet OpenOffice.org mo¿na zaliczyæ:
 %if%{?_with_nest:1}%{!?_with_nest:0}
 %patch3 -p1
 %endif
+%patch4 -p1
 
 
 install %{SOURCE1} external
@@ -144,8 +147,8 @@ while [ -f /tmp/.X$i-lock ]; do
 done
 
 /usr/X11R6/bin/Xvfb :$i & 
-sleep 5
 PID=$!
+sleep 5
 
 # preparing to start installator
 cp -f %{SOURCE3} $RPM_BUILD_DIR/oo_%{oo_ver}_src/install.rs.in
@@ -159,7 +162,7 @@ sed -e "s,@DESTDIR@,$RPM_BUILD_ROOT/usr/X11R6/lib/openoffice," \
 %{?_with_de:DISPLAY=":$i" instsetoo/unxlngi3.pro/49/normal/setup -R:$RPM_BUILD_DIR/oo_%{oo_ver}_src/install.rs}
 
 # stopping Xvfb
-kill $PID
+#kill $PID
 
 %clean
 rm -rf $RPM_BUILD_ROOT
