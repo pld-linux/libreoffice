@@ -150,6 +150,7 @@ Patch207: openoffice-gui-sw-insert-symbol.patch
 Patch208: openoffice-use-fork.patch
 Patch209: openoffice-print-dialog.patch
 Patch210: openoffice-print-error.patch
+Patch211: openoffice-help-fallback-en.patch
 
 Patch301: openoffice-splash.patch
 
@@ -863,6 +864,7 @@ rm -f moz/prj/d.lst
 %patch208 -p0
 %patch209 -p0
 %patch210 -p0
+%patch211 -p0 
 
 %patch301 -p1 
 
@@ -885,7 +887,7 @@ rm -f moz/prj/d.lst
 %patch363 -p0 
 %patch364 -p0 
 
-% fonts
+# fonts
 %patch371 -p0
 %patch372 -p0 
 %patch373 -p0 
