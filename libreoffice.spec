@@ -204,15 +204,16 @@ Pakiet biurowy OpenOffice.org - biblioteki.
 
 %package devel
 Summary:	OpenOffice.org - header files and development documentation
-Summary(pl):	OpenOffice.org - pliki nag³ówkowe i dokumentacja do kdelibs
+Summary(pl):	OpenOffice.org - pliki nag³ówkowe i dokumentacja
 Group:		X11/Development/Libraries
 Requires:	%{name}-libs = %{version}
 
 %description devel
-OpenOffice.org productivity suite - header files and development documentation.
+OpenOffice.org productivity suite - header files and development
+documentation.
 
 %description devel -l pl
-Pakiet biurowy OpenOffice.org - pliki nag³ówkowe i dokumentacja do kdelibs.
+Pakiet biurowy OpenOffice.org - pliki nag³ówkowe i dokumentacja.
 
 #
 # Internationalization
@@ -1106,6 +1107,7 @@ done
 %dir %{oolib}/user
 %dir %{oolib}/user/autotext
 %{oolib}/user/basic
+%dir %{oolib}/user/config
 %{oolib}/user/config/registry
 %{oolib}/user/database
 %{oolib}/user/gallery
