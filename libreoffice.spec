@@ -15,7 +15,7 @@ Summary:	OpenOffice - powerful office suite
 Summary(pl):	OpenOffice - potê¿ny pakiet biurowy
 Name:		openoffice
 Version:	1.0.2
-Release:	0.82
+Release:	0.83
 Epoch:		1
 License:	GPL/LGPL
 Group:		X11/Applications
@@ -137,7 +137,6 @@ BuildRequires:	automake
 BuildRequires:	bison
 BuildRequires:	flex
 BuildRequires:	freetype-devel >= 2.1
-BuildRequires:	mozilla-devel
 BuildRequires:	pam-devel
 BuildRequires:	perl
 BuildRequires:	tcsh
@@ -158,7 +157,6 @@ Requires:	libstdc++ < 3.2.1
 Requires:	db3
 %endif
 
-%define	_noautoprovfiles	libgcc_s.so.1
 
 %define	langs	"ENUS,FREN,GERM,SPAN,ITAL,DTCH,PORT,DAN,GREEK,POL,SWED,TURK,RUSS,CZECH"
 %define	apps	agenda calc draw fax impress label letter math master memo vcard web writer
@@ -220,6 +218,16 @@ OpenOffice.org productivity suite - shared libraries.
 
 %description libs -l pl
 Pakiet biurowy OpenOffice.org - biblioteki.
+
+%package i18n
+Summary: OpenOffice.org internationalization
+Group: Applications/Office
+
+%description i18n
+OpenOffice.org is an Open Source, community-developed, multi-platform
+office productivity suite.  This package provides spell checker dictionaries
+and resources containing menus and dialogs for various languages.
+You need to install this to use OpenOffice.org.
 
 %prep
 #%setup -q -n oo_%{version}_src
@@ -578,6 +586,7 @@ echo DICT de AT de_DE >> $RPM_BUILD_ROOT%{_libdir}/openoffice/share/dict/ooo/dic
 # Build system in OO SUX
 rm -f $RPM_BUILD_ROOT%{_libdir}/openoffice/program/libstdc++*
 rm -f $RPM_BUILD_ROOT%{_libdir}/openoffice/program/libstlport_gcc.so
+rm -f $RPM_BUILD_ROOT%{_libdir}/openoffice/program/libgcc_s.so.1
 
 
 %post
@@ -672,3 +681,6 @@ fi
 %attr(755,root,root) %{_libdir}/openoffice/program/*.so.*
 #%%attr(755,root,root) %{_libdir}/openoffice/program/components/*.so -- mozilla
 %attr(755,root,root) %{_libdir}/openoffice/program/filter/*.so
+
+#%%files i18n
+#%%defattr(644,root,root,755)
