@@ -1125,7 +1125,7 @@ cd config_office
 %configure2_13 \
 %if %{with java}
 	--with-jdk-home=$JAVA_HOME \
-%elseif
+%else
 	--disable-java \
 %endif
 	--with-stlport4-home=/usr \
