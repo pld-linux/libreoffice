@@ -2082,10 +2082,10 @@ umask 022
 [ ! -x /usr/bin/update-desktop-database ] || /usr/bin/update-desktop-database >/dev/null 2>&1
 
 %post libs
-fontpostinst TTF %{_fontsdir}/TTF
+fontpostinst TTF
 
 %postun libs
-fontpostinst TTF %{_fontsdir}/TTF
+fontpostinst TTF
 
 %files
 %defattr(644,root,root,755)
