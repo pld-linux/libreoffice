@@ -15,7 +15,7 @@ Summary:	OpenOffice - powerful office suite
 Summary(pl):	OpenOffice - potê¿ny pakiet biurowy
 Name:		openoffice
 Version:	1.0.2
-Release:	0.81
+Release:	0.82
 Epoch:		1
 License:	GPL/LGPL
 Group:		X11/Applications
@@ -109,6 +109,7 @@ Patch25:	%{name}-xmlsearch.patch
 Patch27:	%{name}-sj2-java.patch
 
 Patch29:	%{name}-gcc2-95.patch
+Patch30:	%{name}-system-zlib.patch
 
 URL:		http://www.openoffice.org/
 %if %{?_with_ra:0}%{!?_with_ra:1}
@@ -128,8 +129,8 @@ BuildRequires:	gcc-c++
 
 BuildRequires:	STLport-devel >= 4.5.3-3
 BuildRequires:	XFree86-devel
-#BuildRequires:	XFree86-fonts-PEX
-#BuildRequires:	XFree86-Xvfb
+BuildRequires:	XFree86-fonts-PEX
+BuildRequires:	XFree86-Xvfb
 BuildRequires:	autoconf
 BuildRequires:	automake
 BuildRequires:	bison
@@ -140,6 +141,7 @@ BuildRequires:	perl
 BuildRequires:	tcsh
 BuildRequires:	unzip
 BuildRequires:	zip
+BuildRequires:	zlib-devel
 BuildRequires:	jar
 %{?_with_ibm_java:BuildRequires:	ibm-java-sdk}
 %{?!_with_ibm_java:BuildRequires:	java-sun}
@@ -252,6 +254,8 @@ cd oo_%{version}_src
 %patch27 -p1
 
 %patch29 -p1
+
+%patch30 -p1
 
 # gcc 2 include error hack:
 rm -rf autodoc/source/inc/utility
@@ -584,7 +588,7 @@ fi
 ## CLEAN
 ####################
 %clean
-rm -rf $RPM_BUILD_ROOT
+#rm -rf $RPM_BUILD_ROOT
 
 
 ####################
