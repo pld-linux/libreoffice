@@ -1,0 +1,3 @@
+- don't use LANG and LANGUAGES, this evn variables set locale
+- create %{_libdir}/%{name}/program/resource before installing files in it
+now rpmbuild -bb work :-)
