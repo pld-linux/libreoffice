@@ -139,6 +139,11 @@ Do zalet OpenOffice.org mo¿na zaliczyæ:
 install %{SOURCE1} external
 cd external; tar fxz %{SOURCE1}; cp -fr gpc231/* gpc
 
+CC=gcc
+CXX=g++
+GCJ=gcj
+export CC CXX GCJ
+
 ##################
 # Build fake JDK
 mkdir -p fakejdk/bin fakejdk/include
