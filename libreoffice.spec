@@ -15,6 +15,7 @@ Patch1:		%{name}-jdk_fix_for_x86.patch
 Patch2:		%{name}-db3.patch
 URL:		http://www.openoffice.org/
 BuildRequires:	XFree86-devel
+BuildRequires:	db3-devel
 BuildRequires:	autoconf
 BuildRequires:	automake
 BuildRequires:	flex
