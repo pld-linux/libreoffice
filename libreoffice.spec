@@ -382,30 +382,30 @@ Dowi±zania MIME OpenOffice.org dla wersji KDE <= 3.1.5.
 #
 # Internationalization
 #
-#%define		have_ARAB	yes
-#%define		have_CAT	yes
-#%define		have_CZECH	yes
-#%define		have_DAN	yes
-#%define		have_GERM	yes
-#%define		have_GREEK	yes
+%define		have_ARAB	yes
+%define		have_CAT	yes
+%define		have_CZECH	yes
+%define		have_DAN	yes
+%define		have_GERM	yes
+%define		have_GREEK	yes
 # ENUS should be always "yes"
-#%define		have_ENUS	yes
-#%define		have_SPAN	yes
-#%define		have_FINN	yes
-#%define		have_FREN	yes
-#%define		have_ITAL	yes
-#%define		have_JAPN	yes
-#%define		have_KOREAN	yes
-#%define		have_DTCH	yes
-#%define		have_POL	yes
-#%define		have_PORT	yes
-#%define		have_PORTBR	yes
-#%define		have_RUSS	yes
-#%define		have_SLOVAK	yes
-#%define		have_SWED	yes
-#%define		have_TURK	yes
-#%define		have_CHINSIM	yes
-#%define		have_CHINTRAD	yes
+%define		have_ENUS	yes
+%define		have_SPAN	yes
+%define		have_FINN	yes
+%define		have_FREN	yes
+%define		have_ITAL	yes
+%define		have_JAPN	yes
+%define		have_KOREAN	yes
+%define		have_DTCH	yes
+%define		have_POL	yes
+%define		have_PORT	yes
+%define		have_PORTBR	yes
+%define		have_RUSS	yes
+%define		have_SLOVAK	yes
+%define		have_SWED	yes
+%define		have_TURK	yes
+%define		have_CHINSIM	yes
+%define		have_CHINTRAD	yes
 
 %define		ARAB		""
 %if %{have_ARAB} == yes
@@ -424,7 +424,7 @@ Arabic language.
 Ten pakiet dostarcza zasoby zawieraj±ce menu i okna dialogowe w jêzyku
 arabskim.
 
-%files i18n-ar -f i18n-ar
+#%files i18n-ar -f i18n-ar
 %endif
 
 %define		CAT		""
@@ -444,7 +444,7 @@ Catalan language.
 Ten pakiet dostarcza zasoby zawieraj±ce menu i okna dialogowe w jêzyku
 kataloñskim.
 
-%files i18n-ca -f i18n-ca
+#%files i18n-ca -f i18n-ca
 %endif
 
 %define		CZECH		""
@@ -464,7 +464,7 @@ Czech language.
 Ten pakiet dostarcza zasoby zawieraj±ce menu i okna dialogowe w jêzyku
 czeskim.
 
-%files i18n-cs -f i18n-cs
+#%files i18n-cs -f i18n-cs
 %endif
 
 %define		DAN		""
@@ -484,7 +484,7 @@ Danish language.
 Ten pakiet dostarcza zasoby zawieraj±ce menu i okna dialogowe w jêzyku
 duñskim.
 
-%files i18n-da -f i18n-da
+#%files i18n-da -f i18n-da
 %endif
 
 %define		GERM		""
@@ -504,7 +504,7 @@ German language.
 Ten pakiet dostarcza zasoby zawieraj±ce menu i okna dialogowe w jêzyku
 niemieckim.
 
-%files i18n-de -f i18n-de
+#%files i18n-de -f i18n-de
 %endif
 
 %define		GREEK		""
@@ -524,7 +524,7 @@ Greek language.
 Ten pakiet dostarcza zasoby zawieraj±ce menu i okna dialogowe w jêzyku
 greckim.
 
-%files i18n-el -f i18n-el
+#%files i18n-el -f i18n-el
 %endif
 
 %define		ENUS		""
@@ -544,7 +544,7 @@ English language.
 Ten pakiet dostarcza zasoby zawieraj±ce menu i okna dialogowe w jêzyku
 angielskim.
 
-%files i18n-en -f i18n-en
+#%files i18n-en -f i18n-en
 %endif
 
 %define		SPAN		""
@@ -564,7 +564,7 @@ Spanish language.
 Ten pakiet dostarcza zasoby zawieraj±ce menu i okna dialogowe w jêzyku
 hiszpañskim.
 
-%files i18n-es -f i18n-es
+#%files i18n-es -f i18n-es
 %endif
 
 %define		FINN		""
@@ -584,7 +584,7 @@ Finnish language.
 Ten pakiet dostarcza zasoby zawieraj±ce menu i okna dialogowe w jêzyku
 fiñskim.
 
-%files i18n-fi -f i18n-fi
+#%files i18n-fi -f i18n-fi
 %endif
 
 %define		FREN		""
@@ -604,7 +604,7 @@ French language.
 Ten pakiet dostarcza zasoby zawieraj±ce menu i okna dialogowe w jêzyku
 francuskim.
 
-%files i18n-fr -f i18n-fr
+#%files i18n-fr -f i18n-fr
 %endif
 
 %define		ITAL		""
@@ -624,7 +624,7 @@ Italian language.
 Ten pakiet dostarcza zasoby zawieraj±ce menu i okna dialogowe w jêzyku
 w³oskim.
 
-%files i18n-it -f i18n-it
+#%files i18n-it -f i18n-it
 %endif
 
 %define		JAPN		""
@@ -644,7 +644,7 @@ Japan language.
 Ten pakiet dostarcza zasoby zawieraj±ce menu i okna dialogowe w jêzyku
 japoñskim.
 
-%files i18n-ja -f i18n-ja
+#%files i18n-ja -f i18n-ja
 %endif
 
 %define		KOREAN		""
@@ -664,7 +664,7 @@ Korean language.
 Ten pakiet dostarcza zasoby zawieraj±ce menu i okna dialogowe w jêzyku
 koreañskim.
 
-%files i18n-ko -f i18n-ko
+#%files i18n-ko -f i18n-ko
 %endif
 
 %define		DTCH		""
@@ -684,7 +684,7 @@ Dutch language.
 Ten pakiet dostarcza zasoby zawieraj±ce menu i okna dialogowe w jêzyku
 holenderskim.
 
-%files i18n-nl -f i18n-nl
+#%files i18n-nl -f i18n-nl
 %endif
 
 %define		POL		""
@@ -704,7 +704,7 @@ Polish language.
 Ten pakiet dostarcza zasoby zawieraj±ce menu i okna dialogowe w jêzyku
 polskim.
 
-%files i18n-pl -f i18n-pl
+#%files i18n-pl -f i18n-pl
 %endif
 
 %define		PORT		""
@@ -724,7 +724,7 @@ Portuguese language.
 Ten pakiet dostarcza zasoby zawieraj±ce menu i okna dialogowe w jêzyku
 portugalskim.
 
-%files i18n-pt -f i18n-pt
+#%files i18n-pt -f i18n-pt
 %endif
 
 %define		PORTBR		""
@@ -744,7 +744,7 @@ Portuguese Brazylian language.
 Ten pakiet dostarcza zasoby zawieraj±ce menu i okna dialogowe w jêzyku
 portugalskim (odmiana brazylijska).
 
-%files i18n-pt_BR -f i18n-pt_BR
+#%files i18n-pt_BR -f i18n-pt_BR
 %endif
 
 %define		RUSS		""
@@ -764,7 +764,7 @@ Russian language.
 Ten pakiet dostarcza zasoby zawieraj±ce menu i okna dialogowe w jêzyku
 rosyjskim.
 
-%files i18n-ru -f i18n-ru
+#%files i18n-ru -f i18n-ru
 %endif
 
 %define		SLOVAK		""
@@ -784,7 +784,7 @@ Slovak language.
 Ten pakiet dostarcza zasoby zawieraj±ce menu i okna dialogowe w jêzyku
 s³owackim.
 
-%files i18n-sk -f i18n-sk
+#%files i18n-sk -f i18n-sk
 %endif
 
 %define		SWED		""
@@ -804,7 +804,7 @@ Swedish language.
 Ten pakiet dostarcza zasoby zawieraj±ce menu i okna dialogowe w jêzyku
 szwedzkim.
 
-%files i18n-sv -f i18n-sv
+#%files i18n-sv -f i18n-sv
 %endif
 
 %define		TURK		""
@@ -824,7 +824,7 @@ Turkish language.
 Ten pakiet dostarcza zasoby zawieraj±ce menu i okna dialogowe w jêzyku
 tureckim.
 
-%files i18n-tr -f i18n-tr
+#%files i18n-tr -f i18n-tr
 %endif
 
 %define		CHINSIM		""
@@ -844,7 +844,7 @@ Chinese language for China.
 Ten pakiet dostarcza zasoby zawieraj±ce menu i okna dialogowe w jêzyku
 chiñskim dla Chin.
 
-%files i18n-zh_CN -f i18n-zh_CN
+#%files i18n-zh_CN -f i18n-zh_CN
 %endif
 
 %define		CHINTRAD		""
@@ -864,7 +864,7 @@ Chinese language for Taiwan.
 Ten pakiet dostarcza zasoby zawieraj±ce menu i okna dialogowe w jêzyku
 chiñskim dla Tajwanu.
 
-%files i18n-zh_TW -f i18n-zh_TW
+#%files i18n-zh_TW -f i18n-zh_TW
 %endif
 
 %prep
@@ -1069,128 +1069,126 @@ rm -rf $RPM_BUILD_ROOT
 %files
 %defattr(644,root,root,755)
 #%%doc readlicense/source/license/unx/LICENSE
-%doc %{oolib}/LICENSE*
-%doc %{oolib}/*README*
+%doc %{_libdir}/%{name}/LICENSE*
+%doc %{_libdir}/%{name}/*README*
 
 %dir %{_sysconfdir}/openoffice
-%config %{_sysconfdir}/openoffice/autoresponse.conf
+#%config %{_sysconfdir}/openoffice/autoresponse.conf
 
 %{_desktopdir}/*.desktop
-%{_pixmapsdir}/*.png
-%{_pixmapsdir}/document-icons/*.png
+#%{_pixmapsdir}/*.png
+#%{_pixmapsdir}/document-icons/*.png
 
-%{oolib}/program/*.rdb
-%{oolib}/program/*.bmp
-%{oolib}/program/user_registry.xsl
+%{_libdir}/%{name}/program/*.rdb
+%{_libdir}/%{name}/program/*.bmp
+%{_libdir}/%{name}/program/user_registry.xsl
 
-%{oolib}/program/sofficerc
-%{oolib}/program/unorc
-%{oolib}/program/bootstraprc
-%{oolib}/program/configmgrrc
-%{oolib}/program/instdb.ins
+%{_libdir}/%{name}/program/sofficerc
+%{_libdir}/%{name}/program/unorc
+%{_libdir}/%{name}/program/bootstraprc
+%{_libdir}/%{name}/program/configmgrrc
+%{_libdir}/%{name}/program/instdb.ins
 
 # dirs/trees
-#%{oolib}/program/classes
+#%{_libdir}/%{name}/program/classes
 
-%dir %{oolib}/program/resource
-%{oolib}/program/resource/bmp.res
-#%{oolib}/program/resource/crash_dump.res
-%{oolib}/program/resource/testtool.res
+%dir %{_libdir}/%{name}/program/resource
+#%{_libdir}/%{name}/program/resource/bmp.res
+#%{_libdir}/%{name}/program/resource/crash_dump.res
 
 # mozilla
-#%%{oolib}/program/defaults
-#%%{oolib}/program/component.reg
-#%%{oolib}/program/components/*.xpt
-#%%{oolib}/program/components/*.dat
+#%%{_libdir}/%{name}/program/defaults
+#%%{_libdir}/%{name}/program/component.reg
+#%%{_libdir}/%{name}/program/components/*.xpt
+#%%{_libdir}/%{name}/program/components/*.dat
 
-%dir %{oolib}/help
-%{oolib}/help/en
-%{oolib}/help/main_transform.xsl
+%dir %{_libdir}/%{name}/help
+%{_libdir}/%{name}/help/en
+%{_libdir}/%{name}/help/main_transform.xsl
 
-%dir %{oolib}/share
-%dir %{oolib}/share/autocorr
-%dir %{oolib}/share/autotext
-%{oolib}/share/basic
-%{oolib}/share/config
-%dir %{oolib}/share/dict
-%dir %{oolib}/share/dict/ooo
-%{oolib}/share/dtd
-%{oolib}/share/fonts
-%{oolib}/share/gallery
-%{oolib}/share/psprint
-%{oolib}/share/samples
-%dir %{oolib}/share/template
-%dir %{oolib}/share/wordbook
-%{oolib}/share/readme
-#%{oolib}/share/xslt
+%dir %{_libdir}/%{name}/share
+%dir %{_libdir}/%{name}/share/autocorr
+%dir %{_libdir}/%{name}/share/autotext
+%{_libdir}/%{name}/share/basic
+%{_libdir}/%{name}/share/config
+%dir %{_libdir}/%{name}/share/dict
+%dir %{_libdir}/%{name}/share/dict/ooo
+%{_libdir}/%{name}/share/dtd
+%{_libdir}/%{name}/share/fonts
+%{_libdir}/%{name}/share/gallery
+%{_libdir}/%{name}/share/psprint
+%{_libdir}/%{name}/share/samples
+%dir %{_libdir}/%{name}/share/template
+%dir %{_libdir}/%{name}/share/wordbook
+%{_libdir}/%{name}/share/readme
+#%{_libdir}/%{name}/share/xslt
 
-%dir %{oolib}/share/registry
-%dir %{oolib}/share/registry/res
-%{oolib}/share/registry/data
-%{oolib}/share/registry/schema
+%dir %{_libdir}/%{name}/share/registry
+%dir %{_libdir}/%{name}/share/registry/res
+%{_libdir}/%{name}/share/registry/data
+%{_libdir}/%{name}/share/registry/schema
 
-%{oolib}/share/autotext/english
-%{oolib}/share/template/english
-%ghost %{oolib}/share/dict/ooo/dictionary.lst
-%{oolib}/share/dict/ooo/dictionary.lst-readme
+%{_libdir}/%{name}/share/autotext/english
+%{_libdir}/%{name}/share/template/english
+%ghost %{_libdir}/%{name}/share/dict/ooo/dictionary.lst
 
-%dir %{oolib}/user
-%dir %{oolib}/user/autotext
-%{oolib}/user/basic
-%{oolib}/user/database
-%{oolib}/user/gallery
-%{oolib}/user/psprint
+%dir %{_libdir}/%{name}/user
+%dir %{_libdir}/%{name}/user/autotext
+%{_libdir}/%{name}/user/basic
+%{_libdir}/%{name}/user/database
+%{_libdir}/%{name}/user/gallery
+%{_libdir}/%{name}/user/psprint
 
-%{oolib}/user/autotext/english
+%{_libdir}/%{name}/user/autotext/english
 
 # Programs
 %attr(755,root,root) %{_bindir}/oo*
 
-%attr(755,root,root) %{oolib}/setup
-%attr(755,root,root) %{oolib}/spadmin
+#%attr(755,root,root) %{_libdir}/%{name}/setup
+#%attr(755,root,root) %{_libdir}/%{name}/spadmin
 
-%attr(755,root,root) %{oolib}/program/*.bin
-#%attr(755,root,root) %{oolib}/program/crash_report
-%attr(755,root,root) %{oolib}/program/fromtemplate
-%attr(755,root,root) %{oolib}/program/gnomeint
+%attr(755,root,root) %{_libdir}/%{name}/program/*.bin
+#%attr(755,root,root) %{_libdir}/%{name}/program/crash_report
+#%attr(755,root,root) %{_libdir}/%{name}/program/fromtemplate
+#%attr(755,root,root) %{_libdir}/%{name}/program/gnomeint
 %if %{with java}
-%attr(755,root,root) %{oolib}/program/javaldx
-%attr(755,root,root) %{oolib}/program/jvmsetup
+%attr(755,root,root) %{_libdir}/%{name}/program/javaldx
+%attr(755,root,root) %{_libdir}/%{name}/program/jvmsetup
 %endif
-%attr(755,root,root) %{oolib}/program/nswrapper
-%attr(755,root,root) %{oolib}/program/pagein*
-%attr(755,root,root) %{oolib}/program/setup
-%attr(755,root,root) %{oolib}/program/soffice
-%attr(755,root,root) %{oolib}/program/sopatchlevel.sh
-%attr(755,root,root) %{oolib}/program/spadmin
-%attr(755,root,root) %{oolib}/program/getstyle-gnome
-%attr(755,root,root) %{oolib}/program/msgbox-gnome
+%attr(755,root,root) %{_libdir}/%{name}/program/nswrapper
+%attr(755,root,root) %{_libdir}/%{name}/program/pagein*
+%attr(755,root,root) %{_libdir}/%{name}/program/setup
+%attr(755,root,root) %{_libdir}/%{name}/program/soffice
+#%attr(755,root,root) %{_libdir}/%{name}/program/sopatchlevel.sh
+#%attr(755,root,root) %{_libdir}/%{name}/program/spadmin
+%attr(755,root,root) %{_libdir}/%{name}/program/getstyle-gnome
+%attr(755,root,root) %{_libdir}/%{name}/program/msgbox-gnome
 
 # %files devel ?????????
 #%attr(755,root,root) %{_bindir}/autodoc
-%attr(755,root,root) %{_bindir}/cppumaker
-%attr(755,root,root) %{_bindir}/idlc
-%attr(755,root,root) %{_bindir}/idlcpp
-%attr(755,root,root) %{_bindir}/javamaker
-%attr(755,root,root) %{_bindir}/rdbmaker
-%attr(755,root,root) %{_bindir}/regcomp
-%attr(755,root,root) %{_bindir}/regmerge
-%attr(755,root,root) %{_bindir}/regview
-%attr(755,root,root) %{_bindir}/uno
-%attr(755,root,root) %{_bindir}/xml2cmp
+#%attr(755,root,root) %{_bindir}/cppumaker
+#%attr(755,root,root) %{_bindir}/idlc
+#%attr(755,root,root) %{_bindir}/idlcpp
+#%attr(755,root,root) %{_bindir}/javamaker
+#%attr(755,root,root) %{_bindir}/rdbmaker
+#%attr(755,root,root) %{_bindir}/regcomp
+#%attr(755,root,root) %{_bindir}/regmerge
+#%attr(755,root,root) %{_bindir}/regview
+#%attr(755,root,root) %{_bindir}/uno
+#%attr(755,root,root) %{_bindir}/xml2cmp
 
 %files libs
 %defattr(644,root,root,755)
-%dir %{oolib}
-%dir %{oolib}/program
-#%%dir %{oolib}/program/components -- mozilla
-%dir %{oolib}/program/filter
+%dir %{_libdir}/%{name}
+%dir %{_libdir}/%{name}/program
+#%%dir %{_libdir}/%{name}/program/components -- mozilla
+%dir %{_libdir}/%{name}/program/filter
 
-%attr(755,root,root) %{oolib}/program/*.so
-%attr(755,root,root) %{oolib}/program/*.so.*
-#%%attr(755,root,root) %{oolib}/program/components/*.so -- mozilla
-%attr(755,root,root) %{oolib}/program/filter/*.so
+%attr(755,root,root) %{_libdir}/%{name}/program/*.so
+%attr(755,root,root) %{_libdir}/%{name}/program/*.so.*
+#%%attr(755,root,root) %{_libdir}/%{name}/program/components/*.so -- mozilla
+%attr(755,root,root) %{_libdir}/%{name}/program/filter/*.so
 
 %files mimelinks
 %defattr(644,root,root,755)
-%{_datadir}/mimelnk/application/*
+#%{_datadir}/mimelnk/application/*
