@@ -18,7 +18,7 @@
 %bcond_with	gnomecups	# gnome-cups
 %bcond_with	i18n 		# i18n bits
 
-%define		ver		1.1.0
+%define		ver		1.1.1
 %define		rel		%{nil}
 %define		fullver		%{ver}%{rel}
 %define		specflags	-fno-strict-aliasing
@@ -33,7 +33,7 @@ License:	GPL/LGPL
 Group:		X11/Applications
 # Previous url: ftp://ftp.openoffice.pl/pub/OpenOffice.ORG/stable/%{fullver}/OOo_%{fullver}_source.tar.bz2
 Source0:	ftp://sunsite.icm.edu.pl/packages/OpenOffice/official/stable/%{fullver}/OOo_%{fullver}_source.tar.bz2
-# Source0-md5:	bec8b41089ebdad2831f3c456973ad4e
+# Source0-md5:	1919ec0ef5d3e8fe4b0a4910856d8987
 Source1:	ftp://ftp.cs.man.ac.uk/pub/toby/gpc/gpc231.tar.Z
 # Source1-md5:	fdb06fdb5a4670b172f9fb738b717be9
 Source2:	%{name}-rsfile.txt
@@ -125,11 +125,6 @@ Patch29:	%{name}-gcc2-95.patch
 Patch30:	%{name}-system-zlib.patch
 Patch31:	%{name}-system-mozilla.patch
 Patch32:	%{name}-fix-errno.patch
-
-Patch52:	%{name}-xmlhelp.patch
-
-Patch63:	%{name}-stlutility.patch
-Patch64:	%{name}-crashrepgtk.patch
 
 # Fix java/ppc problem 
 Patch65:	%{name}-java-ppc.patch 
@@ -901,7 +896,7 @@ chiñskim dla Tajwanu.
 %endif
 
 %prep
-%setup -q -n oo_1.1_src
+%setup -q -n oo_%{ver}_src
 #%setup1 -q -n oo_1.1_src
 
 #%patch0 -p1
@@ -916,18 +911,14 @@ chiñskim dla Tajwanu.
 %patch16 -p1
 
 %patch19 -p1
-%patch20 -p1
+#%patch20 -p1
 %patch21 -p1
 
-%patch30 -p1
+# obsoleted by --with-system-zlib?
+#%patch30 -p1
 
 rm -f moz/prj/d.lst
 %patch31 -p1
-
-# 1.1 BETA
-%patch52 -p1
-%patch63 -p1
-%patch64 -p1
 
 # java/ppc: broken native threads?
 %ifarch ppc
@@ -944,7 +935,8 @@ rm -f moz/prj/d.lst
 %ifarch sparc sparc64
 %patch66 -p0 
 %endif 
-%patch101 -p0
+# UPDATE/CHECK ME
+#%patch101 -p0
 %patch102 -p0
 %patch103 -p0
 %patch104 -p0
@@ -1156,6 +1148,7 @@ cd config_office
 %else
 	--disable-java \
 %endif
+	--with-system-zlib \
 	--with-stlport4-home=/usr \
 	--with-lang=ALL \
 	--with-x \
