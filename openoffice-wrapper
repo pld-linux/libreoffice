@@ -27,7 +27,12 @@ else
   # rename old .sversonrc
   [ -f $HOME/.sversionrc ] && mv $HOME/.sversionrc $HOME/.sversionrc.old
   # run the automated setup
-  /usr/lib/openoffice/program/setup -R:/etc/openoffice/autoresponse.conf
+  lang=$(eval $(locale); echo "$LC_MESSAGES" | sed -n "s/\([a-z]*\)_.*/\1/p")
+  if [ -n "$lang" -a -e "/usr/lib/openoffice/help/${lang%%%%_*}" ]; then
+    /usr/lib/openoffice/program/setup -R:/etc/openoffice/autoresponse.conf -LANG=$lang
+  else
+    /usr/lib/openoffice/program/setup -R:/etc/openoffice/autoresponse.conf
+  fi
   echo "DONE"
 fi
 
