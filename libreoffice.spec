@@ -267,6 +267,8 @@ Patch510:	%{name}-1.1-psprint-cups-PPD.patch
 Patch511:	%{name}-1.1-disable-python-nojava.patch
 
 Patch600:	%{name}-freetype_2_1_7.patch
+Patch601:	%{name}-system-vera-fonts.patch
+Patch602:	%{name}-externalapp.patch
 
 URL:		http://www.openoffice.org/
 BuildRequires:  ImageMagick
@@ -1078,6 +1080,8 @@ rm -f moz/prj/d.lst
 %patch510 -p1 
 
 %patch600 -p1
+%patch601 -p1 
+%patch602 -p0
 
 # gcc 2 include error hack:
 rm -rf autodoc/source/inc/utility
