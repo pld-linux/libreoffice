@@ -1,3 +1,60 @@
+diff -Nur oo/berkeleydb/makefile.mk oo.new/berkeleydb/makefile.mk
+--- oo/berkeleydb/makefile.mk	Fri Feb  8 16:18:17 2002
++++ oo.new/berkeleydb/makefile.mk	Sun Apr 14 23:56:12 2002
+@@ -117,12 +117,12 @@
+ 
+ .INCLUDE : set_ext.mk
+ .INCLUDE :	target.mk
+-.INCLUDE :	tg_ext.mk
++#.INCLUDE :	tg_ext.mk
+ 
+-TG_DELIVER : $(INPATH)$/misc$/build$/so_predeliver
+-		$(DELIVER)
++#TG_DELIVER : $(INPATH)$/misc$/build$/so_predeliver
++#		$(DELIVER)
+ 
+-.IF "$(BUILD_SOSL)"!=""
+-ALLTAR : TG_DELIVER
+-.ENDIF			# "$(BUILD_SOSL)"!=""
++#.IF "$(BUILD_SOSL)"!=""
++#ALLTAR : TG_DELIVER
++#.ENDIF			# "$(BUILD_SOSL)"!=""
+ 
+diff -Nur oo/config_office/makefile.rc oo.new/config_office/makefile.rc
+--- oo/config_office/makefile.rc	Fri Oct 19 17:25:23 2001
++++ oo.new/config_office/makefile.rc	Sun Apr 14 23:56:12 2002
+@@ -155,7 +155,6 @@
+ 	so3 \
+ 	soltools \
+ 	sot \
+-	berkeleydb \
+ 	starmath \
+ 	stoc \
+ 	store \
+diff -Nur oo/xmlhelp/source/cxxhelp/provider/databases.cxx oo.new/xmlhelp/source/cxxhelp/provider/databases.cxx
+--- oo/xmlhelp/source/cxxhelp/provider/databases.cxx	Fri Nov 23 17:51:01 2001
++++ oo.new/xmlhelp/source/cxxhelp/provider/databases.cxx	Mon Apr 15 10:59:50 2002
+@@ -60,7 +60,7 @@
+  ************************************************************************/
+ 
+ 
+-#include <berkeleydb/db_cxx.h>
++#include <db_cxx.h>
+ #ifndef _VOS_DIAGNOSE_HXX_
+ #include <vos/diagnose.hxx>
+ #endif
+diff -Nur oo/xmlhelp/source/cxxhelp/provider/urlparameter.cxx oo.new/xmlhelp/source/cxxhelp/provider/urlparameter.cxx
+--- oo/xmlhelp/source/cxxhelp/provider/urlparameter.cxx	Wed Oct 31 14:08:14 2001
++++ oo.new/xmlhelp/source/cxxhelp/provider/urlparameter.cxx	Mon Apr 15 11:05:50 2002
+@@ -88,7 +88,7 @@
+ #include <sablot/shandler.h>
+ #endif
+ #ifndef _DB_CXX_H_
+-#include <berkeleydb/db_cxx.h>
++#include <db_cxx.h>
+ #endif
+ #ifndef _URLPARAMETER_HXX_
+ #include <provider/urlparameter.hxx>
 --- oo_1.0_src/setup2/script/linux/1.0.0/webinstdb.inf.systemdb	Fri May 31 17:46:36 2002
 +++ oo_1.0_src/setup2/script/linux/1.0.0/webinstdb.inf	Fri May 31 17:47:08 2002
 @@ -6687,7 +6687,7 @@
@@ -231,8 +288,8 @@ diff -uNr xmlhelp.old/source/com/sun/star/help/HelpIndexer.java xmlhelp/source/c
              for( int i = 0; i < list.length; ++i )
              {
 diff -uNr xmlhelp.old/source/cxxhelp/provider/databases.cxx xmlhelp/source/cxxhelp/provider/databases.cxx
---- xmlhelp.old/source/cxxhelp/provider/databases.cxx	Wed Dec  4 15:19:26 2002
-+++ xmlhelp/source/cxxhelp/provider/databases.cxx	Wed Dec  4 15:33:41 2002
+--- oo/xmlhelp.old/source/cxxhelp/provider/databases.cxx	Wed Dec  4 15:19:26 2002
++++ oo/xmlhelp/source/cxxhelp/provider/databases.cxx	Wed Dec  4 15:33:41 2002
 @@ -495,7 +495,11 @@
  		
  		rtl::OString fileName( fileNameOU.getStr(),fileNameOU.getLength(),osl_getThreadTextEncoding() );
