@@ -1247,8 +1247,6 @@ fontpostinst TTF %{_fontsdir}/%{name}
 %{_libdir}/%{name}/program/configmgrrc
 %{_libdir}/%{name}/program/instdb.ins
 
-%{_libdir}/%{name}/program/resource.default
-
 %dir %{_libdir}/%{name}/help
 #%{_libdir}/%{name}/help/en
 %{_libdir}/%{name}/help/main_transform.xsl
