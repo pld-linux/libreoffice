@@ -2,7 +2,7 @@
 #	- normal build requires little less than 4GB of disk space
 #	- full debug build requires about 9GB of disk space
 # TODO:
-#	- fix version on splash (currently 1.1.1, must be 1.1.2 or just 1.1)
+#	- wait for nearest ooo-build snap (with --with-arch support)
 #	- drop requirement on nas-devel
 #	- fix locale names and other locale related things
 #	- --with-system-myspell + myspell package as in Debian
@@ -142,7 +142,7 @@ Requires:	%{name}-i18n-en = %{epoch}:%{version}-%{release}
 Requires:	cups-lib
 Requires:	db
 Requires:	libstdc++ >= 5:3.2.1
-ExclusiveArch:	%{ix86} sparc ppc
+ExclusiveArch:	%{ix86} ppc sparc sparcv9
 #Suggested:	chkfontpath
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
@@ -1023,6 +1023,12 @@ RPM_BUILD_NR_THREADS="%(echo "%{__make}" | sed -e 's#.*-j\([[:space:]]*[0-9]\+\)
 [ "$RPM_BUILD_NR_THREADS" != "%{__make}" -a "$RPM_BUILD_NR_THREADS" -gt 4 ] && RPM_BUILD_NR_THREADS=4 || RPM_BUILD_NR_THREADS=1
 
 CONFOPTS=" \
+%ifarch ppc
+	--with-arch=ppc \
+%endif
+%ifarch sparc sparcv9
+	--with-arch=sparc \
+%endif
 	--with-tag=OOO_%{dfullver} \
 	--with-ccache-allowed \
 	--with-system-gcc \
@@ -1080,7 +1086,8 @@ CONFOPTS=" \
 CONFIGURE_OPTIONS="$CONFOPTS"; export CONFIGURE_OPTIONS
 
 # main build
-%configure $CONFOPTS
+%configure \
+	$CONFOPTS
 
 # this limits processing some files but doesn't limit parallel build
 # processes of main OOo build (since OOo uses it's own build system)
