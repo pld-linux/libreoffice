@@ -12,6 +12,7 @@ Source1:	ftp://ftp.cs.man.ac.uk/pub/toby/gpc/gpc231.tar.Z
 Source2:	%{name}-db3.jar
 Patch0:		%{name}-gcc.patch
 Patch1:		%{name}-db3.patch
+Patch2:		%{name}-mozilla.patch
 URL:		http://www.openoffice.org/
 BuildRequires:	STLport-static
 BuildRequires:	XFree86-devel
