@@ -1251,7 +1251,7 @@ for lang in $RPM_BUILD_ROOT%{_libdir}/%{name}/help/*; do
         langlist="$langlist $(echo "$lang" | sed -e 's#.*/\(.*\)#\1#g')"
 done
 langlist=$(echo "$langlist" | tr ' ' '\n' | sort | uniq)
-slanglist=$(echo "$langlist" | awk -F_ ' { print $1) ' | | awk -F- ' { print $1 } ')
+slanglist=$(echo "$langlist" | awk -F_ ' { print $1) ' | awk -F- ' { print $1 } ')
 
 echo "LANGLIST [$langlist]"
 echo "SLANGLIST [$slanglist]"
