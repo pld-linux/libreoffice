@@ -209,6 +209,14 @@ OpenOffice.org productivity suite - shared libraries.
 %description libs -l pl
 Pakiet biurowy OpenOffice.org - biblioteki.
 
+%package mimelinks
+Summary:	OpenOffice.org mimelinks
+Group:		X11/Applications
+Requires:	%{name} = %{epoch}:%{version}-%{release}
+
+%description mimelinks
+OpenOffice.org mimelinks
+
 #
 # Internationalization
 #
@@ -1091,7 +1099,7 @@ rm -rf $RPM_BUILD_ROOT
 %{_pixmapsdir}/hicolor/32x32/apps/*.xpm
 %{_pixmapsdir}/hicolor/48x48/apps/*.xpm
 
-%{_datadir}/mimelnk/application/*
+
 
 %{oolib}/program/*.rdb
 %{oolib}/program/*.bmp
@@ -1202,3 +1210,6 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{oolib}/program/*.so.*
 #%%attr(755,root,root) %{oolib}/program/components/*.so -- mozilla
 %attr(755,root,root) %{oolib}/program/filter/*.so
+
+%files mimelinks
+%{_datadir}/mimelnk/application/*
