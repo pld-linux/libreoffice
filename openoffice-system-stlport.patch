@@ -9,3 +9,14 @@
  
  #FILLUPARC=$(STATIC) -lsupc++ $(DYNAMIC)
  
+--- oo_1.1rc3_src/solenv/inc/unxlngppc.mk.orig	Mon Apr 28 16:47:14 2003
++++ oo_1.1rc3_src/solenv/inc/unxlngppc.mk	Wed Sep  3 10:03:39 2003
+@@ -189,7 +189,7 @@
+ STDSHLCUIMT=-ldl -lpthread -lm
+ 
+ LIBSTLPORT=$(DYNAMIC) -lstlport_gcc
+-LIBSTLPORTST=$(STATIC) -lstlport_gcc $(DYNAMIC)
++LIBSTLPORTST=$(DYNAMIC) -lstlport_gcc $(DYNAMIC)
+ 
+ # name of library manager
+ LIBMGR=ar 
