@@ -77,6 +77,7 @@ Patch6:		%{name}-pld-do-not-overwrite-configopt.patch
 Patch7:		%{name}-pld-package-lang.patch
 Patch8:		%{name}-pld-ooo-build-fix.patch
 Patch9:		%{name}-pld-ooo-build-stderr.patch
+Patch10:	%{name}-pld-sh-tcsh.patch
 
 URL:		http://www.openoffice.org/
 BuildRequires:	ImageMagick
@@ -862,6 +863,7 @@ chiñskim.
 %patch7 -p1
 %patch8 -p1
 %patch9 -p1
+%patch10 -p1
 
 install -d src
 ln -s %{SOURCE1} src/
@@ -981,6 +983,8 @@ for file in \
 done
 cd ..
 
+sed -e 's#DESTINATIONPATH=.*#DESTINATIONPATH=<home>/.openoffice#g' etc/redhat-autoresponse.conf > $RPM_BUILD_ROOT%{_sysconfdir}/%{name}/autoresponse.conf
+
 install -d $RPM_BUILD_ROOT%{_desktopdir}
 bzip2 -dc %{SOURCE10} | tar xf - -C $RPM_BUILD_ROOT%{_desktopdir}
 
@@ -1052,6 +1056,7 @@ echo "SLANGLIST [$slanglist]"
 
 for lang in $slanglist; do
 	echo "%%defattr(644,root,root,755)" >> ${lang}.lang
+
 	# help files
 	if (ls $RPM_BUILD_ROOT%{_libdir}/%{name}/help/*${lang}* 2> /dev/null); then
 		echo "%%lang(${lang}) %{_libdir}/%{name}/help/*${lang}*" >> ${lang}.lang
@@ -1092,7 +1097,7 @@ fontpostinst TTF %{_fontsdir}/%{name}
 %doc %{_libdir}/%{name}/*README*
 
 %dir %{_sysconfdir}/openoffice
-#%config %{_sysconfdir}/openoffice/autoresponse.conf
+%config %{_sysconfdir}/openoffice/autoresponse.conf
 
 %{_desktopdir}/*.desktop
 #%{_pixmapsdir}/*.png
