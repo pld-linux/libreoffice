@@ -18,23 +18,33 @@ Group:		X11/Applications
 Source0:	ftp://ftp1.openoffice.pl/pub/OpenOffice.ORG/stable/%{version}/OOo_%{version}_source.tar.bz2
 # Source0-md5:	c1d9a96fa644968a76f9b4fbd3f18cf2
 Source1:	ftp://ftp.cs.man.ac.uk/pub/toby/gpc/gpc231.tar.Z
+# Source1-md5:	fdb06fdb5a4670b172f9fb738b717be9
 Source2:	%{name}-rsfile.txt
 Source3:	%{name}-rsfile-local.txt
 Source4:	%{name}-xmlparse.sh
 Source6:	%{name}-applnk.tar.gz
+# Source6-md5:	bb67af38dfd5aa98ee9490c0c452478c
 Source7:	%{name}-wrapper
 Source8:	%{name}-wrapper-component
 Source9:	%{name}-langs.txt
 Source10:	%{name}-db3.jar
+# Source10-md5:	0d15818dea3099eed42b4be9950c69ad
 Source11:	%{name}-dictionary.lst.readme
+# Source11-md5:	e4c1c2844b4a4cebca33339538da7f1d
 Source12:	OOo_1.0.2beta2_LinuxIntel_odk.tar.gz
 
 Source101:	ftp://ftp.task.gda.pl/mirror/ftp.openoffice.org/contrib/helpfiles/helpcontent_01_unix.tgz
+# Source101-md5:	ff3eb5095a74ae7a9b2918ef5874288f
 Source102:	ftp://ftp.task.gda.pl/mirror/ftp.openoffice.org/contrib/helpfiles/helpcontent_33_unix.tgz
+# Source102-md5:	20dcbf3211c20afb27fc5677ab8f69e5
 Source103:	ftp://ftp.task.gda.pl/mirror/ftp.openoffice.org/contrib/helpfiles/helpcontent_34_unix.tgz
+# Source103-md5:	ba6adc71dc5cb766dd75f5b13a7c6bc8
 Source104:	ftp://ftp.task.gda.pl/mirror/ftp.openoffice.org/contrib/helpfiles/helpcontent_39_unix.tgz
+# Source104-md5:	4c33e3f9f8a64be68c63f33ff1e0e4a7
 Source105:	ftp://ftp.task.gda.pl/mirror/ftp.openoffice.org/contrib/helpfiles/helpcontent_46_unix.tgz
+# Source105-md5:	5183879d8b57850d433351cb8a5634a8
 Source106:	ftp://ftp.task.gda.pl/mirror/ftp.openoffice.org/contrib/helpfiles/helpcontent_49_unix.tgz
+# Source106-md5:	68f0db91bb091065a4795d47d6ae0b0b
 
 # Localization scripts from Mandrake
 Source302:	%{name}-dpack-lang.pl
