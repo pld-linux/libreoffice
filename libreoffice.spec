@@ -2219,7 +2219,7 @@ fontpostinst TTF %{_fontsdir}/TTF
 %attr(755,root,root) %{_libdir}/%{name}/program/*.so.*
 %attr(755,root,root) %{_libdir}/%{name}/program/filter/*.so
 
-%{_fontsdir}/openoffice/*.ttf
+%{_fontsdir}/TTF/*.ttf
 
 %files libs-kde -f en.lang.kde
 %defattr(644,root,root,755)
