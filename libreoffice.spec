@@ -21,6 +21,7 @@ BuildRequires:	perl
 BuildRequires:	tcsh
 BuildRequires:	unzip
 BuildRequires:	zip
+BuildConflicts:	STLport-devel
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %define		_prefix		/usr/X11R6
