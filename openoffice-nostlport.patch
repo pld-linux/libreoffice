@@ -119,7 +119,7 @@ diff -Nur oo_641_src/config_office/configure.in oo_641_src.new/config_office/con
  fi
  if test -z "$STLPORT4"; then 
 -   STLPORT4="NO_STLPORT4"
-+   STLPORT4="/usr"
++   STLPORT4="/no/_/stlport4"
  fi
  if test -z "$PERL"; then
     PERL="NO_PERL"
