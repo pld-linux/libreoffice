@@ -48,8 +48,8 @@ Source10:	%{name}-db3.jar
 Source11:	%{name}-dictionary.lst.readme
 # Source11-md5:	e4c1c2844b4a4cebca33339538da7f1d
 
-Source12:	http://ooo.ximian.com/packages/ooo-icons-OOO_1_1-6.tar.gz
-# Source12-md5:	3f73b262e35011e42d0b4fbfa46c34cd
+Source12:	http://ooo.ximian.com/packages/ooo-icons-OOO_1_1-8.tar.gz
+# Source12-md5:	61c9379fa718ee7f36ccd2d70f3649c8
 
 %define		helpftp	ftp://openoffice.tu-bs.de/OpenOffice.org/contrib/helpcontent
 Source101:	%{helpftp}/helpcontent_01_unix.tgz
