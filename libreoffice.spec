@@ -11,10 +11,11 @@ Group(pl):	X11/Aplikacje
 Source0:	http://a1652.g.akamai.net/7/1652/2064/OpenOffice619/anoncvs.openoffice.org/download/OpenOffice619/oo_%{version}_src.tar.bz2
 URL:		http://www.openoffice.org/
 BuildRequires:	STLport-devel
-BuildRequires:	STLport-static
+#BuildRequires:	STLport-static
 #BuildRequires:	jdk
-BuildRequires:	perl
+BuildRequires:	flex
 BuildRequires:	tcsh
+BuildRequires:	perl
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
