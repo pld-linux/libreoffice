@@ -34,10 +34,11 @@ cd config_office
 	--with-jdk-home=/usr/local/lib/jdk
 cd ..
 
+echo "setenv PATH \${PATH}:\${SRC_ROOT}/solenv/unxlngi3/bin" >> LinuxIntelEnv.Set
+
 cat <<EOF > compile
 #!/bin/csh
 source LinuxIntelEnv.Set
-PATH=$SRC_ROOT/solenv/unxlngi3/bin
 dmake
 EOF
 
