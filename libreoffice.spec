@@ -8,7 +8,7 @@
 #	- incorporate gnome OOo artwork (icons & more)
 #	- copy & paste problem in oocalc
 
-%bcond_without java		# build without java support
+%bcond_with java		# build without java support
 
 %define		ver		1.1.0
 %define		rel		%{nil}
@@ -18,7 +18,7 @@ Summary:	OpenOffice - powerful office suite
 Summary(pl):	OpenOffice - potê¿ny pakiet biurowy
 Name:		openoffice
 Version:	%{ver}
-Release:	0.4
+Release:	0.5
 Epoch:		1
 License:	GPL/LGPL
 Group:		X11/Applications
@@ -172,6 +172,9 @@ Patch224: openoffice-svx-freeze-fix.patch
 Patch225: openoffice-wm-dialog-utility.patch
 Patch226: openoffice-db-dbcxx.patch
 Patch227: openoffice-fix-parallel-build.patch
+Patch228: openoffice-thread-yield.patch
+Patch229: openoffice-prelink-friendly.patch
+Patch230: openoffice-svtools-dep.patch
 
 Patch301: openoffice-splash.patch
 
@@ -250,11 +253,13 @@ BuildRequires:	xft-static
 BuildRequires:	xrender-static
 BuildRequires:	zlib-static
 BuildRequires:	pkgconfig
+BuildRequires:	startup-notification-devel
 Requires:	%{name}-libs = %{epoch}:%{version}-%{release}
 Requires:	%{name}-i18n-en = %{epoch}:%{version}-%{release}
 Requires:	%{name}-dict-en
 Requires:	libstdc++ >= 3.2.1
 Requires:	db
+Requires:	startup-notification
 #Requires:	chkfontpath
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
@@ -907,14 +912,17 @@ rm -f moz/prj/d.lst
 %patch225 -p0
 %patch226 -p1
 %patch227 -p1
+%patch228 -p0
+%patch229 -p1 
+%patch230 -p0
 
 %patch301 -p1 
 
 # i18n support (?)
-%patch341 -p0 
-%patch342 -p0
-%patch343 -p0 
-%patch344 -p0 
+#%patch341 -p0 
+#%patch342 -p0
+#%patch343 -p0 
+#%patch344 -p0 
 
 # CUPS support
 #%patch351 -p0
@@ -961,6 +969,10 @@ cp /usr/lib/libstdc++.so.5* solver/%{subver}/%{_archbuilddir}/lib
 install %{SOURCE401} offmgr/res/openabout_pld.bmp
 install %{SOURCE402} offmgr/res/openintro_pld.bmp
 
+# bzz... 
+rm -f offmgr/source/offapp/intro/iso.src
+cp offmgr/source/offapp/intro/ooo.src offmgr/source/offapp/intro/iso.src
+
 # optimalization
 cd solenv/inc
 for i in *.mk
@@ -991,15 +1003,27 @@ cd config_office
 %endif
 	--with-stlport4-home=/usr \
 	--with-lang=ALL \
-	--with-x
+	--with-x \
+	--enable-libsn
 
 cd ..
 
+if [ -z "$RPM_BUILD_NCPUS" ] ; then
+	if [ -x /usr/bin/getconf ] ; then
+		RPM_BUILD_NCPUS=$(/usr/bin/getconf _NPROCESSORS_ONLN)
+		if [ $RPM_BUILD_NCPUS -eq 0 ] ; then 
+			RPM_BUILD_NCPUS=1
+		fi
+	else 
+		RPM_BUILD_NCPUS=1
+	fi
+fi
+
 %ifarch %{ix86}
-echo -e "#!/bin/tcsh\nsource LinuxIntelEnv.Set\ndmake -p -v\n" > compile
+echo -e "#!/bin/tcsh\nsource LinuxIntelEnv.Set\ncd instsetoo\nbuild.pl -P$RPM_BUILD_NCPUS --all\nexit 0" > compile
 %endif
 %ifarch ppc
-echo -e "#!/bin/tcsh\nsource LinuxPPCEnv.Set\ndmake -p -v\n" > compile
+echo -e "#!/bin/tcsh\nsource LinuxPPCEnv.Set\ncd instsetoo\nbuild.pl -P$RPM_BUILD_NCPUS --all\nexit 0" > compile
 %endif
 echo -e "#!/bin/tcsh\n./bootstrap\n" > prep
 chmod u+rx prep compile
@@ -1011,7 +1035,6 @@ install /usr/lib/db.jar solver/%{subver}/%{_archbuilddir}/bin/db.jar
 %endif 
 
 ./compile
-
 
 %install
 rm -rf $RPM_BUILD_ROOT
