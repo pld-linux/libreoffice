@@ -13,6 +13,7 @@
 %bcond_without	icons		# new Ximian icons
 %bcond_without	gnomevfs	# gnome-vfs
 %bcond_with	parallel 	# parallel building
+%bcond_without  optimalization  # without it. that's right 
 
 # not tested
 %bcond_with	gnomecups	# gnome-cups
@@ -26,7 +27,7 @@ Summary:	OpenOffice - powerful office suite
 Summary(pl):	OpenOffice - potê¿ny pakiet biurowy
 Name:		openoffice
 Version:	%{ver}
-Release:	0.6.4
+Release:	0.6.5
 Epoch:		1
 License:	GPL/LGPL
 Group:		X11/Applications
@@ -1105,6 +1106,7 @@ chmod a+x scale-icons
 cp -Rvf ooo-icons-OOO_1_1-6/* .
 %endif 
 
+%if %{with optimalization}
 # optimalization
 cd solenv/inc
 for i in *.mk
@@ -1115,6 +1117,7 @@ do
 		-e 's/-mcpu=pentiumpro/%{rpmcflags}/' > $i.new
 	mv -f $i.new $i
 done
+%endif 
 
 %build
 CC=%{__cc}
@@ -1481,6 +1484,9 @@ done
 
 install %{SOURCE401} $RPM_BUILD_ROOT%{oolib}/program/about.bmp
 install %{SOURCE402} $RPM_BUILD_ROOT%{oolib}/program/intro.bmp
+
+# clean some fucked files
+rm -rf $RPM_BUILD_ROOT%{oolib}/share/fonts/truetype/Vera*.ttf
 
 %clean
 rm -rf $RPM_BUILD_ROOT
