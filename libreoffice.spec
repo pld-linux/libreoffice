@@ -12,6 +12,7 @@
 %bcond_without icons		# new Ximian icons
 %bcond_without gnomevfs		# gnome-vfs
 %bcond_with parallel 		# parallel building
+%bcond_with static		# static libraries
 
 # not tested
 %bcond_with gnomecups		# gnome-cups
@@ -252,6 +253,16 @@ Patch432: openoffice-gui-menu-checkitems.patch
 Patch433: openoffice-gui-menu-check-render.patch
 Patch434: openoffice-gui-menu-fixes.patch
 
+Patch501: openoffice-1.0.1-so-ooo-coexist.patch
+Patch502: openoffice-1.0.2-sal-sigsegv.patch
+Patch503: openoffice-scpzip-langs.patch
+Patch504: openoffice-1.1-disable-python.patch
+Patch505: openoffice-1.1-psprint-pdf-drivers.patch
+Patch506: openoffice-1.1-sal-main-cmdline.patch
+Patch507: openoffice-iso8859-2-html.patch
+Patch508: openoffice-buildset.patch
+Patch509: openoffice-vcl-dynamic-Xinerama.patch
+
 URL:		http://www.openoffice.org/
 BuildRequires:	STLport-devel >= 4.5.3-6
 BuildRequires:	XFree86-devel
@@ -278,6 +289,7 @@ BuildRequires:	unzip
 BuildRequires:	zip
 BuildRequires:	zlib-devel
 # gtk crashreport static requirements:
+%if %{with static}
 BuildRequires:	XFree86-static
 BuildRequires:	atk-static
 BuildRequires:	expat-static
@@ -293,10 +305,12 @@ BuildRequires:	pango-static
 BuildRequires:	xft-static
 BuildRequires:	xrender-static
 BuildRequires:	zlib-static
+%endif 
 # more and more...
 BuildRequires:	pkgconfig
 BuildRequires:	startup-notification-devel
 BuildRequires:  libart_lgpl-devel
+BuildRequires:  gtk+2-devel
 %if %{with gnomevfs} 
 BuildRequires:	gnome-vfs2-devel
 %endif 
@@ -1050,6 +1064,16 @@ rm -f moz/prj/d.lst
 %patch433 -p0 
 %patch434 -p0
 %endif
+
+#%patch501 -p1
+%patch502 -p1
+%patch503 -p1
+%patch504 -p0
+%patch505 -p1
+%patch506 -p1
+%patch507 -p1
+%patch508 -p0
+%patch509 -p0
 
 # gcc 2 include error hack:
 rm -rf autodoc/source/inc/utility
