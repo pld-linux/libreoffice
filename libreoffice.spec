@@ -23,7 +23,7 @@ OpenOffice jest potê¿nym pakietem biurowym wywodz±cym siê ze StarOffice.
 %setup -q -n oo_613_src
 
 %build
-cd config-office
+cd config_office
 %configure \
 	--with-stlport4-home=%{_prefix}
 
