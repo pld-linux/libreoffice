@@ -875,14 +875,18 @@ ln -s %{SOURCE20} src/openabout_pld.bmp
 ln -s %{SOURCE21} src/openintro_pld.bmp
 
 %build
+# Make sure we have /proc mounted - otherwise idlc will fail later.
+[ -r /proc/version ] || exit 1
+
 CC=%{__cc}
 CXX=%{__cxx}
 GCJ=gcj
 JAVA_HOME="/usr/lib/java"
-CFLAGS="%{rpmcflags}"
-CXXFLAGS="%{rpmcflags}"
+ENVCFLAGS="%{rpmcflags}"
+ENVCFLAGSCXX="%{rpmcflags}"
 DESTDIR=$RPM_BUILD_ROOT
-export JAVA_HOME CC CXX GCJ CFLAGS CXXFLAGS DESTDIR
+IGNORE_MANIFEST_CHANGES=1
+export JAVA_HOME CC CXX GCJ ENVCFLAGS ENVCFLAGSCXX DESTDIR IGNORE_MANIFEST_CHANGES
 
 if [ -z "$RPM_BUILD_NCPUS" ] ; then
 	if [ -x /usr/bin/getconf ] ; then
@@ -898,6 +902,13 @@ fi
 CONFOPTS=" \
 	--with-system-gcc \
 	--with-system-zlib \
+	--with-system-sane-headers \
+	--with-system-x11-extensions-headers \
+	--with-system-unixodbc-headers \
+	--with-system-myspell \
+	--with-system-db \
+	--with-system-curl \
+	--with-system-freetype \
 	--with-vendor="PLD" \
 	--with-distro="Ximian" \
 %if %{with kde}
@@ -914,11 +925,15 @@ CONFOPTS=" \
 %else
 	--disable-java \
 %endif
+	--with-python=%{_bindir}/python \
 	--with-stlport4-home=/usr \
 	--with-lang=ALL \
 	--with-x \
+	--enable-crashdump \
 	--enable-libsn \
 	--enable-libart \
+	--disable-rpath \
+	--disable-symbols \
 	--with-num-cpus=$RPM_BUILD_NCPUS
 "
 
