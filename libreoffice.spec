@@ -256,6 +256,7 @@ Source499:	%{name}-additional-dictionaries.txt
 
 Patch0:		%{name}-rh-disable-spellcheck-all-langs.patch
 Patch1:		%{name}-pld-stlport.patch
+Patch2:		%{name}-pld-ximian-is-pld.patch
 
 URL:		http://www.openoffice.org/
 BuildRequires:	ImageMagick
@@ -854,11 +855,14 @@ chiñskim dla Tajwanu.
 %setup -q -n ooo-build-%{ooobver}
 %patch0 -p1
 %patch1 -p1
+%patch2 -p1
 
 install -d src
 ln -s %{SOURCE1} src/
 ln -s %{SOURCE2} src/
 ln -s %{SOURCE3} src/
+ln -s %{SOURCE20} src/openabout_pld.bmp
+ln -s %{SOURCE21} src/openintro_pld.bmp
 
 %build
 CC=%{__cc}
@@ -940,6 +944,9 @@ for file in \
 		unzip -o -d $RPM_BUILD_ROOT%{_libdir}/%{name}/share/dict/ooo $file
 done
 cat %{SOURCE499} >> $RPM_BUILD_ROOT%{_libdir}/%{name}/share/dict/ooo/dictionary.lst
+
+install -d $RPM_BUILD_ROOT%{_desktopdir}
+bzip2 -dc %{SOURCE6} | tar xf - -C $RPM_BUILD_ROOT%{_desktopdir}
 
 # Add in the regcomp tool since some people need it for 3rd party add-ons
 cp -f build/%{build_release_tag}/solver/%{subver}/unxlng*.pro/bin/regcomp $RPM_BUILD_ROOT%{_libdir}/%{name}/program
