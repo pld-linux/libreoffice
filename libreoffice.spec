@@ -1,12 +1,12 @@
 %define		ver		1.1
-%define		rel		rc2
+%define		rel		rc3
 %define		fullver		%{ver}%{rel}
 
 Summary:	OpenOffice - powerful office suite
 Summary(pl):	OpenOffice - potê¿ny pakiet biurowy
 Name:		openoffice
 Version:	%{ver}
-Release:	0.%{rel}.3
+Release:	0.%{rel}.1
 Epoch:		1
 License:	GPL/LGPL
 Group:		X11/Applications
