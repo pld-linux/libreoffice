@@ -30,8 +30,8 @@ Source1:	ftp://ftp.cs.man.ac.uk/pub/toby/gpc/gpc231.tar.Z
 Source2:	%{name}-rsfile.txt
 Source3:	%{name}-rsfile-local.txt
 Source4:	%{name}-xmlparse.sh
-Source6:	%{name}-applnk.tar.gz
-# Source6-md5:	577bc34d026c951653fbef752d1b5d85
+Source6:	http://www.kernel.pl/~adgor/pld/%{name}-desktopfiles-0.1.tar.bz2
+# Source6-md5:	98b43bd3749bb2f3626e04373f5c2d60
 Source7:	%{name}-wrapper
 Source8:	%{name}-wrapper-component
 Source10:	%{name}-db3.jar
@@ -1183,8 +1183,8 @@ do
     rm -f $RPM_BUILD_ROOT%{oolib}/program/s${app}
 done
 
-install -d $RPM_BUILD_ROOT%{_applnkdir}
-gunzip -dc %{SOURCE6} | tar xf - -C $RPM_BUILD_ROOT%{_applnkdir}
+install -d $RPM_BUILD_ROOT%{_desktopdir}
+bzip2 -dc %{SOURCE6} | tar xf - -C $RPM_BUILD_ROOT%{_desktopdir}
 
 # Remove stuff that should come from system libraries
 rm -rf $RPM_BUILD_ROOT%{oolib}/program/libdb-*
@@ -1337,7 +1337,7 @@ rm -rf $RPM_BUILD_ROOT
 %dir %{_sysconfdir}/openoffice
 %config %{_sysconfdir}/openoffice/autoresponse.conf
 
-%{_applnkdir}/Office
+%{_desktopdir}/*.desktop
 %{_pixmapsdir}/*.png
 %{_pixmapsdir}/document-icons/*.png
 
