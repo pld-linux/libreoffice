@@ -5,10 +5,11 @@
 
 # Conditional build:
 %bcond_with	java		# Java support
+%bcond_without	kde		# do not use KDE framework, use GNOME
 
 %define		ver		1.1
 %define		rel		1
-%define		ooobver		1.1.53
+%define		ooobver		1.1.54
 %define		subver		645
 %define		fullver		%{ver}.%{rel}
 %define		dfullver	%(echo %{fullver} | tr . _)
@@ -23,7 +24,7 @@ Epoch:		1
 License:	GPL/LGPL
 Group:		X11/Applications
 Source0:	http://ooo.ximian.com/packages/OOO_%{dfullver}/ooo-build-%{ooobver}.tar.gz
-# Source0-md5:	ef3ddb2cbdbe029b3b1cbdd1d82cea8c
+# Source0-md5:	22a459b68c2534c2213805d1445d947d
 Source1:	http://ooo.ximian.com/packages/OOO_%{dfullver}/OOO_%{dfullver}.tar.bz2
 # Source1-md5:	550381bc429fbbda54cb84758f14e010
 Source2:	http://ooo.ximian.com/packages/ooo-icons-OOO_1_1-9.tar.gz
@@ -257,6 +258,7 @@ Source499:	%{name}-additional-dictionaries.txt
 Patch0:		%{name}-rh-disable-spellcheck-all-langs.patch
 Patch1:		%{name}-pld-stlport.patch
 Patch2:		%{name}-pld-ximian-is-pld.patch
+Patch3:		%{name}-pld-ooo-build-ldver.patch
 
 URL:		http://www.openoffice.org/
 BuildRequires:	ImageMagick
@@ -286,6 +288,10 @@ BuildRequires:	unzip
 BuildRequires:	zip
 BuildRequires:	zlib-devel
 # more and more...
+%if %{with kde}
+BuildRequires:	qt-devel
+BuildRequires:	kdelibs-devel
+%else
 BuildRequires:	pkgconfig
 BuildRequires:	startup-notification-devel
 BuildRequires:	libart_lgpl-devel
@@ -293,6 +299,7 @@ BuildRequires:	gtk+2-devel
 BuildRequires:	gnome-vfs2-devel
 BuildRequires:  libbonobo-devel
 BuildRequires:	libgnomecups-devel
+%endif
 BuildConflicts:	java-sun = 1.4.2
 Requires:	%{name}-libs = %{epoch}:%{version}-%{release}
 Requires:	%{name}-i18n-en = %{epoch}:%{version}-%{release}
@@ -856,6 +863,7 @@ chiñskim dla Tajwanu.
 %patch0 -p1
 %patch1 -p1
 %patch2 -p1
+%patch3 -p1
 
 install -d src
 ln -s %{SOURCE1} src/
@@ -890,7 +898,13 @@ CONFOPTS=" \
 	--with-system-zlib \
 	--with-vendor="PLD" \
 	--with-distro="Ximian" \
+%if %{with kde}
 	--with-icons="KDE" \
+	--with-widgetset=kde \
+%else
+	--with-icons="Ximian" \
+	--with-widgetset=gtk \
+%endif
 	--with-installed-ooo-dirname=%{name} \
 %if %{with java}
 	--enable-java \
