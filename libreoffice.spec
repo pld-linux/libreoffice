@@ -1,6 +1,7 @@
 # TODO:
 # 	- everything
 #	- PLD vendor list of patches to apply in patches/*/appply?
+#	- drop requirement on XFree86-static
 #	- --with-system-myspell + myspell package as in Debian
 #	- --with-system-neon - check compilation
 
@@ -288,6 +289,7 @@ BuildRequires:	freetype-devel >= 2.1
 BuildRequires:	libstdc++-devel >= 3.2.1
 BuildRequires:	curl-devel
 BuildRequires:	unixODBC-devel
+BuildRequires:	sane-backend-devel
 BuildRequires:	pam-devel
 BuildRequires:	perl
 BuildRequires:	tcsh
