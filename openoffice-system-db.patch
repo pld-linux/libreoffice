@@ -9,9 +9,9 @@ diff -Nur oo.orig/berkeleydb/makefile.mk oo.chng/berkeleydb/makefile.mk
 +.IF "$(GUI)"=="UNX"
 +all:
 +	@echo "Since you're running a real OS, we're assuming you have db..."
-+	+$(COPY) /usr$/lib$/libdb-4.1.so $(DLLDEST)
-+	+$(COPY) /usr$/lib$/libdb_cxx-4.1.so $(DLLDEST)
-+	+$(COPY) /usr$/lib$/libdb_java-4.1.so $(DLLDEST)
++	+$(COPY) /usr$/lib$/libdb-4.2.so $(DLLDEST)
++	+$(COPY) /usr$/lib$/libdb_cxx-4.2.so $(DLLDEST)
++	+$(COPY) /usr$/lib$/libdb_java-4.2.so $(DLLDEST)
 +	+$(COPY) /usr$/lib$/db.jar $(DLLDEST)
 +.ENDIF
 +
@@ -39,9 +39,9 @@ diff -Nur oo.orig/berkeleydb/prj/d.lst oo.chng/berkeleydb/prj/d.lst
 -..\%__SRC%\lib\libdb-3.2.so %_DEST%\lib%_EXT%\libdb-3.2.so
 -..\%__SRC%\lib\libdb_java-3.2.so %_DEST%\lib%_EXT%\libdb_java-3.2.so
 -..\%__SRC%\lib\libdb_cxx-3.2.so %_DEST%\lib%_EXT%\libdb_cxx-3.2.so
-+\usr\lib\libdb-4.1.so %_DEST%\lib%_EXT%\libdb-4.1.so
-+\usr\lib\libdb_java-4.1.so %_DEST%\lib%_EXT%\libdb_java-4.1.so
-+\usr\lib\libdb_cxx-4.1.so %_DEST%\lib%_EXT%\libdb_cxx-4.1.so
++\usr\lib\libdb-4.2.so %_DEST%\lib%_EXT%\libdb-4.2.so
++\usr\lib\libdb_java-4.2.so %_DEST%\lib%_EXT%\libdb_java-4.2.so
++\usr\lib\libdb_cxx-4.2.so %_DEST%\lib%_EXT%\libdb_cxx-4.2.so
  
  ..\%__SRC%\lib\libdb-3.2.dylib %_DEST%\lib%_EXT%\libdb-3.2.dylib
  ..\%__SRC%\lib\libdb_java-3.2.dylib %_DEST%\lib%_EXT%\libdb_java-3.2.dylib
@@ -71,7 +71,7 @@ diff -Nur oo.orig/scp/source/office/files.scp oo.chng/scp/source/office/files.sc
          Dir             = GID_DIR_PROGRAM;
          #ifdef UNX
 -        Name            = STRING(CONCAT2(libdb-3.2,UNXSUFFIX));
-+        Name            = STRING(CONCAT2(libdb-4.1,UNXSUFFIX));
++        Name            = STRING(CONCAT2(libdb-4.2,UNXSUFFIX));
          #else
          Name            = "libdb32.dll";
          #endif
@@ -80,7 +80,7 @@ diff -Nur oo.orig/scp/source/office/files.scp oo.chng/scp/source/office/files.sc
          Dir             = GID_DIR_PROGRAM;
          #ifdef UNX
 -        Name            = STRING(CONCAT2(libdb_java-3.2,UNXSUFFIX));
-+        Name            = STRING(CONCAT2(libdb_java-4.1,UNXSUFFIX));
++        Name            = STRING(CONCAT2(libdb_java-4.2,UNXSUFFIX));
          #else
          Name            = "libdb_java32.dll";
          #endif
@@ -89,7 +89,7 @@ diff -Nur oo.orig/scp/source/office/files.scp oo.chng/scp/source/office/files.sc
          Styles          = (PACKED);
          Dir             = GID_DIR_PROGRAM;
 -        Name            = STRING(CONCAT2(libdb_cxx-3.2,UNXSUFFIX));
-+        Name            = STRING(CONCAT2(libdb_cxx-4.1,UNXSUFFIX));
++        Name            = STRING(CONCAT2(libdb_cxx-4.2,UNXSUFFIX));
  End
  
  #endif
@@ -101,7 +101,7 @@ diff -Nur oo.orig/setup2/script/linux/1.0.0/webinstdb.inf oo.chng/setup2/script/
  
  File gid_File_Lib_Db31
 -	Name		 = "libdb-3.1.so";
-+	Name		 = "libdb-4.1.so";
++	Name		 = "libdb-4.2.so";
  	PackedName	 = "f_0352";
  	Size		 = 458008;
  	Dir			 = gid_Dir_Program;
@@ -110,7 +110,7 @@ diff -Nur oo.orig/setup2/script/linux/1.0.0/webinstdb.inf oo.chng/setup2/script/
  
  File gid_File_Lib_Dbjava31
 -	Name		 = "libdb_java-3.1.so";
-+	Name		 = "libdb_java-4.1.so";
++	Name		 = "libdb_java-4.2.so";
  	PackedName	 = "f_0353";
  	Size		 = 506820;
  	Dir			 = gid_Dir_Program;
@@ -122,7 +122,7 @@ diff -Nur oo.orig/setup2/script/linux/1.0.1/webinstdb.inf oo.chng/setup2/script/
  
  File gid_File_Lib_Db31
 -	Name		 = "libdb-3.1.so";
-+	Name		 = "libdb-4.1.so";
++	Name		 = "libdb-4.2.so";
  	PackedName	 = "f_0358";
  	Size		 = 458008;
  	DownloadSize = 196814;
@@ -131,7 +131,7 @@ diff -Nur oo.orig/setup2/script/linux/1.0.1/webinstdb.inf oo.chng/setup2/script/
  
  File gid_File_Lib_Dbjava31
 -	Name		 = "libdb_java-3.1.so";
-+	Name		 = "libdb_java-4.1.so";
++	Name		 = "libdb_java-4.2.so";
  	PackedName	 = "f_0359";
  	Size		 = 506820;
  	DownloadSize = 212931;
@@ -143,7 +143,7 @@ diff -Nur oo.orig/setup2/script/linux/1.1.1/webinstdb.inf oo.chng/setup2/script/
  
  File gid_File_Lib_Db31
 -	Name		 = "libdb-3.1.so";
-+	Name		 = "libdb-4.1.so";
++	Name		 = "libdb-4.2.so";
  	PackedName	 = "f_0361";
  	Size		 = 458008;
  	DownloadSize = 196814;
@@ -152,7 +152,7 @@ diff -Nur oo.orig/setup2/script/linux/1.1.1/webinstdb.inf oo.chng/setup2/script/
  
  File gid_File_Lib_Dbjava31
 -	Name		 = "libdb_java-3.1.so";
-+	Name		 = "libdb_java-4.1.so";
++	Name		 = "libdb_java-4.2.so";
  	PackedName	 = "f_0362";
  	Size		 = 506820;
  	DownloadSize = 212931;
@@ -165,8 +165,8 @@ diff -Nur oo.orig/solenv/inc/libs.mk oo.chng/solenv/inc/libs.mk
  NEON3RDLIB=-lneon
 -BERKELEYLIB=-ldb-3.2
 -BERKELEYCPPLIB=-ldb_cxx-3.2
-+BERKELEYLIB=-ldb-4.1
-+BERKELEYCPPLIB=-ldb_cxx-4.1
++BERKELEYLIB=-ldb-4.2
++BERKELEYCPPLIB=-ldb_cxx-4.2
  CURLLIB=-lcurl
  SFX2LIB=-lsfx$(OFFICEUPD)$(DLLPOSTFIX)
  SFXLIB=-lsfx$(OFFICEUPD)$(DLLPOSTFIX)

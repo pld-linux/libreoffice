@@ -2,10 +2,10 @@
 +++ oo_1.1_src/berkeleydb/makefile.mk	2003-11-27 17:08:40.000000000 +0100
 @@ -71,9 +71,11 @@
  	@echo "Since you're running a real OS, we're assuming you have db..."
- 	+$(COPY) /usr$/lib$/libdb-4.1.so $(DLLDEST)
- 	+$(COPY) /usr$/lib$/libdb_cxx-4.1.so $(DLLDEST)
+ 	+$(COPY) /usr$/lib$/libdb-4.2.so $(DLLDEST)
+ 	+$(COPY) /usr$/lib$/libdb_cxx-4.2.so $(DLLDEST)
 +.IF "$(SOLAR_JAVA)"!=""
- 	+$(COPY) /usr$/lib$/libdb_java-4.1.so $(DLLDEST)
+ 	+$(COPY) /usr$/lib$/libdb_java-4.2.so $(DLLDEST)
  	+$(COPY) /usr$/lib$/db.jar $(DLLDEST)
  .ENDIF
 +.ENDIF
