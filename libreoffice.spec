@@ -724,7 +724,7 @@ JAVA_HOME="/usr/lib/java"
 export JAVA_HOME CC CXX GCJ
 
 cd config_office
-autoconf
+%{__autoconf}
 %configure2_13 \
 	--with-jdk-home=$JAVA_HOME \
 	--with-stlport4-home=/usr \
