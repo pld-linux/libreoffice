@@ -817,7 +817,7 @@ rm -f moz/prj/d.lst
 %patch121 -p0 
 %endif 
 
-%patch201 -p1 
+%patch201 -p0
 %patch202 -p0 
 %patch203 -p0
 
