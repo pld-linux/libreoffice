@@ -972,9 +972,6 @@ zuluskim.
 %patch2 -p1
 %patch3 -p1
 
-# is long name correct?
-echo '55:pt-BR:portuguese_brazilian' >> bin/openoffice-xlate-lang
-
 install -d src
 # sources, icons, KDE_icons
 ln -sf %{SOURCE1} %{SOURCE2} %{SOURCE3} src
@@ -1175,7 +1172,7 @@ for lang in $langlist; do
 
 	lfile="build/lang_${lang}_list.txt"
 	if [ -f ${lfile} ]; then
-		longlang="`bin/openoffice-xlate-lang -l ${lang} | sed -e 's/english_us/english/;s/norwegian_bokmal/norwegian/;s/northern_sotho/northernsotho/;s/nowegian_nynorsk/norwegian_nynorsk/'`"
+		longlang="`bin/openoffice-xlate-lang -l ${lang}`"
 		# share/*/${longlang}
 		grep "^%%dir.*/${longlang}/\$" ${lfile} > tmp.lang
 		# share/registry/res/${lang} (but en-US for en)
