@@ -1027,10 +1027,10 @@ TEMP="%{tmpdir}"; export TEMP
 mv $RPM_BUILD_ROOT%{_libdir}/%{name}/program/libvcl%{verarch}.so \
 	$RPM_BUILD_ROOT%{_libdir}/%{name}/program/libvcl%{verarch}-kde.so
 
-install -m755 build/OOO_%{dfullver}/vcl.gtk/unxlngi4.pro/lib/libvcl%{verarch}.so \
+install -m755 build/OOO_%{dfullver}/vcl.gtk/unxlng*.pro/lib/libvcl%{verarch}.so \
 	$RPM_BUILD_ROOT%{_libdir}/%{name}/program/libvcl%{verarch}-gtk.so
-install -m755 build/OOO_%{dfullver}/vcl.gtk/unxlngi4.pro/bin/*-gnome \
-	$RPM_BUILD_ROOT%{_libdir}/%{name}/program/
+install -m755 build/OOO_%{dfullver}/vcl.gtk/unxlng*.pro/bin/*-gnome \
+	$RPM_BUILD_ROOT%{_libdir}/%{name}/program
 
 install -d helptmp && cd helptmp || exit 1
 for file in \
