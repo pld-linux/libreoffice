@@ -1,0 +1,119 @@
+--- ooo-build-1.1.52/patches/OOO_1_1_1/apply.rh	2004-03-31 03:46:36.000000000 -0500
++++ ooo-build-1.1.52/patches/OOO_1_1_1/apply	2004-04-18 17:42:15.880895629 -0400
+@@ -45,6 +45,10 @@
+ icu-build-no-extras.diff
+ 
+ [ Misc ]
++# disable "Check in all languages" in the UI and set the
++# value to false in preferences
++gui-disable-spellcheck-all-langs.diff
++
+ # fix atomic dec/inc for Sparc #15502 patch_to_boost_patch (also #14848)
+ build-sparc-boost.diff
+ 
+--- /dev/null	2004-02-23 16:02:56.000000000 -0500
++++ ooo-build-1.1.52/patches/OOO_1_1_1/gui-disable-spellcheck-all-langs.diff	2004-04-18 21:21:29.785611050 -0400
+@@ -0,0 +1,103 @@
++--- svx/source/options/optlingu.orig	2004-04-16 10:59:10.183356464 -0400
+++++ svx/source/options/optlingu.cxx	2004-04-16 11:03:21.387511428 -0400
++@@ -1611,12 +1611,19 @@
++ 	pModel->Insert( pEntry );
++ 	lcl_SetCheckButton( pEntry, bVal );
++ 
+++// Users often check this item, which makes lingucomponent use
+++// horrendous amounts of memory because all dictionaries are loaded.
+++// To make people not quite so lazy, force them to check _only_ the
+++// languages they really use by not providing this option.  This may
+++// not work if users already checked this button in previous versions.
+++#if 0
++ 	pEntry = CreateEntry( sAllLanguages,	CBCOL_FIRST );
++ 	aLngCfg.GetProperty( C2U(UPN_IS_SPELL_IN_ALL_LANGUAGES) ) >>= bVal;
++ 	nUserData = OptionsUserData( EID_ALL_LANGUAGES, FALSE, 0, TRUE, bVal).GetUserData();
++ 	pEntry->SetUserData( (void *)nUserData );
++ 	pModel->Insert( pEntry );
++ 	lcl_SetCheckButton( pEntry, bVal );
+++#endif
++ 
++ 	pEntry = CreateEntry( sSpellAuto,		CBCOL_FIRST );
++ 	aLngCfg.GetProperty( C2U(UPN_IS_SPELL_AUTO) ) >>= bVal;
++--- svtools/source/misc/lingucfg.cxx.orig	2003-03-27 09:39:15.000000000 -0500
+++++ svtools/source/misc/lingucfg.cxx	2004-04-18 20:19:24.423383758 -0400
++@@ -323,7 +323,7 @@
++ 	const INT16 *pnVal = 0;
++ 	const BOOL  *pbVal = 0;
++ 
++-	const SvtLinguOptions &rOpt = ((const SvtLinguConfig *) this)->aOpt;
+++	SvtLinguOptions &rOpt = ((SvtLinguConfig *) this)->aOpt;
++ 	switch (nPropertyHandle)
++ 	{
++ 		case UPH_IS_GERMAN_PRE_REFORM :		pbVal = &rOpt.bIsGermanPreReform;	break;
++@@ -333,7 +333,15 @@
++ 		case UPH_IS_HYPH_SPECIAL : 			pbVal = &rOpt.bIsHyphSpecial;	break;
++ 		case UPH_IS_SPELL_AUTO : 			pbVal = &rOpt.bIsSpellAuto;	break;
++ 		case UPH_IS_SPELL_HIDE : 			pbVal = &rOpt.bIsSpellHideMarkings;	break;
++-		case UPH_IS_SPELL_IN_ALL_LANGUAGES :pbVal = &rOpt.bIsSpellInAllLanguages;	break;
+++		case UPH_IS_SPELL_IN_ALL_LANGUAGES :
+++		{
+++			// Disable spell checking in all languages
+++			// since enabling too many dictionaries takes
+++			// up huge amounts of memory
+++			rOpt.bIsSpellInAllLanguages = FALSE;
+++			pbVal = &rOpt.bIsSpellInAllLanguages;
+++			break;
+++		}
++ 		case UPH_IS_SPELL_SPECIAL : 		pbVal = &rOpt.bIsSpellSpecial;	break;
++ 		case UPH_IS_WRAP_REVERSE : 			pbVal = &rOpt.bIsSpellReverse;	break;
++ 		case UPH_DEFAULT_LANGUAGE :			pnVal = &rOpt.nDefaultLanguage;	break;
++@@ -409,7 +417,15 @@
++ 		case UPH_IS_HYPH_SPECIAL : 			pbVal = &aOpt.bIsHyphSpecial;	break;
++ 		case UPH_IS_SPELL_AUTO : 			pbVal = &aOpt.bIsSpellAuto;	break;
++ 		case UPH_IS_SPELL_HIDE : 			pbVal = &aOpt.bIsSpellHideMarkings;	break;
++-		case UPH_IS_SPELL_IN_ALL_LANGUAGES :pbVal = &aOpt.bIsSpellInAllLanguages;	break;
+++		case UPH_IS_SPELL_IN_ALL_LANGUAGES :
+++		{
+++			// Disable spell checking in all languages
+++			// since enabling too man dictionaries uses
+++			// huge amounts of memory
+++			aOpt.bIsSpellInAllLanguages = FALSE;
+++			pbVal = NULL;
+++			break;
+++		}
++ 		case UPH_IS_SPELL_SPECIAL : 		pbVal = &aOpt.bIsSpellSpecial;	break;
++ 		case UPH_IS_WRAP_REVERSE : 			pbVal = &aOpt.bIsSpellReverse;	break;
++ 		case UPH_DEFAULT_LANGUAGE :			pnVal = &aOpt.nDefaultLanguage;	break;
++--- linguistic/source/lngopt.cxx.orig	2004-04-18 21:17:31.041707927 -0400
+++++ linguistic/source/lngopt.cxx	2004-04-18 18:49:16.000000000 -0400
++@@ -187,7 +193,15 @@
++ 		case WID_IS_HYPH_SPECIAL : 			pbVal = &pData->bIsHyphSpecial;	break;
++ 		case WID_IS_SPELL_AUTO : 			pbVal = &pData->bIsSpellAuto;	break;
++ 		case WID_IS_SPELL_HIDE : 			pbVal = &pData->bIsSpellHideMarkings;	break;
++-		case WID_IS_SPELL_IN_ALL_LANGUAGES :pbVal = &pData->bIsSpellInAllLanguages;	break;
+++		case WID_IS_SPELL_IN_ALL_LANGUAGES :
+++		{
+++			// Disable spell checking in all languages
+++			// since enabling too many dictionaries takes
+++			// up huge amounts of memory.
+++			pData->bIsSpellInAllLanguages = FALSE;
+++			pbVal = NULL;
+++			break;
+++		}
++ 		case WID_IS_SPELL_SPECIAL : 		pbVal = &pData->bIsSpellSpecial;	break;
++ 		case WID_IS_WRAP_REVERSE : 			pbVal = &pData->bIsSpellReverse;	break;
++ 		case WID_DEFAULT_LANGUAGE :			pnVal = &pData->nDefaultLanguage;	break;
++@@ -264,7 +284,15 @@
++ 		case WID_IS_HYPH_SPECIAL : 			pbVal = &pData->bIsHyphSpecial;	break;
++ 		case WID_IS_SPELL_AUTO : 			pbVal = &pData->bIsSpellAuto;	break;
++ 		case WID_IS_SPELL_HIDE : 			pbVal = &pData->bIsSpellHideMarkings;	break;
++-		case WID_IS_SPELL_IN_ALL_LANGUAGES :pbVal = &pData->bIsSpellInAllLanguages;	break;
+++		case WID_IS_SPELL_IN_ALL_LANGUAGES :
+++		{
+++			// Disable spell checking in all languages
+++			// since enabling too many dictionaries
+++			// uses too much memory
+++			pData->bIsSpellInAllLanguages = FALSE;
+++			pbVal = &pData->bIsSpellInAllLanguages;
+++			break;
+++		}
++ 		case WID_IS_SPELL_SPECIAL : 		pbVal = &pData->bIsSpellSpecial;	break;
++ 		case WID_IS_WRAP_REVERSE : 			pbVal = &pData->bIsSpellReverse;	break;
++ 		case WID_DEFAULT_LANGUAGE :			pnVal = &pData->nDefaultLanguage;	break;
