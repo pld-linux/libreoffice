@@ -12,7 +12,6 @@
 %bcond_without icons		# new Ximian icons
 %bcond_without gnomevfs		# gnome-vfs
 %bcond_with parallel 		# parallel building
-%bcond_with static		# static libraries
 
 # not tested
 %bcond_with gnomecups		# gnome-cups
@@ -289,24 +288,6 @@ BuildRequires:	tcsh
 BuildRequires:	unzip
 BuildRequires:	zip
 BuildRequires:	zlib-devel
-# gtk crashreport static requirements:
-%if %{with static}
-BuildRequires:	XFree86-static
-BuildRequires:	atk-static
-BuildRequires:	expat-static
-BuildRequires:	fontconfig-static
-BuildRequires:	freetype-static
-BuildRequires:	glib2-static
-BuildRequires:	glibc-static
-BuildRequires:	gtk+2-static
-BuildRequires:	libjpeg-static
-BuildRequires:	libpng-static
-BuildRequires:	libtiff-static
-BuildRequires:	pango-static
-BuildRequires:	xft-static
-BuildRequires:	xrender-static
-BuildRequires:	zlib-static
-%endif 
 # more and more...
 BuildRequires:	pkgconfig
 BuildRequires:	startup-notification-devel
