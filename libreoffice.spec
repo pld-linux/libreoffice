@@ -127,7 +127,7 @@ dmake install
 EOF
 
 chmod u+rx install
-#./install
+./install
 
 # starting Xvfb
 i=0
