@@ -1,0 +1,40 @@
+--- oo_1.0_src/sj2/source/jscpp/makefile.mk.jj	Tue Apr 10 15:56:22 2001
++++ oo_1.0_src/sj2/source/jscpp/makefile.mk	Sun Jun  2 23:18:41 2002
+@@ -91,7 +91,7 @@ CXXFILES=	\
+ 
+ SLOFILES=	\
+ 	$(SLO)$/sjapplet.obj						\
+-	$(SLO)$/sjapplet_impl.obj
++	$(SLO)$/sjapplet_impl2.obj
+ 
+ # .IF "$(GUI)"=="WNT"
+ # SLOFILES +=	$(SLO)$/sun_awt_windows_package.obj
+--- oo_1.0_src/sj2/source/jscpp/sjapplet_impl2.cxx.jj	Sun Jun  2 23:18:47 2002
++++ oo_1.0_src/sj2/source/jscpp/sjapplet_impl2.cxx	Sun Jun  2 23:27:20 2002
+@@ -0,0 +1,26 @@
++#include "sjapplet_impl.hxx"
++
++#include <rtl/ustring>
++
++SjApplet2_Impl::SjApplet2_Impl() throw(com::sun::star::uno::RuntimeException)
++: _pJVM(NULL), _joAppletExecutionContext(0), _jcAppletExecutionContext(0) {}
++
++SjApplet2_Impl::~SjApplet2_Impl() throw() {}
++
++using namespace ::rtl;
++using namespace ::com::sun::star::uno;
++
++void SjApplet2_Impl::init(Window * pParentWin,
++			  const com::sun::star::uno::Reference<com::sun::star::lang::XMultiServiceFactory> & smgr,
++			  const INetURLObject & rDocBase,
++			  const SvCommandList & rCmdList) throw(com::sun::star::uno::RuntimeException)
++{
++  throw RuntimeException(OUString(RTL_CONSTASCII_USTRINGPARAM("sjapplet_impl2.cxx: java vm not supported")), Reference<XInterface>());
++}
++
++void SjApplet2_Impl::setSize(const Size & rSize) throw(com::sun::star::uno::RuntimeException) {}
++void SjApplet2_Impl::restart() throw(com::sun::star::uno::RuntimeException) {}
++void SjApplet2_Impl::reload() throw(com::sun::star::uno::RuntimeException) {}
++void SjApplet2_Impl::start() throw(com::sun::star::uno::RuntimeException) {}
++void SjApplet2_Impl::stop() throw(com::sun::star::uno::RuntimeException) {}
++void SjApplet2_Impl::close() throw(com::sun::star::uno::RuntimeException) {}
