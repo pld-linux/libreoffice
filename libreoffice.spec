@@ -17,7 +17,7 @@ License:	GPL/LGPL
 Group:		X11/Applications
 #Source0:	ftp://ftp.openoffice.pl/%{version}/OOo_%{version}_source.tar.bz2
 #Source0:	http://sf1.mirror.openoffice.org/%{version}/OOo_%{version}_source.tar.bz2
-Source0:	ftp://ftp1.openoffice.pl/pub/OpenOffice.ORG/%{version}/OOo_%{version}_source.tar.bz2
+Source0:	ftp://ftp1.openoffice.pl/pub/OpenOffice.ORG/stable/%{version}/OOo_%{version}_source.tar.bz2
 Source1:	ftp://ftp.cs.man.ac.uk/pub/toby/gpc/gpc231.tar.Z
 Source2:	%{name}-db3.jar
 Source3:	%{name}-rsfile.txt
