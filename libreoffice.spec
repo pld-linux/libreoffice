@@ -11,6 +11,7 @@ Group(pl):	X11/Aplikacje
 Source0:	ftp://openoffice@ftp.ists.pwr.wroc.pl/sources/build%{version}b/oo_%{version}_src.tar.bz2
 Source1:	ftp://ftp.cs.man.ac.uk/pub/toby/gpc/gpc231.tar.Z
 Patch0:		%{name}-nostlport.patch
+Patch1:		%{name}-jdk_fix_for_x86.patch
 URL:		http://www.openoffice.org/
 BuildRequires:	XFree86-devel
 BuildRequires:	autoconf
@@ -57,6 +58,7 @@ Do zalet OpenOffice.org mo¿na zaliczyæ:
 %prep
 %setup -q -n oo_%{version}_src
 %patch0 -p1
+%ptach1 -p1
 install %{SOURCE1} external
 cd external; tar fxz %{SOURCE1}; cp -fr gpc231/* gpc
 
@@ -76,7 +78,7 @@ source LinuxIntelEnv.Set
 # see http://tools.openoffice.org/troubleshoot.html
 #Xvfb :15 &
 #setenv DISPLAY	:15
-#dmake
+dmake
 EOF
 
 chmod u+rx compile
