@@ -258,7 +258,7 @@ Arabic language.
 Ten pakiet dostarcza zasoby zawieraj±ce menu i okna dialogowe w jêzyku
 arabskim.
 
-%files i18n-ar-gtk -f ar.lang
+%files i18n-ar-gtk -f ar.lang.gnome
 
 %package i18n-bg-gtk
 Summary:	OpenOffice.org - interface in Bulgarian language
@@ -1059,7 +1059,7 @@ Arabic language.
 Ten pakiet dostarcza zasoby zawieraj±ce menu i okna dialogowe w jêzyku
 arabskim.
 
-%files i18n-ar-kde -f ar.lang
+%files i18n-ar-kde -f ar.lang.kde
 
 %package i18n-bg-kde
 Summary:	OpenOffice.org - interface in Bulgarian language
@@ -2059,8 +2059,8 @@ for lang in $langlist; do
 		cp ${lang}.lang ${lang}.lang.gnome
 		cp ${lang}.lang ${lang}.lang.kde
 		# program/resource.*/*${code}.res (for kde and gnome versions)
- 		grep '/program/resource.gnome/.*res$' ${lfile} >> ${lang}.gnome
-		grep '/program/resource.kde/.*res$' ${lfile} >> ${lang}.kde
+ 		grep '/program/resource.gnome/.*res$' ${lfile} >> ${lang}.lang.gnome
+		grep '/program/resource.kde/.*res$' ${lfile} >> ${lang}.lang.kde
 	fi
 done
 
