@@ -29,6 +29,7 @@ $sc_good = 'res/sc00000.bmp';
 	'res/czech',
 	'res/dtch',
 	'res/fren',
+	'res/hung',
 	'res/ital',
 	'res/japn',
 	'res/korean',
@@ -38,6 +39,7 @@ $sc_good = 'res/sc00000.bmp';
 	'res/portbr',
 	'res/russ',
 	'res/slovak',
+	'res/slovenian',
 	'res/span',
 	'res/turk'
 	       );
