@@ -1,14 +1,21 @@
 diff -urN ooo-build-1.1.54.org/bin/package-lang ooo-build-1.1.54/bin/package-lang
 --- ooo-build-1.1.54.org/bin/package-lang	2004-04-30 02:50:20.270649456 +0200
-+++ ooo-build-1.1.54/bin/package-lang	2004-05-01 01:11:01.139778560 +0200
-@@ -117,6 +117,10 @@
++++ ooo-build-1.1.54/bin/package-lang	2004-05-01 01:14:56.088060992 +0200
+@@ -27,6 +27,7 @@
+ }
+ 
+ my $UnzipCommand = "/usr/bin/unzip";
++my $BuildDir = $setup_vars{'BUILDDIR'};
+ my $DestDir = $setup_vars{'OOINSTDIR'};
+ my $Xlate = $setup_vars{'TOOLSDIR'}. "/bin/openoffice-xlate-lang";
+ my @Langs = split (' ', `$Xlate -p all`);
+@@ -117,6 +118,9 @@
  
  sub BuildLang {
  	my $lang = shift;
 +	my $lang_iso = `$Xlate -i $lang`;
 +	chomp ($lang_iso);
 +	$lang_iso =~ s/\r//;
-+	my $BaseDir = $setup_vars{'BUILDDIR'};
  	my $SetupDir = $setup_vars{'OOBUILDDIR'} . "/instsetoo/$Target/$lang/normal";
  	my $SolverDir = $setup_vars{'OOBUILDDIR'} . "/solver/$Id/$Target";
  	my $SetupConf = "$SetupDir/setup.ins";
@@ -16,7 +23,7 @@ diff -urN ooo-build-1.1.54.org/bin/package-lang ooo-build-1.1.54/bin/package-lan
  	die "$UnzipCommand not found, please set the full path to the unzip command\n" if
  	    ( ! -x "$UnzipCommand" );
  
-+	$langl_file = $BaseDir . '/lang_' . $lang_iso . '_list.txt';
++	$langl_file = $BuildDir . '/lang_' . $lang_iso . '_list.txt';
 +	open(LANGL, ">>$langl_file");
 +		
  	while (my ($key, $value) = each (%{$setup->{File}})) {
@@ -49,3 +56,11 @@ diff -urN ooo-build-1.1.54.org/bin/package-lang ooo-build-1.1.54/bin/package-lan
  
  	print "done";
  
+@@ -194,6 +207,7 @@
+ 
+ 	print "Building language $txt_name ($std_locale:$a): ";
+ 
++	system("rm -f $BuildDir/lang_*_list.txt");
+ 	BuildLang ($a);
+ 
+ 	print "\n";
