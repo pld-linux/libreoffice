@@ -208,7 +208,7 @@ Afrikaans language.
 Ten pakiet dostarcza zasoby zawieraj±ce menu i okna dialogowe w jêzyku
 afrykanerskim.
 
-%files i18n-af -f af.lang
+#%files i18n-af -f af.lang
 
 %package i18n-ar
 Summary:	OpenOffice.org - interface in Arabic language
@@ -240,7 +240,7 @@ Bulgarian language.
 Ten pakiet dostarcza zasoby zawieraj±ce menu i okna dialogowe w jêzyku
 bu³garskim.
 
-%files i18n-bg -f bg.lang
+#%files i18n-bg -f bg.lang
 
 %package i18n-ca
 Summary:	OpenOffice.org - interface in Catalan language
@@ -288,7 +288,7 @@ Cymraeg language.
 Ten pakiet dostarcza zasoby zawieraj±ce menu i okna dialogowe w jêzyku
 walijskim.
 
-%files i18n-cy -f cy.lang
+#%files i18n-cy -f cy.lang
 
 %package i18n-da
 Summary:	OpenOffice.org - interface in Danish language
@@ -416,7 +416,7 @@ Faroese language.
 Ten pakiet dostarcza zasoby zawieraj±ce menu i okna dialogowe w jêzyku
 FO.
 
-%files i18n-fo -f fo.lang
+#%files i18n-fo -f fo.lang
 
 %package i18n-fr
 Summary:	OpenOffice.org - interface in French language
@@ -448,7 +448,7 @@ Irish language.
 Ten pakiet dostarcza zasoby zawieraj±ce menu i okna dialogowe w jêzyku
 irlandzkim.
 
-%files i18n-ga -f ga.lang
+#%files i18n-ga -f ga.lang
 
 %package i18n-gl
 Summary:	OpenOffice.org - interface in Galician language
@@ -464,7 +464,7 @@ Galician language.
 Ten pakiet dostarcza zasoby zawieraj±ce menu i okna dialogowe w jêzyku
 galicyjskim.
 
-%files i18n-gl -f gl.lang
+#%files i18n-gl -f gl.lang
 
 %package i18n-hr
 Summary:	OpenOffice.org - interface in Croatian language
@@ -480,7 +480,7 @@ Croatian language.
 Ten pakiet dostarcza zasoby zawieraj±ce menu i okna dialogowe w jêzyku
 chorwackim.
 
-%files i18n-hr -f hr.lang
+#%files i18n-hr -f hr.lang
 
 %package i18n-hu
 Summary:	OpenOffice.org - interface in Hungarian language
@@ -512,7 +512,7 @@ Interlingua language.
 Ten pakiet dostarcza zasoby zawieraj±ce menu i okna dialogowe w jêzyku
 interlingua.
 
-%files i18n-ia -f ia.lang
+#%files i18n-ia -f ia.lang
 
 %package i18n-id
 Summary:	OpenOffice.org - interface in Indonesian language
@@ -528,7 +528,7 @@ Indonesian language.
 Ten pakiet dostarcza zasoby zawieraj±ce menu i okna dialogowe w jêzyku
 indonezyjskim.
 
-%files i18n-id -f id.lang
+#%files i18n-id -f id.lang
 
 %package i18n-it
 Summary:	OpenOffice.org - interface in Italian language
@@ -592,7 +592,7 @@ Latin language.
 Ten pakiet dostarcza zasoby zawieraj±ce menu i okna dialogowe w jêzyku
 ³aciñskim.
 
-%files i18n-la -f la.lang
+#%files i18n-la -f la.lang
 
 %package i18n-lt
 Summary:	OpenOffice.org - interface in Lithuanian language
@@ -608,7 +608,7 @@ Lithuanian language.
 Ten pakiet dostarcza zasoby zawieraj±ce menu i okna dialogowe w jêzyku
 litewskim.
 
-%files i18n-lt -f lt.lang
+#%files i18n-lt -f lt.lang
 
 %package i18n-med
 Summary:	OpenOffice.org - interface in MED language
@@ -624,7 +624,7 @@ MED language.
 Ten pakiet dostarcza zasoby zawieraj±ce menu i okna dialogowe w jêzyku
 MED.
 
-%files i18n-med -f med.lang
+#%files i18n-med -f med.lang
 
 %package i18n-mi
 Summary:	OpenOffice.org - interface in Maori language
@@ -640,7 +640,7 @@ Maori language.
 Ten pakiet dostarcza zasoby zawieraj±ce menu i okna dialogowe w jêzyku
 maoryjskim.
 
-%files i18n-mi -f mi.lang
+#%files i18n-mi -f mi.lang
 
 %package i18n-ms
 Summary:	OpenOffice.org - interface in Malay language
@@ -656,7 +656,7 @@ Malay language.
 Ten pakiet dostarcza zasoby zawieraj±ce menu i okna dialogowe w jêzyku
 malajskim.
 
-%files i18n-ms -f ms.lang
+#%files i18n-ms -f ms.lang
 
 %package i18n-nb
 Summary:	OpenOffice.org - interface in Norwegian Bokmaal language
@@ -672,7 +672,7 @@ Norwegian language.
 Ten pakiet dostarcza zasoby zawieraj±ce menu i okna dialogowe w jêzyku
 norweskim.
 
-%files i18n-nb -f nb.lang
+#%files i18n-nb -f nb.lang
 
 %package i18n-nl
 Summary:	OpenOffice.org - interface in Dutch language
@@ -736,7 +736,7 @@ Romanian language.
 Ten pakiet dostarcza zasoby zawieraj±ce menu i okna dialogowe w jêzyku
 rumuñskim.
 
-%files i18n-ro -f ro.lang
+#%files i18n-ro -f ro.lang
 
 %package i18n-ru
 Summary:	OpenOffice.org - interface in Russian language
@@ -832,7 +832,7 @@ Ukrainian language.
 Ten pakiet dostarcza zasoby zawieraj±ce menu i okna dialogowe w jêzyku
 ukraiñskim.
 
-%files i18n-uk -f uk.lang
+#%files i18n-uk -f uk.lang
 
 %package i18n-zh
 Summary:	OpenOffice.org - interface in Chinese language
