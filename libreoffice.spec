@@ -26,7 +26,7 @@ Summary:	OpenOffice - powerful office suite
 Summary(pl):	OpenOffice - potê¿ny pakiet biurowy
 Name:		openoffice
 Version:	%{fullver}
-Release:	2.1
+Release:	2.2
 Epoch:		1
 License:	GPL/LGPL
 Group:		X11/Applications
@@ -1207,8 +1207,8 @@ for lang in $langlist; do
 		grep "^%%dir.*/res/${lang}[^/]*/\$" ${lfile} >> tmp.lang
 		# ... translate %dir into whole tree, handle special wordbook/english case
 		sed -e 's,^%%dir ,,;s,\(wordbook/english/\)$,\1soffice.dic,;s,/$,,' tmp.lang >> ${lang}.lang
-		# program/resource/*${code}.res
-		grep '/program/resource/.*res$' ${lfile} >> ${lang}.lang
+		# program/resource.*/*${code}.res (for kde and gnome versions)
+ 		grep '/program/resource.*/.*res$' ${lfile} >> ${lang}.lang
 		# share/autocorr/acor${somecodes}.dat (if exist)
 		grep '/autocorr/acor.*dat$' ${lfile} >> ${lang}.lang || :
 		# user/config/* (if exist, without parent directory)
@@ -1247,8 +1247,7 @@ fontpostinst TTF %{_fontsdir}/%{name}
 %{_libdir}/%{name}/program/configmgrrc
 %{_libdir}/%{name}/program/instdb.ins
 
-%dir %{_libdir}/%{name}/program/resource
-%{_libdir}/%{name}/program/resource/iso%{subver}01.res
+%{_libdir}/%{name}/program/resource.default
 
 %dir %{_libdir}/%{name}/help
 #%{_libdir}/%{name}/help/en
@@ -1308,6 +1307,8 @@ fontpostinst TTF %{_fontsdir}/%{name}
 %attr(755,root,root) %{_bindir}/oo*
 %attr(755,root,root) %{_libdir}/%{name}/spadmin
 %attr(755,root,root) %{_libdir}/%{name}/program/*.bin
+%attr(755,root,root) %{_libdir}/%{name}/program/fromtemplate
+%attr(755,root,root) %{_libdir}/%{name}/program/mozwrapper
 %attr(755,root,root) %{_libdir}/%{name}/program/nswrapper
 %attr(755,root,root) %{_libdir}/%{name}/program/ooovirg
 %attr(755,root,root) %{_libdir}/%{name}/program/pagein*
@@ -1353,7 +1354,7 @@ fontpostinst TTF %{_fontsdir}/%{name}
 
 %attr(755,root,root) %{_libdir}/%{name}/program/*.so
 %exclude %{_libdir}/%{name}/program/libvclplug_gtk*.so
-#%exclude %{_libdir}/%{name}/program/libvclplug_kde*.so
+%exclude %{_libdir}/%{name}/program/libvclplug_kde*.so
 %attr(755,root,root) %{_libdir}/%{name}/program/*.so.*
 %attr(755,root,root) %{_libdir}/%{name}/program/filter/*.so
 
@@ -1363,13 +1364,14 @@ fontpostinst TTF %{_fontsdir}/%{name}
 
 %files libs-kde
 %defattr(644,root,root,755)
+%attr(755,root,root) %{_libdir}/%{name}/program/kdefilepicker
 %attr(755,root,root) %{_libdir}/%{name}/program/libvclplug_kde*.so
+%{_libdir}/%{name}/program/resource.kde
 
 %files libs-gtk
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_libdir}/%{name}/program/libvclplug_gtk*.so
-#%attr(755,root,root) %{_libdir}/%{name}/program/getstyle-gnome
-#%attr(755,root,root) %{_libdir}/%{name}/program/msgbox-gnome
+%{_libdir}/%{name}/program/resource.gnome
 
 %files mimelinks
 %defattr(644,root,root,755)
