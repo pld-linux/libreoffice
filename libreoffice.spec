@@ -25,7 +25,7 @@ Source8:	%{name}-wrapper-component
 Source9:	%{name}-langs.txt
 Source10:	%{name}-db3.jar
 Source11:	%{name}-dictionary.lst.readme
-Source12:	OOo_1.0.2beta_LinuxIntel_odk.tar.gz
+Source12:	ftp://ftp.stardiv.de/pub/OpenOffice.org/developer/1.0.2beta_odk/OOo_1.0.2beta_LinuxIntel_odk.tar.gz
 
 Source101:	ftp://ftp.task.gda.pl/mirror/ftp.openoffice.org/contrib/helpfiles/helpcontent_01_unix.tgz
 Source102:	ftp://ftp.task.gda.pl/mirror/ftp.openoffice.org/contrib/helpfiles/helpcontent_33_unix.tgz
