@@ -7,16 +7,17 @@
 # _with_pl		- 48 PL translation
 # _with_de		- 49 DE translation
 
-%define		oo_ver	641d
+#%define		oo_ver	641d
 Summary:	OpenOffice - powerful office suite
 Summary(pl):	OpenOffice - potê¿ny pakiet biurowy
 Name:		openoffice
-Version:	0.641d
+Version:	1.0.0
 Release:	0.1
 Epoch:		1
 License:	GPL/LGPL
 Group:		X11/Applications
-Source0:	http://sf1.mirror.openoffice.org/%{oo_ver}/oo_%{oo_ver}_src.tar.bz2
+#Source0:	http://sf1.mirror.openoffice.org/%{version}/oo_%{version}_source.tar.bz2
+Source0:	http://sf1.mirror.openoffice.org/%{version}/OOo_%{version}_source.tar.bz2
 Source1:	ftp://ftp.cs.man.ac.uk/pub/toby/gpc/gpc231.tar.Z
 Source2:	%{name}-db3.jar
 Source3:	%{name}-rsfile.txt
