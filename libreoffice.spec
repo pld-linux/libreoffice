@@ -21,6 +21,8 @@ BuildRequires:	tcsh
 BuildRequires:	perl
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
+%define		_prefix		/usr/X11R6
+
 %description
 OpenOffice.org is an open-source project sponsored by Sun Microsystems 
 and hosted by CollabNet. In October of 2000, Sun released the source 
@@ -70,7 +72,7 @@ install db-3.2.9/java/classes/db.jar external/common/db31.jar
 cd config_office
 autoconf
 %configure \
-	--with-stlport4-home=%{_prefix} \
+	--with-stlport4-home=/usr \
 	--with-jdk-home=$JAVA_HOME \
 	--with-xprint
 
@@ -98,11 +100,29 @@ EOF
 chmod u+rx compile
 ./compile
 
-%clean
+%install
 rm -rf $RPM_BUILD_ROOT
 
-%install
+cat <<EOF > install
+#!/bin/csh
+source LinuxIntelEnv.Set
+dmake install
+EOF
+
+chmod u+rx install
+./install
+
+install -d $RPM_BUILD_ROOT{%{_bindir},%{_libdir},%{_datadir}/%{name}}
+
+install solver/%{version}/unxlngi3.pro/bin/*.{bin,exe}		$RPM_BUILD_ROOT%{_bindir}
+install solver/%{version}/unxlngi3.pro/lib/*.so		 	$RPM_BUILD_ROOT%{_libdir}
+cp -fr solver/%{version}/unxlngi3.pro/lib/{par,pck,rdb,res,xml}	$RPM_BUILD_ROOT%{_datadir}/%{name}
+
+%clean
 rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(644,root,root,755)
+%attr(755,root,root) %{_bindir}/*
+%attr(755,root,root) %{_libdir}/*
+%{_datadir}/%{name}
