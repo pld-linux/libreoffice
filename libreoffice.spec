@@ -972,7 +972,7 @@ rm -f moz/prj/d.lst
 %patch301 -p1 
 
 # i18n support (?)
-%if %{with i18}
+%if %{with i18n}
 %patch341 -p0 
 %patch342 -p0
 %patch343 -p0 
