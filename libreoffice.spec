@@ -21,16 +21,24 @@ Source0:	http://sf1.mirror.openoffice.org/%{version}/OOo_%{version}_source.tar.b
 Source1:	ftp://ftp.cs.man.ac.uk/pub/toby/gpc/gpc231.tar.Z
 Source2:	%{name}-db3.jar
 Source3:	%{name}-rsfile.txt
+Source4:	%{name}-xmlparse.sh
 Patch0:		%{name}-gcc.patch
 Patch1:		%{name}-db3.patch
 Patch2:		%{name}-mozilla.patch
 Patch3:		%{name}-nest.patch
 Patch4:		%{name}-perl.patch
+# Start using some system libraries:
 Patch5:		%{name}-system-freetype.patch
 Patch6:		%{name}-system-getopt.patch
 Patch7:		%{name}-freetype-2.1.patch
+# Fix broken makefiles
 Patch8:		%{name}-braindamage.patch
+# Add jj patch for CLK_TCK -> CLOCKS_PER_SEC
 Patch9:		%{name}-clockspersec.patch
+# Fix psprint /euro to /Euro
+Patch10:	%{name}-psprint-euro.patch
+# Fix config_office/configure
+Patch11:	%{name}-ac.patch
 URL:		http://www.openoffice.org/
 BuildRequires:	STLport-static
 BuildRequires:	XFree86-devel
@@ -102,15 +110,15 @@ Do zalet OpenOffice.org mo¿na zaliczyæ:
 %patch7 -p1
 %patch8 -p1
 %patch9 -p1
-
+%patch10 -p1
+%patch11 -p1
 
 install %{SOURCE1} external
 cd external; tar fxz %{SOURCE1}; cp -fr gpc231/* gpc
 
 %build
 cd config_office
-#autoconf
-
+autoconf
 
 %{?!_with_ibm_java:JAVA_HOME="/usr/lib/jdk1.3.1_03"}
 %{?_with_ibm_java:JAVA_HOME="/usr/lib/IBMJava2-13"}
