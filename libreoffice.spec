@@ -21,7 +21,6 @@ BuildRequires:	perl
 BuildRequires:	tcsh
 BuildRequires:	unzip
 BuildRequires:	zip
-BuildConflicts:	STLport-devel
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %define		_prefix		/usr/X11R6
@@ -77,7 +76,7 @@ source LinuxIntelEnv.Set
 # see http://tools.openoffice.org/troubleshoot.html
 #Xvfb :15 &
 #setenv DISPLAY	:15
-dmake
+#dmake
 EOF
 
 chmod u+rx compile
