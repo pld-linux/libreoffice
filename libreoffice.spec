@@ -1245,7 +1245,7 @@ cp %{SOURCE11} $RPM_BUILD_ROOT%{dictlst}-readme
 touch $RPM_BUILD_ROOT%{dictlst}
 
 # move to devel ???
-for file in autodoc cppumaker idlc idlcpp javamaker rdbmaker regcomp \
+for file in cppumaker idlc idlcpp javamaker rdbmaker regcomp \
     regmerge regview uno xml2cmp
 do
     cp solver/%{subver}/%{_archbuilddir}/bin/$file $RPM_BUILD_ROOT%{_bindir}
@@ -1353,7 +1353,7 @@ rm -rf $RPM_BUILD_ROOT
 %{oolib}/program/instdb.ins
 
 # dirs/trees
-%{oolib}/program/classes
+#%{oolib}/program/classes
 
 %dir %{oolib}/program/resource
 %{oolib}/program/resource/bmp.res
@@ -1430,7 +1430,7 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{oolib}/program/msgbox-gnome
 
 # %files devel ?????????
-%attr(755,root,root) %{_bindir}/autodoc
+#%attr(755,root,root) %{_bindir}/autodoc
 %attr(755,root,root) %{_bindir}/cppumaker
 %attr(755,root,root) %{_bindir}/idlc
 %attr(755,root,root) %{_bindir}/idlcpp
