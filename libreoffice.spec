@@ -91,6 +91,7 @@ Patch0:		%{name}-rh-disable-spellcheck-all-langs.patch
 # PLD-specific, they ooo-build people don't like it
 Patch1:		%{name}-files.patch
 Patch2:		%{name}-build.patch
+Patch3:		%{name}-scresplit.patch
 
 URL:		http://www.openoffice.org/
 BuildRequires:	ImageMagick
@@ -1821,6 +1822,7 @@ zuluskim.
 %patch0 -p1
 %patch1 -p1 
 %patch2 -p1
+%patch3 -p1
 
 install -d src
 # sources, icons, KDE_icons
