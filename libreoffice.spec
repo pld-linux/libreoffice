@@ -64,8 +64,6 @@ Do zalet OpenOffice.org mo¿na zaliczyæ:
 %patch1 -p1
 install %{SOURCE1} external
 cd external; tar fxz %{SOURCE1}; cp -fr gpc231/* gpc
-install -d solver/641/unxlngi3.pro/bin
-install %{SOURCE2} solver/641/unxlngi3.pro/bin/db.jar
 
 %build
 cd config_office
@@ -78,6 +76,9 @@ autoconf
 	--with-stlport4-home=/usr \
 	--with-lang=ALL \
 	--with-x
+
+install -d solver/641/unxlngi3.pro/bin
+install %{SOURCE2} solver/641/unxlngi3.pro/bin/db.jar
 
 cd ..
 cat <<EOF > compile
