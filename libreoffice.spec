@@ -1176,13 +1176,13 @@ if [ -f %{_libdir}/%{name}/program/libvcl%{verarch}-gtk.so ]; then
 fi
 
 %preun libs-kde
-rm -f %{_libdir}/%{name}/program/libvcl%{verarch}.so
+[ "$1" = "0" ] && rm -f %{_libdir}/%{name}/program/libvcl%{verarch}.so
 
 %post libs-kde
 ln -sf libvcl%{verarch}-kde.so %{_libdir}/%{name}/program/libvcl%{verarch}.so
 
 %preun libs-gtk
-rm -f %{_libdir}/%{name}/program/libvcl%{verarch}.so
+[ "$1" = "0" ] && rm -f %{_libdir}/%{name}/program/libvcl%{verarch}.so
 
 %post libs-gtk
 ln -sf libvcl%{verarch}-gtk.so %{_libdir}/%{name}/program/libvcl%{verarch}.so
