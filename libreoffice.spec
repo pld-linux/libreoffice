@@ -281,7 +281,6 @@ BuildRequires:	XFree86-devel
 BuildRequires:	autoconf
 BuildRequires:	automake
 BuildRequires:	bison >= 1.875-4
-BuildRequires:	libbonobo-devel
 BuildRequires:	cups-devel
 BuildRequires:	db-devel
 BuildRequires:	db-cxx-devel
@@ -309,6 +308,7 @@ BuildRequires:	libart_lgpl-devel
 BuildRequires:	gtk+2-devel
 %if %{with gnomevfs} 
 BuildRequires:	gnome-vfs2-devel
+BuildRequires:  libbonobo-devel
 %endif 
 %if %{with gnomecups}
 BuildRequires:	libgnomecups-devel
