@@ -997,9 +997,9 @@ TEMP="%{tmpdir}"; export TEMP
 mv $RPM_BUILD_ROOT%{_libdir}/%{name}/program/libvcl%{subver}li.so \
 	$RPM_BUILD_ROOT%{_libdir}/%{name}/program/libvcl%{subver}li-kde.so
 
-install build/OOO_%{dfullver}/vcl.gtk/unxlngi4.pro/lib/libvcl%{subver}li.so \
+install -m755 build/OOO_%{dfullver}/vcl.gtk/unxlngi4.pro/lib/libvcl%{subver}li.so \
 	$RPM_BUILD_ROOT%{_libdir}/%{name}/program/libvcl%{subver}li-gtk.so
-install build/OOO_%{dfullver}/vcl.gtk/unxlngi4.pro/bin/*-gnome \
+install -m755 build/OOO_%{dfullver}/vcl.gtk/unxlngi4.pro/bin/*-gnome \
 	$RPM_BUILD_ROOT%{_libdir}/%{name}/program/
 
 install -d helptmp && cd helptmp || exit 1
