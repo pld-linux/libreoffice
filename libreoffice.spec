@@ -7,15 +7,16 @@
 # 	- incorporate ximian patches (mostly done)
 #	- copy & paste problem in oocalc (not verified)
 
-%bcond_with java		# java support
-%bcond_without fontconf		# fontconfig
-%bcond_without icons		# new Ximian icons
-%bcond_without gnomevfs		# gnome-vfs
-%bcond_with parallel 		# parallel building
+# Conditional build:
+%bcond_with	java		# Java support
+%bcond_without	fontconf	# fontconfig
+%bcond_without	icons		# new Ximian icons
+%bcond_without	gnomevfs	# gnome-vfs
+%bcond_with	parallel 	# parallel building
 
 # not tested
-%bcond_with gnomecups		# gnome-cups
-%bcond_with i18n 		# i18n bits
+%bcond_with	gnomecups	# gnome-cups
+%bcond_with	i18n 		# i18n bits
 
 %define		ver		1.1.0
 %define		rel		%{nil}
@@ -133,141 +134,143 @@ Patch64:	%{name}-crashrepgtk.patch
 Patch65:	%{name}-java-ppc.patch 
 
 # Hey, we _really_ want java?
-Patch101: openoffice-allow-no-jdk.patch
-Patch102: openoffice-berkeleydb-handle-no-solar-java.patch
-Patch103: openoffice-desktop-handle-no-solar-java.patch
-Patch104: openoffice-javaunohelper-handle-no-solar-java.patch
-Patch105: openoffice-jni-uno-handle-no-solar-java.patch
-Patch106: openoffice-jurt-handle-no-solar-java.patch
-Patch107: openoffice-jvmaccess-handle-no-solar-java.patch
-Patch108: openoffice-officecfg-xsltproc.patch
-Patch109: openoffice-psprint-handle-no-solar-java.patch
-Patch110: openoffice-readlicense-oo-xsltproc.patch
-Patch111: openoffice-ridljar-handle-no-solar-java.patch
-Patch112: openoffice-setup2-handle-no-solar-java.patch
-Patch113: openoffice-sj2-handle-no-solar-java.patch
-Patch114: openoffice-solenv-set-solar-java-only-if-unset.patch
-Patch115: openoffice-svg-handle-no-solar-java.patch
-Patch116: openoffice-xsltfilter-handle-no-solar-java.patch
-Patch117: openoffice-xsltvalidate-handle-no-solar-java.patch
-Patch118: openoffice-berkeleydb-no-java-fix.patch 
-Patch119: openoffice-scp-handle-no-solar-java.patch
-Patch120: openoffice-odk-handle-no-solar-java.patch 
-Patch121: openoffice-disable-odk-build.patch
+Patch101:	%{name}-allow-no-jdk.patch
+Patch102:	%{name}-berkeleydb-handle-no-solar-java.patch
+Patch103:	%{name}-desktop-handle-no-solar-java.patch
+Patch104:	%{name}-javaunohelper-handle-no-solar-java.patch
+Patch105:	%{name}-jni-uno-handle-no-solar-java.patch
+Patch106:	%{name}-jurt-handle-no-solar-java.patch
+Patch107:	%{name}-jvmaccess-handle-no-solar-java.patch
+Patch108:	%{name}-officecfg-xsltproc.patch
+Patch109:	%{name}-psprint-handle-no-solar-java.patch
+Patch110:	%{name}-readlicense-oo-xsltproc.patch
+Patch111:	%{name}-ridljar-handle-no-solar-java.patch
+Patch112:	%{name}-setup2-handle-no-solar-java.patch
+Patch113:	%{name}-sj2-handle-no-solar-java.patch
+Patch114:	%{name}-solenv-set-solar-java-only-if-unset.patch
+Patch115:	%{name}-svg-handle-no-solar-java.patch
+Patch116:	%{name}-xsltfilter-handle-no-solar-java.patch
+Patch117:	%{name}-xsltvalidate-handle-no-solar-java.patch
+Patch118:	%{name}-berkeleydb-no-java-fix.patch 
+Patch119:	%{name}-scp-handle-no-solar-java.patch
+Patch120:	%{name}-odk-handle-no-solar-java.patch 
+Patch121:	%{name}-disable-odk-build.patch
 
 # misc patches
-Patch201: openoffice-zoom-combobox.patch
-Patch202: openoffice-unzip-not-jar.patch 
-Patch203: openoffice-spell-sv.patch
-Patch204: openoffice-word-count.patch
-Patch206: openoffice-recent-files.patch
-Patch207: openoffice-gui-sw-insert-symbol.patch
-Patch208: openoffice-use-fork.patch
-Patch209: openoffice-print-dialog.patch
-Patch210: openoffice-print-error.patch
-Patch211: openoffice-help-fallback-en.patch
-Patch212: openoffice-crash-bindings.patch
-Patch213: openoffice-crash-mapmode.patch
-Patch214: openoffice-gui-beep-less.patch
-Patch215: openoffice-gui-splash-redraw.patch
-Patch216: openoffice-gui-startup-style.patch
-Patch217: openoffice-gui-sw-scroll.patch
-Patch218: openoffice-gui-tbx-palette.patch
-Patch219: openoffice-gui-vcl-fix-borders.patch
-Patch220: openoffice-init-desktop.patch
-Patch221: openoffice-init-sw.patch
-Patch222: openoffice-ooo111-general-io-error-sxi.patch
-Patch223: openoffice-startup-fix.patch
-Patch224: openoffice-svx-freeze-fix.patch
-Patch225: openoffice-wm-dialog-utility.patch
-Patch226: openoffice-db-dbcxx.patch
-Patch227: openoffice-fix-parallel-build.patch
-Patch228: openoffice-thread-yield.patch
-Patch229: openoffice-prelink-friendly.patch
-Patch230: openoffice-svtools-dep.patch
-Patch231: openoffice-crashrep-nogtk.patch
+Patch201:	%{name}-zoom-combobox.patch
+Patch202:	%{name}-unzip-not-jar.patch 
+Patch203:	%{name}-spell-sv.patch
+Patch204:	%{name}-word-count.patch
+Patch206:	%{name}-recent-files.patch
+Patch207:	%{name}-gui-sw-insert-symbol.patch
+Patch208:	%{name}-use-fork.patch
+Patch209:	%{name}-print-dialog.patch
+Patch210:	%{name}-print-error.patch
+Patch211:	%{name}-help-fallback-en.patch
+Patch212:	%{name}-crash-bindings.patch
+Patch213:	%{name}-crash-mapmode.patch
+Patch214:	%{name}-gui-beep-less.patch
+Patch215:	%{name}-gui-splash-redraw.patch
+Patch216:	%{name}-gui-startup-style.patch
+Patch217:	%{name}-gui-sw-scroll.patch
+Patch218:	%{name}-gui-tbx-palette.patch
+Patch219:	%{name}-gui-vcl-fix-borders.patch
+Patch220:	%{name}-init-desktop.patch
+Patch221:	%{name}-init-sw.patch
+Patch222:	%{name}-ooo111-general-io-error-sxi.patch
+Patch223:	%{name}-startup-fix.patch
+Patch224:	%{name}-svx-freeze-fix.patch
+Patch225:	%{name}-wm-dialog-utility.patch
+Patch226:	%{name}-db-dbcxx.patch
+Patch227:	%{name}-fix-parallel-build.patch
+Patch228:	%{name}-thread-yield.patch
+Patch229:	%{name}-prelink-friendly.patch
+Patch230:	%{name}-svtools-dep.patch
+Patch231:	%{name}-crashrep-nogtk.patch
 
-Patch301: openoffice-splash.patch
+Patch301:	%{name}-splash.patch
 
-Patch341: openoffice-i18n-sal.patch
-Patch342: openoffice-i18n-rehash.patch
-Patch343: openoffice-i18n-cleanup.patch
-Patch344: openoffice-i18n-search-all.patch
+Patch341:	%{name}-i18n-sal.patch
+Patch342:	%{name}-i18n-rehash.patch
+Patch343:	%{name}-i18n-cleanup.patch
+Patch344:	%{name}-i18n-search-all.patch
 
-Patch351: openoffice-print-cups.patch
-Patch352: openoffice-print-generic-gui.patch
-Patch353: openoffice-print-psprint-rehash.patch
-Patch354: openoffice-print-spadmin-disable.patch
-Patch355: openoffice-print-type42.patch
+Patch351:	%{name}-print-cups.patch
+Patch352:	%{name}-print-generic-gui.patch
+Patch353:	%{name}-print-psprint-rehash.patch
+Patch354:	%{name}-print-spadmin-disable.patch
+Patch355:	%{name}-print-type42.patch
 
-Patch361: openoffice-gnome-desktop-force.patch
-Patch362: openoffice-gtk-themeing.patch
-Patch363: openoffice-gui-sc-paste.patch
-Patch364: openoffice-speed-lang-cache.patch
+Patch361:	%{name}-gnome-desktop-force.patch
+Patch362:	%{name}-gtk-themeing.patch
+Patch363:	%{name}-gui-sc-paste.patch
+Patch364:	%{name}-speed-lang-cache.patch
 
-Patch371: openoffice-capitalization.patch
-Patch372: openoffice-gui-font-antialias-size.patch
-Patch373: openoffice-gui-font-default-size.patch
-Patch374: openoffice-gui-font-scale.patch
-Patch375: openoffice-gui-font-size-unbreak.patch
-Patch376: openoffice-gui-fonts-kde.patch
-Patch377: openoffice-gui-ft-21-compat.patch
-Patch378: openoffice-gui-ft-pt-not-pixel.patch
-Patch379: openoffice-gui-ft-set-hint.patch
-Patch380: openoffice-gui-ft-use-system-font.patch
-Patch381: openoffice-gui-scale-ruler.patch
+Patch371:	%{name}-capitalization.patch
+Patch372:	%{name}-gui-font-antialias-size.patch
+Patch373:	%{name}-gui-font-default-size.patch
+Patch374:	%{name}-gui-font-scale.patch
+Patch375:	%{name}-gui-font-size-unbreak.patch
+Patch376:	%{name}-gui-fonts-kde.patch
+Patch377:	%{name}-gui-ft-21-compat.patch
+Patch378:	%{name}-gui-ft-pt-not-pixel.patch
+Patch379:	%{name}-gui-ft-set-hint.patch
+Patch380:	%{name}-gui-ft-use-system-font.patch
+Patch381:	%{name}-gui-scale-ruler.patch
 
-Patch391: openoffice-print-fontconfig.patch
-Patch392: openoffice-print-scale-fix.patch
-Patch393: openoffice-padmin-nofontconfig.patch
+Patch391:	%{name}-print-fontconfig.patch
+Patch392:	%{name}-print-scale-fix.patch
+Patch393:	%{name}-padmin-nofontconfig.patch
 
-Patch401: openoffice-vfs-content.patch
-Patch402: openoffice-vfs-directory.patch
-Patch403: openoffice-vfs-offapi.patch
-Patch404: openoffice-vfs-provider.patch
-Patch405: openoffice-vfs-stream.patch
-Patch406: openoffice-vfs-ucp-setup.patch
-Patch407: openoffice-vfs-uno-register.patch
-Patch408: openoffice-vfs-uno-uri.patch
+Patch401:	%{name}-vfs-content.patch
+Patch402:	%{name}-vfs-directory.patch
+Patch403:	%{name}-vfs-offapi.patch
+Patch404:	%{name}-vfs-provider.patch
+Patch405:	%{name}-vfs-stream.patch
+Patch406:	%{name}-vfs-ucp-setup.patch
+Patch407:	%{name}-vfs-uno-register.patch
+Patch408:	%{name}-vfs-uno-uri.patch
 
-Patch411: openoffice-bmp32.patch
-Patch412: openoffice-gui-icon-composite.patch
-Patch413: openoffice-gui-image-load.patch
-Patch414: openoffice-gui-insensitive.patch
-Patch415: openoffice-gui-new-icons.patch
-Patch416: openoffice-gui-symbol-remove.patch
-Patch417: openoffice-gui-tbx-ctrl-bg.patch
-Patch418: openoffice-gui-tbxcust.patch
-Patch419: openoffice-gui-toolbox-large-icons.patch
-Patch420: openoffice-gui-toolbox.patch
-Patch421: openoffice-gui-toolbox-prelight.patch
-Patch422: openoffice-gui-toolbox-tristate.patch
-Patch423: openoffice-help-support.patch
-Patch424: openoffice-icon-masks.patch
-Patch425: openoffice-icon-render.patch
-Patch426: openoffice-speed-bitmap-render.patch
+Patch411:	%{name}-bmp32.patch
+Patch412:	%{name}-gui-icon-composite.patch
+Patch413:	%{name}-gui-image-load.patch
+Patch414:	%{name}-gui-insensitive.patch
+Patch415:	%{name}-gui-new-icons.patch
+Patch416:	%{name}-gui-symbol-remove.patch
+Patch417:	%{name}-gui-tbx-ctrl-bg.patch
+Patch418:	%{name}-gui-tbxcust.patch
+Patch419:	%{name}-gui-toolbox-large-icons.patch
+Patch420:	%{name}-gui-toolbox.patch
+Patch421:	%{name}-gui-toolbox-prelight.patch
+Patch422:	%{name}-gui-toolbox-tristate.patch
+Patch423:	%{name}-help-support.patch
+Patch424:	%{name}-icon-masks.patch
+Patch425:	%{name}-icon-render.patch
+Patch426:	%{name}-speed-bitmap-render.patch
 
-Patch431: openoffice-gui-menu-check-images.patch
-Patch432: openoffice-gui-menu-checkitems.patch
-Patch433: openoffice-gui-menu-check-render.patch
-Patch434: openoffice-gui-menu-fixes.patch
+Patch431:	%{name}-gui-menu-check-images.patch
+Patch432:	%{name}-gui-menu-checkitems.patch
+Patch433:	%{name}-gui-menu-check-render.patch
+Patch434:	%{name}-gui-menu-fixes.patch
 
-Patch501: openoffice-1.0.1-so-ooo-coexist.patch
-Patch502: openoffice-1.0.2-sal-sigsegv.patch
-Patch503: openoffice-scpzip-langs.patch
-Patch504: openoffice-1.1-disable-python.patch
-Patch505: openoffice-1.1-psprint-pdf-drivers.patch
-Patch506: openoffice-1.1-sal-main-cmdline.patch
-Patch507: openoffice-iso8859-2-html.patch
-Patch508: openoffice-buildset.patch
-Patch509: openoffice-vcl-dynamic-Xinerama.patch
-Patch510: openoffice-1.1-psprint-cups-PPD.patch
-Patch511: openoffice-1.1-disable-python-nojava.patch
+Patch501:	%{name}-1.0.1-so-ooo-coexist.patch
+Patch502:	%{name}-1.0.2-sal-sigsegv.patch
+Patch503:	%{name}-scpzip-langs.patch
+Patch504:	%{name}-1.1-disable-python.patch
+Patch505:	%{name}-1.1-psprint-pdf-drivers.patch
+Patch506:	%{name}-1.1-sal-main-cmdline.patch
+Patch507:	%{name}-iso8859-2-html.patch
+Patch508:	%{name}-buildset.patch
+Patch509:	%{name}-vcl-dynamic-Xinerama.patch
+Patch510:	%{name}-1.1-psprint-cups-PPD.patch
+Patch511:	%{name}-1.1-disable-python-nojava.patch
 
-Patch600: openoffice-freetype_2_1_7.patch
+Patch600:	%{name}-freetype_2_1_7.patch
 
 URL:		http://www.openoffice.org/
+BuildRequires:  ImageMagick
 BuildRequires:	STLport-devel >= 4.5.3-6
+BuildRequires:	STLport-devel < 4.6
 BuildRequires:	XFree86-devel
 BuildRequires:	autoconf
 BuildRequires:	automake
@@ -283,7 +286,6 @@ BuildRequires:	libxslt-progs
 %endif
 BuildRequires:	flex
 BuildRequires:	freetype-devel >= 2.1
-BuildConflicts:	java-sun = 1.4.2
 BuildRequires:	libstdc++-devel >= 3.2.1
 BuildRequires:	pam-devel
 BuildRequires:	perl
@@ -303,7 +305,7 @@ BuildRequires:	gnome-vfs2-devel
 BuildRequires:	libgnomecups-devel
 BuildRequires:	cups-devel
 %endif
-BuildRequires:  ImageMagick
+BuildConflicts:	java-sun = 1.4.2
 Requires:	%{name}-libs = %{epoch}:%{version}-%{release}
 Requires:	%{name}-i18n-en = %{epoch}:%{version}-%{release}
 Requires:	%{name}-dict-en
