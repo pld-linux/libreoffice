@@ -3,6 +3,10 @@
 # _with_ibm_java	- uses IBM java instead SUN java
 # _with_nest		- build for nest envinronment
 
+# _with_us		- 01 US translation
+# _with_pl		- 48 PL translation
+# _with_de		- 49 DE translation
+
 %define		oo_ver	641d
 Summary:	OpenOffice - powerful office suite
 Summary(pl):	OpenOffice - potê¿ny pakiet biurowy
@@ -144,7 +148,9 @@ sed -e "s,@DESTDIR@,$RPM_BUILD_ROOT/usr/X11R6/lib/openoffice," \
 	install.rs.in > install.rs
 
 # starting installator
-DISPLAY=":$i" instsetoo/unxlngi3.pro/01/normal/setup -R:$RPM_BUILD_DIR/oo_%{oo_ver}_src/install.rs
+%{?_with_us:DISPLAY=":$i" instsetoo/unxlngi3.pro/01/normal/setup -R:$RPM_BUILD_DIR/oo_%{oo_ver}_src/install.rs}
+%{?_with_pl:DISPLAY=":$i" instsetoo/unxlngi3.pro/48/normal/setup -R:$RPM_BUILD_DIR/oo_%{oo_ver}_src/install.rs}
+%{?_with_de:DISPLAY=":$i" instsetoo/unxlngi3.pro/49/normal/setup -R:$RPM_BUILD_DIR/oo_%{oo_ver}_src/install.rs}
 
 # stopping Xvfb
 kill $PID
