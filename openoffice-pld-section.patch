@@ -43,15 +43,6 @@ diff -urN ooo-build-1.1.54.org/patches/OOO_1_1_1/apply ooo-build-1.1.54/patches/
  # somewhat odder:
  Win32 : Common, ODKFixes, VBABits, Win32Only
  
-@@ -305,7 +306,7 @@
- gui-ft-pt-not-pixel.diff
- gui-ft-use-system-font.diff
- 
--[ XimianOnly, RedHatOnly ]
-+[ XimianOnly, RedHatOnly, PLDOnly ]
- # Disable custom staroffice printer admin thing & broken crashdialog bits
- module-buildset.diff
- 
 @@ -362,7 +363,7 @@
  # Add support for the freedesktop.org ~/.recently-used spec. #24253
  recent-files.diff
