@@ -17,9 +17,9 @@
 
 %define		ver		2.0
 %define		rel		0
-%define		ooobver		1.9.79.2.2
+%define		ooobver		1.9.90
 %define		snap		SRC680
-%define		bver		m79
+%define		bver		m90
 %define		subver		645
 
 %define		fullver		%{ver}.%{rel}
@@ -36,15 +36,15 @@ Epoch:		1
 License:	GPL/LGPL
 Group:		X11/Applications
 Source0:	http://go-ooo.org/packages/%{snap}/ooo-build-%{ooobver}.tar.gz
-# Source0-md5:	e5fd24d970b0c459c45787df373e073d
+# Source0-md5:	07526c23db6495b4841c7a71e46d9cbc
 Source1:	http://go-ooo.org/packages/%{snap}/%{ssnap}-%{bver}-core.tar.bz2
-# Source1-md5:	c6aca9d683a4a1e86e6f757ba66e1e80
+# Source1-md5:	8222cf9bcacac3892e75a598f2acc343
 Source2:	http://go-ooo.org/packages/%{snap}/ooo_custom_images-13.tar.bz2
 # Source2-md5:	2480af7f890c8175c7f9e183a1b39ed2
 Source3:	http://go-ooo.org/packages/%{snap}/ooo_crystal_images-5.tar.bz2
 # Source3-md5:	040be799b20ccec2791e04a152d97cc3
-Source4:	http://go-ooo.org/packages/%{snap}/extras-1.tar.bz2
-# Source4-md5:	c76b1c554529a37975d0149ca8647e7a
+Source4:	http://go-ooo.org/packages/%{snap}/extras-2.tar.bz2
+# Source4-md5:	733051ebeffae5232a2eb760162da020
 Source5:	http://go-ooo.org/packages/libwpd/libwpd-0.8.0.tar.gz
 # Source5-md5:	98e59beecc112339bb78654863304c1c
 Source10:	oocalc.desktop
@@ -1916,7 +1916,6 @@ CONFOPTS=" \
 	--with-distro="${DISTRO}" \
 	--enable-gtk \
 	--enable-kde \
-	--with-images='industrial crystal' \
 	--without-binsuffix \
 	--with-installed-ooo-dirname=%{name} \
 %if %{with java}

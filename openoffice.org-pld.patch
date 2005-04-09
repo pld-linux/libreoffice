@@ -1,29 +1,14 @@
-diff -urN ooo-build-1.9.79.2.2.org/patches/src680/buildfix-lotus.diff ooo-build-1.9.79.2.2/patches/src680/buildfix-lotus.diff
---- ooo-build-1.9.79.2.2.org/patches/src680/buildfix-lotus.diff	1970-01-01 01:00:00.000000000 +0100
-+++ ooo-build-1.9.79.2.2/patches/src680/buildfix-lotus.diff	2005-03-21 19:57:47.508300824 +0100
-@@ -0,0 +1,13 @@
-+diff -ur sc/source/filter/lotus/filter.cxx src680-m79/sc/source/filter/lotus/filter.cxx
-+--- sc/source/filter/lotus/filter.cxx	2005-03-21 19:55:29.649258000 +0100
-++++ sc/source/filter/lotus/filter.cxx	2005-03-21 19:55:50.209133008 +0100
-+@@ -71,7 +71,7 @@
-+ 
-+ #include <tools/solar.h>
-+ #include <string.h>
-+-#include <stl/map>
-++#include <map>
-+ 
-+ #include "filter.hxx"
-+ #include "document.hxx"
-+
-diff -urN ooo-build-1.9.79.2.2.org/patches/src680-m79/apply ooo-build-1.9.79.2.2/patches/src680-m79/apply
---- ooo-build-1.9.79.2.2.org/patches/src680-m79/apply	2005-03-17 18:33:16.000000000 +0100
-+++ ooo-build-1.9.79.2.2/patches/src680-m79/apply	2005-03-21 19:58:51.997496976 +0100
-@@ -81,6 +81,8 @@
- # fixes size of some fields in the create table wizard, n#72184; it is already fixed in m84
- # add a missing period i#45103
- wizard-table-filed-sizes.diff
-+# fix for lotus inclugin
-+buildfix-lotus.diff
- 
- [ Fixes ]
- # fix the wizards crasher n#10512
+diff -urN ooo.org/patches/src680/system-mozilla-xmlsecurity.diff ooo/patches/src680/system-mozilla-xmlsecurity.diff
+--- ooo.org/patches/src680/system-mozilla-xmlsecurity.diff	2004-12-14 18:15:32.000000000 +0100
++++ ooo/patches/src680/system-mozilla-xmlsecurity.diff	2005-04-08 20:17:45.352241872 +0200
+@@ -15,8 +15,8 @@
+  MOZ_INC = $(SOLARVERSION)$/$(INPATH)$/inc$(UPDMINOREXT)$/mozilla
+ +.ENDIF
+ +
+- NSS_INC = $(MOZ_INC)$/nss
+- NSPR_INC = $(MOZ_INC)$/nspr
++ NSS_INC = /usr/include/nss
++ NSPR_INC = /usr/include/nspr
+  
+ @@ -152,6 +156,93 @@ SLOFILES = \
+  	$(SLO)$/seinitializer_nssimpl.obj \
