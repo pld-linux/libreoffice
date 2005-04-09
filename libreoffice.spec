@@ -127,9 +127,9 @@ BuildRequires:	libart_lgpl-devel
 BuildRequires:	libstdc++-devel >= 5:3.2.1
 BuildRequires:	libxml2-devel
 BuildRequires:	libjpeg-devel
-BuildRequires:	nss-devel
-BuildRequires:	nspr-devel
-BuildRequires:	mozilla-devel
+BuildRequires:	nss-devel >= 1:3.9.4-2
+BuildRequires:	nspr-devel >= 1:4.6-0.20041030.3
+BuildRequires:	mozilla-devel >= 5:1.7.6-2
 BuildRequires:	nas-devel
 BuildRequires:	neon-devel
 BuildRequires:	openldap-devel
