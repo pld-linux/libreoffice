@@ -17,9 +17,9 @@
 
 %define		ver		2.0
 %define		rel		0
-%define		ooobver		1.9.90
+%define		ooobver		1.9.92
 %define		snap		SRC680
-%define		bver		m90
+%define		bver		m92
 %define		subver		645
 
 %define		fullver		%{ver}.%{rel}
@@ -36,9 +36,9 @@ Epoch:		1
 License:	GPL/LGPL
 Group:		X11/Applications
 Source0:	http://go-ooo.org/packages/%{snap}/ooo-build-%{ooobver}.tar.gz
-# Source0-md5:	07526c23db6495b4841c7a71e46d9cbc
+# Source0-md5:	69e58aa7d56667375e31f1b92eb18778
 Source1:	http://go-ooo.org/packages/%{snap}/%{ssnap}-%{bver}-core.tar.bz2
-# Source1-md5:	8222cf9bcacac3892e75a598f2acc343
+# Source1-md5:	bc03727a08fa607e68dacd38fafe86f9
 Source2:	http://go-ooo.org/packages/%{snap}/ooo_custom_images-13.tar.bz2
 # Source2-md5:	2480af7f890c8175c7f9e183a1b39ed2
 Source3:	http://go-ooo.org/packages/%{snap}/ooo_crystal_images-5.tar.bz2
