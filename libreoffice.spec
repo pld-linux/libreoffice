@@ -1934,6 +1934,7 @@ CONFOPTS=" \
 	--with-x \
 	--without-fonts \
 	--without-gpc \
+	--disable-binfilter \
 	--disable-epm \
 	--disable-fontooo \
 	--enable-openldap \
