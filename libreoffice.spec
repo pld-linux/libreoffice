@@ -35,8 +35,9 @@ Release:	0.1%{?with_vfs:vfs}
 Epoch:		1
 License:	GPL/LGPL
 Group:		X11/Applications
-Source0:	http://go-ooo.org/packages/%{snap}/ooo-build-%{ooobver}.tar.gz
-# Source0-md5:	41832dd5b41119b2bc9f03736053baa3
+# Source0:	http://go-ooo.org/packages/%{snap}/ooo-build-%{ooobver}.tar.gz
+Source0:	http://go-ooo.org/packages/snap/ooo-build-HEAD-1.9.100-20050507.tar.gz
+# Source0-md5:	43aaff1f1678bb6ef5ee7ad01bea5d5e
 Source1:	http://go-ooo.org/packages/%{snap}/%{ssnap}-%{bver}-core.tar.bz2
 # Source1-md5:	47274b7ecdeeb4c21118590d5bbe84c1
 Source2:	http://go-ooo.org/packages/%{snap}/ooo_custom_images-13.tar.bz2
@@ -1919,13 +1920,15 @@ CONFOPTS=" \
 	--without-binsuffix \
 	--with-installed-ooo-dirname=%{name} \
 %if %{with java}
-	--enable-java \
+	--with-java \
 	--with-jdk-home=$JAVA_HOME \
 %else
-	--disable-java \
+	--without-java \
 %endif
 %if %{with vfs}
 	--enable-gnome-vfs \
+%else
+	--disable-gnome-vfs \
 %endif
 	--with-docdir=%{_docdir}/%{name}-%{version} \
 	--with-python=%{_bindir}/python \
