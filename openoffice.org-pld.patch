@@ -1,14 +1,27 @@
-diff -urN ooo.org/patches/src680/system-mozilla-xmlsecurity.diff ooo/patches/src680/system-mozilla-xmlsecurity.diff
---- ooo.org/patches/src680/system-mozilla-xmlsecurity.diff	2004-12-14 18:15:32.000000000 +0100
-+++ ooo/patches/src680/system-mozilla-xmlsecurity.diff	2005-04-08 20:17:45.352241872 +0200
-@@ -15,8 +15,8 @@
-  MOZ_INC = $(SOLARVERSION)$/$(INPATH)$/inc$(UPDMINOREXT)$/mozilla
- +.ENDIF
- +
-- NSS_INC = $(MOZ_INC)$/nss
-- NSPR_INC = $(MOZ_INC)$/nspr
-+ NSS_INC = /usr/include/nss
-+ NSPR_INC = /usr/include/nspr
-  
- @@ -152,6 +156,93 @@ SLOFILES = \
-  	$(SLO)$/seinitializer_nssimpl.obj \
+diff -urN ooo-build-1.9.100.org/patches/src680/apply ooo-build-1.9.100/patches/src680/apply
+--- ooo-build-1.9.100.org/patches/src680/apply	2005-05-06 15:14:57.000000000 +0000
++++ ooo-build-1.9.100/patches/src680/apply	2005-05-08 16:32:31.807428480 +0000
+@@ -57,6 +57,8 @@
+ enable-debug.diff
+ # Several KDE vclplug fixes from CWS kdeplugfixes
+ cws-kdeplugfixes.diff
++# fix mozilla
++system-mozilla.diff
+ 
+ [ GCJ ]
+ # qadevOOo fails with encoding errors...
+diff -urN ooo-build-1.9.100.org/patches/src680/system-mozilla.diff ooo-build-1.9.100/patches/src680/system-mozilla.diff
+--- ooo-build-1.9.100.org/patches/src680/system-mozilla.diff	1970-01-01 00:00:00.000000000 +0000
++++ ooo-build-1.9.100/patches/src680/system-mozilla.diff	2005-05-08 16:31:14.699150720 +0000
+@@ -0,0 +1,11 @@
++--- extensions.org/source/nsplugin/source/makefile.mk.org	2005-05-08 16:38:52.722520584 +0000
+++++ extensions/source/nsplugin/source/makefile.mk	2005-05-08 16:39:21.614128392 +0000
++@@ -81,7 +81,7 @@
++ .IF "$(OS)"=="LINUX" || "$(OS)"=="FREEBSD"
++ INC+= -DNP_LINUX
++ .IF "$(SYSTEM_MOZILLA)" == "YES"
++-INCPRE=-I$(MOZ_INC)/nspr -I$(MOZ_INC)/java -I$(MOZ_INC)/plugin
+++INCPRE=-I$(MOZ_NSS_CFLAGS) -I$(MOZ_INC)/nspr -I$(MOZ_INC)/java -I$(MOZ_INC)/plugin
++ # not sure about -DMOZ_X11 but otheriwse some struct member don't exist...
++ CFLAGS+=-DSYSTEM_MOZILLA -DMOZ_X11
++ .ENDIF
