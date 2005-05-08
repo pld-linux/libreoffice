@@ -1836,7 +1836,7 @@ zuluskim.
 
 %prep
 %setup -q -n ooo-build-%{ooobver}
-#%patch0 -p1
+%patch0 -p1
 
 install -d src
 # sources, icons, KDE_icons
