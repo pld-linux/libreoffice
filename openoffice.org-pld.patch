@@ -13,7 +13,7 @@ diff -urN ooo-build-1.9.100.org/patches/src680/apply ooo-build-1.9.100/patches/s
 diff -urN ooo-build-1.9.100.org/patches/src680/system-mozilla.diff ooo-build-1.9.100/patches/src680/system-mozilla.diff
 --- ooo-build-1.9.100.org/patches/src680/system-mozilla.diff	1970-01-01 00:00:00.000000000 +0000
 +++ ooo-build-1.9.100/patches/src680/system-mozilla.diff	2005-05-08 16:31:14.699150720 +0000
-@@ -0,0 +1,11 @@
+@@ -0,0 +1,22 @@
 +--- np_sdk/mozilla-source-M16-stub.patch.org	2005-05-08 17:17:25.759885456 +0000
 ++++ np_sdk/mozilla-source-M16-stub.patch	2005-05-08 17:17:55.449371968 +0000
 +@@ -1202,7 +1202,7 @@
@@ -25,3 +25,14 @@ diff -urN ooo-build-1.9.100.org/patches/src680/system-mozilla.diff ooo-build-1.9
 + ! .ENDIF
 + ! 
 + ! .IF "$(GUI)" == "UNX"
++--- etensions/source/nsplugin/source/makefile.mk.org	2005-05-09 04:39:32.597010704 +0000
+++++ extensions/source/nsplugin/source/makefile.mk	2005-05-09 04:40:03.547305544 +0000
++@@ -81,7 +81,7 @@
++ .IF "$(OS)"=="LINUX" || "$(OS)"=="FREEBSD"
++ INC+= -DNP_LINUX
++ .IF "$(SYSTEM_MOZILLA)" == "YES"
++-INCPRE=-I$(MOZ_INC)/nspr -I$(MOZ_INC)/java -I$(MOZ_INC)/plugin
+++INCPRE=-I$(MOZ_NSS_CFLAGS) -I$(MOZ_INC)/nspr -I$(MOZ_INC)/java -I$(MOZ_INC)/plugin
++ # not sure about -DMOZ_X11 but otheriwse some struct member don't exist...
++ CFLAGS+=-DSYSTEM_MOZILLA -DMOZ_X11
++ .ENDIF
