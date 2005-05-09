@@ -40,24 +40,28 @@ Source0:	http://go-ooo.org/packages/snap/ooo-build-HEAD-1.9.100-20050507.tar.gz
 # Source0-md5:	43aaff1f1678bb6ef5ee7ad01bea5d5e
 Source1:	http://go-ooo.org/packages/%{snap}/%{ssnap}-%{bver}-core.tar.bz2
 # Source1-md5:	47274b7ecdeeb4c21118590d5bbe84c1
-Source2:	http://go-ooo.org/packages/%{snap}/ooo_custom_images-13.tar.bz2
-# Source2-md5:	2480af7f890c8175c7f9e183a1b39ed2
-Source3:	http://go-ooo.org/packages/%{snap}/ooo_crystal_images-5.tar.bz2
-# Source3-md5:	040be799b20ccec2791e04a152d97cc3
-Source4:	http://go-ooo.org/packages/%{snap}/extras-2.tar.bz2
-# Source4-md5:	733051ebeffae5232a2eb760162da020
-Source5:	http://go-ooo.org/packages/libwpd/libwpd-0.8.0.tar.gz
-# Source5-md5:	98e59beecc112339bb78654863304c1c
-Source10:	oocalc.desktop
-Source11:	oodraw.desktop
-Source12:	ooffice.desktop
-Source13:	ooglobal.desktop
-Source14:	ooimpress.desktop
-Source15:	oomath.desktop
-Source16:	ooprinteradmin.desktop
-Source17:	oosetup.desktop
-Source18:	ooweb.desktop
-Source19:	oowriter.desktop
+Source2:	http://go-ooo.org/packages/%{snap}/%{ssnap}-%{bver}-system.tar.bz2
+# Source2-md5:	003b9447b56b4d0c2fa5c78ff434aa86
+Source3:	http://go-ooo.org/packages/%{snap}/%{ssnap}-%{bver}-binfilter.tar.bz2
+# Source3-md5:	6a717aa0e4563a032eb29c268e11aca7
+Source10:	http://go-ooo.org/packages/%{snap}/ooo_custom_images-13.tar.bz2
+# Source10-md5:	2480af7f890c8175c7f9e183a1b39ed2
+Source11:	http://go-ooo.org/packages/%{snap}/ooo_crystal_images-5.tar.bz2
+# Source11-md5:	040be799b20ccec2791e04a152d97cc3
+Source12:	http://go-ooo.org/packages/%{snap}/extras-2.tar.bz2
+# Source12-md5:	733051ebeffae5232a2eb760162da020
+Source13:	http://go-ooo.org/packages/libwpd/libwpd-0.8.0.tar.gz
+# Source13-md5:	98e59beecc112339bb78654863304c1c
+Source20:	oocalc.desktop
+Source21:	oodraw.desktop
+Source22:	ooffice.desktop
+Source23:	ooglobal.desktop
+Source24:	ooimpress.desktop
+Source25:	oomath.desktop
+Source26:	ooprinteradmin.desktop
+Source27:	oosetup.desktop
+Source28:	ooweb.desktop
+Source29:	oowriter.desktop
 
 # we keep these in ooo-build repository
 # PLD splash screen
@@ -1840,7 +1844,8 @@ zuluskim.
 
 install -d src
 # sources, icons, KDE_icons
-ln -sf %{SOURCE1} %{SOURCE2} %{SOURCE3} %{SOURCE4} %{SOURCE5} src
+ln -sf %{SOURCE1} %{SOURCE2} %{SOURCE3} \
+	%{SOURCE10} %{SOURCE11} %{SOURCE12} %{SOURCE13} src
 # help files
 ln -sf %{SOURCE400} %{SOURCE401} %{SOURCE402} %{SOURCE403} %{SOURCE404} \
 	%{SOURCE405} %{SOURCE406} %{SOURCE407} %{SOURCE408} %{SOURCE409} \
@@ -1937,7 +1942,6 @@ CONFOPTS=" \
 	--with-x \
 	--without-fonts \
 	--without-gpc \
-	--disable-binfilter \
 	--disable-epm \
 	--disable-fontooo \
 	--enable-openldap \
@@ -2002,16 +2006,16 @@ install -d $RPM_BUILD_ROOT%{_sysconfdir}/%{name}
 sed -e 's#DESTINATIONPATH=.*#DESTINATIONPATH=<home>/.openoffice#g' etc/redhat-autoresponse.conf > $RPM_BUILD_ROOT%{_sysconfdir}/%{name}/autoresponse.conf
 
 install -d $RPM_BUILD_ROOT%{_desktopdir}
-install %{SOURCE10} $RPM_BUILD_ROOT%{_desktopdir}
-install %{SOURCE11} $RPM_BUILD_ROOT%{_desktopdir}
-install %{SOURCE12} $RPM_BUILD_ROOT%{_desktopdir}
-install %{SOURCE13} $RPM_BUILD_ROOT%{_desktopdir}
-install %{SOURCE14} $RPM_BUILD_ROOT%{_desktopdir}
-install %{SOURCE15} $RPM_BUILD_ROOT%{_desktopdir}
-install %{SOURCE16} $RPM_BUILD_ROOT%{_desktopdir}
-install %{SOURCE17} $RPM_BUILD_ROOT%{_desktopdir}
-install %{SOURCE18} $RPM_BUILD_ROOT%{_desktopdir}
-install %{SOURCE19} $RPM_BUILD_ROOT%{_desktopdir}
+install %{SOURCE20} $RPM_BUILD_ROOT%{_desktopdir}
+install %{SOURCE21} $RPM_BUILD_ROOT%{_desktopdir}
+install %{SOURCE22} $RPM_BUILD_ROOT%{_desktopdir}
+install %{SOURCE23} $RPM_BUILD_ROOT%{_desktopdir}
+install %{SOURCE24} $RPM_BUILD_ROOT%{_desktopdir}
+install %{SOURCE25} $RPM_BUILD_ROOT%{_desktopdir}
+install %{SOURCE26} $RPM_BUILD_ROOT%{_desktopdir}
+install %{SOURCE27} $RPM_BUILD_ROOT%{_desktopdir}
+install %{SOURCE28} $RPM_BUILD_ROOT%{_desktopdir}
+install %{SOURCE29} $RPM_BUILD_ROOT%{_desktopdir}
 
 # Add in the regcomp tool since some people need it for 3rd party add-ons
 cp -f build/OOO_%{dfullver}/solver/%{subver}/unxlng*.pro/bin/regcomp $RPM_BUILD_ROOT%{_libdir}/%{name}/program
