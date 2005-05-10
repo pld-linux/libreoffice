@@ -1885,6 +1885,8 @@ DB_JAR="%{_javadir}/db.jar"
 export JAVA_HOME DB_JAR GCJ
 %endif
 
+DFAULT_TO_ENGLISH_FOR_PACKING=1; export DFAULT_TO_ENGLISH_FOR_PACKING
+
 RPM_BUILD_NR_THREADS="%(echo "%{__make}" | sed -e 's#.*-j\([[:space:]]*[0-9]\+\)#\1#g' | xargs)"
 [ "$RPM_BUILD_NR_THREADS" = "%{__make}" ] && RPM_BUILD_NR_THREADS=1
 
