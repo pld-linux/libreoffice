@@ -128,9 +128,11 @@ BuildRequires:	libxslt-progs
 BuildRequires:	flex
 BuildRequires:	fontconfig-devel >= 1.0.1
 BuildRequires:	freetype-devel >= 2.1
+BuildRequires:	gtk+2-devel
+BuildRequires:	kdelibs-devel
 BuildRequires:	libart_lgpl-devel
 BuildRequires:	libstdc++-devel >= 5:3.2.1
-BuildRequires:	libxml2-devel
+BuildRequires:	libxml2-devel >= 2.0
 BuildRequires:	libjpeg-devel
 BuildRequires:	nss-devel >= 1:3.10
 BuildRequires:	nspr-devel >= 1:4.6-0.20041030.3
@@ -142,6 +144,7 @@ BuildRequires:	pam-devel
 BuildRequires:	perl-base
 BuildRequires:	perl-Archive-Zip
 BuildRequires:	pkgconfig
+BuildRequires:	rpmbuild(macros) >= 1.213
 BuildRequires:	python >= 2.2
 BuildRequires:	python-devel >= 2.2
 BuildRequires:	python-modules >= 2.2
@@ -153,9 +156,6 @@ BuildRequires:	unixODBC-devel
 BuildRequires:	unzip
 BuildRequires:	zip
 BuildRequires:	zlib-devel
-BuildRequires:	kdelibs-devel
-BuildRequires:	gtk+2-devel
-BuildRequires:	libxml2-devel >= 2.0
 BuildConflicts:	java-sun = 1.4.2
 Requires(post,postun):	fontpostinst
 Requires:	%{name}-libs = %{epoch}:%{version}-%{release}
@@ -164,8 +164,8 @@ Requires:	db
 Requires:	libstdc++ >= 5:3.2.1
 Requires:	mktemp
 Requires:	sed
-ExclusiveArch:	%{ix86} ppc sparc sparcv9
 #Suggested:	chkfontpath
+ExclusiveArch:	%{ix86} ppc sparc sparcv9
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
@@ -1862,7 +1862,7 @@ if [ ! -r /proc/cpuinfo ]; then
 	exit 1
 fi
 
-%ifarch amd64 sparc64 ppc64 alpha
+%ifarch %{x8664} sparc64 ppc64 alpha
 DISTRO="PLD64"
 %else
 DISTRO="PLD"
