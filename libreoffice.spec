@@ -1885,7 +1885,7 @@ DB_JAR="%{_javadir}/db.jar"
 export JAVA_HOME DB_JAR GCJ
 %endif
 
-DFAULT_TO_ENGLISH_FOR_PACKING=1; export DFAULT_TO_ENGLISH_FOR_PACKING
+DEFAULT_TO_ENGLISH_FOR_PACKING=1; export DEFAULT_TO_ENGLISH_FOR_PACKING
 
 RPM_BUILD_NR_THREADS="%(echo "%{__make}" | sed -e 's#.*-j\([[:space:]]*[0-9]\+\)#\1#g' | xargs)"
 [ "$RPM_BUILD_NR_THREADS" = "%{__make}" ] && RPM_BUILD_NR_THREADS=1
@@ -2000,6 +2000,7 @@ sed -i -e 's#^BUILD_NCPUS=.*#BUILD_NCPUS=1#g' bin/setup
 DESTDIR=$RPM_BUILD_ROOT; export DESTDIR
 TMP="%{tmpdir}"; export TMP
 TEMP="%{tmpdir}"; export TEMP
+DEFAULT_TO_ENGLISH_FOR_PACKING=1; export DEFAULT_TO_ENGLISH_FOR_PACKING
 
 %{__make} install \
 	DESTDIR=$RPM_BUILD_ROOT
