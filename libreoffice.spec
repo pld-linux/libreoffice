@@ -19,8 +19,8 @@
 %define		rel		0
 %define		ooobver		1.9.100
 %define		snap		SRC680
-%define		bver		m100
-%define		subver		645
+%define		bver		m102
+%define		subver		680
 
 %define		fullver		%{ver}.%{rel}
 %define		dfullver	%(echo %{fullver} | tr . _)
@@ -36,18 +36,18 @@ Epoch:		1
 License:	GPL/LGPL
 Group:		X11/Applications
 # Source0:	http://go-ooo.org/packages/%{snap}/ooo-build-%{ooobver}.tar.gz
-Source0:	http://go-ooo.org/packages/snap/ooo-build-HEAD-1.9.100-20050507.tar.gz
-# Source0-md5:	43aaff1f1678bb6ef5ee7ad01bea5d5e
+Source0:	http://go-ooo.org/packages/snap/ooo-build-HEAD-1.9.100-20050519.tar.gz
+# Source0-md5:	9c41226b3dcae1aa45627ae225f34f6a
 Source1:	http://go-ooo.org/packages/%{snap}/%{ssnap}-%{bver}-core.tar.bz2
-# Source1-md5:	47274b7ecdeeb4c21118590d5bbe84c1
+# Source1-md5:	c7888ed43efd8bba80f493a9a656c291
 Source2:	http://go-ooo.org/packages/%{snap}/%{ssnap}-%{bver}-system.tar.bz2
-# Source2-md5:	003b9447b56b4d0c2fa5c78ff434aa86
+# Source2-md5:	82a1de2bea13fed611c0a62b0244ccff
 Source3:	http://go-ooo.org/packages/%{snap}/%{ssnap}-%{bver}-binfilter.tar.bz2
-# Source3-md5:	6a717aa0e4563a032eb29c268e11aca7
+# Source3-md5:	38aefd200259b180196354eff46d6f44
 Source10:	http://go-ooo.org/packages/%{snap}/ooo_custom_images-13.tar.bz2
 # Source10-md5:	2480af7f890c8175c7f9e183a1b39ed2
-Source11:	http://go-ooo.org/packages/%{snap}/ooo_crystal_images-5.tar.bz2
-# Source11-md5:	040be799b20ccec2791e04a152d97cc3
+Source11:	http://go-ooo.org/packages/%{snap}/ooo_crystal_images-6.tar.bz2
+# Source11-md5:	586d0f26b3f79d89bbb5b25b874e3df6
 Source12:	http://go-ooo.org/packages/%{snap}/extras-2.tar.bz2
 # Source12-md5:	733051ebeffae5232a2eb760162da020
 Source13:	http://go-ooo.org/packages/libwpd/libwpd-0.8.0.tar.gz
@@ -1940,7 +1940,6 @@ CONFOPTS=" \
 	--with-docdir=%{_docdir}/%{name}-%{version} \
 	--with-python=%{_bindir}/python \
 	--with-stlport4=/usr \
-	--with-lang=ALL \
 	--with-x \
 	--without-fonts \
 	--without-gpc \
@@ -2006,7 +2005,6 @@ DEFAULT_TO_ENGLISH_FOR_PACKING=1; export DEFAULT_TO_ENGLISH_FOR_PACKING
 	DESTDIR=$RPM_BUILD_ROOT
 
 install -d $RPM_BUILD_ROOT%{_sysconfdir}/%{name}
-sed -e 's#DESTINATIONPATH=.*#DESTINATIONPATH=<home>/.openoffice#g' etc/redhat-autoresponse.conf > $RPM_BUILD_ROOT%{_sysconfdir}/%{name}/autoresponse.conf
 
 install -d $RPM_BUILD_ROOT%{_desktopdir}
 install %{SOURCE20} $RPM_BUILD_ROOT%{_desktopdir}
@@ -2021,14 +2019,10 @@ install %{SOURCE28} $RPM_BUILD_ROOT%{_desktopdir}
 install %{SOURCE29} $RPM_BUILD_ROOT%{_desktopdir}
 
 # Add in the regcomp tool since some people need it for 3rd party add-ons
-cp -f build/OOO_%{dfullver}/solver/%{subver}/unxlng*.pro/bin/regcomp $RPM_BUILD_ROOT%{_libdir}/%{name}/program
+cp -f build/src%{subver}-%{bver}/solver/%{subver}/unxlng*.pro/bin/regcomp $RPM_BUILD_ROOT%{_libdir}/%{name}/program
 
 # mimelnk, icons
 install -d $RPM_BUILD_ROOT{%{_datadir}/mimelnk/application,%{_pixmapsdir}}
-
-cp -a build/OOO_%{dfullver}/sysui/desktop/gnome/icons/*/*.png $RPM_BUILD_ROOT%{_pixmapsdir}
-cp -a build/OOO_%{dfullver}/sysui/desktop/gnome/icons/*.png $RPM_BUILD_ROOT%{_pixmapsdir}
-cp -a build/OOO_%{dfullver}/sysui/desktop/kde/vnd*.desktop $RPM_BUILD_ROOT%{_datadir}/mimelnk/application
 
 rm -rf $RPM_BUILD_ROOT%{_libdir}/%{name}/share/kde
 rm -rf $RPM_BUILD_ROOT%{_libdir}/%{name}/share/cde
@@ -2132,7 +2126,6 @@ fontpostinst TTF
 %doc %{_libdir}/%{name}/*README*
 
 %dir %{_sysconfdir}/openoffice
-%config %{_sysconfdir}/openoffice/autoresponse.conf
 
 %attr(755,root,root) %{_libdir}/%{name}/install-dict
 
