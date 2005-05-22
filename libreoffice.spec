@@ -37,7 +37,7 @@ License:	GPL/LGPL
 Group:		X11/Applications
 # Source0:	http://go-ooo.org/packages/%{snap}/ooo-build-%{ooobver}.tar.gz
 Source0:	http://go-ooo.org/packages/snap/ooo-build-HEAD-1.9.100-20050521.tar.gz
-# Source0-md5:	62f4e3f8bdfb23dd204a7eb7dc295426
+# Source0-md5:	1b1087032355d77b1bf483efcd087119
 Source1:	http://go-ooo.org/packages/%{snap}/%{ssnap}-%{bver}-core.tar.bz2
 # Source1-md5:	c7888ed43efd8bba80f493a9a656c291
 Source2:	http://go-ooo.org/packages/%{snap}/%{ssnap}-%{bver}-system.tar.bz2
