@@ -2,9 +2,9 @@ diff -urN ooo-build-1.9.100.org/patches/src680/apply ooo-build-1.9.100/patches/s
 --- ooo-build-1.9.100.org/patches/src680/apply	2005-05-06 15:14:57.000000000 +0000
 +++ ooo-build-1.9.100/patches/src680/apply	2005-05-08 16:32:31.807428480 +0000
 @@ -57,6 +57,8 @@
- enable-debug.diff
- # Several KDE vclplug fixes from CWS kdeplugfixes
- cws-kdeplugfixes.diff
+ [ TemporaryHacks ]
+ # Teach linkoo about types.rdb i#49104
+ linkoo-types.diff
 +# fix mozilla
 +system-mozilla.diff
  
