@@ -17,9 +17,9 @@
 
 %define		ver		2.0
 %define		rel		0
-%define		ooobver		1.9.100
+%define		ooobver		1.9.104
 %define		snap		SRC680
-%define		bver		m102
+%define		bver		m104
 %define		subver		680
 
 %define		fullver		%{ver}.%{rel}
@@ -35,15 +35,14 @@ Release:	0.1%{?with_vfs:vfs}
 Epoch:		1
 License:	GPL/LGPL
 Group:		X11/Applications
-# Source0:	http://go-ooo.org/packages/%{snap}/ooo-build-%{ooobver}.tar.gz
-Source0:	http://go-ooo.org/packages/snap/ooo-build-HEAD-1.9.100-20050521.tar.gz
-# Source0-md5:	1b1087032355d77b1bf483efcd087119
+Source0:	http://go-ooo.org/packages/%{snap}/ooo-build-%{ooobver}.tar.gz
+# Source0-md5:	fa08452dc2a878ecfcc8604646349718
 Source1:	http://go-ooo.org/packages/%{snap}/%{ssnap}-%{bver}-core.tar.bz2
-# Source1-md5:	c7888ed43efd8bba80f493a9a656c291
+# Source1-md5:	836712abedb668695628af3ec4ce379c
 Source2:	http://go-ooo.org/packages/%{snap}/%{ssnap}-%{bver}-system.tar.bz2
-# Source2-md5:	82a1de2bea13fed611c0a62b0244ccff
+# Source2-md5:	cfa783c1e0e82c5c19a0f11e215fab50
 Source3:	http://go-ooo.org/packages/%{snap}/%{ssnap}-%{bver}-binfilter.tar.bz2
-# Source3-md5:	38aefd200259b180196354eff46d6f44
+# Source3-md5:	c6c8b7efbe3ec9b47c71143a3c12f785
 Source10:	http://go-ooo.org/packages/%{snap}/ooo_custom_images-13.tar.bz2
 # Source10-md5:	2480af7f890c8175c7f9e183a1b39ed2
 Source11:	http://go-ooo.org/packages/%{snap}/ooo_crystal_images-6.tar.bz2
@@ -1926,6 +1925,7 @@ CONFOPTS=" \
 	--enable-kde \
 	--without-binsuffix \
 	--with-installed-ooo-dirname=%{name} \
+	--with-lang=ALL \
 %if %{with java}
 	--with-java \
 	--with-jdk-home=$JAVA_HOME \
