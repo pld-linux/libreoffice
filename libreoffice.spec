@@ -2103,16 +2103,30 @@ done
 find $RPM_BUILD_ROOT -type f -name '*.so' -exec chmod 755 "{}" ";"
 chmod 755 $RPM_BUILD_ROOT%{_libdir}/%{name}/program/*
 
+rm -rf $RPM_BUILD_ROOT%{_libdir}/%{name}/share/xdg
+rm -rf $RPM_BUILD_ROOT/opt/gnome
+
+%if %{without java}
+# Java-releated bits
+rm -f $RPM_BUILD_ROOT%{_sbin}/oojvmsetup
+rm -rf $RPM_BUILD_ROOT%{_libdir}/%{name}/share/Scripts/javascript
+rm -rf $RPM_BUILD_ROOT%{_libdir}/%{name}/share/Scripts/beanshell
+rm -rf $RPM_BUILD_ROOT%{_libdir}/%{name}/share/xslt
+%endif
+
+
 %clean
 rm -rf $RPM_BUILD_ROOT
 
 %post
 umask 022
 [ ! -x /usr/bin/update-desktop-database ] || /usr/bin/update-desktop-database >/dev/null 2>&1 ||:
+[ ! -x /usr/bin/update-mime-database ] || /usr/bin/update-mime-database %{_datadir}/mime >/dev/null 2>&1 ||:
 
 %postun
 umask 022
 [ ! -x /usr/bin/update-desktop-database ] || /usr/bin/update-desktop-database >/dev/null 2>&1
+[ ! -x /usr/bin/update-mime-database ] || /usr/bin/update-mime-database %{_datadir}/mime >/dev/null 2>&1 ||:
 
 %post libs
 fontpostinst TTF
@@ -2151,6 +2165,11 @@ fontpostinst TTF
 %{_libdir}/%{name}/share/config/symbol
 %{_libdir}/%{name}/share/config/webcast
 %{_libdir}/%{name}/share/config/*.xpm
+%{_libdir}/%{name}/share/config/images.zip
+%{_libdir}/%{name}/share/config/images_crystal.zip
+%{_libdir}/%{name}/share/config/images_industrial.zip
+%{_libdir}/%{name}/share/config/soffice.cfg
+%{_libdir}/%{name}/share/config/wizard
 #%dir %{_libdir}/%{name}/share/database
 %dir %{_libdir}/%{name}/share/dict
 %dir %{_libdir}/%{name}/share/dict/ooo
@@ -2169,28 +2188,40 @@ fontpostinst TTF
 %dir %{_libdir}/%{name}/share/registry/res
 %{_libdir}/%{name}/share/registry/data
 %{_libdir}/%{name}/share/registry/schema
+%{_libdir}/%{name}/share/registry/ldap
+# split ?
+%{_libdir}/%{name}/share/registry/modules
 
 #%{_libdir}/%{name}/share/autotext/english
 # XXX: in ooo-build only template/english/wizard/bitmaps is in main?
 #%{_libdir}/%{name}/share/template/english
 %ghost %{_libdir}/%{name}/share/dict/ooo/dictionary.lst
 
-#%dir %{_libdir}/%{name}/user
-#%dir %{_libdir}/%{name}/user/autotext
-#%{_libdir}/%{name}/user/basic
-#%dir %{_libdir}/%{name}/user/config
-#%{_libdir}/%{name}/user/config/autotbl.fmt
-#%{_libdir}/%{name}/user/config/cmyk.soc
-#%{_libdir}/%{name}/user/config/gallery.soc
-#%{_libdir}/%{name}/user/config/html.soc
-#%{_libdir}/%{name}/user/config/standard.so?
-#%{_libdir}/%{name}/user/config/sun-color.soc
-#%{_libdir}/%{name}/user/config/web.soc
-#%{_libdir}/%{name}/user/database
-#%{_libdir}/%{name}/user/gallery
-#%{_libdir}/%{name}/user/psprint
+%dir %{_libdir}/%{name}/presets
+%dir %{_libdir}/%{name}/presets/autotext
+%{_libdir}/%{name}/presets/autotext/mytexts.bau
+%{_libdir}/%{name}/presets/basic
+%dir %{_libdir}/%{name}/presets/config
+%{_libdir}/%{name}/presets/config/autotbl.fmt
+%{_libdir}/%{name}/presets/config/arrowhd.soe
+%{_libdir}/%{name}/presets/config/classic.sog
+%{_libdir}/%{name}/presets/config/cmyk.soc
+%{_libdir}/%{name}/presets/config/gallery.soc
+%{_libdir}/%{name}/presets/config/hatching.soh
+%{_libdir}/%{name}/presets/config/html.soc
+%{_libdir}/%{name}/presets/config/modern.sog
+%{_libdir}/%{name}/presets/config/palette.soc
+%{_libdir}/%{name}/presets/config/standard.so?
+%{_libdir}/%{name}/presets/config/styles.sod
+%{_libdir}/%{name}/presets/config/sun-color.soc
+%{_libdir}/%{name}/presets/config/web.soc
+%{_libdir}/%{name}/presets/database
+%{_libdir}/%{name}/presets/gallery
+%{_libdir}/%{name}/presets/psprint
 
-#%{_libdir}/%{name}/user/autotext/english
+#%{_libdir}/%{name}/presets/autotext/english
+
+/etc/bash_completion.d/*
 
 # Programs
 %attr(755,root,root) %{_bindir}/oo*
@@ -2223,19 +2254,44 @@ fontpostinst TTF
 #%attr(755,root,root) %{_libdir}/%{name}/program/svcard
 #%attr(755,root,root) %{_libdir}/%{name}/program/sweb
 %attr(755,root,root) %{_libdir}/%{name}/program/swriter
+%attr(755,root,root) %{_libdir}/%{name}/program/open-url
+%attr(755,root,root) %{_libdir}/%{name}/program/nsplugin
+%attr(755,root,root) %{_libdir}/%{name}/program/gengal
+%attr(755,root,root) %{_libdir}/%{name}/program/configimport
+%attr(755,root,root) %{_libdir}/%{name}/program/sbase
+%attr(755,root,root) %{_libdir}/%{name}/program/senddoc
+%attr(755,root,root) %{_libdir}/%{name}/program/setofficelang
+%attr(755,root,root) %{_libdir}/%{name}/program/unopkg
+%attr(755,root,root) %{_libdir}/%{name}/program/uri-encode
+%attr(755,root,root) %{_libdir}/%{name}/program/viewdoc
 %attr(755,root,root) %{_libdir}/%{name}/program/*.py
 
 %if %{with java}
 %attr(755,root,root) %{_sbindir}/oojvmsetup
 %attr(755,root,root) %{_libdir}/%{name}/program/javaldx
 %attr(755,root,root) %{_libdir}/%{name}/program/jvmsetup
+%attr(755,root,root) %{_libdir}/%{name}/program/java-set-classpath
+%attr(755,root,root) %{_libdir}/%{name}/program/jvmfwk3rc
 %{_libdir}/%{name}/program/classes
+%{_libdir}/%{name}/share/Scripts/beanshell
+%{_libdir}/%{name}/share/Scripts/javascript
 %{_libdir}/%{name}/share/xslt
 %endif
 
+%dir %{_libdir}/%{name}/share/Scripts
+%{_libdir}/%{name}/share/Scripts/python
+
+%{_datadir}/mime/packages/openoffice.xml
 %{_desktopdir}/*.desktop
 %{_pixmapsdir}/*.png
 %{_mandir}/man1/o*.1*
+
+# en-US
+%{_libdir}/%{name}/share/autotext/en-US
+%{_libdir}/%{name}/share/registry/res/en-US
+%{_libdir}/%{name}/share/template/en-US
+%{_libdir}/%{name}/share/wordbook/en-US
+%{_libdir}/%{name}/program/resource/*en-US.res
 
 %files libs
 %defattr(644,root,root,755)
@@ -2258,10 +2314,12 @@ fontpostinst TTF
 %attr(755,root,root) %{_libdir}/%{name}/program/kdefilepicker
 %attr(755,root,root) %{_libdir}/%{name}/program/libvclplug_kde*.so
 %attr(755,root,root) %{_libdir}/%{name}/program/libfps_kde.so
+%attr(755,root,root) %{_libdir}/%{name}/program/kde-open-url
 #%dir %{_libdir}/%{name}/program/resource.kde
 
 %files libs-gtk
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_libdir}/%{name}/program/libvclplug_gtk*.so
+%attr(755,root,root) %{_libdir}/%{name}/program/gnome-open-url
 #%attr(755,root,root) %{_libdir}/%{name}/program/libfps_gnome.so
 #%dir %{_libdir}/%{name}/program/resource.gnome
