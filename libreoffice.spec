@@ -2048,6 +2048,7 @@ rm -f $RPM_BUILD_ROOT%{_libdir}/%{name}/program/crash_report.bin
 rm -f $RPM_BUILD_ROOT%{_datadir}/applications/openoffice-setup.desktop
 rm -f $RPM_BUILD_ROOT%{_datadir}/applications/openoffice-printeradmin.desktop
 
+
 rm -rf $RPM_BUILD_ROOT%{_datadir}/applnk
 rm -rf $RPM_BUILD_ROOT%{_datadir}/gnome
 
@@ -2055,6 +2056,7 @@ rm -rf $RPM_BUILD_ROOT%{_datadir}/gnome
 
 # some libs creep in somehow
 rm -f $RPM_BUILD_ROOT%{_libdir}/%{name}/program/libstl*.so*
+rm -f $RPM_BUILD_ROOT%{_libdir}/%{name}/program/libsndfile*
 
 rm -f $RPM_BUILD_ROOT%{_libdir}/%{name}/program/sopatchlevel.sh
 perl -pi -e 's/^[       ]*LD_LIBRARY_PATH/# LD_LIBRARY_PATH/;s/export LD_LIBRARY_PATH/# export LD_LIBRARY_PATH/' \
