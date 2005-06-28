@@ -17,9 +17,9 @@
 
 %define		ver		2.0
 %define		rel		0
-%define		ooobver		1.9.104
+%define		ooobver		1.9.110
 %define		snap		SRC680
-%define		bver		m104
+%define		bver		m110
 %define		subver		680
 
 %define		fullver		%{ver}.%{rel}
@@ -36,13 +36,13 @@ Epoch:		1
 License:	GPL/LGPL
 Group:		X11/Applications
 Source0:	http://go-ooo.org/packages/%{snap}/ooo-build-%{ooobver}.tar.gz
-# Source0-md5:	fa08452dc2a878ecfcc8604646349718
+# Source0-md5:	cecd438bef4504211d7a26c007544e14
 Source1:	http://go-ooo.org/packages/%{snap}/%{ssnap}-%{bver}-core.tar.bz2
-# Source1-md5:	836712abedb668695628af3ec4ce379c
+# Source1-md5:	ab74a68aefc8c20967df9ff18bdf453e
 Source2:	http://go-ooo.org/packages/%{snap}/%{ssnap}-%{bver}-system.tar.bz2
-# Source2-md5:	cfa783c1e0e82c5c19a0f11e215fab50
+# Source2-md5:	b83cf8ae59738baa5dcc27804433f2ba
 Source3:	http://go-ooo.org/packages/%{snap}/%{ssnap}-%{bver}-binfilter.tar.bz2
-# Source3-md5:	c6c8b7efbe3ec9b47c71143a3c12f785
+# Source3-md5:	2d51f348e6e3a4247cf6297fe77cbf39
 Source10:	http://go-ooo.org/packages/%{snap}/ooo_custom_images-13.tar.bz2
 # Source10-md5:	2480af7f890c8175c7f9e183a1b39ed2
 Source11:	http://go-ooo.org/packages/%{snap}/ooo_crystal_images-6.tar.bz2
@@ -1839,7 +1839,7 @@ zuluskim.
 
 %prep
 %setup -q -n ooo-build-%{ooobver}
-%patch0 -p1
+#%patch0 -p1
 
 install -d src
 # sources, icons, KDE_icons
