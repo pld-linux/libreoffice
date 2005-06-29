@@ -10,6 +10,7 @@
 #	- 6 user/config/*.so? files shared between -i18n-en and -i18n-sl
 #	- remove oohtml symlink (there is ooweb),
 #	- add ooglobal symlink and it's ooo-wrapper entry (among calc|draw|impress|math|web|writer)
+# 	- add lang: xh, tn, th, kn-IN, km, hi-IN, eo, eu, en-GB (?)
 
 # Conditional build:
 %bcond_with	java		# Java support
@@ -31,7 +32,7 @@ Summary:	OpenOffice.org - powerful office suite
 Summary(pl):	OpenOffice.org - potê¿ny pakiet biurowy
 Name:		openoffice.org
 Version:	%{fullver}
-Release:	0.1%{?with_vfs:vfs}
+Release:	0.2%{?with_vfs:vfs}
 Epoch:		1
 License:	GPL/LGPL
 Group:		X11/Applications
@@ -250,7 +251,7 @@ Afrikaans language.
 Ten pakiet dostarcza zasoby zawieraj±ce menu i okna dialogowe w jêzyku
 afrykanerskim.
 
-#%files i18n-af-gtk -f af.lang.gnome
+%files i18n-af-gtk -f af.lang.gnome
 
 %package i18n-ar-gtk
 Summary:	OpenOffice.org - interface in Arabic language
@@ -267,7 +268,7 @@ Arabic language.
 Ten pakiet dostarcza zasoby zawieraj±ce menu i okna dialogowe w jêzyku
 arabskim.
 
-#%files i18n-ar-gtk -f ar.lang.gnome
+%files i18n-ar-gtk -f ar.lang.gnome
 
 %package i18n-bg-gtk
 Summary:	OpenOffice.org - interface in Bulgarian language
@@ -301,7 +302,7 @@ Catalan language.
 Ten pakiet dostarcza zasoby zawieraj±ce menu i okna dialogowe w jêzyku
 kataloñskim.
 
-#%files i18n-ca-gtk -f ca.lang.gnome
+%files i18n-ca-gtk -f ca.lang.gnome
 
 %package i18n-cs-gtk
 Summary:	OpenOffice.org - interface in Czech language
@@ -318,7 +319,7 @@ Czech language.
 Ten pakiet dostarcza zasoby zawieraj±ce menu i okna dialogowe w jêzyku
 czeskim.
 
-#%files i18n-cs-gtk -f cs.lang.gnome
+%files i18n-cs-gtk -f cs.lang.gnome
 
 %package i18n-cy-gtk
 Summary:	OpenOffice.org - interface in Cymraeg language
@@ -335,7 +336,7 @@ Cymraeg language.
 Ten pakiet dostarcza zasoby zawieraj±ce menu i okna dialogowe w jêzyku
 walijskim.
 
-#%files i18n-cy-gtk -f cy.lang.gnome
+%files i18n-cy-gtk -f cy.lang.gnome
 
 %package i18n-da-gtk
 Summary:	OpenOffice.org - interface in Danish language
@@ -352,7 +353,7 @@ Danish language.
 Ten pakiet dostarcza zasoby zawieraj±ce menu i okna dialogowe w jêzyku
 duñskim.
 
-#%files i18n-da-gtk -f da.lang.gnome
+%files i18n-da-gtk -f da.lang.gnome
 
 %package i18n-de-gtk
 Summary:	OpenOffice.org - interface in German language
@@ -369,7 +370,7 @@ German language.
 Ten pakiet dostarcza zasoby zawieraj±ce menu i okna dialogowe w jêzyku
 niemieckim.
 
-#%files i18n-de-gtk -f de.lang.gnome
+%files i18n-de-gtk -f de.lang.gnome
 
 %package i18n-el-gtk
 Summary:	OpenOffice.org - interface in Greek language
@@ -386,7 +387,7 @@ Greek language.
 Ten pakiet dostarcza zasoby zawieraj±ce menu i okna dialogowe w jêzyku
 greckim.
 
-#%files i18n-el-gtk -f el.lang.gnome
+%files i18n-el-gtk -f el.lang.gnome
 
 %package i18n-es-gtk
 Summary:	OpenOffice.org - interface in Spanish language
@@ -420,7 +421,7 @@ Estonian language.
 Ten pakiet dostarcza zasoby zawieraj±ce menu i okna dialogowe w jêzyku
 estoñskim.
 
-#%files i18n-et-gtk -f et.lang.gnome
+%files i18n-et-gtk -f et.lang.gnome
 
 %package i18n-fi-gtk
 Summary:	OpenOffice.org - interface in Finnish language
@@ -437,7 +438,7 @@ Finnish language.
 Ten pakiet dostarcza zasoby zawieraj±ce menu i okna dialogowe w jêzyku
 fiñskim.
 
-#%files i18n-fi-gtk -f fi.lang.gnome
+%files i18n-fi-gtk -f fi.lang.gnome
 
 %package i18n-fo-gtk
 Summary:	OpenOffice.org - interface in Faroese language
@@ -471,7 +472,7 @@ French language.
 Ten pakiet dostarcza zasoby zawieraj±ce menu i okna dialogowe w jêzyku
 francuskim.
 
-#%files i18n-fr-gtk -f fr.lang.gnome
+%files i18n-fr-gtk -f fr.lang.gnome
 
 %package i18n-ga-gtk
 Summary:	OpenOffice.org - interface in Irish language
@@ -522,7 +523,7 @@ Hebrew language.
 Ten pakiet dostarcza zasoby zawieraj±ce menu i okna dialogowe w jêzyku
 hebrajskim.
 
-#%files i18n-he-gtk -f he.lang.gnome
+%files i18n-he-gtk -f he.lang.gnome
 
 %package i18n-hi-gtk
 Summary:	OpenOffice.org - interface in Hindi language
@@ -573,7 +574,7 @@ Hungarian language.
 Ten pakiet dostarcza zasoby zawieraj±ce menu i okna dialogowe w jêzyku
 wêgierskim.
 
-#%files i18n-hu-gtk -f hu.lang.gnome
+%files i18n-hu-gtk -f hu.lang.gnome
 
 %package i18n-ia-gtk
 Summary:	OpenOffice.org - interface in Interlingua language
@@ -624,7 +625,7 @@ Italian language.
 Ten pakiet dostarcza zasoby zawieraj±ce menu i okna dialogowe w jêzyku
 w³oskim.
 
-#%files i18n-it-gtk -f it.lang.gnome
+%files i18n-it-gtk -f it.lang.gnome
 
 %package i18n-ja-gtk
 Summary:	OpenOffice.org - interface in Japan language
@@ -641,7 +642,7 @@ Japan language.
 Ten pakiet dostarcza zasoby zawieraj±ce menu i okna dialogowe w jêzyku
 japoñskim.
 
-#%files i18n-ja-gtk -f ja.lang.gnome
+%files i18n-ja-gtk -f ja.lang.gnome
 
 %package i18n-ko-gtk
 Summary:	OpenOffice.org - interface in Korean language
@@ -658,7 +659,7 @@ Korean language.
 Ten pakiet dostarcza zasoby zawieraj±ce menu i okna dialogowe w jêzyku
 koreañskim.
 
-#%files i18n-ko-gtk -f ko.lang.gnome
+%files i18n-ko-gtk -f ko.lang.gnome
 
 %package i18n-la-gtk
 Summary:	OpenOffice.org - interface in Latin language
@@ -760,7 +761,7 @@ Norwegian Bokmaal language.
 Ten pakiet dostarcza zasoby zawieraj±ce menu i okna dialogowe w jêzyku
 norweskim w odmianie Bokmaal.
 
-#%files i18n-nb-gtk -f nb.lang.gnome
+%files i18n-nb-gtk -f nb.lang.gnome
 
 %package i18n-nl-gtk
 Summary:	OpenOffice.org - interface in Dutch language
@@ -777,7 +778,7 @@ Dutch language.
 Ten pakiet dostarcza zasoby zawieraj±ce menu i okna dialogowe w jêzyku
 holenderskim.
 
-#%files i18n-nl-gtk -f nl.lang.gnome
+%files i18n-nl-gtk -f nl.lang.gnome
 
 %package i18n-nn-gtk
 Summary:	OpenOffice.org - interface in Norwegian Nynorsk language
@@ -794,7 +795,7 @@ Norwegian Nynorsk language.
 Ten pakiet dostarcza zasoby zawieraj±ce menu i okna dialogowe w jêzyku
 norweskim w odmianie Nynorsk.
 
-#%files i18n-nn-gtk -f nn.lang.gnome
+%files i18n-nn-gtk -f nn.lang.gnome
 
 %package i18n-nso-gtk
 Summary:	OpenOffice.org - interface in Northern Sotho language
@@ -811,7 +812,7 @@ Northern Sotho language.
 Ten pakiet dostarcza zasoby zawieraj±ce menu i okna dialogowe w jêzyku
 ludu Soto.
 
-#%files i18n-nso-gtk -f ns.lang.gnome
+%files i18n-nso-gtk -f ns.lang.gnome
 
 %package i18n-pl-gtk
 Summary:	OpenOffice.org - interface in Polish language
@@ -828,7 +829,7 @@ Polish language.
 Ten pakiet dostarcza zasoby zawieraj±ce menu i okna dialogowe w jêzyku
 polskim.
 
-#%files i18n-pl-gtk -f pl.lang.gnome
+%files i18n-pl-gtk -f pl.lang.gnome
 
 %package i18n-pt-gtk
 Summary:	OpenOffice.org - interface in Portuguese language
@@ -845,7 +846,7 @@ Portuguese language.
 Ten pakiet dostarcza zasoby zawieraj±ce menu i okna dialogowe w jêzyku
 portugalskim.
 
-#%files i18n-pt-gtk -f pt.lang.gnome
+%files i18n-pt-gtk -f pt.lang.gnome
 
 %package i18n-pt_BR-gtk
 Summary:	OpenOffice.org - interface in Brazilian Portuguese language
@@ -862,7 +863,7 @@ Brazilian Portuguese language.
 Ten pakiet dostarcza zasoby zawieraj±ce menu i okna dialogowe w jêzyku
 portugalskim dla Brazylii.
 
-#%files i18n-pt_BR-gtk -f pt-BR.lang.gnome
+%files i18n-pt_BR-gtk -f pt-BR.lang.gnome
 
 %package i18n-ro-gtk
 Summary:	OpenOffice.org - interface in Romanian language
@@ -896,7 +897,7 @@ Russian language.
 Ten pakiet dostarcza zasoby zawieraj±ce menu i okna dialogowe w jêzyku
 rosyjskim.
 
-#%files i18n-ru-gtk -f ru.lang.gnome
+%files i18n-ru-gtk -f ru.lang.gnome
 
 %package i18n-sk-gtk
 Summary:	OpenOffice.org - interface in Slovak language
@@ -913,7 +914,7 @@ Slovak language.
 Ten pakiet dostarcza zasoby zawieraj±ce menu i okna dialogowe w jêzyku
 s³owackim.
 
-#%files i18n-sk-gtk -f sk.lang.gnome
+%files i18n-sk-gtk -f sk.lang.gnome
 
 %package i18n-sl-gtk
 Summary:	OpenOffice.org - interface in Slovenian language
@@ -930,7 +931,7 @@ Slovenian language.
 Ten pakiet dostarcza zasoby zawieraj±ce menu i okna dialogowe w jêzyku
 s³oweñskim.
 
-#%files i18n-sl-gtk -f sl.lang.gnome
+%files i18n-sl-gtk -f sl.lang.gnome
 
 %package i18n-sv-gtk
 Summary:	OpenOffice.org - interface in Swedish language
@@ -947,7 +948,7 @@ Swedish language.
 Ten pakiet dostarcza zasoby zawieraj±ce menu i okna dialogowe w jêzyku
 szwedzkim.
 
-#%files i18n-sv-gtk -f sv.lang.gnome
+%files i18n-sv-gtk -f sv.lang.gnome
 
 %package i18n-tr-gtk
 Summary:	OpenOffice.org - interface in Turkish language
@@ -964,7 +965,7 @@ Turkish language.
 Ten pakiet dostarcza zasoby zawieraj±ce menu i okna dialogowe w jêzyku
 tureckim.
 
-#%files i18n-tr-gtk -f tr.lang.gnome
+%files i18n-tr-gtk -f tr.lang.gnome
 
 %package i18n-uk-gtk
 Summary:	OpenOffice.org - interface in Ukrainian language
@@ -999,7 +1000,7 @@ Chinese language for China.
 Ten pakiet dostarcza zasoby zawieraj±ce menu i okna dialogowe w jêzyku
 chiñskim dla Chin.
 
-#%files i18n-zh_CN-gtk -f zh-CN.lang.gnome
+%files i18n-zh_CN-gtk -f zh-CN.lang.gnome
 
 %package i18n-zh_TW-gtk
 Summary:	OpenOffice.org - interface in Chinese language for Taiwan
@@ -1017,7 +1018,7 @@ Chinese language for Taiwan.
 Ten pakiet dostarcza zasoby zawieraj±ce menu i okna dialogowe w jêzyku
 chiñskim dla Tajwanu.
 
-#%files i18n-zh_TW-gtk -f zh-TW.lang.gnome
+%files i18n-zh_TW-gtk -f zh-TW.lang.gnome
 
 %package i18n-zu-gtk
 Summary:	OpenOffice.org - interface in Zulu language
@@ -1034,7 +1035,7 @@ Zulu language.
 Ten pakiet dostarcza zasoby zawieraj±ce menu i okna dialogowe w jêzyku
 zuluskim.
 
-#%files i18n-zu-gtk -f zu.lang.gnome
+%files i18n-zu-gtk -f zu.lang.gnome
 
 %package i18n-af-kde
 Summary:	OpenOffice.org - interface in Afrikaans language
@@ -1051,7 +1052,7 @@ Afrikaans language.
 Ten pakiet dostarcza zasoby zawieraj±ce menu i okna dialogowe w jêzyku
 afrykanerskim.
 
-#%files i18n-af-kde -f af.lang.kde
+%files i18n-af-kde -f af.lang.kde
 
 %package i18n-ar-kde
 Summary:	OpenOffice.org - interface in Arabic language
@@ -1068,7 +1069,7 @@ Arabic language.
 Ten pakiet dostarcza zasoby zawieraj±ce menu i okna dialogowe w jêzyku
 arabskim.
 
-#%files i18n-ar-kde -f ar.lang.kde
+%files i18n-ar-kde -f ar.lang.kde
 
 %package i18n-bg-kde
 Summary:	OpenOffice.org - interface in Bulgarian language
@@ -1102,7 +1103,7 @@ Catalan language.
 Ten pakiet dostarcza zasoby zawieraj±ce menu i okna dialogowe w jêzyku
 kataloñskim.
 
-#%files i18n-ca-kde -f ca.lang.kde
+%files i18n-ca-kde -f ca.lang.kde
 
 %package i18n-cs-kde
 Summary:	OpenOffice.org - interface in Czech language
@@ -1119,7 +1120,7 @@ Czech language.
 Ten pakiet dostarcza zasoby zawieraj±ce menu i okna dialogowe w jêzyku
 czeskim.
 
-#%files i18n-cs-kde -f cs.lang.kde
+%files i18n-cs-kde -f cs.lang.kde
 
 %package i18n-cy-kde
 Summary:	OpenOffice.org - interface in Cymraeg language
@@ -1136,7 +1137,7 @@ Cymraeg language.
 Ten pakiet dostarcza zasoby zawieraj±ce menu i okna dialogowe w jêzyku
 walijskim.
 
-#%files i18n-cy-kde -f cy.lang.kde
+%files i18n-cy-kde -f cy.lang.kde
 
 %package i18n-da-kde
 Summary:	OpenOffice.org - interface in Danish language
@@ -1153,7 +1154,7 @@ Danish language.
 Ten pakiet dostarcza zasoby zawieraj±ce menu i okna dialogowe w jêzyku
 duñskim.
 
-#%files i18n-da-kde -f da.lang.kde
+%files i18n-da-kde -f da.lang.kde
 
 %package i18n-de-kde
 Summary:	OpenOffice.org - interface in German language
@@ -1170,7 +1171,7 @@ German language.
 Ten pakiet dostarcza zasoby zawieraj±ce menu i okna dialogowe w jêzyku
 niemieckim.
 
-#%files i18n-de-kde -f de.lang.kde
+%files i18n-de-kde -f de.lang.kde
 
 %package i18n-el-kde
 Summary:	OpenOffice.org - interface in Greek language
@@ -1187,7 +1188,7 @@ Greek language.
 Ten pakiet dostarcza zasoby zawieraj±ce menu i okna dialogowe w jêzyku
 greckim.
 
-#%files i18n-el-kde -f el.lang.kde
+%files i18n-el-kde -f el.lang.kde
 
 %package i18n-es-kde
 Summary:	OpenOffice.org - interface in Spanish language
@@ -1204,7 +1205,7 @@ Spanish language.
 Ten pakiet dostarcza zasoby zawieraj±ce menu i okna dialogowe w jêzyku
 hiszpañskim.
 
-#%files i18n-es-kde -f es.lang.kde
+%files i18n-es-kde -f es.lang.kde
 
 %package i18n-et-kde
 Summary:	OpenOffice.org - interface in Estonian language
@@ -1221,7 +1222,7 @@ Estonian language.
 Ten pakiet dostarcza zasoby zawieraj±ce menu i okna dialogowe w jêzyku
 estoñskim.
 
-#%files i18n-et-kde -f et.lang.kde
+%files i18n-et-kde -f et.lang.kde
 
 %package i18n-fi-kde
 Summary:	OpenOffice.org - interface in Finnish language
@@ -1238,7 +1239,7 @@ Finnish language.
 Ten pakiet dostarcza zasoby zawieraj±ce menu i okna dialogowe w jêzyku
 fiñskim.
 
-#%files i18n-fi-kde -f fi.lang.kde
+%files i18n-fi-kde -f fi.lang.kde
 
 %package i18n-fo-kde
 Summary:	OpenOffice.org - interface in Faroese language
@@ -1272,7 +1273,7 @@ French language.
 Ten pakiet dostarcza zasoby zawieraj±ce menu i okna dialogowe w jêzyku
 francuskim.
 
-#%files i18n-fr-kde -f fr.lang.kde
+%files i18n-fr-kde -f fr.lang.kde
 
 %package i18n-ga-kde
 Summary:	OpenOffice.org - interface in Irish language
@@ -1323,7 +1324,7 @@ Hebrew language.
 Ten pakiet dostarcza zasoby zawieraj±ce menu i okna dialogowe w jêzyku
 hebrajskim.
 
-#%files i18n-he-kde -f he.lang.kde
+%files i18n-he-kde -f he.lang.kde
 
 %package i18n-hi-kde
 Summary:	OpenOffice.org - interface in Hindi language
@@ -1374,7 +1375,7 @@ Hungarian language.
 Ten pakiet dostarcza zasoby zawieraj±ce menu i okna dialogowe w jêzyku
 wêgierskim.
 
-#%files i18n-hu-kde -f hu.lang.kde
+%files i18n-hu-kde -f hu.lang.kde
 
 %package i18n-ia-kde
 Summary:	OpenOffice.org - interface in Interlingua language
@@ -1425,7 +1426,7 @@ Italian language.
 Ten pakiet dostarcza zasoby zawieraj±ce menu i okna dialogowe w jêzyku
 w³oskim.
 
-#%files i18n-it-kde -f it.lang.kde
+%files i18n-it-kde -f it.lang.kde
 
 %package i18n-ja-kde
 Summary:	OpenOffice.org - interface in Japan language
@@ -1442,7 +1443,7 @@ Japan language.
 Ten pakiet dostarcza zasoby zawieraj±ce menu i okna dialogowe w jêzyku
 japoñskim.
 
-#%files i18n-ja-kde -f ja.lang.kde
+%files i18n-ja-kde -f ja.lang.kde
 
 %package i18n-ko-kde
 Summary:	OpenOffice.org - interface in Korean language
@@ -1459,7 +1460,7 @@ Korean language.
 Ten pakiet dostarcza zasoby zawieraj±ce menu i okna dialogowe w jêzyku
 koreañskim.
 
-#%files i18n-ko-kde -f ko.lang.kde
+%files i18n-ko-kde -f ko.lang.kde
 
 %package i18n-la-kde
 Summary:	OpenOffice.org - interface in Latin language
@@ -1561,7 +1562,7 @@ Norwegian Bokmaal language.
 Ten pakiet dostarcza zasoby zawieraj±ce menu i okna dialogowe w jêzyku
 norweskim w odmianie Bokmaal.
 
-#%files i18n-nb-kde -f nb.lang.kde
+%files i18n-nb-kde -f nb.lang.kde
 
 %package i18n-nl-kde
 Summary:	OpenOffice.org - interface in Dutch language
@@ -1578,7 +1579,7 @@ Dutch language.
 Ten pakiet dostarcza zasoby zawieraj±ce menu i okna dialogowe w jêzyku
 holenderskim.
 
-#%files i18n-nl-kde -f nl.lang.kde
+%files i18n-nl-kde -f nl.lang.kde
 
 %package i18n-nn-kde
 Summary:	OpenOffice.org - interface in Norwegian Nynorsk language
@@ -1595,7 +1596,7 @@ Norwegian Nynorsk language.
 Ten pakiet dostarcza zasoby zawieraj±ce menu i okna dialogowe w jêzyku
 norweskim w odmianie Nynorsk.
 
-#%files i18n-nn-kde -f nn.lang.kde
+%files i18n-nn-kde -f nn.lang.kde
 
 %package i18n-nso-kde
 Summary:	OpenOffice.org - interface in Northern Sotho language
@@ -1612,7 +1613,7 @@ Northern Sotho language.
 Ten pakiet dostarcza zasoby zawieraj±ce menu i okna dialogowe w jêzyku
 ludu Soto.
 
-#%files i18n-nso-kde -f ns.lang.kde
+%files i18n-nso-kde -f ns.lang.kde
 
 %package i18n-pl-kde
 Summary:	OpenOffice.org - interface in Polish language
@@ -1629,7 +1630,7 @@ Polish language.
 Ten pakiet dostarcza zasoby zawieraj±ce menu i okna dialogowe w jêzyku
 polskim.
 
-#%files i18n-pl-kde -f pl.lang.kde
+%files i18n-pl-kde -f pl.lang.kde
 
 %package i18n-pt-kde
 Summary:	OpenOffice.org - interface in Portuguese language
@@ -1646,7 +1647,7 @@ Portuguese language.
 Ten pakiet dostarcza zasoby zawieraj±ce menu i okna dialogowe w jêzyku
 portugalskim.
 
-#%files i18n-pt-kde -f pt.lang.kde
+%files i18n-pt-kde -f pt.lang.kde
 
 %package i18n-pt_BR-kde
 Summary:	OpenOffice.org - interface in Brazilian Portuguese language
@@ -1663,7 +1664,7 @@ Brazilian Portuguese language.
 Ten pakiet dostarcza zasoby zawieraj±ce menu i okna dialogowe w jêzyku
 portugalskim dla Brazylii.
 
-#%files i18n-pt_BR-kde -f pt-BR.lang.kde
+%files i18n-pt_BR-kde -f pt-BR.lang.kde
 
 %package i18n-ro-kde
 Summary:	OpenOffice.org - interface in Romanian language
@@ -1697,7 +1698,7 @@ Russian language.
 Ten pakiet dostarcza zasoby zawieraj±ce menu i okna dialogowe w jêzyku
 rosyjskim.
 
-#%files i18n-ru-kde -f ru.lang.kde
+%files i18n-ru-kde -f ru.lang.kde
 
 %package i18n-sk-kde
 Summary:	OpenOffice.org - interface in Slovak language
@@ -1714,7 +1715,7 @@ Slovak language.
 Ten pakiet dostarcza zasoby zawieraj±ce menu i okna dialogowe w jêzyku
 s³owackim.
 
-#%files i18n-sk-kde -f sk.lang.kde
+%files i18n-sk-kde -f sk.lang.kde
 
 %package i18n-sl-kde
 Summary:	OpenOffice.org - interface in Slovenian language
@@ -1731,7 +1732,7 @@ Slovenian language.
 Ten pakiet dostarcza zasoby zawieraj±ce menu i okna dialogowe w jêzyku
 s³oweñskim.
 
-#%files i18n-sl-kde -f sl.lang.kde
+%files i18n-sl-kde -f sl.lang.kde
 
 %package i18n-sv-kde
 Summary:	OpenOffice.org - interface in Swedish language
@@ -1748,7 +1749,7 @@ Swedish language.
 Ten pakiet dostarcza zasoby zawieraj±ce menu i okna dialogowe w jêzyku
 szwedzkim.
 
-#%files i18n-sv-kde -f sv.lang.kde
+%files i18n-sv-kde -f sv.lang.kde
 
 %package i18n-tr-kde
 Summary:	OpenOffice.org - interface in Turkish language
@@ -1765,7 +1766,7 @@ Turkish language.
 Ten pakiet dostarcza zasoby zawieraj±ce menu i okna dialogowe w jêzyku
 tureckim.
 
-#%files i18n-tr-kde -f tr.lang.kde
+%files i18n-tr-kde -f tr.lang.kde
 
 %package i18n-uk-kde
 Summary:	OpenOffice.org - interface in Ukrainian language
@@ -1800,7 +1801,7 @@ Chinese language for China.
 Ten pakiet dostarcza zasoby zawieraj±ce menu i okna dialogowe w jêzyku
 chiñskim dla Chin.
 
-#%files i18n-zh_CN-kde -f zh-CN.lang.kde
+%files i18n-zh_CN-kde -f zh-CN.lang.kde
 
 %package i18n-zh_TW-kde
 Summary:	OpenOffice.org - interface in Chinese language for Taiwan
@@ -1818,7 +1819,7 @@ Chinese language for Taiwan.
 Ten pakiet dostarcza zasoby zawieraj±ce menu i okna dialogowe w jêzyku
 chiñskim dla Tajwanu.
 
-#%files i18n-zh_TW-kde -f zh-TW.lang.kde
+%files i18n-zh_TW-kde -f zh-TW.lang.kde
 
 %package i18n-zu-kde
 Summary:	OpenOffice.org - interface in Zulu language
@@ -1835,7 +1836,7 @@ Zulu language.
 Ten pakiet dostarcza zasoby zawieraj±ce menu i okna dialogowe w jêzyku
 zuluskim.
 
-#%files i18n-zu-kde -f zu.lang.kde
+%files i18n-zu-kde -f zu.lang.kde
 
 %prep
 %setup -q -n ooo-build-%{ooobver}
@@ -2085,20 +2086,38 @@ for lang in $langlist; do
 	if [ -f ${lfile} ]; then
 		longlang="`bin/openoffice-xlate-lang -l ${lang}`"
 		# share/*/${longlang}
-		grep "^%%dir.*/${longlang}/\$" ${lfile} > tmp.lang
+		grep "^%%dir.*/${longlang}/\$" ${lfile} > tmp.lang || :
 		# share/registry/res/${lang} (but en-US for en)
-		grep "^%%dir.*/res/${lang}[^/]*/\$" ${lfile} >> tmp.lang
+		grep "^%%dir.*/res/${lang}[^/]*/\$" ${lfile} >> tmp.lang || :
 		# ... translate %dir into whole tree, handle special wordbook/english case
-		sed -e 's,^%%dir ,,;s,\(wordbook/english/\)$,\1soffice.dic,;s,/$,,' tmp.lang >> ${lang}.lang
+		sed -e 's,^%%dir ,,;s,\(wordbook/english/\)$,\1soffice.dic,;s,/$,,' tmp.lang >> ${lang}.lang || :
 		# share/autocorr/acor${somecodes}.dat (if exist)
 		grep '/autocorr/acor.*dat$' ${lfile} >> ${lang}.lang || :
 		# user/config/* (if exist, without parent directory)
 		grep '/user/config/..*' ${lfile} >> ${lang}.lang || :
+		grep "/licenses/LICENSE_${lang}" ${lfile} >> ${lang}.lang || :
+		grep "/readmes/README_${lang}" ${lfile} >> ${lang}.lang || :
+		# lib/openoffice.org/presers/config/*.so?
+		grep "/presets/config/.*_${lang}.so?$" ${lfile} >> ${lang}.lang || :
+		# lib/openoffice.org/program/resource/*.res
+		grep "/program/resource/.*${lang}.res$" ${lfile} >> ${lang}.lang || :
+		# lib/openoffice.org/share/autocorr/*.dat
+		grep "/share/autocorr/.*${lang}.dat$" ${lfile} >> ${lang}.lang || :
+		# lib/openoffice.org/share/autotext/$lang
+		grep "/share/autotext/${lang}/" ${lfile} >> ${lang}.lang || :
+		# lib/openoffice.org/share/registry/res/$lang
+		grep "/share/registry/res/${lang}/" ${lfile} >> ${lang}.lang || :
+		# lib/openoffice.org/share/template/$lang
+		grep "/share/template/${lang}/" ${lfile} >> ${lang}.lang || :
+		# lib/openoffice.org/share/template/wizard/letter/lang
+		grep "/share/template/wizard/letter/${lang}/" ${lfile} >> ${lang}.lang || :
+		# lib/openoffice.org/share/wordbook/$lang
+		grep "/share/wordbook/${lang}/" ${lfile} >> ${lang}.lang || :
 		cp ${lang}.lang ${lang}.lang.gnome
 		cp ${lang}.lang ${lang}.lang.kde
 		# program/resource.*/*${code}.res (for kde and gnome versions)
- 		grep '/program/resource.gnome/.*res$' ${lfile} >> ${lang}.lang.gnome
-		grep '/program/resource.kde/.*res$' ${lfile} >> ${lang}.lang.kde
+ 		grep '/program/resource.gnome/.*res$' ${lfile} >> ${lang}.lang.gnome || :
+		grep '/program/resource.kde/.*res$' ${lfile} >> ${lang}.lang.kde || :
 	fi
 done
 
