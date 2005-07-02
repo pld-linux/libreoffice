@@ -2,7 +2,7 @@
 Encoding=UTF-8
 Name=OpenOffice.org Math
 Terminal=false
-Icon=ooo_math.png
+Icon=ooo-math.png
 Exec=oomath
 Type=Application
 MimeType=application/vnd.sun.xml.math

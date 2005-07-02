@@ -2,7 +2,7 @@
 Encoding=UTF-8
 Name=OpenOffice.org Calc
 Terminal=false
-Icon=ooo_calc.png
+Icon=ooo-calc.png
 Exec=oocalc
 Type=Application
 MimeType=application/msexcel;application/vnd.ms-excel;application/x-msexcel;application/vnd.stardivision.calc;application/vnd.sun.xml.calc;application/vnd.stardivision.calc.template;application/vnd.sun.xml.calc.template

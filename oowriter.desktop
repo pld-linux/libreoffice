@@ -48,7 +48,7 @@ GenericName[zh_TW]=文書處理
 GenericName[zu]=Uqhubekelo Lwegama
 
 Terminal=false
-Icon=ooo_writer.png
+Icon=ooo-writer.png
 Exec=oowriter
 Type=Application
 MimeType=application/msword;application/vnd.ms-word;application/x-msword;application/vnd.stardivision.writer.template;application/vnd.sun.xml.writer.template;application/vnd.sun.xml.writer;application/vnd.stardivision.writer.math;application/vnd.sun.xml.writer.math;application/rtf
