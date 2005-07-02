@@ -201,6 +201,7 @@ Do zalet OpenOffice.org mo¿na zaliczyæ:
 Summary:	OpenOffice.org shared libraries
 Summary(pl):	Biblioteki dzielone OpenOffice.org
 Group:		X11/Libraries
+Obsoletes:	openoffice-libs
 
 %description libs
 OpenOffice.org productivity suite - shared libraries.
@@ -215,6 +216,7 @@ Group:		X11/Libraries
 Requires:	%{name}-libs = %{epoch}:%{version}-%{release}
 Obsoletes:	%{name}-i18n-en-kde
 Obsoletes:	%{name}-i18n-en
+Obsoletes:	openoffice-libs-kde
 
 %description libs-kde
 OpenOffice.org productivity suite - KDE Interface.
@@ -229,6 +231,7 @@ Group:		X11/Libraries
 Requires:	%{name}-libs = %{epoch}:%{version}-%{release}
 Obsoletes:	%{name}-i18n-en-gtk
 Obsoletes:	%{name}-i18n-en
+Obsoletes:	openoffice-libs-gtk
 
 %description libs-gtk
 OpenOffice.org productivity suite - GTK+ Interface.
@@ -242,6 +245,7 @@ Summary(pl):	OpenOffice.org - interfejs w jêzyku afrykanerskim
 Group:		Applications/Office
 Requires:	%{name} = %{epoch}:%{version}-%{release}
 Obsoletes:	openoffice-i18n-af
+Obsoletes:	openoffice-i18n-af-gtk
 
 %description i18n-af-gtk
 This package provides resources containing menus and dialogs in
@@ -259,6 +263,7 @@ Summary(pl):	OpenOffice.org - interfejs w jêzyku arabskim
 Group:		Applications/Office
 Requires:	%{name} = %{epoch}:%{version}-%{release}
 Obsoletes:	openoffice-i18n-ar
+Obsoletes:	openoffice-i18n-ar-gtk
 
 %description i18n-ar-gtk
 This package provides resources containing menus and dialogs in
@@ -276,6 +281,7 @@ Summary(pl):	OpenOffice.org - interfejs w jêzyku bu³garskim
 Group:		Applications/Office
 Requires:	%{name} = %{epoch}:%{version}-%{release}
 Obsoletes:	openoffice-i18n-bg
+Obsoletes:	openoffice-i18n-bg-gtk
 
 %description i18n-bg-gtk
 This package provides resources containing menus and dialogs in
@@ -293,6 +299,7 @@ Summary(pl):	OpenOffice.org - interfejs w jêzyku kataloñskim
 Group:		Applications/Office
 Requires:	%{name} = %{epoch}:%{version}-%{release}
 Obsoletes:	openoffice-i18n-ca
+Obsoletes:	openoffice-i18n-ca-gtk
 
 %description i18n-ca-gtk
 This package provides resources containing menus and dialogs in
@@ -310,6 +317,7 @@ Summary(pl):	OpenOffice.org - interfejs w jêzyku czeskim
 Group:		Applications/Office
 Requires:	%{name} = %{epoch}:%{version}-%{release}
 Obsoletes:	openoffice-i18n-cs
+Obsoletes:	openoffice-i18n-cs-gtk
 
 %description i18n-cs-gtk
 This package provides resources containing menus and dialogs in
@@ -327,6 +335,7 @@ Summary(pl):	OpenOffice.org - interfejs w jêzyku walijskim
 Group:		Applications/Office
 Requires:	%{name} = %{epoch}:%{version}-%{release}
 Obsoletes:	openoffice-i18n-cy
+Obsoletes:	openoffice-i18n-cy-gtk
 
 %description i18n-cy-gtk
 This package provides resources containing menus and dialogs in
@@ -344,6 +353,7 @@ Summary(pl):	OpenOffice.org - interfejs w jêzyku duñskim
 Group:		Applications/Office
 Requires:	%{name} = %{epoch}:%{version}-%{release}
 Obsoletes:	openoffice-i18n-da
+Obsoletes:	openoffice-i18n-da-gtk
 
 %description i18n-da-gtk
 This package provides resources containing menus and dialogs in
@@ -361,6 +371,7 @@ Summary(pl):	OpenOffice.org - interfejs w jêzyku niemieckim
 Group:		Applications/Office
 Requires:	%{name} = %{epoch}:%{version}-%{release}
 Obsoletes:	openoffice-i18n-de
+Obsoletes:	openoffice-i18n-de-gtk
 
 %description i18n-de-gtk
 This package provides resources containing menus and dialogs in
@@ -378,6 +389,7 @@ Summary(pl):	OpenOffice.org - interfejs w jêzyku greckim
 Group:		Applications/Office
 Requires:	%{name} = %{epoch}:%{version}-%{release}
 Obsoletes:	openoffice-i18n-el
+Obsoletes:	openoffice-i18n-el-gtk
 
 %description i18n-el-gtk
 This package provides resources containing menus and dialogs in
@@ -395,6 +407,7 @@ Summary(pl):	OpenOffice.org - interfejs w jêzyku hiszpañskim
 Group:		Applications/Office
 Requires:	%{name} = %{epoch}:%{version}-%{release}
 Obsoletes:	openoffice-i18n-es
+Obsoletes:	openoffice-i18n-es-gtk
 
 %description i18n-es-gtk
 This package provides resources containing menus and dialogs in
@@ -412,6 +425,7 @@ Summary(pl):	OpenOffice.org - interfejs w jêzyku estoñskim
 Group:		Applications/Office
 Requires:	%{name} = %{epoch}:%{version}-%{release}
 Obsoletes:	openoffice-i18n-et
+Obsoletes:	openoffice-i18n-et-gtk
 
 %description i18n-et-gtk
 This package provides resources containing menus and dialogs in
@@ -429,6 +443,7 @@ Summary(pl):	OpenOffice.org - interfejs w jêzyku fiñskim
 Group:		Applications/Office
 Requires:	%{name} = %{epoch}:%{version}-%{release}
 Obsoletes:	openoffice-i18n-fi
+Obsoletes:	openoffice-i18n-fi-gtk
 
 %description i18n-fi-gtk
 This package provides resources containing menus and dialogs in
@@ -446,6 +461,7 @@ Summary(pl):	OpenOffice.org - interfejs w jêzyku farerskim
 Group:		Applications/Office
 Requires:	%{name} = %{epoch}:%{version}-%{release}
 Obsoletes:	openoffice-i18n-fo
+Obsoletes:	openoffice-i18n-fo-gtk
 
 %description i18n-fo-gtk
 This package provides resources containing menus and dialogs in
@@ -463,6 +479,7 @@ Summary(pl):	OpenOffice.org - interfejs w jêzyku francuskim
 Group:		Applications/Office
 Requires:	%{name} = %{epoch}:%{version}-%{release}
 Obsoletes:	openoffice-i18n-fr
+Obsoletes:	openoffice-i18n-fr-gtk
 
 %description i18n-fr-gtk
 This package provides resources containing menus and dialogs in
@@ -480,6 +497,7 @@ Summary(pl):	OpenOffice.org - interfejs w jêzyku irlandzkim
 Group:		Applications/Office
 Requires:	%{name} = %{epoch}:%{version}-%{release}
 Obsoletes:	openoffice-i18n-ga
+Obsoletes:	openoffice-i18n-ga-gtk
 
 %description i18n-ga-gtk
 This package provides resources containing menus and dialogs in
@@ -497,6 +515,7 @@ Summary(pl):	OpenOffice.org - interfejs w jêzyku galicyjskim
 Group:		Applications/Office
 Requires:	%{name} = %{epoch}:%{version}-%{release}
 Obsoletes:	openoffice-i18n-gl
+Obsoletes:	openoffice-i18n-gl-gtk
 
 %description i18n-gl-gtk
 This package provides resources containing menus and dialogs in
@@ -514,6 +533,7 @@ Summary(pl):	OpenOffice.org - interfejs w jêzyku hebrajskim
 Group:		Applications/Office
 Requires:	%{name} = %{epoch}:%{version}-%{release}
 Obsoletes:	openoffice-i18n-he
+Obsoletes:	openoffice-i18n-he-gtk
 
 %description i18n-he-gtk
 This package provides resources containing menus and dialogs in
@@ -531,6 +551,7 @@ Summary(pl):	OpenOffice.org - interfejs w jêzyku hindi
 Group:		Applications/Office
 Requires:	%{name} = %{epoch}:%{version}-%{release}
 Obsoletes:	openoffice-i18n-hi
+Obsoletes:	openoffice-i18n-hi-gtk
 
 %description i18n-hi-gtk
 This package provides resources containing menus and dialogs in
@@ -548,6 +569,7 @@ Summary(pl):	OpenOffice.org - interfejs w jêzyku chorwackim
 Group:		Applications/Office
 Requires:	%{name} = %{epoch}:%{version}-%{release}
 Obsoletes:	openoffice-i18n-hr
+Obsoletes:	openoffice-i18n-hr-gtk
 
 %description i18n-hr-gtk
 This package provides resources containing menus and dialogs in
@@ -565,6 +587,7 @@ Summary(pl):	OpenOffice.org - interfejs w jêzyku wêgierskim
 Group:		Applications/Office
 Requires:	%{name} = %{epoch}:%{version}-%{release}
 Obsoletes:	openoffice-i18n-hu
+Obsoletes:	openoffice-i18n-hu-gtk
 
 %description i18n-hu-gtk
 This package provides resources containing menus and dialogs in
@@ -582,6 +605,7 @@ Summary(pl):	OpenOffice.org - interfejs w jêzyku interlingua
 Group:		Applications/Office
 Requires:	%{name} = %{epoch}:%{version}-%{release}
 Obsoletes:	openoffice-i18n-ia
+Obsoletes:	openoffice-i18n-ia-gtk
 
 %description i18n-ia-gtk
 This package provides resources containing menus and dialogs in
@@ -599,6 +623,7 @@ Summary(pl):	OpenOffice.org - interfejs w jêzyku indonezyjskim
 Group:		Applications/Office
 Requires:	%{name} = %{epoch}:%{version}-%{release}
 Obsoletes:	openoffice-i18n-id
+Obsoletes:	openoffice-i18n-id-gtk
 
 %description i18n-id-gtk
 This package provides resources containing menus and dialogs in
@@ -616,6 +641,7 @@ Summary(pl):	OpenOffice.org - interfejs w jêzyku w³oskim
 Group:		Applications/Office
 Requires:	%{name} = %{epoch}:%{version}-%{release}
 Obsoletes:	openoffice-i18n-it
+ObsoleteS:	openoffice-i18n-it-gtk
 
 %description i18n-it-gtk
 This package provides resources containing menus and dialogs in
@@ -633,6 +659,7 @@ Summary(pl):	OpenOffice.org - interfejs w jêzyku japoñskim
 Group:		Applications/Office
 Requires:	%{name} = %{epoch}:%{version}-%{release}
 Obsoletes:	openoffice-i18n-ja
+Obsoletes:	openoffice-i18n-ja-gtk
 
 %description i18n-ja-gtk
 This package provides resources containing menus and dialogs in
@@ -650,6 +677,7 @@ Summary(pl):	OpenOffice.org - interfejs w jêzyku koreañskim
 Group:		Applications/Office
 Requires:	%{name} = %{epoch}:%{version}-%{release}
 Obsoletes:	openoffice-i18n-ko
+Obsoletes:	openoffice-i18n-ko-gtk
 
 %description i18n-ko-gtk
 This package provides resources containing menus and dialogs in
@@ -667,6 +695,7 @@ Summary(pl):	OpenOffice.org - interfejs w jêzyku ³aciñskim
 Group:		Applications/Office
 Requires:	%{name} = %{epoch}:%{version}-%{release}
 Obsoletes:	openoffice-i18n-la
+Obsoletes:	openoffice-i18n-la-gtk
 
 %description i18n-la-gtk
 This package provides resources containing menus and dialogs in
@@ -684,6 +713,7 @@ Summary(pl):	OpenOffice.org - interfejs w jêzyku litewskim
 Group:		Applications/Office
 Requires:	%{name} = %{epoch}:%{version}-%{release}
 Obsoletes:	openoffice-i18n-lt
+Obsoletes:	openoffice-i18n-lt-gtk
 
 %description i18n-lt-gtk
 This package provides resources containing menus and dialogs in
@@ -701,6 +731,7 @@ Summary(pl):	OpenOffice.org - interfejs w jêzyku melpa
 Group:		Applications/Office
 Requires:	%{name} = %{epoch}:%{version}-%{release}
 Obsoletes:	openoffice-i18n-med
+Obsoletes:	openoffice-i18n-med-gtk
 
 %description i18n-med-gtk
 This package provides resources containing menus and dialogs in
@@ -718,6 +749,7 @@ Summary(pl):	OpenOffice.org - interfejs w jêzyku maoryjskim
 Group:		Applications/Office
 Requires:	%{name} = %{epoch}:%{version}-%{release}
 Obsoletes:	openoffice-i18n-mi
+Obsoletes:	openoffice-i18n-mi-gtk
 
 %description i18n-mi-gtk
 This package provides resources containing menus and dialogs in
@@ -735,6 +767,7 @@ Summary(pl):	OpenOffice.org - interfejs w jêzyku malajskim
 Group:		Applications/Office
 Requires:	%{name} = %{epoch}:%{version}-%{release}
 Obsoletes:	openoffice-i18n-ms
+Obsoletes:	openoffice-i18n-ms-gtk
 
 %description i18n-ms-gtk
 This package provides resources containing menus and dialogs in
@@ -752,6 +785,7 @@ Summary(pl):	OpenOffice.org - interfejs w jêzyku norweskim (odmiana Bokmaal)
 Group:		Applications/Office
 Requires:	%{name} = %{epoch}:%{version}-%{release}
 Obsoletes:	openoffice-i18n-nb
+Obsoletes:	openoffice-i18n-nb-gtk
 
 %description i18n-nb-gtk
 This package provides resources containing menus and dialogs in
@@ -769,6 +803,7 @@ Summary(pl):	OpenOffice.org - interfejs w jêzyku holenderskim
 Group:		Applications/Office
 Requires:	%{name} = %{epoch}:%{version}-%{release}
 Obsoletes:	openoffice-i18n-nl
+Obsoletes:	openoffice-i18n-nl-gtk
 
 %description i18n-nl-gtk
 This package provides resources containing menus and dialogs in
@@ -786,6 +821,7 @@ Summary(pl):	OpenOffice.org - interfejs w jêzyku norweskim (odmiana Nynorsk)
 Group:		Applications/Office
 Requires:	%{name} = %{epoch}:%{version}-%{release}
 Obsoletes:	openoffice-i18n-nn
+Obsoletes:	openoffice-i18n-nn-gtk
 
 %description i18n-nn-gtk
 This package provides resources containing menus and dialogs in
@@ -803,6 +839,7 @@ Summary(pl):	OpenOffice.org - interfejs w jêzyku ludu Soto
 Group:		Applications/Office
 Requires:	%{name} = %{epoch}:%{version}-%{release}
 Obsoletes:	openoffice-i18n-nso
+Obsoletes:	openoffice-i18n-nso-gtk
 
 %description i18n-nso-gtk
 This package provides resources containing menus and dialogs in
@@ -820,6 +857,7 @@ Summary(pl):	OpenOffice.org - interfejs w jêzyku polskim
 Group:		Applications/Office
 Requires:	%{name} = %{epoch}:%{version}-%{release}
 Obsoletes:	openoffice-i18n-pl
+Obsoletes:	openoffice-i18n-pl-gtk
 
 %description i18n-pl-gtk
 This package provides resources containing menus and dialogs in
@@ -837,6 +875,7 @@ Summary(pl):	OpenOffice.org - interfejs w jêzyku portugalskim
 Group:		Applications/Office
 Requires:	%{name} = %{epoch}:%{version}-%{release}
 Obsoletes:	openoffice-i18n-pt
+Obsoletes:	openoffice-i18n-pt-gtk
 
 %description i18n-pt-gtk
 This package provides resources containing menus and dialogs in
@@ -854,6 +893,7 @@ Summary(pl):	OpenOffice.org - interfejs w jêzyku portugalskim dla Brazylii
 Group:		Applications/Office
 Requires:	%{name} = %{epoch}:%{version}-%{release}
 Obsoletes:	openoffice-i18n-pt_BR
+Obsoletes:	openoffice-i18n-pt_BR-gtk
 
 %description i18n-pt_BR-gtk
 This package provides resources containing menus and dialogs in
@@ -871,6 +911,7 @@ Summary(pl):	OpenOffice.org - interfejs w jêzyku rumuñskim
 Group:		Applications/Office
 Requires:	%{name} = %{epoch}:%{version}-%{release}
 Obsoletes:	openoffice-i18n-ro
+Obsoletes:	openoffice-i18n-ro-gtk
 
 %description i18n-ro-gtk
 This package provides resources containing menus and dialogs in
@@ -888,6 +929,7 @@ Summary(pl):	OpenOffice.org - interfejs w jêzyku rosyjskim
 Group:		Applications/Office
 Requires:	%{name} = %{epoch}:%{version}-%{release}
 Obsoletes:	openoffice-i18n-ru
+Obsoletes:	openoffice-i18n-ru-gtk
 
 %description i18n-ru-gtk
 This package provides resources containing menus and dialogs in
@@ -905,6 +947,7 @@ Summary(pl):	OpenOffice.org - interfejs w jêzyku s³owackim
 Group:		Applications/Office
 Requires:	%{name} = %{epoch}:%{version}-%{release}
 Obsoletes:	openoffice-i18n-sk
+Obsoletes:	openoffice-i18n-sk-gtk
 
 %description i18n-sk-gtk
 This package provides resources containing menus and dialogs in
@@ -922,6 +965,7 @@ Summary(pl):	OpenOffice.org - interfejs w jêzyku s³oweñskim
 Group:		Applications/Office
 Requires:	%{name} = %{epoch}:%{version}-%{release}
 Obsoletes:	openoffice-i18n-sl
+Obsoletes:	openoffice-i18n-sl-gtk
 
 %description i18n-sl-gtk
 This package provides resources containing menus and dialogs in
@@ -939,6 +983,7 @@ Summary(pl):	OpenOffice.org - interfejs w jêzyku szwedzkim
 Group:		Applications/Office
 Requires:	%{name} = %{epoch}:%{version}-%{release}
 Obsoletes:	openoffice-i18n-sv
+Obsoletes:	openoffice-i18n-sv-gtk
 
 %description i18n-sv-gtk
 This package provides resources containing menus and dialogs in
@@ -954,8 +999,9 @@ szwedzkim.
 Summary:	OpenOffice.org - interface in Turkish language
 Summary(pl):	OpenOffice.org - interfejs w jêzyku tureckim
 Group:		Applications/Office
-Requires:	%{name} = %{epoch}:%{version}-%{release}
+Requires:	%{name} = %{epoch}-:%{version}-%{release}
 Obsoletes:	openoffice-i18n-tr
+Obsoletes:	openoffice-i18n-tr-gtk
 
 %description i18n-tr-gtk
 This package provides resources containing menus and dialogs in
@@ -973,6 +1019,7 @@ Summary(pl):	OpenOffice.org - interfejs w jêzyku ukraiñskim
 Group:		Applications/Office
 Requires:	%{name} = %{epoch}:%{version}-%{release}
 Obsoletes:	openoffice-i18n-uk
+Obsoletes:	openoffice-i18n-uk-gtk
 
 %description i18n-uk-gtk
 This package provides resources containing menus and dialogs in
@@ -991,6 +1038,7 @@ Group:		Applications/Office
 Requires:	%{name} = %{epoch}:%{version}-%{release}
 Obsoletes:	openoffice-i18n-zh
 Obsoletes:	openoffice-i18n-zh_CN
+Obsoletes:	openoffice-i18n-zh_CN-gtk
 
 %description i18n-zh_CN-gtk
 This package provides resources containing menus and dialogs in
@@ -1009,6 +1057,7 @@ Group:		Applications/Office
 Requires:	%{name} = %{epoch}:%{version}-%{release}
 Obsoletes:	openoffice-i18n-zh
 Obsoletes:	openoffice-i18n-zh_TW
+Obsoletes:	openoffice-i18n-zh_TW-gtk
 
 %description i18n-zh_TW-gtk
 This package provides resources containing menus and dialogs in
@@ -1026,6 +1075,7 @@ Summary(pl):	OpenOffice.org - interfejs w jêzyku zuluskim
 Group:		Applications/Office
 Requires:	%{name} = %{epoch}:%{version}-%{release}
 Obsoletes:	openoffice-i18n-zu
+Obsoletes:	openoffice-i18n-zu-gtk
 
 %description i18n-zu-gtk
 This package provides resources containing menus and dialogs in
@@ -1043,6 +1093,7 @@ Summary(pl):	OpenOffice.org - interfejs w jêzyku afrykanerskim
 Group:		Applications/Office
 Requires:	%{name} = %{epoch}:%{version}-%{release}
 Obsoletes:	openoffice-i18n-af
+Obsoletes:	openoffice-i18n-af-kde
 
 %description i18n-af-kde
 This package provides resources containing menus and dialogs in
@@ -1060,6 +1111,7 @@ Summary(pl):	OpenOffice.org - interfejs w jêzyku arabskim
 Group:		Applications/Office
 Requires:	%{name} = %{epoch}:%{version}-%{release}
 Obsoletes:	openoffice-i18n-ar
+Obsoletes:	openoffice-i18n-ar-kde
 
 %description i18n-ar-kde
 This package provides resources containing menus and dialogs in
@@ -1077,6 +1129,7 @@ Summary(pl):	OpenOffice.org - interfejs w jêzyku bu³garskim
 Group:		Applications/Office
 Requires:	%{name} = %{epoch}:%{version}-%{release}
 Obsoletes:	openoffice-i18n-bg
+Obsoletes:	openoffice-i18n-bg-kde
 
 %description i18n-bg-kde
 This package provides resources containing menus and dialogs in
@@ -1094,6 +1147,7 @@ Summary(pl):	OpenOffice.org - interfejs w jêzyku kataloñskim
 Group:		Applications/Office
 Requires:	%{name} = %{epoch}:%{version}-%{release}
 Obsoletes:	openoffice-i18n-ca
+Obsoletes:	openoffice-i18n-ca-kde
 
 %description i18n-ca-kde
 This package provides resources containing menus and dialogs in
@@ -1111,6 +1165,7 @@ Summary(pl):	OpenOffice.org - interfejs w jêzyku czeskim
 Group:		Applications/Office
 Requires:	%{name} = %{epoch}:%{version}-%{release}
 Obsoletes:	openoffice-i18n-cs
+Obsoletes:	openoffice-i18n-cs-kde
 
 %description i18n-cs-kde
 This package provides resources containing menus and dialogs in
@@ -1128,6 +1183,7 @@ Summary(pl):	OpenOffice.org - interfejs w jêzyku walijskim
 Group:		Applications/Office
 Requires:	%{name} = %{epoch}:%{version}-%{release}
 Obsoletes:	openoffice-i18n-cy
+Obsoletes:	openoffice-i18n-cy-kde
 
 %description i18n-cy-kde
 This package provides resources containing menus and dialogs in
@@ -1145,6 +1201,7 @@ Summary(pl):	OpenOffice.org - interfejs w jêzyku duñskim
 Group:		Applications/Office
 Requires:	%{name} = %{epoch}:%{version}-%{release}
 Obsoletes:	openoffice-i18n-da
+Obsoletes:	openoffice-i18n-da-kde
 
 %description i18n-da-kde
 This package provides resources containing menus and dialogs in
@@ -1162,6 +1219,7 @@ Summary(pl):	OpenOffice.org - interfejs w jêzyku niemieckim
 Group:		Applications/Office
 Requires:	%{name} = %{epoch}:%{version}-%{release}
 Obsoletes:	openoffice-i18n-de
+Obsoletes:	openoffice-i18n-de-kde
 
 %description i18n-de-kde
 This package provides resources containing menus and dialogs in
@@ -1179,6 +1237,7 @@ Summary(pl):	OpenOffice.org - interfejs w jêzyku greckim
 Group:		Applications/Office
 Requires:	%{name} = %{epoch}:%{version}-%{release}
 Obsoletes:	openoffice-i18n-el
+Obsoletes:	openoffice-i18n-el-kde
 
 %description i18n-el-kde
 This package provides resources containing menus and dialogs in
@@ -1196,6 +1255,7 @@ Summary(pl):	OpenOffice.org - interfejs w jêzyku hiszpañskim
 Group:		Applications/Office
 Requires:	%{name} = %{epoch}:%{version}-%{release}
 Obsoletes:	openoffice-i18n-es
+Obsoletes:	openoffice-i18n-es-kde
 
 %description i18n-es-kde
 This package provides resources containing menus and dialogs in
@@ -1213,6 +1273,7 @@ Summary(pl):	OpenOffice.org - interfejs w jêzyku estoñskim
 Group:		Applications/Office
 Requires:	%{name} = %{epoch}:%{version}-%{release}
 Obsoletes:	openoffice-i18n-et
+Obsoletes:	openoffice-i18n-et-kde
 
 %description i18n-et-kde
 This package provides resources containing menus and dialogs in
@@ -1230,6 +1291,7 @@ Summary(pl):	OpenOffice.org - interfejs w jêzyku fiñskim
 Group:		Applications/Office
 Requires:	%{name} = %{epoch}:%{version}-%{release}
 Obsoletes:	openoffice-i18n-fi
+Obsoletes:	openoffice-i18n-fi-kde
 
 %description i18n-fi-kde
 This package provides resources containing menus and dialogs in
@@ -1247,6 +1309,7 @@ Summary(pl):	OpenOffice.org - interfejs w jêzyku farerskim
 Group:		Applications/Office
 Requires:	%{name} = %{epoch}:%{version}-%{release}
 Obsoletes:	openoffice-i18n-fo
+Obsoletes:	openoffice-i18n-fo-kde
 
 %description i18n-fo-kde
 This package provides resources containing menus and dialogs in
@@ -1264,6 +1327,7 @@ Summary(pl):	OpenOffice.org - interfejs w jêzyku francuskim
 Group:		Applications/Office
 Requires:	%{name} = %{epoch}:%{version}-%{release}
 Obsoletes:	openoffice-i18n-fr
+Obsoletes:	openoffice-i18n-fr-kde
 
 %description i18n-fr-kde
 This package provides resources containing menus and dialogs in
@@ -1281,6 +1345,7 @@ Summary(pl):	OpenOffice.org - interfejs w jêzyku irlandzkim
 Group:		Applications/Office
 Requires:	%{name} = %{epoch}:%{version}-%{release}
 Obsoletes:	openoffice-i18n-ga
+Obsoletes:	openoffice-i18n-ga-kde
 
 %description i18n-ga-kde
 This package provides resources containing menus and dialogs in
@@ -1298,6 +1363,7 @@ Summary(pl):	OpenOffice.org - interfejs w jêzyku galicyjskim
 Group:		Applications/Office
 Requires:	%{name} = %{epoch}:%{version}-%{release}
 Obsoletes:	openoffice-i18n-gl
+Obsoletes:	openoffice-i18n-gl-kde
 
 %description i18n-gl-kde
 This package provides resources containing menus and dialogs in
@@ -1315,6 +1381,7 @@ Summary(pl):	OpenOffice.org - interfejs w jêzyku hebrajskim
 Group:		Applications/Office
 Requires:	%{name} = %{epoch}:%{version}-%{release}
 Obsoletes:	openoffice-i18n-he
+Obsoletes:	openoffice-i18n-he-kde
 
 %description i18n-he-kde
 This package provides resources containing menus and dialogs in
@@ -1332,6 +1399,7 @@ Summary(pl):	OpenOffice.org - interfejs w jêzyku hindi
 Group:		Applications/Office
 Requires:	%{name} = %{epoch}:%{version}-%{release}
 Obsoletes:	openoffice-i18n-hi
+Obsoletes:	openoffice-i18n-hi-kde
 
 %description i18n-hi-kde
 This package provides resources containing menus and dialogs in
@@ -1348,8 +1416,9 @@ Summary:	OpenOffice.org - interface in Croatian language
 Summary(pl):	OpenOffice.org - interfejs w jêzyku chorwackim
 Group:		Applications/Office
 Requires:	%{name} = %{epoch}:%{version}-%{release}
-Obsoletes:	openoffice-i18n-hr
+Obsoletes:	openoffice-i18n-hr-kde
 
+Obsoletes:	openoffice-i18n-hr
 %description i18n-hr-kde
 This package provides resources containing menus and dialogs in
 Croatian language.
@@ -1366,6 +1435,7 @@ Summary(pl):	OpenOffice.org - interfejs w jêzyku wêgierskim
 Group:		Applications/Office
 Requires:	%{name} = %{epoch}:%{version}-%{release}
 Obsoletes:	openoffice-i18n-hu
+Obsoletes:	openoffice-i18n-hu-kde
 
 %description i18n-hu-kde
 This package provides resources containing menus and dialogs in
@@ -1383,6 +1453,7 @@ Summary(pl):	OpenOffice.org - interfejs w jêzyku interlingua
 Group:		Applications/Office
 Requires:	%{name} = %{epoch}:%{version}-%{release}
 Obsoletes:	openoffice-i18n-ia
+Obsoletes:	openoffice-i18n-ia-kde
 
 %description i18n-ia-kde
 This package provides resources containing menus and dialogs in
@@ -1400,6 +1471,7 @@ Summary(pl):	OpenOffice.org - interfejs w jêzyku indonezyjskim
 Group:		Applications/Office
 Requires:	%{name} = %{epoch}:%{version}-%{release}
 Obsoletes:	openoffice-i18n-id
+Obsoletes:	openoffice-i18n-id-kde
 
 %description i18n-id-kde
 This package provides resources containing menus and dialogs in
@@ -1417,6 +1489,7 @@ Summary(pl):	OpenOffice.org - interfejs w jêzyku w³oskim
 Group:		Applications/Office
 Requires:	%{name} = %{epoch}:%{version}-%{release}
 Obsoletes:	openoffice-i18n-it
+Obsoletes:	openoffice-i18n-it-kde
 
 %description i18n-it-kde
 This package provides resources containing menus and dialogs in
@@ -1434,6 +1507,7 @@ Summary(pl):	OpenOffice.org - interfejs w jêzyku japoñskim
 Group:		Applications/Office
 Requires:	%{name} = %{epoch}:%{version}-%{release}
 Obsoletes:	openoffice-i18n-ja
+Obsoletes:	openoffice-i18n-ja-kde
 
 %description i18n-ja-kde
 This package provides resources containing menus and dialogs in
@@ -1451,6 +1525,7 @@ Summary(pl):	OpenOffice.org - interfejs w jêzyku koreañskim
 Group:		Applications/Office
 Requires:	%{name} = %{epoch}:%{version}-%{release}
 Obsoletes:	openoffice-i18n-ko
+Obsoletes:	openoffice-i18n-ko-kde
 
 %description i18n-ko-kde
 This package provides resources containing menus and dialogs in
@@ -1468,6 +1543,7 @@ Summary(pl):	OpenOffice.org - interfejs w jêzyku ³aciñskim
 Group:		Applications/Office
 Requires:	%{name} = %{epoch}:%{version}-%{release}
 Obsoletes:	openoffice-i18n-la
+Obsoletes:	openoffice-i18n-la-kde
 
 %description i18n-la-kde
 This package provides resources containing menus and dialogs in
@@ -1485,6 +1561,7 @@ Summary(pl):	OpenOffice.org - interfejs w jêzyku litewskim
 Group:		Applications/Office
 Requires:	%{name} = %{epoch}:%{version}-%{release}
 Obsoletes:	openoffice-i18n-lt
+Obsoletes:	openoffice-i18n-lt-kde
 
 %description i18n-lt-kde
 This package provides resources containing menus and dialogs in
@@ -1502,6 +1579,7 @@ Summary(pl):	OpenOffice.org - interfejs w jêzyku melpa
 Group:		Applications/Office
 Requires:	%{name} = %{epoch}:%{version}-%{release}
 Obsoletes:	openoffice-i18n-med
+Obsoletes:	openoffice-i18n-med-kde
 
 %description i18n-med-kde
 This package provides resources containing menus and dialogs in
@@ -1519,6 +1597,7 @@ Summary(pl):	OpenOffice.org - interfejs w jêzyku maoryjskim
 Group:		Applications/Office
 Requires:	%{name} = %{epoch}:%{version}-%{release}
 Obsoletes:	openoffice-i18n-mi
+Obsoletes:	openoffice-i18n-mi-kde
 
 %description i18n-mi-kde
 This package provides resources containing menus and dialogs in
@@ -1536,6 +1615,7 @@ Summary(pl):	OpenOffice.org - interfejs w jêzyku malajskim
 Group:		Applications/Office
 Requires:	%{name} = %{epoch}:%{version}-%{release}
 Obsoletes:	openoffice-i18n-ms
+Obsoletes:	openoffice-i18n-ms-kde
 
 %description i18n-ms-kde
 This package provides resources containing menus and dialogs in
@@ -1553,6 +1633,7 @@ Summary(pl):	OpenOffice.org - interfejs w jêzyku norweskim (odmiana Bokmaal)
 Group:		Applications/Office
 Requires:	%{name} = %{epoch}:%{version}-%{release}
 Obsoletes:	openoffice-i18n-nb
+Obsoletes:	openoffice-i18n-nb-kde
 
 %description i18n-nb-kde
 This package provides resources containing menus and dialogs in
@@ -1570,6 +1651,7 @@ Summary(pl):	OpenOffice.org - interfejs w jêzyku holenderskim
 Group:		Applications/Office
 Requires:	%{name} = %{epoch}:%{version}-%{release}
 Obsoletes:	openoffice-i18n-nl
+Obsoletes:	openoffice-i18n-nl-kde
 
 %description i18n-nl-kde
 This package provides resources containing menus and dialogs in
@@ -1587,6 +1669,7 @@ Summary(pl):	OpenOffice.org - interfejs w jêzyku norweskim (odmiana Nynorsk)
 Group:		Applications/Office
 Requires:	%{name} = %{epoch}:%{version}-%{release}
 Obsoletes:	openoffice-i18n-nn
+Obsoletes:	openoffice-i18n-nn-kde
 
 %description i18n-nn-kde
 This package provides resources containing menus and dialogs in
@@ -1604,6 +1687,7 @@ Summary(pl):	OpenOffice.org - interfejs w jêzyku ludu Soto
 Group:		Applications/Office
 Requires:	%{name} = %{epoch}:%{version}-%{release}
 Obsoletes:	openoffice-i18n-nso
+Obsoletes:	openoffice-i18n-nso-kde
 
 %description i18n-nso-kde
 This package provides resources containing menus and dialogs in
@@ -1621,6 +1705,7 @@ Summary(pl):	OpenOffice.org - interfejs w jêzyku polskim
 Group:		Applications/Office
 Requires:	%{name} = %{epoch}:%{version}-%{release}
 Obsoletes:	openoffice-i18n-pl
+Obsoletes:	openoffice-i18n-pl-kde
 
 %description i18n-pl-kde
 This package provides resources containing menus and dialogs in
@@ -1638,6 +1723,7 @@ Summary(pl):	OpenOffice.org - interfejs w jêzyku portugalskim
 Group:		Applications/Office
 Requires:	%{name} = %{epoch}:%{version}-%{release}
 Obsoletes:	openoffice-i18n-pt
+Obsoletes:	openoffice-i18n-pt-kde
 
 %description i18n-pt-kde
 This package provides resources containing menus and dialogs in
@@ -1655,6 +1741,7 @@ Summary(pl):	OpenOffice.org - interfejs w jêzyku portugalskim dla Brazylii
 Group:		Applications/Office
 Requires:	%{name} = %{epoch}:%{version}-%{release}
 Obsoletes:	openoffice-i18n-pt_BR
+Obsoletes:	openoffice-i18n-pt_BR-kde
 
 %description i18n-pt_BR-kde
 This package provides resources containing menus and dialogs in
@@ -1672,6 +1759,7 @@ Summary(pl):	OpenOffice.org - interfejs w jêzyku rumuñskim
 Group:		Applications/Office
 Requires:	%{name} = %{epoch}:%{version}-%{release}
 Obsoletes:	openoffice-i18n-ro
+Obsoletes:	openoffice-i18n-ro-kde
 
 %description i18n-ro-kde
 This package provides resources containing menus and dialogs in
@@ -1689,6 +1777,7 @@ Summary(pl):	OpenOffice.org - interfejs w jêzyku rosyjskim
 Group:		Applications/Office
 Requires:	%{name} = %{epoch}:%{version}-%{release}
 Obsoletes:	openoffice-i18n-ru
+Obsoletes:	openoffice-i18n-ru-kde
 
 %description i18n-ru-kde
 This package provides resources containing menus and dialogs in
@@ -1706,6 +1795,7 @@ Summary(pl):	OpenOffice.org - interfejs w jêzyku s³owackim
 Group:		Applications/Office
 Requires:	%{name} = %{epoch}:%{version}-%{release}
 Obsoletes:	openoffice-i18n-sk
+Obsoletes:	openoffice-i18n-sk-kde
 
 %description i18n-sk-kde
 This package provides resources containing menus and dialogs in
@@ -1723,6 +1813,7 @@ Summary(pl):	OpenOffice.org - interfejs w jêzyku s³oweñskim
 Group:		Applications/Office
 Requires:	%{name} = %{epoch}:%{version}-%{release}
 Obsoletes:	openoffice-i18n-sl
+Obsoletes:	openoffice-i18n-sl-kde
 
 %description i18n-sl-kde
 This package provides resources containing menus and dialogs in
@@ -1740,6 +1831,7 @@ Summary(pl):	OpenOffice.org - interfejs w jêzyku szwedzkim
 Group:		Applications/Office
 Requires:	%{name} = %{epoch}:%{version}-%{release}
 Obsoletes:	openoffice-i18n-sv
+Obsoletes:	openoffice-i18n-sv-kde
 
 %description i18n-sv-kde
 This package provides resources containing menus and dialogs in
@@ -1757,6 +1849,7 @@ Summary(pl):	OpenOffice.org - interfejs w jêzyku tureckim
 Group:		Applications/Office
 Requires:	%{name} = %{epoch}:%{version}-%{release}
 Obsoletes:	openoffice-i18n-tr
+Obsoletes:	openoffice-i18n-tr-kde
 
 %description i18n-tr-kde
 This package provides resources containing menus and dialogs in
@@ -1774,6 +1867,7 @@ Summary(pl):	OpenOffice.org - interfejs w jêzyku ukraiñskim
 Group:		Applications/Office
 Requires:	%{name} = %{epoch}:%{version}-%{release}
 Obsoletes:	openoffice-i18n-uk
+Obsoletes:	openoffice-i18n-uk-kde
 
 %description i18n-uk-kde
 This package provides resources containing menus and dialogs in
@@ -1792,6 +1886,7 @@ Group:		Applications/Office
 Requires:	%{name} = %{epoch}:%{version}-%{release}
 Obsoletes:	openoffice-i18n-zh
 Obsoletes:	openoffice-i18n-zh_CN
+Obsoletes:	openoffice-i18n-zh_CN-kde
 
 %description i18n-zh_CN-kde
 This package provides resources containing menus and dialogs in
@@ -1810,6 +1905,7 @@ Group:		Applications/Office
 Requires:	%{name} = %{epoch}:%{version}-%{release}
 Obsoletes:	openoffice-i18n-zh
 Obsoletes:	openoffice-i18n-zh_TW
+Obsoletes:	openoffice-i18n-zh_TW-kde
 
 %description i18n-zh_TW-kde
 This package provides resources containing menus and dialogs in
@@ -1827,6 +1923,7 @@ Summary(pl):	OpenOffice.org - interfejs w jêzyku zuluskim
 Group:		Applications/Office
 Requires:	%{name} = %{epoch}:%{version}-%{release}
 Obsoletes:	openoffice-i18n-zu
+Obsoletes:	openoffice-i18n-zu-kde
 
 %description i18n-zu-kde
 This package provides resources containing menus and dialogs in
