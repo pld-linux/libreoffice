@@ -55,7 +55,7 @@ Source13:	http://go-ooo.org/packages/libwpd/libwpd-0.8.0.tar.gz
 Source20:	oocalc.desktop
 Source21:	oodraw.desktop
 Source22:	ooffice.desktop
-Source23:	ooglobal.desktop
+#Source23:	ooglobal.desktop
 Source24:	ooimpress.desktop
 Source25:	oomath.desktop
 Source26:	ooprinteradmin.desktop
@@ -2108,7 +2108,7 @@ install -d $RPM_BUILD_ROOT%{_desktopdir}
 install %{SOURCE20} $RPM_BUILD_ROOT%{_desktopdir}
 install %{SOURCE21} $RPM_BUILD_ROOT%{_desktopdir}
 install %{SOURCE22} $RPM_BUILD_ROOT%{_desktopdir}
-install %{SOURCE23} $RPM_BUILD_ROOT%{_desktopdir}
+#install %{SOURCE23} $RPM_BUILD_ROOT%{_desktopdir}
 install %{SOURCE24} $RPM_BUILD_ROOT%{_desktopdir}
 install %{SOURCE25} $RPM_BUILD_ROOT%{_desktopdir}
 install %{SOURCE26} $RPM_BUILD_ROOT%{_desktopdir}
