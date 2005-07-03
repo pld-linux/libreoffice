@@ -2269,6 +2269,7 @@ fontpostinst TTF
 %{_libdir}/%{name}/program/bootstraprc
 %{_libdir}/%{name}/program/configmgrrc
 #%{_libdir}/%{name}/program/instdb.ins
+%dir %{_libdir}/%{name}/program/resource
 
 #%dir %{_libdir}/%{name}/help
 #%{_libdir}/%{name}/help/en
