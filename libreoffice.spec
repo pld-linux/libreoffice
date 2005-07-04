@@ -2119,8 +2119,8 @@ install %{SOURCE29} $RPM_BUILD_ROOT%{_desktopdir}
 # Add in the regcomp tool since some people need it for 3rd party add-ons
 cp -f build/src%{subver}-%{bver}/solver/%{subver}/unxlng*.pro/bin/regcomp $RPM_BUILD_ROOT%{_libdir}/%{name}/program
 
-# mimelnk, icons
-install -d $RPM_BUILD_ROOT{%{_datadir}/mimelnk/application,%{_pixmapsdir}}
+# Really needed?
+install -d $RPM_BUILD_ROOT%{_pixmapsdir}
 
 rm -rf $RPM_BUILD_ROOT%{_libdir}/%{name}/share/kde
 rm -rf $RPM_BUILD_ROOT%{_libdir}/%{name}/share/cde
@@ -2145,10 +2145,6 @@ rm -f $RPM_BUILD_ROOT%{_libdir}/%{name}/setup
 rm -f $RPM_BUILD_ROOT%{_libdir}/%{name}/program/crash_report.bin
 rm -f $RPM_BUILD_ROOT%{_datadir}/applications/openoffice-setup.desktop
 rm -f $RPM_BUILD_ROOT%{_datadir}/applications/openoffice-printeradmin.desktop
-
-
-rm -rf $RPM_BUILD_ROOT%{_datadir}/applnk
-rm -rf $RPM_BUILD_ROOT%{_datadir}/gnome
 
 #rm -f $RPM_BUILD_ROOT%{_libdir}/%{name}/program/gnomeint
 
