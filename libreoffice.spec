@@ -11,6 +11,7 @@
 #	- remove oohtml symlink (there is ooweb),
 #	- add ooglobal symlink and it's ooo-wrapper entry (among calc|draw|impress|math|web|writer)
 # 	- add lang: rw (?)
+#	- add %{_libdir}/%{name}/share/autocorr/acor_(ll)-(LL).dat files to package (marked with %lang)
 
 # Conditional build:
 %bcond_with	java		# Java support
@@ -1605,9 +1606,12 @@ for lang in $langlist; do
 
 	lfile="build/lang_${lang}_list.txt"
 	if [ -f ${lfile} ]; then
-		#longlang="`bin/openoffice-xlate-lang -l ${lang}`"
+		lprefix="`bin/openoffice-xlate-lang -p ${lang} 2>/dev/null || echo ""`"
+		longlang="`bin/openoffice-xlate-lang -l ${lang} 2>/dev/null || echo ""`"
 		# share/*/${longlang}
-		#grep "^%%dir.*/${longlang}/\$" ${lfile} > tmp.lang || :
+		if [ "x${longlang}" != "x" ] ; then 
+			grep "^%%dir.*/${longlang}/\$" ${lfile} > tmp.lang || :
+		fi
 		# share/registry/res/${lang} (but en-US for en)
 		grep "^%%dir.*/res/${lang}[^/]*/\$" ${lfile} >> tmp.lang || :
 		# ... translate %dir into whole tree, handle special wordbook/english case
@@ -1618,21 +1622,31 @@ for lang in $langlist; do
 		grep '/user/config/..*' ${lfile} >> ${lang}.lang || :
 		grep "/licenses/LICENSE_${lang}" ${lfile} >> ${lang}.lang || :
 		grep "/readmes/README_${lang}" ${lfile} >> ${lang}.lang || :
-		# lib/openoffice.org/presers/config/*.so?
-		grep "/presets/config/.*_${lang}.so?$" ${lfile} >> ${lang}.lang || :
+		# lib/openoffice.org/presers/config/*.so[cdegh]
+		grep "/presets/config/.*_${lang}\.so[cdegh]$" ${lfile} >> ${lang}.lang || :
+		if [ "x${lprefix}" != "x" ] ; then
+			grep "/presets/config/${lprefix}.*\.so[cdegh]$" ${lfile} >> ${lang}.lang || :
+		fi
 		# lib/openoffice.org/program/resource/*.res
 		grep "/program/resource/.*${lang}.res$" ${lfile} >> ${lang}.lang || :
 		# lib/openoffice.org/share/autocorr/*.dat
 		grep "/share/autocorr/.*${lang}.dat$" ${lfile} >> ${lang}.lang || :
 		# lib/openoffice.org/share/autotext/$lang
+		grep "/share/autotext/${lang}$" ${lfile} >> ${lang}.lang || :
 		grep "/share/autotext/${lang}/" ${lfile} >> ${lang}.lang || :
 		# lib/openoffice.org/share/registry/res/$lang
+		grep "/share/registry/res/${lang}$" ${lfile} >> ${lang}.lang || :
 		grep "/share/registry/res/${lang}/" ${lfile} >> ${lang}.lang || :
 		# lib/openoffice.org/share/template/$lang
+		grep "/share/template/${lang}$" ${lfile} >> ${lang}.lang || :
 		grep "/share/template/${lang}/" ${lfile} >> ${lang}.lang || :
 		# lib/openoffice.org/share/template/wizard/letter/lang
+		grep "/share/template/wizard/letter/${lang}$" ${lfile} >> ${lang}.lang || :
+		grep "/share/template/wizard/letter/${lang}$" build/common_list.txt >> ${lang}.lang || :
 		grep "/share/template/wizard/letter/${lang}/" ${lfile} >> ${lang}.lang || :
+		grep "/share/template/wizard/letter/${lang}/" build/common_list.txt >> ${lang}.lang || :
 		# lib/openoffice.org/share/wordbook/$lang
+		grep "/share/wordbook/${lang}$" ${lfile} >> ${lang}.lang || :
 		grep "/share/wordbook/${lang}/" ${lfile} >> ${lang}.lang || :
 	fi
 done
@@ -1689,6 +1703,8 @@ fontpostinst TTF
 %{_libdir}/%{name}/program/configmgrrc
 #%{_libdir}/%{name}/program/instdb.ins
 %dir %{_libdir}/%{name}/program/resource
+%dir %{_libdir}/%{name}/licenses
+%dir %{_libdir}/%{name}/readmes
 
 #%dir %{_libdir}/%{name}/help
 #%{_libdir}/%{name}/help/en
@@ -1706,6 +1722,7 @@ fontpostinst TTF
 %{_libdir}/%{name}/share/config/images.zip
 %{_libdir}/%{name}/share/config/images_crystal.zip
 %{_libdir}/%{name}/share/config/images_industrial.zip
+%{_libdir}/%{name}/share/config/images_hicontrast.zip
 %{_libdir}/%{name}/share/config/soffice.cfg
 %{_libdir}/%{name}/share/config/wizard
 #%dir %{_libdir}/%{name}/share/database
@@ -1753,6 +1770,79 @@ fontpostinst TTF
 %{_libdir}/%{name}/presets/config/styles.sod
 %{_libdir}/%{name}/presets/config/sun-color.soc
 %{_libdir}/%{name}/presets/config/web.soc
+%{_libdir}/%{name}/presets/config/Classico.sog
+%{_libdir}/%{name}/presets/config/Linhas.sod
+%{_libdir}/%{name}/presets/config/Palheta.soc
+%{_libdir}/%{name}/presets/config/PreenchimentoDePadrao.soh
+%{_libdir}/%{name}/presets/config/Ptseta.soe
+%{_libdir}/%{name}/presets/config/Vigente.sog
+%{_libdir}/%{name}/presets/config/actual.sog
+%{_libdir}/%{name}/presets/config/aktuell.sog
+%{_libdir}/%{name}/presets/config/arcer.soh
+%{_libdir}/%{name}/presets/config/arrowhead.soe
+%{_libdir}/%{name}/presets/config/cary.sod
+%{_libdir}/%{name}/presets/config/chic.sod
+%{_libdir}/%{name}/presets/config/clasico.sog
+%{_libdir}/%{name}/presets/config/classico.sog
+%{_libdir}/%{name}/presets/config/classique.sog
+%{_libdir}/%{name}/presets/config/color.soc
+%{_libdir}/%{name}/presets/config/colore.soc
+%{_libdir}/%{name}/presets/config/colours.soc
+%{_libdir}/%{name}/presets/config/contemporary.sog
+%{_libdir}/%{name}/presets/config/cor.soc
+%{_libdir}/%{name}/presets/config/couleur.soc
+%{_libdir}/%{name}/presets/config/drawstyles.sod
+%{_libdir}/%{name}/presets/config/einden.soe
+%{_libdir}/%{name}/presets/config/elegant.sog
+%{_libdir}/%{name}/presets/config/enden.soe
+%{_libdir}/%{name}/presets/config/estilos.sod
+%{_libdir}/%{name}/presets/config/estrem.soe
+%{_libdir}/%{name}/presets/config/extrem.soe
+%{_libdir}/%{name}/presets/config/faerg.soc
+%{_libdir}/%{name}/presets/config/farben.soc
+%{_libdir}/%{name}/presets/config/fimlinha.soe
+%{_libdir}/%{name}/presets/config/finlinea.soe
+%{_libdir}/%{name}/presets/config/formellt.sog
+%{_libdir}/%{name}/presets/config/hachures.soh
+%{_libdir}/%{name}/presets/config/hatch.soh
+%{_libdir}/%{name}/presets/config/klasicky.sog
+%{_libdir}/%{name}/presets/config/klasik.sog
+%{_libdir}/%{name}/presets/config/klasika.sog
+%{_libdir}/%{name}/presets/config/klassiek.sog
+%{_libdir}/%{name}/presets/config/klassik.sog
+%{_libdir}/%{name}/presets/config/klassisk.sog
+%{_libdir}/%{name}/presets/config/linien.sod
+%{_libdir}/%{name}/presets/config/moderne.sog
+%{_libdir}/%{name}/presets/config/moderni.sog
+%{_libdir}/%{name}/presets/config/moderno.sog
+%{_libdir}/%{name}/presets/config/moderny.sog
+%{_libdir}/%{name}/presets/config/modieus.sog
+%{_libdir}/%{name}/presets/config/moenster.soh
+%{_libdir}/%{name}/presets/config/nuevo.sog
+%{_libdir}/%{name}/presets/config/palet.soc
+%{_libdir}/%{name}/presets/config/paleta.soc
+%{_libdir}/%{name}/presets/config/palete.soc
+%{_libdir}/%{name}/presets/config/pilespds.soe
+%{_libdir}/%{name}/presets/config/puscice.soe
+%{_libdir}/%{name}/presets/config/schraffu.soh
+%{_libdir}/%{name}/presets/config/singelo.sog
+%{_libdir}/%{name}/presets/config/sipky.soe
+%{_libdir}/%{name}/presets/config/skraver.soh
+%{_libdir}/%{name}/presets/config/slogi.sod
+%{_libdir}/%{name}/presets/config/slut.soe
+%{_libdir}/%{name}/presets/config/sombread.soh
+%{_libdir}/%{name}/presets/config/srafovani.soh
+%{_libdir}/%{name}/presets/config/srafovanie.soh
+%{_libdir}/%{name}/presets/config/srafure.soh
+%{_libdir}/%{name}/presets/config/stijlen.sod
+%{_libdir}/%{name}/presets/config/stil.sod
+%{_libdir}/%{name}/presets/config/stili.sod
+%{_libdir}/%{name}/presets/config/stilos.sod
+%{_libdir}/%{name}/presets/config/streger.sod
+%{_libdir}/%{name}/presets/config/styly.sod
+%{_libdir}/%{name}/presets/config/tramas.soh
+%{_libdir}/%{name}/presets/config/tratto.soh
+
 %{_libdir}/%{name}/presets/database
 %{_libdir}/%{name}/presets/gallery
 %{_libdir}/%{name}/presets/psprint
@@ -1830,6 +1920,10 @@ fontpostinst TTF
 %{_libdir}/%{name}/share/template/en-US
 %{_libdir}/%{name}/share/wordbook/en-US
 %{_libdir}/%{name}/program/resource/*en-US.res
+%{_libdir}/%{name}/licenses/LICENSE_en-US
+%{_libdir}/%{name}/licenses/LICENSE_en-US.html
+%{_libdir}/%{name}/readmes/README_en-US
+%{_libdir}/%{name}/readmes/README_en-US.html
 
 %files libs
 %defattr(644,root,root,755)
