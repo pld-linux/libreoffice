@@ -12,6 +12,7 @@
 #	- add ooglobal symlink and it's ooo-wrapper entry (among calc|draw|impress|math|web|writer)
 # 	- add lang: rw (?)
 #	- add %{_libdir}/%{name}/share/autocorr/acor_(ll)-(LL).dat files to package (marked with %lang)
+#       - can't be just i18n-{be,gu,hi,kn,pa,ta} instead of *-{be_BY,*_IN}?
 
 # Conditional build:
 %bcond_with	java		# Java support
@@ -284,6 +285,7 @@ arabskim.
 
 %package i18n-be_BY
 Summary:	OpenOffice.org - interface in Belarusian language
+Summary(pl):	OpenOffice.org - interfejs w jêzyku bia³oruskim
 Group:		Applications/Office
 Requires:	%{name} = %{epoch}:%{version}-%{release}
 
@@ -292,6 +294,8 @@ This package provides resources containing menus and dialogs in
 Belarusian language.
 
 %files i18n-be_BY -f be-BY.lang
+Ten pakiet dostarcza zasoby zawieraj±ce menu i okna dialogowe w jêzyku
+bia³oruskim.
 
 %package i18n-bg
 Summary:	OpenOffice.org - interface in Bulgarian language
@@ -315,12 +319,17 @@ bu³garskim.
 
 %package i18n-bn
 Summary:	OpenOffice.org - interface in Bangla language
+Summary(pl):	OpenOffice.org - interfejs w jêzyku bengalskim
 Group:		Applications/Office
 Requires:	%{name} = %{epoch}:%{version}-%{release}
 
 %description i18n-bn
 This package provides resources containing menus and dialogs in
 Bangla language.
+
+%description i18n-bn -l pl
+Ten pakiet dostarcza zasoby zawieraj±ce menu i okna dialogowe w jêzyku
+bengalskim.
 
 %files i18n-bn -f bn.lang
 
@@ -462,6 +471,7 @@ anglieskim dla Wielkiej Brytanii.
 
 %package i18n-eo
 Summary:	OpenOffice.org - interface in Esperanto language
+Summary(pl):	OpenOffice.org - interfejs w jêzyku esperanto
 Group:		Applications/Office
 Requires:	%{name} = %{epoch}:%{version}-%{release}
 
@@ -469,7 +479,11 @@ Requires:	%{name} = %{epoch}:%{version}-%{release}
 This package provides resources containing menus and dialogs in
 Esperanto language.
 
+%description i18n-eo -l pl
+
 %files i18n-eo -f eo.lang
+Ten pakiet dostarcza zasoby zawieraj±ce menu i okna dialogowe w jêzyku
+esperanto.
 
 %package i18n-es
 Summary:	OpenOffice.org - interface in Spanish language
@@ -513,15 +527,22 @@ estoñskim.
 
 %package i18n-eu
 Summary:	OpenOffice.org - interface in Basque (Euskara) language
+Summary(pl):	OpenOffice.org - interfejs w jêzyku baskijskim (euskera)
 Group:		Applications/Office
 Requires:	%{name} = %{epoch}:%{version}-%{release}
+Obsoletes:	openoffice-i18n-eu
+Obsoletes:	openoffice-i18n-eu-gtk
+Obsoletes:	openoffice-i18n-eu-kde
 
 %description i18n-eu
 This package provides resources containing menus and dialogs in
 Basque (Euskara) language.
 
-%files i18n-eu -f eu.lang
+%description i18n-eu -l pl
+Ten pakiet dostarcza zasoby zawieraj±ce menu i okna dialogowe w jêzyku
+baskijskim (euskera).
 
+%files i18n-eu -f eu.lang
 
 %package i18n-fi
 Summary:	OpenOffice.org - interface in Finnish language
@@ -625,7 +646,7 @@ galicyjskim.
 
 %package i18n-gu_IN
 Summary:	OpenOffice.org - interface in Gujarati language
-Summary(pl):	OpenOffice.org - interfejs w jêzyku gujarati
+Summary(pl):	OpenOffice.org - interfejs w jêzyku gud¼arati
 Group:		Applications/Office
 Requires:	%{name} = %{epoch}:%{version}-%{release}
 
@@ -635,7 +656,7 @@ Gujarati language.
 
 %description i18n-gu_IN -l pl
 Ten pakiet dostarcza zasoby zawieraj±ce menu i okna dialogowe w jêzyku
-gujarati.
+gud¼arati.
 
 %files i18n-gu_IN -f gu-IN.lang
 
@@ -801,6 +822,7 @@ japoñskim.
 
 %package i18n-km
 Summary:	OpenOffice.org - interface in Khmer language
+Summary(pl):	OpenOffice.org - interfejs w jêzyku khmerskim
 Group:		Applications/Office
 Requires:	%{name} = %{epoch}:%{version}-%{release}
 
@@ -808,16 +830,28 @@ Requires:	%{name} = %{epoch}:%{version}-%{release}
 This package provides resources containing menus and dialogs in
 Khmer language.
 
+%description i18n-km -l pl
+Ten pakiet dostarcza zasoby zawieraj±ce menu i okna dialogowe w jêzyku
+khmerskim.
+
 %files i18n-km -f km.lang
 
 %package i18n-kn_IN
 Summary:	OpenOffice.org - interface in Kannada language
+Summary(pl):	OpenOffice.org - interfejs w jêzyku kannara
 Group:		Applications/Office
 Requires:	%{name} = %{epoch}:%{version}-%{release}
+Obsoletes:	openoffice-i18n-kn
+Obsoletes:	openoffice-i18n-kn-gtk
+Obsoletes:	openoffice-i18n-kn-kde
 
 %description i18n-kn_IN
 This package provides resources containing menus and dialogs in
 Kannada language.
+
+%description i18n-kn_IN -l pl
+Ten pakiet dostarcza zasoby zawieraj±ce menu i okna dialogowe w jêzyku
+kannara.
 
 %files i18n-kn_IN -f kn-IN.lang
 
@@ -1215,23 +1249,39 @@ tamilskim.
 
 %package i18n-th
 Summary:	OpenOffice.org - interface in Thai language
+Summary(pl):	OpenOffice.org - interfejs w jêzyku tajskim
 Group:		Applications/Office
 Requires:	%{name} = %{epoch}:%{version}-%{release}
+Obsoletes:	openoffice-i18n-th
+Obsoletes:	openoffice-i18n-th-gtk
+Obsoletes:	openoffice-i18n-th-kde
 
 %description i18n-th
 This package provides resources containing menus and dialogs in
 Thai language.
 
+%description i18n-th -l pl
+Ten pakiet dostarcza zasoby zawieraj±ce menu i okna dialogowe w jêzyku
+tajskim.
+
 %files i18n-th -f th.lang
 
 %package i18n-tn
 Summary:	OpenOffice.org - interface in Tswana language
+Summary(pl):	OpenOffice.org - interfejs w jêzyku tswana
 Group:		Applications/Office
 Requires:	%{name} = %{epoch}:%{version}-%{release}
+Obsoletes:	openoffice-i18n-tn
+Obsoletes:	openoffice-i18n-tn-gtk
+Obsoletes:	openoffice-i18n-tn-kde
 
 %description i18n-tn
 This package provides resources containing menus and dialogs in
 Tswana language.
+
+%description i18n-tn -l pl
+Ten pakiet dostarcza zasoby zawieraj±ce menu i okna dialogowe w jêzyku
+tswana.
 
 %files i18n-tn -f tn.lang
 
@@ -1293,12 +1343,17 @@ wietnamskim.
 
 %package i18n-xh
 Summary:	OpenOffice.org - interface in Xhosa language
+Summary(pl):	OpenOffice.org - interfejs w jêzyku khosa
 Group:		Applications/Office
 Requires:	%{name} = %{epoch}:%{version}-%{release}
 
 %description i18n-xh
 This package provides resources containing menus and dialogs in
 Xhosa language.
+
+%description i18n-xh -l pl
+Ten pakiet dostarcza zasoby zawieraj±ce menu i okna dialogowe w jêzyku
+khosa.
 
 %files i18n-xh -f xh.lang
 
