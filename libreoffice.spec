@@ -34,7 +34,7 @@ Summary:	OpenOffice.org - powerful office suite
 Summary(pl):	OpenOffice.org - potê¿ny pakiet biurowy
 Name:		openoffice.org
 Version:	%{fullver}
-Release:	0.4%{?with_vfs:vfs}
+Release:	0.5%{?with_vfs:vfs}
 Epoch:		1
 License:	GPL/LGPL
 Group:		X11/Applications
@@ -1706,7 +1706,8 @@ for lang in $langlist; do
 		# lib/openoffice.org/program/resource/*.res
 		grep "/program/resource/.*${lang}.res$" ${lfile} >> ${lang}.lang || :
 		# lib/openoffice.org/share/autocorr/*.dat
-		grep "/share/autocorr/.*${lang}-.*.dat$" ${lfile} >> ${lang}.lang || :
+		grep "/share/autocorr/.*${lang}.dat$" ${lfile} >> ${lang}.lang || :
+		grep -i "/share/autocorr/.*${lang}-${lang}.dat$" ${lfile} >> ${lang}.lang || :
 		# lib/openoffice.org/share/autotext/$lang
 		grep "/share/autotext/${lang}$" ${lfile} >> ${lang}.lang || :
 		grep "/share/autotext/${lang}/" ${lfile} >> ${lang}.lang || :
