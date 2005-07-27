@@ -20,9 +20,9 @@
 
 %define		ver		2.0
 %define		rel		0
-%define		ooobver		1.9.116
+%define		ooobver		1.9.118
 %define		snap		SRC680
-%define		bver		m116
+%define		bver		m118
 %define		subver		680
 
 %define		fullver		%{ver}.%{rel}
@@ -34,20 +34,20 @@ Summary:	OpenOffice.org - powerful office suite
 Summary(pl):	OpenOffice.org - potê¿ny pakiet biurowy
 Name:		openoffice.org
 Version:	%{fullver}
-Release:	0.3%{?with_vfs:vfs}
+Release:	0.4%{?with_vfs:vfs}
 Epoch:		1
 License:	GPL/LGPL
 Group:		X11/Applications
 Source0:	http://go-ooo.org/packages/%{snap}/ooo-build-%{ooobver}.tar.gz
-# Source0-md5:	98848d9720898ff37f8627750d239807
+# Source0-md5:	d0d56a537416473f7deed33947078de8
 Source1:	http://go-ooo.org/packages/%{snap}/%{ssnap}-%{bver}-core.tar.bz2
-# Source1-md5:	8bdbfbe48a328275ea44dc6bef3bd2e9
+# Source1-md5:	e5dbb456faf8c94e2acab8aae3f64511
 Source2:	http://go-ooo.org/packages/%{snap}/%{ssnap}-%{bver}-system.tar.bz2
-# Source2-md5:	927f38c6d4c20324d811960d43c636b9
+# Source2-md5:	2aad305908f01086b3dff896b3853e2e
 Source3:	http://go-ooo.org/packages/%{snap}/%{ssnap}-%{bver}-binfilter.tar.bz2
-# Source3-md5:	d3a7ce9579047cb8553968830c65761f
+# Source3-md5:	fd6abac76015952175f882d63f060506
 Source4:	http://go-ooo.org/packages/%{snap}/%{ssnap}-%{bver}-lang.tar.bz2
-# Source4-md5:	539babf4ca1951c8a7715a0ea41e904d
+# Source4-md5:	723806c4287f7ae77ae16eac3711492f
 Source10:	http://go-ooo.org/packages/%{snap}/ooo_custom_images-13.tar.bz2
 # Source10-md5:	2480af7f890c8175c7f9e183a1b39ed2
 Source11:	http://go-ooo.org/packages/%{snap}/ooo_crystal_images-6.tar.bz2
@@ -293,9 +293,11 @@ Requires:	%{name} = %{epoch}:%{version}-%{release}
 This package provides resources containing menus and dialogs in
 Belarusian language.
 
-%files i18n-be_BY -f be-BY.lang
+%description i18n-be_BY -l pl
 Ten pakiet dostarcza zasoby zawieraj±ce menu i okna dialogowe w jêzyku
 bia³oruskim.
+
+%files i18n-be_BY -f be-BY.lang
 
 %package i18n-bg
 Summary:	OpenOffice.org - interface in Bulgarian language
@@ -480,10 +482,10 @@ This package provides resources containing menus and dialogs in
 Esperanto language.
 
 %description i18n-eo -l pl
-
-%files i18n-eo -f eo.lang
 Ten pakiet dostarcza zasoby zawieraj±ce menu i okna dialogowe w jêzyku
 esperanto.
+
+%files i18n-eo -f eo.lang
 
 %package i18n-es
 Summary:	OpenOffice.org - interface in Spanish language
