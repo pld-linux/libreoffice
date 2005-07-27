@@ -1605,6 +1605,9 @@ install %{SOURCE29} $RPM_BUILD_ROOT%{_desktopdir}
 # Add in the regcomp tool since some people need it for 3rd party add-ons
 cp -f build/src%{subver}-%{bver}/solver/%{subver}/unxlng*.pro/bin/regcomp $RPM_BUILD_ROOT%{_libdir}/%{name}/program
 
+# fix python
+sed -i -e 's|#!/bin/python|#!%{_bindir}/python|g' $RPM_BUILD_ROOT%{_libdir}/%{name}/program/*.py
+
 # Really needed?
 install -d $RPM_BUILD_ROOT%{_pixmapsdir}
 
