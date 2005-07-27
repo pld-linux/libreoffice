@@ -1175,7 +1175,7 @@ rosyjskim.
 
 %package i18n-rw
 Summary:	OpenOffice.org - interface in Kinarwanda language
-Summary(pl):	OpenOffice.org - interfejs w jêzyku Kinarwanda
+Summary(pl):	OpenOffice.org - interfejs w jêzyku kinya-ruanda
 Group:		Applications/Office
 Requires:	%{name} = %{epoch}:%{version}-%{release}
 
@@ -1185,7 +1185,7 @@ Kinarwanda language.
 
 %description i18n-rw -l pl
 Ten pakiet dostarcza zasoby zawieraj±ce menu i okna dialogowe w jêzyku
-Kinarwanda.
+kinya-ruanda.
 
 %files i18n-ro -f rw.lang
 
