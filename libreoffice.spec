@@ -1173,6 +1173,22 @@ rosyjskim.
 
 %files i18n-ru -f ru.lang
 
+%package i18n-rw
+Summary:	OpenOffice.org - interface in Kinarwanda language
+Summary(pl):	OpenOffice.org - interfejs w jêzyku Kinarwanda
+Group:		Applications/Office
+Requires:	%{name} = %{epoch}:%{version}-%{release}
+
+%description i18n-rw
+This package provides resources containing menus and dialogs in
+Kinarwanda language.
+
+%description i18n-rw -l pl
+Ten pakiet dostarcza zasoby zawieraj±ce menu i okna dialogowe w jêzyku
+Kinarwanda.
+
+%files i18n-ro -f rw.lang
+
 %package i18n-sk
 Summary:	OpenOffice.org - interface in Slovak language
 Summary(pl):	OpenOffice.org - interfejs w jêzyku s³owackim
@@ -1690,7 +1706,7 @@ for lang in $langlist; do
 		# lib/openoffice.org/program/resource/*.res
 		grep "/program/resource/.*${lang}.res$" ${lfile} >> ${lang}.lang || :
 		# lib/openoffice.org/share/autocorr/*.dat
-		grep "/share/autocorr/.*${lang}.dat$" ${lfile} >> ${lang}.lang || :
+		grep "/share/autocorr/.*${lang}-.*.dat$" ${lfile} >> ${lang}.lang || :
 		# lib/openoffice.org/share/autotext/$lang
 		grep "/share/autotext/${lang}$" ${lfile} >> ${lang}.lang || :
 		grep "/share/autotext/${lang}/" ${lfile} >> ${lang}.lang || :
@@ -1710,6 +1726,11 @@ for lang in $langlist; do
 		grep "/share/wordbook/${lang}/" ${lfile} >> ${lang}.lang || :
 	fi
 done
+
+echo "%{_libdir}/%{name}/presets/config/*_hun.*" >> hu.lang
+echo "%{_libdir}/%{name}/presets/config/*_pol.*" >> pl.lang
+echo "%{_libdir}/%{name}/presets/config/*_rus.*" >> ru.lang
+echo "%{_libdir}/%{name}/presets/config/*_hun.*" >> hu.lang
 
 find $RPM_BUILD_ROOT -type f -name '*.so' -exec chmod 755 "{}" ";"
 chmod 755 $RPM_BUILD_ROOT%{_libdir}/%{name}/program/*
