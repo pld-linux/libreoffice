@@ -1,0 +1,8 @@
+[Desktop Entry]
+Encoding=UTF-8
+Name=OpenOffice.org Master
+Terminal=false
+Icon=ooo_office.png
+Exec=ooglobal
+Type=Application
+Categories=Office;X-Misc;
