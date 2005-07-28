@@ -1,28 +1,20 @@
-diff -urN ooo-build-1.9.100.org/patches/src680/apply ooo-build-1.9.100/patches/src680/apply
---- ooo-build-1.9.100.org/patches/src680/apply	2005-05-06 15:14:57.000000000 +0000
-+++ ooo-build-1.9.100/patches/src680/apply	2005-05-08 16:32:31.807428480 +0000
-@@ -57,6 +57,8 @@
- [ TemporaryHacks ]
- # Teach linkoo about types.rdb i#49104
- linkoo-types.diff
-+# fix mozilla
-+system-mozilla.diff
- 
- [ GCJ ]
- # qadevOOo fails with encoding errors...
-diff -urN ooo-build-1.9.100.org/patches/src680/system-mozilla.diff ooo-build-1.9.100/patches/src680/system-mozilla.diff
---- ooo-build-1.9.100.org/patches/src680/system-mozilla.diff	1970-01-01 00:00:00.000000000 +0000
-+++ ooo-build-1.9.100/patches/src680/system-mozilla.diff	2005-05-08 16:31:14.699150720 +0000
-@@ -0,0 +1,11 @@
-+--- np_sdk/mozilla-source-M16-stub.patch.org	2005-05-08 17:17:25.759885456 +0000
-++++ np_sdk/mozilla-source-M16-stub.patch	2005-05-08 17:17:55.449371968 +0000
-+@@ -1202,7 +1202,7 @@
-+ ! .ENDIF
-+ ! 
-+ ! .IF "$(SYSTEM_MOZILLA)" == "YES"
-+-! INCPRE= -I$(MOZ_INC)/nspr -I$(MOZ_INC)/java -I$(MOZ_INC)/plugin
-++! INCPRE= -I$(MOZ_NSS_CFLAGS) -I$(MOZ_INC)/nspr -I$(MOZ_INC)/java -I$(MOZ_INC)/plugin
-+ ! .ENDIF
-+ ! 
-+ ! .IF "$(GUI)" == "UNX"
-
+--- ./patches/src680/apply~	2005-07-28 00:28:15.000000000 +0300
++++ ./patches/src680/apply	2005-07-28 00:29:27.000000000 +0300
+@@ -31,7 +31,7 @@
+ # Ark Linux
+ Ark: LinuxCommon, NotDebian, ArkOnly
+ # www.pld-linux.org
+-PLDBase: LinuxCommon, NotDebian
++PLDBase: LinuxCommon, NotDebian, PLDOnly
+ PLD: PLDBase
+ PLD64: PLDBase, 64bit
+ # Mandriva Linux
+--- ./patches/src680/apply~	2005-07-28 00:28:15.000000000 +0300
++++ ./patches/src680/apply	2005-07-28 00:29:27.000000000 +0300
+@@ -1086,3 +1086,6 @@
+ vba-basic-globals.diff
+ vba-build.diff
+ vba-sc-docuno-hook.diff
++
++[ PLDOnly ]
++openoffice.org-STL-lib64.diff
