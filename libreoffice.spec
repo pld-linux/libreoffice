@@ -103,6 +103,7 @@ Source412:	%{cftp}/helpcontent/helpcontent_90_unix.tgz
 # Source412-md5:	9521a01c5817e87178f356762f8cdab5
 
 Patch0:		%{name}-pld.patch
+Patch1:		%{name}-STL-lib64.diff
 
 URL:		http://www.openoffice.org/
 BuildRequires:	ImageMagick
@@ -141,7 +142,7 @@ BuildRequires:	libjpeg-devel
 BuildRequires:	nss-devel >= 1:3.10
 BuildRequires:	nspr-devel >= 1:4.6-0.20041030.3
 BuildRequires:	mozilla-devel >= 5:1.7.6-2
-BuildRequires:	nas-devel
+BuildRequires:	nas-devel >= 1.7-1
 BuildRequires:	neon-devel
 BuildRequires:	openldap-devel
 BuildRequires:	pam-devel
@@ -169,7 +170,7 @@ Requires:	libstdc++ >= 5:3.2.1
 Requires:	mktemp
 Requires:	sed
 #Suggested:	chkfontpath
-ExclusiveArch:	%{ix86} ppc sparc sparcv9
+ExclusiveArch:	%{ix86} ppc sparc sparcv9 amd64
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
@@ -1439,7 +1440,7 @@ zuluskim.
 
 %prep
 %setup -q -n ooo-build-%{ooobver}
-#%patch0 -p1
+%patch0 -p1
 
 install -d src
 # sources, icons, KDE_icons
@@ -1453,6 +1454,9 @@ ln -sf %{SOURCE400} %{SOURCE401} %{SOURCE402} %{SOURCE403} %{SOURCE404} \
 # we keep these in ooo-build repository
 #ln -s %{SOURCE20} src/openabout_pld.bmp
 #ln -s %{SOURCE21} src/openintro_pld.bmp
+
+# add to ooo-build patch-system
+install %{PATCH1} patches/src680
 
 %build
 # Make sure we have /proc mounted - otherwise idlc will fail later.
@@ -1498,6 +1502,9 @@ CONFOPTS=" \
 %endif
 %ifarch sparc sparcv9
 	--with-arch=sparc \
+%endif
+%ifarch amd64
+	--with-arch=x86_64 \
 %endif
 	--with-ccache-allowed \
 	--with-system-gcc \
