@@ -1566,7 +1566,7 @@ CONFOPTS=" \
 	--enable-crashdump=no \
 	--disable-symbols \
 %endif
-	--with-num-jobs=$RPM_BUILD_NR_THREADS
+	--with-num-cpus=$RPM_BUILD_NR_THREADS
 "
 
 # for cvs snaps
