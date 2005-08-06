@@ -149,10 +149,11 @@ BuildRequires:	pam-devel
 BuildRequires:	perl-base
 BuildRequires:	perl-Archive-Zip
 BuildRequires:	pkgconfig
-BuildRequires:	rpmbuild(macros) >= 1.213
 BuildRequires:	python >= 2.2
 BuildRequires:	python-devel >= 2.2
 BuildRequires:	python-modules >= 2.2
+BuildRequires:	rpm-pythonprov
+BuildRequires:	rpmbuild(macros) >= 1.213
 BuildRequires:	sablotron-devel
 BuildRequires:	sane-backends-devel
 BuildRequires:	startup-notification-devel >= 0.5
