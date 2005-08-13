@@ -20,9 +20,9 @@
 
 %define		ver		2.0
 %define		rel		0
-%define		ooobver		1.9.118
+%define		ooobver		1.9.123
 %define		snap		SRC680
-%define		bver		m118
+%define		bver		m123
 %define		subver		680
 
 %define		fullver		%{ver}.%{rel}
@@ -34,20 +34,20 @@ Summary:	OpenOffice.org - powerful office suite
 Summary(pl):	OpenOffice.org - potê¿ny pakiet biurowy
 Name:		openoffice.org
 Version:	%{fullver}
-Release:	0.5%{?with_vfs:vfs}
+Release:	0.6%{?with_vfs:vfs}
 Epoch:		1
 License:	GPL/LGPL
 Group:		X11/Applications
 Source0:	http://go-ooo.org/packages/%{snap}/ooo-build-%{ooobver}.tar.gz
-# Source0-md5:	d0d56a537416473f7deed33947078de8
+# Source0-md5:	7906dcfeb2074971bdc37019582b32f5
 Source1:	http://go-ooo.org/packages/%{snap}/%{ssnap}-%{bver}-core.tar.bz2
-# Source1-md5:	e5dbb456faf8c94e2acab8aae3f64511
+# Source1-md5:	4c566ccd4131ceb99fcf7395cbae3d9e
 Source2:	http://go-ooo.org/packages/%{snap}/%{ssnap}-%{bver}-system.tar.bz2
-# Source2-md5:	2aad305908f01086b3dff896b3853e2e
+# Source2-md5:	e223aa4452b2148f657c107392539343
 Source3:	http://go-ooo.org/packages/%{snap}/%{ssnap}-%{bver}-binfilter.tar.bz2
-# Source3-md5:	fd6abac76015952175f882d63f060506
+# Source3-md5:	cc5799f480c530e21b2f030e194aae1f
 Source4:	http://go-ooo.org/packages/%{snap}/%{ssnap}-%{bver}-lang.tar.bz2
-# Source4-md5:	723806c4287f7ae77ae16eac3711492f
+# Source4-md5:	ec7638b7b508b7da5aa8dcea52fd823a
 Source10:	http://go-ooo.org/packages/%{snap}/ooo_custom_images-13.tar.bz2
 # Source10-md5:	2480af7f890c8175c7f9e183a1b39ed2
 Source11:	http://go-ooo.org/packages/%{snap}/ooo_crystal_images-6.tar.bz2
@@ -56,6 +56,8 @@ Source12:	http://go-ooo.org/packages/%{snap}/extras-2.tar.bz2
 # Source12-md5:	733051ebeffae5232a2eb760162da020
 Source13:	http://go-ooo.org/packages/libwpd/libwpd-0.8.0.tar.gz
 # Source13-md5:	98e59beecc112339bb78654863304c1c
+Source14:	http://go-ooo.org/packages/SRC680/mdbtools-0.6pre1.tar.gz
+# Source14-md5:	246e8f38b2a1af1bcff60ee0da59300b
 Source20:	oocalc.desktop
 Source21:	oodraw.desktop
 Source22:	ooffice.desktop
@@ -115,6 +117,7 @@ BuildRequires:	bison >= 1.875-4
 BuildRequires:	boost-devel
 BuildRequires:	boost-spirit-devel
 BuildRequires:	boost-mem_fn-devel
+BuildRequires:	cairo-devel >= 0.5.2
 BuildRequires:	cups-devel
 BuildRequires:	curl-devel >= 7.9.8
 BuildRequires:	db-cxx-devel
@@ -127,6 +130,7 @@ BuildRequires:	gnome-vfs2-devel
 BuildRequires:	db-java >= 4.2.52-4
 BuildRequires:	jar
 BuildRequires:	jdk
+BuildRequires:	jakarta-ant
 %else
 BuildRequires:	libxslt-progs
 %endif
@@ -144,6 +148,7 @@ BuildRequires:	nspr-devel >= 1:4.6-0.20041030.3
 BuildRequires:	mozilla-devel >= 5:1.7.6-2
 BuildRequires:	nas-devel >= 1.7-1
 BuildRequires:	neon-devel
+BuildRequires:	openclipart-png >= 0:0.16
 BuildRequires:	openldap-devel
 BuildRequires:	pam-devel
 BuildRequires:	perl-base
@@ -1446,7 +1451,8 @@ zuluskim.
 install -d src
 # sources, icons, KDE_icons
 ln -sf %{SOURCE1} %{SOURCE2} %{SOURCE3} %{SOURCE4} \
-	%{SOURCE10} %{SOURCE11} %{SOURCE12} %{SOURCE13} src
+	%{SOURCE10} %{SOURCE11} %{SOURCE12} %{SOURCE13} \
+	%{SOURCE14} src
 # help files
 ln -sf %{SOURCE400} %{SOURCE401} %{SOURCE402} %{SOURCE403} %{SOURCE404} \
 	%{SOURCE405} %{SOURCE406} %{SOURCE407} %{SOURCE408} %{SOURCE409} \
@@ -1466,6 +1472,9 @@ if [ ! -r /proc/cpuinfo ]; then
 	exit 1
 fi
 
+%{__aclocal}
+%{__autoconf}
+
 %ifarch %{x8664} sparc64 ppc64 alpha
 DISTRO="PLD64"
 %else
@@ -1483,10 +1492,9 @@ QTLIB="%{_libdir}"
 export CC CXX ENVCFLAGS ENVCFLAGSCXX DESTDIR IGNORE_MANIFEST_CHANGES DISTRO QTINC QTLIB
 
 %if %{with java}
-GCJ=gcj
 JAVA_HOME=%{_libdir}/java
 DB_JAR="%{_javadir}/db.jar"
-export JAVA_HOME DB_JAR GCJ
+export JAVA_HOME DB_JAR
 %endif
 
 DEFAULT_TO_ENGLISH_FOR_PACKING=1; export DEFAULT_TO_ENGLISH_FOR_PACKING
@@ -1526,6 +1534,7 @@ CONFOPTS=" \
 	--with-system-boost \
 	--with-system-neon \
 	--with-system-mozilla \
+	--with-system-cairo \
 	--with-dynamic-xinerama \
 	--with-vendor="${DISTRO}" \
 	--with-distro="${DISTRO}" \
@@ -1537,6 +1546,7 @@ CONFOPTS=" \
 %if %{with java}
 	--with-java \
 	--with-jdk-home=$JAVA_HOME \
+	--with-ant-home=$JAVA_HOME \
 %else
 	--without-java \
 %endif
@@ -1547,12 +1557,17 @@ CONFOPTS=" \
 %endif
 	--with-docdir=%{_docdir}/%{name}-%{version} \
 	--with-python=%{_bindir}/python \
+	--with-openclipart=%{_datadir}/openclipart \
 	--with-stlport4=/usr \
 	--with-x \
 	--without-fonts \
 	--without-gpc \
 	--disable-epm \
 	--disable-fontooo \
+	--enable-access \
+	--enable-cairo \
+	--enable-crypt-link \
+	--enable-pam-link \
 	--enable-openldap \
 	--enable-cups \
 	--enable-fontconfig \
