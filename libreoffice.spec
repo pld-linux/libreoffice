@@ -20,9 +20,9 @@
 
 %define		ver		2.0
 %define		rel		0
-%define		ooobver		1.9.123
+%define		ooobver		1.9.124
 %define		snap		SRC680
-%define		bver		m123
+%define		bver		m124
 %define		subver		680
 
 %define		fullver		%{ver}.%{rel}
@@ -34,20 +34,20 @@ Summary:	OpenOffice.org - powerful office suite
 Summary(pl):	OpenOffice.org - potê¿ny pakiet biurowy
 Name:		openoffice.org
 Version:	%{fullver}
-Release:	0.6%{?with_vfs:vfs}
+Release:	0.7%{?with_vfs:vfs}
 Epoch:		1
 License:	GPL/LGPL
 Group:		X11/Applications
 Source0:	http://go-ooo.org/packages/%{snap}/ooo-build-%{ooobver}.tar.gz
-# Source0-md5:	7906dcfeb2074971bdc37019582b32f5
+# Source0-md5:	a82488bad72ea7006c7b269ad0652660
 Source1:	http://go-ooo.org/packages/%{snap}/%{ssnap}-%{bver}-core.tar.bz2
-# Source1-md5:	4c566ccd4131ceb99fcf7395cbae3d9e
+# Source1-md5:	1f79a23b6d6a1339b137d12b156583a6
 Source2:	http://go-ooo.org/packages/%{snap}/%{ssnap}-%{bver}-system.tar.bz2
-# Source2-md5:	e223aa4452b2148f657c107392539343
+# Source2-md5:	db7079c78028378224aeb0f282cb051e
 Source3:	http://go-ooo.org/packages/%{snap}/%{ssnap}-%{bver}-binfilter.tar.bz2
-# Source3-md5:	cc5799f480c530e21b2f030e194aae1f
+# Source3-md5:	a11c3419e5be158056bfbe8f16bcc65a
 Source4:	http://go-ooo.org/packages/%{snap}/%{ssnap}-%{bver}-lang.tar.bz2
-# Source4-md5:	ec7638b7b508b7da5aa8dcea52fd823a
+# Source4-md5:	dc8bd51c89a032e9156a53a38039150d
 Source10:	http://go-ooo.org/packages/%{snap}/ooo_custom_images-13.tar.bz2
 # Source10-md5:	2480af7f890c8175c7f9e183a1b39ed2
 Source11:	http://go-ooo.org/packages/%{snap}/ooo_crystal_images-6.tar.bz2
@@ -1446,7 +1446,7 @@ zuluskim.
 
 %prep
 %setup -q -n ooo-build-%{ooobver}
-%patch0 -p1
+#%patch0 -p1
 
 install -d src
 # sources, icons, KDE_icons
