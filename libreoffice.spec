@@ -17,12 +17,13 @@
 # Conditional build:
 %bcond_with	java		# Java support
 %bcond_with	vfs		# Enable GNOME VFS and Evolution 2 support
+%bcond_with	mono
 
 %define		ver		2.0
 %define		rel		0
-%define		ooobver		1.9.124
+%define		ooobver		1.9.125.1.1
 %define		snap		SRC680
-%define		bver		m124
+%define		bver		m125
 %define		subver		680
 
 %define		fullver		%{ver}.%{rel}
@@ -34,20 +35,20 @@ Summary:	OpenOffice.org - powerful office suite
 Summary(pl):	OpenOffice.org - potê¿ny pakiet biurowy
 Name:		openoffice.org
 Version:	%{fullver}
-Release:	0.7%{?with_vfs:vfs}
+Release:	0.9%{?with_vfs:vfs}
 Epoch:		1
 License:	GPL/LGPL
 Group:		X11/Applications
 Source0:	http://go-ooo.org/packages/%{snap}/ooo-build-%{ooobver}.tar.gz
-# Source0-md5:	a82488bad72ea7006c7b269ad0652660
+# Source0-md5:	aaa8d3ae5356f689863b08fee259bc63
 Source1:	http://go-ooo.org/packages/%{snap}/%{ssnap}-%{bver}-core.tar.bz2
-# Source1-md5:	1f79a23b6d6a1339b137d12b156583a6
+# Source1-md5:	6b3c2853d5866d8ccbd8c2fc62c06a10
 Source2:	http://go-ooo.org/packages/%{snap}/%{ssnap}-%{bver}-system.tar.bz2
-# Source2-md5:	db7079c78028378224aeb0f282cb051e
+# Source2-md5:	df8030902e050f8d9ad7cdb01c4715a1
 Source3:	http://go-ooo.org/packages/%{snap}/%{ssnap}-%{bver}-binfilter.tar.bz2
-# Source3-md5:	a11c3419e5be158056bfbe8f16bcc65a
+# Source3-md5:	6193bd8b00ca0d9a1b43192690b9136f
 Source4:	http://go-ooo.org/packages/%{snap}/%{ssnap}-%{bver}-lang.tar.bz2
-# Source4-md5:	dc8bd51c89a032e9156a53a38039150d
+# Source4-md5:	de8666744f403e2408dc33e556063293
 Source10:	http://go-ooo.org/packages/%{snap}/ooo_custom_images-13.tar.bz2
 # Source10-md5:	2480af7f890c8175c7f9e183a1b39ed2
 Source11:	http://go-ooo.org/packages/%{snap}/ooo_crystal_images-6.tar.bz2
@@ -145,6 +146,10 @@ BuildRequires:	libxml2-devel >= 2.0
 BuildRequires:	libjpeg-devel
 BuildRequires:	nss-devel >= 1:3.10
 BuildRequires:	nspr-devel >= 1:4.6-0.20041030.3
+%if %{with mono}
+BuildRequires:	mono-devel >= 1.1.8
+BuildRequires:	mono-csharp >= 1.1.8
+%endif
 BuildRequires:	mozilla-devel >= 5:1.7.6-2
 BuildRequires:	nas-devel >= 1.7-1
 BuildRequires:	neon-devel
@@ -1567,6 +1572,7 @@ CONFOPTS=" \
 	--enable-access \
 	--enable-cairo \
 	--enable-crypt-link \
+	%{?with_mono:--enable-mono} %{!?with_mono:--disable-mono} \
 	--enable-pam-link \
 	--enable-openldap \
 	--enable-cups \
