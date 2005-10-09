@@ -21,14 +21,15 @@
 
 %define		ver		2.0
 %define		rel		0
-%define		ooobver		1.9.125.1.1
-%define		snap		SRC680
-%define		bver		m125
+%define		ooobver		1.9.129
+%define		ootag		ooo680-m1
+%define		snap		OOO680
+%define		bver		m1
 %define		subver		680
 
 %define		fullver		%{ver}.%{rel}
 %define		dfullver	%(echo %{fullver} | tr . _)
-%define		ssnap		%(echo %{snap} | tr SRC src)
+%define		ssnap		%(echo %{snap} | tr '[:upper:]' '[:lower:]')
 %define		specflags	-fno-strict-aliasing
 
 Summary:	OpenOffice.org - powerful office suite
@@ -39,16 +40,17 @@ Release:	0.9%{?with_vfs:vfs}
 Epoch:		1
 License:	GPL/LGPL
 Group:		X11/Applications
-Source0:	http://go-ooo.org/packages/%{snap}/ooo-build-%{ooobver}.tar.gz
-# Source0-md5:	aaa8d3ae5356f689863b08fee259bc63
+# Source0:	http://go-ooo.org/packages/%{snap}/ooo-build-%{ooobver}.tar.gz
+Source0:	http://go-ooo.org/packages/snap/ooo-build-HEAD-1.9.129-20051007.tar.gz
+# Source0-md5:	c2df5936686d5958f8369318990857d0
 Source1:	http://go-ooo.org/packages/%{snap}/%{ssnap}-%{bver}-core.tar.bz2
-# Source1-md5:	6b3c2853d5866d8ccbd8c2fc62c06a10
+# Source1-md5:	4f1cc799b61156ac4cf22578aff8f771
 Source2:	http://go-ooo.org/packages/%{snap}/%{ssnap}-%{bver}-system.tar.bz2
-# Source2-md5:	df8030902e050f8d9ad7cdb01c4715a1
+# Source2-md5:	eb603f957bcf92abbb15167dbf11598d
 Source3:	http://go-ooo.org/packages/%{snap}/%{ssnap}-%{bver}-binfilter.tar.bz2
-# Source3-md5:	6193bd8b00ca0d9a1b43192690b9136f
+# Source3-md5:	3531428307293bebbfb3ba6e62611fe6
 Source4:	http://go-ooo.org/packages/%{snap}/%{ssnap}-%{bver}-lang.tar.bz2
-# Source4-md5:	de8666744f403e2408dc33e556063293
+# Source4-md5:	6fe484f65c1da09dab317e9dcae39ce2
 Source10:	http://go-ooo.org/packages/%{snap}/ooo_custom_images-13.tar.bz2
 # Source10-md5:	2480af7f890c8175c7f9e183a1b39ed2
 Source11:	http://go-ooo.org/packages/%{snap}/ooo_crystal_images-6.tar.bz2
@@ -1508,6 +1510,7 @@ RPM_BUILD_NR_THREADS="%(echo "%{__make}" | sed -e 's#.*-j\([[:space:]]*[0-9]\+\)
 [ "$RPM_BUILD_NR_THREADS" = "%{__make}" ] && RPM_BUILD_NR_THREADS=1
 
 CONFOPTS=" \
+	--with-tag=%{ootag} \
 %ifarch %{ix86} \
 	--with-arch=x86 \
 %endif
