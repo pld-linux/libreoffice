@@ -21,15 +21,15 @@
 
 %define		ver		2.0
 %define		rel		0
-%define		ooobver		1.9.129
-%define		ootag		ooo680-m1
+%define		ooobver		2.0.0
 %define		snap		OOO680
-%define		bver		m1
+%define		snap2		SRC680
+%define		bver		%{nil}
 %define		subver		680
 
 %define		fullver		%{ver}.%{rel}
 %define		dfullver	%(echo %{fullver} | tr . _)
-%define		ssnap		%(echo %{snap} | tr O o)
+%define		ssnap		OOO_%{dfullver}
 %define		specflags	-fno-strict-aliasing
 
 Summary:	OpenOffice.org - powerful office suite
@@ -40,25 +40,24 @@ Release:	0.9%{?with_vfs:vfs}
 Epoch:		1
 License:	GPL/LGPL
 Group:		X11/Applications
-# Source0:	http://go-ooo.org/packages/%{snap}/ooo-build-%{ooobver}.tar.gz
-Source0:	http://go-ooo.org/packages/snap/ooo-build-HEAD-1.9.129-20051007.tar.gz
-# Source0-md5:	c2df5936686d5958f8369318990857d0
-Source1:	http://go-ooo.org/packages/%{snap}/%{ssnap}-%{bver}-core.tar.bz2
-# Source1-md5:	4f1cc799b61156ac4cf22578aff8f771
-Source2:	http://go-ooo.org/packages/%{snap}/%{ssnap}-%{bver}-system.tar.bz2
-# Source2-md5:	eb603f957bcf92abbb15167dbf11598d
-Source3:	http://go-ooo.org/packages/%{snap}/%{ssnap}-%{bver}-binfilter.tar.bz2
-# Source3-md5:	3531428307293bebbfb3ba6e62611fe6
-Source4:	http://go-ooo.org/packages/%{snap}/%{ssnap}-%{bver}-lang.tar.bz2
-# Source4-md5:	6fe484f65c1da09dab317e9dcae39ce2
-Source10:	http://go-ooo.org/packages/%{snap}/ooo_custom_images-13.tar.bz2
+Source0:	http://go-ooo.org/packages/%{snap}/ooo-build-%{ooobver}.tar.gz
+# Source0-md5:	e12441b6fa94576760e7ef060530b475
+Source1:	http://go-ooo.org/packages/%{snap}/%{ssnap}-core.tar.bz2
+# Source1-md5:	6a6b1dfa8fd068b1c5f9b341b35ab99d
+Source2:	http://go-ooo.org/packages/%{snap}/%{ssnap}-system.tar.bz2
+# Source2-md5:	a6f4b2ef7d1fae927cedbd45e6dd403d
+Source3:	http://go-ooo.org/packages/%{snap}/%{ssnap}-binfilter.tar.bz2
+# Source3-md5:	f5074e1968de633a5a37355fe62471f6
+Source4:	http://go-ooo.org/packages/%{snap}/%{ssnap}-lang.tar.bz2
+# Source4-md5:	8aa0c6463dc517723f9f4d4a3f0191a0
+Source10:	http://go-ooo.org/packages/%{snap2}/ooo_custom_images-13.tar.bz2
 # Source10-md5:	2480af7f890c8175c7f9e183a1b39ed2
-Source11:	http://go-ooo.org/packages/%{snap}/ooo_crystal_images-6.tar.bz2
+Source11:	http://go-ooo.org/packages/%{snap2}/ooo_crystal_images-6.tar.bz2
 # Source11-md5:	586d0f26b3f79d89bbb5b25b874e3df6
-Source12:	http://go-ooo.org/packages/%{snap}/extras-2.tar.bz2
+Source12:	http://go-ooo.org/packages/%{snap2}/extras-2.tar.bz2
 # Source12-md5:	733051ebeffae5232a2eb760162da020
-Source13:	http://go-ooo.org/packages/libwpd/libwpd-0.8.0.tar.gz
-# Source13-md5:	98e59beecc112339bb78654863304c1c
+Source13:	http://go-ooo.org/packages/libwpd/libwpd-0.8.3.tar.gz
+# Source13-md5:	f34404f8dc6123aca156d203c37e3e5d
 Source14:	http://go-ooo.org/packages/SRC680/mdbtools-0.6pre1.tar.gz
 # Source14-md5:	246e8f38b2a1af1bcff60ee0da59300b
 Source20:	oocalc.desktop
@@ -130,9 +129,10 @@ BuildRequires:	/usr/bin/getopt
 BuildRequires:	gnome-vfs2-devel
 %endif
 %if %{with java}
+BuildRequires:	jdk >= 1.4.0_00
+BuildRequires:	jdk < 1.5.0_00
 BuildRequires:	db-java >= 4.2.52-4
 BuildRequires:	jar
-BuildRequires:	jdk
 BuildRequires:	jakarta-ant
 %else
 BuildRequires:	libxslt-progs
@@ -1510,7 +1510,6 @@ RPM_BUILD_NR_THREADS="%(echo "%{__make}" | sed -e 's#.*-j\([[:space:]]*[0-9]\+\)
 [ "$RPM_BUILD_NR_THREADS" = "%{__make}" ] && RPM_BUILD_NR_THREADS=1
 
 CONFOPTS=" \
-	--with-tag=%{ootag} \
 %ifarch %{ix86} \
 	--with-arch=x86 \
 %endif
