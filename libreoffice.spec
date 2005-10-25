@@ -2,6 +2,7 @@
 #	- normal build requires little less than 4GB of disk space
 #	- full debug build requires about 9GB of disk space
 # TODO:
+#	- https://bugzilla.novell.com/show_bug.cgi?id=130220
 #	- drop requirement on nas-devel
 #	- fix locale names and other locale related things
 #	- --with-system-myspell + myspell package as in Debian
@@ -36,12 +37,13 @@ Summary:	OpenOffice.org - powerful office suite
 Summary(pl):	OpenOffice.org - potê¿ny pakiet biurowy
 Name:		openoffice.org
 Version:	%{fullver}
-Release:	0.9%{?with_vfs:vfs}
+Release:	0.91%{?with_vfs:vfs}
 Epoch:		1
 License:	GPL/LGPL
 Group:		X11/Applications
-Source0:	http://go-ooo.org/packages/%{snap}/ooo-build-%{ooobver}.tar.gz
-# Source0-md5:	e12441b6fa94576760e7ef060530b475
+# Source0:	http://go-ooo.org/packages/%{snap}/ooo-build-%{ooobver}.tar.gz
+Source0:	http://go-ooo.org/packages/snap/ooo-build-ooo-build-2-0-2.0.0-20051024.tar.gz
+# Source0-md5:	62535c263c94c13b4cd9ef8814ae17d5
 Source1:	http://go-ooo.org/packages/%{snap}/%{ssnap}-core.tar.bz2
 # Source1-md5:	6a6b1dfa8fd068b1c5f9b341b35ab99d
 Source2:	http://go-ooo.org/packages/%{snap}/%{ssnap}-system.tar.bz2
@@ -108,6 +110,7 @@ Source412:	%{cftp}/helpcontent/helpcontent_90_unix.tgz
 
 Patch0:		%{name}-pld.patch
 Patch1:		%{name}-STL-lib64.diff
+Patch2:		%{name}-filter.patch
 
 URL:		http://www.openoffice.org/
 BuildRequires:	ImageMagick
@@ -1454,6 +1457,7 @@ zuluskim.
 %prep
 %setup -q -n ooo-build-%{ooobver}
 #%patch0 -p1
+%patch2 -p1
 
 install -d src
 # sources, icons, KDE_icons
