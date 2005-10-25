@@ -15,13 +15,13 @@ diff -urbBN ooo-build-2.0.0.org/patches/src680/buildfix-filter.diff ooo-build-2.
 --- ooo-build-2.0.0.org/patches/src680/buildfix-filter.diff	1970-01-01 00:00:00.000000000 +0000
 +++ ooo-build-2.0.0/patches/src680/buildfix-filter.diff	2005-10-25 20:24:41.017338360 +0000
 @@ -0,0 +1,41 @@
-+Index: source/config/fragments/makefile.mk
++Index: filter/source/config/fragments/makefile.mk
 +===================================================================
 +RCS file: /cvs/framework/filter/source/config/fragments/makefile.mk,v
 +retrieving revision 1.12
 +diff -u -u -r1.12 makefile.mk
-+--- source/config/fragments/makefile.mk	8 Sep 2005 21:33:23 -0000	1.12
-++++ source/config/fragments/makefile.mk	25 Oct 2005 18:24:46 -0000
++--- filter/source/config/fragments/makefile.mk	8 Sep 2005 21:33:23 -0000	1.12
+++++ filter/source/config/fragments/makefile.mk	25 Oct 2005 18:24:46 -0000
 +@@ -147,13 +147,22 @@
 + .IF "$(SOLAR_JAVA)"==""
 + #cmc, hack to workaround the java build requirement
