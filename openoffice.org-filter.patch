@@ -1,0 +1,32 @@
+diff -urbBN ooo-build-2.0.0.org/patches/OOO_2_0/apply ooo-build-2.0.0/patches/OOO_2_0/apply
+--- ooo-build-2.0.0.org/patches/OOO_2_0/apply	2005-10-24 21:12:15.000000000 +0000
++++ ooo-build-2.0.0/patches/OOO_2_0/apply	2005-10-25 19:13:09.430758688 +0000
+@@ -254,6 +254,9 @@
+ # Fix for novell-i#113235
+ wizards-source-importwizard-filesmodul-xba.diff
+ 
++# https://bugzilla.novell.com/show_bug.cgi?id=130220
++buildfix-filter.diff
++
+ [ Leaks ]
+ # silly leaks around the place i#50726
+ leak-sal-file.diff
+diff -urbBN ooo-build-2.0.0.org/patches/src680/buildfix-filter.diff ooo-build-2.0.0/patches/src680/buildfix-filter.diff
+--- ooo-build-2.0.0.org/patches/src680/buildfix-filter.diff	1970-01-01 00:00:00.000000000 +0000
++++ ooo-build-2.0.0/patches/src680/buildfix-filter.diff	2005-10-25 19:09:16.000000000 +0000
+@@ -0,0 +1,15 @@
++diff -urbB filter.org/source/config/fragments/makefile.mk filter/source/config/fragments/makefile.mk
++--- filter.org/source/config/fragments/makefile.mk	2005-10-25 19:00:56.754142000 +0000
+++++ filter/source/config/fragments/makefile.mk	2005-10-25 19:06:43.637408192 +0000
++@@ -182,7 +182,11 @@
++      +@echo Building language packages $(@:b:s/Filter_//) for filters
++      +@echo ===================================================================
++      +-$(MKDIRHIER) $(@:d)
+++.IF "$(XSLTPROC)"=="NO_XSLTPROC"
++      +$(PACKLANG) -IN $< -PARAM lang $(@:d:d:d:d:d:d:d:d:b) > $@
+++.ELSE
+++     +$(XSLTPROC) -o $@ -param lang $(@:d:d:d:d:d:d:d:d:b) langfilter.xsl $<
+++.ENDIF
++ 
++ $(REALFILTERPACKAGES_FILTERS_UI_LANGPACKS_PACKED) : $(REALFILTERPACKAGES_FILTERS_UI_LANGPACKS)
++ 
