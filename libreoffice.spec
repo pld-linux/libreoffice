@@ -2,7 +2,6 @@
 #	- normal build requires little less than 4GB of disk space
 #	- full debug build requires about 9GB of disk space
 # TODO:
-#	- https://bugzilla.novell.com/show_bug.cgi?id=130220
 #	- drop requirement on nas-devel
 #	- fix locale names and other locale related things
 #	- --with-system-myspell + myspell package as in Debian
@@ -1456,7 +1455,7 @@ zuluskim.
 
 %prep
 %setup -q -n ooo-build-%{ooobver}
-#%patch0 -p1
+%patch0 -p1
 %patch2 -p1
 
 install -d src
@@ -1654,7 +1653,7 @@ install %{SOURCE28} $RPM_BUILD_ROOT%{_desktopdir}
 install %{SOURCE29} $RPM_BUILD_ROOT%{_desktopdir}
 
 # Add in the regcomp tool since some people need it for 3rd party add-ons
-cp -f build/src%{subver}-%{bver}/solver/%{subver}/unxlng*.pro/bin/regcomp $RPM_BUILD_ROOT%{_libdir}/%{name}/program
+cp -f build/%{ssnap}/solver/%{subver}/unxlng*.pro/bin/regcomp $RPM_BUILD_ROOT%{_libdir}/%{name}/program
 
 # fix python
 sed -i -e 's|#!/bin/python|#!%{_bindir}/python|g' $RPM_BUILD_ROOT%{_libdir}/%{name}/program/*.py
@@ -1897,7 +1896,6 @@ fontpostinst TTF
 %{_libdir}/%{name}/presets/config/aktuell.sog
 %{_libdir}/%{name}/presets/config/arcer.soh
 %{_libdir}/%{name}/presets/config/arrowhead.soe
-%{_libdir}/%{name}/presets/config/cary.sod
 %{_libdir}/%{name}/presets/config/chic.sod
 %{_libdir}/%{name}/presets/config/clasico.sog
 %{_libdir}/%{name}/presets/config/classico.sog
@@ -1905,7 +1903,6 @@ fontpostinst TTF
 %{_libdir}/%{name}/presets/config/color.soc
 %{_libdir}/%{name}/presets/config/colore.soc
 %{_libdir}/%{name}/presets/config/colours.soc
-%{_libdir}/%{name}/presets/config/contemporary.sog
 %{_libdir}/%{name}/presets/config/cor.soc
 %{_libdir}/%{name}/presets/config/couleur.soc
 %{_libdir}/%{name}/presets/config/drawstyles.sod
@@ -1922,41 +1919,32 @@ fontpostinst TTF
 %{_libdir}/%{name}/presets/config/formellt.sog
 %{_libdir}/%{name}/presets/config/hachures.soh
 %{_libdir}/%{name}/presets/config/hatch.soh
-%{_libdir}/%{name}/presets/config/klasicky.sog
-%{_libdir}/%{name}/presets/config/klasik.sog
 %{_libdir}/%{name}/presets/config/klasika.sog
 %{_libdir}/%{name}/presets/config/klassiek.sog
 %{_libdir}/%{name}/presets/config/klassik.sog
 %{_libdir}/%{name}/presets/config/klassisk.sog
 %{_libdir}/%{name}/presets/config/linien.sod
 %{_libdir}/%{name}/presets/config/moderne.sog
-%{_libdir}/%{name}/presets/config/moderni.sog
 %{_libdir}/%{name}/presets/config/moderno.sog
-%{_libdir}/%{name}/presets/config/moderny.sog
 %{_libdir}/%{name}/presets/config/modieus.sog
 %{_libdir}/%{name}/presets/config/moenster.soh
 %{_libdir}/%{name}/presets/config/nuevo.sog
 %{_libdir}/%{name}/presets/config/palet.soc
-%{_libdir}/%{name}/presets/config/paleta.soc
 %{_libdir}/%{name}/presets/config/palete.soc
 %{_libdir}/%{name}/presets/config/pilespds.soe
 %{_libdir}/%{name}/presets/config/puscice.soe
 %{_libdir}/%{name}/presets/config/schraffu.soh
 %{_libdir}/%{name}/presets/config/singelo.sog
-%{_libdir}/%{name}/presets/config/sipky.soe
 %{_libdir}/%{name}/presets/config/skraver.soh
 %{_libdir}/%{name}/presets/config/slogi.sod
 %{_libdir}/%{name}/presets/config/slut.soe
 %{_libdir}/%{name}/presets/config/sombread.soh
-%{_libdir}/%{name}/presets/config/srafovani.soh
-%{_libdir}/%{name}/presets/config/srafovanie.soh
 %{_libdir}/%{name}/presets/config/srafure.soh
 %{_libdir}/%{name}/presets/config/stijlen.sod
 %{_libdir}/%{name}/presets/config/stil.sod
 %{_libdir}/%{name}/presets/config/stili.sod
 %{_libdir}/%{name}/presets/config/stilos.sod
 %{_libdir}/%{name}/presets/config/streger.sod
-%{_libdir}/%{name}/presets/config/styly.sod
 %{_libdir}/%{name}/presets/config/tramas.soh
 %{_libdir}/%{name}/presets/config/tratto.soh
 
