@@ -110,6 +110,7 @@ Source412:	%{cftp}/helpcontent/helpcontent_90_unix.tgz
 Patch0:		%{name}-pld.patch
 Patch1:		%{name}-STL-lib64.diff
 Patch2:		%{name}-filter.patch
+Patch3:		buildfix-64bit-sc.diff
 
 URL:		http://www.openoffice.org/
 BuildRequires:	ImageMagick
@@ -1474,6 +1475,9 @@ ln -sf %{SOURCE400} %{SOURCE401} %{SOURCE402} %{SOURCE403} %{SOURCE404} \
 
 # add to ooo-build patch-system
 install %{PATCH1} patches/src680
+install %{PATCH3} patches/64bit
+# fake patch to make buildsystem happy (patch is included)
+touch patches/64bit/cws-ooo64bit02.2005-04-19-math-h.diff
 
 %build
 # Make sure we have /proc mounted - otherwise idlc will fail later.
