@@ -1,54 +1,22 @@
-diff -urN ooo-build-1.9.121.1.org/configure.in ooo-build-1.9.121.1/configure.in
---- ooo-build-1.9.121.1.org/configure.in	2005-08-05 13:58:27.000000000 +0000
-+++ ooo-build-1.9.121.1/configure.in	2005-08-08 07:32:25.155535728 +0000
-@@ -489,6 +489,9 @@
- AC_SUBST(WITH_ICONS)
+diff -urbB ooo-build-2.0.0.org/patches/OOO_2_0/apply ooo-build-2.0.0/patches/OOO_2_0/apply
+--- ooo-build-2.0.0.org/patches/OOO_2_0/apply	2005-10-24 21:12:15.000000000 +0000
++++ ooo-build-2.0.0/patches/OOO_2_0/apply	2005-10-26 18:00:40.136587088 +0000
+@@ -38,7 +38,7 @@
+ # Ark Linux
+ Ark: LinuxCommon, NotDebian, ArkOnly
+ # www.pld-linux.org
+-PLDBase: LinuxCommon, NotDebian
++PLDBase: LinuxCommon, NotDebian, PLDOnly
+ PLD: PLDBase
+ PLD64: PLDBase, 64bit
+ # Mandriva Linux
+@@ -371,6 +371,9 @@
+ ooo-vendor-debian.diff
+ debian-splash.diff
  
- if test "$enable_cairo" != "no"; then
-+   if test "$with_system_cairo" = "yes"; then
-+	SYSTEM_CAIRO=TRUE
-+   fi
-    CAIRO_ENABLED=TRUE
-    LIBPIXMAN_VER=0.1.5
-    GLITZ_VER=0.4.3
-@@ -504,6 +507,7 @@
-    cairo_enabled=no
- fi
- AC_SUBST(CAIRO_ENABLED)
-+AC_SUBST(SYSTEM_CAIRO)
- AC_SUBST(LIBPIXMAN_VER)
- AC_SUBST(GLITZ_VER)
- AC_SUBST(CAIRO_VER)
-diff -urN ooo-build-1.9.121.1.org/download.in ooo-build-1.9.121.1/download.in
---- ooo-build-1.9.121.1.org/download.in	2005-07-26 10:21:26.000000000 +0000
-+++ ooo-build-1.9.121.1/download.in	2005-08-08 07:32:56.814722800 +0000
-@@ -116,7 +116,7 @@
-     push @files, ( "$tag-lang.tar.bz2" );
- }
- 
--if ('@CAIRO_ENABLED@' eq 'TRUE') {
-+if ('@CAIRO_ENABLED@' eq 'TRUE' && '@SYSTEM_CAIRO@' ne 'TRUE') {
-     push @files, ( 'libpixman-@LIBPIXMAN_VER@.tar.gz' );
-     push @files, ( 'cairo-@CAIRO_VER@.tar.gz' );
-     push @files, ( 'glitz-@GLITZ_VER@.tar.gz' );
---- ooo-build-1.9.121.1.org/bin/unpack.org	2005-08-10 13:41:10.000000000 +0000
-+++ ooo-build-1.9.121.1/bin/unpack	2005-08-12 17:15:44.247923952 +0000
-@@ -209,7 +209,7 @@
- echo "Copying default evolution database into tree"
- cp -af $SRCDIR/evolocal.odb $OOBUILDDIR/extras/source/database
- 
--if test "$CAIRO_ENABLED" == "TRUE"; then
-+if test "$CAIRO_ENABLED" == "TRUE" -a "$SYSTEM_CAIRO" != "TRUE"; then
-     echo "Making symbolic links of libpixman, cairo and glitz at build location"
- 
-     mkdir -p $OOBUILDDIR/libpixman
---- ooo-build-1.9.121.1.org/bin/setup.in.org	2005-08-10 13:41:10.000000000 +0000
-+++ ooo-build-1.9.121.1/bin/setup.in	2005-08-12 17:14:27.515589040 +0000
-@@ -39,6 +39,7 @@
- LIBPIXMAN_VER=@LIBPIXMAN_VER@
- CAIRO_VER=@CAIRO_VER@
- CAIRO_ENABLED=@CAIRO_ENABLED@
-+SYSTEM_CAIRO=@SYSTEM_CAIRO@
- GLITZ_VER=@GLITZ_VER@
- HUNSPELL_UNO_SRC=@HUNSPELL_UNO_SRC@
- HUNSPELL_LIB_SRC=@HUNSPELL_LIB_SRC@
++[ PLDOnly ]
++ooo-longnames-54730.diff
++
+ [ MandrivaOnly ]
+ mandriva-splash.diff
+ default-system-fpicker.diff
