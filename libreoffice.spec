@@ -2035,6 +2035,7 @@ fontpostinst TTF
 %exclude %{_libdir}/%{name}/program/libvclplug_gtk*.so
 %exclude %{_libdir}/%{name}/program/libvclplug_kde*.so
 %exclude %{_libdir}/%{name}/program/libfps_kde.so
+%exclude %{_libdir}/%{name}/program/fps_gnome.uno.so
 %exclude %{_libdir}/%{name}/program/libkab1.so
 #%exclude %{_libdir}/%{name}/program/libfps_gnome.so
 %attr(755,root,root) %{_libdir}/%{name}/program/*.so.*
@@ -2055,5 +2056,5 @@ fontpostinst TTF
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_libdir}/%{name}/program/libvclplug_gtk*.so
 %attr(755,root,root) %{_libdir}/%{name}/program/gnome-open-url
-#%attr(755,root,root) %{_libdir}/%{name}/program/libfps_gnome.so
+%attr(755,root,root) %{_libdir}/%{name}/program/fps_gnome.uno.so
 #%dir %{_libdir}/%{name}/program/resource.gnome
