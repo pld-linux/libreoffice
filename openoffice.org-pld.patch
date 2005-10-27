@@ -1,6 +1,6 @@
-diff -urbB ooo-build-2.0.0.org/patches/OOO_2_0/apply ooo-build-2.0.0/patches/OOO_2_0/apply
---- ooo-build-2.0.0.org/patches/OOO_2_0/apply	2005-10-24 21:12:15.000000000 +0000
-+++ ooo-build-2.0.0/patches/OOO_2_0/apply	2005-10-26 18:00:40.136587088 +0000
+diff -urbBN ooo-build-2.0.0.org/patches/OOO_2_0/apply ooo-build-2.0.0/patches/OOO_2_0/apply
+--- ooo-build-2.0.0.org/patches/OOO_2_0/apply	2005-10-24 23:12:15.000000000 +0200
++++ ooo-build-2.0.0/patches/OOO_2_0/apply	2005-10-27 20:50:00.000000000 +0200
 @@ -38,7 +38,7 @@
  # Ark Linux
  Ark: LinuxCommon, NotDebian, ArkOnly
@@ -10,13 +10,59 @@ diff -urbB ooo-build-2.0.0.org/patches/OOO_2_0/apply ooo-build-2.0.0/patches/OOO
  PLD: PLDBase
  PLD64: PLDBase, 64bit
  # Mandriva Linux
-@@ -371,6 +371,9 @@
+@@ -371,6 +371,10 @@
  ooo-vendor-debian.diff
  debian-splash.diff
  
 +[ PLDOnly ]
 +ooo-longnames-54730.diff
++buildfix-new-xslt.diff
 +
  [ MandrivaOnly ]
  mandriva-splash.diff
  default-system-fpicker.diff
+diff -urbBN ooo-build-2.0.0.org/patches/src680/buildfix-new-xslt.diff ooo-build-2.0.0/patches/src680/buildfix-new-xslt.diff
+--- ooo-build-2.0.0.org/patches/src680/buildfix-new-xslt.diff	1970-01-01 01:00:00.000000000 +0100
++++ ooo-build-2.0.0/patches/src680/buildfix-new-xslt.diff	2005-10-27 20:41:12.000000000 +0200
+@@ -0,0 +1,41 @@
++--- filter/source/config/fragments/langfilter.xsl.org	2005-10-27 20:38:20.000000000 +0200
+++++ filter/source/config/fragments/langfilter.xsl	2005-10-27 20:38:44.000000000 +0200
++@@ -2,19 +2,35 @@
++ <xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:oor="http://openoffice.org/2001/registry">
++ <xsl:output method="xml" indent="yes" omit-xml-declaration="no" version="1.0" encoding="UTF-8"/>
++ <xsl:param name="lang"/>
++-<xsl:template match="*[.//*[@xml:lang=$lang]] | @*">
+++<xsl:template match="*">
+++    <xsl:if test="count(.//*[@xml:lang=$lang])&gt;0">
++     <xsl:copy>
++         <xsl:apply-templates select="*|@*"/>
++     </xsl:copy>
+++    </xsl:if>
++ </xsl:template>
++ 
++-<xsl:template match="value[@xml:lang=$lang] | text()[../@xml:lang=$lang]">
+++<xsl:template match="@*">
+++    <xsl:copy>
+++        <xsl:apply-templates select="*|@*"/>
+++    </xsl:copy>
+++</xsl:template>
+++
+++<xsl:template match="value">
+++    <xsl:if test="@xml:lang=$lang">
++     <xsl:copy>
++         <xsl:apply-templates select="@*|text()"/>
++     </xsl:copy>
+++    </xsl:if>
++ </xsl:template>
++  
++-<xsl:template match="text()"/>
+++<xsl:template match="text()">
+++    <xsl:if test="../@xml:lang=$lang">
+++        <xsl:copy>
+++            <xsl:apply-templates select="@*|text()"/>
+++        </xsl:copy>
+++    </xsl:if>
+++</xsl:template>
++ 
++ 
++ </xsl:stylesheet>
