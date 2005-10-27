@@ -72,11 +72,6 @@ Source27:	oosetup.desktop
 Source28:	ooweb.desktop
 Source29:	oowriter.desktop
 
-# we keep these in ooo-build repository
-# PLD splash screen
-#Source20:	%{name}-about.bmp
-#Source21:	%{name}-intro.bmp
-
 %define		cftp	http://ftp.services.openoffice.org/pub/OpenOffice.org/contrib
 
 # Help content
@@ -1469,10 +1464,6 @@ ln -sf %{SOURCE400} %{SOURCE401} %{SOURCE402} %{SOURCE403} %{SOURCE404} \
 	%{SOURCE405} %{SOURCE406} %{SOURCE407} %{SOURCE408} %{SOURCE409} \
 	%{SOURCE410} %{SOURCE411} %{SOURCE412} src
 
-# we keep these in ooo-build repository
-#ln -s %{SOURCE20} src/openabout_pld.bmp
-#ln -s %{SOURCE21} src/openintro_pld.bmp
-
 # add to ooo-build patch-system
 install %{PATCH1} patches/src680
 install %{PATCH3} patches/64bit
@@ -2044,6 +2035,7 @@ fontpostinst TTF
 %exclude %{_libdir}/%{name}/program/libvclplug_gtk*.so
 %exclude %{_libdir}/%{name}/program/libvclplug_kde*.so
 %exclude %{_libdir}/%{name}/program/libfps_kde.so
+%exclude %{_libdir}/%{name}/program/libkab1.so
 #%exclude %{_libdir}/%{name}/program/libfps_gnome.so
 %attr(755,root,root) %{_libdir}/%{name}/program/*.so.*
 #%attr(755,root,root) %{_libdir}/%{name}/program/filter/*.so
@@ -2055,6 +2047,7 @@ fontpostinst TTF
 %attr(755,root,root) %{_libdir}/%{name}/program/kdefilepicker
 %attr(755,root,root) %{_libdir}/%{name}/program/libvclplug_kde*.so
 %attr(755,root,root) %{_libdir}/%{name}/program/libfps_kde.so
+%attr(755,root,root) %{_libdir}/%{name}/program/libkab1.so
 %attr(755,root,root) %{_libdir}/%{name}/program/kde-open-url
 #%dir %{_libdir}/%{name}/program/resource.kde
 
