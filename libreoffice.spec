@@ -36,7 +36,7 @@ Summary:	OpenOffice.org - powerful office suite
 Summary(pl):	OpenOffice.org - potê¿ny pakiet biurowy
 Name:		openoffice.org
 Version:	%{fullver}
-Release:	0.92%{?with_vfs:vfs}
+Release:	0.93%{?with_vfs:vfs}
 Epoch:		1
 License:	GPL/LGPL
 Group:		X11/Applications
@@ -1452,7 +1452,7 @@ zuluskim.
 %prep
 %setup -q -n ooo-build-%{ooobver}
 #%patch0 -p1
-#%patch2 -p1
+%patch2 -p1
 
 install -d src
 # sources, icons, KDE_icons
