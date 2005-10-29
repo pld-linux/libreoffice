@@ -21,7 +21,7 @@
 
 %define		ver		2.0
 %define		rel		0
-%define		ooobver		2.0.0
+%define		ooobver		2.0.0.1
 %define		snap		OOO680
 %define		snap2		SRC680
 %define		bver		%{nil}
@@ -36,13 +36,13 @@ Summary:	OpenOffice.org - powerful office suite
 Summary(pl):	OpenOffice.org - potê¿ny pakiet biurowy
 Name:		openoffice.org
 Version:	%{fullver}
-Release:	0.91%{?with_vfs:vfs}
+Release:	0.92%{?with_vfs:vfs}
 Epoch:		1
 License:	GPL/LGPL
 Group:		X11/Applications
 # Source0:	http://go-ooo.org/packages/%{snap}/ooo-build-%{ooobver}.tar.gz
-Source0:	http://go-ooo.org/packages/snap/ooo-build-ooo-build-2-0-2.0.0-20051024.tar.gz
-# Source0-md5:	62535c263c94c13b4cd9ef8814ae17d5
+Source0:	http://go-ooo.org/packages/snap/ooo-build-ooo-build-2-0-2.0.0.1-20051027.tar.gz
+# Source0-md5:	f4d714a502f51eb7f540827f6ebca8e0
 Source1:	http://go-ooo.org/packages/%{snap}/%{ssnap}-core.tar.bz2
 # Source1-md5:	6a6b1dfa8fd068b1c5f9b341b35ab99d
 Source2:	http://go-ooo.org/packages/%{snap}/%{ssnap}-system.tar.bz2
@@ -1451,8 +1451,8 @@ zuluskim.
 
 %prep
 %setup -q -n ooo-build-%{ooobver}
-%patch0 -p1
-%patch2 -p1
+#%patch0 -p1
+#%patch2 -p1
 
 install -d src
 # sources, icons, KDE_icons
