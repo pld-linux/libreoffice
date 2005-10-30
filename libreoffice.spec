@@ -41,8 +41,8 @@ Epoch:		1
 License:	GPL/LGPL
 Group:		X11/Applications
 # Source0:	http://go-ooo.org/packages/%{snap}/ooo-build-%{ooobver}.tar.gz
-Source0:	http://go-ooo.org/packages/snap/ooo-build-ooo-build-2-0-2.0.0.1-20051027.tar.gz
-# Source0-md5:	f4d714a502f51eb7f540827f6ebca8e0
+Source0:	http://go-ooo.org/packages/snap/ooo-build-ooo-build-2-0-2.0.0.1-20051029.tar.gz
+# Source0-md5:	4dcabebe0503302eac3d9bdbbc46fbcc
 Source1:	http://go-ooo.org/packages/%{snap}/%{ssnap}-core.tar.bz2
 # Source1-md5:	6a6b1dfa8fd068b1c5f9b341b35ab99d
 Source2:	http://go-ooo.org/packages/%{snap}/%{ssnap}-system.tar.bz2
@@ -1452,7 +1452,7 @@ zuluskim.
 %prep
 %setup -q -n ooo-build-%{ooobver}
 #%patch0 -p1
-%patch2 -p1
+#%patch2 -p1
 
 install -d src
 # sources, icons, KDE_icons
