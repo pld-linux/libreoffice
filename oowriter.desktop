@@ -51,5 +51,5 @@ Terminal=false
 Icon=ooo_writer.png
 Exec=oowriter
 Type=Application
-MimeType=application/msword;application/vnd.ms-word;application/x-msword;application/vnd.stardivision.writer.template;application/vnd.sun.xml.writer.template;application/vnd.sun.xml.writer;application/vnd.stardivision.writer.math;application/vnd.sun.xml.writer.math;application/rtf
+MimeType=application/msword;application/rtf;application/vnd.ms-word;application/vnd.oasis.opendocument.text;application/vnd.oasis.opendocument.text-master;application/vnd.oasis.opendocument.text-template;application/vnd.oasis.opendocument.text-web;application/vnd.stardivision.writer;application/vnd.stardivision.writer.math;application/vnd.stardivision.writer.template;application/vnd.sun.xml.writer;application/vnd.sun.xml.writer.global;application/vnd.sun.xml.writer.math;application/rtf;application/vnd.sun.xml.writer.template;application/vnd.wordperfect;application/wordperfect;application/x-msword;application/x-mswrite;text/plain
 Categories=Office;WordProcessor;
