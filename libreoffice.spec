@@ -10,7 +10,6 @@
 #	- 6 user/config/*.so? files shared between -i18n-en and -i18n-sl
 #	- remove oohtml symlink (there is ooweb),
 #	- add ooglobal symlink and it's ooo-wrapper entry (among calc|draw|impress|math|web|writer)
-# 	- add lang: rw (?)
 #	- add %{_libdir}/%{name}/share/autocorr/acor_(ll)-(LL).dat files to package (marked with %lang)
 #       - can't be just i18n-{be,gu,hi,kn,pa,ta} instead of *-{be_BY,*_IN}?
 
@@ -1199,7 +1198,7 @@ Kinarwanda language.
 Ten pakiet dostarcza zasoby zawieraj±ce menu i okna dialogowe w jêzyku
 kinya-ruanda.
 
-%files i18n-ro -f rw.lang
+%files i18n-rw -f rw.lang
 
 %package i18n-sk
 Summary:	OpenOffice.org - interface in Slovak language
