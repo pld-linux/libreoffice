@@ -180,8 +180,8 @@ Requires:	db
 Requires:	libstdc++ >= 5:3.2.1
 Requires:	mktemp
 Requires:	sed
-#Suggested:	chkfontpath
-ExclusiveArch:	%{ix86} ppc sparc sparcv9 amd64
+#Suggests:	chkfontpath
+ExclusiveArch:	%{ix86} %{x8664} ppc sparc sparcv9
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
@@ -1760,7 +1760,6 @@ done
 echo "%{_libdir}/%{name}/presets/config/*_hun.*" >> hu.lang
 echo "%{_libdir}/%{name}/presets/config/*_pol.*" >> pl.lang
 echo "%{_libdir}/%{name}/presets/config/*_rus.*" >> ru.lang
-echo "%{_libdir}/%{name}/presets/config/*_hun.*" >> hu.lang
 
 find $RPM_BUILD_ROOT -type f -name '*.so' -exec chmod 755 "{}" ";"
 chmod 755 $RPM_BUILD_ROOT%{_libdir}/%{name}/program/*
