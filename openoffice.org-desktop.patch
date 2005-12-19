@@ -1,0 +1,8 @@
+--- ooo-build-2.0.0.1/desktop/textdoc.desktop.in.orig	2005-08-23 16:13:12.000000000 +0200
++++ ooo-build-2.0.0.1/desktop/textdoc.desktop.in	2005-12-19 09:34:17.000000000 +0100
+@@ -9,4 +9,4 @@
+ Type=Application
+ Categories=GNOME;Application;Office;X-Ximian-Main;
+ StartupNotify=true
+-MimeType=application/vnd.sun.xml.writer;application/vnd.sun.xml.writer.global;application/vnd.sun.xml.writer.template;application/vnd.ms-word;application/x-mswrite;application/vnd.stardivision.writer;application/vnd.wordperfect;application/wordperfect;application/rtf;text/rtf;text/plain;application/vnd.oasis.opendocument.text;vnd.oasis.opendocument.text-master;application/vnd.oasis.opendocument.text-template;
++MimeType=application/vnd.sun.xml.writer;application/vnd.sun.xml.writer.global;application/vnd.sun.xml.writer.template;application/vnd.ms-word;application/x-mswrite;application/vnd.stardivision.writer;application/vnd.wordperfect;application/wordperfect;application/rtf;text/rtf;text/plain;application/vnd.oasis.opendocument.text;application/vnd.oasis.opendocument.text-master;application/vnd.oasis.opendocument.text-template;
