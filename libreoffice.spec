@@ -105,6 +105,7 @@ Patch0:		%{name}-pld.patch
 Patch1:		%{name}-STL-lib64.diff
 Patch2:		%{name}-filter.patch
 Patch3:		buildfix-64bit-sc.diff
+Patch4:		%{name}-desktop.patch
 
 URL:		http://www.openoffice.org/
 BuildRequires:	ImageMagick
@@ -1452,6 +1453,7 @@ zuluskim.
 %setup -q -n ooo-build-%{ooobver}
 #%patch0 -p1
 #%patch2 -p1
+%patch4 -p1
 
 install -d src
 # sources, icons, KDE_icons
