@@ -636,7 +636,7 @@ Irish language.
 Ten pakiet dostarcza zasoby zawieraj±ce menu i okna dialogowe w jêzyku
 irlandzkim.
 
-%files i18n-ga-f ga.lang
+%files i18n-ga -f ga.lang
 
 %package i18n-gl
 Summary:	OpenOffice.org - interface in Galician language
