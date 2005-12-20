@@ -12,6 +12,46 @@
 #	- add ooglobal symlink and it's ooo-wrapper entry (among calc|draw|impress|math|web|writer)
 #	- add %{_libdir}/%{name}/share/autocorr/acor_(ll)-(LL).dat files to package (marked with %lang)
 #       - can't be just i18n-{be,gu,hi,kn,pa,ta} instead of *-{be_BY,*_IN}?
+#
+# warning: Installed (but unpackaged) file(s) found:
+#   /usr/lib/openoffice.org/program/cde-open-url
+#   /usr/lib/openoffice.org/program/hid.lst
+#   /usr/lib/openoffice.org/program/java-set-classpath
+#   /usr/lib/openoffice.org/program/jvmfwk3rc
+#   /usr/lib/openoffice.org/program/pyunorc-update64
+#   /usr/lib/openoffice.org/share/autocorr/acor_bg-BG.dat
+#   /usr/lib/openoffice.org/share/autocorr/acor_cs-CZ.dat
+#   /usr/lib/openoffice.org/share/autocorr/acor_da-DK.dat
+#   /usr/lib/openoffice.org/share/autocorr/acor_de-DE.dat
+#   /usr/lib/openoffice.org/share/autocorr/acor_en-GB.dat
+#   /usr/lib/openoffice.org/share/autocorr/acor_en-US.dat
+#   /usr/lib/openoffice.org/share/autocorr/acor_es-ES.dat
+#   /usr/lib/openoffice.org/share/autocorr/acor_fr-FR.dat
+#   /usr/lib/openoffice.org/share/autocorr/acor_hu-HU.dat
+#   /usr/lib/openoffice.org/share/autocorr/acor_it-IT.dat
+#   /usr/lib/openoffice.org/share/autocorr/acor_ja-JP.dat
+#   /usr/lib/openoffice.org/share/autocorr/acor_ko-KR.dat
+#   /usr/lib/openoffice.org/share/autocorr/acor_nl-NL.dat
+#   /usr/lib/openoffice.org/share/autocorr/acor_pl-PL.dat
+#   /usr/lib/openoffice.org/share/autocorr/acor_pt-BR.dat
+#   /usr/lib/openoffice.org/share/autocorr/acor_pt-PT.dat
+#   /usr/lib/openoffice.org/share/autocorr/acor_ru-RU.dat
+#   /usr/lib/openoffice.org/share/autocorr/acor_sk-SK.dat
+#   /usr/lib/openoffice.org/share/autocorr/acor_sl-SI.dat
+#   /usr/lib/openoffice.org/share/autocorr/acor_sv-SE.dat
+#   /usr/lib/openoffice.org/share/autocorr/acor_tr-TR.dat
+#   /usr/lib/openoffice.org/share/autocorr/acor_zh-CN.dat
+#   /usr/lib/openoffice.org/share/autocorr/acor_zh-TW.dat
+#   /usr/lib/openoffice.org/share/template/wizard/letter/en-US/bus-elegant_l.ott
+#   /usr/lib/openoffice.org/share/template/wizard/letter/en-US/bus-modern_l.ott
+#   /usr/lib/openoffice.org/share/template/wizard/letter/en-US/bus-office_l.ott
+#   /usr/lib/openoffice.org/share/template/wizard/letter/en-US/off-elegant_l.ott
+#   /usr/lib/openoffice.org/share/template/wizard/letter/en-US/off-modern_l.ott
+#   /usr/lib/openoffice.org/share/template/wizard/letter/en-US/off-office_l.ott
+#   /usr/lib/openoffice.org/share/template/wizard/letter/en-US/pri-bottle_l.ott
+#   /usr/lib/openoffice.org/share/template/wizard/letter/en-US/pri-mail_l.ott
+#   /usr/lib/openoffice.org/share/template/wizard/letter/en-US/pri-marine_l.ott
+#   /usr/lib/openoffice.org/share/template/wizard/letter/en-US/pri-redline_l.ott
 
 # Conditional build:
 %bcond_with	java		# Java support
