@@ -59,9 +59,9 @@
 %bcond_with	mono
 
 %define		ver		2.0
-%define		rel		0
-%define		ooobver		2.0.0.1
-%define		snap		OOO680
+%define		rel		1
+%define		ooobver		2.0.1
+%define		snap		OOA680
 %define		snap2		SRC680
 %define		bver		%{nil}
 %define		subver		680
@@ -75,21 +75,20 @@ Summary:	OpenOffice.org - powerful office suite
 Summary(pl):	OpenOffice.org - potê¿ny pakiet biurowy
 Name:		openoffice.org
 Version:	%{fullver}
-Release:	0.93%{?with_vfs:vfs}
+Release:	0.95%{?with_vfs:vfs}
 Epoch:		1
 License:	GPL/LGPL
 Group:		X11/Applications
-# Source0:	http://go-ooo.org/packages/%{snap}/ooo-build-%{ooobver}.tar.gz
-Source0:	http://go-ooo.org/packages/snap/ooo-build-ooo-build-2-0-2.0.0.1-20051029.tar.gz
-# Source0-md5:	4dcabebe0503302eac3d9bdbbc46fbcc
+Source0:	http://go-ooo.org/packages/%{snap}/ooo-build-%{ooobver}.tar.gz
+# Source0-md5:	efa2962487704143767bab8fa08b9477
 Source1:	http://go-ooo.org/packages/%{snap}/%{ssnap}-core.tar.bz2
-# Source1-md5:	6a6b1dfa8fd068b1c5f9b341b35ab99d
+# Source1-md5:	fc0a44c3344c2274b4ea2ee1a8501df5
 Source2:	http://go-ooo.org/packages/%{snap}/%{ssnap}-system.tar.bz2
-# Source2-md5:	a6f4b2ef7d1fae927cedbd45e6dd403d
+# Source2-md5:	642eaffe89f652358de8261618b3d016
 Source3:	http://go-ooo.org/packages/%{snap}/%{ssnap}-binfilter.tar.bz2
-# Source3-md5:	f5074e1968de633a5a37355fe62471f6
+# Source3-md5:	4e50fd0fb02155edc410e9fea01e5c59
 Source4:	http://go-ooo.org/packages/%{snap}/%{ssnap}-lang.tar.bz2
-# Source4-md5:	8aa0c6463dc517723f9f4d4a3f0191a0
+# Source4-md5:	694a196fbcc4f9eb0bdd84656b6b6b2d
 Source10:	http://go-ooo.org/packages/%{snap2}/ooo_custom_images-13.tar.bz2
 # Source10-md5:	2480af7f890c8175c7f9e183a1b39ed2
 Source11:	http://go-ooo.org/packages/%{snap2}/ooo_crystal_images-6.tar.bz2
@@ -1955,10 +1954,6 @@ for lang in $langlist; do
 	fi
 done
 
-echo "%{_libdir}/%{name}/presets/config/*_hun.*" >> hu.lang
-echo "%{_libdir}/%{name}/presets/config/*_pol.*" >> pl.lang
-echo "%{_libdir}/%{name}/presets/config/*_rus.*" >> ru.lang
-
 find $RPM_BUILD_ROOT -type f -name '*.so' -exec chmod 755 "{}" ";"
 chmod 755 $RPM_BUILD_ROOT%{_libdir}/%{name}/program/*
 
@@ -2066,79 +2061,12 @@ fontpostinst TTF
 %{_libdir}/%{name}/presets/basic
 %dir %{_libdir}/%{name}/presets/config
 %{_libdir}/%{name}/presets/config/autotbl.fmt
-%{_libdir}/%{name}/presets/config/arrowhd.soe
-%{_libdir}/%{name}/presets/config/classic.sog
 %{_libdir}/%{name}/presets/config/cmyk.soc
 %{_libdir}/%{name}/presets/config/gallery.soc
-%{_libdir}/%{name}/presets/config/hatching.soh
 %{_libdir}/%{name}/presets/config/html.soc
-%{_libdir}/%{name}/presets/config/modern.sog
-%{_libdir}/%{name}/presets/config/palette.soc
 %{_libdir}/%{name}/presets/config/standard.so?
-%{_libdir}/%{name}/presets/config/styles.sod
 %{_libdir}/%{name}/presets/config/sun-color.soc
 %{_libdir}/%{name}/presets/config/web.soc
-%{_libdir}/%{name}/presets/config/Classico.sog
-%{_libdir}/%{name}/presets/config/Linhas.sod
-%{_libdir}/%{name}/presets/config/Palheta.soc
-%{_libdir}/%{name}/presets/config/PreenchimentoDePadrao.soh
-%{_libdir}/%{name}/presets/config/Ptseta.soe
-%{_libdir}/%{name}/presets/config/Vigente.sog
-%{_libdir}/%{name}/presets/config/actual.sog
-%{_libdir}/%{name}/presets/config/aktuell.sog
-%{_libdir}/%{name}/presets/config/arcer.soh
-%{_libdir}/%{name}/presets/config/arrowhead.soe
-%{_libdir}/%{name}/presets/config/chic.sod
-%{_libdir}/%{name}/presets/config/clasico.sog
-%{_libdir}/%{name}/presets/config/classico.sog
-%{_libdir}/%{name}/presets/config/classique.sog
-%{_libdir}/%{name}/presets/config/color.soc
-%{_libdir}/%{name}/presets/config/colore.soc
-%{_libdir}/%{name}/presets/config/colours.soc
-%{_libdir}/%{name}/presets/config/cor.soc
-%{_libdir}/%{name}/presets/config/couleur.soc
-%{_libdir}/%{name}/presets/config/drawstyles.sod
-%{_libdir}/%{name}/presets/config/einden.soe
-%{_libdir}/%{name}/presets/config/elegant.sog
-%{_libdir}/%{name}/presets/config/enden.soe
-%{_libdir}/%{name}/presets/config/estilos.sod
-%{_libdir}/%{name}/presets/config/estrem.soe
-%{_libdir}/%{name}/presets/config/extrem.soe
-%{_libdir}/%{name}/presets/config/faerg.soc
-%{_libdir}/%{name}/presets/config/farben.soc
-%{_libdir}/%{name}/presets/config/fimlinha.soe
-%{_libdir}/%{name}/presets/config/finlinea.soe
-%{_libdir}/%{name}/presets/config/formellt.sog
-%{_libdir}/%{name}/presets/config/hachures.soh
-%{_libdir}/%{name}/presets/config/hatch.soh
-%{_libdir}/%{name}/presets/config/klasika.sog
-%{_libdir}/%{name}/presets/config/klassiek.sog
-%{_libdir}/%{name}/presets/config/klassik.sog
-%{_libdir}/%{name}/presets/config/klassisk.sog
-%{_libdir}/%{name}/presets/config/linien.sod
-%{_libdir}/%{name}/presets/config/moderne.sog
-%{_libdir}/%{name}/presets/config/moderno.sog
-%{_libdir}/%{name}/presets/config/modieus.sog
-%{_libdir}/%{name}/presets/config/moenster.soh
-%{_libdir}/%{name}/presets/config/nuevo.sog
-%{_libdir}/%{name}/presets/config/palet.soc
-%{_libdir}/%{name}/presets/config/palete.soc
-%{_libdir}/%{name}/presets/config/pilespds.soe
-%{_libdir}/%{name}/presets/config/puscice.soe
-%{_libdir}/%{name}/presets/config/schraffu.soh
-%{_libdir}/%{name}/presets/config/singelo.sog
-%{_libdir}/%{name}/presets/config/skraver.soh
-%{_libdir}/%{name}/presets/config/slogi.sod
-%{_libdir}/%{name}/presets/config/slut.soe
-%{_libdir}/%{name}/presets/config/sombread.soh
-%{_libdir}/%{name}/presets/config/srafure.soh
-%{_libdir}/%{name}/presets/config/stijlen.sod
-%{_libdir}/%{name}/presets/config/stil.sod
-%{_libdir}/%{name}/presets/config/stili.sod
-%{_libdir}/%{name}/presets/config/stilos.sod
-%{_libdir}/%{name}/presets/config/streger.sod
-%{_libdir}/%{name}/presets/config/tramas.soh
-%{_libdir}/%{name}/presets/config/tratto.soh
 
 %{_libdir}/%{name}/presets/database
 %{_libdir}/%{name}/presets/gallery
