@@ -1663,7 +1663,7 @@ ln -sf %{SOURCE400} %{SOURCE401} %{SOURCE402} %{SOURCE403} %{SOURCE404} \
 install %{PATCH0} patches/src680
 install %{PATCH1} patches/64bit
 install %{PATCH3} patches/src680
-(echo "[ Fixes ]"; echo `basename %{PATCH3}`) >>patches/OOO_2_0/apply
+(echo "[ Fixes ]"; echo `basename %{PATCH3}`) >>patches/%{ssnap}/apply
 # fake patch to make buildsystem happy (patch is included)
 touch patches/64bit/cws-ooo64bit02.2005-04-19-math-h.diff
 
