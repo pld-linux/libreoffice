@@ -1721,7 +1721,7 @@ CONFOPTS=" \
 %ifarch sparc sparcv9
 	--with-arch=sparc \
 %endif
-%ifarch amd64
+%ifarch %{x8664}
 	--with-arch=x86_64 \
 %endif
 	--with-ccache-allowed \
