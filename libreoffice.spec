@@ -140,14 +140,10 @@ Source411:	%{cftp}/helpcontent/helpcontent_88_unix.tgz
 # Source411-md5:	3b00571318e45965dee0545d86306d65
 Source412:	%{cftp}/helpcontent/helpcontent_90_unix.tgz
 # Source412-md5:	9521a01c5817e87178f356762f8cdab5
-
-Patch0:		%{name}-pld.patch
-Patch1:		%{name}-STL-lib64.diff
-Patch2:		%{name}-filter.patch
-Patch3:		buildfix-64bit-sc.diff
-Patch4:		%{name}-desktop.patch
-Patch5:		%{name}-gcc4.diff
-
+Patch0:		%{name}-STL-lib64.diff
+Patch1:		buildfix-64bit-sc.diff
+Patch2:		%{name}-desktop.patch
+Patch3:		%{name}-gcc4.diff
 URL:		http://www.openoffice.org/
 BuildRequires:	ImageMagick
 BuildRequires:	STLport-devel >= 4.5.3-6
@@ -1652,9 +1648,7 @@ zuluskim.
 
 %prep
 %setup -q -n ooo-build-%{ooobver}
-#%patch0 -p1
-#%patch2 -p1
-%patch4 -p1
+%patch2 -p1
 
 install -d src
 # sources, icons, KDE_icons
@@ -1667,10 +1661,10 @@ ln -sf %{SOURCE400} %{SOURCE401} %{SOURCE402} %{SOURCE403} %{SOURCE404} \
 	%{SOURCE410} %{SOURCE411} %{SOURCE412} src
 
 # add to ooo-build patch-system
-install %{PATCH1} patches/src680
-install %{PATCH3} patches/64bit
-install %{PATCH5} patches/src680
-(echo "[ Fixes ]"; echo `basename %{PATCH5}`) >>patches/OOO_2_0/apply
+install %{PATCH0} patches/src680
+install %{PATCH1} patches/64bit
+install %{PATCH3} patches/src680
+(echo "[ Fixes ]"; echo `basename %{PATCH3}`) >>patches/OOO_2_0/apply
 # fake patch to make buildsystem happy (patch is included)
 touch patches/64bit/cws-ooo64bit02.2005-04-19-math-h.diff
 
