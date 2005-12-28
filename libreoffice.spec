@@ -57,6 +57,7 @@
 %bcond_with	java		# Java support
 %bcond_with	vfs		# Enable GNOME VFS and Evolution 2 support
 %bcond_with	mono
+%bcond_with	gcc4		# use gcc4 patch (breaks build with gcc 3.3.x)
 
 %define		ver		2.0
 %define		rel		1
@@ -1662,8 +1663,10 @@ ln -sf %{SOURCE400} %{SOURCE401} %{SOURCE402} %{SOURCE403} %{SOURCE404} \
 # add to ooo-build patch-system
 install %{PATCH0} patches/src680
 install %{PATCH1} patches/64bit
+%if %{with gcc4}
 install %{PATCH3} patches/src680
 (echo "[ Fixes ]"; echo `basename %{PATCH3}`) >>patches/src680/apply
+%endif
 # fake patch to make buildsystem happy (patch is included)
 touch patches/64bit/cws-ooo64bit02.2005-04-19-math-h.diff
 
