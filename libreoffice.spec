@@ -110,6 +110,8 @@ Source26:	ooprinteradmin.desktop
 Source27:	oosetup.desktop
 Source28:	ooweb.desktop
 Source29:	oowriter.desktop
+Source50:	openabout_pld.png
+Source51:	openintro_pld.bmp
 
 %define		cftp	http://ftp.services.openoffice.org/pub/OpenOffice.org/contrib
 
@@ -144,6 +146,7 @@ Patch0:		%{name}-STL-lib64.diff
 Patch1:		buildfix-64bit-sc.diff
 Patch2:		%{name}-desktop.patch
 Patch3:		%{name}-gcc4.diff
+Patch4:		ooo-build-update.patch
 URL:		http://www.openoffice.org/
 BuildRequires:	ImageMagick
 BuildRequires:	STLport-devel >= 4.5.3-6
@@ -1649,8 +1652,10 @@ zuluskim.
 %prep
 %setup -q -n ooo-build-%{ooobver}
 %patch2 -p1
+%patch4 -p1
 
 install -d src
+cp %{SOURCE50} %{SOURCE51} src
 # sources, icons, KDE_icons
 ln -sf %{SOURCE1} %{SOURCE2} %{SOURCE3} %{SOURCE4} \
 	%{SOURCE10} %{SOURCE11} %{SOURCE12} %{SOURCE13} \
