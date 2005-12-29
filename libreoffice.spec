@@ -14,11 +14,18 @@
 #       - can't be just i18n-{be,gu,hi,kn,pa,ta} instead of *-{be_BY,*_IN}?
 #
 # warning: Installed (but unpackaged) file(s) found:
+#   /usr/lib/openoffice.org/presets/config/arrowhd_en-US.soe
+#   /usr/lib/openoffice.org/presets/config/classic_en-US.sog
+#   /usr/lib/openoffice.org/presets/config/hatching_en-US.soh
+#   /usr/lib/openoffice.org/presets/config/modern_en-US.sog
+#   /usr/lib/openoffice.org/presets/config/palette_en-US.soc
+#   /usr/lib/openoffice.org/presets/config/styles_en-US.sod
 #   /usr/lib/openoffice.org/program/cde-open-url
 #   /usr/lib/openoffice.org/program/hid.lst
 #   /usr/lib/openoffice.org/program/java-set-classpath
 #   /usr/lib/openoffice.org/program/jvmfwk3rc
 #   /usr/lib/openoffice.org/program/pyunorc-update64
+#   /usr/lib/openoffice.org/program/versionrc
 #   /usr/lib/openoffice.org/share/autocorr/acor_bg-BG.dat
 #   /usr/lib/openoffice.org/share/autocorr/acor_cs-CZ.dat
 #   /usr/lib/openoffice.org/share/autocorr/acor_da-DK.dat
