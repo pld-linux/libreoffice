@@ -401,7 +401,7 @@ Bangla language for Bangladesh.
 Ten pakiet dostarcza zasoby zawieraj±ce menu i okna dialogowe w jêzyku
 bengalskim dla Bangladeszu.
 
-%files i18n-bn_BD -f bn_BD.lang
+%files i18n-bn_BD -f bn-BD.lang
 
 %package i18n-bn_IN
 Summary:	OpenOffice.org - interface in Bangla language for India
@@ -417,7 +417,7 @@ Bangla language for India.
 Ten pakiet dostarcza zasoby zawieraj±ce menu i okna dialogowe w jêzyku
 bengalskim dla Indii.
 
-%files i18n-bn_IN -f bn_IN.lang
+%files i18n-bn_IN -f bn-IN.lang
 
 %package i18n-br
 Summary:	OpenOffice.org - interface in Breton language
