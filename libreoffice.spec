@@ -5,7 +5,7 @@
 #	- drop requirement on nas-devel
 #	- fix locale names and other locale related things
 #	- --with-system-myspell + myspell package as in Debian
-#	- --with-system-neon - check compilation (works with 0.23 but not 0.24)
+#	- --with-system-neon - check compilation (works with 0.24 but not 0.25)
 #	- in gtk version menu highlight has almost the same colour as menu text
 #	- 6 user/config/*.so? files shared between -i18n-en and -i18n-sl
 #	- remove oohtml symlink (there is ooweb),
@@ -1893,7 +1893,7 @@ CONFOPTS=" \
 	--with-system-expat \
 	--with-system-sablot \
 	--with-system-boost \
-	--with-system-neon \
+	--without-system-neon \
 	--with-system-mozilla \
 	--with-system-cairo \
 	--with-dynamic-xinerama \
