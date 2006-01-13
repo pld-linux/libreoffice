@@ -175,7 +175,6 @@ BuildRequires:	gnome-vfs2-devel
 %endif
 %if %{with java}
 BuildRequires:	jdk >= 1.4.0_00
-BuildRequires:	jdk < 1.5.0_00
 BuildRequires:	db-java >= 4.2.52-4
 BuildRequires:	jar
 BuildRequires:	jakarta-ant
@@ -2122,7 +2121,6 @@ rm -rf $RPM_BUILD_ROOT/opt/gnome
 
 %if %{without java}
 # Java-releated bits
-rm -f $RPM_BUILD_ROOT%{_sbin}/oojvmsetup
 rm -rf $RPM_BUILD_ROOT%{_libdir}/%{name}/share/Scripts/javascript
 rm -rf $RPM_BUILD_ROOT%{_libdir}/%{name}/share/Scripts/beanshell
 rm -rf $RPM_BUILD_ROOT%{_libdir}/%{name}/share/xslt
@@ -2280,9 +2278,7 @@ fontpostinst TTF
 %attr(755,root,root) %{_libdir}/%{name}/program/*.py
 
 %if %{with java}
-%attr(755,root,root) %{_sbindir}/oojvmsetup
 %attr(755,root,root) %{_libdir}/%{name}/program/javaldx
-%attr(755,root,root) %{_libdir}/%{name}/program/jvmsetup
 %attr(755,root,root) %{_libdir}/%{name}/program/java-set-classpath
 %attr(755,root,root) %{_libdir}/%{name}/program/jvmfwk3rc
 %{_libdir}/%{name}/program/classes
