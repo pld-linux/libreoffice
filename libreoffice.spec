@@ -1856,6 +1856,7 @@ export CC CXX ENVCFLAGS ENVCFLAGSCXX DESTDIR IGNORE_MANIFEST_CHANGES DISTRO QTIN
 JAVA_HOME=%{_libdir}/java
 DB_JAR="%{_javadir}/db.jar"
 export JAVA_HOME DB_JAR
+ANT_HOME=%{_datadir}/java
 %endif
 
 DEFAULT_TO_ENGLISH_FOR_PACKING=1; export DEFAULT_TO_ENGLISH_FOR_PACKING
@@ -1907,7 +1908,7 @@ CONFOPTS=" \
 %if %{with java}
 	--with-java \
 	--with-jdk-home=$JAVA_HOME \
-	--with-ant-home=$JAVA_HOME \
+	--with-ant-home=$ANT_HOME \
 %else
 	--without-java \
 %endif
