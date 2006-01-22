@@ -81,7 +81,7 @@ Source50:	openabout_pld.png
 Source51:	openintro_pld.bmp
 
 Patch0:		%{name}-STL-lib64.diff
-Patch1:		buildfix-64bit-sc.diff
+Patch1:		%{name}-64bit-inline.diff
 Patch2:		%{name}-desktop.patch
 Patch3:		%{name}-gcc4.diff
 Patch4:		ooo-build-update.patch
@@ -143,6 +143,7 @@ BuildRequires:	rpm-pythonprov
 BuildRequires:	rpmbuild(macros) >= 1.213
 BuildRequires:	sablotron-devel
 BuildRequires:	sane-backends-devel
+BuildRequires:	sed >= 4.0
 BuildRequires:	startup-notification-devel >= 0.5
 BuildRequires:	tcsh
 BuildRequires:	unixODBC-devel
@@ -1743,8 +1744,14 @@ ln -sf %{SOURCE1} %{SOURCE2} %{SOURCE3} %{SOURCE4} \
 	%{SOURCE14} src
 
 # add to ooo-build patch-system
-install %{PATCH0} patches/src680
+%ifarch %{x8664} sparc64
+install %{PATCH0} patches/64bit
 install %{PATCH1} patches/64bit
+echo "[ 64bitPLDFixes ]" >>patches/src680/apply
+echo `basename %{PATCH0}` >>patches/src680/apply
+echo `basename %{PATCH1}` >>patches/src680/apply
+sed -i -e 's/PLD64: PLDBase, 64bit/PLD64: PLDBase, 64bit, 64bitPLDFixes/' patches/src680/apply
+%endif
 %if %{with gcc4}
 install %{PATCH3} patches/src680
 (echo "[ Fixes ]"; echo `basename %{PATCH3}`) >>patches/src680/apply
