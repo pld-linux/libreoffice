@@ -13,52 +13,12 @@
 #	- add %{_libdir}/%{name}/share/autocorr/acor_(ll)-(LL).dat files to package (marked with %lang)
 #       - can't be just i18n-{be,gu,hi,kn,pa,ta} instead of *-{be_BY,*_IN}?
 #
-# warning: Installed (but unpackaged) file(s) found:
-#   /usr/lib/openoffice.org/presets/config/arrowhd_en-US.soe
-#   /usr/lib/openoffice.org/presets/config/classic_en-US.sog
-#   /usr/lib/openoffice.org/presets/config/hatching_en-US.soh
-#   /usr/lib/openoffice.org/presets/config/modern_en-US.sog
-#   /usr/lib/openoffice.org/presets/config/palette_en-US.soc
-#   /usr/lib/openoffice.org/presets/config/styles_en-US.sod
-#   /usr/lib/openoffice.org/program/cde-open-url
-#   /usr/lib/openoffice.org/program/hid.lst
-#   /usr/lib/openoffice.org/program/java-set-classpath
-#   /usr/lib/openoffice.org/program/jvmfwk3rc
-#   /usr/lib/openoffice.org/program/pyunorc-update64
-#   /usr/lib/openoffice.org/program/versionrc
-#   /usr/lib/openoffice.org/share/autocorr/acor_bg-BG.dat
-#   /usr/lib/openoffice.org/share/autocorr/acor_cs-CZ.dat
-#   /usr/lib/openoffice.org/share/autocorr/acor_da-DK.dat
-#   /usr/lib/openoffice.org/share/autocorr/acor_de-DE.dat
-#   /usr/lib/openoffice.org/share/autocorr/acor_en-GB.dat
-#   /usr/lib/openoffice.org/share/autocorr/acor_en-US.dat
-#   /usr/lib/openoffice.org/share/autocorr/acor_es-ES.dat
-#   /usr/lib/openoffice.org/share/autocorr/acor_fr-FR.dat
-#   /usr/lib/openoffice.org/share/autocorr/acor_hu-HU.dat
-#   /usr/lib/openoffice.org/share/autocorr/acor_it-IT.dat
-#   /usr/lib/openoffice.org/share/autocorr/acor_ja-JP.dat
-#   /usr/lib/openoffice.org/share/autocorr/acor_ko-KR.dat
-#   /usr/lib/openoffice.org/share/autocorr/acor_nl-NL.dat
-#   /usr/lib/openoffice.org/share/autocorr/acor_pl-PL.dat
-#   /usr/lib/openoffice.org/share/autocorr/acor_pt-BR.dat
-#   /usr/lib/openoffice.org/share/autocorr/acor_pt-PT.dat
-#   /usr/lib/openoffice.org/share/autocorr/acor_ru-RU.dat
-#   /usr/lib/openoffice.org/share/autocorr/acor_sk-SK.dat
-#   /usr/lib/openoffice.org/share/autocorr/acor_sl-SI.dat
-#   /usr/lib/openoffice.org/share/autocorr/acor_sv-SE.dat
-#   /usr/lib/openoffice.org/share/autocorr/acor_tr-TR.dat
-#   /usr/lib/openoffice.org/share/autocorr/acor_zh-CN.dat
-#   /usr/lib/openoffice.org/share/autocorr/acor_zh-TW.dat
-#   /usr/lib/openoffice.org/share/template/wizard/letter/en-US/bus-elegant_l.ott
-#   /usr/lib/openoffice.org/share/template/wizard/letter/en-US/bus-modern_l.ott
-#   /usr/lib/openoffice.org/share/template/wizard/letter/en-US/bus-office_l.ott
-#   /usr/lib/openoffice.org/share/template/wizard/letter/en-US/off-elegant_l.ott
-#   /usr/lib/openoffice.org/share/template/wizard/letter/en-US/off-modern_l.ott
-#   /usr/lib/openoffice.org/share/template/wizard/letter/en-US/off-office_l.ott
-#   /usr/lib/openoffice.org/share/template/wizard/letter/en-US/pri-bottle_l.ott
-#   /usr/lib/openoffice.org/share/template/wizard/letter/en-US/pri-mail_l.ott
-#   /usr/lib/openoffice.org/share/template/wizard/letter/en-US/pri-marine_l.ott
-#   /usr/lib/openoffice.org/share/template/wizard/letter/en-US/pri-redline_l.ott
+
+#Doing gallery Containers...
+#xargs: .../usr/lib/openoffice.org/program/gengal: terminated by signal 11
+#Doing gallery Decorations...
+#xargs: .../usr/lib/openoffice.org/program/gengal: terminated by signal 11
+#Doing gallery Education...
 
 # Conditional build:
 %bcond_with	java		# Java support
@@ -83,7 +43,7 @@ Summary:	OpenOffice.org - powerful office suite
 Summary(pl):	OpenOffice.org - potê¿ny pakiet biurowy
 Name:		openoffice.org
 Version:	%{fullver}
-Release:	0.95%{?with_vfs:vfs}
+Release:	0.96%{?with_vfs:vfs}
 Epoch:		1
 License:	GPL/LGPL
 Group:		X11/Applications
@@ -120,35 +80,6 @@ Source29:	oowriter.desktop
 Source50:	openabout_pld.png
 Source51:	openintro_pld.bmp
 
-%define		cftp	http://ftp.services.openoffice.org/pub/OpenOffice.org/contrib
-
-# Help content
-Source400:	%{cftp}/helpcontent/helpcontent_01_unix.tgz
-# Source400-md5:	7da2aff674c2c84aba8b21ac2ab16bb6
-Source401:	%{cftp}/helpcontent/helpcontent_31_unix.tgz
-# Source401-md5:	c7e618e2d9b8bd25cae12954ef2548c9
-Source402:	%{cftp}/helpcontent/helpcontent_33_unix.tgz
-# Source402-md5:	68d58bc30b485a77c0a0fba08af3aee3
-Source403:	%{cftp}/helpcontent/helpcontent_34_unix.tgz
-# Source403-md5:	8696bbee3dc4d5b6fd60218123016e29
-Source404:	%{cftp}/helpcontent/helpcontent_39_unix.tgz
-# Source404-md5:	c2ae86d02f462d2b663d621190f5ef34
-Source405:	%{cftp}/helpcontent/helpcontent_46_unix.tgz
-# Source405-md5:	7b013981edce2fabe4a8751ff64a8d58
-Source406:	%{cftp}/helpcontent/helpcontent_49_unix.tgz
-# Source406-md5:	a39f44ec40f452c963a4a187f31d1acb
-Source407:	%{cftp}/helpcontent/helpcontent_55_unix.tgz
-# Source407-md5:	804d3ce61e11335193a410aaf9603f8e
-Source408:	%{cftp}/helpcontent/helpcontent_81_unix.tgz
-# Source408-md5:	81b705057a0e14ebcbf02fac4762781a
-Source409:	%{cftp}/helpcontent/helpcontent_82_unix.tgz
-# Source409-md5:	3121fbd251176d7c7b6e33ecec744c65
-Source410:	%{cftp}/helpcontent/helpcontent_86_unix.tgz
-# Source410-md5:	aee37935139c5ccd4b6d8abdd2037c66
-Source411:	%{cftp}/helpcontent/helpcontent_88_unix.tgz
-# Source411-md5:	3b00571318e45965dee0545d86306d65
-Source412:	%{cftp}/helpcontent/helpcontent_90_unix.tgz
-# Source412-md5:	9521a01c5817e87178f356762f8cdab5
 Patch0:		%{name}-STL-lib64.diff
 Patch1:		buildfix-64bit-sc.diff
 Patch2:		%{name}-desktop.patch
@@ -1810,10 +1741,6 @@ cp %{SOURCE50} %{SOURCE51} src
 ln -sf %{SOURCE1} %{SOURCE2} %{SOURCE3} %{SOURCE4} \
 	%{SOURCE10} %{SOURCE11} %{SOURCE12} %{SOURCE13} \
 	%{SOURCE14} src
-# help files
-ln -sf %{SOURCE400} %{SOURCE401} %{SOURCE402} %{SOURCE403} %{SOURCE404} \
-	%{SOURCE405} %{SOURCE406} %{SOURCE407} %{SOURCE408} %{SOURCE409} \
-	%{SOURCE410} %{SOURCE411} %{SOURCE412} src
 
 # add to ooo-build patch-system
 install %{PATCH0} patches/src680
@@ -2296,9 +2223,12 @@ fontpostinst TTF
 %{_mandir}/man1/o*.1*
 
 # en-US
+%{_libdir}/%{name}/presets/config/*_en-US.so*
+%{_libdir}/%{name}/share/autocorr/acor_*.dat
 %{_libdir}/%{name}/share/autotext/en-US
 %{_libdir}/%{name}/share/registry/res/en-US
 %{_libdir}/%{name}/share/template/en-US
+%{_libdir}/%{name}/share/template/wizard/letter/en-US/*.ott
 %{_libdir}/%{name}/share/wordbook/en-US
 %{_libdir}/%{name}/program/resource/*en-US.res
 %{_libdir}/%{name}/licenses/LICENSE_en-US
