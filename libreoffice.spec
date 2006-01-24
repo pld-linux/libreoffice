@@ -2129,6 +2129,8 @@ fontpostinst TTF
 %{_libdir}/%{name}/share/psprint
 %dir %{_libdir}/%{name}/share/samples
 %dir %{_libdir}/%{name}/share/template
+%dir %{_libdir}/%{name}/share/template/wizard
+%dir %{_libdir}/%{name}/share/template/wizard/letter
 %dir %{_libdir}/%{name}/share/wordbook
 #%dir %{_libdir}/%{name}/share/wordbook/english
 #%{_libdir}/%{name}/share/wordbook/english/sun.dic
@@ -2235,6 +2237,7 @@ fontpostinst TTF
 %{_libdir}/%{name}/share/autotext/en-US
 %{_libdir}/%{name}/share/registry/res/en-US
 %{_libdir}/%{name}/share/template/en-US
+%dir %{_libdir}/%{name}/share/template/wizard/letter/en-US
 %{_libdir}/%{name}/share/template/wizard/letter/en-US/*.ott
 %{_libdir}/%{name}/share/wordbook/en-US
 %{_libdir}/%{name}/program/resource/*en-US.res
