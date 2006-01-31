@@ -87,7 +87,6 @@ Patch0:		%{name}-STL-lib64.diff
 Patch1:		%{name}-64bit-inline.diff
 Patch2:		%{name}-desktop.patch
 Patch3:		%{name}-gcc4.diff
-Patch4:		ooo-build-update.patch
 URL:		http://www.openoffice.org/
 BuildRequires:	ImageMagick
 BuildRequires:	STLport-devel >= 4.5.3-6
@@ -1738,7 +1737,6 @@ zuluskim.
 %prep
 %setup -q -n ooo-build-%{ooobver}
 %patch2 -p1
-%patch4 -p1
 
 install -d src
 cp %{SOURCE50} %{SOURCE51} src
