@@ -1572,7 +1572,7 @@ tswana.
 Summary:	OpenOffice.org - interface in Turkish language
 Summary(pl):	OpenOffice.org - interfejs w jêzyku tureckim
 Group:		Applications/Office
-Requires:	%{name} = %{epoch}-:%{version}-%{release}
+Requires:	%{name} = %{epoch}:%{version}-%{release}
 Obsoletes:	openoffice-i18n-tr
 Obsoletes:	openoffice-i18n-tr-gtk
 Obsoletes:	openoffice.org-i18n-tr-gtk
@@ -1592,7 +1592,7 @@ tureckim.
 Summary:	OpenOffice.org - interface in Tsonga language
 Summary(pl):	OpenOffice.org - interfejs w jêzyku tsonga
 Group:		Applications/Office
-Requires:	%{name} = %{epoch}-:%{version}-%{release}
+Requires:	%{name} = %{epoch}:%{version}-%{release}
 
 %description i18n-ts
 This package provides resources containing menus and dialogs in Tsonga
