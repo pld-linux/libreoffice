@@ -13,13 +13,8 @@
 #	- add %{_libdir}/%{name}/share/autocorr/acor_(ll)-(LL).dat files to package (marked with %lang)
 #       - can't be just i18n-{be,gu,hi,kn,pa,ta} instead of *-{be_BY,*_IN}?
 #	- add option to build with {not} all lanquages
+#	- REMOVE USE of Xvfb from build-galleries script (ooo-build-2.0.1.2/bin/build-galleries line 84) 
 #
-
-#Doing gallery Containers...
-#xargs: .../usr/lib/openoffice.org/program/gengal: terminated by signal 11
-#Doing gallery Decorations...
-#xargs: .../usr/lib/openoffice.org/program/gengal: terminated by signal 11
-#Doing gallery Education...
 
 # Conditional build:
 %bcond_with	java		# Java support (enables help support)
