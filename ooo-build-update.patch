@@ -65,32 +65,6 @@ diff -u -r1.1 -r1.2
 + 
 + 	##############################################################
 ===================================================================
-RCS file: /cvs/gnome/ooo-build/patches/src680/apply,v
-retrieving revision 1.616
-retrieving revision 1.617
-diff -u -r1.616 -r1.617
---- ooo-build/patches/src680/apply	2005/12/23 15:36:34	1.616
-+++ ooo-build/patches/src680/apply	2005/12/25 10:41:23	1.617
-@@ -46,7 +46,7 @@
- # Ark Linux
- Ark: LinuxCommon, NotDebian, ArkOnly
- # www.pld-linux.org
--PLDBase: LinuxCommon, NotDebian
-+PLDBase: LinuxCommon, NotDebian, PLDOnly
- PLD: PLDBase
- PLD64: PLDBase, 64bit
- # Mandriva Linux
-@@ -609,6 +609,9 @@
- workspace.jaxpapi.diff
- gcj-no-com.sun.xml.diff
- 
-+[PLDOnly]
-+pld-splash.diff
-+buildfix-longnames-54730.diff
- 
- [ BuildBits ]
- # work around http://gcc.gnu.org/bugzilla/show_bug.cgi?id=22392
-===================================================================
 RCS file: /cvs/gnome/ooo-build/patches/src680/pld-splash.diff,v
 retrieving revision 1.1
 retrieving revision 1.2
