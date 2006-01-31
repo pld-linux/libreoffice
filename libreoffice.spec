@@ -12,6 +12,7 @@
 #	- add ooglobal symlink and it's ooo-wrapper entry (among calc|draw|impress|math|web|writer)
 #	- add %{_libdir}/%{name}/share/autocorr/acor_(ll)-(LL).dat files to package (marked with %lang)
 #       - can't be just i18n-{be,gu,hi,kn,pa,ta} instead of *-{be_BY,*_IN}?
+#	- add option to build with {not} all lanquages
 #
 
 #Doing gallery Containers...
@@ -21,14 +22,14 @@
 #Doing gallery Education...
 
 # Conditional build:
-%bcond_with	java		# Java support
+%bcond_with	java		# Java support (enables help support)
 %bcond_with	vfs		# Enable GNOME VFS and Evolution 2 support
 %bcond_with	mono
 %bcond_with	gcc4		# use gcc4 patch (breaks build with gcc 3.3.x)
 
 %define		ver		2.0
 %define		rel		1
-%define		ooobver		2.0.1
+%define		ooobver		2.0.1.2
 %define		snap		OOA680
 %define		snap2		SRC680
 %define		bver		%{nil}
@@ -48,7 +49,7 @@ Epoch:		1
 License:	GPL/LGPL
 Group:		X11/Applications
 Source0:	http://go-ooo.org/packages/%{snap}/ooo-build-%{ooobver}.tar.gz
-# Source0-md5:	efa2962487704143767bab8fa08b9477
+# Source0-md5:	d1fa1071b3f2322d33216aaac65eb349
 Source1:	http://go-ooo.org/packages/%{snap}/%{ssnap}-core.tar.bz2
 # Source1-md5:	fc0a44c3344c2274b4ea2ee1a8501df5
 Source2:	http://go-ooo.org/packages/%{snap}/%{ssnap}-system.tar.bz2
@@ -67,16 +68,18 @@ Source13:	http://go-ooo.org/packages/libwpd/libwpd-0.8.3.tar.gz
 # Source13-md5:	f34404f8dc6123aca156d203c37e3e5d
 Source14:	http://go-ooo.org/packages/SRC680/mdbtools-0.6pre1.tar.gz
 # Source14-md5:	246e8f38b2a1af1bcff60ee0da59300b
-Source20:	oocalc.desktop
-Source21:	oodraw.desktop
+
+Source20:	spreadsheet.desktop
+Source21:	drawing.desktop
 Source22:	ooffice.desktop
 #Source23:	ooglobal.desktop
-Source24:	ooimpress.desktop
-Source25:	oomath.desktop
+Source24:	presentation.desktop
+Source25:	formula.desktop
 Source26:	ooprinteradmin.desktop
 Source27:	oosetup.desktop
 Source28:	ooweb.desktop
-Source29:	oowriter.desktop
+Source29:	textdoc.desktop
+Source30:	database.desktop
 Source50:	openabout_pld.png
 Source51:	openintro_pld.bmp
 
@@ -1937,6 +1940,7 @@ install %{SOURCE26} $RPM_BUILD_ROOT%{_desktopdir}
 install %{SOURCE27} $RPM_BUILD_ROOT%{_desktopdir}
 install %{SOURCE28} $RPM_BUILD_ROOT%{_desktopdir}
 install %{SOURCE29} $RPM_BUILD_ROOT%{_desktopdir}
+install %{SOURCE30} $RPM_BUILD_ROOT%{_desktopdir}
 
 # Add in the regcomp tool since some people need it for 3rd party add-ons
 cp -f build/%{ssnap}/solver/%{subver}/unxlng*.pro/bin/regcomp $RPM_BUILD_ROOT%{_libdir}/%{name}/program
@@ -2045,6 +2049,10 @@ for lang in $langlist; do
 		# lib/openoffice.org/share/wordbook/$lang
 		grep "/share/wordbook/${lang}$" ${lfile} >> ${lang}.lang || :
 		grep "/share/wordbook/${lang}/" ${lfile} >> ${lang}.lang || :
+		%if %{with java}
+		grep "/help/${lang}$" ${lfile} >> ${lang}.lang || :
+		grep "/help/${lang}/" ${lfile} >> ${lang}.lang || :
+		%endif
 	fi
 done
 
@@ -2213,15 +2221,24 @@ fontpostinst TTF
 %attr(755,root,root) %{_libdir}/%{name}/program/uri-encode
 %attr(755,root,root) %{_libdir}/%{name}/program/viewdoc
 %attr(755,root,root) %{_libdir}/%{name}/program/*.py
+%attr(755,root,root) %{_libdir}/%{name}/program/pyunorc-update64
+%attr(755,root,root) %{_libdir}/%{name}/program/versionrc
 
 %if %{with java}
 %attr(755,root,root) %{_libdir}/%{name}/program/javaldx
 %attr(755,root,root) %{_libdir}/%{name}/program/java-set-classpath
 %attr(755,root,root) %{_libdir}/%{name}/program/jvmfwk3rc
+%attr(755,root,root) %{_libdir}/%{name}/program/JREProperties.class
+#%attr(755,root,root) %{_libdir}/%{name}/program/cde-open-url
+%{_libdir}/%{name}/help/en
+%{_libdir}/%{name}/help/main_transform.xsl
+%{_libdir}/%{name}/program/hid.lst
 %{_libdir}/%{name}/program/classes
 %{_libdir}/%{name}/share/Scripts/beanshell
 %{_libdir}/%{name}/share/Scripts/javascript
+%{_libdir}/%{name}/share/Scripts/java
 %{_libdir}/%{name}/share/xslt
+%{_libdir}/%{name}/share/config/javavendors.xml
 %endif
 
 %dir %{_libdir}/%{name}/share/Scripts
