@@ -39,7 +39,7 @@ Summary:	OpenOffice.org - powerful office suite
 Summary(pl):	OpenOffice.org - potê¿ny pakiet biurowy
 Name:		openoffice.org
 Version:	%{fullver}
-Release:	0.96.2%{?with_vfs:vfs}
+Release:	0.97%{?with_vfs:vfs}
 Epoch:		1
 License:	GPL/LGPL
 Group:		X11/Applications
