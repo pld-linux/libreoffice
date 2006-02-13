@@ -24,7 +24,7 @@
 
 %define		ver		2.0
 %define		rel		1
-%define		ooobver		2.0.1.2
+%define		ooobver		2.0.1.3
 %define		snap		OOA680
 %define		snap2		SRC680
 %define		bver		%{nil}
@@ -44,7 +44,7 @@ Epoch:		1
 License:	GPL/LGPL
 Group:		X11/Applications
 Source0:	http://go-ooo.org/packages/%{snap}/ooo-build-%{ooobver}.tar.gz
-# Source0-md5:	d1fa1071b3f2322d33216aaac65eb349
+# Source0-md5:	a80519e90879edd2f476dc9c46fdc05d
 Source1:	http://go-ooo.org/packages/%{snap}/%{ssnap}-core.tar.bz2
 # Source1-md5:	fc0a44c3344c2274b4ea2ee1a8501df5
 Source2:	http://go-ooo.org/packages/%{snap}/%{ssnap}-system.tar.bz2
@@ -82,6 +82,7 @@ Patch0:		%{name}-STL-lib64.diff
 Patch1:		%{name}-64bit-inline.diff
 Patch2:		%{name}-desktop.patch
 Patch3:		%{name}-gcc4.diff
+Patch4:		%{name}-bashizm.patch
 URL:		http://www.openoffice.org/
 BuildRequires:	ImageMagick
 BuildRequires:	STLport-devel >= 4.5.3-6
@@ -1732,6 +1733,7 @@ zuluskim.
 %prep
 %setup -q -n ooo-build-%{ooobver}
 %patch2 -p1
+%patch4 -p1
 
 install -d src
 cp %{SOURCE50} %{SOURCE51} src
