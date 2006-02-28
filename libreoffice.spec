@@ -17,7 +17,7 @@
 #
 
 # Conditional build:
-%bcond_with	java		# Java support (enables help support)
+%bcond_with	java		# Java support (enables help support and improves funcionality)
 %bcond_with	vfs		# Enable GNOME VFS and Evolution 2 support
 %bcond_with	mono
 %bcond_with	gcc4		# use gcc4 patch (breaks build with gcc 3.3.x)
