@@ -23,9 +23,9 @@
 %bcond_with	gcc4		# use gcc4 patch (breaks build with gcc 3.3.x)
 
 %define		ver		2.0
-%define		rel		1
-%define		ooobver		2.0.1.3
-%define		snap		OOA680
+%define		rel		2
+%define		ooobver		2.0.2
+%define		snap		OOB680
 %define		snap2		SRC680
 %define		bver		%{nil}
 %define		subver		680
@@ -39,20 +39,20 @@ Summary:	OpenOffice.org - powerful office suite
 Summary(pl):	OpenOffice.org - potê¿ny pakiet biurowy
 Name:		openoffice.org
 Version:	%{fullver}
-Release:	0.98%{?with_vfs:vfs}
+Release:	0.0.1%{?with_vfs:vfs}
 Epoch:		1
 License:	GPL/LGPL
 Group:		X11/Applications
 Source0:	http://go-ooo.org/packages/%{snap}/ooo-build-%{ooobver}.tar.gz
-# Source0-md5:	a80519e90879edd2f476dc9c46fdc05d
+# Source0-md5:	a745d2aedde615ee98b591901161c228
 Source1:	http://go-ooo.org/packages/%{snap}/%{ssnap}-core.tar.bz2
-# Source1-md5:	fc0a44c3344c2274b4ea2ee1a8501df5
+# Source1-md5:	99d5e8c21c50af94bc5eee8d5e7e6df1
 Source2:	http://go-ooo.org/packages/%{snap}/%{ssnap}-system.tar.bz2
-# Source2-md5:	642eaffe89f652358de8261618b3d016
+# Source2-md5:	a1e4d5f03e2c0c0870847f4de97b8d12
 Source3:	http://go-ooo.org/packages/%{snap}/%{ssnap}-binfilter.tar.bz2
-# Source3-md5:	4e50fd0fb02155edc410e9fea01e5c59
+# Source3-md5:	c55854ea2a38753813c47019d4332eca
 Source4:	http://go-ooo.org/packages/%{snap}/%{ssnap}-lang.tar.bz2
-# Source4-md5:	694a196fbcc4f9eb0bdd84656b6b6b2d
+# Source4-md5:	af0b0b9e629e9ed95693c6b1cecbe8a9
 Source10:	http://go-ooo.org/packages/%{snap2}/ooo_custom_images-13.tar.bz2
 # Source10-md5:	2480af7f890c8175c7f9e183a1b39ed2
 Source11:	http://go-ooo.org/packages/%{snap2}/ooo_crystal_images-6.tar.bz2
@@ -63,6 +63,8 @@ Source13:	http://go-ooo.org/packages/libwpd/libwpd-0.8.3.tar.gz
 # Source13-md5:	f34404f8dc6123aca156d203c37e3e5d
 Source14:	http://go-ooo.org/packages/SRC680/mdbtools-0.6pre1.tar.gz
 # Source14-md5:	246e8f38b2a1af1bcff60ee0da59300b
+Source15:	http://go-ooo.org/packages/xt/xt-20051206-src-only.zip
+# Source15-md5:	0395e6e7da27c1cea7e1852286f6ccf9
 
 Source20:	spreadsheet.desktop
 Source21:	drawing.desktop
@@ -80,9 +82,12 @@ Source51:	openintro_pld.bmp
 
 Patch0:		%{name}-STL-lib64.diff
 Patch1:		%{name}-64bit-inline.diff
-Patch2:		%{name}-desktop.patch
-Patch3:		%{name}-gcc4.diff
-Patch4:		%{name}-bashizm.patch
+Patch2:		%{name}-gcc4.diff
+Patch3:		%{name}-bashizm.patch
+Patch4:		%{name}-build-crystal_images.patch
+Patch5:		%{name}-build-pld-splash.diff
+Patch6:		%{name}-build-no-java.diff
+Patch7:		%{name}-sfx2.badscript.diff
 URL:		http://www.openoffice.org/
 BuildRequires:	ImageMagick
 BuildRequires:	STLport-devel >= 4.5.3-6
@@ -1732,7 +1737,7 @@ zuluskim.
 
 %prep
 %setup -q -n ooo-build-%{ooobver}
-%patch2 -p1
+%patch3 -p1
 %patch4 -p1
 
 install -d src
@@ -1740,7 +1745,7 @@ cp %{SOURCE50} %{SOURCE51} src
 # sources, icons, KDE_icons
 ln -sf %{SOURCE1} %{SOURCE2} %{SOURCE3} %{SOURCE4} \
 	%{SOURCE10} %{SOURCE11} %{SOURCE12} %{SOURCE13} \
-	%{SOURCE14} src
+	%{SOURCE14} %{SOURCE15} src
 
 # add to ooo-build patch-system
 %ifarch %{x8664} sparc64
@@ -1751,10 +1756,29 @@ echo `basename %{PATCH0}` >>patches/src680/apply
 echo `basename %{PATCH1}` >>patches/src680/apply
 sed -i -e 's/PLD64: PLDBase, 64bit/PLD64: PLDBase, 64bit, 64bitPLDFixes/' patches/src680/apply
 %endif
+
+# various fixes
+echo "[ Fixes ]" >> patches/src680/apply
+
+# macro browser can crash if there's an invalid script container
+install %{PATCH7} patches/src680
+echo `basename %{PATCH7}` >>patches/src680/apply
+
+# gcc4 fixes
 %if %{with gcc4}
-install %{PATCH3} patches/src680
-(echo "[ Fixes ]"; echo `basename %{PATCH3}`) >>patches/src680/apply
+install %{PATCH2} patches/src680
+echo `basename %{PATCH2}` >>patches/src680/apply
 %endif
+
+# fix build when not using java
+%if %{without java}
+install %{PATCH6} patches/src680
+echo -e `basename %{PATCH6}` >> patches/src680/apply
+%endif
+
+# fix patches/src680/pld-splash.diff
+install %{PATCH5} patches/src680/pld-splash.diff
+
 # fake patch to make buildsystem happy (patch is included)
 touch patches/64bit/cws-ooo64bit02.2005-04-19-math-h.diff
 
@@ -1788,7 +1812,8 @@ export CC CXX ENVCFLAGS ENVCFLAGSCXX DESTDIR IGNORE_MANIFEST_CHANGES DISTRO QTIN
 JAVA_HOME=%{_libdir}/java
 DB_JAR="%{_javadir}/db.jar"
 export JAVA_HOME DB_JAR
-ANT_HOME=%{_datadir}/java
+ANT_HOME=%{_prefix}
+export ANT_HOME
 %endif
 
 DEFAULT_TO_ENGLISH_FOR_PACKING=1; export DEFAULT_TO_ENGLISH_FOR_PACKING
@@ -1823,6 +1848,7 @@ CONFOPTS=" \
 	--with-system-freetype \
 	--with-system-nas \
 	--with-system-xrender \
+	--with-system-xrender-headers=yes \
 	--with-system-expat \
 	--with-system-sablot \
 	--with-system-boost \
@@ -1840,7 +1866,6 @@ CONFOPTS=" \
 %if %{with java}
 	--with-java \
 	--with-jdk-home=$JAVA_HOME \
-	--with-ant-home=$ANT_HOME \
 %else
 	--without-java \
 %endif
@@ -1986,6 +2011,9 @@ rm -f $RPM_BUILD_ROOT%{_libdir}/%{name}/program/setup.log
 # Remove copied system libraries
 rm -f $RPM_BUILD_ROOT%{_libdir}/%{name}/program/libgcc_s.so* \
 	$RPM_BUILD_ROOT%{_libdir}/%{name}/program/libstdc++*so*
+
+# install ooqstart
+install build/OOO_2_0_2/desktop/unxlngi4.pro/bin/ooqstart $RPM_BUILD_ROOT%{_libdir}/%{name}/program
 
 # Find out locales
 rm -f *.lang*
@@ -2176,13 +2204,14 @@ fontpostinst TTF
 
 # Programs
 %attr(755,root,root) %{_bindir}/oo*
-%attr(755,root,root) %{_sbindir}/oopadmin
+#%attr(755,root,root) %{_sbindir}/oopadmin
 #%attr(755,root,root) %{_libdir}/%{name}/spadmin
 %attr(755,root,root) %{_libdir}/%{name}/program/*.bin
 #%attr(755,root,root) %{_libdir}/%{name}/program/fromtemplate
 #%attr(755,root,root) %{_libdir}/%{name}/program/mozwrapper
 #%attr(755,root,root) %{_libdir}/%{name}/program/nswrapper
 #%attr(755,root,root) %{_libdir}/%{name}/program/ooovirg
+%attr(755,root,root) %{_libdir}/%{name}/program/ooqstart
 %attr(755,root,root) %{_libdir}/%{name}/program/pagein*
 #%attr(755,root,root) %{_libdir}/%{name}/program/python.sh
 %attr(755,root,root) %{_libdir}/%{name}/program/pythonloader.unorc
