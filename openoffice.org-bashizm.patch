@@ -1,11 +1,11 @@
---- ooo-build-2.0.1.2/bin/build-galleries~	2006-01-25 18:34:40.000000000 +0100
-+++ ooo-build-2.0.1.2/bin/build-galleries	2006-02-13 14:13:52.298627500 +0100
-@@ -81,7 +81,7 @@
- while /bin/true; do 
+--- ooo-build-2.0.2.orig/bin/build-galleries	2006-03-13 00:17:29.000000000 +0100
++++ ooo-build-2.0.2/bin/build-galleries	2006-03-13 00:21:47.000000000 +0100
+@@ -123,7 +123,7 @@
  	if [ ! -f /tmp/.X$XDISPLAY-lock ]; then
+ 		echo "    trying display :$XDISPLAY ..."
  		sleep 2s
--		/usr/X11R6/bin/Xvfb -ac :$XDISPLAY >& /dev/null &
-+		/usr/X11R6/bin/Xvfb -ac :$XDISPLAY &
+-		$XVFB -ac :$XDISPLAY >& /dev/null &
++		$XVFB -ac :$XDISPLAY &
  		trap "kill $! > /dev/null 2>&1 || true" EXIT
  		# let server to start
  		sleep 10s 
