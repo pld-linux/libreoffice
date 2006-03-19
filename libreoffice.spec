@@ -39,7 +39,7 @@ Summary:	OpenOffice.org - powerful office suite
 Summary(pl):	OpenOffice.org - potê¿ny pakiet biurowy
 Name:		openoffice.org
 Version:	%{fullver}
-Release:	0.0.1%{?with_vfs:vfs}
+Release:	0.0.2%{?with_vfs:vfs}
 Epoch:		1
 License:	GPL/LGPL
 Group:		X11/Applications
@@ -55,8 +55,8 @@ Source4:	http://go-ooo.org/packages/%{snap}/%{ssnap}-lang.tar.bz2
 # Source4-md5:	af0b0b9e629e9ed95693c6b1cecbe8a9
 Source10:	http://go-ooo.org/packages/%{snap2}/ooo_custom_images-13.tar.bz2
 # Source10-md5:	2480af7f890c8175c7f9e183a1b39ed2
-Source11:	http://go-ooo.org/packages/%{snap2}/ooo_crystal_images-6.tar.bz2
-# Source11-md5:	586d0f26b3f79d89bbb5b25b874e3df6
+Source11:	http://go-ooo.org/packages/%{snap2}/ooo_crystal_images-1.tar.gz
+# Source11-md5:	9c57c933e793f791f2c8817ccd28911c
 Source12:	http://go-ooo.org/packages/%{snap2}/extras-2.tar.bz2
 # Source12-md5:	733051ebeffae5232a2eb760162da020
 Source13:	http://go-ooo.org/packages/libwpd/libwpd-0.8.3.tar.gz
@@ -84,7 +84,7 @@ Patch0:		%{name}-STL-lib64.diff
 Patch1:		%{name}-64bit-inline.diff
 Patch2:		%{name}-gcc4.diff
 Patch3:		%{name}-bashizm.patch
-Patch4:		%{name}-build-crystal_images.patch
+#Patch4:		%{name}-ooo62030.solenv._version.diff
 Patch5:		%{name}-build-pld-splash.diff
 Patch6:		%{name}-build-no-java.diff
 Patch7:		%{name}-sfx2.badscript.diff
@@ -1738,7 +1738,6 @@ zuluskim.
 %prep
 %setup -q -n ooo-build-%{ooobver}
 %patch3 -p1
-%patch4 -p1
 
 install -d src
 cp %{SOURCE50} %{SOURCE51} src
