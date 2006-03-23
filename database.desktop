@@ -62,7 +62,7 @@ Exec=oobase %U
 Icon=ooo-base.png
 Terminal=false
 Type=Application
-Categories=Office;Database
+Categories=Office;Database;
 StartupNotify=true
 MimeType=application/vnd.oasis.opendocument.database
-
+# vi: encoding=utf-8
