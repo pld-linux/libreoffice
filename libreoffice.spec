@@ -24,7 +24,7 @@
 
 %define		ver		2.0
 %define		rel		2
-%define		ooobver		2.0.2
+%define		ooobver		2.0.2.6
 %define		snap		OOB680
 %define		snap2		SRC680
 %define		bver		%{nil}
@@ -39,12 +39,12 @@ Summary:	OpenOffice.org - powerful office suite
 Summary(pl):	OpenOffice.org - potê¿ny pakiet biurowy
 Name:		openoffice.org
 Version:	%{fullver}
-Release:	0.0.2%{?with_vfs:vfs}
+Release:	0.0.3%{?with_vfs:vfs}
 Epoch:		1
 License:	GPL/LGPL
 Group:		X11/Applications
 Source0:	http://go-ooo.org/packages/%{snap}/ooo-build-%{ooobver}.tar.gz
-# Source0-md5:	a745d2aedde615ee98b591901161c228
+# Source0-md5:	bbc067eec12fe99da4a23decf4b82cbb
 Source1:	http://go-ooo.org/packages/%{snap}/%{ssnap}-core.tar.bz2
 # Source1-md5:	99d5e8c21c50af94bc5eee8d5e7e6df1
 Source2:	http://go-ooo.org/packages/%{snap}/%{ssnap}-system.tar.bz2
@@ -61,7 +61,7 @@ Source12:	http://go-ooo.org/packages/%{snap2}/extras-2.tar.bz2
 # Source12-md5:	733051ebeffae5232a2eb760162da020
 Source13:	http://go-ooo.org/packages/libwpd/libwpd-0.8.3.tar.gz
 # Source13-md5:	f34404f8dc6123aca156d203c37e3e5d
-Source14:	http://go-ooo.org/packages/SRC680/mdbtools-0.6pre1.tar.gz
+Source14:	http://go-ooo.org/packages/%{snap2}/mdbtools-0.6pre1.tar.gz
 # Source14-md5:	246e8f38b2a1af1bcff60ee0da59300b
 Source15:	http://go-ooo.org/packages/xt/xt-20051206-src-only.zip
 # Source15-md5:	0395e6e7da27c1cea7e1852286f6ccf9
@@ -2298,7 +2298,7 @@ fontpostinst TTF
 %exclude %{_libdir}/%{name}/program/libvclplug_kde*.so
 %exclude %{_libdir}/%{name}/program/libfps_kde.so
 %exclude %{_libdir}/%{name}/program/fps_gnome.uno.so
-%exclude %{_libdir}/%{name}/program/libkab1.so
+%exclude %{_libdir}/%{name}/program/libkabdrv1.so
 #%exclude %{_libdir}/%{name}/program/libfps_gnome.so
 %attr(755,root,root) %{_libdir}/%{name}/program/*.so.*
 #%attr(755,root,root) %{_libdir}/%{name}/program/filter/*.so
@@ -2310,7 +2310,7 @@ fontpostinst TTF
 %attr(755,root,root) %{_libdir}/%{name}/program/kdefilepicker
 %attr(755,root,root) %{_libdir}/%{name}/program/libvclplug_kde*.so
 %attr(755,root,root) %{_libdir}/%{name}/program/libfps_kde.so
-%attr(755,root,root) %{_libdir}/%{name}/program/libkab1.so
+%attr(755,root,root) %{_libdir}/%{name}/program/libkabdrv1.so
 %attr(755,root,root) %{_libdir}/%{name}/program/kde-open-url
 #%dir %{_libdir}/%{name}/program/resource.kde
 
