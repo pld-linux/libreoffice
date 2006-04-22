@@ -24,7 +24,7 @@
 
 %define		ver		2.0
 %define		rel		2
-%define		ooobver		2.0.2.6
+%define		ooobver		2.0.2.7
 %define		snap		OOB680
 %define		snap2		SRC680
 %define		bver		%{nil}
@@ -39,12 +39,12 @@ Summary:	OpenOffice.org - powerful office suite
 Summary(pl):	OpenOffice.org - potê¿ny pakiet biurowy
 Name:		openoffice.org
 Version:	%{fullver}
-Release:	0.0.3%{?with_vfs:vfs}
+Release:	0.0.4%{?with_vfs:vfs}
 Epoch:		1
 License:	GPL/LGPL
 Group:		X11/Applications
 Source0:	http://go-ooo.org/packages/%{snap}/ooo-build-%{ooobver}.tar.gz
-# Source0-md5:	bbc067eec12fe99da4a23decf4b82cbb
+# Source0-md5:	67b73c718a6712289aa30a4d56f006da
 Source1:	http://go-ooo.org/packages/%{snap}/%{ssnap}-core.tar.bz2
 # Source1-md5:	99d5e8c21c50af94bc5eee8d5e7e6df1
 Source2:	http://go-ooo.org/packages/%{snap}/%{ssnap}-system.tar.bz2
@@ -79,15 +79,12 @@ Source29:	textdoc.desktop
 Source30:	database.desktop
 Source50:	openabout_pld.png
 Source51:	openintro_pld.bmp
-
-Patch0:		%{name}-STL-lib64.diff
-Patch1:		%{name}-64bit-inline.diff
-Patch2:		%{name}-gcc4.diff
-Patch3:		%{name}-bashizm.patch
-#Patch4:		%{name}-ooo62030.solenv._version.diff
-Patch5:		%{name}-build-pld-splash.diff
-Patch6:		%{name}-build-no-java.diff
-Patch7:		%{name}-sfx2.badscript.diff
+Patch0:		%{name}-bashizm.patch
+Patch1:		%{name}-PLD.patch
+Patch2:		%{name}-STL-lib64.diff
+Patch3:		%{name}-64bit-inline.diff
+Patch4:		%{name}-build-pld-splash.diff
+Patch5:		%{name}-sfx2.badscript.diff
 URL:		http://www.openoffice.org/
 BuildRequires:	ImageMagick
 BuildRequires:	STLport-devel >= 4.5.3-6
@@ -1737,7 +1734,6 @@ zuluskim.
 
 %prep
 %setup -q -n ooo-build-%{ooobver}
-%patch3 -p1
 
 install -d src
 cp %{SOURCE50} %{SOURCE51} src
@@ -1746,40 +1742,21 @@ ln -sf %{SOURCE1} %{SOURCE2} %{SOURCE3} %{SOURCE4} \
 	%{SOURCE10} %{SOURCE11} %{SOURCE12} %{SOURCE13} \
 	%{SOURCE14} %{SOURCE15} src
 
-# add to ooo-build patch-system
-%ifarch %{x8664} sparc64
-install %{PATCH0} patches/64bit
-install %{PATCH1} patches/64bit
-echo "[ 64bitPLDFixes ]" >>patches/src680/apply
-echo `basename %{PATCH0}` >>patches/src680/apply
-echo `basename %{PATCH1}` >>patches/src680/apply
-sed -i -e 's/PLD64: PLDBase, 64bit/PLD64: PLDBase, 64bit, 64bitPLDFixes/' patches/src680/apply
-%endif
+# bashizm
+%patch0 -p1
 
-# various fixes
-echo "[ Fixes ]" >> patches/src680/apply
+# fixes for the patch subsystem
+%patch1 -p1
 
-# macro browser can crash if there's an invalid script container
-install %{PATCH7} patches/src680
-echo `basename %{PATCH7}` >>patches/src680/apply
-
-# gcc4 fixes
-%if %{with gcc4}
-install %{PATCH2} patches/src680
-echo `basename %{PATCH2}` >>patches/src680/apply
-%endif
-
-# fix build when not using java
-%if %{without java}
-install %{PATCH6} patches/src680
-echo -e `basename %{PATCH6}` >> patches/src680/apply
-%endif
+# 64 bit related patches
+install %{PATCH2} patches/64bit
+install %{PATCH3} patches/64bit
 
 # fix patches/src680/pld-splash.diff
-install %{PATCH5} patches/src680/pld-splash.diff
+install %{PATCH4} patches/src680/pld-splash.diff
 
-# fake patch to make buildsystem happy (patch is included)
-touch patches/64bit/cws-ooo64bit02.2005-04-19-math-h.diff
+# macro browser can crash if there's an invalid script container
+install %{PATCH5} patches/src680
 
 %build
 # Make sure we have /proc mounted - otherwise idlc will fail later.
