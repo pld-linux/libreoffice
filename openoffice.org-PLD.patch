@@ -1,0 +1,31 @@
+diff -bur ooo-build-2.0.2.7.orig/patches/src680/apply ooo-build-2.0.2.7/patches/src680/apply
+--- ooo-build-2.0.2.7.orig/patches/src680/apply	2006-04-21 15:21:46.640348000 +0200
++++ ooo-build-2.0.2.7/patches/src680/apply	2006-04-21 16:10:55.324630250 +0200
+@@ -52,9 +52,9 @@
+ Ark: LinuxCommon, NotDebian, ArkOnly, GCJExperimental, BerkeleyDB43, SystemJavaBits
+ Ark64: LinuxCommon, NotDebian, ArkOnly, BerkeleyDB43, 64bit, SystemJavaBits
+ # www.pld-linux.org
+-PLDBase: LinuxCommon, NotDebian, PLDOnly
++PLDBase: LinuxCommon, NotDebian, PLDOnly, GCJExperimental
+ PLD: PLDBase
+-PLD64: PLDBase, 64bit
++PLD64: PLDBase, 64bit, PLD64bitfixes
+ # Mandriva Linux
+ MandrivaBase: MandrivaOnly, LinuxCommon, MandrivaOnlyUnix, LockDown
+ Mandriva: MandrivaBase
+@@ -749,9 +749,14 @@
+ gcj-HelpLinker-native.diff
+ xt-precompile.diff
+ 
+-
++# PLD fixes
+ [PLDOnly]
+ pld-splash.diff
++openoffice.org-sfx2.badscript.diff
++
++[PLD64bitfixes]
++openoffice.org-STL-lib64.diff
++openoffice.org-64bit-inline.diff
+ 
+ [ BuildBits ]
+ # work around http://gcc.gnu.org/bugzilla/show_bug.cgi?id=22392
