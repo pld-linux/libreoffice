@@ -89,6 +89,7 @@ URL:		http://www.openoffice.org/
 BuildRequires:	ImageMagick
 BuildRequires:	STLport-devel >= 4.5.3-6
 BuildRequires:	XFree86-devel
+BuildRequires:	XFree86-Xvfb
 BuildRequires:	autoconf
 BuildRequires:	automake
 BuildRequires:	bison >= 1.875-4
