@@ -109,7 +109,7 @@ BuildRequires:	gnome-vfs2-devel
 BuildRequires:	jdk >= 1.4.0_00
 BuildRequires:	db-java >= 4.2.52-4
 BuildRequires:	jar
-BuildRequires:	jakarta-ant
+BuildRequires:	ant
 %else
 BuildRequires:	libxslt-progs
 %endif
