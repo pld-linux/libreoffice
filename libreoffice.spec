@@ -2,6 +2,8 @@
 #	- normal build requires little less than 4GB of disk space
 #	- full debug build requires about 9GB of disk space
 # TODO:
+#	- fix build with freetype 2.2.x:
+#	  http://www.openoffice.org/nonav/issues/showattachment.cgi/36573/vcl-freetype-2.2.x.diff
 #	- drop requirement on nas-devel
 #	- fix locale names and other locale related things
 #	- --with-system-myspell + myspell package as in Debian
