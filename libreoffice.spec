@@ -16,6 +16,14 @@
 #       - can't be just i18n-{be,gu,hi,kn,pa,ta} instead of *-{be_BY,*_IN}?
 #	- add option to build with {not} all lanquages
 #	- REMOVE USE of Xvfb from build-galleries script (ooo-build-2.0.1.2/bin/build-galleries line 84) 
+#	- ooqstart (disappeared from 2.0.3?)
+#	- check:
+#		Installed (but unpackaged) file(s) found:
+#		   /usr/lib/openoffice.org/program/.testtoolrc
+#		   /usr/lib/openoffice.org/program/cde-open-url
+#		   /usr/lib/openoffice.org/program/hid.lst
+#		   /usr/lib/openoffice.org/program/java-set-classpath
+#		   /usr/lib/openoffice.org/program/jvmfwk3rc
 #
 
 # Conditional build:
@@ -23,38 +31,40 @@
 %bcond_with	vfs		# Enable GNOME VFS and Evolution 2 support
 %bcond_with	mono
 %bcond_with	gcc4		# use gcc4 patch (breaks build with gcc 3.3.x)
+%bcond_without	mozilla		# without mozilla
 
 %define		ver		2.0
-%define		rel		2
-%define		ooobver		2.0.2.7
-%define		snap		OOB680
+%define		rel		3
+%define		ooobver		ooc680-m7
+%define		snap		OOC680
 %define		snap2		SRC680
 %define		bver		%{nil}
 %define		subver		680
 
 %define		fullver		%{ver}.%{rel}
 %define		dfullver	%(echo %{fullver} | tr . _)
-%define		ssnap		OOO_%{dfullver}
+#%define		ssnap		OOO_%{dfullver}
+%define		ssnap		ooc680-m7
 %define		specflags	-fno-strict-aliasing
 
 Summary:	OpenOffice.org - powerful office suite
 Summary(pl):	OpenOffice.org - potê¿ny pakiet biurowy
 Name:		openoffice.org
 Version:	%{fullver}
-Release:	0.0.4%{?with_vfs:vfs}
+Release:	0.0.3%{?with_vfs:vfs}
 Epoch:		1
 License:	GPL/LGPL
 Group:		X11/Applications
 Source0:	http://go-ooo.org/packages/%{snap}/ooo-build-%{ooobver}.tar.gz
-# Source0-md5:	67b73c718a6712289aa30a4d56f006da
+# Source0-md5:	97045632ac7291ef80681351634626f5
 Source1:	http://go-ooo.org/packages/%{snap}/%{ssnap}-core.tar.bz2
-# Source1-md5:	99d5e8c21c50af94bc5eee8d5e7e6df1
+# Source1-md5:	fbc38a693821f7abdaf6e2cbfc802b7b
 Source2:	http://go-ooo.org/packages/%{snap}/%{ssnap}-system.tar.bz2
-# Source2-md5:	a1e4d5f03e2c0c0870847f4de97b8d12
+# Source2-md5:	46bf9184fe04c7aca1a4cbdd65881164
 Source3:	http://go-ooo.org/packages/%{snap}/%{ssnap}-binfilter.tar.bz2
-# Source3-md5:	c55854ea2a38753813c47019d4332eca
+# Source3-md5:	810ec48412698e7a89a3164cc756cd81
 Source4:	http://go-ooo.org/packages/%{snap}/%{ssnap}-lang.tar.bz2
-# Source4-md5:	af0b0b9e629e9ed95693c6b1cecbe8a9
+# Source4-md5:	85ebe692d05cca9949d68c32696a87e4
 Source10:	http://go-ooo.org/packages/%{snap2}/ooo_custom_images-13.tar.bz2
 # Source10-md5:	2480af7f890c8175c7f9e183a1b39ed2
 Source11:	http://go-ooo.org/packages/%{snap2}/ooo_crystal_images-1.tar.gz
@@ -67,26 +77,17 @@ Source14:	http://go-ooo.org/packages/%{snap2}/mdbtools-0.6pre1.tar.gz
 # Source14-md5:	246e8f38b2a1af1bcff60ee0da59300b
 Source15:	http://go-ooo.org/packages/xt/xt-20051206-src-only.zip
 # Source15-md5:	0395e6e7da27c1cea7e1852286f6ccf9
-
-Source20:	spreadsheet.desktop
-Source21:	drawing.desktop
-Source22:	ooffice.desktop
-#Source23:	ooglobal.desktop
-Source24:	presentation.desktop
-Source25:	formula.desktop
-Source26:	ooprinteradmin.desktop
-Source27:	oosetup.desktop
-Source28:	ooweb.desktop
-Source29:	textdoc.desktop
-Source30:	database.desktop
+Source16:	http://go-ooo.org/packages/%{snap2}/lp_solve_5.5.tar.gz
+# Source16-md5:	2ff7b4c52f9c3937ebe3002798fbc479
 Source50:	openabout_pld.png
 Source51:	openintro_pld.bmp
 Patch0:		%{name}-bashizm.patch
 Patch1:		%{name}-PLD.patch
-Patch2:		%{name}-STL-lib64.diff
-Patch3:		%{name}-64bit-inline.diff
-Patch4:		%{name}-build-pld-splash.diff
-Patch5:		%{name}-sfx2.badscript.diff
+Patch2:		%{name}-vendorname.patch
+Patch100:	%{name}-STL-lib64.diff
+Patch101:	%{name}-64bit-inline.diff
+Patch102:	%{name}-build-pld-splash.diff
+Patch103:	%{name}-sfx2.badscript.diff
 URL:		http://www.openoffice.org/
 BuildRequires:	ImageMagick
 BuildRequires:	STLport-devel >= 4.5.3-6
@@ -130,7 +131,9 @@ BuildRequires:	nspr-devel >= 1:4.6-0.20041030.3
 BuildRequires:	mono-devel >= 1.1.8
 BuildRequires:	mono-csharp >= 1.1.8
 %endif
+%if %{with mozilla}
 BuildRequires:	mozilla-devel >= 5:1.7.6-2
+%endif
 BuildRequires:	nas-devel >= 1.7-1
 BuildRequires:	neon-devel
 BuildRequires:	openclipart-png >= 0:0.16
@@ -619,6 +622,25 @@ Ten pakiet dostarcza zasoby zawieraj±ce menu i okna dialogowe w jêzyku
 baskijskim (euskera).
 
 %files i18n-eu -f eu.lang
+
+%package i18n-fa
+Summary:	OpenOffice.org - interface in Persian language
+Summary(pl):	OpenOffice.org - interfejs w jêzyku perskim
+Group:		Applications/Office
+Requires:	%{name} = %{epoch}:%{version}-%{release}
+Obsoletes:	openoffice-i18n-fa
+Obsoletes:	openoffice-i18n-fa-gtk
+Obsoletes:	openoffice-i18n-fa-kde
+
+%description i18n-fa
+This package provides resources containing menus and dialogs in
+Persian language.
+
+%description i18n-eu -l pl
+Ten pakiet dostarcza zasoby zawieraj±ce menu i okna dialogowe w jêzyku
+perskim.
+
+%files i18n-fa -f fa.lang
 
 %package i18n-fi
 Summary:	OpenOffice.org - interface in Finnish language
@@ -1740,10 +1762,11 @@ zuluskim.
 
 install -d src
 cp %{SOURCE50} %{SOURCE51} src
+
 # sources, icons, KDE_icons
 ln -sf %{SOURCE1} %{SOURCE2} %{SOURCE3} %{SOURCE4} \
 	%{SOURCE10} %{SOURCE11} %{SOURCE12} %{SOURCE13} \
-	%{SOURCE14} %{SOURCE15} src
+	%{SOURCE14} %{SOURCE15} %{SOURCE16} src
 
 # bashizm
 %patch0 -p1
@@ -1751,15 +1774,18 @@ ln -sf %{SOURCE1} %{SOURCE2} %{SOURCE3} %{SOURCE4} \
 # fixes for the patch subsystem
 %patch1 -p1
 
+# teach configure.in about PLD
+%patch2 -p1
+
 # 64 bit related patches
-install %{PATCH2} patches/64bit
-install %{PATCH3} patches/64bit
+install %{PATCH100} patches/64bit
+install %{PATCH101} patches/64bit/64bit-inline.diff
 
 # fix patches/src680/pld-splash.diff
-install %{PATCH4} patches/src680/pld-splash.diff
+install %{PATCH102} patches/src680/pld-splash.diff
 
 # macro browser can crash if there's an invalid script container
-install %{PATCH5} patches/src680
+install %{PATCH103} patches/src680/sfx2.badscript.diff
 
 %build
 # Make sure we have /proc mounted - otherwise idlc will fail later.
@@ -1832,10 +1858,15 @@ CONFOPTS=" \
 	--with-system-sablot \
 	--with-system-boost \
 	--without-system-neon \
+%if %{with mozilla}
 	--with-system-mozilla \
+%else
+	--disable-mozilla \
+%endif
 	--with-system-cairo \
 	--with-dynamic-xinerama \
-	--with-vendor="${DISTRO}" \
+	--with-intro-bitmaps="\$SRCDIR/openintro_pld.bmp" \
+	--with-about-bitmaps="\$SRCDIR/openabout_pld.png" \
 	--with-distro="${DISTRO}" \
 	--enable-gtk \
 	--enable-kde \
@@ -1892,7 +1923,7 @@ CONFIGURE_OPTIONS="$CONFOPTS"; export CONFIGURE_OPTIONS
 
 :> distro-configs/Common.conf
 :> distro-configs/Common.conf.in
-echo "$CONFOPTS" > distro-configs/${DISTRO}.conf
+echo "$CONFOPTS" > distro-configs/${DISTRO}.conf.in
 
 # main build
 %configure \
@@ -1927,19 +1958,6 @@ DEFAULT_TO_ENGLISH_FOR_PACKING=1; export DEFAULT_TO_ENGLISH_FOR_PACKING
 	DESTDIR=$RPM_BUILD_ROOT
 
 install -d $RPM_BUILD_ROOT%{_sysconfdir}/%{name}
-
-install -d $RPM_BUILD_ROOT%{_desktopdir}
-install %{SOURCE20} $RPM_BUILD_ROOT%{_desktopdir}
-install %{SOURCE21} $RPM_BUILD_ROOT%{_desktopdir}
-install %{SOURCE22} $RPM_BUILD_ROOT%{_desktopdir}
-#install %{SOURCE23} $RPM_BUILD_ROOT%{_desktopdir}
-install %{SOURCE24} $RPM_BUILD_ROOT%{_desktopdir}
-install %{SOURCE25} $RPM_BUILD_ROOT%{_desktopdir}
-install %{SOURCE26} $RPM_BUILD_ROOT%{_desktopdir}
-install %{SOURCE27} $RPM_BUILD_ROOT%{_desktopdir}
-install %{SOURCE28} $RPM_BUILD_ROOT%{_desktopdir}
-install %{SOURCE29} $RPM_BUILD_ROOT%{_desktopdir}
-install %{SOURCE30} $RPM_BUILD_ROOT%{_desktopdir}
 
 # Add in the regcomp tool since some people need it for 3rd party add-ons
 cp -f build/%{ssnap}/solver/%{subver}/unxlng*.pro/bin/regcomp $RPM_BUILD_ROOT%{_libdir}/%{name}/program
@@ -1992,7 +2010,7 @@ rm -f $RPM_BUILD_ROOT%{_libdir}/%{name}/program/libgcc_s.so* \
 	$RPM_BUILD_ROOT%{_libdir}/%{name}/program/libstdc++*so*
 
 # install ooqstart
-install build/OOO_2_0_2/desktop/unxlngi4.pro/bin/ooqstart $RPM_BUILD_ROOT%{_libdir}/%{name}/program
+#install build/OOO_2_0_2/desktop/unxlngi4.pro/bin/ooqstart $RPM_BUILD_ROOT%{_libdir}/%{name}/program
 
 # Find out locales
 rm -f *.lang*
