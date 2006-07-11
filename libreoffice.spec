@@ -144,7 +144,7 @@ BuildRequires:	mono-csharp >= 1.1.8
 %endif
 BuildRequires:	nas-devel >= 1.7-1
 BuildRequires:	neon-devel
-BuildRequires:	openclipart-png >= 0:0.16
+BuildRequires:	openclipart-png >= 0:0.18
 BuildRequires:	openldap-devel
 BuildRequires:	pam-devel
 BuildRequires:	perl-base
