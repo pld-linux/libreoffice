@@ -96,7 +96,11 @@ BuildRequires:	ImageMagick
 BuildRequires:	STLport-devel >= 4.5.3-6
 %if %{with th}
 BuildRequires:	xorg-lib-libX11-devel
+BuildRequires:	mozilla-firefox-devel
 %else
+%if %{with mozilla}
+BuildRequires:	mozilla-devel >= 5:1.7.6-2
+%endif
 BuildRequires:	XFree86-devel
 BuildRequires:	XFree86-Xvfb
 %endif
@@ -137,9 +141,6 @@ BuildRequires:	nspr-devel >= 1:4.6-0.20041030.3
 %if %{with mono}
 BuildRequires:	mono-devel >= 1.1.8
 BuildRequires:	mono-csharp >= 1.1.8
-%endif
-%if %{with mozilla}
-BuildRequires:	mozilla-devel >= 5:1.7.6-2
 %endif
 BuildRequires:	nas-devel >= 1.7-1
 BuildRequires:	neon-devel
