@@ -33,6 +33,9 @@
 %bcond_with	gcc4		# use gcc4 patch (breaks build with gcc 3.3.x)
 %bcond_without	mozilla		# without mozilla
 
+## build for TH
+%bcond_with	th
+
 %define		ver		2.0
 %define		rel		3
 %define		ooobver		ooc680-m7
@@ -51,7 +54,7 @@ Summary:	OpenOffice.org - powerful office suite
 Summary(pl):	OpenOffice.org - potê¿ny pakiet biurowy
 Name:		openoffice.org
 Version:	%{fullver}
-Release:	0.0.3%{?with_vfs:vfs}
+Release:	0.0.3.1%{?with_vfs:vfs}
 Epoch:		1
 License:	GPL/LGPL
 Group:		X11/Applications
@@ -91,8 +94,12 @@ Patch103:	%{name}-sfx2.badscript.diff
 URL:		http://www.openoffice.org/
 BuildRequires:	ImageMagick
 BuildRequires:	STLport-devel >= 4.5.3-6
+%if %{with th}
+BuildRequires:	xorg-lib-libX11-devel
+%else
 BuildRequires:	XFree86-devel
 BuildRequires:	XFree86-Xvfb
+%endif
 BuildRequires:	autoconf
 BuildRequires:	automake
 BuildRequires:	bison >= 1.875-4
