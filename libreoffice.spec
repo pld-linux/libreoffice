@@ -2240,7 +2240,9 @@ fontpostinst TTF
 #%attr(755,root,root) %{_libdir}/%{name}/program/sweb
 %attr(755,root,root) %{_libdir}/%{name}/program/swriter
 %attr(755,root,root) %{_libdir}/%{name}/program/open-url
+%if %{with mozilla}
 %attr(755,root,root) %{_libdir}/%{name}/program/nsplugin
+%endif
 %attr(755,root,root) %{_libdir}/%{name}/program/gengal
 %attr(755,root,root) %{_libdir}/%{name}/program/configimport
 %attr(755,root,root) %{_libdir}/%{name}/program/sbase
@@ -2300,6 +2302,7 @@ fontpostinst TTF
 #%dir %{_libdir}/%{name}/program/filter
 
 %attr(755,root,root) %{_libdir}/%{name}/program/*.so
+%exclude %{_libdir}/%{name}/program/kdebe1.uno.so
 %exclude %{_libdir}/%{name}/program/libvclplug_gtk*.so
 %exclude %{_libdir}/%{name}/program/libvclplug_kde*.so
 %exclude %{_libdir}/%{name}/program/libfps_kde.so
@@ -2313,6 +2316,7 @@ fontpostinst TTF
 
 %files libs-kde
 %defattr(644,root,root,755)
+%attr(755,root,root) %{_libdir}/%{name}/program/kdebe1.uno.so
 %attr(755,root,root) %{_libdir}/%{name}/program/kdefilepicker
 %attr(755,root,root) %{_libdir}/%{name}/program/libvclplug_kde*.so
 %attr(755,root,root) %{_libdir}/%{name}/program/libfps_kde.so
