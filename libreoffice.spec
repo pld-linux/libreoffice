@@ -81,11 +81,9 @@ Source50:	openabout_pld.png
 Source51:	openintro_pld.bmp
 Patch0:		%{name}-PLD.patch
 Patch1:		%{name}-vendorname.patch
-Patch100:	%{name}-STL-lib64.diff
-Patch101:	%{name}-64bit-inline.diff
-Patch102:	%{name}-build-pld-splash.diff
-Patch103:	%{name}-sfx2.badscript.diff
-Patch104:	%{name}-i66982.diff
+Patch101:	%{name}-build-pld-splash.diff
+Patch102:	%{name}-sfx2.badscript.diff
+Patch103:	%{name}-i66982.diff
 URL:		http://www.openoffice.org/
 BuildRequires:	ImageMagick
 BuildRequires:	STLport-devel >= 4.5.3-6
@@ -1771,18 +1769,14 @@ ln -sf %{SOURCE1} %{SOURCE2} %{SOURCE3} %{SOURCE4} \
 # teach configure.in about PLD
 %patch1 -p1
 
-# 64 bit related patches
-install %{PATCH100} patches/64bit
-install %{PATCH101} patches/64bit/64bit-inline.diff
-
 # fix patches/src680/pld-splash.diff
-install %{PATCH102} patches/src680/pld-splash.diff
+install %{PATCH101} patches/src680/pld-splash.diff
 
 # macro browser can crash if there's an invalid script container
-install %{PATCH103} patches/src680/sfx2.badscript.diff
+install %{PATCH102} patches/src680/sfx2.badscript.diff
 
 # fix build of sal project
-install %{PATCH104} patches/src680/unxlngi4.mk_linker.diff
+install %{PATCH103} patches/src680/unxlngi4.mk_linker.diff
 
 %build
 # Make sure we have /proc mounted - otherwise idlc will fail later.
