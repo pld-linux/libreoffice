@@ -27,83 +27,73 @@
 #
 
 # Conditional build:
-%bcond_with	java		# Java support (enables help support and improves functionality)
 %bcond_with	vfs		# Enable GNOME VFS and Evolution 2 support
 %bcond_with	mono
 %bcond_with	gcc4		# use gcc4 patch (breaks build with gcc 3.3.x)
+%bcond_without	java		# without Java support (disables help support)
 %bcond_without	mozilla		# without mozilla
-
-## build for TH
-%bcond_with	th
 
 %define		ver		2.0
 %define		rel		3
-%define		ooobver		ooc680-m7
-%define		snap		OOC680
-%define		snap2		SRC680
-%define		bver		%{nil}
-%define		subver		680
-
 %define		fullver		%{ver}.%{rel}
-%define		dfullver	%(echo %{fullver} | tr . _)
-#%define		ssnap		OOO_%{dfullver}
-%define		ssnap		ooc680-m7
+%define		subver		680
+%define		snap		m180
+%define		ooobver		src680-%{snap}
+%define		bver		%{nil}
+%define		ssnap		src680-%{snap}
+
 %define		specflags	-fno-strict-aliasing
 
 Summary:	OpenOffice.org - powerful office suite
 Summary(pl):	OpenOffice.org - potê¿ny pakiet biurowy
 Name:		openoffice.org
 Version:	%{fullver}
-Release:	0.0.3.1%{?with_vfs:vfs}
+Release:	0.0.3.%{snap}%{?with_vfs:vfs}
 Epoch:		1
 License:	GPL/LGPL
 Group:		X11/Applications
-Source0:	http://go-ooo.org/packages/%{snap}/ooo-build-%{ooobver}.tar.gz
-# Source0-md5:	97045632ac7291ef80681351634626f5
-Source1:	http://go-ooo.org/packages/%{snap}/%{ssnap}-core.tar.bz2
-# Source1-md5:	fbc38a693821f7abdaf6e2cbfc802b7b
-Source2:	http://go-ooo.org/packages/%{snap}/%{ssnap}-system.tar.bz2
-# Source2-md5:	46bf9184fe04c7aca1a4cbdd65881164
-Source3:	http://go-ooo.org/packages/%{snap}/%{ssnap}-binfilter.tar.bz2
-# Source3-md5:	810ec48412698e7a89a3164cc756cd81
-Source4:	http://go-ooo.org/packages/%{snap}/%{ssnap}-lang.tar.bz2
-# Source4-md5:	85ebe692d05cca9949d68c32696a87e4
-Source10:	http://go-ooo.org/packages/%{snap2}/ooo_custom_images-13.tar.bz2
+#Source0:	http://go-ooo.org/packages/SRC680/ooo-build-%{ooobver}.tar.gz
+Source0:	ooo-build-%{ooobver}.tar.bz2
+# Source0-md5:	f0cf6caa3118f8c4c77fd8b7bd4cfd33
+Source1:	http://go-ooo.org/packages/SRC680/%{ssnap}-core.tar.bz2
+# Source1-md5:	8f758ebbe9a571a5e1db43cda649e599
+Source2:	http://go-ooo.org/packages/SRC680/%{ssnap}-system.tar.bz2
+# Source2-md5:	a7fba66177d020995544952d1a4507b0
+Source3:	http://go-ooo.org/packages/SRC680/%{ssnap}-binfilter.tar.bz2
+# Source3-md5:	9da5ce3d0ceaa9841c31db7dfaccf9b4
+Source4:	http://go-ooo.org/packages/SRC680/%{ssnap}-lang.tar.bz2
+# Source4-md5:	3e30f230499fcd0890598c3ea5fcdd95
+Source10:	http://go-ooo.org/packages/SRC680/ooo_custom_images-13.tar.bz2
 # Source10-md5:	2480af7f890c8175c7f9e183a1b39ed2
-Source11:	http://go-ooo.org/packages/%{snap2}/ooo_crystal_images-1.tar.gz
+Source11:	http://go-ooo.org/packages/SRC680/ooo_crystal_images-1.tar.gz
 # Source11-md5:	9c57c933e793f791f2c8817ccd28911c
-Source12:	http://go-ooo.org/packages/%{snap2}/extras-2.tar.bz2
+Source12:	http://go-ooo.org/packages/SRC680/extras-2.tar.bz2
 # Source12-md5:	733051ebeffae5232a2eb760162da020
 Source13:	http://go-ooo.org/packages/libwpd/libwpd-0.8.3.tar.gz
 # Source13-md5:	f34404f8dc6123aca156d203c37e3e5d
-Source14:	http://go-ooo.org/packages/%{snap2}/mdbtools-0.6pre1.tar.gz
+Source14:	http://go-ooo.org/packages/SRC680/mdbtools-0.6pre1.tar.gz
 # Source14-md5:	246e8f38b2a1af1bcff60ee0da59300b
 Source15:	http://go-ooo.org/packages/xt/xt-20051206-src-only.zip
 # Source15-md5:	0395e6e7da27c1cea7e1852286f6ccf9
-Source16:	http://go-ooo.org/packages/%{snap2}/lp_solve_5.5.tar.gz
+Source16:	http://go-ooo.org/packages/SRC680/lp_solve_5.5.tar.gz
 # Source16-md5:	2ff7b4c52f9c3937ebe3002798fbc479
 Source50:	openabout_pld.png
 Source51:	openintro_pld.bmp
-Patch0:		%{name}-bashizm.patch
-Patch1:		%{name}-PLD.patch
-Patch2:		%{name}-vendorname.patch
+Patch0:		%{name}-PLD.patch
+Patch1:		%{name}-vendorname.patch
 Patch100:	%{name}-STL-lib64.diff
 Patch101:	%{name}-64bit-inline.diff
 Patch102:	%{name}-build-pld-splash.diff
 Patch103:	%{name}-sfx2.badscript.diff
+Patch104:	%{name}-i66982.diff
 URL:		http://www.openoffice.org/
 BuildRequires:	ImageMagick
 BuildRequires:	STLport-devel >= 4.5.3-6
-%if %{with th}
-BuildRequires:	xorg-lib-libX11-devel
-BuildRequires:	mozilla-firefox-devel
-%else
 %if %{with mozilla}
 BuildRequires:	mozilla-devel >= 5:1.7.6-2
 %endif
 BuildRequires:	XFree86-devel
 BuildRequires:	XFree86-Xvfb
-%endif
 BuildRequires:	autoconf
 BuildRequires:	automake
 BuildRequires:	bison >= 1.875-4
@@ -144,7 +134,7 @@ BuildRequires:	mono-csharp >= 1.1.8
 %endif
 BuildRequires:	nas-devel >= 1.7-1
 BuildRequires:	neon-devel
-BuildRequires:	openclipart-png >= 0:0.18
+BuildRequires:	openclipart-png >= 0:0.16
 BuildRequires:	openldap-devel
 BuildRequires:	pam-devel
 BuildRequires:	perl-base
@@ -156,7 +146,6 @@ BuildRequires:	python-modules >= 2.2
 BuildRequires:	rpm-pythonprov
 BuildRequires:	rpmbuild(macros) >= 1.213
 BuildRequires:	sablotron-devel
-BuildRequires:	sane-backends-devel
 BuildRequires:	sed >= 4.0
 BuildRequires:	startup-notification-devel >= 0.5
 BuildRequires:	tcsh
@@ -1776,14 +1765,11 @@ ln -sf %{SOURCE1} %{SOURCE2} %{SOURCE3} %{SOURCE4} \
 	%{SOURCE10} %{SOURCE11} %{SOURCE12} %{SOURCE13} \
 	%{SOURCE14} %{SOURCE15} %{SOURCE16} src
 
-# bashizm
-%patch0 -p1
-
 # fixes for the patch subsystem
-%patch1 -p1
+%patch0 -p0
 
 # teach configure.in about PLD
-%patch2 -p1
+%patch1 -p1
 
 # 64 bit related patches
 install %{PATCH100} patches/64bit
@@ -1794,6 +1780,9 @@ install %{PATCH102} patches/src680/pld-splash.diff
 
 # macro browser can crash if there's an invalid script container
 install %{PATCH103} patches/src680/sfx2.badscript.diff
+
+# fix build of sal project
+install %{PATCH104} patches/src680/unxlngi4.mk_linker.diff
 
 %build
 # Make sure we have /proc mounted - otherwise idlc will fail later.
@@ -1822,11 +1811,10 @@ QTLIB="%{_libdir}"
 export CC CXX ENVCFLAGS ENVCFLAGSCXX DESTDIR IGNORE_MANIFEST_CHANGES DISTRO QTINC QTLIB
 
 %if %{with java}
-JAVA_HOME=%{_libdir}/java
+JAVA_HOME=%{java_home}
 DB_JAR="%{_javadir}/db.jar"
-export JAVA_HOME DB_JAR
 ANT_HOME=%{_prefix}
-export ANT_HOME
+export JAVA_HOME DB_JAR ANT_HOME
 %endif
 
 DEFAULT_TO_ENGLISH_FOR_PACKING=1; export DEFAULT_TO_ENGLISH_FOR_PACKING
@@ -1923,15 +1911,15 @@ CONFOPTS=" \
 	--with-num-cpus=$RPM_BUILD_NR_THREADS
 "
 
-# for cvs snaps
-[ -x ./autogen.sh ] && ./autogen.sh $CONFOPTS
-
 # build-ooo script will pickup these
 CONFIGURE_OPTIONS="$CONFOPTS"; export CONFIGURE_OPTIONS
 
 :> distro-configs/Common.conf
 :> distro-configs/Common.conf.in
 echo "$CONFOPTS" > distro-configs/${DISTRO}.conf.in
+
+# for cvs snaps
+[ -x ./autogen.sh ] && ./autogen.sh $CONFOPTS
 
 # main build
 %configure \
