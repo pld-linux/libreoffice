@@ -1,0 +1,19 @@
+--- solenv/inc/unxlngi4.mk~	2006-08-04 18:37:27.659804224 +0200
++++ solenv/inc/unxlngi4.mk	2006-08-04 18:40:43.495576601 +0200
+@@ -135,12 +135,13 @@
+ DYNAMIC		= -Wl,-Bdynamic
+ 
+ # name of linker
+-LINK*=$(CC)
++LINK*=$(CXX)
++LINKC*=$(CC)
+ 
+ # default linker flags
+-LINKFLAGSDEFS*=-z defs
++LINKFLAGSDEFS*=-Wl,-z,defs
+ LINKFLAGSRUNPATH*=-Wl,-rpath,\''$$ORIGIN'\'
+-LINKFLAGS=-O2 -Bsymbolic -z combreloc $(LINKFLAGSDEFS) $(LINKFLAGSRUNPATH)
++LINKFLAGS=-O2 -Bsymbolic -Wl,-z,combreloc $(LINKFLAGSDEFS) $(LINKFLAGSRUNPATH)
+ 
+ # linker flags for linking applications
+ LINKFLAGSAPPGUI= -Wl,-export-dynamic -Wl,--noinhibit-exec
