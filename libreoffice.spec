@@ -2,6 +2,8 @@
 #	- normal build requires little less than 4GB of disk space
 #	- full debug build requires about 9GB of disk space
 # TODO:
+#	- fix help files
+#	- fix entry in Help -> About
 #	- fix build with freetype 2.2.x:
 #	  http://www.openoffice.org/nonav/issues/showattachment.cgi/36573/vcl-freetype-2.2.x.diff
 #	- drop requirement on nas-devel
@@ -10,7 +12,6 @@
 #	- --with-system-neon - check compilation (works with 0.24 but not 0.25)
 #	- in gtk version menu highlight has almost the same colour as menu text
 #	- 6 user/config/*.so? files shared between -i18n-en and -i18n-sl
-#	- remove oohtml symlink (there is ooweb),
 #	- add ooglobal symlink and it's ooo-wrapper entry (among calc|draw|impress|math|web|writer)
 #	- add %{_libdir}/%{name}/share/autocorr/acor_(ll)-(LL).dat files to package (marked with %lang)
 #       - can't be just i18n-{be,gu,hi,kn,pa,ta} instead of *-{be_BY,*_IN}?
@@ -28,8 +29,7 @@
 
 # Conditional build:
 %bcond_with	vfs		# Enable GNOME VFS and Evolution 2 support
-%bcond_with	mono
-%bcond_with	gcc4		# use gcc4 patch (breaks build with gcc 3.3.x)
+%bcond_with	mono		# enable compilation of mono bindings
 %bcond_without	java		# without Java support (disables help support)
 %bcond_without	mozilla		# without mozilla
 
