@@ -1,34 +1,30 @@
-TODO:
-CalcSolver
-diff -bur ooo-build-2.0.2.7.orig/patches/src680/apply ooo-build-2.0.2.7/patches/src680/apply
---- ooo-build-2.0.2.7.orig/patches/src680/apply	2006-04-21 15:21:46.640348000 +0200
-+++ ooo-build-2.0.2.7/patches/src680/apply	2006-04-21 16:10:55.324630250 +0200
-@@ -52,9 +52,9 @@
+Index: patches/src680/apply
+===================================================================
+RCS file: /cvs/gnome/ooo-build/patches/src680/apply,v
+retrieving revision 1.1208
+diff -u -r1.1208 apply
+--- patches/src680/apply	5 Aug 2006 12:20:45 -0000	1.1208
++++ patches/src680/apply	6 Aug 2006 09:37:44 -0000
+@@ -53,7 +53,7 @@
  Ark: LinuxCommon, NotDebian, ArkOnly, GCJExperimental, BerkeleyDB43, SystemJavaBits
  Ark64: LinuxCommon, NotDebian, ArkOnly, BerkeleyDB43, 64bit, SystemJavaBits
  # www.pld-linux.org
 -PLDBase: LinuxCommon, NotDebian, PLDOnly
 +PLDBase: LinuxCommon, NotDebian, PLDOnly, NovellOnly, NovellOnlyUnix, FilePickers, GCJExperimental, SystemJavaBits, SystemJavaBitsWorkaround
  PLD: PLDBase
--PLD64: PLDBase, 64bit
-+PLD64: PLDBase, 64bit, PLD64bitfixes
+ PLD64: PLDBase, 64bit
  # Mandriva Linux
- MandrivaBase: MandrivaOnly, LinuxCommon, MandrivaOnlyUnix, LockDown
- Mandriva: MandrivaBase
-@@ -806,11 +806,14 @@
- filter-always-xsltproc.diff, i#56619, martink
+@@ -779,9 +779,10 @@
  
- 
-+# PLD fixes
  [PLDOnly]
  SectionOwner => arekm
 -
 -pld-splash.diff, pmladek
+-
++# fix build of sal project, i#66982
++unxlngi4.mk_linker.diff
++# fix for macro browser crash, i#67976
 +sfx2.badscript.diff
  
-+[PLD64bitfixes]
-+STL-lib64.diff
-+64bit-inline.diff
- 
  [ BuildBits ]
- 
+ # work around http://gcc.gnu.org/bugzilla/show_bug.cgi?id=22392
