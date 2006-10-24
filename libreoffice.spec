@@ -1,7 +1,7 @@
 # NOTE:
 #	- normal build with java requires little less than 17GB of disk space
-#		$BUILD_ROOT	 4.8 GB 
-#		BUILD		11.7 GB 
+#		$BUILD_ROOT	 4.8 GB
+#		BUILD		11.7 GB
 #		SRPMS		 0.3 GB
 #		RPMS		 0.8 GB
 # TODO:
@@ -22,7 +22,7 @@
 #	- add %{_libdir}/%{name}/share/autocorr/acor_(ll)-(LL).dat files to package (marked with %lang)
 #       - can't be just i18n-{be,gu,hi,kn,pa,ta} instead of *-{be_BY,*_IN}?
 #	- add option to build with {not} all lanquages
-#	- REMOVE USE of Xvfb from build-galleries script (ooo-build-2.0.1.2/bin/build-galleries line 84) 
+#	- REMOVE USE of Xvfb from build-galleries script (ooo-build-2.0.1.2/bin/build-galleries line 84)
 #	- ooqstart (disappeared from 2.0.3?)
 #	- check:
 #		Installed (but unpackaged) file(s) found:
@@ -107,22 +107,22 @@ Patch105:	%{name}-firefox.patch
 Patch106:	%{name}-i66982.diff
 Patch107:	%{name}-regcomp_ugly_hack.diff
 URL:		http://www.openoffice.org/
-BuildConflicts:	STLport4
 BuildRequires:	ImageMagick
 BuildRequires:	STLport-devel >= 5.0.0
-BuildRequires:	xorg-lib-libX11-devel
-BuildRequires:	xorg-xserver-Xvfb
-BuildRequires:	mozilla-firefox-devel
 BuildRequires:	autoconf
 BuildRequires:	automake
 %{?with_system_beanshell:BuildRequires:	beanshell}
 BuildRequires:	bison >= 1.875-4
 BuildRequires:	boost-devel
-BuildRequires:	boost-spirit-devel
 BuildRequires:	boost-mem_fn-devel
+BuildRequires:	boost-spirit-devel
 BuildRequires:	cairo-devel >= 0.5.2
 BuildRequires:	cups-devel
 BuildRequires:	curl-devel >= 7.9.8
+BuildRequires:	mozilla-firefox-devel
+BuildRequires:	xorg-lib-libX11-devel
+BuildRequires:	xorg-xserver-Xvfb
+BuildConflicts:	STLport4
 %if %{with system_db}
 BuildRequires:	db-cxx-devel
 BuildRequires:	db-devel
@@ -132,10 +132,10 @@ BuildRequires:	/usr/bin/getopt
 BuildRequires:	gnome-vfs2-devel
 %endif
 %if %{with java}
-BuildRequires:	jdk >= 1.4.0_00
+BuildRequires:	ant
 BuildRequires:	db-java >= 4.2.52-4
 BuildRequires:	jar
-BuildRequires:	ant
+BuildRequires:	jdk >= 1.4.0_00
 %else
 BuildRequires:	libxslt-progs
 %endif
@@ -150,34 +150,34 @@ BuildRequires:	libart_lgpl-devel
 BuildRequires:	libhnj-devel
 %endif
 BuildRequires:	libicu-devel
-BuildRequires:	libwpd-devel
-BuildRequires:	libstdc++-devel >= 5:3.2.1
-BuildRequires:	libxml2-devel >= 2.0
 BuildRequires:	libjpeg-devel
 BuildRequires:	libsndfile-devel
+BuildRequires:	libstdc++-devel >= 5:3.2.1
+BuildRequires:	libwpd-devel
+BuildRequires:	libxml2-devel >= 2.0
 %if %{with system_mdbtools}
 BuildRequires:	mdbtools-devel >= 0.6
 %endif
-BuildRequires:	nss-devel >= 1:3.10
 BuildRequires:	nspr-devel >= 1:4.6-0.20041030.3
+BuildRequires:	nss-devel >= 1:3.10
 %if %{with mono}
-BuildRequires:	mono-devel >= 1.1.8
 BuildRequires:	mono-csharp >= 1.1.8
+BuildRequires:	mono-devel >= 1.1.8
 %endif
 BuildRequires:	nas-devel >= 1.7-1
 BuildRequires:	neon-devel
 BuildRequires:	openclipart-png >= 0:0.16
 BuildRequires:	openldap-devel
 BuildRequires:	pam-devel
-BuildRequires:	perl-base
 BuildRequires:	perl-Archive-Zip
+BuildRequires:	perl-base
 BuildRequires:	pkgconfig
 BuildRequires:	portaudio-devel
 BuildRequires:	python >= 2.2
 BuildRequires:	python-devel >= 2.2
 BuildRequires:	python-modules >= 2.2
 BuildRequires:	rpm-pythonprov
-BuildRequires:	rpmbuild(macros) >= 1.213
+BuildRequires:	rpmbuild(macros) >= 1.300
 BuildRequires:	sablotron-devel
 BuildRequires:	sane-backends-devel
 BuildRequires:	sed >= 4.0
@@ -197,8 +197,8 @@ Requires:	db
 Requires:	libstdc++ >= 5:3.2.1
 Requires:	mktemp
 Requires:	sed
-Conflicts:	libicu > 3.4.1
 Obsoletes:	openoffice
+Conflicts:	libicu > 3.4.1
 #Suggests:	chkfontpath
 ExclusiveArch:	%{ix86} %{x8664} ppc sparc sparcv9
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
@@ -249,8 +249,8 @@ Summary:	OpenOffice.org KDE Interface
 Summary(pl):	Interfejs KDE dla OpenOffice.org
 Group:		X11/Libraries
 Requires:	%{name}-libs = %{epoch}:%{version}-%{release}
-Obsoletes:	openoffice-i18n-en-kde
 Obsoletes:	openoffice-i18n-en
+Obsoletes:	openoffice-i18n-en-kde
 Obsoletes:	openoffice-libs-kde
 
 %description libs-kde
@@ -264,8 +264,8 @@ Summary:	OpenOffice.org GTK+ Interface
 Summary(pl):	Interfejs GTK+ dla OpenOffice.org
 Group:		X11/Libraries
 Requires:	%{name}-libs = %{epoch}:%{version}-%{release}
-Obsoletes:	openoffice-i18n-en-gtk
 Obsoletes:	openoffice-i18n-en
+Obsoletes:	openoffice-i18n-en-gtk
 Obsoletes:	openoffice-libs-gtk
 
 %description libs-gtk
@@ -1843,24 +1843,22 @@ DISTRO="PLD64"
 DISTRO="PLD"
 %endif
 
-CC="%{__cc}"
-CXX="%{__cxx}"
-ENVCFLAGS="%{rpmcflags}"
-ENVCFLAGSCXX="%{rpmcflags} -fpermissive"
-DESTDIR=$RPM_BUILD_ROOT
-IGNORE_MANIFEST_CHANGES=1
-QTINC="%{_includedir}/qt"
-QTLIB="%{_libdir}"
-export CC CXX ENVCFLAGS ENVCFLAGSCXX DESTDIR IGNORE_MANIFEST_CHANGES DISTRO QTINC QTLIB
+export CC="%{__cc}"
+export CXX="%{__cxx}"
+export ENVCFLAGS="%{rpmcflags}"
+export ENVCFLAGSCXX="%{rpmcflags} -fpermissive"
+export DESTDIR=$RPM_BUILD_ROOT
+export IGNORE_MANIFEST_CHANGES=1
+export QTINC="%{_includedir}/qt"
+export QTLIB="%{_libdir}"
 
 %if %{with java}
-JAVA_HOME=%{java_home}
-DB_JAR="%{_javadir}/db.jar"
-ANT_HOME=%{_prefix}
-export JAVA_HOME DB_JAR ANT_HOME
+export JAVA_HOME=%{java_home}
+export DB_JAR="%{_javadir}/db.jar"
+export ANT_HOME=%{_prefix}
 %endif
 
-DEFAULT_TO_ENGLISH_FOR_PACKING=1; export DEFAULT_TO_ENGLISH_FOR_PACKING
+export DEFAULT_TO_ENGLISH_FOR_PACKING=1
 
 RPM_BUILD_NR_THREADS="%(echo "%{__make}" | sed -e 's#.*-j\([[:space:]]*[0-9]\+\)#\1#g' | xargs)"
 [ "$RPM_BUILD_NR_THREADS" = "%{__make}" ] && RPM_BUILD_NR_THREADS=1
