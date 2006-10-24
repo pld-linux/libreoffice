@@ -1,0 +1,65 @@
+--- config_office/configure.in.orig	2006-08-16 15:00:25.000000000 +0000
++++ config_office/configure.in	2006-08-16 15:03:25.000000000 +0000
+@@ -3825,12 +3825,6 @@
+ 	   AC_CHECK_LIB(portaudio, Pa_Initialize, [],
+ 		[AC_MSG_ERROR(portaudio library not found or functional)], [])
+ 	   AC_MSG_CHECKING(portaudio version)
+-	   AC_TRY_LINK([#include <portaudio.h>], [
+-void main(int argc, char **argv) {
+-	 /* Pa_GetVersion() only exists in v19, so this fails to build with v18 */
+-        int v = Pa_GetVersion();
+-}
+-	   ], [AC_MSG_ERROR([portaudio too new. you need v18])], [AC_MSG_RESULT([OK, v18])])
+       SYSTEM_PORTAUDIO=YES
+ 	else
+ 	   AC_MSG_RESULT([internal])
+--- vcl/unx/source/app/salimpsound.hxx.orig	2006-08-17 04:38:53.000000000 +0000
++++ vcl/unx/source/app/salimpsound.hxx	2006-08-17 04:39:02.000000000 +0000
+@@ -190,7 +190,7 @@
+ 
+ typedef struct
+ {       
+-    PaDeviceID       device;
++    PaDeviceIndex    device;
+     PaSampleFormat   format;
+     unsigned int     bufsize;
+     SNDFILE          *sndfile;
+--- vcl/unx/source/app/pasfsound.cxx.orig	2006-08-17 04:53:09.000000000 +0000
++++ vcl/unx/source/app/pasfsound.cxx	2006-08-17 05:09:12.000000000 +0000
+@@ -61,8 +61,9 @@
+     
+     /* callback that takes data from sound file and converts it and loads it */
+     
+-    static int pasf_in_out_callback (void *inputBuffer, void * outputBuffer,
+-    unsigned long framesPerBuffer, PaTimestamp outTime, void * userData )
++    static int pasf_in_out_callback (const void *inputBuffer, void * outputBuffer,
++    unsigned long framesPerBuffer, const PaStreamCallbackTimeInfo* timeInfo,
++           PaStreamCallbackFlags statusFlags, void * userData )
+     {	
+         PASFAudioData*	paudio_data;
+         unsigned int	read_count, bufoff, bytecnt; 
+@@ -70,7 +71,6 @@
+         
+         /* prevent warnings for unused variables */
+         inputBuffer = inputBuffer;
+-        outTime = outTime;
+         
+         /* get all other info needed from audio_data structure passed in as userData */
+         paudio_data = (PASFAudioData*) userData;
+@@ -139,7 +139,7 @@
+     m_pData->bufsize = PASF_BUFFER_LEN;
+     
+     // Using the default output device for this
+-    m_pData->device = Pa_GetDefaultOutputDeviceID();
++    m_pData->device = Pa_GetDefaultOutputDevice();
+     
+     // the size of a frame in bytes is the number of channels of data * the size of the 
+     // underlying data type type being used to store data for each for each channel
+@@ -156,7 +156,6 @@
+     m_pData->format,               // 32 bit floating point format for each item
+     m_pData->sfinfo.samplerate,    // get desired sampling rate from file
+     framesPerBuffer,               // frames per buffer
+-    0,                             // number of buffers, if zero then use optimal number as determined by Pa
+     pasf_in_out_callback,          // call back to load data into the stream
+     m_pData );                     // pass along m_pData pointer so that callback can get access to info
+     

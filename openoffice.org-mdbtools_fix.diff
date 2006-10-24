@@ -1,0 +1,13 @@
+--- config_office/configure.in.orig	2006-08-17 08:31:43.000000000 +0000
++++ config_office/configure.in	2006-08-17 08:32:47.000000000 +0000
+@@ -3208,7 +3208,9 @@
+ 	PKG_CHECK_MODULES(GLIB, glib-2.0)
+    	AM_ICONV
+ 	if test "$am_cv_func_iconv" = "yes"; then
+-      MDBTOOLS_CFLAGS=-DHAVE_ICONV
++      MDBTOOLS_CFLAGS="-DHAVE_ICONV -I/usr/include/mdb/"
++   else
++      MDBTOOLS_CFLAGS=-I/usr/include/mdb/
+    fi
+ dnl   save_CFLAGS=$CFLAGS
+ dnl	CFLAGS="$GLIB_CFLAGS -I. $MDBTOOLS_CFLAGS"

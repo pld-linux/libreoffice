@@ -1,0 +1,12 @@
+--- ooo-build-ood680-m4/patches/src680/apply.orig	2006-10-14 18:58:18.847040750 +0000
++++ ooo-build-ood680-m4/patches/src680/apply	2006-10-14 18:58:36.612151000 +0000
+@@ -760,9 +760,6 @@
+ # Use short TMP and TEMP if possible in Win32 build
+ win32-use-short-tmp.diff, i#68888, tml
+ 
+-# LFS support
+-lfs.diff, i#26865, rengelha
+-
+ # fix build with system libnss installed apart from mozilla
+ # strictly required on SL10.1/SLED10 where the xulrunner-nss.pc is broken, n#195272
+ libxmlsec-system-nss.diff, i#69368, pmladek
