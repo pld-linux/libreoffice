@@ -1,16 +1,23 @@
 # NOTE:
-#	- normal build requires little less than 4GB of disk space
-#	- full debug build requires about 9GB of disk space
+#	- normal build with java requires little less than 17GB of disk space
+#		$BUILD_ROOT	 4.8 GB 
+#		BUILD		11.7 GB 
+#		SRPMS		 0.3 GB
+#		RPMS		 0.8 GB
 # TODO:
-#	- fix build with freetype 2.2.x:
-#	  http://www.openoffice.org/nonav/issues/showattachment.cgi/36573/vcl-freetype-2.2.x.diff
+#	- fix regcomp.bin crash (workarounded by strace hack)
+#	- fix xml2cmp crash (workarounded by no_lfs_hack)
+#	- fix help files (xslt hacker needed)
+#	- add i18n-ku subpackaged
+#	- bcond with_xt is broken (xt in PLD is too old or broken)
+#	- check bconds with_mono and with_vfs
+#	- build on 64-bit archsitectures
+# MAYBE TODO:
 #	- drop requirement on nas-devel
 #	- fix locale names and other locale related things
 #	- --with-system-myspell + myspell package as in Debian
-#	- --with-system-neon - check compilation (works with 0.24 but not 0.25)
 #	- in gtk version menu highlight has almost the same colour as menu text
 #	- 6 user/config/*.so? files shared between -i18n-en and -i18n-sl
-#	- remove oohtml symlink (there is ooweb),
 #	- add ooglobal symlink and it's ooo-wrapper entry (among calc|draw|impress|math|web|writer)
 #	- add %{_libdir}/%{name}/share/autocorr/acor_(ll)-(LL).dat files to package (marked with %lang)
 #       - can't be just i18n-{be,gu,hi,kn,pa,ta} instead of *-{be_BY,*_IN}?
@@ -19,55 +26,56 @@
 #	- ooqstart (disappeared from 2.0.3?)
 #	- check:
 #		Installed (but unpackaged) file(s) found:
-#		   /usr/lib/openoffice.org/program/.testtoolrc
+#		   /usr/lib/openoffice.org/program/testtoolrc
 #		   /usr/lib/openoffice.org/program/cde-open-url
+#		%if %{without java}
 #		   /usr/lib/openoffice.org/program/hid.lst
 #		   /usr/lib/openoffice.org/program/java-set-classpath
 #		   /usr/lib/openoffice.org/program/jvmfwk3rc
+#		%endif
 #
 
 # Conditional build:
-%bcond_with	java		# Java support (enables help support and improves functionality)
+%bcond_without	java		# without Java support (disables help support)
 %bcond_with	vfs		# Enable GNOME VFS and Evolution 2 support
-%bcond_with	mono
-%bcond_with	gcc4		# use gcc4 patch (breaks build with gcc 3.3.x)
+%bcond_with	mono		# enable compilation of mono bindings
 %bcond_without	mozilla		# without mozilla
 
-## build for TH
-%bcond_with	th
+%bcond_without	system_db		# with internal berkeley db
+%bcond_without	system_mdbtools
+%bcond_with	system_xt
+%bcond_without	system_beanshell
+%bcond_without	system_libhnj		# with internal ALTLinuxhyph
 
-%define		ver		2.0
-%define		rel		3
-%define		ooobver		ooc680-m7
-%define		snap		OOC680
-%define		snap2		SRC680
-%define		bver		%{nil}
+%define		ver		2.0.4
+%define		_rel		3
 %define		subver		680
+%define		snap		OOD680
+%define		snap2		SRC680
+%define		bver		m4
+%define		ooobver		ood680-%{bver}
+%define		ssnap		ood680-%{bver}
 
-%define		fullver		%{ver}.%{rel}
-%define		dfullver	%(echo %{fullver} | tr . _)
-#%define		ssnap		OOO_%{dfullver}
-%define		ssnap		ooc680-m7
 %define		specflags	-fno-strict-aliasing
 
 Summary:	OpenOffice.org - powerful office suite
 Summary(pl):	OpenOffice.org - potê¿ny pakiet biurowy
 Name:		openoffice.org
-Version:	%{fullver}
-Release:	0.0.3.1%{?with_vfs:vfs}
+Version:	%{ver}
+Release:	0.%{bver}%{?with_vfs:vfs}.%{_rel}
 Epoch:		1
 License:	GPL/LGPL
 Group:		X11/Applications
 Source0:	http://go-ooo.org/packages/%{snap}/ooo-build-%{ooobver}.tar.gz
-# Source0-md5:	97045632ac7291ef80681351634626f5
+# Source0-md5:	400590f308afd5189bfceaca9eb75878
 Source1:	http://go-ooo.org/packages/%{snap}/%{ssnap}-core.tar.bz2
-# Source1-md5:	fbc38a693821f7abdaf6e2cbfc802b7b
+# Source1-md5:	78af5bdc68cb594d77365cf405a79864
 Source2:	http://go-ooo.org/packages/%{snap}/%{ssnap}-system.tar.bz2
-# Source2-md5:	46bf9184fe04c7aca1a4cbdd65881164
+# Source2-md5:	ba224f69a027211742517f784bcb7ad4
 Source3:	http://go-ooo.org/packages/%{snap}/%{ssnap}-binfilter.tar.bz2
-# Source3-md5:	810ec48412698e7a89a3164cc756cd81
+# Source3-md5:	d737f3b71caf365c75eeae5b31d99bdb
 Source4:	http://go-ooo.org/packages/%{snap}/%{ssnap}-lang.tar.bz2
-# Source4-md5:	85ebe692d05cca9949d68c32696a87e4
+# Source4-md5:	3db28ac4efab118c57d3015361de62d0
 Source10:	http://go-ooo.org/packages/%{snap2}/ooo_custom_images-13.tar.bz2
 # Source10-md5:	2480af7f890c8175c7f9e183a1b39ed2
 Source11:	http://go-ooo.org/packages/%{snap2}/ooo_crystal_images-1.tar.gz
@@ -82,30 +90,32 @@ Source15:	http://go-ooo.org/packages/xt/xt-20051206-src-only.zip
 # Source15-md5:	0395e6e7da27c1cea7e1852286f6ccf9
 Source16:	http://go-ooo.org/packages/%{snap2}/lp_solve_5.5.tar.gz
 # Source16-md5:	2ff7b4c52f9c3937ebe3002798fbc479
+Source17:	http://go-ooo.org/packages/%{snap2}/biblio.tar.bz2
 Source50:	openabout_pld.png
 Source51:	openintro_pld.bmp
-Patch0:		%{name}-bashizm.patch
+Patch0:		%{name}-stl5_fix.patch
 Patch1:		%{name}-PLD.patch
 Patch2:		%{name}-vendorname.patch
+Patch3:		%{name}-mdbtools_fix.patch
+Patch4:		%{name}-nolfs_hack.patch
 Patch100:	%{name}-STL-lib64.diff
 Patch101:	%{name}-64bit-inline.diff
 Patch102:	%{name}-build-pld-splash.diff
 Patch103:	%{name}-sfx2.badscript.diff
+Patch104:	%{name}-portaudio_v19.diff
+Patch105:	%{name}-firefox.patch
+Patch106:	%{name}-i66982.diff
+Patch107:	%{name}-regcomp_ugly_hack.diff
 URL:		http://www.openoffice.org/
+BuildConflicts:	STLport4
 BuildRequires:	ImageMagick
-BuildRequires:	STLport-devel >= 4.5.3-6
-%if %{with th}
+BuildRequires:	STLport-devel >= 5.0.0
 BuildRequires:	xorg-lib-libX11-devel
+BuildRequires:	xorg-xserver-Xvfb
 BuildRequires:	mozilla-firefox-devel
-%else
-%if %{with mozilla}
-BuildRequires:	mozilla-devel >= 5:1.7.6-2
-%endif
-BuildRequires:	XFree86-devel
-BuildRequires:	XFree86-Xvfb
-%endif
 BuildRequires:	autoconf
 BuildRequires:	automake
+%{?with_system_beanshell:BuildRequires:	beanshell}
 BuildRequires:	bison >= 1.875-4
 BuildRequires:	boost-devel
 BuildRequires:	boost-spirit-devel
@@ -113,8 +123,10 @@ BuildRequires:	boost-mem_fn-devel
 BuildRequires:	cairo-devel >= 0.5.2
 BuildRequires:	cups-devel
 BuildRequires:	curl-devel >= 7.9.8
+%if %{with system_db}
 BuildRequires:	db-cxx-devel
 BuildRequires:	db-devel
+%endif
 BuildRequires:	/usr/bin/getopt
 %if %{with vfs}
 BuildRequires:	gnome-vfs2-devel
@@ -131,11 +143,21 @@ BuildRequires:	flex
 BuildRequires:	fontconfig-devel >= 1.0.1
 BuildRequires:	freetype-devel >= 2.1
 BuildRequires:	gtk+2-devel
+BuildRequires:	icu
 BuildRequires:	kdelibs-devel
 BuildRequires:	libart_lgpl-devel
+%if %{with system_libhnj}
+BuildRequires:	libhnj-devel
+%endif
+BuildRequires:	libicu-devel
+BuildRequires:	libwpd-devel
 BuildRequires:	libstdc++-devel >= 5:3.2.1
 BuildRequires:	libxml2-devel >= 2.0
 BuildRequires:	libjpeg-devel
+BuildRequires:	libsndfile-devel
+%if %{with system_mdbtools}
+BuildRequires:	mdbtools-devel >= 0.6
+%endif
 BuildRequires:	nss-devel >= 1:3.10
 BuildRequires:	nspr-devel >= 1:4.6-0.20041030.3
 %if %{with mono}
@@ -144,12 +166,13 @@ BuildRequires:	mono-csharp >= 1.1.8
 %endif
 BuildRequires:	nas-devel >= 1.7-1
 BuildRequires:	neon-devel
-BuildRequires:	openclipart-png >= 0:0.18
+BuildRequires:	openclipart-png >= 0:0.16
 BuildRequires:	openldap-devel
 BuildRequires:	pam-devel
 BuildRequires:	perl-base
 BuildRequires:	perl-Archive-Zip
 BuildRequires:	pkgconfig
+BuildRequires:	portaudio-devel
 BuildRequires:	python >= 2.2
 BuildRequires:	python-devel >= 2.2
 BuildRequires:	python-modules >= 2.2
@@ -162,6 +185,8 @@ BuildRequires:	startup-notification-devel >= 0.5
 BuildRequires:	tcsh
 BuildRequires:	unixODBC-devel
 BuildRequires:	unzip
+BuildRequires:	xmlsec1-nss-devel
+%{?with_system_xt:BuildRequires:	xt}
 BuildRequires:	zip
 BuildRequires:	zlib-devel
 BuildConflicts:	java-sun = 1.4.2
@@ -172,6 +197,7 @@ Requires:	db
 Requires:	libstdc++ >= 5:3.2.1
 Requires:	mktemp
 Requires:	sed
+Conflicts:	libicu > 3.4.1
 Obsoletes:	openoffice
 #Suggests:	chkfontpath
 ExclusiveArch:	%{ix86} %{x8664} ppc sparc sparcv9
@@ -1774,16 +1800,17 @@ cp %{SOURCE50} %{SOURCE51} src
 # sources, icons, KDE_icons
 ln -sf %{SOURCE1} %{SOURCE2} %{SOURCE3} %{SOURCE4} \
 	%{SOURCE10} %{SOURCE11} %{SOURCE12} %{SOURCE13} \
-	%{SOURCE14} %{SOURCE15} %{SOURCE16} src
+	%{SOURCE14} %{SOURCE15} %{SOURCE16} %{SOURCE17} src
 
-# bashizm
 %patch0 -p1
-
 # fixes for the patch subsystem
 %patch1 -p1
 
 # teach configure.in about PLD
 %patch2 -p1
+
+%patch3 -p1
+%patch4 -p1
 
 # 64 bit related patches
 install %{PATCH100} patches/64bit
@@ -1794,6 +1821,11 @@ install %{PATCH102} patches/src680/pld-splash.diff
 
 # macro browser can crash if there's an invalid script container
 install %{PATCH103} patches/src680/sfx2.badscript.diff
+
+install %{PATCH104} patches/src680/portaudio_v19.diff
+install %{PATCH105} patches/src680/mozilla-firefox.diff
+install %{PATCH106} patches/src680/unxlngi4.mk_linker.diff
+install %{PATCH107} patches/src680/regcomp_ugly_hack.diff
 
 %build
 # Make sure we have /proc mounted - otherwise idlc will fail later.
@@ -1822,11 +1854,10 @@ QTLIB="%{_libdir}"
 export CC CXX ENVCFLAGS ENVCFLAGSCXX DESTDIR IGNORE_MANIFEST_CHANGES DISTRO QTINC QTLIB
 
 %if %{with java}
-JAVA_HOME=%{_libdir}/java
+JAVA_HOME=%{java_home}
 DB_JAR="%{_javadir}/db.jar"
-export JAVA_HOME DB_JAR
 ANT_HOME=%{_prefix}
-export ANT_HOME
+export JAVA_HOME DB_JAR ANT_HOME
 %endif
 
 DEFAULT_TO_ENGLISH_FOR_PACKING=1; export DEFAULT_TO_ENGLISH_FOR_PACKING
@@ -1847,16 +1878,19 @@ CONFOPTS=" \
 %ifarch %{x8664}
 	--with-arch=x86_64 \
 %endif
+	--disable-odk \
 	--with-ccache-allowed \
 	--with-system-gcc \
 	--with-system-zlib \
 	--with-system-jpeg \
 	--with-system-libxml \
 	--with-system-python \
-	--with-system-sane-headers \
+	--with-system-sane-header \
 	--with-system-x11-extensions-headers \
 	--with-system-odbc-headers \
+%if %{with system_db}
 	--with-system-db \
+%endif
 	--with-system-curl \
 	--with-system-freetype \
 	--with-system-nas \
@@ -1865,9 +1899,25 @@ CONFOPTS=" \
 	--with-system-expat \
 	--with-system-sablot \
 	--with-system-boost \
-	--without-system-neon \
+	--with-system-icu \
+	--with-system-libwpd \
+%if %{with system_mdbtools}
+	--with-system-mdbtools \
+%endif
+	--with-system-neon \
+	--with-system-portaudio \
+	--with-system-sndfile \
+%if %{with system_xt}
+	--with-system-xt \
+	--with-xt-jar=/usr/share/java/classes/ \
+%endif
+%if %{with system_beanshell}
+	--with-system-beanshell \
+%endif
+	--with-system-xmlsec \
 %if %{with mozilla}
 	--with-system-mozilla \
+	--with-firefox \
 %else
 	--disable-mozilla \
 %endif
@@ -1895,7 +1945,7 @@ CONFOPTS=" \
 	--with-docdir=%{_docdir}/%{name}-%{version} \
 	--with-python=%{_bindir}/python \
 	--with-openclipart=%{_datadir}/openclipart \
-	--with-stlport4=/usr \
+	--with-stlport=/usr \
 	--with-x \
 	--without-fonts \
 	--without-gpc \
@@ -1923,15 +1973,15 @@ CONFOPTS=" \
 	--with-num-cpus=$RPM_BUILD_NR_THREADS
 "
 
-# for cvs snaps
-[ -x ./autogen.sh ] && ./autogen.sh $CONFOPTS
-
 # build-ooo script will pickup these
 CONFIGURE_OPTIONS="$CONFOPTS"; export CONFIGURE_OPTIONS
 
 :> distro-configs/Common.conf
 :> distro-configs/Common.conf.in
 echo "$CONFOPTS" > distro-configs/${DISTRO}.conf.in
+
+# for cvs snaps
+[ -x ./autogen.sh ] && ./autogen.sh $CONFOPTS
 
 # main build
 %configure \
@@ -2261,6 +2311,7 @@ fontpostinst TTF
 %attr(755,root,root) %{_libdir}/%{name}/program/jvmfwk3rc
 %attr(755,root,root) %{_libdir}/%{name}/program/JREProperties.class
 #%attr(755,root,root) %{_libdir}/%{name}/program/cde-open-url
+%dir %{_libdir}/%{name}/help
 %{_libdir}/%{name}/help/en
 %{_libdir}/%{name}/help/main_transform.xsl
 %{_libdir}/%{name}/program/hid.lst
