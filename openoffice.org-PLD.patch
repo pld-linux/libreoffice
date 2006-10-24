@@ -8,27 +8,26 @@ diff -bur ooo-build-2.0.2.7.orig/patches/src680/apply ooo-build-2.0.2.7/patches/
  Ark64: LinuxCommon, NotDebian, ArkOnly, BerkeleyDB43, 64bit, SystemJavaBits
  # www.pld-linux.org
 -PLDBase: LinuxCommon, NotDebian, PLDOnly
-+PLDBase: LinuxCommon, NotDebian, PLDOnly, NovellOnly, NovellOnlyUnix, FilePickers, GCJExperimental, SystemJavaBits, SystemJavaBitsWorkaround
++PLDBase: LinuxCommon, NotDebian, PLDOnly, NovellOnly, NovellOnlyUnix, FilePickers, GCJExperimental, SystemJavaBits, SystemJavaBitsWorkaround, BerkeleyDB43, STLport5
  PLD: PLDBase
 -PLD64: PLDBase, 64bit
 +PLD64: PLDBase, 64bit, PLD64bitfixes
  # Mandriva Linux
  MandrivaBase: MandrivaOnly, LinuxCommon, MandrivaOnlyUnix, LockDown
  Mandriva: MandrivaBase
-@@ -806,11 +806,14 @@
- filter-always-xsltproc.diff, i#56619, martink
- 
- 
-+# PLD fixes
+@@ -806,11 +806,13 @@
  [PLDOnly]
  SectionOwner => arekm
--
--pld-splash.diff, pmladek
-+sfx2.badscript.diff
  
-+[PLD64bitfixes]
-+STL-lib64.diff
-+64bit-inline.diff
+-# fix build of sal project
+-solenv-unxlngi4-link.diff, i#66982
+ # fix for macro browser crash
+ sfx2-badscript.diff, i#67976
  
++system-db-4.3-use-lpthread.diff
++portaudio_v19.diff
++mozilla-firefox.diff
++# regcomp_ugly_hack.diff
  [ BuildBits ]
- 
+ # buildfix for some JDKs, i#68790
+ readlicense_oo-xml-apis.diff, cws-cmcfixes27
