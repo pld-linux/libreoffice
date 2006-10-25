@@ -15,15 +15,15 @@ diff -bur ooo-build-2.0.2.7.orig/patches/src680/apply ooo-build-2.0.2.7/patches/
  # Mandriva Linux
  MandrivaBase: MandrivaOnly, LinuxCommon, MandrivaOnlyUnix, LockDown
  Mandriva: MandrivaBase
-@@ -806,11 +806,13 @@
+@@ -806,11 +806,10 @@
  [PLDOnly]
  SectionOwner => arekm
  
 -# fix build of sal project
 -solenv-unxlngi4-link.diff, i#66982
- # fix for macro browser crash
- sfx2-badscript.diff, i#67976
- 
+-# fix for macro browser crash
+-sfx2-badscript.diff, i#67976
+-
 +system-db-4.3-use-lpthread.diff
 +portaudio_v19.diff
 +mozilla-firefox.diff
