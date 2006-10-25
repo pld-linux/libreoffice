@@ -48,35 +48,47 @@
 %bcond_without	system_beanshell
 %bcond_without	system_libhnj		# with internal ALTLinuxhyph
 
+%define		is_snapshot	0
 %define		ver		2.0.4
-%define		_rel		3
+%define		_rel		0.1
 %define		subver		680
 %define		snap		OOD680
 %define		snap2		SRC680
 %define		bver		m4
+%define		bugfix		.1
+%if %{is_snapshot}
 %define		ooobver		ood680-%{bver}
 %define		ssnap		ood680-%{bver}
+%else
+%define		us_ver		2_0_4
+%define		ooobver		%{ver}%{bugfix}
+%define		ssnap		OOO_%{us_ver}
+%endif
 
 %define		specflags	-fno-strict-aliasing
 
 Summary:	OpenOffice.org - powerful office suite
 Summary(pl):	OpenOffice.org - potê¿ny pakiet biurowy
 Name:		openoffice.org
-Version:	%{ver}
-Release:	0.%{bver}%{?with_vfs:vfs}.%{_rel}
+Version:	%{ver}%{bugfix}
+%if %{is_snapshot}
+Release:	0.%{bver}%{?with_vfs:.vfs}.%{_rel}
+%else
+Release:	%{_rel}%{?with_vfs:.vfs}
+%endif
 Epoch:		1
 License:	GPL/LGPL
 Group:		X11/Applications
 Source0:	http://go-ooo.org/packages/%{snap}/ooo-build-%{ooobver}.tar.gz
-# Source0-md5:	400590f308afd5189bfceaca9eb75878
+# Source0-md5:	38a82068e85ca4bc96d088f13e3bedc3
 Source1:	http://go-ooo.org/packages/%{snap}/%{ssnap}-core.tar.bz2
-# Source1-md5:	78af5bdc68cb594d77365cf405a79864
+# Source1-md5:	3f18ee3d2e67c8f9daef02ed2dd2fc51
 Source2:	http://go-ooo.org/packages/%{snap}/%{ssnap}-system.tar.bz2
-# Source2-md5:	ba224f69a027211742517f784bcb7ad4
+# Source2-md5:	7d5aa9932eaf739bd63449d16cc6a6d0
 Source3:	http://go-ooo.org/packages/%{snap}/%{ssnap}-binfilter.tar.bz2
-# Source3-md5:	d737f3b71caf365c75eeae5b31d99bdb
+# Source3-md5:	81f5c0b4b51b47c968e71d6685e022c5
 Source4:	http://go-ooo.org/packages/%{snap}/%{ssnap}-lang.tar.bz2
-# Source4-md5:	3db28ac4efab118c57d3015361de62d0
+# Source4-md5:	fbe2fb266ecbdca0dcf55ce677d0fe2b
 Source10:	http://go-ooo.org/packages/%{snap2}/ooo_custom_images-13.tar.bz2
 # Source10-md5:	2480af7f890c8175c7f9e183a1b39ed2
 Source11:	http://go-ooo.org/packages/%{snap2}/ooo_crystal_images-1.tar.gz
@@ -92,6 +104,7 @@ Source15:	http://go-ooo.org/packages/xt/xt-20051206-src-only.zip
 Source16:	http://go-ooo.org/packages/%{snap2}/lp_solve_5.5.tar.gz
 # Source16-md5:	2ff7b4c52f9c3937ebe3002798fbc479
 Source17:	http://go-ooo.org/packages/%{snap2}/biblio.tar.bz2
+# Source17-md5:	1948e39a68f12bfa0b7eb309c14d940c
 Source50:	openabout_pld.png
 Source51:	openintro_pld.bmp
 Patch0:		%{name}-stl5_fix.patch
@@ -102,7 +115,6 @@ Patch4:		%{name}-nolfs_hack.patch
 Patch100:	%{name}-STL-lib64.diff
 Patch101:	%{name}-64bit-inline.diff
 Patch102:	%{name}-build-pld-splash.diff
-Patch103:	%{name}-sfx2.badscript.diff
 Patch104:	%{name}-portaudio_v19.diff
 Patch105:	%{name}-firefox.patch
 Patch106:	%{name}-i66982.diff
@@ -1893,9 +1905,6 @@ install %{PATCH101} patches/64bit/64bit-inline.diff
 
 # fix patches/src680/pld-splash.diff
 install %{PATCH102} patches/src680/pld-splash.diff
-
-# macro browser can crash if there's an invalid script container
-install %{PATCH103} patches/src680/sfx2.badscript.diff
 
 install %{PATCH104} patches/src680/portaudio_v19.diff
 install %{PATCH105} patches/src680/mozilla-firefox.diff
