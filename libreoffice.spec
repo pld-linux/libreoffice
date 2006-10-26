@@ -5,22 +5,21 @@
 #		SRPMS		 0.3 GB
 #		RPMS		 0.8 GB
 # TODO:
-#	- fix regcomp.bin crash (workarounded by strace hack)
+#	- fix regcomp.bin crash (workarounded by trapping segv signal)
 #	- fix xml2cmp crash (workarounded by no_lfs_hack)
 #	- fix help files (xslt hacker needed)
-#	- add i18n-ku subpackaged
 #	- bcond with_xt is broken (xt in PLD is too old or broken)
-#	- check bconds with_mono and with_vfs
-#	- build on 64-bit archsitectures
+#	- check (or remove) bconds with_mono and with_vfs
+#	- build on 64-bit architectures
 #	- there's no such rpm.groups as Applications/Office
 # MAYBE TODO:
 #	- drop requirement on nas-devel
-#	- fix locale names and other locale related things
 #	- --with-system-myspell + myspell package as in Debian
 #	- in gtk version menu highlight has almost the same colour as menu text
 #	- 6 user/config/*.so? files shared between -i18n-en and -i18n-sl
 #	- add ooglobal symlink and it's ooo-wrapper entry (among calc|draw|impress|math|web|writer)
 #	- add %{_libdir}/%{name}/share/autocorr/acor_(ll)-(LL).dat files to package (marked with %lang)
+#	- fix locale names and other locale related things
 #       - can't be just i18n-{be,gu,hi,kn,pa,ta} instead of *-{be_BY,*_IN}?
 #	- add option to build with {not} all lanquages
 #	- REMOVE USE of Xvfb from build-galleries script (ooo-build-2.0.1.2/bin/build-galleries line 84)
@@ -50,7 +49,7 @@
 
 %define		is_snapshot	0
 %define		ver		2.0.4
-%define		_rel		0.1
+%define		_rel		0.2
 %define		subver		680
 %define		snap		OOD680
 %define		snap2		SRC680
@@ -107,11 +106,13 @@ Source17:	http://go-ooo.org/packages/%{snap2}/biblio.tar.bz2
 # Source17-md5:	1948e39a68f12bfa0b7eb309c14d940c
 Source50:	openabout_pld.png
 Source51:	openintro_pld.bmp
-Patch0:		%{name}-stl5_fix.patch
-Patch1:		%{name}-PLD.patch
-Patch2:		%{name}-vendorname.patch
+# patches applied in prep section
+Patch0:		%{name}-PLD.patch
+Patch1:		%{name}-vendorname.patch
+Patch2:		%{name}-stl5_fix.patch
 Patch3:		%{name}-mdbtools_fix.patch
 Patch4:		%{name}-nolfs_hack.patch
+# patches applied by ooo-patching-system 
 Patch100:	%{name}-STL-lib64.diff
 Patch101:	%{name}-64bit-inline.diff
 Patch102:	%{name}-build-pld-splash.diff
@@ -135,7 +136,6 @@ BuildRequires:	curl-devel >= 7.9.8
 BuildRequires:	mozilla-firefox-devel
 BuildRequires:	xorg-lib-libX11-devel
 BuildRequires:	xorg-xserver-Xvfb
-BuildConflicts:	STLport4
 %if %{with system_db}
 BuildRequires:	db-cxx-devel
 BuildRequires:	db-devel
@@ -202,6 +202,8 @@ BuildRequires:	xmlsec1-nss-devel
 %{?with_system_xt:BuildRequires:	xt}
 BuildRequires:	zip
 BuildRequires:	zlib-devel
+BuildConflicts:	STLport4
+BuildConflicts:	libicu-devel > 3.4.1
 BuildConflicts:	java-sun = 1.4.2
 Requires(post,postun):	fontpostinst
 Requires:	%{name}-libs = %{epoch}:%{version}-%{release}
@@ -211,7 +213,6 @@ Requires:	libstdc++ >= 5:3.2.1
 Requires:	mktemp
 Requires:	sed
 Obsoletes:	openoffice
-Conflicts:	libicu > 3.4.1
 #Suggests:	chkfontpath
 ExclusiveArch:	%{ix86} %{x8664} ppc sparc sparcv9
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
@@ -1056,6 +1057,23 @@ koreañskim.
 %files i18n-ko -f ko.lang
 %defattr(644,root,root,755)
 
+%package i18n-ku
+Summary:	OpenOffice.org - interface in Kurdish language
+Summary(pl):	OpenOffice.org - interfejs w jêzyku kurdyjskim
+Group:		Applications/Office
+Requires:	%{name} = %{epoch}:%{version}-%{release}
+
+%description i18n-ku
+This package provides resources containing menus and dialogs in Kurdish
+language.
+
+%description i18n-ku -l pl
+Ten pakiet dostarcza zasoby zawieraj±ce menu i okna dialogowe w jêzyku
+kurdyjskim.
+
+%files i18n-ku -f ku.lang
+%defattr(644,root,root,755)
+
 %package i18n-la
 Summary:	OpenOffice.org - interface in Latin language
 Summary(pl):	OpenOffice.org - interfejs w jêzyku ³aciñskim
@@ -1889,27 +1907,27 @@ ln -sf %{SOURCE1} %{SOURCE2} %{SOURCE3} %{SOURCE4} \
 	%{SOURCE10} %{SOURCE11} %{SOURCE12} %{SOURCE13} \
 	%{SOURCE14} %{SOURCE15} %{SOURCE16} %{SOURCE17} src
 
-%patch0 -p1
 # fixes for the patch subsystem
-%patch1 -p1
+%patch0 -p1
 
 # teach configure.in about PLD
-%patch2 -p1
+%patch1 -p1
 
+%patch2 -p1
 %patch3 -p1
 %patch4 -p1
 
-# 64 bit related patches
+# 64 bit related patches (not applied now)
 install %{PATCH100} patches/64bit
 install %{PATCH101} patches/64bit/64bit-inline.diff
 
-# fix patches/src680/pld-splash.diff
-install %{PATCH102} patches/src680/pld-splash.diff
-
-install %{PATCH104} patches/src680/portaudio_v19.diff
-install %{PATCH105} patches/src680/mozilla-firefox.diff
-install %{PATCH106} patches/src680/unxlngi4.mk_linker.diff
-install %{PATCH107} patches/src680/regcomp_ugly_hack.diff
+echo "[ PLDOnly ]" >> patches/src680/apply
+# patches applied by ooo (extension .diff is required)
+for P in %{PATCH102} %{PATCH104} %{PATCH105} %{PATCH107}; do
+	PATCHNAME=`basename $P | sed "s/%{name}-//; s/.patch$/.diff/"`
+	install $P patches/src680/$PATCHNAME
+	echo $PATCHNAME >> patches/src680/apply
+done
 
 %build
 # Make sure we have /proc mounted - otherwise idlc will fail later.
