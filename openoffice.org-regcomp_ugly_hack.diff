@@ -1,5 +1,5 @@
---- solver/680/unxlngi6.pro/bin/regcomp.orig	2006-10-24 18:20:46.641885250 +0200
-+++ solver/680/unxlngi6.pro/bin/regcomp	2006-10-24 18:21:18.491875750 +0200
+--- cpputools/source/registercomponent/regcomp.sh.orig	2006-10-24 18:20:46.641885250 +0200
++++ cpputools/source/registercomponent/regcomp.sh	2006-10-24 18:21:18.491875750 +0200
 @@ -144,5 +144,5 @@
  
  
