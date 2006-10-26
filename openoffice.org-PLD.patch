@@ -15,19 +15,19 @@ diff -bur ooo-build-2.0.2.7.orig/patches/src680/apply ooo-build-2.0.2.7/patches/
  # Mandriva Linux
  MandrivaBase: MandrivaOnly, LinuxCommon, MandrivaOnlyUnix, LockDown
  Mandriva: MandrivaBase
-@@ -806,11 +806,10 @@
- [PLDOnly]
- SectionOwner => arekm
+@@ -815,15 +815,6 @@
+ # Db 4.3/4.4 needs -lpthread
+ system-db-4.3-use-lpthread.diff, i#58474, rengelha
  
+-
+-[PLDOnly]
+-SectionOwner => arekm
+-
 -# fix build of sal project
 -solenv-unxlngi4-link.diff, i#66982
 -# fix for macro browser crash
 -sfx2-badscript.diff, i#67976
 -
-+system-db-4.3-use-lpthread.diff
-+portaudio_v19.diff
-+mozilla-firefox.diff
-+# regcomp_ugly_hack.diff
  [ BuildBits ]
  # buildfix for some JDKs, i#68790
  readlicense_oo-xml-apis.diff, cws-cmcfixes27
