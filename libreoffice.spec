@@ -110,7 +110,7 @@ Source51:	openintro_pld.bmp
 Patch0:		%{name}-PLD.patch
 Patch1:		%{name}-vendorname.patch
 Patch2:		%{name}-stl5_fix.patch
-Patch3:		%{name}-mdbtools_fix.patch
+Patch3:		%{name}-mdbtools_fix.diff
 Patch4:		%{name}-nolfs_hack.patch
 # patches applied by ooo-patching-system 
 Patch100:	%{name}-STL-lib64.diff
