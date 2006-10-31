@@ -162,7 +162,7 @@ BuildRequires:	libart_lgpl-devel
 %if %{with system_libhnj}
 BuildRequires:	libhnj-devel
 %endif
-BuildRequires:	libicu-devel
+BuildRequires:	libicu-devel <= 3.4.1
 BuildRequires:	libjpeg-devel
 BuildRequires:	libsndfile-devel
 BuildRequires:	libstdc++-devel >= 5:3.2.1
@@ -203,7 +203,6 @@ BuildRequires:	xmlsec1-nss-devel
 BuildRequires:	zip
 BuildRequires:	zlib-devel
 BuildConflicts:	STLport4
-BuildConflicts:	libicu-devel > 3.4.1
 BuildConflicts:	java-sun = 1.4.2
 Requires(post,postun):	fontpostinst
 Requires:	%{name}-libs = %{epoch}:%{version}-%{release}
