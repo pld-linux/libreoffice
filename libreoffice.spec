@@ -1964,8 +1964,9 @@ export ANT_HOME=%{_prefix}
 
 export DEFAULT_TO_ENGLISH_FOR_PACKING=1
 
-RPM_BUILD_NR_THREADS="%(echo "%{__make}" | sed -e 's#.*-j\([[:space:]]*[0-9]\+\)#\1#g' | xargs)"
-[ "$RPM_BUILD_NR_THREADS" = "$(echo %{__make})" ] && RPM_BUILD_NR_THREADS=1
+RPM_BUILD_NR_THREADS="%(echo "%{__make}" | sed -e 's#.*-j\([[:space:]]*[0-9]\+\)#\1#g')"
+[ "$RPM_BUILD_NR_THREADS" = "%{__make}" ] && RPM_BUILD_NR_THREADS=1
+RPM_BUILD_NR_THREADS=$(echo $RPM_BUILD_NR_THREADS)
 
 CONFOPTS=" \
 %ifarch %{ix86} \
