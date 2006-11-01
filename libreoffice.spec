@@ -1965,7 +1965,7 @@ export ANT_HOME=%{_prefix}
 export DEFAULT_TO_ENGLISH_FOR_PACKING=1
 
 RPM_BUILD_NR_THREADS="%(echo "%{__make}" | sed -e 's#.*-j\([[:space:]]*[0-9]\+\)#\1#g' | xargs)"
-[ "$RPM_BUILD_NR_THREADS" = "%{__make}" ] && RPM_BUILD_NR_THREADS=1
+[ "$RPM_BUILD_NR_THREADS" = "$(echo %{__make})" ] && RPM_BUILD_NR_THREADS=1
 
 CONFOPTS=" \
 %ifarch %{ix86} \
@@ -2081,6 +2081,7 @@ CONFIGURE_OPTIONS="$CONFOPTS"; export CONFIGURE_OPTIONS
 :> distro-configs/Common.conf
 :> distro-configs/Common.conf.in
 echo "$CONFOPTS" > distro-configs/${DISTRO}.conf.in
+echo "$CONFOPTS" > distro-configs/${DISTRO}64.conf.in
 
 # for cvs snaps
 [ -x ./autogen.sh ] && ./autogen.sh $CONFOPTS
