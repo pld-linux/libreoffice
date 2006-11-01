@@ -163,7 +163,7 @@ BuildRequires:	libart_lgpl-devel
 %if %{with system_libhnj}
 BuildRequires:	libhnj-devel
 %endif
-BuildRequires:	libicu-devel <= 3.4.1
+BuildRequires:	libicu-devel >= 3.4
 BuildRequires:	libjpeg-devel
 BuildRequires:	libsndfile-devel
 BuildRequires:	libstdc++-devel >= 5:3.2.1
