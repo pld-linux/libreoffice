@@ -2081,8 +2081,7 @@ export CONFIGURE_OPTIONS="$CONFOPTS"
 
 :> distro-configs/Common.conf
 :> distro-configs/Common.conf.in
-echo "$CONFOPTS" > distro-configs/${DISTRO}.conf.in
-echo "$CONFOPTS" > distro-configs/${DISTRO}64.conf.in
+echo "$CONFOPTS" > distro-configs/PLD.conf.in
 
 # for cvs snaps
 [ -x ./autogen.sh ] && ./autogen.sh $CONFOPTS
