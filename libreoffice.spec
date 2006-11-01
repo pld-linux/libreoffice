@@ -113,7 +113,7 @@ Patch1:		%{name}-vendorname.patch
 Patch2:		%{name}-stl5_fix.patch
 Patch3:		%{name}-mdbtools_fix.diff
 Patch4:		%{name}-nolfs_hack.patch
-# patches applied by ooo-patching-system 
+# patches applied by ooo-patching-system
 Patch100:	%{name}-STL-lib64.diff
 Patch101:	%{name}-64bit-inline.diff
 Patch102:	%{name}-build-pld-splash.diff
@@ -156,6 +156,8 @@ BuildRequires:	libxslt-progs
 BuildRequires:	flex
 BuildRequires:	fontconfig-devel >= 1.0.1
 BuildRequires:	freetype-devel >= 2.1
+BuildRequires:	gstreamer-devel >= 0.10.0
+BuildRequires:	gstreamer-plugins-base-devel >= 0.10.0
 BuildRequires:	gtk+2-devel
 BuildRequires:	icu
 BuildRequires:	kdelibs-devel
@@ -1064,8 +1066,8 @@ Group:		X11/Applications
 Requires:	%{name} = %{epoch}:%{version}-%{release}
 
 %description i18n-ku
-This package provides resources containing menus and dialogs in Kurdish
-language.
+This package provides resources containing menus and dialogs in
+Kurdish language.
 
 %description i18n-ku -l pl
 Ten pakiet dostarcza zasoby zawieraj±ce menu i okna dialogowe w jêzyku
