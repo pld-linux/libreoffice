@@ -2077,7 +2077,7 @@ CONFOPTS=" \
 "
 
 # build-ooo script will pickup these
-CONFIGURE_OPTIONS="$CONFOPTS"; export CONFIGURE_OPTIONS
+export CONFIGURE_OPTIONS="$CONFOPTS"
 
 :> distro-configs/Common.conf
 :> distro-configs/Common.conf.in
@@ -2096,7 +2096,7 @@ echo "$CONFOPTS" > distro-configs/${DISTRO}64.conf.in
 %{__make} -j1
 
 # hack for parallel build
-if [ "$RPM_BUILD_NCPUS" -gt 1 ]; then
+if [ $RPM_BUILD_NR_THREADS -gt 1 ]; then
 	doit=1
 	while [ "$doit" -eq 1 ]; do
 		echo "Waiting one more time..."
@@ -2109,12 +2109,12 @@ fi
 rm -rf $RPM_BUILD_ROOT
 
 # limit to single process installation, it's safe at least
-sed -i -e 's#^BUILD_NCPUS=.*#BUILD_NCPUS=1#g' bin/setup
+%{__sed} -i -e 's#^BUILD_NCPUS=.*#BUILD_NCPUS=1#g' bin/setup
 
-DESTDIR=$RPM_BUILD_ROOT; export DESTDIR
-TMP="%{tmpdir}"; export TMP
-TEMP="%{tmpdir}"; export TEMP
-DEFAULT_TO_ENGLISH_FOR_PACKING=1; export DEFAULT_TO_ENGLISH_FOR_PACKING
+export DESTDIR=$RPM_BUILD_ROOT
+export TMP="%{tmpdir}"
+export TEMP="%{tmpdir}"
+export DEFAULT_TO_ENGLISH_FOR_PACKING=1
 
 %{__make} install \
 	DESTDIR=$RPM_BUILD_ROOT
