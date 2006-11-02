@@ -123,7 +123,7 @@ Patch106:	%{name}-i66982.diff
 Patch107:	%{name}-regcomp_ugly_hack.diff
 URL:		http://www.openoffice.org/
 BuildRequires:	ImageMagick
-BuildRequires:	STLport-devel >= 5.0.0
+BuildRequires:	STLport-devel >= 2:5.0.0
 BuildRequires:	autoconf
 BuildRequires:	automake
 %{?with_system_beanshell:BuildRequires:	beanshell}
