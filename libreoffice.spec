@@ -2243,7 +2243,7 @@ chmod 755 $RPM_BUILD_ROOT%{_libdir}/%{name}/program/*
 rm -rf $RPM_BUILD_ROOT%{_libdir}/%{name}/share/xdg
 rm -rf $RPM_BUILD_ROOT/opt/gnome
 
-%if %{without java}
+%if !%{with java}
 # Java-releated bits
 rm -rf $RPM_BUILD_ROOT%{_libdir}/%{name}/share/Scripts/javascript
 rm -rf $RPM_BUILD_ROOT%{_libdir}/%{name}/share/Scripts/beanshell
