@@ -1,9 +1,0 @@
---- cpputools/source/registercomponent/regcomp.sh.orig	2006-10-24 18:20:46.641885250 +0200
-+++ cpputools/source/registercomponent/regcomp.sh	2006-10-24 18:21:18.491875750 +0200
-@@ -144,5 +144,5 @@
- 
- 
- # execute binary
--exec "$sd_prog/$sd_binary" "$@"
-+strace -e execve "$sd_prog/$sd_binary" "$@"
- 
