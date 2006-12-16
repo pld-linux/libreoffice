@@ -5,7 +5,6 @@
 #		SRPMS		 0.3 GB
 #		RPMS		 0.8 GB
 # TODO:
-#	- fix regcomp.bin crash (workarounded by trapping segv signal)
 #	- fix xml2cmp crash (workarounded by no_lfs_hack)
 #	- fix help files (xslt hacker needed - maybe it's screwed by system-sablotron)
 #	- bcond with_xt is broken (xt in PLD is too old or broken)
@@ -13,6 +12,9 @@
 #               made)
 #	- build on 64-bit architectures
 #       - Help>Support loads www.novell.com
+#	- does anyone need missing pyunorc-update64?
+#	- does anyone need opens___.ttf?
+#	- add new i18n packages (as, ml, mr, or, te, tg, ti, uk, ur)
 # MAYBE TODO:
 #	- drop requirement on nas-devel
 #	- --with-system-myspell + myspell package as in Debian
@@ -38,7 +40,7 @@
 
 # Conditional build:
 %bcond_without	java		# without Java support (disables help support)
-%bcond_with	vfs		# Enable GNOME VFS and Evolution 2 support
+%bcond_without	vfs		# Enable GNOME VFS and Evolution 2 support
 %bcond_with	mono		# enable compilation of mono bindings
 %bcond_without	mozilla		# without mozilla
 
@@ -48,19 +50,20 @@
 %bcond_without	system_beanshell
 %bcond_without	system_libhnj		# with internal ALTLinuxhyph
 
-%define		is_snapshot	0
-%define		ver		2.0.4
-%define		_rel		0.2
+%define		is_pre		1
+%define		ver		2.1.0
+%define		_rel		0.1
 %define		subver		680
-%define		snap		OOD680
+%define		snap		OOE680
 %define		snap2		SRC680
-%define		bver		m4
-%define		bugfix		.1
-%if %{is_snapshot}
-%define		ooobver		ood680-%{bver}
-%define		ssnap		ood680-%{bver}
+%define		bver		m6
+%define		bbver		m6
+%define		bugfix		%nil
+%if %{is_pre}
+%define		ooobver		ooe680-%{bbver}
+%define		ssnap		ooe680-%{bver}
 %else
-%define		us_ver		2_0_4
+%define		us_ver		2_1_0
 %define		ooobver		%{ver}%{bugfix}
 %define		ssnap		OOO_%{us_ver}
 %endif
@@ -71,28 +74,29 @@ Summary:	OpenOffice.org - powerful office suite
 Summary(pl):	OpenOffice.org - potê¿ny pakiet biurowy
 Name:		openoffice.org
 Version:	%{ver}%{bugfix}
-%if %{is_snapshot}
-Release:	0.%{bver}%{?with_vfs:.vfs}.%{_rel}
+%if %{is_pre}
+Release:	0.%{bver}%{?without_vfs:.novfs}.%{_rel}
 %else
-Release:	%{_rel}%{?with_vfs:.vfs}
+Release:	%{_rel}%{?without_vfs:.novfs}
 %endif
 Epoch:		1
 License:	GPL/LGPL
 Group:		X11/Applications
-Source0:	http://go-ooo.org/packages/%{snap}/ooo-build-%{ooobver}.tar.gz
-# Source0-md5:	38a82068e85ca4bc96d088f13e3bedc3
+#Source0:	http://go-ooo.org/packages/%{snap}/ooo-build-%{ooobver}.tar.gz
+Source0:	ooo-build-%{ooobver}.tar.gz
+# Source0-md5:	8cbdd14b46d6f9ed90869df38a66bb1c
 Source1:	http://go-ooo.org/packages/%{snap}/%{ssnap}-core.tar.bz2
-# Source1-md5:	3f18ee3d2e67c8f9daef02ed2dd2fc51
+# Source1-md5:	7dbf5f7ea4f469bb6c8b1d6037567431
 Source2:	http://go-ooo.org/packages/%{snap}/%{ssnap}-system.tar.bz2
-# Source2-md5:	7d5aa9932eaf739bd63449d16cc6a6d0
+# Source2-md5:	7f645231043a776c07a22300c0a10848
 Source3:	http://go-ooo.org/packages/%{snap}/%{ssnap}-binfilter.tar.bz2
-# Source3-md5:	81f5c0b4b51b47c968e71d6685e022c5
+# Source3-md5:	22acf75656a2186d8a969ee5069ef193
 Source4:	http://go-ooo.org/packages/%{snap}/%{ssnap}-lang.tar.bz2
-# Source4-md5:	fbe2fb266ecbdca0dcf55ce677d0fe2b
+# Source4-md5:	9b1a1d5dafbde7cbc90da8b903e6b0bf
 Source10:	http://go-ooo.org/packages/%{snap2}/ooo_custom_images-13.tar.bz2
 # Source10-md5:	2480af7f890c8175c7f9e183a1b39ed2
-Source11:	http://go-ooo.org/packages/%{snap2}/ooo_crystal_images-1.tar.gz
-# Source11-md5:	9c57c933e793f791f2c8817ccd28911c
+Source11:	http://go-ooo.org/packages/%{snap2}/ooo_crystal_images-6.tar.bz2
+# Source11-md5:	586d0f26b3f79d89bbb5b25b874e3df6
 Source12:	http://go-ooo.org/packages/%{snap2}/extras-2.tar.bz2
 # Source12-md5:	733051ebeffae5232a2eb760162da020
 Source13:	http://go-ooo.org/packages/libwpd/libwpd-0.8.3.tar.gz
@@ -113,6 +117,7 @@ Patch1:		%{name}-vendorname.patch
 Patch2:		%{name}-stl5_fix.patch
 Patch3:		%{name}-mdbtools_fix.diff
 Patch4:		%{name}-nolfs_hack.patch
+Patch5:		%{name}-no_fonts_dir_buildfix.patch
 # patches applied by ooo-patching-system
 Patch100:	%{name}-STL-lib64.diff
 Patch101:	%{name}-64bit-inline.diff
@@ -120,7 +125,6 @@ Patch102:	%{name}-build-pld-splash.diff
 Patch104:	%{name}-portaudio_v19.diff
 Patch105:	%{name}-firefox.diff
 Patch106:	%{name}-i66982.diff
-Patch107:	%{name}-regcomp_ugly_hack.diff
 URL:		http://www.openoffice.org/
 BuildRequires:	ImageMagick
 BuildRequires:	STLport-devel >= 2:5.0.0
@@ -1918,6 +1922,7 @@ ln -sf %{SOURCE1} %{SOURCE2} %{SOURCE3} %{SOURCE4} \
 %patch2 -p1
 %patch3 -p1
 %patch4 -p1
+%patch5 -p1
 
 # 64 bit related patches (not applied now)
 install %{PATCH100} patches/64bit
@@ -1925,7 +1930,7 @@ install %{PATCH101} patches/64bit/64bit-inline.diff
 
 echo "[ PLDOnly ]" >> patches/src680/apply
 # patches applied by ooo (extension .diff is required)
-for P in %{PATCH102} %{PATCH104} %{PATCH105} %{PATCH107}; do
+for P in %{PATCH102} %{PATCH104} %{PATCH105} ; do
 	PATCHNAME=`basename $P | sed "s/%{name}-//; s/.patch$/.diff/"`
 	install $P patches/src680/$PATCHNAME
 	echo $PATCHNAME >> patches/src680/apply
@@ -2074,6 +2079,7 @@ CONFOPTS=" \
 	--disable-symbols \
 %endif
 	--with-num-cpus=$RPM_BUILD_NR_THREADS
+	--with-tag=%{ssnap}
 "
 
 # build-ooo script will pickup these
@@ -2145,7 +2151,7 @@ rm -rf $RPM_BUILD_ROOT%{_libdir}/%{name}/share/fonts/truetype/*
 
 # Copy fixed OpenSymbol to correct location
 install -d $RPM_BUILD_ROOT%{_fontsdir}/TTF
-install fonts/opens___.ttf $RPM_BUILD_ROOT%{_fontsdir}/TTF
+install build/%{ssnap}/extras/source/truetype/symbol/opens___.ttf $RPM_BUILD_ROOT%{_fontsdir}/TTF
 
 # We don't need spadmin (gtk) or the setup application
 rm -f $RPM_BUILD_ROOT%{_libdir}/%{name}/setup
@@ -2405,7 +2411,7 @@ fontpostinst TTF
 %attr(755,root,root) %{_libdir}/%{name}/program/uri-encode
 %attr(755,root,root) %{_libdir}/%{name}/program/viewdoc
 %attr(755,root,root) %{_libdir}/%{name}/program/*.py
-%attr(755,root,root) %{_libdir}/%{name}/program/pyunorc-update64
+#%attr(755,root,root) %{_libdir}/%{name}/program/pyunorc-update64
 %attr(755,root,root) %{_libdir}/%{name}/program/versionrc
 
 %if %{with java}
