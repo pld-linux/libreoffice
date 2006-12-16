@@ -50,7 +50,6 @@
 %bcond_without	system_beanshell
 %bcond_without	system_libhnj		# with internal ALTLinuxhyph
 
-%define		is_pre		1
 %define		ver		2.1.0
 %define		_rel		0.1
 %define		subver		680
@@ -59,14 +58,8 @@
 %define		bver		m6
 %define		bbver		m6
 %define		bugfix		%nil
-%if %{is_pre}
 %define		ooobver		ooe680-%{bbver}
 %define		ssnap		ooe680-%{bver}
-%else
-%define		us_ver		2_1_0
-%define		ooobver		%{ver}%{bugfix}
-%define		ssnap		OOO_%{us_ver}
-%endif
 
 %define		specflags	-fno-strict-aliasing
 
@@ -74,17 +67,13 @@ Summary:	OpenOffice.org - powerful office suite
 Summary(pl):	OpenOffice.org - potê¿ny pakiet biurowy
 Name:		openoffice.org
 Version:	%{ver}%{bugfix}
-%if %{is_pre}
 Release:	0.%{bver}%{?without_vfs:.novfs}.%{_rel}
-%else
-Release:	%{_rel}%{?without_vfs:.novfs}
-%endif
 Epoch:		1
 License:	GPL/LGPL
 Group:		X11/Applications
 #Source0:	http://go-ooo.org/packages/%{snap}/ooo-build-%{ooobver}.tar.gz
 Source0:	ooo-build-%{ooobver}.tar.gz
-# Source0-md5:	8cbdd14b46d6f9ed90869df38a66bb1c
+# Source0-md5:	797f04099223b549ed1b4939dfc2a335
 Source1:	http://go-ooo.org/packages/%{snap}/%{ssnap}-core.tar.bz2
 # Source1-md5:	7dbf5f7ea4f469bb6c8b1d6037567431
 Source2:	http://go-ooo.org/packages/%{snap}/%{ssnap}-system.tar.bz2
