@@ -6,15 +6,11 @@
 #		RPMS		 0.8 GB
 # TODO:
 #	- fix xml2cmp crash (workarounded by no_lfs_hack)
-#	- fix help files (xslt hacker needed - maybe it's screwed by system-sablotron)
+#	- fix help files (broken links)
 #	- bcond with_xt is broken (xt in PLD is too old or broken)
-#       - bcond with_mono is broken (cli_types.dll not found, and can't be
-#               made)
+#       - bcond with_mono is broken (cli_types.dll not found, and can't be made)
 #	- build on 64-bit architectures
-#       - Help>Support loads www.novell.com
-#	- does anyone need missing pyunorc-update64?
-#	- does anyone need opens___.ttf?
-#	- add new i18n packages (as, ml, mr, or, te, tg, ti, uk, ur)
+#       - adapt help-support.diff to PLD
 # MAYBE TODO:
 #	- drop requirement on nas-devel
 #	- --with-system-myspell + myspell package as in Debian
@@ -26,7 +22,6 @@
 #       - can't be just i18n-{be,gu,hi,kn,pa,ta} instead of *-{be_BY,*_IN}?
 #	- add option to build with {not} all lanquages
 #	- REMOVE USE of Xvfb from build-galleries script (ooo-build-2.0.1.2/bin/build-galleries line 84)
-#	- ooqstart (disappeared from 2.0.3?)
 #	- check:
 #		Installed (but unpackaged) file(s) found:
 #		   /usr/lib/openoffice.org/program/testtoolrc
@@ -51,7 +46,7 @@
 %bcond_without	system_libhnj		# with internal ALTLinuxhyph
 
 %define		ver		2.1.0
-%define		_rel		0.1
+%define		_rel		0.2
 %define		subver		680
 %define		snap		OOE680
 %define		snap2		SRC680
@@ -323,6 +318,23 @@ Ten pakiet dostarcza zasoby zawieraj±ce menu i okna dialogowe w jêzyku
 arabskim.
 
 %files i18n-ar -f ar.lang
+%defattr(644,root,root,755)
+
+%package i18n-as_IN
+Summary:	OpenOffice.org - interface in Assamese language for India
+Summary(pl):	OpenOffice.org - interfejs w jêzyku asamskim dla Indii
+Group:		X11/Applications
+Requires:	%{name} = %{epoch}:%{version}-%{release}
+
+%description i18n-as_IN
+This package provides resources containing menus and dialogs in
+Assamese language for India.
+
+%description i18n-as_IN -l pl
+Ten pakiet dostarcza zasoby zawieraj±ce menu i okna dialogowe w jêzyku
+asamskim dla Indii.
+
+%files i18n-as_IN -f as-IN.lang
 %defattr(644,root,root,755)
 
 %package i18n-be_BY
@@ -1194,11 +1206,45 @@ Requires:	%{name} = %{epoch}:%{version}-%{release}
 This package provides resources containing menus and dialogs in
 Macedonian language.
 
-%description i18n-mi -l pl
+%description i18n-mk -l pl
 Ten pakiet dostarcza zasoby zawieraj±ce menu i okna dialogowe w jêzyku
 macedoñskim.
 
 %files i18n-mk -f mk.lang
+%defattr(644,root,root,755)
+
+%package i18n-ml_IN
+Summary:	OpenOffice.org - interface in Malayalam language for India
+Summary(pl):	OpenOffice.org - interfejs w jêzyku malajalamskim dla Indii
+Group:		X11/Applications
+Requires:	%{name} = %{epoch}:%{version}-%{release}
+
+%description i18n-ml_IN
+This package provides resources containing menus and dialogs in
+Malayalam language for India.
+
+%description i18n-ml_IN -l pl
+Ten pakiet dostarcza zasoby zawieraj±ce menu i okna dialogowe w jêzyku
+malajalamskim dla Indii.
+
+%files i18n-ml_IN -f ml-IN.lang
+%defattr(644,root,root,755)
+
+%package i18n-mr_IN
+Summary:	OpenOffice.org - interface in Marathi language for India
+Summary(pl):	OpenOffice.org - interfejs w jêzyku marathi dla Indii
+Group:		X11/Applications
+Requires:	%{name} = %{epoch}:%{version}-%{release}
+
+%description i18n-mr_IN
+This package provides resources containing menus and dialogs in
+Marathi language for India.
+
+%description i18n-mr_IN -l pl
+Ten pakiet dostarcza zasoby zawieraj±ce menu i okna dialogowe w jêzyku
+marathi dla Indii.
+
+%files i18n-mr_IN -f mr-IN.lang
 %defattr(644,root,root,755)
 
 %package i18n-ms
@@ -1338,6 +1384,23 @@ Ten pakiet dostarcza zasoby zawieraj±ce menu i okna dialogowe w jêzyku
 ludu Soto.
 
 %files i18n-nso -f ns.lang
+%defattr(644,root,root,755)
+
+%package i18n-or_IN
+Summary:	OpenOffice.org - interface in Oriya language for India
+Summary(pl):	OpenOffice.org - interfejs w jêzyku orija dla Indii
+Group:		X11/Applications
+Requires:	%{name} = %{epoch}:%{version}-%{release}
+
+%description i18n-or_IN
+This package provides resources containing menus and dialogs in Oriya
+language for India.
+
+%description i18n-or_IN -l pl
+Ten pakiet dostarcza zasoby zawieraj±ce menu i okna dialogowe w jêzyku
+orija dla Indii.
+
+%files i18n-or_IN -f or-IN.lang
 %defattr(644,root,root,755)
 
 %package i18n-pa_IN
@@ -1677,6 +1740,40 @@ tamilskim.
 %files i18n-ta_IN -f ta-IN.lang
 %defattr(644,root,root,755)
 
+%package i18n-te_IN
+Summary:	OpenOffice.org - interface in Telugu language for India
+Summary(pl):	OpenOffice.org - interfejs w jêzyku telugu dla Indii
+Group:		X11/Applications
+Requires:	%{name} = %{epoch}:%{version}-%{release}
+
+%description i18n-te_IN
+This package provides resources containing menus and dialogs in Telugu
+language for India.
+
+%description i18n-te_IN -l pl
+Ten pakiet dostarcza zasoby zawieraj±ce menu i okna dialogowe w jêzyku
+telugu dla Indii.
+
+%files i18n-te_IN -f te-IN.lang
+%defattr(644,root,root,755)
+
+%package i18n-tg
+Summary:	OpenOffice.org - interface in Tajik language
+Summary(pl):	OpenOffice.org - interfejs w jêzyku tad¿yckim
+Group:		X11/Applications
+Requires:	%{name} = %{epoch}:%{version}-%{release}
+
+%description i18n-tg
+This package provides resources containing menus and dialogs in Tajik
+language.
+
+%description i18n-tg -l pl
+Ten pakiet dostarcza zasoby zawieraj±ce menu i okna dialogowe w jêzyku
+tad¿yckim.
+
+%files i18n-tg -f tg.lang
+%defattr(644,root,root,755)
+
 %package i18n-th
 Summary:	OpenOffice.org - interface in Thai language
 Summary(pl):	OpenOffice.org - interfejs w jêzyku tajskim
@@ -1695,6 +1792,23 @@ Ten pakiet dostarcza zasoby zawieraj±ce menu i okna dialogowe w jêzyku
 tajskim.
 
 %files i18n-th -f th.lang
+%defattr(644,root,root,755)
+
+%package i18n-ti_ER
+Summary:	OpenOffice.org - interface in Tigrigna language for Eritrea
+Summary(pl):	OpenOffice.org - interfejs w jêzyku tigrinia dla Erytrei
+Group:		X11/Applications
+Requires:	%{name} = %{epoch}:%{version}-%{release}
+
+%description i18n-ti_ER
+This package provides resources containing menus and dialogs in
+Tigrigna language for Eritrea.
+
+%description i18n-ti_ER -l pl
+Ten pakiet dostarcza zasoby zawieraj±ce menu i okna dialogowe w jêzyku
+tigrinia dla Erytrei.
+
+%files i18n-ti_ER -f ti-ER.lang
 %defattr(644,root,root,755)
 
 %package i18n-tn
@@ -1773,7 +1887,25 @@ Ukrainian language.
 Ten pakiet dostarcza zasoby zawieraj±ce menu i okna dialogowe w jêzyku
 ukraiñskim.
 
-#%files i18n-uk -f uk.lang
+%files i18n-uk -f uk.lang
+%defattr(644,root,root,755)
+
+%package i18n-ur_IN
+Summary:	OpenOffice.org - interface in Urdu language for India
+Summary(pl):	OpenOffice.org - interfejs w jêzyku urdu dla Indii
+Group:		X11/Applications
+Requires:	%{name} = %{epoch}:%{version}-%{release}
+
+%description i18n-ur_IN
+This package provides resources containing menus and dialogs in Urdu
+language for India.
+
+%description i18n-ur_IN -l pl
+Ten pakiet dostarcza zasoby zawieraj±ce menu i okna dialogowe w jêzyku
+urdu dla Indii.
+
+%files i18n-ur_IN -f ur-IN.lang
+%defattr(644,root,root,755)
 
 %package i18n-ve
 Summary:	OpenOffice.org - interface in Venda language
@@ -2400,6 +2532,7 @@ fontpostinst TTF
 %attr(755,root,root) %{_libdir}/%{name}/program/uri-encode
 %attr(755,root,root) %{_libdir}/%{name}/program/viewdoc
 %attr(755,root,root) %{_libdir}/%{name}/program/*.py
+# exclusive arch x86_64 ?
 #%attr(755,root,root) %{_libdir}/%{name}/program/pyunorc-update64
 %attr(755,root,root) %{_libdir}/%{name}/program/versionrc
 
