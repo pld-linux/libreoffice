@@ -9,10 +9,10 @@
  esac
  AC_MSG_RESULT([$VENDORNAME])
 @@ -886,6 +887,7 @@
- distro-configs/Frugalware64.conf
- distro-configs/translate-org-za-linux.conf
  distro-configs/translate-org-za-win32.conf
+ distro-configs/rpl2.conf
+ distro-configs/rpl2-64.conf
 +distro-configs/PLD.conf
  etc/Makefile
- fonts/Makefile
  patches/Makefile
+ patches/cairo/Makefile
