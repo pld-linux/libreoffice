@@ -1,9 +1,9 @@
 # NOTE:
-#	- normal build with java requires little less than 17GB of disk space
-#		$BUILD_ROOT	 4.8 GB
-#		BUILD		11.7 GB
+#	- normal build with java requires about 24GB of disk space
+#		$BUILD_ROOT	 7.1 GB
+#		BUILD		15.7 GB
 #		SRPMS		 0.3 GB
-#		RPMS		 0.8 GB
+#		RPMS		 1.2 GB
 # TODO:
 #	- fix xml2cmp crash (workarounded by no_lfs_hack)
 #	- fix help files (broken links)
@@ -24,6 +24,7 @@
 #	- REMOVE USE of Xvfb from build-galleries script (ooo-build-2.0.1.2/bin/build-galleries line 84)
 #	- check:
 #		Installed (but unpackaged) file(s) found:
+#		   /usr/lib/openoffice.org/program/gnome-set-default-application
 #		   /usr/lib/openoffice.org/program/testtoolrc
 #		   /usr/lib/openoffice.org/program/cde-open-url
 #		%if %{without java}
@@ -46,7 +47,7 @@
 %bcond_without	system_libhnj		# with internal ALTLinuxhyph
 
 %define		ver		2.1.0
-%define		_rel		0.2
+%define		_rel		0.3
 %define		subver		680
 %define		snap		OOE680
 %define		snap2		SRC680
@@ -2023,6 +2024,19 @@ zuluskim.
 %files i18n-zu -f zu.lang
 %defattr(644,root,root,755)
 
+%package -n bash-completion-openoffice
+Summary:	bash-completion for OpenOffice.org
+Summary(pl):	bashowe uzupe³nianie nazw dla OpenOffice.org
+Group:		Applications/Shells
+Requires:	%{name}
+Requires:	bash-completion
+
+%description -n bash-completion-openoffice
+bash-completion for OpenOffice.org.
+
+%description -n bash-completion-openoffice -l pl
+bashowe uzupe³nianie nazw dla Openoffice.org.
+
 %prep
 %setup -q -n ooo-build-%{ooobver}
 
@@ -2485,8 +2499,6 @@ fontpostinst TTF
 
 #%{_libdir}/%{name}/presets/autotext/english
 
-/etc/bash_completion.d/*
-
 # Programs
 %attr(755,root,root) %{_bindir}/oo*
 #%attr(755,root,root) %{_sbindir}/oopadmin
@@ -2612,3 +2624,7 @@ fontpostinst TTF
 %attr(755,root,root) %{_libdir}/%{name}/program/gnome-open-url
 %attr(755,root,root) %{_libdir}/%{name}/program/fps_gnome.uno.so
 #%dir %{_libdir}/%{name}/program/resource.gnome
+
+%files -n bash-completion-openoffice
+%defattr(644,root,root,755)
+/etc/bash_completion.d/*
