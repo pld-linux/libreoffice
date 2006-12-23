@@ -37,6 +37,7 @@
 # Conditional build:
 %bcond_without	gnomevfs	# GNOME VFS and Evolution 2 support
 %bcond_without	java		# without Java support (disables help support)
+%bcond_without	kde		# KDE L&F packages
 %bcond_with	mono		# enable compilation of mono bindings
 %bcond_without	mozilla		# without mozilla
 
@@ -138,7 +139,9 @@ BuildRequires:	gstreamer-devel >= 0.10.0
 BuildRequires:	gstreamer-plugins-base-devel >= 0.10.0
 BuildRequires:	gtk+2-devel
 BuildRequires:	icu
+%if %{with kde}
 BuildRequires:	kdelibs-devel
+%endif
 BuildRequires:	libart_lgpl-devel
 %if %{with system_libhnj}
 BuildRequires:	libhnj-devel
@@ -2170,7 +2173,11 @@ CONFOPTS=" \
 	--with-about-bitmaps="\$SRCDIR/openabout_pld.png" \
 	--with-distro="${DISTRO}" \
 	--enable-gtk \
+%if %{with kde}
 	--enable-kde \
+%else
+	--disable-kde \
+%endif
 	--without-binsuffix \
 	--with-installed-ooo-dirname=%{name} \
 	--with-lang=ALL \
@@ -2596,18 +2603,21 @@ fontpostinst TTF
 #%dir %{_libdir}/%{name}/program/filter
 
 %attr(755,root,root) %{_libdir}/%{name}/program/*.so
-%exclude %{_libdir}/%{name}/program/kdebe1.uno.so
 %exclude %{_libdir}/%{name}/program/libvclplug_gtk*.so
+%exclude %{_libdir}/%{name}/program/fps_gnome.uno.so
+#%exclude %{_libdir}/%{name}/program/libfps_gnome.so
+%if %{with kde}
+%exclude %{_libdir}/%{name}/program/kdebe1.uno.so
 %exclude %{_libdir}/%{name}/program/libvclplug_kde*.so
 %exclude %{_libdir}/%{name}/program/libfps_kde.so
-%exclude %{_libdir}/%{name}/program/fps_gnome.uno.so
 %exclude %{_libdir}/%{name}/program/libkabdrv1.so
-#%exclude %{_libdir}/%{name}/program/libfps_gnome.so
+%endif
 %attr(755,root,root) %{_libdir}/%{name}/program/*.so.*
 #%attr(755,root,root) %{_libdir}/%{name}/program/filter/*.so
 
 %{_fontsdir}/TTF/*.ttf
 
+%if %{with kde}
 %files libs-kde
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_libdir}/%{name}/program/kdebe1.uno.so
@@ -2617,6 +2627,7 @@ fontpostinst TTF
 %attr(755,root,root) %{_libdir}/%{name}/program/libkabdrv1.so
 %attr(755,root,root) %{_libdir}/%{name}/program/kde-open-url
 #%dir %{_libdir}/%{name}/program/resource.kde
+%endif
 
 %files libs-gtk
 %defattr(644,root,root,755)
