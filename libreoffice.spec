@@ -35,8 +35,8 @@
 #
 
 # Conditional build:
+%bcond_without	gnomevfs	# GNOME VFS and Evolution 2 support
 %bcond_without	java		# without Java support (disables help support)
-%bcond_without	vfs		# Enable GNOME VFS and Evolution 2 support
 %bcond_with	mono		# enable compilation of mono bindings
 %bcond_without	mozilla		# without mozilla
 
@@ -63,7 +63,7 @@ Summary:	OpenOffice.org - powerful office suite
 Summary(pl):	OpenOffice.org - potê¿ny pakiet biurowy
 Name:		openoffice.org
 Version:	%{ver}%{bugfix}
-Release:	0.%{bver}%{?without_vfs:.novfs}.%{_rel}
+Release:	0.%{bver}%{?without_gnomevfs:.novfs}.%{_rel}
 Epoch:		1
 License:	GPL/LGPL
 Group:		X11/Applications
@@ -131,7 +131,7 @@ BuildRequires:	db-cxx-devel
 BuildRequires:	db-devel
 %endif
 BuildRequires:	/usr/bin/getopt
-%if %{with vfs}
+%if %{with gnomevfs}
 BuildRequires:	gnome-vfs2-devel
 %endif
 %if %{with java}
@@ -2180,7 +2180,7 @@ CONFOPTS=" \
 %else
 	--without-java \
 %endif
-%if %{with vfs}
+%if %{with gnomevfs}
 	--enable-gnome-vfs \
 %else
 	--disable-gnome-vfs \
