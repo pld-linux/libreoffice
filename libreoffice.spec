@@ -113,8 +113,8 @@ Patch106:	%{name}-i66982.diff
 URL:		http://www.openoffice.org/
 BuildRequires:	ImageMagick
 BuildRequires:	STLport-devel >= 2:5.0.0
-BuildRequires:	autoconf
-BuildRequires:	automake
+BuildRequires:	autoconf >= 2.51
+BuildRequires:	automake >= 1:1.9
 %{?with_system_beanshell:BuildRequires:	beanshell}
 BuildRequires:	bison >= 1.875-4
 BuildRequires:	boost-devel
@@ -123,9 +123,6 @@ BuildRequires:	boost-spirit-devel
 BuildRequires:	cairo-devel >= 0.5.2
 BuildRequires:	cups-devel
 BuildRequires:	curl-devel >= 7.9.8
-BuildRequires:	mozilla-firefox-devel
-BuildRequires:	xorg-lib-libX11-devel
-BuildRequires:	xorg-xserver-Xvfb
 %if %{with system_db}
 BuildRequires:	db-cxx-devel
 BuildRequires:	db-devel
@@ -133,14 +130,6 @@ BuildRequires:	db-devel
 BuildRequires:	/usr/bin/getopt
 %if %{with gnomevfs}
 BuildRequires:	gnome-vfs2-devel
-%endif
-%if %{with java}
-BuildRequires:	ant
-BuildRequires:	db-java >= 4.2.52-4
-BuildRequires:	jar
-BuildRequires:	jdk >= 1.4.0_00
-%else
-BuildRequires:	libxslt-progs
 %endif
 BuildRequires:	flex
 BuildRequires:	fontconfig-devel >= 1.0.1
@@ -169,6 +158,7 @@ BuildRequires:	nss-devel >= 1:3.10
 BuildRequires:	mono-csharp >= 1.1.8
 BuildRequires:	mono-devel >= 1.1.8
 %endif
+BuildRequires:	mozilla-firefox-devel
 BuildRequires:	nas-devel >= 1.7-1
 BuildRequires:	neon-devel
 BuildRequires:	openclipart-png >= 0:0.16
@@ -191,9 +181,19 @@ BuildRequires:	tcsh
 BuildRequires:	unixODBC-devel
 BuildRequires:	unzip
 BuildRequires:	xmlsec1-nss-devel
+BuildRequires:	xorg-lib-libX11-devel
+BuildRequires:	xorg-xserver-Xvfb
 %{?with_system_xt:BuildRequires:	xt}
 BuildRequires:	zip
 BuildRequires:	zlib-devel
+%if %{with java}
+BuildRequires:	ant
+BuildRequires:	db-java >= 4.2.52-4
+BuildRequires:	jar
+BuildRequires:	jdk >= 1.4.0_00
+%else
+BuildRequires:	libxslt-progs
+%endif
 BuildConflicts:	STLport4
 BuildConflicts:	java-sun = 1.4.2
 Requires(post,postun):	fontpostinst
