@@ -110,7 +110,6 @@ Patch101:	%{name}-64bit-inline.diff
 Patch102:	%{name}-build-pld-splash.diff
 Patch104:	%{name}-portaudio_v19.diff
 Patch105:	%{name}-firefox.diff
-Patch106:	%{name}-i66982.diff
 URL:		http://www.openoffice.org/
 BuildRequires:	ImageMagick
 BuildRequires:	STLport-devel >= 2:5.0.0
