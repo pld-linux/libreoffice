@@ -40,6 +40,7 @@
 %bcond_without	kde		# KDE L&F packages
 %bcond_with	mono		# enable compilation of mono bindings
 %bcond_without	mozilla		# without mozilla
+%bcond_with	seamonkey	# use seamonkey instead of firefox
 
 %bcond_without	system_db		# with internal berkeley db
 %bcond_without	system_mdbtools
@@ -110,6 +111,7 @@ Patch101:	%{name}-64bit-inline.diff
 Patch102:	%{name}-build-pld-splash.diff
 Patch104:	%{name}-portaudio_v19.diff
 Patch105:	%{name}-firefox.diff
+Patch106:	%{name}-seamonkey.diff
 URL:		http://www.openoffice.org/
 BuildRequires:	ImageMagick
 BuildRequires:	STLport-devel >= 2:5.0.0
@@ -160,7 +162,6 @@ BuildRequires:	nss-devel >= 1:3.10
 BuildRequires:	mono-csharp >= 1.1.8
 BuildRequires:	mono-devel >= 1.1.8
 %endif
-BuildRequires:	mozilla-firefox-devel
 BuildRequires:	nas-devel >= 1.7-1
 BuildRequires:	neon-devel
 BuildRequires:	openclipart-png >= 0:0.16
@@ -195,6 +196,11 @@ BuildRequires:	jar
 BuildRequires:	jdk >= 1.4.0_00
 %else
 BuildRequires:	libxslt-progs
+%endif
+%if %{with seamonkey}
+BuildRequires:	seamonkey-devel
+%else
+BuildRequires:	mozilla-firefox-devel
 %endif
 BuildConflicts:	STLport4
 BuildConflicts:	java-sun = 1.4.2
@@ -2067,7 +2073,7 @@ install %{PATCH101} patches/64bit/64bit-inline.diff
 
 echo "[ PLDOnly ]" >> patches/src680/apply
 # patches applied by ooo (extension .diff is required)
-for P in %{PATCH102} %{PATCH104} %{PATCH105} ; do
+for P in %{PATCH102} %{PATCH104} %{PATCH105} %{PATCH106} ; do
 	PATCHNAME=`basename $P | sed "s/%{name}-//; s/.patch$/.diff/"`
 	install $P patches/src680/$PATCHNAME
 	echo $PATCHNAME >> patches/src680/apply
@@ -2092,7 +2098,8 @@ DISTRO="PLD"
 export CC="%{__cc}"
 export CXX="%{__cxx}"
 export ENVCFLAGS="%{rpmcflags}"
-export ENVCFLAGSCXX="%{rpmcflags} -fpermissive"
+# disable STLport 5.1 containers extension, doesn't work with map indexed by enum
+export ENVCFLAGSCXX="%{rpmcflags} -fpermissive -D_STLP_NO_CONTAINERS_EXTENSION"
 export DESTDIR=$RPM_BUILD_ROOT
 export IGNORE_MANIFEST_CHANGES=1
 export QTINC="%{_includedir}/qt"
@@ -2162,7 +2169,11 @@ CONFOPTS=" \
 	--with-system-xmlsec \
 %if %{with mozilla}
 	--with-system-mozilla \
+%if %{with seamonkey}
+	--with-seamonkey \
+%else
 	--with-firefox \
+%endif
 %else
 	--disable-mozilla \
 %endif
