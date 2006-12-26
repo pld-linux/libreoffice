@@ -86,8 +86,6 @@ Source11:	http://go-ooo.org/packages/%{snap2}/ooo_crystal_images-6.tar.bz2
 # Source11-md5:	586d0f26b3f79d89bbb5b25b874e3df6
 Source12:	http://go-ooo.org/packages/%{snap2}/extras-2.tar.bz2
 # Source12-md5:	733051ebeffae5232a2eb760162da020
-Source13:	http://go-ooo.org/packages/libwpd/libwpd-0.8.3.tar.gz
-# Source13-md5:	f34404f8dc6123aca156d203c37e3e5d
 Source14:	http://go-ooo.org/packages/%{snap2}/mdbtools-0.6pre1.tar.gz
 # Source14-md5:	246e8f38b2a1af1bcff60ee0da59300b
 Source15:	http://go-ooo.org/packages/xt/xt-20051206-src-only.zip
@@ -151,7 +149,7 @@ BuildRequires:	libicu-devel >= 3.4
 BuildRequires:	libjpeg-devel
 BuildRequires:	libsndfile-devel
 BuildRequires:	libstdc++-devel >= 5:3.2.1
-BuildRequires:	libwpd-devel
+BuildRequires:	libwpd-devel >= 0.8.6
 BuildRequires:	libxml2-devel >= 2.0
 %if %{with system_mdbtools}
 BuildRequires:	mdbtools-devel >= 0.6
@@ -2053,7 +2051,7 @@ cp %{SOURCE50} %{SOURCE51} src
 
 # sources, icons, KDE_icons
 ln -sf %{SOURCE1} %{SOURCE2} %{SOURCE3} %{SOURCE4} \
-	%{SOURCE10} %{SOURCE11} %{SOURCE12} %{SOURCE13} \
+	%{SOURCE10} %{SOURCE11} %{SOURCE12} \
 	%{SOURCE14} %{SOURCE15} %{SOURCE16} %{SOURCE17} src
 
 # fixes for the patch subsystem
