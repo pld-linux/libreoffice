@@ -203,7 +203,6 @@ BuildConflicts:	java-sun = 1.4.2
 Requires(post,postun):	fontpostinst
 Requires:	%{name}-libs = %{epoch}:%{version}-%{release}
 Requires:	cups-lib
-Requires:	db
 Requires:	libstdc++ >= 5:3.2.1
 Requires:	mktemp
 Requires:	sed
