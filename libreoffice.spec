@@ -202,6 +202,7 @@ BuildConflicts:	STLport4
 BuildConflicts:	java-sun = 1.4.2
 Requires(post,postun):	fontpostinst
 Requires:	%{name}-libs = %{epoch}:%{version}-%{release}
+# libcups.so.2 is dlopened (in cupsmgr.cxx); maybe Suggests instead?
 Requires:	cups-lib
 Requires:	libstdc++ >= 5:3.2.1
 Requires:	mktemp
