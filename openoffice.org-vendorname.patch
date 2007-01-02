@@ -1,5 +1,5 @@
---- ooo-build-ooc680-m7/configure.in~	2006-06-28 17:19:08.000000000 +0200
-+++ ooo-build-ooc680-m7/configure.in	2006-07-09 15:34:05.290959182 +0200
+--- ooo-build-ooc680-m7/configure.in	2006-07-09 15:34:05.290959182 +0200
++++ ooo-build-src680-m180/configure.in	2007-01-03 00:31:17.000000000 +0200
 @@ -408,6 +408,7 @@
          Gentoo*) VENDORNAME="Gentoo" ;;
          Mandriva*) VENDORNAME="Mandriva" ;;
@@ -8,11 +8,12 @@
          *) AC_MSG_WARN([Cannot guess vendor from distro - please add it to configure.in]) ;;
  esac
  AC_MSG_RESULT([$VENDORNAME])
-@@ -886,6 +887,7 @@
+@@ -886,6 +887,8 @@
  distro-configs/Frugalware64.conf
  distro-configs/translate-org-za-linux.conf
  distro-configs/translate-org-za-win32.conf
 +distro-configs/PLD.conf
++distro-configs/PLD64.conf
  etc/Makefile
  fonts/Makefile
  patches/Makefile
