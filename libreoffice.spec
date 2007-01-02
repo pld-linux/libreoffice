@@ -26,7 +26,6 @@
 #		Installed (but unpackaged) file(s) found:
 #		   /usr/lib/openoffice.org/program/gnome-set-default-application
 #		   /usr/lib/openoffice.org/program/testtoolrc
-#		   /usr/lib/openoffice.org/program/cde-open-url
 #		%if %{without java}
 #		   /usr/lib/openoffice.org/program/hid.lst
 #		   /usr/lib/openoffice.org/program/java-set-classpath
@@ -2414,6 +2413,7 @@ chmod 755 $RPM_BUILD_ROOT%{_libdir}/%{name}/program/*
 
 rm -rf $RPM_BUILD_ROOT%{_libdir}/%{name}/share/xdg
 rm -rf $RPM_BUILD_ROOT/opt/gnome
+rm -f $RPM_BUILD_ROOT%{_libdir}/%{name}/program/cde-open-url
 
 %if !%{with java}
 # Java-releated bits
