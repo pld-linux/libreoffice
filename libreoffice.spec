@@ -31,7 +31,7 @@
 %bcond_with	vfs		# Enable GNOME VFS and Evolution 2 support
 %bcond_with	mono		# enable compilation of mono bindings
 %bcond_without	java		# without Java support (disables help support)
-%bcond_without	mozilla		# without mozilla
+%bcond_without	mozilla		# without mozilla-firefox
 
 %define		ver		2.0
 %define		rel		3
@@ -88,7 +88,7 @@ URL:		http://www.openoffice.org/
 BuildRequires:	ImageMagick
 BuildRequires:	STLport-devel >= 4.5.3-6
 %if %{with mozilla}
-BuildRequires:	mozilla-devel >= 5:1.7.6-2
+BuildRequires:	mozilla-firefox-devel
 %endif
 BuildRequires:	XFree86-devel
 BuildRequires:	XFree86-Xvfb
@@ -1910,7 +1910,7 @@ CONFIGURE_OPTIONS="$CONFOPTS"; export CONFIGURE_OPTIONS
 
 :> distro-configs/Common.conf
 :> distro-configs/Common.conf.in
-echo "$CONFOPTS" > distro-configs/${DISTRO}.conf.in
+echo "$CONFOPTS" > distro-configs/PLD.conf.in
 
 # for cvs snaps
 [ -x ./autogen.sh ] && ./autogen.sh $CONFOPTS
