@@ -2269,6 +2269,24 @@ export TMP="%{tmpdir}"
 export TEMP="%{tmpdir}"
 export DEFAULT_TO_ENGLISH_FOR_PACKING=1
 
+# <hack reason="complained at install stage">
+#ERROR: The following files could not be found:
+#ERROR: File not found: libstdc++.so.5
+#... cleaning the output tree ...
+#
+#**************************************************
+#ERROR: ERROR: Missing files
+#in function: remove_Files_Without_Sourcedirectory
+
+#-- nearby errors:
+#  SUCCESS: Source for libgcc_s.so.1: /home/glen/rpm/pld/BUILD/ooo-build-ooe680-m6/build/ooe680-m6/solver/680/unxlngi4.pro/lib/libgcc_s.so.1
+#WARNING: Source for libstdc++.so.5 not found!
+#SUCCESS: Source for libgcc3_uno.so: /home/glen/rpm/pld/BUILD/ooo-build-ooe680-m6/build/ooe680-m6/solver/680/unxlngi4.pro/lib/libgcc3_uno.so
+if [ ! -f build/ooe680-m6/solver/680/unxlngi4.pro/lib/libstdc++.so.? ]; then
+	ln -s %{_libdir}/libstdc++.so.? build/ooe680-m6/solver/680/unxlngi4.pro/lib
+fi
+# </hack>
+
 %{__make} install \
 	DESTDIR=$RPM_BUILD_ROOT
 
