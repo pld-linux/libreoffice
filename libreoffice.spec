@@ -32,6 +32,20 @@
 #		   /usr/lib/openoffice.org/program/java-set-classpath
 #		   /usr/lib/openoffice.org/program/jvmfwk3rc
 #		%endif
+#   - more system libs todo:
+#	$ grep SYSTEM ooo-build-ooe680-m6/build/ooe680-m6/config_office/config.log |grep NO
+#	SYSTEM_AGG='NO'
+#	SYSTEM_HSQLDB='NO'
+#	SYSTEM_HUNSPELL='NO'
+#	SYSTEM_HYPH='NO'
+#	SYSTEM_LIBXSLT='NO'
+#	SYSTEM_MYSPELL='NO'
+#	SYSTEM_MYTHES='NO'
+#	SYSTEM_STDLIBS='NO'
+#	SYSTEM_XALAN='NO'
+#	SYSTEM_XERCES='NO'
+#	SYSTEM_XML_APIS='NO'
+#	SYSTEM_XT='NO'
 #
 
 # Conditional build:
@@ -49,13 +63,13 @@
 %bcond_without	system_libhnj		# with internal ALTLinuxhyph
 
 %define		ver		2.1.0
-%define		_rel		0.3
+%define		_rel		0.4
 %define		subver		680
 %define		snap		OOE680
 %define		snap2		SRC680
 %define		bver		m6
 %define		bbver		m6
-%define		bugfix		%nil
+%define		bugfix		%{nil}
 %define		ooobver		ooe680-%{bbver}
 %define		ssnap		ooe680-%{bver}
 
@@ -2136,6 +2150,7 @@ CONFOPTS=" \
 	--with-system-sane-header \
 	--with-system-x11-extensions-headers \
 	--with-system-odbc-headers \
+	--with-system-stdlibs \
 %if %{with system_db}
 	--with-system-db \
 %endif
@@ -2269,24 +2284,6 @@ export TMP="%{tmpdir}"
 export TEMP="%{tmpdir}"
 export DEFAULT_TO_ENGLISH_FOR_PACKING=1
 
-# <hack reason="complained at install stage">
-#ERROR: The following files could not be found:
-#ERROR: File not found: libstdc++.so.5
-#... cleaning the output tree ...
-#
-#**************************************************
-#ERROR: ERROR: Missing files
-#in function: remove_Files_Without_Sourcedirectory
-
-#-- nearby errors:
-#  SUCCESS: Source for libgcc_s.so.1: /home/glen/rpm/pld/BUILD/ooo-build-ooe680-m6/build/ooe680-m6/solver/680/unxlngi4.pro/lib/libgcc_s.so.1
-#WARNING: Source for libstdc++.so.5 not found!
-#SUCCESS: Source for libgcc3_uno.so: /home/glen/rpm/pld/BUILD/ooo-build-ooe680-m6/build/ooe680-m6/solver/680/unxlngi4.pro/lib/libgcc3_uno.so
-if [ ! -f build/ooe680-m6/solver/680/unxlngi4.pro/lib/libstdc++.so.? ]; then
-	ln -s %{_libdir}/libstdc++.so.? build/ooe680-m6/solver/680/unxlngi4.pro/lib
-fi
-# </hack>
-
 %{__make} install \
 	DESTDIR=$RPM_BUILD_ROOT
 
@@ -2341,9 +2338,6 @@ rm -f $RPM_BUILD_ROOT%{_libdir}/%{name}/program/setup.log
 # Remove copied system libraries
 rm -f $RPM_BUILD_ROOT%{_libdir}/%{name}/program/libgcc_s.so* \
 	$RPM_BUILD_ROOT%{_libdir}/%{name}/program/libstdc++*so*
-
-# install ooqstart
-#install build/OOO_2_0_2/desktop/unxlngi4.pro/bin/ooqstart $RPM_BUILD_ROOT%{_libdir}/%{name}/program
 
 # Find out locales
 rm -f *.lang*
@@ -2535,7 +2529,16 @@ fontpostinst TTF
 %attr(755,root,root) %{_bindir}/oo*
 #%attr(755,root,root) %{_sbindir}/oopadmin
 #%attr(755,root,root) %{_libdir}/%{name}/spadmin
-%attr(755,root,root) %{_libdir}/%{name}/program/*.bin
+%attr(755,root,root) %{_libdir}/%{name}/program/configimport.bin
+%attr(755,root,root) %{_libdir}/%{name}/program/gengal.bin
+%attr(755,root,root) %{_libdir}/%{name}/program/pkgchk.bin
+%attr(755,root,root) %{_libdir}/%{name}/program/pluginapp.bin
+%attr(755,root,root) %{_libdir}/%{name}/program/setofficelang.bin
+%attr(755,root,root) %{_libdir}/%{name}/program/soffice.bin
+%attr(755,root,root) %{_libdir}/%{name}/program/spadmin.bin
+%attr(755,root,root) %{_libdir}/%{name}/program/testtool.bin
+%attr(755,root,root) %{_libdir}/%{name}/program/uno.bin
+%attr(755,root,root) %{_libdir}/%{name}/program/unopkg.bin
 #%attr(755,root,root) %{_libdir}/%{name}/program/fromtemplate
 #%attr(755,root,root) %{_libdir}/%{name}/program/mozwrapper
 #%attr(755,root,root) %{_libdir}/%{name}/program/nswrapper
@@ -2585,7 +2588,6 @@ fontpostinst TTF
 %attr(755,root,root) %{_libdir}/%{name}/program/java-set-classpath
 %attr(755,root,root) %{_libdir}/%{name}/program/jvmfwk3rc
 %attr(755,root,root) %{_libdir}/%{name}/program/JREProperties.class
-#%attr(755,root,root) %{_libdir}/%{name}/program/cde-open-url
 %dir %{_libdir}/%{name}/help
 %{_libdir}/%{name}/help/en
 %{_libdir}/%{name}/help/main_transform.xsl
@@ -2658,6 +2660,7 @@ fontpostinst TTF
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_libdir}/%{name}/program/libvclplug_gtk*.so
 %attr(755,root,root) %{_libdir}/%{name}/program/gnome-open-url
+%attr(755,root,root) %{_libdir}/%{name}/program/gnome-open-url.bin
 %attr(755,root,root) %{_libdir}/%{name}/program/fps_gnome.uno.so
 #%dir %{_libdir}/%{name}/program/resource.gnome
 
