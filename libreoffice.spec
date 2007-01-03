@@ -316,9 +316,6 @@ Afrikaans language.
 Ten pakiet dostarcza zasoby zawieraj±ce menu i okna dialogowe w jêzyku
 afrykanerskim.
 
-%files i18n-af -f af.lang
-%defattr(644,root,root,755)
-
 %package i18n-ar
 Summary:	OpenOffice.org - interface in Arabic language
 Summary(pl):	OpenOffice.org - interfejs w jêzyku arabskim
@@ -337,9 +334,6 @@ language.
 Ten pakiet dostarcza zasoby zawieraj±ce menu i okna dialogowe w jêzyku
 arabskim.
 
-%files i18n-ar -f ar.lang
-%defattr(644,root,root,755)
-
 %package i18n-as_IN
 Summary:	OpenOffice.org - interface in Assamese language for India
 Summary(pl):	OpenOffice.org - interfejs w jêzyku asamskim dla Indii
@@ -354,9 +348,6 @@ Assamese language for India.
 Ten pakiet dostarcza zasoby zawieraj±ce menu i okna dialogowe w jêzyku
 asamskim dla Indii.
 
-%files i18n-as_IN -f as-IN.lang
-%defattr(644,root,root,755)
-
 %package i18n-be_BY
 Summary:	OpenOffice.org - interface in Belarusian language
 Summary(pl):	OpenOffice.org - interfejs w jêzyku bia³oruskim
@@ -370,9 +361,6 @@ Belarusian language.
 %description i18n-be_BY -l pl
 Ten pakiet dostarcza zasoby zawieraj±ce menu i okna dialogowe w jêzyku
 bia³oruskim.
-
-%files i18n-be_BY -f be-BY.lang
-%defattr(644,root,root,755)
 
 %package i18n-bg
 Summary:	OpenOffice.org - interface in Bulgarian language
@@ -392,9 +380,6 @@ Bulgarian language.
 Ten pakiet dostarcza zasoby zawieraj±ce menu i okna dialogowe w jêzyku
 bu³garskim.
 
-%files i18n-bg -f bg.lang
-%defattr(644,root,root,755)
-
 %package i18n-bn
 Summary:	OpenOffice.org - interface in Bangla language
 Summary(pl):	OpenOffice.org - interfejs w jêzyku bengalskim
@@ -408,9 +393,6 @@ language.
 %description i18n-bn -l pl
 Ten pakiet dostarcza zasoby zawieraj±ce menu i okna dialogowe w jêzyku
 bengalskim.
-
-%files i18n-bn -f bn.lang
-%defattr(644,root,root,755)
 
 %package i18n-bn_BD
 Summary:	OpenOffice.org - interface in Bangla language for Bangladesh
@@ -426,9 +408,6 @@ language for Bangladesh.
 Ten pakiet dostarcza zasoby zawieraj±ce menu i okna dialogowe w jêzyku
 bengalskim dla Bangladeszu.
 
-%files i18n-bn_BD -f bn-BD.lang
-%defattr(644,root,root,755)
-
 %package i18n-bn_IN
 Summary:	OpenOffice.org - interface in Bangla language for India
 Summary(pl):	OpenOffice.org - interfejs w jêzyku bengalskim dla Indii
@@ -442,9 +421,6 @@ language for India.
 %description i18n-bn_IN -l pl
 Ten pakiet dostarcza zasoby zawieraj±ce menu i okna dialogowe w jêzyku
 bengalskim dla Indii.
-
-%files i18n-bn_IN -f bn-IN.lang
-%defattr(644,root,root,755)
 
 %package i18n-br
 Summary:	OpenOffice.org - interface in Breton language
@@ -460,9 +436,6 @@ language.
 Ten pakiet dostarcza zasoby zawieraj±ce menu i okna dialogowe w jêzyku
 bretoñskim.
 
-%files i18n-br -f br.lang
-%defattr(644,root,root,755)
-
 %package i18n-bs
 Summary:	OpenOffice.org - interface in Bosnian language
 Summary(pl):	OpenOffice.org - interfejs w jêzyku bo¶niañskim
@@ -476,9 +449,6 @@ Bosnian language.
 %description i18n-bs -l pl
 Ten pakiet dostarcza zasoby zawieraj±ce menu i okna dialogowe w jêzyku
 bo¶niañskim
-
-%files i18n-bs -f bs.lang
-%defattr(644,root,root,755)
 
 %package i18n-ca
 Summary:	OpenOffice.org - interface in Catalan language
@@ -498,8 +468,6 @@ Catalan language.
 Ten pakiet dostarcza zasoby zawieraj±ce menu i okna dialogowe w jêzyku
 kataloñskim.
 
-%files i18n-ca -f ca.lang
-%defattr(644,root,root,755)
 
 %package i18n-cs
 Summary:	OpenOffice.org - interface in Czech language
@@ -519,9 +487,6 @@ language.
 Ten pakiet dostarcza zasoby zawieraj±ce menu i okna dialogowe w jêzyku
 czeskim.
 
-%files i18n-cs -f cs.lang
-%defattr(644,root,root,755)
-
 %package i18n-cy
 Summary:	OpenOffice.org - interface in Cymraeg language
 Summary(pl):	OpenOffice.org - interfejs w jêzyku walijskim
@@ -539,9 +504,6 @@ Cymraeg language.
 %description i18n-cy -l pl
 Ten pakiet dostarcza zasoby zawieraj±ce menu i okna dialogowe w jêzyku
 walijskim.
-
-%files i18n-cy -f cy.lang
-%defattr(644,root,root,755)
 
 %package i18n-da
 Summary:	OpenOffice.org - interface in Danish language
@@ -561,9 +523,6 @@ language.
 Ten pakiet dostarcza zasoby zawieraj±ce menu i okna dialogowe w jêzyku
 duñskim.
 
-%files i18n-da -f da.lang
-%defattr(644,root,root,755)
-
 %package i18n-de
 Summary:	OpenOffice.org - interface in German language
 Summary(pl):	OpenOffice.org - interfejs w jêzyku niemieckim
@@ -581,9 +540,6 @@ language.
 %description i18n-de -l pl
 Ten pakiet dostarcza zasoby zawieraj±ce menu i okna dialogowe w jêzyku
 niemieckim.
-
-%files i18n-de -f de.lang
-%defattr(644,root,root,755)
 
 %package i18n-el
 Summary:	OpenOffice.org - interface in Greek language
@@ -603,9 +559,6 @@ language.
 Ten pakiet dostarcza zasoby zawieraj±ce menu i okna dialogowe w jêzyku
 greckim.
 
-%files i18n-el -f el.lang
-%defattr(644,root,root,755)
-
 %package i18n-en_GB
 Summary:	OpenOffice.org - interface in English language for United Kingdom
 Summary(pl):	OpenOffice.org - interfejs w jêzyku anglieskim dla Wielkiej Brytanii
@@ -619,9 +572,6 @@ English language for United Kingdom.
 %description i18n-en_GB -l pl
 Ten pakiet dostarcza zasoby zawieraj±ce menu i okna dialogowe w jêzyku
 anglieskim dla Wielkiej Brytanii.
-
-%files i18n-en_GB -f en-GB.lang
-%defattr(644,root,root,755)
 
 %package i18n-en_ZA
 Summary:	OpenOffice.org - interface in English language for South Africa
@@ -637,9 +587,6 @@ English language for South Africa.
 Ten pakiet dostarcza zasoby zawieraj±ce menu i okna dialogowe w jêzyku
 anglieskim dla Po³udniowej Afryki.
 
-%files i18n-en_ZA -f en-ZA.lang
-%defattr(644,root,root,755)
-
 %package i18n-eo
 Summary:	OpenOffice.org - interface in Esperanto language
 Summary(pl):	OpenOffice.org - interfejs w jêzyku esperanto
@@ -653,9 +600,6 @@ Esperanto language.
 %description i18n-eo -l pl
 Ten pakiet dostarcza zasoby zawieraj±ce menu i okna dialogowe w jêzyku
 esperanto.
-
-%files i18n-eo -f eo.lang
-%defattr(644,root,root,755)
 
 %package i18n-es
 Summary:	OpenOffice.org - interface in Spanish language
@@ -675,9 +619,6 @@ Spanish language.
 Ten pakiet dostarcza zasoby zawieraj±ce menu i okna dialogowe w jêzyku
 hiszpañskim.
 
-%files i18n-es -f es.lang
-%defattr(644,root,root,755)
-
 %package i18n-et
 Summary:	OpenOffice.org - interface in Estonian language
 Summary(pl):	OpenOffice.org - interfejs w jêzyku estoñskim
@@ -696,9 +637,6 @@ Estonian language.
 Ten pakiet dostarcza zasoby zawieraj±ce menu i okna dialogowe w jêzyku
 estoñskim.
 
-%files i18n-et -f et.lang
-%defattr(644,root,root,755)
-
 %package i18n-eu
 Summary:	OpenOffice.org - interface in Basque (Euskara) language
 Summary(pl):	OpenOffice.org - interfejs w jêzyku baskijskim (euskera)
@@ -716,9 +654,6 @@ This package provides resources containing menus and dialogs in Basque
 Ten pakiet dostarcza zasoby zawieraj±ce menu i okna dialogowe w jêzyku
 baskijskim (euskera).
 
-%files i18n-eu -f eu.lang
-%defattr(644,root,root,755)
-
 %package i18n-fa
 Summary:	OpenOffice.org - interface in Persian language
 Summary(pl):	OpenOffice.org - interfejs w jêzyku perskim
@@ -735,9 +670,6 @@ Persian language.
 %description i18n-eu -l pl
 Ten pakiet dostarcza zasoby zawieraj±ce menu i okna dialogowe w jêzyku
 perskim.
-
-%files i18n-fa -f fa.lang
-%defattr(644,root,root,755)
 
 %package i18n-fi
 Summary:	OpenOffice.org - interface in Finnish language
@@ -757,9 +689,6 @@ Finnish language.
 Ten pakiet dostarcza zasoby zawieraj±ce menu i okna dialogowe w jêzyku
 fiñskim.
 
-%files i18n-fi -f fi.lang
-%defattr(644,root,root,755)
-
 %package i18n-fo
 Summary:	OpenOffice.org - interface in Faroese language
 Summary(pl):	OpenOffice.org - interfejs w jêzyku farerskim
@@ -777,8 +706,6 @@ Faroese language.
 %description i18n-fo -l pl
 Ten pakiet dostarcza zasoby zawieraj±ce menu i okna dialogowe w jêzyku
 farerskim.
-
-#%files i18n-fo -f fo.lang
 
 %package i18n-fr
 Summary:	OpenOffice.org - interface in French language
@@ -798,9 +725,6 @@ language.
 Ten pakiet dostarcza zasoby zawieraj±ce menu i okna dialogowe w jêzyku
 francuskim.
 
-%files i18n-fr -f fr.lang
-%defattr(644,root,root,755)
-
 %package i18n-ga
 Summary:	OpenOffice.org - interface in Irish language
 Summary(pl):	OpenOffice.org - interfejs w jêzyku irlandzkim
@@ -818,9 +742,6 @@ language.
 %description i18n-ga -l pl
 Ten pakiet dostarcza zasoby zawieraj±ce menu i okna dialogowe w jêzyku
 irlandzkim.
-
-%files i18n-ga -f ga.lang
-%defattr(644,root,root,755)
 
 %package i18n-gl
 Summary:	OpenOffice.org - interface in Galician language
@@ -840,9 +761,6 @@ Galician language.
 Ten pakiet dostarcza zasoby zawieraj±ce menu i okna dialogowe w jêzyku
 galicyjskim.
 
-%files i18n-gl -f gl.lang
-%defattr(644,root,root,755)
-
 %package i18n-gu_IN
 Summary:	OpenOffice.org - interface in Gujarati language
 Summary(pl):	OpenOffice.org - interfejs w jêzyku gud¼arati
@@ -856,9 +774,6 @@ Gujarati language.
 %description i18n-gu_IN -l pl
 Ten pakiet dostarcza zasoby zawieraj±ce menu i okna dialogowe w jêzyku
 gud¼arati.
-
-%files i18n-gu_IN -f gu-IN.lang
-%defattr(644,root,root,755)
 
 %package i18n-he
 Summary:	OpenOffice.org - interface in Hebrew language
@@ -878,9 +793,6 @@ language.
 Ten pakiet dostarcza zasoby zawieraj±ce menu i okna dialogowe w jêzyku
 hebrajskim.
 
-%files i18n-he -f he.lang
-%defattr(644,root,root,755)
-
 %package i18n-hi_IN
 Summary:	OpenOffice.org - interface in Hindi language
 Summary(pl):	OpenOffice.org - interfejs w jêzyku hindi
@@ -898,9 +810,6 @@ language.
 %description i18n-hi_IN -l pl
 Ten pakiet dostarcza zasoby zawieraj±ce menu i okna dialogowe w jêzyku
 hindi.
-
-%files i18n-hi_IN -f hi-IN.lang
-%defattr(644,root,root,755)
 
 %package i18n-hr
 Summary:	OpenOffice.org - interface in Croatian language
@@ -920,9 +829,6 @@ Croatian language.
 Ten pakiet dostarcza zasoby zawieraj±ce menu i okna dialogowe w jêzyku
 chorwackim.
 
-%files i18n-hr -f hr.lang
-%defattr(644,root,root,755)
-
 %package i18n-hu
 Summary:	OpenOffice.org - interface in Hungarian language
 Summary(pl):	OpenOffice.org - interfejs w jêzyku wêgierskim
@@ -940,9 +846,6 @@ Hungarian language.
 %description i18n-hu -l pl
 Ten pakiet dostarcza zasoby zawieraj±ce menu i okna dialogowe w jêzyku
 wêgierskim.
-
-%files i18n-hu -f hu.lang
-%defattr(644,root,root,755)
 
 %package i18n-ia
 Summary:	OpenOffice.org - interface in Interlingua language
@@ -962,8 +865,6 @@ Interlingua language.
 Ten pakiet dostarcza zasoby zawieraj±ce menu i okna dialogowe w jêzyku
 interlingua.
 
-#%files i18n-ia -f ia.lang
-
 %package i18n-id
 Summary:	OpenOffice.org - interface in Indonesian language
 Summary(pl):	OpenOffice.org - interfejs w jêzyku indonezyjskim
@@ -981,8 +882,6 @@ Indonesian language.
 %description i18n-id -l pl
 Ten pakiet dostarcza zasoby zawieraj±ce menu i okna dialogowe w jêzyku
 indonezyjskim.
-
-#%files i18n-id -f id.lang
 
 %package i18n-it
 Summary:	OpenOffice.org - interface in Italian language
@@ -1002,9 +901,6 @@ Italian language.
 Ten pakiet dostarcza zasoby zawieraj±ce menu i okna dialogowe w jêzyku
 w³oskim.
 
-%files i18n-it -f it.lang
-%defattr(644,root,root,755)
-
 %package i18n-ja
 Summary:	OpenOffice.org - interface in Japan language
 Summary(pl):	OpenOffice.org - interfejs w jêzyku japoñskim
@@ -1023,9 +919,6 @@ language.
 Ten pakiet dostarcza zasoby zawieraj±ce menu i okna dialogowe w jêzyku
 japoñskim.
 
-%files i18n-ja -f ja.lang
-%defattr(644,root,root,755)
-
 %package i18n-km
 Summary:	OpenOffice.org - interface in Khmer language
 Summary(pl):	OpenOffice.org - interfejs w jêzyku khmerskim
@@ -1039,9 +932,6 @@ language.
 %description i18n-km -l pl
 Ten pakiet dostarcza zasoby zawieraj±ce menu i okna dialogowe w jêzyku
 khmerskim.
-
-%files i18n-km -f km.lang
-%defattr(644,root,root,755)
 
 %package i18n-kn_IN
 Summary:	OpenOffice.org - interface in Kannada language
@@ -1059,9 +949,6 @@ Kannada language.
 %description i18n-kn_IN -l pl
 Ten pakiet dostarcza zasoby zawieraj±ce menu i okna dialogowe w jêzyku
 kannara.
-
-%files i18n-kn_IN -f kn-IN.lang
-%defattr(644,root,root,755)
 
 %package i18n-ko
 Summary:	OpenOffice.org - interface in Korean language
@@ -1081,9 +968,6 @@ language.
 Ten pakiet dostarcza zasoby zawieraj±ce menu i okna dialogowe w jêzyku
 koreañskim.
 
-%files i18n-ko -f ko.lang
-%defattr(644,root,root,755)
-
 %package i18n-ku
 Summary:	OpenOffice.org - interface in Kurdish language
 Summary(pl):	OpenOffice.org - interfejs w jêzyku kurdyjskim
@@ -1097,9 +981,6 @@ Kurdish language.
 %description i18n-ku -l pl
 Ten pakiet dostarcza zasoby zawieraj±ce menu i okna dialogowe w jêzyku
 kurdyjskim.
-
-%files i18n-ku -f ku.lang
-%defattr(644,root,root,755)
 
 %package i18n-la
 Summary:	OpenOffice.org - interface in Latin language
@@ -1119,8 +1000,6 @@ language.
 Ten pakiet dostarcza zasoby zawieraj±ce menu i okna dialogowe w jêzyku
 ³aciñskim.
 
-#%files i18n-la -f la.lang
-
 %package i18n-lo
 Summary:	OpenOffice.org - interface in Lao language
 Summary(pl):	OpenOffice.org - interfejs w jêzyku laotañskim
@@ -1134,9 +1013,6 @@ language.
 %description i18n-lo -l pl
 Ten pakiet dostarcza zasoby zawieraj±ce menu i okna dialogowe w jêzyku
 laotañskim.
-
-%files i18n-lo -f lo.lang
-%defattr(644,root,root,755)
 
 %package i18n-lt
 Summary:	OpenOffice.org - interface in Lithuanian language
@@ -1156,9 +1032,6 @@ Lithuanian language.
 Ten pakiet dostarcza zasoby zawieraj±ce menu i okna dialogowe w jêzyku
 litewskim.
 
-%files i18n-lt -f lt.lang
-%defattr(644,root,root,755)
-
 %package i18n-lv
 Summary:	OpenOffice.org - interface in Latvian language
 Summary(pl):	OpenOffice.org - interfejs w jêzyku ³otewskim
@@ -1172,9 +1045,6 @@ Latvian language.
 %description i18n-lv -l pl
 Ten pakiet dostarcza zasoby zawieraj±ce menu i okna dialogowe w jêzyku
 ³otewskim.
-
-%files i18n-lv -f lv.lang
-%defattr(644,root,root,755)
 
 %package i18n-med
 Summary:	OpenOffice.org - interface in Melpa language
@@ -1194,8 +1064,6 @@ language.
 Ten pakiet dostarcza zasoby zawieraj±ce menu i okna dialogowe w jêzyku
 melpa.
 
-#%files i18n-med -f med.lang
-
 %package i18n-mi
 Summary:	OpenOffice.org - interface in Maori language
 Summary(pl):	OpenOffice.org - interfejs w jêzyku maoryjskim
@@ -1214,8 +1082,6 @@ language.
 Ten pakiet dostarcza zasoby zawieraj±ce menu i okna dialogowe w jêzyku
 maoryjskim.
 
-#%files i18n-mi -f mi.lang
-
 %package i18n-mk
 Summary:	OpenOffice.org - interface in Macedonian language
 Summary(pl):	OpenOffice.org - interfejs w jêzyku macedoñskim
@@ -1229,9 +1095,6 @@ Macedonian language.
 %description i18n-mk -l pl
 Ten pakiet dostarcza zasoby zawieraj±ce menu i okna dialogowe w jêzyku
 macedoñskim.
-
-%files i18n-mk -f mk.lang
-%defattr(644,root,root,755)
 
 %package i18n-ml_IN
 Summary:	OpenOffice.org - interface in Malayalam language for India
@@ -1247,9 +1110,6 @@ Malayalam language for India.
 Ten pakiet dostarcza zasoby zawieraj±ce menu i okna dialogowe w jêzyku
 malajalamskim dla Indii.
 
-%files i18n-ml_IN -f ml-IN.lang
-%defattr(644,root,root,755)
-
 %package i18n-mr_IN
 Summary:	OpenOffice.org - interface in Marathi language for India
 Summary(pl):	OpenOffice.org - interfejs w jêzyku marathi dla Indii
@@ -1263,9 +1123,6 @@ Marathi language for India.
 %description i18n-mr_IN -l pl
 Ten pakiet dostarcza zasoby zawieraj±ce menu i okna dialogowe w jêzyku
 marathi dla Indii.
-
-%files i18n-mr_IN -f mr-IN.lang
-%defattr(644,root,root,755)
 
 %package i18n-ms
 Summary:	OpenOffice.org - interface in Malay language
@@ -1285,9 +1142,6 @@ language.
 Ten pakiet dostarcza zasoby zawieraj±ce menu i okna dialogowe w jêzyku
 malajskim.
 
-%files i18n-ms -f ms.lang
-%defattr(644,root,root,755)
-
 %package i18n-nb
 Summary:	OpenOffice.org - interface in Norwegian Bokmaal language
 Summary(pl):	OpenOffice.org - interfejs w jêzyku norweskim (odmiana Bokmaal)
@@ -1306,9 +1160,6 @@ Norwegian Bokmaal language.
 Ten pakiet dostarcza zasoby zawieraj±ce menu i okna dialogowe w jêzyku
 norweskim w odmianie Bokmaal.
 
-%files i18n-nb -f nb.lang
-%defattr(644,root,root,755)
-
 %package i18n-ne
 Summary:	OpenOffice.org - interface in Nepali language
 Summary(pl):	OpenOffice.org - interfejs w jêzyku nepalskim
@@ -1322,9 +1173,6 @@ language.
 %description i18n-ne -l pl
 Ten pakiet dostarcza zasoby zawieraj±ce menu i okna dialogowe w jêzyku
 nepalskim.
-
-%files i18n-ne -f ne.lang
-%defattr(644,root,root,755)
 
 %package i18n-nl
 Summary:	OpenOffice.org - interface in Dutch language
@@ -1344,9 +1192,6 @@ language.
 Ten pakiet dostarcza zasoby zawieraj±ce menu i okna dialogowe w jêzyku
 holenderskim.
 
-%files i18n-nl -f nl.lang
-%defattr(644,root,root,755)
-
 %package i18n-nn
 Summary:	OpenOffice.org - interface in Norwegian Nynorsk language
 Summary(pl):	OpenOffice.org - interfejs w jêzyku norweskim (odmiana Nynorsk)
@@ -1365,9 +1210,6 @@ Norwegian Nynorsk language.
 Ten pakiet dostarcza zasoby zawieraj±ce menu i okna dialogowe w jêzyku
 norweskim w odmianie Nynorsk.
 
-%files i18n-nn -f nn.lang
-%defattr(644,root,root,755)
-
 %package i18n-nr
 Summary:	OpenOffice.org - interface in South Ndebele language
 Summary(pl):	OpenOffice.org - interfejs w jêzyku ndebele (po³udniowym)
@@ -1381,9 +1223,6 @@ Ndebele language.
 %description i18n-nr -l pl
 Ten pakiet dostarcza zasoby zawieraj±ce menu i okna dialogowe w jêzyku
 ndebele (po³udniowym).
-
-%files i18n-nr -f nr.lang
-%defattr(644,root,root,755)
 
 %package i18n-nso
 Summary:	OpenOffice.org - interface in Northern Sotho language
@@ -1403,9 +1242,6 @@ Northern Sotho language.
 Ten pakiet dostarcza zasoby zawieraj±ce menu i okna dialogowe w jêzyku
 ludu Soto.
 
-%files i18n-nso -f ns.lang
-%defattr(644,root,root,755)
-
 %package i18n-or_IN
 Summary:	OpenOffice.org - interface in Oriya language for India
 Summary(pl):	OpenOffice.org - interfejs w jêzyku orija dla Indii
@@ -1420,9 +1256,6 @@ language for India.
 Ten pakiet dostarcza zasoby zawieraj±ce menu i okna dialogowe w jêzyku
 orija dla Indii.
 
-%files i18n-or_IN -f or-IN.lang
-%defattr(644,root,root,755)
-
 %package i18n-pa_IN
 Summary:	OpenOffice.org - interface in Punjabi language
 Summary(pl):	OpenOffice.org - interfejs w jêzyku pend¿abskim
@@ -1436,9 +1269,6 @@ Punjabi language.
 %description i18n-pa_IN -l pl
 Ten pakiet dostarcza zasoby zawieraj±ce menu i okna dialogowe w jêzyku
 pend¿abskim.
-
-%files i18n-pa_IN -f pa-IN.lang
-%defattr(644,root,root,755)
 
 %package i18n-pl
 Summary:	OpenOffice.org - interface in Polish language
@@ -1458,9 +1288,6 @@ language.
 Ten pakiet dostarcza zasoby zawieraj±ce menu i okna dialogowe w jêzyku
 polskim.
 
-%files i18n-pl -f pl.lang
-%defattr(644,root,root,755)
-
 %package i18n-pt
 Summary:	OpenOffice.org - interface in Portuguese language
 Summary(pl):	OpenOffice.org - interfejs w jêzyku portugalskim
@@ -1478,9 +1305,6 @@ Portuguese language.
 %description i18n-pt -l pl
 Ten pakiet dostarcza zasoby zawieraj±ce menu i okna dialogowe w jêzyku
 portugalskim.
-
-%files i18n-pt -f pt.lang
-%defattr(644,root,root,755)
 
 %package i18n-pt_BR
 Summary:	OpenOffice.org - interface in Brazilian Portuguese language
@@ -1500,9 +1324,6 @@ Brazilian Portuguese language.
 Ten pakiet dostarcza zasoby zawieraj±ce menu i okna dialogowe w jêzyku
 portugalskim dla Brazylii.
 
-%files i18n-pt_BR -f pt-BR.lang
-%defattr(644,root,root,755)
-
 %package i18n-ro
 Summary:	OpenOffice.org - interface in Romanian language
 Summary(pl):	OpenOffice.org - interfejs w jêzyku rumuñskim
@@ -1520,8 +1341,6 @@ Romanian language.
 %description i18n-ro -l pl
 Ten pakiet dostarcza zasoby zawieraj±ce menu i okna dialogowe w jêzyku
 rumuñskim.
-
-#%files i18n-ro -f ro.lang
 
 %package i18n-ru
 Summary:	OpenOffice.org - interface in Russian language
@@ -1541,9 +1360,6 @@ Russian language.
 Ten pakiet dostarcza zasoby zawieraj±ce menu i okna dialogowe w jêzyku
 rosyjskim.
 
-%files i18n-ru -f ru.lang
-%defattr(644,root,root,755)
-
 %package i18n-rw
 Summary:	OpenOffice.org - interface in Kinarwanda language
 Summary(pl):	OpenOffice.org - interfejs w jêzyku kinya-ruanda
@@ -1558,9 +1374,6 @@ Kinarwanda language.
 Ten pakiet dostarcza zasoby zawieraj±ce menu i okna dialogowe w jêzyku
 kinya-ruanda.
 
-%files i18n-rw -f rw.lang
-%defattr(644,root,root,755)
-
 %package i18n-sh
 Summary:	OpenOffice.org - interface in Serbo-Croatian language
 Summary(pl):	OpenOffice.org - interfejs w jêzyku serbsko-chorwackim
@@ -1574,9 +1387,6 @@ Serbo-Croatian language.
 %description i18n-sh -l pl
 Ten pakiet dostarcza zasoby zawieraj±ce menu i okna dialogowe w jêzyku
 serbsko-chorwackim.
-
-%files i18n-sh -f sh-YU.lang
-%defattr(644,root,root,755)
 
 %package i18n-sk
 Summary:	OpenOffice.org - interface in Slovak language
@@ -1596,9 +1406,6 @@ language.
 Ten pakiet dostarcza zasoby zawieraj±ce menu i okna dialogowe w jêzyku
 s³owackim.
 
-%files i18n-sk -f sk.lang
-%defattr(644,root,root,755)
-
 %package i18n-sl
 Summary:	OpenOffice.org - interface in Slovenian language
 Summary(pl):	OpenOffice.org - interfejs w jêzyku s³oweñskim
@@ -1617,9 +1424,6 @@ Slovenian language.
 Ten pakiet dostarcza zasoby zawieraj±ce menu i okna dialogowe w jêzyku
 s³oweñskim.
 
-%files i18n-sl -f sl.lang
-%defattr(644,root,root,755)
-
 %package i18n-sr
 Summary:	OpenOffice.org - interface in Serbian language
 Summary(pl):	OpenOffice.org - interfejs w jêzyku serbskim
@@ -1633,9 +1437,6 @@ Serbian language.
 %description i18n-sr -l pl
 Ten pakiet dostarcza zasoby zawieraj±ce menu i okna dialogowe w jêzyku
 serbskim.
-
-%files i18n-sr -f sr-CS.lang
-%defattr(644,root,root,755)
 
 %package i18n-ss
 Summary:	OpenOffice.org - interface in Siswant language
@@ -1651,9 +1452,6 @@ Siswant language.
 Ten pakiet dostarcza zasoby zawieraj±ce menu i okna dialogowe w jêzyku
 siswati.
 
-%files i18n-ss -f ss.lang
-%defattr(644,root,root,755)
-
 %package i18n-st
 Summary:	OpenOffice.org - interface in Southern Sotho language
 Summary(pl):	OpenOffice.org - interfejs w jêzyku po³udniowym sotho
@@ -1667,9 +1465,6 @@ Southern Sotho language.
 %description i18n-st -l pl
 Ten pakiet dostarcza zasoby zawieraj±ce menu i okna dialogowe w jêzyku
 po³udniowym sotho.
-
-%files i18n-st -f st.lang
-%defattr(644,root,root,755)
 
 %package i18n-sv
 Summary:	OpenOffice.org - interface in Swedish language
@@ -1689,9 +1484,6 @@ Swedish language.
 Ten pakiet dostarcza zasoby zawieraj±ce menu i okna dialogowe w jêzyku
 szwedzkim.
 
-%files i18n-sv -f sv.lang
-%defattr(644,root,root,755)
-
 %package i18n-sw
 Summary:	OpenOffice.org - interface in Swahili language
 Summary(pl):	OpenOffice.org - interfejs w jêzyku suahili
@@ -1705,9 +1497,6 @@ Swahili language.
 %description i18n-sw -l pl
 Ten pakiet dostarcza zasoby zawieraj±ce menu i okna dialogowe w jêzyku
 suahili.
-
-%files i18n-sw -f sw.lang
-%defattr(644,root,root,755)
 
 %package i18n-sw_TZ
 Summary:	OpenOffice.org - interface in Swahili language for Tanzania
