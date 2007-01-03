@@ -157,6 +157,7 @@ BuildRequires:	libart_lgpl-devel
 %if %{with system_libhnj}
 BuildRequires:	libhnj-devel
 %endif
+BuildRequires:	libbonobo-devel >= 2.0
 BuildRequires:	libicu-devel >= 3.4
 BuildRequires:	libjpeg-devel
 BuildRequires:	libsndfile-devel
