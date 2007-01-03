@@ -1,0 +1,4 @@
+- remove unpackaged files
+- update mime database in %post(un)
+- fix(?) files
+  Now its build, install and ... work ;-).
