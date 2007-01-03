@@ -275,6 +275,7 @@ Ten pakiet dostarcza zasoby zawieraj±ce menu i okna dialogowe w jêzyku
 arabskim.
 
 %files i18n-ar -f ar.lang
+%defattr(644,root,root,755)
 
 %package i18n-be_BY
 Summary:	OpenOffice.org - interface in Belarusian language
@@ -1001,6 +1002,7 @@ Ten pakiet dostarcza zasoby zawieraj±ce menu i okna dialogowe w jêzyku
 koreañskim.
 
 %files i18n-ko -f ko.lang
+%defattr(644,root,root,755)
 
 %package i18n-la
 Summary:	OpenOffice.org - interface in Latin language
@@ -1132,6 +1134,7 @@ Ten pakiet dostarcza zasoby zawieraj±ce menu i okna dialogowe w jêzyku
 macedoñskim.
 
 %files i18n-mk -f mk.lang
+%defattr(644,root,root,755)
 
 %package i18n-ms
 Summary:	OpenOffice.org - interface in Malay language
@@ -1270,6 +1273,7 @@ Ten pakiet dostarcza zasoby zawieraj±ce menu i okna dialogowe w jêzyku
 ludu Soto.
 
 %files i18n-nso -f ns.lang
+%defattr(644,root,root,755)
 
 %package i18n-pa_IN
 Summary:	OpenOffice.org - interface in Punjabi language
@@ -1606,6 +1610,7 @@ Ten pakiet dostarcza zasoby zawieraj±ce menu i okna dialogowe w jêzyku
 tamilskim.
 
 %files i18n-ta_IN -f ta-IN.lang
+%defattr(644,root,root,755)
 
 %package i18n-th
 Summary:	OpenOffice.org - interface in Thai language
@@ -1625,6 +1630,7 @@ Ten pakiet dostarcza zasoby zawieraj±ce menu i okna dialogowe w jêzyku
 tajskim.
 
 %files i18n-th -f th.lang
+%defattr(644,root,root,755)
 
 %package i18n-tn
 Summary:	OpenOffice.org - interface in Tswana language
@@ -1818,6 +1824,7 @@ Ten pakiet dostarcza zasoby zawieraj±ce menu i okna dialogowe w jêzyku
 zuluskim.
 
 %files i18n-zu -f zu.lang
+%defattr(644,root,root,755)
 
 %prep
 %setup -q -n ooo-build-%{ooobver}
@@ -1947,7 +1954,7 @@ CONFOPTS=" \
 	--disable-gnome-vfs \
 %endif
 	--with-docdir=%{_docdir}/%{name}-%{version} \
-	--with-python=%{_bindir}/python \
+	--with-python=%{__python} \
 	--with-openclipart=%{_datadir}/openclipart \
 	--with-stlport4=/usr \
 	--with-x \
