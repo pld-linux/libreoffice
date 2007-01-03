@@ -2459,3 +2459,222 @@ fontpostinst TTF
 %files -n bash-completion-openoffice
 %defattr(644,root,root,755)
 /etc/bash_completion.d/*
+
+%files i18n-af -f af.lang
+%defattr(644,root,root,755)
+
+%files i18n-ar -f ar.lang
+%defattr(644,root,root,755)
+
+%files i18n-as_IN -f as-IN.lang
+%defattr(644,root,root,755)
+
+%files i18n-be_BY -f be-BY.lang
+%defattr(644,root,root,755)
+
+%files i18n-bg -f bg.lang
+%defattr(644,root,root,755)
+
+%files i18n-bn -f bn.lang
+%defattr(644,root,root,755)
+
+%files i18n-bn_BD -f bn-BD.lang
+%defattr(644,root,root,755)
+
+%files i18n-bn_IN -f bn-IN.lang
+%defattr(644,root,root,755)
+
+%files i18n-br -f br.lang
+%defattr(644,root,root,755)
+
+%files i18n-bs -f bs.lang
+%defattr(644,root,root,755)
+
+%files i18n-ca -f ca.lang
+%defattr(644,root,root,755)
+
+%files i18n-cs -f cs.lang
+%defattr(644,root,root,755)
+
+%files i18n-cy -f cy.lang
+%defattr(644,root,root,755)
+
+%files i18n-da -f da.lang
+%defattr(644,root,root,755)
+
+%files i18n-de -f de.lang
+%defattr(644,root,root,755)
+
+%files i18n-el -f el.lang
+%defattr(644,root,root,755)
+
+%files i18n-en_GB -f en-GB.lang
+%defattr(644,root,root,755)
+
+%files i18n-en_ZA -f en-ZA.lang
+%defattr(644,root,root,755)
+
+%files i18n-eo -f eo.lang
+%defattr(644,root,root,755)
+
+%files i18n-es -f es.lang
+%defattr(644,root,root,755)
+
+%files i18n-et -f et.lang
+%defattr(644,root,root,755)
+
+%files i18n-eu -f eu.lang
+%defattr(644,root,root,755)
+
+%files i18n-fa -f fa.lang
+%defattr(644,root,root,755)
+
+%files i18n-fi -f fi.lang
+%defattr(644,root,root,755)
+
+#%files i18n-fo -f fo.lang
+#%defattr(644,root,root,755)
+
+%files i18n-fr -f fr.lang
+%defattr(644,root,root,755)
+
+%files i18n-ga -f ga.lang
+%defattr(644,root,root,755)
+
+%files i18n-gl -f gl.lang
+%defattr(644,root,root,755)
+
+%files i18n-gu_IN -f gu-IN.lang
+%defattr(644,root,root,755)
+
+%files i18n-he -f he.lang
+%defattr(644,root,root,755)
+
+%files i18n-hi_IN -f hi-IN.lang
+%defattr(644,root,root,755)
+
+%files i18n-hr -f hr.lang
+%defattr(644,root,root,755)
+
+%files i18n-hu -f hu.lang
+%defattr(644,root,root,755)
+
+#%files i18n-ia -f ia.lang
+#%defattr(644,root,root,755)
+
+#%files i18n-id -f id.lang
+#%defattr(644,root,root,755)
+
+%files i18n-it -f it.lang
+%defattr(644,root,root,755)
+
+%files i18n-ja -f ja.lang
+%defattr(644,root,root,755)
+
+%files i18n-km -f km.lang
+%defattr(644,root,root,755)
+
+%files i18n-kn_IN -f kn-IN.lang
+%defattr(644,root,root,755)
+
+%files i18n-ko -f ko.lang
+%defattr(644,root,root,755)
+
+%files i18n-ku -f ku.lang
+%defattr(644,root,root,755)
+
+#%files i18n-la -f la.lang
+#%defattr(644,root,root,755)
+
+%files i18n-lo -f lo.lang
+%defattr(644,root,root,755)
+
+%files i18n-lt -f lt.lang
+%defattr(644,root,root,755)
+
+%files i18n-lv -f lv.lang
+%defattr(644,root,root,755)
+
+#%files i18n-med -f med.lang
+#%defattr(644,root,root,755)
+
+#%files i18n-mi -f mi.lang
+#%defattr(644,root,root,755)
+
+%files i18n-mk -f mk.lang
+%defattr(644,root,root,755)
+
+%files i18n-ml_IN -f ml-IN.lang
+%defattr(644,root,root,755)
+
+%files i18n-mr_IN -f mr-IN.lang
+%defattr(644,root,root,755)
+
+%files i18n-ms -f ms.lang
+%defattr(644,root,root,755)
+
+%files i18n-nb -f nb.lang
+%defattr(644,root,root,755)
+
+%files i18n-ne -f ne.lang
+%defattr(644,root,root,755)
+
+%files i18n-nl -f nl.lang
+%defattr(644,root,root,755)
+
+%files i18n-nn -f nn.lang
+%defattr(644,root,root,755)
+
+%files i18n-nr -f nr.lang
+%defattr(644,root,root,755)
+
+%files i18n-nso -f ns.lang
+%defattr(644,root,root,755)
+
+%files i18n-or_IN -f or-IN.lang
+%defattr(644,root,root,755)
+
+%files i18n-pa_IN -f pa-IN.lang
+%defattr(644,root,root,755)
+
+%files i18n-pl -f pl.lang
+%defattr(644,root,root,755)
+
+%files i18n-pt -f pt.lang
+%defattr(644,root,root,755)
+
+%files i18n-pt_BR -f pt-BR.lang
+%defattr(644,root,root,755)
+
+#%files i18n-ro -f ro.lang
+#%defattr(644,root,root,755)
+
+%files i18n-ru -f ru.lang
+%defattr(644,root,root,755)
+
+%files i18n-rw -f rw.lang
+%defattr(644,root,root,755)
+
+%files i18n-sh -f sh-YU.lang
+%defattr(644,root,root,755)
+
+%files i18n-sk -f sk.lang
+%defattr(644,root,root,755)
+
+%files i18n-sl -f sl.lang
+%defattr(644,root,root,755)
+
+%files i18n-sr -f sr-CS.lang
+%defattr(644,root,root,755)
+
+%files i18n-ss -f ss.lang
+%defattr(644,root,root,755)
+
+%files i18n-st -f st.lang
+%defattr(644,root,root,755)
+
+%files i18n-sv -f sv.lang
+%defattr(644,root,root,755)
+
+%files i18n-sw -f sw.lang
+%defattr(644,root,root,755)
