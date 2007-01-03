@@ -23,14 +23,6 @@
 #       - can't be just i18n-{be,gu,hi,kn,pa,ta} instead of *-{be_BY,*_IN}?
 #	- add option to build with {not} all lanquages
 #	- REMOVE USE of Xvfb from build-galleries script (ooo-build-2.0.1.2/bin/build-galleries line 84)
-#	- check:
-#		Installed (but unpackaged) file(s) found:
-#		   /usr/lib/openoffice.org/program/testtoolrc
-#		%if %{without java}
-#		   /usr/lib/openoffice.org/program/hid.lst
-#		   /usr/lib/openoffice.org/program/java-set-classpath
-#		   /usr/lib/openoffice.org/program/jvmfwk3rc
-#		%endif
 #   - more system libs todo:
 #	$ grep SYSTEM ooo-build-ooe680-m6/build/ooe680-m6/config_office/config.log |grep NO
 #	SYSTEM_AGG='NO'
@@ -2148,13 +2140,15 @@ rm -rf $RPM_BUILD_ROOT%{_libdir}/%{name}/share/xdg
 rm -rf $RPM_BUILD_ROOT/opt/gnome
 rm -f $RPM_BUILD_ROOT%{_libdir}/%{name}/program/cde-open-url
 
-%if !%{with java}
+%if %{without java}
 # Java-releated bits
-rm -rf $RPM_BUILD_ROOT%{_libdir}/%{name}/share/Scripts/javascript
+rm -rf $RPM_BUILD_ROOT%{_libdir}/%{name}/program/hid.lst
+rm -rf $RPM_BUILD_ROOT%{_libdir}/%{name}/program/java-set-classpath
+rm -rf $RPM_BUILD_ROOT%{_libdir}/%{name}/program/jvmfwk3rc
 rm -rf $RPM_BUILD_ROOT%{_libdir}/%{name}/share/Scripts/beanshell
+rm -rf $RPM_BUILD_ROOT%{_libdir}/%{name}/share/Scripts/javascript
 rm -rf $RPM_BUILD_ROOT%{_libdir}/%{name}/share/xslt
 %endif
-
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -2275,6 +2269,7 @@ fontpostinst TTF
 %attr(755,root,root) %{_libdir}/%{name}/program/soffice.bin
 %attr(755,root,root) %{_libdir}/%{name}/program/spadmin.bin
 %attr(755,root,root) %{_libdir}/%{name}/program/testtool.bin
+%{_libdir}/%{name}/program/testtoolrc
 %attr(755,root,root) %{_libdir}/%{name}/program/uno.bin
 %attr(755,root,root) %{_libdir}/%{name}/program/unopkg.bin
 #%attr(755,root,root) %{_libdir}/%{name}/program/fromtemplate
@@ -2284,7 +2279,7 @@ fontpostinst TTF
 %attr(755,root,root) %{_libdir}/%{name}/program/ooqstart
 %attr(755,root,root) %{_libdir}/%{name}/program/pagein*
 #%attr(755,root,root) %{_libdir}/%{name}/program/python.sh
-%attr(755,root,root) %{_libdir}/%{name}/program/pythonloader.unorc
+%{_libdir}/%{name}/program/pythonloader.unorc
 #%attr(755,root,root) %{_libdir}/%{name}/program/pyunorc
 %attr(755,root,root) %{_libdir}/%{name}/program/regcomp
 #%attr(755,root,root) %{_libdir}/%{name}/program/sagenda
@@ -2319,13 +2314,13 @@ fontpostinst TTF
 %attr(755,root,root) %{_libdir}/%{name}/program/*.py
 # exclusive arch x86_64 ?
 #%attr(755,root,root) %{_libdir}/%{name}/program/pyunorc-update64
-%attr(755,root,root) %{_libdir}/%{name}/program/versionrc
+%{_libdir}/%{name}/program/versionrc
 
 %if %{with java}
 %attr(755,root,root) %{_libdir}/%{name}/program/javaldx
 %attr(755,root,root) %{_libdir}/%{name}/program/java-set-classpath
-%attr(755,root,root) %{_libdir}/%{name}/program/jvmfwk3rc
-%attr(755,root,root) %{_libdir}/%{name}/program/JREProperties.class
+%{_libdir}/%{name}/program/jvmfwk3rc
+%{_libdir}/%{name}/program/JREProperties.class
 %dir %{_libdir}/%{name}/help
 %{_libdir}/%{name}/help/en
 %{_libdir}/%{name}/help/main_transform.xsl
@@ -2384,7 +2379,6 @@ fontpostinst TTF
 %attr(755,root,root) %{_libdir}/%{name}/program/fpicker.uno.so
 %attr(755,root,root) %{_libdir}/%{name}/program/fps_office.uno.so
 %attr(755,root,root) %{_libdir}/%{name}/program/fsstorage.uno.so
-%attr(755,root,root) %{_libdir}/%{name}/program/gconfbe1.uno.so
 %attr(755,root,root) %{_libdir}/%{name}/program/hatchwindowfactory.uno.so
 %attr(755,root,root) %{_libdir}/%{name}/program/i18npool.uno.so
 %attr(755,root,root) %{_libdir}/%{name}/program/i18nsearch.uno.so
@@ -2612,7 +2606,6 @@ fontpostinst TTF
 %attr(755,root,root) %{_libdir}/%{name}/program/typeconverter.uno.so
 %attr(755,root,root) %{_libdir}/%{name}/program/typemgr.uno.so
 %attr(755,root,root) %{_libdir}/%{name}/program/ucpexpand1.uno.so
-%attr(755,root,root) %{_libdir}/%{name}/program/ucpgvfs1.uno.so
 %attr(755,root,root) %{_libdir}/%{name}/program/ucptdoc1.uno.so
 %attr(755,root,root) %{_libdir}/%{name}/program/uriproc.uno.so
 %attr(755,root,root) %{_libdir}/%{name}/program/uuresolver.uno.so
@@ -2640,22 +2633,24 @@ fontpostinst TTF
 %if %{with kde}
 %files libs-kde
 %defattr(644,root,root,755)
+%attr(755,root,root) %{_libdir}/%{name}/program/kde-open-url
 %attr(755,root,root) %{_libdir}/%{name}/program/kdebe1.uno.so
 %attr(755,root,root) %{_libdir}/%{name}/program/kdefilepicker
-%attr(755,root,root) %{_libdir}/%{name}/program/libvclplug_kde*.so
 %attr(755,root,root) %{_libdir}/%{name}/program/libfps_kde.so
 %attr(755,root,root) %{_libdir}/%{name}/program/libkabdrv1.so
-%attr(755,root,root) %{_libdir}/%{name}/program/kde-open-url
+%attr(755,root,root) %{_libdir}/%{name}/program/libvclplug_kde*.so
 #%dir %{_libdir}/%{name}/program/resource.kde
 %endif
 
 %files libs-gtk
 %defattr(644,root,root,755)
-%attr(755,root,root) %{_libdir}/%{name}/program/libvclplug_gtk*.so
+%attr(755,root,root) %{_libdir}/%{name}/program/fps_gnome.uno.so
+%attr(755,root,root) %{_libdir}/%{name}/program/gconfbe1.uno.so
 %attr(755,root,root) %{_libdir}/%{name}/program/gnome-open-url
 %attr(755,root,root) %{_libdir}/%{name}/program/gnome-open-url.bin
 %attr(755,root,root) %{_libdir}/%{name}/program/gnome-set-default-application
-%attr(755,root,root) %{_libdir}/%{name}/program/fps_gnome.uno.so
+%attr(755,root,root) %{_libdir}/%{name}/program/libvclplug_gtk*.so
+%attr(755,root,root) %{_libdir}/%{name}/program/ucpgvfs1.uno.so
 #%dir %{_libdir}/%{name}/program/resource.gnome
 
 %files i18n-af -f af.lang
