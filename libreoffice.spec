@@ -5,8 +5,9 @@
 #		SRPMS		 0.3 GB
 #		RPMS		 1.2 GB
 # TODO:
-#	- fix xml2cmp crash (workarounded by no_lfs_hack)
+#	- problems with gcc-4.2.0 (I guess): oowriter is useless (invisble text till refresh)
 #	- fix help files (broken links)
+#	- LFS support is disabled (no_lfs_hack.patch for xml2cmp crash) because it need LFS-ready STLport
 #	- bcond with_xt is broken (xt in PLD is too old or broken)
 #       - bcond with_mono is broken (cli_types.dll not found, and can't be made)
 #	- build on 64-bit architectures
