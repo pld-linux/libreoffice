@@ -25,7 +25,6 @@
 #	- REMOVE USE of Xvfb from build-galleries script (ooo-build-2.0.1.2/bin/build-galleries line 84)
 #	- check:
 #		Installed (but unpackaged) file(s) found:
-#		   /usr/lib/openoffice.org/program/gnome-set-default-application
 #		   /usr/lib/openoffice.org/program/testtoolrc
 #		%if %{without java}
 #		   /usr/lib/openoffice.org/program/hid.lst
@@ -2661,6 +2660,7 @@ fontpostinst TTF
 %attr(755,root,root) %{_libdir}/%{name}/program/libvclplug_gtk*.so
 %attr(755,root,root) %{_libdir}/%{name}/program/gnome-open-url
 %attr(755,root,root) %{_libdir}/%{name}/program/gnome-open-url.bin
+%attr(755,root,root) %{_libdir}/%{name}/program/gnome-set-default-application
 %attr(755,root,root) %{_libdir}/%{name}/program/fps_gnome.uno.so
 #%dir %{_libdir}/%{name}/program/resource.gnome
 
