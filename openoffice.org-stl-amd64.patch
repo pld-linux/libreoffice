@@ -1,0 +1,22 @@
+--- ooo-build-src680-m180/build/src680-m180/config_office/configure.in~	2007-01-03 00:53:05.000000000 +0200
++++ ooo-build-src680-m180/build/src680-m180/config_office/configure.in	2007-01-03 00:54:32.000000000 +0200
+@@ -2041,7 +2041,7 @@
+ 				   fi
+ 			   fi
+ 		   else
+-			   if test -f "$STLPORT4/lib/libstlport_gcc.so"; then
++			   if test -f "$STLPORT4/lib64/libstlport_gcc.so"; then
+ 				   AC_MSG_RESULT([checked])
+ 			   else
+ 				   AC_MSG_ERROR([STLport4 libraries not found])
+--- ooo-build-src680-m180/build/src680-m180/stlport/makefile.mk~	2007-01-03 01:28:58.000000000 +0200
++++ ooo-build-src680-m180/build/src680-m180/stlport/makefile.mk	2007-01-03 01:29:02.000000000 +0200
+@@ -204,7 +204,7 @@
+ all :
+        @echo "         An already available installation of STLport has been chosen in the configure process."
+        @echo "         Therefore the version provided here does not need to be built in addition."
+-       +$(COPY) $(STLPORT4)$/lib$/*stlport*$(DLLPOST) $(DLLDEST)
++       +$(COPY) $(STLPORT4)$/lib64$/*stlport*$(DLLPOST) $(DLLDEST)
+ .ENDIF
+ 
+ .INCLUDE : 	set_ext.mk
