@@ -1512,9 +1512,6 @@ Swahili language for Tanzania.
 Ten pakiet dostarcza zasoby zawieraj±ce menu i okna dialogowe w jêzyku
 suahili dla Tanzanii.
 
-%files i18n-sw_TZ -f sw-TZ.lang
-%defattr(644,root,root,755)
-
 %package i18n-sx
 Summary:	OpenOffice.org - interface in Sutu language
 Summary(pl):	OpenOffice.org - interfejs w jêzyku sutu
@@ -1528,9 +1525,6 @@ language.
 %description i18n-sx -l pl
 Ten pakiet dostarcza zasoby zawieraj±ce menu i okna dialogowe w jêzyku
 sutu.
-
-%files i18n-sx -f sx.lang
-%defattr(644,root,root,755)
 
 %package i18n-ta_IN
 Summary:	OpenOffice.org - interface in Tamil language
@@ -1546,9 +1540,6 @@ language.
 Ten pakiet dostarcza zasoby zawieraj±ce menu i okna dialogowe w jêzyku
 tamilskim.
 
-%files i18n-ta_IN -f ta-IN.lang
-%defattr(644,root,root,755)
-
 %package i18n-te_IN
 Summary:	OpenOffice.org - interface in Telugu language for India
 Summary(pl):	OpenOffice.org - interfejs w jêzyku telugu dla Indii
@@ -1563,9 +1554,6 @@ language for India.
 Ten pakiet dostarcza zasoby zawieraj±ce menu i okna dialogowe w jêzyku
 telugu dla Indii.
 
-%files i18n-te_IN -f te-IN.lang
-%defattr(644,root,root,755)
-
 %package i18n-tg
 Summary:	OpenOffice.org - interface in Tajik language
 Summary(pl):	OpenOffice.org - interfejs w jêzyku tad¿yckim
@@ -1579,9 +1567,6 @@ language.
 %description i18n-tg -l pl
 Ten pakiet dostarcza zasoby zawieraj±ce menu i okna dialogowe w jêzyku
 tad¿yckim.
-
-%files i18n-tg -f tg.lang
-%defattr(644,root,root,755)
 
 %package i18n-th
 Summary:	OpenOffice.org - interface in Thai language
@@ -1600,9 +1585,6 @@ language.
 Ten pakiet dostarcza zasoby zawieraj±ce menu i okna dialogowe w jêzyku
 tajskim.
 
-%files i18n-th -f th.lang
-%defattr(644,root,root,755)
-
 %package i18n-ti_ER
 Summary:	OpenOffice.org - interface in Tigrigna language for Eritrea
 Summary(pl):	OpenOffice.org - interfejs w jêzyku tigrinia dla Erytrei
@@ -1616,9 +1598,6 @@ Tigrigna language for Eritrea.
 %description i18n-ti_ER -l pl
 Ten pakiet dostarcza zasoby zawieraj±ce menu i okna dialogowe w jêzyku
 tigrinia dla Erytrei.
-
-%files i18n-ti_ER -f ti-ER.lang
-%defattr(644,root,root,755)
 
 %package i18n-tn
 Summary:	OpenOffice.org - interface in Tswana language
@@ -1636,9 +1615,6 @@ language.
 %description i18n-tn -l pl
 Ten pakiet dostarcza zasoby zawieraj±ce menu i okna dialogowe w jêzyku
 tswana.
-
-%files i18n-tn -f tn.lang
-%defattr(644,root,root,755)
 
 %package i18n-tr
 Summary:	OpenOffice.org - interface in Turkish language
@@ -1658,9 +1634,6 @@ Turkish language.
 Ten pakiet dostarcza zasoby zawieraj±ce menu i okna dialogowe w jêzyku
 tureckim.
 
-%files i18n-tr -f tr.lang
-%defattr(644,root,root,755)
-
 %package i18n-ts
 Summary:	OpenOffice.org - interface in Tsonga language
 Summary(pl):	OpenOffice.org - interfejs w jêzyku tsonga
@@ -1674,9 +1647,6 @@ language.
 %description i18n-ts -l pl
 Ten pakiet dostarcza zasoby zawieraj±ce menu i okna dialogowe w jêzyku
 tsonga.
-
-%files i18n-ts -f ts.lang
-%defattr(644,root,root,755)
 
 %package i18n-uk
 Summary:	OpenOffice.org - interface in Ukrainian language
@@ -1696,9 +1666,6 @@ Ukrainian language.
 Ten pakiet dostarcza zasoby zawieraj±ce menu i okna dialogowe w jêzyku
 ukraiñskim.
 
-%files i18n-uk -f uk.lang
-%defattr(644,root,root,755)
-
 %package i18n-ur_IN
 Summary:	OpenOffice.org - interface in Urdu language for India
 Summary(pl):	OpenOffice.org - interfejs w jêzyku urdu dla Indii
@@ -1712,9 +1679,6 @@ language for India.
 %description i18n-ur_IN -l pl
 Ten pakiet dostarcza zasoby zawieraj±ce menu i okna dialogowe w jêzyku
 urdu dla Indii.
-
-%files i18n-ur_IN -f ur-IN.lang
-%defattr(644,root,root,755)
 
 %package i18n-ve
 Summary:	OpenOffice.org - interface in Venda language
@@ -1730,9 +1694,6 @@ language.
 Ten pakiet dostarcza zasoby zawieraj±ce menu i okna dialogowe w jêzyku
 venda.
 
-%files i18n-ve -f ve.lang
-%defattr(644,root,root,755)
-
 %package i18n-vi
 Summary:	OpenOffice.org - interface in Vietnamese language
 Summary(pl):	OpenOffice.org - interfejs w jêzyku wietnamskim
@@ -1747,9 +1708,6 @@ Vietnamese language.
 Ten pakiet dostarcza zasoby zawieraj±ce menu i okna dialogowe w jêzyku
 wietnamskim.
 
-%files i18n-vi -f vi.lang
-%defattr(644,root,root,755)
-
 %package i18n-xh
 Summary:	OpenOffice.org - interface in Xhosa language
 Summary(pl):	OpenOffice.org - interfejs w jêzyku khosa
@@ -1763,9 +1721,6 @@ language.
 %description i18n-xh -l pl
 Ten pakiet dostarcza zasoby zawieraj±ce menu i okna dialogowe w jêzyku
 khosa.
-
-%files i18n-xh -f xh.lang
-%defattr(644,root,root,755)
 
 %package i18n-zh_CN
 Summary:	OpenOffice.org - interface in Chinese language for China
@@ -1786,9 +1741,6 @@ Chinese language for China.
 Ten pakiet dostarcza zasoby zawieraj±ce menu i okna dialogowe w jêzyku
 chiñskim dla Chin.
 
-%files i18n-zh_CN -f zh-CN.lang
-%defattr(644,root,root,755)
-
 %package i18n-zh_TW
 Summary:	OpenOffice.org - interface in Chinese language for Taiwan
 Summary(pl):	OpenOffice.org - interfejs w jêzyku chiñskim dla Tajwanu
@@ -1808,9 +1760,6 @@ Chinese language for Taiwan.
 Ten pakiet dostarcza zasoby zawieraj±ce menu i okna dialogowe w jêzyku
 chiñskim dla Tajwanu.
 
-%files i18n-zh_TW -f zh-TW.lang
-%defattr(644,root,root,755)
-
 %package i18n-zu
 Summary:	OpenOffice.org - interface in Zulu language
 Summary(pl):	OpenOffice.org - interfejs w jêzyku zuluskim
@@ -1828,9 +1777,6 @@ language.
 %description i18n-zu -l pl
 Ten pakiet dostarcza zasoby zawieraj±ce menu i okna dialogowe w jêzyku
 zuluskim.
-
-%files i18n-zu -f zu.lang
-%defattr(644,root,root,755)
 
 %package -n bash-completion-openoffice
 Summary:	bash-completion for OpenOffice.org
@@ -2696,10 +2642,6 @@ fontpostinst TTF
 %attr(755,root,root) %{_libdir}/%{name}/program/fps_gnome.uno.so
 #%dir %{_libdir}/%{name}/program/resource.gnome
 
-%files -n bash-completion-openoffice
-%defattr(644,root,root,755)
-/etc/bash_completion.d/*
-
 %files i18n-af -f af.lang
 %defattr(644,root,root,755)
 
@@ -2918,3 +2860,61 @@ fontpostinst TTF
 
 %files i18n-sw -f sw.lang
 %defattr(644,root,root,755)
+
+%files i18n-sw_TZ -f sw-TZ.lang
+%defattr(644,root,root,755)
+
+%files i18n-sx -f sx.lang
+%defattr(644,root,root,755)
+
+%files i18n-ta_IN -f ta-IN.lang
+%defattr(644,root,root,755)
+
+%files i18n-te_IN -f te-IN.lang
+%defattr(644,root,root,755)
+
+%files i18n-tg -f tg.lang
+%defattr(644,root,root,755)
+
+%files i18n-th -f th.lang
+%defattr(644,root,root,755)
+
+%files i18n-ti_ER -f ti-ER.lang
+%defattr(644,root,root,755)
+
+%files i18n-tn -f tn.lang
+%defattr(644,root,root,755)
+
+%files i18n-tr -f tr.lang
+%defattr(644,root,root,755)
+
+%files i18n-ts -f ts.lang
+%defattr(644,root,root,755)
+
+%files i18n-uk -f uk.lang
+%defattr(644,root,root,755)
+
+%files i18n-ur_IN -f ur-IN.lang
+%defattr(644,root,root,755)
+
+%files i18n-ve -f ve.lang
+%defattr(644,root,root,755)
+
+%files i18n-vi -f vi.lang
+%defattr(644,root,root,755)
+
+%files i18n-xh -f xh.lang
+%defattr(644,root,root,755)
+
+%files i18n-zh_CN -f zh-CN.lang
+%defattr(644,root,root,755)
+
+%files i18n-zh_TW -f zh-TW.lang
+%defattr(644,root,root,755)
+
+%files i18n-zu -f zu.lang
+%defattr(644,root,root,755)
+
+%files -n bash-completion-openoffice
+%defattr(644,root,root,755)
+/etc/bash_completion.d/*
