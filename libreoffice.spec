@@ -90,28 +90,28 @@ BuildRequires:	STLport-devel >= 4.5.3-6
 %if %{with firefox}
 BuildRequires:	mozilla-firefox-devel
 %endif
-BuildRequires:	XFree86-devel
+BuildRequires:	/usr/bin/getopt
 BuildRequires:	XFree86-Xvfb
+BuildRequires:	XFree86-devel
 BuildRequires:	autoconf
 BuildRequires:	automake
 BuildRequires:	bison >= 1.875-4
 BuildRequires:	boost-devel
-BuildRequires:	boost-spirit-devel
 BuildRequires:	boost-mem_fn-devel
+BuildRequires:	boost-spirit-devel
 BuildRequires:	cairo-devel >= 0.5.2
 BuildRequires:	cups-devel
 BuildRequires:	curl-devel >= 7.9.8
 BuildRequires:	db-cxx-devel
 BuildRequires:	db-devel
-BuildRequires:	/usr/bin/getopt
 %if %{with vfs}
 BuildRequires:	gnome-vfs2-devel
 %endif
 %if %{with java}
-BuildRequires:	jdk >= 1.4.0_00
+BuildRequires:	ant
 BuildRequires:	db-java >= 4.2.52-4
 BuildRequires:	jar
-BuildRequires:	ant
+BuildRequires:	jdk >= 1.4.0_00
 %else
 BuildRequires:	libxslt-progs
 %endif
@@ -121,22 +121,22 @@ BuildRequires:	freetype-devel >= 2.1
 BuildRequires:	gtk+2-devel
 BuildRequires:	kdelibs-devel
 BuildRequires:	libart_lgpl-devel
+BuildRequires:	libjpeg-devel
 BuildRequires:	libstdc++-devel >= 5:3.2.1
 BuildRequires:	libxml2-devel >= 2.0
-BuildRequires:	libjpeg-devel
-BuildRequires:	nss-devel >= 1:3.10
 BuildRequires:	nspr-devel >= 1:4.6-0.20041030.3
+BuildRequires:	nss-devel >= 1:3.10
 %if %{with mono}
-BuildRequires:	mono-devel >= 1.1.8
 BuildRequires:	mono-csharp >= 1.1.8
+BuildRequires:	mono-devel >= 1.1.8
 %endif
 BuildRequires:	nas-devel >= 1.7-1
 BuildRequires:	neon-devel
 BuildRequires:	openclipart-png >= 0:0.16
 BuildRequires:	openldap-devel
 BuildRequires:	pam-devel
-BuildRequires:	perl-base
 BuildRequires:	perl-Archive-Zip
+BuildRequires:	perl-base
 BuildRequires:	pkgconfig
 BuildRequires:	python >= 2.2
 BuildRequires:	python-devel >= 2.2
@@ -210,8 +210,8 @@ Summary:	OpenOffice.org KDE Interface
 Summary(pl):	Interfejs KDE dla OpenOffice.org
 Group:		X11/Libraries
 Requires:	%{name}-libs = %{epoch}:%{version}-%{release}
-Obsoletes:	openoffice-i18n-en-kde
 Obsoletes:	openoffice-i18n-en
+Obsoletes:	openoffice-i18n-en-kde
 Obsoletes:	openoffice-libs-kde
 
 %description libs-kde
@@ -225,8 +225,8 @@ Summary:	OpenOffice.org GTK+ Interface
 Summary(pl):	Interfejs GTK+ dla OpenOffice.org
 Group:		X11/Libraries
 Requires:	%{name}-libs = %{epoch}:%{version}-%{release}
-Obsoletes:	openoffice-i18n-en-gtk
 Obsoletes:	openoffice-i18n-en
+Obsoletes:	openoffice-i18n-en-gtk
 Obsoletes:	openoffice-libs-gtk
 
 %description libs-gtk
