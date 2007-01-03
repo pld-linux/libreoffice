@@ -16,7 +16,7 @@
 #	- add %{_libdir}/%{name}/share/autocorr/acor_(ll)-(LL).dat files to package (marked with %lang)
 #       - can't be just i18n-{be,gu,hi,kn,pa,ta} instead of *-{be_BY,*_IN}?
 #	- add option to build with {not} all lanquages
-#	- REMOVE USE of Xvfb from build-galleries script (ooo-build-2.0.1.2/bin/build-galleries line 84) 
+#	- REMOVE USE of Xvfb from build-galleries script (ooo-build-2.0.1.2/bin/build-galleries line 84)
 #	- ooqstart (disappeared from 2.0.3?)
 #	- check:
 #		Installed (but unpackaged) file(s) found:
@@ -31,11 +31,9 @@
 %bcond_with	vfs		# Enable GNOME VFS and Evolution 2 support
 %bcond_with	mono		# enable compilation of mono bindings
 %bcond_without	java		# without Java support (disables help support)
-%bcond_without	mozilla		# without mozilla-firefox
+%bcond_without	firefox		# without mozilla-firefox
 
-%define		ver		2.0
-%define		rel		3
-%define		fullver		%{ver}.%{rel}
+%define		fullver		2.0.3
 %define		subver		680
 %define		snap		m180
 %define		ooobver		src680-%{snap}
@@ -43,12 +41,13 @@
 %define		ssnap		src680-%{snap}
 
 %define		specflags	-fno-strict-aliasing
+%define		_rel	0.0.4
 
 Summary:	OpenOffice.org - powerful office suite
 Summary(pl):	OpenOffice.org - potê¿ny pakiet biurowy
 Name:		openoffice.org
 Version:	%{fullver}
-Release:	0.0.3.%{snap}%{?with_vfs:vfs}
+Release:	%{_rel}%{snap}%{?with_vfs:vfs}
 Epoch:		1
 License:	GPL/LGPL
 Group:		X11/Applications
@@ -81,13 +80,14 @@ Source50:	openabout_pld.png
 Source51:	openintro_pld.bmp
 Patch0:		%{name}-PLD.patch
 Patch1:		%{name}-vendorname.patch
+Patch2:		%{name}-stl-amd64.patch
 Patch101:	%{name}-build-pld-splash.diff
 Patch102:	%{name}-sfx2.badscript.diff
 Patch103:	%{name}-i66982.diff
 URL:		http://www.openoffice.org/
 BuildRequires:	ImageMagick
 BuildRequires:	STLport-devel >= 4.5.3-6
-%if %{with mozilla}
+%if %{with firefox}
 BuildRequires:	mozilla-firefox-devel
 %endif
 BuildRequires:	XFree86-devel
@@ -1769,6 +1769,11 @@ ln -sf %{SOURCE1} %{SOURCE2} %{SOURCE3} %{SOURCE4} \
 # teach configure.in about PLD
 %patch1 -p1
 
+# fix stlport detection
+%ifarch %{x8664}
+%patch2 -p1
+%endif
+
 # fix patches/src680/pld-splash.diff
 install %{PATCH101} patches/src680/pld-splash.diff
 
@@ -1848,8 +1853,8 @@ CONFOPTS=" \
 	--with-system-sablot \
 	--with-system-boost \
 	--without-system-neon \
-%if %{with mozilla}
-	--with-system-mozilla \
+%if %{with firefox}
+	--with-system-mozilla --with-firefox \
 %else
 	--disable-mozilla \
 %endif
@@ -1911,6 +1916,7 @@ CONFIGURE_OPTIONS="$CONFOPTS"; export CONFIGURE_OPTIONS
 :> distro-configs/Common.conf
 :> distro-configs/Common.conf.in
 echo "$CONFOPTS" > distro-configs/PLD.conf.in
+echo "$CONFOPTS" > distro-configs/PLD64.conf.in
 
 # for cvs snaps
 [ -x ./autogen.sh ] && ./autogen.sh $CONFOPTS
@@ -2222,7 +2228,7 @@ fontpostinst TTF
 #%attr(755,root,root) %{_libdir}/%{name}/program/sweb
 %attr(755,root,root) %{_libdir}/%{name}/program/swriter
 %attr(755,root,root) %{_libdir}/%{name}/program/open-url
-%if %{with mozilla}
+%if %{with firefox}
 %attr(755,root,root) %{_libdir}/%{name}/program/nsplugin
 %endif
 %attr(755,root,root) %{_libdir}/%{name}/program/gengal
