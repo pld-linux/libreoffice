@@ -2617,7 +2617,22 @@ fontpostinst TTF
 %attr(755,root,root) %{_libdir}/%{name}/program/uuresolver.uno.so
 %attr(755,root,root) %{_libdir}/%{name}/program/vbaevents680*.uno.so
 %attr(755,root,root) %{_libdir}/%{name}/program/vclcanvas.uno.so
+
+# versioned libraries and their symlinks
 %attr(755,root,root) %{_libdir}/%{name}/program/*.so.*
+%attr(755,root,root) %{_libdir}/%{name}/program/libcppu.so
+%attr(755,root,root) %{_libdir}/%{name}/program/libcppuhelper3gcc3.so
+%attr(755,root,root) %{_libdir}/%{name}/program/libcppuhelpergcc3.so
+%attr(755,root,root) %{_libdir}/%{name}/program/libreg.so
+%attr(755,root,root) %{_libdir}/%{name}/program/librmcxt.so
+%attr(755,root,root) %{_libdir}/%{name}/program/libsal.so
+%attr(755,root,root) %{_libdir}/%{name}/program/libsalhelper3gcc3.so
+%attr(755,root,root) %{_libdir}/%{name}/program/libsalhelpergcc3.so
+%attr(755,root,root) %{_libdir}/%{name}/program/libstore.so
+%attr(755,root,root) %{_libdir}/%{name}/program/libuno_cppu.so
+%attr(755,root,root) %{_libdir}/%{name}/program/libuno_cppuhelpergcc3.so
+%attr(755,root,root) %{_libdir}/%{name}/program/libuno_sal.so
+%attr(755,root,root) %{_libdir}/%{name}/program/libuno_salhelpergcc3.so
 
 %{_fontsdir}/TTF/*.ttf
 
