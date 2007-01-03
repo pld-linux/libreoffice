@@ -1877,16 +1877,16 @@ QTLIB="%{_libdir}"
 export CC CXX ENVCFLAGS ENVCFLAGSCXX DESTDIR IGNORE_MANIFEST_CHANGES DISTRO QTINC QTLIB
 
 %if %{with java}
-JAVA_HOME=%{java_home}
-DB_JAR="%{_javadir}/db.jar"
-ANT_HOME=%{_prefix}
-export JAVA_HOME DB_JAR ANT_HOME
+export JAVA_HOME=%{java_home}
+export DB_JAR="%{_javadir}/db.jar"
+export ANT_HOME=%{_prefix}
 %endif
 
-DEFAULT_TO_ENGLISH_FOR_PACKING=1; export DEFAULT_TO_ENGLISH_FOR_PACKING
+export DEFAULT_TO_ENGLISH_FOR_PACKING=1
 
-RPM_BUILD_NR_THREADS="%(echo "%{__make}" | sed -e 's#.*-j\([[:space:]]*[0-9]\+\)#\1#g' | xargs)"
+RPM_BUILD_NR_THREADS="%(echo "%{__make}" | sed -e 's#.*-j\([[:space:]]*[0-9]\+\)#\1#g')"
 [ "$RPM_BUILD_NR_THREADS" = "%{__make}" ] && RPM_BUILD_NR_THREADS=1
+RPM_BUILD_NR_THREADS=$(echo $RPM_BUILD_NR_THREADS)
 
 CONFOPTS=" \
 %ifarch %{ix86} \
@@ -1978,7 +1978,7 @@ CONFOPTS=" \
 "
 
 # build-ooo script will pickup these
-CONFIGURE_OPTIONS="$CONFOPTS"; export CONFIGURE_OPTIONS
+export CONFIGURE_OPTIONS="$CONFOPTS"
 
 :> distro-configs/Common.conf
 :> distro-configs/Common.conf.in
@@ -1997,7 +1997,7 @@ echo "$CONFOPTS" > distro-configs/PLD64.conf.in
 %{__make} -j1
 
 # hack for parallel build
-if [ "$RPM_BUILD_NCPUS" -gt 1 ]; then
+if [ $RPM_BUILD_NR_THREADS -gt 1 ]; then
 	doit=1
 	while [ "$doit" -eq 1 ]; do
 		echo "Waiting one more time..."
@@ -2052,8 +2052,8 @@ install fonts/opens___.ttf $RPM_BUILD_ROOT%{_fontsdir}/TTF
 # We don't need spadmin (gtk) or the setup application
 rm -f $RPM_BUILD_ROOT%{_libdir}/%{name}/setup
 rm -f $RPM_BUILD_ROOT%{_libdir}/%{name}/program/crash_report.bin
-rm -f $RPM_BUILD_ROOT%{_datadir}/applications/openoffice-setup.desktop
-rm -f $RPM_BUILD_ROOT%{_datadir}/applications/openoffice-printeradmin.desktop
+rm -f $RPM_BUILD_ROOT%{_desktopdir}/openoffice-setup.desktop
+rm -f $RPM_BUILD_ROOT%{_desktopdir}/openoffice-printeradmin.desktop
 
 #rm -f $RPM_BUILD_ROOT%{_libdir}/%{name}/program/gnomeint
 
@@ -2092,7 +2092,7 @@ for lang in $langlist; do
 		lprefix="`bin/openoffice-xlate-lang -p ${lang} 2>/dev/null || echo ""`"
 		longlang="`bin/openoffice-xlate-lang -l ${lang} 2>/dev/null || echo ""`"
 		# share/*/${longlang}
-		if [ "x${longlang}" != "x" ] ; then 
+		if [ "x${longlang}" != "x" ] ; then
 			grep "^%%dir.*/${longlang}/\$" ${lfile} > tmp.lang || :
 		fi
 		# share/registry/res/${lang} (but en-US for en)
