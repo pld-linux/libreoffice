@@ -2380,8 +2380,18 @@ fontpostinst TTF
 %{_libdir}/%{name}/share/Scripts/beanshell
 %{_libdir}/%{name}/share/Scripts/javascript
 %{_libdir}/%{name}/share/Scripts/java
-%{_libdir}/%{name}/share/xslt
 %{_libdir}/%{name}/share/config/javavendors.xml
+
+%dir %{_libdir}/%{name}/share/xslt
+%{_libdir}/%{name}/share/xslt/common
+%{_libdir}/%{name}/share/xslt/docbook
+%dir %{_libdir}/%{name}/share/xslt/export
+%{_libdir}/%{name}/share/xslt/export/common
+%{_libdir}/%{name}/share/xslt/export/spreadsheetml
+%{_libdir}/%{name}/share/xslt/export/wordml
+%{_libdir}/%{name}/share/xslt/export/xhtml
+%{_libdir}/%{name}/share/xslt/import
+
 %endif
 
 %dir %{_libdir}/%{name}/share/Scripts
