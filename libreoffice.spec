@@ -45,6 +45,7 @@
 %bcond_with	mono		# enable compilation of mono bindings
 %bcond_without	mozilla		# without mozilla
 %bcond_with	seamonkey	# use seamonkey instead of firefox
+%bcond_without	i18n	# do not create i18n packages (for debugging only)
 
 %bcond_without	system_db		# with internal berkeley db
 %bcond_without	system_mdbtools
@@ -53,7 +54,7 @@
 %bcond_without	system_libhnj		# with internal ALTLinuxhyph
 
 %define		ver		2.1.0
-%define		_rel		0.6
+%define		_rel		0.8
 %define		subver		680
 %define		snap		OOE680
 %define		snap2		SRC680
@@ -2232,6 +2233,7 @@ fontpostinst TTF
 %{_libdir}/%{name}/share/registry/data
 %{_libdir}/%{name}/share/registry/schema
 %{_libdir}/%{name}/share/registry/ldap
+
 # split ?
 %{_libdir}/%{name}/share/registry/modules
 
@@ -2255,7 +2257,17 @@ fontpostinst TTF
 %{_libdir}/%{name}/presets/psprint
 
 # Programs
-%attr(755,root,root) %{_bindir}/oo*
+%attr(755,root,root) %{_bindir}/oobase
+%attr(755,root,root) %{_bindir}/oocalc
+%attr(755,root,root) %{_bindir}/ooconfig
+%attr(755,root,root) %{_bindir}/oodraw
+%attr(755,root,root) %{_bindir}/ooffice
+%attr(755,root,root) %{_bindir}/oofromtemplate
+%attr(755,root,root) %{_bindir}/ooimpress
+%attr(755,root,root) %{_bindir}/oomath
+%attr(755,root,root) %{_bindir}/ootool
+%attr(755,root,root) %{_bindir}/ooweb
+%attr(755,root,root) %{_bindir}/oowriter
 %attr(755,root,root) %{_libdir}/%{name}/program/configimport.bin
 %attr(755,root,root) %{_libdir}/%{name}/program/gengal.bin
 %{_libdir}/%{name}/program/pkgchk
@@ -2293,7 +2305,13 @@ fontpostinst TTF
 %attr(755,root,root) %{_libdir}/%{name}/program/unopkg
 %attr(755,root,root) %{_libdir}/%{name}/program/uri-encode
 %attr(755,root,root) %{_libdir}/%{name}/program/viewdoc
-%attr(755,root,root) %{_libdir}/%{name}/program/*.py
+
+%{_libdir}/%{name}/program/mailmerge.py
+%{_libdir}/%{name}/program/officehelper.py
+%{_libdir}/%{name}/program/pythonloader.py
+%{_libdir}/%{name}/program/pythonscript.py
+%{_libdir}/%{name}/program/uno.py
+%{_libdir}/%{name}/program/unohelper.py
 %{_libdir}/%{name}/program/versionrc
 
 %if %{with java}
@@ -2317,9 +2335,36 @@ fontpostinst TTF
 %{_libdir}/%{name}/share/Scripts/python
 
 %{_datadir}/mime/packages/openoffice.xml
-%{_desktopdir}/*.desktop
-%{_pixmapsdir}/*.png
-%{_mandir}/man1/o*.1*
+
+%{_desktopdir}/base.desktop
+%{_desktopdir}/calc.desktop
+%{_desktopdir}/draw.desktop
+%{_desktopdir}/impress.desktop
+%{_desktopdir}/math.desktop
+%{_desktopdir}/template.desktop
+%{_desktopdir}/web.desktop
+%{_desktopdir}/writer.desktop
+
+%{_pixmapsdir}/ooo-base.png
+%{_pixmapsdir}/ooo-calc.png
+%{_pixmapsdir}/ooo-draw.png
+%{_pixmapsdir}/ooo-gulls.png
+%{_pixmapsdir}/ooo-impress.png
+%{_pixmapsdir}/ooo-math.png
+%{_pixmapsdir}/ooo-template.png
+%{_pixmapsdir}/ooo-web.png
+%{_pixmapsdir}/ooo-writer.png
+
+%{_mandir}/man1/oobase.1
+%{_mandir}/man1/oocalc.1
+%{_mandir}/man1/oodraw.1
+%{_mandir}/man1/ooffice.1
+%{_mandir}/man1/oofromtemplate.1
+%{_mandir}/man1/ooimpress.1
+%{_mandir}/man1/oomath.1
+%{_mandir}/man1/ooweb.1
+%{_mandir}/man1/oowriter.1
+%{_mandir}/man1/openoffice.1*
 
 # en-US
 %{_libdir}/%{name}/presets/config/*_en-US.so*
@@ -2644,6 +2689,7 @@ fontpostinst TTF
 %attr(755,root,root) %{_libdir}/%{name}/program/libvclplug_gtk*.so
 %attr(755,root,root) %{_libdir}/%{name}/program/ucpgvfs1.uno.so
 
+%if %{with i18n}
 %files i18n-af -f af.lang
 %defattr(644,root,root,755)
 
@@ -2916,6 +2962,7 @@ fontpostinst TTF
 
 %files i18n-zu -f zu.lang
 %defattr(644,root,root,755)
+%endif
 
 %files -n bash-completion-openoffice
 %defattr(644,root,root,755)
