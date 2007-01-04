@@ -114,6 +114,7 @@ Patch102:	%{name}-build-pld-splash.diff
 Patch104:	%{name}-portaudio_v19.diff
 Patch105:	%{name}-firefox.diff
 Patch106:	%{name}-seamonkey.diff
+Patch107:	%{name}-stl-amd64.patch
 URL:		http://www.openoffice.org/
 BuildRequires:	ImageMagick
 BuildRequires:	STLport-devel >= 2:5.0.0
@@ -1811,9 +1812,20 @@ ln -sf %{SOURCE1} %{SOURCE2} %{SOURCE3} %{SOURCE4} \
 install %{PATCH100} patches/64bit
 install %{PATCH101} patches/64bit/64bit-inline.diff
 
+%ifarch %{x8664}
+echo "[ PLD64bitfixes ]" >> patches/src680/apply
+# patches applied by ooo (extension .diff is required)
+for P in %{PATCH107}; do
+	PATCHNAME=PLD-${P##*/%{name}-}
+	PATCHNAME=${PATCHNAME%.patch}.diff
+	install $P patches/src680/$PATCHNAME
+	echo $PATCHNAME >> patches/src680/apply
+done
+%endif
+
 echo "[ PLDOnly ]" >> patches/src680/apply
 # patches applied by ooo (extension .diff is required)
-for P in %{PATCH102} %{PATCH104} %{PATCH105} %{PATCH106} ; do
+for P in %{PATCH102} %{PATCH104} %{PATCH105} %{PATCH106}; do
 	PATCHNAME=`basename $P | sed "s/%{name}-//; s/.patch$/.diff/"`
 	install $P patches/src680/$PATCHNAME
 	echo $PATCHNAME >> patches/src680/apply
@@ -1981,6 +1993,7 @@ export CONFIGURE_OPTIONS="$CONFOPTS"
 :> distro-configs/Common.conf
 :> distro-configs/Common.conf.in
 echo "$CONFOPTS" > distro-configs/PLD.conf.in
+echo "$CONFOPTS" > distro-configs/PLD64.conf.in
 
 # for cvs snaps
 [ -x ./autogen.sh ] && ./autogen.sh $CONFOPTS
