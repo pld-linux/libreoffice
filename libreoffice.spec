@@ -11,6 +11,9 @@
 #       - bcond with_mono is broken (cli_types.dll not found, and can't be made)
 #	- build on 64-bit architectures
 #       - adapt help-support.diff to PLD
+#	- make --without xvfb working, required
+#	  REMOVE USE of Xvfb from build-galleries script (ooo-build-2.0.1.2/bin/build-galleries line 84)
+#	  then remove that bcond
 # MAYBE TODO:
 #	- drop requirement on nas-devel
 #	- --with-system-myspell + myspell package as in Debian
@@ -21,7 +24,6 @@
 #	- fix locale names and other locale related things
 #       - can't be just i18n-{be,gu,hi,kn,pa,ta} instead of *-{be_BY,*_IN}?
 #	- add option to build with {not} all lanquages
-#	- REMOVE USE of Xvfb from build-galleries script (ooo-build-2.0.1.2/bin/build-galleries line 84)
 #   - more system libs todo:
 #	$ grep SYSTEM ooo-build-ooe680-m6/build/ooe680-m6/config_office/config.log |grep NO
 #	SYSTEM_AGG='NO'
@@ -52,6 +54,8 @@
 %bcond_with	system_xt
 %bcond_without	system_beanshell
 %bcond_without	system_libhnj		# with internal ALTLinuxhyph
+
+%bcond_without	xvfb		# using Xvfb in build-galleries script (without xvfb broken)
 
 %define		ver		2.1.0
 %define		_rel		0.10
@@ -189,7 +193,12 @@ BuildRequires:	unzip
 BuildRequires:	xmlsec1-nss-devel
 BuildRequires:	xorg-lib-libX11-devel
 BuildRequires:	xorg-lib-libXaw-devel
+%if %{with xvfb}
+#BuildRequires:	xorg-app-mkfontdir	(missing PreReq in fonts?)
+BuildRequires:	xorg-font-font-cursor-misc
+BuildRequires:	xorg-font-font-misc-misc-base
 BuildRequires:	xorg-xserver-Xvfb
+%endif
 %{?with_system_xt:BuildRequires:	xt}
 BuildRequires:	zip
 BuildRequires:	zlib-devel
