@@ -8,7 +8,6 @@
 #	- problems with gcc-4.2.0 (I guess): oowriter is useless (invisble text till refresh)
 #	- fix help files (broken links)
 #	- LFS support is disabled (no_lfs_hack.patch for xml2cmp crash) because it need LFS-ready STLport
-#	- bcond with_xt is broken (xt in PLD is too old or broken)
 #       - bcond with_mono is broken (cli_types.dll not found, and can't be made)
 #	- build on 64-bit architectures
 #       - adapt help-support.diff to PLD
@@ -29,14 +28,14 @@
 #	SYSTEM_HSQLDB='NO'
 #	SYSTEM_HUNSPELL='NO'
 #	SYSTEM_HYPH='NO'
-#	SYSTEM_LIBXSLT='NO'
+#	SYSTEM_LIBXSLT='NO'		fixed?
 #	SYSTEM_MYSPELL='NO'
 #	SYSTEM_MYTHES='NO'
-#	SYSTEM_STDLIBS='NO'
+#	SYSTEM_STDLIBS='NO'		fixed
 #	SYSTEM_XALAN='NO'
 #	SYSTEM_XERCES='NO'
 #	SYSTEM_XML_APIS='NO'
-#	SYSTEM_XT='NO'
+#	SYSTEM_XT='NO'			bcond system_xt (doesn't work - xt in PLD is too old or broken)
 #
 
 # Conditional build:
@@ -1949,6 +1948,7 @@ CONFOPTS=" \
 	--with-jdk-home=$JAVA_HOME \
 %else
 	--without-java \
+	--with-system-libxslt \
 %endif
 %if %{with gnomevfs}
 	--enable-gnome-vfs \
