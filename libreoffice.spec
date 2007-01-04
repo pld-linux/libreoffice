@@ -2146,8 +2146,7 @@ for lang in $langlist; do
 	fi
 done
 
-find $RPM_BUILD_ROOT -type f -name '*.so' -exec chmod 755 "{}" ";"
-chmod 755 $RPM_BUILD_ROOT%{_libdir}/%{name}/program/*
+chmod +x $RPM_BUILD_ROOT%{_libdir}/%{name}/program/*.so
 
 rm -rf $RPM_BUILD_ROOT%{_libdir}/%{name}/share/xdg
 rm -rf $RPM_BUILD_ROOT/opt/gnome
