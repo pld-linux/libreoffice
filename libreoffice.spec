@@ -116,7 +116,6 @@ Patch105:	%{name}-firefox.diff
 Patch106:	%{name}-seamonkey.diff
 Patch107:	%{name}-stl-amd64.patch
 URL:		http://www.openoffice.org/
-BuildRequires:	ImageMagick
 BuildRequires:	STLport-devel >= 2:5.0.0
 BuildRequires:	autoconf >= 2.51
 BuildRequires:	automake >= 1:1.9
