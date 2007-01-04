@@ -53,7 +53,7 @@
 %bcond_without	system_libhnj		# with internal ALTLinuxhyph
 
 %define		ver		2.1.0
-%define		_rel		0.4
+%define		_rel		0.6
 %define		subver		680
 %define		snap		OOE680
 %define		snap2		SRC680
@@ -2275,6 +2275,7 @@ fontpostinst TTF
 #%attr(755,root,root) %{_libdir}/%{name}/spadmin
 %attr(755,root,root) %{_libdir}/%{name}/program/configimport.bin
 %attr(755,root,root) %{_libdir}/%{name}/program/gengal.bin
+%{_libdir}/%{name}/program/pkgchk
 %attr(755,root,root) %{_libdir}/%{name}/program/pkgchk.bin
 %attr(755,root,root) %{_libdir}/%{name}/program/pluginapp.bin
 %attr(755,root,root) %{_libdir}/%{name}/program/setofficelang.bin
@@ -2282,6 +2283,7 @@ fontpostinst TTF
 %attr(755,root,root) %{_libdir}/%{name}/program/spadmin.bin
 %attr(755,root,root) %{_libdir}/%{name}/program/testtool.bin
 %{_libdir}/%{name}/program/testtoolrc
+%attr(755,root,root) %{_libdir}/%{name}/program/uno
 %attr(755,root,root) %{_libdir}/%{name}/program/uno.bin
 %attr(755,root,root) %{_libdir}/%{name}/program/unopkg.bin
 #%attr(755,root,root) %{_libdir}/%{name}/program/fromtemplate
@@ -2623,6 +2625,21 @@ fontpostinst TTF
 %attr(755,root,root) %{_libdir}/%{name}/program/uuresolver.uno.so
 %attr(755,root,root) %{_libdir}/%{name}/program/vbaevents680*.uno.so
 %attr(755,root,root) %{_libdir}/%{name}/program/vclcanvas.uno.so
+
+%if %{with java}
+%attr(755,root,root) %{_libdir}/%{name}/program/javaloader.uno.so
+%attr(755,root,root) %{_libdir}/%{name}/program/javavm.uno.so
+%attr(755,root,root) %{_libdir}/%{name}/program/libhsqldb2.so
+%attr(755,root,root) %{_libdir}/%{name}/program/libjava_uno.so
+%attr(755,root,root) %{_libdir}/%{name}/program/libjdbc2.so
+%attr(755,root,root) %{_libdir}/%{name}/program/libjpipe.so
+%attr(755,root,root) %{_libdir}/%{name}/program/libjuh.so
+%attr(755,root,root) %{_libdir}/%{name}/program/libjuhx.so
+%attr(755,root,root) %{_libdir}/%{name}/program/libofficebean.so
+%attr(755,root,root) %{_libdir}/%{name}/program/sunjavaplugin.so
+%{_libdir}/%{name}/program/libjvmaccessgcc3.so
+%{_libdir}/%{name}/program/libjvmfwk.so
+%endif
 
 # versioned libraries and their symlinks
 %attr(755,root,root) %{_libdir}/%{name}/program/*.so.*
