@@ -1826,7 +1826,8 @@ done
 echo "[ PLDOnly ]" >> patches/src680/apply
 # patches applied by ooo (extension .diff is required)
 for P in %{PATCH102} %{PATCH104} %{PATCH105} %{PATCH106}; do
-	PATCHNAME=`basename $P | sed "s/%{name}-//; s/.patch$/.diff/"`
+	PATCHNAME=PLD-${P##*/%{name}-}
+	PATCHNAME=${PATCHNAME%.patch}.diff
 	install $P patches/src680/$PATCHNAME
 	echo $PATCHNAME >> patches/src680/apply
 done
