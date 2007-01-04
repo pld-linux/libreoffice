@@ -54,7 +54,7 @@
 %bcond_without	system_libhnj		# with internal ALTLinuxhyph
 
 %define		ver		2.1.0
-%define		_rel		0.8
+%define		_rel		0.9
 %define		subver		680
 %define		snap		OOE680
 %define		snap2		SRC680
@@ -2319,11 +2319,64 @@ fontpostinst TTF
 %attr(755,root,root) %{_libdir}/%{name}/program/java-set-classpath
 %{_libdir}/%{name}/program/jvmfwk3rc
 %{_libdir}/%{name}/program/JREProperties.class
+
 %dir %{_libdir}/%{name}/help
-%{_libdir}/%{name}/help/en
-%{_libdir}/%{name}/help/main_transform.xsl
+%dir %{_libdir}/%{name}/help/en
+%{_libdir}/%{name}/help/en/*.html
+%{_libdir}/%{name}/help/en/*.css
+%{_libdir}/%{name}/help/en/sbasic.*
+%{_libdir}/%{name}/help/en/scalc.*
+%{_libdir}/%{name}/help/en/schart.*
+%{_libdir}/%{name}/help/en/sdatabase.*
+%{_libdir}/%{name}/help/en/sdraw.*
+%{_libdir}/%{name}/help/en/shared.*
+%{_libdir}/%{name}/help/en/simpress.*
+%{_libdir}/%{name}/help/en/smath.*
+%{_libdir}/%{name}/help/en/swriter.*
+%{_libdir}/%{name}/help/*.xsl
+
 %{_libdir}/%{name}/program/hid.lst
-%{_libdir}/%{name}/program/classes
+%dir %{_libdir}/%{name}/program/classes
+%{_libdir}/%{name}/program/classes/ScriptFramework.jar
+%{_libdir}/%{name}/program/classes/ScriptProviderForBeanShell.jar
+%{_libdir}/%{name}/program/classes/ScriptProviderForJava.jar
+%{_libdir}/%{name}/program/classes/ScriptProviderForJavaScript.jar
+%{_libdir}/%{name}/program/classes/XMergeBridge.jar
+%{_libdir}/%{name}/program/classes/XSLTFilter.jar
+%{_libdir}/%{name}/program/classes/XSLTValidate.jar
+%{_libdir}/%{name}/program/classes/agenda.jar
+%{_libdir}/%{name}/program/classes/aportisdoc.jar
+%{_libdir}/%{name}/program/classes/classes.jar
+%{_libdir}/%{name}/program/classes/commonwizards.jar
+%{_libdir}/%{name}/program/classes/fax.jar
+%{_libdir}/%{name}/program/classes/form.jar
+%{_libdir}/%{name}/program/classes/hsqldb.jar
+%{_libdir}/%{name}/program/classes/java_uno.jar
+%{_libdir}/%{name}/program/classes/java_uno_accessbridge.jar
+%{_libdir}/%{name}/program/classes/js.jar
+%{_libdir}/%{name}/program/classes/juh.jar
+%{_libdir}/%{name}/program/classes/jurt.jar
+%{_libdir}/%{name}/program/classes/jut.jar
+%{_libdir}/%{name}/program/classes/letter.jar
+%{_libdir}/%{name}/program/classes/officebean.jar
+%{_libdir}/%{name}/program/classes/pexcel.jar
+%{_libdir}/%{name}/program/classes/pocketword.jar
+%{_libdir}/%{name}/program/classes/query.jar
+%{_libdir}/%{name}/program/classes/report.jar
+%{_libdir}/%{name}/program/classes/ridl.jar
+%{_libdir}/%{name}/program/classes/sandbox.jar
+%{_libdir}/%{name}/program/classes/sdbc_hsqldb.jar
+%{_libdir}/%{name}/program/classes/serializer.jar
+%{_libdir}/%{name}/program/classes/table.jar
+%{_libdir}/%{name}/program/classes/unoil.jar
+%{_libdir}/%{name}/program/classes/unoloader.jar
+%{_libdir}/%{name}/program/classes/web.jar
+%{_libdir}/%{name}/program/classes/writer2latex.jar
+%{_libdir}/%{name}/program/classes/xalan.jar
+%{_libdir}/%{name}/program/classes/xercesImpl.jar
+%{_libdir}/%{name}/program/classes/xmerge.jar
+%{_libdir}/%{name}/program/classes/xml-apis.jar
+
 %{_libdir}/%{name}/share/Scripts/beanshell
 %{_libdir}/%{name}/share/Scripts/javascript
 %{_libdir}/%{name}/share/Scripts/java
@@ -2375,7 +2428,74 @@ fontpostinst TTF
 %dir %{_libdir}/%{name}/share/template/wizard/letter/en-US
 %{_libdir}/%{name}/share/template/wizard/letter/en-US/*.ott
 %{_libdir}/%{name}/share/wordbook/en-US
-%{_libdir}/%{name}/program/resource/*en-US.res
+
+%{_libdir}/%{name}/program/resource/abp680en-US.res
+%{_libdir}/%{name}/program/resource/analysis680en-US.res
+%{_libdir}/%{name}/program/resource/avmedia680en-US.res
+%{_libdir}/%{name}/program/resource/basctl680en-US.res
+%{_libdir}/%{name}/program/resource/bf_frm680en-US.res
+%{_libdir}/%{name}/program/resource/bf_ofa680en-US.res
+%{_libdir}/%{name}/program/resource/bf_sc680en-US.res
+%{_libdir}/%{name}/program/resource/bf_sch680en-US.res
+%{_libdir}/%{name}/program/resource/bf_sd680en-US.res
+%{_libdir}/%{name}/program/resource/bf_sfx680en-US.res
+%{_libdir}/%{name}/program/resource/bf_sm680en-US.res
+%{_libdir}/%{name}/program/resource/bf_svx680en-US.res
+%{_libdir}/%{name}/program/resource/bf_sw680en-US.res
+%{_libdir}/%{name}/program/resource/bib680en-US.res
+%{_libdir}/%{name}/program/resource/cal680en-US.res
+%{_libdir}/%{name}/program/resource/cnr680en-US.res
+%{_libdir}/%{name}/program/resource/date680en-US.res
+%{_libdir}/%{name}/program/resource/dba680en-US.res
+%{_libdir}/%{name}/program/resource/dbp680en-US.res
+%{_libdir}/%{name}/program/resource/dbu680en-US.res
+%{_libdir}/%{name}/program/resource/dbw680en-US.res
+%{_libdir}/%{name}/program/resource/deployment680en-US.res
+%{_libdir}/%{name}/program/resource/deploymentgui680en-US.res
+%{_libdir}/%{name}/program/resource/dkt680en-US.res
+%{_libdir}/%{name}/program/resource/egi680en-US.res
+%{_libdir}/%{name}/program/resource/eme680en-US.res
+%{_libdir}/%{name}/program/resource/epb680en-US.res
+%{_libdir}/%{name}/program/resource/epg680en-US.res
+%{_libdir}/%{name}/program/resource/epp680en-US.res
+%{_libdir}/%{name}/program/resource/eps680en-US.res
+%{_libdir}/%{name}/program/resource/ept680en-US.res
+%{_libdir}/%{name}/program/resource/eur680en-US.res
+%{_libdir}/%{name}/program/resource/fps_office680en-US.res
+%{_libdir}/%{name}/program/resource/frm680en-US.res
+%{_libdir}/%{name}/program/resource/fwe680en-US.res
+%{_libdir}/%{name}/program/resource/gal680en-US.res
+%{_libdir}/%{name}/program/resource/imp680en-US.res
+%{_libdir}/%{name}/program/resource/ofa680en-US.res
+%{_libdir}/%{name}/program/resource/ooo680en-US.res
+%{_libdir}/%{name}/program/resource/pcr680en-US.res
+%{_libdir}/%{name}/program/resource/pdffilter680en-US.res
+%{_libdir}/%{name}/program/resource/preload680en-US.res
+%{_libdir}/%{name}/program/resource/productregistration680en-US.res
+%{_libdir}/%{name}/program/resource/san680en-US.res
+%{_libdir}/%{name}/program/resource/sc680en-US.res
+%{_libdir}/%{name}/program/resource/sch680en-US.res
+%{_libdir}/%{name}/program/resource/sd680en-US.res
+%{_libdir}/%{name}/program/resource/sdbt680en-US.res
+%{_libdir}/%{name}/program/resource/sfx680en-US.res
+%{_libdir}/%{name}/program/resource/sm680en-US.res
+%{_libdir}/%{name}/program/resource/spa680en-US.res
+%{_libdir}/%{name}/program/resource/stt680en-US.res
+%{_libdir}/%{name}/program/resource/svs680en-US.res
+%{_libdir}/%{name}/program/resource/svt680en-US.res
+%{_libdir}/%{name}/program/resource/svx680en-US.res
+%{_libdir}/%{name}/program/resource/sw680en-US.res
+%{_libdir}/%{name}/program/resource/textconversiondlgs680en-US.res
+%{_libdir}/%{name}/program/resource/tfu680en-US.res
+%{_libdir}/%{name}/program/resource/tk680en-US.res
+%{_libdir}/%{name}/program/resource/tpl680en-US.res
+%{_libdir}/%{name}/program/resource/updchk680en-US.res
+%{_libdir}/%{name}/program/resource/uui680en-US.res
+%{_libdir}/%{name}/program/resource/vcl680en-US.res
+%{_libdir}/%{name}/program/resource/wzi680en-US.res
+%{_libdir}/%{name}/program/resource/xmlsec680en-US.res
+%{_libdir}/%{name}/program/resource/xsltdlg680en-US.res
+
 %{_libdir}/%{name}/licenses/LICENSE_en-US
 %{_libdir}/%{name}/licenses/LICENSE_en-US.html
 %{_libdir}/%{name}/readmes/README_en-US
