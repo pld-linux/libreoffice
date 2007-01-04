@@ -2192,25 +2192,18 @@ fontpostinst TTF
 
 %{_libdir}/%{name}/program/*.rdb
 %{_libdir}/%{name}/program/*.bmp
-#%{_libdir}/%{name}/program/user_registry.xsl
 %{_libdir}/%{name}/program/sofficerc
 %{_libdir}/%{name}/program/unorc
 %{_libdir}/%{name}/program/bootstraprc
 %{_libdir}/%{name}/program/configmgrrc
-#%{_libdir}/%{name}/program/instdb.ins
 %dir %{_libdir}/%{name}/program/resource
 %dir %{_libdir}/%{name}/licenses
 %dir %{_libdir}/%{name}/readmes
-
-#%dir %{_libdir}/%{name}/help
-#%{_libdir}/%{name}/help/en
-#%{_libdir}/%{name}/help/main_transform.xsl
 
 %dir %{_libdir}/%{name}/share
 %dir %{_libdir}/%{name}/share/autocorr
 %dir %{_libdir}/%{name}/share/autotext
 %{_libdir}/%{name}/share/basic
-#%dir %{_libdir}/%{name}/share/bookmark
 %dir %{_libdir}/%{name}/share/config
 %{_libdir}/%{name}/share/config/symbol
 %{_libdir}/%{name}/share/config/webcast
@@ -2221,7 +2214,6 @@ fontpostinst TTF
 %{_libdir}/%{name}/share/config/images_hicontrast.zip
 %{_libdir}/%{name}/share/config/soffice.cfg
 %{_libdir}/%{name}/share/config/wizard
-#%dir %{_libdir}/%{name}/share/database
 %dir %{_libdir}/%{name}/share/dict
 %dir %{_libdir}/%{name}/share/dict/ooo
 %{_libdir}/%{name}/share/dtd
@@ -2233,8 +2225,6 @@ fontpostinst TTF
 %dir %{_libdir}/%{name}/share/template/wizard
 %dir %{_libdir}/%{name}/share/template/wizard/letter
 %dir %{_libdir}/%{name}/share/wordbook
-#%dir %{_libdir}/%{name}/share/wordbook/english
-#%{_libdir}/%{name}/share/wordbook/english/sun.dic
 %{_libdir}/%{name}/share/readme
 
 %dir %{_libdir}/%{name}/share/registry
@@ -2245,9 +2235,6 @@ fontpostinst TTF
 # split ?
 %{_libdir}/%{name}/share/registry/modules
 
-#%{_libdir}/%{name}/share/autotext/english
-# XXX: in ooo-build only template/english/wizard/bitmaps is in main?
-#%{_libdir}/%{name}/share/template/english
 %ghost %{_libdir}/%{name}/share/dict/ooo/dictionary.lst
 
 %dir %{_libdir}/%{name}/presets
@@ -2267,12 +2254,8 @@ fontpostinst TTF
 %{_libdir}/%{name}/presets/gallery
 %{_libdir}/%{name}/presets/psprint
 
-#%{_libdir}/%{name}/presets/autotext/english
-
 # Programs
 %attr(755,root,root) %{_bindir}/oo*
-#%attr(755,root,root) %{_sbindir}/oopadmin
-#%attr(755,root,root) %{_libdir}/%{name}/spadmin
 %attr(755,root,root) %{_libdir}/%{name}/program/configimport.bin
 %attr(755,root,root) %{_libdir}/%{name}/program/gengal.bin
 %{_libdir}/%{name}/program/pkgchk
@@ -2286,32 +2269,17 @@ fontpostinst TTF
 %attr(755,root,root) %{_libdir}/%{name}/program/uno
 %attr(755,root,root) %{_libdir}/%{name}/program/uno.bin
 %attr(755,root,root) %{_libdir}/%{name}/program/unopkg.bin
-#%attr(755,root,root) %{_libdir}/%{name}/program/fromtemplate
-#%attr(755,root,root) %{_libdir}/%{name}/program/mozwrapper
-#%attr(755,root,root) %{_libdir}/%{name}/program/nswrapper
-#%attr(755,root,root) %{_libdir}/%{name}/program/ooovirg
 %attr(755,root,root) %{_libdir}/%{name}/program/ooqstart
 %attr(755,root,root) %{_libdir}/%{name}/program/pagein*
-#%attr(755,root,root) %{_libdir}/%{name}/program/python.sh
 %{_libdir}/%{name}/program/pythonloader.unorc
-#%attr(755,root,root) %{_libdir}/%{name}/program/pyunorc
 %attr(755,root,root) %{_libdir}/%{name}/program/regcomp
-#%attr(755,root,root) %{_libdir}/%{name}/program/sagenda
 %attr(755,root,root) %{_libdir}/%{name}/program/scalc
 %attr(755,root,root) %{_libdir}/%{name}/program/sdraw
-#%attr(755,root,root) %{_libdir}/%{name}/program/setup
 %{_libdir}/%{name}/program/setuprc
-#%attr(755,root,root) %{_libdir}/%{name}/program/sfax
 %attr(755,root,root) %{_libdir}/%{name}/program/simpress
-#%attr(755,root,root) %{_libdir}/%{name}/program/slabel
-#%attr(755,root,root) %{_libdir}/%{name}/program/sletter
-#%attr(755,root,root) %{_libdir}/%{name}/program/smaster
 %attr(755,root,root) %{_libdir}/%{name}/program/smath
-#%attr(755,root,root) %{_libdir}/%{name}/program/smemo
 %attr(755,root,root) %{_libdir}/%{name}/program/soffice
 %attr(755,root,root) %{_libdir}/%{name}/program/spadmin
-#%attr(755,root,root) %{_libdir}/%{name}/program/svcard
-#%attr(755,root,root) %{_libdir}/%{name}/program/sweb
 %attr(755,root,root) %{_libdir}/%{name}/program/swriter
 %attr(755,root,root) %{_libdir}/%{name}/program/open-url
 %if %{with mozilla}
@@ -2326,8 +2294,6 @@ fontpostinst TTF
 %attr(755,root,root) %{_libdir}/%{name}/program/uri-encode
 %attr(755,root,root) %{_libdir}/%{name}/program/viewdoc
 %attr(755,root,root) %{_libdir}/%{name}/program/*.py
-# exclusive arch x86_64 ?
-#%attr(755,root,root) %{_libdir}/%{name}/program/pyunorc-update64
 %{_libdir}/%{name}/program/versionrc
 
 %if %{with java}
@@ -2374,8 +2340,6 @@ fontpostinst TTF
 %defattr(644,root,root,755)
 %dir %{_libdir}/%{name}
 %dir %{_libdir}/%{name}/program
-#%dir %{_libdir}/%{name}/program/filter
-#%attr(755,root,root) %{_libdir}/%{name}/program/filter/*.so
 
 %attr(755,root,root) %{_libdir}/%{name}/program/acceptor.uno.so
 %attr(755,root,root) %{_libdir}/%{name}/program/basprov680*.uno.so
@@ -2668,7 +2632,6 @@ fontpostinst TTF
 %attr(755,root,root) %{_libdir}/%{name}/program/libfps_kde.so
 %attr(755,root,root) %{_libdir}/%{name}/program/libkabdrv1.so
 %attr(755,root,root) %{_libdir}/%{name}/program/libvclplug_kde*.so
-#%dir %{_libdir}/%{name}/program/resource.kde
 %endif
 
 %files libs-gtk
@@ -2680,7 +2643,6 @@ fontpostinst TTF
 %attr(755,root,root) %{_libdir}/%{name}/program/gnome-set-default-application
 %attr(755,root,root) %{_libdir}/%{name}/program/libvclplug_gtk*.so
 %attr(755,root,root) %{_libdir}/%{name}/program/ucpgvfs1.uno.so
-#%dir %{_libdir}/%{name}/program/resource.gnome
 
 %files i18n-af -f af.lang
 %defattr(644,root,root,755)
