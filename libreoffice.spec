@@ -204,7 +204,7 @@ BuildRequires:	zip
 BuildRequires:	zlib-devel
 %if %{with java}
 BuildRequires:	ant
-BuildRequires:	db-java >= 4.3
+%{?with_system_db:BuildRequires:	db-java >= 4.3}
 BuildRequires:	jar
 BuildRequires:	jdk >= 1.4.0_00
 %else
