@@ -2238,9 +2238,71 @@ fontpostinst TTF
 %{_libdir}/%{name}/share/readme
 %dir %{_libdir}/%{name}/share/registry
 %dir %{_libdir}/%{name}/share/registry/res
-%{_libdir}/%{name}/share/registry/data
 
-#%{_libdir}/%{name}/share/registry/schema
+#%{_libdir}/%{name}/share/registry/data
+%dir %{_libdir}/%{name}/share/registry/data
+%dir %{_libdir}/%{name}/share/registry/data/org
+%dir %{_libdir}/%{name}/share/registry/data/org/openoffice
+%dir %{_libdir}/%{name}/share/registry/data/org/openoffice/Office
+%dir %{_libdir}/%{name}/share/registry/data/org/openoffice/Office/UI
+%dir %{_libdir}/%{name}/share/registry/data/org/openoffice/TypeDetection
+%dir %{_libdir}/%{name}/share/registry/data/org/openoffice/ucb
+%{_libdir}/%{name}/share/registry/data/org/openoffice/FirstStartWizard.xcu
+%{_libdir}/%{name}/share/registry/data/org/openoffice/Inet.xcu
+%{_libdir}/%{name}/share/registry/data/org/openoffice/LDAP.xcu.sample
+%{_libdir}/%{name}/share/registry/data/org/openoffice/Office/Calc.xcu
+%{_libdir}/%{name}/share/registry/data/org/openoffice/Office/Common.xcu
+%{_libdir}/%{name}/share/registry/data/org/openoffice/Office/Compatibility.xcu
+%{_libdir}/%{name}/share/registry/data/org/openoffice/Office/DataAccess.xcu
+%{_libdir}/%{name}/share/registry/data/org/openoffice/Office/Embedding.xcu
+%{_libdir}/%{name}/share/registry/data/org/openoffice/Office/FormWizard.xcu
+%{_libdir}/%{name}/share/registry/data/org/openoffice/Office/Jobs.xcu
+%{_libdir}/%{name}/share/registry/data/org/openoffice/Office/Labels.xcu
+%{_libdir}/%{name}/share/registry/data/org/openoffice/Office/Math.xcu
+%{_libdir}/%{name}/share/registry/data/org/openoffice/Office/Paths.xcu
+%{_libdir}/%{name}/share/registry/data/org/openoffice/Office/ProtocolHandler.xcu
+%{_libdir}/%{name}/share/registry/data/org/openoffice/Office/SFX.xcu
+%{_libdir}/%{name}/share/registry/data/org/openoffice/Office/Scripting.xcu
+%{_libdir}/%{name}/share/registry/data/org/openoffice/Office/Security.xcu
+%{_libdir}/%{name}/share/registry/data/org/openoffice/Office/TableWizard.xcu
+%{_libdir}/%{name}/share/registry/data/org/openoffice/Office/UI.xcu
+%{_libdir}/%{name}/share/registry/data/org/openoffice/Office/UI/BaseWindowState.xcu
+%{_libdir}/%{name}/share/registry/data/org/openoffice/Office/UI/BasicIDECommands.xcu
+%{_libdir}/%{name}/share/registry/data/org/openoffice/Office/UI/BasicIDEWindowState.xcu
+%{_libdir}/%{name}/share/registry/data/org/openoffice/Office/UI/BibliographyCommands.xcu
+%{_libdir}/%{name}/share/registry/data/org/openoffice/Office/UI/CalcCommands.xcu
+%{_libdir}/%{name}/share/registry/data/org/openoffice/Office/UI/CalcWindowState.xcu
+%{_libdir}/%{name}/share/registry/data/org/openoffice/Office/UI/ChartCommands.xcu
+%{_libdir}/%{name}/share/registry/data/org/openoffice/Office/UI/ChartWindowState.xcu
+%{_libdir}/%{name}/share/registry/data/org/openoffice/Office/UI/Controller.xcu
+%{_libdir}/%{name}/share/registry/data/org/openoffice/Office/UI/DbBrowserWindowState.xcu
+%{_libdir}/%{name}/share/registry/data/org/openoffice/Office/UI/DbQueryWindowState.xcu
+%{_libdir}/%{name}/share/registry/data/org/openoffice/Office/UI/DbRelationWindowState.xcu
+%{_libdir}/%{name}/share/registry/data/org/openoffice/Office/UI/DbTableWindowState.xcu
+%{_libdir}/%{name}/share/registry/data/org/openoffice/Office/UI/DbuCommands.xcu
+%{_libdir}/%{name}/share/registry/data/org/openoffice/Office/UI/DrawImpressCommands.xcu
+%{_libdir}/%{name}/share/registry/data/org/openoffice/Office/UI/DrawWindowState.xcu
+%{_libdir}/%{name}/share/registry/data/org/openoffice/Office/UI/Effects.xcu
+%{_libdir}/%{name}/share/registry/data/org/openoffice/Office/UI/Factories.xcu
+%{_libdir}/%{name}/share/registry/data/org/openoffice/Office/UI/GenericCategories.xcu
+%{_libdir}/%{name}/share/registry/data/org/openoffice/Office/UI/GenericCommands.xcu
+%{_libdir}/%{name}/share/registry/data/org/openoffice/Office/UI/ImpressWindowState.xcu
+%{_libdir}/%{name}/share/registry/data/org/openoffice/Office/UI/MathCommands.xcu
+%{_libdir}/%{name}/share/registry/data/org/openoffice/Office/UI/MathWindowState.xcu
+%{_libdir}/%{name}/share/registry/data/org/openoffice/Office/UI/StartModuleCommands.xcu
+%{_libdir}/%{name}/share/registry/data/org/openoffice/Office/UI/StartModuleWindowState.xcu
+%{_libdir}/%{name}/share/registry/data/org/openoffice/Office/UI/WriterCommands.xcu
+%{_libdir}/%{name}/share/registry/data/org/openoffice/Office/UI/WriterGlobalWindowState.xcu
+%{_libdir}/%{name}/share/registry/data/org/openoffice/Office/UI/WriterWebWindowState.xcu
+%{_libdir}/%{name}/share/registry/data/org/openoffice/Office/UI/WriterWindowState.xcu
+%{_libdir}/%{name}/share/registry/data/org/openoffice/Office/Views.xcu
+%{_libdir}/%{name}/share/registry/data/org/openoffice/Office/WebWizard.xcu
+%{_libdir}/%{name}/share/registry/data/org/openoffice/Office/Writer.xcu
+%{_libdir}/%{name}/share/registry/data/org/openoffice/Setup.xcu
+%{_libdir}/%{name}/share/registry/data/org/openoffice/TypeDetection/UISort.xcu
+%{_libdir}/%{name}/share/registry/data/org/openoffice/VCL.xcu
+%{_libdir}/%{name}/share/registry/data/org/openoffice/ucb/Configuration.xcu
+
 %dir %{_libdir}/%{name}/share/registry/schema
 %dir %{_libdir}/%{name}/share/registry/schema/org
 %dir %{_libdir}/%{name}/share/registry/schema/org/openoffice
