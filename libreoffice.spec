@@ -2316,9 +2316,11 @@ fontpostinst TTF
 %defattr(644,root,root,755)
 %dir %{_sysconfdir}/openoffice.org
 %dir %{_libdir}/%{name}
+%if %{with java}
 %dir %{_libdir}/%{name}/help/en
-%dir %{_libdir}/%{name}/program
 %dir %{_libdir}/%{name}/program/classes
+%endif
+%dir %{_libdir}/%{name}/program
 %dir %{_libdir}/%{name}/program/resource
 %dir %{_libdir}/%{name}/share
 %dir %{_libdir}/%{name}/share/Scripts
@@ -2515,6 +2517,15 @@ fontpostinst TTF
 %{_libdir}/%{name}/share/registry/ldap
 
 %{_libdir}/%{name}/share/registry/modules/org/openoffice/Office/Common/Common-UseOOoFileDialogs.xcu
+%{_libdir}/%{name}/share/registry/modules/org/openoffice/Office/Common/Common-dicooo.xcu
+%{_libdir}/%{name}/share/registry/modules/org/openoffice/Office/Common/Common-unx.xcu
+%{_libdir}/%{name}/share/registry/modules/org/openoffice/Office/Embedding/Embedding-calc.xcu
+%{_libdir}/%{name}/share/registry/modules/org/openoffice/Office/Embedding/Embedding-chart.xcu
+%{_libdir}/%{name}/share/registry/modules/org/openoffice/Office/Embedding/Embedding-draw.xcu
+%{_libdir}/%{name}/share/registry/modules/org/openoffice/Office/Embedding/Embedding-impress.xcu
+%{_libdir}/%{name}/share/registry/modules/org/openoffice/Office/Embedding/Embedding-math.xcu
+%{_libdir}/%{name}/share/registry/modules/org/openoffice/Office/Embedding/Embedding-writer.xcu
+%if %{with java}
 %{_libdir}/%{name}/share/registry/modules/org/openoffice/Office/Common/Common-cjk_ja.xcu
 %{_libdir}/%{name}/share/registry/modules/org/openoffice/Office/Common/Common-cjk_ko.xcu
 %{_libdir}/%{name}/share/registry/modules/org/openoffice/Office/Common/Common-cjk_zh-CN.xcu
@@ -2531,15 +2542,8 @@ fontpostinst TTF
 %{_libdir}/%{name}/share/registry/modules/org/openoffice/Office/Common/Common-ctl_ta-IN.xcu
 %{_libdir}/%{name}/share/registry/modules/org/openoffice/Office/Common/Common-ctl_th.xcu
 %{_libdir}/%{name}/share/registry/modules/org/openoffice/Office/Common/Common-ctl_vi.xcu
-%{_libdir}/%{name}/share/registry/modules/org/openoffice/Office/Common/Common-dicooo.xcu
 %{_libdir}/%{name}/share/registry/modules/org/openoffice/Office/Common/Common-korea.xcu
-%{_libdir}/%{name}/share/registry/modules/org/openoffice/Office/Common/Common-unx.xcu
-%{_libdir}/%{name}/share/registry/modules/org/openoffice/Office/Embedding/Embedding-calc.xcu
-%{_libdir}/%{name}/share/registry/modules/org/openoffice/Office/Embedding/Embedding-chart.xcu
-%{_libdir}/%{name}/share/registry/modules/org/openoffice/Office/Embedding/Embedding-draw.xcu
-%{_libdir}/%{name}/share/registry/modules/org/openoffice/Office/Embedding/Embedding-impress.xcu
-%{_libdir}/%{name}/share/registry/modules/org/openoffice/Office/Embedding/Embedding-math.xcu
-%{_libdir}/%{name}/share/registry/modules/org/openoffice/Office/Embedding/Embedding-writer.xcu
+# move it to -writer ?
 %{_libdir}/%{name}/share/registry/modules/org/openoffice/Office/Writer/Writer-cjk_ja.xcu
 %{_libdir}/%{name}/share/registry/modules/org/openoffice/Office/Writer/Writer-cjk_ko.xcu
 %{_libdir}/%{name}/share/registry/modules/org/openoffice/Office/Writer/Writer-cjk_zh-CN.xcu
@@ -2629,6 +2633,7 @@ fontpostinst TTF
 %{_libdir}/%{name}/share/registry/modules/org/openoffice/Setup/Langpack-zh-CN.xcu
 %{_libdir}/%{name}/share/registry/modules/org/openoffice/Setup/Langpack-zh-TW.xcu
 %{_libdir}/%{name}/share/registry/modules/org/openoffice/Setup/Langpack-zu.xcu
+%endif
 %{_libdir}/%{name}/share/registry/modules/org/openoffice/TypeDetection/Filter/fcfg_global_filters.xcu
 %{_libdir}/%{name}/share/registry/modules/org/openoffice/TypeDetection/Filter/fcfg_base_filters.xcu
 %{_libdir}/%{name}/share/registry/modules/org/openoffice/TypeDetection/Filter/fcfg_chart_filters.xcu
@@ -3149,7 +3154,9 @@ fontpostinst TTF
 %{_desktopdir}/base.desktop
 %{_pixmapsdir}/ooo-base.png
 %{_libdir}/%{name}/program/resource/cnr680en-US.res
+%if %{with java}
 %{_libdir}/%{name}/help/en/sdatabase.*
+%endif
 %{_libdir}/%{name}/share/registry/modules/org/openoffice/Office/Common/Common-base.xcu
 %{_libdir}/%{name}/share/registry/modules/org/openoffice/Setup/Setup-base.xcu
 %{_libdir}/%{name}/share/registry/modules/org/openoffice/TypeDetection/Filter/fcfg_database_filters.xcu
@@ -3170,7 +3177,9 @@ fontpostinst TTF
 %{_mandir}/man1/oocalc.1
 %{_desktopdir}/calc.desktop
 %{_pixmapsdir}/ooo-calc.png
+%if %{with java}
 %{_libdir}/%{name}/help/en/scalc.*
+%endif
 %{_libdir}/%{name}/program/resource/analysis680en-US.res
 %{_libdir}/%{name}/program/resource/bf_sc680en-US.res
 %{_libdir}/%{name}/program/resource/date680en-US.res
@@ -3191,7 +3200,9 @@ fontpostinst TTF
 %{_mandir}/man1/oodraw.1
 %{_desktopdir}/draw.desktop
 %{_pixmapsdir}/ooo-draw.png
+%if %{with java}
 %{_libdir}/%{name}/help/en/sdraw.*
+%endif
 %{_libdir}/%{name}/share/registry/data/org/openoffice/Office/UI/DrawWindowState.xcu
 %{_libdir}/%{name}/share/registry/modules/org/openoffice/Office/Common/Common-draw.xcu
 %{_libdir}/%{name}/share/registry/modules/org/openoffice/Setup/Setup-draw.xcu
@@ -3215,8 +3226,10 @@ fontpostinst TTF
 %{_mandir}/man1/oowriter.1
 %{_desktopdir}/writer.desktop
 %{_pixmapsdir}/ooo-writer.png
+%if %{with java}
 %{_libdir}/%{name}/help/en/swriter.*
 %{_libdir}/%{name}/program/classes/writer2latex.jar
+%endif
 %{_libdir}/%{name}/share/registry/data/org/openoffice/Office/UI/WriterCommands.xcu
 %{_libdir}/%{name}/share/registry/data/org/openoffice/Office/UI/WriterGlobalWindowState.xcu
 %{_libdir}/%{name}/share/registry/data/org/openoffice/Office/UI/WriterWebWindowState.xcu
@@ -3243,7 +3256,9 @@ fontpostinst TTF
 %{_mandir}/man1/ooimpress.1
 %{_desktopdir}/impress.desktop
 %{_pixmapsdir}/ooo-impress.png
+%if %{with java}
 %{_libdir}/%{name}/help/en/simpress.*
+%endif
 %{_libdir}/%{name}/share/config/soffice.cfg
 %{_libdir}/%{name}/share/registry/data/org/openoffice/Office/UI/Effects.xcu
 %{_libdir}/%{name}/share/registry/data/org/openoffice/Office/UI/ImpressWindowState.xcu
@@ -3263,7 +3278,9 @@ fontpostinst TTF
 %{_mandir}/man1/oomath.1
 %{_desktopdir}/math.desktop
 %{_pixmapsdir}/ooo-math.png
+%if %{with java}
 %{_libdir}/%{name}/help/en/smath.*
+%endif
 %{_libdir}/%{name}/program/resource/bf_sm680en-US.res
 %{_libdir}/%{name}/program/resource/sm680en-US.res
 %{_libdir}/%{name}/share/registry/data/org/openoffice/Office/UI/MathCommands.xcu
@@ -3287,11 +3304,15 @@ fontpostinst TTF
 %defattr(644,root,root,755)
 %{_libdir}/%{name}/share/registry/modules/org/openoffice/TypeDetection/Filter/fcfg_xslt_filters.xcu
 %{_libdir}/%{name}/share/registry/modules/org/openoffice/TypeDetection/Types/fcfg_xslt_types.xcu
+%if %{with java}
+# not exists when --system-libxslt ?
 %{_libdir}/%{name}/share/xslt/docbook
 %{_libdir}/%{name}/share/xslt/export/xhtml
+%endif
 
 %files javafilter
 %defattr(644,root,root,755)
+%if %{with java}
 %{_libdir}/%{name}/program/classes/aportisdoc.jar
 %{_libdir}/%{name}/program/classes/pexcel.jar
 %{_libdir}/%{name}/program/classes/pocketword.jar
@@ -3301,13 +3322,16 @@ fontpostinst TTF
 %{_libdir}/%{name}/share/registry/modules/org/openoffice/TypeDetection/Types/fcfg_palm_types.xcu
 %{_libdir}/%{name}/share/registry/modules/org/openoffice/TypeDetection/Types/fcfg_pocketexcel_types.xcu
 %{_libdir}/%{name}/share/registry/modules/org/openoffice/TypeDetection/Types/fcfg_pocketword_types.xcu
+%endif
 
 %files testtools
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_libdir}/%{name}/program/libcommuni680*.so
 %attr(755,root,root) %{_libdir}/%{name}/program/libsimplecm680*.so
 %attr(755,root,root) %{_libdir}/%{name}/program/testtool.bin
+%if %{with java}
 %{_libdir}/%{name}/program/hid.lst
+%endif
 %{_libdir}/%{name}/program/resource/stt680en-US.res
 %{_libdir}/%{name}/program/testtoolrc
 
