@@ -14,6 +14,7 @@
 #	- make --without xvfb working, required
 #	  REMOVE USE of Xvfb from build-galleries script (ooo-build-2.0.1.2/bin/build-galleries line 84)
 #	  then remove that bcond
+#	- create subpackage with OpenSymbol fonts (or remove it)
 # MAYBE TODO:
 #	- drop requirement on nas-devel
 #	- --with-system-myspell + myspell package as in Debian
@@ -2184,6 +2185,7 @@ rm -rf $RPM_BUILD_ROOT%{_datadir}/gnome
 rm -rf $RPM_BUILD_ROOT%{_libdir}/%{name}/share/dict/ooo/*
 touch $RPM_BUILD_ROOT%{_libdir}/%{name}/share/dict/ooo/dictionary.lst
 
+# is below comment true?
 # OOo should not install the Vera fonts, they are Required: now
 rm -rf $RPM_BUILD_ROOT%{_libdir}/%{name}/share/fonts/truetype/*
 
