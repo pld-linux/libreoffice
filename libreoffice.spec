@@ -23,7 +23,6 @@
 #	- add %{_libdir}/%{name}/share/autocorr/acor_(ll)-(LL).dat files to package (marked with %lang)
 #	- fix locale names and other locale related things
 #       - can't be just i18n-{be,gu,hi,kn,pa,ta} instead of *-{be_BY,*_IN}?
-#	- add option to build with {not} all lanquages
 #   - more system libs todo:
 #	$ grep SYSTEM ooo-build-ooe680-m6/build/ooe680-m6/config_office/config.log |grep NO
 #	SYSTEM_AGG='NO'
@@ -45,7 +44,7 @@
 %bcond_with	mono		# enable compilation of mono bindings
 %bcond_without	mozilla		# without mozilla
 %bcond_with	seamonkey	# use seamonkey instead of firefox
-%bcond_without	i18n	# do not create i18n packages (for debugging only)
+%bcond_without	i18n		# do not create i18n packages
 
 %bcond_without	system_db		# with internal berkeley db
 %bcond_without	system_mdbtools
@@ -2074,7 +2073,7 @@ CONFOPTS=" \
 %endif
 	--without-binsuffix \
 	--with-installed-ooo-dirname=%{name} \
-	--with-lang=ALL \
+	--with-lang=%{?with_i18n:ALL} \
 %if %{with java}
 	--with-java \
 	--with-jdk-home=$JAVA_HOME \
