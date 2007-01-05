@@ -303,6 +303,7 @@ Group:		X11/Applications
 Requires(post,postun):	fontpostinst
 Requires:	%{name}-dirs = %{epoch}:%{version}-%{release}
 Requires:	%{name}-libs = %{epoch}:%{version}-%{release}
+Obsoletes:	oooqs
 Obsoletes:	openoffice-libs
 Obsoletes:	openoffice.org-libs < 1:2.1.0-0.m6.0.11
 # libcups.so.2 is dlopened (in cupsmgr.cxx); maybe Suggests instead?
