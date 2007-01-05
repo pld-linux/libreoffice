@@ -15,6 +15,7 @@
 #	  REMOVE USE of Xvfb from build-galleries script (ooo-build-2.0.1.2/bin/build-galleries line 84)
 #	  then remove that bcond
 #	- create subpackage with OpenSymbol fonts (or remove it)
+#	- configure --without-ppds --without afms
 # MAYBE TODO:
 #	- drop requirement on nas-devel
 #	- --with-system-myspell + myspell package as in Debian
