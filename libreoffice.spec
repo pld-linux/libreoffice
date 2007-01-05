@@ -3312,9 +3312,9 @@ fontpostinst TTF
 %{_libdir}/%{name}/share/xslt/export/xhtml
 %endif
 
+%if %{with java}
 %files javafilter
 %defattr(644,root,root,755)
-%if %{with java}
 %{_libdir}/%{name}/program/classes/aportisdoc.jar
 %{_libdir}/%{name}/program/classes/pexcel.jar
 %{_libdir}/%{name}/program/classes/pocketword.jar
