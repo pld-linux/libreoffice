@@ -14,7 +14,6 @@
 #	- make --without xvfb working, required
 #	  REMOVE USE of Xvfb from build-galleries script (ooo-build-2.0.1.2/bin/build-galleries line 84)
 #	  then remove that bcond
-#	- create subpackage with OpenSymbol fonts (or remove it)
 #	- configure --without-ppds --without afms
 #	- /share/config/soffice.cfg/global/accelerator/es/ should be in i18n-es
 # MAYBE TODO:
@@ -221,6 +220,7 @@ Requires:	%{name}-base = %{epoch}:%{version}-%{release}
 Requires:	%{name}-calc = %{epoch}:%{version}-%{release}
 Requires:	%{name}-draw = %{epoch}:%{version}-%{release}
 Requires:	%{name}-emailmerge = %{epoch}:%{version}-%{release}
+Requires:	%{name}-fonts-OpenSymbol = %{epoch}:%{version}-%{release}
 Requires:	%{name}-graphicfilter = %{epoch}:%{version}-%{release}
 Requires:	%{name}-impress = %{epoch}:%{version}-%{release}
 Requires:	%{name}-javafilter = %{epoch}:%{version}-%{release}
@@ -301,7 +301,6 @@ Common directories for OpenOffice.org.
 %package core
 Summary:	Core modules for OpenOffice.org
 Group:		X11/Applications
-Requires(post,postun):	fontpostinst
 # is below R: really needed?
 Requires:	%{name}-dirs = %{epoch}:%{version}-%{release}
 Obsoletes:	oooqs
@@ -430,6 +429,14 @@ Requires:	%{name}-core = %{epoch}:%{version}-%{release}
 
 %description testtools
 QA tools for OpenOffice.org, enables automated testing.
+
+%package fonts-OpenSymbol
+Summary:	OpenSymbol fonts
+Group:		Fonts
+Requires(post,postun):	fontpostinst
+
+%description fonts-OpenSymbol
+OpenSymbol fonts.
 
 %package i18n-af
 Summary:	OpenOffice.org - interface in Afrikaans language
@@ -2311,12 +2318,16 @@ rm -rf $RPM_BUILD_ROOT
 umask 022
 [ ! -x /usr/bin/update-desktop-database ] || /usr/bin/update-desktop-database >/dev/null 2>&1 ||:
 [ ! -x /usr/bin/update-mime-database ] || /usr/bin/update-mime-database %{_datadir}/mime >/dev/null 2>&1 ||:
-fontpostinst TTF
 
 %postun core
 umask 022
 [ ! -x /usr/bin/update-desktop-database ] || /usr/bin/update-desktop-database >/dev/null 2>&1
 [ ! -x /usr/bin/update-mime-database ] || /usr/bin/update-mime-database %{_datadir}/mime >/dev/null 2>&1 ||:
+
+%post fonts-OpenSymbol
+fontpostinst TTF
+
+%postun fonts-OpenSymbol
 fontpostinst TTF
 
 %files
@@ -3136,6 +3147,8 @@ fontpostinst TTF
 %attr(755,root,root) %{_libdir}/%{name}/program/libuno_sal.so
 %attr(755,root,root) %{_libdir}/%{name}/program/libuno_salhelpergcc3.so
 
+%files fonts-OpenSymbol
+%defattr(644,root,root,755)
 %{_fontsdir}/TTF/*.ttf
 
 %if %{with kde}
