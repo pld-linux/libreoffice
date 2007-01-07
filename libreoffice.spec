@@ -266,7 +266,6 @@ Summary:	OpenOffice.org KDE Interface
 Summary(pl):	Interfejs KDE dla OpenOffice.org
 Group:		X11/Libraries
 Requires:	%{name}-dirs = %{epoch}:%{version}-%{release}
-Provides:	%{name}-libs = %{epoch}:%{version}-%{release}
 Obsoletes:	openoffice-i18n-en
 Obsoletes:	openoffice-i18n-en-kde
 Obsoletes:	openoffice-libs-kde
@@ -282,7 +281,6 @@ Summary:	OpenOffice.org GTK+ Interface
 Summary(pl):	Interfejs GTK+ dla OpenOffice.org
 Group:		X11/Libraries
 Requires:	%{name}-dirs = %{epoch}:%{version}-%{release}
-Provides:	%{name}-libs = %{epoch}:%{version}-%{release}
 Obsoletes:	openoffice-i18n-en
 Obsoletes:	openoffice-i18n-en-gtk
 Obsoletes:	openoffice-libs-gtk
@@ -304,8 +302,8 @@ Common directories for OpenOffice.org.
 Summary:	Core modules for OpenOffice.org
 Group:		X11/Applications
 Requires(post,postun):	fontpostinst
+# is below R: really needed?
 Requires:	%{name}-dirs = %{epoch}:%{version}-%{release}
-Requires:	%{name}-libs = %{epoch}:%{version}-%{release}
 Obsoletes:	oooqs
 Obsoletes:	openoffice-libs
 Obsoletes:	openoffice.org-libs < 1:2.1.0-0.m6.0.11
