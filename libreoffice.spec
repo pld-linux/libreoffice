@@ -351,7 +351,6 @@ Web publishing application of OpenOffice.org
 Summary:	writer module for OpenOffice.org
 Group:		X11/Applications
 Requires:	%{name}-core = %{epoch}:%{version}-%{release}
-Requires:	libwpd >= 0.8.0
 
 %description writer
 Wordprocessor application of OpenOffice.org
