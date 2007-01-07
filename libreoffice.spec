@@ -220,7 +220,6 @@ Requires:	%{name}-base = %{epoch}:%{version}-%{release}
 Requires:	%{name}-calc = %{epoch}:%{version}-%{release}
 Requires:	%{name}-draw = %{epoch}:%{version}-%{release}
 Requires:	%{name}-emailmerge = %{epoch}:%{version}-%{release}
-Requires:	%{name}-fonts-OpenSymbol = %{epoch}:%{version}-%{release}
 Requires:	%{name}-graphicfilter = %{epoch}:%{version}-%{release}
 Requires:	%{name}-impress = %{epoch}:%{version}-%{release}
 Requires:	%{name}-javafilter = %{epoch}:%{version}-%{release}
@@ -229,6 +228,7 @@ Requires:	%{name}-pyuno = %{epoch}:%{version}-%{release}
 Requires:	%{name}-testtools = %{epoch}:%{version}-%{release}
 Requires:	%{name}-writer = %{epoch}:%{version}-%{release}
 Requires:	%{name}-xsltfilter = %{epoch}:%{version}-%{release}
+Requires:	fonts-TTF-OpenSymbol = %{epoch}:%{version}-%{release}
 ExclusiveArch:	%{ix86} %{x8664} ppc sparc sparcv9
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
@@ -430,12 +430,13 @@ Requires:	%{name}-core = %{epoch}:%{version}-%{release}
 %description testtools
 QA tools for OpenOffice.org, enables automated testing.
 
-%package fonts-OpenSymbol
+%package -n fonts-TTF-OpenSymbol
 Summary:	OpenSymbol fonts
 Group:		Fonts
 Requires(post,postun):	fontpostinst
+Obsoletes:	openoffice.org-fonts-OpenSymbol
 
-%description fonts-OpenSymbol
+%description -n fonts-TTF-OpenSymbol
 OpenSymbol fonts.
 
 %package i18n-af
@@ -2324,10 +2325,10 @@ umask 022
 [ ! -x /usr/bin/update-desktop-database ] || /usr/bin/update-desktop-database >/dev/null 2>&1
 [ ! -x /usr/bin/update-mime-database ] || /usr/bin/update-mime-database %{_datadir}/mime >/dev/null 2>&1 ||:
 
-%post fonts-OpenSymbol
+%post -n fonts-TTF-OpenSymbol
 fontpostinst TTF
 
-%postun fonts-OpenSymbol
+%postun -n fonts-TTF-OpenSymbol
 fontpostinst TTF
 
 %files
@@ -3147,7 +3148,7 @@ fontpostinst TTF
 %attr(755,root,root) %{_libdir}/%{name}/program/libuno_sal.so
 %attr(755,root,root) %{_libdir}/%{name}/program/libuno_salhelpergcc3.so
 
-%files fonts-OpenSymbol
+%files -n fonts-TTF-OpenSymbol
 %defattr(644,root,root,755)
 %{_fontsdir}/TTF/*.ttf
 
