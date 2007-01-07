@@ -295,13 +295,18 @@ Pakiet biurowy OpenOffice.org - Interfejs GTK+.
 
 %package dirs
 Summary:	Common directories for OpenOffice.org
+Summary(pl):	Katalogi wspólne dla OpenOffice.org
 Group:		X11/Applications
 
 %description dirs
 Common directories for OpenOffice.org.
 
+%description dirs -l pl
+Katalogi wspólne dla OpenOffice.org.
+
 %package core
 Summary:	Core modules for OpenOffice.org
+Summary(pl):	Podstawowe modu³y dla OpenOffice.org
 Group:		X11/Applications
 Requires:	%{name}-dirs = %{epoch}:%{version}-%{release}
 Requires:	%{name}-libs = %{epoch}:%{version}-%{release}
@@ -317,21 +322,31 @@ Obsoletes:	openoffice
 #Suggests:	chkfontpath
 
 %description core
-Core libraries and support files for OpenOffice.org
+Core libraries and support files for OpenOffice.org.
+
+%description core -l pl
+Podstawowe modu³y dla OpenOffice.org.
 
 %package pyuno
-Summary:	python bindings for OpenOffice.org
+Summary:	Python bindings for OpenOffice.org
+Summary(pl):	Wi±zania Pythona dla OpenOffice.org
 Group:		Libraries
 Requires:	%{name}-core = %{epoch}:%{version}-%{release}
 Requires:	python
 
 %description pyuno
-Cool python bindings for the OpenOffice.org UNO component model.
+Cool Python bindings for the OpenOffice.org UNO component model.
 Allows scripts both external to OpenOffice.org and within the internal
-OpenOffice.org scripting module to be written in python
+OpenOffice.org scripting module to be written in Python.
+
+%description pyuno -l pl
+Wi±zania Pythona dla modelu komponentów UNO OpenOffice.org. Pozwala na
+oskryptowanie zarówno na zewn±trz OpenOffice.org, jak i na u¿ywanie
+skryptów w Pythonie w wewnêtrznym module skryptów OpenOffice.org.
 
 %package base
-Summary:	database frontend for OpenOffice.org
+Summary:	Database frontend for OpenOffice.org
+Summary(pl):	Frontend do baz danych dla OpenOffice.org
 Group:		X11/Applications
 Requires:	%{name}-core = %{epoch}:%{version}-%{release}
 
@@ -339,75 +354,115 @@ Requires:	%{name}-core = %{epoch}:%{version}-%{release}
 GUI database frontend for OpenOffice.org. Allows creation and
 management of databases through a GUI.
 
+%description base -l pl
+Graficzny frontend do baz danych dla OpenOffice.org. Pozwala na
+tworzenie i zarz±dzanie bazami poprzez graficzny interfejs
+u¿ytkownika.
+
 %package web
-Summary:	web module for OpenOffice.org
+Summary:	Web module for OpenOffice.org
+Summary(pl):	Modu³ Web dla OpenOffice.org
 Group:		X11/Applications
 Requires:	%{name}-core = %{epoch}:%{version}-%{release}
 Requires:	%{name}-writer = %{epoch}:%{version}-%{release}
 
 %description web
-Web publishing application of OpenOffice.org
+Web publishing application of OpenOffice.org.
+
+%description web -l pl
+Aplikacja do tworzenia stron WWW z OpenOffice.org.
 
 %package writer
-Summary:	writer module for OpenOffice.org
+Summary:	Writer module for OpenOffice.org
+Summary(pl):	Modu³ Writer dla OpenOffice.org
 Group:		X11/Applications
 Requires:	%{name}-core = %{epoch}:%{version}-%{release}
 
 %description writer
-Wordprocessor application of OpenOffice.org
+Wordprocessor application of OpenOffice.org.
+
+%description writer -l pl
+Procesor tekstu z OpenOffice.org.
 
 %package emailmerge
 Summary:	email mail merge component for OpenOffice.org
+Summary(pl):	Kompolent email mail merge dla OpenOffice.org
 Group:		X11/Applications
 Requires:	%{name}-pyuno = %{epoch}:%{version}-%{release}
 Requires:	%{name}-writer = %{epoch}:%{version}-%{release}
 
 %description emailmerge
-Enables OpenOffice.org writer module to enable mail merge to email
+Enables OpenOffice.org Writer module to enable mail merge to email.
+
+%description emailmerge -l pl
+Komponent umo¿liwiaj±cy modu³owi Writer w³±czanie poczty do poczty
+elektronicznej.
 
 %package calc
-Summary:	calc module for OpenOffice.org
+Summary:	Calc module for OpenOffice.org
+Summary(pl):	Modu³ Calc dla OpenOffice.org
 Group:		X11/Applications
 Requires:	%{name}-core = %{epoch}:%{version}-%{release}
 
 %description calc
-Spreadsheet application of OpenOffice.org
+Spreadsheet application of OpenOffice.org.
+
+%description calc -l pl
+Arkusz kalkulacyjny z OpenOffice.org.
 
 %package draw
-Summary:	draw module for OpenOffice.org
+Summary:	Draw module for OpenOffice.org
+Summary(pl):	Modu³ Draw dla OpenOffice.org
 Group:		X11/Applications
 Requires:	%{name}-core = %{epoch}:%{version}-%{release}
 
 %description draw
-Drawing application of OpenOffice.org
+Drawing application of OpenOffice.org.
+
+%description draw -l pl
+Aplikacja rysunkowa z OpenOffice.org.
 
 %package impress
-Summary:	impress module for OpenOffice.org
+Summary:	Impress module for OpenOffice.org
+Summary(pl):	Modu³ Impress dla OpenOffice.org
 Group:		X11/Applications
 Requires:	%{name}-core = %{epoch}:%{version}-%{release}
 
 %description impress
-Presentation application of OpenOffice.org
+Presentation application of OpenOffice.org.
+
+%description impress -l pl
+Aplikacja do tworzenia prezentacji z OpenOffice.org.
 
 %package math
-Summary:	math module for OpenOffice.org
+Summary:	Math module for OpenOffice.org
+Summary(pl):	Modu³ Math dla OpenOffice.org
 Group:		X11/Applications
 Requires:	%{name}-core = %{epoch}:%{version}-%{release}
 
 %description math
-Math editor of OpenOffice.org
+Math editor of OpenOffice.org.
+
+%description math -l pl
+Edytor równañ matematycznych z OpenOffice.org.
 
 %package graphicfilter
-Summary:	extra graphicfilter module for OpenOffice.org
+Summary:	Extra graphicfilter module for OpenOffice.org
+Summary(pl):	Dodatkowy modu³ graphicfilter dla OpenOffice.org
 Group:		X11/Applications
 Requires:	%{name}-core = %{epoch}:%{version}-%{release}
 
 %description graphicfilter
-Graphicfilter module for OpenOffice.org, provides additional svg and
-flash export filters.
+Graphicfilter module for OpenOffice.org, provides additional SVG and
+Flash export filters.
+
+%description graphicfilter -l pl
+Modu³ graphicfilter dla OpenOffice.org, udostêpnia dodatkowe filtry
+eksportu SVG i Flash.
 
 %package xsltfilter
-Summary:	extra xsltfilter module for OpenOffice.org
+Summary:	Extra xsltfilter module for OpenOffice.org
+Summary(pl):	Dodatkowy modu³ xsltfilter dla OpenOffice.org
 Group:		X11/Applications
 Requires:	%{name}-core = %{epoch}:%{version}-%{release}
 
@@ -415,31 +470,49 @@ Requires:	%{name}-core = %{epoch}:%{version}-%{release}
 xsltfilter module for OpenOffice.org, provides additional docbook and
 xhtml export transforms. Install this to enable docbook export.
 
+%description xsltfilter -l pl
+Modu³ xsltfilter dla OpenOffice.org, udostêpnia dodatkowe
+przekszta³cenia wyj¶ciowe dla formatów docbook i xhtml. Jest potrzebny
+do eksportu do docbooka.
+
 %package javafilter
-Summary:	extra javafilter module for OpenOffice.org
+Summary:	Extra javafilter module for OpenOffice.org
+Summary(pl):	Dodatkowy modu³ javafilter dla OpenOffice.org
 Group:		X11/Applications
 Requires:	%{name}-core = %{epoch}:%{version}-%{release}
 
 %description javafilter
 javafilter module for OpenOffice.org, provides additional aportisdoc,
-pocket excel and pocket word import filters.
+Pocket Excel and Pocket Word import filters.
+
+%description javafilter -l pl
+Modu³ javafilter dla OpenOffice.org, udostêpnia dodatkowe filtry
+importu aportisdoc, Pocket Excel i Pocket Word.
 
 %package testtools
 Summary:	testtools for OpenOffice.org
+Summary(pl):	Narzêdzia testowe dla OpenOffice.org
 Group:		Development/Libraries
 Requires:	%{name}-core = %{epoch}:%{version}-%{release}
 
 %description testtools
 QA tools for OpenOffice.org, enables automated testing.
 
+%description testtools -l pl
+Narzêdzia QA dla OpenOffice.org, pozwalaj± na automatyczne testowanie.
+
 %package -n fonts-TTF-OpenSymbol
 Summary:	OpenSymbol fonts
+Summary(pl):	Fonty OpenSymbol
 Group:		Fonts
 Requires(post,postun):	fontpostinst
 Obsoletes:	openoffice.org-fonts-OpenSymbol
 
 %description -n fonts-TTF-OpenSymbol
-OpenSymbol fonts.
+OpenSymbol TrueType fonts.
+
+%description -n fonts-TTF-OpenSymbol -l pl
+Fonty TrueType OpenSymbol.
 
 %package i18n-af
 Summary:	OpenOffice.org - interface in Afrikaans language
