@@ -301,7 +301,6 @@ Common directories for OpenOffice.org.
 %package core
 Summary:	Core modules for OpenOffice.org
 Group:		X11/Applications
-# is below R: really needed?
 Requires:	%{name}-dirs = %{epoch}:%{version}-%{release}
 Obsoletes:	oooqs
 Obsoletes:	openoffice-libs
