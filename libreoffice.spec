@@ -3241,12 +3241,14 @@ fontpostinst TTF
 %files libs-gtk
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_libdir}/%{name}/program/fps_gnome.uno.so
-%attr(755,root,root) %{_libdir}/%{name}/program/gconfbe1.uno.so
 %attr(755,root,root) %{_libdir}/%{name}/program/gnome-open-url
 %attr(755,root,root) %{_libdir}/%{name}/program/gnome-open-url.bin
 %attr(755,root,root) %{_libdir}/%{name}/program/gnome-set-default-application
 %attr(755,root,root) %{_libdir}/%{name}/program/libvclplug_gtk*.so
+%if %{with gnomevfs}
+%attr(755,root,root) %{_libdir}/%{name}/program/gconfbe1.uno.so
 %attr(755,root,root) %{_libdir}/%{name}/program/ucpgvfs1.uno.so
+%endif
 
 %files base
 %defattr(644,root,root,755)
