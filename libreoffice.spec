@@ -22,7 +22,6 @@
 #	- in gtk version menu highlight has almost the same colour as menu text
 #	- 6 user/config/*.so? files shared between -i18n-en and -i18n-sl
 #	- add ooglobal symlink and it's ooo-wrapper entry (among calc|draw|impress|math|web|writer)
-#	- add %{_libdir}/%{name}/share/autocorr/acor_(ll)-(LL).dat files to package (marked with %lang)
 #	- fix locale names and other locale related things
 #       - can't be just i18n-{be,gu,hi,kn,pa,ta} instead of *-{be_BY,*_IN}?
 #   - more system libs todo:
