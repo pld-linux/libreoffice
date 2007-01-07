@@ -58,7 +58,7 @@
 %bcond_without	xvfb		# using Xvfb in build-galleries script (without xvfb broken)
 
 %define		ver		2.1.0
-%define		_rel		0.15
+%define		_rel		0.16
 %define		subver		680
 %define		snap		OOE680
 %define		snap2		SRC680
@@ -337,6 +337,15 @@ Requires:	%{name}-core = %{epoch}:%{version}-%{release}
 %description base
 GUI database frontend for OpenOffice.org. Allows creation and
 management of databases through a GUI.
+
+%package web
+Summary:	web module for OpenOffice.org
+Group:		X11/Applications
+Requires:	%{name}-core = %{epoch}:%{version}-%{release}
+Requires:	%{name}-writer = %{epoch}:%{version}-%{release}
+
+%description web
+Web publishing application of OpenOffice.org
 
 %package writer
 Summary:	writer module for OpenOffice.org
@@ -2385,7 +2394,6 @@ fontpostinst TTF
 %{_libdir}/%{name}/share/config/soffice.cfg/modules/BasicIDE
 %{_libdir}/%{name}/share/config/soffice.cfg/modules/sglobal
 %{_libdir}/%{name}/share/config/soffice.cfg/modules/StartModule
-%{_libdir}/%{name}/share/config/soffice.cfg/modules/sweb
 %{_libdir}/%{name}/share/config/wizard
 %dir %{_libdir}/%{name}/share/dict
 %dir %{_libdir}/%{name}/share/dict/ooo
@@ -2681,7 +2689,6 @@ fontpostinst TTF
 %attr(755,root,root) %{_bindir}/ooffice
 %attr(755,root,root) %{_bindir}/oofromtemplate
 %attr(755,root,root) %{_bindir}/ootool
-%attr(755,root,root) %{_bindir}/ooweb
 
 %attr(755,root,root) %{_libdir}/%{name}/program/configimport.bin
 %attr(755,root,root) %{_libdir}/%{name}/program/gengal.bin
@@ -2783,15 +2790,12 @@ fontpostinst TTF
 %{_datadir}/mime/packages/openoffice.xml
 
 %{_desktopdir}/template.desktop
-%{_desktopdir}/web.desktop
 
 %{_pixmapsdir}/ooo-gulls.png
 %{_pixmapsdir}/ooo-template.png
-%{_pixmapsdir}/ooo-web.png
 
 %{_mandir}/man1/ooffice.1
 %{_mandir}/man1/oofromtemplate.1
-%{_mandir}/man1/ooweb.1
 %{_mandir}/man1/openoffice.1*
 
 # en-US
@@ -3311,6 +3315,14 @@ fontpostinst TTF
 %{_libdir}/%{name}/share/registry/modules/org/openoffice/TypeDetection/Filter/fcfg_math_filters.xcu
 %{_libdir}/%{name}/share/registry/modules/org/openoffice/TypeDetection/Types/fcfg_math_types.xcu
 %{_libdir}/%{name}/share/registry/schema/org/openoffice/Office/UI/MathCommands.xcs
+
+%files web
+%defattr(644,root,root,755)
+%attr(755,root,root) %{_bindir}/ooweb
+%{_libdir}/%{name}/share/config/soffice.cfg/modules/sweb
+%{_mandir}/man1/ooweb.1
+%{_desktopdir}/web.desktop
+%{_pixmapsdir}/ooo-web.png
 
 %files graphicfilter
 %defattr(644,root,root,755)
