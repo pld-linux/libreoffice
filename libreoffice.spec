@@ -226,6 +226,7 @@ Requires:	%{name}-javafilter = %{epoch}:%{version}-%{release}
 Requires:	%{name}-math = %{epoch}:%{version}-%{release}
 Requires:	%{name}-pyuno = %{epoch}:%{version}-%{release}
 Requires:	%{name}-testtools = %{epoch}:%{version}-%{release}
+Requires:	%{name}-web = %{epoch}:%{version}-%{release}
 Requires:	%{name}-writer = %{epoch}:%{version}-%{release}
 Requires:	%{name}-xsltfilter = %{epoch}:%{version}-%{release}
 Requires:	fonts-TTF-OpenSymbol = %{epoch}:%{version}-%{release}
