@@ -6,6 +6,7 @@
 #		RPMS		 1.2 GB
 # TODO:
 #	- problems with gcc-4.2.0 (I guess): oowriter is useless (invisble text till refresh)
+#	- -writer needs some files from -impress
 #	- fix help files (broken links)
 #	- LFS support is disabled (no_lfs_hack.patch for xml2cmp crash) because it need LFS-ready STLport
 #       - bcond with_mono is broken (cli_types.dll not found, and can't be made)
