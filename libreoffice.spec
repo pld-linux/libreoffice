@@ -2174,7 +2174,7 @@ export DEFAULT_TO_ENGLISH_FOR_PACKING=1
 install -d $RPM_BUILD_ROOT%{_sysconfdir}/%{name}
 
 # Add in the regcomp tool since some people need it for 3rd party add-ons
-cp -f build/%{ssnap}/solver/%{subver}/unxlng*.pro/bin/regcomp $RPM_BUILD_ROOT%{_libdir}/%{name}/program
+cp -f build/%{ssnap}/solver/%{subver}/unxlng*.pro/bin/regcomp{,.bin} $RPM_BUILD_ROOT%{_libdir}/%{name}/program/
 
 # fix python
 sed -i -e 's|#!/bin/python|#!%{_bindir}/python|g' $RPM_BUILD_ROOT%{_libdir}/%{name}/program/*.py
@@ -2703,6 +2703,7 @@ fontpostinst TTF
 %attr(755,root,root) %{_libdir}/%{name}/program/ooqstart
 %attr(755,root,root) %{_libdir}/%{name}/program/pagein*
 %attr(755,root,root) %{_libdir}/%{name}/program/regcomp
+%attr(755,root,root) %{_libdir}/%{name}/program/regcomp.bin
 %{_libdir}/%{name}/program/setuprc
 %attr(755,root,root) %{_libdir}/%{name}/program/smath
 %attr(755,root,root) %{_libdir}/%{name}/program/soffice
