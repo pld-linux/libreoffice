@@ -6,7 +6,6 @@
 #		RPMS		 1.2 GB
 # TODO:
 #	- problems with gcc-4.2.0 (I guess): oowriter is useless (invisble text till refresh)
-#	- some files from -impress should be in -core
 #	- fix help files (broken links)
 #	- LFS support is disabled (no_lfs_hack.patch for xml2cmp crash) because it need LFS-ready STLport
 #       - bcond with_mono is broken (cli_types.dll not found, and can't be made)
@@ -17,6 +16,7 @@
 #	  then remove that bcond
 #	- create subpackage with OpenSymbol fonts (or remove it)
 #	- configure --without-ppds --without afms
+#	- /share/config/soffice.cfg/global/accelerator/es/ should be in i18n-es
 # MAYBE TODO:
 #	- drop requirement on nas-devel
 #	- --with-system-myspell + myspell package as in Debian
@@ -2379,6 +2379,13 @@ fontpostinst TTF
 %{_libdir}/%{name}/share/config/images_crystal.zip
 %{_libdir}/%{name}/share/config/images_industrial.zip
 %{_libdir}/%{name}/share/config/images_hicontrast.zip
+%dir %{_libdir}/%{name}/share/config/soffice.cfg
+%{_libdir}/%{name}/share/config/soffice.cfg/global/
+%dir %{_libdir}/%{name}/share/config/soffice.cfg/modules/
+%{_libdir}/%{name}/share/config/soffice.cfg/modules/BasicIDE
+%{_libdir}/%{name}/share/config/soffice.cfg/modules/sglobal
+%{_libdir}/%{name}/share/config/soffice.cfg/modules/StartModule
+%{_libdir}/%{name}/share/config/soffice.cfg/modules/sweb
 %{_libdir}/%{name}/share/config/wizard
 %dir %{_libdir}/%{name}/share/dict
 %dir %{_libdir}/%{name}/share/dict/ooo
@@ -3159,6 +3166,11 @@ fontpostinst TTF
 %if %{with java}
 %{_libdir}/%{name}/help/en/sdatabase.*
 %endif
+%{_libdir}/%{name}/share/config/soffice.cfg/modules/dbapp
+%{_libdir}/%{name}/share/config/soffice.cfg/modules/dbbrowser
+%{_libdir}/%{name}/share/config/soffice.cfg/modules/dbquery
+%{_libdir}/%{name}/share/config/soffice.cfg/modules/dbrelation
+%{_libdir}/%{name}/share/config/soffice.cfg/modules/dbtable
 %{_libdir}/%{name}/share/registry/modules/org/openoffice/Office/Common/Common-base.xcu
 %{_libdir}/%{name}/share/registry/modules/org/openoffice/Setup/Setup-base.xcu
 %{_libdir}/%{name}/share/registry/modules/org/openoffice/TypeDetection/Filter/fcfg_database_filters.xcu
@@ -3182,6 +3194,8 @@ fontpostinst TTF
 %if %{with java}
 %{_libdir}/%{name}/help/en/scalc.*
 %endif
+%{_libdir}/%{name}/share/config/soffice.cfg/modules/scalc
+%{_libdir}/%{name}/share/config/soffice.cfg/modules/schart
 %{_libdir}/%{name}/program/resource/analysis680en-US.res
 %{_libdir}/%{name}/program/resource/bf_sc680en-US.res
 %{_libdir}/%{name}/program/resource/date680en-US.res
@@ -3205,6 +3219,7 @@ fontpostinst TTF
 %if %{with java}
 %{_libdir}/%{name}/help/en/sdraw.*
 %endif
+%{_libdir}/%{name}/share/config/soffice.cfg/modules/sdraw
 %{_libdir}/%{name}/share/registry/data/org/openoffice/Office/UI/DrawWindowState.xcu
 %{_libdir}/%{name}/share/registry/modules/org/openoffice/Office/Common/Common-draw.xcu
 %{_libdir}/%{name}/share/registry/modules/org/openoffice/Setup/Setup-draw.xcu
@@ -3232,6 +3247,8 @@ fontpostinst TTF
 %{_libdir}/%{name}/help/en/swriter.*
 %{_libdir}/%{name}/program/classes/writer2latex.jar
 %endif
+%{_libdir}/%{name}/share/config/soffice.cfg/modules/swriter
+%{_libdir}/%{name}/share/config/soffice.cfg/modules/sbibliography
 %{_libdir}/%{name}/share/registry/data/org/openoffice/Office/UI/WriterCommands.xcu
 %{_libdir}/%{name}/share/registry/data/org/openoffice/Office/UI/WriterGlobalWindowState.xcu
 %{_libdir}/%{name}/share/registry/data/org/openoffice/Office/UI/WriterWebWindowState.xcu
@@ -3261,7 +3278,8 @@ fontpostinst TTF
 %if %{with java}
 %{_libdir}/%{name}/help/en/simpress.*
 %endif
-%{_libdir}/%{name}/share/config/soffice.cfg
+%{_libdir}/%{name}/share/config/soffice.cfg/modules/simpress
+%{_libdir}/%{name}/share/config/soffice.cfg/simpress/
 %{_libdir}/%{name}/share/registry/data/org/openoffice/Office/UI/Effects.xcu
 %{_libdir}/%{name}/share/registry/data/org/openoffice/Office/UI/ImpressWindowState.xcu
 %{_libdir}/%{name}/share/registry/modules/org/openoffice/Office/Common/Common-impress.xcu
@@ -3285,6 +3303,7 @@ fontpostinst TTF
 %endif
 %{_libdir}/%{name}/program/resource/bf_sm680en-US.res
 %{_libdir}/%{name}/program/resource/sm680en-US.res
+%{_libdir}/%{name}/share/config/soffice.cfg/modules/smath
 %{_libdir}/%{name}/share/registry/data/org/openoffice/Office/UI/MathCommands.xcu
 %{_libdir}/%{name}/share/registry/data/org/openoffice/Office/UI/MathWindowState.xcu
 %{_libdir}/%{name}/share/registry/modules/org/openoffice/Office/Common/Common-math.xcu
