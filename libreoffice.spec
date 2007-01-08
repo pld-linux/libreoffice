@@ -5,7 +5,7 @@
 #		SRPMS		 0.3 GB
 #		RPMS		 1.2 GB
 # TODO:
-#	- problems with gcc-4.2.0 (I guess): oowriter is useless (invisble text till refresh)
+#	- problems with gcc-4.2.0: oowriter is useless (invisble text till refresh)
 #	- fix help files (broken links)
 #	- LFS support is disabled (no_lfs_hack.patch for xml2cmp crash) because it need LFS-ready STLport
 #       - bcond with_mono is broken (cli_types.dll not found, and can't be made)
@@ -18,27 +18,24 @@
 #	  then remove that bcond
 #	- configure --without-ppds --without afms
 #	- /share/config/soffice.cfg/global/accelerator/es/ should be in i18n-es
-# MAYBE TODO:
-#	- drop requirement on nas-devel
-#	- --with-system-myspell + myspell package as in Debian
-#	- in gtk version menu highlight has almost the same colour as menu text
-#	- 6 user/config/*.so? files shared between -i18n-en and -i18n-sl
-#	- add ooglobal symlink and it's ooo-wrapper entry (among calc|draw|impress|math|web|writer)
 #	- fix locale names and other locale related things
 #       - can't be just i18n-{be,gu,hi,kn,pa,ta} instead of *-{be_BY,*_IN}?
 #   - more system libs todo:
-#	$ grep SYSTEM ooo-build-ooe680-m6/build/ooe680-m6/config_office/config.log |grep NO
-#	SYSTEM_AGG='NO'
-#	SYSTEM_HSQLDB='NO'
-#	SYSTEM_HUNSPELL='NO'
-#	SYSTEM_HYPH='NO'
-#	SYSTEM_MYSPELL='NO'
-#	SYSTEM_MYTHES='NO'
-#	SYSTEM_XALAN='NO'
-#	SYSTEM_XERCES='NO'
-#	SYSTEM_XML_APIS='NO'
-#	SYSTEM_XT='NO'			bcond system_xt (doesn't work - xt in PLD is too old or broken)
+#	- --with-system-agg + antigrain package (http://www.antigrain.com)
+#	- --with-system-hsqldb + hsqldb package (http://hsqldb.org or sourceforge)
+#	- --with-system-hunspell + hunspell package (http://hunspell.sourceforge.net)
+#	- (SYSTEM_HYPH) bcond system_libhnj doesn't work - needs Debian-patched version of libhnj
+#	- --with-system-myspell + myspell package as in Debian
+#	- --with-system-mythes + mythes package (http://lingucomponent.openoffice.org/thesaurus.html)
+#	- bcond system_xt doesn't work - xt in PLD is too old or broken
 #
+#	$ grep SYSTEM ooo-build-ooe680-m6/build/ooe680-m6/config_office/config.log |grep NO
+#
+# MAYBE TODO:
+#	- drop requirement on nas-devel
+#	- in gtk version menu highlight has almost the same colour as menu text
+#	- 6 user/config/*.so? files shared between -i18n-en and -i18n-sl
+#	- add ooglobal symlink and it's ooo-wrapper entry (among calc|draw|impress|math|web|writer)
 
 # Conditional build:
 %bcond_without	gnomevfs	# GNOME VFS and Evolution 2 support
@@ -49,11 +46,14 @@
 %bcond_with	seamonkey	# use seamonkey instead of firefox
 %bcond_without	i18n		# do not create i18n packages
 
-%bcond_without	system_db		# with internal berkeley db
-%bcond_without	system_mdbtools
-%bcond_with	system_xt
 %bcond_without	system_beanshell
-%bcond_without	system_libhnj		# with internal ALTLinuxhyph
+%bcond_without	system_db		# with system berkeley db
+%bcond_with	system_libhnj		# with system ALTLinuxhyph (NFY)
+%bcond_without	system_mdbtools
+%bcond_without	system_xalan
+%bcond_without	system_xerces
+%bcond_without	system_xml_apis
+%bcond_with	system_xt
 
 %bcond_without	xvfb		# using Xvfb in build-galleries script (without xvfb broken)
 
@@ -190,6 +190,8 @@ BuildRequires:	startup-notification-devel >= 0.5
 BuildRequires:	tcsh
 BuildRequires:	unixODBC-devel
 BuildRequires:	unzip
+%{?with_system_xerces:BuildRequires:     xerces-j}
+%{?with_system_xalan:BuildRequires:     xalan-j}
 BuildRequires:	xmlsec1-nss-devel
 BuildRequires:	xorg-lib-libX11-devel
 BuildRequires:	xorg-lib-libXaw-devel
@@ -2109,6 +2111,10 @@ CONFOPTS=" \
 	--disable-odk \
 	--with-ccache-allowed \
 	--with-system-gcc \
+        %{?with_system_libhnj:--with-system-altlinuxhyphen} \
+        %{?with_system_xalan:--with-system-xalan} \
+        %{?with_system_xerces:--with-system-xerces} \
+        %{?with_system_xml_apis:--with-system-xml-apis} \
 	--with-system-zlib \
 	--with-system-jpeg \
 	--with-system-libxml \
