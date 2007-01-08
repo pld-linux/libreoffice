@@ -10,6 +10,8 @@
 #	- LFS support is disabled (no_lfs_hack.patch for xml2cmp crash) because it need LFS-ready STLport
 #       - bcond with_mono is broken (cli_types.dll not found, and can't be made)
 #	- build on 64-bit architectures
+#	- doesn't build with java-sun-1.6 (maybe java-dependent packages are screwed)
+#	- maybe it could be build with gcc-java
 #       - adapt help-support.diff to PLD
 #	- make --without xvfb working, required
 #	  REMOVE USE of Xvfb from build-galleries script (ooo-build-2.0.1.2/bin/build-galleries line 84)
@@ -214,7 +216,6 @@ BuildRequires:	seamonkey-devel
 BuildRequires:	mozilla-firefox-devel
 %endif
 BuildConflicts:	STLport4
-BuildConflicts:	java-sun = 1.4.2
 Requires:	%{name}-base = %{epoch}:%{version}-%{release}
 Requires:	%{name}-calc = %{epoch}:%{version}-%{release}
 Requires:	%{name}-draw = %{epoch}:%{version}-%{release}
