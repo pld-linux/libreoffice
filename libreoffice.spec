@@ -57,7 +57,7 @@
 
 %bcond_without	xvfb		# using Xvfb in build-galleries script (without xvfb broken)
 
-%if !%{with java}
+%if %{without java}
 %undefine       with_system_beanshell
 %undefine       with_system_xalan
 %undefine       with_system_xerces
