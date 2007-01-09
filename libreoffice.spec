@@ -198,8 +198,8 @@ BuildRequires:	startup-notification-devel >= 0.5
 BuildRequires:	tcsh
 BuildRequires:	unixODBC-devel
 BuildRequires:	unzip
-%{?with_system_xerces:BuildRequires:     xerces-j}
 %{?with_system_xalan:BuildRequires:     xalan-j}
+%{?with_system_xerces:BuildRequires:     xerces-j}
 BuildRequires:	xmlsec1-nss-devel
 BuildRequires:	xorg-lib-libX11-devel
 BuildRequires:	xorg-lib-libXaw-devel
@@ -321,6 +321,7 @@ Summary(pl):	Podstawowe modu³y dla OpenOffice.org
 Group:		X11/Applications
 Requires:	%{name}-dirs = %{epoch}:%{version}-%{release}
 Requires:	%{name}-libs = %{epoch}:%{version}-%{release}
+Requires:	shared-mime-info
 Obsoletes:	oooqs
 Obsoletes:	openoffice-libs
 Obsoletes:	openoffice.org-libs < 1:2.1.0-0.m6.0.11
@@ -2119,10 +2120,10 @@ CONFOPTS=" \
 	--disable-odk \
 	--with-ccache-allowed \
 	--with-system-gcc \
-        %{?with_system_libhnj:--with-system-altlinuxhyphen} \
-        %{?with_system_xalan:--with-system-xalan} \
-        %{?with_system_xerces:--with-system-xerces} \
-        %{?with_system_xml_apis:--with-system-xml-apis} \
+	%{?with_system_libhnj:--with-system-altlinuxhyphen} \
+	%{?with_system_xalan:--with-system-xalan} \
+	%{?with_system_xerces:--with-system-xerces} \
+	%{?with_system_xml_apis:--with-system-xml-apis} \
 	--with-system-zlib \
 	--with-system-jpeg \
 	--with-system-libxml \
