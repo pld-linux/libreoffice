@@ -58,11 +58,11 @@
 %bcond_without	xvfb		# using Xvfb in build-galleries script (without xvfb broken)
 
 %if %{without java}
-%undefine       with_system_beanshell
-%undefine       with_system_xalan
-%undefine       with_system_xerces
-%undefine       with_system_xml_apis
-%undefine       with_system_xt
+%undefine	with_system_beanshell
+%undefine	with_system_xalan
+%undefine	with_system_xerces
+%undefine	with_system_xml_apis
+%undefine	with_system_xt
 %endif
 
 %define		ver		2.1.0
@@ -198,8 +198,8 @@ BuildRequires:	startup-notification-devel >= 0.5
 BuildRequires:	tcsh
 BuildRequires:	unixODBC-devel
 BuildRequires:	unzip
-%{?with_system_xalan:BuildRequires:     xalan-j}
-%{?with_system_xerces:BuildRequires:     xerces-j}
+%{?with_system_xalan:BuildRequires:	xalan-j}
+%{?with_system_xerces:BuildRequires:	xerces-j}
 BuildRequires:	xmlsec1-nss-devel
 BuildRequires:	xorg-lib-libX11-devel
 BuildRequires:	xorg-lib-libXaw-devel
