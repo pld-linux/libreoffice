@@ -47,7 +47,7 @@
 %bcond_without	i18n		# do not create i18n packages
 
 %bcond_without	system_beanshell
-%bcond_without	system_db		# with system berkeley db
+%bcond_without	system_db		# without system (i.e. with internal) Berkeley DB
 %bcond_with	system_libhnj		# with system ALTLinuxhyph (NFY)
 %bcond_without	system_mdbtools
 %bcond_without	system_xalan
