@@ -216,6 +216,7 @@ BuildRequires:	zlib-devel
 BuildRequires:	ant
 %{?with_system_db:BuildRequires:	db-java >= 4.3}
 BuildRequires:	jar
+BuildRequires:	jdk < 1.6
 BuildRequires:	jdk >= 1.4.0_00
 %else
 BuildRequires:	libxslt-progs
