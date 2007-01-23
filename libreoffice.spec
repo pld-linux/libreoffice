@@ -5,6 +5,7 @@
 #		SRPMS		 0.3 GB
 #		RPMS		 1.2 GB
 # TODO:
+#	- without system_db will not work (w/ java) as it will use db4.2 which is too old (see r1.650)
 #	- problems with gcc-4.2.0: oowriter is useless (invisble text till refresh)
 #	- fix help files (broken links)
 #	- LFS support is disabled (no_lfs_hack.patch for xml2cmp crash) because it need LFS-ready STLport
