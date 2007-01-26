@@ -67,7 +67,7 @@
 %endif
 
 %define		ver		2.1.0
-%define		_rel		0.16
+%define		_rel		0.17
 %define		subver		680
 %define		snap		OOE680
 %define		snap2		SRC680
@@ -278,8 +278,7 @@ Do zalet OpenOffice.org mo¿na zaliczyæ:
 Summary:	OpenOffice.org KDE Interface
 Summary(pl):	Interfejs KDE dla OpenOffice.org
 Group:		X11/Libraries
-Requires:	%{name}-dirs = %{epoch}:%{version}-%{release}
-Provides:	%{name}-libs = %{epoch}:%{version}-%{release}
+Requires:	%{name}-core = %{epoch}:%{version}-%{release}
 Obsoletes:	openoffice-i18n-en
 Obsoletes:	openoffice-i18n-en-kde
 Obsoletes:	openoffice-libs-kde
@@ -294,8 +293,7 @@ Pakiet biurowy OpenOffice.org - Interfejs KDE.
 Summary:	OpenOffice.org GTK+ Interface
 Summary(pl):	Interfejs GTK+ dla OpenOffice.org
 Group:		X11/Libraries
-Requires:	%{name}-dirs = %{epoch}:%{version}-%{release}
-Provides:	%{name}-libs = %{epoch}:%{version}-%{release}
+Requires:	%{name}-core = %{epoch}:%{version}-%{release}
 Obsoletes:	openoffice-i18n-en
 Obsoletes:	openoffice-i18n-en-gtk
 Obsoletes:	openoffice-libs-gtk
@@ -306,26 +304,15 @@ OpenOffice.org productivity suite - GTK+ Interface.
 %description libs-gtk -l pl
 Pakiet biurowy OpenOffice.org - Interfejs GTK+.
 
-%package dirs
-Summary:	Common directories for OpenOffice.org
-Summary(pl):	Katalogi wspólne dla OpenOffice.org
-Group:		X11/Applications
-
-%description dirs
-Common directories for OpenOffice.org.
-
-%description dirs -l pl
-Katalogi wspólne dla OpenOffice.org.
-
 %package core
 Summary:	Core modules for OpenOffice.org
 Summary(pl):	Podstawowe modu³y dla OpenOffice.org
 Group:		X11/Applications
-Requires:	%{name}-dirs = %{epoch}:%{version}-%{release}
 Requires:	%{name}-libs = %{epoch}:%{version}-%{release}
 Requires:	shared-mime-info
 Obsoletes:	oooqs
 Obsoletes:	openoffice-libs
+Obsoletes:	openoffice.org-dirs
 Obsoletes:	openoffice.org-libs < 1:2.1.0-0.m6.0.11
 # libcups.so.2 is dlopened (in cupsmgr.cxx); maybe Suggests instead?
 Requires:	cups-lib
@@ -2427,8 +2414,11 @@ fontpostinst TTF
 %files
 %defattr(644,root,root,755)
 
-%files dirs
+%files core
 %defattr(644,root,root,755)
+%doc %{_libdir}/%{name}/LICENSE*
+%doc %{_libdir}/%{name}/*README*
+
 %dir %{_sysconfdir}/openoffice.org
 %dir %{_libdir}/%{name}
 %if %{with java}
@@ -2469,10 +2459,6 @@ fontpostinst TTF
 %dir %{_libdir}/%{name}/share/registry/schema/org/openoffice/TypeDetection
 %dir %{_libdir}/%{name}/share/registry/schema/org/openoffice/ucb
 
-%files core
-%defattr(644,root,root,755)
-%doc %{_libdir}/%{name}/LICENSE*
-%doc %{_libdir}/%{name}/*README*
 %attr(755,root,root) %{_libdir}/%{name}/install-dict
 %{_libdir}/%{name}/program/*.rdb
 %{_libdir}/%{name}/program/*.bmp
