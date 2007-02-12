@@ -80,7 +80,7 @@
 %define		specflags	-fno-strict-aliasing
 
 Summary:	OpenOffice.org - powerful office suite
-Summary(pl):	OpenOffice.org - potê¿ny pakiet biurowy
+Summary(pl.UTF-8):   OpenOffice.org - potÄ™Å¼ny pakiet biurowy
 Name:		openoffice.org
 Version:	%{ver}%{bugfix}
 Release:	0.%{bver}%{?without_gnomevfs:.novfs}.%{_rel}
@@ -261,22 +261,22 @@ Features of OpenOffice.org include:
  - Infrastructure for community involvement, including guidelines and
    discussion groups.
 
-%description -l pl
+%description -l pl.UTF-8
 OpenOffice.org jest projektem open-source sponsorowanym przez Sun
-Microsystems i przechowywanym przez CollabNet. W pa¼dzierniku 2000
-roku Sun udostêpni³ kod ¼ród³owy popularnego pakietu biurowego
-StarOfficeTM na zasadach licencji open-source. G³ównym celem
-OpenOffice.org jest stworzenie sieciowego pakietu biurowego nastêpnej
-generacji, wykorzystuj±c open-source'owe metody pracy.
+Microsystems i przechowywanym przez CollabNet. W paÅºdzierniku 2000
+roku Sun udostÄ™pniÅ‚ kod ÅºrÃ³dÅ‚owy popularnego pakietu biurowego
+StarOfficeTM na zasadach licencji open-source. GÅ‚Ã³wnym celem
+OpenOffice.org jest stworzenie sieciowego pakietu biurowego nastÄ™pnej
+generacji, wykorzystujÄ…c open-source'owe metody pracy.
 
-Do zalet OpenOffice.org mo¿na zaliczyæ:
- - dostêpny ca³y czas kod ¼ród³owy,
+Do zalet OpenOffice.org moÅ¼na zaliczyÄ‡:
+ - dostÄ™pny caÅ‚y czas kod ÅºrÃ³dÅ‚owy,
  - kontrola CVS,
- - infrastruktura s³u¿±ca do komunikowania siê w ramach projektu.
+ - infrastruktura sÅ‚uÅ¼Ä…ca do komunikowania siÄ™ w ramach projektu.
 
 %package libs-kde
 Summary:	OpenOffice.org KDE Interface
-Summary(pl):	Interfejs KDE dla OpenOffice.org
+Summary(pl.UTF-8):   Interfejs KDE dla OpenOffice.org
 Group:		X11/Libraries
 Requires:	%{name}-core = %{epoch}:%{version}-%{release}
 Obsoletes:	openoffice-i18n-en
@@ -286,12 +286,12 @@ Obsoletes:	openoffice-libs-kde
 %description libs-kde
 OpenOffice.org productivity suite - KDE Interface.
 
-%description libs-kde -l pl
+%description libs-kde -l pl.UTF-8
 Pakiet biurowy OpenOffice.org - Interfejs KDE.
 
 %package libs-gtk
 Summary:	OpenOffice.org GTK+ Interface
-Summary(pl):	Interfejs GTK+ dla OpenOffice.org
+Summary(pl.UTF-8):   Interfejs GTK+ dla OpenOffice.org
 Group:		X11/Libraries
 Requires:	%{name}-core = %{epoch}:%{version}-%{release}
 Obsoletes:	openoffice-i18n-en
@@ -301,12 +301,12 @@ Obsoletes:	openoffice-libs-gtk
 %description libs-gtk
 OpenOffice.org productivity suite - GTK+ Interface.
 
-%description libs-gtk -l pl
+%description libs-gtk -l pl.UTF-8
 Pakiet biurowy OpenOffice.org - Interfejs GTK+.
 
 %package core
 Summary:	Core modules for OpenOffice.org
-Summary(pl):	Podstawowe modu³y dla OpenOffice.org
+Summary(pl.UTF-8):   Podstawowe moduÅ‚y dla OpenOffice.org
 Group:		X11/Applications
 Requires:	%{name}-libs = %{epoch}:%{version}-%{release}
 Requires:	shared-mime-info
@@ -325,12 +325,12 @@ Obsoletes:	openoffice
 %description core
 Core libraries and support files for OpenOffice.org.
 
-%description core -l pl
-Podstawowe modu³y dla OpenOffice.org.
+%description core -l pl.UTF-8
+Podstawowe moduÅ‚y dla OpenOffice.org.
 
 %package pyuno
 Summary:	Python bindings for OpenOffice.org
-Summary(pl):	Wi±zania Pythona dla OpenOffice.org
+Summary(pl.UTF-8):   WiÄ…zania Pythona dla OpenOffice.org
 Group:		Libraries
 Requires:	%{name}-core = %{epoch}:%{version}-%{release}
 Requires:	python
@@ -340,14 +340,14 @@ Cool Python bindings for the OpenOffice.org UNO component model.
 Allows scripts both external to OpenOffice.org and within the internal
 OpenOffice.org scripting module to be written in Python.
 
-%description pyuno -l pl
-Wi±zania Pythona dla modelu komponentów UNO OpenOffice.org. Pozwala na
-oskryptowanie zarówno na zewn±trz OpenOffice.org, jak i na u¿ywanie
-skryptów w Pythonie w wewnêtrznym module skryptów OpenOffice.org.
+%description pyuno -l pl.UTF-8
+WiÄ…zania Pythona dla modelu komponentÃ³w UNO OpenOffice.org. Pozwala na
+oskryptowanie zarÃ³wno na zewnÄ…trz OpenOffice.org, jak i na uÅ¼ywanie
+skryptÃ³w w Pythonie w wewnÄ™trznym module skryptÃ³w OpenOffice.org.
 
 %package base
 Summary:	Database frontend for OpenOffice.org
-Summary(pl):	Frontend do baz danych dla OpenOffice.org
+Summary(pl.UTF-8):   Frontend do baz danych dla OpenOffice.org
 Group:		X11/Applications
 Requires:	%{name}-core = %{epoch}:%{version}-%{release}
 
@@ -355,14 +355,14 @@ Requires:	%{name}-core = %{epoch}:%{version}-%{release}
 GUI database frontend for OpenOffice.org. Allows creation and
 management of databases through a GUI.
 
-%description base -l pl
+%description base -l pl.UTF-8
 Graficzny frontend do baz danych dla OpenOffice.org. Pozwala na
-tworzenie i zarz±dzanie bazami poprzez graficzny interfejs
-u¿ytkownika.
+tworzenie i zarzÄ…dzanie bazami poprzez graficzny interfejs
+uÅ¼ytkownika.
 
 %package web
 Summary:	Web module for OpenOffice.org
-Summary(pl):	Modu³ Web dla OpenOffice.org
+Summary(pl.UTF-8):   ModuÅ‚ Web dla OpenOffice.org
 Group:		X11/Applications
 Requires:	%{name}-core = %{epoch}:%{version}-%{release}
 Requires:	%{name}-writer = %{epoch}:%{version}-%{release}
@@ -370,24 +370,24 @@ Requires:	%{name}-writer = %{epoch}:%{version}-%{release}
 %description web
 Web publishing application of OpenOffice.org.
 
-%description web -l pl
+%description web -l pl.UTF-8
 Aplikacja do tworzenia stron WWW z OpenOffice.org.
 
 %package writer
 Summary:	Writer module for OpenOffice.org
-Summary(pl):	Modu³ Writer dla OpenOffice.org
+Summary(pl.UTF-8):   ModuÅ‚ Writer dla OpenOffice.org
 Group:		X11/Applications
 Requires:	%{name}-core = %{epoch}:%{version}-%{release}
 
 %description writer
 Wordprocessor application of OpenOffice.org.
 
-%description writer -l pl
+%description writer -l pl.UTF-8
 Procesor tekstu z OpenOffice.org.
 
 %package emailmerge
 Summary:	email mail merge component for OpenOffice.org
-Summary(pl):	Kompolent email mail merge dla OpenOffice.org
+Summary(pl.UTF-8):   Kompolent email mail merge dla OpenOffice.org
 Group:		X11/Applications
 Requires:	%{name}-pyuno = %{epoch}:%{version}-%{release}
 Requires:	%{name}-writer = %{epoch}:%{version}-%{release}
@@ -395,61 +395,61 @@ Requires:	%{name}-writer = %{epoch}:%{version}-%{release}
 %description emailmerge
 Enables OpenOffice.org Writer module to enable mail merge to email.
 
-%description emailmerge -l pl
-Komponent umo¿liwiaj±cy modu³owi Writer w³±czanie poczty do poczty
+%description emailmerge -l pl.UTF-8
+Komponent umoÅ¼liwiajÄ…cy moduÅ‚owi Writer wÅ‚Ä…czanie poczty do poczty
 elektronicznej.
 
 %package calc
 Summary:	Calc module for OpenOffice.org
-Summary(pl):	Modu³ Calc dla OpenOffice.org
+Summary(pl.UTF-8):   ModuÅ‚ Calc dla OpenOffice.org
 Group:		X11/Applications
 Requires:	%{name}-core = %{epoch}:%{version}-%{release}
 
 %description calc
 Spreadsheet application of OpenOffice.org.
 
-%description calc -l pl
+%description calc -l pl.UTF-8
 Arkusz kalkulacyjny z OpenOffice.org.
 
 %package draw
 Summary:	Draw module for OpenOffice.org
-Summary(pl):	Modu³ Draw dla OpenOffice.org
+Summary(pl.UTF-8):   ModuÅ‚ Draw dla OpenOffice.org
 Group:		X11/Applications
 Requires:	%{name}-core = %{epoch}:%{version}-%{release}
 
 %description draw
 Drawing application of OpenOffice.org.
 
-%description draw -l pl
+%description draw -l pl.UTF-8
 Aplikacja rysunkowa z OpenOffice.org.
 
 %package impress
 Summary:	Impress module for OpenOffice.org
-Summary(pl):	Modu³ Impress dla OpenOffice.org
+Summary(pl.UTF-8):   ModuÅ‚ Impress dla OpenOffice.org
 Group:		X11/Applications
 Requires:	%{name}-core = %{epoch}:%{version}-%{release}
 
 %description impress
 Presentation application of OpenOffice.org.
 
-%description impress -l pl
+%description impress -l pl.UTF-8
 Aplikacja do tworzenia prezentacji z OpenOffice.org.
 
 %package math
 Summary:	Math module for OpenOffice.org
-Summary(pl):	Modu³ Math dla OpenOffice.org
+Summary(pl.UTF-8):   ModuÅ‚ Math dla OpenOffice.org
 Group:		X11/Applications
 Requires:	%{name}-core = %{epoch}:%{version}-%{release}
 
 %description math
 Math editor of OpenOffice.org.
 
-%description math -l pl
-Edytor równañ matematycznych z OpenOffice.org.
+%description math -l pl.UTF-8
+Edytor rÃ³wnaÅ„ matematycznych z OpenOffice.org.
 
 %package graphicfilter
 Summary:	Extra graphicfilter module for OpenOffice.org
-Summary(pl):	Dodatkowy modu³ graphicfilter dla OpenOffice.org
+Summary(pl.UTF-8):   Dodatkowy moduÅ‚ graphicfilter dla OpenOffice.org
 Group:		X11/Applications
 Requires:	%{name}-core = %{epoch}:%{version}-%{release}
 
@@ -457,13 +457,13 @@ Requires:	%{name}-core = %{epoch}:%{version}-%{release}
 Graphicfilter module for OpenOffice.org, provides additional SVG and
 Flash export filters.
 
-%description graphicfilter -l pl
-Modu³ graphicfilter dla OpenOffice.org, udostêpnia dodatkowe filtry
+%description graphicfilter -l pl.UTF-8
+ModuÅ‚ graphicfilter dla OpenOffice.org, udostÄ™pnia dodatkowe filtry
 eksportu SVG i Flash.
 
 %package xsltfilter
 Summary:	Extra xsltfilter module for OpenOffice.org
-Summary(pl):	Dodatkowy modu³ xsltfilter dla OpenOffice.org
+Summary(pl.UTF-8):   Dodatkowy moduÅ‚ xsltfilter dla OpenOffice.org
 Group:		X11/Applications
 Requires:	%{name}-core = %{epoch}:%{version}-%{release}
 
@@ -471,14 +471,14 @@ Requires:	%{name}-core = %{epoch}:%{version}-%{release}
 xsltfilter module for OpenOffice.org, provides additional docbook and
 xhtml export transforms. Install this to enable docbook export.
 
-%description xsltfilter -l pl
-Modu³ xsltfilter dla OpenOffice.org, udostêpnia dodatkowe
-przekszta³cenia wyj¶ciowe dla formatów docbook i xhtml. Jest potrzebny
+%description xsltfilter -l pl.UTF-8
+ModuÅ‚ xsltfilter dla OpenOffice.org, udostÄ™pnia dodatkowe
+przeksztaÅ‚cenia wyjÅ›ciowe dla formatÃ³w docbook i xhtml. Jest potrzebny
 do eksportu do docbooka.
 
 %package javafilter
 Summary:	Extra javafilter module for OpenOffice.org
-Summary(pl):	Dodatkowy modu³ javafilter dla OpenOffice.org
+Summary(pl.UTF-8):   Dodatkowy moduÅ‚ javafilter dla OpenOffice.org
 Group:		X11/Applications
 Requires:	%{name}-core = %{epoch}:%{version}-%{release}
 
@@ -486,25 +486,25 @@ Requires:	%{name}-core = %{epoch}:%{version}-%{release}
 javafilter module for OpenOffice.org, provides additional aportisdoc,
 Pocket Excel and Pocket Word import filters.
 
-%description javafilter -l pl
-Modu³ javafilter dla OpenOffice.org, udostêpnia dodatkowe filtry
+%description javafilter -l pl.UTF-8
+ModuÅ‚ javafilter dla OpenOffice.org, udostÄ™pnia dodatkowe filtry
 importu aportisdoc, Pocket Excel i Pocket Word.
 
 %package testtools
 Summary:	testtools for OpenOffice.org
-Summary(pl):	Narzêdzia testowe dla OpenOffice.org
+Summary(pl.UTF-8):   NarzÄ™dzia testowe dla OpenOffice.org
 Group:		Development/Libraries
 Requires:	%{name}-core = %{epoch}:%{version}-%{release}
 
 %description testtools
 QA tools for OpenOffice.org, enables automated testing.
 
-%description testtools -l pl
-Narzêdzia QA dla OpenOffice.org, pozwalaj± na automatyczne testowanie.
+%description testtools -l pl.UTF-8
+NarzÄ™dzia QA dla OpenOffice.org, pozwalajÄ… na automatyczne testowanie.
 
 %package -n fonts-TTF-OpenSymbol
 Summary:	OpenSymbol fonts
-Summary(pl):	Fonty OpenSymbol
+Summary(pl.UTF-8):   Fonty OpenSymbol
 Group:		Fonts
 Requires(post,postun):	fontpostinst
 Obsoletes:	openoffice.org-fonts-OpenSymbol
@@ -512,12 +512,12 @@ Obsoletes:	openoffice.org-fonts-OpenSymbol
 %description -n fonts-TTF-OpenSymbol
 OpenSymbol TrueType fonts.
 
-%description -n fonts-TTF-OpenSymbol -l pl
+%description -n fonts-TTF-OpenSymbol -l pl.UTF-8
 Fonty TrueType OpenSymbol.
 
 %package i18n-af
 Summary:	OpenOffice.org - interface in Afrikaans language
-Summary(pl):	OpenOffice.org - interfejs w jêzyku afrykanerskim
+Summary(pl.UTF-8):   OpenOffice.org - interfejs w jÄ™zyku afrykanerskim
 Group:		X11/Applications
 Requires:	%{name} = %{epoch}:%{version}-%{release}
 Obsoletes:	openoffice-i18n-af
@@ -529,13 +529,13 @@ Obsoletes:	openoffice.org-i18n-af-kde
 This package provides resources containing menus and dialogs in
 Afrikaans language.
 
-%description i18n-af -l pl
-Ten pakiet dostarcza zasoby zawieraj±ce menu i okna dialogowe w jêzyku
+%description i18n-af -l pl.UTF-8
+Ten pakiet dostarcza zasoby zawierajÄ…ce menu i okna dialogowe w jÄ™zyku
 afrykanerskim.
 
 %package i18n-ar
 Summary:	OpenOffice.org - interface in Arabic language
-Summary(pl):	OpenOffice.org - interfejs w jêzyku arabskim
+Summary(pl.UTF-8):   OpenOffice.org - interfejs w jÄ™zyku arabskim
 Group:		X11/Applications
 Requires:	%{name} = %{epoch}:%{version}-%{release}
 Obsoletes:	openoffice-i18n-ar
@@ -547,13 +547,13 @@ Obsoletes:	openoffice.org-i18n-ar-kde
 This package provides resources containing menus and dialogs in Arabic
 language.
 
-%description i18n-ar -l pl
-Ten pakiet dostarcza zasoby zawieraj±ce menu i okna dialogowe w jêzyku
+%description i18n-ar -l pl.UTF-8
+Ten pakiet dostarcza zasoby zawierajÄ…ce menu i okna dialogowe w jÄ™zyku
 arabskim.
 
 %package i18n-as_IN
 Summary:	OpenOffice.org - interface in Assamese language for India
-Summary(pl):	OpenOffice.org - interfejs w jêzyku asamskim dla Indii
+Summary(pl.UTF-8):   OpenOffice.org - interfejs w jÄ™zyku asamskim dla Indii
 Group:		X11/Applications
 Requires:	%{name} = %{epoch}:%{version}-%{release}
 
@@ -561,13 +561,13 @@ Requires:	%{name} = %{epoch}:%{version}-%{release}
 This package provides resources containing menus and dialogs in
 Assamese language for India.
 
-%description i18n-as_IN -l pl
-Ten pakiet dostarcza zasoby zawieraj±ce menu i okna dialogowe w jêzyku
+%description i18n-as_IN -l pl.UTF-8
+Ten pakiet dostarcza zasoby zawierajÄ…ce menu i okna dialogowe w jÄ™zyku
 asamskim dla Indii.
 
 %package i18n-be_BY
 Summary:	OpenOffice.org - interface in Belarusian language
-Summary(pl):	OpenOffice.org - interfejs w jêzyku bia³oruskim
+Summary(pl.UTF-8):   OpenOffice.org - interfejs w jÄ™zyku biaÅ‚oruskim
 Group:		X11/Applications
 Requires:	%{name} = %{epoch}:%{version}-%{release}
 
@@ -575,13 +575,13 @@ Requires:	%{name} = %{epoch}:%{version}-%{release}
 This package provides resources containing menus and dialogs in
 Belarusian language.
 
-%description i18n-be_BY -l pl
-Ten pakiet dostarcza zasoby zawieraj±ce menu i okna dialogowe w jêzyku
-bia³oruskim.
+%description i18n-be_BY -l pl.UTF-8
+Ten pakiet dostarcza zasoby zawierajÄ…ce menu i okna dialogowe w jÄ™zyku
+biaÅ‚oruskim.
 
 %package i18n-bg
 Summary:	OpenOffice.org - interface in Bulgarian language
-Summary(pl):	OpenOffice.org - interfejs w jêzyku bu³garskim
+Summary(pl.UTF-8):   OpenOffice.org - interfejs w jÄ™zyku buÅ‚garskim
 Group:		X11/Applications
 Requires:	%{name} = %{epoch}:%{version}-%{release}
 Obsoletes:	openoffice-i18n-bg
@@ -593,13 +593,13 @@ Obsoletes:	openoffice.org-i18n-bg-kde
 This package provides resources containing menus and dialogs in
 Bulgarian language.
 
-%description i18n-bg -l pl
-Ten pakiet dostarcza zasoby zawieraj±ce menu i okna dialogowe w jêzyku
-bu³garskim.
+%description i18n-bg -l pl.UTF-8
+Ten pakiet dostarcza zasoby zawierajÄ…ce menu i okna dialogowe w jÄ™zyku
+buÅ‚garskim.
 
 %package i18n-bn
 Summary:	OpenOffice.org - interface in Bangla language
-Summary(pl):	OpenOffice.org - interfejs w jêzyku bengalskim
+Summary(pl.UTF-8):   OpenOffice.org - interfejs w jÄ™zyku bengalskim
 Group:		X11/Applications
 Requires:	%{name} = %{epoch}:%{version}-%{release}
 
@@ -607,13 +607,13 @@ Requires:	%{name} = %{epoch}:%{version}-%{release}
 This package provides resources containing menus and dialogs in Bangla
 language.
 
-%description i18n-bn -l pl
-Ten pakiet dostarcza zasoby zawieraj±ce menu i okna dialogowe w jêzyku
+%description i18n-bn -l pl.UTF-8
+Ten pakiet dostarcza zasoby zawierajÄ…ce menu i okna dialogowe w jÄ™zyku
 bengalskim.
 
 %package i18n-bn_BD
 Summary:	OpenOffice.org - interface in Bangla language for Bangladesh
-Summary(pl):	OpenOffice.org - interfejs w jêzyku bengalskim dla Bangladeszu
+Summary(pl.UTF-8):   OpenOffice.org - interfejs w jÄ™zyku bengalskim dla Bangladeszu
 Group:		X11/Applications
 Requires:	%{name} = %{epoch}:%{version}-%{release}
 
@@ -621,13 +621,13 @@ Requires:	%{name} = %{epoch}:%{version}-%{release}
 This package provides resources containing menus and dialogs in Bangla
 language for Bangladesh.
 
-%description i18n-bn_BD -l pl
-Ten pakiet dostarcza zasoby zawieraj±ce menu i okna dialogowe w jêzyku
+%description i18n-bn_BD -l pl.UTF-8
+Ten pakiet dostarcza zasoby zawierajÄ…ce menu i okna dialogowe w jÄ™zyku
 bengalskim dla Bangladeszu.
 
 %package i18n-bn_IN
 Summary:	OpenOffice.org - interface in Bangla language for India
-Summary(pl):	OpenOffice.org - interfejs w jêzyku bengalskim dla Indii
+Summary(pl.UTF-8):   OpenOffice.org - interfejs w jÄ™zyku bengalskim dla Indii
 Group:		X11/Applications
 Requires:	%{name} = %{epoch}:%{version}-%{release}
 
@@ -635,13 +635,13 @@ Requires:	%{name} = %{epoch}:%{version}-%{release}
 This package provides resources containing menus and dialogs in Bangla
 language for India.
 
-%description i18n-bn_IN -l pl
-Ten pakiet dostarcza zasoby zawieraj±ce menu i okna dialogowe w jêzyku
+%description i18n-bn_IN -l pl.UTF-8
+Ten pakiet dostarcza zasoby zawierajÄ…ce menu i okna dialogowe w jÄ™zyku
 bengalskim dla Indii.
 
 %package i18n-br
 Summary:	OpenOffice.org - interface in Breton language
-Summary(pl):	OpenOffice.org - interfejs w jêzyku bretoñskim
+Summary(pl.UTF-8):   OpenOffice.org - interfejs w jÄ™zyku bretoÅ„skim
 Group:		X11/Applications
 Requires:	%{name} = %{epoch}:%{version}-%{release}
 
@@ -649,13 +649,13 @@ Requires:	%{name} = %{epoch}:%{version}-%{release}
 This package provides resources containing menus and dialogs in Breton
 language.
 
-%description i18n-br -l pl
-Ten pakiet dostarcza zasoby zawieraj±ce menu i okna dialogowe w jêzyku
-bretoñskim.
+%description i18n-br -l pl.UTF-8
+Ten pakiet dostarcza zasoby zawierajÄ…ce menu i okna dialogowe w jÄ™zyku
+bretoÅ„skim.
 
 %package i18n-bs
 Summary:	OpenOffice.org - interface in Bosnian language
-Summary(pl):	OpenOffice.org - interfejs w jêzyku bo¶niañskim
+Summary(pl.UTF-8):   OpenOffice.org - interfejs w jÄ™zyku boÅ›niaÅ„skim
 Group:		X11/Applications
 Requires:	%{name} = %{epoch}:%{version}-%{release}
 
@@ -663,13 +663,13 @@ Requires:	%{name} = %{epoch}:%{version}-%{release}
 This package provides resources containing menus and dialogs in
 Bosnian language.
 
-%description i18n-bs -l pl
-Ten pakiet dostarcza zasoby zawieraj±ce menu i okna dialogowe w jêzyku
-bo¶niañskim
+%description i18n-bs -l pl.UTF-8
+Ten pakiet dostarcza zasoby zawierajÄ…ce menu i okna dialogowe w jÄ™zyku
+boÅ›niaÅ„skim
 
 %package i18n-ca
 Summary:	OpenOffice.org - interface in Catalan language
-Summary(pl):	OpenOffice.org - interfejs w jêzyku kataloñskim
+Summary(pl.UTF-8):   OpenOffice.org - interfejs w jÄ™zyku kataloÅ„skim
 Group:		X11/Applications
 Requires:	%{name} = %{epoch}:%{version}-%{release}
 Obsoletes:	openoffice-i18n-ca
@@ -681,14 +681,14 @@ Obsoletes:	openoffice.org-i18n-ca-kde
 This package provides resources containing menus and dialogs in
 Catalan language.
 
-%description i18n-ca -l pl
-Ten pakiet dostarcza zasoby zawieraj±ce menu i okna dialogowe w jêzyku
-kataloñskim.
+%description i18n-ca -l pl.UTF-8
+Ten pakiet dostarcza zasoby zawierajÄ…ce menu i okna dialogowe w jÄ™zyku
+kataloÅ„skim.
 
 
 %package i18n-cs
 Summary:	OpenOffice.org - interface in Czech language
-Summary(pl):	OpenOffice.org - interfejs w jêzyku czeskim
+Summary(pl.UTF-8):   OpenOffice.org - interfejs w jÄ™zyku czeskim
 Group:		X11/Applications
 Requires:	%{name} = %{epoch}:%{version}-%{release}
 Obsoletes:	openoffice-i18n-cs
@@ -700,13 +700,13 @@ Obsoletes:	openoffice.org-i18n-cs-kde
 This package provides resources containing menus and dialogs in Czech
 language.
 
-%description i18n-cs -l pl
-Ten pakiet dostarcza zasoby zawieraj±ce menu i okna dialogowe w jêzyku
+%description i18n-cs -l pl.UTF-8
+Ten pakiet dostarcza zasoby zawierajÄ…ce menu i okna dialogowe w jÄ™zyku
 czeskim.
 
 %package i18n-cy
 Summary:	OpenOffice.org - interface in Cymraeg language
-Summary(pl):	OpenOffice.org - interfejs w jêzyku walijskim
+Summary(pl.UTF-8):   OpenOffice.org - interfejs w jÄ™zyku walijskim
 Group:		X11/Applications
 Requires:	%{name} = %{epoch}:%{version}-%{release}
 Obsoletes:	openoffice-i18n-cy
@@ -718,13 +718,13 @@ Obsoletes:	openoffice.org-i18n-cy-kde
 This package provides resources containing menus and dialogs in
 Cymraeg language.
 
-%description i18n-cy -l pl
-Ten pakiet dostarcza zasoby zawieraj±ce menu i okna dialogowe w jêzyku
+%description i18n-cy -l pl.UTF-8
+Ten pakiet dostarcza zasoby zawierajÄ…ce menu i okna dialogowe w jÄ™zyku
 walijskim.
 
 %package i18n-da
 Summary:	OpenOffice.org - interface in Danish language
-Summary(pl):	OpenOffice.org - interfejs w jêzyku duñskim
+Summary(pl.UTF-8):   OpenOffice.org - interfejs w jÄ™zyku duÅ„skim
 Group:		X11/Applications
 Requires:	%{name} = %{epoch}:%{version}-%{release}
 Obsoletes:	openoffice-i18n-da
@@ -736,13 +736,13 @@ Obsoletes:	openoffice.org-i18n-da-kde
 This package provides resources containing menus and dialogs in Danish
 language.
 
-%description i18n-da -l pl
-Ten pakiet dostarcza zasoby zawieraj±ce menu i okna dialogowe w jêzyku
-duñskim.
+%description i18n-da -l pl.UTF-8
+Ten pakiet dostarcza zasoby zawierajÄ…ce menu i okna dialogowe w jÄ™zyku
+duÅ„skim.
 
 %package i18n-de
 Summary:	OpenOffice.org - interface in German language
-Summary(pl):	OpenOffice.org - interfejs w jêzyku niemieckim
+Summary(pl.UTF-8):   OpenOffice.org - interfejs w jÄ™zyku niemieckim
 Group:		X11/Applications
 Requires:	%{name} = %{epoch}:%{version}-%{release}
 Obsoletes:	openoffice-i18n-de
@@ -754,13 +754,13 @@ Obsoletes:	openoffice.org-i18n-de-kde
 This package provides resources containing menus and dialogs in German
 language.
 
-%description i18n-de -l pl
-Ten pakiet dostarcza zasoby zawieraj±ce menu i okna dialogowe w jêzyku
+%description i18n-de -l pl.UTF-8
+Ten pakiet dostarcza zasoby zawierajÄ…ce menu i okna dialogowe w jÄ™zyku
 niemieckim.
 
 %package i18n-el
 Summary:	OpenOffice.org - interface in Greek language
-Summary(pl):	OpenOffice.org - interfejs w jêzyku greckim
+Summary(pl.UTF-8):   OpenOffice.org - interfejs w jÄ™zyku greckim
 Group:		X11/Applications
 Requires:	%{name} = %{epoch}:%{version}-%{release}
 Obsoletes:	openoffice-i18n-el
@@ -772,13 +772,13 @@ Obsoletes:	openoffice.org-i18n-el-kde
 This package provides resources containing menus and dialogs in Greek
 language.
 
-%description i18n-el -l pl
-Ten pakiet dostarcza zasoby zawieraj±ce menu i okna dialogowe w jêzyku
+%description i18n-el -l pl.UTF-8
+Ten pakiet dostarcza zasoby zawierajÄ…ce menu i okna dialogowe w jÄ™zyku
 greckim.
 
 %package i18n-en_GB
 Summary:	OpenOffice.org - interface in English language for United Kingdom
-Summary(pl):	OpenOffice.org - interfejs w jêzyku anglieskim dla Wielkiej Brytanii
+Summary(pl.UTF-8):   OpenOffice.org - interfejs w jÄ™zyku anglieskim dla Wielkiej Brytanii
 Group:		X11/Applications
 Requires:	%{name} = %{epoch}:%{version}-%{release}
 
@@ -786,13 +786,13 @@ Requires:	%{name} = %{epoch}:%{version}-%{release}
 This package provides resources containing menus and dialogs in
 English language for United Kingdom.
 
-%description i18n-en_GB -l pl
-Ten pakiet dostarcza zasoby zawieraj±ce menu i okna dialogowe w jêzyku
+%description i18n-en_GB -l pl.UTF-8
+Ten pakiet dostarcza zasoby zawierajÄ…ce menu i okna dialogowe w jÄ™zyku
 anglieskim dla Wielkiej Brytanii.
 
 %package i18n-en_ZA
 Summary:	OpenOffice.org - interface in English language for South Africa
-Summary(pl):	OpenOffice.org - interfejs w jêzyku anglieskim dla Po³udniowej Afryki
+Summary(pl.UTF-8):   OpenOffice.org - interfejs w jÄ™zyku anglieskim dla PoÅ‚udniowej Afryki
 Group:		X11/Applications
 Requires:	%{name} = %{epoch}:%{version}-%{release}
 
@@ -800,13 +800,13 @@ Requires:	%{name} = %{epoch}:%{version}-%{release}
 This package provides resources containing menus and dialogs in
 English language for South Africa.
 
-%description i18n-en_ZA -l pl
-Ten pakiet dostarcza zasoby zawieraj±ce menu i okna dialogowe w jêzyku
-anglieskim dla Po³udniowej Afryki.
+%description i18n-en_ZA -l pl.UTF-8
+Ten pakiet dostarcza zasoby zawierajÄ…ce menu i okna dialogowe w jÄ™zyku
+anglieskim dla PoÅ‚udniowej Afryki.
 
 %package i18n-eo
 Summary:	OpenOffice.org - interface in Esperanto language
-Summary(pl):	OpenOffice.org - interfejs w jêzyku esperanto
+Summary(pl.UTF-8):   OpenOffice.org - interfejs w jÄ™zyku esperanto
 Group:		X11/Applications
 Requires:	%{name} = %{epoch}:%{version}-%{release}
 
@@ -814,13 +814,13 @@ Requires:	%{name} = %{epoch}:%{version}-%{release}
 This package provides resources containing menus and dialogs in
 Esperanto language.
 
-%description i18n-eo -l pl
-Ten pakiet dostarcza zasoby zawieraj±ce menu i okna dialogowe w jêzyku
+%description i18n-eo -l pl.UTF-8
+Ten pakiet dostarcza zasoby zawierajÄ…ce menu i okna dialogowe w jÄ™zyku
 esperanto.
 
 %package i18n-es
 Summary:	OpenOffice.org - interface in Spanish language
-Summary(pl):	OpenOffice.org - interfejs w jêzyku hiszpañskim
+Summary(pl.UTF-8):   OpenOffice.org - interfejs w jÄ™zyku hiszpaÅ„skim
 Group:		X11/Applications
 Requires:	%{name} = %{epoch}:%{version}-%{release}
 Obsoletes:	openoffice-i18n-es
@@ -832,13 +832,13 @@ Obsoletes:	openoffice.org-i18n-es-kde
 This package provides resources containing menus and dialogs in
 Spanish language.
 
-%description i18n-es -l pl
-Ten pakiet dostarcza zasoby zawieraj±ce menu i okna dialogowe w jêzyku
-hiszpañskim.
+%description i18n-es -l pl.UTF-8
+Ten pakiet dostarcza zasoby zawierajÄ…ce menu i okna dialogowe w jÄ™zyku
+hiszpaÅ„skim.
 
 %package i18n-et
 Summary:	OpenOffice.org - interface in Estonian language
-Summary(pl):	OpenOffice.org - interfejs w jêzyku estoñskim
+Summary(pl.UTF-8):   OpenOffice.org - interfejs w jÄ™zyku estoÅ„skim
 Group:		X11/Applications
 Requires:	%{name} = %{epoch}:%{version}-%{release}
 Obsoletes:	openoffice-i18n-et
@@ -850,13 +850,13 @@ Obsoletes:	openoffice.org-i18n-et-kde
 This package provides resources containing menus and dialogs in
 Estonian language.
 
-%description i18n-et -l pl
-Ten pakiet dostarcza zasoby zawieraj±ce menu i okna dialogowe w jêzyku
-estoñskim.
+%description i18n-et -l pl.UTF-8
+Ten pakiet dostarcza zasoby zawierajÄ…ce menu i okna dialogowe w jÄ™zyku
+estoÅ„skim.
 
 %package i18n-eu
 Summary:	OpenOffice.org - interface in Basque (Euskara) language
-Summary(pl):	OpenOffice.org - interfejs w jêzyku baskijskim (euskera)
+Summary(pl.UTF-8):   OpenOffice.org - interfejs w jÄ™zyku baskijskim (euskera)
 Group:		X11/Applications
 Requires:	%{name} = %{epoch}:%{version}-%{release}
 Obsoletes:	openoffice-i18n-eu
@@ -867,13 +867,13 @@ Obsoletes:	openoffice-i18n-eu-kde
 This package provides resources containing menus and dialogs in Basque
 (Euskara) language.
 
-%description i18n-eu -l pl
-Ten pakiet dostarcza zasoby zawieraj±ce menu i okna dialogowe w jêzyku
+%description i18n-eu -l pl.UTF-8
+Ten pakiet dostarcza zasoby zawierajÄ…ce menu i okna dialogowe w jÄ™zyku
 baskijskim (euskera).
 
 %package i18n-fa
 Summary:	OpenOffice.org - interface in Persian language
-Summary(pl):	OpenOffice.org - interfejs w jêzyku perskim
+Summary(pl.UTF-8):   OpenOffice.org - interfejs w jÄ™zyku perskim
 Group:		X11/Applications
 Requires:	%{name} = %{epoch}:%{version}-%{release}
 Obsoletes:	openoffice-i18n-fa
@@ -884,13 +884,13 @@ Obsoletes:	openoffice-i18n-fa-kde
 This package provides resources containing menus and dialogs in
 Persian language.
 
-%description i18n-eu -l pl
-Ten pakiet dostarcza zasoby zawieraj±ce menu i okna dialogowe w jêzyku
+%description i18n-eu -l pl.UTF-8
+Ten pakiet dostarcza zasoby zawierajÄ…ce menu i okna dialogowe w jÄ™zyku
 perskim.
 
 %package i18n-fi
 Summary:	OpenOffice.org - interface in Finnish language
-Summary(pl):	OpenOffice.org - interfejs w jêzyku fiñskim
+Summary(pl.UTF-8):   OpenOffice.org - interfejs w jÄ™zyku fiÅ„skim
 Group:		X11/Applications
 Requires:	%{name} = %{epoch}:%{version}-%{release}
 Obsoletes:	openoffice-i18n-fi
@@ -902,13 +902,13 @@ Obsoletes:	openoffice.org-i18n-fi-kde
 This package provides resources containing menus and dialogs in
 Finnish language.
 
-%description i18n-fi -l pl
-Ten pakiet dostarcza zasoby zawieraj±ce menu i okna dialogowe w jêzyku
-fiñskim.
+%description i18n-fi -l pl.UTF-8
+Ten pakiet dostarcza zasoby zawierajÄ…ce menu i okna dialogowe w jÄ™zyku
+fiÅ„skim.
 
 %package i18n-fo
 Summary:	OpenOffice.org - interface in Faroese language
-Summary(pl):	OpenOffice.org - interfejs w jêzyku farerskim
+Summary(pl.UTF-8):   OpenOffice.org - interfejs w jÄ™zyku farerskim
 Group:		X11/Applications
 Requires:	%{name} = %{epoch}:%{version}-%{release}
 Obsoletes:	openoffice-i18n-fo
@@ -920,13 +920,13 @@ Obsoletes:	openoffice.org-i18n-fo-kde
 This package provides resources containing menus and dialogs in
 Faroese language.
 
-%description i18n-fo -l pl
-Ten pakiet dostarcza zasoby zawieraj±ce menu i okna dialogowe w jêzyku
+%description i18n-fo -l pl.UTF-8
+Ten pakiet dostarcza zasoby zawierajÄ…ce menu i okna dialogowe w jÄ™zyku
 farerskim.
 
 %package i18n-fr
 Summary:	OpenOffice.org - interface in French language
-Summary(pl):	OpenOffice.org - interfejs w jêzyku francuskim
+Summary(pl.UTF-8):   OpenOffice.org - interfejs w jÄ™zyku francuskim
 Group:		X11/Applications
 Requires:	%{name} = %{epoch}:%{version}-%{release}
 Obsoletes:	openoffice-i18n-fr
@@ -938,13 +938,13 @@ Obsoletes:	openoffice.org-i18n-fr-kde
 This package provides resources containing menus and dialogs in French
 language.
 
-%description i18n-fr -l pl
-Ten pakiet dostarcza zasoby zawieraj±ce menu i okna dialogowe w jêzyku
+%description i18n-fr -l pl.UTF-8
+Ten pakiet dostarcza zasoby zawierajÄ…ce menu i okna dialogowe w jÄ™zyku
 francuskim.
 
 %package i18n-ga
 Summary:	OpenOffice.org - interface in Irish language
-Summary(pl):	OpenOffice.org - interfejs w jêzyku irlandzkim
+Summary(pl.UTF-8):   OpenOffice.org - interfejs w jÄ™zyku irlandzkim
 Group:		X11/Applications
 Requires:	%{name} = %{epoch}:%{version}-%{release}
 Obsoletes:	openoffice-i18n-ga
@@ -956,13 +956,13 @@ Obsoletes:	openoffice.org-i18n-ga-kde
 This package provides resources containing menus and dialogs in Irish
 language.
 
-%description i18n-ga -l pl
-Ten pakiet dostarcza zasoby zawieraj±ce menu i okna dialogowe w jêzyku
+%description i18n-ga -l pl.UTF-8
+Ten pakiet dostarcza zasoby zawierajÄ…ce menu i okna dialogowe w jÄ™zyku
 irlandzkim.
 
 %package i18n-gl
 Summary:	OpenOffice.org - interface in Galician language
-Summary(pl):	OpenOffice.org - interfejs w jêzyku galicyjskim
+Summary(pl.UTF-8):   OpenOffice.org - interfejs w jÄ™zyku galicyjskim
 Group:		X11/Applications
 Requires:	%{name} = %{epoch}:%{version}-%{release}
 Obsoletes:	openoffice-i18n-gl
@@ -974,13 +974,13 @@ Obsoletes:	openoffice.org-i18n-gl-kde
 This package provides resources containing menus and dialogs in
 Galician language.
 
-%description i18n-gl -l pl
-Ten pakiet dostarcza zasoby zawieraj±ce menu i okna dialogowe w jêzyku
+%description i18n-gl -l pl.UTF-8
+Ten pakiet dostarcza zasoby zawierajÄ…ce menu i okna dialogowe w jÄ™zyku
 galicyjskim.
 
 %package i18n-gu_IN
 Summary:	OpenOffice.org - interface in Gujarati language
-Summary(pl):	OpenOffice.org - interfejs w jêzyku gud¼arati
+Summary(pl.UTF-8):   OpenOffice.org - interfejs w jÄ™zyku gudÅºarati
 Group:		X11/Applications
 Requires:	%{name} = %{epoch}:%{version}-%{release}
 
@@ -988,13 +988,13 @@ Requires:	%{name} = %{epoch}:%{version}-%{release}
 This package provides resources containing menus and dialogs in
 Gujarati language.
 
-%description i18n-gu_IN -l pl
-Ten pakiet dostarcza zasoby zawieraj±ce menu i okna dialogowe w jêzyku
-gud¼arati.
+%description i18n-gu_IN -l pl.UTF-8
+Ten pakiet dostarcza zasoby zawierajÄ…ce menu i okna dialogowe w jÄ™zyku
+gudÅºarati.
 
 %package i18n-he
 Summary:	OpenOffice.org - interface in Hebrew language
-Summary(pl):	OpenOffice.org - interfejs w jêzyku hebrajskim
+Summary(pl.UTF-8):   OpenOffice.org - interfejs w jÄ™zyku hebrajskim
 Group:		X11/Applications
 Requires:	%{name} = %{epoch}:%{version}-%{release}
 Obsoletes:	openoffice-i18n-he
@@ -1006,13 +1006,13 @@ Obsoletes:	openoffice.org-i18n-he-kde
 This package provides resources containing menus and dialogs in Hebrew
 language.
 
-%description i18n-he -l pl
-Ten pakiet dostarcza zasoby zawieraj±ce menu i okna dialogowe w jêzyku
+%description i18n-he -l pl.UTF-8
+Ten pakiet dostarcza zasoby zawierajÄ…ce menu i okna dialogowe w jÄ™zyku
 hebrajskim.
 
 %package i18n-hi_IN
 Summary:	OpenOffice.org - interface in Hindi language
-Summary(pl):	OpenOffice.org - interfejs w jêzyku hindi
+Summary(pl.UTF-8):   OpenOffice.org - interfejs w jÄ™zyku hindi
 Group:		X11/Applications
 Requires:	%{name} = %{epoch}:%{version}-%{release}
 Obsoletes:	openoffice-i18n-hi
@@ -1024,13 +1024,13 @@ Obsoletes:	openoffice.org-i18n-hi-kde
 This package provides resources containing menus and dialogs in Hindi
 language.
 
-%description i18n-hi_IN -l pl
-Ten pakiet dostarcza zasoby zawieraj±ce menu i okna dialogowe w jêzyku
+%description i18n-hi_IN -l pl.UTF-8
+Ten pakiet dostarcza zasoby zawierajÄ…ce menu i okna dialogowe w jÄ™zyku
 hindi.
 
 %package i18n-hr
 Summary:	OpenOffice.org - interface in Croatian language
-Summary(pl):	OpenOffice.org - interfejs w jêzyku chorwackim
+Summary(pl.UTF-8):   OpenOffice.org - interfejs w jÄ™zyku chorwackim
 Group:		X11/Applications
 Requires:	%{name} = %{epoch}:%{version}-%{release}
 Obsoletes:	openoffice-i18n-hr
@@ -1042,13 +1042,13 @@ Obsoletes:	openoffice.org-i18n-hr-kde
 This package provides resources containing menus and dialogs in
 Croatian language.
 
-%description i18n-hr -l pl
-Ten pakiet dostarcza zasoby zawieraj±ce menu i okna dialogowe w jêzyku
+%description i18n-hr -l pl.UTF-8
+Ten pakiet dostarcza zasoby zawierajÄ…ce menu i okna dialogowe w jÄ™zyku
 chorwackim.
 
 %package i18n-hu
 Summary:	OpenOffice.org - interface in Hungarian language
-Summary(pl):	OpenOffice.org - interfejs w jêzyku wêgierskim
+Summary(pl.UTF-8):   OpenOffice.org - interfejs w jÄ™zyku wÄ™gierskim
 Group:		X11/Applications
 Requires:	%{name} = %{epoch}:%{version}-%{release}
 Obsoletes:	openoffice-i18n-hu
@@ -1060,13 +1060,13 @@ Obsoletes:	openoffice.org-i18n-hu-kde
 This package provides resources containing menus and dialogs in
 Hungarian language.
 
-%description i18n-hu -l pl
-Ten pakiet dostarcza zasoby zawieraj±ce menu i okna dialogowe w jêzyku
-wêgierskim.
+%description i18n-hu -l pl.UTF-8
+Ten pakiet dostarcza zasoby zawierajÄ…ce menu i okna dialogowe w jÄ™zyku
+wÄ™gierskim.
 
 %package i18n-ia
 Summary:	OpenOffice.org - interface in Interlingua language
-Summary(pl):	OpenOffice.org - interfejs w jêzyku interlingua
+Summary(pl.UTF-8):   OpenOffice.org - interfejs w jÄ™zyku interlingua
 Group:		X11/Applications
 Requires:	%{name} = %{epoch}:%{version}-%{release}
 Obsoletes:	openoffice-i18n-ia
@@ -1078,13 +1078,13 @@ Obsoletes:	openoffice.org-i18n-ia-kde
 This package provides resources containing menus and dialogs in
 Interlingua language.
 
-%description i18n-ia -l pl
-Ten pakiet dostarcza zasoby zawieraj±ce menu i okna dialogowe w jêzyku
+%description i18n-ia -l pl.UTF-8
+Ten pakiet dostarcza zasoby zawierajÄ…ce menu i okna dialogowe w jÄ™zyku
 interlingua.
 
 %package i18n-id
 Summary:	OpenOffice.org - interface in Indonesian language
-Summary(pl):	OpenOffice.org - interfejs w jêzyku indonezyjskim
+Summary(pl.UTF-8):   OpenOffice.org - interfejs w jÄ™zyku indonezyjskim
 Group:		X11/Applications
 Requires:	%{name} = %{epoch}:%{version}-%{release}
 Obsoletes:	openoffice-i18n-id
@@ -1096,13 +1096,13 @@ Obsoletes:	openoffice.org-i18n-id-kde
 This package provides resources containing menus and dialogs in
 Indonesian language.
 
-%description i18n-id -l pl
-Ten pakiet dostarcza zasoby zawieraj±ce menu i okna dialogowe w jêzyku
+%description i18n-id -l pl.UTF-8
+Ten pakiet dostarcza zasoby zawierajÄ…ce menu i okna dialogowe w jÄ™zyku
 indonezyjskim.
 
 %package i18n-it
 Summary:	OpenOffice.org - interface in Italian language
-Summary(pl):	OpenOffice.org - interfejs w jêzyku w³oskim
+Summary(pl.UTF-8):   OpenOffice.org - interfejs w jÄ™zyku wÅ‚oskim
 Group:		X11/Applications
 Requires:	%{name} = %{epoch}:%{version}-%{release}
 Obsoletes:	openoffice-i18n-it
@@ -1114,13 +1114,13 @@ Obsoletes:	openoffice.org-i18n-it-kde
 This package provides resources containing menus and dialogs in
 Italian language.
 
-%description i18n-it -l pl
-Ten pakiet dostarcza zasoby zawieraj±ce menu i okna dialogowe w jêzyku
-w³oskim.
+%description i18n-it -l pl.UTF-8
+Ten pakiet dostarcza zasoby zawierajÄ…ce menu i okna dialogowe w jÄ™zyku
+wÅ‚oskim.
 
 %package i18n-ja
 Summary:	OpenOffice.org - interface in Japan language
-Summary(pl):	OpenOffice.org - interfejs w jêzyku japoñskim
+Summary(pl.UTF-8):   OpenOffice.org - interfejs w jÄ™zyku japoÅ„skim
 Group:		X11/Applications
 Requires:	%{name} = %{epoch}:%{version}-%{release}
 Obsoletes:	openoffice-i18n-ja
@@ -1132,13 +1132,13 @@ Obsoletes:	openoffice.org-i18n-ja-kde
 This package provides resources containing menus and dialogs in Japan
 language.
 
-%description i18n-ja -l pl
-Ten pakiet dostarcza zasoby zawieraj±ce menu i okna dialogowe w jêzyku
-japoñskim.
+%description i18n-ja -l pl.UTF-8
+Ten pakiet dostarcza zasoby zawierajÄ…ce menu i okna dialogowe w jÄ™zyku
+japoÅ„skim.
 
 %package i18n-km
 Summary:	OpenOffice.org - interface in Khmer language
-Summary(pl):	OpenOffice.org - interfejs w jêzyku khmerskim
+Summary(pl.UTF-8):   OpenOffice.org - interfejs w jÄ™zyku khmerskim
 Group:		X11/Applications
 Requires:	%{name} = %{epoch}:%{version}-%{release}
 
@@ -1146,13 +1146,13 @@ Requires:	%{name} = %{epoch}:%{version}-%{release}
 This package provides resources containing menus and dialogs in Khmer
 language.
 
-%description i18n-km -l pl
-Ten pakiet dostarcza zasoby zawieraj±ce menu i okna dialogowe w jêzyku
+%description i18n-km -l pl.UTF-8
+Ten pakiet dostarcza zasoby zawierajÄ…ce menu i okna dialogowe w jÄ™zyku
 khmerskim.
 
 %package i18n-kn_IN
 Summary:	OpenOffice.org - interface in Kannada language
-Summary(pl):	OpenOffice.org - interfejs w jêzyku kannara
+Summary(pl.UTF-8):   OpenOffice.org - interfejs w jÄ™zyku kannara
 Group:		X11/Applications
 Requires:	%{name} = %{epoch}:%{version}-%{release}
 Obsoletes:	openoffice-i18n-kn
@@ -1163,13 +1163,13 @@ Obsoletes:	openoffice-i18n-kn-kde
 This package provides resources containing menus and dialogs in
 Kannada language.
 
-%description i18n-kn_IN -l pl
-Ten pakiet dostarcza zasoby zawieraj±ce menu i okna dialogowe w jêzyku
+%description i18n-kn_IN -l pl.UTF-8
+Ten pakiet dostarcza zasoby zawierajÄ…ce menu i okna dialogowe w jÄ™zyku
 kannara.
 
 %package i18n-ko
 Summary:	OpenOffice.org - interface in Korean language
-Summary(pl):	OpenOffice.org - interfejs w jêzyku koreañskim
+Summary(pl.UTF-8):   OpenOffice.org - interfejs w jÄ™zyku koreaÅ„skim
 Group:		X11/Applications
 Requires:	%{name} = %{epoch}:%{version}-%{release}
 Obsoletes:	openoffice-i18n-ko
@@ -1181,13 +1181,13 @@ Obsoletes:	openoffice.org-i18n-ko-kde
 This package provides resources containing menus and dialogs in Korean
 language.
 
-%description i18n-ko -l pl
-Ten pakiet dostarcza zasoby zawieraj±ce menu i okna dialogowe w jêzyku
-koreañskim.
+%description i18n-ko -l pl.UTF-8
+Ten pakiet dostarcza zasoby zawierajÄ…ce menu i okna dialogowe w jÄ™zyku
+koreaÅ„skim.
 
 %package i18n-ku
 Summary:	OpenOffice.org - interface in Kurdish language
-Summary(pl):	OpenOffice.org - interfejs w jêzyku kurdyjskim
+Summary(pl.UTF-8):   OpenOffice.org - interfejs w jÄ™zyku kurdyjskim
 Group:		X11/Applications
 Requires:	%{name} = %{epoch}:%{version}-%{release}
 
@@ -1195,13 +1195,13 @@ Requires:	%{name} = %{epoch}:%{version}-%{release}
 This package provides resources containing menus and dialogs in
 Kurdish language.
 
-%description i18n-ku -l pl
-Ten pakiet dostarcza zasoby zawieraj±ce menu i okna dialogowe w jêzyku
+%description i18n-ku -l pl.UTF-8
+Ten pakiet dostarcza zasoby zawierajÄ…ce menu i okna dialogowe w jÄ™zyku
 kurdyjskim.
 
 %package i18n-la
 Summary:	OpenOffice.org - interface in Latin language
-Summary(pl):	OpenOffice.org - interfejs w jêzyku ³aciñskim
+Summary(pl.UTF-8):   OpenOffice.org - interfejs w jÄ™zyku Å‚aciÅ„skim
 Group:		X11/Applications
 Requires:	%{name} = %{epoch}:%{version}-%{release}
 Obsoletes:	openoffice-i18n-la
@@ -1213,13 +1213,13 @@ Obsoletes:	openoffice.org-i18n-la-kde
 This package provides resources containing menus and dialogs in Latin
 language.
 
-%description i18n-la -l pl
-Ten pakiet dostarcza zasoby zawieraj±ce menu i okna dialogowe w jêzyku
-³aciñskim.
+%description i18n-la -l pl.UTF-8
+Ten pakiet dostarcza zasoby zawierajÄ…ce menu i okna dialogowe w jÄ™zyku
+Å‚aciÅ„skim.
 
 %package i18n-lo
 Summary:	OpenOffice.org - interface in Lao language
-Summary(pl):	OpenOffice.org - interfejs w jêzyku laotañskim
+Summary(pl.UTF-8):   OpenOffice.org - interfejs w jÄ™zyku laotaÅ„skim
 Group:		X11/Applications
 Requires:	%{name} = %{epoch}:%{version}-%{release}
 
@@ -1227,13 +1227,13 @@ Requires:	%{name} = %{epoch}:%{version}-%{release}
 This package provides resources containing menus and dialogs in Lao
 language.
 
-%description i18n-lo -l pl
-Ten pakiet dostarcza zasoby zawieraj±ce menu i okna dialogowe w jêzyku
-laotañskim.
+%description i18n-lo -l pl.UTF-8
+Ten pakiet dostarcza zasoby zawierajÄ…ce menu i okna dialogowe w jÄ™zyku
+laotaÅ„skim.
 
 %package i18n-lt
 Summary:	OpenOffice.org - interface in Lithuanian language
-Summary(pl):	OpenOffice.org - interfejs w jêzyku litewskim
+Summary(pl.UTF-8):   OpenOffice.org - interfejs w jÄ™zyku litewskim
 Group:		X11/Applications
 Requires:	%{name} = %{epoch}:%{version}-%{release}
 Obsoletes:	openoffice-i18n-lt
@@ -1245,13 +1245,13 @@ Obsoletes:	openoffice.org-i18n-lt-kde
 This package provides resources containing menus and dialogs in
 Lithuanian language.
 
-%description i18n-lt -l pl
-Ten pakiet dostarcza zasoby zawieraj±ce menu i okna dialogowe w jêzyku
+%description i18n-lt -l pl.UTF-8
+Ten pakiet dostarcza zasoby zawierajÄ…ce menu i okna dialogowe w jÄ™zyku
 litewskim.
 
 %package i18n-lv
 Summary:	OpenOffice.org - interface in Latvian language
-Summary(pl):	OpenOffice.org - interfejs w jêzyku ³otewskim
+Summary(pl.UTF-8):   OpenOffice.org - interfejs w jÄ™zyku Å‚otewskim
 Group:		X11/Applications
 Requires:	%{name} = %{epoch}:%{version}-%{release}
 
@@ -1259,13 +1259,13 @@ Requires:	%{name} = %{epoch}:%{version}-%{release}
 This package provides resources containing menus and dialogs in
 Latvian language.
 
-%description i18n-lv -l pl
-Ten pakiet dostarcza zasoby zawieraj±ce menu i okna dialogowe w jêzyku
-³otewskim.
+%description i18n-lv -l pl.UTF-8
+Ten pakiet dostarcza zasoby zawierajÄ…ce menu i okna dialogowe w jÄ™zyku
+Å‚otewskim.
 
 %package i18n-med
 Summary:	OpenOffice.org - interface in Melpa language
-Summary(pl):	OpenOffice.org - interfejs w jêzyku melpa
+Summary(pl.UTF-8):   OpenOffice.org - interfejs w jÄ™zyku melpa
 Group:		X11/Applications
 Requires:	%{name} = %{epoch}:%{version}-%{release}
 Obsoletes:	openoffice-i18n-med
@@ -1277,13 +1277,13 @@ Obsoletes:	openoffice.org-i18n-med-kde
 This package provides resources containing menus and dialogs in Melpa
 language.
 
-%description i18n-med -l pl
-Ten pakiet dostarcza zasoby zawieraj±ce menu i okna dialogowe w jêzyku
+%description i18n-med -l pl.UTF-8
+Ten pakiet dostarcza zasoby zawierajÄ…ce menu i okna dialogowe w jÄ™zyku
 melpa.
 
 %package i18n-mi
 Summary:	OpenOffice.org - interface in Maori language
-Summary(pl):	OpenOffice.org - interfejs w jêzyku maoryjskim
+Summary(pl.UTF-8):   OpenOffice.org - interfejs w jÄ™zyku maoryjskim
 Group:		X11/Applications
 Requires:	%{name} = %{epoch}:%{version}-%{release}
 Obsoletes:	openoffice-i18n-mi
@@ -1295,13 +1295,13 @@ Obsoletes:	openoffice.org-i18n-mi-kde
 This package provides resources containing menus and dialogs in Maori
 language.
 
-%description i18n-mi -l pl
-Ten pakiet dostarcza zasoby zawieraj±ce menu i okna dialogowe w jêzyku
+%description i18n-mi -l pl.UTF-8
+Ten pakiet dostarcza zasoby zawierajÄ…ce menu i okna dialogowe w jÄ™zyku
 maoryjskim.
 
 %package i18n-mk
 Summary:	OpenOffice.org - interface in Macedonian language
-Summary(pl):	OpenOffice.org - interfejs w jêzyku macedoñskim
+Summary(pl.UTF-8):   OpenOffice.org - interfejs w jÄ™zyku macedoÅ„skim
 Group:		X11/Applications
 Requires:	%{name} = %{epoch}:%{version}-%{release}
 
@@ -1309,13 +1309,13 @@ Requires:	%{name} = %{epoch}:%{version}-%{release}
 This package provides resources containing menus and dialogs in
 Macedonian language.
 
-%description i18n-mk -l pl
-Ten pakiet dostarcza zasoby zawieraj±ce menu i okna dialogowe w jêzyku
-macedoñskim.
+%description i18n-mk -l pl.UTF-8
+Ten pakiet dostarcza zasoby zawierajÄ…ce menu i okna dialogowe w jÄ™zyku
+macedoÅ„skim.
 
 %package i18n-ml_IN
 Summary:	OpenOffice.org - interface in Malayalam language for India
-Summary(pl):	OpenOffice.org - interfejs w jêzyku malajalamskim dla Indii
+Summary(pl.UTF-8):   OpenOffice.org - interfejs w jÄ™zyku malajalamskim dla Indii
 Group:		X11/Applications
 Requires:	%{name} = %{epoch}:%{version}-%{release}
 
@@ -1323,13 +1323,13 @@ Requires:	%{name} = %{epoch}:%{version}-%{release}
 This package provides resources containing menus and dialogs in
 Malayalam language for India.
 
-%description i18n-ml_IN -l pl
-Ten pakiet dostarcza zasoby zawieraj±ce menu i okna dialogowe w jêzyku
+%description i18n-ml_IN -l pl.UTF-8
+Ten pakiet dostarcza zasoby zawierajÄ…ce menu i okna dialogowe w jÄ™zyku
 malajalamskim dla Indii.
 
 %package i18n-mr_IN
 Summary:	OpenOffice.org - interface in Marathi language for India
-Summary(pl):	OpenOffice.org - interfejs w jêzyku marathi dla Indii
+Summary(pl.UTF-8):   OpenOffice.org - interfejs w jÄ™zyku marathi dla Indii
 Group:		X11/Applications
 Requires:	%{name} = %{epoch}:%{version}-%{release}
 
@@ -1337,13 +1337,13 @@ Requires:	%{name} = %{epoch}:%{version}-%{release}
 This package provides resources containing menus and dialogs in
 Marathi language for India.
 
-%description i18n-mr_IN -l pl
-Ten pakiet dostarcza zasoby zawieraj±ce menu i okna dialogowe w jêzyku
+%description i18n-mr_IN -l pl.UTF-8
+Ten pakiet dostarcza zasoby zawierajÄ…ce menu i okna dialogowe w jÄ™zyku
 marathi dla Indii.
 
 %package i18n-ms
 Summary:	OpenOffice.org - interface in Malay language
-Summary(pl):	OpenOffice.org - interfejs w jêzyku malajskim
+Summary(pl.UTF-8):   OpenOffice.org - interfejs w jÄ™zyku malajskim
 Group:		X11/Applications
 Requires:	%{name} = %{epoch}:%{version}-%{release}
 Obsoletes:	openoffice-i18n-ms
@@ -1355,13 +1355,13 @@ Obsoletes:	openoffice.org-i18n-ms-kde
 This package provides resources containing menus and dialogs in Malay
 language.
 
-%description i18n-ms -l pl
-Ten pakiet dostarcza zasoby zawieraj±ce menu i okna dialogowe w jêzyku
+%description i18n-ms -l pl.UTF-8
+Ten pakiet dostarcza zasoby zawierajÄ…ce menu i okna dialogowe w jÄ™zyku
 malajskim.
 
 %package i18n-nb
 Summary:	OpenOffice.org - interface in Norwegian Bokmaal language
-Summary(pl):	OpenOffice.org - interfejs w jêzyku norweskim (odmiana Bokmaal)
+Summary(pl.UTF-8):   OpenOffice.org - interfejs w jÄ™zyku norweskim (odmiana Bokmaal)
 Group:		X11/Applications
 Requires:	%{name} = %{epoch}:%{version}-%{release}
 Obsoletes:	openoffice-i18n-nb
@@ -1373,13 +1373,13 @@ Obsoletes:	openoffice.org-i18n-nb-kde
 This package provides resources containing menus and dialogs in
 Norwegian Bokmaal language.
 
-%description i18n-nb -l pl
-Ten pakiet dostarcza zasoby zawieraj±ce menu i okna dialogowe w jêzyku
+%description i18n-nb -l pl.UTF-8
+Ten pakiet dostarcza zasoby zawierajÄ…ce menu i okna dialogowe w jÄ™zyku
 norweskim w odmianie Bokmaal.
 
 %package i18n-ne
 Summary:	OpenOffice.org - interface in Nepali language
-Summary(pl):	OpenOffice.org - interfejs w jêzyku nepalskim
+Summary(pl.UTF-8):   OpenOffice.org - interfejs w jÄ™zyku nepalskim
 Group:		X11/Applications
 Requires:	%{name} = %{epoch}:%{version}-%{release}
 
@@ -1387,13 +1387,13 @@ Requires:	%{name} = %{epoch}:%{version}-%{release}
 This package provides resources containing menus and dialogs in Nepali
 language.
 
-%description i18n-ne -l pl
-Ten pakiet dostarcza zasoby zawieraj±ce menu i okna dialogowe w jêzyku
+%description i18n-ne -l pl.UTF-8
+Ten pakiet dostarcza zasoby zawierajÄ…ce menu i okna dialogowe w jÄ™zyku
 nepalskim.
 
 %package i18n-nl
 Summary:	OpenOffice.org - interface in Dutch language
-Summary(pl):	OpenOffice.org - interfejs w jêzyku holenderskim
+Summary(pl.UTF-8):   OpenOffice.org - interfejs w jÄ™zyku holenderskim
 Group:		X11/Applications
 Requires:	%{name} = %{epoch}:%{version}-%{release}
 Obsoletes:	openoffice-i18n-nl
@@ -1405,13 +1405,13 @@ Obsoletes:	openoffice.org-i18n-nl-kde
 This package provides resources containing menus and dialogs in Dutch
 language.
 
-%description i18n-nl -l pl
-Ten pakiet dostarcza zasoby zawieraj±ce menu i okna dialogowe w jêzyku
+%description i18n-nl -l pl.UTF-8
+Ten pakiet dostarcza zasoby zawierajÄ…ce menu i okna dialogowe w jÄ™zyku
 holenderskim.
 
 %package i18n-nn
 Summary:	OpenOffice.org - interface in Norwegian Nynorsk language
-Summary(pl):	OpenOffice.org - interfejs w jêzyku norweskim (odmiana Nynorsk)
+Summary(pl.UTF-8):   OpenOffice.org - interfejs w jÄ™zyku norweskim (odmiana Nynorsk)
 Group:		X11/Applications
 Requires:	%{name} = %{epoch}:%{version}-%{release}
 Obsoletes:	openoffice-i18n-nn
@@ -1423,13 +1423,13 @@ Obsoletes:	openoffice.org-i18n-nn-kde
 This package provides resources containing menus and dialogs in
 Norwegian Nynorsk language.
 
-%description i18n-nn -l pl
-Ten pakiet dostarcza zasoby zawieraj±ce menu i okna dialogowe w jêzyku
+%description i18n-nn -l pl.UTF-8
+Ten pakiet dostarcza zasoby zawierajÄ…ce menu i okna dialogowe w jÄ™zyku
 norweskim w odmianie Nynorsk.
 
 %package i18n-nr
 Summary:	OpenOffice.org - interface in South Ndebele language
-Summary(pl):	OpenOffice.org - interfejs w jêzyku ndebele (po³udniowym)
+Summary(pl.UTF-8):   OpenOffice.org - interfejs w jÄ™zyku ndebele (poÅ‚udniowym)
 Group:		X11/Applications
 Requires:	%{name} = %{epoch}:%{version}-%{release}
 
@@ -1437,13 +1437,13 @@ Requires:	%{name} = %{epoch}:%{version}-%{release}
 This package provides resources containing menus and dialogs in South
 Ndebele language.
 
-%description i18n-nr -l pl
-Ten pakiet dostarcza zasoby zawieraj±ce menu i okna dialogowe w jêzyku
-ndebele (po³udniowym).
+%description i18n-nr -l pl.UTF-8
+Ten pakiet dostarcza zasoby zawierajÄ…ce menu i okna dialogowe w jÄ™zyku
+ndebele (poÅ‚udniowym).
 
 %package i18n-nso
 Summary:	OpenOffice.org - interface in Northern Sotho language
-Summary(pl):	OpenOffice.org - interfejs w jêzyku ludu Soto
+Summary(pl.UTF-8):   OpenOffice.org - interfejs w jÄ™zyku ludu Soto
 Group:		X11/Applications
 Requires:	%{name} = %{epoch}:%{version}-%{release}
 Obsoletes:	openoffice-i18n-nso
@@ -1455,13 +1455,13 @@ Obsoletes:	openoffice.org-i18n-nso-kde
 This package provides resources containing menus and dialogs in
 Northern Sotho language.
 
-%description i18n-nso -l pl
-Ten pakiet dostarcza zasoby zawieraj±ce menu i okna dialogowe w jêzyku
+%description i18n-nso -l pl.UTF-8
+Ten pakiet dostarcza zasoby zawierajÄ…ce menu i okna dialogowe w jÄ™zyku
 ludu Soto.
 
 %package i18n-or_IN
 Summary:	OpenOffice.org - interface in Oriya language for India
-Summary(pl):	OpenOffice.org - interfejs w jêzyku orija dla Indii
+Summary(pl.UTF-8):   OpenOffice.org - interfejs w jÄ™zyku orija dla Indii
 Group:		X11/Applications
 Requires:	%{name} = %{epoch}:%{version}-%{release}
 
@@ -1469,13 +1469,13 @@ Requires:	%{name} = %{epoch}:%{version}-%{release}
 This package provides resources containing menus and dialogs in Oriya
 language for India.
 
-%description i18n-or_IN -l pl
-Ten pakiet dostarcza zasoby zawieraj±ce menu i okna dialogowe w jêzyku
+%description i18n-or_IN -l pl.UTF-8
+Ten pakiet dostarcza zasoby zawierajÄ…ce menu i okna dialogowe w jÄ™zyku
 orija dla Indii.
 
 %package i18n-pa_IN
 Summary:	OpenOffice.org - interface in Punjabi language
-Summary(pl):	OpenOffice.org - interfejs w jêzyku pend¿abskim
+Summary(pl.UTF-8):   OpenOffice.org - interfejs w jÄ™zyku pendÅ¼abskim
 Group:		X11/Applications
 Requires:	%{name} = %{epoch}:%{version}-%{release}
 
@@ -1483,13 +1483,13 @@ Requires:	%{name} = %{epoch}:%{version}-%{release}
 This package provides resources containing menus and dialogs in
 Punjabi language.
 
-%description i18n-pa_IN -l pl
-Ten pakiet dostarcza zasoby zawieraj±ce menu i okna dialogowe w jêzyku
-pend¿abskim.
+%description i18n-pa_IN -l pl.UTF-8
+Ten pakiet dostarcza zasoby zawierajÄ…ce menu i okna dialogowe w jÄ™zyku
+pendÅ¼abskim.
 
 %package i18n-pl
 Summary:	OpenOffice.org - interface in Polish language
-Summary(pl):	OpenOffice.org - interfejs w jêzyku polskim
+Summary(pl.UTF-8):   OpenOffice.org - interfejs w jÄ™zyku polskim
 Group:		X11/Applications
 Requires:	%{name} = %{epoch}:%{version}-%{release}
 Obsoletes:	openoffice-i18n-pl
@@ -1501,13 +1501,13 @@ Obsoletes:	openoffice.org-i18n-pl-kde
 This package provides resources containing menus and dialogs in Polish
 language.
 
-%description i18n-pl -l pl
-Ten pakiet dostarcza zasoby zawieraj±ce menu i okna dialogowe w jêzyku
+%description i18n-pl -l pl.UTF-8
+Ten pakiet dostarcza zasoby zawierajÄ…ce menu i okna dialogowe w jÄ™zyku
 polskim.
 
 %package i18n-pt
 Summary:	OpenOffice.org - interface in Portuguese language
-Summary(pl):	OpenOffice.org - interfejs w jêzyku portugalskim
+Summary(pl.UTF-8):   OpenOffice.org - interfejs w jÄ™zyku portugalskim
 Group:		X11/Applications
 Requires:	%{name} = %{epoch}:%{version}-%{release}
 Obsoletes:	openoffice-i18n-pt
@@ -1519,13 +1519,13 @@ Obsoletes:	openoffice.org-i18n-pt-kde
 This package provides resources containing menus and dialogs in
 Portuguese language.
 
-%description i18n-pt -l pl
-Ten pakiet dostarcza zasoby zawieraj±ce menu i okna dialogowe w jêzyku
+%description i18n-pt -l pl.UTF-8
+Ten pakiet dostarcza zasoby zawierajÄ…ce menu i okna dialogowe w jÄ™zyku
 portugalskim.
 
 %package i18n-pt_BR
 Summary:	OpenOffice.org - interface in Brazilian Portuguese language
-Summary(pl):	OpenOffice.org - interfejs w jêzyku portugalskim dla Brazylii
+Summary(pl.UTF-8):   OpenOffice.org - interfejs w jÄ™zyku portugalskim dla Brazylii
 Group:		X11/Applications
 Requires:	%{name} = %{epoch}:%{version}-%{release}
 Obsoletes:	openoffice-i18n-pt_BR
@@ -1537,13 +1537,13 @@ Obsoletes:	openoffice.org-i18n-pt_BR-kde
 This package provides resources containing menus and dialogs in
 Brazilian Portuguese language.
 
-%description i18n-pt_BR -l pl
-Ten pakiet dostarcza zasoby zawieraj±ce menu i okna dialogowe w jêzyku
+%description i18n-pt_BR -l pl.UTF-8
+Ten pakiet dostarcza zasoby zawierajÄ…ce menu i okna dialogowe w jÄ™zyku
 portugalskim dla Brazylii.
 
 %package i18n-ro
 Summary:	OpenOffice.org - interface in Romanian language
-Summary(pl):	OpenOffice.org - interfejs w jêzyku rumuñskim
+Summary(pl.UTF-8):   OpenOffice.org - interfejs w jÄ™zyku rumuÅ„skim
 Group:		X11/Applications
 Requires:	%{name} = %{epoch}:%{version}-%{release}
 Obsoletes:	openoffice-i18n-ro
@@ -1555,13 +1555,13 @@ Obsoletes:	openoffice.org-i18n-ro-kde
 This package provides resources containing menus and dialogs in
 Romanian language.
 
-%description i18n-ro -l pl
-Ten pakiet dostarcza zasoby zawieraj±ce menu i okna dialogowe w jêzyku
-rumuñskim.
+%description i18n-ro -l pl.UTF-8
+Ten pakiet dostarcza zasoby zawierajÄ…ce menu i okna dialogowe w jÄ™zyku
+rumuÅ„skim.
 
 %package i18n-ru
 Summary:	OpenOffice.org - interface in Russian language
-Summary(pl):	OpenOffice.org - interfejs w jêzyku rosyjskim
+Summary(pl.UTF-8):   OpenOffice.org - interfejs w jÄ™zyku rosyjskim
 Group:		X11/Applications
 Requires:	%{name} = %{epoch}:%{version}-%{release}
 Obsoletes:	openoffice-i18n-ru
@@ -1573,13 +1573,13 @@ Obsoletes:	openoffice.org-i18n-ru-kde
 This package provides resources containing menus and dialogs in
 Russian language.
 
-%description i18n-ru -l pl
-Ten pakiet dostarcza zasoby zawieraj±ce menu i okna dialogowe w jêzyku
+%description i18n-ru -l pl.UTF-8
+Ten pakiet dostarcza zasoby zawierajÄ…ce menu i okna dialogowe w jÄ™zyku
 rosyjskim.
 
 %package i18n-rw
 Summary:	OpenOffice.org - interface in Kinarwanda language
-Summary(pl):	OpenOffice.org - interfejs w jêzyku kinya-ruanda
+Summary(pl.UTF-8):   OpenOffice.org - interfejs w jÄ™zyku kinya-ruanda
 Group:		X11/Applications
 Requires:	%{name} = %{epoch}:%{version}-%{release}
 
@@ -1587,13 +1587,13 @@ Requires:	%{name} = %{epoch}:%{version}-%{release}
 This package provides resources containing menus and dialogs in
 Kinarwanda language.
 
-%description i18n-rw -l pl
-Ten pakiet dostarcza zasoby zawieraj±ce menu i okna dialogowe w jêzyku
+%description i18n-rw -l pl.UTF-8
+Ten pakiet dostarcza zasoby zawierajÄ…ce menu i okna dialogowe w jÄ™zyku
 kinya-ruanda.
 
 %package i18n-sh
 Summary:	OpenOffice.org - interface in Serbo-Croatian language
-Summary(pl):	OpenOffice.org - interfejs w jêzyku serbsko-chorwackim
+Summary(pl.UTF-8):   OpenOffice.org - interfejs w jÄ™zyku serbsko-chorwackim
 Group:		X11/Applications
 Requires:	%{name} = %{epoch}:%{version}-%{release}
 
@@ -1601,13 +1601,13 @@ Requires:	%{name} = %{epoch}:%{version}-%{release}
 This package provides resources containing menus and dialogs in
 Serbo-Croatian language.
 
-%description i18n-sh -l pl
-Ten pakiet dostarcza zasoby zawieraj±ce menu i okna dialogowe w jêzyku
+%description i18n-sh -l pl.UTF-8
+Ten pakiet dostarcza zasoby zawierajÄ…ce menu i okna dialogowe w jÄ™zyku
 serbsko-chorwackim.
 
 %package i18n-sk
 Summary:	OpenOffice.org - interface in Slovak language
-Summary(pl):	OpenOffice.org - interfejs w jêzyku s³owackim
+Summary(pl.UTF-8):   OpenOffice.org - interfejs w jÄ™zyku sÅ‚owackim
 Group:		X11/Applications
 Requires:	%{name} = %{epoch}:%{version}-%{release}
 Obsoletes:	openoffice-i18n-sk
@@ -1619,13 +1619,13 @@ Obsoletes:	openoffice.org-i18n-sk-kde
 This package provides resources containing menus and dialogs in Slovak
 language.
 
-%description i18n-sk -l pl
-Ten pakiet dostarcza zasoby zawieraj±ce menu i okna dialogowe w jêzyku
-s³owackim.
+%description i18n-sk -l pl.UTF-8
+Ten pakiet dostarcza zasoby zawierajÄ…ce menu i okna dialogowe w jÄ™zyku
+sÅ‚owackim.
 
 %package i18n-sl
 Summary:	OpenOffice.org - interface in Slovenian language
-Summary(pl):	OpenOffice.org - interfejs w jêzyku s³oweñskim
+Summary(pl.UTF-8):   OpenOffice.org - interfejs w jÄ™zyku sÅ‚oweÅ„skim
 Group:		X11/Applications
 Requires:	%{name} = %{epoch}:%{version}-%{release}
 Obsoletes:	openoffice-i18n-sl
@@ -1637,13 +1637,13 @@ Obsoletes:	openoffice.org-i18n-sl-kde
 This package provides resources containing menus and dialogs in
 Slovenian language.
 
-%description i18n-sl -l pl
-Ten pakiet dostarcza zasoby zawieraj±ce menu i okna dialogowe w jêzyku
-s³oweñskim.
+%description i18n-sl -l pl.UTF-8
+Ten pakiet dostarcza zasoby zawierajÄ…ce menu i okna dialogowe w jÄ™zyku
+sÅ‚oweÅ„skim.
 
 %package i18n-sr
 Summary:	OpenOffice.org - interface in Serbian language
-Summary(pl):	OpenOffice.org - interfejs w jêzyku serbskim
+Summary(pl.UTF-8):   OpenOffice.org - interfejs w jÄ™zyku serbskim
 Group:		X11/Applications
 Requires:	%{name} = %{epoch}:%{version}-%{release}
 
@@ -1651,13 +1651,13 @@ Requires:	%{name} = %{epoch}:%{version}-%{release}
 This package provides resources containing menus and dialogs in
 Serbian language.
 
-%description i18n-sr -l pl
-Ten pakiet dostarcza zasoby zawieraj±ce menu i okna dialogowe w jêzyku
+%description i18n-sr -l pl.UTF-8
+Ten pakiet dostarcza zasoby zawierajÄ…ce menu i okna dialogowe w jÄ™zyku
 serbskim.
 
 %package i18n-ss
 Summary:	OpenOffice.org - interface in Siswant language
-Summary(pl):	OpenOffice.org - interfejs w jêzyku siswati
+Summary(pl.UTF-8):   OpenOffice.org - interfejs w jÄ™zyku siswati
 Group:		X11/Applications
 Requires:	%{name} = %{epoch}:%{version}-%{release}
 
@@ -1665,13 +1665,13 @@ Requires:	%{name} = %{epoch}:%{version}-%{release}
 This package provides resources containing menus and dialogs in
 Siswant language.
 
-%description i18n-ss -l pl
-Ten pakiet dostarcza zasoby zawieraj±ce menu i okna dialogowe w jêzyku
+%description i18n-ss -l pl.UTF-8
+Ten pakiet dostarcza zasoby zawierajÄ…ce menu i okna dialogowe w jÄ™zyku
 siswati.
 
 %package i18n-st
 Summary:	OpenOffice.org - interface in Southern Sotho language
-Summary(pl):	OpenOffice.org - interfejs w jêzyku po³udniowym sotho
+Summary(pl.UTF-8):   OpenOffice.org - interfejs w jÄ™zyku poÅ‚udniowym sotho
 Group:		X11/Applications
 Requires:	%{name} = %{epoch}:%{version}-%{release}
 
@@ -1679,13 +1679,13 @@ Requires:	%{name} = %{epoch}:%{version}-%{release}
 This package provides resources containing menus and dialogs in
 Southern Sotho language.
 
-%description i18n-st -l pl
-Ten pakiet dostarcza zasoby zawieraj±ce menu i okna dialogowe w jêzyku
-po³udniowym sotho.
+%description i18n-st -l pl.UTF-8
+Ten pakiet dostarcza zasoby zawierajÄ…ce menu i okna dialogowe w jÄ™zyku
+poÅ‚udniowym sotho.
 
 %package i18n-sv
 Summary:	OpenOffice.org - interface in Swedish language
-Summary(pl):	OpenOffice.org - interfejs w jêzyku szwedzkim
+Summary(pl.UTF-8):   OpenOffice.org - interfejs w jÄ™zyku szwedzkim
 Group:		X11/Applications
 Requires:	%{name} = %{epoch}:%{version}-%{release}
 Obsoletes:	openoffice-i18n-sv
@@ -1697,13 +1697,13 @@ Obsoletes:	openoffice.org-i18n-sv-kde
 This package provides resources containing menus and dialogs in
 Swedish language.
 
-%description i18n-sv -l pl
-Ten pakiet dostarcza zasoby zawieraj±ce menu i okna dialogowe w jêzyku
+%description i18n-sv -l pl.UTF-8
+Ten pakiet dostarcza zasoby zawierajÄ…ce menu i okna dialogowe w jÄ™zyku
 szwedzkim.
 
 %package i18n-sw
 Summary:	OpenOffice.org - interface in Swahili language
-Summary(pl):	OpenOffice.org - interfejs w jêzyku suahili
+Summary(pl.UTF-8):   OpenOffice.org - interfejs w jÄ™zyku suahili
 Group:		X11/Applications
 Requires:	%{name} = %{epoch}:%{version}-%{release}
 
@@ -1711,13 +1711,13 @@ Requires:	%{name} = %{epoch}:%{version}-%{release}
 This package provides resources containing menus and dialogs in
 Swahili language.
 
-%description i18n-sw -l pl
-Ten pakiet dostarcza zasoby zawieraj±ce menu i okna dialogowe w jêzyku
+%description i18n-sw -l pl.UTF-8
+Ten pakiet dostarcza zasoby zawierajÄ…ce menu i okna dialogowe w jÄ™zyku
 suahili.
 
 %package i18n-sw_TZ
 Summary:	OpenOffice.org - interface in Swahili language for Tanzania
-Summary(pl):	OpenOffice.org - interfejs w jêzyku suahili dla Tanzanii
+Summary(pl.UTF-8):   OpenOffice.org - interfejs w jÄ™zyku suahili dla Tanzanii
 Group:		X11/Applications
 Requires:	%{name} = %{epoch}:%{version}-%{release}
 
@@ -1725,13 +1725,13 @@ Requires:	%{name} = %{epoch}:%{version}-%{release}
 This package provides resources containing menus and dialogs in
 Swahili language for Tanzania.
 
-%description i18n-sw_TZ -l pl
-Ten pakiet dostarcza zasoby zawieraj±ce menu i okna dialogowe w jêzyku
+%description i18n-sw_TZ -l pl.UTF-8
+Ten pakiet dostarcza zasoby zawierajÄ…ce menu i okna dialogowe w jÄ™zyku
 suahili dla Tanzanii.
 
 %package i18n-sx
 Summary:	OpenOffice.org - interface in Sutu language
-Summary(pl):	OpenOffice.org - interfejs w jêzyku sutu
+Summary(pl.UTF-8):   OpenOffice.org - interfejs w jÄ™zyku sutu
 Group:		X11/Applications
 Requires:	%{name} = %{epoch}:%{version}-%{release}
 
@@ -1739,13 +1739,13 @@ Requires:	%{name} = %{epoch}:%{version}-%{release}
 This package provides resources containing menus and dialogs in Sutu
 language.
 
-%description i18n-sx -l pl
-Ten pakiet dostarcza zasoby zawieraj±ce menu i okna dialogowe w jêzyku
+%description i18n-sx -l pl.UTF-8
+Ten pakiet dostarcza zasoby zawierajÄ…ce menu i okna dialogowe w jÄ™zyku
 sutu.
 
 %package i18n-ta_IN
 Summary:	OpenOffice.org - interface in Tamil language
-Summary(pl):	OpenOffice.org - interfejs w jêzyku tamiskim
+Summary(pl.UTF-8):   OpenOffice.org - interfejs w jÄ™zyku tamiskim
 Group:		X11/Applications
 Requires:	%{name} = %{epoch}:%{version}-%{release}
 
@@ -1753,13 +1753,13 @@ Requires:	%{name} = %{epoch}:%{version}-%{release}
 This package provides resources containing menus and dialogs in Tamil
 language.
 
-%description i18n-ta_IN -l pl
-Ten pakiet dostarcza zasoby zawieraj±ce menu i okna dialogowe w jêzyku
+%description i18n-ta_IN -l pl.UTF-8
+Ten pakiet dostarcza zasoby zawierajÄ…ce menu i okna dialogowe w jÄ™zyku
 tamilskim.
 
 %package i18n-te_IN
 Summary:	OpenOffice.org - interface in Telugu language for India
-Summary(pl):	OpenOffice.org - interfejs w jêzyku telugu dla Indii
+Summary(pl.UTF-8):   OpenOffice.org - interfejs w jÄ™zyku telugu dla Indii
 Group:		X11/Applications
 Requires:	%{name} = %{epoch}:%{version}-%{release}
 
@@ -1767,13 +1767,13 @@ Requires:	%{name} = %{epoch}:%{version}-%{release}
 This package provides resources containing menus and dialogs in Telugu
 language for India.
 
-%description i18n-te_IN -l pl
-Ten pakiet dostarcza zasoby zawieraj±ce menu i okna dialogowe w jêzyku
+%description i18n-te_IN -l pl.UTF-8
+Ten pakiet dostarcza zasoby zawierajÄ…ce menu i okna dialogowe w jÄ™zyku
 telugu dla Indii.
 
 %package i18n-tg
 Summary:	OpenOffice.org - interface in Tajik language
-Summary(pl):	OpenOffice.org - interfejs w jêzyku tad¿yckim
+Summary(pl.UTF-8):   OpenOffice.org - interfejs w jÄ™zyku tadÅ¼yckim
 Group:		X11/Applications
 Requires:	%{name} = %{epoch}:%{version}-%{release}
 
@@ -1781,13 +1781,13 @@ Requires:	%{name} = %{epoch}:%{version}-%{release}
 This package provides resources containing menus and dialogs in Tajik
 language.
 
-%description i18n-tg -l pl
-Ten pakiet dostarcza zasoby zawieraj±ce menu i okna dialogowe w jêzyku
-tad¿yckim.
+%description i18n-tg -l pl.UTF-8
+Ten pakiet dostarcza zasoby zawierajÄ…ce menu i okna dialogowe w jÄ™zyku
+tadÅ¼yckim.
 
 %package i18n-th
 Summary:	OpenOffice.org - interface in Thai language
-Summary(pl):	OpenOffice.org - interfejs w jêzyku tajskim
+Summary(pl.UTF-8):   OpenOffice.org - interfejs w jÄ™zyku tajskim
 Group:		X11/Applications
 Requires:	%{name} = %{epoch}:%{version}-%{release}
 Obsoletes:	openoffice-i18n-th
@@ -1798,13 +1798,13 @@ Obsoletes:	openoffice-i18n-th-kde
 This package provides resources containing menus and dialogs in Thai
 language.
 
-%description i18n-th -l pl
-Ten pakiet dostarcza zasoby zawieraj±ce menu i okna dialogowe w jêzyku
+%description i18n-th -l pl.UTF-8
+Ten pakiet dostarcza zasoby zawierajÄ…ce menu i okna dialogowe w jÄ™zyku
 tajskim.
 
 %package i18n-ti_ER
 Summary:	OpenOffice.org - interface in Tigrigna language for Eritrea
-Summary(pl):	OpenOffice.org - interfejs w jêzyku tigrinia dla Erytrei
+Summary(pl.UTF-8):   OpenOffice.org - interfejs w jÄ™zyku tigrinia dla Erytrei
 Group:		X11/Applications
 Requires:	%{name} = %{epoch}:%{version}-%{release}
 
@@ -1812,13 +1812,13 @@ Requires:	%{name} = %{epoch}:%{version}-%{release}
 This package provides resources containing menus and dialogs in
 Tigrigna language for Eritrea.
 
-%description i18n-ti_ER -l pl
-Ten pakiet dostarcza zasoby zawieraj±ce menu i okna dialogowe w jêzyku
+%description i18n-ti_ER -l pl.UTF-8
+Ten pakiet dostarcza zasoby zawierajÄ…ce menu i okna dialogowe w jÄ™zyku
 tigrinia dla Erytrei.
 
 %package i18n-tn
 Summary:	OpenOffice.org - interface in Tswana language
-Summary(pl):	OpenOffice.org - interfejs w jêzyku tswana
+Summary(pl.UTF-8):   OpenOffice.org - interfejs w jÄ™zyku tswana
 Group:		X11/Applications
 Requires:	%{name} = %{epoch}:%{version}-%{release}
 Obsoletes:	openoffice-i18n-tn
@@ -1829,13 +1829,13 @@ Obsoletes:	openoffice-i18n-tn-kde
 This package provides resources containing menus and dialogs in Tswana
 language.
 
-%description i18n-tn -l pl
-Ten pakiet dostarcza zasoby zawieraj±ce menu i okna dialogowe w jêzyku
+%description i18n-tn -l pl.UTF-8
+Ten pakiet dostarcza zasoby zawierajÄ…ce menu i okna dialogowe w jÄ™zyku
 tswana.
 
 %package i18n-tr
 Summary:	OpenOffice.org - interface in Turkish language
-Summary(pl):	OpenOffice.org - interfejs w jêzyku tureckim
+Summary(pl.UTF-8):   OpenOffice.org - interfejs w jÄ™zyku tureckim
 Group:		X11/Applications
 Requires:	%{name} = %{epoch}:%{version}-%{release}
 Obsoletes:	openoffice-i18n-tr
@@ -1847,13 +1847,13 @@ Obsoletes:	openoffice.org-i18n-tr-kde
 This package provides resources containing menus and dialogs in
 Turkish language.
 
-%description i18n-tr -l pl
-Ten pakiet dostarcza zasoby zawieraj±ce menu i okna dialogowe w jêzyku
+%description i18n-tr -l pl.UTF-8
+Ten pakiet dostarcza zasoby zawierajÄ…ce menu i okna dialogowe w jÄ™zyku
 tureckim.
 
 %package i18n-ts
 Summary:	OpenOffice.org - interface in Tsonga language
-Summary(pl):	OpenOffice.org - interfejs w jêzyku tsonga
+Summary(pl.UTF-8):   OpenOffice.org - interfejs w jÄ™zyku tsonga
 Group:		X11/Applications
 Requires:	%{name} = %{epoch}:%{version}-%{release}
 
@@ -1861,13 +1861,13 @@ Requires:	%{name} = %{epoch}:%{version}-%{release}
 This package provides resources containing menus and dialogs in Tsonga
 language.
 
-%description i18n-ts -l pl
-Ten pakiet dostarcza zasoby zawieraj±ce menu i okna dialogowe w jêzyku
+%description i18n-ts -l pl.UTF-8
+Ten pakiet dostarcza zasoby zawierajÄ…ce menu i okna dialogowe w jÄ™zyku
 tsonga.
 
 %package i18n-uk
 Summary:	OpenOffice.org - interface in Ukrainian language
-Summary(pl):	OpenOffice.org - interfejs w jêzyku ukraiñskim
+Summary(pl.UTF-8):   OpenOffice.org - interfejs w jÄ™zyku ukraiÅ„skim
 Group:		X11/Applications
 Requires:	%{name} = %{epoch}:%{version}-%{release}
 Obsoletes:	openoffice-i18n-uk
@@ -1879,13 +1879,13 @@ Obsoletes:	openoffice.org-i18n-uk-kde
 This package provides resources containing menus and dialogs in
 Ukrainian language.
 
-%description i18n-uk -l pl
-Ten pakiet dostarcza zasoby zawieraj±ce menu i okna dialogowe w jêzyku
-ukraiñskim.
+%description i18n-uk -l pl.UTF-8
+Ten pakiet dostarcza zasoby zawierajÄ…ce menu i okna dialogowe w jÄ™zyku
+ukraiÅ„skim.
 
 %package i18n-ur_IN
 Summary:	OpenOffice.org - interface in Urdu language for India
-Summary(pl):	OpenOffice.org - interfejs w jêzyku urdu dla Indii
+Summary(pl.UTF-8):   OpenOffice.org - interfejs w jÄ™zyku urdu dla Indii
 Group:		X11/Applications
 Requires:	%{name} = %{epoch}:%{version}-%{release}
 
@@ -1893,13 +1893,13 @@ Requires:	%{name} = %{epoch}:%{version}-%{release}
 This package provides resources containing menus and dialogs in Urdu
 language for India.
 
-%description i18n-ur_IN -l pl
-Ten pakiet dostarcza zasoby zawieraj±ce menu i okna dialogowe w jêzyku
+%description i18n-ur_IN -l pl.UTF-8
+Ten pakiet dostarcza zasoby zawierajÄ…ce menu i okna dialogowe w jÄ™zyku
 urdu dla Indii.
 
 %package i18n-ve
 Summary:	OpenOffice.org - interface in Venda language
-Summary(pl):	OpenOffice.org - interfejs w jêzyku venda
+Summary(pl.UTF-8):   OpenOffice.org - interfejs w jÄ™zyku venda
 Group:		X11/Applications
 Requires:	%{name} = %{epoch}:%{version}-%{release}
 
@@ -1907,13 +1907,13 @@ Requires:	%{name} = %{epoch}:%{version}-%{release}
 This package provides resources containing menus and dialogs in Venda
 language.
 
-%description i18n-ve -l pl
-Ten pakiet dostarcza zasoby zawieraj±ce menu i okna dialogowe w jêzyku
+%description i18n-ve -l pl.UTF-8
+Ten pakiet dostarcza zasoby zawierajÄ…ce menu i okna dialogowe w jÄ™zyku
 venda.
 
 %package i18n-vi
 Summary:	OpenOffice.org - interface in Vietnamese language
-Summary(pl):	OpenOffice.org - interfejs w jêzyku wietnamskim
+Summary(pl.UTF-8):   OpenOffice.org - interfejs w jÄ™zyku wietnamskim
 Group:		X11/Applications
 Requires:	%{name} = %{epoch}:%{version}-%{release}
 
@@ -1921,13 +1921,13 @@ Requires:	%{name} = %{epoch}:%{version}-%{release}
 This package provides resources containing menus and dialogs in
 Vietnamese language.
 
-%description i18n-vi -l pl
-Ten pakiet dostarcza zasoby zawieraj±ce menu i okna dialogowe w jêzyku
+%description i18n-vi -l pl.UTF-8
+Ten pakiet dostarcza zasoby zawierajÄ…ce menu i okna dialogowe w jÄ™zyku
 wietnamskim.
 
 %package i18n-xh
 Summary:	OpenOffice.org - interface in Xhosa language
-Summary(pl):	OpenOffice.org - interfejs w jêzyku khosa
+Summary(pl.UTF-8):   OpenOffice.org - interfejs w jÄ™zyku khosa
 Group:		X11/Applications
 Requires:	%{name} = %{epoch}:%{version}-%{release}
 
@@ -1935,13 +1935,13 @@ Requires:	%{name} = %{epoch}:%{version}-%{release}
 This package provides resources containing menus and dialogs in Xhosa
 language.
 
-%description i18n-xh -l pl
-Ten pakiet dostarcza zasoby zawieraj±ce menu i okna dialogowe w jêzyku
+%description i18n-xh -l pl.UTF-8
+Ten pakiet dostarcza zasoby zawierajÄ…ce menu i okna dialogowe w jÄ™zyku
 khosa.
 
 %package i18n-zh_CN
 Summary:	OpenOffice.org - interface in Chinese language for China
-Summary(pl):	OpenOffice.org - interfejs w jêzyku chiñskim dla Chin
+Summary(pl.UTF-8):   OpenOffice.org - interfejs w jÄ™zyku chiÅ„skim dla Chin
 Group:		X11/Applications
 Requires:	%{name} = %{epoch}:%{version}-%{release}
 Obsoletes:	openoffice-i18n-zh
@@ -1954,13 +1954,13 @@ Obsoletes:	openoffice.org-i18n-zh_CN-kde
 This package provides resources containing menus and dialogs in
 Chinese language for China.
 
-%description i18n-zh_CN -l pl
-Ten pakiet dostarcza zasoby zawieraj±ce menu i okna dialogowe w jêzyku
-chiñskim dla Chin.
+%description i18n-zh_CN -l pl.UTF-8
+Ten pakiet dostarcza zasoby zawierajÄ…ce menu i okna dialogowe w jÄ™zyku
+chiÅ„skim dla Chin.
 
 %package i18n-zh_TW
 Summary:	OpenOffice.org - interface in Chinese language for Taiwan
-Summary(pl):	OpenOffice.org - interfejs w jêzyku chiñskim dla Tajwanu
+Summary(pl.UTF-8):   OpenOffice.org - interfejs w jÄ™zyku chiÅ„skim dla Tajwanu
 Group:		X11/Applications
 Requires:	%{name} = %{epoch}:%{version}-%{release}
 Obsoletes:	openoffice-i18n-zh
@@ -1973,13 +1973,13 @@ Obsoletes:	openoffice.org-i18n-zh_TW-kde
 This package provides resources containing menus and dialogs in
 Chinese language for Taiwan.
 
-%description i18n-zh_TW -l pl
-Ten pakiet dostarcza zasoby zawieraj±ce menu i okna dialogowe w jêzyku
-chiñskim dla Tajwanu.
+%description i18n-zh_TW -l pl.UTF-8
+Ten pakiet dostarcza zasoby zawierajÄ…ce menu i okna dialogowe w jÄ™zyku
+chiÅ„skim dla Tajwanu.
 
 %package i18n-zu
 Summary:	OpenOffice.org - interface in Zulu language
-Summary(pl):	OpenOffice.org - interfejs w jêzyku zuluskim
+Summary(pl.UTF-8):   OpenOffice.org - interfejs w jÄ™zyku zuluskim
 Group:		X11/Applications
 Requires:	%{name} = %{epoch}:%{version}-%{release}
 Obsoletes:	openoffice-i18n-zu
@@ -1991,13 +1991,13 @@ Obsoletes:	openoffice.org-i18n-zu-kde
 This package provides resources containing menus and dialogs in Zulu
 language.
 
-%description i18n-zu -l pl
-Ten pakiet dostarcza zasoby zawieraj±ce menu i okna dialogowe w jêzyku
+%description i18n-zu -l pl.UTF-8
+Ten pakiet dostarcza zasoby zawierajÄ…ce menu i okna dialogowe w jÄ™zyku
 zuluskim.
 
 %package -n bash-completion-openoffice
 Summary:	bash-completion for OpenOffice.org
-Summary(pl):	bashowe uzupe³nianie nazw dla OpenOffice.org
+Summary(pl.UTF-8):   bashowe uzupeÅ‚nianie nazw dla OpenOffice.org
 Group:		Applications/Shells
 Requires:	%{name}
 Requires:	bash-completion
@@ -2005,8 +2005,8 @@ Requires:	bash-completion
 %description -n bash-completion-openoffice
 bash-completion for OpenOffice.org.
 
-%description -n bash-completion-openoffice -l pl
-bashowe uzupe³nianie nazw dla Openoffice.org.
+%description -n bash-completion-openoffice -l pl.UTF-8
+bashowe uzupeÅ‚nianie nazw dla Openoffice.org.
 
 %prep
 %setup -q -n ooo-build-%{ooobver}
