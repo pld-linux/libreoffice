@@ -80,7 +80,7 @@
 %define		specflags	-fno-strict-aliasing
 
 Summary:	OpenOffice.org - powerful office suite
-Summary(pl.UTF-8):   OpenOffice.org - potężny pakiet biurowy
+Summary(pl.UTF-8):	OpenOffice.org - potężny pakiet biurowy
 Name:		openoffice.org
 Version:	%{ver}%{bugfix}
 Release:	0.%{bver}%{?without_gnomevfs:.novfs}.%{_rel}
@@ -276,7 +276,7 @@ Do zalet OpenOffice.org można zaliczyć:
 
 %package libs-kde
 Summary:	OpenOffice.org KDE Interface
-Summary(pl.UTF-8):   Interfejs KDE dla OpenOffice.org
+Summary(pl.UTF-8):	Interfejs KDE dla OpenOffice.org
 Group:		X11/Libraries
 Requires:	%{name}-core = %{epoch}:%{version}-%{release}
 Obsoletes:	openoffice-i18n-en
@@ -291,7 +291,7 @@ Pakiet biurowy OpenOffice.org - Interfejs KDE.
 
 %package libs-gtk
 Summary:	OpenOffice.org GTK+ Interface
-Summary(pl.UTF-8):   Interfejs GTK+ dla OpenOffice.org
+Summary(pl.UTF-8):	Interfejs GTK+ dla OpenOffice.org
 Group:		X11/Libraries
 Requires:	%{name}-core = %{epoch}:%{version}-%{release}
 Obsoletes:	openoffice-i18n-en
@@ -306,7 +306,7 @@ Pakiet biurowy OpenOffice.org - Interfejs GTK+.
 
 %package core
 Summary:	Core modules for OpenOffice.org
-Summary(pl.UTF-8):   Podstawowe moduły dla OpenOffice.org
+Summary(pl.UTF-8):	Podstawowe moduły dla OpenOffice.org
 Group:		X11/Applications
 Requires:	%{name}-libs = %{epoch}:%{version}-%{release}
 Requires:	shared-mime-info
@@ -330,7 +330,7 @@ Podstawowe moduły dla OpenOffice.org.
 
 %package pyuno
 Summary:	Python bindings for OpenOffice.org
-Summary(pl.UTF-8):   Wiązania Pythona dla OpenOffice.org
+Summary(pl.UTF-8):	Wiązania Pythona dla OpenOffice.org
 Group:		Libraries
 Requires:	%{name}-core = %{epoch}:%{version}-%{release}
 Requires:	python
@@ -347,7 +347,7 @@ skryptów w Pythonie w wewnętrznym module skryptów OpenOffice.org.
 
 %package base
 Summary:	Database frontend for OpenOffice.org
-Summary(pl.UTF-8):   Frontend do baz danych dla OpenOffice.org
+Summary(pl.UTF-8):	Frontend do baz danych dla OpenOffice.org
 Group:		X11/Applications
 Requires:	%{name}-core = %{epoch}:%{version}-%{release}
 
@@ -362,7 +362,7 @@ użytkownika.
 
 %package web
 Summary:	Web module for OpenOffice.org
-Summary(pl.UTF-8):   Moduł Web dla OpenOffice.org
+Summary(pl.UTF-8):	Moduł Web dla OpenOffice.org
 Group:		X11/Applications
 Requires:	%{name}-core = %{epoch}:%{version}-%{release}
 Requires:	%{name}-writer = %{epoch}:%{version}-%{release}
@@ -375,7 +375,7 @@ Aplikacja do tworzenia stron WWW z OpenOffice.org.
 
 %package writer
 Summary:	Writer module for OpenOffice.org
-Summary(pl.UTF-8):   Moduł Writer dla OpenOffice.org
+Summary(pl.UTF-8):	Moduł Writer dla OpenOffice.org
 Group:		X11/Applications
 Requires:	%{name}-core = %{epoch}:%{version}-%{release}
 
@@ -387,7 +387,7 @@ Procesor tekstu z OpenOffice.org.
 
 %package emailmerge
 Summary:	email mail merge component for OpenOffice.org
-Summary(pl.UTF-8):   Kompolent email mail merge dla OpenOffice.org
+Summary(pl.UTF-8):	Kompolent email mail merge dla OpenOffice.org
 Group:		X11/Applications
 Requires:	%{name}-pyuno = %{epoch}:%{version}-%{release}
 Requires:	%{name}-writer = %{epoch}:%{version}-%{release}
@@ -401,7 +401,7 @@ elektronicznej.
 
 %package calc
 Summary:	Calc module for OpenOffice.org
-Summary(pl.UTF-8):   Moduł Calc dla OpenOffice.org
+Summary(pl.UTF-8):	Moduł Calc dla OpenOffice.org
 Group:		X11/Applications
 Requires:	%{name}-core = %{epoch}:%{version}-%{release}
 
@@ -413,7 +413,7 @@ Arkusz kalkulacyjny z OpenOffice.org.
 
 %package draw
 Summary:	Draw module for OpenOffice.org
-Summary(pl.UTF-8):   Moduł Draw dla OpenOffice.org
+Summary(pl.UTF-8):	Moduł Draw dla OpenOffice.org
 Group:		X11/Applications
 Requires:	%{name}-core = %{epoch}:%{version}-%{release}
 
@@ -425,7 +425,7 @@ Aplikacja rysunkowa z OpenOffice.org.
 
 %package impress
 Summary:	Impress module for OpenOffice.org
-Summary(pl.UTF-8):   Moduł Impress dla OpenOffice.org
+Summary(pl.UTF-8):	Moduł Impress dla OpenOffice.org
 Group:		X11/Applications
 Requires:	%{name}-core = %{epoch}:%{version}-%{release}
 
@@ -437,7 +437,7 @@ Aplikacja do tworzenia prezentacji z OpenOffice.org.
 
 %package math
 Summary:	Math module for OpenOffice.org
-Summary(pl.UTF-8):   Moduł Math dla OpenOffice.org
+Summary(pl.UTF-8):	Moduł Math dla OpenOffice.org
 Group:		X11/Applications
 Requires:	%{name}-core = %{epoch}:%{version}-%{release}
 
@@ -449,7 +449,7 @@ Edytor równań matematycznych z OpenOffice.org.
 
 %package graphicfilter
 Summary:	Extra graphicfilter module for OpenOffice.org
-Summary(pl.UTF-8):   Dodatkowy moduł graphicfilter dla OpenOffice.org
+Summary(pl.UTF-8):	Dodatkowy moduł graphicfilter dla OpenOffice.org
 Group:		X11/Applications
 Requires:	%{name}-core = %{epoch}:%{version}-%{release}
 
@@ -463,7 +463,7 @@ eksportu SVG i Flash.
 
 %package xsltfilter
 Summary:	Extra xsltfilter module for OpenOffice.org
-Summary(pl.UTF-8):   Dodatkowy moduł xsltfilter dla OpenOffice.org
+Summary(pl.UTF-8):	Dodatkowy moduł xsltfilter dla OpenOffice.org
 Group:		X11/Applications
 Requires:	%{name}-core = %{epoch}:%{version}-%{release}
 
@@ -478,7 +478,7 @@ do eksportu do docbooka.
 
 %package javafilter
 Summary:	Extra javafilter module for OpenOffice.org
-Summary(pl.UTF-8):   Dodatkowy moduł javafilter dla OpenOffice.org
+Summary(pl.UTF-8):	Dodatkowy moduł javafilter dla OpenOffice.org
 Group:		X11/Applications
 Requires:	%{name}-core = %{epoch}:%{version}-%{release}
 
@@ -492,7 +492,7 @@ importu aportisdoc, Pocket Excel i Pocket Word.
 
 %package testtools
 Summary:	testtools for OpenOffice.org
-Summary(pl.UTF-8):   Narzędzia testowe dla OpenOffice.org
+Summary(pl.UTF-8):	Narzędzia testowe dla OpenOffice.org
 Group:		Development/Libraries
 Requires:	%{name}-core = %{epoch}:%{version}-%{release}
 
@@ -504,7 +504,7 @@ Narzędzia QA dla OpenOffice.org, pozwalają na automatyczne testowanie.
 
 %package -n fonts-TTF-OpenSymbol
 Summary:	OpenSymbol fonts
-Summary(pl.UTF-8):   Fonty OpenSymbol
+Summary(pl.UTF-8):	Fonty OpenSymbol
 Group:		Fonts
 Requires(post,postun):	fontpostinst
 Obsoletes:	openoffice.org-fonts-OpenSymbol
@@ -517,7 +517,7 @@ Fonty TrueType OpenSymbol.
 
 %package i18n-af
 Summary:	OpenOffice.org - interface in Afrikaans language
-Summary(pl.UTF-8):   OpenOffice.org - interfejs w języku afrykanerskim
+Summary(pl.UTF-8):	OpenOffice.org - interfejs w języku afrykanerskim
 Group:		X11/Applications
 Requires:	%{name} = %{epoch}:%{version}-%{release}
 Obsoletes:	openoffice-i18n-af
@@ -535,7 +535,7 @@ afrykanerskim.
 
 %package i18n-ar
 Summary:	OpenOffice.org - interface in Arabic language
-Summary(pl.UTF-8):   OpenOffice.org - interfejs w języku arabskim
+Summary(pl.UTF-8):	OpenOffice.org - interfejs w języku arabskim
 Group:		X11/Applications
 Requires:	%{name} = %{epoch}:%{version}-%{release}
 Obsoletes:	openoffice-i18n-ar
@@ -553,7 +553,7 @@ arabskim.
 
 %package i18n-as_IN
 Summary:	OpenOffice.org - interface in Assamese language for India
-Summary(pl.UTF-8):   OpenOffice.org - interfejs w języku asamskim dla Indii
+Summary(pl.UTF-8):	OpenOffice.org - interfejs w języku asamskim dla Indii
 Group:		X11/Applications
 Requires:	%{name} = %{epoch}:%{version}-%{release}
 
@@ -567,7 +567,7 @@ asamskim dla Indii.
 
 %package i18n-be_BY
 Summary:	OpenOffice.org - interface in Belarusian language
-Summary(pl.UTF-8):   OpenOffice.org - interfejs w języku białoruskim
+Summary(pl.UTF-8):	OpenOffice.org - interfejs w języku białoruskim
 Group:		X11/Applications
 Requires:	%{name} = %{epoch}:%{version}-%{release}
 
@@ -581,7 +581,7 @@ białoruskim.
 
 %package i18n-bg
 Summary:	OpenOffice.org - interface in Bulgarian language
-Summary(pl.UTF-8):   OpenOffice.org - interfejs w języku bułgarskim
+Summary(pl.UTF-8):	OpenOffice.org - interfejs w języku bułgarskim
 Group:		X11/Applications
 Requires:	%{name} = %{epoch}:%{version}-%{release}
 Obsoletes:	openoffice-i18n-bg
@@ -599,7 +599,7 @@ bułgarskim.
 
 %package i18n-bn
 Summary:	OpenOffice.org - interface in Bangla language
-Summary(pl.UTF-8):   OpenOffice.org - interfejs w języku bengalskim
+Summary(pl.UTF-8):	OpenOffice.org - interfejs w języku bengalskim
 Group:		X11/Applications
 Requires:	%{name} = %{epoch}:%{version}-%{release}
 
@@ -613,7 +613,7 @@ bengalskim.
 
 %package i18n-bn_BD
 Summary:	OpenOffice.org - interface in Bangla language for Bangladesh
-Summary(pl.UTF-8):   OpenOffice.org - interfejs w języku bengalskim dla Bangladeszu
+Summary(pl.UTF-8):	OpenOffice.org - interfejs w języku bengalskim dla Bangladeszu
 Group:		X11/Applications
 Requires:	%{name} = %{epoch}:%{version}-%{release}
 
@@ -627,7 +627,7 @@ bengalskim dla Bangladeszu.
 
 %package i18n-bn_IN
 Summary:	OpenOffice.org - interface in Bangla language for India
-Summary(pl.UTF-8):   OpenOffice.org - interfejs w języku bengalskim dla Indii
+Summary(pl.UTF-8):	OpenOffice.org - interfejs w języku bengalskim dla Indii
 Group:		X11/Applications
 Requires:	%{name} = %{epoch}:%{version}-%{release}
 
@@ -641,7 +641,7 @@ bengalskim dla Indii.
 
 %package i18n-br
 Summary:	OpenOffice.org - interface in Breton language
-Summary(pl.UTF-8):   OpenOffice.org - interfejs w języku bretońskim
+Summary(pl.UTF-8):	OpenOffice.org - interfejs w języku bretońskim
 Group:		X11/Applications
 Requires:	%{name} = %{epoch}:%{version}-%{release}
 
@@ -655,7 +655,7 @@ bretońskim.
 
 %package i18n-bs
 Summary:	OpenOffice.org - interface in Bosnian language
-Summary(pl.UTF-8):   OpenOffice.org - interfejs w języku bośniańskim
+Summary(pl.UTF-8):	OpenOffice.org - interfejs w języku bośniańskim
 Group:		X11/Applications
 Requires:	%{name} = %{epoch}:%{version}-%{release}
 
@@ -669,7 +669,7 @@ bośniańskim
 
 %package i18n-ca
 Summary:	OpenOffice.org - interface in Catalan language
-Summary(pl.UTF-8):   OpenOffice.org - interfejs w języku katalońskim
+Summary(pl.UTF-8):	OpenOffice.org - interfejs w języku katalońskim
 Group:		X11/Applications
 Requires:	%{name} = %{epoch}:%{version}-%{release}
 Obsoletes:	openoffice-i18n-ca
@@ -688,7 +688,7 @@ katalońskim.
 
 %package i18n-cs
 Summary:	OpenOffice.org - interface in Czech language
-Summary(pl.UTF-8):   OpenOffice.org - interfejs w języku czeskim
+Summary(pl.UTF-8):	OpenOffice.org - interfejs w języku czeskim
 Group:		X11/Applications
 Requires:	%{name} = %{epoch}:%{version}-%{release}
 Obsoletes:	openoffice-i18n-cs
@@ -706,7 +706,7 @@ czeskim.
 
 %package i18n-cy
 Summary:	OpenOffice.org - interface in Cymraeg language
-Summary(pl.UTF-8):   OpenOffice.org - interfejs w języku walijskim
+Summary(pl.UTF-8):	OpenOffice.org - interfejs w języku walijskim
 Group:		X11/Applications
 Requires:	%{name} = %{epoch}:%{version}-%{release}
 Obsoletes:	openoffice-i18n-cy
@@ -724,7 +724,7 @@ walijskim.
 
 %package i18n-da
 Summary:	OpenOffice.org - interface in Danish language
-Summary(pl.UTF-8):   OpenOffice.org - interfejs w języku duńskim
+Summary(pl.UTF-8):	OpenOffice.org - interfejs w języku duńskim
 Group:		X11/Applications
 Requires:	%{name} = %{epoch}:%{version}-%{release}
 Obsoletes:	openoffice-i18n-da
@@ -742,7 +742,7 @@ duńskim.
 
 %package i18n-de
 Summary:	OpenOffice.org - interface in German language
-Summary(pl.UTF-8):   OpenOffice.org - interfejs w języku niemieckim
+Summary(pl.UTF-8):	OpenOffice.org - interfejs w języku niemieckim
 Group:		X11/Applications
 Requires:	%{name} = %{epoch}:%{version}-%{release}
 Obsoletes:	openoffice-i18n-de
@@ -760,7 +760,7 @@ niemieckim.
 
 %package i18n-el
 Summary:	OpenOffice.org - interface in Greek language
-Summary(pl.UTF-8):   OpenOffice.org - interfejs w języku greckim
+Summary(pl.UTF-8):	OpenOffice.org - interfejs w języku greckim
 Group:		X11/Applications
 Requires:	%{name} = %{epoch}:%{version}-%{release}
 Obsoletes:	openoffice-i18n-el
@@ -778,7 +778,7 @@ greckim.
 
 %package i18n-en_GB
 Summary:	OpenOffice.org - interface in English language for United Kingdom
-Summary(pl.UTF-8):   OpenOffice.org - interfejs w języku anglieskim dla Wielkiej Brytanii
+Summary(pl.UTF-8):	OpenOffice.org - interfejs w języku anglieskim dla Wielkiej Brytanii
 Group:		X11/Applications
 Requires:	%{name} = %{epoch}:%{version}-%{release}
 
@@ -792,7 +792,7 @@ anglieskim dla Wielkiej Brytanii.
 
 %package i18n-en_ZA
 Summary:	OpenOffice.org - interface in English language for South Africa
-Summary(pl.UTF-8):   OpenOffice.org - interfejs w języku anglieskim dla Południowej Afryki
+Summary(pl.UTF-8):	OpenOffice.org - interfejs w języku anglieskim dla Południowej Afryki
 Group:		X11/Applications
 Requires:	%{name} = %{epoch}:%{version}-%{release}
 
@@ -806,7 +806,7 @@ anglieskim dla Południowej Afryki.
 
 %package i18n-eo
 Summary:	OpenOffice.org - interface in Esperanto language
-Summary(pl.UTF-8):   OpenOffice.org - interfejs w języku esperanto
+Summary(pl.UTF-8):	OpenOffice.org - interfejs w języku esperanto
 Group:		X11/Applications
 Requires:	%{name} = %{epoch}:%{version}-%{release}
 
@@ -820,7 +820,7 @@ esperanto.
 
 %package i18n-es
 Summary:	OpenOffice.org - interface in Spanish language
-Summary(pl.UTF-8):   OpenOffice.org - interfejs w języku hiszpańskim
+Summary(pl.UTF-8):	OpenOffice.org - interfejs w języku hiszpańskim
 Group:		X11/Applications
 Requires:	%{name} = %{epoch}:%{version}-%{release}
 Obsoletes:	openoffice-i18n-es
@@ -838,7 +838,7 @@ hiszpańskim.
 
 %package i18n-et
 Summary:	OpenOffice.org - interface in Estonian language
-Summary(pl.UTF-8):   OpenOffice.org - interfejs w języku estońskim
+Summary(pl.UTF-8):	OpenOffice.org - interfejs w języku estońskim
 Group:		X11/Applications
 Requires:	%{name} = %{epoch}:%{version}-%{release}
 Obsoletes:	openoffice-i18n-et
@@ -856,7 +856,7 @@ estońskim.
 
 %package i18n-eu
 Summary:	OpenOffice.org - interface in Basque (Euskara) language
-Summary(pl.UTF-8):   OpenOffice.org - interfejs w języku baskijskim (euskera)
+Summary(pl.UTF-8):	OpenOffice.org - interfejs w języku baskijskim (euskera)
 Group:		X11/Applications
 Requires:	%{name} = %{epoch}:%{version}-%{release}
 Obsoletes:	openoffice-i18n-eu
@@ -873,7 +873,7 @@ baskijskim (euskera).
 
 %package i18n-fa
 Summary:	OpenOffice.org - interface in Persian language
-Summary(pl.UTF-8):   OpenOffice.org - interfejs w języku perskim
+Summary(pl.UTF-8):	OpenOffice.org - interfejs w języku perskim
 Group:		X11/Applications
 Requires:	%{name} = %{epoch}:%{version}-%{release}
 Obsoletes:	openoffice-i18n-fa
@@ -890,7 +890,7 @@ perskim.
 
 %package i18n-fi
 Summary:	OpenOffice.org - interface in Finnish language
-Summary(pl.UTF-8):   OpenOffice.org - interfejs w języku fińskim
+Summary(pl.UTF-8):	OpenOffice.org - interfejs w języku fińskim
 Group:		X11/Applications
 Requires:	%{name} = %{epoch}:%{version}-%{release}
 Obsoletes:	openoffice-i18n-fi
@@ -908,7 +908,7 @@ fińskim.
 
 %package i18n-fo
 Summary:	OpenOffice.org - interface in Faroese language
-Summary(pl.UTF-8):   OpenOffice.org - interfejs w języku farerskim
+Summary(pl.UTF-8):	OpenOffice.org - interfejs w języku farerskim
 Group:		X11/Applications
 Requires:	%{name} = %{epoch}:%{version}-%{release}
 Obsoletes:	openoffice-i18n-fo
@@ -926,7 +926,7 @@ farerskim.
 
 %package i18n-fr
 Summary:	OpenOffice.org - interface in French language
-Summary(pl.UTF-8):   OpenOffice.org - interfejs w języku francuskim
+Summary(pl.UTF-8):	OpenOffice.org - interfejs w języku francuskim
 Group:		X11/Applications
 Requires:	%{name} = %{epoch}:%{version}-%{release}
 Obsoletes:	openoffice-i18n-fr
@@ -944,7 +944,7 @@ francuskim.
 
 %package i18n-ga
 Summary:	OpenOffice.org - interface in Irish language
-Summary(pl.UTF-8):   OpenOffice.org - interfejs w języku irlandzkim
+Summary(pl.UTF-8):	OpenOffice.org - interfejs w języku irlandzkim
 Group:		X11/Applications
 Requires:	%{name} = %{epoch}:%{version}-%{release}
 Obsoletes:	openoffice-i18n-ga
@@ -962,7 +962,7 @@ irlandzkim.
 
 %package i18n-gl
 Summary:	OpenOffice.org - interface in Galician language
-Summary(pl.UTF-8):   OpenOffice.org - interfejs w języku galicyjskim
+Summary(pl.UTF-8):	OpenOffice.org - interfejs w języku galicyjskim
 Group:		X11/Applications
 Requires:	%{name} = %{epoch}:%{version}-%{release}
 Obsoletes:	openoffice-i18n-gl
@@ -980,7 +980,7 @@ galicyjskim.
 
 %package i18n-gu_IN
 Summary:	OpenOffice.org - interface in Gujarati language
-Summary(pl.UTF-8):   OpenOffice.org - interfejs w języku gudźarati
+Summary(pl.UTF-8):	OpenOffice.org - interfejs w języku gudźarati
 Group:		X11/Applications
 Requires:	%{name} = %{epoch}:%{version}-%{release}
 
@@ -994,7 +994,7 @@ gudźarati.
 
 %package i18n-he
 Summary:	OpenOffice.org - interface in Hebrew language
-Summary(pl.UTF-8):   OpenOffice.org - interfejs w języku hebrajskim
+Summary(pl.UTF-8):	OpenOffice.org - interfejs w języku hebrajskim
 Group:		X11/Applications
 Requires:	%{name} = %{epoch}:%{version}-%{release}
 Obsoletes:	openoffice-i18n-he
@@ -1012,7 +1012,7 @@ hebrajskim.
 
 %package i18n-hi_IN
 Summary:	OpenOffice.org - interface in Hindi language
-Summary(pl.UTF-8):   OpenOffice.org - interfejs w języku hindi
+Summary(pl.UTF-8):	OpenOffice.org - interfejs w języku hindi
 Group:		X11/Applications
 Requires:	%{name} = %{epoch}:%{version}-%{release}
 Obsoletes:	openoffice-i18n-hi
@@ -1030,7 +1030,7 @@ hindi.
 
 %package i18n-hr
 Summary:	OpenOffice.org - interface in Croatian language
-Summary(pl.UTF-8):   OpenOffice.org - interfejs w języku chorwackim
+Summary(pl.UTF-8):	OpenOffice.org - interfejs w języku chorwackim
 Group:		X11/Applications
 Requires:	%{name} = %{epoch}:%{version}-%{release}
 Obsoletes:	openoffice-i18n-hr
@@ -1048,7 +1048,7 @@ chorwackim.
 
 %package i18n-hu
 Summary:	OpenOffice.org - interface in Hungarian language
-Summary(pl.UTF-8):   OpenOffice.org - interfejs w języku węgierskim
+Summary(pl.UTF-8):	OpenOffice.org - interfejs w języku węgierskim
 Group:		X11/Applications
 Requires:	%{name} = %{epoch}:%{version}-%{release}
 Obsoletes:	openoffice-i18n-hu
@@ -1066,7 +1066,7 @@ węgierskim.
 
 %package i18n-ia
 Summary:	OpenOffice.org - interface in Interlingua language
-Summary(pl.UTF-8):   OpenOffice.org - interfejs w języku interlingua
+Summary(pl.UTF-8):	OpenOffice.org - interfejs w języku interlingua
 Group:		X11/Applications
 Requires:	%{name} = %{epoch}:%{version}-%{release}
 Obsoletes:	openoffice-i18n-ia
@@ -1084,7 +1084,7 @@ interlingua.
 
 %package i18n-id
 Summary:	OpenOffice.org - interface in Indonesian language
-Summary(pl.UTF-8):   OpenOffice.org - interfejs w języku indonezyjskim
+Summary(pl.UTF-8):	OpenOffice.org - interfejs w języku indonezyjskim
 Group:		X11/Applications
 Requires:	%{name} = %{epoch}:%{version}-%{release}
 Obsoletes:	openoffice-i18n-id
@@ -1102,7 +1102,7 @@ indonezyjskim.
 
 %package i18n-it
 Summary:	OpenOffice.org - interface in Italian language
-Summary(pl.UTF-8):   OpenOffice.org - interfejs w języku włoskim
+Summary(pl.UTF-8):	OpenOffice.org - interfejs w języku włoskim
 Group:		X11/Applications
 Requires:	%{name} = %{epoch}:%{version}-%{release}
 Obsoletes:	openoffice-i18n-it
@@ -1120,7 +1120,7 @@ włoskim.
 
 %package i18n-ja
 Summary:	OpenOffice.org - interface in Japan language
-Summary(pl.UTF-8):   OpenOffice.org - interfejs w języku japońskim
+Summary(pl.UTF-8):	OpenOffice.org - interfejs w języku japońskim
 Group:		X11/Applications
 Requires:	%{name} = %{epoch}:%{version}-%{release}
 Obsoletes:	openoffice-i18n-ja
@@ -1138,7 +1138,7 @@ japońskim.
 
 %package i18n-km
 Summary:	OpenOffice.org - interface in Khmer language
-Summary(pl.UTF-8):   OpenOffice.org - interfejs w języku khmerskim
+Summary(pl.UTF-8):	OpenOffice.org - interfejs w języku khmerskim
 Group:		X11/Applications
 Requires:	%{name} = %{epoch}:%{version}-%{release}
 
@@ -1152,7 +1152,7 @@ khmerskim.
 
 %package i18n-kn_IN
 Summary:	OpenOffice.org - interface in Kannada language
-Summary(pl.UTF-8):   OpenOffice.org - interfejs w języku kannara
+Summary(pl.UTF-8):	OpenOffice.org - interfejs w języku kannara
 Group:		X11/Applications
 Requires:	%{name} = %{epoch}:%{version}-%{release}
 Obsoletes:	openoffice-i18n-kn
@@ -1169,7 +1169,7 @@ kannara.
 
 %package i18n-ko
 Summary:	OpenOffice.org - interface in Korean language
-Summary(pl.UTF-8):   OpenOffice.org - interfejs w języku koreańskim
+Summary(pl.UTF-8):	OpenOffice.org - interfejs w języku koreańskim
 Group:		X11/Applications
 Requires:	%{name} = %{epoch}:%{version}-%{release}
 Obsoletes:	openoffice-i18n-ko
@@ -1187,7 +1187,7 @@ koreańskim.
 
 %package i18n-ku
 Summary:	OpenOffice.org - interface in Kurdish language
-Summary(pl.UTF-8):   OpenOffice.org - interfejs w języku kurdyjskim
+Summary(pl.UTF-8):	OpenOffice.org - interfejs w języku kurdyjskim
 Group:		X11/Applications
 Requires:	%{name} = %{epoch}:%{version}-%{release}
 
@@ -1201,7 +1201,7 @@ kurdyjskim.
 
 %package i18n-la
 Summary:	OpenOffice.org - interface in Latin language
-Summary(pl.UTF-8):   OpenOffice.org - interfejs w języku łacińskim
+Summary(pl.UTF-8):	OpenOffice.org - interfejs w języku łacińskim
 Group:		X11/Applications
 Requires:	%{name} = %{epoch}:%{version}-%{release}
 Obsoletes:	openoffice-i18n-la
@@ -1219,7 +1219,7 @@ Ten pakiet dostarcza zasoby zawierające menu i okna dialogowe w języku
 
 %package i18n-lo
 Summary:	OpenOffice.org - interface in Lao language
-Summary(pl.UTF-8):   OpenOffice.org - interfejs w języku laotańskim
+Summary(pl.UTF-8):	OpenOffice.org - interfejs w języku laotańskim
 Group:		X11/Applications
 Requires:	%{name} = %{epoch}:%{version}-%{release}
 
@@ -1233,7 +1233,7 @@ laotańskim.
 
 %package i18n-lt
 Summary:	OpenOffice.org - interface in Lithuanian language
-Summary(pl.UTF-8):   OpenOffice.org - interfejs w języku litewskim
+Summary(pl.UTF-8):	OpenOffice.org - interfejs w języku litewskim
 Group:		X11/Applications
 Requires:	%{name} = %{epoch}:%{version}-%{release}
 Obsoletes:	openoffice-i18n-lt
@@ -1251,7 +1251,7 @@ litewskim.
 
 %package i18n-lv
 Summary:	OpenOffice.org - interface in Latvian language
-Summary(pl.UTF-8):   OpenOffice.org - interfejs w języku łotewskim
+Summary(pl.UTF-8):	OpenOffice.org - interfejs w języku łotewskim
 Group:		X11/Applications
 Requires:	%{name} = %{epoch}:%{version}-%{release}
 
@@ -1265,7 +1265,7 @@ Ten pakiet dostarcza zasoby zawierające menu i okna dialogowe w języku
 
 %package i18n-med
 Summary:	OpenOffice.org - interface in Melpa language
-Summary(pl.UTF-8):   OpenOffice.org - interfejs w języku melpa
+Summary(pl.UTF-8):	OpenOffice.org - interfejs w języku melpa
 Group:		X11/Applications
 Requires:	%{name} = %{epoch}:%{version}-%{release}
 Obsoletes:	openoffice-i18n-med
@@ -1283,7 +1283,7 @@ melpa.
 
 %package i18n-mi
 Summary:	OpenOffice.org - interface in Maori language
-Summary(pl.UTF-8):   OpenOffice.org - interfejs w języku maoryjskim
+Summary(pl.UTF-8):	OpenOffice.org - interfejs w języku maoryjskim
 Group:		X11/Applications
 Requires:	%{name} = %{epoch}:%{version}-%{release}
 Obsoletes:	openoffice-i18n-mi
@@ -1301,7 +1301,7 @@ maoryjskim.
 
 %package i18n-mk
 Summary:	OpenOffice.org - interface in Macedonian language
-Summary(pl.UTF-8):   OpenOffice.org - interfejs w języku macedońskim
+Summary(pl.UTF-8):	OpenOffice.org - interfejs w języku macedońskim
 Group:		X11/Applications
 Requires:	%{name} = %{epoch}:%{version}-%{release}
 
@@ -1315,7 +1315,7 @@ macedońskim.
 
 %package i18n-ml_IN
 Summary:	OpenOffice.org - interface in Malayalam language for India
-Summary(pl.UTF-8):   OpenOffice.org - interfejs w języku malajalamskim dla Indii
+Summary(pl.UTF-8):	OpenOffice.org - interfejs w języku malajalamskim dla Indii
 Group:		X11/Applications
 Requires:	%{name} = %{epoch}:%{version}-%{release}
 
@@ -1329,7 +1329,7 @@ malajalamskim dla Indii.
 
 %package i18n-mr_IN
 Summary:	OpenOffice.org - interface in Marathi language for India
-Summary(pl.UTF-8):   OpenOffice.org - interfejs w języku marathi dla Indii
+Summary(pl.UTF-8):	OpenOffice.org - interfejs w języku marathi dla Indii
 Group:		X11/Applications
 Requires:	%{name} = %{epoch}:%{version}-%{release}
 
@@ -1343,7 +1343,7 @@ marathi dla Indii.
 
 %package i18n-ms
 Summary:	OpenOffice.org - interface in Malay language
-Summary(pl.UTF-8):   OpenOffice.org - interfejs w języku malajskim
+Summary(pl.UTF-8):	OpenOffice.org - interfejs w języku malajskim
 Group:		X11/Applications
 Requires:	%{name} = %{epoch}:%{version}-%{release}
 Obsoletes:	openoffice-i18n-ms
@@ -1361,7 +1361,7 @@ malajskim.
 
 %package i18n-nb
 Summary:	OpenOffice.org - interface in Norwegian Bokmaal language
-Summary(pl.UTF-8):   OpenOffice.org - interfejs w języku norweskim (odmiana Bokmaal)
+Summary(pl.UTF-8):	OpenOffice.org - interfejs w języku norweskim (odmiana Bokmaal)
 Group:		X11/Applications
 Requires:	%{name} = %{epoch}:%{version}-%{release}
 Obsoletes:	openoffice-i18n-nb
@@ -1379,7 +1379,7 @@ norweskim w odmianie Bokmaal.
 
 %package i18n-ne
 Summary:	OpenOffice.org - interface in Nepali language
-Summary(pl.UTF-8):   OpenOffice.org - interfejs w języku nepalskim
+Summary(pl.UTF-8):	OpenOffice.org - interfejs w języku nepalskim
 Group:		X11/Applications
 Requires:	%{name} = %{epoch}:%{version}-%{release}
 
@@ -1393,7 +1393,7 @@ nepalskim.
 
 %package i18n-nl
 Summary:	OpenOffice.org - interface in Dutch language
-Summary(pl.UTF-8):   OpenOffice.org - interfejs w języku holenderskim
+Summary(pl.UTF-8):	OpenOffice.org - interfejs w języku holenderskim
 Group:		X11/Applications
 Requires:	%{name} = %{epoch}:%{version}-%{release}
 Obsoletes:	openoffice-i18n-nl
@@ -1411,7 +1411,7 @@ holenderskim.
 
 %package i18n-nn
 Summary:	OpenOffice.org - interface in Norwegian Nynorsk language
-Summary(pl.UTF-8):   OpenOffice.org - interfejs w języku norweskim (odmiana Nynorsk)
+Summary(pl.UTF-8):	OpenOffice.org - interfejs w języku norweskim (odmiana Nynorsk)
 Group:		X11/Applications
 Requires:	%{name} = %{epoch}:%{version}-%{release}
 Obsoletes:	openoffice-i18n-nn
@@ -1429,7 +1429,7 @@ norweskim w odmianie Nynorsk.
 
 %package i18n-nr
 Summary:	OpenOffice.org - interface in South Ndebele language
-Summary(pl.UTF-8):   OpenOffice.org - interfejs w języku ndebele (południowym)
+Summary(pl.UTF-8):	OpenOffice.org - interfejs w języku ndebele (południowym)
 Group:		X11/Applications
 Requires:	%{name} = %{epoch}:%{version}-%{release}
 
@@ -1443,7 +1443,7 @@ ndebele (południowym).
 
 %package i18n-nso
 Summary:	OpenOffice.org - interface in Northern Sotho language
-Summary(pl.UTF-8):   OpenOffice.org - interfejs w języku ludu Soto
+Summary(pl.UTF-8):	OpenOffice.org - interfejs w języku ludu Soto
 Group:		X11/Applications
 Requires:	%{name} = %{epoch}:%{version}-%{release}
 Obsoletes:	openoffice-i18n-nso
@@ -1461,7 +1461,7 @@ ludu Soto.
 
 %package i18n-or_IN
 Summary:	OpenOffice.org - interface in Oriya language for India
-Summary(pl.UTF-8):   OpenOffice.org - interfejs w języku orija dla Indii
+Summary(pl.UTF-8):	OpenOffice.org - interfejs w języku orija dla Indii
 Group:		X11/Applications
 Requires:	%{name} = %{epoch}:%{version}-%{release}
 
@@ -1475,7 +1475,7 @@ orija dla Indii.
 
 %package i18n-pa_IN
 Summary:	OpenOffice.org - interface in Punjabi language
-Summary(pl.UTF-8):   OpenOffice.org - interfejs w języku pendżabskim
+Summary(pl.UTF-8):	OpenOffice.org - interfejs w języku pendżabskim
 Group:		X11/Applications
 Requires:	%{name} = %{epoch}:%{version}-%{release}
 
@@ -1489,7 +1489,7 @@ pendżabskim.
 
 %package i18n-pl
 Summary:	OpenOffice.org - interface in Polish language
-Summary(pl.UTF-8):   OpenOffice.org - interfejs w języku polskim
+Summary(pl.UTF-8):	OpenOffice.org - interfejs w języku polskim
 Group:		X11/Applications
 Requires:	%{name} = %{epoch}:%{version}-%{release}
 Obsoletes:	openoffice-i18n-pl
@@ -1507,7 +1507,7 @@ polskim.
 
 %package i18n-pt
 Summary:	OpenOffice.org - interface in Portuguese language
-Summary(pl.UTF-8):   OpenOffice.org - interfejs w języku portugalskim
+Summary(pl.UTF-8):	OpenOffice.org - interfejs w języku portugalskim
 Group:		X11/Applications
 Requires:	%{name} = %{epoch}:%{version}-%{release}
 Obsoletes:	openoffice-i18n-pt
@@ -1525,7 +1525,7 @@ portugalskim.
 
 %package i18n-pt_BR
 Summary:	OpenOffice.org - interface in Brazilian Portuguese language
-Summary(pl.UTF-8):   OpenOffice.org - interfejs w języku portugalskim dla Brazylii
+Summary(pl.UTF-8):	OpenOffice.org - interfejs w języku portugalskim dla Brazylii
 Group:		X11/Applications
 Requires:	%{name} = %{epoch}:%{version}-%{release}
 Obsoletes:	openoffice-i18n-pt_BR
@@ -1543,7 +1543,7 @@ portugalskim dla Brazylii.
 
 %package i18n-ro
 Summary:	OpenOffice.org - interface in Romanian language
-Summary(pl.UTF-8):   OpenOffice.org - interfejs w języku rumuńskim
+Summary(pl.UTF-8):	OpenOffice.org - interfejs w języku rumuńskim
 Group:		X11/Applications
 Requires:	%{name} = %{epoch}:%{version}-%{release}
 Obsoletes:	openoffice-i18n-ro
@@ -1561,7 +1561,7 @@ rumuńskim.
 
 %package i18n-ru
 Summary:	OpenOffice.org - interface in Russian language
-Summary(pl.UTF-8):   OpenOffice.org - interfejs w języku rosyjskim
+Summary(pl.UTF-8):	OpenOffice.org - interfejs w języku rosyjskim
 Group:		X11/Applications
 Requires:	%{name} = %{epoch}:%{version}-%{release}
 Obsoletes:	openoffice-i18n-ru
@@ -1579,7 +1579,7 @@ rosyjskim.
 
 %package i18n-rw
 Summary:	OpenOffice.org - interface in Kinarwanda language
-Summary(pl.UTF-8):   OpenOffice.org - interfejs w języku kinya-ruanda
+Summary(pl.UTF-8):	OpenOffice.org - interfejs w języku kinya-ruanda
 Group:		X11/Applications
 Requires:	%{name} = %{epoch}:%{version}-%{release}
 
@@ -1593,7 +1593,7 @@ kinya-ruanda.
 
 %package i18n-sh
 Summary:	OpenOffice.org - interface in Serbo-Croatian language
-Summary(pl.UTF-8):   OpenOffice.org - interfejs w języku serbsko-chorwackim
+Summary(pl.UTF-8):	OpenOffice.org - interfejs w języku serbsko-chorwackim
 Group:		X11/Applications
 Requires:	%{name} = %{epoch}:%{version}-%{release}
 
@@ -1607,7 +1607,7 @@ serbsko-chorwackim.
 
 %package i18n-sk
 Summary:	OpenOffice.org - interface in Slovak language
-Summary(pl.UTF-8):   OpenOffice.org - interfejs w języku słowackim
+Summary(pl.UTF-8):	OpenOffice.org - interfejs w języku słowackim
 Group:		X11/Applications
 Requires:	%{name} = %{epoch}:%{version}-%{release}
 Obsoletes:	openoffice-i18n-sk
@@ -1625,7 +1625,7 @@ słowackim.
 
 %package i18n-sl
 Summary:	OpenOffice.org - interface in Slovenian language
-Summary(pl.UTF-8):   OpenOffice.org - interfejs w języku słoweńskim
+Summary(pl.UTF-8):	OpenOffice.org - interfejs w języku słoweńskim
 Group:		X11/Applications
 Requires:	%{name} = %{epoch}:%{version}-%{release}
 Obsoletes:	openoffice-i18n-sl
@@ -1643,7 +1643,7 @@ słoweńskim.
 
 %package i18n-sr
 Summary:	OpenOffice.org - interface in Serbian language
-Summary(pl.UTF-8):   OpenOffice.org - interfejs w języku serbskim
+Summary(pl.UTF-8):	OpenOffice.org - interfejs w języku serbskim
 Group:		X11/Applications
 Requires:	%{name} = %{epoch}:%{version}-%{release}
 
@@ -1657,7 +1657,7 @@ serbskim.
 
 %package i18n-ss
 Summary:	OpenOffice.org - interface in Siswant language
-Summary(pl.UTF-8):   OpenOffice.org - interfejs w języku siswati
+Summary(pl.UTF-8):	OpenOffice.org - interfejs w języku siswati
 Group:		X11/Applications
 Requires:	%{name} = %{epoch}:%{version}-%{release}
 
@@ -1671,7 +1671,7 @@ siswati.
 
 %package i18n-st
 Summary:	OpenOffice.org - interface in Southern Sotho language
-Summary(pl.UTF-8):   OpenOffice.org - interfejs w języku południowym sotho
+Summary(pl.UTF-8):	OpenOffice.org - interfejs w języku południowym sotho
 Group:		X11/Applications
 Requires:	%{name} = %{epoch}:%{version}-%{release}
 
@@ -1685,7 +1685,7 @@ południowym sotho.
 
 %package i18n-sv
 Summary:	OpenOffice.org - interface in Swedish language
-Summary(pl.UTF-8):   OpenOffice.org - interfejs w języku szwedzkim
+Summary(pl.UTF-8):	OpenOffice.org - interfejs w języku szwedzkim
 Group:		X11/Applications
 Requires:	%{name} = %{epoch}:%{version}-%{release}
 Obsoletes:	openoffice-i18n-sv
@@ -1703,7 +1703,7 @@ szwedzkim.
 
 %package i18n-sw
 Summary:	OpenOffice.org - interface in Swahili language
-Summary(pl.UTF-8):   OpenOffice.org - interfejs w języku suahili
+Summary(pl.UTF-8):	OpenOffice.org - interfejs w języku suahili
 Group:		X11/Applications
 Requires:	%{name} = %{epoch}:%{version}-%{release}
 
@@ -1717,7 +1717,7 @@ suahili.
 
 %package i18n-sw_TZ
 Summary:	OpenOffice.org - interface in Swahili language for Tanzania
-Summary(pl.UTF-8):   OpenOffice.org - interfejs w języku suahili dla Tanzanii
+Summary(pl.UTF-8):	OpenOffice.org - interfejs w języku suahili dla Tanzanii
 Group:		X11/Applications
 Requires:	%{name} = %{epoch}:%{version}-%{release}
 
@@ -1731,7 +1731,7 @@ suahili dla Tanzanii.
 
 %package i18n-sx
 Summary:	OpenOffice.org - interface in Sutu language
-Summary(pl.UTF-8):   OpenOffice.org - interfejs w języku sutu
+Summary(pl.UTF-8):	OpenOffice.org - interfejs w języku sutu
 Group:		X11/Applications
 Requires:	%{name} = %{epoch}:%{version}-%{release}
 
@@ -1745,7 +1745,7 @@ sutu.
 
 %package i18n-ta_IN
 Summary:	OpenOffice.org - interface in Tamil language
-Summary(pl.UTF-8):   OpenOffice.org - interfejs w języku tamiskim
+Summary(pl.UTF-8):	OpenOffice.org - interfejs w języku tamiskim
 Group:		X11/Applications
 Requires:	%{name} = %{epoch}:%{version}-%{release}
 
@@ -1759,7 +1759,7 @@ tamilskim.
 
 %package i18n-te_IN
 Summary:	OpenOffice.org - interface in Telugu language for India
-Summary(pl.UTF-8):   OpenOffice.org - interfejs w języku telugu dla Indii
+Summary(pl.UTF-8):	OpenOffice.org - interfejs w języku telugu dla Indii
 Group:		X11/Applications
 Requires:	%{name} = %{epoch}:%{version}-%{release}
 
@@ -1773,7 +1773,7 @@ telugu dla Indii.
 
 %package i18n-tg
 Summary:	OpenOffice.org - interface in Tajik language
-Summary(pl.UTF-8):   OpenOffice.org - interfejs w języku tadżyckim
+Summary(pl.UTF-8):	OpenOffice.org - interfejs w języku tadżyckim
 Group:		X11/Applications
 Requires:	%{name} = %{epoch}:%{version}-%{release}
 
@@ -1787,7 +1787,7 @@ tadżyckim.
 
 %package i18n-th
 Summary:	OpenOffice.org - interface in Thai language
-Summary(pl.UTF-8):   OpenOffice.org - interfejs w języku tajskim
+Summary(pl.UTF-8):	OpenOffice.org - interfejs w języku tajskim
 Group:		X11/Applications
 Requires:	%{name} = %{epoch}:%{version}-%{release}
 Obsoletes:	openoffice-i18n-th
@@ -1804,7 +1804,7 @@ tajskim.
 
 %package i18n-ti_ER
 Summary:	OpenOffice.org - interface in Tigrigna language for Eritrea
-Summary(pl.UTF-8):   OpenOffice.org - interfejs w języku tigrinia dla Erytrei
+Summary(pl.UTF-8):	OpenOffice.org - interfejs w języku tigrinia dla Erytrei
 Group:		X11/Applications
 Requires:	%{name} = %{epoch}:%{version}-%{release}
 
@@ -1818,7 +1818,7 @@ tigrinia dla Erytrei.
 
 %package i18n-tn
 Summary:	OpenOffice.org - interface in Tswana language
-Summary(pl.UTF-8):   OpenOffice.org - interfejs w języku tswana
+Summary(pl.UTF-8):	OpenOffice.org - interfejs w języku tswana
 Group:		X11/Applications
 Requires:	%{name} = %{epoch}:%{version}-%{release}
 Obsoletes:	openoffice-i18n-tn
@@ -1835,7 +1835,7 @@ tswana.
 
 %package i18n-tr
 Summary:	OpenOffice.org - interface in Turkish language
-Summary(pl.UTF-8):   OpenOffice.org - interfejs w języku tureckim
+Summary(pl.UTF-8):	OpenOffice.org - interfejs w języku tureckim
 Group:		X11/Applications
 Requires:	%{name} = %{epoch}:%{version}-%{release}
 Obsoletes:	openoffice-i18n-tr
@@ -1853,7 +1853,7 @@ tureckim.
 
 %package i18n-ts
 Summary:	OpenOffice.org - interface in Tsonga language
-Summary(pl.UTF-8):   OpenOffice.org - interfejs w języku tsonga
+Summary(pl.UTF-8):	OpenOffice.org - interfejs w języku tsonga
 Group:		X11/Applications
 Requires:	%{name} = %{epoch}:%{version}-%{release}
 
@@ -1867,7 +1867,7 @@ tsonga.
 
 %package i18n-uk
 Summary:	OpenOffice.org - interface in Ukrainian language
-Summary(pl.UTF-8):   OpenOffice.org - interfejs w języku ukraińskim
+Summary(pl.UTF-8):	OpenOffice.org - interfejs w języku ukraińskim
 Group:		X11/Applications
 Requires:	%{name} = %{epoch}:%{version}-%{release}
 Obsoletes:	openoffice-i18n-uk
@@ -1885,7 +1885,7 @@ ukraińskim.
 
 %package i18n-ur_IN
 Summary:	OpenOffice.org - interface in Urdu language for India
-Summary(pl.UTF-8):   OpenOffice.org - interfejs w języku urdu dla Indii
+Summary(pl.UTF-8):	OpenOffice.org - interfejs w języku urdu dla Indii
 Group:		X11/Applications
 Requires:	%{name} = %{epoch}:%{version}-%{release}
 
@@ -1899,7 +1899,7 @@ urdu dla Indii.
 
 %package i18n-ve
 Summary:	OpenOffice.org - interface in Venda language
-Summary(pl.UTF-8):   OpenOffice.org - interfejs w języku venda
+Summary(pl.UTF-8):	OpenOffice.org - interfejs w języku venda
 Group:		X11/Applications
 Requires:	%{name} = %{epoch}:%{version}-%{release}
 
@@ -1913,7 +1913,7 @@ venda.
 
 %package i18n-vi
 Summary:	OpenOffice.org - interface in Vietnamese language
-Summary(pl.UTF-8):   OpenOffice.org - interfejs w języku wietnamskim
+Summary(pl.UTF-8):	OpenOffice.org - interfejs w języku wietnamskim
 Group:		X11/Applications
 Requires:	%{name} = %{epoch}:%{version}-%{release}
 
@@ -1927,7 +1927,7 @@ wietnamskim.
 
 %package i18n-xh
 Summary:	OpenOffice.org - interface in Xhosa language
-Summary(pl.UTF-8):   OpenOffice.org - interfejs w języku khosa
+Summary(pl.UTF-8):	OpenOffice.org - interfejs w języku khosa
 Group:		X11/Applications
 Requires:	%{name} = %{epoch}:%{version}-%{release}
 
@@ -1941,7 +1941,7 @@ khosa.
 
 %package i18n-zh_CN
 Summary:	OpenOffice.org - interface in Chinese language for China
-Summary(pl.UTF-8):   OpenOffice.org - interfejs w języku chińskim dla Chin
+Summary(pl.UTF-8):	OpenOffice.org - interfejs w języku chińskim dla Chin
 Group:		X11/Applications
 Requires:	%{name} = %{epoch}:%{version}-%{release}
 Obsoletes:	openoffice-i18n-zh
@@ -1960,7 +1960,7 @@ chińskim dla Chin.
 
 %package i18n-zh_TW
 Summary:	OpenOffice.org - interface in Chinese language for Taiwan
-Summary(pl.UTF-8):   OpenOffice.org - interfejs w języku chińskim dla Tajwanu
+Summary(pl.UTF-8):	OpenOffice.org - interfejs w języku chińskim dla Tajwanu
 Group:		X11/Applications
 Requires:	%{name} = %{epoch}:%{version}-%{release}
 Obsoletes:	openoffice-i18n-zh
@@ -1979,7 +1979,7 @@ chińskim dla Tajwanu.
 
 %package i18n-zu
 Summary:	OpenOffice.org - interface in Zulu language
-Summary(pl.UTF-8):   OpenOffice.org - interfejs w języku zuluskim
+Summary(pl.UTF-8):	OpenOffice.org - interfejs w języku zuluskim
 Group:		X11/Applications
 Requires:	%{name} = %{epoch}:%{version}-%{release}
 Obsoletes:	openoffice-i18n-zu
@@ -1997,7 +1997,7 @@ zuluskim.
 
 %package -n bash-completion-openoffice
 Summary:	bash-completion for OpenOffice.org
-Summary(pl.UTF-8):   bashowe uzupełnianie nazw dla OpenOffice.org
+Summary(pl.UTF-8):	bashowe uzupełnianie nazw dla OpenOffice.org
 Group:		Applications/Shells
 Requires:	%{name}
 Requires:	bash-completion
