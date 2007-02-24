@@ -2311,10 +2311,8 @@ rm -f $RPM_BUILD_ROOT%{_libdir}/%{name}/program/libgcc_s.so* \
 	$RPM_BUILD_ROOT%{_libdir}/%{name}/program/libstdc++*so*
 
 # Find out locales
-rm -f *.lang*
-langlist="`ls build/lang_*_list.txt|sed -e 's=build/lang_\(.*\)_list.txt=\1=g'`"
-
-for lang in $langlist; do
+find_lang() {
+	local lang="$1"
 	echo "%%defattr(644,root,root,755)" > ${lang}.lang
 
 	# help files
@@ -2372,6 +2370,13 @@ for lang in $langlist; do
 		grep "/help/${lang}/" ${lfile} >> ${lang}.lang || :
 		%endif
 	fi
+}
+
+rm -f *.lang*
+langlist="`ls build/lang_*_list.txt|sed -e 's=build/lang_\(.*\)_list.txt=\1=g'`"
+
+for lang in $langlist; do
+	find_lang $lang
 done
 
 chmod +x $RPM_BUILD_ROOT%{_libdir}/%{name}/program/*.so
