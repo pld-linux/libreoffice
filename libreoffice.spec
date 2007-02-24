@@ -1,3 +1,11 @@
+#
+#
+#RPM build errors:
+#    File not found: /home/glen/tmp/openoffice.org-2.1.0-root-glen/usr/lib/openoffice.org/program/classes/serializer.jar
+#    File not found: /home/glen/tmp/openoffice.org-2.1.0-root-glen/usr/lib/openoffice.org/program/classes/xalan.jar
+#    File not found: /home/glen/tmp/openoffice.org-2.1.0-root-glen/usr/lib/openoffice.org/program/classes/xercesImpl.jar
+#    File not found: /home/glen/tmp/openoffice.org-2.1.0-root-glen/usr/lib/openoffice.org/program/classes/xml-apis.jar
+#Error: package build failed. (no more info)
 # NOTE:
 #	- normal build with java requires about 24GB of disk space
 #		$BUILD_ROOT	 7.1 GB
@@ -43,8 +51,7 @@
 %bcond_without	java		# without Java support (disables help support)
 %bcond_without	kde		# KDE L&F packages
 %bcond_with	mono		# enable compilation of mono bindings
-%bcond_without	mozilla		# without mozilla
-%bcond_with	seamonkey	# use seamonkey instead of firefox
+%bcond_without	mozilla		# without mozilla components
 %bcond_without	i18n		# do not create i18n packages
 
 %bcond_without	system_beanshell
@@ -67,7 +74,7 @@
 %endif
 
 %define		ver		2.1.0
-%define		_rel		0.17
+%define		_rel		0.18
 %define		subver		680
 %define		snap		OOE680
 %define		snap2		SRC680
@@ -125,7 +132,6 @@ Patch100:	%{name}-STL-lib64.diff
 Patch101:	%{name}-64bit-inline.diff
 Patch102:	%{name}-build-pld-splash.diff
 Patch104:	%{name}-portaudio_v19.diff
-Patch105:	%{name}-firefox.diff
 Patch106:	%{name}-seamonkey.diff
 Patch107:	%{name}-stl-amd64.patch
 URL:		http://www.openoffice.org/
@@ -222,11 +228,7 @@ BuildRequires:	jdk >= 1.4.0_00
 %else
 BuildRequires:	libxslt-progs
 %endif
-%if %{with seamonkey}
-BuildRequires:	seamonkey-devel
-%else
-BuildRequires:	mozilla-firefox-devel
-%endif
+BuildRequires:	xulrunner-devel
 BuildConflicts:	STLport4
 Requires:	%{name}-base = %{epoch}:%{version}-%{release}
 Requires:	%{name}-calc = %{epoch}:%{version}-%{release}
@@ -2048,7 +2050,7 @@ done
 
 echo "[ PLDOnly ]" >> patches/src680/apply
 # patches applied by ooo (extension .diff is required)
-for P in %{PATCH102} %{PATCH104} %{PATCH105} %{PATCH106}; do
+for P in %{PATCH102} %{PATCH104} %{PATCH106}; do
 	PATCHNAME=PLD-${P##*/%{name}-}
 	PATCHNAME=${PATCHNAME%.patch}.diff
 	install $P patches/src680/$PATCHNAME
@@ -2150,11 +2152,7 @@ CONFOPTS=" \
 	--with-system-xmlsec \
 %if %{with mozilla}
 	--with-system-mozilla \
-%if %{with seamonkey}
-	--with-seamonkey \
-%else
-	--with-firefox \
-%endif
+	--with-xulrunner \
 %else
 	--disable-mozilla \
 %endif
