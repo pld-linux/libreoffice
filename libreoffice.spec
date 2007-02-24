@@ -2,9 +2,6 @@
 #
 #RPM build errors:
 #    File not found: /home/glen/tmp/openoffice.org-2.1.0-root-glen/usr/lib/openoffice.org/program/classes/serializer.jar
-#    File not found: /home/glen/tmp/openoffice.org-2.1.0-root-glen/usr/lib/openoffice.org/program/classes/xalan.jar
-#    File not found: /home/glen/tmp/openoffice.org-2.1.0-root-glen/usr/lib/openoffice.org/program/classes/xercesImpl.jar
-#    File not found: /home/glen/tmp/openoffice.org-2.1.0-root-glen/usr/lib/openoffice.org/program/classes/xml-apis.jar
 #Error: package build failed. (no more info)
 # NOTE:
 #	- normal build with java requires about 24GB of disk space
@@ -127,6 +124,7 @@ Patch3:		%{name}-mdbtools_fix.diff
 Patch4:		%{name}-nolfs_hack.patch
 Patch5:		%{name}-no_fonts_dir_buildfix.patch
 Patch6:		%{name}-java16.patch
+Patch7:		%{name}-java6.patch
 # patches applied by ooo-patching-system
 Patch100:	%{name}-STL-lib64.diff
 Patch101:	%{name}-64bit-inline.diff
@@ -2032,6 +2030,7 @@ ln -sf %{SOURCE1} %{SOURCE2} %{SOURCE3} %{SOURCE4} \
 %patch4 -p1
 %patch5 -p1
 %patch6 -p1
+%patch7 -p1
 
 # 64 bit related patches (not applied now)
 install %{PATCH100} patches/64bit
@@ -2861,10 +2860,10 @@ fontpostinst TTF
 %{_libdir}/%{name}/program/classes/unoil.jar
 %{_libdir}/%{name}/program/classes/unoloader.jar
 %{_libdir}/%{name}/program/classes/web.jar
-%{_libdir}/%{name}/program/classes/xalan.jar
-%{_libdir}/%{name}/program/classes/xercesImpl.jar
+%{!?with_system_xalan:%{_libdir}/%{name}/program/classes/xalan.jar}
+%{!?with_system_xerces:%{_libdir}/%{name}/program/classes/xercesImpl.jar}
 %{_libdir}/%{name}/program/classes/xmerge.jar
-%{_libdir}/%{name}/program/classes/xml-apis.jar
+%{!?with_system_xml_apis:%{_libdir}/%{name}/program/classes/xml-apis.jar}
 
 %{_libdir}/%{name}/share/Scripts/beanshell
 %{_libdir}/%{name}/share/Scripts/javascript
