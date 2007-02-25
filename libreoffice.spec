@@ -1,8 +1,3 @@
-#
-#
-#RPM build errors:
-#    File not found: /home/glen/tmp/openoffice.org-2.1.0-root-glen/usr/lib/openoffice.org/program/classes/serializer.jar
-#Error: package build failed. (no more info)
 # NOTE:
 #	- normal build with java requires about 24GB of disk space
 #		$BUILD_ROOT	 7.1 GB
@@ -2112,6 +2107,7 @@ CONFOPTS=" \
 	--with-system-gcc \
 	%{?with_system_libhnj:--with-system-altlinuxhyphen} \
 	%{?with_system_xalan:--with-system-xalan} \
+	%{?with_system_xalan:--with-serializer-jar=%{_javadir}/xalan.jar} \
 	%{?with_system_xerces:--with-system-xerces} \
 	%{?with_system_xml_apis:--with-system-xml-apis} \
 	--with-system-zlib \
@@ -2193,7 +2189,7 @@ CONFOPTS=" \
 	--enable-access \
 	--enable-cairo \
 	--enable-crypt-link \
-	%{?with_mono:--enable-mono} %{!?with_mono:--disable-mono} \
+	--%{?with_mono:--en}%{!?with_mono:dis}able-mono \
 	--enable-pam-link \
 	--enable-openldap \
 	--enable-cups \
@@ -2855,7 +2851,7 @@ fontpostinst TTF
 %{_libdir}/%{name}/program/classes/ridl.jar
 %{_libdir}/%{name}/program/classes/sandbox.jar
 %{_libdir}/%{name}/program/classes/sdbc_hsqldb.jar
-%{_libdir}/%{name}/program/classes/serializer.jar
+%{!?with_system_xalan:%{_libdir}/%{name}/program/classes/serializer.jar}
 %{_libdir}/%{name}/program/classes/table.jar
 %{_libdir}/%{name}/program/classes/unoil.jar
 %{_libdir}/%{name}/program/classes/unoloader.jar
@@ -2877,7 +2873,6 @@ fontpostinst TTF
 %{_libdir}/%{name}/share/xslt/export/spreadsheetml
 %{_libdir}/%{name}/share/xslt/export/wordml
 %{_libdir}/%{name}/share/xslt/import
-
 %endif
 
 %{_datadir}/mime/packages/openoffice.xml
