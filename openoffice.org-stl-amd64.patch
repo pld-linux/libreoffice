@@ -1,0 +1,25 @@
+--- config_office/configure.in~	2007-01-03 23:21:35.000000000 +0200
++++ config_office/configure.in	2007-01-04 00:14:05.000000000 +0200
+@@ -2116,9 +2117,9 @@
+ 				   fi
+ 			   fi
+ 		   else
+-			   if test -f "$STLPORT4/lib/libstlport_gcc.so"; then
++			   if test -f "$STLPORT4/lib64/libstlport_gcc.so"; then
+ 				   AC_MSG_RESULT([checked])
+-			   elif test -f "$STLPORT4/lib/libstlport.so"; then
++			   elif test -f "$STLPORT4/lib64/libstlport.so"; then
+ 				   AC_MSG_RESULT([checked])
+ 				   STLPORT_VER=500
+ 			   else
+--- stlport/makefile.mk~	2007-01-03 01:28:58.000000000 +0200
++++ stlport/makefile.mk	2007-01-03 01:29:02.000000000 +0200
+@@ -204,7 +204,7 @@
+ all :
+        @echo "         An already available installation of STLport has been chosen in the configure process."
+        @echo "         Therefore the version provided here does not need to be built in addition."
+-       +$(COPY) $(STLPORT4)$/lib$/*stlport*$(DLLPOST) $(DLLDEST)
++       +$(COPY) $(STLPORT4)$/lib64$/*stlport*$(DLLPOST) $(DLLDEST)
+ .ENDIF
+ 
+ .INCLUDE : 	set_ext.mk

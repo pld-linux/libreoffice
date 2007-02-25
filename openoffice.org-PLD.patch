@@ -1,0 +1,33 @@
+TODO:
+CalcSolver
+diff -bur ooo-build-2.0.2.7.orig/patches/src680/apply ooo-build-2.0.2.7/patches/src680/apply
+--- ooo-build-2.0.2.7.orig/patches/src680/apply	2006-04-21 15:21:46.640348000 +0200
++++ ooo-build-2.0.2.7/patches/src680/apply	2006-04-21 16:10:55.324630250 +0200
+@@ -52,9 +52,9 @@
+ Ark: LinuxCommon, NotDebian, ArkOnly, GCJExperimental, BerkeleyDB43, SystemJavaBits
+ Ark64: LinuxCommon, NotDebian, ArkOnly, BerkeleyDB43, 64bit, SystemJavaBits
+ # www.pld-linux.org
+-PLDBase: LinuxCommon, NotDebian, PLDOnly
++PLDBase: LinuxCommon, NotDebian, PLDOnly, NovellOnly, NovellOnlyUnix, FilePickers, GCJExperimental, SystemJavaBits, SystemJavaBitsWorkaround, BerkeleyDB43, STLport5
+ PLD: PLDBase
+-PLD64: PLDBase, 64bit
++PLD64: PLDBase, 64bit, PLD64bitfixes
+ # Mandriva Linux
+ MandrivaBase: MandrivaOnly, LinuxCommon, MandrivaOnlyUnix, LockDown
+ Mandriva: MandrivaBase
+@@ -815,15 +815,6 @@
+ # Db 4.3/4.4 needs -lpthread
+ system-db-4.3-use-lpthread.diff, i#58474, rengelha
+ 
+-
+-[PLDOnly]
+-SectionOwner => arekm
+-
+-# fix build of sal project
+-solenv-unxlngi4-link.diff, i#66982
+-# fix for macro browser crash
+-sfx2-badscript.diff, i#67976
+-
+ [ BuildBits ]
+ # buildfix for some JDKs, i#68790
+ readlicense_oo-xml-apis.diff, cws-cmcfixes27

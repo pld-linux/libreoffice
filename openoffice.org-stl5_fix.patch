@@ -1,0 +1,28 @@
+--- ooo-build-src680-m176/patches/src680/system-stlport5.diff.orig	2006-08-16 11:03:36.000000000 +0000
++++ ooo-build-src680-m176/patches/src680/system-stlport5.diff	2006-08-16 11:04:16.000000000 +0000
+@@ -381,3 +381,25 @@
+  
+      for (aIt = mChildren.begin(); aIt != mChildren.end(); aIt++)
+      {
++--- scp2/source/ooo/file_library_ooo.scp.orig	2006-08-15 21:29:35.000000000 +0000
+++++ scp2/source/ooo/file_library_ooo.scp	2006-08-15 21:30:45.000000000 +0000
++@@ -2045,7 +2045,7 @@
++   #ifdef IRIX
++     Name = STRING(CONCAT3(libstlport_,gcc,.so.4.5));
++   #else
++-    Name = STRING(CONCAT3(libstlport_,gcc,UNXSUFFIX));
+++    Name = STRING(CONCAT2(libstlport,UNXSUFFIX));
++   #endif
++   #else
++   #ifdef SOLARIS
++--- scp2/source/ure/ure.scp.orig	2006-08-15 21:31:54.000000000 +0000
+++++ scp2/source/ure/ure.scp	2006-08-15 21:32:19.000000000 +0000
++@@ -592,7 +592,7 @@
++     TXT_FILE_BODY;
++     Dir = SCP2_URE_DL_DIR;
++ #if defined _gcc3
++-    Name = SCP2_URE_DL_NORMAL(stlport_gcc);
+++    Name = SCP2_URE_DL_NORMAL(stlport);
++ #elif defined SOLARIS
++     Name = SCP2_URE_DL_NORMAL(stlport_sunpro);
++ #elif defined WNT
