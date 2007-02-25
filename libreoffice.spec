@@ -66,7 +66,7 @@
 %endif
 
 %define		ver		2.1.0
-%define		_rel		0.19
+%define		_rel		0.20
 %define		subver		680
 %define		snap		OOE680
 %define		snap2		SRC680
@@ -200,6 +200,7 @@ BuildRequires:	unixODBC-devel
 BuildRequires:	unzip
 %{?with_system_xalan:BuildRequires:	xalan-j}
 %{?with_system_xerces:BuildRequires:	xerces-j}
+%{?with_system_xml_apis:BuildRequires:	xml-commons}
 BuildRequires:	xmlsec1-nss-devel
 BuildRequires:	xorg-lib-libX11-devel
 BuildRequires:	xorg-lib-libXaw-devel
@@ -309,10 +310,15 @@ Obsoletes:	openoffice-libs
 Obsoletes:	openoffice.org-dirs
 Obsoletes:	openoffice.org-libs < 1:2.1.0-0.m6.0.11
 # libcups.so.2 is dlopened (in cupsmgr.cxx); maybe Suggests instead?
+%{?with_system_beanshell:Requires:	beanshell}
 Requires:	cups-lib
 Requires:	libstdc++ >= 5:3.2.1
 Requires:	mktemp
 Requires:	sed
+%{?with_system_xalan:Requires:	xalan-j}
+%{?with_system_xerces:Requires:	xerces-j}
+%{?with_system_xml_apis:Requires:	xml-commons}
+%{?with_system_xt:Requires:	xt}
 Obsoletes:	openoffice
 #Suggests:	chkfontpath
 
@@ -2088,7 +2094,7 @@ RPM_BUILD_NR_THREADS="%(echo "%{__make}" | sed -e 's#.*-j\([[:space:]]*[0-9]\+\)
 [ "$RPM_BUILD_NR_THREADS" = "%{__make}" ] && RPM_BUILD_NR_THREADS=1
 RPM_BUILD_NR_THREADS=$(echo $RPM_BUILD_NR_THREADS)
 
-CONFOPTS=" \
+CONFOPTS="\
 %ifarch %{ix86} \
 	--with-arch=x86 \
 %endif
@@ -2138,7 +2144,7 @@ CONFOPTS=" \
 	--with-system-sndfile \
 %if %{with system_xt}
 	--with-system-xt \
-	--with-xt-jar=/usr/share/java/classes/ \
+	--with-xt-jar=%{_javadir}/classes/ \
 %endif
 %if %{with system_beanshell}
 	--with-system-beanshell \
