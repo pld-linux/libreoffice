@@ -66,7 +66,7 @@
 %endif
 
 %define		ver		2.1.0
-%define		_rel		0.18
+%define		_rel		0.19
 %define		subver		680
 %define		snap		OOE680
 %define		snap2		SRC680
@@ -303,7 +303,6 @@ Pakiet biurowy OpenOffice.org - Interfejs GTK+.
 Summary:	Core modules for OpenOffice.org
 Summary(pl.UTF-8):	Podstawowe moduły dla OpenOffice.org
 Group:		X11/Applications
-Requires:	%{name}-libs = %{epoch}:%{version}-%{release}
 Requires:	shared-mime-info
 Obsoletes:	oooqs
 Obsoletes:	openoffice-libs
