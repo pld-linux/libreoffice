@@ -66,7 +66,7 @@
 %endif
 
 %define		ver		2.1.0
-%define		_rel		1
+%define		_rel		2
 %define		subver		680
 %define		snap		OOE680
 %define		snap2		SRC680
@@ -119,7 +119,6 @@ Patch3:		%{name}-mdbtools_fix.diff
 Patch4:		%{name}-nolfs_hack.patch
 Patch5:		%{name}-no_fonts_dir_buildfix.patch
 Patch6:		%{name}-java16.patch
-Patch7:		%{name}-java6.patch
 # patches applied by ooo-patching-system
 Patch100:	%{name}-STL-lib64.diff
 Patch101:	%{name}-64bit-inline.diff
@@ -127,6 +126,7 @@ Patch102:	%{name}-build-pld-splash.diff
 Patch104:	%{name}-portaudio_v19.diff
 Patch106:	%{name}-seamonkey.diff
 Patch107:	%{name}-stl-amd64.patch
+Patch108:	%{name}-java6.patch
 URL:		http://www.openoffice.org/
 BuildRequires:	STLport-devel >= 2:5.0.0
 BuildRequires:	autoconf >= 2.51
@@ -2025,7 +2025,6 @@ ln -sf %{SOURCE1} %{SOURCE2} %{SOURCE3} %{SOURCE4} \
 %patch4 -p1
 %patch5 -p1
 %patch6 -p1
-%patch7 -p1
 
 # 64 bit related patches (not applied now)
 install %{PATCH100} patches/64bit
@@ -2044,7 +2043,7 @@ done
 
 echo "[ PLDOnly ]" >> patches/src680/apply
 # patches applied by ooo (extension .diff is required)
-for P in %{PATCH102} %{PATCH104} %{PATCH106}; do
+for P in %{PATCH102} %{PATCH104} %{PATCH106} %{PATCH108}; do
 	PATCHNAME=PLD-${P##*/%{name}-}
 	PATCHNAME=${PATCHNAME%.patch}.diff
 	install $P patches/src680/$PATCHNAME
