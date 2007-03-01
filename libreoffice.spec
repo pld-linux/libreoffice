@@ -2204,7 +2204,7 @@ CONFOPTS="\
 	--enable-crashdump=no \
 	--disable-symbols \
 %endif
-	--with-num-cpus=$RPM_BUILD_NR_THREADS
+	--with-num-cpus=$RPM_BUILD_NR_THREADS \
 	--with-tag=%{ssnap}
 "
 
