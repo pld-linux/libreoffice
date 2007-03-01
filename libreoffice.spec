@@ -2052,7 +2052,7 @@ done
 
 %build
 # Make sure we have /proc mounted - otherwise idlc will fail later.
-if [ ! -r /proc/cpuinfo ]; then
+if [ ! -f /proc/cpuinfo ]; then
 	echo "You need to have /proc mounted in order to build this package!"
 	exit 1
 fi
