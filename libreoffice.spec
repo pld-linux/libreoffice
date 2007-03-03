@@ -2121,9 +2121,7 @@ CONFOPTS="\
 	--with-system-x11-extensions-headers \
 	--with-system-odbc-headers \
 	--with-system-stdlibs \
-%if %{with system_db}
-	--with-system-db \
-%endif
+	%{?with_system_db:--with-system-db} \
 	--with-system-curl \
 	--with-system-freetype \
 	--with-system-nas \
@@ -2134,19 +2132,12 @@ CONFOPTS="\
 	--with-system-boost \
 	--with-system-icu \
 	--with-system-libwpd \
-%if %{with system_mdbtools}
-	--with-system-mdbtools \
-%endif
+	%{?with_system_mdbtools:--with-system-mdbtools} \
 	--with-system-neon \
 	--with-system-portaudio \
 	--with-system-sndfile \
-%if %{with system_xt}
-	--with-system-xt \
-	--with-xt-jar=%{_javadir}/classes/ \
-%endif
-%if %{with system_beanshell}
-	--with-system-beanshell \
-%endif
+	%{?with_system_xt:--with-system-xt --with-xt-jar=%{_javadir}/classes} \
+	%{?with_system_beanshell:--with-system-beanshell} \
 	--with-system-xmlsec \
 %if %{with mozilla}
 	--with-system-mozilla \
@@ -2160,11 +2151,7 @@ CONFOPTS="\
 	--with-about-bitmaps="\$SRCDIR/openabout_pld.png" \
 	--with-distro="${DISTRO}" \
 	--enable-gtk \
-%if %{with kde}
-	--enable-kde \
-%else
-	--disable-kde \
-%endif
+	--%{!?with_kde:dis}%{?with_kde:en}able-kde \
 	--without-binsuffix \
 	--with-installed-ooo-dirname=%{name} \
 	--with-lang=%{?with_i18n:ALL} \
