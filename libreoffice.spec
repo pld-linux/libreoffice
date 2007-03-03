@@ -27,7 +27,6 @@
 #       - can't be just i18n-{be,gu,hi,kn,pa,ta} instead of *-{be_BY,*_IN}?
 #   - more system libs todo:
 #	- --with-system-agg + antigrain package (http://www.antigrain.com)
-#	- --with-system-hsqldb + hsqldb package (http://hsqldb.org or sourceforge)
 #	- --with-system-hunspell + hunspell package (http://hunspell.sourceforge.net)
 #	- (SYSTEM_HYPH) bcond system_libhnj doesn't work - needs Debian-patched version of libhnj
 #	- --with-system-myspell + myspell package as in Debian
@@ -57,6 +56,7 @@
 %bcond_without	system_xalan
 %bcond_without	system_xerces
 %bcond_without	system_xml_apis
+%bcond_without	system_hsqldb
 %bcond_with	system_xt
 
 %bcond_without	xvfb		# using Xvfb in build-galleries script (without xvfb broken)
@@ -67,10 +67,11 @@
 %undefine	with_system_xerces
 %undefine	with_system_xml_apis
 %undefine	with_system_xt
+%undefine	with_system_hsqldb
 %endif
 
 %define		ver		2.1.0
-%define		_rel		0.20
+%define		_rel		0.21
 %define		subver		680
 %define		snap		OOE680
 %define		snap2		SRC680
@@ -157,6 +158,7 @@ BuildRequires:	freetype-devel >= 2.1
 BuildRequires:	gstreamer-devel >= 0.10.0
 BuildRequires:	gstreamer-plugins-base-devel >= 0.10.0
 BuildRequires:	gtk+2-devel
+%{?with_system_hsqldb:BuildRequires:	hsqldb >= 1.8.0}
 BuildRequires:	icu
 %if %{with kde}
 BuildRequires:	kdelibs-devel
@@ -221,7 +223,6 @@ BuildRequires:	zlib-devel
 BuildRequires:	ant
 %{?with_system_db:BuildRequires:	db-java >= 4.3}
 BuildRequires:	jar
-BuildRequires:	jdk < 1.6
 BuildRequires:	jdk >= 1.4.0_00
 %else
 BuildRequires:	libxslt-progs
@@ -2061,7 +2062,7 @@ done
 
 %build
 # Make sure we have /proc mounted - otherwise idlc will fail later.
-if [ ! -r /proc/cpuinfo ]; then
+if [ ! -f /proc/cpuinfo ]; then
 	echo "You need to have /proc mounted in order to build this package!"
 	exit 1
 fi
@@ -2117,6 +2118,7 @@ CONFOPTS="\
 	%{?with_system_xalan:--with-system-xalan} \
 	%{?with_system_xalan:--with-serializer-jar=%{_javadir}/xalan.jar} \
 	%{?with_system_xerces:--with-system-xerces} \
+	%{?with_system_hsqldb:--with-system-hsqldb} \
 	%{?with_system_xml_apis:--with-system-xml-apis} \
 	--with-system-zlib \
 	--with-system-jpeg \
@@ -2845,7 +2847,7 @@ fontpostinst TTF
 %{_libdir}/%{name}/program/classes/commonwizards.jar
 %{_libdir}/%{name}/program/classes/fax.jar
 %{_libdir}/%{name}/program/classes/form.jar
-%{_libdir}/%{name}/program/classes/hsqldb.jar
+%{!?with_system_hsqldb:%{_libdir}/%{name}/program/classes/hsqldb.jar}
 %{_libdir}/%{name}/program/classes/java_uno.jar
 %{_libdir}/%{name}/program/classes/java_uno_accessbridge.jar
 %{_libdir}/%{name}/program/classes/js.jar
