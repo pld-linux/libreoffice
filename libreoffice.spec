@@ -23,7 +23,6 @@
 #       - can't be just i18n-{be,gu,hi,kn,pa,ta} instead of *-{be_BY,*_IN}?
 #   - more system libs todo:
 #	- --with-system-agg + antigrain package (http://www.antigrain.com)
-#	- --with-system-hsqldb + hsqldb package (http://hsqldb.org or sourceforge)
 #	- --with-system-hunspell + hunspell package (http://hunspell.sourceforge.net)
 #	- (SYSTEM_HYPH) bcond system_libhnj doesn't work - needs Debian-patched version of libhnj
 #	- --with-system-myspell + myspell package as in Debian
@@ -53,6 +52,7 @@
 %bcond_without	system_xalan
 %bcond_without	system_xerces
 %bcond_without	system_xml_apis
+%bcond_without	system_hsqldb
 %bcond_with	system_xt
 
 %bcond_without	xvfb		# using Xvfb in build-galleries script (without xvfb broken)
@@ -63,6 +63,7 @@
 %undefine	with_system_xerces
 %undefine	with_system_xml_apis
 %undefine	with_system_xt
+%undefine	with_system_hsqldb
 %endif
 
 %define		ver		2.1.0
@@ -178,6 +179,7 @@ BuildRequires:	mono-csharp >= 1.1.8
 BuildRequires:	mono-devel >= 1.1.8
 %endif
 BuildRequires:	XFree86-devel
+%{?with_system_hsqldb:BuildRequires:	hsqldb >= 1.8.0}
 BuildRequires:	nas-devel >= 1.7-1
 BuildRequires:	neon-devel
 BuildRequires:	openclipart-png >= 0:0.16
@@ -307,6 +309,7 @@ Obsoletes:	openoffice.org-libs < 1:2.1.0-0.m6.0.11
 # libcups.so.2 is dlopened (in cupsmgr.cxx); maybe Suggests instead?
 %{?with_system_beanshell:Requires:	beanshell}
 Requires:	cups-lib
+%{?with_system_hsqldb:Requires:	hsqldb >= 1.8.0}
 Requires:	libstdc++ >= 5:3.2.1
 Requires:	mktemp
 Requires:	sed
@@ -2108,6 +2111,7 @@ CONFOPTS="\
 	%{?with_system_xalan:--with-system-xalan} \
 	%{?with_system_xalan:--with-serializer-jar=%{_javadir}/xalan.jar} \
 	%{?with_system_xerces:--with-system-xerces} \
+	%{?with_system_hsqldb:--with-system-hsqldb} \
 	%{?with_system_xml_apis:--with-system-xml-apis} \
 	--with-system-zlib \
 	--with-system-jpeg \
@@ -2836,7 +2840,7 @@ fontpostinst TTF
 %{_libdir}/%{name}/program/classes/commonwizards.jar
 %{_libdir}/%{name}/program/classes/fax.jar
 %{_libdir}/%{name}/program/classes/form.jar
-%{_libdir}/%{name}/program/classes/hsqldb.jar
+%{!?with_system_hsqldb:%{_libdir}/%{name}/program/classes/hsqldb.jar}
 %{_libdir}/%{name}/program/classes/java_uno.jar
 %{_libdir}/%{name}/program/classes/java_uno_accessbridge.jar
 %{_libdir}/%{name}/program/classes/js.jar
