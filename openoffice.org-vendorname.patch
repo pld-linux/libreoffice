@@ -8,11 +8,12 @@
          *) AC_MSG_WARN([Cannot guess vendor from distro - please add it to configure.in]) ;;
  esac
  AC_MSG_RESULT([$VENDORNAME])
-@@ -886,6 +887,7 @@
+@@ -886,6 +888,8 @@
  distro-configs/translate-org-za-win32.conf
  distro-configs/rpl2.conf
  distro-configs/rpl2-64.conf
 +distro-configs/PLD.conf
++distro-configs/PLD64.conf
  etc/Makefile
  patches/Makefile
  patches/cairo/Makefile
