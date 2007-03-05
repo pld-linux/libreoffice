@@ -67,7 +67,7 @@
 %endif
 
 %define		ver		2.1.0
-%define		_rel		2
+%define		_rel		3
 %define		subver		680
 %define		snap		OOE680
 %define		snap2		SRC680
@@ -2257,8 +2257,13 @@ rm -rf $RPM_BUILD_ROOT%{_datadir}/applnk
 rm -rf $RPM_BUILD_ROOT%{_datadir}/gnome
 
 # Remove dictionaries (in separate pkg)
-rm -rf $RPM_BUILD_ROOT%{_libdir}/%{name}/share/dict/ooo/*
+rm -vf $RPM_BUILD_ROOT%{_libdir}/%{name}/share/dict/ooo/*
+%if %{with system_myspell}
+rmdir $RPM_BUILD_ROOT%{_libdir}/%{name}/share/dict/ooo
+ln -s %{_datadir}/myspell $RPM_BUILD_ROOT%{_libdir}/%{name}/share/dict/ooo
+%else
 touch $RPM_BUILD_ROOT%{_libdir}/%{name}/share/dict/ooo/dictionary.lst
+%endif
 
 # is below comment true?
 # OOo should not install the Vera fonts, they are Required: now
@@ -2379,6 +2384,15 @@ rm -rf $RPM_BUILD_ROOT%{_libdir}/%{name}/share/xslt
 %clean
 rm -rf $RPM_BUILD_ROOT
 
+%if %{with system_myspell}
+# we symlink the dir, unless smb wishes to patch OOo to use system dir directly
+%pre core
+if [ -d %{_libdir}/%{name}/share/dict/ooo ] && [ ! -L %{_libdir}/%{name}/share/dict/ooo ]; then
+	rmdir %{_libdir}/%{name}/share/dict/ooo 2>/dev/null || mv -v %{_libdir}/%{name}/share/dict/ooo{,rpmsave} || :
+	ln -s %{_datadir}/myspell %{_libdir}/%{name}/share/dict/ooo
+fi
+%endif
+
 %post core
 umask 022
 [ ! -x /usr/bin/update-desktop-database ] || /usr/bin/update-desktop-database >/dev/null 2>&1 ||:
@@ -2394,6 +2408,9 @@ fontpostinst TTF
 
 %postun -n fonts-TTF-OpenSymbol
 fontpostinst TTF
+
+# NOTE:
+# you may find build/*_list.txt useful to help you package files to packages
 
 %files
 %defattr(644,root,root,755)
@@ -2470,7 +2487,8 @@ fontpostinst TTF
 %{_libdir}/%{name}/share/config/soffice.cfg/modules/StartModule
 %{_libdir}/%{name}/share/config/wizard
 %dir %{_libdir}/%{name}/share/dict
-%dir %{_libdir}/%{name}/share/dict/ooo
+%{!?with_system_myspell:%dir %{_libdir}/%{name}/share/dict/ooo}
+%{!?with_system_myspell:%ghost %{_libdir}/%{name}/share/dict/ooo/dictionary.lst}
 %{_libdir}/%{name}/share/dtd
 %{_libdir}/%{name}/share/fonts
 %{_libdir}/%{name}/share/gallery
@@ -2740,7 +2758,6 @@ fontpostinst TTF
 %{_libdir}/%{name}/share/registry/modules/org/openoffice/TypeDetection/UISort/UISort-math.xcu
 %{_libdir}/%{name}/share/registry/modules/org/openoffice/TypeDetection/UISort/UISort-writer.xcu
 
-%ghost %{_libdir}/%{name}/share/dict/ooo/dictionary.lst
 %dir %{_libdir}/%{name}/presets
 %dir %{_libdir}/%{name}/presets/autotext
 %{_libdir}/%{name}/presets/autotext/mytexts.bau
@@ -3027,7 +3044,6 @@ fontpostinst TTF
 %attr(755,root,root) %{_libdir}/%{name}/program/libera680*.so
 %attr(755,root,root) %{_libdir}/%{name}/program/libeti680*.so
 %attr(755,root,root) %{_libdir}/%{name}/program/libevoab1.so
-%attr(755,root,root) %{_libdir}/%{name}/program/libevoab2.so
 %attr(755,root,root) %{_libdir}/%{name}/program/libevtatt.so
 %attr(755,root,root) %{_libdir}/%{name}/program/libexlink680*.so
 %attr(755,root,root) %{_libdir}/%{name}/program/libexp680*.so
@@ -3230,6 +3246,7 @@ fontpostinst TTF
 %attr(755,root,root) %{_libdir}/%{name}/program/gnome-open-url
 %attr(755,root,root) %{_libdir}/%{name}/program/gnome-open-url.bin
 %attr(755,root,root) %{_libdir}/%{name}/program/gnome-set-default-application
+%attr(755,root,root) %{_libdir}/%{name}/program/libevoab2.so
 %attr(755,root,root) %{_libdir}/%{name}/program/libvclplug_gtk*.so
 %if %{with gnomevfs}
 %attr(755,root,root) %{_libdir}/%{name}/program/gconfbe1.uno.so
