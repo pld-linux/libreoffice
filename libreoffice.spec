@@ -156,7 +156,6 @@ BuildRequires:	gstreamer-plugins-base-devel >= 0.10.0
 BuildRequires:	gtk+2-devel
 %{?with_system_hsqldb:BuildRequires:	hsqldb >= 1.8.0}
 %{?with_system_hunspell:BuildRequires:	hunspell-devel}
-%{?with_system_myspell:BuildRequires:	myspell-devel}
 BuildRequires:	icu
 %{?with_kde:BuildRequires:	kdelibs-devel}
 BuildRequires:	libart_lgpl-devel
@@ -171,6 +170,7 @@ BuildRequires:	libxml2-devel >= 2.0
 %{?with_system_mdbtools:BuildRequires:	mdbtools-devel >= 0.6}
 %{?with_mono:BuildRequires:	mono-csharp >= 1.1.8}
 %{?with_mono:BuildRequires:	mono-devel >= 1.1.8}
+%{?with_system_myspell:BuildRequires:	myspell-devel}
 BuildRequires:	nas-devel >= 1.7-1
 BuildRequires:	neon-devel
 BuildRequires:	nspr-devel >= 1:4.6-0.20041030.3
