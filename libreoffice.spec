@@ -28,6 +28,7 @@
 #   - more system libs todo:
 #	- (SYSTEM_HYPH) bcond system_libhnj doesn't work - needs Debian-patched version of libhnj
 #	- --with-system-mythes + mythes package (http://lingucomponent.openoffice.org/thesaurus.html)
+#   - --with-system-mspack    use libmspack already installed on system
 #	- bcond system_xt doesn't work - xt in PLD is too old or broken
 #
 #	$ grep SYSTEM ooo-build-ooe680-m6/build/ooe680-m6/config_office/config.log |grep NO
@@ -45,6 +46,7 @@
 %bcond_with	mono		# enable compilation of mono bindings
 %bcond_without	mozilla		# without mozilla components
 %bcond_without	i18n		# do not create i18n packages
+%bcond_without	xvfb		# using Xvfb in build-galleries script (without xvfb broken)
 
 %bcond_without	system_beanshell
 %bcond_without	system_db		# without system (i.e. with internal) Berkeley DB
@@ -58,8 +60,6 @@
 %bcond_without	system_hunspell
 %bcond_without	system_myspell
 %bcond_with	system_xt
-
-%bcond_without	xvfb		# using Xvfb in build-galleries script (without xvfb broken)
 
 %if %{without java}
 %undefine	with_system_beanshell
@@ -2984,7 +2984,7 @@ fontpostinst TTF
 %attr(755,root,root) %{_libdir}/%{name}/program/ldapbe2.uno.so
 %attr(755,root,root) %{_libdir}/%{name}/program/libabp680*.so
 %attr(755,root,root) %{_libdir}/%{name}/program/libadabas2.so
-%attr(755,root,root) %{_libdir}/%{name}/program/libagg680*.so
+%{!?with_system_agg:%attr(755,root,root) %{_libdir}/%{name}/program/libagg680*.so}
 %attr(755,root,root) %{_libdir}/%{name}/program/libanimcore.so
 %attr(755,root,root) %{_libdir}/%{name}/program/libavmedia680*.so
 %attr(755,root,root) %{_libdir}/%{name}/program/libavmediagst.so
@@ -3051,7 +3051,7 @@ fontpostinst TTF
 %attr(755,root,root) %{_libdir}/%{name}/program/libfwm680*.so
 %attr(755,root,root) %{_libdir}/%{name}/program/libgcc3_uno.so
 %attr(755,root,root) %{_libdir}/%{name}/program/libgo680*.so
-%attr(755,root,root) %{_libdir}/%{name}/program/libhunspell.so
+%{!?with_system_hunspell:%attr(755,root,root) %{_libdir}/%{name}/program/libhunspell.so}
 %attr(755,root,root) %{_libdir}/%{name}/program/libhyphen680*.so
 %attr(755,root,root) %{_libdir}/%{name}/program/libi18nisolang1gcc3.so
 %attr(755,root,root) %{_libdir}/%{name}/program/libi18nregexpgcc3.so
