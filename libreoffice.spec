@@ -3069,7 +3069,7 @@ fontpostinst TTF
 %attr(755,root,root) %{_libdir}/%{name}/program/libira680*.so
 %attr(755,root,root) %{_libdir}/%{name}/program/libitg680*.so
 %attr(755,root,root) %{_libdir}/%{name}/program/libiti680*.so
-%attr(755,root,root) %{_libdir}/%{name}/program/libj680li_g.so
+%attr(755,root,root) %{_libdir}/%{name}/program/libj680l*_g.so
 %attr(755,root,root) %{_libdir}/%{name}/program/libkab1.so
 %attr(755,root,root) %{_libdir}/%{name}/program/liblegacy_binfilters680*.so
 %attr(755,root,root) %{_libdir}/%{name}/program/liblng680*.so
@@ -3092,7 +3092,6 @@ fontpostinst TTF
 %attr(755,root,root) %{_libdir}/%{name}/program/libpdffilter680*.so
 %attr(755,root,root) %{_libdir}/%{name}/program/libpk680*.so
 %attr(755,root,root) %{_libdir}/%{name}/program/libpl680*.so
-%attr(755,root,root) %{_libdir}/%{name}/program/libplacewareli.so
 %attr(755,root,root) %{_libdir}/%{name}/program/libpreload680*.so
 %attr(755,root,root) %{_libdir}/%{name}/program/libprotocolhandler680*.so
 %attr(755,root,root) %{_libdir}/%{name}/program/libpsp680*.so
