@@ -24,6 +24,7 @@
 #   - more system libs todo:
 #	- (SYSTEM_HYPH) bcond system_libhnj doesn't work - needs Debian-patched version of libhnj
 #	- --with-system-mythes + mythes package (http://lingucomponent.openoffice.org/thesaurus.html)
+#   - --with-system-mspack    use libmspack already installed on system
 #	- bcond system_xt doesn't work - xt in PLD is too old or broken
 #
 #	$ grep SYSTEM ooo-build-ooe680-m6/build/ooe680-m6/config_office/config.log |grep NO
@@ -41,6 +42,7 @@
 %bcond_with	mono		# enable compilation of mono bindings
 %bcond_without	mozilla		# without mozilla components
 %bcond_without	i18n		# do not create i18n packages
+%bcond_without	xvfb		# using Xvfb in build-galleries script (without xvfb broken)
 
 %bcond_without	system_beanshell
 %bcond_without	system_db		# without system (i.e. with internal) Berkeley DB
@@ -54,8 +56,6 @@
 %bcond_without	system_hunspell
 %bcond_without	system_myspell
 %bcond_with	system_xt
-
-%bcond_without	xvfb		# using Xvfb in build-galleries script (without xvfb broken)
 
 %if %{without java}
 %undefine	with_system_beanshell
@@ -291,23 +291,23 @@ Pakiet biurowy OpenOffice.org - Interfejs GTK+.
 Summary:	Core modules for OpenOffice.org
 Summary(pl):	Podstawowe modu³y dla OpenOffice.org
 Group:		X11/Applications
-Requires:	shared-mime-info
-Obsoletes:	oooqs
-Obsoletes:	openoffice-libs
-Obsoletes:	openoffice.org-dirs
-Obsoletes:	openoffice.org-libs < 1:2.1.0-0.m6.0.11
-# libcups.so.2 is dlopened (in cupsmgr.cxx); maybe Suggests instead?
 %{?with_system_beanshell:Requires:	beanshell}
+# libcups.so.2 is dlopened (in cupsmgr.cxx); maybe Suggests instead?
 Requires:	cups-lib
 %{?with_system_hsqldb:Requires:	hsqldb >= 1.8.0}
 Requires:	libstdc++ >= 5:3.2.1
 Requires:	mktemp
 Requires:	sed
+Requires:	shared-mime-info
 %{?with_system_xalan:Requires:	xalan-j}
 %{?with_system_xerces:Requires:	xerces-j}
 %{?with_system_xml_apis:Requires:	xml-commons}
 %{?with_system_xt:Requires:	xt}
+Obsoletes:	oooqs
 Obsoletes:	openoffice
+Obsoletes:	openoffice-libs
+Obsoletes:	openoffice.org-dirs
+Obsoletes:	openoffice.org-libs < 1:2.1.0-0.m6.0.11
 #Suggests:	chkfontpath
 
 %description core
