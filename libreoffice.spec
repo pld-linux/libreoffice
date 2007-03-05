@@ -301,22 +301,22 @@ Pakiet biurowy OpenOffice.org - Interfejs GTK+.
 Summary:	Core modules for OpenOffice.org
 Summary(pl.UTF-8):	Podstawowe moduły dla OpenOffice.org
 Group:		X11/Applications
-Requires:	shared-mime-info
-Obsoletes:	oooqs
-Obsoletes:	openoffice-libs
-Obsoletes:	openoffice.org-dirs
-Obsoletes:	openoffice.org-libs < 1:2.1.0-0.m6.0.11
-# libcups.so.2 is dlopened (in cupsmgr.cxx); maybe Suggests instead?
 %{?with_system_beanshell:Requires:	beanshell}
+# libcups.so.2 is dlopened (in cupsmgr.cxx); maybe Suggests instead?
 Requires:	cups-lib
 Requires:	libstdc++ >= 5:3.2.1
 Requires:	mktemp
 Requires:	sed
+Requires:	shared-mime-info
 %{?with_system_xalan:Requires:	xalan-j}
 %{?with_system_xerces:Requires:	xerces-j}
 %{?with_system_xml_apis:Requires:	xml-commons}
 %{?with_system_xt:Requires:	xt}
+Obsoletes:	oooqs
 Obsoletes:	openoffice
+Obsoletes:	openoffice-libs
+Obsoletes:	openoffice.org-dirs
+Obsoletes:	openoffice.org-libs < 1:2.1.0-0.m6.0.11
 #Suggests:	chkfontpath
 
 %description core
