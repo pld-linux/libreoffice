@@ -22,10 +22,7 @@
 #	- fix locale names and other locale related things
 #       - can't be just i18n-{be,gu,hi,kn,pa,ta} instead of *-{be_BY,*_IN}?
 #   - more system libs todo:
-#	- --with-system-agg + antigrain package (http://www.antigrain.com)
-#	- --with-system-hunspell + hunspell package (http://hunspell.sourceforge.net)
 #	- (SYSTEM_HYPH) bcond system_libhnj doesn't work - needs Debian-patched version of libhnj
-#	- --with-system-myspell + myspell package as in Debian
 #	- --with-system-mythes + mythes package (http://lingucomponent.openoffice.org/thesaurus.html)
 #	- bcond system_xt doesn't work - xt in PLD is too old or broken
 #
@@ -53,6 +50,9 @@
 %bcond_without	system_xerces
 %bcond_without	system_xml_apis
 %bcond_without	system_hsqldb
+%bcond_with	system_agg
+%bcond_without	system_hunspell
+%bcond_without	system_myspell
 %bcond_with	system_xt
 
 %bcond_without	xvfb		# using Xvfb in build-galleries script (without xvfb broken)
@@ -129,7 +129,11 @@ Patch106:	%{name}-seamonkey.diff
 Patch107:	%{name}-stl-amd64.patch
 Patch108:	%{name}-java6.patch
 URL:		http://www.openoffice.org/
+BuildRequires:	/usr/bin/getopt
 BuildRequires:	STLport-devel >= 2:5.0.0
+%{?with_xvfb:BuildRequires:	XFree86-Xvfb}
+BuildRequires:	XFree86-devel
+%{?with_system_agg:BuildRequires:	agg-devel}
 BuildRequires:	autoconf >= 2.51
 BuildRequires:	automake >= 1:1.9
 %{?with_system_beanshell:BuildRequires:	beanshell}
@@ -140,48 +144,36 @@ BuildRequires:	boost-spirit-devel
 BuildRequires:	cairo-devel >= 0.5.2
 BuildRequires:	cups-devel
 BuildRequires:	curl-devel >= 7.9.8
-%if %{with system_db}
-BuildRequires:	db-cxx-devel
-BuildRequires:	db-devel
-%endif
-BuildRequires:	/usr/bin/getopt
-%if %{with gnomevfs}
-BuildRequires:	gnome-vfs2-devel
-%endif
+%{?with_system_db:BuildRequires:	db-cxx-devel}
+%{?with_system_db:BuildRequires:	db-devel}
 BuildRequires:	flex
 BuildRequires:	fontconfig-devel >= 1.0.1
 BuildRequires:	freetype-devel >= 2.1
+%{?with_gnomevfs:BuildRequires:	gnome-vfs2-devel}
 BuildRequires:	gstreamer-devel >= 0.10.0
 BuildRequires:	gstreamer-plugins-base-devel >= 0.10.0
 BuildRequires:	gtk+2-devel
+%{?with_system_hsqldb:BuildRequires:	hsqldb >= 1.8.0}
+%{?with_system_hunspell:BuildRequires:	hunspell-devel}
+%{?with_system_myspell:BuildRequires:	myspell-devel}
 BuildRequires:	icu
-%if %{with kde}
-BuildRequires:	kdelibs-devel
-%endif
+%{?with_kde:BuildRequires:	kdelibs-devel}
 BuildRequires:	libart_lgpl-devel
-%if %{with system_libhnj}
-BuildRequires:	libhnj-devel
-%endif
 BuildRequires:	libbonobo-devel >= 2.0
+%{?with_csystem_libhnj:BuildRequires:	libhnj-devel}
 BuildRequires:	libicu-devel >= 3.4
 BuildRequires:	libjpeg-devel
 BuildRequires:	libsndfile-devel
 BuildRequires:	libstdc++-devel >= 5:3.2.1
 BuildRequires:	libwpd-devel >= 0.8.6
 BuildRequires:	libxml2-devel >= 2.0
-%if %{with system_mdbtools}
-BuildRequires:	mdbtools-devel >= 0.6
-%endif
-BuildRequires:	nspr-devel >= 1:4.6-0.20041030.3
-BuildRequires:	nss-devel >= 1:3.10
-%if %{with mono}
-BuildRequires:	mono-csharp >= 1.1.8
-BuildRequires:	mono-devel >= 1.1.8
-%endif
-BuildRequires:	XFree86-devel
-%{?with_system_hsqldb:BuildRequires:	hsqldb >= 1.8.0}
+%{?with_system_mdbtools:BuildRequires:	mdbtools-devel >= 0.6}
+%{?with_mono:BuildRequires:	mono-csharp >= 1.1.8}
+%{?with_mono:BuildRequires:	mono-devel >= 1.1.8}
 BuildRequires:	nas-devel >= 1.7-1
 BuildRequires:	neon-devel
+BuildRequires:	nspr-devel >= 1:4.6-0.20041030.3
+BuildRequires:	nss-devel >= 1:3.10
 BuildRequires:	openclipart-png >= 0:0.16
 BuildRequires:	openldap-devel
 BuildRequires:	pam-devel
@@ -205,9 +197,6 @@ BuildRequires:	unzip
 %{?with_system_xerces:BuildRequires:	xerces-j}
 %{?with_system_xml_apis:BuildRequires:	xml-commons}
 BuildRequires:	xmlsec1-nss-devel
-%if %{with xvfb}
-BuildRequires:	XFree86-Xvfb
-%endif
 %{?with_system_xt:BuildRequires:	xt}
 BuildRequires:	zip
 BuildRequires:	zlib-devel
@@ -2106,46 +2095,48 @@ CONFOPTS="\
 %endif
 	--disable-odk \
 	--with-ccache-allowed \
-	--with-system-gcc \
-	%{?with_system_libhnj:--with-system-altlinuxhyphen} \
-	%{?with_system_xalan:--with-system-xalan} \
-	%{?with_system_xalan:--with-serializer-jar=%{_javadir}/xalan.jar} \
-	%{?with_system_xerces:--with-system-xerces} \
-	%{?with_system_hsqldb:--with-system-hsqldb} \
-	%{?with_system_xml_apis:--with-system-xml-apis} \
-	--with-system-zlib \
-	--with-system-jpeg \
-	--with-system-libxml \
-	--with-system-python \
-	--with-system-sane-header \
-	--with-system-x11-extensions-headers \
-	--with-system-odbc-headers \
-	--with-system-stdlibs \
+	%{?with_system_agg:--with-system-agg} \
+	%{?with_system_beanshell:--with-system-beanshell} \
 	%{?with_system_db:--with-system-db} \
+	%{?with_system_hsqldb:--with-system-hsqldb} \
+	%{?with_system_hunspell:--with-system-hunspell --without-myspell-dicts} \
+	%{?with_system_libhnj:--with-system-altlinuxhyphen} \
+	%{?with_system_mdbtools:--with-system-mdbtools} \
+	%{?with_system_myspell:--with-system-myspell} \
+	%{?with_system_xalan:--with-system-xalan --with-serializer-jar=%{_javadir}/xalan.jar} \
+	%{?with_system_xerces:--with-system-xerces} \
+	%{?with_system_xml_apis:--with-system-xml-apis} \
+	%{?with_system_xt:--with-system-xt --with-xt-jar=%{_javadir}/classes} \
+	--with-system-boost \
+	--with-system-cairo \
 	--with-system-curl \
+	--with-system-expat \
 	--with-system-freetype \
+	--with-system-gcc \
+	--with-system-icu \
+	--with-system-jpeg \
+	--with-system-libwpd \
+	--with-system-libxml \
 	--with-system-nas \
+	--with-system-neon \
+	--with-system-odbc-headers \
+	--with-system-portaudio \
+	--with-system-python \
+	--with-system-sablot \
+	--with-system-sane-header \
+	--with-system-sndfile \
+	--with-system-stdlibs \
+	--with-system-x11-extensions-headers \
+	--with-system-xmlsec \
 	--with-system-xrender \
 	--with-system-xrender-headers=yes \
-	--with-system-expat \
-	--with-system-sablot \
-	--with-system-boost \
-	--with-system-icu \
-	--with-system-libwpd \
-	%{?with_system_mdbtools:--with-system-mdbtools} \
-	--with-system-neon \
-	--with-system-portaudio \
-	--with-system-sndfile \
-	%{?with_system_xt:--with-system-xt --with-xt-jar=%{_javadir}/classes} \
-	%{?with_system_beanshell:--with-system-beanshell} \
-	--with-system-xmlsec \
+	--with-system-zlib \
 %if %{with mozilla}
 	--with-system-mozilla \
 	--with-xulrunner \
 %else
 	--disable-mozilla \
 %endif
-	--with-system-cairo \
 	--with-dynamic-xinerama \
 	--with-intro-bitmaps="\$SRCDIR/openintro_pld.bmp" \
 	--with-about-bitmaps="\$SRCDIR/openabout_pld.png" \
