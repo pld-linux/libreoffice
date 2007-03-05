@@ -2972,7 +2972,7 @@ fontpostinst TTF
 %attr(755,root,root) %{_libdir}/%{name}/program/ldapbe2.uno.so
 %attr(755,root,root) %{_libdir}/%{name}/program/libabp680*.so
 %attr(755,root,root) %{_libdir}/%{name}/program/libadabas2.so
-%attr(755,root,root) %{_libdir}/%{name}/program/libagg680*.so
+%{!?with_system_agg:%attr(755,root,root) %{_libdir}/%{name}/program/libagg680*.so}
 %attr(755,root,root) %{_libdir}/%{name}/program/libanimcore.so
 %attr(755,root,root) %{_libdir}/%{name}/program/libavmedia680*.so
 %attr(755,root,root) %{_libdir}/%{name}/program/libavmediagst.so
@@ -3039,7 +3039,7 @@ fontpostinst TTF
 %attr(755,root,root) %{_libdir}/%{name}/program/libfwm680*.so
 %attr(755,root,root) %{_libdir}/%{name}/program/libgcc3_uno.so
 %attr(755,root,root) %{_libdir}/%{name}/program/libgo680*.so
-%attr(755,root,root) %{_libdir}/%{name}/program/libhunspell.so
+%{!?with_system_hunspell:%attr(755,root,root) %{_libdir}/%{name}/program/libhunspell.so}
 %attr(755,root,root) %{_libdir}/%{name}/program/libhyphen680*.so
 %attr(755,root,root) %{_libdir}/%{name}/program/libi18nisolang1gcc3.so
 %attr(755,root,root) %{_libdir}/%{name}/program/libi18nregexpgcc3.so
