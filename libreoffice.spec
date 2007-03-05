@@ -2113,7 +2113,10 @@ CONFOPTS="\
 	%{?with_system_libhnj:--with-system-altlinuxhyphen} \
 	%{?with_system_mdbtools:--with-system-mdbtools} \
 	%{?with_system_myspell:--with-system-myspell} \
-	%{?with_system_xalan:--with-system-xalan --with-serializer-jar=%{_javadir}/xalan.jar} \
+%if %{with system_xalan}
+	--with-system-xalan \
+	`[ -e "%{_javadir}/serializer.jar" ] && echo "--with-serializer-jar=%{_javadir}/serializer.jar" || echo "--with-serializer-jar=%{_javadir}/xalan.jar"`
+%endif
 	%{?with_system_xerces:--with-system-xerces} \
 	%{?with_system_xml_apis:--with-system-xml-apis} \
 	%{?with_system_xt:--with-system-xt --with-xt-jar=%{_javadir}/classes} \
