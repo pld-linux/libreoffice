@@ -50,7 +50,7 @@
 %bcond_without	system_xerces
 %bcond_without	system_xml_apis
 %bcond_without	system_hsqldb
-%bcond_with	system_agg
+%bcond_without	system_agg
 %bcond_without	system_hunspell
 %bcond_without	system_myspell
 %bcond_with	system_xt
@@ -128,6 +128,7 @@ Patch104:	%{name}-portaudio_v19.diff
 Patch106:	%{name}-seamonkey.diff
 Patch107:	%{name}-stl-amd64.patch
 Patch108:	%{name}-java6.patch
+Patch109:	%{name}-agg25.patch
 URL:		http://www.openoffice.org/
 BuildRequires:	/usr/bin/getopt
 BuildRequires:	STLport-devel >= 2:5.0.0
@@ -2035,7 +2036,7 @@ done
 
 echo "[ PLDOnly ]" >> patches/src680/apply
 # patches applied by ooo (extension .diff is required)
-for P in %{PATCH102} %{PATCH104} %{PATCH106} %{PATCH108}; do
+for P in %{PATCH102} %{PATCH104} %{PATCH106} %{PATCH108} %{PATCH109}; do
 	PATCHNAME=PLD-${P##*/%{name}-}
 	PATCHNAME=${PATCHNAME%.patch}.diff
 	install $P patches/src680/$PATCHNAME
