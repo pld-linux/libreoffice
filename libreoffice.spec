@@ -304,6 +304,7 @@ Group:		X11/Applications
 %{?with_system_beanshell:Requires:	beanshell}
 # libcups.so.2 is dlopened (in cupsmgr.cxx); maybe Suggests instead?
 Requires:	cups-lib
+%{?with_system_hsqldb:Requires:	hsqldb >= 1.8.0}
 Requires:	libstdc++ >= 5:3.2.1
 Requires:	mktemp
 Requires:	sed
@@ -2496,6 +2497,7 @@ fontpostinst TTF
 %{_libdir}/%{name}/share/config/wizard
 %dir %{_libdir}/%{name}/share/dict
 %{!?with_system_myspell:%dir %{_libdir}/%{name}/share/dict/ooo}
+%{?with_system_myspell:%{_libdir}/%{name}/share/dict/ooo}
 %{!?with_system_myspell:%ghost %{_libdir}/%{name}/share/dict/ooo/dictionary.lst}
 %{_libdir}/%{name}/share/dtd
 %{_libdir}/%{name}/share/fonts
