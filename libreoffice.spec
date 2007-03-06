@@ -2396,7 +2396,7 @@ rm -rf $RPM_BUILD_ROOT
 # we symlink the dir, unless smb wishes to patch OOo to use system dir directly
 %pre core
 if [ -d %{_libdir}/%{name}/share/dict/ooo ] && [ ! -L %{_libdir}/%{name}/share/dict/ooo ]; then
-	rmdir %{_libdir}/%{name}/share/dict/ooo 2>/dev/null || mv -v %{_libdir}/%{name}/share/dict/ooo{,rpmsave} || :
+	rmdir %{_libdir}/%{name}/share/dict/ooo 2>/dev/null || mv -v %{_libdir}/%{name}/share/dict/ooo{,.rpmsave} || :
 	ln -s %{_datadir}/myspell %{_libdir}/%{name}/share/dict/ooo
 fi
 %endif
