@@ -67,7 +67,7 @@
 %endif
 
 %define		ver		2.1.0
-%define		_rel		3
+%define		_rel		4
 %define		subver		680
 %define		snap		OOE680
 %define		snap2		SRC680
@@ -2488,6 +2488,7 @@ fontpostinst TTF
 %{_libdir}/%{name}/share/config/wizard
 %dir %{_libdir}/%{name}/share/dict
 %{!?with_system_myspell:%dir %{_libdir}/%{name}/share/dict/ooo}
+%{?with_system_myspell:%{_libdir}/%{name}/share/dict/ooo}
 %{!?with_system_myspell:%ghost %{_libdir}/%{name}/share/dict/ooo/dictionary.lst}
 %{_libdir}/%{name}/share/dtd
 %{_libdir}/%{name}/share/fonts
