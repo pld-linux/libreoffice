@@ -2080,9 +2080,9 @@ export QTINC="%{_includedir}/qt"
 export QTLIB="%{_libdir}"
 
 %if %{with java}
-export JAVA_HOME=%{java_home}
+export JAVA_HOME="%{java_home}"
 export DB_JAR="%{_javadir}/db.jar"
-export ANT_HOME=%{_prefix}
+export ANT_HOME="%{_datadir}/ant"
 %endif
 
 export DEFAULT_TO_ENGLISH_FOR_PACKING=1
@@ -2163,6 +2163,7 @@ CONFOPTS="\
 %if %{with java}
 	--with-java \
 	--with-jdk-home=$JAVA_HOME \
+	--with-ant-home=$ANT_HOME \
 %else
 	--without-java \
 	--with-system-libxslt \
