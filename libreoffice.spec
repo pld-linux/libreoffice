@@ -186,7 +186,7 @@ BuildRequires:	python >= 2.2
 BuildRequires:	python-devel >= 2.2
 BuildRequires:	python-modules >= 2.2
 BuildRequires:	rpm-pythonprov
-BuildRequires:	rpmbuild(macros) >= 1.300
+BuildRequires:	rpmbuild(macros) >= 1.357
 BuildRequires:	sablotron-devel
 BuildRequires:	sane-backends-devel
 BuildRequires:	sed >= 4.0
@@ -503,6 +503,18 @@ OpenSymbol TrueType fonts.
 
 %description -n fonts-TTF-OpenSymbol -l pl
 Fonty TrueType OpenSymbol.
+
+%package -n browser-plugin-%{name}
+Summary:	OpenOffice.org plugin for WWW browsers
+Group:		X11/Applications
+Requires:	%{name}-core = %{epoch}:%{version}-%{release}
+Requires:	browser-plugins >= 2.0
+Requires:	browser-plugins(%{_target_base_arch})
+
+%description -n browser-plugin-%{name}
+OpenOffice.org plugin for WWW browsers.
+
+This plugin allows browsers to display OOo documents inline.
 
 %package i18n-af
 Summary:	OpenOffice.org - interface in Afrikaans language
@@ -2265,6 +2277,14 @@ ln -s %{_datadir}/myspell $RPM_BUILD_ROOT%{_libdir}/%{name}/share/dict/ooo
 touch $RPM_BUILD_ROOT%{_libdir}/%{name}/share/dict/ooo/dictionary.lst
 %endif
 
+%if %{with mozilla}
+install -d $RPM_BUILD_ROOT%{_browserpluginsdir}
+mv $RPM_BUILD_ROOT%{_libdir}/%{name}/program/libnpsoplugin.so $RPM_BUILD_ROOT%{_browserpluginsdir}
+# this is for options -> browser plugin -> enable to work
+# altho in PLD Linux browser-plugins archidecture takes care of that
+ln -s %{_browserpluginsdir}/libnpsoplugin.so $RPM_BUILD_ROOT%{_libdir}/%{name}/program
+%endif
+
 # is below comment true?
 # OOo should not install the Vera fonts, they are Required: now
 rm -rf $RPM_BUILD_ROOT%{_libdir}/%{name}/share/fonts/truetype/*
@@ -2408,6 +2428,14 @@ fontpostinst TTF
 
 %postun -n fonts-TTF-OpenSymbol
 fontpostinst TTF
+
+%post -n browser-plugin-%{name}
+%update_browser_plugins
+
+%postun -n browser-plugin-%{name}
+if [ "$1" = 0 ]; then
+	%update_browser_plugins
+fi
 
 # NOTE:
 # you may find build/*_list.txt useful to help you package files to packages
@@ -2802,9 +2830,6 @@ fontpostinst TTF
 %attr(755,root,root) %{_libdir}/%{name}/program/soffice
 %attr(755,root,root) %{_libdir}/%{name}/program/spadmin
 %attr(755,root,root) %{_libdir}/%{name}/program/open-url
-%if %{with mozilla}
-%attr(755,root,root) %{_libdir}/%{name}/program/nsplugin
-%endif
 %attr(755,root,root) %{_libdir}/%{name}/program/gengal
 %attr(755,root,root) %{_libdir}/%{name}/program/configimport
 %attr(755,root,root) %{_libdir}/%{name}/program/sbase
@@ -3092,7 +3117,6 @@ fontpostinst TTF
 %attr(755,root,root) %{_libdir}/%{name}/program/libmdb680*.so
 %attr(755,root,root) %{_libdir}/%{name}/program/libmdbimpl680*.so
 %attr(755,root,root) %{_libdir}/%{name}/program/libmysql2.so
-%attr(755,root,root) %{_libdir}/%{name}/program/libnpsoplugin.so
 %attr(755,root,root) %{_libdir}/%{name}/program/libodbc2.so
 %attr(755,root,root) %{_libdir}/%{name}/program/libodbcbase2.so
 %attr(755,root,root) %{_libdir}/%{name}/program/liboffacc680*.so
@@ -3478,6 +3502,14 @@ fontpostinst TTF
 
 # samples there
 %{_libdir}/%{name}/share/Scripts/python
+
+%if %{with mozilla}
+%files -n browser-plugin-%{name}
+%defattr(644,root,root,755)
+%attr(755,root,root) %{_libdir}/%{name}/program/nsplugin
+%attr(755,root,root) %{_browserpluginsdir}/libnpsoplugin.so
+%{_libdir}/%{name}/program/libnpsoplugin.so
+%endif
 
 %if %{with i18n}
 %files i18n-af -f af.lang
