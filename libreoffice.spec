@@ -120,6 +120,7 @@ Patch3:		%{name}-mdbtools_fix.diff
 Patch4:		%{name}-nolfs_hack.patch
 Patch5:		%{name}-no_fonts_dir_buildfix.patch
 Patch6:		%{name}-java16.patch
+Patch7:		%{name}-nodictinst.patch
 # patches applied by ooo-patching-system
 Patch100:	%{name}-STL-lib64.diff
 Patch101:	%{name}-64bit-inline.diff
@@ -2031,6 +2032,9 @@ ln -sf %{SOURCE1} %{SOURCE2} %{SOURCE3} %{SOURCE4} \
 %patch4 -p1
 %patch5 -p1
 %patch6 -p1
+%if %{with system_myspell}
+%patch7 -p1
+%endif
 
 # 64 bit related patches (not applied now)
 install %{PATCH100} patches/64bit
