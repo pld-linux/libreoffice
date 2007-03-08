@@ -18,9 +18,6 @@
 #	- doesn't build with java-sun-1.6 (maybe java-dependent packages are screwed)
 #	- maybe it could be build with gcc-java
 #       - adapt help-support.diff to PLD
-#	- make --without xvfb working, required
-#	  REMOVE USE of Xvfb from build-galleries script (ooo-build-2.0.1.2/bin/build-galleries line 84)
-#	  then remove that bcond
 #	- configure --without-ppds --without afms
 #	- /share/config/soffice.cfg/global/accelerator/es/ should be in i18n-es
 #	- fix locale names and other locale related things
@@ -46,7 +43,6 @@
 %bcond_with	mono		# enable compilation of mono bindings
 %bcond_without	mozilla		# without mozilla components
 %bcond_without	i18n		# do not create i18n packages
-%bcond_without	xvfb		# using Xvfb in build-galleries script (without xvfb broken)
 
 %bcond_without	system_beanshell
 %bcond_without	system_db		# without system (i.e. with internal) Berkeley DB
@@ -71,7 +67,7 @@
 %endif
 
 %define		ver		2.1.0
-%define		_rel		0.22
+%define		_rel		5
 %define		subver		680
 %define		snap		OOE680
 %define		snap2		SRC680
@@ -178,7 +174,6 @@ BuildRequires:	nas-devel >= 1.7-1
 BuildRequires:	neon-devel
 BuildRequires:	nspr-devel >= 1:4.6-0.20041030.3
 BuildRequires:	nss-devel >= 1:3.10
-BuildRequires:	openclipart-png >= 0:0.16
 BuildRequires:	openldap-devel
 BuildRequires:	pam-devel
 BuildRequires:	perl-Archive-Zip
@@ -203,12 +198,6 @@ BuildRequires:	unzip
 BuildRequires:	xmlsec1-nss-devel
 BuildRequires:	xorg-lib-libX11-devel
 BuildRequires:	xorg-lib-libXaw-devel
-%if %{with xvfb}
-#BuildRequires:	xorg-app-mkfontdir	(missing PreReq in fonts?)
-BuildRequires:	xorg-font-font-cursor-misc
-BuildRequires:	xorg-font-font-misc-misc-base
-BuildRequires:	xorg-xserver-Xvfb
-%endif
 %{?with_system_xt:BuildRequires:	xt}
 BuildRequires:	zip
 BuildRequires:	zlib-devel
@@ -2191,7 +2180,6 @@ CONFOPTS="\
 %endif
 	--with-docdir=%{_docdir}/%{name}-%{version} \
 	--with-python=%{__python} \
-	--with-openclipart=%{_datadir}/openclipart \
 	--with-stlport=/usr \
 	--with-x \
 	--without-fonts \
