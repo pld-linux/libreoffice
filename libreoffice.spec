@@ -2235,99 +2235,98 @@ fi
 
 %install
 if [ ! -f installed.stamp -o ! -d $RPM_BUILD_ROOT ]; then
-rm -rf $RPM_BUILD_ROOT
+	rm -rf $RPM_BUILD_ROOT
 
-# limit to single process installation, it's safe at least
-%{__sed} -i -e 's#^BUILD_NCPUS=.*#BUILD_NCPUS=1#g' bin/setup
+	# limit to single process installation, it's safe at least
+	%{__sed} -i -e 's#^BUILD_NCPUS=.*#BUILD_NCPUS=1#g' bin/setup
 
-export DESTDIR=$RPM_BUILD_ROOT
-export TMP="%{tmpdir}"
-export TEMP="%{tmpdir}"
-export DEFAULT_TO_ENGLISH_FOR_PACKING=1
+	export DESTDIR=$RPM_BUILD_ROOT
+	export TMP="%{tmpdir}"
+	export TEMP="%{tmpdir}"
+	export DEFAULT_TO_ENGLISH_FOR_PACKING=1
 
-%{__make} install \
-	DESTDIR=$RPM_BUILD_ROOT
+	%{__make} install \
+		DESTDIR=$RPM_BUILD_ROOT
 
-install -d $RPM_BUILD_ROOT%{_sysconfdir}/%{name}
+	install -d $RPM_BUILD_ROOT%{_sysconfdir}/%{name}
 
-# Add in the regcomp tool since some people need it for 3rd party add-ons
-cp -f build/%{ssnap}/solver/%{subver}/unxlng*.pro/bin/regcomp{,.bin} $RPM_BUILD_ROOT%{_libdir}/%{name}/program/
+	# Add in the regcomp tool since some people need it for 3rd party add-ons
+	cp -f build/%{ssnap}/solver/%{subver}/unxlng*.pro/bin/regcomp{,.bin} $RPM_BUILD_ROOT%{_libdir}/%{name}/program/
 
-# fix python
-sed -i -e 's|#!/bin/python|#!%{_bindir}/python|g' $RPM_BUILD_ROOT%{_libdir}/%{name}/program/*.py
+	# fix python
+	sed -i -e 's|#!/bin/python|#!%{_bindir}/python|g' $RPM_BUILD_ROOT%{_libdir}/%{name}/program/*.py
 
-# Really needed?
-install -d $RPM_BUILD_ROOT%{_pixmapsdir}
+	# Really needed?
+	install -d $RPM_BUILD_ROOT%{_pixmapsdir}
 
-rm -rf $RPM_BUILD_ROOT%{_libdir}/%{name}/share/kde
-rm -rf $RPM_BUILD_ROOT%{_libdir}/%{name}/share/cde
-rm -rf $RPM_BUILD_ROOT%{_libdir}/%{name}/share/gnome
-rm -rf $RPM_BUILD_ROOT%{_libdir}/%{name}/share/icons
-rm -rf $RPM_BUILD_ROOT%{_datadir}/applnk
-rm -rf $RPM_BUILD_ROOT%{_datadir}/gnome
+	rm -rf $RPM_BUILD_ROOT%{_libdir}/%{name}/share/kde
+	rm -rf $RPM_BUILD_ROOT%{_libdir}/%{name}/share/cde
+	rm -rf $RPM_BUILD_ROOT%{_libdir}/%{name}/share/gnome
+	rm -rf $RPM_BUILD_ROOT%{_libdir}/%{name}/share/icons
+	rm -rf $RPM_BUILD_ROOT%{_datadir}/applnk
+	rm -rf $RPM_BUILD_ROOT%{_datadir}/gnome
 
-# Remove dictionaries (in separate pkg)
-rm -vf $RPM_BUILD_ROOT%{_libdir}/%{name}/share/dict/ooo/*
-%if %{with system_myspell}
-rmdir $RPM_BUILD_ROOT%{_libdir}/%{name}/share/dict/ooo
-ln -s %{_datadir}/myspell $RPM_BUILD_ROOT%{_libdir}/%{name}/share/dict/ooo
-%else
-touch $RPM_BUILD_ROOT%{_libdir}/%{name}/share/dict/ooo/dictionary.lst
-%endif
+	# Remove dictionaries (in separate pkg)
+	rm -vf $RPM_BUILD_ROOT%{_libdir}/%{name}/share/dict/ooo/*
+	%if %{with system_myspell}
+	rmdir $RPM_BUILD_ROOT%{_libdir}/%{name}/share/dict/ooo
+	ln -s %{_datadir}/myspell $RPM_BUILD_ROOT%{_libdir}/%{name}/share/dict/ooo
+	%else
+	touch $RPM_BUILD_ROOT%{_libdir}/%{name}/share/dict/ooo/dictionary.lst
+	%endif
 
-%if %{with mozilla}
-install -d $RPM_BUILD_ROOT%{_browserpluginsdir}
-ln -s %{_libdir}/%{name}/program/libnpsoplugin.so $RPM_BUILD_ROOT%{_browserpluginsdir}
-%endif
+	%if %{with mozilla}
+	install -d $RPM_BUILD_ROOT%{_browserpluginsdir}
+	ln -s %{_libdir}/%{name}/program/libnpsoplugin.so $RPM_BUILD_ROOT%{_browserpluginsdir}
+	%endif
 
-# is below comment true?
-# OOo should not install the Vera fonts, they are Required: now
-rm -rf $RPM_BUILD_ROOT%{_libdir}/%{name}/share/fonts/truetype/*
+	# is below comment true?
+	# OOo should not install the Vera fonts, they are Required: now
+	rm -rf $RPM_BUILD_ROOT%{_libdir}/%{name}/share/fonts/truetype/*
 
-# Copy fixed OpenSymbol to correct location
-install -d $RPM_BUILD_ROOT%{_fontsdir}/TTF
-install build/%{ssnap}/extras/source/truetype/symbol/opens___.ttf $RPM_BUILD_ROOT%{_fontsdir}/TTF
+	# Copy fixed OpenSymbol to correct location
+	install -d $RPM_BUILD_ROOT%{_fontsdir}/TTF
+	install build/%{ssnap}/extras/source/truetype/symbol/opens___.ttf $RPM_BUILD_ROOT%{_fontsdir}/TTF
 
-# We don't need spadmin (gtk) or the setup application
-rm -f $RPM_BUILD_ROOT%{_libdir}/%{name}/setup
-rm -f $RPM_BUILD_ROOT%{_libdir}/%{name}/program/crash_report.bin
-rm -f $RPM_BUILD_ROOT%{_desktopdir}/openoffice-setup.desktop
-rm -f $RPM_BUILD_ROOT%{_desktopdir}/openoffice-printeradmin.desktop
+	# We don't need spadmin (gtk) or the setup application
+	rm -f $RPM_BUILD_ROOT%{_libdir}/%{name}/setup
+	rm -f $RPM_BUILD_ROOT%{_libdir}/%{name}/program/crash_report.bin
+	rm -f $RPM_BUILD_ROOT%{_desktopdir}/openoffice-setup.desktop
+	rm -f $RPM_BUILD_ROOT%{_desktopdir}/openoffice-printeradmin.desktop
 
-#rm -f $RPM_BUILD_ROOT%{_libdir}/%{name}/program/gnomeint
+	#rm -f $RPM_BUILD_ROOT%{_libdir}/%{name}/program/gnomeint
 
-# some libs creep in somehow
-rm -f $RPM_BUILD_ROOT%{_libdir}/%{name}/program/libstl*.so*
-rm -f $RPM_BUILD_ROOT%{_libdir}/%{name}/program/libsndfile*
+	# some libs creep in somehow
+	rm -f $RPM_BUILD_ROOT%{_libdir}/%{name}/program/libstl*.so*
+	rm -f $RPM_BUILD_ROOT%{_libdir}/%{name}/program/libsndfile*
 
-rm -f $RPM_BUILD_ROOT%{_libdir}/%{name}/program/sopatchlevel.sh
-perl -pi -e 's/^[       ]*LD_LIBRARY_PATH/# LD_LIBRARY_PATH/;s/export LD_LIBRARY_PATH/# export LD_LIBRARY_PATH/' \
-	$RPM_BUILD_ROOT%{_libdir}/%{name}/program/setup
+	rm -f $RPM_BUILD_ROOT%{_libdir}/%{name}/program/sopatchlevel.sh
+	perl -pi -e 's/^[       ]*LD_LIBRARY_PATH/# LD_LIBRARY_PATH/;s/export LD_LIBRARY_PATH/# export LD_LIBRARY_PATH/' \
+		$RPM_BUILD_ROOT%{_libdir}/%{name}/program/setup
 
-# Remove setup log
-rm -f $RPM_BUILD_ROOT%{_libdir}/%{name}/program/setup.log
+	# Remove setup log
+	rm -f $RPM_BUILD_ROOT%{_libdir}/%{name}/program/setup.log
 
-# Remove copied system libraries
-rm -f $RPM_BUILD_ROOT%{_libdir}/%{name}/program/libgcc_s.so* \
-	$RPM_BUILD_ROOT%{_libdir}/%{name}/program/libstdc++*so*
+	# Remove copied system libraries
+	rm -f $RPM_BUILD_ROOT%{_libdir}/%{name}/program/libgcc_s.so* \
+		$RPM_BUILD_ROOT%{_libdir}/%{name}/program/libstdc++*so*
 
-chmod +x $RPM_BUILD_ROOT%{_libdir}/%{name}/program/*.so
+	chmod +x $RPM_BUILD_ROOT%{_libdir}/%{name}/program/*.so
 
-rm -rf $RPM_BUILD_ROOT%{_libdir}/%{name}/share/xdg
-rm -rf $RPM_BUILD_ROOT/opt/gnome
-rm -f $RPM_BUILD_ROOT%{_libdir}/%{name}/program/cde-open-url
+	rm -rf $RPM_BUILD_ROOT%{_libdir}/%{name}/share/xdg
+	rm -rf $RPM_BUILD_ROOT/opt/gnome
+	rm -f $RPM_BUILD_ROOT%{_libdir}/%{name}/program/cde-open-url
 
-%if %{without java}
-# Java-releated bits
-rm -rf $RPM_BUILD_ROOT%{_libdir}/%{name}/program/hid.lst
-rm -rf $RPM_BUILD_ROOT%{_libdir}/%{name}/program/java-set-classpath
-rm -rf $RPM_BUILD_ROOT%{_libdir}/%{name}/program/jvmfwk3rc
-rm -rf $RPM_BUILD_ROOT%{_libdir}/%{name}/share/Scripts/beanshell
-rm -rf $RPM_BUILD_ROOT%{_libdir}/%{name}/share/Scripts/javascript
-rm -rf $RPM_BUILD_ROOT%{_libdir}/%{name}/share/xslt
-%endif
-
-fi # installing
+	%if %{without java}
+	# Java-releated bits
+	rm -rf $RPM_BUILD_ROOT%{_libdir}/%{name}/program/hid.lst
+	rm -rf $RPM_BUILD_ROOT%{_libdir}/%{name}/program/java-set-classpath
+	rm -rf $RPM_BUILD_ROOT%{_libdir}/%{name}/program/jvmfwk3rc
+	rm -rf $RPM_BUILD_ROOT%{_libdir}/%{name}/share/Scripts/beanshell
+	rm -rf $RPM_BUILD_ROOT%{_libdir}/%{name}/share/Scripts/javascript
+	rm -rf $RPM_BUILD_ROOT%{_libdir}/%{name}/share/xslt
+	%endif
+fi
 
 # Find out locales
 find_lang() {
