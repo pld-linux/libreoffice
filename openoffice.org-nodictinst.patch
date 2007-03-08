@@ -1,15 +1,11 @@
 skip dictionaries install, we use system dictionaries
 
---- ooo-build-ooe680-m6/bin/ooinstall~	2006-10-16 01:32:31.000000000 +0300
-+++ ooo-build-ooe680-m6/bin/ooinstall	2007-03-08 02:37:09.995344368 +0200
-@@ -149,10 +149,6 @@
-     `$configure_vars{SOLARENV}/bin/linkoo $path $configure_vars{SRC_ROOT}`;
- }
+--- ooo-build-ooe680-m6/bin/install-dictionaries~	2006-09-28 15:46:15.000000000 +0300
++++ ooo-build-ooe680-m6/bin/install-dictionaries	2007-03-08 02:40:55.560459774 +0200
+@@ -1,4 +1,6 @@
+ #!/bin/sh
++echo "SKIP; using system dictionaries"
++exit 0
  
--print "Installing extra dictionaries...\n";
--system ("cd $setup_vars{TOOLSDIR}/bin ; " .
--       	"sh ./install-dictionaries $path/share/dict/ooo") && die "Failed to install dictionaries: $!";
--
- print "Building galleries...\n";
- system ("cd $setup_vars{TOOLSDIR}/bin ; " .
-        	"sh ./build-galleries $path") && die "Failed to build extra galleries: $!";
+ #
+ # See setup for user tweakables.
