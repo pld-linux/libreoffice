@@ -2234,6 +2234,7 @@ if [ $RPM_BUILD_NR_THREADS -gt 1 ]; then
 fi
 
 %install
+if [ ! -f installed.stamp -o ! -d $RPM_BUILD_ROOT ]; then
 rm -rf $RPM_BUILD_ROOT
 
 # limit to single process installation, it's safe at least
@@ -2310,6 +2311,24 @@ rm -f $RPM_BUILD_ROOT%{_libdir}/%{name}/program/setup.log
 rm -f $RPM_BUILD_ROOT%{_libdir}/%{name}/program/libgcc_s.so* \
 	$RPM_BUILD_ROOT%{_libdir}/%{name}/program/libstdc++*so*
 
+chmod +x $RPM_BUILD_ROOT%{_libdir}/%{name}/program/*.so
+
+rm -rf $RPM_BUILD_ROOT%{_libdir}/%{name}/share/xdg
+rm -rf $RPM_BUILD_ROOT/opt/gnome
+rm -f $RPM_BUILD_ROOT%{_libdir}/%{name}/program/cde-open-url
+
+%if %{without java}
+# Java-releated bits
+rm -rf $RPM_BUILD_ROOT%{_libdir}/%{name}/program/hid.lst
+rm -rf $RPM_BUILD_ROOT%{_libdir}/%{name}/program/java-set-classpath
+rm -rf $RPM_BUILD_ROOT%{_libdir}/%{name}/program/jvmfwk3rc
+rm -rf $RPM_BUILD_ROOT%{_libdir}/%{name}/share/Scripts/beanshell
+rm -rf $RPM_BUILD_ROOT%{_libdir}/%{name}/share/Scripts/javascript
+rm -rf $RPM_BUILD_ROOT%{_libdir}/%{name}/share/xslt
+%endif
+
+fi # installing
+
 # Find out locales
 find_lang() {
 	local lang="$1"
@@ -2322,8 +2341,8 @@ find_lang() {
 
 	lfile="build/lang_${lang}_list.txt"
 	if [ -f ${lfile} ]; then
-		lprefix="`bin/openoffice-xlate-lang -p ${lang} 2>/dev/null || echo ""`"
-		longlang="`bin/openoffice-xlate-lang -l ${lang} 2>/dev/null || echo ""`"
+		lprefix=$(bin/openoffice-xlate-lang -p ${lang} 2>/dev/null || :)
+		longlang=$(bin/openoffice-xlate-lang -l ${lang} 2>/dev/null || :)
 		# share/*/${longlang}
 		if [ "x${longlang}" != "x" ] ; then
 			grep "^%%dir.*/${longlang}/\$" ${lfile} > tmp.lang || :
@@ -2365,6 +2384,9 @@ find_lang() {
 		# lib/openoffice.org/share/wordbook/$lang
 		grep "/share/wordbook/${lang}$" ${lfile} >> ${lang}.lang || :
 		grep "/share/wordbook/${lang}/" ${lfile} >> ${lang}.lang || :
+		# lib/openoffice.org/share/samples/$lang
+		grep "/share/samples/${lang}$" ${lfile} >> ${lang}.lang || :
+		grep "/share/samples/${lang}/" ${lfile} >> ${lang}.lang || :
 		%if %{with java}
 		grep "/help/${lang}$" ${lfile} >> ${lang}.lang || :
 		grep "/help/${lang}/" ${lfile} >> ${lang}.lang || :
@@ -2373,27 +2395,11 @@ find_lang() {
 }
 
 rm -f *.lang*
-langlist="`ls build/lang_*_list.txt|sed -e 's=build/lang_\(.*\)_list.txt=\1=g'`"
+langlist=$(ls build/lang_*_list.txt | sed -e 's=build/lang_\(.*\)_list.txt=\1=g')
 
 for lang in $langlist; do
 	find_lang $lang
 done
-
-chmod +x $RPM_BUILD_ROOT%{_libdir}/%{name}/program/*.so
-
-rm -rf $RPM_BUILD_ROOT%{_libdir}/%{name}/share/xdg
-rm -rf $RPM_BUILD_ROOT/opt/gnome
-rm -f $RPM_BUILD_ROOT%{_libdir}/%{name}/program/cde-open-url
-
-%if %{without java}
-# Java-releated bits
-rm -rf $RPM_BUILD_ROOT%{_libdir}/%{name}/program/hid.lst
-rm -rf $RPM_BUILD_ROOT%{_libdir}/%{name}/program/java-set-classpath
-rm -rf $RPM_BUILD_ROOT%{_libdir}/%{name}/program/jvmfwk3rc
-rm -rf $RPM_BUILD_ROOT%{_libdir}/%{name}/share/Scripts/beanshell
-rm -rf $RPM_BUILD_ROOT%{_libdir}/%{name}/share/Scripts/javascript
-rm -rf $RPM_BUILD_ROOT%{_libdir}/%{name}/share/xslt
-%endif
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -2517,6 +2523,7 @@ fi
 %{_libdir}/%{name}/share/gallery
 %{_libdir}/%{name}/share/psprint
 %dir %{_libdir}/%{name}/share/samples
+%dir %{_libdir}/%{name}/share/samples/en-US
 %dir %{_libdir}/%{name}/share/template
 %dir %{_libdir}/%{name}/share/template/wizard
 %dir %{_libdir}/%{name}/share/template/wizard/letter
