@@ -2293,10 +2293,7 @@ touch $RPM_BUILD_ROOT%{_libdir}/%{name}/share/dict/ooo/dictionary.lst
 
 %if %{with mozilla}
 install -d $RPM_BUILD_ROOT%{_browserpluginsdir}
-mv $RPM_BUILD_ROOT%{_libdir}/%{name}/program/libnpsoplugin.so $RPM_BUILD_ROOT%{_browserpluginsdir}
-# this is for options -> browser plugin -> enable to work
-# altho in PLD Linux browser-plugins archidecture takes care of that
-ln -s %{_browserpluginsdir}/libnpsoplugin.so $RPM_BUILD_ROOT%{_libdir}/%{name}/program
+ln -s %{_libdir}/%{name}/program/libnpsoplugin.so $RPM_BUILD_ROOT%{_browserpluginsdir}
 %endif
 
 # is below comment true?
