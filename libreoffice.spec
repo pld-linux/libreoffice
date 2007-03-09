@@ -63,7 +63,7 @@
 %endif
 
 %define		ver		2.1.0
-%define		_rel		5
+%define		_rel		5.1
 %define		subver		680
 %define		snap		OOE680
 %define		snap2		SRC680
@@ -2417,13 +2417,11 @@ rm -rf $RPM_BUILD_ROOT
 if [ -d %{_libdir}/%{name}/share ] && [ ! -L %{_libdir}/%{name}/share ]; then
 	install -d %{_datadir}/%{name}
 	mv %{_libdir}/%{name}/share %{_datadir}/%{name}/share || mv %{_libdir}/%{name}/share{,.rpmsave}
-	ln -snf %{_datadir}/%{name}/share %{_libdir}/%{name}/share
 fi
 %if %{with system_myspell}
 # we symlink the dir, unless smb wishes to patch OOo to use system dir directly
 if [ -d %{_libdir}/%{name}/share/dict/ooo ] && [ ! -L %{_libdir}/%{name}/share/dict/ooo ]; then
 	rmdir %{_libdir}/%{name}/share/dict/ooo 2>/dev/null || mv -v %{_libdir}/%{name}/share/dict/ooo{,.rpmsave} || :
-	ln -s %{_datadir}/myspell %{_libdir}/%{name}/share/dict/ooo
 fi
 %endif
 
