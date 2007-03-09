@@ -2121,6 +2121,7 @@ CONFOPTS="\
 	%{?with_system_myspell:--with-system-myspell} \
 %if %{with system_xalan}
 	--with-system-xalan \
+	--with-xalan-jar=%{_javadir}/xalan.jar \
 	`[ -e "%{_javadir}/serializer.jar" ] && echo "--with-serializer-jar=%{_javadir}/serializer.jar" || echo "--with-serializer-jar=%{_javadir}/xalan.jar"`
 %endif
 	%{?with_system_xerces:--with-system-xerces} \
