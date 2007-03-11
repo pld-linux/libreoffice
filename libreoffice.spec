@@ -1,9 +1,9 @@
 # NOTE:
-#	- normal build with java requires about 24GB of disk space
-#		$BUILD_ROOT	 7.1 GB
-#		BUILD		15.7 GB
-#		SRPMS		 0.3 GB
-#		RPMS		 1.2 GB
+#	- normal build (athlon) requires about 15 GB of disk space:
+#		$BUILD_ROOT	3.7 GB
+#		BUILD		9.6 GB
+#		SRPMS		0.3 GB
+#		RPMS		0.9 GB
 # TODO:
 #   - symlink these files:
 #    WARNING: Using shared_en-US.zip instead of shared_br.zip
@@ -67,7 +67,7 @@
 %endif
 
 %define		ver		2.1.0
-%define		_rel		5
+%define		_rel		6
 %define		subver		680
 %define		snap		OOE680
 %define		snap2		SRC680
@@ -291,6 +291,8 @@ Pakiet biurowy OpenOffice.org - Interfejs GTK+.
 Summary:	Core modules for OpenOffice.org
 Summary(pl.UTF-8):	Podstawowe moduły dla OpenOffice.org
 Group:		X11/Applications
+Requires(post,postun):	desktop-file-utils
+Requires(post,postun):	shared-mime-info
 %{?with_system_beanshell:Requires:	beanshell}
 # libcups.so.2 is dlopened (in cupsmgr.cxx); maybe Suggests instead?
 Requires:	cups-lib
@@ -298,7 +300,6 @@ Requires:	cups-lib
 Requires:	libstdc++ >= 5:3.2.1
 Requires:	mktemp
 Requires:	sed
-Requires:	shared-mime-info
 %{?with_system_xalan:Requires:	xalan-j}
 %{?with_system_xerces:Requires:	xerces-j}
 %{?with_system_xml_apis:Requires:	xml-commons}
@@ -337,6 +338,7 @@ skryptów w Pythonie w wewnętrznym module skryptów OpenOffice.org.
 Summary:	Database frontend for OpenOffice.org
 Summary(pl.UTF-8):	Frontend do baz danych dla OpenOffice.org
 Group:		X11/Applications
+Requires(post,postun):	desktop-file-utils
 Requires:	%{name}-core = %{epoch}:%{version}-%{release}
 
 %description base
@@ -352,6 +354,7 @@ użytkownika.
 Summary:	Web module for OpenOffice.org
 Summary(pl.UTF-8):	Moduł Web dla OpenOffice.org
 Group:		X11/Applications
+Requires(post,postun):	desktop-file-utils
 Requires:	%{name}-core = %{epoch}:%{version}-%{release}
 Requires:	%{name}-writer = %{epoch}:%{version}-%{release}
 
@@ -365,6 +368,7 @@ Aplikacja do tworzenia stron WWW z OpenOffice.org.
 Summary:	Writer module for OpenOffice.org
 Summary(pl.UTF-8):	Moduł Writer dla OpenOffice.org
 Group:		X11/Applications
+Requires(post,postun):	desktop-file-utils
 Requires:	%{name}-core = %{epoch}:%{version}-%{release}
 
 %description writer
@@ -391,6 +395,7 @@ elektronicznej.
 Summary:	Calc module for OpenOffice.org
 Summary(pl.UTF-8):	Moduł Calc dla OpenOffice.org
 Group:		X11/Applications
+Requires(post,postun):	desktop-file-utils
 Requires:	%{name}-core = %{epoch}:%{version}-%{release}
 
 %description calc
@@ -403,6 +408,7 @@ Arkusz kalkulacyjny z OpenOffice.org.
 Summary:	Draw module for OpenOffice.org
 Summary(pl.UTF-8):	Moduł Draw dla OpenOffice.org
 Group:		X11/Applications
+Requires(post,postun):	desktop-file-utils
 Requires:	%{name}-core = %{epoch}:%{version}-%{release}
 
 %description draw
@@ -415,6 +421,7 @@ Aplikacja rysunkowa z OpenOffice.org.
 Summary:	Impress module for OpenOffice.org
 Summary(pl.UTF-8):	Moduł Impress dla OpenOffice.org
 Group:		X11/Applications
+Requires(post,postun):	desktop-file-utils
 Requires:	%{name}-core = %{epoch}:%{version}-%{release}
 
 %description impress
@@ -427,6 +434,7 @@ Aplikacja do tworzenia prezentacji z OpenOffice.org.
 Summary:	Math module for OpenOffice.org
 Summary(pl.UTF-8):	Moduł Math dla OpenOffice.org
 Group:		X11/Applications
+Requires(post,postun):	desktop-file-utils
 Requires:	%{name}-core = %{epoch}:%{version}-%{release}
 
 %description math
@@ -2419,14 +2427,54 @@ fi
 %endif
 
 %post core
-umask 022
-[ ! -x /usr/bin/update-desktop-database ] || /usr/bin/update-desktop-database >/dev/null 2>&1 ||:
-[ ! -x /usr/bin/update-mime-database ] || /usr/bin/update-mime-database %{_datadir}/mime >/dev/null 2>&1 ||:
+%update_mime_database
+%update_desktop_database_post
 
 %postun core
-umask 022
-[ ! -x /usr/bin/update-desktop-database ] || /usr/bin/update-desktop-database >/dev/null 2>&1
-[ ! -x /usr/bin/update-mime-database ] || /usr/bin/update-mime-database %{_datadir}/mime >/dev/null 2>&1 ||:
+%update_desktop_database_postun
+%update_mime_database
+
+%post base
+%update_desktop_database_post
+
+%postun base
+%update_desktop_database_postun
+
+%post web
+%update_desktop_database_post
+
+%postun web
+%update_desktop_database_postun
+
+%post writer
+%update_desktop_database_post
+
+%postun writer
+%update_desktop_database_postun
+
+%post calc
+%update_desktop_database_post
+
+%postun calc
+%update_desktop_database_postun
+
+%post draw
+%update_desktop_database_post
+
+%postun draw
+%update_desktop_database_postun
+
+%post impress
+%update_desktop_database_post
+
+%postun impress
+%update_desktop_database_postun
+
+%post math
+%update_desktop_database_post
+
+%postun math
+%update_desktop_database_postun
 
 %post -n fonts-TTF-OpenSymbol
 fontpostinst TTF
