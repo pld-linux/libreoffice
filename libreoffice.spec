@@ -2414,16 +2414,16 @@ ln -s ../../share/%{name}/share $RPM_BUILD_ROOT%{_libdir}/%{name}/share
 rm -rf $RPM_BUILD_ROOT
 
 %pre core
-if [ -d %{_libdir}/%{name}/share ] && [ ! -L %{_libdir}/%{name}/share ]; then
-	install -d %{_datadir}/%{name}
-	mv %{_libdir}/%{name}/share %{_datadir}/%{name}/share || mv %{_libdir}/%{name}/share{,.rpmsave}
-fi
 %if %{with system_myspell}
 # we symlink the dir, unless smb wishes to patch OOo to use system dir directly
 if [ -d %{_libdir}/%{name}/share/dict/ooo ] && [ ! -L %{_libdir}/%{name}/share/dict/ooo ]; then
 	rmdir %{_libdir}/%{name}/share/dict/ooo 2>/dev/null || mv -v %{_libdir}/%{name}/share/dict/ooo{,.rpmsave} || :
 fi
 %endif
+if [ -d %{_libdir}/%{name}/share ] && [ ! -L %{_libdir}/%{name}/share ]; then
+	install -d %{_datadir}/%{name}
+	mv %{_libdir}/%{name}/share %{_datadir}/%{name}/share || mv %{_libdir}/%{name}/share{,.rpmsave}
+fi
 
 %post core
 umask 022
