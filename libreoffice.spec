@@ -1,27 +1,25 @@
 # NOTE:
-#	- normal build with java requires about 24GB of disk space
-#		$BUILD_ROOT	 7.1 GB
-#		BUILD		15.7 GB
-#		SRPMS		 0.3 GB
-#		RPMS		 1.2 GB
+#	- normal build (athlon) requires about 15 GB of disk space:
+#		$BUILD_ROOT	3.7 GB
+#		BUILD		9.6 GB
+#		SRPMS		0.3 GB
+#		RPMS		0.9 GB
 # TODO:
 #	- without system_db will not work (w/ java) as it will use db4.2 which is too old (see r1.650)
 #	- problems with gcc-4.2.0: oowriter is useless (invisble text till refresh)
 #	- fix help files (broken links)
 #	- LFS support is disabled (no_lfs_hack.patch for xml2cmp crash) because it need LFS-ready STLport
-#       - bcond with_mono is broken (cli_types.dll not found, and can't be made)
-#	- build on 64-bit architectures
-#	- doesn't build with java-sun-1.6 (maybe java-dependent packages are screwed)
+#   - bcond with_mono is broken (cli_types.dll not found, and can't be made)
 #	- maybe it could be build with gcc-java
-#       - adapt help-support.diff to PLD
+#   - adapt help-support.diff to PLD
 #	- configure --without-ppds --without afms
 #	- /share/config/soffice.cfg/global/accelerator/es/ should be in i18n-es
 #	- fix locale names and other locale related things
-#       - can't be just i18n-{be,gu,hi,kn,pa,ta} instead of *-{be_BY,*_IN}?
+#   - can't be just i18n-{be,gu,hi,kn,pa,ta} instead of *-{be_BY,*_IN}?
 #   - more system libs todo:
 #	- (SYSTEM_HYPH) bcond system_libhnj doesn't work - needs Debian-patched version of libhnj
 #	- --with-system-mythes + mythes package (http://lingucomponent.openoffice.org/thesaurus.html)
-#   - --with-system-mspack    use libmspack already installed on system
+#   - --with-system-mspack - use libmspack already installed on system
 #	- bcond system_xt doesn't work - xt in PLD is too old or broken
 #
 #	$ grep SYSTEM ooo-build-ooe680-m6/build/ooe680-m6/config_office/config.log |grep NO
@@ -63,7 +61,7 @@
 %endif
 
 %define		ver		2.1.0
-%define		_rel		5.2
+%define		_rel		6
 %define		subver		680
 %define		snap		OOE680
 %define		snap2		SRC680
@@ -291,6 +289,8 @@ Pakiet biurowy OpenOffice.org - Interfejs GTK+.
 Summary:	Core modules for OpenOffice.org
 Summary(pl):	Podstawowe modu³y dla OpenOffice.org
 Group:		X11/Applications
+Requires(post,postun):	desktop-file-utils
+Requires(post,postun):	shared-mime-info
 %{?with_system_beanshell:Requires:	beanshell}
 # libcups.so.2 is dlopened (in cupsmgr.cxx); maybe Suggests instead?
 Requires:	cups-lib
@@ -298,7 +298,6 @@ Requires:	cups-lib
 Requires:	libstdc++ >= 5:3.2.1
 Requires:	mktemp
 Requires:	sed
-Requires:	shared-mime-info
 %{?with_system_xalan:Requires:	xalan-j}
 %{?with_system_xerces:Requires:	xerces-j}
 %{?with_system_xml_apis:Requires:	xml-commons}
@@ -337,6 +336,7 @@ skryptów w Pythonie w wewnêtrznym module skryptów OpenOffice.org.
 Summary:	Database frontend for OpenOffice.org
 Summary(pl):	Frontend do baz danych dla OpenOffice.org
 Group:		X11/Applications
+Requires(post,postun):	desktop-file-utils
 Requires:	%{name}-core = %{epoch}:%{version}-%{release}
 
 %description base
@@ -352,6 +352,7 @@ u¿ytkownika.
 Summary:	Web module for OpenOffice.org
 Summary(pl):	Modu³ Web dla OpenOffice.org
 Group:		X11/Applications
+Requires(post,postun):	desktop-file-utils
 Requires:	%{name}-core = %{epoch}:%{version}-%{release}
 Requires:	%{name}-writer = %{epoch}:%{version}-%{release}
 
@@ -365,6 +366,7 @@ Aplikacja do tworzenia stron WWW z OpenOffice.org.
 Summary:	Writer module for OpenOffice.org
 Summary(pl):	Modu³ Writer dla OpenOffice.org
 Group:		X11/Applications
+Requires(post,postun):	desktop-file-utils
 Requires:	%{name}-core = %{epoch}:%{version}-%{release}
 
 %description writer
@@ -391,6 +393,7 @@ elektronicznej.
 Summary:	Calc module for OpenOffice.org
 Summary(pl):	Modu³ Calc dla OpenOffice.org
 Group:		X11/Applications
+Requires(post,postun):	desktop-file-utils
 Requires:	%{name}-core = %{epoch}:%{version}-%{release}
 
 %description calc
@@ -403,6 +406,7 @@ Arkusz kalkulacyjny z OpenOffice.org.
 Summary:	Draw module for OpenOffice.org
 Summary(pl):	Modu³ Draw dla OpenOffice.org
 Group:		X11/Applications
+Requires(post,postun):	desktop-file-utils
 Requires:	%{name}-core = %{epoch}:%{version}-%{release}
 
 %description draw
@@ -415,6 +419,7 @@ Aplikacja rysunkowa z OpenOffice.org.
 Summary:	Impress module for OpenOffice.org
 Summary(pl):	Modu³ Impress dla OpenOffice.org
 Group:		X11/Applications
+Requires(post,postun):	desktop-file-utils
 Requires:	%{name}-core = %{epoch}:%{version}-%{release}
 
 %description impress
@@ -427,6 +432,7 @@ Aplikacja do tworzenia prezentacji z OpenOffice.org.
 Summary:	Math module for OpenOffice.org
 Summary(pl):	Modu³ Math dla OpenOffice.org
 Group:		X11/Applications
+Requires(post,postun):	desktop-file-utils
 Requires:	%{name}-core = %{epoch}:%{version}-%{release}
 
 %description math
@@ -2426,14 +2432,54 @@ if [ -d %{_libdir}/%{name}/share ] && [ ! -L %{_libdir}/%{name}/share ]; then
 fi
 
 %post core
-umask 022
-[ ! -x /usr/bin/update-desktop-database ] || /usr/bin/update-desktop-database >/dev/null 2>&1 ||:
-[ ! -x /usr/bin/update-mime-database ] || /usr/bin/update-mime-database %{_datadir}/mime >/dev/null 2>&1 ||:
+%update_mime_database
+%update_desktop_database_post
 
 %postun core
-umask 022
-[ ! -x /usr/bin/update-desktop-database ] || /usr/bin/update-desktop-database >/dev/null 2>&1
-[ ! -x /usr/bin/update-mime-database ] || /usr/bin/update-mime-database %{_datadir}/mime >/dev/null 2>&1 ||:
+%update_desktop_database_postun
+%update_mime_database
+
+%post base
+%update_desktop_database_post
+
+%postun base
+%update_desktop_database_postun
+
+%post web
+%update_desktop_database_post
+
+%postun web
+%update_desktop_database_postun
+
+%post writer
+%update_desktop_database_post
+
+%postun writer
+%update_desktop_database_postun
+
+%post calc
+%update_desktop_database_post
+
+%postun calc
+%update_desktop_database_postun
+
+%post draw
+%update_desktop_database_post
+
+%postun draw
+%update_desktop_database_postun
+
+%post impress
+%update_desktop_database_post
+
+%postun impress
+%update_desktop_database_postun
+
+%post math
+%update_desktop_database_post
+
+%postun math
+%update_desktop_database_postun
 
 %post -n fonts-TTF-OpenSymbol
 fontpostinst TTF
