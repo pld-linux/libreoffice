@@ -63,7 +63,7 @@
 %endif
 
 %define		ver		2.1.0
-%define		_rel		5.1
+%define		_rel		5.2
 %define		subver		680
 %define		snap		OOE680
 %define		snap2		SRC680
@@ -2482,6 +2482,7 @@ fi
 # symlink
 %{_libdir}/%{name}/share
 
+%dir %{_datadir}/%{name}
 %dir %{_datadir}/%{name}/share
 %dir %{_datadir}/%{name}/share/Scripts
 %dir %{_datadir}/%{name}/share/config
