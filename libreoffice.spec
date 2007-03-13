@@ -51,6 +51,11 @@
 %bcond_without	system_myspell
 %bcond_with	system_xt
 
+# this list is same as java-sun
+%ifnarch i586 i686 pentium3 pentium4 athlon %{x8664}
+%undefine	with_java
+%endif
+
 %if %{without java}
 %undefine	with_system_beanshell
 %undefine	with_system_xalan
@@ -61,7 +66,7 @@
 %endif
 
 %define		ver		2.1.0
-%define		_rel		6
+%define		_rel		7
 %define		subver		680
 %define		snap		OOE680
 %define		snap2		SRC680
@@ -218,8 +223,7 @@ Requires:	%{name}-web = %{epoch}:%{version}-%{release}
 Requires:	%{name}-writer = %{epoch}:%{version}-%{release}
 Requires:	%{name}-xsltfilter = %{epoch}:%{version}-%{release}
 Requires:	fonts-TTF-OpenSymbol = %{epoch}:%{version}-%{release}
-# NOTE: when adding archidectures here, don't forget to update basesystem.spec
-ExclusiveArch:	i586 i686 pentium3 pentium4 athlon
+ExclusiveArch:	%{ix86} ppc sparc sparcv9
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 # No ELF objects there to strip/chrpath (skips processing 17k files totaling 415M)
@@ -2336,6 +2340,8 @@ if [ ! -f installed.stamp -o ! -d $RPM_BUILD_ROOT ]; then
 	rm -rf $RPM_BUILD_ROOT%{_libdir}/%{name}/share/Scripts/javascript
 	rm -rf $RPM_BUILD_ROOT%{_libdir}/%{name}/share/xslt
 	%endif
+
+	touch installed.stamp
 fi
 
 # Find out locales
@@ -2715,16 +2721,6 @@ fi
 %{_datadir}/%{name}/share/registry/schema/org/openoffice/ucb/Hierarchy.xcs
 %{_datadir}/%{name}/share/registry/schema/org/openoffice/ucb/Store.xcs
 %{_datadir}/%{name}/share/registry/ldap
-%{_datadir}/%{name}/share/registry/modules/org/openoffice/Office/Common/Common-UseOOoFileDialogs.xcu
-%{_datadir}/%{name}/share/registry/modules/org/openoffice/Office/Common/Common-dicooo.xcu
-%{_datadir}/%{name}/share/registry/modules/org/openoffice/Office/Common/Common-unx.xcu
-%{_datadir}/%{name}/share/registry/modules/org/openoffice/Office/Embedding/Embedding-calc.xcu
-%{_datadir}/%{name}/share/registry/modules/org/openoffice/Office/Embedding/Embedding-chart.xcu
-%{_datadir}/%{name}/share/registry/modules/org/openoffice/Office/Embedding/Embedding-draw.xcu
-%{_datadir}/%{name}/share/registry/modules/org/openoffice/Office/Embedding/Embedding-impress.xcu
-%{_datadir}/%{name}/share/registry/modules/org/openoffice/Office/Embedding/Embedding-math.xcu
-%{_datadir}/%{name}/share/registry/modules/org/openoffice/Office/Embedding/Embedding-writer.xcu
-%if %{with java}
 %{_datadir}/%{name}/share/registry/modules/org/openoffice/Office/Common/Common-cjk_ja.xcu
 %{_datadir}/%{name}/share/registry/modules/org/openoffice/Office/Common/Common-cjk_ko.xcu
 %{_datadir}/%{name}/share/registry/modules/org/openoffice/Office/Common/Common-cjk_zh-CN.xcu
@@ -2741,7 +2737,16 @@ fi
 %{_datadir}/%{name}/share/registry/modules/org/openoffice/Office/Common/Common-ctl_ta-IN.xcu
 %{_datadir}/%{name}/share/registry/modules/org/openoffice/Office/Common/Common-ctl_th.xcu
 %{_datadir}/%{name}/share/registry/modules/org/openoffice/Office/Common/Common-ctl_vi.xcu
+%{_datadir}/%{name}/share/registry/modules/org/openoffice/Office/Common/Common-dicooo.xcu
 %{_datadir}/%{name}/share/registry/modules/org/openoffice/Office/Common/Common-korea.xcu
+%{_datadir}/%{name}/share/registry/modules/org/openoffice/Office/Common/Common-unx.xcu
+%{_datadir}/%{name}/share/registry/modules/org/openoffice/Office/Common/Common-UseOOoFileDialogs.xcu
+%{_datadir}/%{name}/share/registry/modules/org/openoffice/Office/Embedding/Embedding-calc.xcu
+%{_datadir}/%{name}/share/registry/modules/org/openoffice/Office/Embedding/Embedding-chart.xcu
+%{_datadir}/%{name}/share/registry/modules/org/openoffice/Office/Embedding/Embedding-draw.xcu
+%{_datadir}/%{name}/share/registry/modules/org/openoffice/Office/Embedding/Embedding-impress.xcu
+%{_datadir}/%{name}/share/registry/modules/org/openoffice/Office/Embedding/Embedding-math.xcu
+%{_datadir}/%{name}/share/registry/modules/org/openoffice/Office/Embedding/Embedding-writer.xcu
 # move it to -writer ?
 %{_datadir}/%{name}/share/registry/modules/org/openoffice/Office/Writer/Writer-cjk_ja.xcu
 %{_datadir}/%{name}/share/registry/modules/org/openoffice/Office/Writer/Writer-cjk_ko.xcu
@@ -2832,7 +2837,6 @@ fi
 %{_datadir}/%{name}/share/registry/modules/org/openoffice/Setup/Langpack-zh-CN.xcu
 %{_datadir}/%{name}/share/registry/modules/org/openoffice/Setup/Langpack-zh-TW.xcu
 %{_datadir}/%{name}/share/registry/modules/org/openoffice/Setup/Langpack-zu.xcu
-%endif
 %{_datadir}/%{name}/share/registry/modules/org/openoffice/TypeDetection/Filter/fcfg_global_filters.xcu
 %{_datadir}/%{name}/share/registry/modules/org/openoffice/TypeDetection/Filter/fcfg_base_filters.xcu
 %{_datadir}/%{name}/share/registry/modules/org/openoffice/TypeDetection/Filter/fcfg_chart_filters.xcu
