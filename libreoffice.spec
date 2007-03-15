@@ -2076,8 +2076,6 @@ if [ ! -f /proc/cpuinfo ]; then
 	exit 1
 fi
 
-exit 1
-
 %{__aclocal}
 %{__autoconf}
 
