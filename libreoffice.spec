@@ -516,6 +516,7 @@ Fonty TrueType OpenSymbol.
 
 %package -n browser-plugin-%{name}
 Summary:	OpenOffice.org plugin for WWW browsers
+Summary(pl.UTF-8):	Wtyczka OpenOffice.org dla przeglądarek WWW
 Group:		X11/Applications
 Requires:	%{name}-core = %{epoch}:%{version}-%{release}
 Requires:	browser-plugins >= 2.0
@@ -525,6 +526,11 @@ Requires:	browser-plugins(%{_target_base_arch})
 OpenOffice.org plugin for WWW browsers.
 
 This plugin allows browsers to display OOo documents inline.
+
+%description -n browser-plugin-%{name} -l pl.UTF-8
+Wtyczka OpenOffice.org dla przeglądarek WWW.
+
+Ta wtyczka umożliwia wyświetlanie dokumentów OOo wewnątrz stron.
 
 %package i18n-af
 Summary:	OpenOffice.org - interface in Afrikaans language
