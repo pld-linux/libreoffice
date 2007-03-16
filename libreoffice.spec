@@ -2112,6 +2112,12 @@ RPM_BUILD_NR_THREADS="%(echo "%{__make}" | sed -e 's#.*-j\([[:space:]]*[0-9]\+\)
 [ "$RPM_BUILD_NR_THREADS" = "%{__make}" ] && RPM_BUILD_NR_THREADS=1
 RPM_BUILD_NR_THREADS=$(echo $RPM_BUILD_NR_THREADS)
 
+if [ -f "%{_javadir}/serializer.jar" ];then
+	serializer_jar=%{_javadir}/serializer.jar
+else
+	serializer_jar=%{_javadir}/xalan.jar
+fi
+
 CONFOPTS="\
 %ifarch %{ix86} \
 	--with-arch=x86 \
@@ -2135,10 +2141,7 @@ CONFOPTS="\
 	%{?with_system_libhnj:--with-system-altlinuxhyphen} \
 	%{?with_system_mdbtools:--with-system-mdbtools} \
 	%{?with_system_myspell:--with-system-myspell} \
-%if %{with system_xalan}
-	--with-system-xalan \
-	`[ -e "%{_javadir}/serializer.jar" ] && echo "--with-serializer-jar=%{_javadir}/serializer.jar" || echo "--with-serializer-jar=%{_javadir}/xalan.jar"`
-%endif
+	%{?with_system_xalan:--with-system-xalan --with-serializer-jar=$serializer_jar} \
 	%{?with_system_xerces:--with-system-xerces} \
 	%{?with_system_xml_apis:--with-system-xml-apis} \
 	%{?with_system_xt:--with-system-xt --with-xt-jar=%{_javadir}/classes} \
@@ -2229,8 +2232,12 @@ export CONFIGURE_OPTIONS="$CONFOPTS"
 
 :> distro-configs/Common.conf
 :> distro-configs/Common.conf.in
-echo "$CONFOPTS" > distro-configs/PLD.conf.in
-echo "$CONFOPTS" > distro-configs/PLD64.conf.in
+echo -n "$CONFOPTS" > distro-configs/PLD.conf.in
+echo -n "$CONFOPTS" > distro-configs/PLD64.conf.in
+if [ $(cat distro-configs/PLD.conf.in | wc -l) -gt 1 ]; then
+	: 'newline(s) found in distro-configs. some of the options might be lost'
+	exit 1
+fi
 
 # for cvs snaps
 [ -x ./autogen.sh ] && ./autogen.sh $CONFOPTS
