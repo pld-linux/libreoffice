@@ -71,13 +71,14 @@
 %define		upd			680
 %define		mws			OOE%{upd}
 %define		tag			%(echo %{mws} | tr '[A-Z]' '[a-z]')-%{milestone}
+%define		_tag		%(echo %{tag} | tr - _)
 %define		milestone	m6
 
 Summary:	OpenOffice.org - powerful office suite
 Summary(pl.UTF-8):	OpenOffice.org - potężny pakiet biurowy
 Name:		openoffice.org
 Version:	2.1.0
-Release:	0.%{tag}.%{_rel}
+Release:	0.%{_tag}.%{_rel}
 Epoch:		1
 License:	GPL/LGPL
 Group:		X11/Applications
@@ -191,7 +192,7 @@ BuildRequires:	sane-backends-devel
 BuildRequires:	sed >= 4.0
 BuildRequires:	startup-notification-devel >= 0.5
 BuildRequires:	tcsh
-BuildRequires:	unixODBC-devel >= 2.2.12-2
+BuildRequires:	unixODBC-devel
 BuildRequires:	unzip
 %{?with_system_xalan:BuildRequires:	xalan-j}
 %{?with_system_xerces:BuildRequires:	xerces-j}
@@ -2030,7 +2031,7 @@ bash-completion for OpenOffice.org.
 bashowe uzupełnianie nazw dla Openoffice.org.
 
 %prep
-%setup -q -n %(basename %{SOURCE0} .tar.bz2)
+%setup -q -n %(set -x; basename %{SOURCE0} .tar.gz)
 install -d src
 cp %{SOURCE50} %{SOURCE51} src
 
@@ -2308,14 +2309,15 @@ if [ ! -f installed.stamp -o ! -d $RPM_BUILD_ROOT ]; then
 	touch $RPM_BUILD_ROOT%{_libdir}/%{name}/share/dict/ooo/dictionary.lst
 	%endif
 
-	# configs
-	install -d $RPM_BUILD_ROOT%{_sysconfdir}/%{name}
-	mv $RPM_BUILD_ROOT{%{_libdir}/%{name}/program,%{_sysconfdir}/%{name}}/sofficerc
-
 	%if %{with mozilla}
 	install -d $RPM_BUILD_ROOT%{_browserpluginsdir}
 	ln -s %{_libdir}/%{name}/program/libnpsoplugin.so $RPM_BUILD_ROOT%{_browserpluginsdir}
 	%endif
+
+	# configs
+	install -d $RPM_BUILD_ROOT%{_sysconfdir}/%{name}
+	mv $RPM_BUILD_ROOT{%{_libdir}/%{name}/program,%{_sysconfdir}/%{name}}/sofficerc
+	ln -s %{_sysconfdir}/%{name}/sofficerc $RPM_BUILD_ROOT%{_libdir}/%{name}/program
 
 	# is below comment true?
 	# OOo should not install the Vera fonts, they are Required: now
@@ -2363,6 +2365,11 @@ if [ ! -f installed.stamp -o ! -d $RPM_BUILD_ROOT ]; then
 	rm -rf $RPM_BUILD_ROOT%{_libdir}/%{name}/share/Scripts/javascript
 	rm -rf $RPM_BUILD_ROOT%{_libdir}/%{name}/share/xslt
 	%endif
+
+	# put share to %{_datadir} so we're able to produce noarch packages
+	install -d $RPM_BUILD_ROOT%{_datadir}/%{name}
+	mv $RPM_BUILD_ROOT%{_libdir}/%{name}/share $RPM_BUILD_ROOT%{_datadir}/%{name}
+	ln -s ../../share/%{name}/share $RPM_BUILD_ROOT%{_libdir}/%{name}/share
 
 	touch installed.stamp
 fi
@@ -2439,10 +2446,6 @@ for lang in $langlist; do
 	find_lang $lang
 done
 
-# put share to %{_datadir} so we're able to produce noarch packages
-install -d $RPM_BUILD_ROOT%{_datadir}/%{name}
-mv $RPM_BUILD_ROOT%{_libdir}/%{name}/share $RPM_BUILD_ROOT%{_datadir}/%{name}
-ln -s ../../share/%{name}/share $RPM_BUILD_ROOT%{_libdir}/%{name}/share
 %{__sed} -i -e 's,%{_libdir}/%{name}/share,%{_datadir}/%{name}/share,' *.lang
 
 %clean
