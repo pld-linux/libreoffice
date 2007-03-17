@@ -2283,8 +2283,6 @@ if [ ! -f installed.stamp -o ! -d $RPM_BUILD_ROOT ]; then
 	%{__make} install \
 		DESTDIR=$RPM_BUILD_ROOT
 
-	install -d $RPM_BUILD_ROOT%{_sysconfdir}/%{name}
-
 	# Add in the regcomp tool since some people need it for 3rd party add-ons
 	cp -f build/%{tag}/solver/%{upd}/unxlng*.pro/bin/regcomp{,.bin} $RPM_BUILD_ROOT%{_libdir}/%{name}/program/
 
@@ -2309,6 +2307,10 @@ if [ ! -f installed.stamp -o ! -d $RPM_BUILD_ROOT ]; then
 	%else
 	touch $RPM_BUILD_ROOT%{_libdir}/%{name}/share/dict/ooo/dictionary.lst
 	%endif
+
+	# configs
+	install -d $RPM_BUILD_ROOT%{_sysconfdir}/%{name}
+	mv $RPM_BUILD_ROOT{%{_libdir}/%{name}/program,%{_sysconfdir}/%{name}}/sofficerc
 
 	%if %{with mozilla}
 	install -d $RPM_BUILD_ROOT%{_browserpluginsdir}
@@ -2533,7 +2535,9 @@ fi
 %doc %{_libdir}/%{name}/LICENSE*
 %doc %{_libdir}/%{name}/*README*
 
-%dir %{_sysconfdir}/openoffice.org
+%dir %{_sysconfdir}/%{name}
+%config(noreplace) %verify(not md5 mtime size) %{_sysconfdir}/%{name}/sofficerc
+
 %dir %{_libdir}/%{name}
 %if %{with java}
 %dir %{_libdir}/%{name}/help/en
