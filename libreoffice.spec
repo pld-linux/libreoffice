@@ -66,7 +66,7 @@
 %endif
 
 %define		ver		2.1.0
-%define		_rel		7
+%define		_rel		8
 %define		subver		680
 %define		snap		OOE680
 %define		snap2		SRC680
