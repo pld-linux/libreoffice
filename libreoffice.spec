@@ -76,12 +76,13 @@
 Summary:	OpenOffice.org - powerful office suite
 Summary(pl.UTF-8):	OpenOffice.org - potężny pakiet biurowy
 Name:		openoffice.org
-Version:	2.1.8
-Release:	%{_rel}
+# Version should be 2.1
+Version:	2.1.0
+Release:	0.%{tag}.%{_rel}
 Epoch:		1
 License:	GPL/LGPL
 Group:		X11/Applications
-Source0:	http://go-ooo.org/packages/OOE680/ooo-build-%{version}.tar.gz
+Source0:	http://go-ooo.org/packages/OOE680/ooo-build-2.1.8.tar.gz
 # Source0-md5:	ec39e9bb30c5285afba50ae32dbe7af2
 Source1:	http://go-ooo.org/packages/%{mws}/%{tag}-core.tar.bz2
 # Source1-md5:	7dbf5f7ea4f469bb6c8b1d6037567431
@@ -2030,7 +2031,7 @@ bash-completion for OpenOffice.org.
 bashowe uzupełnianie nazw dla Openoffice.org.
 
 %prep
-%setup -q -n ooo-build-%{version}
+%setup -q -n %(basename %{SOURCE0} .tar.bz2)
 install -d src
 cp %{SOURCE50} %{SOURCE51} src
 
