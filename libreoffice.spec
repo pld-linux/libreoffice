@@ -189,7 +189,7 @@ BuildRequires:	sane-backends-devel
 BuildRequires:	sed >= 4.0
 BuildRequires:	startup-notification-devel >= 0.5
 BuildRequires:	tcsh
-BuildRequires:	unixODBC-devel
+BuildRequires:	unixODBC-devel >= 2.2.12-2
 BuildRequires:	unzip
 %{?with_system_xalan:BuildRequires:	xalan-j}
 %{?with_system_xerces:BuildRequires:	xerces-j}
