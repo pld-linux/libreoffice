@@ -76,7 +76,6 @@
 Summary:	OpenOffice.org - powerful office suite
 Summary(pl.UTF-8):	OpenOffice.org - potężny pakiet biurowy
 Name:		openoffice.org
-# Version should be 2.1
 Version:	2.1.0
 Release:	0.%{tag}.%{_rel}
 Epoch:		1
