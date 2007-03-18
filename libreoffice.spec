@@ -133,6 +133,7 @@ Patch104:	%{name}-portaudio_v19.diff
 Patch107:	%{name}-stl-amd64.patch
 Patch108:	%{name}-java6.patch
 Patch109:	%{name}-agg25.patch
+Patch110:	%{name}-nsplugin-path.diff
 URL:		http://www.openoffice.org/
 BuildRequires:	/usr/bin/getopt
 BuildRequires:	STLport-devel >= 2:5.0.0
@@ -2088,6 +2089,7 @@ for P in %{PATCH102} %{PATCH104} %{PATCH108} %{PATCH109}; do
 	install $P patches/src680/$PATCHNAME
 	echo $PATCHNAME >> patches/src680/apply
 done
+cp %{PATCH110} patches/src680/nsplugin-path.diff
 
 %build
 # Make sure we have /proc mounted - otherwise idlc will fail later.
