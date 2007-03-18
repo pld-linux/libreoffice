@@ -2332,6 +2332,7 @@ if [ ! -f installed.stamp -o ! -d $RPM_BUILD_ROOT ]; then
 
 	%if %{with mozilla}
 	install -d $RPM_BUILD_ROOT%{_browserpluginsdir}
+	chmod +x $RPM_BUILD_ROOT%{_libdir}/%{name}/program/libnpsoplugin.so
 	ln -s %{_libdir}/%{name}/program/libnpsoplugin.so $RPM_BUILD_ROOT%{_browserpluginsdir}
 	%endif
 
