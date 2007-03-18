@@ -70,7 +70,7 @@
 %define		_rel		0.1
 %define		upd			680
 %define		mws			OOE%{upd}
-%define		tag			%(echo %{mws} | tr '[A-Z]' '[a-z]')-%{milestone}
+%define		tag			%(echo %{mws} | tr A-Z a-z)-%{milestone}
 %define		_tag		%(echo %{tag} | tr - _)
 %define		milestone	m6
 
