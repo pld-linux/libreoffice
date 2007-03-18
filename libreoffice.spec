@@ -2089,6 +2089,10 @@ if [ ! -f /proc/cpuinfo ]; then
 	exit 1
 fi
 
+export CC="%{__cc}"
+export CXX="%{__cxx}"
+export CPP="%{__cpp}"
+
 %{__aclocal}
 %{__autoconf}
 
@@ -2098,8 +2102,6 @@ DISTRO="PLD64"
 DISTRO="PLD"
 %endif
 
-export CC="%{__cc}"
-export CXX="%{__cxx}"
 export ENVCFLAGS="%{rpmcflags}"
 # disable STLport 5.1 containers extension, doesn't work with map indexed by enum
 export ENVCFLAGSCXX="%{rpmcflags} -fpermissive -D_STLP_NO_CONTAINERS_EXTENSION"
@@ -2253,6 +2255,9 @@ fi
 
 # main build
 %configure \
+	CC="$CC" \
+	CXX="$CXX" \
+	CPP="$CPP" \
 	$CONFOPTS
 
 # this limits processing some files but doesn't limit parallel build
