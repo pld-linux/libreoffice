@@ -1,0 +1,110 @@
+Index: extensions/source/nsplugin/source/so_env.cxx
+===================================================================
+RCS file: /cvs/util/extensions/source/nsplugin/source/so_env.cxx,v
+retrieving revision 1.6
+diff -u -p -u -r1.6 so_env.cxx
+--- extensions/source/nsplugin/source/so_env.cxx	8 Sep 2005 19:40:59 -0000	1.6
++++ extensions/source/nsplugin/source/so_env.cxx	20 Oct 2005 12:32:16 -0000
+@@ -36,6 +36,7 @@
+ #ifdef UNIX
+ #include <sys/types.h>
+ #include <strings.h>
++#include <dlfcn.h>
+ #if defined(SOLARIS) && !defined(__GNUC__)
+ #include <varargs.h>
+ #else
+@@ -122,6 +123,80 @@ restoreUTF8(char *pPath)
+     return 0;
+ }
+ 
++#ifdef UNIX
++extern int nspluginOOoModuleHook (void** aResult);
++int nspluginOOoModuleHook (void** aResult)
++{
++	void *dl_handle;
++	void *thisp;
++
++	dl_handle = dlopen(NULL, RTLD_NOW);
++	if (!dl_handle)
++	{
++		fprintf (stderr, "Can't open myself '%s'\n", dlerror());
++		return 1;
++	}
++
++	Dl_info dl_info = { 0, };
++	if(!dladdr((const void *)nspluginOOoModuleHook, &dl_info))
++	{
++		fprintf (stderr, "Can't find my own address '%s'\n", dlerror());
++		return 1;
++	}
++
++	if (!dl_info.dli_fname)
++	{
++		fprintf (stderr, "Can't find my own file name\n");
++		return 1;
++	}
++
++	char cwdstr[NPP_PATH_MAX];
++    if (!getcwd (cwdstr, sizeof(cwdstr)))
++	{
++		fprintf (stderr, "Can't get cwd\n");
++		return 1;
++	}
++
++    char libFileName[NPP_PATH_MAX];
++
++	if (dl_info.dli_fname[0] != '/')
++	{
++		strcpy (libFileName, cwdstr);
++		strcat (libFileName, "/");
++	}
++	strcat (libFileName, dl_info.dli_fname);
++
++	char *clobber;
++	static char realFileName[NPP_PATH_MAX] = {0};
++#   define SEARCH_SUFFIX "/program/libnpsoplug"
++
++	if (!(clobber = strstr (libFileName, SEARCH_SUFFIX)))
++	{
++		if (readlink(libFileName, realFileName, NPP_PATH_MAX) != 0)
++		{
++		    fprintf (stderr, "Couldn't read link '%s'\n", libFileName);
++			return 1;
++		}
++		if (!(clobber = strstr (realFileName, "/program/libnpsoplug")))
++		{
++		     fprintf (stderr, "Couldn't find suffix in '%s'\n", realFileName);
++			 return 1;
++		}
++		*clobber = '\0';
++	}
++	else
++	{
++		*clobber = '\0';
++		strcpy (realFileName, libFileName);
++	}
++	*aResult = realFileName;
++
++	fprintf (stderr, "OpenOffice path is '%s'\n", realFileName);
++   
++	return 0;
++}
++#endif
++
+ // *aResult points the static string holding "/opt/staroffice8"
+ int findReadSversion(void** aResult, int bWnt, const char* tag, const char* entry)
+ {
+@@ -134,6 +209,12 @@ int findReadSversion(void** aResult, int
+     // Filename of lnk file, eg. "soffice"
+     char lnkFileName[NPP_PATH_MAX] = {0};
+     char* pTempZero = NULL;
++
++    /* try to fetch a 'self' pointer */
++	if (!nspluginOOoModuleHook (aResult))
++	  return 0;
++
++    /* .. now in $HOME */
+     sprintf(lnkFileName, "%s/.mozilla/plugins/libnpsoplugin%s", getenv("HOME"), SAL_DLLEXTENSION);
+     if ((0 > readlink(lnkFileName, realFileName, NPP_PATH_MAX)) ||
+        (NULL == (pTempZero = strstr(realFileName, "/program/libnpsoplugin" SAL_DLLEXTENSION))))
+
