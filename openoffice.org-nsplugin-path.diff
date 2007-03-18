@@ -1,11 +1,6 @@
-Index: extensions/source/nsplugin/source/so_env.cxx
-===================================================================
-RCS file: /cvs/util/extensions/source/nsplugin/source/so_env.cxx,v
-retrieving revision 1.6
-diff -u -p -u -r1.6 so_env.cxx
---- extensions/source/nsplugin/source/so_env.cxx	8 Sep 2005 19:40:59 -0000	1.6
-+++ extensions/source/nsplugin/source/so_env.cxx	20 Oct 2005 12:32:16 -0000
-@@ -36,6 +36,7 @@
+--- extensions/source/nsplugin/source/so_env.cxx.orig	2007-03-18 18:43:48.259831000 +0200
++++ extensions/source/nsplugin/source/so_env.cxx	2007-03-18 18:44:09.670316347 +0200
+@@ -39,6 +39,7 @@
  #ifdef UNIX
  #include <sys/types.h>
  #include <strings.h>
@@ -13,7 +8,7 @@ diff -u -p -u -r1.6 so_env.cxx
  #if defined(SOLARIS) && !defined(__GNUC__)
  #include <varargs.h>
  #else
-@@ -122,6 +123,80 @@ restoreUTF8(char *pPath)
+@@ -125,6 +126,82 @@
      return 0;
  }
  
@@ -66,11 +61,13 @@ diff -u -p -u -r1.6 so_env.cxx
 +
 +	if (!(clobber = strstr (libFileName, SEARCH_SUFFIX)))
 +	{
-+		if (readlink(libFileName, realFileName, NPP_PATH_MAX) != 0)
++		ssize_t len = readlink(libFileName, realFileName, NPP_PATH_MAX);
++		if (len == -1)
 +		{
 +		    fprintf (stderr, "Couldn't read link '%s'\n", libFileName);
 +			return 1;
 +		}
++		realFileName[len] = '\0';
 +		if (!(clobber = strstr (realFileName, "/program/libnpsoplug")))
 +		{
 +		     fprintf (stderr, "Couldn't find suffix in '%s'\n", realFileName);
@@ -94,7 +91,7 @@ diff -u -p -u -r1.6 so_env.cxx
  // *aResult points the static string holding "/opt/staroffice8"
  int findReadSversion(void** aResult, int bWnt, const char* tag, const char* entry)
  {
-@@ -134,6 +209,12 @@ int findReadSversion(void** aResult, int
+@@ -137,9 +214,22 @@
      // Filename of lnk file, eg. "soffice"
      char lnkFileName[NPP_PATH_MAX] = {0};
      char* pTempZero = NULL;
@@ -105,6 +102,17 @@ diff -u -p -u -r1.6 so_env.cxx
 +
 +    /* .. now in $HOME */
      sprintf(lnkFileName, "%s/.mozilla/plugins/libnpsoplugin%s", getenv("HOME"), SAL_DLLEXTENSION);
-     if ((0 > readlink(lnkFileName, realFileName, NPP_PATH_MAX)) ||
-        (NULL == (pTempZero = strstr(realFileName, "/program/libnpsoplugin" SAL_DLLEXTENSION))))
-
+-    if ((0 > readlink(lnkFileName, realFileName, NPP_PATH_MAX)) ||
+-       (NULL == (pTempZero = strstr(realFileName, "/program/libnpsoplugin" SAL_DLLEXTENSION))))
++	ssize_t len = readlink(lnkFileName, realFileName, NPP_PATH_MAX);
++	if (-1 == len)
++	{
++        *realFileName = 0;
++        return -1;
++	}
++	realFileName[len] = '\0';
++
++	if (NULL == (pTempZero = strstr(realFileName, "/program/libnpsoplugin" SAL_DLLEXTENSION))))
+     {
+         *realFileName = 0;
+         return -1;
