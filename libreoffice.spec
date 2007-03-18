@@ -67,7 +67,7 @@
 %undefine	with_system_hsqldb
 %endif
 
-%define		_rel		0.1
+%define		_rel		0.2
 %define		upd			680
 %define		mws			OOE%{upd}
 %define		tag			%(echo %{mws} | tr A-Z a-z)-%{milestone}
@@ -2284,21 +2284,22 @@ if [ ! -f installed.stamp -o ! -d $RPM_BUILD_ROOT ]; then
 	%{__make} install \
 		DESTDIR=$RPM_BUILD_ROOT
 
+	find $RPM_BUILD_ROOT -ls > ls.txt
+
 	# Add in the regcomp tool since some people need it for 3rd party add-ons
-	cp -f build/%{tag}/solver/%{upd}/unxlng*.pro/bin/regcomp{,.bin} $RPM_BUILD_ROOT%{_libdir}/%{name}/program/
+	cp -a build/%{tag}/solver/%{upd}/unxlng*.pro/bin/regcomp{,.bin} $RPM_BUILD_ROOT%{_libdir}/%{name}/program/
 
 	# fix python
 	sed -i -e 's|#!/bin/python|#!%{_bindir}/python|g' $RPM_BUILD_ROOT%{_libdir}/%{name}/program/*.py
 
-	# Really needed?
-	install -d $RPM_BUILD_ROOT%{_pixmapsdir}
-
-	rm -rf $RPM_BUILD_ROOT%{_libdir}/%{name}/share/kde
-	rm -rf $RPM_BUILD_ROOT%{_libdir}/%{name}/share/cde
-	rm -rf $RPM_BUILD_ROOT%{_libdir}/%{name}/share/gnome
-	rm -rf $RPM_BUILD_ROOT%{_libdir}/%{name}/share/icons
-	rm -rf $RPM_BUILD_ROOT%{_datadir}/applnk
-	rm -rf $RPM_BUILD_ROOT%{_datadir}/gnome
+	rm -r $RPM_BUILD_ROOT%{_libdir}/%{name}/share/kde
+	rm -r $RPM_BUILD_ROOT%{_libdir}/%{name}/share/cde
+	rm -r $RPM_BUILD_ROOT%{_libdir}/%{name}/share/gnome
+	rm -r $RPM_BUILD_ROOT%{_libdir}/%{name}/share/icons
+	rm -r $RPM_BUILD_ROOT%{_datadir}/applnk
+	rm -r $RPM_BUILD_ROOT%{_datadir}/gnome
+	# do we need those? large comparing to png
+	rm -r $RPM_BUILD_ROOT%{_datadir}/icons/hicolor/scalable/apps/*.svg
 
 	# Remove dictionaries (in separate pkg)
 	rm -vf $RPM_BUILD_ROOT%{_libdir}/%{name}/share/dict/ooo/*
@@ -3001,6 +3002,9 @@ fi
 
 %{_desktopdir}/template.desktop
 
+%{_iconsdir}/hicolor/*/apps/ooo-gulls.png
+%{_iconsdir}/hicolor/*/apps/ooo-printeradmin.png
+%{_iconsdir}/hicolor/*/apps/ooo-template.png
 %{_pixmapsdir}/ooo-gulls.png
 %{_pixmapsdir}/ooo-template.png
 
@@ -3209,6 +3213,7 @@ fi
 %attr(755,root,root) %{_libdir}/%{name}/program/libmcnttype.so
 %attr(755,root,root) %{_libdir}/%{name}/program/libmdb680*.so
 %attr(755,root,root) %{_libdir}/%{name}/program/libmdbimpl680*.so
+%attr(755,root,root) %{_libdir}/%{name}/program/libmsworks680*.so
 %attr(755,root,root) %{_libdir}/%{name}/program/libmysql2.so
 %attr(755,root,root) %{_libdir}/%{name}/program/libodbc2.so
 %attr(755,root,root) %{_libdir}/%{name}/program/libodbcbase2.so
@@ -3377,6 +3382,7 @@ fi
 %attr(755,root,root) %{_libdir}/%{name}/program/sbase
 %{_mandir}/man1/oobase.1
 %{_desktopdir}/base.desktop
+%{_iconsdir}/hicolor/*/apps/ooo-base.png
 %{_pixmapsdir}/ooo-base.png
 %{_libdir}/%{name}/program/resource/cnr680en-US.res
 %if %{with java}
@@ -3406,6 +3412,7 @@ fi
 %attr(755,root,root) %{_libdir}/%{name}/program/scalc
 %{_mandir}/man1/oocalc.1
 %{_desktopdir}/calc.desktop
+%{_iconsdir}/hicolor/*/apps/ooo-calc.png
 %{_pixmapsdir}/ooo-calc.png
 %if %{with java}
 %{_libdir}/%{name}/help/en/scalc.*
@@ -3431,6 +3438,7 @@ fi
 %attr(755,root,root) %{_libdir}/%{name}/program/sdraw
 %{_mandir}/man1/oodraw.1
 %{_desktopdir}/draw.desktop
+%{_iconsdir}/hicolor/*/apps/ooo-draw.png
 %{_pixmapsdir}/ooo-draw.png
 %if %{with java}
 %{_libdir}/%{name}/help/en/sdraw.*
@@ -3458,6 +3466,7 @@ fi
 %attr(755,root,root) %{_libdir}/%{name}/program/swriter
 %{_mandir}/man1/oowriter.1
 %{_desktopdir}/writer.desktop
+%{_iconsdir}/hicolor/*/apps/ooo-writer.png
 %{_pixmapsdir}/ooo-writer.png
 %if %{with java}
 %{_libdir}/%{name}/help/en/swriter.*
@@ -3490,6 +3499,7 @@ fi
 %attr(755,root,root) %{_libdir}/%{name}/program/simpress
 %{_mandir}/man1/ooimpress.1
 %{_desktopdir}/impress.desktop
+%{_iconsdir}/hicolor/*/apps/ooo-impress.png
 %{_pixmapsdir}/ooo-impress.png
 %if %{with java}
 %{_libdir}/%{name}/help/en/simpress.*
@@ -3513,6 +3523,7 @@ fi
 %attr(755,root,root) %{_libdir}/%{name}/program/smath
 %{_mandir}/man1/oomath.1
 %{_desktopdir}/math.desktop
+%{_iconsdir}/hicolor/*/apps/ooo-math.png
 %{_pixmapsdir}/ooo-math.png
 %if %{with java}
 %{_libdir}/%{name}/help/en/smath.*
@@ -3534,6 +3545,7 @@ fi
 %{_datadir}/%{name}/share/config/soffice.cfg/modules/sweb
 %{_mandir}/man1/ooweb.1
 %{_desktopdir}/web.desktop
+%{_iconsdir}/hicolor/*/apps/ooo-web.png
 %{_pixmapsdir}/ooo-web.png
 
 %files graphicfilter
