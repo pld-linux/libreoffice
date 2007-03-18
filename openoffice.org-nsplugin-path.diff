@@ -112,7 +112,7 @@
 +	}
 +	realFileName[len] = '\0';
 +
-+	if (NULL == (pTempZero = strstr(realFileName, "/program/libnpsoplugin" SAL_DLLEXTENSION))))
++	if (NULL == (pTempZero = strstr(realFileName, "/program/libnpsoplugin" SAL_DLLEXTENSION)))
      {
          *realFileName = 0;
          return -1;
