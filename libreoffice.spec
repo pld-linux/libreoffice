@@ -5,11 +5,13 @@
 #		SRPMS		0.3 GB
 #		RPMS		0.9 GB
 # TODO:
+#   - pld about logo says 2.0
 #	- without system_db will not work (w/ java) as it will use db4.2 which is too old (see r1.650)
 #	- problems with gcc-4.2.0: oowriter is useless (invisble text till refresh)
 #	- fix help files (broken links)
 #	- LFS support is disabled (no_lfs_hack.patch for xml2cmp crash) because it need LFS-ready STLport
 #   - bcond with_mono is broken (cli_types.dll not found, and can't be made)
+#     cli_*.dll are available from http://go-ooo.org/packages/OOE680/
 #	- maybe it could be build with gcc-java
 #   - adapt help-support.diff to PLD
 #	- configure --without-ppds --without afms
@@ -66,50 +68,52 @@
 %undefine	with_system_hsqldb
 %endif
 
-%define		ver		2.1.0
-%define		_rel		8
-%define		subver		680
-%define		snap		OOE680
-%define		snap2		SRC680
-%define		bver		m6
-%define		bbver		m6
-%define		bugfix		%{nil}
-%define		ooobver		ooe680-%{bbver}
-%define		ssnap		ooe680-%{bver}
-
-%define		specflags	-fno-strict-aliasing
+%define		_rel		1
+%define		upd			680
+%define		mws			OOE%{upd}
+%define		tag			%(echo %{mws} | tr A-Z a-z)-%{milestone}
+%define		_tag		%(echo %{tag} | tr - _)
+%define		milestone	m6
 
 Summary:	OpenOffice.org - powerful office suite
 Summary(pl):	OpenOffice.org - potê¿ny pakiet biurowy
 Name:		openoffice.org
-Version:	%{ver}%{bugfix}
-Release:	0.%{bver}%{?without_gnomevfs:.novfs}.%{_rel}
+Version:	2.1.0
+Release:	0.%{_tag}.%{_rel}
 Epoch:		1
 License:	GPL/LGPL
 Group:		X11/Applications
-#Source0:	http://go-ooo.org/packages/%{snap}/ooo-build-%{ooobver}.tar.gz
-Source0:	ooo-build-%{ooobver}.tar.gz
-# Source0-md5:	797f04099223b549ed1b4939dfc2a335
-Source1:	http://go-ooo.org/packages/%{snap}/%{ssnap}-core.tar.bz2
+Source0:	http://go-ooo.org/packages/OOE680/ooo-build-2.1.8.tar.gz
+# Source0-md5:	ec39e9bb30c5285afba50ae32dbe7af2
+Source1:	http://go-ooo.org/packages/%{mws}/%{tag}-core.tar.bz2
 # Source1-md5:	7dbf5f7ea4f469bb6c8b1d6037567431
-Source2:	http://go-ooo.org/packages/%{snap}/%{ssnap}-system.tar.bz2
+Source2:	http://go-ooo.org/packages/%{mws}/%{tag}-system.tar.bz2
 # Source2-md5:	7f645231043a776c07a22300c0a10848
-Source3:	http://go-ooo.org/packages/%{snap}/%{ssnap}-binfilter.tar.bz2
+Source3:	http://go-ooo.org/packages/%{mws}/%{tag}-binfilter.tar.bz2
 # Source3-md5:	22acf75656a2186d8a969ee5069ef193
-Source4:	http://go-ooo.org/packages/%{snap}/%{ssnap}-lang.tar.bz2
+Source4:	http://go-ooo.org/packages/%{mws}/%{tag}-lang.tar.bz2
 # Source4-md5:	9b1a1d5dafbde7cbc90da8b903e6b0bf
-Source10:	http://go-ooo.org/packages/%{snap2}/ooo_custom_images-13.tar.bz2
+Source10:	http://go-ooo.org/packages/SRC680/ooo_custom_images-13.tar.bz2
 # Source10-md5:	2480af7f890c8175c7f9e183a1b39ed2
-Source11:	http://go-ooo.org/packages/%{snap2}/ooo_crystal_images-6.tar.bz2
+Source11:	http://go-ooo.org/packages/SRC680/ooo_crystal_images-6.tar.bz2
 # Source11-md5:	586d0f26b3f79d89bbb5b25b874e3df6
-Source12:	http://go-ooo.org/packages/%{snap2}/extras-2.tar.bz2
+Source12:	http://go-ooo.org/packages/SRC680/extras-2.tar.bz2
 # Source12-md5:	733051ebeffae5232a2eb760162da020
 Source15:	http://go-ooo.org/packages/xt/xt-20051206-src-only.zip
 # Source15-md5:	0395e6e7da27c1cea7e1852286f6ccf9
-Source16:	http://go-ooo.org/packages/%{snap2}/lp_solve_5.5.tar.gz
+Source16:	http://go-ooo.org/packages/SRC680/lp_solve_5.5.tar.gz
 # Source16-md5:	2ff7b4c52f9c3937ebe3002798fbc479
-Source17:	http://go-ooo.org/packages/%{snap2}/biblio.tar.bz2
+Source17:	http://go-ooo.org/packages/SRC680/biblio.tar.bz2
 # Source17-md5:	1948e39a68f12bfa0b7eb309c14d940c
+Source18:	http://go-ooo.org/packages/%{mws}/cli_types.dll
+# Source18-md5:	3cdaf368e99caa3331130a5edf148490
+Source19:	http://go-ooo.org/packages/%{mws}/cli_types_bridgetest.dll
+# Source19-md5:	cadc605a6b0265b8167001b4788ff113
+# lib{wpd,wps} need might be a typo in download.in
+Source20:	http://go-ooo.org/packages/libwpd/libwpd-0.8.8.tar.gz
+# Source20-md5:	cd5997284f4ba1e8dde5d1e5869fc342
+Source21:	http://go-ooo.org/packages/SRC680/libwps-0.1.0~svn20070129.tar.gz
+# Source21-md5:	2e442485100f7e00685737513f853546
 Source50:	openabout_pld.png
 Source51:	openintro_pld.bmp
 # patches applied in prep section
@@ -118,22 +122,20 @@ Patch1:		%{name}-vendorname.patch
 Patch2:		%{name}-stl5_fix.patch
 Patch3:		%{name}-mdbtools_fix.diff
 Patch4:		%{name}-nolfs_hack.patch
-Patch5:		%{name}-no_fonts_dir_buildfix.patch
 Patch6:		%{name}-java16.patch
 Patch7:		%{name}-nodictinst.patch
+Patch8:		%{name}-73257.patch
 # patches applied by ooo-patching-system
 Patch100:	%{name}-STL-lib64.diff
 Patch101:	%{name}-64bit-inline.diff
 Patch102:	%{name}-build-pld-splash.diff
 Patch104:	%{name}-portaudio_v19.diff
-Patch106:	%{name}-seamonkey.diff
 Patch107:	%{name}-stl-amd64.patch
 Patch108:	%{name}-java6.patch
 Patch109:	%{name}-agg25.patch
 URL:		http://www.openoffice.org/
 BuildRequires:	/usr/bin/getopt
 BuildRequires:	STLport-devel >= 2:5.0.0
-BuildRequires:	XFree86-devel
 %{?with_system_agg:BuildRequires:	agg-devel}
 BuildRequires:	autoconf >= 2.51
 BuildRequires:	automake >= 1:1.9
@@ -192,7 +194,7 @@ BuildRequires:	sane-backends-devel
 BuildRequires:	sed >= 4.0
 BuildRequires:	startup-notification-devel >= 0.5
 BuildRequires:	tcsh
-BuildRequires:	unixODBC-devel
+BuildRequires:	unixODBC-devel >= 2.2.12-2
 BuildRequires:	unzip
 %{?with_system_xalan:BuildRequires:	xalan-j}
 %{?with_system_xerces:BuildRequires:	xerces-j}
@@ -227,6 +229,8 @@ Requires:	%{name}-xsltfilter = %{epoch}:%{version}-%{release}
 Requires:	fonts-TTF-OpenSymbol = %{epoch}:%{version}-%{release}
 ExclusiveArch:	%{ix86} %{?with_gcc4:%{x8664}} ppc sparc sparcv9
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
+
+%define		specflags	-fno-strict-aliasing
 
 # No ELF objects there to strip/chrpath (skips processing 17k files totaling 415M)
 %define		_noautostrip	.*%{_datadir}/%{name}/.*
@@ -2034,15 +2038,17 @@ bash-completion for OpenOffice.org.
 bashowe uzupe³nianie nazw dla Openoffice.org.
 
 %prep
-%setup -q -n ooo-build-%{ooobver}
-
+%setup -q -n %(basename %{SOURCE0} .tar.gz)
 install -d src
 cp %{SOURCE50} %{SOURCE51} src
 
 # sources, icons, KDE_icons
 ln -sf %{SOURCE1} %{SOURCE2} %{SOURCE3} %{SOURCE4} \
 	%{SOURCE10} %{SOURCE11} %{SOURCE12} \
-	%{SOURCE15} %{SOURCE16} %{SOURCE17} src
+	%{SOURCE15} %{SOURCE16} %{SOURCE17} \
+	%{SOURCE18} %{SOURCE19} \
+	%{SOURCE20} %{SOURCE21} \
+	src
 
 # fixes for the patch subsystem
 %patch0 -p1
@@ -2053,11 +2059,11 @@ ln -sf %{SOURCE1} %{SOURCE2} %{SOURCE3} %{SOURCE4} \
 %patch2 -p1
 %patch3 -p1
 %patch4 -p1
-%patch5 -p1
 %patch6 -p1
 %if %{with system_myspell}
 %patch7 -p1
 %endif
+%patch8 -p1
 
 # 64 bit related patches (not applied now)
 install %{PATCH100} patches/64bit
@@ -2076,7 +2082,7 @@ done
 
 echo "[ PLDOnly ]" >> patches/src680/apply
 # patches applied by ooo (extension .diff is required)
-for P in %{PATCH102} %{PATCH104} %{PATCH106} %{PATCH108} %{PATCH109}; do
+for P in %{PATCH102} %{PATCH104} %{PATCH108} %{PATCH109}; do
 	PATCHNAME=PLD-${P##*/%{name}-}
 	PATCHNAME=${PATCHNAME%.patch}.diff
 	install $P patches/src680/$PATCHNAME
@@ -2120,9 +2126,9 @@ export QTINC="%{_includedir}/qt"
 export QTLIB="%{_libdir}"
 
 %if %{with java}
-export JAVA_HOME=%{java_home}
+export JAVA_HOME="%{java_home}"
 export DB_JAR="%{_javadir}/db.jar"
-export ANT_HOME=%{_prefix}
+export ANT_HOME="%{_datadir}/ant"
 %endif
 
 export DEFAULT_TO_ENGLISH_FOR_PACKING=1
@@ -2206,6 +2212,7 @@ CONFOPTS="\
 %if %{with java}
 	--with-java \
 	--with-jdk-home=$JAVA_HOME \
+	--with-ant-home=$ANT_HOME \
 %else
 	--without-java \
 	--with-system-libxslt \
@@ -2243,7 +2250,7 @@ CONFOPTS="\
 	--disable-symbols \
 %endif
 	--with-num-cpus=$RPM_BUILD_NR_THREADS \
-	--with-tag=%{ssnap}
+	--with-tag=%{tag}
 "
 
 # build-ooo script will pickup these
@@ -2297,23 +2304,22 @@ if [ ! -f installed.stamp -o ! -d $RPM_BUILD_ROOT ]; then
 	%{__make} install \
 		DESTDIR=$RPM_BUILD_ROOT
 
-	install -d $RPM_BUILD_ROOT%{_sysconfdir}/%{name}
+	find $RPM_BUILD_ROOT -ls > ls.txt
 
 	# Add in the regcomp tool since some people need it for 3rd party add-ons
-	cp -f build/%{ssnap}/solver/%{subver}/unxlng*.pro/bin/regcomp{,.bin} $RPM_BUILD_ROOT%{_libdir}/%{name}/program/
+	cp -a build/%{tag}/solver/%{upd}/unxlng*.pro/bin/regcomp{,.bin} $RPM_BUILD_ROOT%{_libdir}/%{name}/program/
 
 	# fix python
 	sed -i -e 's|#!/bin/python|#!%{_bindir}/python|g' $RPM_BUILD_ROOT%{_libdir}/%{name}/program/*.py
 
-	# Really needed?
-	install -d $RPM_BUILD_ROOT%{_pixmapsdir}
-
-	rm -rf $RPM_BUILD_ROOT%{_libdir}/%{name}/share/kde
-	rm -rf $RPM_BUILD_ROOT%{_libdir}/%{name}/share/cde
-	rm -rf $RPM_BUILD_ROOT%{_libdir}/%{name}/share/gnome
-	rm -rf $RPM_BUILD_ROOT%{_libdir}/%{name}/share/icons
-	rm -rf $RPM_BUILD_ROOT%{_datadir}/applnk
-	rm -rf $RPM_BUILD_ROOT%{_datadir}/gnome
+	rm -r $RPM_BUILD_ROOT%{_libdir}/%{name}/share/kde
+	rm -r $RPM_BUILD_ROOT%{_libdir}/%{name}/share/cde
+	rm -r $RPM_BUILD_ROOT%{_libdir}/%{name}/share/gnome
+	rm -r $RPM_BUILD_ROOT%{_libdir}/%{name}/share/icons
+	rm -r $RPM_BUILD_ROOT%{_datadir}/applnk
+	rm -r $RPM_BUILD_ROOT%{_datadir}/gnome
+	# do we need those? large comparing to png
+	rm -r $RPM_BUILD_ROOT%{_datadir}/icons/hicolor/scalable/apps/*.svg
 
 	# Remove dictionaries (in separate pkg)
 	rm -vf $RPM_BUILD_ROOT%{_libdir}/%{name}/share/dict/ooo/*
@@ -2329,13 +2335,18 @@ if [ ! -f installed.stamp -o ! -d $RPM_BUILD_ROOT ]; then
 	ln -s %{_libdir}/%{name}/program/libnpsoplugin.so $RPM_BUILD_ROOT%{_browserpluginsdir}
 	%endif
 
+	# configs
+	install -d $RPM_BUILD_ROOT%{_sysconfdir}/%{name}
+	mv $RPM_BUILD_ROOT{%{_libdir}/%{name}/program,%{_sysconfdir}/%{name}}/sofficerc
+	ln -s %{_sysconfdir}/%{name}/sofficerc $RPM_BUILD_ROOT%{_libdir}/%{name}/program
+
 	# is below comment true?
 	# OOo should not install the Vera fonts, they are Required: now
 	rm -rf $RPM_BUILD_ROOT%{_libdir}/%{name}/share/fonts/truetype/*
 
 	# Copy fixed OpenSymbol to correct location
 	install -d $RPM_BUILD_ROOT%{_fontsdir}/TTF
-	install build/%{ssnap}/extras/source/truetype/symbol/opens___.ttf $RPM_BUILD_ROOT%{_fontsdir}/TTF
+	install build/%{tag}/extras/source/truetype/symbol/opens___.ttf $RPM_BUILD_ROOT%{_fontsdir}/TTF
 
 	# We don't need spadmin (gtk) or the setup application
 	rm -f $RPM_BUILD_ROOT%{_libdir}/%{name}/setup
@@ -2375,6 +2386,11 @@ if [ ! -f installed.stamp -o ! -d $RPM_BUILD_ROOT ]; then
 	rm -rf $RPM_BUILD_ROOT%{_libdir}/%{name}/share/Scripts/javascript
 	rm -rf $RPM_BUILD_ROOT%{_libdir}/%{name}/share/xslt
 	%endif
+
+	# put share to %{_datadir} so we're able to produce noarch packages
+	install -d $RPM_BUILD_ROOT%{_datadir}/%{name}
+	mv $RPM_BUILD_ROOT%{_libdir}/%{name}/share $RPM_BUILD_ROOT%{_datadir}/%{name}
+	ln -s ../../share/%{name}/share $RPM_BUILD_ROOT%{_libdir}/%{name}/share
 
 	touch installed.stamp
 fi
@@ -2451,10 +2467,6 @@ for lang in $langlist; do
 	find_lang $lang
 done
 
-# put share to %{_datadir} so we're able to produce noarch packages
-install -d $RPM_BUILD_ROOT%{_datadir}/%{name}
-mv $RPM_BUILD_ROOT%{_libdir}/%{name}/share $RPM_BUILD_ROOT%{_datadir}/%{name}
-ln -s ../../share/%{name}/share $RPM_BUILD_ROOT%{_libdir}/%{name}/share
 %{__sed} -i -e 's,%{_libdir}/%{name}/share,%{_datadir}/%{name}/share,' *.lang
 
 %clean
@@ -2547,7 +2559,9 @@ fi
 %doc %{_libdir}/%{name}/LICENSE*
 %doc %{_libdir}/%{name}/*README*
 
-%dir %{_sysconfdir}/openoffice.org
+%dir %{_sysconfdir}/%{name}
+%config(noreplace) %verify(not md5 mtime size) %{_sysconfdir}/%{name}/sofficerc
+
 %dir %{_libdir}/%{name}
 %if %{with java}
 %dir %{_libdir}/%{name}/help/en
@@ -3008,6 +3022,9 @@ fi
 
 %{_desktopdir}/template.desktop
 
+%{_iconsdir}/hicolor/*/apps/ooo-gulls.png
+%{_iconsdir}/hicolor/*/apps/ooo-printeradmin.png
+%{_iconsdir}/hicolor/*/apps/ooo-template.png
 %{_pixmapsdir}/ooo-gulls.png
 %{_pixmapsdir}/ooo-template.png
 
@@ -3216,6 +3233,7 @@ fi
 %attr(755,root,root) %{_libdir}/%{name}/program/libmcnttype.so
 %attr(755,root,root) %{_libdir}/%{name}/program/libmdb680*.so
 %attr(755,root,root) %{_libdir}/%{name}/program/libmdbimpl680*.so
+%attr(755,root,root) %{_libdir}/%{name}/program/libmsworks680*.so
 %attr(755,root,root) %{_libdir}/%{name}/program/libmysql2.so
 %attr(755,root,root) %{_libdir}/%{name}/program/libodbc2.so
 %attr(755,root,root) %{_libdir}/%{name}/program/libodbcbase2.so
@@ -3384,6 +3402,7 @@ fi
 %attr(755,root,root) %{_libdir}/%{name}/program/sbase
 %{_mandir}/man1/oobase.1
 %{_desktopdir}/base.desktop
+%{_iconsdir}/hicolor/*/apps/ooo-base.png
 %{_pixmapsdir}/ooo-base.png
 %{_libdir}/%{name}/program/resource/cnr680en-US.res
 %if %{with java}
@@ -3413,6 +3432,7 @@ fi
 %attr(755,root,root) %{_libdir}/%{name}/program/scalc
 %{_mandir}/man1/oocalc.1
 %{_desktopdir}/calc.desktop
+%{_iconsdir}/hicolor/*/apps/ooo-calc.png
 %{_pixmapsdir}/ooo-calc.png
 %if %{with java}
 %{_libdir}/%{name}/help/en/scalc.*
@@ -3438,6 +3458,7 @@ fi
 %attr(755,root,root) %{_libdir}/%{name}/program/sdraw
 %{_mandir}/man1/oodraw.1
 %{_desktopdir}/draw.desktop
+%{_iconsdir}/hicolor/*/apps/ooo-draw.png
 %{_pixmapsdir}/ooo-draw.png
 %if %{with java}
 %{_libdir}/%{name}/help/en/sdraw.*
@@ -3465,6 +3486,7 @@ fi
 %attr(755,root,root) %{_libdir}/%{name}/program/swriter
 %{_mandir}/man1/oowriter.1
 %{_desktopdir}/writer.desktop
+%{_iconsdir}/hicolor/*/apps/ooo-writer.png
 %{_pixmapsdir}/ooo-writer.png
 %if %{with java}
 %{_libdir}/%{name}/help/en/swriter.*
@@ -3497,6 +3519,7 @@ fi
 %attr(755,root,root) %{_libdir}/%{name}/program/simpress
 %{_mandir}/man1/ooimpress.1
 %{_desktopdir}/impress.desktop
+%{_iconsdir}/hicolor/*/apps/ooo-impress.png
 %{_pixmapsdir}/ooo-impress.png
 %if %{with java}
 %{_libdir}/%{name}/help/en/simpress.*
@@ -3520,6 +3543,7 @@ fi
 %attr(755,root,root) %{_libdir}/%{name}/program/smath
 %{_mandir}/man1/oomath.1
 %{_desktopdir}/math.desktop
+%{_iconsdir}/hicolor/*/apps/ooo-math.png
 %{_pixmapsdir}/ooo-math.png
 %if %{with java}
 %{_libdir}/%{name}/help/en/smath.*
@@ -3541,6 +3565,7 @@ fi
 %{_datadir}/%{name}/share/config/soffice.cfg/modules/sweb
 %{_mandir}/man1/ooweb.1
 %{_desktopdir}/web.desktop
+%{_iconsdir}/hicolor/*/apps/ooo-web.png
 %{_pixmapsdir}/ooo-web.png
 
 %files graphicfilter
