@@ -37,6 +37,7 @@
 %bcond_with	mono		# enable compilation of mono bindings
 %bcond_without	mozilla		# without mozilla components
 %bcond_without	i18n		# do not create i18n packages
+%bcond_with	gcc4		# build with gcc4
 
 %bcond_without	system_beanshell
 %bcond_without	system_db		# without system (i.e. with internal) Berkeley DB
@@ -163,7 +164,8 @@ BuildRequires:	libbonobo-devel >= 2.0
 BuildRequires:	libicu-devel >= 3.4
 BuildRequires:	libjpeg-devel
 BuildRequires:	libsndfile-devel
-BuildRequires:	libstdc++-devel >= 5:3.2.1
+%{!?with_gcc4:BuildRequires:	libstdc++-devel >= 5:3.2.1}
+%{?with_gcc4:BuildRequires:	libstdc++-devel >= 5:4.1.1}
 BuildRequires:	libwpd-devel >= 0.8.6
 BuildRequires:	libxml2-devel >= 2.0
 %{?with_system_mdbtools:BuildRequires:	mdbtools-devel >= 0.6}
@@ -223,12 +225,19 @@ Requires:	%{name}-web = %{epoch}:%{version}-%{release}
 Requires:	%{name}-writer = %{epoch}:%{version}-%{release}
 Requires:	%{name}-xsltfilter = %{epoch}:%{version}-%{release}
 Requires:	fonts-TTF-OpenSymbol = %{epoch}:%{version}-%{release}
-ExclusiveArch:	%{ix86} ppc sparc sparcv9
+ExclusiveArch:	%{ix86} %{?with_gcc4:%{x8664}} ppc sparc sparcv9
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 # No ELF objects there to strip/chrpath (skips processing 17k files totaling 415M)
 %define		_noautostrip	.*%{_datadir}/%{name}/.*
 %define		_noautochrpath	.*%{_datadir}/%{name}/.*
+
+%if %{with gcc4}
+# add suffix, but allow ccache, etc in ~/.rpmmacros
+%{expand:%%define	__cc	%(echo '%__cc' | sed -e 's,-gcc,-gcc4,')}
+%{expand:%%define	__cxx	%(echo '%__cxx' | sed -e 's,-g++,-g++4,')}
+%{expand:%%define	__cpp	%(echo '%__cpp' | sed -e 's,-gcc,-gcc4,')}
+%endif
 
 %description
 OpenOffice.org is an open-source project sponsored by Sun Microsystems
@@ -2081,6 +2090,18 @@ if [ ! -f /proc/cpuinfo ]; then
 	exit 1
 fi
 
+# this has to be here, it work if placed elsewhere in spec
+%if %{with gcc4}
+# add suffix, but allow ccache, etc in ~/.rpmmacros
+%{expand:%%define	__cc	%(echo '%__cc' | sed -e 's,-gcc,-gcc4,')}
+%{expand:%%define	__cxx	%(echo '%__cxx' | sed -e 's,-g++,-g++4,')}
+%{expand:%%define	__cpp	%(echo '%__cpp' | sed -e 's,-gcc,-gcc4,')}
+%endif
+
+export CC="%{__cc}"
+export CXX="%{__cxx}"
+export CPP="%{__cpp}"
+
 %{__aclocal}
 %{__autoconf}
 
@@ -2090,8 +2111,6 @@ DISTRO="PLD64"
 DISTRO="PLD"
 %endif
 
-export CC="%{__cc}"
-export CXX="%{__cxx}"
 export ENVCFLAGS="%{rpmcflags}"
 # disable STLport 5.1 containers extension, doesn't work with map indexed by enum
 export ENVCFLAGSCXX="%{rpmcflags} -fpermissive -D_STLP_NO_CONTAINERS_EXTENSION"
@@ -2244,6 +2263,9 @@ fi
 
 # main build
 %configure \
+	CC="$CC" \
+	CXX="$CXX" \
+	CPP="$CPP" \
 	$CONFOPTS
 
 # this limits processing some files but doesn't limit parallel build
