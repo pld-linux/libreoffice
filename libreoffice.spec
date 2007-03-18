@@ -2090,7 +2090,7 @@ if [ ! -f /proc/cpuinfo ]; then
 	exit 1
 fi
 
-# this has to be here, it work if placed elsewhere in spec
+# this has to be here, it won't work if placed elsewhere in spec
 %if %{with gcc4}
 # add suffix, but allow ccache, etc in ~/.rpmmacros
 %{expand:%%define	__cc	%(echo '%__cc' | sed -e 's,-gcc,-gcc4,')}
