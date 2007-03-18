@@ -2332,7 +2332,6 @@ if [ ! -f installed.stamp -o ! -d $RPM_BUILD_ROOT ]; then
 
 	%if %{with mozilla}
 	install -d $RPM_BUILD_ROOT%{_browserpluginsdir}
-	chmod +x $RPM_BUILD_ROOT%{_libdir}/%{name}/program/libnpsoplugin.so
 	ln -s %{_libdir}/%{name}/program/libnpsoplugin.so $RPM_BUILD_ROOT%{_browserpluginsdir}
 	%endif
 
@@ -3632,9 +3631,9 @@ fi
 %if %{with mozilla}
 %files -n browser-plugin-%{name}
 %defattr(644,root,root,755)
-%attr(755,root,root) %{_libdir}/%{name}/program/nsplugin
 %attr(755,root,root) %{_browserpluginsdir}/libnpsoplugin.so
-%{_libdir}/%{name}/program/libnpsoplugin.so
+%attr(755,root,root) %{_libdir}/%{name}/program/nsplugin
+%attr(755,root,root) %{_libdir}/%{name}/program/libnpsoplugin.so
 %endif
 
 %if %{with i18n}
