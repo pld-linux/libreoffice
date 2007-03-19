@@ -1,9 +1,0 @@
-[Desktop Entry]
-Encoding=UTF-8
-Name=OpenOffice.org Draw
-Terminal=false
-Icon=ooo_draw.png
-Exec=oodraw
-Type=Application
-MimeType=application/vnd.stardivision.draw;application/vnd.sun.xml.draw;application/vnd.stardivision.draw.template;application/vnd.sun.xml.draw.template
-Categories=Graphics;

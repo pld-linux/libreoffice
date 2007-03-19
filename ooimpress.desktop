@@ -1,9 +1,0 @@
-[Desktop Entry]
-Encoding=UTF-8
-Name=OpenOffice.org Impress
-Terminal=false
-Icon=ooo_impress.png
-Exec=ooimpress
-Type=Application
-MimeType=application/mspowerpoint;application/vnd.ms-powerpoint;application/vnd.oasis.opendocument.presentation;application/vnd.oasis.opendocument.presentation-template;application/vnd.stardivision.impress;application/vnd.stardivision.impress.template;application/vnd.sun.xml.impress;application/vnd.sun.xml.impress.template;application/x-mspowerpoint
-Categories=Office;Presentation;
