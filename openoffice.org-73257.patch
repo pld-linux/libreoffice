@@ -1,0 +1,123 @@
+undo this patch, breaks build on i686
+
+Making: ../../../unxlngi4.pro/slo/sdtreelb.obj
+ccache i686-pld-linux-g++ -fmessage-length=0 -c -O1   -I.  -I../../../unxlngi4.pro/inc/dlg -I/home/glen/rpm/pld/BUILD/ooo-build-2.1.8/build/ooe680-m6/solver/680/unxlngi4.pro/inc/offuh -I../inc -I../../../inc/pch -I../../../inc -I../../../unx/inc -I../../../unxlngi4.pro/inc -I. -I/home/glen/rpm/pld/BUILD/ooo-build-2.1.8/build/ooe680-m6/solver/680/unxlngi4.pro/inc/stl -I/home/glen/rpm/pld/BUILD/ooo-build-2.1.8/build/ooe680-m6/solver/680/unxlngi4.pro/inc/external -I/home/glen/rpm/pld/BUILD/ooo-build-2.1.8/build/ooe680-m6/solver/680/unxlngi4.pro/inc -I/home/glen/rpm/pld/BUILD/ooo-build-2.1.8/build/ooe680-m6/solenv/unxlngi4/inc -I/home/glen/rpm/pld/BUILD/ooo-build-2.1.8/build/ooe680-m6/solenv/inc -I/home/glen/rpm/pld/BUILD/ooo-build-2.1.8/build/ooe680-m6/res -I/usr/stlport -I/usr/include/stlport -I/usr/include/stlport -I/home/glen/rpm/pld/BUILD/ooo-build-2.1.8/build/ooe680-m6/solenv/inc/Xp31 -I/usr/lib/jvm/java/include -I/usr/lib/jvm/java/include/linux -I/usr/lib/jvm/java/include/native_threads/include -I/usr/X11R6/include     -I/home/glen/rpm/pld/BUILD/ooo-build-2.1.8/build/ooe680-m6/solver/680/unxlngi4.pro/inc/offuh -I. -I../../../res -I. -pipe -mcpu=pentiumpro -include preinclude.h -fexceptions -fno-enforce-eh-specs -Wuninitialized -Wno-ctor-dtor-privacy   -fpic -DLINUX -DUNX -DVCL -DGCC -DC300 -DINTEL -DCVER=C300 -DNPTL -DGLIBC=2 -DX86 -D_PTHREADS -D_REENTRANT -DNEW_SOLAR -D_USE_NAMESPACE=1 -DSTLPORT_VERSION=500 -D__DMAKE -DUNIX -DCPPU_ENV=gcc3 -DGXX_INCLUDE_PATH=/usr/include/c++/3.3.6 -DSUPD=680 -DPRODUCT -DNDEBUG -DPRODUCT_FULL -DOSL_DEBUG_LEVEL=0 -DOPTIMIZE -DEXCEPTIONS_ON -DGSTREAMER -DCUI -DSOLAR_JAVA -DOOE680=OOE680   -DSD_DLLIMPLEMENTATION -DSHAREDLIB -D_DLL_  -DMULTITHREAD  -o ../../../unxlngi4.pro/slo/sdtreelb.o /home/glen/rpm/pld/BUILD/ooo-build-2.1.8/build/ooe680-m6/sd/source/ui/dlg/sdtreelb.cxx
+/home/glen/rpm/pld/BUILD/ooo-build-2.1.8/build/ooe680-m6/sd/source/ui/dlg/sdtreelb.cxx: In member function `virtual sal_Int64 SdPageObjsTLB::SdPageObjsTransferable::getSomething(const com::sun::star::uno::Sequence<sal_Int8>&)':
+/home/glen/rpm/pld/BUILD/ooo-build-2.1.8/build/ooe680-m6/sd/source/ui/dlg/sdtreelb.cxx:151: warning: cast from pointer to integer of different size
+/home/glen/rpm/pld/BUILD/ooo-build-2.1.8/build/ooe680-m6/sd/source/ui/dlg/sdtreelb.cxx: In static member function `static SdPageObjsTLB::SdPageObjsTransferable* SdPageObjsTLB::SdPageObjsTransferable::getImplementation(const com::sun::star::uno::Reference<com::sun::star::uno::XInterface>&)':
+/home/glen/rpm/pld/BUILD/ooo-build-2.1.8/build/ooe680-m6/sd/source/ui/dlg/sdtreelb.cxx:187: warning: cast to pointer from integer of different size
+/home/glen/rpm/pld/BUILD/ooo-build-2.1.8/build/ooe680-m6/sd/source/ui/dlg/sdtreelb.cxx: In member function `void SdPageObjsTLB::Fill(const SdDrawDocument*, unsigned char, const String&)':
+/home/glen/rpm/pld/BUILD/ooo-build-2.1.8/build/ooe680-m6/sd/source/ui/dlg/sdtreelb.cxx:352: error: variable declaration is not allowed here
+/home/glen/rpm/pld/BUILD/ooo-build-2.1.8/build/ooe680-m6/sd/source/ui/dlg/sdtreelb.cxx:353: error: variable declaration is not allowed here
+/home/glen/rpm/pld/BUILD/ooo-build-2.1.8/build/ooe680-m6/sd/source/ui/dlg/sdtreelb.cxx:354: error: variable declaration is not allowed here
+/home/glen/rpm/pld/BUILD/ooo-build-2.1.8/build/ooe680-m6/sd/source/ui/dlg/sdtreelb.cxx:355: error: variable declaration is not allowed here
+/home/glen/rpm/pld/BUILD/ooo-build-2.1.8/build/ooe680-m6/sd/source/ui/dlg/sdtreelb.cxx:356: error: variable declaration is not allowed here
+/home/glen/rpm/pld/BUILD/ooo-build-2.1.8/build/ooe680-m6/sd/source/ui/dlg/sdtreelb.cxx:358: error: variable declaration is not allowed here
+/home/glen/rpm/pld/BUILD/ooo-build-2.1.8/build/ooe680-m6/sd/source/ui/dlg/sdtreelb.cxx:359: error: variable declaration is not allowed here
+/home/glen/rpm/pld/BUILD/ooo-build-2.1.8/build/ooe680-m6/sd/source/ui/dlg/sdtreelb.cxx:360: error: variable declaration is not allowed here
+/home/glen/rpm/pld/BUILD/ooo-build-2.1.8/build/ooe680-m6/sd/source/ui/dlg/sdtreelb.cxx:361: error: variable declaration is not allowed here
+/home/glen/rpm/pld/BUILD/ooo-build-2.1.8/build/ooe680-m6/sd/source/ui/dlg/sdtreelb.cxx:362: error: variable declaration is not allowed here
+/home/glen/rpm/pld/BUILD/ooo-build-2.1.8/build/ooe680-m6/sd/source/ui/dlg/sdtreelb.cxx:385: error: no matching function for call to `SdPageObjsTLB::InsertEntry(const String&, Image (&)(), Image (&)(), int, int, ULONG, void*)'
+/home/glen/rpm/pld/BUILD/ooo-build-2.1.8/build/ooe680-m6/solver/680/unxlngi4.pro/inc/svtools/svtreebx.hxx:220: error: candidates are: virtual SvLBoxEntry* SvTreeListBox::InsertEntry(const String&, SvLBoxEntry*, unsigned char, long unsigned int, void*)
+/home/glen/rpm/pld/BUILD/ooo-build-2.1.8/build/ooe680-m6/solver/680/unxlngi4.pro/inc/svtools/svtreebx.hxx:227: error:                 virtual SvLBoxEntry* SvTreeListBox::InsertEntry(const String&, const Image&, const Image&, SvLBoxEntry*, unsigned char, long unsigned int, void*)
+/home/glen/rpm/pld/BUILD/ooo-build-2.1.8/build/ooe680-m6/sd/source/ui/dlg/sdtreelb.cxx:387: error: no matching function for call to `SdPageObjsTLB::SetExpandedEntryBmp(SvLBoxEntry*&, Image (&)(), BmpColorMode)'
+/home/glen/rpm/pld/BUILD/ooo-build-2.1.8/build/ooe680-m6/solver/680/unxlngi4.pro/inc/svtools/svtreebx.hxx:242: error: candidates are: void SvTreeListBox::SetExpandedEntryBmp(SvLBoxEntry*, const Image&, BmpColorMode)
+/home/glen/rpm/pld/BUILD/ooo-build-2.1.8/build/ooe680-m6/sd/source/ui/dlg/sdtreelb.cxx:388: error: no matching function for call to `SdPageObjsTLB::SetCollapsedEntryBmp(SvLBoxEntry*&, Image (&)(), BmpColorMode)'
+/home/glen/rpm/pld/BUILD/ooo-build-2.1.8/build/ooe680-m6/solver/680/unxlngi4.pro/inc/svtools/svtreebx.hxx:243: error: candidates are: void SvTreeListBox::SetCollapsedEntryBmp(SvLBoxEntry*, const Image&, BmpColorMode)
+/home/glen/rpm/pld/BUILD/ooo-build-2.1.8/build/ooe680-m6/sd/source/ui/dlg/sdtreelb.cxx:414: error: no matching function for call to `SdPageObjsTLB::InsertEntry(String&, Image (&)(), Image (&)(), SvLBoxEntry*&)'
+/home/glen/rpm/pld/BUILD/ooo-build-2.1.8/build/ooe680-m6/solver/680/unxlngi4.pro/inc/svtools/svtreebx.hxx:220: error: candidates are: virtual SvLBoxEntry* SvTreeListBox::InsertEntry(const String&, SvLBoxEntry*, unsigned char, long unsigned int, void*)
+/home/glen/rpm/pld/BUILD/ooo-build-2.1.8/build/ooe680-m6/solver/680/unxlngi4.pro/inc/svtools/svtreebx.hxx:227: error:                 virtual SvLBoxEntry* SvTreeListBox::InsertEntry(const String&, const Image&, const Image&, SvLBoxEntry*, unsigned char, long unsigned int, void*)
+/home/glen/rpm/pld/BUILD/ooo-build-2.1.8/build/ooe680-m6/sd/source/ui/dlg/sdtreelb.cxx:416: error: no matching function for call to `SdPageObjsTLB::SetExpandedEntryBmp(SvLBoxEntry*&, Image (&)(), BmpColorMode)'
+/home/glen/rpm/pld/BUILD/ooo-build-2.1.8/build/ooe680-m6/solver/680/unxlngi4.pro/inc/svtools/svtreebx.hxx:242: error: candidates are: void SvTreeListBox::SetExpandedEntryBmp(SvLBoxEntry*, const Image&, BmpColorMode)
+/home/glen/rpm/pld/BUILD/ooo-build-2.1.8/build/ooe680-m6/sd/source/ui/dlg/sdtreelb.cxx:417: error: no matching function for call to `SdPageObjsTLB::SetCollapsedEntryBmp(SvLBoxEntry*&, Image (&)(), BmpColorMode)'
+/home/glen/rpm/pld/BUILD/ooo-build-2.1.8/build/ooe680-m6/solver/680/unxlngi4.pro/inc/svtools/svtreebx.hxx:243: error: candidates are: void SvTreeListBox::SetCollapsedEntryBmp(SvLBoxEntry*, const Image&, BmpColorMode)
+/home/glen/rpm/pld/BUILD/ooo-build-2.1.8/build/ooe680-m6/sd/source/ui/dlg/sdtreelb.cxx:423: error: no matching function for call to `SdPageObjsTLB::SetExpandedEntryBmp(SvLBoxEntry*&, Image (&)())'
+/home/glen/rpm/pld/BUILD/ooo-build-2.1.8/build/ooe680-m6/solver/680/unxlngi4.pro/inc/svtools/svtreebx.hxx:242: error: candidates are: void SvTreeListBox::SetExpandedEntryBmp(SvLBoxEntry*, const Image&, BmpColorMode)
+/home/glen/rpm/pld/BUILD/ooo-build-2.1.8/build/ooe680-m6/sd/source/ui/dlg/sdtreelb.cxx:424: error: no matching function for call to `SdPageObjsTLB::SetCollapsedEntryBmp(SvLBoxEntry*&, Image (&)())'
+/home/glen/rpm/pld/BUILD/ooo-build-2.1.8/build/ooe680-m6/solver/680/unxlngi4.pro/inc/svtools/svtreebx.hxx:243: error: candidates are: void SvTreeListBox::SetCollapsedEntryBmp(SvLBoxEntry*, const Image&, BmpColorMode)
+/home/glen/rpm/pld/BUILD/ooo-build-2.1.8/build/ooe680-m6/sd/source/ui/dlg/sdtreelb.cxx:425: error: no matching function for call to `SdPageObjsTLB::SetExpandedEntryBmp(SvLBoxEntry*&, Image (&)(), BmpColorMode)'
+/home/glen/rpm/pld/BUILD/ooo-build-2.1.8/build/ooe680-m6/solver/680/unxlngi4.pro/inc/svtools/svtreebx.hxx:242: error: candidates are: void SvTreeListBox::SetExpandedEntryBmp(SvLBoxEntry*, const Image&, BmpColorMode)
+/home/glen/rpm/pld/BUILD/ooo-build-2.1.8/build/ooe680-m6/sd/source/ui/dlg/sdtreelb.cxx:426: error: no matching function for call to `SdPageObjsTLB::SetCollapsedEntryBmp(SvLBoxEntry*&, Image (&)(), BmpColorMode)'
+/home/glen/rpm/pld/BUILD/ooo-build-2.1.8/build/ooe680-m6/solver/680/unxlngi4.pro/inc/svtools/svtreebx.hxx:243: error: candidates are: void SvTreeListBox::SetCollapsedEntryBmp(SvLBoxEntry*, const Image&, BmpColorMode)
+/home/glen/rpm/pld/BUILD/ooo-build-2.1.8/build/ooe680-m6/sd/source/ui/dlg/sdtreelb.cxx:447: error: no matching function for call to `SdPageObjsTLB::InsertEntry(const String&, Image (&)(), Image (&)(), int, int, ULONG, void*)'
+/home/glen/rpm/pld/BUILD/ooo-build-2.1.8/build/ooe680-m6/solver/680/unxlngi4.pro/inc/svtools/svtreebx.hxx:220: error: candidates are: virtual SvLBoxEntry* SvTreeListBox::InsertEntry(const String&, SvLBoxEntry*, unsigned char, long unsigned int, void*)
+/home/glen/rpm/pld/BUILD/ooo-build-2.1.8/build/ooe680-m6/solver/680/unxlngi4.pro/inc/svtools/svtreebx.hxx:227: error:                 virtual SvLBoxEntry* SvTreeListBox::InsertEntry(const String&, const Image&, const Image&, SvLBoxEntry*, unsigned char, long unsigned int, void*)
+/home/glen/rpm/pld/BUILD/ooo-build-2.1.8/build/ooe680-m6/sd/source/ui/dlg/sdtreelb.cxx:449: error: no matching function for call to `SdPageObjsTLB::SetExpandedEntryBmp(SvLBoxEntry*&, Image (&)(), BmpColorMode)'
+/home/glen/rpm/pld/BUILD/ooo-build-2.1.8/build/ooe680-m6/solver/680/unxlngi4.pro/inc/svtools/svtreebx.hxx:242: error: candidates are: void SvTreeListBox::SetExpandedEntryBmp(SvLBoxEntry*, const Image&, BmpColorMode)
+/home/glen/rpm/pld/BUILD/ooo-build-2.1.8/build/ooe680-m6/sd/source/ui/dlg/sdtreelb.cxx:450: error: no matching function for call to `SdPageObjsTLB::SetCollapsedEntryBmp(SvLBoxEntry*&, Image (&)(), BmpColorMode)'
+/home/glen/rpm/pld/BUILD/ooo-build-2.1.8/build/ooe680-m6/solver/680/unxlngi4.pro/inc/svtools/svtreebx.hxx:243: error: candidates are: void SvTreeListBox::SetCollapsedEntryBmp(SvLBoxEntry*, const Image&, BmpColorMode)
+/home/glen/rpm/pld/BUILD/ooo-build-2.1.8/build/ooe680-m6/sd/source/ui/dlg/sdtreelb.cxx:476: error: no matching function for call to `SdPageObjsTLB::InsertEntry(String&, Image (&)(), Image (&)(), SvLBoxEntry*&)'
+/home/glen/rpm/pld/BUILD/ooo-build-2.1.8/build/ooe680-m6/solver/680/unxlngi4.pro/inc/svtools/svtreebx.hxx:220: error: candidates are: virtual SvLBoxEntry* SvTreeListBox::InsertEntry(const String&, SvLBoxEntry*, unsigned char, long unsigned int, void*)
+/home/glen/rpm/pld/BUILD/ooo-build-2.1.8/build/ooe680-m6/solver/680/unxlngi4.pro/inc/svtools/svtreebx.hxx:227: error:                 virtual SvLBoxEntry* SvTreeListBox::InsertEntry(const String&, const Image&, const Image&, SvLBoxEntry*, unsigned char, long unsigned int, void*)
+/home/glen/rpm/pld/BUILD/ooo-build-2.1.8/build/ooe680-m6/sd/source/ui/dlg/sdtreelb.cxx:478: error: no matching function for call to `SdPageObjsTLB::SetExpandedEntryBmp(SvLBoxEntry*&, Image (&)(), BmpColorMode)'
+/home/glen/rpm/pld/BUILD/ooo-build-2.1.8/build/ooe680-m6/solver/680/unxlngi4.pro/inc/svtools/svtreebx.hxx:242: error: candidates are: void SvTreeListBox::SetExpandedEntryBmp(SvLBoxEntry*, const Image&, BmpColorMode)
+/home/glen/rpm/pld/BUILD/ooo-build-2.1.8/build/ooe680-m6/sd/source/ui/dlg/sdtreelb.cxx:479: error: no matching function for call to `SdPageObjsTLB::SetCollapsedEntryBmp(SvLBoxEntry*&, Image (&)(), BmpColorMode)'
+/home/glen/rpm/pld/BUILD/ooo-build-2.1.8/build/ooe680-m6/solver/680/unxlngi4.pro/inc/svtools/svtreebx.hxx:243: error: candidates are: void SvTreeListBox::SetCollapsedEntryBmp(SvLBoxEntry*, const Image&, BmpColorMode)
+/home/glen/rpm/pld/BUILD/ooo-build-2.1.8/build/ooe680-m6/sd/source/ui/dlg/sdtreelb.cxx:485: error: no matching function for call to `SdPageObjsTLB::SetExpandedEntryBmp(SvLBoxEntry*&, Image (&)())'
+/home/glen/rpm/pld/BUILD/ooo-build-2.1.8/build/ooe680-m6/solver/680/unxlngi4.pro/inc/svtools/svtreebx.hxx:242: error: candidates are: void SvTreeListBox::SetExpandedEntryBmp(SvLBoxEntry*, const Image&, BmpColorMode)
+/home/glen/rpm/pld/BUILD/ooo-build-2.1.8/build/ooe680-m6/sd/source/ui/dlg/sdtreelb.cxx:486: error: no matching function for call to `SdPageObjsTLB::SetCollapsedEntryBmp(SvLBoxEntry*&, Image (&)())'
+/home/glen/rpm/pld/BUILD/ooo-build-2.1.8/build/ooe680-m6/solver/680/unxlngi4.pro/inc/svtools/svtreebx.hxx:243: error: candidates are: void SvTreeListBox::SetCollapsedEntryBmp(SvLBoxEntry*, const Image&, BmpColorMode)
+/home/glen/rpm/pld/BUILD/ooo-build-2.1.8/build/ooe680-m6/sd/source/ui/dlg/sdtreelb.cxx:487: error: no matching function for call to `SdPageObjsTLB::SetExpandedEntryBmp(SvLBoxEntry*&, Image (&)(), BmpColorMode)'
+/home/glen/rpm/pld/BUILD/ooo-build-2.1.8/build/ooe680-m6/solver/680/unxlngi4.pro/inc/svtools/svtreebx.hxx:242: error: candidates are: void SvTreeListBox::SetExpandedEntryBmp(SvLBoxEntry*, const Image&, BmpColorMode)
+/home/glen/rpm/pld/BUILD/ooo-build-2.1.8/build/ooe680-m6/sd/source/ui/dlg/sdtreelb.cxx:488: error: no matching function for call to `SdPageObjsTLB::SetCollapsedEntryBmp(SvLBoxEntry*&, Image (&)(), BmpColorMode)'
+/home/glen/rpm/pld/BUILD/ooo-build-2.1.8/build/ooe680-m6/solver/680/unxlngi4.pro/inc/svtools/svtreebx.hxx:243: error: candidates are: void SvTreeListBox::SetCollapsedEntryBmp(SvLBoxEntry*, const Image&, BmpColorMode)
+/home/glen/rpm/pld/BUILD/ooo-build-2.1.8/build/ooe680-m6/sd/source/ui/dlg/sdtreelb.cxx: In member function `void SdPageObjsTLB::Fill(const SdDrawDocument*, SfxMedium*, const String&)':
+/home/glen/rpm/pld/BUILD/ooo-build-2.1.8/build/ooe680-m6/sd/source/ui/dlg/sdtreelb.cxx:517: error: variable declaration is not allowed here
+/home/glen/rpm/pld/BUILD/ooo-build-2.1.8/build/ooe680-m6/sd/source/ui/dlg/sdtreelb.cxx:518: error: variable declaration is not allowed here
+/home/glen/rpm/pld/BUILD/ooo-build-2.1.8/build/ooe680-m6/sd/source/ui/dlg/sdtreelb.cxx:519: error: variable declaration is not allowed here
+/home/glen/rpm/pld/BUILD/ooo-build-2.1.8/build/ooe680-m6/sd/source/ui/dlg/sdtreelb.cxx:520: error: variable declaration is not allowed here
+/home/glen/rpm/pld/BUILD/ooo-build-2.1.8/build/ooe680-m6/sd/source/ui/dlg/sdtreelb.cxx:529: error: no matching function for call to `SdPageObjsTLB::InsertEntry(String&, Image (&)(), Image (&)(), NULL, int, ULONG, void*)'
+/home/glen/rpm/pld/BUILD/ooo-build-2.1.8/build/ooe680-m6/solver/680/unxlngi4.pro/inc/svtools/svtreebx.hxx:220: error: candidates are: virtual SvLBoxEntry* SvTreeListBox::InsertEntry(const String&, SvLBoxEntry*, unsigned char, long unsigned int, void*)
+/home/glen/rpm/pld/BUILD/ooo-build-2.1.8/build/ooe680-m6/solver/680/unxlngi4.pro/inc/svtools/svtreebx.hxx:227: error:                 virtual SvLBoxEntry* SvTreeListBox::InsertEntry(const String&, const Image&, const Image&, SvLBoxEntry*, unsigned char, long unsigned int, void*)
+/home/glen/rpm/pld/BUILD/ooo-build-2.1.8/build/ooe680-m6/sd/source/ui/dlg/sdtreelb.cxx:531: error: no matching function for call to `SdPageObjsTLB::SetExpandedEntryBmp(SvLBoxEntry*&, Image (&)(), BmpColorMode)'
+/home/glen/rpm/pld/BUILD/ooo-build-2.1.8/build/ooe680-m6/solver/680/unxlngi4.pro/inc/svtools/svtreebx.hxx:242: error: candidates are: void SvTreeListBox::SetExpandedEntryBmp(SvLBoxEntry*, const Image&, BmpColorMode)
+/home/glen/rpm/pld/BUILD/ooo-build-2.1.8/build/ooe680-m6/sd/source/ui/dlg/sdtreelb.cxx:532: error: no matching function for call to `SdPageObjsTLB::SetCollapsedEntryBmp(SvLBoxEntry*&, Image (&)(), BmpColorMode)'
+/home/glen/rpm/pld/BUILD/ooo-build-2.1.8/build/ooe680-m6/solver/680/unxlngi4.pro/inc/svtools/svtreebx.hxx:243: error: candidates are: void SvTreeListBox::SetCollapsedEntryBmp(SvLBoxEntry*, const Image&, BmpColorMode)
+/home/glen/rpm/pld/BUILD/ooo-build-2.1.8/build/ooe680-m6/sd/source/ui/dlg/sdtreelb.cxx: In member function `virtual void SdPageObjsTLB::RequestingChilds(SvLBoxEntry*)':
+/home/glen/rpm/pld/BUILD/ooo-build-2.1.8/build/ooe680-m6/sd/source/ui/dlg/sdtreelb.cxx:716: error: variable declaration is not allowed here
+/home/glen/rpm/pld/BUILD/ooo-build-2.1.8/build/ooe680-m6/sd/source/ui/dlg/sdtreelb.cxx:717: error: variable declaration is not allowed here
+/home/glen/rpm/pld/BUILD/ooo-build-2.1.8/build/ooe680-m6/sd/source/ui/dlg/sdtreelb.cxx:718: error: variable declaration is not allowed here
+/home/glen/rpm/pld/BUILD/ooo-build-2.1.8/build/ooe680-m6/sd/source/ui/dlg/sdtreelb.cxx:719: error: variable declaration is not allowed here
+/home/glen/rpm/pld/BUILD/ooo-build-2.1.8/build/ooe680-m6/sd/source/ui/dlg/sdtreelb.cxx:720: error: variable declaration is not allowed here
+/home/glen/rpm/pld/BUILD/ooo-build-2.1.8/build/ooe680-m6/sd/source/ui/dlg/sdtreelb.cxx:721: error: variable declaration is not allowed here
+/home/glen/rpm/pld/BUILD/ooo-build-2.1.8/build/ooe680-m6/sd/source/ui/dlg/sdtreelb.cxx:740: error: no matching function for call to `SdPageObjsTLB::InsertEntry(const String&, Image (&)(), Image (&)(), SvLBoxEntry*&, int, ULONG, void*)'
+/home/glen/rpm/pld/BUILD/ooo-build-2.1.8/build/ooe680-m6/solver/680/unxlngi4.pro/inc/svtools/svtreebx.hxx:220: error: candidates are: virtual SvLBoxEntry* SvTreeListBox::InsertEntry(const String&, SvLBoxEntry*, unsigned char, long unsigned int, void*)
+/home/glen/rpm/pld/BUILD/ooo-build-2.1.8/build/ooe680-m6/solver/680/unxlngi4.pro/inc/svtools/svtreebx.hxx:227: error:                 virtual SvLBoxEntry* SvTreeListBox::InsertEntry(const String&, const Image&, const Image&, SvLBoxEntry*, unsigned char, long unsigned int, void*)
+/home/glen/rpm/pld/BUILD/ooo-build-2.1.8/build/ooe680-m6/sd/source/ui/dlg/sdtreelb.cxx:742: error: no matching function for call to `SdPageObjsTLB::SetExpandedEntryBmp(SvLBoxEntry*&, Image (&)(), BmpColorMode)'
+/home/glen/rpm/pld/BUILD/ooo-build-2.1.8/build/ooe680-m6/solver/680/unxlngi4.pro/inc/svtools/svtreebx.hxx:242: error: candidates are: void SvTreeListBox::SetExpandedEntryBmp(SvLBoxEntry*, const Image&, BmpColorMode)
+/home/glen/rpm/pld/BUILD/ooo-build-2.1.8/build/ooe680-m6/sd/source/ui/dlg/sdtreelb.cxx:743: error: no matching function for call to `SdPageObjsTLB::SetCollapsedEntryBmp(SvLBoxEntry*&, Image (&)(), BmpColorMode)'
+/home/glen/rpm/pld/BUILD/ooo-build-2.1.8/build/ooe680-m6/solver/680/unxlngi4.pro/inc/svtools/svtreebx.hxx:243: error: candidates are: void SvTreeListBox::SetCollapsedEntryBmp(SvLBoxEntry*, const Image&, BmpColorMode)
+/home/glen/rpm/pld/BUILD/ooo-build-2.1.8/build/ooe680-m6/sd/source/ui/dlg/sdtreelb.cxx:769: error: no matching function for call to `SdPageObjsTLB::InsertEntry(String&, Image (&)(), Image (&)(), SvLBoxEntry*&)'
+/home/glen/rpm/pld/BUILD/ooo-build-2.1.8/build/ooe680-m6/solver/680/unxlngi4.pro/inc/svtools/svtreebx.hxx:220: error: candidates are: virtual SvLBoxEntry* SvTreeListBox::InsertEntry(const String&, SvLBoxEntry*, unsigned char, long unsigned int, void*)
+/home/glen/rpm/pld/BUILD/ooo-build-2.1.8/build/ooe680-m6/solver/680/unxlngi4.pro/inc/svtools/svtreebx.hxx:227: error:                 virtual SvLBoxEntry* SvTreeListBox::InsertEntry(const String&, const Image&, const Image&, SvLBoxEntry*, unsigned char, long unsigned int, void*)
+/home/glen/rpm/pld/BUILD/ooo-build-2.1.8/build/ooe680-m6/sd/source/ui/dlg/sdtreelb.cxx:771: error: no matching function for call to `SdPageObjsTLB::SetExpandedEntryBmp(SvLBoxEntry*&, Image (&)(), BmpColorMode)'
+/home/glen/rpm/pld/BUILD/ooo-build-2.1.8/build/ooe680-m6/solver/680/unxlngi4.pro/inc/svtools/svtreebx.hxx:242: error: candidates are: void SvTreeListBox::SetExpandedEntryBmp(SvLBoxEntry*, const Image&, BmpColorMode)
+/home/glen/rpm/pld/BUILD/ooo-build-2.1.8/build/ooe680-m6/sd/source/ui/dlg/sdtreelb.cxx:772: error: no matching function for call to `SdPageObjsTLB::SetCollapsedEntryBmp(SvLBoxEntry*&, Image (&)(), BmpColorMode)'
+/home/glen/rpm/pld/BUILD/ooo-build-2.1.8/build/ooe680-m6/solver/680/unxlngi4.pro/inc/svtools/svtreebx.hxx:243: error: candidates are: void SvTreeListBox::SetCollapsedEntryBmp(SvLBoxEntry*, const Image&, BmpColorMode)
+/home/glen/rpm/pld/BUILD/ooo-build-2.1.8/build/ooe680-m6/sd/source/ui/dlg/sdtreelb.cxx:778: error: no matching function for call to `SdPageObjsTLB::SetExpandedEntryBmp(SvLBoxEntry*&, Image (&)())'
+/home/glen/rpm/pld/BUILD/ooo-build-2.1.8/build/ooe680-m6/solver/680/unxlngi4.pro/inc/svtools/svtreebx.hxx:242: error: candidates are: void SvTreeListBox::SetExpandedEntryBmp(SvLBoxEntry*, const Image&, BmpColorMode)
+/home/glen/rpm/pld/BUILD/ooo-build-2.1.8/build/ooe680-m6/sd/source/ui/dlg/sdtreelb.cxx:779: error: no matching function for call to `SdPageObjsTLB::SetCollapsedEntryBmp(SvLBoxEntry*&, Image (&)())'
+/home/glen/rpm/pld/BUILD/ooo-build-2.1.8/build/ooe680-m6/solver/680/unxlngi4.pro/inc/svtools/svtreebx.hxx:243: error: candidates are: void SvTreeListBox::SetCollapsedEntryBmp(SvLBoxEntry*, const Image&, BmpColorMode)
+/home/glen/rpm/pld/BUILD/ooo-build-2.1.8/build/ooe680-m6/sd/source/ui/dlg/sdtreelb.cxx:780: error: no matching function for call to `SdPageObjsTLB::SetExpandedEntryBmp(SvLBoxEntry*&, Image (&)(), BmpColorMode)'
+/home/glen/rpm/pld/BUILD/ooo-build-2.1.8/build/ooe680-m6/solver/680/unxlngi4.pro/inc/svtools/svtreebx.hxx:242: error: candidates are: void SvTreeListBox::SetExpandedEntryBmp(SvLBoxEntry*, const Image&, BmpColorMode)
+/home/glen/rpm/pld/BUILD/ooo-build-2.1.8/build/ooe680-m6/sd/source/ui/dlg/sdtreelb.cxx:781: error: no matching function for call to `SdPageObjsTLB::SetCollapsedEntryBmp(SvLBoxEntry*&, Image (&)(), BmpColorMode)'
+/home/glen/rpm/pld/BUILD/ooo-build-2.1.8/build/ooe680-m6/solver/680/unxlngi4.pro/inc/svtools/svtreebx.hxx:243: error: candidates are: void SvTreeListBox::SetCollapsedEntryBmp(SvLBoxEntry*, const Image&, BmpColorMode)
+dmake:  Error code 1, while making '../../../unxlngi4.pro/slo/sdtreelb.obj'
+'---* tg_merge.mk *---'
+dmake:  Error code 255, while making 'do_it_exceptions'
+'---* tg_merge.mk *---'
+
+ERROR: Error 65280 occurred while making /home/glen/rpm/pld/BUILD/ooo-build-2.1.8/build/ooe680-m6/sd/source/ui/dlg
+
+--- ooo-build-2.1.8/patches/src680/apply~	2007-03-16 16:57:27.707889812 +0200
++++ ooo-build-2.1.8/patches/src680/apply	2007-03-17 18:48:36.371546382 +0200
+@@ -983,9 +983,6 @@
+ # default to large icons in the toolbar
+ gui-toolbox-large-icons.diff, jholesov
+ 
+-# fix impress navigator wrt. alpha
+-gui-sd-nav-icons.diff, i#73257, michael
+-
+ [ Branding ]
+ SectionOwner => jholesov
+ SectionIssue => i#66426
