@@ -1,0 +1,20 @@
+either we install perl-perldoc for /usr/share/perl5/5.8.8/pod/perldiag.pod or we don't use diagnostics
+or we get error:
+
+/usr/bin/perl ../../source/scripts/subst_template.pl \
+        cli_basetypes_config ../../unxlngi4.pro/bin/cliureversion.mk ../../unxlngi4.pro/bin/cli_basetypes.config
+couldn't find diagnostic data in /usr/share/perl5/5.8.8/pods/perldiag.pod /usr/local/lib/perl5/5.8.0/i686-pld-linux-thread-multi /usr/local/share/perl5 /usr/lib/perl5/vendor_perl/5.8.0/i686-pld-linux-thread-multi /usr/share/perl5/vendor_perl /usr/lib/perl5/5.8.8/i686-pld-linux-thread-multi /usr/share/perl5/5.8.8 . ../../source/scripts/subst_template.pl at /usr/share/perl5/5.8.8/diagnostics.pm line 268, <POD_DIAG> line 646.
+Compilation failed in require at ../../source/scripts/subst_template.pl line 38, <POD_DIAG> line 646.
+BEGIN failed--compilation aborted at ../../source/scripts/subst_template.pl line 38, <POD_DIAG> line 646.
+dmake:  Error code 9, while making '../../unxlngi4.pro/bin/cli_basetypes.config'
+
+--- cli_ure/source/scripts/subst_template.pl~	2006-03-09 12:53:30.000000000 +0200
++++ cli_ure/source/scripts/subst_template.pl	2007-03-20 00:42:27.363664578 +0200
+@@ -35,7 +35,6 @@
+ 
+ use warnings;
+ use strict;
+-use diagnostics;
+ 
+ sub trim;
+ sub readRedirectionValues($);
