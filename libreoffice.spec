@@ -2293,8 +2293,8 @@ if [ $RPM_BUILD_NR_THREADS -gt 1 ]; then
 fi
 
 %install
-if [ ! -f installed.stamp -o ! -d $RPM_BUILD_ROOT ]; then
-	rm -rf $RPM_BUILD_ROOT
+if [ ! -f makeinstall.stamp -o ! -d $RPM_BUILD_ROOT ]; then
+	rm -rf $RPM_BUILD_ROOT makeinstall.stamp
 
 	# limit to single process installation, it's safe at least
 	%{__sed} -i -e 's#^BUILD_NCPUS=.*#BUILD_NCPUS=1#g' bin/setup
@@ -2307,25 +2307,45 @@ if [ ! -f installed.stamp -o ! -d $RPM_BUILD_ROOT ]; then
 	%{__make} install \
 		DESTDIR=$RPM_BUILD_ROOT
 
+	# save orignal install layout
 	find $RPM_BUILD_ROOT -ls > ls.txt
+	touch makeinstall.stamp
+fi
 
-	# Add in the regcomp tool since some people need it for 3rd party add-ons
-	cp -a build/%{tag}/solver/%{upd}/unxlng*.pro/bin/regcomp{,.bin} $RPM_BUILD_ROOT%{_libdir}/%{name}/program/
-
-	# fix python
-	sed -i -e 's|#!/bin/python|#!%{_bindir}/python|g' $RPM_BUILD_ROOT%{_libdir}/%{name}/program/*.py
-
-	rm -r $RPM_BUILD_ROOT%{_libdir}/%{name}/share/kde
-	rm -r $RPM_BUILD_ROOT%{_libdir}/%{name}/share/cde
-	rm -r $RPM_BUILD_ROOT%{_libdir}/%{name}/share/gnome
-	rm -r $RPM_BUILD_ROOT%{_libdir}/%{name}/share/icons
-	rm -r $RPM_BUILD_ROOT%{_datadir}/applnk
-	rm -r $RPM_BUILD_ROOT%{_datadir}/gnome
+if [ ! -f installed.stamp ]; then
 	# do we need those? large comparing to png
-	rm -r $RPM_BUILD_ROOT%{_datadir}/icons/hicolor/scalable/apps/*.svg
+	rm -rf $RPM_BUILD_ROOT%{_datadir}/icons/hicolor/scalable/apps/*.svg
+
+	# is below comment true?
+	# OOo should not install the Vera fonts, they are Required: now
+	rm -f $RPM_BUILD_ROOT%{_libdir}/%{name}/share/fonts/truetype/*
+
+	# some libs creep in somehow
+	rm -f $RPM_BUILD_ROOT%{_libdir}/%{name}/program/libstl*.so*
+	rm -f $RPM_BUILD_ROOT%{_libdir}/%{name}/program/libsndfile*
+	rm -f $RPM_BUILD_ROOT%{_libdir}/%{name}/program/libgcc_s.so*
+	rm -f $RPM_BUILD_ROOT%{_libdir}/%{name}/program/libstdc++*so*
+
+	rm -f $RPM_BUILD_ROOT%{_libdir}/%{name}/program/sopatchlevel.sh
+
+	# Remove setup log
+	rm -f $RPM_BUILD_ROOT%{_libdir}/%{name}/program/setup.log
+
+	rm -rf $RPM_BUILD_ROOT%{_libdir}/%{name}/share/xdg
+	rm $RPM_BUILD_ROOT%{_libdir}/%{name}/program/cde-open-url
+
+	%if %{without java}
+	# Java-releated bits
+	rm -rf $RPM_BUILD_ROOT%{_libdir}/%{name}/program/hid.lst
+	rm -rf $RPM_BUILD_ROOT%{_libdir}/%{name}/program/java-set-classpath
+	rm -rf $RPM_BUILD_ROOT%{_libdir}/%{name}/program/jvmfwk3rc
+	rm -rf $RPM_BUILD_ROOT%{_libdir}/%{name}/share/Scripts/beanshell
+	rm -rf $RPM_BUILD_ROOT%{_libdir}/%{name}/share/Scripts/javascript
+	rm -rf $RPM_BUILD_ROOT%{_libdir}/%{name}/share/xslt
+	%endif
 
 	# Remove dictionaries (in separate pkg)
-	rm -vf $RPM_BUILD_ROOT%{_libdir}/%{name}/share/dict/ooo/*
+	rm -rf $RPM_BUILD_ROOT%{_libdir}/%{name}/share/dict/ooo/*
 	%if %{with system_myspell}
 	rmdir $RPM_BUILD_ROOT%{_libdir}/%{name}/share/dict/ooo
 	ln -s %{_datadir}/myspell $RPM_BUILD_ROOT%{_libdir}/%{name}/share/dict/ooo
@@ -2343,57 +2363,25 @@ if [ ! -f installed.stamp -o ! -d $RPM_BUILD_ROOT ]; then
 	mv $RPM_BUILD_ROOT{%{_libdir}/%{name}/program,%{_sysconfdir}/%{name}}/sofficerc
 	ln -s %{_sysconfdir}/%{name}/sofficerc $RPM_BUILD_ROOT%{_libdir}/%{name}/program
 
-	# is below comment true?
-	# OOo should not install the Vera fonts, they are Required: now
-	rm -rf $RPM_BUILD_ROOT%{_libdir}/%{name}/share/fonts/truetype/*
-
-	# Copy fixed OpenSymbol to correct location
-	install -d $RPM_BUILD_ROOT%{_fontsdir}/TTF
-	install build/%{tag}/extras/source/truetype/symbol/opens___.ttf $RPM_BUILD_ROOT%{_fontsdir}/TTF
-
-	# We don't need spadmin (gtk) or the setup application
-	rm -f $RPM_BUILD_ROOT%{_libdir}/%{name}/setup
-	rm -f $RPM_BUILD_ROOT%{_libdir}/%{name}/program/crash_report.bin
-	rm -f $RPM_BUILD_ROOT%{_desktopdir}/openoffice-setup.desktop
-	rm -f $RPM_BUILD_ROOT%{_desktopdir}/openoffice-printeradmin.desktop
-
-	#rm -f $RPM_BUILD_ROOT%{_libdir}/%{name}/program/gnomeint
-
-	# some libs creep in somehow
-	rm -f $RPM_BUILD_ROOT%{_libdir}/%{name}/program/libstl*.so*
-	rm -f $RPM_BUILD_ROOT%{_libdir}/%{name}/program/libsndfile*
-
-	rm -f $RPM_BUILD_ROOT%{_libdir}/%{name}/program/sopatchlevel.sh
 	perl -pi -e 's/^[       ]*LD_LIBRARY_PATH/# LD_LIBRARY_PATH/;s/export LD_LIBRARY_PATH/# export LD_LIBRARY_PATH/' \
 		$RPM_BUILD_ROOT%{_libdir}/%{name}/program/setup
 
-	# Remove setup log
-	rm -f $RPM_BUILD_ROOT%{_libdir}/%{name}/program/setup.log
-
-	# Remove copied system libraries
-	rm -f $RPM_BUILD_ROOT%{_libdir}/%{name}/program/libgcc_s.so* \
-		$RPM_BUILD_ROOT%{_libdir}/%{name}/program/libstdc++*so*
-
 	chmod +x $RPM_BUILD_ROOT%{_libdir}/%{name}/program/*.so
-
-	rm -rf $RPM_BUILD_ROOT%{_libdir}/%{name}/share/xdg
-	rm -rf $RPM_BUILD_ROOT/opt/gnome
-	rm -f $RPM_BUILD_ROOT%{_libdir}/%{name}/program/cde-open-url
-
-	%if %{without java}
-	# Java-releated bits
-	rm -rf $RPM_BUILD_ROOT%{_libdir}/%{name}/program/hid.lst
-	rm -rf $RPM_BUILD_ROOT%{_libdir}/%{name}/program/java-set-classpath
-	rm -rf $RPM_BUILD_ROOT%{_libdir}/%{name}/program/jvmfwk3rc
-	rm -rf $RPM_BUILD_ROOT%{_libdir}/%{name}/share/Scripts/beanshell
-	rm -rf $RPM_BUILD_ROOT%{_libdir}/%{name}/share/Scripts/javascript
-	rm -rf $RPM_BUILD_ROOT%{_libdir}/%{name}/share/xslt
-	%endif
 
 	# put share to %{_datadir} so we're able to produce noarch packages
 	install -d $RPM_BUILD_ROOT%{_datadir}/%{name}
 	mv $RPM_BUILD_ROOT%{_libdir}/%{name}/share $RPM_BUILD_ROOT%{_datadir}/%{name}
 	ln -s ../../share/%{name}/share $RPM_BUILD_ROOT%{_libdir}/%{name}/share
+
+	# fix python
+	sed -i -e 's|#!/bin/python|#!%{_bindir}/python|g' $RPM_BUILD_ROOT%{_libdir}/%{name}/program/*.py
+
+	# Copy fixed OpenSymbol to correct location
+	install -d $RPM_BUILD_ROOT%{_fontsdir}/TTF
+	install build/%{tag}/extras/source/truetype/symbol/opens___.ttf $RPM_BUILD_ROOT%{_fontsdir}/TTF
+
+	# Add in the regcomp tool since some people need it for 3rd party add-ons
+	cp -a build/%{tag}/solver/%{upd}/unxlng*.pro/bin/regcomp{,.bin} $RPM_BUILD_ROOT%{_libdir}/%{name}/program/
 
 	touch installed.stamp
 fi
