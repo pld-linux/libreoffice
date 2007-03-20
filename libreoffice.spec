@@ -68,7 +68,7 @@
 %undefine	with_system_hsqldb
 %endif
 
-%define		_rel		2
+%define		_rel		1
 %define		upd			680
 %define		mws			OOE%{upd}
 %define		tag			%(echo %{mws} | tr A-Z a-z)-%{milestone}
