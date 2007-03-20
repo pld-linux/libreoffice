@@ -5,6 +5,7 @@
 #		SRPMS		0.3 GB
 #		RPMS		0.9 GB
 # TODO:
+#   - --with-system-libwps     Use system libwps* library
 #   - pld about logo says 2.0
 #	- without system_db will not work (w/ java) as it will use db4.2 which is too old (see r1.650)
 #	- problems with gcc-4.2.0: oowriter is useless (invisble text till refresh)
@@ -2220,10 +2221,11 @@ CONFOPTS="\
 	--without-gpc \
 	--disable-epm \
 	--disable-fontooo \
+	--disable-strip \
 	--enable-access \
 	--enable-cairo \
 	--enable-crypt-link \
-	--%{?with_mono:--en}%{!?with_mono:dis}able-mono \
+	--%{?with_mono:en}%{!?with_mono:dis}able-mono \
 	--enable-pam-link \
 	--enable-openldap \
 	--enable-cups \
