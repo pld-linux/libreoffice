@@ -11,8 +11,6 @@
 #	- problems with gcc-4.2.0: oowriter is useless (invisble text till refresh)
 #	- fix help files (broken links)
 #	- LFS support is disabled (no_lfs_hack.patch for xml2cmp crash) because it need LFS-ready STLport
-#   - bcond with_mono is broken (cli_types.dll not found, and can't be made)
-#     cli_*.dll are available from http://go-ooo.org/packages/OOE680/
 #	- maybe it could be build with gcc-java
 #   - adapt help-support.diff to PLD
 #	- configure --without-ppds --without afms
@@ -37,7 +35,7 @@
 %bcond_without	gnomevfs	# GNOME VFS and Evolution 2 support
 %bcond_without	java		# without Java support (disables help support)
 %bcond_without	kde		# KDE L&F packages
-%bcond_with	mono		# enable compilation of mono bindings
+%bcond_without	mono		# disable compilation of mono bindings
 %bcond_without	mozilla		# without mozilla components
 %bcond_without	i18n		# do not create i18n packages
 
@@ -68,7 +66,7 @@
 %undefine	with_system_hsqldb
 %endif
 
-%define		_rel		0.2
+%define		_rel		0.5
 %define		upd			680
 %define		mws			OOE%{upd}
 %define		tag			%(echo %{mws} | tr A-Z a-z)-%{milestone}
@@ -134,6 +132,7 @@ Patch107:	%{name}-stl-amd64.patch
 Patch108:	%{name}-java6.patch
 Patch109:	%{name}-agg25.patch
 Patch110:	%{name}-nsplugin-path.diff
+Patch111:	%{name}-perl-nodiag.patch
 URL:		http://www.openoffice.org/
 BuildRequires:	/usr/bin/getopt
 BuildRequires:	STLport-devel >= 2:5.0.0
@@ -2080,7 +2079,7 @@ done
 
 echo "[ PLDOnly ]" >> patches/src680/apply
 # patches applied by ooo (extension .diff is required)
-for P in %{PATCH102} %{PATCH104} %{PATCH108} %{PATCH109}; do
+for P in %{PATCH102} %{PATCH104} %{PATCH108} %{PATCH109} %{PATCH111}; do
 	PATCHNAME=PLD-${P##*/%{name}-}
 	PATCHNAME=${PATCHNAME%.patch}.diff
 	install $P patches/src680/$PATCHNAME
@@ -2321,7 +2320,7 @@ if [ ! -f installed.stamp ]; then
 	rm -f $RPM_BUILD_ROOT%{_libdir}/%{name}/program/setup.log
 
 	rm -rf $RPM_BUILD_ROOT%{_libdir}/%{name}/share/xdg
-	rm $RPM_BUILD_ROOT%{_libdir}/%{name}/program/cde-open-url
+	rm -f $RPM_BUILD_ROOT%{_libdir}/%{name}/program/cde-open-url
 
 	%if %{without java}
 	# Java-releated bits
@@ -2331,6 +2330,10 @@ if [ ! -f installed.stamp ]; then
 	rm -rf $RPM_BUILD_ROOT%{_libdir}/%{name}/share/Scripts/beanshell
 	rm -rf $RPM_BUILD_ROOT%{_libdir}/%{name}/share/Scripts/javascript
 	rm -rf $RPM_BUILD_ROOT%{_libdir}/%{name}/share/xslt
+	%endif
+
+	%if %{with mono}
+	rm -rf $RPM_BUILD_ROOT%{_libdir}/pkgconfig/mono-ooo-2.1.pc
 	%endif
 
 	# Remove dictionaries (in separate pkg)
@@ -2947,6 +2950,16 @@ fi
 %attr(755,root,root) %{_libdir}/%{name}/program/uri-encode
 %attr(755,root,root) %{_libdir}/%{name}/program/viewdoc
 %{_libdir}/%{name}/program/versionrc
+
+%if %{with mono}
+%{_libdir}/%{name}/program/cli_basetypes.dll
+%{_libdir}/%{name}/program/cli_cppuhelper.dll
+%{_libdir}/%{name}/program/cli_types.dll
+%{_libdir}/%{name}/program/cli_uno_bridge.dll
+%{_libdir}/%{name}/program/cli_ure.dll
+%attr(755,root,root) %{_libdir}/%{name}/program/libcli_uno.so
+%attr(755,root,root) %{_libdir}/%{name}/program/libcli_uno_glue.so
+%endif
 
 %if %{with java}
 %{_libdir}/%{name}/help
