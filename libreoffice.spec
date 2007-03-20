@@ -132,6 +132,7 @@ Patch104:	%{name}-portaudio_v19.diff
 Patch107:	%{name}-stl-amd64.patch
 Patch108:	%{name}-java6.patch
 Patch109:	%{name}-agg25.patch
+Patch110:	%{name}-nsplugin-path.diff
 URL:		http://www.openoffice.org/
 BuildRequires:	/usr/bin/getopt
 BuildRequires:	STLport-devel >= 2:5.0.0
@@ -232,9 +233,12 @@ BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %define		specflags	-fno-strict-aliasing
 
-# No ELF objects there to strip/chrpath (skips processing 17k files totaling 415M)
-%define		_noautostrip	.*%{_datadir}/%{name}/.*
-%define		_noautochrpath	.*%{_datadir}/%{name}/.*
+# No ELF objects there to strip/chrpath, skips processing:
+# - share/ - 17000 files of 415M
+# - help/ - 6500 files of 1.4G
+# - program/resource/ - 5610 files of 216M
+%define		_noautostrip	.*\\(%{_datadir}\\|%{_libdir}/%{name}/program/resource\\)/.*
+%define		_noautochrpath	.*\\(%{_datadir}\\|%{_libdir}/%{name}/program/resource\\)/.*
 
 %description
 OpenOffice.org is an open-source project sponsored by Sun Microsystems
@@ -2081,6 +2085,7 @@ for P in %{PATCH102} %{PATCH104} %{PATCH108} %{PATCH109}; do
 	install $P patches/src680/$PATCHNAME
 	echo $PATCHNAME >> patches/src680/apply
 done
+cp %{PATCH110} patches/src680/nsplugin-path.diff
 
 %build
 # Make sure we have /proc mounted - otherwise idlc will fail later.
@@ -2275,8 +2280,8 @@ if [ $RPM_BUILD_NR_THREADS -gt 1 ]; then
 fi
 
 %install
-if [ ! -f installed.stamp -o ! -d $RPM_BUILD_ROOT ]; then
-	rm -rf $RPM_BUILD_ROOT
+if [ ! -f makeinstall.stamp -o ! -d $RPM_BUILD_ROOT ]; then
+	rm -rf $RPM_BUILD_ROOT makeinstall.stamp
 
 	# limit to single process installation, it's safe at least
 	%{__sed} -i -e 's#^BUILD_NCPUS=.*#BUILD_NCPUS=1#g' bin/setup
@@ -2289,25 +2294,45 @@ if [ ! -f installed.stamp -o ! -d $RPM_BUILD_ROOT ]; then
 	%{__make} install \
 		DESTDIR=$RPM_BUILD_ROOT
 
+	# save orignal install layout
 	find $RPM_BUILD_ROOT -ls > ls.txt
+	touch makeinstall.stamp
+fi
 
-	# Add in the regcomp tool since some people need it for 3rd party add-ons
-	cp -a build/%{tag}/solver/%{upd}/unxlng*.pro/bin/regcomp{,.bin} $RPM_BUILD_ROOT%{_libdir}/%{name}/program/
-
-	# fix python
-	sed -i -e 's|#!/bin/python|#!%{_bindir}/python|g' $RPM_BUILD_ROOT%{_libdir}/%{name}/program/*.py
-
-	rm -r $RPM_BUILD_ROOT%{_libdir}/%{name}/share/kde
-	rm -r $RPM_BUILD_ROOT%{_libdir}/%{name}/share/cde
-	rm -r $RPM_BUILD_ROOT%{_libdir}/%{name}/share/gnome
-	rm -r $RPM_BUILD_ROOT%{_libdir}/%{name}/share/icons
-	rm -r $RPM_BUILD_ROOT%{_datadir}/applnk
-	rm -r $RPM_BUILD_ROOT%{_datadir}/gnome
+if [ ! -f installed.stamp ]; then
 	# do we need those? large comparing to png
-	rm -r $RPM_BUILD_ROOT%{_datadir}/icons/hicolor/scalable/apps/*.svg
+	rm -rf $RPM_BUILD_ROOT%{_datadir}/icons/hicolor/scalable/apps/*.svg
+
+	# is below comment true?
+	# OOo should not install the Vera fonts, they are Required: now
+	rm -f $RPM_BUILD_ROOT%{_libdir}/%{name}/share/fonts/truetype/*
+
+	# some libs creep in somehow
+	rm -f $RPM_BUILD_ROOT%{_libdir}/%{name}/program/libstl*.so*
+	rm -f $RPM_BUILD_ROOT%{_libdir}/%{name}/program/libsndfile*
+	rm -f $RPM_BUILD_ROOT%{_libdir}/%{name}/program/libgcc_s.so*
+	rm -f $RPM_BUILD_ROOT%{_libdir}/%{name}/program/libstdc++*so*
+
+	rm -f $RPM_BUILD_ROOT%{_libdir}/%{name}/program/sopatchlevel.sh
+
+	# Remove setup log
+	rm -f $RPM_BUILD_ROOT%{_libdir}/%{name}/program/setup.log
+
+	rm -rf $RPM_BUILD_ROOT%{_libdir}/%{name}/share/xdg
+	rm $RPM_BUILD_ROOT%{_libdir}/%{name}/program/cde-open-url
+
+	%if %{without java}
+	# Java-releated bits
+	rm -rf $RPM_BUILD_ROOT%{_libdir}/%{name}/program/hid.lst
+	rm -rf $RPM_BUILD_ROOT%{_libdir}/%{name}/program/java-set-classpath
+	rm -rf $RPM_BUILD_ROOT%{_libdir}/%{name}/program/jvmfwk3rc
+	rm -rf $RPM_BUILD_ROOT%{_libdir}/%{name}/share/Scripts/beanshell
+	rm -rf $RPM_BUILD_ROOT%{_libdir}/%{name}/share/Scripts/javascript
+	rm -rf $RPM_BUILD_ROOT%{_libdir}/%{name}/share/xslt
+	%endif
 
 	# Remove dictionaries (in separate pkg)
-	rm -vf $RPM_BUILD_ROOT%{_libdir}/%{name}/share/dict/ooo/*
+	rm -rf $RPM_BUILD_ROOT%{_libdir}/%{name}/share/dict/ooo/*
 	%if %{with system_myspell}
 	rmdir $RPM_BUILD_ROOT%{_libdir}/%{name}/share/dict/ooo
 	ln -s %{_datadir}/myspell $RPM_BUILD_ROOT%{_libdir}/%{name}/share/dict/ooo
@@ -2325,57 +2350,34 @@ if [ ! -f installed.stamp -o ! -d $RPM_BUILD_ROOT ]; then
 	mv $RPM_BUILD_ROOT{%{_libdir}/%{name}/program,%{_sysconfdir}/%{name}}/sofficerc
 	ln -s %{_sysconfdir}/%{name}/sofficerc $RPM_BUILD_ROOT%{_libdir}/%{name}/program
 
-	# is below comment true?
-	# OOo should not install the Vera fonts, they are Required: now
-	rm -rf $RPM_BUILD_ROOT%{_libdir}/%{name}/share/fonts/truetype/*
+	perl -pi -e 's/^[       ]*LD_LIBRARY_PATH/# LD_LIBRARY_PATH/;s/export LD_LIBRARY_PATH/# export LD_LIBRARY_PATH/' \
+		$RPM_BUILD_ROOT%{_libdir}/%{name}/program/setup
+
+	chmod +x $RPM_BUILD_ROOT%{_libdir}/%{name}/program/*.so
+
+	install -d $RPM_BUILD_ROOT%{_datadir}/%{name}
+	# put share to %{_datadir} so we're able to produce noarch packages
+	mv $RPM_BUILD_ROOT%{_libdir}/%{name}/share $RPM_BUILD_ROOT%{_datadir}/%{name}
+	ln -s ../../share/%{name}/share $RPM_BUILD_ROOT%{_libdir}/%{name}/share
+	# more non-archidecture dependant nature data
+	mv $RPM_BUILD_ROOT%{_libdir}/%{name}/help $RPM_BUILD_ROOT%{_datadir}/%{name}
+	ln -s ../../share/%{name}/help $RPM_BUILD_ROOT%{_libdir}/%{name}/help
+	mv $RPM_BUILD_ROOT%{_libdir}/%{name}/licenses $RPM_BUILD_ROOT%{_datadir}/%{name}
+	ln -s ../../share/%{name}/licenses $RPM_BUILD_ROOT%{_libdir}/%{name}/licenses
+	mv $RPM_BUILD_ROOT%{_libdir}/%{name}/readmes $RPM_BUILD_ROOT%{_datadir}/%{name}
+	ln -s ../../share/%{name}/readmes $RPM_BUILD_ROOT%{_libdir}/%{name}/readmes
+	mv $RPM_BUILD_ROOT%{_libdir}/%{name}/presets $RPM_BUILD_ROOT%{_datadir}/%{name}
+	ln -s ../../share/%{name}/presets $RPM_BUILD_ROOT%{_libdir}/%{name}/presets
+
+	# fix python
+	sed -i -e 's|#!/bin/python|#!%{_bindir}/python|g' $RPM_BUILD_ROOT%{_libdir}/%{name}/program/*.py
 
 	# Copy fixed OpenSymbol to correct location
 	install -d $RPM_BUILD_ROOT%{_fontsdir}/TTF
 	install build/%{tag}/extras/source/truetype/symbol/opens___.ttf $RPM_BUILD_ROOT%{_fontsdir}/TTF
 
-	# We don't need spadmin (gtk) or the setup application
-	rm -f $RPM_BUILD_ROOT%{_libdir}/%{name}/setup
-	rm -f $RPM_BUILD_ROOT%{_libdir}/%{name}/program/crash_report.bin
-	rm -f $RPM_BUILD_ROOT%{_desktopdir}/openoffice-setup.desktop
-	rm -f $RPM_BUILD_ROOT%{_desktopdir}/openoffice-printeradmin.desktop
-
-	#rm -f $RPM_BUILD_ROOT%{_libdir}/%{name}/program/gnomeint
-
-	# some libs creep in somehow
-	rm -f $RPM_BUILD_ROOT%{_libdir}/%{name}/program/libstl*.so*
-	rm -f $RPM_BUILD_ROOT%{_libdir}/%{name}/program/libsndfile*
-
-	rm -f $RPM_BUILD_ROOT%{_libdir}/%{name}/program/sopatchlevel.sh
-	perl -pi -e 's/^[       ]*LD_LIBRARY_PATH/# LD_LIBRARY_PATH/;s/export LD_LIBRARY_PATH/# export LD_LIBRARY_PATH/' \
-		$RPM_BUILD_ROOT%{_libdir}/%{name}/program/setup
-
-	# Remove setup log
-	rm -f $RPM_BUILD_ROOT%{_libdir}/%{name}/program/setup.log
-
-	# Remove copied system libraries
-	rm -f $RPM_BUILD_ROOT%{_libdir}/%{name}/program/libgcc_s.so* \
-		$RPM_BUILD_ROOT%{_libdir}/%{name}/program/libstdc++*so*
-
-	chmod +x $RPM_BUILD_ROOT%{_libdir}/%{name}/program/*.so
-
-	rm -rf $RPM_BUILD_ROOT%{_libdir}/%{name}/share/xdg
-	rm -rf $RPM_BUILD_ROOT/opt/gnome
-	rm -f $RPM_BUILD_ROOT%{_libdir}/%{name}/program/cde-open-url
-
-	%if %{without java}
-	# Java-releated bits
-	rm -rf $RPM_BUILD_ROOT%{_libdir}/%{name}/program/hid.lst
-	rm -rf $RPM_BUILD_ROOT%{_libdir}/%{name}/program/java-set-classpath
-	rm -rf $RPM_BUILD_ROOT%{_libdir}/%{name}/program/jvmfwk3rc
-	rm -rf $RPM_BUILD_ROOT%{_libdir}/%{name}/share/Scripts/beanshell
-	rm -rf $RPM_BUILD_ROOT%{_libdir}/%{name}/share/Scripts/javascript
-	rm -rf $RPM_BUILD_ROOT%{_libdir}/%{name}/share/xslt
-	%endif
-
-	# put share to %{_datadir} so we're able to produce noarch packages
-	install -d $RPM_BUILD_ROOT%{_datadir}/%{name}
-	mv $RPM_BUILD_ROOT%{_libdir}/%{name}/share $RPM_BUILD_ROOT%{_datadir}/%{name}
-	ln -s ../../share/%{name}/share $RPM_BUILD_ROOT%{_libdir}/%{name}/share
+	# Add in the regcomp tool since some people need it for 3rd party add-ons
+	cp -a build/%{tag}/solver/%{upd}/unxlng*.pro/bin/regcomp{,.bin} $RPM_BUILD_ROOT%{_libdir}/%{name}/program/
 
 	touch installed.stamp
 fi
@@ -2452,7 +2454,13 @@ for lang in $langlist; do
 	find_lang $lang
 done
 
-%{__sed} -i -e 's,%{_libdir}/%{name}/share,%{_datadir}/%{name}/share,' *.lang
+%{__sed} -i -e '
+	s,%{_libdir}/%{name}/help,%{_datadir}/%{name}/help,;
+	s,%{_libdir}/%{name}/licenses,%{_datadir}/%{name}/licenses,;
+	s,%{_libdir}/%{name}/presets,%{_datadir}/%{name}/presets,;
+	s,%{_libdir}/%{name}/readmes,%{_datadir}/%{name}/readmes,;
+	s,%{_libdir}/%{name}/share,%{_datadir}/%{name}/share,;
+' *.lang
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -2464,10 +2472,12 @@ if [ -d %{_libdir}/%{name}/share/dict/ooo ] && [ ! -L %{_libdir}/%{name}/share/d
 	rmdir %{_libdir}/%{name}/share/dict/ooo 2>/dev/null || mv -v %{_libdir}/%{name}/share/dict/ooo{,.rpmsave} || :
 fi
 %endif
-if [ -d %{_libdir}/%{name}/share ] && [ ! -L %{_libdir}/%{name}/share ]; then
-	install -d %{_datadir}/%{name}
-	mv %{_libdir}/%{name}/share %{_datadir}/%{name}/share || mv %{_libdir}/%{name}/share{,.rpmsave}
-fi
+for d in presets share help readmes licenses; do
+	if [ -d %{_libdir}/%{name}/$d ] && [ ! -L %{_libdir}/%{name}/$d ]; then
+		install -d %{_datadir}/%{name}
+		mv %{_libdir}/%{name}/$d %{_datadir}/%{name}/$d || mv %{_libdir}/%{name}/$d{,.rpmsave}
+	fi
+done
 
 %post core
 %update_mime_database
@@ -2548,10 +2558,6 @@ fi
 %config(noreplace) %verify(not md5 mtime size) %{_sysconfdir}/%{name}/sofficerc
 
 %dir %{_libdir}/%{name}
-%if %{with java}
-%dir %{_libdir}/%{name}/help/en
-%dir %{_libdir}/%{name}/program/classes
-%endif
 %dir %{_libdir}/%{name}/program
 %dir %{_libdir}/%{name}/program/resource
 
@@ -2562,10 +2568,10 @@ fi
 %{_libdir}/%{name}/program/unorc
 %{_libdir}/%{name}/program/bootstraprc
 %{_libdir}/%{name}/program/configmgrrc
-%dir %{_libdir}/%{name}/licenses
-%dir %{_libdir}/%{name}/readmes
 
-# symlink
+# symlinks
+%{_libdir}/%{name}/licenses
+%{_libdir}/%{name}/readmes
 %{_libdir}/%{name}/share
 
 %dir %{_datadir}/%{name}
@@ -2886,22 +2892,23 @@ fi
 %{_datadir}/%{name}/share/registry/modules/org/openoffice/TypeDetection/UISort/UISort-math.xcu
 %{_datadir}/%{name}/share/registry/modules/org/openoffice/TypeDetection/UISort/UISort-writer.xcu
 
-%dir %{_libdir}/%{name}/presets
-%dir %{_libdir}/%{name}/presets/autotext
-%{_libdir}/%{name}/presets/autotext/mytexts.bau
-%{_libdir}/%{name}/presets/basic
-%dir %{_libdir}/%{name}/presets/config
-%{_libdir}/%{name}/presets/config/autotbl.fmt
-%{_libdir}/%{name}/presets/config/cmyk.soc
-%{_libdir}/%{name}/presets/config/gallery.soc
-%{_libdir}/%{name}/presets/config/html.soc
-%{_libdir}/%{name}/presets/config/standard.so?
-%{_libdir}/%{name}/presets/config/sun-color.soc
-%{_libdir}/%{name}/presets/config/web.soc
+%{_libdir}/%{name}/presets
+%dir %{_datadir}/%{name}/presets
+%dir %{_datadir}/%{name}/presets/autotext
+%{_datadir}/%{name}/presets/autotext/mytexts.bau
+%{_datadir}/%{name}/presets/basic
+%dir %{_datadir}/%{name}/presets/config
+%{_datadir}/%{name}/presets/config/autotbl.fmt
+%{_datadir}/%{name}/presets/config/cmyk.soc
+%{_datadir}/%{name}/presets/config/gallery.soc
+%{_datadir}/%{name}/presets/config/html.soc
+%{_datadir}/%{name}/presets/config/standard.so?
+%{_datadir}/%{name}/presets/config/sun-color.soc
+%{_datadir}/%{name}/presets/config/web.soc
 
-%{_libdir}/%{name}/presets/database
-%{_libdir}/%{name}/presets/gallery
-%{_libdir}/%{name}/presets/psprint
+%{_datadir}/%{name}/presets/database
+%{_datadir}/%{name}/presets/gallery
+%{_datadir}/%{name}/presets/psprint
 
 # Programs
 %attr(755,root,root) %{_bindir}/ooconfig
@@ -2940,19 +2947,22 @@ fi
 %{_libdir}/%{name}/program/versionrc
 
 %if %{with java}
+%{_libdir}/%{name}/help
+%dir %{_datadir}/%{name}/help
+%dir %{_datadir}/%{name}/help/en
+%{_datadir}/%{name}/help/en/*.html
+%{_datadir}/%{name}/help/en/*.css
+%{_datadir}/%{name}/help/en/sbasic.*
+%{_datadir}/%{name}/help/en/schart.*
+%{_datadir}/%{name}/help/en/shared.*
+%{_datadir}/%{name}/help/*.xsl
+
 %attr(755,root,root) %{_libdir}/%{name}/program/javaldx
 %attr(755,root,root) %{_libdir}/%{name}/program/java-set-classpath
 %{_libdir}/%{name}/program/jvmfwk3rc
 %{_libdir}/%{name}/program/JREProperties.class
 
-%dir %{_libdir}/%{name}/help
-%{_libdir}/%{name}/help/en/*.html
-%{_libdir}/%{name}/help/en/*.css
-%{_libdir}/%{name}/help/en/sbasic.*
-%{_libdir}/%{name}/help/en/schart.*
-%{_libdir}/%{name}/help/en/shared.*
-%{_libdir}/%{name}/help/*.xsl
-
+%dir %{_libdir}/%{name}/program/classes
 %{_libdir}/%{name}/program/classes/ScriptFramework.jar
 %{_libdir}/%{name}/program/classes/ScriptProviderForBeanShell.jar
 %{_libdir}/%{name}/program/classes/ScriptProviderForJava.jar
@@ -3018,7 +3028,7 @@ fi
 %{_mandir}/man1/openoffice.1*
 
 # en-US
-%{_libdir}/%{name}/presets/config/*_en-US.so*
+%{_datadir}/%{name}/presets/config/*_en-US.so*
 %{_datadir}/%{name}/share/autocorr/acor_*.dat
 %{_datadir}/%{name}/share/autotext/en-US
 %{_datadir}/%{name}/share/registry/res/en-US
@@ -3090,10 +3100,13 @@ fi
 %{_libdir}/%{name}/program/resource/xmlsec680en-US.res
 %{_libdir}/%{name}/program/resource/xsltdlg680en-US.res
 
-%{_libdir}/%{name}/licenses/LICENSE_en-US
-%{_libdir}/%{name}/licenses/LICENSE_en-US.html
-%{_libdir}/%{name}/readmes/README_en-US
-%{_libdir}/%{name}/readmes/README_en-US.html
+%dir %{_datadir}/%{name}/licenses
+%{_datadir}/%{name}/licenses/LICENSE_en-US
+%{_datadir}/%{name}/licenses/LICENSE_en-US.html
+
+%dir %{_datadir}/%{name}/readmes
+%{_datadir}/%{name}/readmes/README_en-US
+%{_datadir}/%{name}/readmes/README_en-US.html
 
 %attr(755,root,root) %{_libdir}/%{name}/program/acceptor.uno.so
 %attr(755,root,root) %{_libdir}/%{name}/program/basprov680*.uno.so
@@ -3391,7 +3404,7 @@ fi
 %{_pixmapsdir}/ooo-base.png
 %{_libdir}/%{name}/program/resource/cnr680en-US.res
 %if %{with java}
-%{_libdir}/%{name}/help/en/sdatabase.*
+%{_datadir}/%{name}/help/en/sdatabase.*
 %endif
 %{_datadir}/%{name}/share/config/soffice.cfg/modules/dbapp
 %{_datadir}/%{name}/share/config/soffice.cfg/modules/dbbrowser
@@ -3420,7 +3433,7 @@ fi
 %{_iconsdir}/hicolor/*/apps/ooo-calc.png
 %{_pixmapsdir}/ooo-calc.png
 %if %{with java}
-%{_libdir}/%{name}/help/en/scalc.*
+%{_datadir}/%{name}/help/en/scalc.*
 %endif
 %{_libdir}/%{name}/program/resource/analysis680en-US.res
 %{_libdir}/%{name}/program/resource/bf_sc680en-US.res
@@ -3446,7 +3459,7 @@ fi
 %{_iconsdir}/hicolor/*/apps/ooo-draw.png
 %{_pixmapsdir}/ooo-draw.png
 %if %{with java}
-%{_libdir}/%{name}/help/en/sdraw.*
+%{_datadir}/%{name}/help/en/sdraw.*
 %endif
 %{_datadir}/%{name}/share/config/soffice.cfg/modules/sdraw
 %{_datadir}/%{name}/share/registry/data/org/openoffice/Office/UI/DrawWindowState.xcu
@@ -3474,7 +3487,7 @@ fi
 %{_iconsdir}/hicolor/*/apps/ooo-writer.png
 %{_pixmapsdir}/ooo-writer.png
 %if %{with java}
-%{_libdir}/%{name}/help/en/swriter.*
+%{_datadir}/%{name}/help/en/swriter.*
 %{_libdir}/%{name}/program/classes/writer2latex.jar
 %endif
 %{_datadir}/%{name}/share/config/soffice.cfg/modules/swriter
@@ -3507,7 +3520,7 @@ fi
 %{_iconsdir}/hicolor/*/apps/ooo-impress.png
 %{_pixmapsdir}/ooo-impress.png
 %if %{with java}
-%{_libdir}/%{name}/help/en/simpress.*
+%{_datadir}/%{name}/help/en/simpress.*
 %endif
 %{_datadir}/%{name}/share/config/soffice.cfg/modules/simpress
 %{_datadir}/%{name}/share/config/soffice.cfg/simpress/
@@ -3531,7 +3544,7 @@ fi
 %{_iconsdir}/hicolor/*/apps/ooo-math.png
 %{_pixmapsdir}/ooo-math.png
 %if %{with java}
-%{_libdir}/%{name}/help/en/smath.*
+%{_datadir}/%{name}/help/en/smath.*
 %endif
 %{_libdir}/%{name}/program/resource/bf_sm680en-US.res
 %{_libdir}/%{name}/program/resource/sm680en-US.res
@@ -3616,9 +3629,9 @@ fi
 %if %{with mozilla}
 %files -n browser-plugin-%{name}
 %defattr(644,root,root,755)
-%attr(755,root,root) %{_libdir}/%{name}/program/nsplugin
 %attr(755,root,root) %{_browserpluginsdir}/libnpsoplugin.so
-%{_libdir}/%{name}/program/libnpsoplugin.so
+%attr(755,root,root) %{_libdir}/%{name}/program/nsplugin
+%attr(755,root,root) %{_libdir}/%{name}/program/libnpsoplugin.so
 %endif
 
 %if %{with i18n}
