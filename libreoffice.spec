@@ -68,7 +68,7 @@
 %undefine	with_system_hsqldb
 %endif
 
-%define		_rel		1
+%define		_rel		2
 %define		upd			680
 %define		mws			OOE%{upd}
 %define		tag			%(echo %{mws} | tr A-Z a-z)-%{milestone}
@@ -2335,7 +2335,7 @@ if [ ! -f installed.stamp ]; then
 	rm -f $RPM_BUILD_ROOT%{_libdir}/%{name}/program/setup.log
 
 	rm -rf $RPM_BUILD_ROOT%{_libdir}/%{name}/share/xdg
-	rm $RPM_BUILD_ROOT%{_libdir}/%{name}/program/cde-open-url
+	rm -f $RPM_BUILD_ROOT%{_libdir}/%{name}/program/cde-open-url
 
 	%if %{without java}
 	# Java-releated bits
