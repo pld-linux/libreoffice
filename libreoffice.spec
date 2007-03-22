@@ -229,7 +229,7 @@ Requires:	%{name}-web = %{epoch}:%{version}-%{release}
 Requires:	%{name}-writer = %{epoch}:%{version}-%{release}
 Requires:	%{name}-xsltfilter = %{epoch}:%{version}-%{release}
 Requires:	fonts-TTF-OpenSymbol = %{epoch}:%{version}-%{release}
-ExclusiveArch:	alpha %{ix86} %{?with_gcc4:%{x8664}} ppc sparc sparcv9
+ExclusiveArch:	%{ix86} %{?with_gcc4:%{x8664}} ppc sparc sparcv9
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %define		specflags	-fno-strict-aliasing
