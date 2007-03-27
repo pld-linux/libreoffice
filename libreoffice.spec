@@ -5,7 +5,6 @@
 #		SRPMS		0.3 GB
 #		RPMS		0.9 GB
 # TODO:
-#   - --with-system-libwps     Use system libwps* library
 #   - pld about logo says 2.0
 #	- without system_db will not work (w/ java) as it will use db4.2 which is too old (see r1.650)
 #	- problems with gcc-4.2.0: oowriter is useless (invisble text till refresh)
@@ -66,31 +65,34 @@
 %undefine	with_system_hsqldb
 %endif
 
-%define		_rel		0.5
 %define		upd			680
-%define		mws			OOE%{upd}
+%define		mws			OOF%{upd}
 %define		tag			%(echo %{mws} | tr A-Z a-z)-%{milestone}
+%define		milestone	m14
 %define		_tag		%(echo %{tag} | tr - _)
-%define		milestone	m6
+%define		_rc			rc4
+%define		_rel		0.1
 
 Summary:	OpenOffice.org - powerful office suite
 Summary(pl.UTF-8):	OpenOffice.org - potężny pakiet biurowy
 Name:		openoffice.org
-Version:	2.1.0
-Release:	0.%{_tag}.%{_rel}
+Version:	2.2.0
+Release:	%{_tag}.%{_rc}.%{_rel}
 Epoch:		1
 License:	GPL/LGPL
 Group:		X11/Applications
-Source0:	http://go-ooo.org/packages/OOE680/ooo-build-2.1.8.tar.gz
-# Source0-md5:	ec39e9bb30c5285afba50ae32dbe7af2
+#Source0:	http://go-ooo.org/packages/OOE680/ooo-build-2.1.8.tar.gz
+# svn export http://svn.gnome.org/svn/ooo-build/tags/DEBIAN-2_2_0_RC4-1 ooo-build-2.2.0
+Source0:	ooo-build-%{version}.tar.bz2
+# Source0-md5:	4ada0593297e807fe07363af3de7c7e3
 Source1:	http://go-ooo.org/packages/%{mws}/%{tag}-core.tar.bz2
-# Source1-md5:	7dbf5f7ea4f469bb6c8b1d6037567431
+# Source1-md5:	42ec421d4550572c4718b2f4d31a1aef
 Source2:	http://go-ooo.org/packages/%{mws}/%{tag}-system.tar.bz2
-# Source2-md5:	7f645231043a776c07a22300c0a10848
+# Source2-md5:	a82acbe556fad97128cea8dc7017da5a
 Source3:	http://go-ooo.org/packages/%{mws}/%{tag}-binfilter.tar.bz2
-# Source3-md5:	22acf75656a2186d8a969ee5069ef193
+# Source3-md5:	b22033d24d92a9e65860d594da9e81a0
 Source4:	http://go-ooo.org/packages/%{mws}/%{tag}-lang.tar.bz2
-# Source4-md5:	9b1a1d5dafbde7cbc90da8b903e6b0bf
+# Source4-md5:	c98e40510a858cd6afdd25149f48300c
 Source10:	http://go-ooo.org/packages/SRC680/ooo_custom_images-13.tar.bz2
 # Source10-md5:	2480af7f890c8175c7f9e183a1b39ed2
 Source11:	http://go-ooo.org/packages/SRC680/ooo_crystal_images-6.tar.bz2
@@ -107,11 +109,8 @@ Source18:	http://go-ooo.org/packages/%{mws}/cli_types.dll
 # Source18-md5:	3cdaf368e99caa3331130a5edf148490
 Source19:	http://go-ooo.org/packages/%{mws}/cli_types_bridgetest.dll
 # Source19-md5:	cadc605a6b0265b8167001b4788ff113
-# lib{wpd,wps} need might be a typo in download.in
-Source20:	http://go-ooo.org/packages/libwpd/libwpd-0.8.8.tar.gz
-# Source20-md5:	cd5997284f4ba1e8dde5d1e5869fc342
-Source21:	http://go-ooo.org/packages/SRC680/libwps-0.1.0~svn20070129.tar.gz
-# Source21-md5:	2e442485100f7e00685737513f853546
+Source20:	http://go-ooo.org/packages/SRC680/libwps-0.1.0~svn20070129.tar.gz
+# Source20-md5:    2e442485100f7e00685737513f853546
 Source50:	openabout_pld.png
 Source51:	openintro_pld.bmp
 # patches applied in prep section
@@ -123,6 +122,7 @@ Patch4:		%{name}-nolfs_hack.patch
 Patch6:		%{name}-java16.patch
 Patch7:		%{name}-nodictinst.patch
 Patch8:		%{name}-73257.patch
+Patch9:		%{name}-apply.patch
 # patches applied by ooo-patching-system
 Patch100:	%{name}-STL-lib64.diff
 Patch101:	%{name}-64bit-inline.diff
@@ -168,10 +168,11 @@ BuildRequires:	libjpeg-devel
 BuildRequires:	libsndfile-devel
 BuildRequires:	libstdc++-devel >= 5:3.2.1
 BuildRequires:	libwpd-devel >= 0.8.6
+BuildRequires:	libwps-devel
 BuildRequires:	libxml2-devel >= 2.0
 %{?with_system_mdbtools:BuildRequires:	mdbtools-devel >= 0.6}
-%{?with_mono:BuildRequires:	mono-csharp >= 1.1.8}
-%{?with_mono:BuildRequires:	mono-devel >= 1.1.8}
+%{?with_mono:BuildRequires:	mono-csharp >= 1.2.3}
+%{?with_mono:BuildRequires:	mono-devel >= 1.2.3}
 %{?with_system_myspell:BuildRequires:	myspell-devel}
 BuildRequires:	nas-devel >= 1.7-1
 BuildRequires:	neon-devel
@@ -2035,7 +2036,7 @@ bash-completion for OpenOffice.org.
 bashowe uzupełnianie nazw dla Openoffice.org.
 
 %prep
-%setup -q -n %(basename %{SOURCE0} .tar.gz)
+%setup -q -n %(basename %{SOURCE0} .tar.bz2)
 install -d src
 cp %{SOURCE50} %{SOURCE51} src
 
@@ -2044,7 +2045,7 @@ ln -sf %{SOURCE1} %{SOURCE2} %{SOURCE3} %{SOURCE4} \
 	%{SOURCE10} %{SOURCE11} %{SOURCE12} \
 	%{SOURCE15} %{SOURCE16} %{SOURCE17} \
 	%{SOURCE18} %{SOURCE19} \
-	%{SOURCE20} %{SOURCE21} \
+	%{SOURCE20} \
 	src
 
 # fixes for the patch subsystem
@@ -2053,14 +2054,15 @@ ln -sf %{SOURCE1} %{SOURCE2} %{SOURCE3} %{SOURCE4} \
 # teach configure.in about PLD
 %patch1 -p1
 
-%patch2 -p1
+#%patch2 -p1
 %patch3 -p1
 %patch4 -p1
 %patch6 -p1
 %if %{with system_myspell}
 %patch7 -p1
 %endif
-%patch8 -p1
+#%patch8 -p1
+%patch9 -p1
 
 # 64 bit related patches (not applied now)
 install %{PATCH100} patches/64bit
@@ -2169,6 +2171,7 @@ CONFOPTS="\
 	--with-system-icu \
 	--with-system-jpeg \
 	--with-system-libwpd \
+	--with-system-libwps \
 	--with-system-libxml \
 	--with-system-nas \
 	--with-system-neon \
@@ -2333,7 +2336,7 @@ if [ ! -f installed.stamp ]; then
 	%endif
 
 	%if %{with mono}
-	rm -rf $RPM_BUILD_ROOT%{_libdir}/pkgconfig/mono-ooo-2.1.pc
+	rm -f $RPM_BUILD_ROOT%{_libdir}/pkgconfig/mono-ooo-2.1.pc
 	%endif
 
 	# Remove dictionaries (in separate pkg)
