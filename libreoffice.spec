@@ -71,7 +71,7 @@
 %define		milestone	m14
 %define		_tag		%(echo %{tag} | tr - _)
 %define		_rc			rc4
-%define		_rel		0.1
+%define		_rel		0.2
 
 Summary:	OpenOffice.org - powerful office suite
 Summary(pl.UTF-8):	OpenOffice.org - potężny pakiet biurowy
@@ -81,10 +81,9 @@ Release:	%{_tag}.%{_rc}.%{_rel}
 Epoch:		1
 License:	GPL/LGPL
 Group:		X11/Applications
-#Source0:	http://go-ooo.org/packages/OOE680/ooo-build-2.1.8.tar.gz
-# svn export http://svn.gnome.org/svn/ooo-build/tags/DEBIAN-2_2_0_RC4-1 ooo-build-2.2.0
-Source0:	ooo-build-%{version}.tar.bz2
-# Source0-md5:	4ada0593297e807fe07363af3de7c7e3
+# svn export http://svn.gnome.org/svn/ooo-build/trunk
+Source0:	ooo-build-r9097.tar.bz2
+# Source0-md5:	4aaaab97e83d87d2b71fcef8ea570a13
 Source1:	http://go-ooo.org/packages/%{mws}/%{tag}-core.tar.bz2
 # Source1-md5:	42ec421d4550572c4718b2f4d31a1aef
 Source2:	http://go-ooo.org/packages/%{mws}/%{tag}-system.tar.bz2
@@ -110,7 +109,7 @@ Source18:	http://go-ooo.org/packages/%{mws}/cli_types.dll
 Source19:	http://go-ooo.org/packages/%{mws}/cli_types_bridgetest.dll
 # Source19-md5:	cadc605a6b0265b8167001b4788ff113
 Source20:	http://go-ooo.org/packages/SRC680/libwps-0.1.0~svn20070129.tar.gz
-# Source20-md5:    2e442485100f7e00685737513f853546
+# Source20-md5:	2e442485100f7e00685737513f853546
 Source50:	openabout_pld.png
 Source51:	openintro_pld.bmp
 # patches applied in prep section
