@@ -70,14 +70,13 @@
 %define		tag			%(echo %{mws} | tr A-Z a-z)-%{milestone}
 %define		milestone	m14
 %define		_tag		%(echo %{tag} | tr - _)
-%define		_rc			rc4
 %define		_rel		0.2
 
 Summary:	OpenOffice.org - powerful office suite
 Summary(pl.UTF-8):	OpenOffice.org - potężny pakiet biurowy
 Name:		openoffice.org
 Version:	2.2.0
-Release:	%{_tag}.%{_rc}.%{_rel}
+Release:	%{_tag}.%{_rel}
 Epoch:		1
 License:	GPL/LGPL
 Group:		X11/Applications
@@ -114,7 +113,6 @@ Source50:	openabout_pld.png
 Source51:	openintro_pld.bmp
 # patches applied in prep section
 Patch0:		%{name}-PLD.patch
-Patch1:		%{name}-vendorname.patch
 Patch2:		%{name}-stl5_fix.patch
 Patch3:		%{name}-mdbtools_fix.diff
 Patch4:		%{name}-nolfs_hack.patch
@@ -2049,9 +2047,6 @@ ln -sf %{SOURCE1} %{SOURCE2} %{SOURCE3} %{SOURCE4} \
 
 # fixes for the patch subsystem
 %patch0 -p1
-
-# teach configure.in about PLD
-%patch1 -p1
 
 #%patch2 -p1
 %patch3 -p1
