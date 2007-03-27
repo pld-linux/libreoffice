@@ -1,5 +1,5 @@
---- ooo-build-2.2.0/patches/src680/apply~	2007-03-27 02:54:55.779113930 +0300
-+++ ooo-build-2.2.0/patches/src680/apply	2007-03-27 02:54:40.198763000 +0300
+--- ooo-build-2.2.0/patches/src680/apply	2007-03-27 02:54:40.198763000 +0300
++++ ooo-build-r9097/patches/src680/apply	2007-03-27 16:17:52.011699303 +0200
 @@ -62,7 +62,8 @@
  Ark: LinuxCommon, NotDebian, ArkOnly, BerkeleyDB43, SystemJavaBits
  Ark64: LinuxCommon, NotDebian, ArkOnly, BerkeleyDB43, 64bit, SystemJavaBits
@@ -10,9 +10,7 @@
  PLD: PLDBase
  PLD64: PLDBase, 64bit, PLD64bitfixes
  # Mandriva Linux
---- ooo-build-r9097/patches/src680/apply~	2007-03-27 16:16:22.000000000 +0200
-+++ ooo-build-r9097/patches/src680/apply	2007-03-27 16:17:52.011699303 +0200
-@@ -1747,6 +1747,12 @@
+@@ -1746,6 +1747,12 @@
  # we will move to gcc-4.x, so it does not make sense to push it upstream
  buildfix-boost-gcc33.diff
  
