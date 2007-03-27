@@ -10,17 +10,3 @@
  PLD: PLDBase
  PLD64: PLDBase, 64bit, PLD64bitfixes
  # Mandriva Linux
-@@ -1734,7 +1735,13 @@
- store-core.diff
- store-install.diff
- store-registry.diff
-+
- [ PLDOnly ]
-+build-wizard-bitmap-scp.diff
-+scp2-user-config-ooo-2.0.diff
-+pushfont-psstream.diff
-+xmlhelp-use-libxslt-from-system.diff
-+
- PLD-build-pld-splash.diff.diff
- PLD-portaudio_v19.diff.diff
- PLD-java6.diff
