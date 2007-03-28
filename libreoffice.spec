@@ -2238,10 +2238,11 @@ CONFOPTS="\
 	--without-gpc \
 	--disable-epm \
 	--disable-fontooo \
+	--disable-strip \
 	--enable-access \
 	--enable-cairo \
 	--enable-crypt-link \
-	--%{?with_mono:--en}%{!?with_mono:dis}able-mono \
+	--%{?with_mono:en}%{!?with_mono:dis}able-mono \
 	--enable-pam-link \
 	--enable-openldap \
 	--enable-cups \
