@@ -115,7 +115,9 @@ Source20:	http://go-ooo.org/packages/libwpd/libwpd-0.8.8.tar.gz
 Source21:	http://go-ooo.org/packages/SRC680/libwps-0.1.0~svn20070129.tar.gz
 # Source21-md5:	2e442485100f7e00685737513f853546
 Source50:	openabout_pld.png
+# Source50-md5:	2af10f6a1f9b2c2448deb8bf4c06908c
 Source51:	openintro_pld.bmp
+# Source51-md5:	25e1f250e83b6aab8b6acca0ed181859
 # patches applied in prep section
 Patch0:		%{name}-PLD.patch
 Patch1:		%{name}-vendorname.patch
