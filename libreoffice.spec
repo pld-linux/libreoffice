@@ -68,7 +68,7 @@
 %undefine	with_system_hsqldb
 %endif
 
-%define		_rel		3.1
+%define		_rel		3.2
 %define		upd			680
 %define		mws			OOE%{upd}
 %define		tag			%(echo %{mws} | tr A-Z a-z)-%{milestone}
@@ -2299,7 +2299,7 @@ fi
 
 %install
 if [ ! -f makeinstall.stamp -o ! -d $RPM_BUILD_ROOT ]; then
-	rm -rf $RPM_BUILD_ROOT makeinstall.stamp
+	rm -rf $RPM_BUILD_ROOT makeinstall.stamp installed.stamp
 
 	# limit to single process installation, it's safe at least
 	%{__sed} -i -e 's#^BUILD_NCPUS=.*#BUILD_NCPUS=1#g' bin/setup
@@ -2386,8 +2386,6 @@ if [ ! -f installed.stamp ]; then
 	ln -s ../../share/%{name}/licenses $RPM_BUILD_ROOT%{_libdir}/%{name}/licenses
 	mv $RPM_BUILD_ROOT%{_libdir}/%{name}/readmes $RPM_BUILD_ROOT%{_datadir}/%{name}
 	ln -s ../../share/%{name}/readmes $RPM_BUILD_ROOT%{_libdir}/%{name}/readmes
-	mv $RPM_BUILD_ROOT%{_libdir}/%{name}/presets $RPM_BUILD_ROOT%{_datadir}/%{name}
-	ln -s ../../share/%{name}/presets $RPM_BUILD_ROOT%{_libdir}/%{name}/presets
 
 	# fix python
 	sed -i -e 's|#!/bin/python|#!%{_bindir}/python|g' $RPM_BUILD_ROOT%{_libdir}/%{name}/program/*.py
@@ -2477,7 +2475,6 @@ done
 %{__sed} -i -e '
 	s,%{_libdir}/%{name}/help,%{_datadir}/%{name}/help,;
 	s,%{_libdir}/%{name}/licenses,%{_datadir}/%{name}/licenses,;
-	s,%{_libdir}/%{name}/presets,%{_datadir}/%{name}/presets,;
 	s,%{_libdir}/%{name}/readmes,%{_datadir}/%{name}/readmes,;
 	s,%{_libdir}/%{name}/share,%{_datadir}/%{name}/share,;
 ' *.lang
@@ -2492,12 +2489,15 @@ if [ -d %{_libdir}/%{name}/share/dict/ooo ] && [ ! -L %{_libdir}/%{name}/share/d
 	rmdir %{_libdir}/%{name}/share/dict/ooo 2>/dev/null || mv -v %{_libdir}/%{name}/share/dict/ooo{,.rpmsave} || :
 fi
 %endif
-for d in presets share %{?with_java:help} readmes licenses; do
+for d in share %{?with_java:help} readmes licenses; do
 	if [ -d %{_libdir}/%{name}/$d ] && [ ! -L %{_libdir}/%{name}/$d ]; then
 		install -d %{_datadir}/%{name}
 		mv %{_libdir}/%{name}/$d %{_datadir}/%{name}/$d || mv %{_libdir}/%{name}/$d{,.rpmsave}
 	fi
 done
+if [ -L %{_libdir}/%{name}/presets ]; then
+	rm -f %{_libdir}/%{name}/presets
+fi
 
 %post core
 %update_mime_database
@@ -2912,23 +2912,22 @@ fi
 %{_datadir}/%{name}/share/registry/modules/org/openoffice/TypeDetection/UISort/UISort-math.xcu
 %{_datadir}/%{name}/share/registry/modules/org/openoffice/TypeDetection/UISort/UISort-writer.xcu
 
-%{_libdir}/%{name}/presets
-%dir %{_datadir}/%{name}/presets
-%dir %{_datadir}/%{name}/presets/autotext
-%{_datadir}/%{name}/presets/autotext/mytexts.bau
-%{_datadir}/%{name}/presets/basic
-%dir %{_datadir}/%{name}/presets/config
-%{_datadir}/%{name}/presets/config/autotbl.fmt
-%{_datadir}/%{name}/presets/config/cmyk.soc
-%{_datadir}/%{name}/presets/config/gallery.soc
-%{_datadir}/%{name}/presets/config/html.soc
-%{_datadir}/%{name}/presets/config/standard.so?
-%{_datadir}/%{name}/presets/config/sun-color.soc
-%{_datadir}/%{name}/presets/config/web.soc
+%dir %{_libdir}/%{name}/presets
+%dir %{_libdir}/%{name}/presets/autotext
+%{_libdir}/%{name}/presets/autotext/mytexts.bau
+%{_libdir}/%{name}/presets/basic
+%dir %{_libdir}/%{name}/presets/config
+%{_libdir}/%{name}/presets/config/autotbl.fmt
+%{_libdir}/%{name}/presets/config/cmyk.soc
+%{_libdir}/%{name}/presets/config/gallery.soc
+%{_libdir}/%{name}/presets/config/html.soc
+%{_libdir}/%{name}/presets/config/standard.so?
+%{_libdir}/%{name}/presets/config/sun-color.soc
+%{_libdir}/%{name}/presets/config/web.soc
 
-%{_datadir}/%{name}/presets/database
-%{_datadir}/%{name}/presets/gallery
-%{_datadir}/%{name}/presets/psprint
+%{_libdir}/%{name}/presets/database
+%{_libdir}/%{name}/presets/gallery
+%{_libdir}/%{name}/presets/psprint
 
 # Programs
 %attr(755,root,root) %{_bindir}/ooconfig
@@ -3045,7 +3044,7 @@ fi
 %{_mandir}/man1/openoffice.1*
 
 # en-US
-%{_datadir}/%{name}/presets/config/*_en-US.so*
+%{_libdir}/%{name}/presets/config/*_en-US.so*
 %{_datadir}/%{name}/share/autocorr/acor_*.dat
 %{_datadir}/%{name}/share/autotext/en-US
 %{_datadir}/%{name}/share/registry/res/en-US
