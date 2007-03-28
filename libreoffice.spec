@@ -68,7 +68,7 @@
 %undefine	with_system_hsqldb
 %endif
 
-%define		_rel		3.2
+%define		_rel		3.3
 %define		upd			680
 %define		mws			OOE%{upd}
 %define		tag			%(echo %{mws} | tr A-Z a-z)-%{milestone}
@@ -83,8 +83,8 @@ Release:	0.%{_tag}.%{_rel}
 Epoch:		1
 License:	GPL/LGPL
 Group:		X11/Applications
-Source0:	ooo-build-ooe680-m6.tar.gz
-# Source0-md5:	797f04099223b549ed1b4939dfc2a335
+Source0:	http://go-ooo.org/packages/OOE680/ooo-build-2.1.8.tar.gz
+# Source0-md5:	ec39e9bb30c5285afba50ae32dbe7af2
 Source1:	http://go-ooo.org/packages/%{mws}/%{tag}-core.tar.bz2
 # Source1-md5:	7dbf5f7ea4f469bb6c8b1d6037567431
 Source2:	http://go-ooo.org/packages/%{mws}/%{tag}-system.tar.bz2
@@ -124,9 +124,9 @@ Patch1:		%{name}-vendorname.patch
 Patch2:		%{name}-stl5_fix.patch
 Patch3:		%{name}-mdbtools_fix.diff
 Patch4:		%{name}-nolfs_hack.patch
-Patch5:		%{name}-no_fonts_dir_buildfix.patch
 Patch6:		%{name}-java16.patch
 Patch7:		%{name}-nodictinst.patch
+Patch8:		%{name}-73257.patch
 # patches applied by ooo-patching-system
 Patch100:	%{name}-STL-lib64.diff
 Patch101:	%{name}-64bit-inline.diff
@@ -2066,11 +2066,11 @@ ln -sf %{SOURCE1} %{SOURCE2} %{SOURCE3} %{SOURCE4} \
 %patch2 -p1
 %patch3 -p1
 %patch4 -p1
-%patch5 -p1
 %patch6 -p1
 %if %{with system_myspell}
 %patch7 -p1
 %endif
+%patch8 -p1
 
 # 64 bit related patches (not applied now)
 install %{PATCH100} patches/64bit
@@ -3036,6 +3036,9 @@ fi
 
 %{_desktopdir}/template.desktop
 
+%{_iconsdir}/hicolor/*/apps/ooo-gulls.png
+%{_iconsdir}/hicolor/*/apps/ooo-printeradmin.png
+%{_iconsdir}/hicolor/*/apps/ooo-template.png
 %{_pixmapsdir}/ooo-gulls.png
 %{_pixmapsdir}/ooo-template.png
 
@@ -3247,6 +3250,7 @@ fi
 %attr(755,root,root) %{_libdir}/%{name}/program/libmcnttype.so
 %attr(755,root,root) %{_libdir}/%{name}/program/libmdb680*.so
 %attr(755,root,root) %{_libdir}/%{name}/program/libmdbimpl680*.so
+%attr(755,root,root) %{_libdir}/%{name}/program/libmsworks680*.so
 %attr(755,root,root) %{_libdir}/%{name}/program/libmysql2.so
 %attr(755,root,root) %{_libdir}/%{name}/program/libodbc2.so
 %attr(755,root,root) %{_libdir}/%{name}/program/libodbcbase2.so
@@ -3415,6 +3419,7 @@ fi
 %attr(755,root,root) %{_libdir}/%{name}/program/sbase
 %{_mandir}/man1/oobase.1
 %{_desktopdir}/base.desktop
+%{_iconsdir}/hicolor/*/apps/ooo-base.png
 %{_pixmapsdir}/ooo-base.png
 %{_libdir}/%{name}/program/resource/cnr680en-US.res
 %if %{with java}
@@ -3444,6 +3449,7 @@ fi
 %attr(755,root,root) %{_libdir}/%{name}/program/scalc
 %{_mandir}/man1/oocalc.1
 %{_desktopdir}/calc.desktop
+%{_iconsdir}/hicolor/*/apps/ooo-calc.png
 %{_pixmapsdir}/ooo-calc.png
 %if %{with java}
 %{_datadir}/%{name}/help/en/scalc.*
@@ -3469,6 +3475,7 @@ fi
 %attr(755,root,root) %{_libdir}/%{name}/program/sdraw
 %{_mandir}/man1/oodraw.1
 %{_desktopdir}/draw.desktop
+%{_iconsdir}/hicolor/*/apps/ooo-draw.png
 %{_pixmapsdir}/ooo-draw.png
 %if %{with java}
 %{_datadir}/%{name}/help/en/sdraw.*
@@ -3496,6 +3503,7 @@ fi
 %attr(755,root,root) %{_libdir}/%{name}/program/swriter
 %{_mandir}/man1/oowriter.1
 %{_desktopdir}/writer.desktop
+%{_iconsdir}/hicolor/*/apps/ooo-writer.png
 %{_pixmapsdir}/ooo-writer.png
 %if %{with java}
 %{_datadir}/%{name}/help/en/swriter.*
@@ -3528,6 +3536,7 @@ fi
 %attr(755,root,root) %{_libdir}/%{name}/program/simpress
 %{_mandir}/man1/ooimpress.1
 %{_desktopdir}/impress.desktop
+%{_iconsdir}/hicolor/*/apps/ooo-impress.png
 %{_pixmapsdir}/ooo-impress.png
 %if %{with java}
 %{_datadir}/%{name}/help/en/simpress.*
@@ -3551,6 +3560,7 @@ fi
 %attr(755,root,root) %{_libdir}/%{name}/program/smath
 %{_mandir}/man1/oomath.1
 %{_desktopdir}/math.desktop
+%{_iconsdir}/hicolor/*/apps/ooo-math.png
 %{_pixmapsdir}/ooo-math.png
 %if %{with java}
 %{_datadir}/%{name}/help/en/smath.*
@@ -3572,6 +3582,7 @@ fi
 %{_datadir}/%{name}/share/config/soffice.cfg/modules/sweb
 %{_mandir}/man1/ooweb.1
 %{_desktopdir}/web.desktop
+%{_iconsdir}/hicolor/*/apps/ooo-web.png
 %{_pixmapsdir}/ooo-web.png
 
 %files graphicfilter
