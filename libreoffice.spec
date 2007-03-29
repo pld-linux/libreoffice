@@ -109,8 +109,6 @@ Source19:	http://go-ooo.org/packages/%{mws}/cli_types_bridgetest.dll
 # Source19-md5:	cadc605a6b0265b8167001b4788ff113
 Source20:	http://go-ooo.org/packages/SRC680/libwps-0.1.0~svn20070129.tar.gz
 # Source20-md5:	2e442485100f7e00685737513f853546
-Source50:	openabout_pld.png
-Source51:	openintro_pld.bmp
 # patches applied in prep section
 Patch0:		%{name}-PLD.patch
 Patch2:		%{name}-stl5_fix.patch
@@ -2035,7 +2033,6 @@ bashowe uzupełnianie nazw dla Openoffice.org.
 %prep
 %setup -q -n %(basename %{SOURCE0} .tar.bz2)
 install -d src
-cp %{SOURCE50} %{SOURCE51} src
 
 # sources, icons, KDE_icons
 ln -sf %{SOURCE1} %{SOURCE2} %{SOURCE3} %{SOURCE4} \
