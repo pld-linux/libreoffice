@@ -114,8 +114,8 @@ Source20:	http://go-ooo.org/packages/libwpd/libwpd-0.8.8.tar.gz
 # Source20-md5:	cd5997284f4ba1e8dde5d1e5869fc342
 Source21:	http://go-ooo.org/packages/SRC680/libwps-0.1.0~svn20070129.tar.gz
 # Source21-md5:	2e442485100f7e00685737513f853546
-Source50:	openabout_pld.bmp
-# Source50-md5:	08771d1a8ff22b1097546e3f7a701c04
+Source50:	openabout_pld.png
+# Source50-md5:	64a945a07b64ebc0a12adfde4c99da8a
 Source51:	openintro_pld.bmp
 # Source51-md5:	25e1f250e83b6aab8b6acca0ed181859
 # patches applied in prep section
@@ -2210,7 +2210,7 @@ CONFOPTS="\
 %endif
 	--with-dynamic-xinerama \
 	--with-intro-bitmaps="\$SRCDIR/openintro_pld.bmp" \
-	--with-about-bitmaps="\$SRCDIR/openabout_pld.bmp" \
+	--with-about-bitmaps="\$SRCDIR/openabout_pld.png" \
 	--with-distro="${DISTRO}" \
 	--enable-gtk \
 	--%{!?with_kde:dis}%{?with_kde:en}able-kde \
