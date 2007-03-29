@@ -5,7 +5,7 @@
 #		SRPMS		0.3 GB
 #		RPMS		0.9 GB
 # TODO:
-#   - pld about logo says 2.0
+#   - --with mono wants static mono
 #	- without system_db will not work (w/ java) as it will use db4.2 which is too old (see r1.650)
 #	- problems with gcc-4.2.0: oowriter is useless (invisble text till refresh)
 #	- fix help files (broken links)
