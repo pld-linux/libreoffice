@@ -1,6 +1,6 @@
---- config_office/configure.in~	2007-01-03 23:21:35.000000000 +0200
-+++ config_office/configure.in	2007-01-04 00:14:05.000000000 +0200
-@@ -2116,9 +2117,9 @@
+--- config_office/configure.in~	2007-03-28 00:03:45.805243465 +0300
++++ config_office/configure.in	2007-03-28 00:21:10.154123488 +0300
+@@ -2235,9 +2235,9 @@
  				   fi
  			   fi
  		   else
@@ -12,14 +12,3 @@
  				   AC_MSG_RESULT([checked])
  				   STLPORT_VER=500
  			   else
---- stlport/makefile.mk~	2007-01-03 01:28:58.000000000 +0200
-+++ stlport/makefile.mk	2007-01-03 01:29:02.000000000 +0200
-@@ -204,7 +204,7 @@
- all :
-        @echo "         An already available installation of STLport has been chosen in the configure process."
-        @echo "         Therefore the version provided here does not need to be built in addition."
--       +$(COPY) $(STLPORT4)$/lib$/*stlport*$(DLLPOST) $(DLLDEST)
-+       +$(COPY) $(STLPORT4)$/lib64$/*stlport*$(DLLPOST) $(DLLDEST)
- .ENDIF
- 
- .INCLUDE : 	set_ext.mk
