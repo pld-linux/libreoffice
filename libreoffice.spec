@@ -109,6 +109,8 @@ Source19:	http://go-ooo.org/packages/%{mws}/cli_types_bridgetest.dll
 # Source19-md5:	cadc605a6b0265b8167001b4788ff113
 Source20:	http://go-ooo.org/packages/SRC680/libwps-0.1.0~svn20070129.tar.gz
 # Source20-md5:	2e442485100f7e00685737513f853546
+Source50:	openabout_pld.png
+# Source50-md5: 64a945a07b64ebc0a12adfde4c99da8a
 # patches applied in prep section
 Patch0:		%{name}-PLD.patch
 Patch2:		%{name}-stl5_fix.patch
@@ -2043,6 +2045,8 @@ ln -sf %{SOURCE1} %{SOURCE2} %{SOURCE3} %{SOURCE4} \
 	%{SOURCE20} \
 	src
 
+cp %{SOURCE50} src
+
 # fixes for the patch subsystem
 %patch0 -p1
 
@@ -2187,7 +2191,7 @@ CONFOPTS="\
 %endif
 	--with-dynamic-xinerama \
 	--with-intro-bitmaps="\$SRCDIR/openintro_pld.bmp" \
-	--with-about-bitmaps="\$SRCDIR/openabout_pld.bmp" \
+	--with-about-bitmaps="\$SRCDIR/openabout_pld.png" \
 	--with-distro="${DISTRO}" \
 	--enable-gtk \
 	--%{!?with_kde:dis}%{?with_kde:en}able-kde \
@@ -2236,6 +2240,7 @@ CONFOPTS="\
 	--disable-symbols \
 %endif
 	--with-num-cpus=$RPM_BUILD_NR_THREADS \
+	--with-build-version=%{version}-%{release} \
 	--with-tag=%{tag}
 "
 
@@ -3387,7 +3392,7 @@ fi
 %attr(755,root,root) %{_libdir}/%{name}/program/kde-open-url
 %attr(755,root,root) %{_libdir}/%{name}/program/kdebe1.uno.so
 %attr(755,root,root) %{_libdir}/%{name}/program/kdefilepicker
-%attr(755,root,root) %{_libdir}/%{name}/program/libfps_kde.so
+#%attr(755,root,root) %{_libdir}/%{name}/program/libfps_kde.so
 %attr(755,root,root) %{_libdir}/%{name}/program/libkabdrv1.so
 %attr(755,root,root) %{_libdir}/%{name}/program/libvclplug_kde*.so
 %endif
