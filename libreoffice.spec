@@ -170,7 +170,7 @@ BuildRequires:	libwps-devel
 BuildRequires:	libxml2-devel >= 2.0
 %{?with_system_mdbtools:BuildRequires:	mdbtools-devel >= 0.6}
 %{?with_mono:BuildRequires:	mono-csharp >= 1.2.3}
-%{?with_mono:BuildRequires:	mono-devel >= 1.2.3}
+%{?with_mono:BuildRequires:	mono-static >= 1.2.3}
 %{?with_system_myspell:BuildRequires:	myspell-devel}
 BuildRequires:	nas-devel >= 1.7-1
 BuildRequires:	neon-devel
