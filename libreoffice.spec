@@ -5,6 +5,8 @@
 #		SRPMS		0.3 GB
 #		RPMS		0.9 GB
 # TODO:
+#   /usr/share/openoffice.org/share/registry/modules/org/openoffice/Office/Common/Common-ctl_dz.xcu
+#   /usr/share/openoffice.org/share/registry/modules/org/openoffice/Setup/Langpack-dz.xcu
 #   - --with mono wants static mono
 #	- without system_db will not work (w/ java) as it will use db4.2 which is too old (see r1.650)
 #	- problems with gcc-4.2.0: oowriter is useless (invisble text till refresh)
@@ -70,7 +72,7 @@
 %define		tag			%(echo %{mws} | tr A-Z a-z)-%{milestone}
 %define		milestone	m14
 %define		_tag		%(echo %{tag} | tr - _)
-%define		_rel		0.2
+%define		_rel		0.4
 
 Summary:	OpenOffice.org - powerful office suite
 Summary(pl.UTF-8):	OpenOffice.org - potężny pakiet biurowy
@@ -782,6 +784,15 @@ language.
 %description i18n-de -l pl.UTF-8
 Ten pakiet dostarcza zasoby zawierające menu i okna dialogowe w języku
 niemieckim.
+
+%package i18n-dz
+Summary:	OpenOffice.org - interface in dz language
+Group:		X11/Applications
+Requires:	%{name}-core = %{epoch}:%{version}-%{release}
+
+%description i18n-dz
+This package provides resources containing menus and dialogs in dz
+language.
 
 %package i18n-el
 Summary:	OpenOffice.org - interface in Greek language
@@ -2561,6 +2572,23 @@ fi
 %doc %{_libdir}/%{name}/LICENSE*
 %doc %{_libdir}/%{name}/*README*
 
+# TODO: check where these really belong
+   %attr(755,root,root) %{_libdir}/%{name}/program/libbf_go680lx.so
+   %attr(755,root,root) %{_libdir}/%{name}/program/libdeploymentmisc680lx.so
+   %attr(755,root,root) %{_libdir}/%{name}/program/liblpsolve55.so
+   %attr(755,root,root) %{_libdir}/%{name}/program/libvbaobj680lx.uno.so
+   %attr(755,root,root) %{_libdir}/%{name}/program/scsolver.uno.so
+   %attr(755,root,root) %{_libdir}/%{name}/program/stringresource680lx.uno.so
+   %attr(755,root,root) %{_libdir}/%{name}/program/updatefeed.uno.so
+   %{_datadir}/%{name}/share/config/images_tango.zip
+   %{_datadir}/%{name}/share/registry/data/org/openoffice/UserProfile.xcu
+#   %{_datadir}/%{name}/share/registry/modules/org/openoffice/Office/Common/Common-ctl_dz.xcu
+#   %{_datadir}/%{name}/share/registry/modules/org/openoffice/Setup/Langpack-dz.xcu
+   %{_libdir}/%{name}/program/resource/scsolver680en-US.res
+   %{_libdir}/%{name}/program/root3.dat
+   %{_libdir}/%{name}/program/root4.dat
+   %{_libdir}/%{name}/program/root5.dat
+
 %dir %{_sysconfdir}/%{name}
 %config(noreplace) %verify(not md5 mtime size) %{_sysconfdir}/%{name}/sofficerc
 
@@ -3392,7 +3420,7 @@ fi
 %attr(755,root,root) %{_libdir}/%{name}/program/kde-open-url
 %attr(755,root,root) %{_libdir}/%{name}/program/kdebe1.uno.so
 %attr(755,root,root) %{_libdir}/%{name}/program/kdefilepicker
-#%attr(755,root,root) %{_libdir}/%{name}/program/libfps_kde.so
+%attr(755,root,root) %{_libdir}/%{name}/program/fps_kde.uno.so
 %attr(755,root,root) %{_libdir}/%{name}/program/libkabdrv1.so
 %attr(755,root,root) %{_libdir}/%{name}/program/libvclplug_kde*.so
 %endif
@@ -3694,6 +3722,9 @@ fi
 %defattr(644,root,root,755)
 
 %files i18n-de -f de.lang
+%defattr(644,root,root,755)
+
+%files i18n-dz -f dz.lang
 %defattr(644,root,root,755)
 
 %files i18n-el -f el.lang
