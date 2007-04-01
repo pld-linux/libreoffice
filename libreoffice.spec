@@ -36,7 +36,7 @@
 %bcond_without	gnomevfs	# GNOME VFS and Evolution 2 support
 %bcond_without	java		# without Java support (disables help support)
 %bcond_without	kde		# KDE L&F packages
-%bcond_without	mono		# disable compilation of mono bindings
+%bcond_with	mono		# disable compilation of mono bindings
 %bcond_without	mozilla		# without mozilla components
 %bcond_without	i18n		# do not create i18n packages
 
