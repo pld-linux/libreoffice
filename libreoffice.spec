@@ -786,13 +786,18 @@ Ten pakiet dostarcza zasoby zawierające menu i okna dialogowe w języku
 niemieckim.
 
 %package i18n-dz
-Summary:	OpenOffice.org - interface in dz language
+Summary:	OpenOffice.org - interface in Dzongkha language
+Summary(pl.UTF-8):	Openoffice.org - interfejs w języku dżongkha
 Group:		X11/Applications
 Requires:	%{name}-core = %{epoch}:%{version}-%{release}
 
 %description i18n-dz
-This package provides resources containing menus and dialogs in dz
-language.
+This package provides resources containing menus and dialogs in
+Dzongkha language.
+
+%description i18n-dz -l pl.UTF-8
+Ten pakiet dostarcza zasoby zawierające menu i okna dialogowe w języku
+dżongkha.
 
 %package i18n-el
 Summary:	OpenOffice.org - interface in Greek language
