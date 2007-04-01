@@ -2578,17 +2578,15 @@ fi
 %doc %{_libdir}/%{name}/*README*
 
 # TODO: check where these really belong
-   %attr(755,root,root) %{_libdir}/%{name}/program/libbf_go680lx.so
-   %attr(755,root,root) %{_libdir}/%{name}/program/libdeploymentmisc680lx.so
+   %attr(755,root,root) %{_libdir}/%{name}/program/libbf_go680*.so
+   %attr(755,root,root) %{_libdir}/%{name}/program/libdeploymentmisc680*.so
    %attr(755,root,root) %{_libdir}/%{name}/program/liblpsolve55.so
-   %attr(755,root,root) %{_libdir}/%{name}/program/libvbaobj680lx.uno.so
+   %attr(755,root,root) %{_libdir}/%{name}/program/libvbaobj680*.uno.so
    %attr(755,root,root) %{_libdir}/%{name}/program/scsolver.uno.so
-   %attr(755,root,root) %{_libdir}/%{name}/program/stringresource680lx.uno.so
+   %attr(755,root,root) %{_libdir}/%{name}/program/stringresource680*.uno.so
    %attr(755,root,root) %{_libdir}/%{name}/program/updatefeed.uno.so
    %{_datadir}/%{name}/share/config/images_tango.zip
    %{_datadir}/%{name}/share/registry/data/org/openoffice/UserProfile.xcu
-#   %{_datadir}/%{name}/share/registry/modules/org/openoffice/Office/Common/Common-ctl_dz.xcu
-#   %{_datadir}/%{name}/share/registry/modules/org/openoffice/Setup/Langpack-dz.xcu
    %{_libdir}/%{name}/program/resource/scsolver680en-US.res
    %{_libdir}/%{name}/program/root3.dat
    %{_libdir}/%{name}/program/root4.dat
@@ -2806,6 +2804,7 @@ fi
 %{_datadir}/%{name}/share/registry/modules/org/openoffice/Office/Common/Common-cjk_zh-CN.xcu
 %{_datadir}/%{name}/share/registry/modules/org/openoffice/Office/Common/Common-cjk_zh-TW.xcu
 %{_datadir}/%{name}/share/registry/modules/org/openoffice/Office/Common/Common-ctl_ar.xcu
+%{_datadir}/%{name}/share/registry/modules/org/openoffice/Office/Common/Common-ctl_dz.xcu
 %{_datadir}/%{name}/share/registry/modules/org/openoffice/Office/Common/Common-ctl_fa.xcu
 %{_datadir}/%{name}/share/registry/modules/org/openoffice/Office/Common/Common-ctl_gu-IN.xcu
 %{_datadir}/%{name}/share/registry/modules/org/openoffice/Office/Common/Common-ctl_he.xcu
@@ -2847,6 +2846,7 @@ fi
 %{_datadir}/%{name}/share/registry/modules/org/openoffice/Setup/Langpack-cy.xcu
 %{_datadir}/%{name}/share/registry/modules/org/openoffice/Setup/Langpack-da.xcu
 %{_datadir}/%{name}/share/registry/modules/org/openoffice/Setup/Langpack-de.xcu
+%{_datadir}/%{name}/share/registry/modules/org/openoffice/Setup/Langpack-dz.xcu
 %{_datadir}/%{name}/share/registry/modules/org/openoffice/Setup/Langpack-el.xcu
 %{_datadir}/%{name}/share/registry/modules/org/openoffice/Setup/Langpack-en-GB.xcu
 %{_datadir}/%{name}/share/registry/modules/org/openoffice/Setup/Langpack-en-US.xcu
