@@ -1,0 +1,10 @@
+--- sw/source/core/bastyp/swregion.cxx.org	2006-09-16 23:43:34.000000000 +0300
++++ sw/source/core/bastyp/swregion.cxx	2007-04-03 22:56:57.415625055 +0300
+@@ -79,6 +79,7 @@
+ {
+ 	if( rDel )
+ 	{
++		pData = (SwRect*) pData;
+ 		*(pData+nPos) = rRect;
+ 		rDel = FALSE;
+ 	}
