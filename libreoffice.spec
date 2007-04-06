@@ -1,9 +1,9 @@
 # NOTE:
 #	- normal build (athlon) requires about 15 GB of disk space:
-#		$BUILD_ROOT	3.7 GB
-#		BUILD		9.6 GB
+#		$BUILD_ROOT	3.9 GB
+#		BUILD		9.8 GB
 #		SRPMS		0.3 GB
-#		RPMS		0.9 GB
+#		RPMS		1.0 GB
 # TODO:
 #   /usr/share/openoffice.org/share/registry/modules/org/openoffice/Office/Common/Common-ctl_dz.xcu
 #   /usr/share/openoffice.org/share/registry/modules/org/openoffice/Setup/Langpack-dz.xcu
