@@ -2299,7 +2299,7 @@ fi
 
 %install
 if [ ! -f makeinstall.stamp -o ! -d $RPM_BUILD_ROOT ]; then
-	rm -rf $RPM_BUILD_ROOT makeinstall.stamp installed.stamp
+	rm -rf makeinstall.stamp installed.stamp $RPM_BUILD_ROOT
 
 	# limit to single process installation, it's safe at least
 	%{__sed} -i -e 's#^BUILD_NCPUS=.*#BUILD_NCPUS=1#g' bin/setup
