@@ -23,6 +23,7 @@
 #	- --with-system-mythes + mythes package (http://lingucomponent.openoffice.org/thesaurus.html)
 #   - --with-system-mspack - use libmspack already installed on system
 #	- bcond system_xt doesn't work - xt in PLD is too old or broken
+#   - rename %_desktopdir/calc.desktop (conflicts with calc)
 #
 #	$ grep SYSTEM ooo-build-ooe680-m6/build/ooe680-m6/config_office/config.log |grep NO
 #
