@@ -1,5 +1,5 @@
 # NOTE:
-#	- normal build (athlon) requires about 15 GB of disk space:
+#	- normal build (athlon) requires about 25 GB of disk space:
 #		$BUILD_ROOT	7.0 GB
 #		BUILD	       16.2 GB
 #		SRPMS		0.3 GB
