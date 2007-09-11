@@ -2482,7 +2482,7 @@ done
 %clean
 rm -rf $RPM_BUILD_ROOT
 
-%pre core
+%pretrans core
 %if %{with system_myspell}
 # we symlink the dir, unless smb wishes to patch OOo to use system dir directly
 if [ -d %{_libdir}/%{name}/share/dict/ooo ] && [ ! -L %{_libdir}/%{name}/share/dict/ooo ]; then
