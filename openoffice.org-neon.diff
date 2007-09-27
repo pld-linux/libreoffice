@@ -1,0 +1,11 @@
+--- config_office/configure.in.org	2007-09-27 12:20:44.019267510 +0200
++++ config_office/configure.in	2007-09-27 12:50:09.187003711 +0200
+@@ -4350,7 +4350,7 @@
+ 	test "$with_system_neon" != "no"; then
+         AC_MSG_RESULT([external])
+         PKG_CHECK_MODULES(NEON, neon >= 0.24.0)
+-        PKG_CHECK_MODULES(NEON, neon < 0.27.0, , AC_MSG_ERROR([you need neon 0.24.x to 0.26.x for system-neon]))
++        PKG_CHECK_MODULES(NEON, neon < 0.28.0, , AC_MSG_ERROR([you need neon 0.24.x to 0.28.x for system-neon]))
+         NEON_VERSION="`$PKG_CONFIG --modversion neon | $SED 's/\.//g'`"
+         NEON_CFLAGS="$NEON_CFLAGS -DSYSTEM_NEON -DUSE_DAV_LOCKS=1"
+         SYSTEM_NEON=YES
