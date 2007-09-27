@@ -73,7 +73,7 @@
 %define		tag			%(echo %{mws} | tr A-Z a-z)-%{milestone}
 %define		milestone	m14
 %define		_tag		%(echo %{tag} | tr - _)
-%define		_rel		0.8
+%define		_rel		0.9
 
 Summary:	OpenOffice.org - powerful office suite
 Summary(pl.UTF-8):	OpenOffice.org - potężny pakiet biurowy
@@ -134,6 +134,7 @@ Patch109:	%{name}-agg25.patch
 Patch110:	%{name}-nsplugin-path.diff
 Patch111:	%{name}-perl-nodiag.patch
 Patch112:	%{name}-gcc42-swregion.diff
+Patch113:	%{name}-neon.diff
 URL:		http://www.openoffice.org/
 BuildRequires:	/usr/bin/getopt
 BuildRequires:	STLport-devel >= 2:5.0.0
@@ -2095,7 +2096,7 @@ done
 
 echo "[ PLDOnly ]" >> patches/src680/apply
 # patches applied by ooo (extension .diff is required)
-for P in %{PATCH102} %{PATCH104} %{PATCH108} %{PATCH109} %{PATCH111} %{PATCH112}; do
+for P in %{PATCH102} %{PATCH104} %{PATCH108} %{PATCH109} %{PATCH111} %{PATCH112} %{PATCH113}; do
 	PATCHNAME=PLD-${P##*/%{name}-}
 	PATCHNAME=${PATCHNAME%.patch}.diff
 	install $P patches/src680/$PATCHNAME
