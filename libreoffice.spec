@@ -23,7 +23,6 @@
 #	- --with-system-mythes + mythes package (http://lingucomponent.openoffice.org/thesaurus.html)
 #   - --with-system-mspack - use libmspack already installed on system
 #	- bcond system_xt doesn't work - xt in PLD is too old or broken
-#   - rename %_desktopdir/calc.desktop (conflicts with calc)
 #
 #	$ grep SYSTEM ooo-build-ooe680-m6/build/ooe680-m6/config_office/config.log |grep NO
 #
@@ -73,7 +72,7 @@
 %define		tag			%(echo %{mws} | tr A-Z a-z)-%{milestone}
 %define		milestone	m14
 %define		_tag		%(echo %{tag} | tr - _)
-%define		_rel		0.10
+%define		_rel		0.11
 
 Summary:	OpenOffice.org - powerful office suite
 Summary(pl.UTF-8):	OpenOffice.org - potężny pakiet biurowy
@@ -2486,6 +2485,13 @@ done
 	s,%{_libdir}/%{name}/share,%{_datadir}/%{name}/share,;
 ' *.lang
 
+# Rename .desktop files to avoid conflicts with other applications .desktops
+desktoplist=$(ls desktop/*.desktop | cut -d"/" -f2)
+
+for desktop in $desktoplist; do
+	install $desktop $RPM_BUILD_ROOT%{_desktopdir}/oo$desktop
+done
+
 %clean
 rm -rf $RPM_BUILD_ROOT
 
@@ -3068,7 +3074,7 @@ fi
 
 %{_datadir}/mime/packages/openoffice.xml
 
-%{_desktopdir}/template.desktop
+%{_desktopdir}/ootemplate.desktop
 
 %{_iconsdir}/hicolor/*/apps/ooo-gulls.png
 %{_iconsdir}/hicolor/*/apps/ooo-printeradmin.png
@@ -3452,7 +3458,7 @@ fi
 %attr(755,root,root) %{_bindir}/oobase
 %attr(755,root,root) %{_libdir}/%{name}/program/sbase
 %{_mandir}/man1/oobase.1
-%{_desktopdir}/base.desktop
+%{_desktopdir}/oobase.desktop
 %{_iconsdir}/hicolor/*/apps/ooo-base.png
 %{_pixmapsdir}/ooo-base.png
 %{_libdir}/%{name}/program/resource/cnr680en-US.res
@@ -3482,7 +3488,7 @@ fi
 %attr(755,root,root) %{_libdir}/%{name}/program/libscui680*.so
 %attr(755,root,root) %{_libdir}/%{name}/program/scalc
 %{_mandir}/man1/oocalc.1
-%{_desktopdir}/calc.desktop
+%{_desktopdir}/oocalc.desktop
 %{_iconsdir}/hicolor/*/apps/ooo-calc.png
 %{_pixmapsdir}/ooo-calc.png
 %if %{with java}
@@ -3508,7 +3514,7 @@ fi
 %attr(755,root,root) %{_bindir}/oodraw
 %attr(755,root,root) %{_libdir}/%{name}/program/sdraw
 %{_mandir}/man1/oodraw.1
-%{_desktopdir}/draw.desktop
+%{_desktopdir}/oodraw.desktop
 %{_iconsdir}/hicolor/*/apps/ooo-draw.png
 %{_pixmapsdir}/ooo-draw.png
 %if %{with java}
@@ -3536,7 +3542,7 @@ fi
 %attr(755,root,root) %{_libdir}/%{name}/program/libwpft680*.so
 %attr(755,root,root) %{_libdir}/%{name}/program/swriter
 %{_mandir}/man1/oowriter.1
-%{_desktopdir}/writer.desktop
+%{_desktopdir}/oowriter.desktop
 %{_iconsdir}/hicolor/*/apps/ooo-writer.png
 %{_pixmapsdir}/ooo-writer.png
 %if %{with java}
@@ -3569,7 +3575,7 @@ fi
 %attr(755,root,root) %{_libdir}/%{name}/program/libplaceware*.so
 %attr(755,root,root) %{_libdir}/%{name}/program/simpress
 %{_mandir}/man1/ooimpress.1
-%{_desktopdir}/impress.desktop
+%{_desktopdir}/ooimpress.desktop
 %{_iconsdir}/hicolor/*/apps/ooo-impress.png
 %{_pixmapsdir}/ooo-impress.png
 %if %{with java}
@@ -3593,7 +3599,7 @@ fi
 %attr(755,root,root) %{_libdir}/%{name}/program/libsmd680*.so
 %attr(755,root,root) %{_libdir}/%{name}/program/smath
 %{_mandir}/man1/oomath.1
-%{_desktopdir}/math.desktop
+%{_desktopdir}/oomath.desktop
 %{_iconsdir}/hicolor/*/apps/ooo-math.png
 %{_pixmapsdir}/ooo-math.png
 %if %{with java}
@@ -3615,7 +3621,7 @@ fi
 %attr(755,root,root) %{_bindir}/ooweb
 %{_datadir}/%{name}/share/config/soffice.cfg/modules/sweb
 %{_mandir}/man1/ooweb.1
-%{_desktopdir}/web.desktop
+%{_desktopdir}/ooweb.desktop
 %{_iconsdir}/hicolor/*/apps/ooo-web.png
 %{_pixmapsdir}/ooo-web.png
 
