@@ -4,6 +4,16 @@
 #		BUILD	       16.2 GB
 #		SRPMS		0.3 GB
 #		RPMS		1.2 GB
+#
+# 2.3.0 NOTES/TODO:
+#  - needs some help to build: when the build fails complaining about --enable-gtk,
+#    go to rpm/BUILD/ooo-build-trunk dir, type make and go grab some coffee. 
+#    After some time it will eventually fail on sc/util (_sv_rules empty), workaround:
+#    comment out the `.IF "$(VBA_EXTENSION)"=="YES"' section (3 lines) in 
+#    build/current/sc/util/makefile.mk, and rerun the build. It will complete, yet it will
+#    fail on install...
+#    
+#
 # TODO:
 #   /usr/share/openoffice.org/share/registry/modules/org/openoffice/Office/Common/Common-ctl_dz.xcu
 #   /usr/share/openoffice.org/share/registry/modules/org/openoffice/Setup/Langpack-dz.xcu
@@ -39,16 +49,18 @@
 %bcond_with	mono		# enable compilation of mono bindings
 %bcond_without	mozilla		# without mozilla components
 %bcond_without	i18n		# do not create i18n packages
+%bcond_with	ccache		# use ccache to speed up builds
+%bcond_with	msaccess	# with ms access import pieces
 
 %bcond_without	system_beanshell
 %bcond_without	system_db		# without system (i.e. with internal) Berkeley DB
 %bcond_with	system_libhnj		# with system ALTLinuxhyph (NFY)
-%bcond_without	system_mdbtools
+%bcond_without	system_mdbtools		# with system mdbtools
 %bcond_without	system_xalan
 %bcond_without	system_xerces
 %bcond_without	system_xml_apis
 %bcond_without	system_hsqldb
-%bcond_without	system_agg
+%bcond_with	system_agg		# with system agg
 %bcond_without	system_hunspell
 %bcond_without	system_myspell
 %bcond_with	system_xt
@@ -68,31 +80,31 @@
 %endif
 
 %define		upd			680
-%define		mws			OOF%{upd}
+%define		mws			OOG%{upd}
 %define		tag			%(echo %{mws} | tr A-Z a-z)-%{milestone}
-%define		milestone	m14
+%define		milestone	m5
 %define		_tag		%(echo %{tag} | tr - _)
-%define		_rel		0.11
+%define		_rel		0.0.1
 
 Summary:	OpenOffice.org - powerful office suite
 Summary(pl.UTF-8):	OpenOffice.org - potężny pakiet biurowy
 Name:		openoffice.org
-Version:	2.2.0
+Version:	2.3.0
 Release:	%{_tag}.%{_rel}
 Epoch:		1
 License:	GPL/LGPL
 Group:		X11/Applications
 # svn export http://svn.gnome.org/svn/ooo-build/trunk
-Source0:	ooo-build-r9097.tar.bz2
-# Source0-md5:	4aaaab97e83d87d2b71fcef8ea570a13
+Source0:	ooo-build-r10353.tar.bz2
+# Source0-md5:	c7fe3328c889c2332650f3de3ff3afa0
 Source1:	http://go-ooo.org/packages/%{mws}/%{tag}-core.tar.bz2
-# Source1-md5:	42ec421d4550572c4718b2f4d31a1aef
+# Source1-md5:	eb0bce2625e182db1470b7cebfbcdc17
 Source2:	http://go-ooo.org/packages/%{mws}/%{tag}-system.tar.bz2
-# Source2-md5:	a82acbe556fad97128cea8dc7017da5a
+# Source2-md5:	35cc875dd83712ee1eb43b0b974220ff
 Source3:	http://go-ooo.org/packages/%{mws}/%{tag}-binfilter.tar.bz2
-# Source3-md5:	b22033d24d92a9e65860d594da9e81a0
+# Source3-md5:	8ebfe5ead84524f38c23911805142c4d
 Source4:	http://go-ooo.org/packages/%{mws}/%{tag}-lang.tar.bz2
-# Source4-md5:	c98e40510a858cd6afdd25149f48300c
+# Source4-md5:	8adb383d272ffe100f38d6510e1fc7ea
 Source10:	http://go-ooo.org/packages/SRC680/ooo_custom_images-13.tar.bz2
 # Source10-md5:	2480af7f890c8175c7f9e183a1b39ed2
 Source11:	http://go-ooo.org/packages/SRC680/ooo_crystal_images-6.tar.bz2
@@ -101,8 +113,8 @@ Source12:	http://go-ooo.org/packages/SRC680/extras-2.tar.bz2
 # Source12-md5:	733051ebeffae5232a2eb760162da020
 Source15:	http://go-ooo.org/packages/xt/xt-20051206-src-only.zip
 # Source15-md5:	0395e6e7da27c1cea7e1852286f6ccf9
-Source16:	http://go-ooo.org/packages/SRC680/lp_solve_5.5.tar.gz
-# Source16-md5:	2ff7b4c52f9c3937ebe3002798fbc479
+Source16:	http://go-ooo.org/packages/SRC680/lp_solve_5.5.0.10_source.tar.gz
+# Source16-md5:	26b3e95ddf3d9c077c480ea45874b3b8
 Source17:	http://go-ooo.org/packages/SRC680/biblio.tar.bz2
 # Source17-md5:	1948e39a68f12bfa0b7eb309c14d940c
 Source18:	http://go-ooo.org/packages/%{mws}/cli_types.dll
@@ -111,10 +123,13 @@ Source19:	http://go-ooo.org/packages/%{mws}/cli_types_bridgetest.dll
 # Source19-md5:	cadc605a6b0265b8167001b4788ff113
 Source20:	http://go-ooo.org/packages/SRC680/libwps-0.1.0~svn20070129.tar.gz
 # Source20-md5:	2e442485100f7e00685737513f853546
+Source21:	http://go-ooo.org/packages/SRC680/libwpg-0.1.0.tar.gz
+# Source21-md5:	1d9644fb4c90511255c1576b4b30b1d2
 Source50:	openabout_pld.png
-# Source50-md5: 64a945a07b64ebc0a12adfde4c99da8a
+# Source50-md5:	64a945a07b64ebc0a12adfde4c99da8a
 # patches applied in prep section
 Patch0:		%{name}-PLD.patch
+#Patch1:		%{name}-sc-dataform.patch
 Patch2:		%{name}-stl5_fix.patch
 Patch3:		%{name}-mdbtools_fix.diff
 Patch4:		%{name}-nolfs_hack.patch
@@ -133,8 +148,6 @@ Patch109:	%{name}-agg25.patch
 Patch110:	%{name}-nsplugin-path.diff
 Patch111:	%{name}-perl-nodiag.patch
 Patch112:	%{name}-gcc42-swregion.diff
-Patch113:	%{name}-neon.diff
-Patch114:	%{name}-curl.diff
 URL:		http://www.openoffice.org/
 BuildRequires:	/usr/bin/getopt
 BuildRequires:	STLport-devel >= 2:5.0.0
@@ -148,6 +161,7 @@ BuildRequires:	boost-mem_fn-devel
 BuildRequires:	boost-spirit-devel
 BuildRequires:	boost-uBLAS-devel
 BuildRequires:	cairo-devel >= 0.5.2
+%{?with_ccache:BuildRequires:	ccache}
 BuildRequires:	cups-devel
 BuildRequires:	curl-devel >= 7.9.8
 %{?with_system_db:BuildRequires:	db-cxx-devel}
@@ -159,7 +173,7 @@ BuildRequires:	freetype-devel >= 2.1
 BuildRequires:	gstreamer-devel >= 0.10.0
 BuildRequires:	gstreamer-plugins-base-devel >= 0.10.0
 BuildRequires:	gtk+2-devel
-%{?with_system_hsqldb:BuildRequires:	hsqldb >= 1.8.0}
+%{?with_system_hsqldb:BuildRequires:	hsqldb >= 1.8.0.8}
 %{?with_system_hunspell:BuildRequires:	hunspell-devel}
 BuildRequires:	icu
 %{?with_kde:BuildRequires:	kdelibs-devel}
@@ -170,10 +184,11 @@ BuildRequires:	libicu-devel >= 3.4
 BuildRequires:	libjpeg-devel
 BuildRequires:	libsndfile-devel
 BuildRequires:	libstdc++-devel >= 5:3.2.1
+BuildRequires:	libsvg-devel >= 0.1.4
 BuildRequires:	libwpd-devel >= 0.8.6
 BuildRequires:	libwps-devel
 BuildRequires:	libxml2-devel >= 2.0
-%{?with_system_mdbtools:BuildRequires:	mdbtools-devel >= 0.6}
+%{?with_access:%{?with_system_mdbtools:BuildRequires:	mdbtools-devel >= 0.6}}
 %{?with_mono:BuildRequires:	mono-csharp >= 1.2.3}
 %{?with_mono:BuildRequires:	mono-static >= 1.2.3}
 %{?with_system_myspell:BuildRequires:	myspell-devel}
@@ -235,7 +250,7 @@ Requires:	fonts-TTF-OpenSymbol = %{epoch}:%{version}-%{release}
 ExclusiveArch:	%{ix86} %{x8664} ppc sparc sparcv9
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
-%define		specflags	-fno-strict-aliasing
+%define		specflags	-fno-strict-aliasing -O2
 
 # No ELF objects there to strip/chrpath, skips processing:
 # - share/ - 17000 files of 415M
@@ -2053,7 +2068,7 @@ bash-completion for OpenOffice.org.
 bashowe uzupełnianie nazw dla Openoffice.org.
 
 %prep
-%setup -q -n %(basename %{SOURCE0} .tar.bz2)
+%setup -q -n ooo-build-trunk
 install -d src
 
 # sources, icons, KDE_icons
@@ -2061,48 +2076,50 @@ ln -sf %{SOURCE1} %{SOURCE2} %{SOURCE3} %{SOURCE4} \
 	%{SOURCE10} %{SOURCE11} %{SOURCE12} \
 	%{SOURCE15} %{SOURCE16} %{SOURCE17} \
 	%{SOURCE18} %{SOURCE19} \
-	%{SOURCE20} \
+	%{SOURCE20} %{SOURCE21} \
 	src
 
 cp %{SOURCE50} src
 
 # fixes for the patch subsystem
 %patch0 -p1
+#%patch1 -p0
 
 #%patch2 -p1
-%patch3 -p1
-%patch4 -p1
+#%patch3 -p1
+#%patch4 -p1
 %patch6 -p1
-%if %{with system_myspell}
-%patch7 -p1
-%endif
+#%if %{with system_myspell}
+#%patch7 -p1
+#%endif
 #%patch8 -p1
-%patch9 -p1
+#%patch9 -p1
 
 # 64 bit related patches (not applied now)
-install %{PATCH100} patches/64bit
-install %{PATCH101} patches/64bit/64bit-inline.diff
+#install %{PATCH100} patches/64bit
+#install %{PATCH101} patches/64bit/64bit-inline.diff
 
-%ifarch %{x8664}
-echo "[ PLD64bitfixes ]" >> patches/src680/apply
-# patches applied by ooo (extension .diff is required)
-for P in %{PATCH107}; do
-	PATCHNAME=PLD-${P##*/%{name}-}
-	PATCHNAME=${PATCHNAME%.patch}.diff
-	install $P patches/src680/$PATCHNAME
-	echo $PATCHNAME >> patches/src680/apply
-done
-%endif
+#%ifarch %{x8664}
+#echo "[ PLD64bitfixes ]" >> patches/src680/apply
+## patches applied by ooo (extension .diff is required)
+#for P in %{PATCH107}; do
+#	PATCHNAME=PLD-${P##*/%{name}-}
+#	PATCHNAME=${PATCHNAME%.patch}.diff
+#	install $P patches/src680/$PATCHNAME
+#	echo $PATCHNAME >> patches/src680/apply
+#done
+#%endif
 
 echo "[ PLDOnly ]" >> patches/src680/apply
 # patches applied by ooo (extension .diff is required)
-for P in %{PATCH102} %{PATCH104} %{PATCH108} %{PATCH109} %{PATCH111} %{PATCH112} %{PATCH113} %{PATCH114}; do
+#for P in %{PATCH102} %{PATCH104} %{PATCH108} %{PATCH109} %{PATCH111} %{PATCH112}; do
+for P in %{PATCH108}; do
 	PATCHNAME=PLD-${P##*/%{name}-}
 	PATCHNAME=${PATCHNAME%.patch}.diff
 	install $P patches/src680/$PATCHNAME
 	echo $PATCHNAME >> patches/src680/apply
 done
-cp %{PATCH110} patches/src680/nsplugin-path.diff
+#cp %{PATCH110} patches/src680/nsplugin-path.diff
 
 %build
 # Make sure we have /proc mounted - otherwise idlc will fail later.
@@ -2164,14 +2181,14 @@ CONFOPTS="\
 	--with-arch=x86_64 \
 %endif
 	--disable-odk \
-	--with-ccache-allowed \
+	%{?with_ccache:--with-gcc-speedup=ccache} \
 	%{?with_system_agg:--with-system-agg} \
 	%{?with_system_beanshell:--with-system-beanshell} \
 	%{?with_system_db:--with-system-db} \
 	%{?with_system_hsqldb:--with-system-hsqldb} \
 	%{?with_system_hunspell:--with-system-hunspell --without-myspell-dicts} \
 	%{?with_system_libhnj:--with-system-altlinuxhyphen} \
-	%{?with_system_mdbtools:--with-system-mdbtools} \
+	%{?with_msaccess:%{?with_system_mdbtools:--with-system-mdbtools}} \
 	%{?with_system_myspell:--with-system-myspell} \
 	%{?with_system_xalan:--with-system-xalan --with-xalan-jar=%{_javadir}/xalan.jar --with-serializer-jar=$serializer_jar} \
 	%{?with_system_xerces:--with-system-xerces} \
@@ -2183,8 +2200,9 @@ CONFOPTS="\
 	--with-system-expat \
 	--with-system-freetype \
 	--with-system-gcc \
-	--with-system-icu \
+	--without-system-icu \
 	--with-system-jpeg \
+	--with-system-libsvg \
 	--with-system-libwpd \
 	--with-system-libwps \
 	--with-system-libxml \
@@ -2239,7 +2257,7 @@ CONFOPTS="\
 	--disable-epm \
 	--disable-fontooo \
 	--disable-strip \
-	--enable-access \
+	--%{?with_msaccess:en}%{!?with_msaccess:dis}able-access \
 	--enable-cairo \
 	--enable-crypt-link \
 	--%{?with_mono:en}%{!?with_mono:dis}able-mono \
@@ -2260,7 +2278,8 @@ CONFOPTS="\
 %endif
 	--with-num-cpus=$RPM_BUILD_NR_THREADS \
 	--with-build-version=%{version}-%{release} \
-	--with-tag=%{tag}
+	--with-tag=%{tag} \
+	--with-drink=coffee
 "
 
 # build-ooo script will pickup these
