@@ -72,7 +72,7 @@
 %define		tag			%(echo %{mws} | tr A-Z a-z)-%{milestone}
 %define		milestone	m14
 %define		_tag		%(echo %{tag} | tr - _)
-%define		_rel		0.11
+%define		_rel		0.12
 
 Summary:	OpenOffice.org - powerful office suite
 Summary(pl.UTF-8):	OpenOffice.org - potężny pakiet biurowy
@@ -135,6 +135,7 @@ Patch111:	%{name}-perl-nodiag.patch
 Patch112:	%{name}-gcc42-swregion.diff
 Patch113:	%{name}-neon.diff
 Patch114:	%{name}-curl.diff
+Patch115:	%{name}-hunspell.diff
 URL:		http://www.openoffice.org/
 BuildRequires:	/usr/bin/getopt
 BuildRequires:	STLport-devel >= 2:5.0.0
@@ -160,7 +161,7 @@ BuildRequires:	gstreamer-devel >= 0.10.0
 BuildRequires:	gstreamer-plugins-base-devel >= 0.10.0
 BuildRequires:	gtk+2-devel
 %{?with_system_hsqldb:BuildRequires:	hsqldb >= 1.8.0}
-%{?with_system_hunspell:BuildRequires:	hunspell-devel}
+%{?with_system_hunspell:BuildRequires:	hunspell-devel >= 1.1.12}
 BuildRequires:	icu
 %{?with_kde:BuildRequires:	kdelibs-devel}
 BuildRequires:	libart_lgpl-devel
@@ -2096,7 +2097,7 @@ done
 
 echo "[ PLDOnly ]" >> patches/src680/apply
 # patches applied by ooo (extension .diff is required)
-for P in %{PATCH102} %{PATCH104} %{PATCH108} %{PATCH109} %{PATCH111} %{PATCH112} %{PATCH113} %{PATCH114}; do
+for P in %{PATCH102} %{PATCH104} %{PATCH108} %{PATCH109} %{PATCH111} %{PATCH112} %{PATCH113} %{PATCH114} %{PATCH115}; do
 	PATCHNAME=PLD-${P##*/%{name}-}
 	PATCHNAME=${PATCHNAME%.patch}.diff
 	install $P patches/src680/$PATCHNAME
