@@ -95,8 +95,8 @@ Epoch:		1
 License:	GPL/LGPL
 Group:		X11/Applications
 # svn export http://svn.gnome.org/svn/ooo-build/trunk
-Source0:	ooo-build-r10353.tar.bz2
-# Source0-md5:	c7fe3328c889c2332650f3de3ff3afa0
+Source0:	ooo-build-r10430.tar.bz2
+# Source0-md5:	7a6288397ec0b9ba16003a2a335f3c7c
 Source1:	http://go-ooo.org/packages/%{mws}/%{tag}-core.tar.bz2
 # Source1-md5:	eb0bce2625e182db1470b7cebfbcdc17
 Source2:	http://go-ooo.org/packages/%{mws}/%{tag}-system.tar.bz2
