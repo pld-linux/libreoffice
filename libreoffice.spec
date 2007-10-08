@@ -82,7 +82,7 @@
 %define		upd			680
 %define		mws			OOG%{upd}
 %define		tag			%(echo %{mws} | tr A-Z a-z)-%{milestone}
-%define		milestone	m5
+%define		milestone	m6
 %define		_tag		%(echo %{tag} | tr - _)
 %define		_rel		0.0.1
 
@@ -95,35 +95,35 @@ Epoch:		1
 License:	GPL/LGPL
 Group:		X11/Applications
 # svn export http://svn.gnome.org/svn/ooo-build/trunk
-Source0:	ooo-build-r10430.tar.bz2
-# Source0-md5:	7a6288397ec0b9ba16003a2a335f3c7c
-Source1:	http://go-ooo.org/packages/%{mws}/%{tag}-core.tar.bz2
-# Source1-md5:	eb0bce2625e182db1470b7cebfbcdc17
-Source2:	http://go-ooo.org/packages/%{mws}/%{tag}-system.tar.bz2
-# Source2-md5:	35cc875dd83712ee1eb43b0b974220ff
-Source3:	http://go-ooo.org/packages/%{mws}/%{tag}-binfilter.tar.bz2
-# Source3-md5:	8ebfe5ead84524f38c23911805142c4d
-Source4:	http://go-ooo.org/packages/%{mws}/%{tag}-lang.tar.bz2
-# Source4-md5:	8adb383d272ffe100f38d6510e1fc7ea
-Source10:	http://go-ooo.org/packages/SRC680/ooo_custom_images-13.tar.bz2
+Source0:	ooo-build-r10437.tar.bz2
+# Source0-md5:	ef4d6269fbf75cd9f68a5dc486fc8ac7
+Source1:	http://go-oo.org/packages/%{mws}/%{tag}-core.tar.bz2
+# Source1-md5:	02ef9044f6339bdd76cd1a37291b406d
+Source2:	http://go-oo.org/packages/%{mws}/%{tag}-system.tar.bz2
+# Source2-md5:	593aa8e2a8c311cc216170e0f0a34355
+Source3:	http://go-oo.org/packages/%{mws}/%{tag}-binfilter.tar.bz2
+# Source3-md5:	c79086fb3c1f3309ba3ccf7a660ce23c
+Source4:	http://go-oo.org/packages/%{mws}/%{tag}-lang.tar.bz2
+# Source4-md5:	e7057a8dbfc7f0ee6b065e556b382ac4
+Source10:	http://go-oo.org/packages/SRC680/ooo_custom_images-13.tar.bz2
 # Source10-md5:	2480af7f890c8175c7f9e183a1b39ed2
-Source11:	http://go-ooo.org/packages/SRC680/ooo_crystal_images-6.tar.bz2
+Source11:	http://go-oo.org/packages/SRC680/ooo_crystal_images-6.tar.bz2
 # Source11-md5:	586d0f26b3f79d89bbb5b25b874e3df6
-Source12:	http://go-ooo.org/packages/SRC680/extras-2.tar.bz2
+Source12:	http://go-oo.org/packages/SRC680/extras-2.tar.bz2
 # Source12-md5:	733051ebeffae5232a2eb760162da020
-Source15:	http://go-ooo.org/packages/xt/xt-20051206-src-only.zip
+Source15:	http://go-oo.org/packages/xt/xt-20051206-src-only.zip
 # Source15-md5:	0395e6e7da27c1cea7e1852286f6ccf9
-Source16:	http://go-ooo.org/packages/SRC680/lp_solve_5.5.0.10_source.tar.gz
+Source16:	http://go-oo.org/packages/SRC680/lp_solve_5.5.0.10_source.tar.gz
 # Source16-md5:	26b3e95ddf3d9c077c480ea45874b3b8
-Source17:	http://go-ooo.org/packages/SRC680/biblio.tar.bz2
+Source17:	http://go-oo.org/packages/SRC680/biblio.tar.bz2
 # Source17-md5:	1948e39a68f12bfa0b7eb309c14d940c
-Source18:	http://go-ooo.org/packages/%{mws}/cli_types.dll
+Source18:	http://go-oo.org/packages/%{mws}/cli_types.dll
 # Source18-md5:	3cdaf368e99caa3331130a5edf148490
-Source19:	http://go-ooo.org/packages/%{mws}/cli_types_bridgetest.dll
+Source19:	http://go-oo.org/packages/%{mws}/cli_types_bridgetest.dll
 # Source19-md5:	cadc605a6b0265b8167001b4788ff113
-Source20:	http://go-ooo.org/packages/SRC680/libwps-0.1.0~svn20070129.tar.gz
+Source20:	http://go-oo.org/packages/SRC680/libwps-0.1.0~svn20070129.tar.gz
 # Source20-md5:	2e442485100f7e00685737513f853546
-Source21:	http://go-ooo.org/packages/SRC680/libwpg-0.1.0.tar.gz
+Source21:	http://go-oo.org/packages/SRC680/libwpg-0.1.0.tar.gz
 # Source21-md5:	1d9644fb4c90511255c1576b4b30b1d2
 Source50:	openabout_pld.png
 # Source50-md5:	64a945a07b64ebc0a12adfde4c99da8a
@@ -2287,9 +2287,9 @@ export CONFIGURE_OPTIONS="$CONFOPTS"
 
 :> distro-configs/Common.conf
 :> distro-configs/Common.conf.in
-echo -n "$CONFOPTS" > distro-configs/PLD.conf.in
-echo -n "$CONFOPTS" > distro-configs/PLD64.conf.in
-if [ $(cat distro-configs/PLD.conf.in | wc -l) -gt 1 ]; then
+echo -n "$CONFOPTS" > distro-configs/PLD.conf
+echo -n "$CONFOPTS" > distro-configs/PLD64.conf
+if [ $(cat distro-configs/PLD.conf | wc -l) -gt 1 ]; then
 	: 'newline(s) found in distro-configs. some of the options might be lost'
 	exit 1
 fi
