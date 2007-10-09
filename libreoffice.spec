@@ -1197,6 +1197,15 @@ language.
 Ten pakiet dostarcza zasoby zawierające menu i okna dialogowe w języku
 japońskim.
 
+%package i18n-ka
+Summary:	OpenOffice.org - interface in Georgian language
+Group:		X11/Applications
+Requires:	%{name}-core = %{epoch}:%{version}-%{release}
+
+%description i18n-ka
+This package provides resources containing menus and dialogs in Georgian
+language.
+
 %package i18n-km
 Summary:	OpenOffice.org - interface in Khmer language
 Summary(pl.UTF-8):	OpenOffice.org - interfejs w języku khmerskim
@@ -3828,6 +3837,9 @@ fi
 %defattr(644,root,root,755)
 
 %files i18n-ja -f ja.lang
+%defattr(644,root,root,755)
+
+%files i18n-ka -f ka.lang
 %defattr(644,root,root,755)
 
 %files i18n-km -f km.lang
