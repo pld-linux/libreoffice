@@ -2510,7 +2510,7 @@ done
 desktoplist=$(ls desktop/*.desktop | cut -d"/" -f2)
 
 for desktop in $desktoplist; do
-	install $desktop $RPM_BUILD_ROOT%{_desktopdir}/oo$desktop
+	install desktop/$desktop $RPM_BUILD_ROOT%{_desktopdir}/oo$desktop
 done
 
 %clean
@@ -2611,14 +2611,14 @@ fi
 # TODO: check where these really belong
    %attr(755,root,root) %{_libdir}/%{name}/program/libbf_go680*.so
    %attr(755,root,root) %{_libdir}/%{name}/program/libdeploymentmisc680*.so
-   %attr(755,root,root) %{_libdir}/%{name}/program/liblpsolve55.so
+#   %attr(755,root,root) %{_libdir}/%{name}/program/liblpsolve55.so
    %attr(755,root,root) %{_libdir}/%{name}/program/libvbaobj680*.uno.so
-   %attr(755,root,root) %{_libdir}/%{name}/program/scsolver.uno.so
+#   %attr(755,root,root) %{_libdir}/%{name}/program/scsolver.uno.so
    %attr(755,root,root) %{_libdir}/%{name}/program/stringresource680*.uno.so
    %attr(755,root,root) %{_libdir}/%{name}/program/updatefeed.uno.so
    %{_datadir}/%{name}/share/config/images_tango.zip
    %{_datadir}/%{name}/share/registry/data/org/openoffice/UserProfile.xcu
-   %{_libdir}/%{name}/program/resource/scsolver680en-US.res
+#   %{_libdir}/%{name}/program/resource/scsolver680en-US.res
    %{_libdir}/%{name}/program/root3.dat
    %{_libdir}/%{name}/program/root4.dat
    %{_libdir}/%{name}/program/root5.dat
@@ -2846,7 +2846,7 @@ fi
 %{_datadir}/%{name}/share/registry/modules/org/openoffice/Office/Common/Common-ctl_pa-IN.xcu
 %{_datadir}/%{name}/share/registry/modules/org/openoffice/Office/Common/Common-ctl_ta-IN.xcu
 %{_datadir}/%{name}/share/registry/modules/org/openoffice/Office/Common/Common-ctl_th.xcu
-%{_datadir}/%{name}/share/registry/modules/org/openoffice/Office/Common/Common-ctl_vi.xcu
+#%{_datadir}/%{name}/share/registry/modules/org/openoffice/Office/Common/Common-ctl_vi.xcu
 %{_datadir}/%{name}/share/registry/modules/org/openoffice/Office/Common/Common-dicooo.xcu
 %{_datadir}/%{name}/share/registry/modules/org/openoffice/Office/Common/Common-korea.xcu
 %{_datadir}/%{name}/share/registry/modules/org/openoffice/Office/Common/Common-unx.xcu
@@ -3057,7 +3057,7 @@ fi
 %{_libdir}/%{name}/program/classes/form.jar
 %{!?with_system_hsqldb:%{_libdir}/%{name}/program/classes/hsqldb.jar}
 %{_libdir}/%{name}/program/classes/java_uno.jar
-%{_libdir}/%{name}/program/classes/java_uno_accessbridge.jar
+#%{_libdir}/%{name}/program/classes/java_uno_accessbridge.jar
 %{_libdir}/%{name}/program/classes/js.jar
 %{_libdir}/%{name}/program/classes/juh.jar
 %{_libdir}/%{name}/program/classes/jurt.jar
@@ -3095,7 +3095,7 @@ fi
 
 %{_datadir}/mime/packages/openoffice.xml
 
-%{_desktopdir}/ootemplate.desktop
+#%{_desktopdir}/ootemplate.desktop
 
 %{_iconsdir}/hicolor/*/apps/ooo-gulls.png
 %{_iconsdir}/hicolor/*/apps/ooo-printeradmin.png
@@ -3126,7 +3126,7 @@ fi
 %{_libdir}/%{name}/program/resource/bf_sc680en-US.res
 %{_libdir}/%{name}/program/resource/bf_sch680en-US.res
 %{_libdir}/%{name}/program/resource/bf_sd680en-US.res
-%{_libdir}/%{name}/program/resource/bf_sfx680en-US.res
+#%{_libdir}/%{name}/program/resource/bf_sfx680en-US.res
 %{_libdir}/%{name}/program/resource/bf_svx680en-US.res
 %{_libdir}/%{name}/program/resource/bf_sw680en-US.res
 %{_libdir}/%{name}/program/resource/bib680en-US.res
@@ -3160,7 +3160,7 @@ fi
 %{_libdir}/%{name}/program/resource/productregistration680en-US.res
 %{_libdir}/%{name}/program/resource/san680en-US.res
 %{_libdir}/%{name}/program/resource/sc680en-US.res
-%{_libdir}/%{name}/program/resource/sch680en-US.res
+#%{_libdir}/%{name}/program/resource/sch680en-US.res
 %{_libdir}/%{name}/program/resource/sd680en-US.res
 %{_libdir}/%{name}/program/resource/sdbt680en-US.res
 %{_libdir}/%{name}/program/resource/sfx680en-US.res
@@ -3221,7 +3221,7 @@ fi
 %attr(755,root,root) %{_libdir}/%{name}/program/libbasctl680*.so
 %attr(755,root,root) %{_libdir}/%{name}/program/libbasegfx680*.so
 %attr(755,root,root) %{_libdir}/%{name}/program/libbf_frm680*.so
-%attr(755,root,root) %{_libdir}/%{name}/program/libbf_lng680*.so
+#%attr(755,root,root) %{_libdir}/%{name}/program/libbf_lng680*.so
 %attr(755,root,root) %{_libdir}/%{name}/program/libbf_migratefilter680*.so
 %attr(755,root,root) %{_libdir}/%{name}/program/libbf_ofa680*.so
 %attr(755,root,root) %{_libdir}/%{name}/program/libbf_sch680*.so
@@ -3309,8 +3309,8 @@ fi
 %attr(755,root,root) %{_libdir}/%{name}/program/liblocaledata_others.so
 %attr(755,root,root) %{_libdir}/%{name}/program/liblwpft680*.so
 %attr(755,root,root) %{_libdir}/%{name}/program/libmcnttype.so
-%attr(755,root,root) %{_libdir}/%{name}/program/libmdb680*.so
-%attr(755,root,root) %{_libdir}/%{name}/program/libmdbimpl680*.so
+#%attr(755,root,root) %{_libdir}/%{name}/program/libmdb680*.so
+#%attr(755,root,root) %{_libdir}/%{name}/program/libmdbimpl680*.so
 %attr(755,root,root) %{_libdir}/%{name}/program/libmsworks680*.so
 %attr(755,root,root) %{_libdir}/%{name}/program/libmysql2.so
 %attr(755,root,root) %{_libdir}/%{name}/program/libodbc2.so
@@ -3319,7 +3319,7 @@ fi
 %attr(755,root,root) %{_libdir}/%{name}/program/libpackage2.so
 %attr(755,root,root) %{_libdir}/%{name}/program/libpcr680*.so
 %attr(755,root,root) %{_libdir}/%{name}/program/libpdffilter680*.so
-%attr(755,root,root) %{_libdir}/%{name}/program/libpk680*.so
+#%attr(755,root,root) %{_libdir}/%{name}/program/libpk680*.so
 %attr(755,root,root) %{_libdir}/%{name}/program/libpl680*.so
 %attr(755,root,root) %{_libdir}/%{name}/program/libpreload680*.so
 %attr(755,root,root) %{_libdir}/%{name}/program/libprotocolhandler680*.so
@@ -3328,8 +3328,8 @@ fi
 %attr(755,root,root) %{_libdir}/%{name}/program/librecentfile.so
 %attr(755,root,root) %{_libdir}/%{name}/program/libres680*.so
 %attr(755,root,root) %{_libdir}/%{name}/program/libsb680*.so
-%attr(755,root,root) %{_libdir}/%{name}/program/libsch680*.so
-%attr(755,root,root) %{_libdir}/%{name}/program/libschd680*.so
+#%attr(755,root,root) %{_libdir}/%{name}/program/libsch680*.so
+#%attr(755,root,root) %{_libdir}/%{name}/program/libschd680*.so
 %attr(755,root,root) %{_libdir}/%{name}/program/libscn680*.so
 %attr(755,root,root) %{_libdir}/%{name}/program/libscriptframe.so
 %attr(755,root,root) %{_libdir}/%{name}/program/libsd680*.so
@@ -3357,7 +3357,7 @@ fi
 %attr(755,root,root) %{_libdir}/%{name}/program/libtl680*.so
 %attr(755,root,root) %{_libdir}/%{name}/program/libtvhlp1.so
 %attr(755,root,root) %{_libdir}/%{name}/program/libucb1.so
-%attr(755,root,root) %{_libdir}/%{name}/program/libucbhelper3gcc3.so
+#%attr(755,root,root) %{_libdir}/%{name}/program/libucbhelper3gcc3.so
 %attr(755,root,root) %{_libdir}/%{name}/program/libucpchelp1.so
 %attr(755,root,root) %{_libdir}/%{name}/program/libucpdav1.so
 %attr(755,root,root) %{_libdir}/%{name}/program/libucpfile1.so
