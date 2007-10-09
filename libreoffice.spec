@@ -2424,6 +2424,14 @@ if [ ! -f installed.stamp ]; then
 	# Add in the regcomp tool since some people need it for 3rd party add-ons
 	cp -a build/%{tag}/solver/%{upd}/unxlng*.pro/bin/regcomp{,.bin} $RPM_BUILD_ROOT%{_libdir}/%{name}/program/
 
+	# Rename .desktop files to avoid conflicts with other applications .desktops
+	# TODO: make patch instead.
+	for a in $RPM_BUILD_ROOT%{_desktopdir}/*.desktop; do
+		d=$(dirname "$a")
+		f=$(basename "$a")
+		mv $a $d/oo$f
+	done
+
 	touch installed.stamp
 fi
 
@@ -2505,13 +2513,6 @@ done
 	s,%{_libdir}/%{name}/readmes,%{_datadir}/%{name}/readmes,;
 	s,%{_libdir}/%{name}/share,%{_datadir}/%{name}/share,;
 ' *.lang
-
-# Rename .desktop files to avoid conflicts with other applications .desktops
-desktoplist=$(ls desktop/*.desktop | cut -d"/" -f2)
-
-for desktop in $desktoplist; do
-	install desktop/$desktop $RPM_BUILD_ROOT%{_desktopdir}/oo$desktop
-done
 
 %clean
 rm -rf $RPM_BUILD_ROOT
