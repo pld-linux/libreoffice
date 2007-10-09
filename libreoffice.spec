@@ -2708,6 +2708,7 @@ fi
 %{?with_system_myspell:%{_datadir}/%{name}/share/dict/ooo}
 %{!?with_system_myspell:%ghost %{_datadir}/%{name}/share/dict/ooo/dictionary.lst}
 %{_datadir}/%{name}/share/dtd
+%{_datadir}/%{name}/share/fingerprint
 %{_datadir}/%{name}/share/fonts
 %{_datadir}/%{name}/share/gallery
 %{_datadir}/%{name}/share/psprint
@@ -3367,7 +3368,7 @@ fi
 %attr(755,root,root) %{_libdir}/%{name}/program/libtl680*.so
 %attr(755,root,root) %{_libdir}/%{name}/program/libtvhlp1.so
 %attr(755,root,root) %{_libdir}/%{name}/program/libucb1.so
-#%attr(755,root,root) %{_libdir}/%{name}/program/libucbhelper3gcc3.so
+%attr(755,root,root) %{_libdir}/%{name}/program/libucbhelper4gcc3.so
 %attr(755,root,root) %{_libdir}/%{name}/program/libucpchelp1.so
 %attr(755,root,root) %{_libdir}/%{name}/program/libucpdav1.so
 %attr(755,root,root) %{_libdir}/%{name}/program/libucpfile1.so
@@ -3500,6 +3501,7 @@ fi
 %{_datadir}/%{name}/share/config/soffice.cfg/modules/dbbrowser
 %{_datadir}/%{name}/share/config/soffice.cfg/modules/dbquery
 %{_datadir}/%{name}/share/config/soffice.cfg/modules/dbrelation
+%{_datadir}/%{name}/share/config/soffice.cfg/modules/dbreport
 %{_datadir}/%{name}/share/config/soffice.cfg/modules/dbtable
 %{_datadir}/%{name}/share/registry/modules/org/openoffice/Office/Common/Common-base.xcu
 %{_datadir}/%{name}/share/registry/modules/org/openoffice/Setup/Setup-base.xcu
@@ -3516,6 +3518,10 @@ fi
 %attr(755,root,root) %{_libdir}/%{name}/program/libdate680*.so
 %attr(755,root,root) %{_libdir}/%{name}/program/libsc680*.so
 %attr(755,root,root) %{_libdir}/%{name}/program/libscd680*.so
+%attr(755,root,root) %{_libdir}/%{name}/program/libchartcontroller680*.so
+%attr(755,root,root) %{_libdir}/%{name}/program/libchartmodel680*.so
+%attr(755,root,root) %{_libdir}/%{name}/program/libcharttools680*.so
+%attr(755,root,root) %{_libdir}/%{name}/program/libchartview680*.so
 %attr(755,root,root) %{_libdir}/%{name}/program/libscui680*.so
 %attr(755,root,root) %{_libdir}/%{name}/program/scalc
 %{_mandir}/man1/oocalc.1
