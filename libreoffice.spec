@@ -2290,7 +2290,9 @@ CONFOPTS="\
 	--with-num-cpus=$RPM_BUILD_NR_THREADS \
 	--with-build-version=%{version}-%{release} \
 	--with-tag=%{tag} \
-	--with-drink=coffee
+	--with-drink=coffee \
+	--enable-split-app-modules \
+	--enable-split-opt-features
 "
 
 # build-ooo script will pickup these
