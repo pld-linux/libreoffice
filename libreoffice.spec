@@ -72,7 +72,7 @@
 %define		tag			%(echo %{mws} | tr A-Z a-z)-%{milestone}
 %define		milestone	m14
 %define		_tag		%(echo %{tag} | tr - _)
-%define		_rel		0.14
+%define		_rel		0.15
 
 Summary:	OpenOffice.org - powerful office suite
 Summary(pl.UTF-8):	OpenOffice.org - potężny pakiet biurowy
@@ -2490,7 +2490,7 @@ done
 desktoplist=$(ls desktop/*.desktop | cut -d"/" -f2)
 
 for desktop in $desktoplist; do
-	install $desktop $RPM_BUILD_ROOT%{_desktopdir}/oo$desktop
+	install desktop/$desktop $RPM_BUILD_ROOT%{_desktopdir}/oo$desktop
 done
 
 %clean
