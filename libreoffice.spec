@@ -125,6 +125,8 @@ Source20:	http://go-oo.org/packages/SRC680/libwps-0.1.0~svn20070129.tar.gz
 # Source20-md5:	2e442485100f7e00685737513f853546
 Source21:	http://go-oo.org/packages/SRC680/libwpg-0.1.0.tar.gz
 # Source21-md5:	1d9644fb4c90511255c1576b4b30b1d2
+Source22:       http://download.go-oo.org/SRC680/oox.2007-09-05.tar.bz2
+# Source22-md5:	42aceb3508ff8b5ed04d0451b30f6ccf
 Source50:	openabout_pld.png
 # Source50-md5:	64a945a07b64ebc0a12adfde4c99da8a
 # patches applied in prep section
@@ -2076,7 +2078,7 @@ ln -sf %{SOURCE1} %{SOURCE2} %{SOURCE3} %{SOURCE4} \
 	%{SOURCE10} %{SOURCE11} %{SOURCE12} \
 	%{SOURCE15} %{SOURCE16} %{SOURCE17} \
 	%{SOURCE18} %{SOURCE19} \
-	%{SOURCE20} %{SOURCE21} \
+	%{SOURCE20} %{SOURCE21} %{SOURCE22} \
 	src
 
 cp %{SOURCE50} src
