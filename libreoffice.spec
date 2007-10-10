@@ -172,6 +172,7 @@ BuildRequires:	flex
 BuildRequires:	fontconfig-devel >= 1.0.1
 BuildRequires:	freetype-devel >= 2.1
 %{?with_gnomevfs:BuildRequires:	gnome-vfs2-devel}
+BuildRequires:	gperf
 BuildRequires:	gstreamer-devel >= 0.10.0
 BuildRequires:	gstreamer-plugins-base-devel >= 0.10.0
 BuildRequires:	gtk+2-devel
@@ -230,6 +231,7 @@ BuildRequires:	ant
 %{?with_system_db:BuildRequires:	db-java >= 4.3}
 BuildRequires:	jar
 BuildRequires:	jdk >= 1.4.0_00
+BuildRequires:	jre-X11
 %else
 BuildRequires:	libxslt-progs
 %endif
