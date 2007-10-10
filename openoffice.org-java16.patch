@@ -2,8 +2,8 @@
 +++ ooo-build-ooe680-m6/patches/src680/build-java-target.diff	2007-01-03 17:46:25.814505250 +0100
 @@ -18,7 +18,7 @@
   AC_ARG_ENABLE(gcjaot,
-  [  --enable-gcjaot        Build with[[out]] using Ahead of Time java compilation support. 
-                            If you have gcj installed then --enable-gcjaot will enable gcj ahead of time
+  [  --enable-gcjaot         Build with[[out]] using Ahead of Time java compilation
+                            support to speed up buildsi by compiling the jars also
 -@@ -2308,6 +2319,43 @@
 +@@ -2308,6 +2319,44 @@
      JAVA_HOME=NO_JAVA_HOME ; export JAVA_HOME
