@@ -2511,6 +2511,9 @@ find_lang() {
 		grep "/help/${lang}$" ${lfile} >> ${lang}.lang || :
 		grep "/help/${lang}/" ${lfile} >> ${lang}.lang || :
 		%endif
+		grep "/share/config/soffice.cfg/modules/swform/accelerator/${lang}/" build/common_list.txt >> ${lang}.lang || :
+		grep "/share/config/soffice.cfg/modules/swreport/accelerator/${lang}/" build/common_list.txt >> ${lang}.lang || :
+		grep "/share/config/soffice.cfg/modules/swxform/accelerator/${lang}/" build/common_list.txt >> ${lang}.lang || :
 	fi
 }
 
@@ -2624,19 +2627,64 @@ fi
 %doc %{_libdir}/%{name}/*README*
 
 # TODO: check where these really belong
-   %attr(755,root,root) %{_libdir}/%{name}/program/libbf_go680*.so
-   %attr(755,root,root) %{_libdir}/%{name}/program/libdeploymentmisc680*.so
-#   %attr(755,root,root) %{_libdir}/%{name}/program/liblpsolve55.so
-   %attr(755,root,root) %{_libdir}/%{name}/program/libvbaobj680*.uno.so
-#   %attr(755,root,root) %{_libdir}/%{name}/program/scsolver.uno.so
-   %attr(755,root,root) %{_libdir}/%{name}/program/stringresource680*.uno.so
-   %attr(755,root,root) %{_libdir}/%{name}/program/updatefeed.uno.so
-   %{_datadir}/%{name}/share/config/images_tango.zip
-   %{_datadir}/%{name}/share/registry/data/org/openoffice/UserProfile.xcu
-#   %{_libdir}/%{name}/program/resource/scsolver680en-US.res
-   %{_libdir}/%{name}/program/root3.dat
-   %{_libdir}/%{name}/program/root4.dat
-   %{_libdir}/%{name}/program/root5.dat
+%attr(755,root,root) %{_libdir}/%{name}/program/libbf_go680*.so
+%attr(755,root,root) %{_libdir}/%{name}/program/libdeploymentmisc680*.so
+%attr(755,root,root) %{_libdir}/%{name}/program/libvbaobj680*.uno.so
+%attr(755,root,root) %{_libdir}/%{name}/program/stringresource680*.uno.so
+%attr(755,root,root) %{_libdir}/%{name}/program/updatefeed.uno.so
+%attr(755,root,root) %{_libdir}/%{name}/program/fastsax.uno.so
+%attr(755,root,root) %{_libdir}/%{name}/program/libacc680*.so
+%attr(755,root,root) %{_libdir}/%{name}/program/libaffine_uno_uno.so
+%attr(755,root,root) %{_libdir}/%{name}/program/libbasebmp680*.so
+%attr(755,root,root) %{_libdir}/%{name}/program/libbf_sb680*.so
+%attr(755,root,root) %{_libdir}/%{name}/program/libguesslang680*.so
+%attr(755,root,root) %{_libdir}/%{name}/program/liblog680*.so
+%attr(755,root,root) %{_libdir}/%{name}/program/liboox680*.so
+%attr(755,root,root) %{_libdir}/%{name}/program/librpt680*.so
+%attr(755,root,root) %{_libdir}/%{name}/program/librptui680*.so
+%attr(755,root,root) %{_libdir}/%{name}/program/librptxml680*.so
+%attr(755,root,root) %{_libdir}/%{name}/program/libsax680*.so
+%attr(755,root,root) %{_libdir}/%{name}/program/libt602filter680*.so
+%attr(755,root,root) %{_libdir}/%{name}/program/libtextcat.so
+%attr(755,root,root) %{_libdir}/%{name}/program/libunsafe_uno_uno.so
+%attr(755,root,root) %{_libdir}/%{name}/program/libvclplug_svp680*.so
+%attr(755,root,root) %{_libdir}/%{name}/program/libwpgimport680*.so
+%attr(755,root,root) %{_libdir}/%{name}/program/libwriterfilter680*.so
+%attr(755,root,root) %{_libdir}/%{name}/program/simplecanvas.uno.so
+%{_datadir}/%{name}/share/config/images_tango.zip
+%{_datadir}/%{name}/share/registry/data/org/openoffice/UserProfile.xcu
+#%{_libdir}/%{name}/program/resource/scsolver680en-US.res
+%{_libdir}/%{name}/program/root3.dat
+%{_libdir}/%{name}/program/root4.dat
+%{_libdir}/%{name}/program/root5.dat
+%{_libdir}/%{name}/program/resource/acc680en-US.res
+%{_libdir}/%{name}/program/resource/chartcontroller680en-US.res
+%{_libdir}/%{name}/program/resource/rpt680en-US.res
+%{_libdir}/%{name}/program/resource/rptui680en-US.res
+%{_libdir}/%{name}/program/resource/sb680en-US.res
+%{_libdir}/%{name}/program/resource/sdbcl680en-US.res
+%{_libdir}/%{name}/program/resource/t602filter680en-US.res
+%{_datadir}/%{name}/share/config/javasettingsunopkginstall.xml
+
+%dir %{_datadir}/%{name}/share/config/soffice.cfg/modules/swform
+%dir %{_datadir}/%{name}/share/config/soffice.cfg/modules/swform/accelerator
+%{_datadir}/%{name}/share/config/soffice.cfg/modules/swform/accelerator/en-US
+%{_datadir}/%{name}/share/config/soffice.cfg/modules/swform/toolbar
+%{_datadir}/%{name}/share/config/soffice.cfg/modules/swform/menubar
+%{_datadir}/%{name}/share/config/soffice.cfg/modules/swform/statusbar
+%dir %{_datadir}/%{name}/share/config/soffice.cfg/modules/swreport
+%dir %{_datadir}/%{name}/share/config/soffice.cfg/modules/swreport/accelerator
+%{_datadir}/%{name}/share/config/soffice.cfg/modules/swreport/menubar
+%{_datadir}/%{name}/share/config/soffice.cfg/modules/swreport/statusbar
+%{_datadir}/%{name}/share/config/soffice.cfg/modules/swreport/toolbar
+%{_datadir}/%{name}/share/config/soffice.cfg/modules/swreport/accelerator/en-US
+%dir %{_datadir}/%{name}/share/config/soffice.cfg/modules/swxform
+%dir %{_datadir}/%{name}/share/config/soffice.cfg/modules/swxform/accelerator
+%{_datadir}/%{name}/share/config/soffice.cfg/modules/swxform/menubar
+%{_datadir}/%{name}/share/config/soffice.cfg/modules/swxform/statusbar
+%{_datadir}/%{name}/share/config/soffice.cfg/modules/swxform/toolbar
+%{_datadir}/%{name}/share/config/soffice.cfg/modules/swxform/accelerator/en-US
+
 
 %dir %{_sysconfdir}/%{name}
 %config(noreplace) %verify(not md5 mtime size) %{_sysconfdir}/%{name}/sofficerc
@@ -2735,17 +2783,20 @@ fi
 %{_datadir}/%{name}/share/registry/data/org/openoffice/Office/Compatibility.xcu
 %{_datadir}/%{name}/share/registry/data/org/openoffice/Office/DataAccess.xcu
 %{_datadir}/%{name}/share/registry/data/org/openoffice/Office/Embedding.xcu
+%{_datadir}/%{name}/share/registry/data/org/openoffice/Office/ExtendedColorScheme.xcu
+%{_datadir}/%{name}/share/registry/data/org/openoffice/Office/ExtensionManager.xcu
 %{_datadir}/%{name}/share/registry/data/org/openoffice/Office/FormWizard.xcu
+%{_datadir}/%{name}/share/registry/data/org/openoffice/Office/Impress.xcu
 %{_datadir}/%{name}/share/registry/data/org/openoffice/Office/Jobs.xcu
 %{_datadir}/%{name}/share/registry/data/org/openoffice/Office/Labels.xcu
+%{_datadir}/%{name}/share/registry/data/org/openoffice/Office/Logging.xcu
 %{_datadir}/%{name}/share/registry/data/org/openoffice/Office/Math.xcu
 %{_datadir}/%{name}/share/registry/data/org/openoffice/Office/Paths.xcu
 %{_datadir}/%{name}/share/registry/data/org/openoffice/Office/ProtocolHandler.xcu
-%{_datadir}/%{name}/share/registry/data/org/openoffice/Office/SFX.xcu
 %{_datadir}/%{name}/share/registry/data/org/openoffice/Office/Scripting.xcu
 %{_datadir}/%{name}/share/registry/data/org/openoffice/Office/Security.xcu
+%{_datadir}/%{name}/share/registry/data/org/openoffice/Office/SFX.xcu
 %{_datadir}/%{name}/share/registry/data/org/openoffice/Office/TableWizard.xcu
-%{_datadir}/%{name}/share/registry/data/org/openoffice/Office/UI.xcu
 %{_datadir}/%{name}/share/registry/data/org/openoffice/Office/UI/BaseWindowState.xcu
 %{_datadir}/%{name}/share/registry/data/org/openoffice/Office/UI/BasicIDECommands.xcu
 %{_datadir}/%{name}/share/registry/data/org/openoffice/Office/UI/BasicIDEWindowState.xcu
@@ -2756,6 +2807,7 @@ fi
 %{_datadir}/%{name}/share/registry/data/org/openoffice/Office/UI/DbBrowserWindowState.xcu
 %{_datadir}/%{name}/share/registry/data/org/openoffice/Office/UI/DbQueryWindowState.xcu
 %{_datadir}/%{name}/share/registry/data/org/openoffice/Office/UI/DbRelationWindowState.xcu
+%{_datadir}/%{name}/share/registry/data/org/openoffice/Office/UI/DbReportWindowState.xcu
 %{_datadir}/%{name}/share/registry/data/org/openoffice/Office/UI/DbTableWindowState.xcu
 %{_datadir}/%{name}/share/registry/data/org/openoffice/Office/UI/DbuCommands.xcu
 %{_datadir}/%{name}/share/registry/data/org/openoffice/Office/UI/DrawImpressCommands.xcu
@@ -2763,8 +2815,13 @@ fi
 %{_datadir}/%{name}/share/registry/data/org/openoffice/Office/UI/GenericCategories.xcu
 %{_datadir}/%{name}/share/registry/data/org/openoffice/Office/UI/GenericCommands.xcu
 %{_datadir}/%{name}/share/registry/data/org/openoffice/Office/UI/MathWindowState.xcu
+%{_datadir}/%{name}/share/registry/data/org/openoffice/Office/UI/ReportCommands.xcu
 %{_datadir}/%{name}/share/registry/data/org/openoffice/Office/UI/StartModuleCommands.xcu
 %{_datadir}/%{name}/share/registry/data/org/openoffice/Office/UI/StartModuleWindowState.xcu
+%{_datadir}/%{name}/share/registry/data/org/openoffice/Office/UI/WriterFormWindowState.xcu
+%{_datadir}/%{name}/share/registry/data/org/openoffice/Office/UI/WriterReportWindowState.xcu
+%{_datadir}/%{name}/share/registry/data/org/openoffice/Office/UI.xcu
+%{_datadir}/%{name}/share/registry/data/org/openoffice/Office/UI/XFormsWindowState.xcu
 %{_datadir}/%{name}/share/registry/data/org/openoffice/Office/Views.xcu
 %{_datadir}/%{name}/share/registry/data/org/openoffice/Office/WebWizard.xcu
 %{_datadir}/%{name}/share/registry/data/org/openoffice/Office/Writer.xcu
@@ -2776,8 +2833,8 @@ fi
 %{_datadir}/%{name}/share/registry/schema/org/openoffice/Inet.xcs
 %{_datadir}/%{name}/share/registry/schema/org/openoffice/LDAP.xcs
 %{_datadir}/%{name}/share/registry/schema/org/openoffice/Office/Addons.xcs
-%{_datadir}/%{name}/share/registry/schema/org/openoffice/Office/Calc.xcs
 %{_datadir}/%{name}/share/registry/schema/org/openoffice/Office/CalcAddIns.xcs
+%{_datadir}/%{name}/share/registry/schema/org/openoffice/Office/Calc.xcs
 %{_datadir}/%{name}/share/registry/schema/org/openoffice/Office/Chart.xcs
 %{_datadir}/%{name}/share/registry/schema/org/openoffice/Office/Commands.xcs
 %{_datadir}/%{name}/share/registry/schema/org/openoffice/Office/Common.xcs
@@ -2786,25 +2843,28 @@ fi
 %{_datadir}/%{name}/share/registry/schema/org/openoffice/Office/Draw.xcs
 %{_datadir}/%{name}/share/registry/schema/org/openoffice/Office/Embedding.xcs
 %{_datadir}/%{name}/share/registry/schema/org/openoffice/Office/Events.xcs
+%{_datadir}/%{name}/share/registry/schema/org/openoffice/Office/ExtendedColorScheme.xcs
+%{_datadir}/%{name}/share/registry/schema/org/openoffice/Office/ExtensionManager.xcs
 %{_datadir}/%{name}/share/registry/schema/org/openoffice/Office/FormWizard.xcs
 %{_datadir}/%{name}/share/registry/schema/org/openoffice/Office/Impress.xcs
 %{_datadir}/%{name}/share/registry/schema/org/openoffice/Office/Java.xcs
 %{_datadir}/%{name}/share/registry/schema/org/openoffice/Office/Jobs.xcs
 %{_datadir}/%{name}/share/registry/schema/org/openoffice/Office/Labels.xcs
 %{_datadir}/%{name}/share/registry/schema/org/openoffice/Office/Linguistic.xcs
+%{_datadir}/%{name}/share/registry/schema/org/openoffice/Office/Logging.xcs
 %{_datadir}/%{name}/share/registry/schema/org/openoffice/Office/Math.xcs
 %{_datadir}/%{name}/share/registry/schema/org/openoffice/Office/OptionsDialog.xcs
 %{_datadir}/%{name}/share/registry/schema/org/openoffice/Office/Paths.xcs
 %{_datadir}/%{name}/share/registry/schema/org/openoffice/Office/ProtocolHandler.xcs
 %{_datadir}/%{name}/share/registry/schema/org/openoffice/Office/Recovery.xcs
-%{_datadir}/%{name}/share/registry/schema/org/openoffice/Office/SFX.xcs
+%{_datadir}/%{name}/share/registry/schema/org/openoffice/Office/ReportDesign.xcs
 %{_datadir}/%{name}/share/registry/schema/org/openoffice/Office/Scripting.xcs
 %{_datadir}/%{name}/share/registry/schema/org/openoffice/Office/Security.xcs
+%{_datadir}/%{name}/share/registry/schema/org/openoffice/Office/SFX.xcs
 %{_datadir}/%{name}/share/registry/schema/org/openoffice/Office/Substitution.xcs
 %{_datadir}/%{name}/share/registry/schema/org/openoffice/Office/TabBrowse.xcs
 %{_datadir}/%{name}/share/registry/schema/org/openoffice/Office/TableWizard.xcs
 %{_datadir}/%{name}/share/registry/schema/org/openoffice/Office/TypeDetection.xcs
-%{_datadir}/%{name}/share/registry/schema/org/openoffice/Office/UI.xcs
 %{_datadir}/%{name}/share/registry/schema/org/openoffice/Office/UI/BaseWindowState.xcs
 %{_datadir}/%{name}/share/registry/schema/org/openoffice/Office/UI/BasicIDECommands.xcs
 %{_datadir}/%{name}/share/registry/schema/org/openoffice/Office/UI/BasicIDEWindowState.xcs
@@ -2818,6 +2878,7 @@ fi
 %{_datadir}/%{name}/share/registry/schema/org/openoffice/Office/UI/DbBrowserWindowState.xcs
 %{_datadir}/%{name}/share/registry/schema/org/openoffice/Office/UI/DbQueryWindowState.xcs
 %{_datadir}/%{name}/share/registry/schema/org/openoffice/Office/UI/DbRelationWindowState.xcs
+%{_datadir}/%{name}/share/registry/schema/org/openoffice/Office/UI/DbReportWindowState.xcs
 %{_datadir}/%{name}/share/registry/schema/org/openoffice/Office/UI/DbTableWindowState.xcs
 %{_datadir}/%{name}/share/registry/schema/org/openoffice/Office/UI/DbuCommands.xcs
 %{_datadir}/%{name}/share/registry/schema/org/openoffice/Office/UI/DrawImpressCommands.xcs
@@ -2826,13 +2887,18 @@ fi
 %{_datadir}/%{name}/share/registry/schema/org/openoffice/Office/UI/GenericCommands.xcs
 %{_datadir}/%{name}/share/registry/schema/org/openoffice/Office/UI/GlobalSettings.xcs
 %{_datadir}/%{name}/share/registry/schema/org/openoffice/Office/UI/MathWindowState.xcs
+%{_datadir}/%{name}/share/registry/schema/org/openoffice/Office/UI/ReportCommands.xcs
 %{_datadir}/%{name}/share/registry/schema/org/openoffice/Office/UI/StartModuleCommands.xcs
 %{_datadir}/%{name}/share/registry/schema/org/openoffice/Office/UI/StartModuleWindowState.xcs
 %{_datadir}/%{name}/share/registry/schema/org/openoffice/Office/UI/WindowState.xcs
+%{_datadir}/%{name}/share/registry/schema/org/openoffice/Office/UI/WriterFormWindowState.xcs
+%{_datadir}/%{name}/share/registry/schema/org/openoffice/Office/UI/WriterReportWindowState.xcs
+%{_datadir}/%{name}/share/registry/schema/org/openoffice/Office/UI.xcs
+%{_datadir}/%{name}/share/registry/schema/org/openoffice/Office/UI/XFormsWindowState.xcs
 %{_datadir}/%{name}/share/registry/schema/org/openoffice/Office/Views.xcs
 %{_datadir}/%{name}/share/registry/schema/org/openoffice/Office/WebWizard.xcs
-%{_datadir}/%{name}/share/registry/schema/org/openoffice/Office/Writer.xcs
 %{_datadir}/%{name}/share/registry/schema/org/openoffice/Office/WriterWeb.xcs
+%{_datadir}/%{name}/share/registry/schema/org/openoffice/Office/Writer.xcs
 %{_datadir}/%{name}/share/registry/schema/org/openoffice/Setup.xcs
 %{_datadir}/%{name}/share/registry/schema/org/openoffice/System.xcs
 %{_datadir}/%{name}/share/registry/schema/org/openoffice/TypeDetection/Filter.xcs
@@ -2872,12 +2938,14 @@ fi
 %{_datadir}/%{name}/share/registry/modules/org/openoffice/Office/Embedding/Embedding-draw.xcu
 %{_datadir}/%{name}/share/registry/modules/org/openoffice/Office/Embedding/Embedding-impress.xcu
 %{_datadir}/%{name}/share/registry/modules/org/openoffice/Office/Embedding/Embedding-math.xcu
+%{_datadir}/%{name}/share/registry/modules/org/openoffice/Office/Embedding/Embedding-report.xcu
 %{_datadir}/%{name}/share/registry/modules/org/openoffice/Office/Embedding/Embedding-writer.xcu
 # move it to -writer ?
 %{_datadir}/%{name}/share/registry/modules/org/openoffice/Office/Writer/Writer-cjk_ja.xcu
 %{_datadir}/%{name}/share/registry/modules/org/openoffice/Office/Writer/Writer-cjk_ko.xcu
 %{_datadir}/%{name}/share/registry/modules/org/openoffice/Office/Writer/Writer-cjk_zh-CN.xcu
 %{_datadir}/%{name}/share/registry/modules/org/openoffice/Office/Writer/Writer-cjk_zh-TW.xcu
+# move to locale pkgs?
 %{_datadir}/%{name}/share/registry/modules/org/openoffice/Setup/Langpack-af.xcu
 %{_datadir}/%{name}/share/registry/modules/org/openoffice/Setup/Langpack-ar.xcu
 %{_datadir}/%{name}/share/registry/modules/org/openoffice/Setup/Langpack-as-IN.xcu
@@ -2964,6 +3032,8 @@ fi
 %{_datadir}/%{name}/share/registry/modules/org/openoffice/Setup/Langpack-zh-CN.xcu
 %{_datadir}/%{name}/share/registry/modules/org/openoffice/Setup/Langpack-zh-TW.xcu
 %{_datadir}/%{name}/share/registry/modules/org/openoffice/Setup/Langpack-zu.xcu
+%{_datadir}/%{name}/share/registry/modules/org/openoffice/Setup/Langpack-ka.xcu
+%{_datadir}/%{name}/share/registry/modules/org/openoffice/Setup/Setup-report.xcu
 %{_datadir}/%{name}/share/registry/modules/org/openoffice/TypeDetection/Filter/fcfg_global_filters.xcu
 %{_datadir}/%{name}/share/registry/modules/org/openoffice/TypeDetection/Filter/fcfg_base_filters.xcu
 %{_datadir}/%{name}/share/registry/modules/org/openoffice/TypeDetection/Filter/fcfg_chart_filters.xcu
@@ -3107,11 +3177,13 @@ fi
 %{_datadir}/%{name}/share/xslt/export/spreadsheetml
 %{_datadir}/%{name}/share/xslt/export/wordml
 %{_datadir}/%{name}/share/xslt/import
+%{_datadir}/%{name}/share/xslt/odfflatxml
+%{_datadir}/%{name}/share/xslt/wiki
 %endif
 
 %{_datadir}/mime/packages/openoffice.xml
 
-#%{_desktopdir}/ootemplate.desktop
+%{_desktopdir}/ootemplate.desktop
 
 %{_iconsdir}/hicolor/*/apps/ooo-gulls.png
 %{_iconsdir}/hicolor/*/apps/ooo-printeradmin.png
@@ -3124,6 +3196,7 @@ fi
 %{_mandir}/man1/openoffice.1*
 
 # en-US
+# TODO: use find lang for en-US too?
 %{_libdir}/%{name}/presets/config/*_en-US.so*
 %{_datadir}/%{name}/share/autocorr/acor_*.dat
 %{_datadir}/%{name}/share/autotext/en-US
