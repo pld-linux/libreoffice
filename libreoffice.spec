@@ -2111,7 +2111,6 @@ cp %{SOURCE50} src
 
 echo "[ PLDOnly ]" >> patches/src680/apply
 # patches applied by ooo (extension .diff is required)
-#for P in %{PATCH102} %{PATCH104} %{PATCH108} %{PATCH109} %{PATCH111} %{PATCH112}; do
 for P in \
 %ifarch %{x8664}
 	%{PATCH107} \
@@ -2122,7 +2121,9 @@ for P in \
 	install $P patches/src680/$PATCHNAME
 	echo $PATCHNAME >> patches/src680/apply
 done
-#cp %{PATCH110} patches/src680/nsplugin-path.diff
+
+# from ooo-build itself
+echo "linux-headers.diff" >> patches/src680/apply
 
 %build
 # Make sure we have /proc mounted - otherwise idlc will fail later.
