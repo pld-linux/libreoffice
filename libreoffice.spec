@@ -2123,6 +2123,7 @@ for P in \
 done
 
 # from ooo-build itself
+echo "vcl_font-NO_LIST.diff" >> patches/src680/apply
 echo "linux-headers.diff" >> patches/src680/apply
 
 %build
