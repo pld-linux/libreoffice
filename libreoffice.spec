@@ -2084,7 +2084,8 @@ bashowe uzupełnianie nazw dla Openoffice.org.
 %setup -q -n ooo-build-trunk
 install -d src
 
-# sources, icons, KDE_icons
+# sources, icons, KDE_icons. You can verify that all needed sources
+# are here by running ./download script manually after rpmbuild -bp
 ln -sf %{SOURCE1} %{SOURCE2} %{SOURCE3} %{SOURCE4} \
 	%{SOURCE10} %{SOURCE11} %{SOURCE12} \
 	%{SOURCE15} %{SOURCE16} %{SOURCE17} \
@@ -2108,25 +2109,14 @@ cp %{SOURCE50} src
 #%patch8 -p1
 #%patch9 -p1
 
-# 64 bit related patches (not applied now)
-#install %{PATCH100} patches/64bit
-#install %{PATCH101} patches/64bit/64bit-inline.diff
-
-#%ifarch %{x8664}
-#echo "[ PLD64bitfixes ]" >> patches/src680/apply
-## patches applied by ooo (extension .diff is required)
-#for P in %{PATCH107}; do
-#	PATCHNAME=PLD-${P##*/%{name}-}
-#	PATCHNAME=${PATCHNAME%.patch}.diff
-#	install $P patches/src680/$PATCHNAME
-#	echo $PATCHNAME >> patches/src680/apply
-#done
-#%endif
-
 echo "[ PLDOnly ]" >> patches/src680/apply
 # patches applied by ooo (extension .diff is required)
 #for P in %{PATCH102} %{PATCH104} %{PATCH108} %{PATCH109} %{PATCH111} %{PATCH112}; do
-for P in %{PATCH108}; do
+for P in \
+%ifarch %{x8664}
+	%{PATCH107} \
+%endif
+	%{PATCH108}; do
 	PATCHNAME=PLD-${P##*/%{name}-}
 	PATCHNAME=${PATCHNAME%.patch}.diff
 	install $P patches/src680/$PATCHNAME
