@@ -175,7 +175,7 @@ BuildRequires:	freetype-devel >= 2.1
 BuildRequires:	gperf
 BuildRequires:	gstreamer-devel >= 0.10.0
 BuildRequires:	gstreamer-plugins-base-devel >= 0.10.0
-BuildRequires:	gtk+2-devel
+BuildRequires:	gtk+2-devel >= 2:2.10
 %{?with_system_hsqldb:BuildRequires:	hsqldb >= 1.8.0.8}
 %{?with_system_hunspell:BuildRequires:	hunspell-devel}
 BuildRequires:	icu
@@ -232,9 +232,8 @@ BuildRequires:	ant
 BuildRequires:	jar
 BuildRequires:	jdk >= 1.4.0_00
 BuildRequires:	jre-X11
-%else
-BuildRequires:	libxslt-progs
 %endif
+BuildRequires:	libxslt-progs
 BuildRequires:	xulrunner-devel
 BuildConflicts:	STLport4
 Requires:	%{name}-base = %{epoch}:%{version}-%{release}
