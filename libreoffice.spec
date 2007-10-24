@@ -2,17 +2,17 @@
 #	- normal build (athlon) requires about 25 GB of disk space:
 #		$BUILD_ROOT	7.0 GB
 #		BUILD	       16.2 GB
-#		SRPMS		0.3 GB
 #		RPMS		1.2 GB
+#		SRPMS		0.3 GB
 #
 # 2.3.0 NOTES/TODO:
 #  - needs some help to build: when the build fails complaining about --enable-gtk,
-#    go to rpm/BUILD/ooo-build-trunk dir, type make and go grab some coffee. 
+#    go to rpm/BUILD/ooo-build-trunk dir, type make and go grab some coffee.
 #    After some time it will eventually fail on sc/util (_sv_rules empty), workaround:
-#    comment out the `.IF "$(VBA_EXTENSION)"=="YES"' section (3 lines) in 
+#    comment out the `.IF "$(VBA_EXTENSION)"=="YES"' section (3 lines) in
 #    build/current/sc/util/makefile.mk, and rerun the build. It will complete, yet it will
 #    fail on install...
-#    
+#
 #
 # TODO:
 #   /usr/share/openoffice.org/share/registry/modules/org/openoffice/Office/Common/Common-ctl_dz.xcu
@@ -162,7 +162,7 @@ BuildRequires:	boost-devel
 BuildRequires:	boost-mem_fn-devel
 BuildRequires:	boost-spirit-devel
 BuildRequires:	boost-uBLAS-devel
-BuildRequires:	cairo-devel >= 0.5.2
+BuildRequires:	cairo-devel >= 1.2.0
 %{?with_ccache:BuildRequires:	ccache}
 BuildRequires:	cups-devel
 BuildRequires:	curl-devel >= 7.9.8
@@ -176,6 +176,9 @@ BuildRequires:	gperf
 BuildRequires:	gstreamer-devel >= 0.10.0
 BuildRequires:	gstreamer-plugins-base-devel >= 0.10.0
 BuildRequires:	gtk+2-devel >= 2:2.10
+BuildRequires:	glib2-devel >= 2.13.5
+BuildRequires:	pango-devel >= 1:1.17.3
+BuildRequires:	atk-devel >= 1:1.9.0
 %{?with_system_hsqldb:BuildRequires:	hsqldb >= 1.8.0.8}
 %{?with_system_hunspell:BuildRequires:	hunspell-devel}
 BuildRequires:	icu
