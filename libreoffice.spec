@@ -182,7 +182,7 @@ BuildRequires:	nas-devel >= 1.7-1
 BuildRequires:	neon-devel
 BuildRequires:	nspr-devel >= 1:4.6-0.20041030.3
 BuildRequires:	nss-devel >= 1:3.10
-BuildRequires:	openldap-devel
+BuildRequires:	openldap-devel >= 2.4.6
 BuildRequires:	pam-devel
 BuildRequires:	perl-Archive-Zip
 BuildRequires:	perl-base
