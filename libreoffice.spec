@@ -12,6 +12,13 @@
 #    comment out the `.IF "$(VBA_EXTENSION)"=="YES"' section (3 lines) in
 #    build/current/sc/util/makefile.mk, and rerun the build. It will complete, yet it will
 #    fail on install...
+
+# UNPACKAGED FILES
+#   /usr/lib64/openoffice.org/program/liblpsolve55.so
+#   /usr/lib64/openoffice.org/program/oosplash.bin
+#   /usr/lib64/openoffice.org/program/resource/scsolver680en-US.res
+#   /usr/lib64/openoffice.org/program/scsolver.uno.so
+
 #
 #
 # TODO:
@@ -3079,7 +3086,7 @@ fi
 %attr(755,root,root) %{_libdir}/%{name}/program/uno
 %attr(755,root,root) %{_libdir}/%{name}/program/uno.bin
 %attr(755,root,root) %{_libdir}/%{name}/program/unopkg.bin
-%attr(755,root,root) %{_libdir}/%{name}/program/ooqstart
+#%attr(755,root,root) %{_libdir}/%{name}/program/ooqstart
 %attr(755,root,root) %{_libdir}/%{name}/program/pagein*
 %attr(755,root,root) %{_libdir}/%{name}/program/regcomp
 %attr(755,root,root) %{_libdir}/%{name}/program/regcomp.bin
