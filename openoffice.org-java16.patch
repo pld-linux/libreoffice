@@ -1,5 +1,5 @@
---- ooo-build-ooe680-m6/patches/src680/build-java-target.diff.orig	2007-01-03 17:45:00.457170750 +0100
-+++ ooo-build-ooe680-m6/patches/src680/build-java-target.diff	2007-01-03 17:46:25.814505250 +0100
+--- ooo-build-ooe680-m6/patches/src680/build-java-target-m7.diff.orig	2007-01-03 17:45:00.457170750 +0100
++++ ooo-build-ooe680-m6/patches/src680/build-java-target-m7.diff	2007-01-03 17:46:25.814505250 +0100
 @@ -18,7 +18,7 @@
   AC_ARG_ENABLE(gcjaot,
   [  --enable-gcjaot         Build with[[out]] using Ahead of Time java compilation
