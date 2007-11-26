@@ -1,0 +1,13 @@
+--- canvas/source/tools/image.cxx~	2007-07-18 12:42:46.000000000 +0200
++++ canvas/source/tools/image.cxx	2007-11-25 16:12:57.375066438 +0100
+@@ -2297,8 +2297,8 @@
+             // TODO(E1): Return value
+             // TODO(F1): FillRule
+             fillGradient( rValues,
+-                          rValues.maColor1,
+-                          rValues.maColor2,
++                          rValues.maColors[0],
++                          rValues.maColors[1],
+                           aPoly,
+                           aTextureTransform,
+                           textures[0] );
