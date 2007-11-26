@@ -5,21 +5,10 @@
 #		RPMS		1.2 GB
 #		SRPMS		0.3 GB
 #
-# 2.3.0 NOTES/TODO:
-#  - needs some help to build: when the build fails complaining about --enable-gtk,
-#    go to rpm/BUILD/ooo-build-trunk dir, type make and go grab some coffee.
-#    After some time it will eventually fail on sc/util (_sv_rules empty), workaround:
-#    comment out the `.IF "$(VBA_EXTENSION)"=="YES"' section (3 lines) in
-#    build/current/sc/util/makefile.mk, and rerun the build. It will complete, yet it will
-#    fail on install...
-
-# UNPACKAGED FILES
-#   /usr/lib64/openoffice.org/program/liblpsolve55.so
-#   /usr/lib64/openoffice.org/program/oosplash.bin
-#   /usr/lib64/openoffice.org/program/resource/scsolver680en-US.res
-#   /usr/lib64/openoffice.org/program/scsolver.uno.so
-
 #
+# TODO (2.3.0):
+#  - oowriter is unusable
+#  - update splash to 2.3.0
 #
 # TODO:
 #   /usr/share/openoffice.org/share/registry/modules/org/openoffice/Office/Common/Common-ctl_dz.xcu
@@ -91,7 +80,7 @@
 %define		tag			%(echo %{mws} | tr A-Z a-z)-%{milestone}
 %define		milestone	m6
 %define		_tag		%(echo %{tag} | tr - _)
-%define		_rel		0.0.2
+%define		_rel		0.0.3
 
 Summary:	OpenOffice.org - powerful office suite
 Summary(pl.UTF-8):	OpenOffice.org - potężny pakiet biurowy
@@ -101,9 +90,9 @@ Release:	%{_tag}.%{_rel}
 Epoch:		1
 License:	GPL/LGPL
 Group:		X11/Applications
-# svn export http://svn.gnome.org/svn/ooo-build/trunk ooo-build-trunk
-Source0:	ooo-build-r10714.tar.bz2
-# Source0-md5:	7e3185d88c3fe950b9ff02443c6ba751
+# svn export http://svn.gnome.org/svn/ooo-build/trunk ooo-build-2-3
+Source0:	ooo-build-r10935.tar.bz2
+# Source0-md5:	bdf41a1f9070dd4ae0f6a883dd472ee7
 Source1:	http://go-oo.org/packages/%{mws}/%{tag}-core.tar.bz2
 # Source1-md5:	02ef9044f6339bdd76cd1a37291b406d
 Source2:	http://go-oo.org/packages/%{mws}/%{tag}-system.tar.bz2
@@ -138,28 +127,27 @@ Source50:	openabout_pld.png
 # Source50-md5:	64a945a07b64ebc0a12adfde4c99da8a
 # patches applied in prep section
 Patch0:		%{name}-PLD.patch
-#Patch1:		%{name}-sc-dataform.patch
-Patch2:		%{name}-stl5_fix.patch
-Patch3:		%{name}-mdbtools_fix.diff
-Patch4:		%{name}-nolfs_hack.patch
-Patch6:		%{name}-java16.patch
-Patch7:		%{name}-nodictinst.patch
-Patch8:		%{name}-73257.patch
-Patch9:		%{name}-apply.patch
+Patch1:		%{name}-java16.patch
+# patch50/51 need review
+Patch50:	%{name}-mdbtools_fix.diff
+Patch51:	%{name}-nodictinst.patch
 # patches applied by ooo-patching-system
-Patch100:	%{name}-STL-lib64.diff
-Patch101:	%{name}-64bit-inline.diff
-Patch102:	%{name}-build-pld-splash.diff
-Patch104:	%{name}-portaudio_v19.diff
-Patch107:	%{name}-stl-amd64.patch
-Patch108:	%{name}-java6.patch
-Patch109:	%{name}-agg25.patch
-Patch110:	%{name}-nsplugin-path.diff
-Patch111:	%{name}-perl-nodiag.patch
-Patch112:	%{name}-gcc42-swregion.diff
+Patch100:	%{name}-stl-amd64.patch
+Patch101:	%{name}-java6.patch
+Patch102:	%{name}-canvas-macolors.diff
+Patch103:	%{name}-missing-includes.diff
+# patches 1000+ need review
+Patch1000:	%{name}-STL-lib64.diff
+Patch1001:	%{name}-64bit-inline.diff
+Patch1002:	%{name}-build-pld-splash.diff
+Patch1003:	%{name}-portaudio_v19.diff
+Patch1004:	%{name}-agg25.patch
+Patch1005:	%{name}-nsplugin-path.diff
+Patch1006:	%{name}-perl-nodiag.patch
+Patch1007:	%{name}-gcc42-swregion.diff
 URL:		http://www.openoffice.org/
 BuildRequires:	/usr/bin/getopt
-BuildRequires:	STLport-devel >= 2:5.0.0
+BuildRequires:	STLport-devel >= 2:5.1.4-2
 %{?with_system_agg:BuildRequires:	agg-devel}
 BuildRequires:	autoconf >= 2.51
 BuildRequires:	automake >= 1:1.9
@@ -2090,7 +2078,7 @@ bash-completion for OpenOffice.org.
 bashowe uzupełnianie nazw dla Openoffice.org.
 
 %prep
-%setup -q -n ooo-build-trunk
+%setup -q -n ooo-build-2-3
 install -d src
 
 # sources, icons, KDE_icons. You can verify that all needed sources
@@ -2106,25 +2094,23 @@ cp %{SOURCE50} src
 
 # fixes for the patch subsystem
 %patch0 -p1
-#%patch1 -p0
-
-#%patch2 -p1
-#%patch3 -p1
-#%patch4 -p1
-%patch6 -p1
+%patch1 -p1
+#
+# mdbtools_fix.diff needs review
+#%patch50 -p1
+#
+# nodictinst patch needs review
 #%if %{with system_myspell}
-#%patch7 -p1
+#%patch51 -p1
 #%endif
-#%patch8 -p1
-#%patch9 -p1
 
 echo "[ PLDOnly ]" >> patches/src680/apply
 # patches applied by ooo (extension .diff is required)
 for P in \
 %ifarch %{x8664}
-	%{PATCH107} \
+	%{PATCH100} \
 %endif
-	%{PATCH108}; do
+	%{PATCH101} %{PATCH102} %{PATCH103}; do
 	PATCHNAME=PLD-${P##*/%{name}-}
 	PATCHNAME=${PATCHNAME%.patch}.diff
 	install $P patches/src680/$PATCHNAME
@@ -2346,6 +2332,7 @@ if [ ! -f makeinstall.stamp -o ! -d $RPM_BUILD_ROOT ]; then
 
 	export DESTDIR=$RPM_BUILD_ROOT
 	export TMP="%{tmpdir}"
+	export TMPDIR="%{tmpdir}"
 	export TEMP="%{tmpdir}"
 	export DEFAULT_TO_ENGLISH_FOR_PACKING=1
 
@@ -2368,7 +2355,7 @@ if [ ! -f installed.stamp ]; then
 	# some libs creep in somehow
 	rm -f $RPM_BUILD_ROOT%{_libdir}/%{name}/program/libstl*.so*
 	rm -f $RPM_BUILD_ROOT%{_libdir}/%{name}/program/libsndfile*
-	rm -f $RPM_BUILD_ROOT%{_libdir}/%{name}/program/libgcc_s.so*
+	#rm -f $RPM_BUILD_ROOT%{_libdir}/%{name}/program/libgcc3_uno.so*
 	rm -f $RPM_BUILD_ROOT%{_libdir}/%{name}/program/libstdc++*so*
 
 	rm -f $RPM_BUILD_ROOT%{_libdir}/%{name}/program/sopatchlevel.sh
@@ -2436,10 +2423,10 @@ if [ ! -f installed.stamp ]; then
 
 	# Copy fixed OpenSymbol to correct location
 	install -d $RPM_BUILD_ROOT%{_fontsdir}/TTF
-	install build/%{tag}/extras/source/truetype/symbol/opens___.ttf $RPM_BUILD_ROOT%{_fontsdir}/TTF
+	install build/current/extras/source/truetype/symbol/opens___.ttf $RPM_BUILD_ROOT%{_fontsdir}/TTF
 
 	# Add in the regcomp tool since some people need it for 3rd party add-ons
-	cp -a build/%{tag}/solver/%{upd}/unxlng*.pro/bin/regcomp{,.bin} $RPM_BUILD_ROOT%{_libdir}/%{name}/program/
+	cp -a build/current/solver/%{upd}/unxlng*.pro/bin/regcomp{,.bin} $RPM_BUILD_ROOT%{_libdir}/%{name}/program/
 
 	# Rename .desktop files to avoid conflicts with other applications .desktops
 	# TODO: make patch instead.
@@ -2642,6 +2629,8 @@ fi
 %attr(755,root,root) %{_libdir}/%{name}/program/libbf_sb680*.so
 %attr(755,root,root) %{_libdir}/%{name}/program/libguesslang680*.so
 %attr(755,root,root) %{_libdir}/%{name}/program/liblog680*.so
+%attr(755,root,root) %{_libdir}/%{name}/program/liblpsolve*.so
+%attr(755,root,root) %{_libdir}/%{name}/program/libmtfrenderer.uno.so
 %attr(755,root,root) %{_libdir}/%{name}/program/liboox680*.so
 %attr(755,root,root) %{_libdir}/%{name}/program/librpt680*.so
 %attr(755,root,root) %{_libdir}/%{name}/program/librptui680*.so
@@ -2653,10 +2642,11 @@ fi
 %attr(755,root,root) %{_libdir}/%{name}/program/libvclplug_svp680*.so
 %attr(755,root,root) %{_libdir}/%{name}/program/libwpgimport680*.so
 %attr(755,root,root) %{_libdir}/%{name}/program/libwriterfilter680*.so
+%attr(755,root,root) %{_libdir}/%{name}/program/oosplash.bin
 %attr(755,root,root) %{_libdir}/%{name}/program/simplecanvas.uno.so
+%attr(755,root,root) %{_libdir}/%{name}/program/scsolver.uno.so
 %{_datadir}/%{name}/share/config/images_tango.zip
 %{_datadir}/%{name}/share/registry/data/org/openoffice/UserProfile.xcu
-#%{_libdir}/%{name}/program/resource/scsolver680en-US.res
 %{_libdir}/%{name}/program/root3.dat
 %{_libdir}/%{name}/program/root4.dat
 %{_libdir}/%{name}/program/root5.dat
@@ -2665,6 +2655,7 @@ fi
 %{_libdir}/%{name}/program/resource/rpt680en-US.res
 %{_libdir}/%{name}/program/resource/rptui680en-US.res
 %{_libdir}/%{name}/program/resource/sb680en-US.res
+%{_libdir}/%{name}/program/resource/scsolver680en-US.res
 %{_libdir}/%{name}/program/resource/sdbcl680en-US.res
 %{_libdir}/%{name}/program/resource/t602filter680en-US.res
 %{_datadir}/%{name}/share/config/javasettingsunopkginstall.xml
