@@ -78,9 +78,9 @@
 %define		upd			680
 %define		mws			OOG%{upd}
 %define		tag			%(echo %{mws} | tr A-Z a-z)-%{milestone}
-%define		milestone	m6
+%define		milestone	m9
 %define		_tag		%(echo %{tag} | tr - _)
-%define		_rel		0.0.3
+%define		_rel		0.0.4
 
 Summary:	OpenOffice.org - powerful office suite
 Summary(pl.UTF-8):	OpenOffice.org - potężny pakiet biurowy
@@ -91,16 +91,16 @@ Epoch:		1
 License:	GPL/LGPL
 Group:		X11/Applications
 # svn export http://svn.gnome.org/svn/ooo-build/trunk ooo-build-2-3
-Source0:	ooo-build-r10935.tar.bz2
-# Source0-md5:	bdf41a1f9070dd4ae0f6a883dd472ee7
+Source0:	ooo-build-r11109.tar.bz2
+# Source0-md5:	636d761ca8e51bef774f963dd9f662b0
 Source1:	http://go-oo.org/packages/%{mws}/%{tag}-core.tar.bz2
-# Source1-md5:	02ef9044f6339bdd76cd1a37291b406d
+# Source1-md5:	551c451f43654d928f524f2f809939a9
 Source2:	http://go-oo.org/packages/%{mws}/%{tag}-system.tar.bz2
-# Source2-md5:	593aa8e2a8c311cc216170e0f0a34355
+# Source2-md5:	1124d841e475015b5fde8e54d2f721f7
 Source3:	http://go-oo.org/packages/%{mws}/%{tag}-binfilter.tar.bz2
-# Source3-md5:	c79086fb3c1f3309ba3ccf7a660ce23c
+# Source3-md5:	c26ba92425087f71531d171cf74ff687
 Source4:	http://go-oo.org/packages/%{mws}/%{tag}-lang.tar.bz2
-# Source4-md5:	e7057a8dbfc7f0ee6b065e556b382ac4
+# Source4-md5:	2f9a7335a8cefb74060e7ba0d0cea11a
 Source10:	http://go-oo.org/packages/SRC680/ooo_custom_images-13.tar.bz2
 # Source10-md5:	2480af7f890c8175c7f9e183a1b39ed2
 Source11:	http://go-oo.org/packages/SRC680/ooo_crystal_images-6.tar.bz2
@@ -119,10 +119,12 @@ Source19:	http://go-oo.org/packages/%{mws}/cli_types_bridgetest.dll
 # Source19-md5:	cadc605a6b0265b8167001b4788ff113
 Source20:	http://go-oo.org/packages/SRC680/libwps-0.1.0~svn20070129.tar.gz
 # Source20-md5:	2e442485100f7e00685737513f853546
-Source21:	http://go-oo.org/packages/SRC680/libwpg-0.1.0.tar.gz
-# Source21-md5:	1d9644fb4c90511255c1576b4b30b1d2
-Source22:       http://download.go-oo.org/SRC680/oox.2007-09-05.tar.bz2
-# Source22-md5:	42aceb3508ff8b5ed04d0451b30f6ccf
+Source21:	http://go-oo.org/packages/SRC680/libwpg-0.1.2.tar.gz
+# Source21-md5:	317cee27f380c394c6e4eec02d45cab8
+Source22:       http://download.go-oo.org/SRC680/oox.2007-12-10.tar.bz2
+# Source22-md5:	fe094a579d6a57cc02f0c7abe50f9e8c
+Source23:	http://download.go-oo.org//SRC680/writerfilter.2007-12-10.tar.bz2
+# Source23-md5:	09f02b622134b2d3d45ec576522ba6e8
 Source50:	openabout_pld.png
 # Source50-md5:	64a945a07b64ebc0a12adfde4c99da8a
 # patches applied in prep section
@@ -2088,6 +2090,7 @@ ln -sf %{SOURCE1} %{SOURCE2} %{SOURCE3} %{SOURCE4} \
 	%{SOURCE15} %{SOURCE16} %{SOURCE17} \
 	%{SOURCE18} %{SOURCE19} \
 	%{SOURCE20} %{SOURCE21} %{SOURCE22} \
+	%{SOURCE23} \
 	src
 
 cp %{SOURCE50} src
