@@ -71,14 +71,14 @@
 %define		mws			OOF%{upd}
 %define		tag			%(echo %{mws} | tr A-Z a-z)-%{milestone}
 %define		milestone	m14
-%define		_tag		%(echo %{tag} | tr - _)
-%define		_rel		0.16
+%define		rtag		%(echo %{tag} | tr - _)
+%define		rel			1
 
 Summary:	OpenOffice.org - powerful office suite
 Summary(pl.UTF-8):	OpenOffice.org - potężny pakiet biurowy
 Name:		openoffice.org
 Version:	2.2.0
-Release:	%{_tag}.%{_rel}
+Release:	%{rtag}.%{rel}
 Epoch:		1
 License:	GPL/LGPL
 Group:		X11/Applications
