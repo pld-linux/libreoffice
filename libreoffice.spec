@@ -93,13 +93,13 @@ Group:		X11/Applications
 Source0:	http://download.go-oo.org/%{mws}/ooo-build-%{version}.tar.gz
 # Source0-md5:	5174381a947eb50cc50d038a5e00761e
 Source1:	http://download.go-oo.org/%{mws}/%{tag}-core.tar.bz2
-# Source1-md5:	9555a2d5fae9a25c788cc732921ef57a
+# Source1-md5:	551c451f43654d928f524f2f809939a9
 Source2:	http://download.go-oo.org/%{mws}/%{tag}-system.tar.bz2
-# Source2-md5:	1e20befe2fdb65c00be11f1f5d9ebdca
+# Source2-md5:	1124d841e475015b5fde8e54d2f721f7
 Source3:	http://download.go-oo.org/%{mws}/%{tag}-binfilter.tar.bz2
-# Source3-md5:	a56cf6ed9bd9759faec5760bacb848cd
+# Source3-md5:	c26ba92425087f71531d171cf74ff687
 Source4:	http://download.go-oo.org/%{mws}/%{tag}-lang.tar.bz2
-# Source4-md5:	3bb80a2c96e3363186377f7aae9f7c13
+# Source4-md5:	2f9a7335a8cefb74060e7ba0d0cea11a
 Source10:	http://download.go-oo.org/SRC680/ooo_custom_images-13.tar.bz2
 # Source10-md5:	2480af7f890c8175c7f9e183a1b39ed2
 Source11:	http://download.go-oo.org/SRC680/ooo_crystal_images-6.tar.bz2
