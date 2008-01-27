@@ -2110,9 +2110,9 @@ cp %{SOURCE50} src
 echo "[ PLDOnly ]" >> patches/src680/apply
 
 # remove patches (temporary FIX)
-%{__sed} -i -e "/oox-stlportism-fix.diff/" patches/src680/apply
-%{__sed} -i -e "/system-stlport51-oox.diff/" patches/src680/apply
-%{__sed} -i -e "/system-stlport51-oox-map.diff/" patches/src680/apply
+%{__sed} -i "/oox-stlportism-fix.diff/d" patches/src680/apply
+%{__sed} -i "/system-stlport51-oox.diff/d" patches/src680/apply
+%{__sed} -i "/system-stlport51-oox-map.diff/d" patches/src680/apply
 
 # patches applied by ooo (extension .diff is required)
 for P in \
