@@ -2165,6 +2165,12 @@ export DB_JAR="%{_javadir}/db.jar"
 export ANT_HOME="%{_datadir}/ant"
 %endif
 
+%if %{with ccache}
+if [ "$CCACHE_DIR" = "" ] ; then
+	export CCACHE_DIR=$HOME/.ccache/
+fi
+%endif
+
 export DEFAULT_TO_ENGLISH_FOR_PACKING=1
 
 RPM_BUILD_NR_THREADS="%(echo "%{__make}" | sed -e 's#.*-j\([[:space:]]*[0-9]\+\)#\1#g')"
