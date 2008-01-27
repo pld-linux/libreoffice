@@ -46,6 +46,7 @@
 %bcond_without	mozilla		# without mozilla components
 %bcond_without	i18n		# do not create i18n packages
 %bcond_with	ccache		# use ccache to speed up builds
+%bcond_with	icecream	# use icecream to speed up builds
 %bcond_with	msaccess	# with ms access import pieces
 
 %bcond_without	system_beanshell
@@ -85,13 +86,13 @@
 Summary:	OpenOffice.org - powerful office suite
 Summary(pl.UTF-8):	OpenOffice.org - potężny pakiet biurowy
 Name:		openoffice.org
-Version:	2.3.1.1
+Version:	2.3.1.2
 Release:	%{_tag}.%{_rel}
 Epoch:		1
 License:	GPL/LGPL
 Group:		X11/Applications
 Source0:	http://download.go-oo.org/%{mws}/ooo-build-%{version}.tar.gz
-# Source0-md5:	5174381a947eb50cc50d038a5e00761e
+# Source0-md5:	ec0b3af4ea1865b5f2b9545db61a20fd
 Source1:	http://download.go-oo.org/%{mws}/%{tag}-core.tar.bz2
 # Source1-md5:	551c451f43654d928f524f2f809939a9
 Source2:	http://download.go-oo.org/%{mws}/%{tag}-system.tar.bz2
@@ -118,10 +119,6 @@ Source19:	http://download.go-oo.org/%{mws}/cli_types_bridgetest.dll
 # Source19-md5:	cadc605a6b0265b8167001b4788ff113
 Source22:	http://download.go-oo.org/SRC680/oox.2007-12-10.tar.bz2
 # Source22-md5:	fe094a579d6a57cc02f0c7abe50f9e8c
-Source201:	ftp://ftp.linux.ee/pub/openoffice/stable/2.3.1/OOo_2.3.1_src_core.tar.bz2
-Source202:	ftp://ftp.linux.ee/pub/openoffice/stable/2.3.1/OOo_2.3.1_src_system.tar.bz2
-Source203:	ftp://ftp.linux.ee/pub/openoffice/stable/2.3.1/OOo_2.3.1_src_binfilter.tar.bz2
-Source204:	ftp://ftp.linux.ee/pub/openoffice/stable/2.3.1/OOo_2.3.1_src_l10n.tar.bz2
 Source23:	http://download.go-oo.org/SRC680/writerfilter.2007-12-10.tar.bz2
 # Source23-md5:	09f02b622134b2d3d45ec576522ba6e8
 Source50:	openabout_pld.png
@@ -129,15 +126,15 @@ Source50:	openabout_pld.png
 # patches applied in prep section
 Patch0:		%{name}-PLD.patch
 Patch1:		%{name}-java16.patch
-#Patch2:		%{name}-oox-stlportism-fix.patch
 # patch50/51 need review
 Patch50:	%{name}-mdbtools_fix.diff
 Patch51:	%{name}-nodictinst.patch
 # patches applied by ooo-patching-system
 Patch100:	%{name}-stl-amd64.patch
-Patch101:	%{name}-java6.patch
+#1Patch101:	%{name}-java6.patch
 Patch102:	%{name}-canvas-macolors.diff
 Patch103:	%{name}-missing-includes.diff
+Patch104:	%{name}-stlportism.patch
 # patches 1000+ need review
 Patch1000:	%{name}-STL-lib64.diff
 Patch1001:	%{name}-64bit-inline.diff
@@ -161,6 +158,7 @@ BuildRequires:	boost-spirit-devel
 BuildRequires:	boost-uBLAS-devel
 BuildRequires:	cairo-devel >= 1.2.0
 %{?with_ccache:BuildRequires:	ccache}
+%{?with_icecream:BuildRequires:	icecream}
 BuildRequires:	cups-devel
 BuildRequires:	curl-devel >= 7.9.8
 %{?with_system_db:BuildRequires:	db-cxx-devel}
@@ -2092,10 +2090,6 @@ ln -sf %{SOURCE1} %{SOURCE2} %{SOURCE3} %{SOURCE4} \
 	%{SOURCE18} %{SOURCE19} \
 	%{SOURCE22} \
 	%{SOURCE23} \
-	%{SOURCE201} \
-	%{SOURCE202} \
-	%{SOURCE203} \
-	%{SOURCE204} \
 	src
 
 cp %{SOURCE50} src
@@ -2114,12 +2108,19 @@ cp %{SOURCE50} src
 
 # TODO: use patches/hotfixes dir from now on
 echo "[ PLDOnly ]" >> patches/src680/apply
+
+#remove patch (temporary FIX)
+%{__sed} -i "s,oox-stlportism-fix.diff,,g" patches/src680/apply
+%{__sed} -i "s,system-stlport51-oox.diff,,g" patches/src680/apply
+%{__sed} -i "s,system-stlport51-oox-map.diff,,g" patches/src680/apply
+
+
 # patches applied by ooo (extension .diff is required)
 for P in \
 %ifarch %{x8664}
 	%{PATCH100} \
 %endif
-	%{PATCH101} %{PATCH102} %{PATCH103}; do
+	%{PATCH102} %{PATCH103}; do
 	PATCHNAME=PLD-${P##*/%{name}-}
 	PATCHNAME=${PATCHNAME%.patch}.diff
 	ln -s $P patches/src680/$PATCHNAME
@@ -2191,6 +2192,7 @@ CONFOPTS="\
 %endif
 	--disable-odk \
 	%{?with_ccache:--with-gcc-speedup=ccache} \
+	%{?with_icecream:--with-gcc-speedup=icecream} \
 	%{?with_system_agg:--with-system-agg} \
 	%{?with_system_beanshell:--with-system-beanshell} \
 	%{?with_system_db:--with-system-db} \
