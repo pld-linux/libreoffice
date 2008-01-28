@@ -1,0 +1,16 @@
+Index: ViewsWindow.cxx
+===================================================================
+RCS file: /cvs/dba/reportdesign/source/ui/report/ViewsWindow.cxx,v
+retrieving revision 1.4
+diff -u -r1.4 ViewsWindow.cxx
+--- openoffice.org.orig/reportdesign/source/ui/report/ViewsWindow.cxx	3 Aug 2007 12:46:04 -0000	1.4
++++ openoffice.org/reportdesign/source/ui/report/ViewsWindow.cxx	15 Aug 2007 18:40:58 -0000
+@@ -866,7 +866,7 @@
+ 		        const SdrMark* pM = pView->GetSdrMarkByIndex(i);
+ 		        SdrObject* pObj = pM->GetMarkedSdrObj();
+                 Rectangle aObjRect(_bBoundRects ? pObj->GetCurrentBoundRect() : pObj->GetSnapRect());
+-                _rSortRectangles.insert(TRectangleMap::value_type(aObjRect,TRectangleMap::data_type(pObj,pView)));
++                _rSortRectangles.insert(TRectangleMap::value_type(aObjRect,TRectangleMap::mapped_type(pObj,pView)));
+             }
+         }
+     }
