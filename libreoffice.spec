@@ -134,7 +134,7 @@ Patch100:	%{name}-stl-amd64.patch
 #1Patch101:	%{name}-java6.patch
 Patch102:	%{name}-canvas-macolors.diff
 Patch103:	%{name}-missing-includes.diff
-Patch104:	%{name}-stlportism.patch
+#Patch104:	%{name}-stlportism.patch
 # patches 1000+ need review
 Patch1000:	%{name}-STL-lib64.diff
 Patch1001:	%{name}-64bit-inline.diff
@@ -180,7 +180,7 @@ BuildRequires:	icu
 %{?with_kde:BuildRequires:	kdelibs-devel}
 BuildRequires:	libart_lgpl-devel
 BuildRequires:	libbonobo-devel >= 2.0
-%{?with_csystem_libhnj:BuildRequires:	libhnj-devel}
+%{?with_system_libhnj:BuildRequires:	libhnj-devel}
 BuildRequires:	libicu-devel >= 3.4
 BuildRequires:	libjpeg-devel
 BuildRequires:	libsndfile-devel
