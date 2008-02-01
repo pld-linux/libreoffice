@@ -175,7 +175,7 @@ BuildRequires:	glib2-devel >= 2.13.5
 BuildRequires:	pango-devel >= 1:1.17.3
 BuildRequires:	atk-devel >= 1:1.9.0
 %{?with_system_hsqldb:BuildRequires:	hsqldb >= 1.8.0.8}
-%{?with_system_hunspell:BuildRequires:	hunspell-devel}
+%{?with_system_hunspell:BuildRequires:	hunspell-devel >=1.2.2}
 BuildRequires:	icu
 %{?with_kde:BuildRequires:	kdelibs-devel}
 BuildRequires:	libart_lgpl-devel
