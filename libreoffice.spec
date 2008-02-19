@@ -73,7 +73,7 @@
 %define		milestone	m14
 %define		rtag		%(echo %{tag} | tr - _)
 
-%define		rel			3
+%define		rel			4
 Summary:	OpenOffice.org - powerful office suite
 Summary(pl.UTF-8):	OpenOffice.org - potężny pakiet biurowy
 Name:		openoffice.org
