@@ -91,8 +91,10 @@ Release:	%{_tag}.%{_rel}
 Epoch:		1
 License:	GPL/LGPL
 Group:		X11/Applications
-Source0:	http://download.go-oo.org/%{mws}/ooo-build-%{version}.tar.gz
-# Source0-md5:	71344243ce6af747d3381957c87c1cfb
+# we use trunk because released tarballs are buggy too often
+# svn export http://svn.gnome.org/svn/ooo-build/trunk ooo-build
+Source0:	ooo-build-r11638.tar.bz2
+# Source0-md5:	1888268400cf6a652df494700cecc7bc
 Source1:	http://download.go-oo.org/%{mws}/%{tag}-core.tar.bz2
 # Source1-md5:	2757e74404ae800baa7b727f3f0684ae
 Source2:	http://download.go-oo.org/%{mws}/%{tag}-system.tar.bz2
@@ -2074,7 +2076,7 @@ bash-completion for OpenOffice.org.
 bashowe uzupełnianie nazw dla Openoffice.org.
 
 %prep
-%setup -q -n ooo-build-%{version}
+%setup -q -n ooo-build
 install -d src
 
 # sources, icons, KDE_icons. You can verify that all needed sources
