@@ -77,30 +77,30 @@
 %endif
 
 %define		upd			680
-%define		mws			OOG%{upd}
+%define		mws			OOH%{upd}
 %define		tag			%(echo %{mws} | tr A-Z a-z)-%{milestone}
-%define		milestone	m9
+%define		milestone	m7
 %define		_tag		%(echo %{tag} | tr - _)
 %define		_rel		0.1
 
 Summary:	OpenOffice.org - powerful office suite
 Summary(pl.UTF-8):	OpenOffice.org - potężny pakiet biurowy
 Name:		openoffice.org
-Version:	2.3.1.2
+Version:	2.3.99.4
 Release:	%{_tag}.%{_rel}
 Epoch:		1
 License:	GPL/LGPL
 Group:		X11/Applications
 Source0:	http://download.go-oo.org/%{mws}/ooo-build-%{version}.tar.gz
-# Source0-md5:	ec0b3af4ea1865b5f2b9545db61a20fd
+# Source0-md5:	71344243ce6af747d3381957c87c1cfb
 Source1:	http://download.go-oo.org/%{mws}/%{tag}-core.tar.bz2
-# Source1-md5:	551c451f43654d928f524f2f809939a9
+# Source1-md5:	2757e74404ae800baa7b727f3f0684ae
 Source2:	http://download.go-oo.org/%{mws}/%{tag}-system.tar.bz2
-# Source2-md5:	1124d841e475015b5fde8e54d2f721f7
+# Source2-md5:	1e6de10d2481d7144e095b40cf9931f3
 Source3:	http://download.go-oo.org/%{mws}/%{tag}-binfilter.tar.bz2
-# Source3-md5:	c26ba92425087f71531d171cf74ff687
+# Source3-md5:	ff5495ee992dfd8cce27a54d1a3fbfaf
 Source4:	http://download.go-oo.org/%{mws}/%{tag}-lang.tar.bz2
-# Source4-md5:	2f9a7335a8cefb74060e7ba0d0cea11a
+# Source4-md5:	1132201e6120d57350e347602ebdf91d
 Source10:	http://download.go-oo.org/SRC680/ooo_custom_images-13.tar.bz2
 # Source10-md5:	2480af7f890c8175c7f9e183a1b39ed2
 Source11:	http://download.go-oo.org/SRC680/ooo_crystal_images-6.tar.bz2
@@ -117,10 +117,10 @@ Source18:	http://download.go-oo.org/%{mws}/cli_types.dll
 # Source18-md5:	3cdaf368e99caa3331130a5edf148490
 Source19:	http://download.go-oo.org/%{mws}/cli_types_bridgetest.dll
 # Source19-md5:	cadc605a6b0265b8167001b4788ff113
-Source22:	http://download.go-oo.org/SRC680/oox.2007-12-10.tar.bz2
-# Source22-md5:	fe094a579d6a57cc02f0c7abe50f9e8c
-Source23:	http://download.go-oo.org/SRC680/writerfilter.2007-12-10.tar.bz2
-# Source23-md5:	09f02b622134b2d3d45ec576522ba6e8
+Source22:	http://download.go-oo.org/SRC680/oox.2008-01-29.tar.bz2
+# Source22-md5:	52678cedcfd1dd9f6993d7f340498b40
+Source23:	http://download.go-oo.org/SRC680/writerfilter.2008-01-29.tar.bz2
+# Source23-md5:	9b6d392253890157aa3990a263c16576
 Source50:	openabout_pld.png
 # Source50-md5:	64a945a07b64ebc0a12adfde4c99da8a
 # patches applied in prep section
@@ -2110,9 +2110,7 @@ cp %{SOURCE50} src
 echo "[ PLDOnly ]" >> patches/src680/apply
 
 # remove patches (temporary FIX)
-%{__sed} -i -e "/oox-stlportism-fix.diff/d" patches/src680/apply
-%{__sed} -i -e "/system-stlport51-oox.diff/d" patches/src680/apply
-%{__sed} -i -e "/system-stlport51-oox-map.diff/d" patches/src680/apply
+%{__sed} -i -e "s#, STLport5, OOXSTLport5,#, #g" patches/src680/apply
 
 # patches applied by ooo (extension .diff is required)
 for P in \
