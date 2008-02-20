@@ -2224,6 +2224,7 @@ CONFOPTS="\
 	--with-system-nas \
 	--with-system-neon \
 	--with-system-odbc-headers \
+	--with-system-openssl \
 	--with-system-portaudio \
 	--with-system-python \
 	--with-system-sablot \
