@@ -100,7 +100,7 @@ Source2:	http://download.go-oo.org/%{mws}/%{tag}-system.tar.bz2
 Source3:	http://download.go-oo.org/%{mws}/%{tag}-binfilter.tar.bz2
 # Source3-md5:	ff5495ee992dfd8cce27a54d1a3fbfaf
 Source4:	http://download.go-oo.org/%{mws}/%{tag}-lang.tar.bz2
-# Source4-md5:	1132201e6120d57350e347602ebdf91d
+# Source4-md5:	50efd4bee77185ee8c162641f3fd1083
 Source10:	http://download.go-oo.org/SRC680/ooo_custom_images-13.tar.bz2
 # Source10-md5:	2480af7f890c8175c7f9e183a1b39ed2
 Source11:	http://download.go-oo.org/SRC680/ooo_crystal_images-6.tar.bz2
@@ -130,13 +130,10 @@ Patch1:		%{name}-java16.patch
 Patch50:	%{name}-mdbtools_fix.diff
 Patch51:	%{name}-nodictinst.patch
 # patches applied by ooo-patching-system
-Patch100:	%{name}-stl-amd64.patch
 #1Patch101:	%{name}-java6.patch
 Patch102:	%{name}-canvas-macolors.diff
 Patch103:	%{name}-missing-includes.diff
-#Patch104:	%{name}-stlportism.patch
 # patches 1000+ need review
-Patch1000:	%{name}-STL-lib64.diff
 Patch1001:	%{name}-64bit-inline.diff
 Patch1002:	%{name}-build-pld-splash.diff
 Patch1003:	%{name}-portaudio_v19.diff
@@ -146,7 +143,6 @@ Patch1006:	%{name}-perl-nodiag.patch
 Patch1007:	%{name}-gcc42-swregion.diff
 URL:		http://www.openoffice.org/
 BuildRequires:	/usr/bin/getopt
-BuildRequires:	STLport-devel >= 2:5.1.4-2
 %{?with_system_agg:BuildRequires:	agg-devel}
 BuildRequires:	autoconf >= 2.51
 BuildRequires:	automake >= 1:1.9
@@ -234,7 +230,6 @@ BuildRequires:	jre-X11
 %endif
 BuildRequires:	libxslt-progs
 BuildRequires:	xulrunner-devel
-BuildConflicts:	STLport4
 Requires:	%{name}-base = %{epoch}:%{version}-%{release}
 Requires:	%{name}-calc = %{epoch}:%{version}-%{release}
 Requires:	%{name}-draw = %{epoch}:%{version}-%{release}
@@ -2114,9 +2109,6 @@ echo "[ PLDOnly ]" >> patches/src680/apply
 
 # patches applied by ooo (extension .diff is required)
 for P in \
-%ifarch %{x8664}
-	%{PATCH100} \
-%endif
 	%{PATCH102} %{PATCH103}; do
 	PATCHNAME=PLD-${P##*/%{name}-}
 	PATCHNAME=${PATCHNAME%.patch}.diff
@@ -2149,8 +2141,7 @@ DISTRO="PLD"
 %endif
 
 export ENVCFLAGS="%{rpmcflags}"
-# disable STLport 5.1 containers extension, doesn't work with map indexed by enum
-export ENVCFLAGSCXX="%{rpmcflags} -fpermissive -D_STLP_NO_CONTAINERS_EXTENSION"
+export ENVCFLAGSCXX="%{rpmcflags} -fpermissive"
 export DESTDIR=$RPM_BUILD_ROOT
 export IGNORE_MANIFEST_CHANGES=1
 export QTINC="%{_includedir}/qt"
@@ -2266,7 +2257,7 @@ CONFOPTS="\
 %endif
 	--with-docdir=%{_docdir}/%{name}-%{version} \
 	--with-python=%{__python} \
-	--with-stlport=/usr \
+	--without-stlport \
 	--with-x \
 	--without-fonts \
 	--without-gpc \
