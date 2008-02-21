@@ -136,6 +136,7 @@ Patch100:	%{name}-lang.patch
 #Patch101:	%{name}-java6.patch
 Patch102:	%{name}-canvas-macolors.diff
 Patch103:	%{name}-missing-includes.diff
+Patch104:	%{name}-issue-86268.patch
 # patches 1000+ need review
 Patch1001:	%{name}-64bit-inline.diff
 Patch1002:	%{name}-build-pld-splash.diff
@@ -2129,7 +2130,7 @@ echo "[ PLDOnly ]" >> patches/src680/apply
 
 # patches applied by ooo (extension .diff is required)
 for P in \
-	%{PATCH100} %{PATCH102} %{PATCH103}; do
+	%{PATCH100} %{PATCH102} %{PATCH103} %{PATCH104}; do
 	PATCHNAME=PLD-${P##*/%{name}-}
 	PATCHNAME=${PATCHNAME%.patch}.diff
 	ln -s $P patches/src680/$PATCHNAME
