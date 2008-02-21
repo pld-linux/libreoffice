@@ -1967,7 +1967,7 @@ urdu dla Indii.
 
 %package i18n-uz
 Summary:	OpenOffice.org - interface in Uzbek language
-Summary(pl.UTF-8):	OpenOffice.org - interfejs w języku ???
+Summary(pl.UTF-8):	OpenOffice.org - interfejs w języku uzbeckim
 Group:		X11/Applications
 Requires:	%{name}-core = %{epoch}:%{version}-%{release}
 
@@ -1976,7 +1976,7 @@ This package provides resources containing menus and dialogs in Uzbek.
 
 %description i18n-uz -l pl.UTF-8
 Ten pakiet dostarcza zasoby zawierające menu i okna dialogowe w języku
-???.
+uzbeckim.
 
 %package i18n-ve
 Summary:	OpenOffice.org - interface in Venda language
