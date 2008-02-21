@@ -1,10 +1,10 @@
-Index: source/deployment/inc/db.hxx
+Index: desktop/source/deployment/inc/db.hxx
 ===================================================================
 RCS file: /cvs/framework/desktop/source/deployment/inc/db.hxx,v
 retrieving revision 1.2
 diff -u -r1.2 db.hxx
---- source/deployment/inc/db.hxx	20 Dec 2006 14:26:02 -0000	1.2
-+++ source/deployment/inc/db.hxx	20 Feb 2008 12:18:51 -0000
+--- desktop/source/deployment/inc/db.hxx	20 Dec 2006 14:26:02 -0000	1.2
++++ desktop/source/deployment/inc/db.hxx	20 Feb 2008 12:18:51 -0000
 @@ -73,7 +73,7 @@
          };
      }
