@@ -1965,6 +1965,19 @@ language for India.
 Ten pakiet dostarcza zasoby zawierające menu i okna dialogowe w języku
 urdu dla Indii.
 
+%package i18n-uz
+Summary:	OpenOffice.org - interface in ??? language for ??
+Summary(pl.UTF-8):	OpenOffice.org - interfejs w języku ???
+Group:		X11/Applications
+Requires:	%{name}-core = %{epoch}:%{version}-%{release}
+
+%description i18n-uz
+This package provides resources containing menus and dialogs in ???.
+
+%description i18n-uz -l pl.UTF-8
+Ten pakiet dostarcza zasoby zawierające menu i okna dialogowe w języku
+???.
+
 %package i18n-ve
 Summary:	OpenOffice.org - interface in Venda language
 Summary(pl.UTF-8):	OpenOffice.org - interfejs w języku venda
@@ -2433,10 +2446,10 @@ if [ ! -f installed.stamp ]; then
 
 	# Copy fixed OpenSymbol to correct location
 	install -d $RPM_BUILD_ROOT%{_fontsdir}/TTF
-	install build/current/extras/source/truetype/symbol/opens___.ttf $RPM_BUILD_ROOT%{_fontsdir}/TTF
+	install build/%{tag}/extras/source/truetype/symbol/opens___.ttf $RPM_BUILD_ROOT%{_fontsdir}/TTF
 
 	# Add in the regcomp tool since some people need it for 3rd party add-ons
-	cp -a build/current/solver/%{upd}/unxlng*.pro/bin/regcomp{,.bin} $RPM_BUILD_ROOT%{_libdir}/%{name}/program/
+	cp -a build/%{tag}/solver/%{upd}/unxlng*.pro/bin/regcomp{,.bin} $RPM_BUILD_ROOT%{_libdir}/%{name}/program/
 
 	# Rename .desktop files to avoid conflicts with other applications .desktops
 	# TODO: make patch instead.
@@ -2630,6 +2643,7 @@ fi
 %attr(755,root,root) %{_libdir}/%{name}/program/libbf_go680*.so
 %attr(755,root,root) %{_libdir}/%{name}/program/libdeploymentmisc680*.so
 %attr(755,root,root) %{_libdir}/%{name}/program/libvbaobj680*.uno.so
+%attr(755,root,root) %{_libdir}/%{name}/program/bootstrap.uno.so
 %attr(755,root,root) %{_libdir}/%{name}/program/stringresource680*.uno.so
 %attr(755,root,root) %{_libdir}/%{name}/program/updatefeed.uno.so
 %attr(755,root,root) %{_libdir}/%{name}/program/fastsax.uno.so
@@ -2637,7 +2651,9 @@ fi
 %attr(755,root,root) %{_libdir}/%{name}/program/libaffine_uno_uno.so
 %attr(755,root,root) %{_libdir}/%{name}/program/libbasebmp680*.so
 %attr(755,root,root) %{_libdir}/%{name}/program/libbf_sb680*.so
+%attr(755,root,root) %{_libdir}/%{name}/program/libbf_so680*.so
 %attr(755,root,root) %{_libdir}/%{name}/program/libguesslang680*.so
+%attr(755,root,root) %{_libdir}/%{name}/program/libhelplinker680*.so
 %attr(755,root,root) %{_libdir}/%{name}/program/liblog680*.so
 %attr(755,root,root) %{_libdir}/%{name}/program/liblpsolve*.so
 %attr(755,root,root) %{_libdir}/%{name}/program/libmtfrenderer.uno.so
@@ -2652,6 +2668,8 @@ fi
 %attr(755,root,root) %{_libdir}/%{name}/program/libvclplug_svp680*.so
 %attr(755,root,root) %{_libdir}/%{name}/program/libwpgimport680*.so
 %attr(755,root,root) %{_libdir}/%{name}/program/libwriterfilter680*.so
+# maybe external is possible?
+%attr(755,root,root) %{_libdir}/%{name}/program/libxmlsec1*.so
 %attr(755,root,root) %{_libdir}/%{name}/program/oosplash.bin
 %attr(755,root,root) %{_libdir}/%{name}/program/simplecanvas.uno.so
 %attr(755,root,root) %{_libdir}/%{name}/program/scsolver.uno.so
@@ -2665,6 +2683,7 @@ fi
 %{_libdir}/%{name}/program/resource/rpt680en-US.res
 %{_libdir}/%{name}/program/resource/rptui680en-US.res
 %{_libdir}/%{name}/program/resource/sb680en-US.res
+
 %{_libdir}/%{name}/program/resource/scsolver680en-US.res
 %{_libdir}/%{name}/program/resource/sdbcl680en-US.res
 %{_libdir}/%{name}/program/resource/t602filter680en-US.res
@@ -2783,6 +2802,7 @@ fi
 %{_datadir}/%{name}/share/registry/data/org/openoffice/Inet.xcu
 %{_datadir}/%{name}/share/registry/data/org/openoffice/LDAP.xcu.sample
 %{_datadir}/%{name}/share/registry/data/org/openoffice/Office/Calc.xcu
+%{_datadir}/%{name}/share/registry/data/org/openoffice/Office/Canvas.xcu
 %{_datadir}/%{name}/share/registry/data/org/openoffice/Office/Common.xcu
 %{_datadir}/%{name}/share/registry/data/org/openoffice/Office/Compatibility.xcu
 %{_datadir}/%{name}/share/registry/data/org/openoffice/Office/DataAccess.xcu
@@ -2839,6 +2859,7 @@ fi
 %{_datadir}/%{name}/share/registry/schema/org/openoffice/Office/Addons.xcs
 %{_datadir}/%{name}/share/registry/schema/org/openoffice/Office/CalcAddIns.xcs
 %{_datadir}/%{name}/share/registry/schema/org/openoffice/Office/Calc.xcs
+%{_datadir}/%{name}/share/registry/schema/org/openoffice/Office/Canvas.xcs
 %{_datadir}/%{name}/share/registry/schema/org/openoffice/Office/Chart.xcs
 %{_datadir}/%{name}/share/registry/schema/org/openoffice/Office/Commands.xcs
 %{_datadir}/%{name}/share/registry/schema/org/openoffice/Office/Common.xcs
@@ -2987,7 +3008,7 @@ fi
 %{_datadir}/%{name}/share/registry/modules/org/openoffice/Setup/Langpack-it.xcu
 %{_datadir}/%{name}/share/registry/modules/org/openoffice/Setup/Langpack-ja.xcu
 %{_datadir}/%{name}/share/registry/modules/org/openoffice/Setup/Langpack-km.xcu
-%{_datadir}/%{name}/share/registry/modules/org/openoffice/Setup/Langpack-kn-IN.xcu
+%{_datadir}/%{name}/share/registry/modules/org/openoffice/Setup/Langpack-kn.xcu
 %{_datadir}/%{name}/share/registry/modules/org/openoffice/Setup/Langpack-ko.xcu
 %{_datadir}/%{name}/share/registry/modules/org/openoffice/Setup/Langpack-ku.xcu
 %{_datadir}/%{name}/share/registry/modules/org/openoffice/Setup/Langpack-lo.xcu
@@ -3010,16 +3031,16 @@ fi
 %{_datadir}/%{name}/share/registry/modules/org/openoffice/Setup/Langpack-pt.xcu
 %{_datadir}/%{name}/share/registry/modules/org/openoffice/Setup/Langpack-ru.xcu
 %{_datadir}/%{name}/share/registry/modules/org/openoffice/Setup/Langpack-rw.xcu
-%{_datadir}/%{name}/share/registry/modules/org/openoffice/Setup/Langpack-sh-YU.xcu
+%{_datadir}/%{name}/share/registry/modules/org/openoffice/Setup/Langpack-sh.xcu
 %{_datadir}/%{name}/share/registry/modules/org/openoffice/Setup/Langpack-sk.xcu
 %{_datadir}/%{name}/share/registry/modules/org/openoffice/Setup/Langpack-sl.xcu
-%{_datadir}/%{name}/share/registry/modules/org/openoffice/Setup/Langpack-sr-CS.xcu
+%{_datadir}/%{name}/share/registry/modules/org/openoffice/Setup/Langpack-sr.xcu
 %{_datadir}/%{name}/share/registry/modules/org/openoffice/Setup/Langpack-ss.xcu
 %{_datadir}/%{name}/share/registry/modules/org/openoffice/Setup/Langpack-st.xcu
 %{_datadir}/%{name}/share/registry/modules/org/openoffice/Setup/Langpack-sv.xcu
 %{_datadir}/%{name}/share/registry/modules/org/openoffice/Setup/Langpack-sw-TZ.xcu
 %{_datadir}/%{name}/share/registry/modules/org/openoffice/Setup/Langpack-sw.xcu
-%{_datadir}/%{name}/share/registry/modules/org/openoffice/Setup/Langpack-sx.xcu
+#%{_datadir}/%{name}/share/registry/modules/org/openoffice/Setup/Langpack-sx.xcu
 %{_datadir}/%{name}/share/registry/modules/org/openoffice/Setup/Langpack-ta-IN.xcu
 %{_datadir}/%{name}/share/registry/modules/org/openoffice/Setup/Langpack-te-IN.xcu
 %{_datadir}/%{name}/share/registry/modules/org/openoffice/Setup/Langpack-tg.xcu
@@ -3030,6 +3051,7 @@ fi
 %{_datadir}/%{name}/share/registry/modules/org/openoffice/Setup/Langpack-ts.xcu
 %{_datadir}/%{name}/share/registry/modules/org/openoffice/Setup/Langpack-uk.xcu
 %{_datadir}/%{name}/share/registry/modules/org/openoffice/Setup/Langpack-ur-IN.xcu
+%{_datadir}/%{name}/share/registry/modules/org/openoffice/Setup/Langpack-uz.xcu
 %{_datadir}/%{name}/share/registry/modules/org/openoffice/Setup/Langpack-ve.xcu
 %{_datadir}/%{name}/share/registry/modules/org/openoffice/Setup/Langpack-vi.xcu
 %{_datadir}/%{name}/share/registry/modules/org/openoffice/Setup/Langpack-xh.xcu
@@ -3255,6 +3277,7 @@ fi
 %{_libdir}/%{name}/program/resource/sc680en-US.res
 #%{_libdir}/%{name}/program/resource/sch680en-US.res
 %{_libdir}/%{name}/program/resource/sd680en-US.res
+%{_libdir}/%{name}/program/resource/sdberr680en-US.res
 %{_libdir}/%{name}/program/resource/sdbt680en-US.res
 %{_libdir}/%{name}/program/resource/sfx680en-US.res
 %{_libdir}/%{name}/program/resource/spa680en-US.res
@@ -3300,7 +3323,7 @@ fi
 %attr(755,root,root) %{_libdir}/%{name}/program/hatchwindowfactory.uno.so
 %attr(755,root,root) %{_libdir}/%{name}/program/i18npool.uno.so
 %attr(755,root,root) %{_libdir}/%{name}/program/i18nsearch.uno.so
-%attr(755,root,root) %{_libdir}/%{name}/program/implreg.uno.so
+#%attr(755,root,root) %{_libdir}/%{name}/program/implreg.uno.so
 %attr(755,root,root) %{_libdir}/%{name}/program/introspection.uno.so
 %attr(755,root,root) %{_libdir}/%{name}/program/invocadapt.uno.so
 %attr(755,root,root) %{_libdir}/%{name}/program/invocation.uno.so
@@ -3431,7 +3454,7 @@ fi
 %attr(755,root,root) %{_libdir}/%{name}/program/libsdd680*.so
 %attr(755,root,root) %{_libdir}/%{name}/program/libsdui680*.so
 %attr(755,root,root) %{_libdir}/%{name}/program/libsfx680*.so
-%attr(755,root,root) %{_libdir}/%{name}/program/libso680*.so
+#%attr(755,root,root) %{_libdir}/%{name}/program/libso680*.so
 %attr(755,root,root) %{_libdir}/%{name}/program/libsot680*.so
 %attr(755,root,root) %{_libdir}/%{name}/program/libspa680*.so
 %attr(755,root,root) %{_libdir}/%{name}/program/libspell680*.so
@@ -3480,30 +3503,31 @@ fi
 %attr(755,root,root) %{_libdir}/%{name}/program/localebe1.uno.so
 %attr(755,root,root) %{_libdir}/%{name}/program/migrationoo2.uno.so
 %attr(755,root,root) %{_libdir}/%{name}/program/namingservice.uno.so
-%attr(755,root,root) %{_libdir}/%{name}/program/nestedreg.uno.so
+#%attr(755,root,root) %{_libdir}/%{name}/program/nestedreg.uno.so
 %attr(755,root,root) %{_libdir}/%{name}/program/passwordcontainer.uno.so
 %attr(755,root,root) %{_libdir}/%{name}/program/productregistration.uno.so
 %attr(755,root,root) %{_libdir}/%{name}/program/proxyfac.uno.so
 %attr(755,root,root) %{_libdir}/%{name}/program/reflection.uno.so
-%attr(755,root,root) %{_libdir}/%{name}/program/regtypeprov.uno.so
+#%attr(755,root,root) %{_libdir}/%{name}/program/regtypeprov.uno.so
 %attr(755,root,root) %{_libdir}/%{name}/program/remotebridge.uno.so
 %attr(755,root,root) %{_libdir}/%{name}/program/sax.uno.so
-%attr(755,root,root) %{_libdir}/%{name}/program/security.uno.so
-%attr(755,root,root) %{_libdir}/%{name}/program/servicemgr.uno.so
-%attr(755,root,root) %{_libdir}/%{name}/program/shlibloader.uno.so
-%attr(755,root,root) %{_libdir}/%{name}/program/simplereg.uno.so
+#%attr(755,root,root) %{_libdir}/%{name}/program/security.uno.so
+#%attr(755,root,root) %{_libdir}/%{name}/program/servicemgr.uno.so
+#%attr(755,root,root) %{_libdir}/%{name}/program/shlibloader.uno.so
+#%attr(755,root,root) %{_libdir}/%{name}/program/simplereg.uno.so
 %attr(755,root,root) %{_libdir}/%{name}/program/slideshow.uno.so
 %attr(755,root,root) %{_libdir}/%{name}/program/streams.uno.so
+%attr(755,root,root) %{_libdir}/%{name}/program/stocservices.uno.so
 %attr(755,root,root) %{_libdir}/%{name}/program/svtmisc.uno.so
 %attr(755,root,root) %{_libdir}/%{name}/program/sysmgr1.uno.so
 %attr(755,root,root) %{_libdir}/%{name}/program/syssh.uno.so
 %attr(755,root,root) %{_libdir}/%{name}/program/textinstream.uno.so
 %attr(755,root,root) %{_libdir}/%{name}/program/textoutstream.uno.so
-%attr(755,root,root) %{_libdir}/%{name}/program/typeconverter.uno.so
-%attr(755,root,root) %{_libdir}/%{name}/program/typemgr.uno.so
+#%attr(755,root,root) %{_libdir}/%{name}/program/typeconverter.uno.so
+#%attr(755,root,root) %{_libdir}/%{name}/program/typemgr.uno.so
 %attr(755,root,root) %{_libdir}/%{name}/program/ucpexpand1.uno.so
 %attr(755,root,root) %{_libdir}/%{name}/program/ucptdoc1.uno.so
-%attr(755,root,root) %{_libdir}/%{name}/program/uriproc.uno.so
+#%attr(755,root,root) %{_libdir}/%{name}/program/uriproc.uno.so
 %attr(755,root,root) %{_libdir}/%{name}/program/uuresolver.uno.so
 %attr(755,root,root) %{_libdir}/%{name}/program/vbaevents680*.uno.so
 %attr(755,root,root) %{_libdir}/%{name}/program/vclcanvas.uno.so
@@ -3933,7 +3957,7 @@ fi
 %files i18n-km -f km.lang
 %defattr(644,root,root,755)
 
-%files i18n-kn_IN -f kn-IN.lang
+%files i18n-kn_IN -f kn.lang
 %defattr(644,root,root,755)
 
 %files i18n-ko -f ko.lang
@@ -4014,7 +4038,7 @@ fi
 %files i18n-rw -f rw.lang
 %defattr(644,root,root,755)
 
-%files i18n-sh -f sh-YU.lang
+%files i18n-sh -f sh.lang
 %defattr(644,root,root,755)
 
 %files i18n-sk -f sk.lang
@@ -4023,7 +4047,7 @@ fi
 %files i18n-sl -f sl.lang
 %defattr(644,root,root,755)
 
-%files i18n-sr -f sr-CS.lang
+%files i18n-sr -f sr.lang
 %defattr(644,root,root,755)
 
 %files i18n-ss -f ss.lang
@@ -4041,8 +4065,8 @@ fi
 %files i18n-sw_TZ -f sw-TZ.lang
 %defattr(644,root,root,755)
 
-%files i18n-sx -f sx.lang
-%defattr(644,root,root,755)
+#%files i18n-sx -f sx.lang
+#%defattr(644,root,root,755)
 
 %files i18n-ta_IN -f ta-IN.lang
 %defattr(644,root,root,755)
@@ -4072,6 +4096,9 @@ fi
 %defattr(644,root,root,755)
 
 %files i18n-ur_IN -f ur-IN.lang
+%defattr(644,root,root,755)
+
+%files i18n-uz -f uz.lang
 %defattr(644,root,root,755)
 
 %files i18n-ve -f ve.lang
