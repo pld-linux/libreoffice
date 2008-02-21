@@ -1966,13 +1966,13 @@ Ten pakiet dostarcza zasoby zawierające menu i okna dialogowe w języku
 urdu dla Indii.
 
 %package i18n-uz
-Summary:	OpenOffice.org - interface in ??? language for ??
+Summary:	OpenOffice.org - interface in Uzbek language
 Summary(pl.UTF-8):	OpenOffice.org - interfejs w języku ???
 Group:		X11/Applications
 Requires:	%{name}-core = %{epoch}:%{version}-%{release}
 
 %description i18n-uz
-This package provides resources containing menus and dialogs in ???.
+This package provides resources containing menus and dialogs in Uzbek.
 
 %description i18n-uz -l pl.UTF-8
 Ten pakiet dostarcza zasoby zawierające menu i okna dialogowe w języku
