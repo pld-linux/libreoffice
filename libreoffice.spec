@@ -132,7 +132,8 @@ Patch1:		%{name}-java16.patch
 Patch50:	%{name}-mdbtools_fix.diff
 Patch51:	%{name}-nodictinst.patch
 # patches applied by ooo-patching-system
-#1Patch101:	%{name}-java6.patch
+Patch100:	%{name}-lang.patch
+#Patch101:	%{name}-java6.patch
 Patch102:	%{name}-canvas-macolors.diff
 Patch103:	%{name}-missing-includes.diff
 # patches 1000+ need review
@@ -2111,7 +2112,7 @@ echo "[ PLDOnly ]" >> patches/src680/apply
 
 # patches applied by ooo (extension .diff is required)
 for P in \
-	%{PATCH102} %{PATCH103}; do
+	%{PATCH100} %{PATCH102} %{PATCH103}; do
 	PATCHNAME=PLD-${P##*/%{name}-}
 	PATCHNAME=${PATCHNAME%.patch}.diff
 	ln -s $P patches/src680/$PATCHNAME
