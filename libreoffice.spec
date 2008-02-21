@@ -700,7 +700,7 @@ bretońskim.
 
 %package i18n-bs
 Summary:	OpenOffice.org - interface in Bosnian language
-Summary(pl.UTF-8):	OpenOffice.org - interfejs w języku bośniańskim
+Summary(pl.UTF-8):	OpenOffice.org - interfejs w języku bośniackim
 Group:		X11/Applications
 Requires:	%{name}-core = %{epoch}:%{version}-%{release}
 
@@ -710,7 +710,7 @@ Bosnian language.
 
 %description i18n-bs -l pl.UTF-8
 Ten pakiet dostarcza zasoby zawierające menu i okna dialogowe w języku
-bośniańskim
+bośniackim
 
 %package i18n-ca
 Summary:	OpenOffice.org - interface in Catalan language
@@ -729,7 +729,6 @@ Catalan language.
 %description i18n-ca -l pl.UTF-8
 Ten pakiet dostarcza zasoby zawierające menu i okna dialogowe w języku
 katalońskim.
-
 
 %package i18n-cs
 Summary:	OpenOffice.org - interface in Czech language
@@ -1197,12 +1196,17 @@ japońskim.
 
 %package i18n-ka
 Summary:	OpenOffice.org - interface in Georgian language
+Summary(pl.UTF-8):	OpenOffice.org - interfejs w języku gruzińskim
 Group:		X11/Applications
 Requires:	%{name}-core = %{epoch}:%{version}-%{release}
 
 %description i18n-ka
 This package provides resources containing menus and dialogs in Georgian
 language.
+
+%description i18n-ka -l pl.UTF-8
+Ten pakiet dostarcza zasoby zawierające menu i okna dialogowe w języku
+gruzińskim.
 
 %package i18n-km
 Summary:	OpenOffice.org - interface in Khmer language
@@ -1724,18 +1728,18 @@ Ten pakiet dostarcza zasoby zawierające menu i okna dialogowe w języku
 serbskim.
 
 %package i18n-ss
-Summary:	OpenOffice.org - interface in Siswant language
-Summary(pl.UTF-8):	OpenOffice.org - interfejs w języku siswati
+Summary:	OpenOffice.org - interface in Swati language
+Summary(pl.UTF-8):	OpenOffice.org - interfejs w języku suazi (siswati)
 Group:		X11/Applications
 Requires:	%{name}-core = %{epoch}:%{version}-%{release}
 
 %description i18n-ss
 This package provides resources containing menus and dialogs in
-Siswant language.
+Swati language.
 
 %description i18n-ss -l pl.UTF-8
 Ten pakiet dostarcza zasoby zawierające menu i okna dialogowe w języku
-siswati.
+suazi (siswati).
 
 %package i18n-st
 Summary:	OpenOffice.org - interface in Southern Sotho language
