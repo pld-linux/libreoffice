@@ -123,8 +123,6 @@ Source22:	http://download.go-oo.org/SRC680/oox.2008-01-29.tar.bz2
 # Source22-md5:	52678cedcfd1dd9f6993d7f340498b40
 Source23:	http://download.go-oo.org/SRC680/writerfilter.2008-01-29.tar.bz2
 # Source23-md5:	9b6d392253890157aa3990a263c16576
-Source50:	openabout_pld.png
-# Source50-md5:	64a945a07b64ebc0a12adfde4c99da8a
 # patches applied in prep section
 Patch0:		%{name}-PLD.patch
 Patch1:		%{name}-java16.patch
@@ -2108,8 +2106,6 @@ ln -sf %{SOURCE1} %{SOURCE2} %{SOURCE3} %{SOURCE4} \
 	%{SOURCE23} \
 	src
 
-cp %{SOURCE50} src
-
 # fixes for the patch subsystem
 %patch0 -p1
 %patch1 -p1
@@ -2256,7 +2252,7 @@ CONFOPTS="\
 %endif
 	--with-dynamic-xinerama \
 	--with-intro-bitmaps="\$SRCDIR/openintro_pld.bmp" \
-	--with-about-bitmaps="\$SRCDIR/openabout_pld.png" \
+	--with-about-bitmaps="\$SRCDIR/openabout_pld.bmp" \
 	--with-distro="${DISTRO}" \
 	--enable-gtk \
 	--%{!?with_kde:dis}%{?with_kde:en}able-kde \
