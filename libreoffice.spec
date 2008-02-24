@@ -2660,9 +2660,11 @@ fi
 %attr(755,root,root) %{_libdir}/%{name}/program/liblpsolve*.so
 %attr(755,root,root) %{_libdir}/%{name}/program/libmtfrenderer.uno.so
 %attr(755,root,root) %{_libdir}/%{name}/program/liboox680*.so
+%ifnarch ppc
 %attr(755,root,root) %{_libdir}/%{name}/program/librpt680*.so
 %attr(755,root,root) %{_libdir}/%{name}/program/librptui680*.so
 %attr(755,root,root) %{_libdir}/%{name}/program/librptxml680*.so
+%endif
 %attr(755,root,root) %{_libdir}/%{name}/program/libsax680*.so
 %attr(755,root,root) %{_libdir}/%{name}/program/libt602filter680*.so
 %attr(755,root,root) %{_libdir}/%{name}/program/libtextcat.so
@@ -2682,8 +2684,10 @@ fi
 %{_libdir}/%{name}/program/root5.dat
 %{_libdir}/%{name}/program/resource/acc680en-US.res
 %{_libdir}/%{name}/program/resource/chartcontroller680en-US.res
+%ifnarch ppc
 %{_libdir}/%{name}/program/resource/rpt680en-US.res
 %{_libdir}/%{name}/program/resource/rptui680en-US.res
+%endif
 %{_libdir}/%{name}/program/resource/sb680en-US.res
 
 %{_libdir}/%{name}/program/resource/scsolver680en-US.res
@@ -3609,7 +3613,9 @@ fi
 %{_datadir}/%{name}/share/config/soffice.cfg/modules/dbbrowser
 %{_datadir}/%{name}/share/config/soffice.cfg/modules/dbquery
 %{_datadir}/%{name}/share/config/soffice.cfg/modules/dbrelation
+%ifnarch ppc
 %{_datadir}/%{name}/share/config/soffice.cfg/modules/dbreport
+%endif
 %{_datadir}/%{name}/share/config/soffice.cfg/modules/dbtable
 %{_datadir}/%{name}/share/registry/modules/org/openoffice/Office/Common/Common-base.xcu
 %{_datadir}/%{name}/share/registry/modules/org/openoffice/Setup/Setup-base.xcu
