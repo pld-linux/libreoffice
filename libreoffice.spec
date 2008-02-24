@@ -81,7 +81,7 @@
 %define		tag			%(echo %{mws} | tr A-Z a-z)-%{milestone}
 %define		milestone	m7
 %define		_tag		%(echo %{tag} | tr - _)
-%define		_rel		0.1
+%define		_rel		0.2
 
 Summary:	OpenOffice.org - powerful office suite
 Summary(pl.UTF-8):	OpenOffice.org - potężny pakiet biurowy
@@ -93,8 +93,8 @@ License:	GPL/LGPL
 Group:		X11/Applications
 # we use trunk because released tarballs are buggy too often
 # svn export http://svn.gnome.org/svn/ooo-build/trunk ooo-build
-Source0:	ooo-build-r11638.tar.bz2
-# Source0-md5:	1888268400cf6a652df494700cecc7bc
+Source0:	ooo-build-r11696.tar.bz2
+# Source0-md5:	f601c6a9c48e73a7dbc326453aac4f9a
 Source1:	http://download.go-oo.org/%{mws}/%{tag}-core.tar.bz2
 # Source1-md5:	2757e74404ae800baa7b727f3f0684ae
 Source2:	http://download.go-oo.org/%{mws}/%{tag}-system.tar.bz2
@@ -125,7 +125,6 @@ Source23:	http://download.go-oo.org/SRC680/writerfilter.2008-01-29.tar.bz2
 # Source23-md5:	9b6d392253890157aa3990a263c16576
 # patches applied in prep section
 Patch0:		%{name}-PLD.patch
-Patch1:		%{name}-java16.patch
 # patch50/51 need review
 Patch50:	%{name}-mdbtools_fix.diff
 Patch51:	%{name}-nodictinst.patch
@@ -134,7 +133,6 @@ Patch100:	%{name}-lang.patch
 #Patch101:	%{name}-java6.patch
 Patch102:	%{name}-canvas-macolors.diff
 Patch103:	%{name}-missing-includes.diff
-Patch104:	%{name}-issue-86268.patch
 # patches 1000+ need review
 Patch1001:	%{name}-64bit-inline.diff
 Patch1002:	%{name}-build-pld-splash.diff
@@ -2108,7 +2106,6 @@ ln -sf %{SOURCE1} %{SOURCE2} %{SOURCE3} %{SOURCE4} \
 
 # fixes for the patch subsystem
 %patch0 -p1
-%patch1 -p1
 
 # mdbtools_fix.diff needs review
 #%patch50 -p1
@@ -2126,7 +2123,7 @@ echo "[ PLDOnly ]" >> patches/src680/apply
 
 # patches applied by ooo (extension .diff is required)
 for P in \
-	%{PATCH100} %{PATCH102} %{PATCH103} %{PATCH104}; do
+	%{PATCH100} %{PATCH102} %{PATCH103}; do
 	PATCHNAME=PLD-${P##*/%{name}-}
 	PATCHNAME=${PATCHNAME%.patch}.diff
 	ln -s $P patches/src680/$PATCHNAME
