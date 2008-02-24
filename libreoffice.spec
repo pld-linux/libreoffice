@@ -2521,10 +2521,8 @@ find_lang() {
 		# lib/openoffice.org/share/samples/$lang
 		grep "/share/samples/${lang}$" ${lfile} >> ${lang}.lang || :
 		grep "/share/samples/${lang}/" ${lfile} >> ${lang}.lang || :
-		%if %{with java}
 		grep "/help/${lang}$" ${lfile} >> ${lang}.lang || :
 		grep "/help/${lang}/" ${lfile} >> ${lang}.lang || :
-		%endif
 		grep "/share/config/soffice.cfg/modules/swform/accelerator/${lang}/" build/common_list.txt >> ${lang}.lang || :
 		grep "/share/config/soffice.cfg/modules/swreport/accelerator/${lang}/" build/common_list.txt >> ${lang}.lang || :
 		grep "/share/config/soffice.cfg/modules/swxform/accelerator/${lang}/" build/common_list.txt >> ${lang}.lang || :
