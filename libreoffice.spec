@@ -2653,6 +2653,7 @@ fi
 %attr(755,root,root) %{_libdir}/%{name}/program/libbasebmp680*.so
 %attr(755,root,root) %{_libdir}/%{name}/program/libbf_sb680*.so
 %attr(755,root,root) %{_libdir}/%{name}/program/libbf_so680*.so
+%{!?with_system_db:%attr(755,root,root) %{_libdir}/%{name}/program/libdb-4.2.so}
 %attr(755,root,root) %{_libdir}/%{name}/program/libguesslang680*.so
 %attr(755,root,root) %{_libdir}/%{name}/program/libhelplinker680*.so
 %attr(755,root,root) %{_libdir}/%{name}/program/liblog680*.so
