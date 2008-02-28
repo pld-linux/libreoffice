@@ -386,6 +386,7 @@ Summary(pl.UTF-8):	Moduł Writer dla OpenOffice.org
 Group:		X11/Applications
 Requires(post,postun):	desktop-file-utils
 Requires:	%{name}-core = %{epoch}:%{version}-%{release}
+%{?with_system_myspell:Suggests:	myspell-pl_PL}
 
 %description writer
 Wordprocessor application of OpenOffice.org.
