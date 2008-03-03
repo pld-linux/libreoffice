@@ -81,7 +81,7 @@
 %define		tag			%(echo %{mws} | tr A-Z a-z)-%{milestone}
 %define		milestone	m8
 %define		_tag		%(echo %{tag} | tr - _)
-%define		_rel		0.1
+%define		_rel		0.2
 
 Summary:	OpenOffice.org - powerful office suite
 Summary(pl.UTF-8):	OpenOffice.org - potężny pakiet biurowy
@@ -2419,6 +2419,8 @@ if [ ! -f installed.stamp ]; then
 	install -d $RPM_BUILD_ROOT%{_sysconfdir}/%{name}
 	mv $RPM_BUILD_ROOT{%{_libdir}/%{name}/program,%{_sysconfdir}/%{name}}/sofficerc
 	ln -s %{_sysconfdir}/%{name}/sofficerc $RPM_BUILD_ROOT%{_libdir}/%{name}/program
+	mv $RPM_BUILD_ROOT{%{_libdir}/%{name}/program,%{_sysconfdir}/%{name}}/unorc
+	ln -s %{_sysconfdir}/%{name}/unorc $RPM_BUILD_ROOT%{_libdir}/%{name}/program
 
 	perl -pi -e 's/^[       ]*LD_LIBRARY_PATH/# LD_LIBRARY_PATH/;s/export LD_LIBRARY_PATH/# export LD_LIBRARY_PATH/' \
 		$RPM_BUILD_ROOT%{_libdir}/%{name}/program/setup
@@ -2712,6 +2714,7 @@ fi
 
 %dir %{_sysconfdir}/%{name}
 %config(noreplace) %verify(not md5 mtime size) %{_sysconfdir}/%{name}/sofficerc
+%config(noreplace) %verify(not md5 mtime size) %{_sysconfdir}/%{name}/unorc
 
 %dir %{_libdir}/%{name}
 %dir %{_libdir}/%{name}/program
