@@ -148,6 +148,7 @@ BuildRequires:	autoconf >= 2.51
 BuildRequires:	automake >= 1:1.9
 %{?with_system_beanshell:BuildRequires:	beanshell}
 BuildRequires:	bison >= 1.875-4
+BuildRequires:	boost-array-devel
 BuildRequires:	boost-devel
 BuildRequires:	boost-mem_fn-devel
 BuildRequires:	boost-spirit-devel
