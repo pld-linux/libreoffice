@@ -79,9 +79,9 @@
 %define		upd			680
 %define		mws			OOH%{upd}
 %define		tag			%(echo %{mws} | tr A-Z a-z)-%{milestone}
-%define		milestone	m8
+%define		milestone	m9
 %define		_tag		%(echo %{tag} | tr - _)
-%define		_rel		0.2
+%define		_rel		0.1
 
 Summary:	OpenOffice.org - powerful office suite
 Summary(pl.UTF-8):	OpenOffice.org - potężny pakiet biurowy
@@ -93,16 +93,16 @@ License:	GPL/LGPL
 Group:		X11/Applications
 # we use trunk because released tarballs are buggy too often
 # svn export http://svn.gnome.org/svn/ooo-build/trunk ooo-build
-Source0:	ooo-build-r11769.tar.bz2
-# Source0-md5:	741b18239901defd7cd2dc4467d5f5f7
+Source0:	ooo-build-r11835.tar.bz2
+# Source0-md5:	5128262ca98cd47e5ad77c68d0667718
 Source1:	http://download.go-oo.org/%{mws}/%{tag}-core.tar.bz2
-# Source1-md5:	0908a608f233abe7bdec8cecc9a6a925
+# Source1-md5:	e34970d3342300c34d2909e348d48cdc
 Source2:	http://download.go-oo.org/%{mws}/%{tag}-system.tar.bz2
-# Source2-md5:	243a8b2d747683004c54ca673eefa809
+# Source2-md5:	6e1c07bb66752a0e7531d19cbae17c6b
 Source3:	http://download.go-oo.org/%{mws}/%{tag}-binfilter.tar.bz2
-# Source3-md5:	e21c671864612514cbae46a5dfe44c13
+# Source3-md5:	bec14f25b6825414854af1674773b977
 Source4:	http://download.go-oo.org/%{mws}/%{tag}-lang.tar.bz2
-# Source4-md5:	61b2ff9310bf007080378fedbdaca4e5
+# Source4-md5:	610fa769a52c5de20dc81a8b164a319a
 Source10:	http://download.go-oo.org/SRC680/ooo_custom_images-13.tar.bz2
 # Source10-md5:	2480af7f890c8175c7f9e183a1b39ed2
 Source11:	http://download.go-oo.org/SRC680/ooo_crystal_images-6.tar.bz2
