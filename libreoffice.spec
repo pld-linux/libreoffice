@@ -2243,8 +2243,7 @@ CONFOPTS="\
 	--with-system-xrender-headers=yes \
 	--with-system-zlib \
 %if %{with mozilla}
-	--with-system-mozilla \
-	--with-xulrunner \
+	--with-system-mozilla=xulrunner \
 %else
 	--disable-mozilla \
 %endif
