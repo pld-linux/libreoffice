@@ -125,6 +125,7 @@ Source23:	http://download.go-oo.org/SRC680/writerfilter.2008-02-29.tar.bz2
 # Source23-md5:	7666cc504d16b8b6598450001cfca403
 # patches applied in prep section
 Patch0:		%{name}-PLD.patch
+Patch1:		%{name}-gcc-Wextra.patch
 # patch50/51 need review
 Patch50:	%{name}-mdbtools_fix.diff
 Patch51:	%{name}-nodictinst.patch
@@ -2107,6 +2108,7 @@ ln -sf %{SOURCE1} %{SOURCE2} %{SOURCE3} %{SOURCE4} \
 
 # fixes for the patch subsystem
 %patch0 -p1
+%patch1 -p1
 
 # mdbtools_fix.diff needs review
 #%patch50 -p1
@@ -2243,7 +2245,7 @@ CONFOPTS="\
 	--with-system-xrender-headers=yes \
 	--with-system-zlib \
 %if %{with mozilla}
-	--with-system-mozilla=libxul \
+	--with-system-mozilla=xulrunner \
 %else
 	--disable-mozilla \
 %endif
