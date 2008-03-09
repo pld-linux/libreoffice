@@ -1,0 +1,11 @@
+--- ooo-build/patches/src680/cws-ia64port01.diff~	2008-02-27 11:03:40.000000000 +0000
++++ ooo-build/patches/src680/cws-ia64port01.diff	2008-03-09 17:46:51.488011431 +0000
+@@ -206,7 +206,7 @@
+ +CFLAGSOUTOBJ=-o
+ +
+ +# -Wshadow does not work for C with nested uses of pthread_cleanup_push:
+-+CFLAGSWARNCC=-Wall -Wextra -Wendif-labels
+++CFLAGSWARNCC=-Wall -Wendif-labels
+ +CFLAGSWARNCXX=$(CFLAGSWARNCC) -Wshadow -Wno-ctor-dtor-privacy \
+ +    -Wno-non-virtual-dtor
+ +CFLAGSWALLCC=$(CFLAGSWARNCC)
