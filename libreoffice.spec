@@ -6,11 +6,9 @@
 #		SRPMS		0.3 GB
 #
 #
-# TODO (2.3.0):
-#  - oowriter is unusable
-#  - update splash to 2.3.0
-#
 # TODO:
+#   - ON PPC help FILES ARE NOT BUILD DUE TO SOME REASON (is missing java the reason?)
+#   -
 #   /usr/share/openoffice.org/share/registry/modules/org/openoffice/Office/Common/Common-ctl_dz.xcu
 #   /usr/share/openoffice.org/share/registry/modules/org/openoffice/Setup/Langpack-dz.xcu
 #   - --with mono wants static mono
