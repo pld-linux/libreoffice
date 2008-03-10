@@ -2108,7 +2108,6 @@ ln -sf %{SOURCE1} %{SOURCE2} %{SOURCE3} %{SOURCE4} \
 
 # fixes for the patch subsystem
 %patch0 -p1
-%patch1 -p1
 
 # mdbtools_fix.diff needs review
 #%patch50 -p1
@@ -2118,11 +2117,13 @@ ln -sf %{SOURCE1} %{SOURCE2} %{SOURCE3} %{SOURCE4} \
 #%patch51 -p1
 #%endif
 
+ln -s %{PATCH1} patches/hotfixes/%{basename:%{PATCH1}}.diff
+
 # TODO: use patches/hotfixes dir from now on
 echo "[ PLDOnly ]" >> patches/src680/apply
 
 # remove patches (temporary FIX)
-%{__sed} -i -e "s#, STLport5, OOXSTLport5,#, #g" patches/src680/apply
+%{__sed} -i -e "s/, STLport5, OOXSTLport5,/, /g" patches/src680/apply
 
 # patches applied by ooo (extension .diff is required)
 for P in \
@@ -2182,7 +2183,7 @@ RPM_BUILD_NR_THREADS="%(echo "%{__make}" | sed -e 's#.*-j\([[:space:]]*[0-9]\+\)
 [ "$RPM_BUILD_NR_THREADS" = "%{__make}" ] && RPM_BUILD_NR_THREADS=1
 RPM_BUILD_NR_THREADS=$(echo $RPM_BUILD_NR_THREADS)
 
-if [ -f "%{_javadir}/serializer.jar" ];then
+if [ -f %{_javadir}/serializer.jar ];then
 	serializer_jar=%{_javadir}/serializer.jar
 else
 	serializer_jar=%{_javadir}/xalan.jar
