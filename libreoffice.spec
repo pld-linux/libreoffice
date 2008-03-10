@@ -79,7 +79,7 @@
 %define		tag			%(echo %{mws} | tr A-Z a-z)-%{milestone}
 %define		milestone	m9
 %define		_tag		%(echo %{tag} | tr - _)
-%define		_rel		0.1
+%define		_rel		0.2
 
 Summary:	OpenOffice.org - powerful office suite
 Summary(pl.UTF-8):	OpenOffice.org - potężny pakiet biurowy
@@ -142,6 +142,8 @@ Patch1006:	%{name}-perl-nodiag.patch
 Patch1007:	%{name}-gcc42-swregion.diff
 URL:		http://www.openoffice.org/
 BuildRequires:	/usr/bin/getopt
+BuildRequires:	GConf2-devel
+BuildRequires:	OpenGL-devel
 %{?with_system_agg:BuildRequires:	agg-devel}
 BuildRequires:	autoconf >= 2.51
 BuildRequires:	automake >= 1:1.9
@@ -159,6 +161,7 @@ BuildRequires:	cups-devel
 BuildRequires:	curl-devel >= 7.9.8
 %{?with_system_db:BuildRequires:	db-cxx-devel}
 %{?with_system_db:BuildRequires:	db-devel}
+BuildRequires:	dbus-glib-devel
 BuildRequires:	flex
 BuildRequires:	fontconfig-devel >= 1.0.1
 BuildRequires:	freetype-devel >= 2.1
@@ -186,6 +189,7 @@ BuildRequires:	libwpd-devel >= 0.8.6
 BuildRequires:	libwpg-devel >= 0.1.0
 BuildRequires:	libwps-devel
 BuildRequires:	libxml2-devel >= 2.0
+BuildRequires:	xmlsec1-devel
 %{?with_access:%{?with_system_mdbtools:BuildRequires:	mdbtools-devel >= 0.6}}
 %{?with_mono:BuildRequires:	mono-csharp >= 1.2.3}
 %{?with_mono:BuildRequires:	mono-static >= 1.2.3}
@@ -2264,6 +2268,7 @@ CONFOPTS="\
 %else
 	--without-java \
 	--with-system-libxslt \
+	--with-system-xmlsec \
 %endif
 %if %{with gnomevfs}
 	--enable-gnome-vfs \
@@ -2279,16 +2284,22 @@ CONFOPTS="\
 	--disable-epm \
 	--disable-fontooo \
 	--disable-strip \
+	--enable-atkbridge \
 	--%{?with_msaccess:en}%{!?with_msaccess:dis}able-access \
 	--enable-cairo \
 	--enable-crypt-link \
+	--enable-dbus \
 	--%{?with_mono:en}%{!?with_mono:dis}able-mono \
 	--enable-pam-link \
+	--enable-opengl \
 	--enable-openldap \
+	--enable-openxml \
 	--enable-cups \
 	--enable-fontconfig \
 	--enable-libsn \
 	--enable-libart \
+	--enable-lockdown \
+	--enable-sdext \
 	--disable-rpath \
 %if 0%{?debug:1}
 	--enable-debug \
@@ -2298,6 +2309,7 @@ CONFOPTS="\
 	--enable-crashdump=no \
 	--disable-symbols \
 %endif
+	--disable-strip \
 	--with-num-cpus=$RPM_BUILD_NR_THREADS \
 	--with-build-version=%{version}-%{release} \
 	--with-tag=%{tag} \
