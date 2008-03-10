@@ -2432,8 +2432,13 @@ if [ ! -f installed.stamp ]; then
 	install -d $RPM_BUILD_ROOT%{_sysconfdir}/%{name}
 	mv $RPM_BUILD_ROOT{%{_libdir}/%{name}/program,%{_sysconfdir}/%{name}}/sofficerc
 	ln -s %{_sysconfdir}/%{name}/sofficerc $RPM_BUILD_ROOT%{_libdir}/%{name}/program
-	mv $RPM_BUILD_ROOT{%{_libdir}/%{name}/program,%{_sysconfdir}/%{name}}/unorc
-	ln -s %{_sysconfdir}/%{name}/unorc $RPM_BUILD_ROOT%{_libdir}/%{name}/program
+
+	# This breaks apps: The application cannot be started. The component manager is not available.
+	# Probably due to relative paths in unorc.
+	# mv $RPM_BUILD_ROOT{%{_libdir}/%{name}/program,%{_sysconfdir}/%{name}}/unorc
+	# ln -s %{_sysconfdir}/%{name}/unorc $RPM_BUILD_ROOT%{_libdir}/%{name}/program
+	# Use this instead:
+	ln -s %{_libdir}/%{name}/program/unorc $RPM_BUILD_ROOT%{_sysconfdir}/%{name}/unorc
 
 	perl -pi -e 's/^[       ]*LD_LIBRARY_PATH/# LD_LIBRARY_PATH/;s/export LD_LIBRARY_PATH/# export LD_LIBRARY_PATH/' \
 		$RPM_BUILD_ROOT%{_libdir}/%{name}/program/setup
@@ -2726,8 +2731,11 @@ fi
 
 
 %dir %{_sysconfdir}/%{name}
+%{_libdir}/%{name}/program/sofficerc
 %config(noreplace) %verify(not md5 mtime size) %{_sysconfdir}/%{name}/sofficerc
-%config(noreplace) %verify(not md5 mtime size) %{_sysconfdir}/%{name}/unorc
+
+%{_sysconfdir}/%{name}/unorc
+%config(noreplace) %verify(not md5 mtime size) %{_libdir}/%{name}/program/unorc
 
 %dir %{_libdir}/%{name}
 %dir %{_libdir}/%{name}/program
@@ -2737,7 +2745,6 @@ fi
 %{_libdir}/%{name}/program/*.rdb
 %{_libdir}/%{name}/program/*.bmp
 %{_libdir}/%{name}/program/sofficerc
-%{_libdir}/%{name}/program/unorc
 %{_libdir}/%{name}/program/bootstraprc
 %{_libdir}/%{name}/program/configmgrrc
 
