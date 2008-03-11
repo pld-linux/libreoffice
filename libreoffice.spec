@@ -2656,6 +2656,7 @@ fi
 %doc %{_libdir}/%{name}/*README*
 
 # TODO: check where these really belong
+%attr(755,root,root) %{_libdir}/%{name}/program/OGLTrans.uno.so
 %attr(755,root,root) %{_libdir}/%{name}/program/libbf_go680*.so
 %attr(755,root,root) %{_libdir}/%{name}/program/libdeploymentmisc680*.so
 %attr(755,root,root) %{_libdir}/%{name}/program/libvbaobj680*.uno.so
