@@ -2159,8 +2159,6 @@ DISTRO="PLD64"
 DISTRO="PLD"
 %endif
 
-export ENVCFLAGS="%{rpmcflags}"
-export ENVCFLAGSCXX="%{rpmcflags} -fpermissive"
 export DESTDIR=$RPM_BUILD_ROOT
 export IGNORE_MANIFEST_CHANGES=1
 export QTINC="%{_includedir}/qt"
@@ -2698,7 +2696,7 @@ fi
 %attr(755,root,root) %{_libdir}/%{name}/program/libhelplinker680*.so
 %attr(755,root,root) %{_libdir}/%{name}/program/liblog680*.so
 %attr(755,root,root) %{_libdir}/%{name}/program/liblpsolve*.so
-%attr(755,root,root) %{_libdir}/%{name}/program/libmtfrenderer.uno.so
+#%attr(755,root,root) %{_libdir}/%{name}/program/libmtfrenderer.uno.so
 %attr(755,root,root) %{_libdir}/%{name}/program/liboox680*.so
 %ifnarch ppc
 %attr(755,root,root) %{_libdir}/%{name}/program/librpt680*.so
@@ -2769,7 +2767,6 @@ fi
 %attr(755,root,root) %{_libdir}/%{name}/install-dict
 %{_libdir}/%{name}/program/*.rdb
 %{_libdir}/%{name}/program/*.bmp
-%{_libdir}/%{name}/program/sofficerc
 %{_libdir}/%{name}/program/bootstraprc
 %{_libdir}/%{name}/program/configmgrrc
 
