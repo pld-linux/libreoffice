@@ -2339,25 +2339,24 @@ fi
 	CC="$CC" \
 	CXX="$CXX" \
 	CPP="$CPP" \
-        --host=%{_target_platform} \
-        --build=%{_target_platform} \
-        --prefix=%{_prefix} \
-        --exec-prefix=%{_exec_prefix} \
-        --bindir=%{_bindir} \
-        --sbindir=%{_sbindir} \
-        --sysconfdir=%{_sysconfdir} \
-        --datadir=%{_datadir} \
-        --includedir=%{_includedir} \
-        --libdir=%{_libdir} \
-        --libexecdir=%{_libexecdir} \
-        --localstatedir=%{_localstatedir} \
-        --sharedstatedir=%{_sharedstatedir} \
-        --mandir=%{_mandir} \
-        --infodir=%{_infodir} \
-        --x-libraries=%{?_x_libraries}%{!?_x_libraries:%{_libdir}} \
-        %{dependencytracking} \
-        %{?configure_cache:--cache-file=%{configure_cache_file}} \
-	$CONFOPTS
+		--host=%{_target_platform} \
+		--build=%{_target_platform} \
+		--prefix=%{_prefix} \
+		--exec-prefix=%{_exec_prefix} \
+		--bindir=%{_bindir} \
+		--sbindir=%{_sbindir} \
+		--sysconfdir=%{_sysconfdir} \
+		--datadir=%{_datadir} \
+		--includedir=%{_includedir} \
+		--libdir=%{_libdir} \
+		--libexecdir=%{_libexecdir} \
+		--localstatedir=%{_localstatedir} \
+		--sharedstatedir=%{_sharedstatedir} \
+		--mandir=%{_mandir} \
+		--infodir=%{_infodir} \
+		--x-libraries=%{?_x_libraries}%{!?_x_libraries:%{_libdir}} \
+		%{?configure_cache:--cache-file=%{configure_cache_file}} \
+		$CONFOPTS
 
 OOO_VENDOR="PLD/Linux Team"; export OOO_VENDOR
 
