@@ -77,9 +77,9 @@
 %define		upd			680
 %define		mws			OOH%{upd}
 %define		tag			%(echo %{mws} | tr A-Z a-z)-%{milestone}
-%define		milestone	m9
+%define		milestone	m12
 %define		_tag		%(echo %{tag} | tr - _)
-%define		_rel		0.2
+%define		_rel		0.4
 
 Summary:	OpenOffice.org - powerful office suite
 Summary(pl.UTF-8):	OpenOffice.org - potężny pakiet biurowy
@@ -91,16 +91,16 @@ License:	GPL/LGPL
 Group:		X11/Applications
 # we use trunk because released tarballs are buggy too often
 # svn export http://svn.gnome.org/svn/ooo-build/trunk ooo-build
-Source0:	ooo-build-r11847.tar.bz2
-# Source0-md5:	8ebd07ff1f74046d42799753f439a911
+Source0:	ooo-build-r11918.tar.bz2
+# Source0-md5:	10ad4a215dc388826e61fb00495f700e
 Source1:	http://download.go-oo.org/%{mws}/%{tag}-core.tar.bz2
-# Source1-md5:	e34970d3342300c34d2909e348d48cdc
+# Source1-md5:	b676821a9f137b1401d6a591ebcb01e0
 Source2:	http://download.go-oo.org/%{mws}/%{tag}-system.tar.bz2
-# Source2-md5:	6e1c07bb66752a0e7531d19cbae17c6b
+# Source2-md5:	09fcd5a0bb64da783ff71666abf1194b
 Source3:	http://download.go-oo.org/%{mws}/%{tag}-binfilter.tar.bz2
-# Source3-md5:	bec14f25b6825414854af1674773b977
+# Source3-md5:	f3568308373429aff9ebfc72a2dfcc28
 Source4:	http://download.go-oo.org/%{mws}/%{tag}-lang.tar.bz2
-# Source4-md5:	610fa769a52c5de20dc81a8b164a319a
+# Source4-md5:	4426488da5f441496b8463ce7f49e6b3
 Source10:	http://download.go-oo.org/SRC680/ooo_custom_images-13.tar.bz2
 # Source10-md5:	2480af7f890c8175c7f9e183a1b39ed2
 Source11:	http://download.go-oo.org/SRC680/ooo_crystal_images-6.tar.bz2
@@ -114,9 +114,9 @@ Source16:	http://download.go-oo.org/SRC680/lp_solve_5.5.0.10_source.tar.gz
 Source17:	http://download.go-oo.org/SRC680/biblio.tar.bz2
 # Source17-md5:	1948e39a68f12bfa0b7eb309c14d940c
 Source18:	http://download.go-oo.org/%{mws}/cli_types.dll
-# Source18-md5:	3cdaf368e99caa3331130a5edf148490
+# Source18-md5:	3ae35431f8c7356e4ae806195dbc35f9
 Source19:	http://download.go-oo.org/%{mws}/cli_types_bridgetest.dll
-# Source19-md5:	cadc605a6b0265b8167001b4788ff113
+# Source19-md5:	d09792656eb45850b8b84424a23a6ce2
 Source22:	http://download.go-oo.org/SRC680/oox.2008-02-29.tar.bz2
 # Source22-md5:	09829c269788249aeb617a683f8cfa94
 Source23:	http://download.go-oo.org/SRC680/writerfilter.2008-02-29.tar.bz2
@@ -2334,15 +2334,41 @@ fi
 [ -x ./autogen.sh ] && ./autogen.sh $CONFOPTS
 
 # main build
-%configure \
+# don't use %%configure here. We don't want cflags/ldflags to be set that way since
+# it breaks things (like preventing NOOPTFILES from working)
+./configure \
 	CC="$CC" \
 	CXX="$CXX" \
 	CPP="$CPP" \
+        --host=%{_target_platform} \
+        --build=%{_target_platform} \
+        --prefix=%{_prefix} \
+        --exec-prefix=%{_exec_prefix} \
+        --bindir=%{_bindir} \
+        --sbindir=%{_sbindir} \
+        --sysconfdir=%{_sysconfdir} \
+        --datadir=%{_datadir} \
+        --includedir=%{_includedir} \
+        --libdir=%{_libdir} \
+        --libexecdir=%{_libexecdir} \
+        --localstatedir=%{_localstatedir} \
+        --sharedstatedir=%{_sharedstatedir} \
+        --mandir=%{_mandir} \
+        --infodir=%{_infodir} \
+        --x-libraries=%{?_x_libraries}%{!?_x_libraries:%{_libdir}} \
+        %{dependencytracking} \
+        %{?configure_cache:--cache-file=%{configure_cache_file}} \
 	$CONFOPTS
+
+OOO_VENDOR="PLD/Linux Team"; export OOO_VENDOR
 
 # this limits processing some files but doesn't limit parallel build
 # processes of main OOo build (since OOo uses it's own build system)
-%{__make} -j1
+%{__make} -j1 \
+	ARCH_FLAGS="%{rpmcflags} -fno-omit-frame-pointer -fno-strict-aliasing" \
+	ARCH_FLAGS_CC="%{rpmcflags} -fno-omit-frame-pointer -fno-strict-aliasing" \
+	ARCH_FLAGS_CXX="%{rpmcxxflags} -fno-omit-frame-pointer -fno-strict-aliasing -fpermissive -fvisibility-inlines-hidden" \
+	ARCH_FLAGS_OPT="%{rpmcflags}"
 
 # hack for parallel build
 if [ $RPM_BUILD_NR_THREADS -gt 1 ]; then
