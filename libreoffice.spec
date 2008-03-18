@@ -2146,6 +2146,18 @@ if [ ! -f /proc/cpuinfo ]; then
 	exit 1
 fi
 
+# Skip optimization. It overwrites some OOo own hacks with -O0
+SAFE_CFLAGS=""
+for i in %{rpmcflags}; do
+	case "$i" in
+	-O?)
+		;;
+	*)
+		SAFE_CFLAGS="$SAFE_CFLAGS $i"
+		;;
+	esac
+done
+
 export CC="%{__cc}"
 export CXX="%{__cxx}"
 export CPP="%{__cpp}"
@@ -2334,9 +2346,9 @@ fi
 # don't use %%configure here. We don't want cflags/ldflags to be set that way since
 # it breaks things (like preventing NOOPTFILES from working)
 ./configure \
-	CC="$CC" \
-	CXX="$CXX" \
-	CPP="$CPP" \
+		CC="$CC" \
+		CXX="$CXX" \
+		CPP="$CPP" \
 		--host=%{_target_platform} \
 		--build=%{_target_platform} \
 		--prefix=%{_prefix} \
@@ -2361,10 +2373,10 @@ OOO_VENDOR="PLD/Linux Team"; export OOO_VENDOR
 # this limits processing some files but doesn't limit parallel build
 # processes of main OOo build (since OOo uses it's own build system)
 %{__make} -j1 \
-	ARCH_FLAGS="%{rpmcflags} -fno-omit-frame-pointer -fno-strict-aliasing" \
-	ARCH_FLAGS_CC="%{rpmcflags} -fno-omit-frame-pointer -fno-strict-aliasing" \
-	ARCH_FLAGS_CXX="%{rpmcxxflags} -fno-omit-frame-pointer -fno-strict-aliasing -fpermissive -fvisibility-inlines-hidden" \
-	ARCH_FLAGS_OPT="%{rpmcflags}"
+	ARCH_FLAGS="$SAFE_CFLAGS -fno-omit-frame-pointer -fno-strict-aliasing" \
+	ARCH_FLAGS_CC="$SAFE_CFLAGS -fno-omit-frame-pointer -fno-strict-aliasing" \
+	ARCH_FLAGS_CXX="$SAFE_CFLAGS -fno-omit-frame-pointer -fno-strict-aliasing -fpermissive -fvisibility-inlines-hidden" \
+	ARCH_FLAGS_OPT="$SAFE_CFLAGS"
 
 # hack for parallel build
 if [ $RPM_BUILD_NR_THREADS -gt 1 ]; then
