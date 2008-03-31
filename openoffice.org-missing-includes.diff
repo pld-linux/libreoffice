@@ -1,0 +1,10 @@
+--- scsolver/source/inc/numeric/polyeqnsolver.hxx~	2007-11-25 17:53:36.000000000 +0100
++++ scsolver/source/inc/numeric/polyeqnsolver.hxx	2007-11-25 23:22:15.115891127 +0100
+@@ -28,6 +28,7 @@
+ #ifndef _SCSOLVER_NUMERIC_POLYEQNSOLVER_HXX_
+ #define _SCSOLVER_NUMERIC_POLYEQNSOLVER_HXX
+ 
++#include <exception>
+ #include <list>
+ 
+ namespace scsolver { namespace numeric {
