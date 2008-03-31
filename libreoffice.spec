@@ -79,7 +79,7 @@
 %define		tag			%(echo %{mws} | tr A-Z a-z)-%{milestone}
 %define		milestone	m12
 %define		_tag		%(echo %{tag} | tr - _)
-%define		_rel		0.4
+%define		_rel		0.5
 
 Summary:	OpenOffice.org - powerful office suite
 Summary(pl.UTF-8):	OpenOffice.org - potężny pakiet biurowy
@@ -91,8 +91,8 @@ License:	GPL/LGPL
 Group:		X11/Applications
 # we use trunk because released tarballs are buggy too often
 # svn export http://svn.gnome.org/svn/ooo-build/trunk ooo-build
-Source0:	ooo-build-r11918.tar.bz2
-# Source0-md5:	10ad4a215dc388826e61fb00495f700e
+Source0:	ooo-build-r12057.tar.bz2
+# Source0-md5:	1ec4255fc912e123469176629128ef92
 Source1:	http://download.go-oo.org/%{mws}/%{tag}-core.tar.bz2
 # Source1-md5:	b676821a9f137b1401d6a591ebcb01e0
 Source2:	http://download.go-oo.org/%{mws}/%{tag}-system.tar.bz2
@@ -3155,6 +3155,7 @@ fi
 %attr(755,root,root) %{_bindir}/ooffice
 %attr(755,root,root) %{_bindir}/oofromtemplate
 %attr(755,root,root) %{_bindir}/ootool
+%attr(755,root,root) %{_bindir}/unopkg
 
 %attr(755,root,root) %{_libdir}/%{name}/program/configimport.bin
 %attr(755,root,root) %{_libdir}/%{name}/program/gengal.bin
@@ -3268,6 +3269,7 @@ fi
 %{_datadir}/mime/packages/openoffice.xml
 
 %{_desktopdir}/ootemplate.desktop
+%{_desktopdir}/ooooo-extension-manager.desktop
 
 %{_iconsdir}/hicolor/*/apps/ooo-gulls.png
 %{_iconsdir}/hicolor/*/apps/ooo-printeradmin.png
@@ -3278,6 +3280,7 @@ fi
 %{_mandir}/man1/ooffice.1
 %{_mandir}/man1/oofromtemplate.1
 %{_mandir}/man1/openoffice.1*
+%{_mandir}/man1/unopkg.1*
 
 # en-US
 # TODO: use find lang for en-US too?
