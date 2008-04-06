@@ -2293,6 +2293,7 @@ CONFOPTS="\
 	--disable-epm \
 	--disable-fontooo \
 	--disable-strip \
+	--enable-openxml \
 	--enable-atkbridge \
 	--%{?with_msaccess:en}%{!?with_msaccess:dis}able-access \
 	--enable-cairo \
