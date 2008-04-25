@@ -79,20 +79,20 @@
 %define		tag			%(echo %{mws} | tr A-Z a-z)-%{milestone}
 %define		milestone	m12
 %define		_tag		%(echo %{tag} | tr - _)
-%define		_rel		0.5
+%define		_rel		0.1
 
 Summary:	OpenOffice.org - powerful office suite
 Summary(pl.UTF-8):	OpenOffice.org - potężny pakiet biurowy
 Name:		openoffice.org
-Version:	2.4.0.2
+Version:	2.4.0.8
 Release:	%{_tag}.%{_rel}
 Epoch:		1
 License:	GPL/LGPL
 Group:		X11/Applications
 # we use trunk because released tarballs are buggy too often
-# svn export http://svn.gnome.org/svn/ooo-build/trunk ooo-build
-Source0:	ooo-build-r12057.tar.bz2
-# Source0-md5:	1ec4255fc912e123469176629128ef92
+# svn export http://svn.gnome.org/svn/ooo-build/branches/ooo-build-2-4 ooo-build
+Source0:	ooo-build-r12335.tar.bz2
+# Source0-md5:	bf8bad3c000a2d79414907a3ba63d17d
 Source1:	http://download.go-oo.org/%{mws}/%{tag}-core.tar.bz2
 # Source1-md5:	b676821a9f137b1401d6a591ebcb01e0
 Source2:	http://download.go-oo.org/%{mws}/%{tag}-system.tar.bz2
