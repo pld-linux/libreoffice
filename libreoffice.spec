@@ -144,10 +144,7 @@ BuildRequires:	autoconf >= 2.51
 BuildRequires:	automake >= 1:1.9
 %{?with_system_beanshell:BuildRequires:	beanshell}
 BuildRequires:	bison >= 1.875-4
-BuildRequires:	boost-devel
-BuildRequires:	boost-mem_fn-devel
-BuildRequires:	boost-spirit-devel
-BuildRequires:	boost-uBLAS-devel
+BuildRequires:	boost-devel >= 1.35.0
 BuildRequires:	cairo-devel >= 0.5.2
 BuildRequires:	cups-devel
 BuildRequires:	curl-devel >= 7.9.8
