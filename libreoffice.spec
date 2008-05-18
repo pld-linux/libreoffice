@@ -215,6 +215,7 @@ BuildRequires:	jdk >= 1.4.0_00
 BuildRequires:	libxslt-progs
 %endif
 BuildRequires:	xulrunner-devel
+BuildRequires:	diskspace(%{_builddir}) >= 16Gb
 BuildConflicts:	STLport4
 Requires:	%{name}-base = %{epoch}:%{version}-%{release}
 Requires:	%{name}-calc = %{epoch}:%{version}-%{release}
