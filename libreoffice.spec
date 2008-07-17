@@ -148,7 +148,7 @@ BuildRequires:	autoconf >= 2.51
 BuildRequires:	automake >= 1:1.9
 %{?with_system_beanshell:BuildRequires:	beanshell}
 BuildRequires:	bison >= 1.875-4
-BuildRequires:	boost-devel
+BuildRequires:	boost-devel >= 1.35.0
 BuildRequires:	cairo-devel >= 1.2.0
 %{?with_ccache:BuildRequires:	ccache}
 %{?with_icecream:BuildRequires:	icecream}
