@@ -77,30 +77,30 @@
 %define		upd			680
 %define		mws			OOH%{upd}
 %define		tag			%(echo %{mws} | tr A-Z a-z)-%{milestone}
-%define		milestone	m12
+%define		milestone	m17
 %define		_tag		%(echo %{tag} | tr - _)
 %define		_rel		0.1
 
 Summary:	OpenOffice.org - powerful office suite
 Summary(pl.UTF-8):	OpenOffice.org - potężny pakiet biurowy
 Name:		openoffice.org
-Version:	2.4.0.13
+Version:	2.4.1.7
 Release:	%{_tag}.%{_rel}
 Epoch:		1
 License:	GPL/LGPL
 Group:		X11/Applications
-# we use trunk because released tarballs are buggy too often
-# svn export http://svn.gnome.org/svn/ooo-build/branches/ooo-build-2-4 ooo-build
-Source0:	ooo-build-r12729.tar.bz2
-# Source0-md5:	183afcbe1d11cbd7576b776e44f70e04
+# we use svn because released tarballs are buggy too often
+# svn export http://svn.gnome.org/svn/ooo-build/branches/ooo-build-2-4-1 ooo-build
+Source0:	ooo-build-r13263.tar.bz2
+# Source0-md5:	be633cf64bc7618fa31f3cc9058dd51b
 Source1:	http://download.go-oo.org/%{mws}/%{tag}-core.tar.bz2
-# Source1-md5:	b676821a9f137b1401d6a591ebcb01e0
+# Source1-md5:	ddaaf10f08d1fbeec42383e13f587a31
 Source2:	http://download.go-oo.org/%{mws}/%{tag}-system.tar.bz2
-# Source2-md5:	09fcd5a0bb64da783ff71666abf1194b
+# Source2-md5:	8638695691707cac9272a97a991a240f
 Source3:	http://download.go-oo.org/%{mws}/%{tag}-binfilter.tar.bz2
-# Source3-md5:	f3568308373429aff9ebfc72a2dfcc28
+# Source3-md5:	d3bad14d049cf2ae96ba8dc5d3cd9145
 Source4:	http://download.go-oo.org/%{mws}/%{tag}-lang.tar.bz2
-# Source4-md5:	4426488da5f441496b8463ce7f49e6b3
+# Source4-md5:	92a46a30ee752f6ef9b4718895a4dd0c
 Source10:	http://download.go-oo.org/SRC680/ooo_custom_images-13.tar.bz2
 # Source10-md5:	2480af7f890c8175c7f9e183a1b39ed2
 Source11:	http://download.go-oo.org/SRC680/ooo_crystal_images-6.tar.bz2
@@ -148,11 +148,7 @@ BuildRequires:	autoconf >= 2.51
 BuildRequires:	automake >= 1:1.9
 %{?with_system_beanshell:BuildRequires:	beanshell}
 BuildRequires:	bison >= 1.875-4
-BuildRequires:	boost-array-devel
 BuildRequires:	boost-devel
-BuildRequires:	boost-mem_fn-devel
-BuildRequires:	boost-spirit-devel
-BuildRequires:	boost-uBLAS-devel
 BuildRequires:	cairo-devel >= 1.2.0
 %{?with_ccache:BuildRequires:	ccache}
 %{?with_icecream:BuildRequires:	icecream}
