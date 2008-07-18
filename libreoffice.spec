@@ -91,8 +91,8 @@ License:	GPL/LGPL
 Group:		X11/Applications
 # we use svn because released tarballs are buggy too often
 # svn export http://svn.gnome.org/svn/ooo-build/branches/ooo-build-2-4-1 ooo-build
-Source0:	ooo-build-r13263.tar.bz2
-# Source0-md5:	be633cf64bc7618fa31f3cc9058dd51b
+Source0:	ooo-build-r13288.tar.bz2
+# Source0-md5:	589cffb42411f2d94186491b09115447
 Source1:	http://download.go-oo.org/%{mws}/%{tag}-core.tar.bz2
 # Source1-md5:	ddaaf10f08d1fbeec42383e13f587a31
 Source2:	http://download.go-oo.org/%{mws}/%{tag}-system.tar.bz2
