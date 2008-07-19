@@ -144,6 +144,7 @@ URL:		http://www.openoffice.org/
 BuildRequires:	/usr/bin/getopt
 BuildRequires:	GConf2-devel
 BuildRequires:	OpenGL-devel
+BuildRequires:	OpenGL-GLU-devel
 %{?with_system_agg:BuildRequires:	agg-devel}
 BuildRequires:	autoconf >= 2.51
 BuildRequires:	automake >= 1:1.9
