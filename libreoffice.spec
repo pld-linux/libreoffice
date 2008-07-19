@@ -143,9 +143,10 @@ Patch1007:	%{name}-gcc42-swregion.diff
 URL:		http://www.openoffice.org/
 BuildRequires:	/usr/bin/getopt
 BuildRequires:	GConf2-devel
-BuildRequires:	OpenGL-devel
 BuildRequires:	OpenGL-GLU-devel
+BuildRequires:	OpenGL-devel
 %{?with_system_agg:BuildRequires:	agg-devel}
+BuildRequires:	atk-devel >= 1:1.9.0
 BuildRequires:	autoconf >= 2.51
 BuildRequires:	automake >= 1:1.9
 %{?with_system_beanshell:BuildRequires:	beanshell}
@@ -153,7 +154,6 @@ BuildRequires:	bison >= 1.875-4
 BuildRequires:	boost-devel >= 1.35.0
 BuildRequires:	cairo-devel >= 1.2.0
 %{?with_ccache:BuildRequires:	ccache}
-%{?with_icecream:BuildRequires:	icecream}
 BuildRequires:	cups-devel
 BuildRequires:	curl-devel >= 7.9.8
 %{?with_system_db:BuildRequires:	db-cxx-devel}
@@ -163,16 +163,15 @@ BuildRequires:	diskspace(%{_builddir}) >= 16Gb
 BuildRequires:	flex
 BuildRequires:	fontconfig-devel >= 1.0.1
 BuildRequires:	freetype-devel >= 2.1
+BuildRequires:	glib2-devel >= 2.13.5
 %{?with_gnomevfs:BuildRequires:	gnome-vfs2-devel}
 BuildRequires:	gperf
 BuildRequires:	gstreamer-devel >= 0.10.0
 BuildRequires:	gstreamer-plugins-base-devel >= 0.10.0
 BuildRequires:	gtk+2-devel >= 2:2.10
-BuildRequires:	glib2-devel >= 2.13.5
-BuildRequires:	pango-devel >= 1:1.17.3
-BuildRequires:	atk-devel >= 1:1.9.0
 %{?with_system_hsqldb:BuildRequires:	hsqldb >= 1.8.0.9}
 %{?with_system_hunspell:BuildRequires:	hunspell-devel >=1.2.2}
+%{?with_icecream:BuildRequires:	icecream}
 BuildRequires:	icu
 %{?with_kde:BuildRequires:	kdelibs-devel}
 BuildRequires:	libart_lgpl-devel
@@ -187,7 +186,6 @@ BuildRequires:	libwpd-devel >= 0.8.6
 BuildRequires:	libwpg-devel >= 0.1.0
 BuildRequires:	libwps-devel
 BuildRequires:	libxml2-devel >= 2.0
-BuildRequires:	xmlsec1-devel
 %{?with_access:%{?with_system_mdbtools:BuildRequires:	mdbtools-devel >= 0.6}}
 %{?with_mono:BuildRequires:	mono-csharp >= 1.2.3}
 %{?with_mono:BuildRequires:	mono-static >= 1.2.3}
@@ -198,6 +196,7 @@ BuildRequires:	nspr-devel >= 1:4.6-0.20041030.3
 BuildRequires:	nss-devel >= 1:3.10
 BuildRequires:	openldap-devel
 BuildRequires:	pam-devel
+BuildRequires:	pango-devel >= 1:1.17.3
 BuildRequires:	perl-Archive-Zip
 BuildRequires:	perl-base
 BuildRequires:	pkgconfig
@@ -217,6 +216,7 @@ BuildRequires:	unzip
 %{?with_system_xalan:BuildRequires:	xalan-j}
 %{?with_system_xerces:BuildRequires:	xerces-j}
 %{?with_system_xml_apis:BuildRequires:	xml-commons}
+BuildRequires:	xmlsec1-devel
 BuildRequires:	xmlsec1-nss-devel
 BuildRequires:	xorg-lib-libX11-devel
 BuildRequires:	xorg-lib-libXaw-devel
@@ -335,12 +335,12 @@ Requires:	sed
 %{?with_system_xerces:Requires:	xerces-j}
 %{?with_system_xml_apis:Requires:	xml-commons}
 %{?with_system_xt:Requires:	xt}
+#Suggests:	chkfontpath
 Obsoletes:	oooqs
 Obsoletes:	openoffice
 Obsoletes:	openoffice-libs
 Obsoletes:	openoffice.org-dirs
 Obsoletes:	openoffice.org-libs < 1:2.1.0-0.m6.0.11
-#Suggests:	chkfontpath
 
 %description core
 Core libraries and support files for OpenOffice.org.
@@ -1201,8 +1201,8 @@ Group:		I18n
 Requires:	%{name}-core = %{epoch}:%{version}-%{release}
 
 %description i18n-ka
-This package provides resources containing menus and dialogs in Georgian
-language.
+This package provides resources containing menus and dialogs in
+Georgian language.
 
 %description i18n-ka -l pl.UTF-8
 Ten pakiet dostarcza zasoby zawierające menu i okna dialogowe w języku
@@ -1734,8 +1734,8 @@ Group:		I18n
 Requires:	%{name}-core = %{epoch}:%{version}-%{release}
 
 %description i18n-ss
-This package provides resources containing menus and dialogs in
-Swati language.
+This package provides resources containing menus and dialogs in Swati
+language.
 
 %description i18n-ss -l pl.UTF-8
 Ten pakiet dostarcza zasoby zawierające menu i okna dialogowe w języku
