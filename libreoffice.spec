@@ -219,6 +219,7 @@ BuildRequires:	unzip
 BuildRequires:	xmlsec1-nss-devel
 BuildRequires:	xorg-lib-libX11-devel
 BuildRequires:	xorg-lib-libXaw-devel
+BuildRequires:	xorg-lib-libXtst-devel
 %{?with_system_xt:BuildRequires:	xt}
 BuildRequires:	zip
 BuildRequires:	zlib-devel
