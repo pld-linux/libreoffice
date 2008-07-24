@@ -79,7 +79,7 @@
 %define		tag			%(echo %{mws} | tr A-Z a-z)-%{milestone}
 %define		milestone	m17
 %define		_tag		%(echo %{tag} | tr - _)
-%define		_rel		0.1
+%define		_rel		0.2
 
 Summary:	OpenOffice.org - powerful office suite
 Summary(pl.UTF-8):	OpenOffice.org - potężny pakiet biurowy
@@ -159,7 +159,8 @@ BuildRequires:	curl-devel >= 7.9.8
 %{?with_system_db:BuildRequires:	db-cxx-devel}
 %{?with_system_db:BuildRequires:	db-devel}
 BuildRequires:	dbus-glib-devel
-BuildRequires:	diskspace(%{_builddir}) >= 16Gb
+# rpm has problems with determining this on builders
+# BuildRequires:	diskspace(%{_builddir}) >= 16Gb
 BuildRequires:	flex
 BuildRequires:	fontconfig-devel >= 1.0.1
 BuildRequires:	freetype-devel >= 2.1
