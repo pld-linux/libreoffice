@@ -2486,10 +2486,8 @@ if [ ! -f installed.stamp ]; then
 	mv $RPM_BUILD_ROOT%{_libdir}/%{name}/share $RPM_BUILD_ROOT%{_datadir}/%{name}
 	ln -s ../../share/%{name}/share $RPM_BUILD_ROOT%{_libdir}/%{name}/share
 	# more non-archidecture dependant nature data
-	%if %{with java}
 	mv $RPM_BUILD_ROOT%{_libdir}/%{name}/help $RPM_BUILD_ROOT%{_datadir}/%{name}
 	ln -s ../../share/%{name}/help $RPM_BUILD_ROOT%{_libdir}/%{name}/help
-	%endif
 	mv $RPM_BUILD_ROOT%{_libdir}/%{name}/licenses $RPM_BUILD_ROOT%{_datadir}/%{name}
 	ln -s ../../share/%{name}/licenses $RPM_BUILD_ROOT%{_libdir}/%{name}/licenses
 	mv $RPM_BUILD_ROOT%{_libdir}/%{name}/readmes $RPM_BUILD_ROOT%{_datadir}/%{name}
@@ -2712,7 +2710,7 @@ fi
 %attr(755,root,root) %{_libdir}/%{name}/program/liblpsolve*.so
 #%attr(755,root,root) %{_libdir}/%{name}/program/libmtfrenderer.uno.so
 %attr(755,root,root) %{_libdir}/%{name}/program/liboox680*.so
-%ifnarch ppc
+%if %{with java}
 %attr(755,root,root) %{_libdir}/%{name}/program/librpt680*.so
 %attr(755,root,root) %{_libdir}/%{name}/program/librptui680*.so
 %attr(755,root,root) %{_libdir}/%{name}/program/librptxml680*.so
@@ -2736,7 +2734,7 @@ fi
 %{_libdir}/%{name}/program/root5.dat
 %{_libdir}/%{name}/program/resource/acc680en-US.res
 %{_libdir}/%{name}/program/resource/chartcontroller680en-US.res
-%ifnarch ppc
+%if %{with java}
 %{_libdir}/%{name}/program/resource/rpt680en-US.res
 %{_libdir}/%{name}/program/resource/rptui680en-US.res
 %endif
@@ -3199,7 +3197,6 @@ fi
 %attr(755,root,root) %{_libdir}/%{name}/program/libcli_uno_glue.so
 %endif
 
-%if %{with java}
 %{_libdir}/%{name}/help
 %dir %{_datadir}/%{name}/help
 %dir %{_datadir}/%{name}/help/en
@@ -3210,6 +3207,7 @@ fi
 %{_datadir}/%{name}/help/en/shared.*
 %{_datadir}/%{name}/help/*.xsl
 
+%if %{with java}
 %attr(755,root,root) %{_libdir}/%{name}/program/javaldx
 %attr(755,root,root) %{_libdir}/%{name}/program/java-set-classpath
 %{_libdir}/%{name}/program/jvmfwk3rc
@@ -3663,14 +3661,12 @@ fi
 %{_iconsdir}/hicolor/*/apps/ooo-base.png
 %{_pixmapsdir}/ooo-base.png
 %{_libdir}/%{name}/program/resource/cnr680en-US.res
-%if %{with java}
 %{_datadir}/%{name}/help/en/sdatabase.*
-%endif
 %{_datadir}/%{name}/share/config/soffice.cfg/modules/dbapp
 %{_datadir}/%{name}/share/config/soffice.cfg/modules/dbbrowser
 %{_datadir}/%{name}/share/config/soffice.cfg/modules/dbquery
 %{_datadir}/%{name}/share/config/soffice.cfg/modules/dbrelation
-%ifnarch ppc
+%if %{with java}
 %{_datadir}/%{name}/share/config/soffice.cfg/modules/dbreport
 %endif
 %{_datadir}/%{name}/share/config/soffice.cfg/modules/dbtable
@@ -3699,9 +3695,7 @@ fi
 %{_desktopdir}/oocalc.desktop
 %{_iconsdir}/hicolor/*/apps/ooo-calc.png
 %{_pixmapsdir}/ooo-calc.png
-%if %{with java}
 %{_datadir}/%{name}/help/en/scalc.*
-%endif
 %{_libdir}/%{name}/program/resource/analysis680en-US.res
 %{_libdir}/%{name}/program/resource/bf_sc680en-US.res
 %{_libdir}/%{name}/program/resource/date680en-US.res
@@ -3725,9 +3719,7 @@ fi
 %{_desktopdir}/oodraw.desktop
 %{_iconsdir}/hicolor/*/apps/ooo-draw.png
 %{_pixmapsdir}/ooo-draw.png
-%if %{with java}
 %{_datadir}/%{name}/help/en/sdraw.*
-%endif
 %{_datadir}/%{name}/share/config/soffice.cfg/modules/sdraw
 %{_datadir}/%{name}/share/registry/data/org/openoffice/Office/UI/DrawWindowState.xcu
 %{_datadir}/%{name}/share/registry/modules/org/openoffice/Office/Common/Common-draw.xcu
@@ -3753,8 +3745,8 @@ fi
 %{_desktopdir}/oowriter.desktop
 %{_iconsdir}/hicolor/*/apps/ooo-writer.png
 %{_pixmapsdir}/ooo-writer.png
-%if %{with java}
 %{_datadir}/%{name}/help/en/swriter.*
+%if %{with java}
 %{_libdir}/%{name}/program/classes/writer2latex.jar
 %endif
 %{_datadir}/%{name}/share/config/soffice.cfg/modules/swriter
@@ -3786,9 +3778,7 @@ fi
 %{_desktopdir}/ooimpress.desktop
 %{_iconsdir}/hicolor/*/apps/ooo-impress.png
 %{_pixmapsdir}/ooo-impress.png
-%if %{with java}
 %{_datadir}/%{name}/help/en/simpress.*
-%endif
 %{_datadir}/%{name}/share/config/soffice.cfg/modules/simpress
 %{_datadir}/%{name}/share/config/soffice.cfg/simpress/
 %{_datadir}/%{name}/share/registry/data/org/openoffice/Office/UI/Effects.xcu
@@ -3810,9 +3800,7 @@ fi
 %{_desktopdir}/oomath.desktop
 %{_iconsdir}/hicolor/*/apps/ooo-math.png
 %{_pixmapsdir}/ooo-math.png
-%if %{with java}
 %{_datadir}/%{name}/help/en/smath.*
-%endif
 %{_libdir}/%{name}/program/resource/bf_sm680en-US.res
 %{_libdir}/%{name}/program/resource/sm680en-US.res
 %{_datadir}/%{name}/share/config/soffice.cfg/modules/smath
