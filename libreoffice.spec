@@ -19,7 +19,7 @@
 #	- maybe it could be build with gcc-java
 #   - adapt help-support.diff to PLD
 #	- configure --without-ppds --without afms
-#       - /share/config/soffice.cfg/global/accelerator/es/ should be in i18n-es
+#	- /share/config/soffice.cfg/global/accelerator/es/ should be in i18n-es
 #	- fix locale names and other locale related things
 #   - broken directory dependencies:
 #       error: openoffice.org-i18n-de-2.4.1.7-ooh680_m17.1: req /usr/share/openoffice.org/share/config/soffice.cfg/modules/swform/accelerator/de not found
