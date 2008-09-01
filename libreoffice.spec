@@ -45,6 +45,7 @@
 #	- in gtk version menu highlight has almost the same colour as menu text
 #	- 6 user/config/*.so? files shared between -i18n-en and -i18n-sl
 #	- add ooglobal symlink and it's ooo-wrapper entry (among calc|draw|impress|math|web|writer)
+#
 
 # Conditional build:
 %bcond_without	gnomevfs	# GNOME VFS and Evolution 2 support
@@ -151,6 +152,8 @@ Patch1005:	%{name}-nsplugin-path.diff
 Patch1006:	%{name}-perl-nodiag.patch
 Patch1007:	%{name}-gcc42-swregion.diff
 URL:		http://www.openoffice.org/
+# http://securitytracker.com/alerts/2008/Aug/1020764.html
+BuildRequires:	security(CVE-2008-3282)
 BuildRequires:	/usr/bin/getopt
 BuildRequires:	GConf2-devel
 BuildRequires:	OpenGL-GLU-devel
