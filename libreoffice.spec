@@ -103,7 +103,7 @@ Group:		X11/Applications
 # we use svn because released tarballs are buggy too often
 # svn export http://svn.gnome.org/svn/ooo-build/branches/ooo-build-3-0 ooo-build
 Source0:	ooo-build-r14209.tar.bz2
-# Source0-md5:	d6aff929c067c817d7fd5d6b49d73a59
+# Source0-md5:	4488028d49f8991f0edb15b5c40f871a
 Source1:	http://download.go-oo.org/DEV300/ooo-cli-prebuilt-3.0.tar.bz2
 # Source1-md5:	8b3979cd7fd99b7e9722fd8f690e69a9
 Source2:	http://download.go-oo.org/%{mws}/%{tag}-base.tar.bz2
