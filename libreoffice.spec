@@ -90,7 +90,7 @@
 %define		tag			%(echo %{mws} | tr A-Z a-z)-%{milestone}
 %define		milestone	m17
 %define		_tag		%(echo %{tag} | tr - _)
-%define		_rel		1
+%define		_rel		2
 
 Summary:	OpenOffice.org - powerful office suite
 Summary(pl.UTF-8):	OpenOffice.org - potężny pakiet biurowy
@@ -152,8 +152,6 @@ Patch1005:	%{name}-nsplugin-path.diff
 Patch1006:	%{name}-perl-nodiag.patch
 Patch1007:	%{name}-gcc42-swregion.diff
 URL:		http://www.openoffice.org/
-# http://securitytracker.com/alerts/2008/Aug/1020764.html
-BuildRequires:	security(CVE-2008-3282)
 BuildRequires:	/usr/bin/getopt
 BuildRequires:	GConf2-devel
 BuildRequires:	OpenGL-GLU-devel
