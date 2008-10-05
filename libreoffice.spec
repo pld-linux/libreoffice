@@ -85,12 +85,12 @@
 %undefine	with_system_hsqldb
 %endif
 
-%define		upd			680
-%define		mws			OOH%{upd}
+%define		upd			300
+%define		mws			OOO%{upd}
 %define		tag			%(echo %{mws} | tr A-Z a-z)-%{milestone}
-%define		milestone	m17
+%define		milestone	m7
 %define		_tag		%(echo %{tag} | tr - _)
-%define		_rel		2
+%define		_rel		0.1
 
 Summary:	OpenOffice.org - powerful office suite
 Summary(pl.UTF-8):	OpenOffice.org - potężny pakiet biurowy
@@ -101,37 +101,53 @@ Epoch:		1
 License:	GPL/LGPL
 Group:		X11/Applications
 # we use svn because released tarballs are buggy too often
-# svn export http://svn.gnome.org/svn/ooo-build/branches/ooo-build-2-4-1 ooo-build
-Source0:	ooo-build-r13288.tar.bz2
-# Source0-md5:	589cffb42411f2d94186491b09115447
-Source1:	http://download.go-oo.org/%{mws}/%{tag}-core.tar.bz2
-# Source1-md5:	ddaaf10f08d1fbeec42383e13f587a31
-Source2:	http://download.go-oo.org/%{mws}/%{tag}-system.tar.bz2
-# Source2-md5:	8638695691707cac9272a97a991a240f
-Source3:	http://download.go-oo.org/%{mws}/%{tag}-binfilter.tar.bz2
-# Source3-md5:	d3bad14d049cf2ae96ba8dc5d3cd9145
-Source4:	http://download.go-oo.org/%{mws}/%{tag}-lang.tar.bz2
-# Source4-md5:	92a46a30ee752f6ef9b4718895a4dd0c
-Source10:	http://download.go-oo.org/SRC680/ooo_custom_images-13.tar.bz2
-# Source10-md5:	2480af7f890c8175c7f9e183a1b39ed2
-Source11:	http://download.go-oo.org/SRC680/ooo_crystal_images-6.tar.bz2
-# Source11-md5:	586d0f26b3f79d89bbb5b25b874e3df6
-Source12:	http://download.go-oo.org/SRC680/extras-2.tar.bz2
-# Source12-md5:	733051ebeffae5232a2eb760162da020
-Source15:	http://download.go-oo.org/xt/xt-20051206-src-only.zip
-# Source15-md5:	0395e6e7da27c1cea7e1852286f6ccf9
-Source16:	http://download.go-oo.org/SRC680/lp_solve_5.5.0.10_source.tar.gz
-# Source16-md5:	26b3e95ddf3d9c077c480ea45874b3b8
-Source17:	http://download.go-oo.org/SRC680/biblio.tar.bz2
-# Source17-md5:	1948e39a68f12bfa0b7eb309c14d940c
-Source18:	http://download.go-oo.org/%{mws}/cli_types.dll
-# Source18-md5:	3ae35431f8c7356e4ae806195dbc35f9
-Source19:	http://download.go-oo.org/%{mws}/cli_types_bridgetest.dll
-# Source19-md5:	d09792656eb45850b8b84424a23a6ce2
-Source22:	http://download.go-oo.org/SRC680/oox.2008-02-29.tar.bz2
-# Source22-md5:	09829c269788249aeb617a683f8cfa94
-Source23:	http://download.go-oo.org/SRC680/writerfilter.2008-02-29.tar.bz2
-# Source23-md5:	7666cc504d16b8b6598450001cfca403
+# svn export http://svn.gnome.org/svn/ooo-build/branches/ooo-build-3-0 ooo-build
+Source0:	ooo-build-r14207.tar.bz2
+# Source0-md5:	d6aff929c067c817d7fd5d6b49d73a59
+Source1:	http://download.go-oo.org/DEV300/ooo-cli-prebuilt-3.0.tar.bz2
+# Source1-md5:	8b3979cd7fd99b7e9722fd8f690e69a9
+Source2:	http://download.go-oo.org/%{mws}/%{tag}-base.tar.bz2
+# Source2-md5:	068bf7aa8a94484f753377d8828af44c
+Source3:	http://download.go-oo.org/%{mws}/%{tag}-calc.tar.bz2
+# Source3-md5:	ff5a376c631a13c559f19c641e7d9627
+Source4:	http://download.go-oo.org/%{mws}/%{tag}-l10n.tar.bz2
+# Source4-md5:	12fac5526b3ecd7698015b8e88b28f4e
+Source5:	http://download.go-oo.org/%{mws}/%{tag}-ure.tar.bz2
+# Source5-md5:	8e525375358c0296f2e4c83652c36cb7
+Source6:        http://download.go-oo.org/%{mws}/%{tag}-writer.tar.bz2
+# Source6-md5:	d8e36359fcee3ad74fec5a4fbba2a044
+Source7:        http://download.go-oo.org/%{mws}/%{tag}-impress.tar.bz2
+# Source7-md5:	19b14c9917953b08e08c4ef237c7ff25
+Source8:        http://download.go-oo.org/%{mws}/%{tag}-artwork.tar.bz2
+# Source8-md5:	49b7fbed028e1abb89723727110bb479
+Source9:        http://download.go-oo.org/%{mws}/%{tag}-filters.tar.bz2
+# Source9-md5:	58de8a39fdeb6e9d71b0507d5e9ecb69
+Source10:        http://download.go-oo.org/%{mws}/%{tag}-testing.tar.bz2
+# Source10-md5:	9678e826647831b5904938546cdff136
+Source11:        http://download.go-oo.org/%{mws}/%{tag}-bootstrap.tar.bz2
+# Source11-md5:	99ed4b033b561a462459fa4e2a88bdb3
+Source12:        http://download.go-oo.org/%{mws}/%{tag}-libs_gui.tar.bz2
+# Source12-md5:	b215876401c2069af5770ea376fdad70
+Source13:        http://download.go-oo.org/%{mws}/%{tag}-libs_core.tar.bz2
+# Source13-md5:	9f2c800f752961a4b1aab9a2f7dde590
+Source14:        http://download.go-oo.org/%{mws}/%{tag}-libs_extern.tar.bz2
+# Source14-md5:	4fe4e1f0e032936cec796d879bb4afe2
+Source15:        http://download.go-oo.org/%{mws}/%{tag}-components.tar.bz2
+# Source15-md5:	49903cfe7cbfe7e967a55300bf3019b7
+Source16:        http://download.go-oo.org/%{mws}/%{tag}-libs_extern_sys.tar.bz2
+# Source16-md5:	7ddca76f0c9165648add0a1b25a45abb
+Source17:        http://download.go-oo.org/%{mws}/%{tag}-extensions.tar.bz2
+# Source17-md5:	b97dffac472ca0b7eb6551424456f1f2
+Source18:        http://download.go-oo.org/%{mws}/%{tag}-sdk.tar.bz2
+# Source18-md5:	35cb8a98d84f2fbb9981c1f45070a263
+Source19:        http://download.go-oo.org/%{mws}/%{tag}-postprocess.tar.bz2
+# Source19-md5:	612dc0f1676d4e55ded38ed1879251a3
+Source50:	http://download.go-oo.org//DEV300/scsolver.2008-09-30.tar.bz2
+# Source50-md5:	4195927360b4ba815c944b6db60bda8a
+Source51:	http://download.go-oo.org/SRC680/biblio.tar.bz2
+# Source51-md5:	1948e39a68f12bfa0b7eb309c14d940c
+Source52:	http://download.go-oo.org/SRC680/extras-3.tar.bz2
+# Source52-md5:	36f323a55ee83e9dc968e1b92569b62a
 # patches applied in prep section
 Patch0:		%{name}-PLD.patch
 Patch1:		%{name}-gcc-Wextra.patch
@@ -2112,15 +2128,15 @@ install -d src
 # sources, icons, KDE_icons. You can verify that all needed sources
 # are here by running ./download script manually after rpmbuild -bp
 ln -sf %{SOURCE1} %{SOURCE2} %{SOURCE3} %{SOURCE4} \
-	%{SOURCE10} %{SOURCE11} %{SOURCE12} \
-	%{SOURCE15} %{SOURCE16} %{SOURCE17} \
-	%{SOURCE18} %{SOURCE19} \
-	%{SOURCE22} \
-	%{SOURCE23} \
+	%{SOURCE5} %{SOURCE6} %{SOURCE7} %{SOURCE8} \
+	%{SOURCE9} %{SOURCE10} %{SOURCE11} %{SOURCE12} \
+	%{SOURCE13} %{SOURCE14} %{SOURCE15} %{SOURCE16} \
+	%{SOURCE17} %{SOURCE18} %{SOURCE19} %{SOURCE50} \
+	%{SOURCE51} %{SOURCE52} \
 	src
 
 # fixes for the patch subsystem
-%patch0 -p1
+#%patch0 -p1
 
 # mdbtools_fix.diff needs review
 #%patch50 -p1
@@ -2130,26 +2146,26 @@ ln -sf %{SOURCE1} %{SOURCE2} %{SOURCE3} %{SOURCE4} \
 #%patch51 -p1
 #%endif
 
-ln -s %{PATCH1} patches/hotfixes/%{basename:%{PATCH1}}.diff
+#ln -s %{PATCH1} patches/hotfixes/%{basename:%{PATCH1}}.diff
 
 # TODO: use patches/hotfixes dir from now on
-echo "[ PLDOnly ]" >> patches/src680/apply
+#echo "[ PLDOnly ]" >> patches/src680/apply
 
 # remove patches (temporary FIX)
-%{__sed} -i -e "s/, STLport5, OOXSTLport5,/, /g" patches/src680/apply
+#%{__sed} -i -e "s/, STLport5, OOXSTLport5,/, /g" patches/src680/apply
 
 # patches applied by ooo (extension .diff is required)
-for P in \
-	%{PATCH100} %{PATCH103} %{PATCH104}; do
-	PATCHNAME=PLD-${P##*/%{name}-}
-	PATCHNAME=${PATCHNAME%.patch}.diff
-	ln -s $P patches/src680/$PATCHNAME
-	echo $PATCHNAME >> patches/src680/apply
-done
+#for P in \
+#	%{PATCH100} %{PATCH103} %{PATCH104}; do
+#	PATCHNAME=PLD-${P##*/%{name}-}
+#	PATCHNAME=${PATCHNAME%.patch}.diff
+#	ln -s $P patches/src680/$PATCHNAME
+#	echo $PATCHNAME >> patches/src680/apply
+#done
 
 # from ooo-build itself
-echo "vcl_font-NO_LIST.diff" >> patches/src680/apply
-echo "linux-headers.diff" >> patches/src680/apply
+#echo "vcl_font-NO_LIST.diff" >> patches/src680/apply
+#echo "linux-headers.diff" >> patches/src680/apply
 
 %build
 # Make sure we have /proc mounted - otherwise idlc will fail later.
