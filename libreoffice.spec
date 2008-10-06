@@ -2135,37 +2135,8 @@ ln -sf %{SOURCE1} %{SOURCE2} %{SOURCE3} %{SOURCE4} \
 	%{SOURCE51} %{SOURCE52} \
 	src
 
-# fixes for the patch subsystem
-#%patch0 -p1
-
-# mdbtools_fix.diff needs review
-#%patch50 -p1
-#
-# nodictinst patch needs review
-#%if %{with system_myspell}
-#%patch51 -p1
-#%endif
-
-#ln -s %{PATCH1} patches/hotfixes/%{basename:%{PATCH1}}.diff
-
-# TODO: use patches/hotfixes dir from now on
-#echo "[ PLDOnly ]" >> patches/dev300/apply
-
-# remove patches (temporary FIX)
-#%{__sed} -i -e "s/, STLport5, OOXSTLport5,/, /g" patches/src680/apply
-
-# patches applied by ooo (extension .diff is required)
-#for P in \
-#	%{PATCH100} %{PATCH103} %{PATCH104}; do
-#	PATCHNAME=PLD-${P##*/%{name}-}
-#	PATCHNAME=${PATCHNAME%.patch}.diff
-#	ln -s $P patches/src680/$PATCHNAME
-#	echo $PATCHNAME >> patches/src680/apply
-#done
-
-# from ooo-build itself
-#echo "vcl_font-NO_LIST.diff" >> patches/src680/apply
-#echo "linux-headers.diff" >> patches/src680/apply
+# fixes
+ln -s %{PATCH104} patches/hotfixes/%{basename:%{PATCH104}}.diff
 
 %build
 # Make sure we have /proc mounted - otherwise idlc will fail later.
