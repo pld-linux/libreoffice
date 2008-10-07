@@ -2413,48 +2413,50 @@ if [ ! -f makeinstall.stamp -o ! -d $RPM_BUILD_ROOT ]; then
 fi
 
 if [ ! -f installed.stamp ]; then
+	chmod -Rf a+rX,u+w,g-w,o-w $RPM_BUILD_ROOT
+
 	# do we need those? large comparing to png
-	rm -rf $RPM_BUILD_ROOT%{_datadir}/icons/hicolor/scalable/apps/*.svg
+	rm -r $RPM_BUILD_ROOT%{_datadir}/icons/hicolor/scalable/apps/*.svg
 
 	# is below comment true?
 	# OOo should not install the Vera fonts, they are Required: now
-	rm -f $RPM_BUILD_ROOT%{_libdir}/%{name}/share/fonts/truetype/*
+	#rm $RPM_BUILD_ROOT%{_libdir}/%{name}/share/fonts/truetype/*
 
 	# some libs creep in somehow
-	rm -f $RPM_BUILD_ROOT%{_libdir}/%{name}/program/libstl*.so*
-	rm -f $RPM_BUILD_ROOT%{_libdir}/%{name}/program/libsndfile*
-	#rm -f $RPM_BUILD_ROOT%{_libdir}/%{name}/program/libgcc3_uno.so*
-	rm -f $RPM_BUILD_ROOT%{_libdir}/%{name}/program/libstdc++*so*
+	#rm $RPM_BUILD_ROOT%{_libdir}/%{name}/program/libstl*.so*
+	#rm $RPM_BUILD_ROOT%{_libdir}/%{name}/program/libsndfile*
+	#rm $RPM_BUILD_ROOT%{_libdir}/%{name}/program/libgcc3_uno.so*
+	#rm $RPM_BUILD_ROOT%{_libdir}/%{name}/program/libstdc++*so*
 
-	rm -f $RPM_BUILD_ROOT%{_libdir}/%{name}/program/sopatchlevel.sh
+	#rm $RPM_BUILD_ROOT%{_libdir}/%{name}/program/sopatchlevel.sh
 
 	# Remove setup log
-	rm -f $RPM_BUILD_ROOT%{_libdir}/%{name}/program/setup.log
+	#rm $RPM_BUILD_ROOT%{_libdir}/%{name}/program/setup.log
 
-	rm -rf $RPM_BUILD_ROOT%{_libdir}/%{name}/share/xdg
-	rm -f $RPM_BUILD_ROOT%{_libdir}/%{name}/program/cde-open-url
+	rm -r $RPM_BUILD_ROOT%{_libdir}/%{name}/share/xdg
+	#rm $RPM_BUILD_ROOT%{_libdir}/%{name}/program/cde-open-url
 
 	%if %{without java}
 	# Java-releated bits
-	rm -rf $RPM_BUILD_ROOT%{_libdir}/%{name}/program/hid.lst
-	rm -rf $RPM_BUILD_ROOT%{_libdir}/%{name}/program/java-set-classpath
-	rm -rf $RPM_BUILD_ROOT%{_libdir}/%{name}/program/jvmfwk3rc
-	rm -rf $RPM_BUILD_ROOT%{_libdir}/%{name}/share/Scripts/beanshell
-	rm -rf $RPM_BUILD_ROOT%{_libdir}/%{name}/share/Scripts/javascript
-	rm -rf $RPM_BUILD_ROOT%{_libdir}/%{name}/share/xslt
+	rm -r $RPM_BUILD_ROOT%{_libdir}/%{name}/program/hid.lst
+	rm -r $RPM_BUILD_ROOT%{_libdir}/%{name}/program/java-set-classpath
+	rm -r $RPM_BUILD_ROOT%{_libdir}/%{name}/program/jvmfwk3rc
+	rm -r $RPM_BUILD_ROOT%{_libdir}/%{name}/share/Scripts/beanshell
+	rm -r $RPM_BUILD_ROOT%{_libdir}/%{name}/share/Scripts/javascript
+	rm -r $RPM_BUILD_ROOT%{_libdir}/%{name}/share/xslt
 	%endif
 
 	%if %{with mono}
-	rm -f $RPM_BUILD_ROOT%{_libdir}/pkgconfig/mono-ooo-2.1.pc
+	rm $RPM_BUILD_ROOT%{_libdir}/pkgconfig/mono-ooo-2.1.pc
 	%endif
 
 	# Remove dictionaries (in separate pkg)
-	rm -rf $RPM_BUILD_ROOT%{_libdir}/%{name}/share/dict/ooo/*
+	#rm -r $RPM_BUILD_ROOT%{_libdir}/%{name}/share/dict/ooo/*
 	%if %{with system_myspell}
-	rmdir $RPM_BUILD_ROOT%{_libdir}/%{name}/share/dict/ooo
-	ln -s %{_datadir}/myspell $RPM_BUILD_ROOT%{_libdir}/%{name}/share/dict/ooo
+	#rmdir $RPM_BUILD_ROOT%{_libdir}/%{name}/share/dict/ooo
+	#ln -s %{_datadir}/myspell $RPM_BUILD_ROOT%{_libdir}/%{name}/share/dict/ooo
 	%else
-	touch $RPM_BUILD_ROOT%{_libdir}/%{name}/share/dict/ooo/dictionary.lst
+	#touch $RPM_BUILD_ROOT%{_libdir}/%{name}/share/dict/ooo/dictionary.lst
 	%endif
 
 	%if %{with mozilla}
@@ -2484,8 +2486,8 @@ if [ ! -f installed.stamp ]; then
 	mv $RPM_BUILD_ROOT%{_libdir}/%{name}/share $RPM_BUILD_ROOT%{_datadir}/%{name}
 	ln -s ../../share/%{name}/share $RPM_BUILD_ROOT%{_libdir}/%{name}/share
 	# more non-archidecture dependant nature data
-	mv $RPM_BUILD_ROOT%{_libdir}/%{name}/help $RPM_BUILD_ROOT%{_datadir}/%{name}
-	ln -s ../../share/%{name}/help $RPM_BUILD_ROOT%{_libdir}/%{name}/help
+	#mv $RPM_BUILD_ROOT%{_libdir}/%{name}/help $RPM_BUILD_ROOT%{_datadir}/%{name}
+	#ln -s ../../share/%{name}/help $RPM_BUILD_ROOT%{_libdir}/%{name}/help
 	mv $RPM_BUILD_ROOT%{_libdir}/%{name}/licenses $RPM_BUILD_ROOT%{_datadir}/%{name}
 	ln -s ../../share/%{name}/licenses $RPM_BUILD_ROOT%{_libdir}/%{name}/licenses
 	mv $RPM_BUILD_ROOT%{_libdir}/%{name}/readmes $RPM_BUILD_ROOT%{_datadir}/%{name}
