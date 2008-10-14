@@ -142,8 +142,8 @@ Source18:        http://download.go-oo.org/%{mws}/%{tag}-sdk.tar.bz2
 # Source18-md5:	b8882d79d7d3d0c8a3c0fc6aa30ef063
 Source19:        http://download.go-oo.org/%{mws}/%{tag}-postprocess.tar.bz2
 # Source19-md5:	843092aad2d2baef22b42d63d26f5c1f
-Source50:	http://download.go-oo.org//DEV300/scsolver.2008-09-30.tar.bz2
-# Source50-md5:	4195927360b4ba815c944b6db60bda8a
+Source50:	http://download.go-oo.org//DEV300/scsolver.2008-10-07.tar.bz2
+# Source50-md5:	01073224529359d1cde2c3e55d33bdb7
 Source51:	http://download.go-oo.org/SRC680/biblio.tar.bz2
 # Source51-md5:	1948e39a68f12bfa0b7eb309c14d940c
 Source52:	http://download.go-oo.org/SRC680/extras-3.tar.bz2
