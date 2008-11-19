@@ -90,7 +90,7 @@
 %define		tag			%(echo %{mws} | tr A-Z a-z)-%{milestone}
 %define		milestone	m17
 %define		_tag		%(echo %{tag} | tr - _)
-%define		_rel		3
+%define		_rel		4
 
 Summary:	OpenOffice.org - powerful office suite
 Summary(pl.UTF-8):	OpenOffice.org - potężny pakiet biurowy
@@ -3404,6 +3404,7 @@ fi
 %attr(755,root,root) %{_libdir}/%{name}/program/libadabas2.so
 %{!?with_system_agg:%attr(755,root,root) %{_libdir}/%{name}/program/libagg680*.so}
 %attr(755,root,root) %{_libdir}/%{name}/program/libanimcore.so
+%attr(755,root,root) %{_libdir}/%{name}/program/libsc680*.so
 %attr(755,root,root) %{_libdir}/%{name}/program/libavmedia680*.so
 %attr(755,root,root) %{_libdir}/%{name}/program/libavmediagst.so
 %attr(755,root,root) %{_libdir}/%{name}/program/libbasctl680*.so
@@ -3694,7 +3695,6 @@ fi
 %attr(755,root,root) %{_libdir}/%{name}/program/libbf_sc680*.so
 %attr(755,root,root) %{_libdir}/%{name}/program/libcalc680*.so
 %attr(755,root,root) %{_libdir}/%{name}/program/libdate680*.so
-%attr(755,root,root) %{_libdir}/%{name}/program/libsc680*.so
 %attr(755,root,root) %{_libdir}/%{name}/program/libscd680*.so
 %attr(755,root,root) %{_libdir}/%{name}/program/libchartcontroller680*.so
 %attr(755,root,root) %{_libdir}/%{name}/program/libchartmodel680*.so
