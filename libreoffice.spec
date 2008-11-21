@@ -274,7 +274,7 @@ Requires:	%{name}-testtools = %{epoch}:%{version}-%{release}
 Requires:	%{name}-web = %{epoch}:%{version}-%{release}
 Requires:	%{name}-writer = %{epoch}:%{version}-%{release}
 Requires:	%{name}-xsltfilter = %{epoch}:%{version}-%{release}
-Requires:	fonts-TTF-OpenSymbol = %{epoch}:%{version}-%{release}
+Requires:	fonts-TTF-OpenSymbol
 ExclusiveArch:	%{ix86} %{x8664} ppc sparc sparcv9
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
