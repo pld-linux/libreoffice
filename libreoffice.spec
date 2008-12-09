@@ -22,15 +22,15 @@
 #	- /share/config/soffice.cfg/global/accelerator/es/ should be in i18n-es
 #	- fix locale names and other locale related things
 #   - broken directory dependencies:
-#       error: openoffice.org-i18n-de-2.4.1.7-ooh680_m17.1: req /usr/share/openoffice.org/share/config/soffice.cfg/modules/swform/accelerator/de not found
-#       error: openoffice.org-i18n-de-2.4.1.7-ooh680_m17.1: req /usr/share/openoffice.org/share/config/soffice.cfg/modules/swreport/accelerator/de not found
-#       error: openoffice.org-i18n-de-2.4.1.7-ooh680_m17.1: req /usr/share/openoffice.org/share/config/soffice.cfg/modules/swxform/accelerator/de not found
-#       error: openoffice.org-i18n-es-2.4.1.7-ooh680_m17.1: req /usr/share/openoffice.org/share/config/soffice.cfg/modules/swform/accelerator/es not found
-#       error: openoffice.org-i18n-es-2.4.1.7-ooh680_m17.1: req /usr/share/openoffice.org/share/config/soffice.cfg/modules/swreport/accelerator/es not found
-#       error: openoffice.org-i18n-es-2.4.1.7-ooh680_m17.1: req /usr/share/openoffice.org/share/config/soffice.cfg/modules/swxform/accelerator/es not found
-#       error: openoffice.org-i18n-fr-2.4.1.7-ooh680_m17.1: req /usr/share/openoffice.org/share/config/soffice.cfg/modules/swform/accelerator/fr not found
-#       error: openoffice.org-i18n-fr-2.4.1.7-ooh680_m17.1: req /usr/share/openoffice.org/share/config/soffice.cfg/modules/swreport/accelerator/fr not found
-#       error: openoffice.org-i18n-fr-2.4.1.7-ooh680_m17.1: req /usr/share/openoffice.org/share/config/soffice.cfg/modules/swxform/accelerator/fr not found
+#       error: openoffice.org-i18n-de-2.4.1.7-ooh_m17.1: req /usr/share/openoffice.org/share/config/soffice.cfg/modules/swform/accelerator/de not found
+#       error: openoffice.org-i18n-de-2.4.1.7-ooh_m17.1: req /usr/share/openoffice.org/share/config/soffice.cfg/modules/swreport/accelerator/de not found
+#       error: openoffice.org-i18n-de-2.4.1.7-ooh_m17.1: req /usr/share/openoffice.org/share/config/soffice.cfg/modules/swxform/accelerator/de not found
+#       error: openoffice.org-i18n-es-2.4.1.7-ooh_m17.1: req /usr/share/openoffice.org/share/config/soffice.cfg/modules/swform/accelerator/es not found
+#       error: openoffice.org-i18n-es-2.4.1.7-ooh_m17.1: req /usr/share/openoffice.org/share/config/soffice.cfg/modules/swreport/accelerator/es not found
+#       error: openoffice.org-i18n-es-2.4.1.7-ooh_m17.1: req /usr/share/openoffice.org/share/config/soffice.cfg/modules/swxform/accelerator/es not found
+#       error: openoffice.org-i18n-fr-2.4.1.7-ooh_m17.1: req /usr/share/openoffice.org/share/config/soffice.cfg/modules/swform/accelerator/fr not found
+#       error: openoffice.org-i18n-fr-2.4.1.7-ooh_m17.1: req /usr/share/openoffice.org/share/config/soffice.cfg/modules/swreport/accelerator/fr not found
+#       error: openoffice.org-i18n-fr-2.4.1.7-ooh_m17.1: req /usr/share/openoffice.org/share/config/soffice.cfg/modules/swxform/accelerator/fr not found
 #   - can't be just i18n-{be,gu,hi,kn,pa,ta} instead of *-{be_BY,*_IN}?
 #   - more system libs todo:
 #	- (SYSTEM_HYPH) bcond system_libhnj doesn't work - needs Debian-patched version of libhnj
@@ -38,7 +38,7 @@
 #   - --with-system-mspack - use libmspack already installed on system
 #	- bcond system_xt doesn't work - xt in PLD is too old or broken
 #
-#	$ grep SYSTEM ooo-build-ooe680-m6/build/ooe680-m6/config_office/config.log |grep NO
+#	$ grep SYSTEM ooo-build-ooe-m6/build/ooe-m6/config_office/config.log |grep NO
 #
 # MAYBE TODO:
 #	- drop requirement on nas-devel
@@ -88,65 +88,65 @@
 %define		upd			300
 %define		mws			OOO%{upd}
 %define		tag			%(echo %{mws} | tr A-Z a-z)-%{milestone}
-%define		milestone	m9
+%define		milestone	m12
 %define		_tag		%(echo %{tag} | tr - _)
 %define		_rel		0.1
 
 Summary:	OpenOffice.org - powerful office suite
 Summary(pl.UTF-8):	OpenOffice.org - potężny pakiet biurowy
 Name:		openoffice.org
-Version:	3.0.0.3.4
+Version:	3.0.0.3.5
 Release:	%{_tag}.%{_rel}
 Epoch:		1
 License:	GPL/LGPL
 Group:		X11/Applications
 # we use svn because released tarballs are buggy too often
-# svn export http://svn.gnome.org/svn/ooo-build/branches/ooo-build-3-0 ooo-build
-Source0:	ooo-build-r14311.tar.bz2
-# Source0-md5:	6ad887360083cceee7f386b229cd88d4
+# svn export http://svn.gnome.org/svn/ooo-build/branches/ooo-build-3-0-1 ooo-build
+Source0:	ooo-build-14795.tar.bz2
+# Source0-md5:	a9edf07fa355005cd72e0175286dda2b
 Source1:	http://download.go-oo.org/DEV300/ooo-cli-prebuilt-3.0.tar.bz2
 # Source1-md5:	8b3979cd7fd99b7e9722fd8f690e69a9
 Source2:	http://download.go-oo.org/%{mws}/%{tag}-base.tar.bz2
-# Source2-md5:	965da80b3f10d6bc631200ea7e1efc9b
+# Source2-md5:	21e57ec27f6362c20d56e73c96ef0d6f
 Source3:	http://download.go-oo.org/%{mws}/%{tag}-calc.tar.bz2
-# Source3-md5:	0b44f195a67a114bec0e31e55081f6e7
+# Source3-md5:	6cc5dde31fd7f24d28c4a097d2d8df10
 Source4:	http://download.go-oo.org/%{mws}/%{tag}-l10n.tar.bz2
-# Source4-md5:	a19b73da9b8f86f0fe8ac4a52b2c2253
+# Source4-md5:	d32577da83f7826ee237a01a7408044f
 Source5:	http://download.go-oo.org/%{mws}/%{tag}-ure.tar.bz2
-# Source5-md5:	279d3e3f6617e9304a46be382f89d329
+# Source5-md5:	70c0990f03ef786c4762c54af99df37d
 Source6:        http://download.go-oo.org/%{mws}/%{tag}-writer.tar.bz2
-# Source6-md5:	38e02b9a936660845c4c4c53207331da
+# Source6-md5:	20a442f052817b7d019ff385a894ecda
 Source7:        http://download.go-oo.org/%{mws}/%{tag}-impress.tar.bz2
-# Source7-md5:	2f13976805c48dd23fdb146f1b527616
+# Source7-md5:	528cbf842aec3a52b172a60c1482acd1
 Source8:        http://download.go-oo.org/%{mws}/%{tag}-artwork.tar.bz2
-# Source8-md5:	7660573041ffda9c867d721b7260119f
+# Source8-md5:	2d94f9ec8bc0ae2ad4a74d660fc11351
 Source9:        http://download.go-oo.org/%{mws}/%{tag}-filters.tar.bz2
-# Source9-md5:	5e535935bea63537f3ff26399642f5e1
+# Source9-md5:	8e3dee220519f49aaa0092ca46a3fa87
 Source10:        http://download.go-oo.org/%{mws}/%{tag}-testing.tar.bz2
-# Source10-md5:	7fa6a81b4cef9ca1702bf24b92a89f37
+# Source10-md5:	c7bed0864af15516834c5f7eb6c2639d
 Source11:        http://download.go-oo.org/%{mws}/%{tag}-bootstrap.tar.bz2
-# Source11-md5:	673bc2a1c9a64a528ca1dd77e30f2416
+# Source11-md5:	d27ca2ae5fff6a8cfbc57cc2d3a9b44d
 Source12:        http://download.go-oo.org/%{mws}/%{tag}-libs_gui.tar.bz2
-# Source12-md5:	79ad9ad2a1aa9724c1a0505f84efba40
+# Source12-md5:	9f085cba68f5946bcb7a66a89eebf04f
 Source13:        http://download.go-oo.org/%{mws}/%{tag}-libs_core.tar.bz2
-# Source13-md5:	0f455579e7c438df3883c262e562384b
+# Source13-md5:	9accbb43877b5d0b6b95f0a67558eaa1
 Source14:        http://download.go-oo.org/%{mws}/%{tag}-libs_extern.tar.bz2
-# Source14-md5:	691f1ab2d88c4c69240cee5215e49b2c
+# Source14-md5:	9139720ec2e1ad52611bf5e3686a8f7f
 Source15:        http://download.go-oo.org/%{mws}/%{tag}-components.tar.bz2
-# Source15-md5:	679bcf3c3e5708cd708eed6df62587e4
+# Source15-md5:	3dbf9aa5d4d82969679e8c76f1907eda
 Source16:        http://download.go-oo.org/%{mws}/%{tag}-libs_extern_sys.tar.bz2
-# Source16-md5:	b619a9f097d1649050675fbf131fa7dd
+# Source16-md5:	77181ab91290d4d996fc39e6ce52eede
 Source17:        http://download.go-oo.org/%{mws}/%{tag}-extensions.tar.bz2
-# Source17-md5:	94ea3b983ffab5933e5b82f425df71f2
+# Source17-md5:	a2c3ed16d08ec356d64384eab57800a5
 Source18:        http://download.go-oo.org/%{mws}/%{tag}-sdk.tar.bz2
-# Source18-md5:	b8882d79d7d3d0c8a3c0fc6aa30ef063
+# Source18-md5:	3259fb1d7e17c73b80dff2207264538e
 Source19:        http://download.go-oo.org/%{mws}/%{tag}-postprocess.tar.bz2
-# Source19-md5:	843092aad2d2baef22b42d63d26f5c1f
-Source50:	http://download.go-oo.org//DEV300/scsolver.2008-10-07.tar.bz2
-# Source50-md5:	01073224529359d1cde2c3e55d33bdb7
-Source51:	http://download.go-oo.org/SRC680/biblio.tar.bz2
+# Source19-md5:	9d363ee41496f3616bff5704e37b3dd1
+Source50:	http://download.go-oo.org//DEV300/scsolver.2008-10-30.tar.bz2
+# Source50-md5:	04181e5ef82973eb349d3122a19d2274
+Source51:	http://download.go-oo.org/SRC/biblio.tar.bz2
 # Source51-md5:	1948e39a68f12bfa0b7eb309c14d940c
-Source52:	http://download.go-oo.org/SRC680/extras-3.tar.bz2
+Source52:	http://download.go-oo.org/SRC/extras-3.tar.bz2
 # Source52-md5:	36f323a55ee83e9dc968e1b92569b62a
 # patches applied in prep section
 Patch0:		%{name}-PLD.patch
@@ -284,8 +284,8 @@ BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 # - share/ - 17000 files of 415M
 # - help/ - 6500 files of 1.4G
 # - program/resource/ - 5610 files of 216M
-%define		_noautostrip	.*\\(%{_datadir}\\|%{_libdir}/%{name}/program/resource\\)/.*
-%define		_noautochrpath	.*\\(%{_datadir}\\|%{_libdir}/%{name}/program/resource\\)/.*
+%define		_noautostrip	.*\\(%{_datadir}\\|%{_libdir}/%{name}/basis*/program/resource\\)/.*
+%define		_noautochrpath	.*\\(%{_datadir}\\|%{_libdir}/%{name}/basis*/program/resource\\)/.*
 
 %description
 OpenOffice.org is an open-source project sponsored by Sun Microsystems
@@ -2423,24 +2423,24 @@ if [ ! -f installed.stamp ]; then
 	#rm $RPM_BUILD_ROOT%{_libdir}/%{name}/share/fonts/truetype/*
 
 	# some libs creep in somehow
-	#rm $RPM_BUILD_ROOT%{_libdir}/%{name}/program/libstl*.so*
-	#rm $RPM_BUILD_ROOT%{_libdir}/%{name}/program/libsndfile*
-	#rm $RPM_BUILD_ROOT%{_libdir}/%{name}/program/libgcc3_uno.so*
-	#rm $RPM_BUILD_ROOT%{_libdir}/%{name}/program/libstdc++*so*
+	#rm $RPM_BUILD_ROOT%{_libdir}/%{name}/basis*/program/libstl*.so*
+	#rm $RPM_BUILD_ROOT%{_libdir}/%{name}/basis*/program/libsndfile*
+	#rm $RPM_BUILD_ROOT%{_libdir}/%{name}/basis*/program/libgcc3_uno.so*
+	#rm $RPM_BUILD_ROOT%{_libdir}/%{name}/basis*/program/libstdc++*so*
 
-	#rm $RPM_BUILD_ROOT%{_libdir}/%{name}/program/sopatchlevel.sh
+	#rm $RPM_BUILD_ROOT%{_libdir}/%{name}/basis*/program/sopatchlevel.sh
 
 	# Remove setup log
-	#rm $RPM_BUILD_ROOT%{_libdir}/%{name}/program/setup.log
+	#rm $RPM_BUILD_ROOT%{_libdir}/%{name}/basis*/program/setup.log
 
 	rm -r $RPM_BUILD_ROOT%{_libdir}/%{name}/share/xdg
-	#rm $RPM_BUILD_ROOT%{_libdir}/%{name}/program/cde-open-url
+	#rm $RPM_BUILD_ROOT%{_libdir}/%{name}/basis*/program/cde-open-url
 
 	%if %{without java}
 	# Java-releated bits
-	rm -r $RPM_BUILD_ROOT%{_libdir}/%{name}/program/hid.lst
-	rm -r $RPM_BUILD_ROOT%{_libdir}/%{name}/program/java-set-classpath
-	rm -r $RPM_BUILD_ROOT%{_libdir}/%{name}/program/jvmfwk3rc
+	rm -r $RPM_BUILD_ROOT%{_libdir}/%{name}/basis*/program/hid.lst
+	rm -r $RPM_BUILD_ROOT%{_libdir}/%{name}/basis*/program/java-set-classpath
+	rm -r $RPM_BUILD_ROOT%{_libdir}/%{name}/basis*/program/jvmfwk3rc
 	rm -r $RPM_BUILD_ROOT%{_libdir}/%{name}/share/Scripts/beanshell
 	rm -r $RPM_BUILD_ROOT%{_libdir}/%{name}/share/Scripts/javascript
 	rm -r $RPM_BUILD_ROOT%{_libdir}/%{name}/share/xslt
@@ -2461,7 +2461,7 @@ if [ ! -f installed.stamp ]; then
 
 	%if %{with mozilla}
 	install -d $RPM_BUILD_ROOT%{_browserpluginsdir}
-	ln -s %{_libdir}/%{name}/program/libnpsoplugin.so $RPM_BUILD_ROOT%{_browserpluginsdir}
+	ln -s %{_libdir}/%{name}/basis*/program/libnpsoplugin.so $RPM_BUILD_ROOT%{_browserpluginsdir}
 	%endif
 
 	# configs
@@ -2474,12 +2474,12 @@ if [ ! -f installed.stamp ]; then
 	# mv $RPM_BUILD_ROOT{%{_libdir}/%{name}/program,%{_sysconfdir}/%{name}}/unorc
 	# ln -s %{_sysconfdir}/%{name}/unorc $RPM_BUILD_ROOT%{_libdir}/%{name}/program
 	# Use this instead:
-	ln -s %{_libdir}/%{name}/program/unorc $RPM_BUILD_ROOT%{_sysconfdir}/%{name}/unorc
+	ln -s %{_libdir}/%{name}/basis*/program/unorc $RPM_BUILD_ROOT%{_sysconfdir}/%{name}/unorc
 
 	perl -pi -e 's/^[       ]*LD_LIBRARY_PATH/# LD_LIBRARY_PATH/;s/export LD_LIBRARY_PATH/# export LD_LIBRARY_PATH/' \
-		$RPM_BUILD_ROOT%{_libdir}/%{name}/program/setup
+		$RPM_BUILD_ROOT%{_libdir}/%{name}/basis*/program/setup
 
-	chmod +x $RPM_BUILD_ROOT%{_libdir}/%{name}/program/*.so
+	chmod +x $RPM_BUILD_ROOT%{_libdir}/%{name}/basis*/program/*.so
 
 	install -d $RPM_BUILD_ROOT%{_datadir}/%{name}
 	# put share to %{_datadir} so we're able to produce noarch packages
@@ -2494,14 +2494,14 @@ if [ ! -f installed.stamp ]; then
 	ln -s ../../share/%{name}/readmes $RPM_BUILD_ROOT%{_libdir}/%{name}/readmes
 
 	# fix python
-	#sed -i -e 's|#!/bin/python|#!%{_bindir}/python|g' $RPM_BUILD_ROOT%{_libdir}/%{name}/program/*.py
+	#sed -i -e 's|#!/bin/python|#!%{_bindir}/python|g' $RPM_BUILD_ROOT%{_libdir}/%{name}/basis*/program/*.py
 
 	# Copy fixed OpenSymbol to correct location
 	install -d $RPM_BUILD_ROOT%{_fontsdir}/TTF
 	install build/%{tag}/extras/source/truetype/symbol/opens___.ttf $RPM_BUILD_ROOT%{_fontsdir}/TTF
 
 	# Add in the regcomp tool since some people need it for 3rd party add-ons
-	cp -a build/%{tag}/solver/%{upd}/unxlng*.pro/bin/regcomp{,.bin} $RPM_BUILD_ROOT%{_libdir}/%{name}/program/
+	cp -a build/%{tag}/solver/%{upd}/unxlng*.pro/bin/regcomp{,.bin} $RPM_BUILD_ROOT%{_libdir}/%{name}/basis*/program/
 
 	# Rename .desktop files to avoid conflicts with other applications .desktops
 	# TODO: make patch instead.
@@ -2610,8 +2610,8 @@ for d in share %{?with_java:help} readmes licenses; do
 		mv %{_libdir}/%{name}/$d %{_datadir}/%{name}/$d || mv %{_libdir}/%{name}/$d{,.rpmsave}
 	fi
 done
-if [ -L %{_libdir}/%{name}/presets ]; then
-	rm -f %{_libdir}/%{name}/presets
+if [ -L %{_libdir}/%{name}/basis*/presets ]; then
+	rm -f %{_libdir}/%{name}/basis*/presets
 fi
 
 %post core
@@ -2690,79 +2690,79 @@ fi
 %doc %{_libdir}/%{name}/*README*
 
 # TODO: check where these really belong
-%attr(755,root,root) %{_libdir}/%{name}/program/OGLTrans.uno.so
-%attr(755,root,root) %{_libdir}/%{name}/program/libbf_go680*.so
-%attr(755,root,root) %{_libdir}/%{name}/program/libdeploymentmisc680*.so
-%attr(755,root,root) %{_libdir}/%{name}/program/libvbaobj680*.uno.so
-%attr(755,root,root) %{_libdir}/%{name}/program/bootstrap.uno.so
-%attr(755,root,root) %{_libdir}/%{name}/program/stringresource680*.uno.so
-%attr(755,root,root) %{_libdir}/%{name}/program/updatefeed.uno.so
-%attr(755,root,root) %{_libdir}/%{name}/program/fastsax.uno.so
-%attr(755,root,root) %{_libdir}/%{name}/program/libacc680*.so
-%attr(755,root,root) %{_libdir}/%{name}/program/libaffine_uno_uno.so
-%attr(755,root,root) %{_libdir}/%{name}/program/libbasebmp680*.so
-%attr(755,root,root) %{_libdir}/%{name}/program/libbf_sb680*.so
-%attr(755,root,root) %{_libdir}/%{name}/program/libbf_so680*.so
-%{!?with_system_db:%attr(755,root,root) %{_libdir}/%{name}/program/libdb-4.2.so}
-%attr(755,root,root) %{_libdir}/%{name}/program/libguesslang680*.so
-%attr(755,root,root) %{_libdir}/%{name}/program/libhelplinker680*.so
-%attr(755,root,root) %{_libdir}/%{name}/program/liblog680*.so
-%attr(755,root,root) %{_libdir}/%{name}/program/liblpsolve*.so
-#%attr(755,root,root) %{_libdir}/%{name}/program/libmtfrenderer.uno.so
-%attr(755,root,root) %{_libdir}/%{name}/program/liboox680*.so
+%attr(755,root,root) %{_libdir}/%{name}/basis*/program/OGLTrans.uno.so
+%attr(755,root,root) %{_libdir}/%{name}/basis*/program/libbf_golx*.so
+%attr(755,root,root) %{_libdir}/%{name}/basis*/program/libdeploymentmisclx*.so
+%attr(755,root,root) %{_libdir}/%{name}/basis*/program/libvbaobj*.uno.so
+%attr(755,root,root) %{_libdir}/%{name}/ure/lib/bootstrap.uno.so
+%attr(755,root,root) %{_libdir}/%{name}/basis*/program/stringresource*.uno.so
+%attr(755,root,root) %{_libdir}/%{name}/basis*/program/updatefeed.uno.so
+%attr(755,root,root) %{_libdir}/%{name}/basis*/program/fastsax.uno.so
+%attr(755,root,root) %{_libdir}/%{name}/basis*/program/libacclx*.so
+%attr(755,root,root) %{_libdir}/%{name}/ure/lib/libaffine_uno_uno.so
+%attr(755,root,root) %{_libdir}/%{name}/basis*/program/libbasebmplx*.so
+%attr(755,root,root) %{_libdir}/%{name}/basis*/program/libbf_sblx*.so
+%attr(755,root,root) %{_libdir}/%{name}/basis*/program/libbf_solx*.so
+%{!?with_system_db:%attr(755,root,root) %{_libdir}/%{name}/basis*/program/libdb-4.2.so}
+%attr(755,root,root) %{_libdir}/%{name}/basis*/program/libguesslanglx*.so
+%attr(755,root,root) %{_libdir}/%{name}/basis*/program/libhelplinkerlx*.so
+%attr(755,root,root) %{_libdir}/%{name}/basis*/program/libloglx*.so
+%attr(755,root,root) %{_libdir}/%{name}/basis*/program/liblpsolve*.so
+#%attr(755,root,root) %{_libdir}/%{name}/basis*/program/libmtfrenderer.uno.so
+%attr(755,root,root) %{_libdir}/%{name}/basis*/program/libooxlx*.so
 %if %{with java}
-%attr(755,root,root) %{_libdir}/%{name}/program/librpt680*.so
-%attr(755,root,root) %{_libdir}/%{name}/program/librptui680*.so
-%attr(755,root,root) %{_libdir}/%{name}/program/librptxml680*.so
+%attr(755,root,root) %{_libdir}/%{name}/basis*/program/librptlx*.so
+%attr(755,root,root) %{_libdir}/%{name}/basis*/program/librptuilx*.so
+%attr(755,root,root) %{_libdir}/%{name}/basis*/program/librptxmllx*.so
 %endif
-%attr(755,root,root) %{_libdir}/%{name}/program/libsax680*.so
-%attr(755,root,root) %{_libdir}/%{name}/program/libt602filter680*.so
-%attr(755,root,root) %{_libdir}/%{name}/program/libtextcat.so
-%attr(755,root,root) %{_libdir}/%{name}/program/libunsafe_uno_uno.so
-%attr(755,root,root) %{_libdir}/%{name}/program/libvclplug_svp680*.so
-%attr(755,root,root) %{_libdir}/%{name}/program/libwpgimport680*.so
-%attr(755,root,root) %{_libdir}/%{name}/program/libwriterfilter680*.so
+%attr(755,root,root) %{_libdir}/%{name}/basis*/program/libsaxlx*.so
+%attr(755,root,root) %{_libdir}/%{name}/basis*/program/libt602filterlx*.so
+%attr(755,root,root) %{_libdir}/%{name}/basis*/program/libtextcat.so
+%attr(755,root,root) %{_libdir}/%{name}/ure/lib/libunsafe_uno_uno.so
+%attr(755,root,root) %{_libdir}/%{name}/basis*/program/libvclplug_svplx*.so
+%attr(755,root,root) %{_libdir}/%{name}/basis*/program/libwpgimportlx*.so
+%attr(755,root,root) %{_libdir}/%{name}/basis*/program/libwriterfilterlx*.so
 # maybe external is possible?
-%attr(755,root,root) %{_libdir}/%{name}/program/libxmlsec1*.so
+%attr(755,root,root) %{_libdir}/%{name}/basis*/program/libxmlsec1*.so
 %attr(755,root,root) %{_libdir}/%{name}/program/oosplash.bin
-%attr(755,root,root) %{_libdir}/%{name}/program/simplecanvas.uno.so
-%attr(755,root,root) %{_libdir}/%{name}/program/scsolver.uno.so
-%{_datadir}/%{name}/share/config/images_tango.zip
-%{_datadir}/%{name}/share/registry/data/org/openoffice/UserProfile.xcu
-%{_libdir}/%{name}/program/root3.dat
-%{_libdir}/%{name}/program/root4.dat
-%{_libdir}/%{name}/program/root5.dat
-%{_libdir}/%{name}/program/resource/acc680en-US.res
-%{_libdir}/%{name}/program/resource/chartcontroller680en-US.res
+%attr(755,root,root) %{_libdir}/%{name}/basis*/program/simplecanvas.uno.so
+#%attr(755,root,root) %{_libdir}/%{name}/ure/lib/scsolver.uno.so
+%{_libdir}/%{name}/basis*/share/config/images_tango.zip
+%{_libdir}/%{name}/basis*/share/registry/data/org/openoffice/UserProfile.xcu
+%{_libdir}/%{name}/basis*/program/root3.dat
+%{_libdir}/%{name}/basis*/program/root4.dat
+%{_libdir}/%{name}/basis*/program/root5.dat
+%{_libdir}/%{name}/basis*/program/resource/accen-US.res
+%{_libdir}/%{name}/basis*/program/resource/chartcontrolleren-US.res
 %if %{with java}
-%{_libdir}/%{name}/program/resource/rpt680en-US.res
-%{_libdir}/%{name}/program/resource/rptui680en-US.res
+%{_libdir}/%{name}/basis*/program/resource/rpten-US.res
+%{_libdir}/%{name}/basis*/program/resource/rptuien-US.res
 %endif
-%{_libdir}/%{name}/program/resource/sb680en-US.res
+%{_libdir}/%{name}/basis*/program/resource/sben-US.res
 
-%{_libdir}/%{name}/program/resource/scsolver680en-US.res
-%{_libdir}/%{name}/program/resource/sdbcl680en-US.res
-%{_libdir}/%{name}/program/resource/t602filter680en-US.res
-%{_datadir}/%{name}/share/config/javasettingsunopkginstall.xml
+#%{_libdir}/%{name}/basis*/program/resource/scsolveren-US.res
+%{_libdir}/%{name}/basis*/program/resource/sdbclen-US.res
+%{_libdir}/%{name}/basis*/program/resource/t602filteren-US.res
+%{_libdir}/%{name}/basis*/share/config/javasettingsunopkginstall.xml
 
-%dir %{_datadir}/%{name}/share/config/soffice.cfg/modules/swform
-%dir %{_datadir}/%{name}/share/config/soffice.cfg/modules/swform/accelerator
-%{_datadir}/%{name}/share/config/soffice.cfg/modules/swform/accelerator/en-US
-%{_datadir}/%{name}/share/config/soffice.cfg/modules/swform/toolbar
-%{_datadir}/%{name}/share/config/soffice.cfg/modules/swform/menubar
-%{_datadir}/%{name}/share/config/soffice.cfg/modules/swform/statusbar
-%dir %{_datadir}/%{name}/share/config/soffice.cfg/modules/swreport
-%dir %{_datadir}/%{name}/share/config/soffice.cfg/modules/swreport/accelerator
-%{_datadir}/%{name}/share/config/soffice.cfg/modules/swreport/menubar
-%{_datadir}/%{name}/share/config/soffice.cfg/modules/swreport/statusbar
-%{_datadir}/%{name}/share/config/soffice.cfg/modules/swreport/toolbar
-%{_datadir}/%{name}/share/config/soffice.cfg/modules/swreport/accelerator/en-US
-%dir %{_datadir}/%{name}/share/config/soffice.cfg/modules/swxform
-%dir %{_datadir}/%{name}/share/config/soffice.cfg/modules/swxform/accelerator
-%{_datadir}/%{name}/share/config/soffice.cfg/modules/swxform/menubar
-%{_datadir}/%{name}/share/config/soffice.cfg/modules/swxform/statusbar
-%{_datadir}/%{name}/share/config/soffice.cfg/modules/swxform/toolbar
-%{_datadir}/%{name}/share/config/soffice.cfg/modules/swxform/accelerator/en-US
+%dir %{_libdir}/%{name}/basis*/share/config/soffice.cfg/modules/swform
+%dir %{_libdir}/%{name}/basis*/share/config/soffice.cfg/modules/swform/accelerator
+%{_libdir}/%{name}/basis*/share/config/soffice.cfg/modules/swform/accelerator/en-US
+%{_libdir}/%{name}/basis*/share/config/soffice.cfg/modules/swform/toolbar
+%{_libdir}/%{name}/basis*/share/config/soffice.cfg/modules/swform/menubar
+%{_libdir}/%{name}/basis*/share/config/soffice.cfg/modules/swform/statusbar
+%dir %{_libdir}/%{name}/basis*/share/config/soffice.cfg/modules/swreport
+%dir %{_libdir}/%{name}/basis*/share/config/soffice.cfg/modules/swreport/accelerator
+%{_libdir}/%{name}/basis*/share/config/soffice.cfg/modules/swreport/menubar
+%{_libdir}/%{name}/basis*/share/config/soffice.cfg/modules/swreport/statusbar
+%{_libdir}/%{name}/basis*/share/config/soffice.cfg/modules/swreport/toolbar
+%{_libdir}/%{name}/basis*/share/config/soffice.cfg/modules/swreport/accelerator/en-US
+%dir %{_libdir}/%{name}/basis*/share/config/soffice.cfg/modules/swxform
+%dir %{_libdir}/%{name}/basis*/share/config/soffice.cfg/modules/swxform/accelerator
+%{_libdir}/%{name}/basis*/share/config/soffice.cfg/modules/swxform/menubar
+%{_libdir}/%{name}/basis*/share/config/soffice.cfg/modules/swxform/statusbar
+%{_libdir}/%{name}/basis*/share/config/soffice.cfg/modules/swxform/toolbar
+%{_libdir}/%{name}/basis*/share/config/soffice.cfg/modules/swxform/accelerator/en-US
 
 
 %dir %{_sysconfdir}/%{name}
@@ -2770,385 +2770,386 @@ fi
 %config(noreplace) %verify(not md5 mtime size) %{_sysconfdir}/%{name}/sofficerc
 
 %{_sysconfdir}/%{name}/unorc
-%config(noreplace) %verify(not md5 mtime size) %{_libdir}/%{name}/program/unorc
+%config(noreplace) %verify(not md5 mtime size) %{_libdir}/%{name}/basis*/program/unorc
 
 %dir %{_libdir}/%{name}
 %dir %{_libdir}/%{name}/program
-%dir %{_libdir}/%{name}/program/resource
+%dir %{_libdir}/%{name}/basis*/program/resource
 
-%attr(755,root,root) %{_libdir}/%{name}/install-dict
-%{_libdir}/%{name}/program/*.rdb
-%{_libdir}/%{name}/program/*.bmp
+#%attr(755,root,root) %{_libdir}/%{name}/install-dict
+#%{_libdir}/%{name}/basis*/program/*.rdb
+#%{_libdir}/%{name}/basis*/program/*.bmp
 %{_libdir}/%{name}/program/bootstraprc
-%{_libdir}/%{name}/program/configmgrrc
+%{_libdir}/%{name}/basis*/program/configmgrrc
 
 # symlinks
 %{_libdir}/%{name}/licenses
 %{_libdir}/%{name}/readmes
 %{_libdir}/%{name}/share
 
-%dir %{_datadir}/%{name}
-%dir %{_datadir}/%{name}/share
-%dir %{_datadir}/%{name}/share/Scripts
-%dir %{_datadir}/%{name}/share/config
-%dir %{_datadir}/%{name}/share/registry
-%dir %{_datadir}/%{name}/share/registry/data
-%dir %{_datadir}/%{name}/share/registry/data/org
-%dir %{_datadir}/%{name}/share/registry/data/org/openoffice
-%dir %{_datadir}/%{name}/share/registry/data/org/openoffice/Office
-%dir %{_datadir}/%{name}/share/registry/data/org/openoffice/Office/UI
-%dir %{_datadir}/%{name}/share/registry/modules
-%dir %{_datadir}/%{name}/share/registry/modules/org
-%dir %{_datadir}/%{name}/share/registry/modules/org/openoffice
-%dir %{_datadir}/%{name}/share/registry/modules/org/openoffice/Office
-%dir %{_datadir}/%{name}/share/registry/modules/org/openoffice/Office/Common
-%dir %{_datadir}/%{name}/share/registry/modules/org/openoffice/Office/Embedding
-%dir %{_datadir}/%{name}/share/registry/modules/org/openoffice/Office/Scripting
-%dir %{_datadir}/%{name}/share/registry/modules/org/openoffice/Office/Writer
-%dir %{_datadir}/%{name}/share/registry/modules/org/openoffice/Setup
-%dir %{_datadir}/%{name}/share/registry/modules/org/openoffice/TypeDetection
-%dir %{_datadir}/%{name}/share/registry/modules/org/openoffice/TypeDetection/Filter
-%dir %{_datadir}/%{name}/share/registry/modules/org/openoffice/TypeDetection/GraphicFilter
-%dir %{_datadir}/%{name}/share/registry/modules/org/openoffice/TypeDetection/Misc
-%dir %{_datadir}/%{name}/share/registry/modules/org/openoffice/TypeDetection/Types
-%dir %{_datadir}/%{name}/share/registry/modules/org/openoffice/TypeDetection/UISort
-%dir %{_datadir}/%{name}/share/registry/schema
-%dir %{_datadir}/%{name}/share/registry/schema/org
-%dir %{_datadir}/%{name}/share/registry/schema/org/openoffice
-%dir %{_datadir}/%{name}/share/registry/schema/org/openoffice/Office
-%dir %{_datadir}/%{name}/share/registry/schema/org/openoffice/Office/UI
-%dir %{_datadir}/%{name}/share/registry/schema/org/openoffice/TypeDetection
-%dir %{_datadir}/%{name}/share/registry/schema/org/openoffice/ucb
-%dir %{_datadir}/%{name}/share/autocorr
-%dir %{_datadir}/%{name}/share/autotext
+%dir %{_libdir}/%{name}
+%dir %{_libdir}/%{name}/basis*
+%dir %{_libdir}/%{name}/basis*/share
+%dir %{_libdir}/%{name}/basis*/share/Scripts
+%dir %{_libdir}/%{name}/basis*/share/config
+%dir %{_libdir}/%{name}/basis*/share/registry
+%dir %{_libdir}/%{name}/basis*/share/registry/data
+%dir %{_libdir}/%{name}/basis*/share/registry/data/org
+%dir %{_libdir}/%{name}/basis*/share/registry/data/org/openoffice
+%dir %{_libdir}/%{name}/basis*/share/registry/data/org/openoffice/Office
+%dir %{_libdir}/%{name}/basis*/share/registry/data/org/openoffice/Office/UI
+%dir %{_libdir}/%{name}/basis*/share/registry/modules
+%dir %{_libdir}/%{name}/basis*/share/registry/modules/org
+%dir %{_libdir}/%{name}/basis*/share/registry/modules/org/openoffice
+%dir %{_libdir}/%{name}/basis*/share/registry/modules/org/openoffice/Office
+%dir %{_libdir}/%{name}/basis*/share/registry/modules/org/openoffice/Office/Common
+%dir %{_libdir}/%{name}/basis*/share/registry/modules/org/openoffice/Office/Embedding
+%dir %{_libdir}/%{name}/basis*/share/registry/modules/org/openoffice/Office/Scripting
+%dir %{_libdir}/%{name}/basis*/share/registry/modules/org/openoffice/Office/Writer
+%dir %{_libdir}/%{name}/basis*/share/registry/modules/org/openoffice/Setup
+%dir %{_libdir}/%{name}/basis*/share/registry/modules/org/openoffice/TypeDetection
+%dir %{_libdir}/%{name}/basis*/share/registry/modules/org/openoffice/TypeDetection/Filter
+%dir %{_libdir}/%{name}/basis*/share/registry/modules/org/openoffice/TypeDetection/GraphicFilter
+%dir %{_libdir}/%{name}/basis*/share/registry/modules/org/openoffice/TypeDetection/Misc
+%dir %{_libdir}/%{name}/basis*/share/registry/modules/org/openoffice/TypeDetection/Types
+%dir %{_libdir}/%{name}/basis*/share/registry/modules/org/openoffice/TypeDetection/UISort
+%dir %{_libdir}/%{name}/basis*/share/registry/schema
+%dir %{_libdir}/%{name}/basis*/share/registry/schema/org
+%dir %{_libdir}/%{name}/basis*/share/registry/schema/org/openoffice
+%dir %{_libdir}/%{name}/basis*/share/registry/schema/org/openoffice/Office
+%dir %{_libdir}/%{name}/basis*/share/registry/schema/org/openoffice/Office/UI
+%dir %{_libdir}/%{name}/basis*/share/registry/schema/org/openoffice/TypeDetection
+%dir %{_libdir}/%{name}/basis*/share/registry/schema/org/openoffice/ucb
+%dir %{_libdir}/%{name}/basis*/share/autocorr
+%dir %{_libdir}/%{name}/basis*/share/autotext
 
-%{_datadir}/%{name}/share/basic
-%{_datadir}/%{name}/share/config/symbol
-%{_datadir}/%{name}/share/config/webcast
-%{_datadir}/%{name}/share/config/*.xpm
-%{_datadir}/%{name}/share/config/images.zip
-%{_datadir}/%{name}/share/config/images_crystal.zip
-%{_datadir}/%{name}/share/config/images_industrial.zip
-%{_datadir}/%{name}/share/config/images_hicontrast.zip
-%dir %{_datadir}/%{name}/share/config/soffice.cfg
-%{_datadir}/%{name}/share/config/soffice.cfg/global/
-%dir %{_datadir}/%{name}/share/config/soffice.cfg/modules/
-%{_datadir}/%{name}/share/config/soffice.cfg/modules/BasicIDE
-%{_datadir}/%{name}/share/config/soffice.cfg/modules/sglobal
-%{_datadir}/%{name}/share/config/soffice.cfg/modules/StartModule
-%{_datadir}/%{name}/share/config/wizard
-%dir %{_datadir}/%{name}/share/dict
-%{!?with_system_myspell:%dir %{_datadir}/%{name}/share/dict/ooo}
-%{?with_system_myspell:%{_datadir}/%{name}/share/dict/ooo}
-%{!?with_system_myspell:%ghost %{_datadir}/%{name}/share/dict/ooo/dictionary.lst}
-%{_datadir}/%{name}/share/dtd
-%{_datadir}/%{name}/share/fingerprint
-%{_datadir}/%{name}/share/fonts
-%{_datadir}/%{name}/share/gallery
-%{_datadir}/%{name}/share/psprint
-%dir %{_datadir}/%{name}/share/samples
-%dir %{_datadir}/%{name}/share/samples/en-US
-%dir %{_datadir}/%{name}/share/template
-%dir %{_datadir}/%{name}/share/template/wizard
-%dir %{_datadir}/%{name}/share/template/wizard/letter
-%dir %{_datadir}/%{name}/share/wordbook
-%{_datadir}/%{name}/share/readme
-%dir %{_datadir}/%{name}/share/registry/res
-%dir %{_datadir}/%{name}/share/registry/data/org/openoffice/TypeDetection
-%dir %{_datadir}/%{name}/share/registry/data/org/openoffice/ucb
-%{_datadir}/%{name}/share/registry/data/org/openoffice/FirstStartWizard.xcu
-%{_datadir}/%{name}/share/registry/data/org/openoffice/Inet.xcu
-%{_datadir}/%{name}/share/registry/data/org/openoffice/LDAP.xcu.sample
-%{_datadir}/%{name}/share/registry/data/org/openoffice/Office/Calc.xcu
-%{_datadir}/%{name}/share/registry/data/org/openoffice/Office/Canvas.xcu
-%{_datadir}/%{name}/share/registry/data/org/openoffice/Office/Common.xcu
-%{_datadir}/%{name}/share/registry/data/org/openoffice/Office/Compatibility.xcu
-%{_datadir}/%{name}/share/registry/data/org/openoffice/Office/DataAccess.xcu
-%{_datadir}/%{name}/share/registry/data/org/openoffice/Office/Embedding.xcu
-%{_datadir}/%{name}/share/registry/data/org/openoffice/Office/ExtendedColorScheme.xcu
-%{_datadir}/%{name}/share/registry/data/org/openoffice/Office/ExtensionManager.xcu
-%{_datadir}/%{name}/share/registry/data/org/openoffice/Office/FormWizard.xcu
-%{_datadir}/%{name}/share/registry/data/org/openoffice/Office/Impress.xcu
-%{_datadir}/%{name}/share/registry/data/org/openoffice/Office/Jobs.xcu
-%{_datadir}/%{name}/share/registry/data/org/openoffice/Office/Labels.xcu
-%{_datadir}/%{name}/share/registry/data/org/openoffice/Office/Logging.xcu
-%{_datadir}/%{name}/share/registry/data/org/openoffice/Office/Math.xcu
-%{_datadir}/%{name}/share/registry/data/org/openoffice/Office/Paths.xcu
-%{_datadir}/%{name}/share/registry/data/org/openoffice/Office/ProtocolHandler.xcu
-%{_datadir}/%{name}/share/registry/data/org/openoffice/Office/Scripting.xcu
-%{_datadir}/%{name}/share/registry/data/org/openoffice/Office/Security.xcu
-%{_datadir}/%{name}/share/registry/data/org/openoffice/Office/SFX.xcu
-%{_datadir}/%{name}/share/registry/data/org/openoffice/Office/TableWizard.xcu
-%{_datadir}/%{name}/share/registry/data/org/openoffice/Office/UI/BaseWindowState.xcu
-%{_datadir}/%{name}/share/registry/data/org/openoffice/Office/UI/BasicIDECommands.xcu
-%{_datadir}/%{name}/share/registry/data/org/openoffice/Office/UI/BasicIDEWindowState.xcu
-%{_datadir}/%{name}/share/registry/data/org/openoffice/Office/UI/BibliographyCommands.xcu
-%{_datadir}/%{name}/share/registry/data/org/openoffice/Office/UI/ChartCommands.xcu
-%{_datadir}/%{name}/share/registry/data/org/openoffice/Office/UI/ChartWindowState.xcu
-%{_datadir}/%{name}/share/registry/data/org/openoffice/Office/UI/Controller.xcu
-%{_datadir}/%{name}/share/registry/data/org/openoffice/Office/UI/DbBrowserWindowState.xcu
-%{_datadir}/%{name}/share/registry/data/org/openoffice/Office/UI/DbQueryWindowState.xcu
-%{_datadir}/%{name}/share/registry/data/org/openoffice/Office/UI/DbRelationWindowState.xcu
-%{_datadir}/%{name}/share/registry/data/org/openoffice/Office/UI/DbReportWindowState.xcu
-%{_datadir}/%{name}/share/registry/data/org/openoffice/Office/UI/DbTableWindowState.xcu
-%{_datadir}/%{name}/share/registry/data/org/openoffice/Office/UI/DbuCommands.xcu
-%{_datadir}/%{name}/share/registry/data/org/openoffice/Office/UI/DrawImpressCommands.xcu
-%{_datadir}/%{name}/share/registry/data/org/openoffice/Office/UI/Factories.xcu
-%{_datadir}/%{name}/share/registry/data/org/openoffice/Office/UI/GenericCategories.xcu
-%{_datadir}/%{name}/share/registry/data/org/openoffice/Office/UI/GenericCommands.xcu
-%{_datadir}/%{name}/share/registry/data/org/openoffice/Office/UI/MathWindowState.xcu
-%{_datadir}/%{name}/share/registry/data/org/openoffice/Office/UI/ReportCommands.xcu
-%{_datadir}/%{name}/share/registry/data/org/openoffice/Office/UI/StartModuleCommands.xcu
-%{_datadir}/%{name}/share/registry/data/org/openoffice/Office/UI/StartModuleWindowState.xcu
-%{_datadir}/%{name}/share/registry/data/org/openoffice/Office/UI/WriterFormWindowState.xcu
-%{_datadir}/%{name}/share/registry/data/org/openoffice/Office/UI/WriterReportWindowState.xcu
-%{_datadir}/%{name}/share/registry/data/org/openoffice/Office/UI.xcu
-%{_datadir}/%{name}/share/registry/data/org/openoffice/Office/UI/XFormsWindowState.xcu
-%{_datadir}/%{name}/share/registry/data/org/openoffice/Office/Views.xcu
-%{_datadir}/%{name}/share/registry/data/org/openoffice/Office/WebWizard.xcu
-%{_datadir}/%{name}/share/registry/data/org/openoffice/Office/Writer.xcu
-%{_datadir}/%{name}/share/registry/data/org/openoffice/Setup.xcu
-%{_datadir}/%{name}/share/registry/data/org/openoffice/TypeDetection/UISort.xcu
-%{_datadir}/%{name}/share/registry/data/org/openoffice/VCL.xcu
-%{_datadir}/%{name}/share/registry/data/org/openoffice/ucb/Configuration.xcu
-%{_datadir}/%{name}/share/registry/schema/org/openoffice/FirstStartWizard.xcs
-%{_datadir}/%{name}/share/registry/schema/org/openoffice/Inet.xcs
-%{_datadir}/%{name}/share/registry/schema/org/openoffice/LDAP.xcs
-%{_datadir}/%{name}/share/registry/schema/org/openoffice/Office/Addons.xcs
-%{_datadir}/%{name}/share/registry/schema/org/openoffice/Office/CalcAddIns.xcs
-%{_datadir}/%{name}/share/registry/schema/org/openoffice/Office/Calc.xcs
-%{_datadir}/%{name}/share/registry/schema/org/openoffice/Office/Canvas.xcs
-%{_datadir}/%{name}/share/registry/schema/org/openoffice/Office/Chart.xcs
-%{_datadir}/%{name}/share/registry/schema/org/openoffice/Office/Commands.xcs
-%{_datadir}/%{name}/share/registry/schema/org/openoffice/Office/Common.xcs
-%{_datadir}/%{name}/share/registry/schema/org/openoffice/Office/Compatibility.xcs
-%{_datadir}/%{name}/share/registry/schema/org/openoffice/Office/DataAccess.xcs
-%{_datadir}/%{name}/share/registry/schema/org/openoffice/Office/Draw.xcs
-%{_datadir}/%{name}/share/registry/schema/org/openoffice/Office/Embedding.xcs
-%{_datadir}/%{name}/share/registry/schema/org/openoffice/Office/Events.xcs
-%{_datadir}/%{name}/share/registry/schema/org/openoffice/Office/ExtendedColorScheme.xcs
-%{_datadir}/%{name}/share/registry/schema/org/openoffice/Office/ExtensionManager.xcs
-%{_datadir}/%{name}/share/registry/schema/org/openoffice/Office/FormWizard.xcs
-%{_datadir}/%{name}/share/registry/schema/org/openoffice/Office/Impress.xcs
-%{_datadir}/%{name}/share/registry/schema/org/openoffice/Office/Java.xcs
-%{_datadir}/%{name}/share/registry/schema/org/openoffice/Office/Jobs.xcs
-%{_datadir}/%{name}/share/registry/schema/org/openoffice/Office/Labels.xcs
-%{_datadir}/%{name}/share/registry/schema/org/openoffice/Office/Linguistic.xcs
-%{_datadir}/%{name}/share/registry/schema/org/openoffice/Office/Logging.xcs
-%{_datadir}/%{name}/share/registry/schema/org/openoffice/Office/Math.xcs
-%{_datadir}/%{name}/share/registry/schema/org/openoffice/Office/OptionsDialog.xcs
-%{_datadir}/%{name}/share/registry/schema/org/openoffice/Office/Paths.xcs
-%{_datadir}/%{name}/share/registry/schema/org/openoffice/Office/ProtocolHandler.xcs
-%{_datadir}/%{name}/share/registry/schema/org/openoffice/Office/Recovery.xcs
-%{_datadir}/%{name}/share/registry/schema/org/openoffice/Office/ReportDesign.xcs
-%{_datadir}/%{name}/share/registry/schema/org/openoffice/Office/Scripting.xcs
-%{_datadir}/%{name}/share/registry/schema/org/openoffice/Office/Security.xcs
-%{_datadir}/%{name}/share/registry/schema/org/openoffice/Office/SFX.xcs
-%{_datadir}/%{name}/share/registry/schema/org/openoffice/Office/Substitution.xcs
-%{_datadir}/%{name}/share/registry/schema/org/openoffice/Office/TabBrowse.xcs
-%{_datadir}/%{name}/share/registry/schema/org/openoffice/Office/TableWizard.xcs
-%{_datadir}/%{name}/share/registry/schema/org/openoffice/Office/TypeDetection.xcs
-%{_datadir}/%{name}/share/registry/schema/org/openoffice/Office/UI/BaseWindowState.xcs
-%{_datadir}/%{name}/share/registry/schema/org/openoffice/Office/UI/BasicIDECommands.xcs
-%{_datadir}/%{name}/share/registry/schema/org/openoffice/Office/UI/BasicIDEWindowState.xcs
-%{_datadir}/%{name}/share/registry/schema/org/openoffice/Office/UI/BibliographyCommands.xcs
-%{_datadir}/%{name}/share/registry/schema/org/openoffice/Office/UI/BibliographyWindowState.xcs
-%{_datadir}/%{name}/share/registry/schema/org/openoffice/Office/UI/Category.xcs
-%{_datadir}/%{name}/share/registry/schema/org/openoffice/Office/UI/ChartCommands.xcs
-%{_datadir}/%{name}/share/registry/schema/org/openoffice/Office/UI/ChartWindowState.xcs
-%{_datadir}/%{name}/share/registry/schema/org/openoffice/Office/UI/Commands.xcs
-%{_datadir}/%{name}/share/registry/schema/org/openoffice/Office/UI/Controller.xcs
-%{_datadir}/%{name}/share/registry/schema/org/openoffice/Office/UI/DbBrowserWindowState.xcs
-%{_datadir}/%{name}/share/registry/schema/org/openoffice/Office/UI/DbQueryWindowState.xcs
-%{_datadir}/%{name}/share/registry/schema/org/openoffice/Office/UI/DbRelationWindowState.xcs
-%{_datadir}/%{name}/share/registry/schema/org/openoffice/Office/UI/DbReportWindowState.xcs
-%{_datadir}/%{name}/share/registry/schema/org/openoffice/Office/UI/DbTableWindowState.xcs
-%{_datadir}/%{name}/share/registry/schema/org/openoffice/Office/UI/DbuCommands.xcs
-%{_datadir}/%{name}/share/registry/schema/org/openoffice/Office/UI/DrawImpressCommands.xcs
-%{_datadir}/%{name}/share/registry/schema/org/openoffice/Office/UI/Factories.xcs
-%{_datadir}/%{name}/share/registry/schema/org/openoffice/Office/UI/GenericCategories.xcs
-%{_datadir}/%{name}/share/registry/schema/org/openoffice/Office/UI/GenericCommands.xcs
-%{_datadir}/%{name}/share/registry/schema/org/openoffice/Office/UI/GlobalSettings.xcs
-%{_datadir}/%{name}/share/registry/schema/org/openoffice/Office/UI/MathWindowState.xcs
-%{_datadir}/%{name}/share/registry/schema/org/openoffice/Office/UI/ReportCommands.xcs
-%{_datadir}/%{name}/share/registry/schema/org/openoffice/Office/UI/StartModuleCommands.xcs
-%{_datadir}/%{name}/share/registry/schema/org/openoffice/Office/UI/StartModuleWindowState.xcs
-%{_datadir}/%{name}/share/registry/schema/org/openoffice/Office/UI/WindowState.xcs
-%{_datadir}/%{name}/share/registry/schema/org/openoffice/Office/UI/WriterFormWindowState.xcs
-%{_datadir}/%{name}/share/registry/schema/org/openoffice/Office/UI/WriterReportWindowState.xcs
-%{_datadir}/%{name}/share/registry/schema/org/openoffice/Office/UI.xcs
-%{_datadir}/%{name}/share/registry/schema/org/openoffice/Office/UI/XFormsWindowState.xcs
-%{_datadir}/%{name}/share/registry/schema/org/openoffice/Office/Views.xcs
-%{_datadir}/%{name}/share/registry/schema/org/openoffice/Office/WebWizard.xcs
-%{_datadir}/%{name}/share/registry/schema/org/openoffice/Office/WriterWeb.xcs
-%{_datadir}/%{name}/share/registry/schema/org/openoffice/Office/Writer.xcs
-%{_datadir}/%{name}/share/registry/schema/org/openoffice/Setup.xcs
-%{_datadir}/%{name}/share/registry/schema/org/openoffice/System.xcs
-%{_datadir}/%{name}/share/registry/schema/org/openoffice/TypeDetection/Filter.xcs
-%{_datadir}/%{name}/share/registry/schema/org/openoffice/TypeDetection/GraphicFilter.xcs
-%{_datadir}/%{name}/share/registry/schema/org/openoffice/TypeDetection/Misc.xcs
-%{_datadir}/%{name}/share/registry/schema/org/openoffice/TypeDetection/Types.xcs
-%{_datadir}/%{name}/share/registry/schema/org/openoffice/TypeDetection/UISort.xcs
-%{_datadir}/%{name}/share/registry/schema/org/openoffice/UserProfile.xcs
-%{_datadir}/%{name}/share/registry/schema/org/openoffice/VCL.xcs
-%{_datadir}/%{name}/share/registry/schema/org/openoffice/ucb/Configuration.xcs
-%{_datadir}/%{name}/share/registry/schema/org/openoffice/ucb/Hierarchy.xcs
-%{_datadir}/%{name}/share/registry/schema/org/openoffice/ucb/Store.xcs
-%{_datadir}/%{name}/share/registry/ldap
-%{_datadir}/%{name}/share/registry/modules/org/openoffice/Office/Common/Common-cjk_ja.xcu
-%{_datadir}/%{name}/share/registry/modules/org/openoffice/Office/Common/Common-cjk_ko.xcu
-%{_datadir}/%{name}/share/registry/modules/org/openoffice/Office/Common/Common-cjk_zh-CN.xcu
-%{_datadir}/%{name}/share/registry/modules/org/openoffice/Office/Common/Common-cjk_zh-TW.xcu
-%{_datadir}/%{name}/share/registry/modules/org/openoffice/Office/Common/Common-ctl_ar.xcu
-%{_datadir}/%{name}/share/registry/modules/org/openoffice/Office/Common/Common-ctl_dz.xcu
-%{_datadir}/%{name}/share/registry/modules/org/openoffice/Office/Common/Common-ctl_fa.xcu
-%{_datadir}/%{name}/share/registry/modules/org/openoffice/Office/Common/Common-ctl_gu-IN.xcu
-%{_datadir}/%{name}/share/registry/modules/org/openoffice/Office/Common/Common-ctl_he.xcu
-%{_datadir}/%{name}/share/registry/modules/org/openoffice/Office/Common/Common-ctl_hi-IN.xcu
-%{_datadir}/%{name}/share/registry/modules/org/openoffice/Office/Common/Common-ctl_km.xcu
-%{_datadir}/%{name}/share/registry/modules/org/openoffice/Office/Common/Common-ctl_lo.xcu
-%{_datadir}/%{name}/share/registry/modules/org/openoffice/Office/Common/Common-ctl_ne.xcu
-%{_datadir}/%{name}/share/registry/modules/org/openoffice/Office/Common/Common-ctl_pa-IN.xcu
-%{_datadir}/%{name}/share/registry/modules/org/openoffice/Office/Common/Common-ctl_ta-IN.xcu
-%{_datadir}/%{name}/share/registry/modules/org/openoffice/Office/Common/Common-ctl_th.xcu
-#%{_datadir}/%{name}/share/registry/modules/org/openoffice/Office/Common/Common-ctl_vi.xcu
-%{_datadir}/%{name}/share/registry/modules/org/openoffice/Office/Common/Common-dicooo.xcu
-%{_datadir}/%{name}/share/registry/modules/org/openoffice/Office/Common/Common-korea.xcu
-%{_datadir}/%{name}/share/registry/modules/org/openoffice/Office/Common/Common-unx.xcu
-%{_datadir}/%{name}/share/registry/modules/org/openoffice/Office/Common/Common-UseOOoFileDialogs.xcu
-%{_datadir}/%{name}/share/registry/modules/org/openoffice/Office/Embedding/Embedding-calc.xcu
-%{_datadir}/%{name}/share/registry/modules/org/openoffice/Office/Embedding/Embedding-chart.xcu
-%{_datadir}/%{name}/share/registry/modules/org/openoffice/Office/Embedding/Embedding-draw.xcu
-%{_datadir}/%{name}/share/registry/modules/org/openoffice/Office/Embedding/Embedding-impress.xcu
-%{_datadir}/%{name}/share/registry/modules/org/openoffice/Office/Embedding/Embedding-math.xcu
-%{_datadir}/%{name}/share/registry/modules/org/openoffice/Office/Embedding/Embedding-report.xcu
-%{_datadir}/%{name}/share/registry/modules/org/openoffice/Office/Embedding/Embedding-writer.xcu
+%{_libdir}/%{name}/basis*/share/basic
+%{_libdir}/%{name}/basis*/share/config/symbol
+%{_libdir}/%{name}/basis*/share/config/webcast
+%{_libdir}/%{name}/basis*/share/config/*.xpm
+%{_libdir}/%{name}/basis*/share/config/images.zip
+%{_libdir}/%{name}/basis*/share/config/images_crystal.zip
+%{_libdir}/%{name}/basis*/share/config/images_industrial.zip
+%{_libdir}/%{name}/basis*/share/config/images_hicontrast.zip
+%dir %{_libdir}/%{name}/basis*/share/config/soffice.cfg
+%{_libdir}/%{name}/basis*/share/config/soffice.cfg/global/
+%dir %{_libdir}/%{name}/basis*/share/config/soffice.cfg/modules/
+%{_libdir}/%{name}/basis*/share/config/soffice.cfg/modules/BasicIDE
+%{_libdir}/%{name}/basis*/share/config/soffice.cfg/modules/sglobal
+%{_libdir}/%{name}/basis*/share/config/soffice.cfg/modules/StartModule
+%{_libdir}/%{name}/basis*/share/config/wizard
+#%dir %{_libdir}/%{name}/basis*/share/dict
+#%{!?with_system_myspell:%dir %{_libdir}/%{name}/basis*/share/dict/ooo}
+#%{?with_system_myspell:%{_libdir}/%{name}/basis*/share/dict/ooo}
+#%{!?with_system_myspell:%ghost %{_libdir}/%{name}/basis*/share/dict/ooo/dictionary.lst}
+%{_libdir}/%{name}/basis*/share/dtd
+%{_libdir}/%{name}/basis*/share/fingerprint
+%{_libdir}/%{name}/basis*/share/fonts
+%{_libdir}/%{name}/basis*/share/gallery
+%{_libdir}/%{name}/basis*/share/psprint
+%dir %{_libdir}/%{name}/basis*/share/samples
+%dir %{_libdir}/%{name}/basis*/share/samples/en-US
+%dir %{_libdir}/%{name}/basis*/share/template
+%dir %{_libdir}/%{name}/basis*/share/template/wizard
+%dir %{_libdir}/%{name}/basis*/share/template/wizard/letter
+%dir %{_libdir}/%{name}/basis*/share/wordbook
+%{_libdir}/%{name}/basis*/share/readme
+%dir %{_libdir}/%{name}/basis*/share/registry/res
+%dir %{_libdir}/%{name}/basis*/share/registry/data/org/openoffice/TypeDetection
+%dir %{_libdir}/%{name}/basis*/share/registry/data/org/openoffice/ucb
+%{_libdir}/%{name}/basis*/share/registry/data/org/openoffice/FirstStartWizard.xcu
+%{_libdir}/%{name}/basis*/share/registry/data/org/openoffice/Inet.xcu
+%{_libdir}/%{name}/basis*/share/registry/data/org/openoffice/LDAP.xcu.sample
+%{_libdir}/%{name}/basis*/share/registry/data/org/openoffice/Office/Calc.xcu
+%{_libdir}/%{name}/basis*/share/registry/data/org/openoffice/Office/Canvas.xcu
+%{_libdir}/%{name}/basis*/share/registry/data/org/openoffice/Office/Common.xcu
+%{_libdir}/%{name}/basis*/share/registry/data/org/openoffice/Office/Compatibility.xcu
+%{_libdir}/%{name}/basis*/share/registry/data/org/openoffice/Office/DataAccess.xcu
+%{_libdir}/%{name}/basis*/share/registry/data/org/openoffice/Office/Embedding.xcu
+%{_libdir}/%{name}/basis*/share/registry/data/org/openoffice/Office/ExtendedColorScheme.xcu
+%{_libdir}/%{name}/basis*/share/registry/data/org/openoffice/Office/ExtensionManager.xcu
+%{_libdir}/%{name}/basis*/share/registry/data/org/openoffice/Office/FormWizard.xcu
+%{_libdir}/%{name}/basis*/share/registry/data/org/openoffice/Office/Impress.xcu
+%{_libdir}/%{name}/basis*/share/registry/data/org/openoffice/Office/Jobs.xcu
+%{_libdir}/%{name}/basis*/share/registry/data/org/openoffice/Office/Labels.xcu
+%{_libdir}/%{name}/basis*/share/registry/data/org/openoffice/Office/Logging.xcu
+%{_libdir}/%{name}/basis*/share/registry/data/org/openoffice/Office/Math.xcu
+%{_libdir}/%{name}/basis*/share/registry/data/org/openoffice/Office/Paths.xcu
+%{_libdir}/%{name}/basis*/share/registry/data/org/openoffice/Office/ProtocolHandler.xcu
+%{_libdir}/%{name}/basis*/share/registry/data/org/openoffice/Office/Scripting.xcu
+%{_libdir}/%{name}/basis*/share/registry/data/org/openoffice/Office/Security.xcu
+%{_libdir}/%{name}/basis*/share/registry/data/org/openoffice/Office/SFX.xcu
+%{_libdir}/%{name}/basis*/share/registry/data/org/openoffice/Office/TableWizard.xcu
+%{_libdir}/%{name}/basis*/share/registry/data/org/openoffice/Office/UI/BaseWindowState.xcu
+%{_libdir}/%{name}/basis*/share/registry/data/org/openoffice/Office/UI/BasicIDECommands.xcu
+%{_libdir}/%{name}/basis*/share/registry/data/org/openoffice/Office/UI/BasicIDEWindowState.xcu
+%{_libdir}/%{name}/basis*/share/registry/data/org/openoffice/Office/UI/BibliographyCommands.xcu
+%{_libdir}/%{name}/basis*/share/registry/data/org/openoffice/Office/UI/ChartCommands.xcu
+%{_libdir}/%{name}/basis*/share/registry/data/org/openoffice/Office/UI/ChartWindowState.xcu
+%{_libdir}/%{name}/basis*/share/registry/data/org/openoffice/Office/UI/Controller.xcu
+%{_libdir}/%{name}/basis*/share/registry/data/org/openoffice/Office/UI/DbBrowserWindowState.xcu
+%{_libdir}/%{name}/basis*/share/registry/data/org/openoffice/Office/UI/DbQueryWindowState.xcu
+%{_libdir}/%{name}/basis*/share/registry/data/org/openoffice/Office/UI/DbRelationWindowState.xcu
+%{_libdir}/%{name}/basis*/share/registry/data/org/openoffice/Office/UI/DbReportWindowState.xcu
+%{_libdir}/%{name}/basis*/share/registry/data/org/openoffice/Office/UI/DbTableWindowState.xcu
+%{_libdir}/%{name}/basis*/share/registry/data/org/openoffice/Office/UI/DbuCommands.xcu
+%{_libdir}/%{name}/basis*/share/registry/data/org/openoffice/Office/UI/DrawImpressCommands.xcu
+%{_libdir}/%{name}/basis*/share/registry/data/org/openoffice/Office/UI/Factories.xcu
+%{_libdir}/%{name}/basis*/share/registry/data/org/openoffice/Office/UI/GenericCategories.xcu
+%{_libdir}/%{name}/basis*/share/registry/data/org/openoffice/Office/UI/GenericCommands.xcu
+%{_libdir}/%{name}/basis*/share/registry/data/org/openoffice/Office/UI/MathWindowState.xcu
+%{_libdir}/%{name}/basis*/share/registry/data/org/openoffice/Office/UI/ReportCommands.xcu
+%{_libdir}/%{name}/basis*/share/registry/data/org/openoffice/Office/UI/StartModuleCommands.xcu
+%{_libdir}/%{name}/basis*/share/registry/data/org/openoffice/Office/UI/StartModuleWindowState.xcu
+%{_libdir}/%{name}/basis*/share/registry/data/org/openoffice/Office/UI/WriterFormWindowState.xcu
+%{_libdir}/%{name}/basis*/share/registry/data/org/openoffice/Office/UI/WriterReportWindowState.xcu
+%{_libdir}/%{name}/basis*/share/registry/data/org/openoffice/Office/UI.xcu
+%{_libdir}/%{name}/basis*/share/registry/data/org/openoffice/Office/UI/XFormsWindowState.xcu
+%{_libdir}/%{name}/basis*/share/registry/data/org/openoffice/Office/Views.xcu
+%{_libdir}/%{name}/basis*/share/registry/data/org/openoffice/Office/WebWizard.xcu
+%{_libdir}/%{name}/basis*/share/registry/data/org/openoffice/Office/Writer.xcu
+%{_libdir}/%{name}/basis*/share/registry/data/org/openoffice/Setup.xcu
+%{_libdir}/%{name}/basis*/share/registry/data/org/openoffice/TypeDetection/UISort.xcu
+%{_libdir}/%{name}/basis*/share/registry/data/org/openoffice/VCL.xcu
+%{_libdir}/%{name}/basis*/share/registry/data/org/openoffice/ucb/Configuration.xcu
+%{_libdir}/%{name}/basis*/share/registry/schema/org/openoffice/FirstStartWizard.xcs
+%{_libdir}/%{name}/basis*/share/registry/schema/org/openoffice/Inet.xcs
+%{_libdir}/%{name}/basis*/share/registry/schema/org/openoffice/LDAP.xcs
+%{_libdir}/%{name}/basis*/share/registry/schema/org/openoffice/Office/Addons.xcs
+%{_libdir}/%{name}/basis*/share/registry/schema/org/openoffice/Office/CalcAddIns.xcs
+%{_libdir}/%{name}/basis*/share/registry/schema/org/openoffice/Office/Calc.xcs
+%{_libdir}/%{name}/basis*/share/registry/schema/org/openoffice/Office/Canvas.xcs
+%{_libdir}/%{name}/basis*/share/registry/schema/org/openoffice/Office/Chart.xcs
+%{_libdir}/%{name}/basis*/share/registry/schema/org/openoffice/Office/Commands.xcs
+%{_libdir}/%{name}/basis*/share/registry/schema/org/openoffice/Office/Common.xcs
+%{_libdir}/%{name}/basis*/share/registry/schema/org/openoffice/Office/Compatibility.xcs
+%{_libdir}/%{name}/basis*/share/registry/schema/org/openoffice/Office/DataAccess.xcs
+%{_libdir}/%{name}/basis*/share/registry/schema/org/openoffice/Office/Draw.xcs
+%{_libdir}/%{name}/basis*/share/registry/schema/org/openoffice/Office/Embedding.xcs
+%{_libdir}/%{name}/basis*/share/registry/schema/org/openoffice/Office/Events.xcs
+%{_libdir}/%{name}/basis*/share/registry/schema/org/openoffice/Office/ExtendedColorScheme.xcs
+%{_libdir}/%{name}/basis*/share/registry/schema/org/openoffice/Office/ExtensionManager.xcs
+%{_libdir}/%{name}/basis*/share/registry/schema/org/openoffice/Office/FormWizard.xcs
+%{_libdir}/%{name}/basis*/share/registry/schema/org/openoffice/Office/Impress.xcs
+%{_libdir}/%{name}/basis*/share/registry/schema/org/openoffice/Office/Java.xcs
+%{_libdir}/%{name}/basis*/share/registry/schema/org/openoffice/Office/Jobs.xcs
+%{_libdir}/%{name}/basis*/share/registry/schema/org/openoffice/Office/Labels.xcs
+%{_libdir}/%{name}/basis*/share/registry/schema/org/openoffice/Office/Linguistic.xcs
+%{_libdir}/%{name}/basis*/share/registry/schema/org/openoffice/Office/Logging.xcs
+%{_libdir}/%{name}/basis*/share/registry/schema/org/openoffice/Office/Math.xcs
+%{_libdir}/%{name}/basis*/share/registry/schema/org/openoffice/Office/OptionsDialog.xcs
+%{_libdir}/%{name}/basis*/share/registry/schema/org/openoffice/Office/Paths.xcs
+%{_libdir}/%{name}/basis*/share/registry/schema/org/openoffice/Office/ProtocolHandler.xcs
+%{_libdir}/%{name}/basis*/share/registry/schema/org/openoffice/Office/Recovery.xcs
+%{_libdir}/%{name}/basis*/share/registry/schema/org/openoffice/Office/ReportDesign.xcs
+%{_libdir}/%{name}/basis*/share/registry/schema/org/openoffice/Office/Scripting.xcs
+%{_libdir}/%{name}/basis*/share/registry/schema/org/openoffice/Office/Security.xcs
+%{_libdir}/%{name}/basis*/share/registry/schema/org/openoffice/Office/SFX.xcs
+%{_libdir}/%{name}/basis*/share/registry/schema/org/openoffice/Office/Substitution.xcs
+%{_libdir}/%{name}/basis*/share/registry/schema/org/openoffice/Office/TabBrowse.xcs
+%{_libdir}/%{name}/basis*/share/registry/schema/org/openoffice/Office/TableWizard.xcs
+%{_libdir}/%{name}/basis*/share/registry/schema/org/openoffice/Office/TypeDetection.xcs
+%{_libdir}/%{name}/basis*/share/registry/schema/org/openoffice/Office/UI/BaseWindowState.xcs
+%{_libdir}/%{name}/basis*/share/registry/schema/org/openoffice/Office/UI/BasicIDECommands.xcs
+%{_libdir}/%{name}/basis*/share/registry/schema/org/openoffice/Office/UI/BasicIDEWindowState.xcs
+%{_libdir}/%{name}/basis*/share/registry/schema/org/openoffice/Office/UI/BibliographyCommands.xcs
+%{_libdir}/%{name}/basis*/share/registry/schema/org/openoffice/Office/UI/BibliographyWindowState.xcs
+%{_libdir}/%{name}/basis*/share/registry/schema/org/openoffice/Office/UI/Category.xcs
+%{_libdir}/%{name}/basis*/share/registry/schema/org/openoffice/Office/UI/ChartCommands.xcs
+%{_libdir}/%{name}/basis*/share/registry/schema/org/openoffice/Office/UI/ChartWindowState.xcs
+%{_libdir}/%{name}/basis*/share/registry/schema/org/openoffice/Office/UI/Commands.xcs
+%{_libdir}/%{name}/basis*/share/registry/schema/org/openoffice/Office/UI/Controller.xcs
+%{_libdir}/%{name}/basis*/share/registry/schema/org/openoffice/Office/UI/DbBrowserWindowState.xcs
+%{_libdir}/%{name}/basis*/share/registry/schema/org/openoffice/Office/UI/DbQueryWindowState.xcs
+%{_libdir}/%{name}/basis*/share/registry/schema/org/openoffice/Office/UI/DbRelationWindowState.xcs
+%{_libdir}/%{name}/basis*/share/registry/schema/org/openoffice/Office/UI/DbReportWindowState.xcs
+%{_libdir}/%{name}/basis*/share/registry/schema/org/openoffice/Office/UI/DbTableWindowState.xcs
+%{_libdir}/%{name}/basis*/share/registry/schema/org/openoffice/Office/UI/DbuCommands.xcs
+%{_libdir}/%{name}/basis*/share/registry/schema/org/openoffice/Office/UI/DrawImpressCommands.xcs
+%{_libdir}/%{name}/basis*/share/registry/schema/org/openoffice/Office/UI/Factories.xcs
+%{_libdir}/%{name}/basis*/share/registry/schema/org/openoffice/Office/UI/GenericCategories.xcs
+%{_libdir}/%{name}/basis*/share/registry/schema/org/openoffice/Office/UI/GenericCommands.xcs
+%{_libdir}/%{name}/basis*/share/registry/schema/org/openoffice/Office/UI/GlobalSettings.xcs
+%{_libdir}/%{name}/basis*/share/registry/schema/org/openoffice/Office/UI/MathWindowState.xcs
+%{_libdir}/%{name}/basis*/share/registry/schema/org/openoffice/Office/UI/ReportCommands.xcs
+%{_libdir}/%{name}/basis*/share/registry/schema/org/openoffice/Office/UI/StartModuleCommands.xcs
+%{_libdir}/%{name}/basis*/share/registry/schema/org/openoffice/Office/UI/StartModuleWindowState.xcs
+%{_libdir}/%{name}/basis*/share/registry/schema/org/openoffice/Office/UI/WindowState.xcs
+%{_libdir}/%{name}/basis*/share/registry/schema/org/openoffice/Office/UI/WriterFormWindowState.xcs
+%{_libdir}/%{name}/basis*/share/registry/schema/org/openoffice/Office/UI/WriterReportWindowState.xcs
+%{_libdir}/%{name}/basis*/share/registry/schema/org/openoffice/Office/UI.xcs
+%{_libdir}/%{name}/basis*/share/registry/schema/org/openoffice/Office/UI/XFormsWindowState.xcs
+%{_libdir}/%{name}/basis*/share/registry/schema/org/openoffice/Office/Views.xcs
+%{_libdir}/%{name}/basis*/share/registry/schema/org/openoffice/Office/WebWizard.xcs
+%{_libdir}/%{name}/basis*/share/registry/schema/org/openoffice/Office/WriterWeb.xcs
+%{_libdir}/%{name}/basis*/share/registry/schema/org/openoffice/Office/Writer.xcs
+%{_libdir}/%{name}/basis*/share/registry/schema/org/openoffice/Setup.xcs
+%{_libdir}/%{name}/basis*/share/registry/schema/org/openoffice/System.xcs
+%{_libdir}/%{name}/basis*/share/registry/schema/org/openoffice/TypeDetection/Filter.xcs
+%{_libdir}/%{name}/basis*/share/registry/schema/org/openoffice/TypeDetection/GraphicFilter.xcs
+%{_libdir}/%{name}/basis*/share/registry/schema/org/openoffice/TypeDetection/Misc.xcs
+%{_libdir}/%{name}/basis*/share/registry/schema/org/openoffice/TypeDetection/Types.xcs
+%{_libdir}/%{name}/basis*/share/registry/schema/org/openoffice/TypeDetection/UISort.xcs
+%{_libdir}/%{name}/basis*/share/registry/schema/org/openoffice/UserProfile.xcs
+%{_libdir}/%{name}/basis*/share/registry/schema/org/openoffice/VCL.xcs
+%{_libdir}/%{name}/basis*/share/registry/schema/org/openoffice/ucb/Configuration.xcs
+%{_libdir}/%{name}/basis*/share/registry/schema/org/openoffice/ucb/Hierarchy.xcs
+%{_libdir}/%{name}/basis*/share/registry/schema/org/openoffice/ucb/Store.xcs
+%{_libdir}/%{name}/basis*/share/registry/ldap
+%{_libdir}/%{name}/basis*/share/registry/modules/org/openoffice/Office/Common/Common-cjk_ja.xcu
+%{_libdir}/%{name}/basis*/share/registry/modules/org/openoffice/Office/Common/Common-cjk_ko.xcu
+%{_libdir}/%{name}/basis*/share/registry/modules/org/openoffice/Office/Common/Common-cjk_zh-CN.xcu
+%{_libdir}/%{name}/basis*/share/registry/modules/org/openoffice/Office/Common/Common-cjk_zh-TW.xcu
+%{_libdir}/%{name}/basis*/share/registry/modules/org/openoffice/Office/Common/Common-ctl_ar.xcu
+%{_libdir}/%{name}/basis*/share/registry/modules/org/openoffice/Office/Common/Common-ctl_dz.xcu
+%{_libdir}/%{name}/basis*/share/registry/modules/org/openoffice/Office/Common/Common-ctl_fa.xcu
+%{_libdir}/%{name}/basis*/share/registry/modules/org/openoffice/Office/Common/Common-ctl_gu-IN.xcu
+%{_libdir}/%{name}/basis*/share/registry/modules/org/openoffice/Office/Common/Common-ctl_he.xcu
+%{_libdir}/%{name}/basis*/share/registry/modules/org/openoffice/Office/Common/Common-ctl_hi-IN.xcu
+%{_libdir}/%{name}/basis*/share/registry/modules/org/openoffice/Office/Common/Common-ctl_km.xcu
+%{_libdir}/%{name}/basis*/share/registry/modules/org/openoffice/Office/Common/Common-ctl_lo.xcu
+%{_libdir}/%{name}/basis*/share/registry/modules/org/openoffice/Office/Common/Common-ctl_ne.xcu
+%{_libdir}/%{name}/basis*/share/registry/modules/org/openoffice/Office/Common/Common-ctl_pa-IN.xcu
+%{_libdir}/%{name}/basis*/share/registry/modules/org/openoffice/Office/Common/Common-ctl_ta-IN.xcu
+%{_libdir}/%{name}/basis*/share/registry/modules/org/openoffice/Office/Common/Common-ctl_th.xcu
+#%{_libdir}/%{name}/basis*/share/registry/modules/org/openoffice/Office/Common/Common-ctl_vi.xcu
+%{_libdir}/%{name}/basis*/share/registry/modules/org/openoffice/Office/Common/Common-dicooo.xcu
+%{_libdir}/%{name}/basis*/share/registry/modules/org/openoffice/Office/Common/Common-korea.xcu
+%{_libdir}/%{name}/basis*/share/registry/modules/org/openoffice/Office/Common/Common-unx.xcu
+%{_libdir}/%{name}/basis*/share/registry/modules/org/openoffice/Office/Common/Common-UseOOoFileDialogs.xcu
+%{_libdir}/%{name}/basis*/share/registry/modules/org/openoffice/Office/Embedding/Embedding-calc.xcu
+%{_libdir}/%{name}/basis*/share/registry/modules/org/openoffice/Office/Embedding/Embedding-chart.xcu
+%{_libdir}/%{name}/basis*/share/registry/modules/org/openoffice/Office/Embedding/Embedding-draw.xcu
+%{_libdir}/%{name}/basis*/share/registry/modules/org/openoffice/Office/Embedding/Embedding-impress.xcu
+%{_libdir}/%{name}/basis*/share/registry/modules/org/openoffice/Office/Embedding/Embedding-math.xcu
+%{_libdir}/%{name}/basis*/share/registry/modules/org/openoffice/Office/Embedding/Embedding-report.xcu
+%{_libdir}/%{name}/basis*/share/registry/modules/org/openoffice/Office/Embedding/Embedding-writer.xcu
 # move it to -writer ?
-%{_datadir}/%{name}/share/registry/modules/org/openoffice/Office/Writer/Writer-cjk_ja.xcu
-%{_datadir}/%{name}/share/registry/modules/org/openoffice/Office/Writer/Writer-cjk_ko.xcu
-%{_datadir}/%{name}/share/registry/modules/org/openoffice/Office/Writer/Writer-cjk_zh-CN.xcu
-%{_datadir}/%{name}/share/registry/modules/org/openoffice/Office/Writer/Writer-cjk_zh-TW.xcu
+%{_libdir}/%{name}/basis*/share/registry/modules/org/openoffice/Office/Writer/Writer-cjk_ja.xcu
+%{_libdir}/%{name}/basis*/share/registry/modules/org/openoffice/Office/Writer/Writer-cjk_ko.xcu
+%{_libdir}/%{name}/basis*/share/registry/modules/org/openoffice/Office/Writer/Writer-cjk_zh-CN.xcu
+%{_libdir}/%{name}/basis*/share/registry/modules/org/openoffice/Office/Writer/Writer-cjk_zh-TW.xcu
 # move to locale pkgs?
-%{_datadir}/%{name}/share/registry/modules/org/openoffice/Setup/Langpack-af.xcu
-%{_datadir}/%{name}/share/registry/modules/org/openoffice/Setup/Langpack-ar.xcu
-%{_datadir}/%{name}/share/registry/modules/org/openoffice/Setup/Langpack-as-IN.xcu
-%{_datadir}/%{name}/share/registry/modules/org/openoffice/Setup/Langpack-be-BY.xcu
-%{_datadir}/%{name}/share/registry/modules/org/openoffice/Setup/Langpack-bg.xcu
-%{_datadir}/%{name}/share/registry/modules/org/openoffice/Setup/Langpack-bn-BD.xcu
-%{_datadir}/%{name}/share/registry/modules/org/openoffice/Setup/Langpack-bn-IN.xcu
-%{_datadir}/%{name}/share/registry/modules/org/openoffice/Setup/Langpack-bn.xcu
-%{_datadir}/%{name}/share/registry/modules/org/openoffice/Setup/Langpack-br.xcu
-%{_datadir}/%{name}/share/registry/modules/org/openoffice/Setup/Langpack-bs.xcu
-%{_datadir}/%{name}/share/registry/modules/org/openoffice/Setup/Langpack-ca.xcu
-%{_datadir}/%{name}/share/registry/modules/org/openoffice/Setup/Langpack-cs.xcu
-%{_datadir}/%{name}/share/registry/modules/org/openoffice/Setup/Langpack-cy.xcu
-%{_datadir}/%{name}/share/registry/modules/org/openoffice/Setup/Langpack-da.xcu
-%{_datadir}/%{name}/share/registry/modules/org/openoffice/Setup/Langpack-de.xcu
-%{_datadir}/%{name}/share/registry/modules/org/openoffice/Setup/Langpack-dz.xcu
-%{_datadir}/%{name}/share/registry/modules/org/openoffice/Setup/Langpack-el.xcu
-%{_datadir}/%{name}/share/registry/modules/org/openoffice/Setup/Langpack-en-GB.xcu
-%{_datadir}/%{name}/share/registry/modules/org/openoffice/Setup/Langpack-en-US.xcu
-%{_datadir}/%{name}/share/registry/modules/org/openoffice/Setup/Langpack-en-ZA.xcu
-%{_datadir}/%{name}/share/registry/modules/org/openoffice/Setup/Langpack-eo.xcu
-%{_datadir}/%{name}/share/registry/modules/org/openoffice/Setup/Langpack-es.xcu
-%{_datadir}/%{name}/share/registry/modules/org/openoffice/Setup/Langpack-et.xcu
-%{_datadir}/%{name}/share/registry/modules/org/openoffice/Setup/Langpack-eu.xcu
-%{_datadir}/%{name}/share/registry/modules/org/openoffice/Setup/Langpack-fa.xcu
-%{_datadir}/%{name}/share/registry/modules/org/openoffice/Setup/Langpack-fi.xcu
-%{_datadir}/%{name}/share/registry/modules/org/openoffice/Setup/Langpack-fr.xcu
-%{_datadir}/%{name}/share/registry/modules/org/openoffice/Setup/Langpack-ga.xcu
-%{_datadir}/%{name}/share/registry/modules/org/openoffice/Setup/Langpack-gl.xcu
-%{_datadir}/%{name}/share/registry/modules/org/openoffice/Setup/Langpack-gu-IN.xcu
-%{_datadir}/%{name}/share/registry/modules/org/openoffice/Setup/Langpack-he.xcu
-%{_datadir}/%{name}/share/registry/modules/org/openoffice/Setup/Langpack-hi-IN.xcu
-%{_datadir}/%{name}/share/registry/modules/org/openoffice/Setup/Langpack-hr.xcu
-%{_datadir}/%{name}/share/registry/modules/org/openoffice/Setup/Langpack-hu.xcu
-%{_datadir}/%{name}/share/registry/modules/org/openoffice/Setup/Langpack-it.xcu
-%{_datadir}/%{name}/share/registry/modules/org/openoffice/Setup/Langpack-ja.xcu
-%{_datadir}/%{name}/share/registry/modules/org/openoffice/Setup/Langpack-km.xcu
-%{_datadir}/%{name}/share/registry/modules/org/openoffice/Setup/Langpack-kn.xcu
-%{_datadir}/%{name}/share/registry/modules/org/openoffice/Setup/Langpack-ko.xcu
-%{_datadir}/%{name}/share/registry/modules/org/openoffice/Setup/Langpack-ku.xcu
-%{_datadir}/%{name}/share/registry/modules/org/openoffice/Setup/Langpack-lo.xcu
-%{_datadir}/%{name}/share/registry/modules/org/openoffice/Setup/Langpack-lt.xcu
-%{_datadir}/%{name}/share/registry/modules/org/openoffice/Setup/Langpack-lv.xcu
-%{_datadir}/%{name}/share/registry/modules/org/openoffice/Setup/Langpack-mk.xcu
-%{_datadir}/%{name}/share/registry/modules/org/openoffice/Setup/Langpack-ml-IN.xcu
-%{_datadir}/%{name}/share/registry/modules/org/openoffice/Setup/Langpack-mr-IN.xcu
-%{_datadir}/%{name}/share/registry/modules/org/openoffice/Setup/Langpack-ms.xcu
-%{_datadir}/%{name}/share/registry/modules/org/openoffice/Setup/Langpack-nb.xcu
-%{_datadir}/%{name}/share/registry/modules/org/openoffice/Setup/Langpack-ne.xcu
-%{_datadir}/%{name}/share/registry/modules/org/openoffice/Setup/Langpack-nl.xcu
-%{_datadir}/%{name}/share/registry/modules/org/openoffice/Setup/Langpack-nn.xcu
-%{_datadir}/%{name}/share/registry/modules/org/openoffice/Setup/Langpack-nr.xcu
-%{_datadir}/%{name}/share/registry/modules/org/openoffice/Setup/Langpack-ns.xcu
-%{_datadir}/%{name}/share/registry/modules/org/openoffice/Setup/Langpack-or-IN.xcu
-%{_datadir}/%{name}/share/registry/modules/org/openoffice/Setup/Langpack-pa-IN.xcu
-%{_datadir}/%{name}/share/registry/modules/org/openoffice/Setup/Langpack-pl.xcu
-%{_datadir}/%{name}/share/registry/modules/org/openoffice/Setup/Langpack-pt-BR.xcu
-%{_datadir}/%{name}/share/registry/modules/org/openoffice/Setup/Langpack-pt.xcu
-%{_datadir}/%{name}/share/registry/modules/org/openoffice/Setup/Langpack-ru.xcu
-%{_datadir}/%{name}/share/registry/modules/org/openoffice/Setup/Langpack-rw.xcu
-%{_datadir}/%{name}/share/registry/modules/org/openoffice/Setup/Langpack-sh.xcu
-%{_datadir}/%{name}/share/registry/modules/org/openoffice/Setup/Langpack-sk.xcu
-%{_datadir}/%{name}/share/registry/modules/org/openoffice/Setup/Langpack-sl.xcu
-%{_datadir}/%{name}/share/registry/modules/org/openoffice/Setup/Langpack-sr.xcu
-%{_datadir}/%{name}/share/registry/modules/org/openoffice/Setup/Langpack-ss.xcu
-%{_datadir}/%{name}/share/registry/modules/org/openoffice/Setup/Langpack-st.xcu
-%{_datadir}/%{name}/share/registry/modules/org/openoffice/Setup/Langpack-sv.xcu
-%{_datadir}/%{name}/share/registry/modules/org/openoffice/Setup/Langpack-sw-TZ.xcu
-%{_datadir}/%{name}/share/registry/modules/org/openoffice/Setup/Langpack-sw.xcu
-#%{_datadir}/%{name}/share/registry/modules/org/openoffice/Setup/Langpack-sx.xcu
-%{_datadir}/%{name}/share/registry/modules/org/openoffice/Setup/Langpack-ta-IN.xcu
-%{_datadir}/%{name}/share/registry/modules/org/openoffice/Setup/Langpack-te-IN.xcu
-%{_datadir}/%{name}/share/registry/modules/org/openoffice/Setup/Langpack-tg.xcu
-%{_datadir}/%{name}/share/registry/modules/org/openoffice/Setup/Langpack-th.xcu
-%{_datadir}/%{name}/share/registry/modules/org/openoffice/Setup/Langpack-ti-ER.xcu
-%{_datadir}/%{name}/share/registry/modules/org/openoffice/Setup/Langpack-tn.xcu
-%{_datadir}/%{name}/share/registry/modules/org/openoffice/Setup/Langpack-tr.xcu
-%{_datadir}/%{name}/share/registry/modules/org/openoffice/Setup/Langpack-ts.xcu
-%{_datadir}/%{name}/share/registry/modules/org/openoffice/Setup/Langpack-uk.xcu
-%{_datadir}/%{name}/share/registry/modules/org/openoffice/Setup/Langpack-ur-IN.xcu
-%{_datadir}/%{name}/share/registry/modules/org/openoffice/Setup/Langpack-uz.xcu
-%{_datadir}/%{name}/share/registry/modules/org/openoffice/Setup/Langpack-ve.xcu
-%{_datadir}/%{name}/share/registry/modules/org/openoffice/Setup/Langpack-vi.xcu
-%{_datadir}/%{name}/share/registry/modules/org/openoffice/Setup/Langpack-xh.xcu
-%{_datadir}/%{name}/share/registry/modules/org/openoffice/Setup/Langpack-zh-CN.xcu
-%{_datadir}/%{name}/share/registry/modules/org/openoffice/Setup/Langpack-zh-TW.xcu
-%{_datadir}/%{name}/share/registry/modules/org/openoffice/Setup/Langpack-zu.xcu
-%{_datadir}/%{name}/share/registry/modules/org/openoffice/Setup/Langpack-ka.xcu
-%{_datadir}/%{name}/share/registry/modules/org/openoffice/Setup/Setup-report.xcu
-%{_datadir}/%{name}/share/registry/modules/org/openoffice/TypeDetection/Filter/fcfg_global_filters.xcu
-%{_datadir}/%{name}/share/registry/modules/org/openoffice/TypeDetection/Filter/fcfg_base_filters.xcu
-%{_datadir}/%{name}/share/registry/modules/org/openoffice/TypeDetection/Filter/fcfg_chart_filters.xcu
-%{_datadir}/%{name}/share/registry/modules/org/openoffice/TypeDetection/GraphicFilter/fcfg_internalgraphics_filters.xcu
-%{_datadir}/%{name}/share/registry/modules/org/openoffice/TypeDetection/Misc/fcfg_base_others.xcu
-%{_datadir}/%{name}/share/registry/modules/org/openoffice/TypeDetection/Misc/fcfg_chart_others.xcu
-%{_datadir}/%{name}/share/registry/modules/org/openoffice/TypeDetection/Types/fcfg_base_types.xcu
-%{_datadir}/%{name}/share/registry/modules/org/openoffice/TypeDetection/Types/fcfg_chart_types.xcu
-%{_datadir}/%{name}/share/registry/modules/org/openoffice/TypeDetection/Types/fcfg_internalgraphics_types.xcu
-%{_datadir}/%{name}/share/registry/modules/org/openoffice/TypeDetection/UISort/UISort-calc.xcu
-%{_datadir}/%{name}/share/registry/modules/org/openoffice/TypeDetection/UISort/UISort-draw.xcu
-%{_datadir}/%{name}/share/registry/modules/org/openoffice/TypeDetection/UISort/UISort-impress.xcu
-%{_datadir}/%{name}/share/registry/modules/org/openoffice/TypeDetection/UISort/UISort-math.xcu
-%{_datadir}/%{name}/share/registry/modules/org/openoffice/TypeDetection/UISort/UISort-writer.xcu
+%{_libdir}/%{name}/basis*/share/registry/modules/org/openoffice/Setup/Langpack-af.xcu
+%{_libdir}/%{name}/basis*/share/registry/modules/org/openoffice/Setup/Langpack-ar.xcu
+%{_libdir}/%{name}/basis*/share/registry/modules/org/openoffice/Setup/Langpack-as-IN.xcu
+%{_libdir}/%{name}/basis*/share/registry/modules/org/openoffice/Setup/Langpack-be-BY.xcu
+%{_libdir}/%{name}/basis*/share/registry/modules/org/openoffice/Setup/Langpack-bg.xcu
+%{_libdir}/%{name}/basis*/share/registry/modules/org/openoffice/Setup/Langpack-bn-BD.xcu
+%{_libdir}/%{name}/basis*/share/registry/modules/org/openoffice/Setup/Langpack-bn-IN.xcu
+%{_libdir}/%{name}/basis*/share/registry/modules/org/openoffice/Setup/Langpack-bn.xcu
+%{_libdir}/%{name}/basis*/share/registry/modules/org/openoffice/Setup/Langpack-br.xcu
+%{_libdir}/%{name}/basis*/share/registry/modules/org/openoffice/Setup/Langpack-bs.xcu
+%{_libdir}/%{name}/basis*/share/registry/modules/org/openoffice/Setup/Langpack-ca.xcu
+%{_libdir}/%{name}/basis*/share/registry/modules/org/openoffice/Setup/Langpack-cs.xcu
+%{_libdir}/%{name}/basis*/share/registry/modules/org/openoffice/Setup/Langpack-cy.xcu
+%{_libdir}/%{name}/basis*/share/registry/modules/org/openoffice/Setup/Langpack-da.xcu
+%{_libdir}/%{name}/basis*/share/registry/modules/org/openoffice/Setup/Langpack-de.xcu
+%{_libdir}/%{name}/basis*/share/registry/modules/org/openoffice/Setup/Langpack-dz.xcu
+%{_libdir}/%{name}/basis*/share/registry/modules/org/openoffice/Setup/Langpack-el.xcu
+%{_libdir}/%{name}/basis*/share/registry/modules/org/openoffice/Setup/Langpack-en-GB.xcu
+%{_libdir}/%{name}/basis*/share/registry/modules/org/openoffice/Setup/Langpack-en-US.xcu
+%{_libdir}/%{name}/basis*/share/registry/modules/org/openoffice/Setup/Langpack-en-ZA.xcu
+%{_libdir}/%{name}/basis*/share/registry/modules/org/openoffice/Setup/Langpack-eo.xcu
+%{_libdir}/%{name}/basis*/share/registry/modules/org/openoffice/Setup/Langpack-es.xcu
+%{_libdir}/%{name}/basis*/share/registry/modules/org/openoffice/Setup/Langpack-et.xcu
+%{_libdir}/%{name}/basis*/share/registry/modules/org/openoffice/Setup/Langpack-eu.xcu
+%{_libdir}/%{name}/basis*/share/registry/modules/org/openoffice/Setup/Langpack-fa.xcu
+%{_libdir}/%{name}/basis*/share/registry/modules/org/openoffice/Setup/Langpack-fi.xcu
+%{_libdir}/%{name}/basis*/share/registry/modules/org/openoffice/Setup/Langpack-fr.xcu
+%{_libdir}/%{name}/basis*/share/registry/modules/org/openoffice/Setup/Langpack-ga.xcu
+%{_libdir}/%{name}/basis*/share/registry/modules/org/openoffice/Setup/Langpack-gl.xcu
+%{_libdir}/%{name}/basis*/share/registry/modules/org/openoffice/Setup/Langpack-gu-IN.xcu
+%{_libdir}/%{name}/basis*/share/registry/modules/org/openoffice/Setup/Langpack-he.xcu
+%{_libdir}/%{name}/basis*/share/registry/modules/org/openoffice/Setup/Langpack-hi-IN.xcu
+%{_libdir}/%{name}/basis*/share/registry/modules/org/openoffice/Setup/Langpack-hr.xcu
+%{_libdir}/%{name}/basis*/share/registry/modules/org/openoffice/Setup/Langpack-hu.xcu
+%{_libdir}/%{name}/basis*/share/registry/modules/org/openoffice/Setup/Langpack-it.xcu
+%{_libdir}/%{name}/basis*/share/registry/modules/org/openoffice/Setup/Langpack-ja.xcu
+%{_libdir}/%{name}/basis*/share/registry/modules/org/openoffice/Setup/Langpack-km.xcu
+%{_libdir}/%{name}/basis*/share/registry/modules/org/openoffice/Setup/Langpack-kn.xcu
+%{_libdir}/%{name}/basis*/share/registry/modules/org/openoffice/Setup/Langpack-ko.xcu
+%{_libdir}/%{name}/basis*/share/registry/modules/org/openoffice/Setup/Langpack-ku.xcu
+%{_libdir}/%{name}/basis*/share/registry/modules/org/openoffice/Setup/Langpack-lo.xcu
+%{_libdir}/%{name}/basis*/share/registry/modules/org/openoffice/Setup/Langpack-lt.xcu
+%{_libdir}/%{name}/basis*/share/registry/modules/org/openoffice/Setup/Langpack-lv.xcu
+%{_libdir}/%{name}/basis*/share/registry/modules/org/openoffice/Setup/Langpack-mk.xcu
+%{_libdir}/%{name}/basis*/share/registry/modules/org/openoffice/Setup/Langpack-ml-IN.xcu
+%{_libdir}/%{name}/basis*/share/registry/modules/org/openoffice/Setup/Langpack-mr-IN.xcu
+%{_libdir}/%{name}/basis*/share/registry/modules/org/openoffice/Setup/Langpack-ms.xcu
+%{_libdir}/%{name}/basis*/share/registry/modules/org/openoffice/Setup/Langpack-nb.xcu
+%{_libdir}/%{name}/basis*/share/registry/modules/org/openoffice/Setup/Langpack-ne.xcu
+%{_libdir}/%{name}/basis*/share/registry/modules/org/openoffice/Setup/Langpack-nl.xcu
+%{_libdir}/%{name}/basis*/share/registry/modules/org/openoffice/Setup/Langpack-nn.xcu
+%{_libdir}/%{name}/basis*/share/registry/modules/org/openoffice/Setup/Langpack-nr.xcu
+%{_libdir}/%{name}/basis*/share/registry/modules/org/openoffice/Setup/Langpack-ns.xcu
+%{_libdir}/%{name}/basis*/share/registry/modules/org/openoffice/Setup/Langpack-or-IN.xcu
+%{_libdir}/%{name}/basis*/share/registry/modules/org/openoffice/Setup/Langpack-pa-IN.xcu
+%{_libdir}/%{name}/basis*/share/registry/modules/org/openoffice/Setup/Langpack-pl.xcu
+%{_libdir}/%{name}/basis*/share/registry/modules/org/openoffice/Setup/Langpack-pt-BR.xcu
+%{_libdir}/%{name}/basis*/share/registry/modules/org/openoffice/Setup/Langpack-pt.xcu
+%{_libdir}/%{name}/basis*/share/registry/modules/org/openoffice/Setup/Langpack-ru.xcu
+%{_libdir}/%{name}/basis*/share/registry/modules/org/openoffice/Setup/Langpack-rw.xcu
+%{_libdir}/%{name}/basis*/share/registry/modules/org/openoffice/Setup/Langpack-sh.xcu
+%{_libdir}/%{name}/basis*/share/registry/modules/org/openoffice/Setup/Langpack-sk.xcu
+%{_libdir}/%{name}/basis*/share/registry/modules/org/openoffice/Setup/Langpack-sl.xcu
+%{_libdir}/%{name}/basis*/share/registry/modules/org/openoffice/Setup/Langpack-sr.xcu
+%{_libdir}/%{name}/basis*/share/registry/modules/org/openoffice/Setup/Langpack-ss.xcu
+%{_libdir}/%{name}/basis*/share/registry/modules/org/openoffice/Setup/Langpack-st.xcu
+%{_libdir}/%{name}/basis*/share/registry/modules/org/openoffice/Setup/Langpack-sv.xcu
+%{_libdir}/%{name}/basis*/share/registry/modules/org/openoffice/Setup/Langpack-sw-TZ.xcu
+%{_libdir}/%{name}/basis*/share/registry/modules/org/openoffice/Setup/Langpack-sw.xcu
+#%{_libdir}/%{name}/basis*/share/registry/modules/org/openoffice/Setup/Langpack-sx.xcu
+%{_libdir}/%{name}/basis*/share/registry/modules/org/openoffice/Setup/Langpack-ta-IN.xcu
+%{_libdir}/%{name}/basis*/share/registry/modules/org/openoffice/Setup/Langpack-te-IN.xcu
+%{_libdir}/%{name}/basis*/share/registry/modules/org/openoffice/Setup/Langpack-tg.xcu
+%{_libdir}/%{name}/basis*/share/registry/modules/org/openoffice/Setup/Langpack-th.xcu
+%{_libdir}/%{name}/basis*/share/registry/modules/org/openoffice/Setup/Langpack-ti-ER.xcu
+%{_libdir}/%{name}/basis*/share/registry/modules/org/openoffice/Setup/Langpack-tn.xcu
+%{_libdir}/%{name}/basis*/share/registry/modules/org/openoffice/Setup/Langpack-tr.xcu
+%{_libdir}/%{name}/basis*/share/registry/modules/org/openoffice/Setup/Langpack-ts.xcu
+%{_libdir}/%{name}/basis*/share/registry/modules/org/openoffice/Setup/Langpack-uk.xcu
+%{_libdir}/%{name}/basis*/share/registry/modules/org/openoffice/Setup/Langpack-ur-IN.xcu
+%{_libdir}/%{name}/basis*/share/registry/modules/org/openoffice/Setup/Langpack-uz.xcu
+%{_libdir}/%{name}/basis*/share/registry/modules/org/openoffice/Setup/Langpack-ve.xcu
+%{_libdir}/%{name}/basis*/share/registry/modules/org/openoffice/Setup/Langpack-vi.xcu
+%{_libdir}/%{name}/basis*/share/registry/modules/org/openoffice/Setup/Langpack-xh.xcu
+%{_libdir}/%{name}/basis*/share/registry/modules/org/openoffice/Setup/Langpack-zh-CN.xcu
+%{_libdir}/%{name}/basis*/share/registry/modules/org/openoffice/Setup/Langpack-zh-TW.xcu
+%{_libdir}/%{name}/basis*/share/registry/modules/org/openoffice/Setup/Langpack-zu.xcu
+%{_libdir}/%{name}/basis*/share/registry/modules/org/openoffice/Setup/Langpack-ka.xcu
+%{_libdir}/%{name}/basis*/share/registry/modules/org/openoffice/Setup/Setup-report.xcu
+%{_libdir}/%{name}/basis*/share/registry/modules/org/openoffice/TypeDetection/Filter/fcfg_global_filters.xcu
+%{_libdir}/%{name}/basis*/share/registry/modules/org/openoffice/TypeDetection/Filter/fcfg_base_filters.xcu
+%{_libdir}/%{name}/basis*/share/registry/modules/org/openoffice/TypeDetection/Filter/fcfg_chart_filters.xcu
+%{_libdir}/%{name}/basis*/share/registry/modules/org/openoffice/TypeDetection/GraphicFilter/fcfg_internalgraphics_filters.xcu
+%{_libdir}/%{name}/basis*/share/registry/modules/org/openoffice/TypeDetection/Misc/fcfg_base_others.xcu
+%{_libdir}/%{name}/basis*/share/registry/modules/org/openoffice/TypeDetection/Misc/fcfg_chart_others.xcu
+%{_libdir}/%{name}/basis*/share/registry/modules/org/openoffice/TypeDetection/Types/fcfg_base_types.xcu
+%{_libdir}/%{name}/basis*/share/registry/modules/org/openoffice/TypeDetection/Types/fcfg_chart_types.xcu
+%{_libdir}/%{name}/basis*/share/registry/modules/org/openoffice/TypeDetection/Types/fcfg_internalgraphics_types.xcu
+%{_libdir}/%{name}/basis*/share/registry/modules/org/openoffice/TypeDetection/UISort/UISort-calc.xcu
+%{_libdir}/%{name}/basis*/share/registry/modules/org/openoffice/TypeDetection/UISort/UISort-draw.xcu
+%{_libdir}/%{name}/basis*/share/registry/modules/org/openoffice/TypeDetection/UISort/UISort-impress.xcu
+%{_libdir}/%{name}/basis*/share/registry/modules/org/openoffice/TypeDetection/UISort/UISort-math.xcu
+%{_libdir}/%{name}/basis*/share/registry/modules/org/openoffice/TypeDetection/UISort/UISort-writer.xcu
 
-%dir %{_libdir}/%{name}/presets
-%dir %{_libdir}/%{name}/presets/autotext
-%{_libdir}/%{name}/presets/autotext/mytexts.bau
-%{_libdir}/%{name}/presets/basic
-%dir %{_libdir}/%{name}/presets/config
-%{_libdir}/%{name}/presets/config/autotbl.fmt
-%{_libdir}/%{name}/presets/config/cmyk.soc
-%{_libdir}/%{name}/presets/config/gallery.soc
-%{_libdir}/%{name}/presets/config/html.soc
-%{_libdir}/%{name}/presets/config/standard.so?
-%{_libdir}/%{name}/presets/config/sun-color.soc
-%{_libdir}/%{name}/presets/config/web.soc
+%dir %{_libdir}/%{name}/basis*/presets
+%dir %{_libdir}/%{name}/basis*/presets/autotext
+%{_libdir}/%{name}/basis*/presets/autotext/mytexts.bau
+%{_libdir}/%{name}/basis*/presets/basic
+%dir %{_libdir}/%{name}/basis*/presets/config
+%{_libdir}/%{name}/basis*/presets/config/autotbl.fmt
+%{_libdir}/%{name}/basis*/presets/config/cmyk.soc
+%{_libdir}/%{name}/basis*/presets/config/gallery.soc
+%{_libdir}/%{name}/basis*/presets/config/html.soc
+%{_libdir}/%{name}/basis*/presets/config/standard.so?
+%{_libdir}/%{name}/basis*/presets/config/sun-color.soc
+%{_libdir}/%{name}/basis*/presets/config/web.soc
 
-%{_libdir}/%{name}/presets/database
-%{_libdir}/%{name}/presets/gallery
-%{_libdir}/%{name}/presets/psprint
+%{_libdir}/%{name}/basis*/presets/database
+%{_libdir}/%{name}/basis*/presets/gallery
+%{_libdir}/%{name}/basis*/presets/psprint
 
 # Programs
 %attr(755,root,root) %{_bindir}/ooconfig
@@ -3157,44 +3158,44 @@ fi
 %attr(755,root,root) %{_bindir}/ootool
 %attr(755,root,root) %{_bindir}/unopkg
 
-%attr(755,root,root) %{_libdir}/%{name}/program/configimport.bin
-%attr(755,root,root) %{_libdir}/%{name}/program/gengal.bin
-%{_libdir}/%{name}/program/pkgchk
-%attr(755,root,root) %{_libdir}/%{name}/program/pkgchk.bin
-%attr(755,root,root) %{_libdir}/%{name}/program/pluginapp.bin
-%attr(755,root,root) %{_libdir}/%{name}/program/setofficelang.bin
-%attr(755,root,root) %{_libdir}/%{name}/program/soffice.bin
-%attr(755,root,root) %{_libdir}/%{name}/program/spadmin.bin
-%attr(755,root,root) %{_libdir}/%{name}/program/uno
-%attr(755,root,root) %{_libdir}/%{name}/program/uno.bin
-%attr(755,root,root) %{_libdir}/%{name}/program/unopkg.bin
-#%attr(755,root,root) %{_libdir}/%{name}/program/ooqstart
-%attr(755,root,root) %{_libdir}/%{name}/program/pagein*
+%attr(755,root,root) %{_libdir}/%{name}/basis*/program/configimport.bin
+%attr(755,root,root) %{_libdir}/%{name}/basis*/program/gengal.bin
+%{_libdir}/%{name}/basis*/program/pkgchk
+%attr(755,root,root) %{_libdir}/%{name}/basis*/program/pkgchk.bin
+%attr(755,root,root) %{_libdir}/%{name}/basis*/program/pluginapp.bin
+%attr(755,root,root) %{_libdir}/%{name}/basis*/program/setofficelang.bin
+%attr(755,root,root) %{_libdir}/%{name}/basis*/program/soffice.bin
+%attr(755,root,root) %{_libdir}/%{name}/basis*/program/spadmin.bin
+%attr(755,root,root) %{_libdir}/%{name}/basis*/program/uno
+%attr(755,root,root) %{_libdir}/%{name}/basis*/program/uno.bin
+%attr(755,root,root) %{_libdir}/%{name}/basis*/program/unopkg.bin
+#%attr(755,root,root) %{_libdir}/%{name}/basis*/program/ooqstart
+%attr(755,root,root) %{_libdir}/%{name}/basis*/program/pagein*
 %attr(755,root,root) %{_libdir}/%{name}/program/regcomp
 %attr(755,root,root) %{_libdir}/%{name}/program/regcomp.bin
-%{_libdir}/%{name}/program/setuprc
-%attr(755,root,root) %{_libdir}/%{name}/program/smath
-%attr(755,root,root) %{_libdir}/%{name}/program/soffice
-%attr(755,root,root) %{_libdir}/%{name}/program/spadmin
-%attr(755,root,root) %{_libdir}/%{name}/program/open-url
-%attr(755,root,root) %{_libdir}/%{name}/program/gengal
-%attr(755,root,root) %{_libdir}/%{name}/program/configimport
-%attr(755,root,root) %{_libdir}/%{name}/program/sbase
-%attr(755,root,root) %{_libdir}/%{name}/program/senddoc
-%attr(755,root,root) %{_libdir}/%{name}/program/setofficelang
-%attr(755,root,root) %{_libdir}/%{name}/program/unopkg
-%attr(755,root,root) %{_libdir}/%{name}/program/uri-encode
-%attr(755,root,root) %{_libdir}/%{name}/program/viewdoc
-%{_libdir}/%{name}/program/versionrc
+%{_libdir}/%{name}/basis*/program/setuprc
+%attr(755,root,root) %{_libdir}/%{name}/basis*/program/smath
+%attr(755,root,root) %{_libdir}/%{name}/basis*/program/soffice
+%attr(755,root,root) %{_libdir}/%{name}/basis*/program/spadmin
+%attr(755,root,root) %{_libdir}/%{name}/basis*/program/open-url
+%attr(755,root,root) %{_libdir}/%{name}/basis*/program/gengal
+%attr(755,root,root) %{_libdir}/%{name}/basis*/program/configimport
+%attr(755,root,root) %{_libdir}/%{name}/basis*/program/sbase
+%attr(755,root,root) %{_libdir}/%{name}/basis*/program/senddoc
+%attr(755,root,root) %{_libdir}/%{name}/basis*/program/setofficelang
+%attr(755,root,root) %{_libdir}/%{name}/basis*/program/unopkg
+%attr(755,root,root) %{_libdir}/%{name}/basis*/program/uri-encode
+%attr(755,root,root) %{_libdir}/%{name}/basis*/program/viewdoc
+%{_libdir}/%{name}/basis*/program/versionrc
 
 %if %{with mono}
-%{_libdir}/%{name}/program/cli_basetypes.dll
-%{_libdir}/%{name}/program/cli_cppuhelper.dll
-%{_libdir}/%{name}/program/cli_types.dll
-%{_libdir}/%{name}/program/cli_uno_bridge.dll
-%{_libdir}/%{name}/program/cli_ure.dll
-%attr(755,root,root) %{_libdir}/%{name}/program/libcli_uno.so
-%attr(755,root,root) %{_libdir}/%{name}/program/libcli_uno_glue.so
+%{_libdir}/%{name}/basis*/program/cli_basetypes.dll
+%{_libdir}/%{name}/basis*/program/cli_cppuhelper.dll
+%{_libdir}/%{name}/basis*/program/cli_types.dll
+%{_libdir}/%{name}/basis*/program/cli_uno_bridge.dll
+%{_libdir}/%{name}/basis*/program/cli_ure.dll
+%attr(755,root,root) %{_libdir}/%{name}/basis*/program/libcli_uno.so
+%attr(755,root,root) %{_libdir}/%{name}/basis*/program/libcli_uno_glue.so
 %endif
 
 %{_libdir}/%{name}/help
@@ -3208,62 +3209,62 @@ fi
 %{_datadir}/%{name}/help/*.xsl
 
 %if %{with java}
-%attr(755,root,root) %{_libdir}/%{name}/program/javaldx
-%attr(755,root,root) %{_libdir}/%{name}/program/java-set-classpath
-%{_libdir}/%{name}/program/jvmfwk3rc
-%{_libdir}/%{name}/program/JREProperties.class
+%attr(755,root,root) %{_libdir}/%{name}/basis*/program/javaldx
+%attr(755,root,root) %{_libdir}/%{name}/basis*/program/java-set-classpath
+%{_libdir}/%{name}/basis*/program/jvmfwk3rc
+%{_libdir}/%{name}/basis*/program/JREProperties.class
 
-%dir %{_libdir}/%{name}/program/classes
-%{_libdir}/%{name}/program/classes/ScriptFramework.jar
-%{_libdir}/%{name}/program/classes/ScriptProviderForBeanShell.jar
-%{_libdir}/%{name}/program/classes/ScriptProviderForJava.jar
-%{_libdir}/%{name}/program/classes/ScriptProviderForJavaScript.jar
-%{_libdir}/%{name}/program/classes/XMergeBridge.jar
-%{_libdir}/%{name}/program/classes/XSLTFilter.jar
-%{_libdir}/%{name}/program/classes/XSLTValidate.jar
-%{_libdir}/%{name}/program/classes/agenda.jar
-%{_libdir}/%{name}/program/classes/classes.jar
-%{_libdir}/%{name}/program/classes/commonwizards.jar
-%{_libdir}/%{name}/program/classes/fax.jar
-%{_libdir}/%{name}/program/classes/form.jar
-%{!?with_system_hsqldb:%{_libdir}/%{name}/program/classes/hsqldb.jar}
-%{_libdir}/%{name}/program/classes/java_uno.jar
-#%{_libdir}/%{name}/program/classes/java_uno_accessbridge.jar
-%{_libdir}/%{name}/program/classes/js.jar
-%{_libdir}/%{name}/program/classes/juh.jar
-%{_libdir}/%{name}/program/classes/jurt.jar
-%{_libdir}/%{name}/program/classes/jut.jar
-%{_libdir}/%{name}/program/classes/letter.jar
-%{_libdir}/%{name}/program/classes/officebean.jar
-%{_libdir}/%{name}/program/classes/query.jar
-%{_libdir}/%{name}/program/classes/report.jar
-%{_libdir}/%{name}/program/classes/ridl.jar
-%{_libdir}/%{name}/program/classes/sandbox.jar
-%{_libdir}/%{name}/program/classes/sdbc_hsqldb.jar
-%{!?with_system_xalan:%{_libdir}/%{name}/program/classes/serializer.jar}
-%{_libdir}/%{name}/program/classes/table.jar
-%{_libdir}/%{name}/program/classes/unoil.jar
-%{_libdir}/%{name}/program/classes/unoloader.jar
-%{_libdir}/%{name}/program/classes/web.jar
-%{!?with_system_xalan:%{_libdir}/%{name}/program/classes/xalan.jar}
-%{!?with_system_xerces:%{_libdir}/%{name}/program/classes/xercesImpl.jar}
-%{_libdir}/%{name}/program/classes/xmerge.jar
-%{!?with_system_xml_apis:%{_libdir}/%{name}/program/classes/xml-apis.jar}
+%dir %{_libdir}/%{name}/basis*/program/classes
+%{_libdir}/%{name}/basis*/program/classes/ScriptFramework.jar
+%{_libdir}/%{name}/basis*/program/classes/ScriptProviderForBeanShell.jar
+%{_libdir}/%{name}/basis*/program/classes/ScriptProviderForJava.jar
+%{_libdir}/%{name}/basis*/program/classes/ScriptProviderForJavaScript.jar
+%{_libdir}/%{name}/basis*/program/classes/XMergeBridge.jar
+%{_libdir}/%{name}/basis*/program/classes/XSLTFilter.jar
+%{_libdir}/%{name}/basis*/program/classes/XSLTValidate.jar
+%{_libdir}/%{name}/basis*/program/classes/agenda.jar
+%{_libdir}/%{name}/basis*/program/classes/classes.jar
+%{_libdir}/%{name}/basis*/program/classes/commonwizards.jar
+%{_libdir}/%{name}/basis*/program/classes/fax.jar
+%{_libdir}/%{name}/basis*/program/classes/form.jar
+%{!?with_system_hsqldb:%{_libdir}/%{name}/basis*/program/classes/hsqldb.jar}
+%{_libdir}/%{name}/basis*/program/classes/java_uno.jar
+#%{_libdir}/%{name}/basis*/program/classes/java_uno_accessbridge.jar
+%{_libdir}/%{name}/basis*/program/classes/js.jar
+%{_libdir}/%{name}/basis*/program/classes/juh.jar
+%{_libdir}/%{name}/basis*/program/classes/jurt.jar
+%{_libdir}/%{name}/basis*/program/classes/jut.jar
+%{_libdir}/%{name}/basis*/program/classes/letter.jar
+%{_libdir}/%{name}/basis*/program/classes/officebean.jar
+%{_libdir}/%{name}/basis*/program/classes/query.jar
+%{_libdir}/%{name}/basis*/program/classes/report.jar
+%{_libdir}/%{name}/basis*/program/classes/ridl.jar
+%{_libdir}/%{name}/basis*/program/classes/sandbox.jar
+%{_libdir}/%{name}/basis*/program/classes/sdbc_hsqldb.jar
+%{!?with_system_xalan:%{_libdir}/%{name}/basis*/program/classes/serializer.jar}
+%{_libdir}/%{name}/basis*/program/classes/table.jar
+%{_libdir}/%{name}/basis*/program/classes/unoil.jar
+%{_libdir}/%{name}/basis*/program/classes/unoloader.jar
+%{_libdir}/%{name}/basis*/program/classes/web.jar
+%{!?with_system_xalan:%{_libdir}/%{name}/basis*/program/classes/xalan.jar}
+%{!?with_system_xerces:%{_libdir}/%{name}/basis*/program/classes/xercesImpl.jar}
+%{_libdir}/%{name}/basis*/program/classes/xmerge.jar
+%{!?with_system_xml_apis:%{_libdir}/%{name}/basis*/program/classes/xml-apis.jar}
 
-%{_datadir}/%{name}/share/Scripts/beanshell
-%{_datadir}/%{name}/share/Scripts/javascript
-%{_datadir}/%{name}/share/Scripts/java
-%{_datadir}/%{name}/share/config/javavendors.xml
+%{_libdir}/%{name}/basis*/share/Scripts/beanshell
+%{_libdir}/%{name}/basis*/share/Scripts/javascript
+%{_libdir}/%{name}/basis*/share/Scripts/java
+%{_libdir}/%{name}/basis*/share/config/javavendors.xml
 
-%dir %{_datadir}/%{name}/share/xslt
-%{_datadir}/%{name}/share/xslt/common
-%dir %{_datadir}/%{name}/share/xslt/export
-%{_datadir}/%{name}/share/xslt/export/common
-%{_datadir}/%{name}/share/xslt/export/spreadsheetml
-%{_datadir}/%{name}/share/xslt/export/wordml
-%{_datadir}/%{name}/share/xslt/import
-%{_datadir}/%{name}/share/xslt/odfflatxml
-%{_datadir}/%{name}/share/xslt/wiki
+%dir %{_libdir}/%{name}/basis*/share/xslt
+%{_libdir}/%{name}/basis*/share/xslt/common
+%dir %{_libdir}/%{name}/basis*/share/xslt/export
+%{_libdir}/%{name}/basis*/share/xslt/export/common
+%{_libdir}/%{name}/basis*/share/xslt/export/spreadsheetml
+%{_libdir}/%{name}/basis*/share/xslt/export/wordml
+%{_libdir}/%{name}/basis*/share/xslt/import
+%{_libdir}/%{name}/basis*/share/xslt/odfflatxml
+%{_libdir}/%{name}/basis*/share/xslt/wiki
 %endif
 
 %{_datadir}/mime/packages/openoffice.xml
@@ -3284,78 +3285,78 @@ fi
 
 # en-US
 # TODO: use find lang for en-US too?
-%{_libdir}/%{name}/presets/config/*_en-US.so*
-%{_datadir}/%{name}/share/autocorr/acor_*.dat
-%{_datadir}/%{name}/share/autotext/en-US
-%{_datadir}/%{name}/share/registry/res/en-US
-%{_datadir}/%{name}/share/template/en-US
-%dir %{_datadir}/%{name}/share/template/wizard/letter/en-US
-%{_datadir}/%{name}/share/template/wizard/letter/en-US/*.ott
-%{_datadir}/%{name}/share/wordbook/en-US
+%{_libdir}/%{name}/basis*/presets/config/*_en-US.so*
+%{_libdir}/%{name}/basis*/share/autocorr/acor_*.dat
+%{_libdir}/%{name}/basis*/share/autotext/en-US
+%{_libdir}/%{name}/basis*/share/registry/res/en-US
+%{_libdir}/%{name}/basis*/share/template/en-US
+%dir %{_libdir}/%{name}/basis*/share/template/wizard/letter/en-US
+%{_libdir}/%{name}/basis*/share/template/wizard/letter/en-US/*.ott
+%{_libdir}/%{name}/basis*/share/wordbook/en-US
 
-%{_libdir}/%{name}/program/resource/abp680en-US.res
-%{_libdir}/%{name}/program/resource/analysis680en-US.res
-%{_libdir}/%{name}/program/resource/avmedia680en-US.res
-%{_libdir}/%{name}/program/resource/basctl680en-US.res
-%{_libdir}/%{name}/program/resource/bf_frm680en-US.res
-%{_libdir}/%{name}/program/resource/bf_ofa680en-US.res
-%{_libdir}/%{name}/program/resource/bf_sc680en-US.res
-%{_libdir}/%{name}/program/resource/bf_sch680en-US.res
-%{_libdir}/%{name}/program/resource/bf_sd680en-US.res
-#%{_libdir}/%{name}/program/resource/bf_sfx680en-US.res
-%{_libdir}/%{name}/program/resource/bf_svx680en-US.res
-%{_libdir}/%{name}/program/resource/bf_sw680en-US.res
-%{_libdir}/%{name}/program/resource/bib680en-US.res
-%{_libdir}/%{name}/program/resource/cal680en-US.res
-%{_libdir}/%{name}/program/resource/date680en-US.res
-%{_libdir}/%{name}/program/resource/dba680en-US.res
-%{_libdir}/%{name}/program/resource/dbp680en-US.res
-%{_libdir}/%{name}/program/resource/dbu680en-US.res
-%{_libdir}/%{name}/program/resource/dbw680en-US.res
-%{_libdir}/%{name}/program/resource/deployment680en-US.res
-%{_libdir}/%{name}/program/resource/deploymentgui680en-US.res
-%{_libdir}/%{name}/program/resource/dkt680en-US.res
-%{_libdir}/%{name}/program/resource/egi680en-US.res
-%{_libdir}/%{name}/program/resource/eme680en-US.res
-%{_libdir}/%{name}/program/resource/epb680en-US.res
-%{_libdir}/%{name}/program/resource/epg680en-US.res
-%{_libdir}/%{name}/program/resource/epp680en-US.res
-%{_libdir}/%{name}/program/resource/eps680en-US.res
-%{_libdir}/%{name}/program/resource/ept680en-US.res
-%{_libdir}/%{name}/program/resource/eur680en-US.res
-%{_libdir}/%{name}/program/resource/fps_office680en-US.res
-%{_libdir}/%{name}/program/resource/frm680en-US.res
-%{_libdir}/%{name}/program/resource/fwe680en-US.res
-%{_libdir}/%{name}/program/resource/gal680en-US.res
-%{_libdir}/%{name}/program/resource/imp680en-US.res
-%{_libdir}/%{name}/program/resource/ofa680en-US.res
-%{_libdir}/%{name}/program/resource/ooo680en-US.res
-%{_libdir}/%{name}/program/resource/pcr680en-US.res
-%{_libdir}/%{name}/program/resource/pdffilter680en-US.res
-%{_libdir}/%{name}/program/resource/preload680en-US.res
-%{_libdir}/%{name}/program/resource/productregistration680en-US.res
-%{_libdir}/%{name}/program/resource/san680en-US.res
-%{_libdir}/%{name}/program/resource/sc680en-US.res
-#%{_libdir}/%{name}/program/resource/sch680en-US.res
-%{_libdir}/%{name}/program/resource/sd680en-US.res
-%{_libdir}/%{name}/program/resource/sdberr680en-US.res
-%{_libdir}/%{name}/program/resource/sdbt680en-US.res
-%{_libdir}/%{name}/program/resource/sfx680en-US.res
-%{_libdir}/%{name}/program/resource/spa680en-US.res
-%{_libdir}/%{name}/program/resource/svs680en-US.res
-%{_libdir}/%{name}/program/resource/svt680en-US.res
-%{_libdir}/%{name}/program/resource/svx680en-US.res
-%{_libdir}/%{name}/program/resource/sw680en-US.res
-%{_libdir}/%{name}/program/resource/textconversiondlgs680en-US.res
-%{_libdir}/%{name}/program/resource/tfu680en-US.res
-%{_libdir}/%{name}/program/resource/tk680en-US.res
-%{_libdir}/%{name}/program/resource/tpl680en-US.res
-%{_libdir}/%{name}/program/resource/updchk680en-US.res
-%{_libdir}/%{name}/program/resource/uui680en-US.res
-%{_libdir}/%{name}/program/resource/vcl680en-US.res
-%{_libdir}/%{name}/program/resource/wzi680en-US.res
-%{_libdir}/%{name}/program/resource/xmlsec680en-US.res
-%{_libdir}/%{name}/program/resource/xsltdlg680en-US.res
+%{_libdir}/%{name}/basis*/program/resource/abpen-US.res
+%{_libdir}/%{name}/basis*/program/resource/analysisen-US.res
+%{_libdir}/%{name}/basis*/program/resource/avmediaen-US.res
+%{_libdir}/%{name}/basis*/program/resource/basctlen-US.res
+%{_libdir}/%{name}/basis*/program/resource/bf_frmen-US.res
+%{_libdir}/%{name}/basis*/program/resource/bf_ofaen-US.res
+%{_libdir}/%{name}/basis*/program/resource/bf_scen-US.res
+%{_libdir}/%{name}/basis*/program/resource/bf_schen-US.res
+%{_libdir}/%{name}/basis*/program/resource/bf_sden-US.res
+#%{_libdir}/%{name}/basis*/program/resource/bf_sfxen-US.res
+%{_libdir}/%{name}/basis*/program/resource/bf_svxen-US.res
+%{_libdir}/%{name}/basis*/program/resource/bf_swen-US.res
+%{_libdir}/%{name}/basis*/program/resource/biben-US.res
+%{_libdir}/%{name}/basis*/program/resource/calen-US.res
+%{_libdir}/%{name}/basis*/program/resource/dateen-US.res
+%{_libdir}/%{name}/basis*/program/resource/dbaen-US.res
+%{_libdir}/%{name}/basis*/program/resource/dbpen-US.res
+%{_libdir}/%{name}/basis*/program/resource/dbuen-US.res
+%{_libdir}/%{name}/basis*/program/resource/dbwen-US.res
+%{_libdir}/%{name}/basis*/program/resource/deploymenten-US.res
+%{_libdir}/%{name}/basis*/program/resource/deploymentguien-US.res
+%{_libdir}/%{name}/basis*/program/resource/dkten-US.res
+%{_libdir}/%{name}/basis*/program/resource/egien-US.res
+%{_libdir}/%{name}/basis*/program/resource/emeen-US.res
+%{_libdir}/%{name}/basis*/program/resource/epben-US.res
+%{_libdir}/%{name}/basis*/program/resource/epgen-US.res
+%{_libdir}/%{name}/basis*/program/resource/eppen-US.res
+%{_libdir}/%{name}/basis*/program/resource/epsen-US.res
+%{_libdir}/%{name}/basis*/program/resource/epten-US.res
+%{_libdir}/%{name}/basis*/program/resource/euren-US.res
+%{_libdir}/%{name}/basis*/program/resource/fps_officeen-US.res
+%{_libdir}/%{name}/basis*/program/resource/frmen-US.res
+%{_libdir}/%{name}/basis*/program/resource/fween-US.res
+%{_libdir}/%{name}/basis*/program/resource/galen-US.res
+%{_libdir}/%{name}/basis*/program/resource/impen-US.res
+%{_libdir}/%{name}/basis*/program/resource/ofaen-US.res
+%{_libdir}/%{name}/basis*/program/resource/oooen-US.res
+%{_libdir}/%{name}/basis*/program/resource/pcren-US.res
+%{_libdir}/%{name}/basis*/program/resource/pdffilteren-US.res
+%{_libdir}/%{name}/basis*/program/resource/preloaden-US.res
+%{_libdir}/%{name}/basis*/program/resource/productregistrationen-US.res
+%{_libdir}/%{name}/basis*/program/resource/sanen-US.res
+%{_libdir}/%{name}/basis*/program/resource/scen-US.res
+#%{_libdir}/%{name}/basis*/program/resource/schen-US.res
+%{_libdir}/%{name}/basis*/program/resource/sden-US.res
+%{_libdir}/%{name}/basis*/program/resource/sdberren-US.res
+%{_libdir}/%{name}/basis*/program/resource/sdbten-US.res
+%{_libdir}/%{name}/basis*/program/resource/sfxen-US.res
+%{_libdir}/%{name}/basis*/program/resource/spaen-US.res
+%{_libdir}/%{name}/basis*/program/resource/svsen-US.res
+%{_libdir}/%{name}/basis*/program/resource/svten-US.res
+%{_libdir}/%{name}/basis*/program/resource/svxen-US.res
+%{_libdir}/%{name}/basis*/program/resource/swen-US.res
+%{_libdir}/%{name}/basis*/program/resource/textconversiondlgsen-US.res
+%{_libdir}/%{name}/basis*/program/resource/tfuen-US.res
+%{_libdir}/%{name}/basis*/program/resource/tken-US.res
+%{_libdir}/%{name}/basis*/program/resource/tplen-US.res
+%{_libdir}/%{name}/basis*/program/resource/updchken-US.res
+%{_libdir}/%{name}/basis*/program/resource/uuien-US.res
+%{_libdir}/%{name}/basis*/program/resource/vclen-US.res
+%{_libdir}/%{name}/basis*/program/resource/wzien-US.res
+%{_libdir}/%{name}/basis*/program/resource/xmlsecen-US.res
+%{_libdir}/%{name}/basis*/program/resource/xsltdlgen-US.res
 
 %dir %{_datadir}/%{name}/licenses
 %{_datadir}/%{name}/licenses/LICENSE_en-US
@@ -3365,264 +3366,264 @@ fi
 %{_datadir}/%{name}/readmes/README_en-US
 %{_datadir}/%{name}/readmes/README_en-US.html
 
-%attr(755,root,root) %{_libdir}/%{name}/program/acceptor.uno.so
-%attr(755,root,root) %{_libdir}/%{name}/program/basprov680*.uno.so
-%attr(755,root,root) %{_libdir}/%{name}/program/behelper.uno.so
-%attr(755,root,root) %{_libdir}/%{name}/program/bridgefac.uno.so
-%attr(755,root,root) %{_libdir}/%{name}/program/cairocanvas.uno.so
-%attr(755,root,root) %{_libdir}/%{name}/program/canvasfactory.uno.so
-%attr(755,root,root) %{_libdir}/%{name}/program/cmdmail.uno.so
-%attr(755,root,root) %{_libdir}/%{name}/program/configmgr2.uno.so
-%attr(755,root,root) %{_libdir}/%{name}/program/connector.uno.so
-%attr(755,root,root) %{_libdir}/%{name}/program/deployment680*.uno.so
-%attr(755,root,root) %{_libdir}/%{name}/program/deploymentgui680*.uno.so
-%attr(755,root,root) %{_libdir}/%{name}/program/desktopbe1.uno.so
-%attr(755,root,root) %{_libdir}/%{name}/program/dlgprov680*.uno.so
-%attr(755,root,root) %{_libdir}/%{name}/program/fpicker.uno.so
-%attr(755,root,root) %{_libdir}/%{name}/program/fps_office.uno.so
-%attr(755,root,root) %{_libdir}/%{name}/program/fsstorage.uno.so
-%attr(755,root,root) %{_libdir}/%{name}/program/hatchwindowfactory.uno.so
-%attr(755,root,root) %{_libdir}/%{name}/program/i18npool.uno.so
-%attr(755,root,root) %{_libdir}/%{name}/program/i18nsearch.uno.so
-#%attr(755,root,root) %{_libdir}/%{name}/program/implreg.uno.so
-%attr(755,root,root) %{_libdir}/%{name}/program/introspection.uno.so
-%attr(755,root,root) %{_libdir}/%{name}/program/invocadapt.uno.so
-%attr(755,root,root) %{_libdir}/%{name}/program/invocation.uno.so
-%attr(755,root,root) %{_libdir}/%{name}/program/ldapbe2.uno.so
-%attr(755,root,root) %{_libdir}/%{name}/program/libabp680*.so
-%attr(755,root,root) %{_libdir}/%{name}/program/libadabas2.so
-%{!?with_system_agg:%attr(755,root,root) %{_libdir}/%{name}/program/libagg680*.so}
-%attr(755,root,root) %{_libdir}/%{name}/program/libanimcore.so
-%attr(755,root,root) %{_libdir}/%{name}/program/libavmedia680*.so
-%attr(755,root,root) %{_libdir}/%{name}/program/libavmediagst.so
-%attr(755,root,root) %{_libdir}/%{name}/program/libbasctl680*.so
-%attr(755,root,root) %{_libdir}/%{name}/program/libbasegfx680*.so
-%attr(755,root,root) %{_libdir}/%{name}/program/libbf_frm680*.so
-#%attr(755,root,root) %{_libdir}/%{name}/program/libbf_lng680*.so
-%attr(755,root,root) %{_libdir}/%{name}/program/libbf_migratefilter680*.so
-%attr(755,root,root) %{_libdir}/%{name}/program/libbf_ofa680*.so
-%attr(755,root,root) %{_libdir}/%{name}/program/libbf_sch680*.so
-%attr(755,root,root) %{_libdir}/%{name}/program/libbf_sd680*.so
-%attr(755,root,root) %{_libdir}/%{name}/program/libbf_sm680*.so
-%attr(755,root,root) %{_libdir}/%{name}/program/libbf_svx680*.so
-%attr(755,root,root) %{_libdir}/%{name}/program/libbf_sw680*.so
-%attr(755,root,root) %{_libdir}/%{name}/program/libbf_wrapper680*.so
-%attr(755,root,root) %{_libdir}/%{name}/program/libbf_xo680*.so
-%attr(755,root,root) %{_libdir}/%{name}/program/libbib680*.so
-%attr(755,root,root) %{_libdir}/%{name}/program/libbindet680*.so
-%attr(755,root,root) %{_libdir}/%{name}/program/libcached1.so
-%attr(755,root,root) %{_libdir}/%{name}/program/libcanvastools680*.so
-%attr(755,root,root) %{_libdir}/%{name}/program/libcollator_data.so
-%attr(755,root,root) %{_libdir}/%{name}/program/libcomphelp4gcc3.so
-%attr(755,root,root) %{_libdir}/%{name}/program/libcppcanvas680*.so
-%attr(755,root,root) %{_libdir}/%{name}/program/libctl680*.so
-%attr(755,root,root) %{_libdir}/%{name}/program/libcui680*.so
-%attr(755,root,root) %{_libdir}/%{name}/program/libdba680*.so
-%attr(755,root,root) %{_libdir}/%{name}/program/libdbacfg680*.so
-%attr(755,root,root) %{_libdir}/%{name}/program/libdbase680*.so
-%attr(755,root,root) %{_libdir}/%{name}/program/libdbaxml680*.so
-%attr(755,root,root) %{_libdir}/%{name}/program/libdbp680*.so
-%attr(755,root,root) %{_libdir}/%{name}/program/libdbpool2.so
-%attr(755,root,root) %{_libdir}/%{name}/program/libdbtools680*.so
-%attr(755,root,root) %{_libdir}/%{name}/program/libdbu680*.so
-%attr(755,root,root) %{_libdir}/%{name}/program/libdict_ja.so
-%attr(755,root,root) %{_libdir}/%{name}/program/libdict_zh.so
-%attr(755,root,root) %{_libdir}/%{name}/program/libdtransX11680*.so
-%attr(755,root,root) %{_libdir}/%{name}/program/libeggtray680*.so
-%attr(755,root,root) %{_libdir}/%{name}/program/libegi680*.so
-%attr(755,root,root) %{_libdir}/%{name}/program/libembobj.so
-%attr(755,root,root) %{_libdir}/%{name}/program/libemboleobj.so
-%attr(755,root,root) %{_libdir}/%{name}/program/libeme680*.so
-%attr(755,root,root) %{_libdir}/%{name}/program/libemp680*.so
-%attr(755,root,root) %{_libdir}/%{name}/program/libepb680*.so
-%attr(755,root,root) %{_libdir}/%{name}/program/libepg680*.so
-%attr(755,root,root) %{_libdir}/%{name}/program/libepp680*.so
-%attr(755,root,root) %{_libdir}/%{name}/program/libeps680*.so
-%attr(755,root,root) %{_libdir}/%{name}/program/libept680*.so
-%attr(755,root,root) %{_libdir}/%{name}/program/libera680*.so
-%attr(755,root,root) %{_libdir}/%{name}/program/libeti680*.so
-%attr(755,root,root) %{_libdir}/%{name}/program/libevoab1.so
-%attr(755,root,root) %{_libdir}/%{name}/program/libevtatt.so
-%attr(755,root,root) %{_libdir}/%{name}/program/libexlink680*.so
-%attr(755,root,root) %{_libdir}/%{name}/program/libexp680*.so
-%attr(755,root,root) %{_libdir}/%{name}/program/libfile680*.so
-%attr(755,root,root) %{_libdir}/%{name}/program/libfileacc.so
-%attr(755,root,root) %{_libdir}/%{name}/program/libfilterconfig1.so
-%attr(755,root,root) %{_libdir}/%{name}/program/libflat680*.so
-%attr(755,root,root) %{_libdir}/%{name}/program/libfrm680*.so
-%attr(755,root,root) %{_libdir}/%{name}/program/libfwe680*.so
-%attr(755,root,root) %{_libdir}/%{name}/program/libfwi680*.so
-%attr(755,root,root) %{_libdir}/%{name}/program/libfwk680*.so
-%attr(755,root,root) %{_libdir}/%{name}/program/libfwl680*.so
-%attr(755,root,root) %{_libdir}/%{name}/program/libfwm680*.so
-%attr(755,root,root) %{_libdir}/%{name}/program/libgcc3_uno.so
-%attr(755,root,root) %{_libdir}/%{name}/program/libgo680*.so
-%{!?with_system_hunspell:%attr(755,root,root) %{_libdir}/%{name}/program/libhunspell.so}
-%attr(755,root,root) %{_libdir}/%{name}/program/libhyphen680*.so
-%attr(755,root,root) %{_libdir}/%{name}/program/libi18nisolang1gcc3.so
-%attr(755,root,root) %{_libdir}/%{name}/program/libi18nregexpgcc3.so
-%attr(755,root,root) %{_libdir}/%{name}/program/libi18nutilgcc3.so
-%attr(755,root,root) %{_libdir}/%{name}/program/libicd680*.so
-%attr(755,root,root) %{_libdir}/%{name}/program/libicg680*.so
-%attr(755,root,root) %{_libdir}/%{name}/program/libidx680*.so
-%attr(755,root,root) %{_libdir}/%{name}/program/libime680*.so
-%attr(755,root,root) %{_libdir}/%{name}/program/libindex_data.so
-%attr(755,root,root) %{_libdir}/%{name}/program/libipb680*.so
-%attr(755,root,root) %{_libdir}/%{name}/program/libipd680*.so
-%attr(755,root,root) %{_libdir}/%{name}/program/libips680*.so
-%attr(755,root,root) %{_libdir}/%{name}/program/libipt680*.so
-%attr(755,root,root) %{_libdir}/%{name}/program/libipx680*.so
-%attr(755,root,root) %{_libdir}/%{name}/program/libira680*.so
-%attr(755,root,root) %{_libdir}/%{name}/program/libitg680*.so
-%attr(755,root,root) %{_libdir}/%{name}/program/libiti680*.so
-%attr(755,root,root) %{_libdir}/%{name}/program/libj680l*_g.so
-%attr(755,root,root) %{_libdir}/%{name}/program/libkab1.so
-%attr(755,root,root) %{_libdir}/%{name}/program/liblegacy_binfilters680*.so
-%attr(755,root,root) %{_libdir}/%{name}/program/liblng680*.so
-%attr(755,root,root) %{_libdir}/%{name}/program/liblnth680*.so
-%attr(755,root,root) %{_libdir}/%{name}/program/liblocaledata_en.so
-%attr(755,root,root) %{_libdir}/%{name}/program/liblocaledata_es.so
-%attr(755,root,root) %{_libdir}/%{name}/program/liblocaledata_euro.so
-%attr(755,root,root) %{_libdir}/%{name}/program/liblocaledata_others.so
-%attr(755,root,root) %{_libdir}/%{name}/program/liblwpft680*.so
-%attr(755,root,root) %{_libdir}/%{name}/program/libmcnttype.so
-#%attr(755,root,root) %{_libdir}/%{name}/program/libmdb680*.so
-#%attr(755,root,root) %{_libdir}/%{name}/program/libmdbimpl680*.so
-%attr(755,root,root) %{_libdir}/%{name}/program/libmsworks680*.so
-%attr(755,root,root) %{_libdir}/%{name}/program/libmysql2.so
-%attr(755,root,root) %{_libdir}/%{name}/program/libodbc2.so
-%attr(755,root,root) %{_libdir}/%{name}/program/libodbcbase2.so
-%attr(755,root,root) %{_libdir}/%{name}/program/liboffacc680*.so
-%attr(755,root,root) %{_libdir}/%{name}/program/libpackage2.so
-%attr(755,root,root) %{_libdir}/%{name}/program/libpcr680*.so
-%attr(755,root,root) %{_libdir}/%{name}/program/libpdffilter680*.so
-#%attr(755,root,root) %{_libdir}/%{name}/program/libpk680*.so
-%attr(755,root,root) %{_libdir}/%{name}/program/libpl680*.so
-%attr(755,root,root) %{_libdir}/%{name}/program/libpreload680*.so
-%attr(755,root,root) %{_libdir}/%{name}/program/libprotocolhandler680*.so
-%attr(755,root,root) %{_libdir}/%{name}/program/libpsp680*.so
-%attr(755,root,root) %{_libdir}/%{name}/program/libqstart_gtk680*.so
-%attr(755,root,root) %{_libdir}/%{name}/program/librecentfile.so
-%attr(755,root,root) %{_libdir}/%{name}/program/libres680*.so
-%attr(755,root,root) %{_libdir}/%{name}/program/libsb680*.so
-#%attr(755,root,root) %{_libdir}/%{name}/program/libsch680*.so
-#%attr(755,root,root) %{_libdir}/%{name}/program/libschd680*.so
-%attr(755,root,root) %{_libdir}/%{name}/program/libscn680*.so
-%attr(755,root,root) %{_libdir}/%{name}/program/libscriptframe.so
-%attr(755,root,root) %{_libdir}/%{name}/program/libsd680*.so
-%attr(755,root,root) %{_libdir}/%{name}/program/libsdbc2.so
-%attr(755,root,root) %{_libdir}/%{name}/program/libsdbt680*.so
-%attr(755,root,root) %{_libdir}/%{name}/program/libsdd680*.so
-%attr(755,root,root) %{_libdir}/%{name}/program/libsdui680*.so
-%attr(755,root,root) %{_libdir}/%{name}/program/libsfx680*.so
-#%attr(755,root,root) %{_libdir}/%{name}/program/libso680*.so
-%attr(755,root,root) %{_libdir}/%{name}/program/libsot680*.so
-%attr(755,root,root) %{_libdir}/%{name}/program/libspa680*.so
-%attr(755,root,root) %{_libdir}/%{name}/program/libspell680*.so
-%attr(755,root,root) %{_libdir}/%{name}/program/libspl680*.so
-%attr(755,root,root) %{_libdir}/%{name}/program/libspl_unx680*.so
-%attr(755,root,root) %{_libdir}/%{name}/program/libsrtrs1.so
-%attr(755,root,root) %{_libdir}/%{name}/program/libsts680*.so
-%attr(755,root,root) %{_libdir}/%{name}/program/libsvl680*.so
-%attr(755,root,root) %{_libdir}/%{name}/program/libsvt680*.so
-%attr(755,root,root) %{_libdir}/%{name}/program/libsvx680*.so
-%attr(755,root,root) %{_libdir}/%{name}/program/libsw680*.so
-%attr(755,root,root) %{_libdir}/%{name}/program/libtextconv_dict.so
-%attr(755,root,root) %{_libdir}/%{name}/program/libtextconversiondlgs680*.so
-%attr(755,root,root) %{_libdir}/%{name}/program/libtfu680*.so
-%attr(755,root,root) %{_libdir}/%{name}/program/libtk680*.so
-%attr(755,root,root) %{_libdir}/%{name}/program/libtl680*.so
-%attr(755,root,root) %{_libdir}/%{name}/program/libtvhlp1.so
-%attr(755,root,root) %{_libdir}/%{name}/program/libucb1.so
-%attr(755,root,root) %{_libdir}/%{name}/program/libucbhelper4gcc3.so
-%attr(755,root,root) %{_libdir}/%{name}/program/libucpchelp1.so
-%attr(755,root,root) %{_libdir}/%{name}/program/libucpdav1.so
-%attr(755,root,root) %{_libdir}/%{name}/program/libucpfile1.so
-%attr(755,root,root) %{_libdir}/%{name}/program/libucpftp1.so
-%attr(755,root,root) %{_libdir}/%{name}/program/libucphier1.so
-%attr(755,root,root) %{_libdir}/%{name}/program/libucppkg1.so
-%attr(755,root,root) %{_libdir}/%{name}/program/libunoxml680*.so
-%attr(755,root,root) %{_libdir}/%{name}/program/libupdchk680*.so
-%attr(755,root,root) %{_libdir}/%{name}/program/liburp_uno.so
-%attr(755,root,root) %{_libdir}/%{name}/program/libutl680*.so
-%attr(755,root,root) %{_libdir}/%{name}/program/libuui680*.so
-%attr(755,root,root) %{_libdir}/%{name}/program/libvcl680*.so
-%attr(755,root,root) %{_libdir}/%{name}/program/libvclplug_gen680*.so
-%attr(755,root,root) %{_libdir}/%{name}/program/libvos3gcc3.so
-%attr(755,root,root) %{_libdir}/%{name}/program/libxcr680*.so
-%attr(755,root,root) %{_libdir}/%{name}/program/libxmlfa680*.so
-%attr(755,root,root) %{_libdir}/%{name}/program/libxmlfd680*.so
-%attr(755,root,root) %{_libdir}/%{name}/program/libxmlsecurity.so
-%attr(755,root,root) %{_libdir}/%{name}/program/libxmx680*.so
-%attr(755,root,root) %{_libdir}/%{name}/program/libxo680*.so
-%attr(755,root,root) %{_libdir}/%{name}/program/libxof680*.so
-%attr(755,root,root) %{_libdir}/%{name}/program/libxsec_fw.so
-%attr(755,root,root) %{_libdir}/%{name}/program/libxsec_xmlsec.so
-%attr(755,root,root) %{_libdir}/%{name}/program/libxsltdlg680*.so
-%attr(755,root,root) %{_libdir}/%{name}/program/libxsltfilter680*.so
-%attr(755,root,root) %{_libdir}/%{name}/program/libxstor.so
-%attr(755,root,root) %{_libdir}/%{name}/program/localebe1.uno.so
-%attr(755,root,root) %{_libdir}/%{name}/program/migrationoo2.uno.so
-%attr(755,root,root) %{_libdir}/%{name}/program/namingservice.uno.so
-#%attr(755,root,root) %{_libdir}/%{name}/program/nestedreg.uno.so
-%attr(755,root,root) %{_libdir}/%{name}/program/passwordcontainer.uno.so
-%attr(755,root,root) %{_libdir}/%{name}/program/productregistration.uno.so
-%attr(755,root,root) %{_libdir}/%{name}/program/proxyfac.uno.so
-%attr(755,root,root) %{_libdir}/%{name}/program/reflection.uno.so
-#%attr(755,root,root) %{_libdir}/%{name}/program/regtypeprov.uno.so
-%attr(755,root,root) %{_libdir}/%{name}/program/remotebridge.uno.so
-%attr(755,root,root) %{_libdir}/%{name}/program/sax.uno.so
-#%attr(755,root,root) %{_libdir}/%{name}/program/security.uno.so
-#%attr(755,root,root) %{_libdir}/%{name}/program/servicemgr.uno.so
-#%attr(755,root,root) %{_libdir}/%{name}/program/shlibloader.uno.so
-#%attr(755,root,root) %{_libdir}/%{name}/program/simplereg.uno.so
-%attr(755,root,root) %{_libdir}/%{name}/program/slideshow.uno.so
-%attr(755,root,root) %{_libdir}/%{name}/program/streams.uno.so
-%attr(755,root,root) %{_libdir}/%{name}/program/stocservices.uno.so
-%attr(755,root,root) %{_libdir}/%{name}/program/svtmisc.uno.so
-%attr(755,root,root) %{_libdir}/%{name}/program/sysmgr1.uno.so
-%attr(755,root,root) %{_libdir}/%{name}/program/syssh.uno.so
-%attr(755,root,root) %{_libdir}/%{name}/program/textinstream.uno.so
-%attr(755,root,root) %{_libdir}/%{name}/program/textoutstream.uno.so
-#%attr(755,root,root) %{_libdir}/%{name}/program/typeconverter.uno.so
-#%attr(755,root,root) %{_libdir}/%{name}/program/typemgr.uno.so
-%attr(755,root,root) %{_libdir}/%{name}/program/ucpexpand1.uno.so
-%attr(755,root,root) %{_libdir}/%{name}/program/ucptdoc1.uno.so
-#%attr(755,root,root) %{_libdir}/%{name}/program/uriproc.uno.so
-%attr(755,root,root) %{_libdir}/%{name}/program/uuresolver.uno.so
-%attr(755,root,root) %{_libdir}/%{name}/program/vbaevents680*.uno.so
-%attr(755,root,root) %{_libdir}/%{name}/program/vclcanvas.uno.so
+%attr(755,root,root) %{_libdir}/%{name}/ure/lib/acceptor.uno.so
+%attr(755,root,root) %{_libdir}/%{name}/basis*/program/basprov*.uno.so
+%attr(755,root,root) %{_libdir}/%{name}/basis*/program/behelper.uno.so
+%attr(755,root,root) %{_libdir}/%{name}/ure/lib/bridgefac.uno.so
+%attr(755,root,root) %{_libdir}/%{name}/basis*/program/cairocanvas.uno.so
+%attr(755,root,root) %{_libdir}/%{name}/basis*/program/canvasfactory.uno.so
+%attr(755,root,root) %{_libdir}/%{name}/basis*/program/cmdmail.uno.so
+%attr(755,root,root) %{_libdir}/%{name}/basis*/program/configmgr2.uno.so
+%attr(755,root,root) %{_libdir}/%{name}/ure/lib/connector.uno.so
+%attr(755,root,root) %{_libdir}/%{name}/basis*/program/deployment*.uno.so
+%attr(755,root,root) %{_libdir}/%{name}/basis*/program/deploymentgui*.uno.so
+%attr(755,root,root) %{_libdir}/%{name}/basis*/program/desktopbe1.uno.so
+%attr(755,root,root) %{_libdir}/%{name}/basis*/program/dlgprov*.uno.so
+%attr(755,root,root) %{_libdir}/%{name}/basis*/program/fpicker.uno.so
+%attr(755,root,root) %{_libdir}/%{name}/basis*/program/fps_office.uno.so
+%attr(755,root,root) %{_libdir}/%{name}/basis*/program/fsstorage.uno.so
+%attr(755,root,root) %{_libdir}/%{name}/basis*/program/hatchwindowfactory.uno.so
+%attr(755,root,root) %{_libdir}/%{name}/basis*/program/i18npool.uno.so
+%attr(755,root,root) %{_libdir}/%{name}/basis*/program/i18nsearch.uno.so
+#%attr(755,root,root) %{_libdir}/%{name}/basis*/program/implreg.uno.so
+%attr(755,root,root) %{_libdir}/%{name}/ure/lib/introspection.uno.so
+%attr(755,root,root) %{_libdir}/%{name}/ure/lib/invocadapt.uno.so
+%attr(755,root,root) %{_libdir}/%{name}/basis*/program/invocation.uno.so
+%attr(755,root,root) %{_libdir}/%{name}/basis*/program/ldapbe2.uno.so
+%attr(755,root,root) %{_libdir}/%{name}/basis*/program/libabplx*.so
+%attr(755,root,root) %{_libdir}/%{name}/basis*/program/libadabas2.so
+%{!?with_system_agg:%attr(755,root,root) %{_libdir}/%{name}/basis*/program/libagglx*.so}
+%attr(755,root,root) %{_libdir}/%{name}/basis*/program/libanimcore.so
+%attr(755,root,root) %{_libdir}/%{name}/basis*/program/libavmedialx*.so
+%attr(755,root,root) %{_libdir}/%{name}/basis*/program/libavmediagst.so
+%attr(755,root,root) %{_libdir}/%{name}/basis*/program/libbasctllx*.so
+%attr(755,root,root) %{_libdir}/%{name}/basis*/program/libbasegfxlx*.so
+%attr(755,root,root) %{_libdir}/%{name}/basis*/program/libbf_frmlx*.so
+#%attr(755,root,root) %{_libdir}/%{name}/basis*/program/libbf_lnglx*.so
+%attr(755,root,root) %{_libdir}/%{name}/basis*/program/libbf_migratefilterlx*.so
+%attr(755,root,root) %{_libdir}/%{name}/basis*/program/libbf_ofalx*.so
+%attr(755,root,root) %{_libdir}/%{name}/basis*/program/libbf_schlx*.so
+%attr(755,root,root) %{_libdir}/%{name}/basis*/program/libbf_sdlx*.so
+%attr(755,root,root) %{_libdir}/%{name}/basis*/program/libbf_smlx*.so
+%attr(755,root,root) %{_libdir}/%{name}/basis*/program/libbf_svxlx*.so
+%attr(755,root,root) %{_libdir}/%{name}/basis*/program/libbf_swlx*.so
+%attr(755,root,root) %{_libdir}/%{name}/basis*/program/libbf_wrapperlx*.so
+%attr(755,root,root) %{_libdir}/%{name}/basis*/program/libbf_xolx*.so
+%attr(755,root,root) %{_libdir}/%{name}/basis*/program/libbiblx*.so
+%attr(755,root,root) %{_libdir}/%{name}/basis*/program/libbindetlx*.so
+%attr(755,root,root) %{_libdir}/%{name}/basis*/program/libcached1.so
+%attr(755,root,root) %{_libdir}/%{name}/basis*/program/libcanvastoolslx*.so
+%attr(755,root,root) %{_libdir}/%{name}/basis*/program/libcollator_data.so
+%attr(755,root,root) %{_libdir}/%{name}/basis*/program/libcomphelp4gcc3.so
+%attr(755,root,root) %{_libdir}/%{name}/basis*/program/libcppcanvaslx*.so
+%attr(755,root,root) %{_libdir}/%{name}/basis*/program/libctllx*.so
+%attr(755,root,root) %{_libdir}/%{name}/basis*/program/libcuilx*.so
+%attr(755,root,root) %{_libdir}/%{name}/basis*/program/libdbalx*.so
+%attr(755,root,root) %{_libdir}/%{name}/basis*/program/libdbacfglx*.so
+%attr(755,root,root) %{_libdir}/%{name}/basis*/program/libdbaselx*.so
+%attr(755,root,root) %{_libdir}/%{name}/basis*/program/libdbaxmllx*.so
+%attr(755,root,root) %{_libdir}/%{name}/basis*/program/libdbplx*.so
+%attr(755,root,root) %{_libdir}/%{name}/basis*/program/libdbpool2.so
+%attr(755,root,root) %{_libdir}/%{name}/basis*/program/libdbtoolslx*.so
+%attr(755,root,root) %{_libdir}/%{name}/basis*/program/libdbulx*.so
+%attr(755,root,root) %{_libdir}/%{name}/basis*/program/libdict_ja.so
+%attr(755,root,root) %{_libdir}/%{name}/basis*/program/libdict_zh.so
+%attr(755,root,root) %{_libdir}/%{name}/basis*/program/libdtransX11lx*.so
+%attr(755,root,root) %{_libdir}/%{name}/basis*/program/libeggtraylx*.so
+%attr(755,root,root) %{_libdir}/%{name}/basis*/program/libegilx*.so
+%attr(755,root,root) %{_libdir}/%{name}/basis*/program/libembobj.so
+%attr(755,root,root) %{_libdir}/%{name}/basis*/program/libemboleobj.so
+%attr(755,root,root) %{_libdir}/%{name}/basis*/program/libemelx*.so
+%attr(755,root,root) %{_libdir}/%{name}/basis*/program/libemplx*.so
+%attr(755,root,root) %{_libdir}/%{name}/basis*/program/libepblx*.so
+%attr(755,root,root) %{_libdir}/%{name}/basis*/program/libepglx*.so
+%attr(755,root,root) %{_libdir}/%{name}/basis*/program/libepplx*.so
+%attr(755,root,root) %{_libdir}/%{name}/basis*/program/libepslx*.so
+%attr(755,root,root) %{_libdir}/%{name}/basis*/program/libeptlx*.so
+%attr(755,root,root) %{_libdir}/%{name}/basis*/program/liberalx*.so
+%attr(755,root,root) %{_libdir}/%{name}/basis*/program/libetilx*.so
+%attr(755,root,root) %{_libdir}/%{name}/basis*/program/libevoab1.so
+%attr(755,root,root) %{_libdir}/%{name}/basis*/program/libevtatt.so
+%attr(755,root,root) %{_libdir}/%{name}/basis*/program/libexlinklx*.so
+%attr(755,root,root) %{_libdir}/%{name}/basis*/program/libexplx*.so
+%attr(755,root,root) %{_libdir}/%{name}/basis*/program/libfilelx*.so
+%attr(755,root,root) %{_libdir}/%{name}/basis*/program/libfileacc.so
+%attr(755,root,root) %{_libdir}/%{name}/basis*/program/libfilterconfig1.so
+%attr(755,root,root) %{_libdir}/%{name}/basis*/program/libflatlx*.so
+%attr(755,root,root) %{_libdir}/%{name}/basis*/program/libfrmlx*.so
+%attr(755,root,root) %{_libdir}/%{name}/basis*/program/libfwelx*.so
+%attr(755,root,root) %{_libdir}/%{name}/basis*/program/libfwilx*.so
+%attr(755,root,root) %{_libdir}/%{name}/basis*/program/libfwklx*.so
+%attr(755,root,root) %{_libdir}/%{name}/basis*/program/libfwllx*.so
+%attr(755,root,root) %{_libdir}/%{name}/basis*/program/libfwmlx*.so
+%attr(755,root,root) %{_libdir}/%{name}/basis*/program/libgcc3_uno.so
+%attr(755,root,root) %{_libdir}/%{name}/basis*/program/libgolx*.so
+%{!?with_system_hunspell:%attr(755,root,root) %{_libdir}/%{name}/basis*/program/libhunspell.so}
+%attr(755,root,root) %{_libdir}/%{name}/basis*/program/libhyphenlx*.so
+%attr(755,root,root) %{_libdir}/%{name}/basis*/program/libi18nisolang1gcc3.so
+%attr(755,root,root) %{_libdir}/%{name}/basis*/program/libi18nregexpgcc3.so
+%attr(755,root,root) %{_libdir}/%{name}/basis*/program/libi18nutilgcc3.so
+%attr(755,root,root) %{_libdir}/%{name}/basis*/program/libicdlx*.so
+%attr(755,root,root) %{_libdir}/%{name}/basis*/program/libicglx*.so
+%attr(755,root,root) %{_libdir}/%{name}/basis*/program/libidxlx*.so
+%attr(755,root,root) %{_libdir}/%{name}/basis*/program/libimelx*.so
+%attr(755,root,root) %{_libdir}/%{name}/basis*/program/libindex_data.so
+%attr(755,root,root) %{_libdir}/%{name}/basis*/program/libipblx*.so
+%attr(755,root,root) %{_libdir}/%{name}/basis*/program/libipdlx*.so
+%attr(755,root,root) %{_libdir}/%{name}/basis*/program/libipslx*.so
+%attr(755,root,root) %{_libdir}/%{name}/basis*/program/libiptlx*.so
+%attr(755,root,root) %{_libdir}/%{name}/basis*/program/libipxlx*.so
+%attr(755,root,root) %{_libdir}/%{name}/basis*/program/libiralx*.so
+%attr(755,root,root) %{_libdir}/%{name}/basis*/program/libitglx*.so
+%attr(755,root,root) %{_libdir}/%{name}/basis*/program/libitilx*.so
+%attr(755,root,root) %{_libdir}/%{name}/basis*/program/libjl*_g.so
+%attr(755,root,root) %{_libdir}/%{name}/basis*/program/libkab1.so
+%attr(755,root,root) %{_libdir}/%{name}/basis*/program/liblegacy_binfilterslx*.so
+%attr(755,root,root) %{_libdir}/%{name}/basis*/program/liblnglx*.so
+%attr(755,root,root) %{_libdir}/%{name}/basis*/program/liblnthlx*.so
+%attr(755,root,root) %{_libdir}/%{name}/basis*/program/liblocaledata_en.so
+%attr(755,root,root) %{_libdir}/%{name}/basis*/program/liblocaledata_es.so
+%attr(755,root,root) %{_libdir}/%{name}/basis*/program/liblocaledata_euro.so
+%attr(755,root,root) %{_libdir}/%{name}/basis*/program/liblocaledata_others.so
+%attr(755,root,root) %{_libdir}/%{name}/basis*/program/liblwpftlx*.so
+%attr(755,root,root) %{_libdir}/%{name}/basis*/program/libmcnttype.so
+#%attr(755,root,root) %{_libdir}/%{name}/basis*/program/libmdblx*.so
+#%attr(755,root,root) %{_libdir}/%{name}/basis*/program/libmdbimpllx*.so
+%attr(755,root,root) %{_libdir}/%{name}/basis*/program/libmsworkslx*.so
+%attr(755,root,root) %{_libdir}/%{name}/basis*/program/libmysql2.so
+%attr(755,root,root) %{_libdir}/%{name}/basis*/program/libodbc2.so
+%attr(755,root,root) %{_libdir}/%{name}/basis*/program/libodbcbase2.so
+%attr(755,root,root) %{_libdir}/%{name}/basis*/program/liboffacclx*.so
+%attr(755,root,root) %{_libdir}/%{name}/basis*/program/libpackage2.so
+%attr(755,root,root) %{_libdir}/%{name}/basis*/program/libpcrlx*.so
+%attr(755,root,root) %{_libdir}/%{name}/basis*/program/libpdffilterlx*.so
+#%attr(755,root,root) %{_libdir}/%{name}/basis*/program/libpklx*.so
+%attr(755,root,root) %{_libdir}/%{name}/basis*/program/libpllx*.so
+%attr(755,root,root) %{_libdir}/%{name}/basis*/program/libpreloadlx*.so
+%attr(755,root,root) %{_libdir}/%{name}/basis*/program/libprotocolhandlerlx*.so
+%attr(755,root,root) %{_libdir}/%{name}/basis*/program/libpsplx*.so
+%attr(755,root,root) %{_libdir}/%{name}/basis*/program/libqstart_gtklx*.so
+%attr(755,root,root) %{_libdir}/%{name}/basis*/program/librecentfile.so
+%attr(755,root,root) %{_libdir}/%{name}/basis*/program/libreslx*.so
+%attr(755,root,root) %{_libdir}/%{name}/basis*/program/libsblx*.so
+#%attr(755,root,root) %{_libdir}/%{name}/basis*/program/libschlx*.so
+#%attr(755,root,root) %{_libdir}/%{name}/basis*/program/libschdlx*.so
+%attr(755,root,root) %{_libdir}/%{name}/basis*/program/libscnlx*.so
+%attr(755,root,root) %{_libdir}/%{name}/basis*/program/libscriptframe.so
+%attr(755,root,root) %{_libdir}/%{name}/basis*/program/libsdlx*.so
+%attr(755,root,root) %{_libdir}/%{name}/basis*/program/libsdbc2.so
+%attr(755,root,root) %{_libdir}/%{name}/basis*/program/libsdbtlx*.so
+%attr(755,root,root) %{_libdir}/%{name}/basis*/program/libsddlx*.so
+%attr(755,root,root) %{_libdir}/%{name}/basis*/program/libsduilx*.so
+%attr(755,root,root) %{_libdir}/%{name}/basis*/program/libsfxlx*.so
+#%attr(755,root,root) %{_libdir}/%{name}/basis*/program/libsolx*.so
+%attr(755,root,root) %{_libdir}/%{name}/basis*/program/libsotlx*.so
+%attr(755,root,root) %{_libdir}/%{name}/basis*/program/libspalx*.so
+%attr(755,root,root) %{_libdir}/%{name}/basis*/program/libspelllx*.so
+%attr(755,root,root) %{_libdir}/%{name}/basis*/program/libspllx*.so
+%attr(755,root,root) %{_libdir}/%{name}/basis*/program/libspl_unxlx*.so
+%attr(755,root,root) %{_libdir}/%{name}/basis*/program/libsrtrs1.so
+%attr(755,root,root) %{_libdir}/%{name}/basis*/program/libstslx*.so
+%attr(755,root,root) %{_libdir}/%{name}/basis*/program/libsvllx*.so
+%attr(755,root,root) %{_libdir}/%{name}/basis*/program/libsvtlx*.so
+%attr(755,root,root) %{_libdir}/%{name}/basis*/program/libsvxlx*.so
+%attr(755,root,root) %{_libdir}/%{name}/basis*/program/libswlx*.so
+%attr(755,root,root) %{_libdir}/%{name}/basis*/program/libtextconv_dict.so
+%attr(755,root,root) %{_libdir}/%{name}/basis*/program/libtextconversiondlgslx*.so
+%attr(755,root,root) %{_libdir}/%{name}/basis*/program/libtfulx*.so
+%attr(755,root,root) %{_libdir}/%{name}/basis*/program/libtklx*.so
+%attr(755,root,root) %{_libdir}/%{name}/basis*/program/libtllx*.so
+%attr(755,root,root) %{_libdir}/%{name}/basis*/program/libtvhlp1.so
+%attr(755,root,root) %{_libdir}/%{name}/basis*/program/libucb1.so
+%attr(755,root,root) %{_libdir}/%{name}/basis*/program/libucbhelper4gcc3.so
+%attr(755,root,root) %{_libdir}/%{name}/basis*/program/libucpchelp1.so
+%attr(755,root,root) %{_libdir}/%{name}/basis*/program/libucpdav1.so
+%attr(755,root,root) %{_libdir}/%{name}/basis*/program/libucpfile1.so
+%attr(755,root,root) %{_libdir}/%{name}/basis*/program/libucpftp1.so
+%attr(755,root,root) %{_libdir}/%{name}/basis*/program/libucphier1.so
+%attr(755,root,root) %{_libdir}/%{name}/basis*/program/libucppkg1.so
+%attr(755,root,root) %{_libdir}/%{name}/basis*/program/libunoxmllx*.so
+%attr(755,root,root) %{_libdir}/%{name}/basis*/program/libupdchklx*.so
+%attr(755,root,root) %{_libdir}/%{name}/basis*/program/liburp_uno.so
+%attr(755,root,root) %{_libdir}/%{name}/basis*/program/libutllx*.so
+%attr(755,root,root) %{_libdir}/%{name}/basis*/program/libuuilx*.so
+%attr(755,root,root) %{_libdir}/%{name}/basis*/program/libvcllx*.so
+%attr(755,root,root) %{_libdir}/%{name}/basis*/program/libvclplug_genlx*.so
+%attr(755,root,root) %{_libdir}/%{name}/basis*/program/libvos3gcc3.so
+%attr(755,root,root) %{_libdir}/%{name}/basis*/program/libxcrlx*.so
+%attr(755,root,root) %{_libdir}/%{name}/basis*/program/libxmlfalx*.so
+%attr(755,root,root) %{_libdir}/%{name}/basis*/program/libxmlfdlx*.so
+%attr(755,root,root) %{_libdir}/%{name}/basis*/program/libxmlsecurity.so
+%attr(755,root,root) %{_libdir}/%{name}/basis*/program/libxmxlx*.so
+%attr(755,root,root) %{_libdir}/%{name}/basis*/program/libxolx*.so
+%attr(755,root,root) %{_libdir}/%{name}/basis*/program/libxoflx*.so
+%attr(755,root,root) %{_libdir}/%{name}/basis*/program/libxsec_fw.so
+%attr(755,root,root) %{_libdir}/%{name}/basis*/program/libxsec_xmlsec.so
+%attr(755,root,root) %{_libdir}/%{name}/basis*/program/libxsltdlglx*.so
+%attr(755,root,root) %{_libdir}/%{name}/basis*/program/libxsltfilterlx*.so
+%attr(755,root,root) %{_libdir}/%{name}/basis*/program/libxstor.so
+%attr(755,root,root) %{_libdir}/%{name}/basis*/program/localebe1.uno.so
+%attr(755,root,root) %{_libdir}/%{name}/basis*/program/migrationoo2.uno.so
+%attr(755,root,root) %{_libdir}/%{name}/ure/lib/namingservice.uno.so
+#%attr(755,root,root) %{_libdir}/%{name}/basis*/program/nestedreg.uno.so
+%attr(755,root,root) %{_libdir}/%{name}/basis*/program/passwordcontainer.uno.so
+%attr(755,root,root) %{_libdir}/%{name}/basis*/program/productregistration.uno.so
+%attr(755,root,root) %{_libdir}/%{name}/ure/lib/proxyfac.uno.so
+%attr(755,root,root) %{_libdir}/%{name}/ure/lib/reflection.uno.so
+#%attr(755,root,root) %{_libdir}/%{name}/basis*/program/regtypeprov.uno.so
+%attr(755,root,root) %{_libdir}/%{name}/ure/lib/remotebridge.uno.so
+%attr(755,root,root) %{_libdir}/%{name}/basis*/program/sax.uno.so
+#%attr(755,root,root) %{_libdir}/%{name}/basis*/program/security.uno.so
+#%attr(755,root,root) %{_libdir}/%{name}/basis*/program/servicemgr.uno.so
+#%attr(755,root,root) %{_libdir}/%{name}/basis*/program/shlibloader.uno.so
+#%attr(755,root,root) %{_libdir}/%{name}/basis*/program/simplereg.uno.so
+%attr(755,root,root) %{_libdir}/%{name}/basis*/program/slideshow.uno.so
+%attr(755,root,root) %{_libdir}/%{name}/ure/lib/streams.uno.so
+%attr(755,root,root) %{_libdir}/%{name}/basis*/program/stocservices.uno.so
+%attr(755,root,root) %{_libdir}/%{name}/basis*/program/svtmisc.uno.so
+%attr(755,root,root) %{_libdir}/%{name}/basis*/program/sysmgr1.uno.so
+%attr(755,root,root) %{_libdir}/%{name}/basis*/program/syssh.uno.so
+%attr(755,root,root) %{_libdir}/%{name}/ure/lib/textinstream.uno.so
+%attr(755,root,root) %{_libdir}/%{name}/ure/lib/textoutstream.uno.so
+#%attr(755,root,root) %{_libdir}/%{name}/basis*/program/typeconverter.uno.so
+#%attr(755,root,root) %{_libdir}/%{name}/basis*/program/typemgr.uno.so
+%attr(755,root,root) %{_libdir}/%{name}/basis*/program/ucpexpand1.uno.so
+%attr(755,root,root) %{_libdir}/%{name}/basis*/program/ucptdoc1.uno.so
+#%attr(755,root,root) %{_libdir}/%{name}/basis*/program/uriproc.uno.so
+%attr(755,root,root) %{_libdir}/%{name}/ure/lib/uuresolver.uno.so
+%attr(755,root,root) %{_libdir}/%{name}/basis*/program/vbaevents*.uno.so
+%attr(755,root,root) %{_libdir}/%{name}/basis*/program/vclcanvas.uno.so
 
 %if %{with java}
-%attr(755,root,root) %{_libdir}/%{name}/program/javaloader.uno.so
-%attr(755,root,root) %{_libdir}/%{name}/program/javavm.uno.so
-%attr(755,root,root) %{_libdir}/%{name}/program/libhsqldb2.so
-%attr(755,root,root) %{_libdir}/%{name}/program/libjava_uno.so
-%attr(755,root,root) %{_libdir}/%{name}/program/libjdbc2.so
-%attr(755,root,root) %{_libdir}/%{name}/program/libjpipe.so
-%attr(755,root,root) %{_libdir}/%{name}/program/libjuh.so
-%attr(755,root,root) %{_libdir}/%{name}/program/libjuhx.so
-%attr(755,root,root) %{_libdir}/%{name}/program/libofficebean.so
-%attr(755,root,root) %{_libdir}/%{name}/program/sunjavaplugin.so
-%{_libdir}/%{name}/program/libjvmaccessgcc3.so
-%{_libdir}/%{name}/program/libjvmfwk.so
+%attr(755,root,root) %{_libdir}/%{name}/ure/lib/javaloader.uno.so
+%attr(755,root,root) %{_libdir}/%{name}/ure/lib/javavm.uno.so
+%attr(755,root,root) %{_libdir}/%{name}/basis*/program/libhsqldb2.so
+%attr(755,root,root) %{_libdir}/%{name}/basis*/program/libjava_uno.so
+%attr(755,root,root) %{_libdir}/%{name}/basis*/program/libjdbc2.so
+%attr(755,root,root) %{_libdir}/%{name}/basis*/program/libjpipe.so
+%attr(755,root,root) %{_libdir}/%{name}/basis*/program/libjuh.so
+%attr(755,root,root) %{_libdir}/%{name}/basis*/program/libjuhx.so
+%attr(755,root,root) %{_libdir}/%{name}/basis*/program/libofficebean.so
+%attr(755,root,root) %{_libdir}/%{name}/basis*/program/sunjavaplugin.so
+%{_libdir}/%{name}/basis*/program/libjvmaccessgcc3.so
+%{_libdir}/%{name}/basis*/program/libjvmfwk.so
 %endif
 
 # versioned libraries and their symlinks
-%attr(755,root,root) %{_libdir}/%{name}/program/*.so.*
-%attr(755,root,root) %{_libdir}/%{name}/program/libcppu.so
-%attr(755,root,root) %{_libdir}/%{name}/program/libcppuhelper3gcc3.so
-%attr(755,root,root) %{_libdir}/%{name}/program/libcppuhelpergcc3.so
-%attr(755,root,root) %{_libdir}/%{name}/program/libreg.so
-%attr(755,root,root) %{_libdir}/%{name}/program/librmcxt.so
-%attr(755,root,root) %{_libdir}/%{name}/program/libsal.so
-%attr(755,root,root) %{_libdir}/%{name}/program/libsalhelper3gcc3.so
-%attr(755,root,root) %{_libdir}/%{name}/program/libsalhelpergcc3.so
-%attr(755,root,root) %{_libdir}/%{name}/program/libstore.so
-%attr(755,root,root) %{_libdir}/%{name}/program/libuno_cppu.so
-%attr(755,root,root) %{_libdir}/%{name}/program/libuno_cppuhelpergcc3.so
-%attr(755,root,root) %{_libdir}/%{name}/program/libuno_sal.so
-%attr(755,root,root) %{_libdir}/%{name}/program/libuno_salhelpergcc3.so
+%attr(755,root,root) %{_libdir}/%{name}/basis*/program/*.so.*
+%attr(755,root,root) %{_libdir}/%{name}/basis*/program/libcppu.so
+%attr(755,root,root) %{_libdir}/%{name}/basis*/program/libcppuhelper3gcc3.so
+%attr(755,root,root) %{_libdir}/%{name}/basis*/program/libcppuhelpergcc3.so
+%attr(755,root,root) %{_libdir}/%{name}/basis*/program/libreg.so
+%attr(755,root,root) %{_libdir}/%{name}/basis*/program/librmcxt.so
+%attr(755,root,root) %{_libdir}/%{name}/basis*/program/libsal.so
+%attr(755,root,root) %{_libdir}/%{name}/basis*/program/libsalhelper3gcc3.so
+%attr(755,root,root) %{_libdir}/%{name}/basis*/program/libsalhelpergcc3.so
+%attr(755,root,root) %{_libdir}/%{name}/basis*/program/libstore.so
+%attr(755,root,root) %{_libdir}/%{name}/basis*/program/libuno_cppu.so
+%attr(755,root,root) %{_libdir}/%{name}/basis*/program/libuno_cppuhelpergcc3.so
+%attr(755,root,root) %{_libdir}/%{name}/basis*/program/libuno_sal.so
+%attr(755,root,root) %{_libdir}/%{name}/basis*/program/libuno_salhelpergcc3.so
 
 %files -n fonts-TTF-OpenSymbol
 %defattr(644,root,root,755)
@@ -3631,191 +3632,191 @@ fi
 %if %{with kde}
 %files libs-kde
 %defattr(644,root,root,755)
-%attr(755,root,root) %{_libdir}/%{name}/program/kde-open-url
-%attr(755,root,root) %{_libdir}/%{name}/program/kdebe1.uno.so
+%attr(755,root,root) %{_libdir}/%{name}/basis*/program/kde-open-url
+%attr(755,root,root) %{_libdir}/%{name}/basis*/program/kdebe1.uno.so
 %attr(755,root,root) %{_libdir}/%{name}/program/kdefilepicker
-%attr(755,root,root) %{_libdir}/%{name}/program/fps_kde.uno.so
-%attr(755,root,root) %{_libdir}/%{name}/program/libkabdrv1.so
-%attr(755,root,root) %{_libdir}/%{name}/program/libvclplug_kde*.so
+%attr(755,root,root) %{_libdir}/%{name}/basis*/program/fps_kde.uno.so
+%attr(755,root,root) %{_libdir}/%{name}/basis*/program/libkabdrv1.so
+%attr(755,root,root) %{_libdir}/%{name}/basis*/program/libvclplug_kde*.so
 %endif
 
 %files libs-gtk
 %defattr(644,root,root,755)
-%attr(755,root,root) %{_libdir}/%{name}/program/fps_gnome.uno.so
-%attr(755,root,root) %{_libdir}/%{name}/program/gnome-open-url
-%attr(755,root,root) %{_libdir}/%{name}/program/gnome-open-url.bin
-%attr(755,root,root) %{_libdir}/%{name}/program/gnome-set-default-application
-%attr(755,root,root) %{_libdir}/%{name}/program/libevoab2.so
-%attr(755,root,root) %{_libdir}/%{name}/program/libvclplug_gtk*.so
+%attr(755,root,root) %{_libdir}/%{name}/basis*/program/fps_gnome.uno.so
+%attr(755,root,root) %{_libdir}/%{name}/basis*/program/gnome-open-url
+%attr(755,root,root) %{_libdir}/%{name}/basis*/program/gnome-open-url.bin
+#%attr(755,root,root) %{_libdir}/%{name}/basis*/program/gnome-set-default-application
+%attr(755,root,root) %{_libdir}/%{name}/basis*/program/libevoab2.so
+%attr(755,root,root) %{_libdir}/%{name}/basis*/program/libvclplug_gtk*.so
 %if %{with gnomevfs}
-%attr(755,root,root) %{_libdir}/%{name}/program/gconfbe1.uno.so
-%attr(755,root,root) %{_libdir}/%{name}/program/ucpgvfs1.uno.so
+%attr(755,root,root) %{_libdir}/%{name}/basis*/program/gconfbe1.uno.so
+%attr(755,root,root) %{_libdir}/%{name}/basis*/program/ucpgvfs1.uno.so
 %endif
 
 %files base
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_bindir}/oobase
-%attr(755,root,root) %{_libdir}/%{name}/program/sbase
+%attr(755,root,root) %{_libdir}/%{name}/basis*/program/sbase
 %{_mandir}/man1/oobase.1
 %{_desktopdir}/oobase.desktop
 %{_iconsdir}/hicolor/*/apps/ooo-base.png
 %{_pixmapsdir}/ooo-base.png
-%{_libdir}/%{name}/program/resource/cnr680en-US.res
+%{_libdir}/%{name}/basis*/program/resource/cnren-US.res
 %{_datadir}/%{name}/help/en/sdatabase.*
-%{_datadir}/%{name}/share/config/soffice.cfg/modules/dbapp
-%{_datadir}/%{name}/share/config/soffice.cfg/modules/dbbrowser
-%{_datadir}/%{name}/share/config/soffice.cfg/modules/dbquery
-%{_datadir}/%{name}/share/config/soffice.cfg/modules/dbrelation
+%{_libdir}/%{name}/basis*/share/config/soffice.cfg/modules/dbapp
+%{_libdir}/%{name}/basis*/share/config/soffice.cfg/modules/dbbrowser
+%{_libdir}/%{name}/basis*/share/config/soffice.cfg/modules/dbquery
+%{_libdir}/%{name}/basis*/share/config/soffice.cfg/modules/dbrelation
 %if %{with java}
-%{_datadir}/%{name}/share/config/soffice.cfg/modules/dbreport
+%{_libdir}/%{name}/basis*/share/config/soffice.cfg/modules/dbreport
 %endif
-%{_datadir}/%{name}/share/config/soffice.cfg/modules/dbtable
-%{_datadir}/%{name}/share/registry/modules/org/openoffice/Office/Common/Common-base.xcu
-%{_datadir}/%{name}/share/registry/modules/org/openoffice/Setup/Setup-base.xcu
-%{_datadir}/%{name}/share/registry/modules/org/openoffice/TypeDetection/Filter/fcfg_database_filters.xcu
-%{_datadir}/%{name}/share/registry/modules/org/openoffice/TypeDetection/Misc/fcfg_database_others.xcu
-%{_datadir}/%{name}/share/registry/modules/org/openoffice/TypeDetection/Types/fcfg_database_types.xcu
+%{_libdir}/%{name}/basis*/share/config/soffice.cfg/modules/dbtable
+%{_libdir}/%{name}/basis*/share/registry/modules/org/openoffice/Office/Common/Common-base.xcu
+%{_libdir}/%{name}/basis*/share/registry/modules/org/openoffice/Setup/Setup-base.xcu
+%{_libdir}/%{name}/basis*/share/registry/modules/org/openoffice/TypeDetection/Filter/fcfg_database_filters.xcu
+%{_libdir}/%{name}/basis*/share/registry/modules/org/openoffice/TypeDetection/Misc/fcfg_database_others.xcu
+%{_libdir}/%{name}/basis*/share/registry/modules/org/openoffice/TypeDetection/Types/fcfg_database_types.xcu
 
 %files calc
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_bindir}/oocalc
-%attr(755,root,root) %{_libdir}/%{name}/program/libanalysis680*.so
-%attr(755,root,root) %{_libdir}/%{name}/program/libbf_sc680*.so
-%attr(755,root,root) %{_libdir}/%{name}/program/libcalc680*.so
-%attr(755,root,root) %{_libdir}/%{name}/program/libdate680*.so
-%attr(755,root,root) %{_libdir}/%{name}/program/libsc680*.so
-%attr(755,root,root) %{_libdir}/%{name}/program/libscd680*.so
-%attr(755,root,root) %{_libdir}/%{name}/program/libchartcontroller680*.so
-%attr(755,root,root) %{_libdir}/%{name}/program/libchartmodel680*.so
-%attr(755,root,root) %{_libdir}/%{name}/program/libcharttools680*.so
-%attr(755,root,root) %{_libdir}/%{name}/program/libchartview680*.so
-%attr(755,root,root) %{_libdir}/%{name}/program/libscui680*.so
-%attr(755,root,root) %{_libdir}/%{name}/program/scalc
+%attr(755,root,root) %{_libdir}/%{name}/basis*/program/libanalysislx*.so
+%attr(755,root,root) %{_libdir}/%{name}/basis*/program/libbf_sclx*.so
+%attr(755,root,root) %{_libdir}/%{name}/basis*/program/libcalclx*.so
+%attr(755,root,root) %{_libdir}/%{name}/basis*/program/libdatelx*.so
+%attr(755,root,root) %{_libdir}/%{name}/basis*/program/libsclx*.so
+%attr(755,root,root) %{_libdir}/%{name}/basis*/program/libscdlx*.so
+%attr(755,root,root) %{_libdir}/%{name}/basis*/program/libchartcontrollerlx*.so
+%attr(755,root,root) %{_libdir}/%{name}/basis*/program/libchartmodellx*.so
+%attr(755,root,root) %{_libdir}/%{name}/basis*/program/libcharttoolslx*.so
+%attr(755,root,root) %{_libdir}/%{name}/basis*/program/libchartviewlx*.so
+%attr(755,root,root) %{_libdir}/%{name}/basis*/program/libscuilx*.so
+%attr(755,root,root) %{_libdir}/%{name}/basis*/program/scalc
 %{_mandir}/man1/oocalc.1
 %{_desktopdir}/oocalc.desktop
 %{_iconsdir}/hicolor/*/apps/ooo-calc.png
 %{_pixmapsdir}/ooo-calc.png
 %{_datadir}/%{name}/help/en/scalc.*
-%{_libdir}/%{name}/program/resource/analysis680en-US.res
-%{_libdir}/%{name}/program/resource/bf_sc680en-US.res
-%{_libdir}/%{name}/program/resource/date680en-US.res
-%{_libdir}/%{name}/program/resource/sc680en-US.res
-%{_datadir}/%{name}/share/config/soffice.cfg/modules/scalc
-%{_datadir}/%{name}/share/config/soffice.cfg/modules/schart
-%{_datadir}/%{name}/share/registry/data/org/openoffice/Office/UI/CalcCommands.xcu
-%{_datadir}/%{name}/share/registry/data/org/openoffice/Office/UI/CalcWindowState.xcu
-%{_datadir}/%{name}/share/registry/modules/org/openoffice/Office/Common/Common-calc.xcu
-%{_datadir}/%{name}/share/registry/modules/org/openoffice/Setup/Setup-calc.xcu
-%{_datadir}/%{name}/share/registry/modules/org/openoffice/TypeDetection/Filter/fcfg_calc_filters.xcu
-%{_datadir}/%{name}/share/registry/modules/org/openoffice/TypeDetection/Types/fcfg_calc_types.xcu
-%{_datadir}/%{name}/share/registry/schema/org/openoffice/Office/UI/CalcCommands.xcs
-%{_datadir}/%{name}/share/registry/schema/org/openoffice/Office/UI/CalcWindowState.xcs
+%{_libdir}/%{name}/basis*/program/resource/analysisen-US.res
+%{_libdir}/%{name}/basis*/program/resource/bf_scen-US.res
+%{_libdir}/%{name}/basis*/program/resource/dateen-US.res
+%{_libdir}/%{name}/basis*/program/resource/scen-US.res
+%{_libdir}/%{name}/basis*/share/config/soffice.cfg/modules/scalc
+%{_libdir}/%{name}/basis*/share/config/soffice.cfg/modules/schart
+%{_libdir}/%{name}/basis*/share/registry/data/org/openoffice/Office/UI/CalcCommands.xcu
+%{_libdir}/%{name}/basis*/share/registry/data/org/openoffice/Office/UI/CalcWindowState.xcu
+%{_libdir}/%{name}/basis*/share/registry/modules/org/openoffice/Office/Common/Common-calc.xcu
+%{_libdir}/%{name}/basis*/share/registry/modules/org/openoffice/Setup/Setup-calc.xcu
+%{_libdir}/%{name}/basis*/share/registry/modules/org/openoffice/TypeDetection/Filter/fcfg_calc_filters.xcu
+%{_libdir}/%{name}/basis*/share/registry/modules/org/openoffice/TypeDetection/Types/fcfg_calc_types.xcu
+%{_libdir}/%{name}/basis*/share/registry/schema/org/openoffice/Office/UI/CalcCommands.xcs
+%{_libdir}/%{name}/basis*/share/registry/schema/org/openoffice/Office/UI/CalcWindowState.xcs
 
 %files draw
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_bindir}/oodraw
-%attr(755,root,root) %{_libdir}/%{name}/program/sdraw
+%attr(755,root,root) %{_libdir}/%{name}/basis*/program/sdraw
 %{_mandir}/man1/oodraw.1
 %{_desktopdir}/oodraw.desktop
 %{_iconsdir}/hicolor/*/apps/ooo-draw.png
 %{_pixmapsdir}/ooo-draw.png
 %{_datadir}/%{name}/help/en/sdraw.*
-%{_datadir}/%{name}/share/config/soffice.cfg/modules/sdraw
-%{_datadir}/%{name}/share/registry/data/org/openoffice/Office/UI/DrawWindowState.xcu
-%{_datadir}/%{name}/share/registry/modules/org/openoffice/Office/Common/Common-draw.xcu
-%{_datadir}/%{name}/share/registry/modules/org/openoffice/Setup/Setup-draw.xcu
-%{_datadir}/%{name}/share/registry/modules/org/openoffice/TypeDetection/Filter/fcfg_draw_filters.xcu
-%{_datadir}/%{name}/share/registry/modules/org/openoffice/TypeDetection/Types/fcfg_draw_types.xcu
-%{_datadir}/%{name}/share/registry/schema/org/openoffice/Office/UI/DrawWindowState.xcs
+%{_libdir}/%{name}/basis*/share/config/soffice.cfg/modules/sdraw
+%{_libdir}/%{name}/basis*/share/registry/data/org/openoffice/Office/UI/DrawWindowState.xcu
+%{_libdir}/%{name}/basis*/share/registry/modules/org/openoffice/Office/Common/Common-draw.xcu
+%{_libdir}/%{name}/basis*/share/registry/modules/org/openoffice/Setup/Setup-draw.xcu
+%{_libdir}/%{name}/basis*/share/registry/modules/org/openoffice/TypeDetection/Filter/fcfg_draw_filters.xcu
+%{_libdir}/%{name}/basis*/share/registry/modules/org/openoffice/TypeDetection/Types/fcfg_draw_types.xcu
+%{_libdir}/%{name}/basis*/share/registry/schema/org/openoffice/Office/UI/DrawWindowState.xcs
 
 %files emailmerge
 %defattr(644,root,root,755)
-%{_libdir}/%{name}/program/mailmerge.py*
-%{_datadir}/%{name}/share/registry/modules/org/openoffice/Office/Writer/Writer-javamail.xcu
+%{_libdir}/%{name}/basis*/program/mailmerge.py*
+%{_libdir}/%{name}/basis*/share/registry/modules/org/openoffice/Office/Writer/Writer-javamail.xcu
 
 %files writer
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_bindir}/oowriter
-%attr(755,root,root) %{_libdir}/%{name}/program/libhwp.so
-%attr(755,root,root) %{_libdir}/%{name}/program/libswd680*.so
-%attr(755,root,root) %{_libdir}/%{name}/program/libswui680*.so
-%attr(755,root,root) %{_libdir}/%{name}/program/libwpft680*.so
-%attr(755,root,root) %{_libdir}/%{name}/program/swriter
+%attr(755,root,root) %{_libdir}/%{name}/basis*/program/libhwp.so
+%attr(755,root,root) %{_libdir}/%{name}/basis*/program/libswdlx*.so
+%attr(755,root,root) %{_libdir}/%{name}/basis*/program/libswuilx*.so
+%attr(755,root,root) %{_libdir}/%{name}/basis*/program/libwpftlx*.so
+%attr(755,root,root) %{_libdir}/%{name}/basis*/program/swriter
 %{_mandir}/man1/oowriter.1
 %{_desktopdir}/oowriter.desktop
 %{_iconsdir}/hicolor/*/apps/ooo-writer.png
 %{_pixmapsdir}/ooo-writer.png
 %{_datadir}/%{name}/help/en/swriter.*
 %if %{with java}
-%{_libdir}/%{name}/program/classes/writer2latex.jar
+%{_libdir}/%{name}/basis*/program/classes/writer2latex.jar
 %endif
-%{_datadir}/%{name}/share/config/soffice.cfg/modules/swriter
-%{_datadir}/%{name}/share/config/soffice.cfg/modules/sbibliography
-%{_datadir}/%{name}/share/registry/data/org/openoffice/Office/UI/WriterCommands.xcu
-%{_datadir}/%{name}/share/registry/data/org/openoffice/Office/UI/WriterGlobalWindowState.xcu
-%{_datadir}/%{name}/share/registry/data/org/openoffice/Office/UI/WriterWebWindowState.xcu
-%{_datadir}/%{name}/share/registry/data/org/openoffice/Office/UI/WriterWindowState.xcu
-%{_datadir}/%{name}/share/registry/modules/org/openoffice/Office/Common/Common-writer.xcu
-%{_datadir}/%{name}/share/registry/modules/org/openoffice/Setup/Setup-writer.xcu
-%{_datadir}/%{name}/share/registry/modules/org/openoffice/TypeDetection/Filter/fcfg_global_filters.xcu
-%{_datadir}/%{name}/share/registry/modules/org/openoffice/TypeDetection/Filter/fcfg_web_filters.xcu
-%{_datadir}/%{name}/share/registry/modules/org/openoffice/TypeDetection/Filter/fcfg_writer_filters.xcu
-%{_datadir}/%{name}/share/registry/modules/org/openoffice/TypeDetection/Types/fcfg_global_types.xcu
-%{_datadir}/%{name}/share/registry/modules/org/openoffice/TypeDetection/Types/fcfg_web_types.xcu
-%{_datadir}/%{name}/share/registry/modules/org/openoffice/TypeDetection/Types/fcfg_writer_types.xcu
-%{_datadir}/%{name}/share/registry/schema/org/openoffice/Office/UI/WriterCommands.xcs
-%{_datadir}/%{name}/share/registry/schema/org/openoffice/Office/UI/WriterGlobalWindowState.xcs
-%{_datadir}/%{name}/share/registry/schema/org/openoffice/Office/UI/WriterWebWindowState.xcs
-%{_datadir}/%{name}/share/registry/schema/org/openoffice/Office/UI/WriterWindowState.xcs
+%{_libdir}/%{name}/basis*/share/config/soffice.cfg/modules/swriter
+%{_libdir}/%{name}/basis*/share/config/soffice.cfg/modules/sbibliography
+%{_libdir}/%{name}/basis*/share/registry/data/org/openoffice/Office/UI/WriterCommands.xcu
+%{_libdir}/%{name}/basis*/share/registry/data/org/openoffice/Office/UI/WriterGlobalWindowState.xcu
+%{_libdir}/%{name}/basis*/share/registry/data/org/openoffice/Office/UI/WriterWebWindowState.xcu
+%{_libdir}/%{name}/basis*/share/registry/data/org/openoffice/Office/UI/WriterWindowState.xcu
+%{_libdir}/%{name}/basis*/share/registry/modules/org/openoffice/Office/Common/Common-writer.xcu
+%{_libdir}/%{name}/basis*/share/registry/modules/org/openoffice/Setup/Setup-writer.xcu
+%{_libdir}/%{name}/basis*/share/registry/modules/org/openoffice/TypeDetection/Filter/fcfg_global_filters.xcu
+%{_libdir}/%{name}/basis*/share/registry/modules/org/openoffice/TypeDetection/Filter/fcfg_web_filters.xcu
+%{_libdir}/%{name}/basis*/share/registry/modules/org/openoffice/TypeDetection/Filter/fcfg_writer_filters.xcu
+%{_libdir}/%{name}/basis*/share/registry/modules/org/openoffice/TypeDetection/Types/fcfg_global_types.xcu
+%{_libdir}/%{name}/basis*/share/registry/modules/org/openoffice/TypeDetection/Types/fcfg_web_types.xcu
+%{_libdir}/%{name}/basis*/share/registry/modules/org/openoffice/TypeDetection/Types/fcfg_writer_types.xcu
+%{_libdir}/%{name}/basis*/share/registry/schema/org/openoffice/Office/UI/WriterCommands.xcs
+%{_libdir}/%{name}/basis*/share/registry/schema/org/openoffice/Office/UI/WriterGlobalWindowState.xcs
+%{_libdir}/%{name}/basis*/share/registry/schema/org/openoffice/Office/UI/WriterWebWindowState.xcs
+%{_libdir}/%{name}/basis*/share/registry/schema/org/openoffice/Office/UI/WriterWindowState.xcs
 
 %files impress
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_bindir}/ooimpress
-%attr(755,root,root) %{_libdir}/%{name}/program/libanimcore.so
-%attr(755,root,root) %{_libdir}/%{name}/program/libplaceware*.so
-%attr(755,root,root) %{_libdir}/%{name}/program/simpress
+%attr(755,root,root) %{_libdir}/%{name}/basis*/program/libanimcore.so
+%attr(755,root,root) %{_libdir}/%{name}/basis*/program/libplaceware*.so
+%attr(755,root,root) %{_libdir}/%{name}/basis*/program/simpress
 %{_mandir}/man1/ooimpress.1
 %{_desktopdir}/ooimpress.desktop
 %{_iconsdir}/hicolor/*/apps/ooo-impress.png
 %{_pixmapsdir}/ooo-impress.png
 %{_datadir}/%{name}/help/en/simpress.*
-%{_datadir}/%{name}/share/config/soffice.cfg/modules/simpress
-%{_datadir}/%{name}/share/config/soffice.cfg/simpress/
-%{_datadir}/%{name}/share/registry/data/org/openoffice/Office/UI/Effects.xcu
-%{_datadir}/%{name}/share/registry/data/org/openoffice/Office/UI/ImpressWindowState.xcu
-%{_datadir}/%{name}/share/registry/modules/org/openoffice/Office/Common/Common-impress.xcu
-%{_datadir}/%{name}/share/registry/modules/org/openoffice/Setup/Setup-impress.xcu
-%{_datadir}/%{name}/share/registry/modules/org/openoffice/TypeDetection/Filter/fcfg_impress_filters.xcu
-%{_datadir}/%{name}/share/registry/modules/org/openoffice/TypeDetection/Types/fcfg_impress_types.xcu
-%{_datadir}/%{name}/share/registry/schema/org/openoffice/Office/UI/Effects.xcs
-%{_datadir}/%{name}/share/registry/schema/org/openoffice/Office/UI/ImpressWindowState.xcs
+%{_libdir}/%{name}/basis*/share/config/soffice.cfg/modules/simpress
+%{_libdir}/%{name}/basis*/share/config/soffice.cfg/simpress/
+%{_libdir}/%{name}/basis*/share/registry/data/org/openoffice/Office/UI/Effects.xcu
+%{_libdir}/%{name}/basis*/share/registry/data/org/openoffice/Office/UI/ImpressWindowState.xcu
+%{_libdir}/%{name}/basis*/share/registry/modules/org/openoffice/Office/Common/Common-impress.xcu
+%{_libdir}/%{name}/basis*/share/registry/modules/org/openoffice/Setup/Setup-impress.xcu
+%{_libdir}/%{name}/basis*/share/registry/modules/org/openoffice/TypeDetection/Filter/fcfg_impress_filters.xcu
+%{_libdir}/%{name}/basis*/share/registry/modules/org/openoffice/TypeDetection/Types/fcfg_impress_types.xcu
+%{_libdir}/%{name}/basis*/share/registry/schema/org/openoffice/Office/UI/Effects.xcs
+%{_libdir}/%{name}/basis*/share/registry/schema/org/openoffice/Office/UI/ImpressWindowState.xcs
 
 %files math
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_bindir}/oomath
-%attr(755,root,root) %{_libdir}/%{name}/program/libsm680*.so
-%attr(755,root,root) %{_libdir}/%{name}/program/libsmd680*.so
-%attr(755,root,root) %{_libdir}/%{name}/program/smath
+%attr(755,root,root) %{_libdir}/%{name}/basis*/program/libsmlx*.so
+%attr(755,root,root) %{_libdir}/%{name}/basis*/program/libsmdlx*.so
+%attr(755,root,root) %{_libdir}/%{name}/basis*/program/smath
 %{_mandir}/man1/oomath.1
 %{_desktopdir}/oomath.desktop
 %{_iconsdir}/hicolor/*/apps/ooo-math.png
 %{_pixmapsdir}/ooo-math.png
 %{_datadir}/%{name}/help/en/smath.*
-%{_libdir}/%{name}/program/resource/bf_sm680en-US.res
-%{_libdir}/%{name}/program/resource/sm680en-US.res
-%{_datadir}/%{name}/share/config/soffice.cfg/modules/smath
-%{_datadir}/%{name}/share/registry/data/org/openoffice/Office/UI/MathCommands.xcu
-%{_datadir}/%{name}/share/registry/data/org/openoffice/Office/UI/MathWindowState.xcu
-%{_datadir}/%{name}/share/registry/modules/org/openoffice/Office/Common/Common-math.xcu
-%{_datadir}/%{name}/share/registry/modules/org/openoffice/Setup/Setup-math.xcu
-%{_datadir}/%{name}/share/registry/modules/org/openoffice/TypeDetection/Filter/fcfg_math_filters.xcu
-%{_datadir}/%{name}/share/registry/modules/org/openoffice/TypeDetection/Types/fcfg_math_types.xcu
-%{_datadir}/%{name}/share/registry/schema/org/openoffice/Office/UI/MathCommands.xcs
+%{_libdir}/%{name}/basis*/program/resource/bf_smen-US.res
+%{_libdir}/%{name}/basis*/program/resource/smen-US.res
+%{_libdir}/%{name}/basis*/share/config/soffice.cfg/modules/smath
+%{_libdir}/%{name}/basis*/share/registry/data/org/openoffice/Office/UI/MathCommands.xcu
+%{_libdir}/%{name}/basis*/share/registry/data/org/openoffice/Office/UI/MathWindowState.xcu
+%{_libdir}/%{name}/basis*/share/registry/modules/org/openoffice/Office/Common/Common-math.xcu
+%{_libdir}/%{name}/basis*/share/registry/modules/org/openoffice/Setup/Setup-math.xcu
+%{_libdir}/%{name}/basis*/share/registry/modules/org/openoffice/TypeDetection/Filter/fcfg_math_filters.xcu
+%{_libdir}/%{name}/basis*/share/registry/modules/org/openoffice/TypeDetection/Types/fcfg_math_types.xcu
+%{_libdir}/%{name}/basis*/share/registry/schema/org/openoffice/Office/UI/MathCommands.xcs
 
 %files web
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_bindir}/ooweb
-%{_datadir}/%{name}/share/config/soffice.cfg/modules/sweb
+%{_libdir}/%{name}/basis*/share/config/soffice.cfg/modules/sweb
 %{_mandir}/man1/ooweb.1
 %{_desktopdir}/ooweb.desktop
 %{_iconsdir}/hicolor/*/apps/ooo-web.png
@@ -3823,70 +3824,70 @@ fi
 
 %files graphicfilter
 %defattr(644,root,root,755)
-%attr(755,root,root) %{_libdir}/%{name}/program/libflash680*.so
-%attr(755,root,root) %{_libdir}/%{name}/program/libsvgfilter680*.so
-%{_datadir}/%{name}/share/registry/modules/org/openoffice/TypeDetection/Filter/fcfg_drawgraphics_filters.xcu
-%{_datadir}/%{name}/share/registry/modules/org/openoffice/TypeDetection/Filter/fcfg_impressgraphics_filters.xcu
-%{_datadir}/%{name}/share/registry/modules/org/openoffice/TypeDetection/Types/fcfg_drawgraphics_types.xcu
-%{_datadir}/%{name}/share/registry/modules/org/openoffice/TypeDetection/Types/fcfg_impressgraphics_types.xcu
+%attr(755,root,root) %{_libdir}/%{name}/basis*/program/libflashlx*.so
+%attr(755,root,root) %{_libdir}/%{name}/basis*/program/libsvgfilterlx*.so
+%{_libdir}/%{name}/basis*/share/registry/modules/org/openoffice/TypeDetection/Filter/fcfg_drawgraphics_filters.xcu
+%{_libdir}/%{name}/basis*/share/registry/modules/org/openoffice/TypeDetection/Filter/fcfg_impressgraphics_filters.xcu
+%{_libdir}/%{name}/basis*/share/registry/modules/org/openoffice/TypeDetection/Types/fcfg_drawgraphics_types.xcu
+%{_libdir}/%{name}/basis*/share/registry/modules/org/openoffice/TypeDetection/Types/fcfg_impressgraphics_types.xcu
 
 %files xsltfilter
 %defattr(644,root,root,755)
-%{_datadir}/%{name}/share/registry/modules/org/openoffice/TypeDetection/Filter/fcfg_xslt_filters.xcu
-%{_datadir}/%{name}/share/registry/modules/org/openoffice/TypeDetection/Types/fcfg_xslt_types.xcu
+%{_libdir}/%{name}/basis*/share/registry/modules/org/openoffice/TypeDetection/Filter/fcfg_xslt_filters.xcu
+%{_libdir}/%{name}/basis*/share/registry/modules/org/openoffice/TypeDetection/Types/fcfg_xslt_types.xcu
 %if %{with java}
 # not exists when --system-libxslt ?
-%{_datadir}/%{name}/share/xslt/docbook
-%{_datadir}/%{name}/share/xslt/export/xhtml
+%{_libdir}/%{name}/basis*/share/xslt/docbook
+%{_libdir}/%{name}/basis*/share/xslt/export/xhtml
 %endif
 
 %if %{with java}
 %files javafilter
 %defattr(644,root,root,755)
-%{_libdir}/%{name}/program/classes/aportisdoc.jar
-%{_libdir}/%{name}/program/classes/pexcel.jar
-%{_libdir}/%{name}/program/classes/pocketword.jar
-%{_datadir}/%{name}/share/registry/modules/org/openoffice/TypeDetection/Filter/fcfg_palm_filters.xcu
-%{_datadir}/%{name}/share/registry/modules/org/openoffice/TypeDetection/Filter/fcfg_pocketexcel_filters.xcu
-%{_datadir}/%{name}/share/registry/modules/org/openoffice/TypeDetection/Filter/fcfg_pocketword_filters.xcu
-%{_datadir}/%{name}/share/registry/modules/org/openoffice/TypeDetection/Types/fcfg_palm_types.xcu
-%{_datadir}/%{name}/share/registry/modules/org/openoffice/TypeDetection/Types/fcfg_pocketexcel_types.xcu
-%{_datadir}/%{name}/share/registry/modules/org/openoffice/TypeDetection/Types/fcfg_pocketword_types.xcu
+%{_libdir}/%{name}/basis*/program/classes/aportisdoc.jar
+%{_libdir}/%{name}/basis*/program/classes/pexcel.jar
+%{_libdir}/%{name}/basis*/program/classes/pocketword.jar
+%{_libdir}/%{name}/basis*/share/registry/modules/org/openoffice/TypeDetection/Filter/fcfg_palm_filters.xcu
+%{_libdir}/%{name}/basis*/share/registry/modules/org/openoffice/TypeDetection/Filter/fcfg_pocketexcel_filters.xcu
+%{_libdir}/%{name}/basis*/share/registry/modules/org/openoffice/TypeDetection/Filter/fcfg_pocketword_filters.xcu
+%{_libdir}/%{name}/basis*/share/registry/modules/org/openoffice/TypeDetection/Types/fcfg_palm_types.xcu
+%{_libdir}/%{name}/basis*/share/registry/modules/org/openoffice/TypeDetection/Types/fcfg_pocketexcel_types.xcu
+%{_libdir}/%{name}/basis*/share/registry/modules/org/openoffice/TypeDetection/Types/fcfg_pocketword_types.xcu
 %endif
 
 %files testtools
 %defattr(644,root,root,755)
-%attr(755,root,root) %{_libdir}/%{name}/program/libcommuni680*.so
-%attr(755,root,root) %{_libdir}/%{name}/program/libsimplecm680*.so
-%attr(755,root,root) %{_libdir}/%{name}/program/testtool.bin
+%attr(755,root,root) %{_libdir}/%{name}/basis*/program/libcommunilx*.so
+%attr(755,root,root) %{_libdir}/%{name}/basis*/program/libsimplecmlx*.so
+%attr(755,root,root) %{_libdir}/%{name}/basis*/program/testtool.bin
 %if %{with java}
-%{_libdir}/%{name}/program/hid.lst
+%{_libdir}/%{name}/basis*/program/hid.lst
 %endif
-%{_libdir}/%{name}/program/resource/stt680en-US.res
-%{_libdir}/%{name}/program/testtoolrc
+%{_libdir}/%{name}/basis*/program/resource/stten-US.res
+%{_libdir}/%{name}/basis*/program/testtoolrc
 
 %files pyuno
 %defattr(644,root,root,755)
-%attr(755,root,root) %{_libdir}/%{name}/program/libpyuno.so
-%attr(755,root,root) %{_libdir}/%{name}/program/pythonloader.uno.so
-%attr(755,root,root) %{_libdir}/%{name}/program/pyuno.so
-%{_libdir}/%{name}/program/pythonloader.unorc
-%{_libdir}/%{name}/program/officehelper.py
-%{_libdir}/%{name}/program/pythonloader.py
-%{_libdir}/%{name}/program/pythonscript.py
-%{_libdir}/%{name}/program/uno.py
-%{_libdir}/%{name}/program/unohelper.py
-%{_datadir}/%{name}/share/registry/modules/org/openoffice/Office/Scripting/Scripting-python.xcu
+%attr(755,root,root) %{_libdir}/%{name}/basis*/program/libpyuno.so
+%attr(755,root,root) %{_libdir}/%{name}/basis*/program/pythonloader.uno.so
+%attr(755,root,root) %{_libdir}/%{name}/basis*/program/pyuno.so
+%{_libdir}/%{name}/basis*/program/pythonloader.unorc
+%{_libdir}/%{name}/basis*/program/officehelper.py
+%{_libdir}/%{name}/basis*/program/pythonloader.py
+%{_libdir}/%{name}/basis*/program/pythonscript.py
+%{_libdir}/%{name}/basis*/program/uno.py
+%{_libdir}/%{name}/basis*/program/unohelper.py
+%{_libdir}/%{name}/basis*/share/registry/modules/org/openoffice/Office/Scripting/Scripting-python.xcu
 
 # samples there
-%{_datadir}/%{name}/share/Scripts/python
+%{_libdir}/%{name}/basis*/share/Scripts/python
 
 %if %{with mozilla}
 %files -n browser-plugin-%{name}
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_browserpluginsdir}/libnpsoplugin.so
-%attr(755,root,root) %{_libdir}/%{name}/program/nsplugin
-%attr(755,root,root) %{_libdir}/%{name}/program/libnpsoplugin.so
+%attr(755,root,root) %{_libdir}/%{name}/basis*/program/nsplugin
+%attr(755,root,root) %{_libdir}/%{name}/basis*/program/libnpsoplugin.so
 %endif
 
 %if %{with i18n}
