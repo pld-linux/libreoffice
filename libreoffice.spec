@@ -2588,7 +2588,7 @@ for lang in $langlist; do
 done
 
 %{__sed} -i -e '
-	s,%{_libdir}/%{name}/help,%{_datadir}/%{name}/help,;
+	s,%{_libdir}/%{name}/help,%{_libdir}/%{name}/basis*/help,;
 	s,%{_libdir}/%{name}/licenses,%{_datadir}/%{name}/licenses,;
 	s,%{_libdir}/%{name}/readmes,%{_datadir}/%{name}/readmes,;
 	s,%{_libdir}/%{name}/share,%{_datadir}/%{name}/share,;
@@ -3199,14 +3199,14 @@ fi
 %endif
 
 %{_libdir}/%{name}/help
-%dir %{_datadir}/%{name}/help
-%dir %{_datadir}/%{name}/help/en
-%{_datadir}/%{name}/help/en/*.html
-%{_datadir}/%{name}/help/en/*.css
-%{_datadir}/%{name}/help/en/sbasic.*
-%{_datadir}/%{name}/help/en/schart.*
-%{_datadir}/%{name}/help/en/shared.*
-%{_datadir}/%{name}/help/*.xsl
+%dir %{_libdir}/%{name}/basis*/help
+%dir %{_libdir}/%{name}/basis*/help/en
+%{_libdir}/%{name}/basis*/help/en/*.html
+%{_libdir}/%{name}/basis*/help/en/*.css
+%{_libdir}/%{name}/basis*/help/en/sbasic.*
+%{_libdir}/%{name}/basis*/help/en/schart.*
+%{_libdir}/%{name}/basis*/help/en/shared.*
+%{_libdir}/%{name}/basis*/help/*.xsl
 
 %if %{with java}
 %attr(755,root,root) %{_libdir}/%{name}/basis*/program/javaldx
@@ -3600,7 +3600,7 @@ fi
 %attr(755,root,root) %{_libdir}/%{name}/basis*/program/libhsqldb2.so
 %attr(755,root,root) %{_libdir}/%{name}/basis*/program/libjava_uno.so
 %attr(755,root,root) %{_libdir}/%{name}/basis*/program/libjdbc2.so
-%attr(755,root,root) %{_libdir}/%{name}/basis*/program/libjpipe.so
+%attr(755,root,root) %{_libdir}/%{name}/ure/lib/libjpipe.so
 %attr(755,root,root) %{_libdir}/%{name}/basis*/program/libjuh.so
 %attr(755,root,root) %{_libdir}/%{name}/basis*/program/libjuhx.so
 %attr(755,root,root) %{_libdir}/%{name}/basis*/program/libofficebean.so
@@ -3662,7 +3662,7 @@ fi
 %{_iconsdir}/hicolor/*/apps/ooo-base.png
 %{_pixmapsdir}/ooo-base.png
 %{_libdir}/%{name}/basis*/program/resource/cnren-US.res
-%{_datadir}/%{name}/help/en/sdatabase.*
+%{_libdir}/%{name}/basis*/help/en/sdatabase.*
 %{_libdir}/%{name}/basis*/share/config/soffice.cfg/modules/dbapp
 %{_libdir}/%{name}/basis*/share/config/soffice.cfg/modules/dbbrowser
 %{_libdir}/%{name}/basis*/share/config/soffice.cfg/modules/dbquery
@@ -3696,7 +3696,7 @@ fi
 %{_desktopdir}/oocalc.desktop
 %{_iconsdir}/hicolor/*/apps/ooo-calc.png
 %{_pixmapsdir}/ooo-calc.png
-%{_datadir}/%{name}/help/en/scalc.*
+%{_libdir}/%{name}/basis*/help/en/scalc.*
 %{_libdir}/%{name}/basis*/program/resource/analysisen-US.res
 %{_libdir}/%{name}/basis*/program/resource/bf_scen-US.res
 %{_libdir}/%{name}/basis*/program/resource/dateen-US.res
@@ -3720,7 +3720,7 @@ fi
 %{_desktopdir}/oodraw.desktop
 %{_iconsdir}/hicolor/*/apps/ooo-draw.png
 %{_pixmapsdir}/ooo-draw.png
-%{_datadir}/%{name}/help/en/sdraw.*
+%{_libdir}/%{name}/basis*/help/en/sdraw.*
 %{_libdir}/%{name}/basis*/share/config/soffice.cfg/modules/sdraw
 %{_libdir}/%{name}/basis*/share/registry/data/org/openoffice/Office/UI/DrawWindowState.xcu
 %{_libdir}/%{name}/basis*/share/registry/modules/org/openoffice/Office/Common/Common-draw.xcu
@@ -3746,7 +3746,7 @@ fi
 %{_desktopdir}/oowriter.desktop
 %{_iconsdir}/hicolor/*/apps/ooo-writer.png
 %{_pixmapsdir}/ooo-writer.png
-%{_datadir}/%{name}/help/en/swriter.*
+%{_libdir}/%{name}/basis*/help/en/swriter.*
 %if %{with java}
 %{_libdir}/%{name}/basis*/program/classes/writer2latex.jar
 %endif
@@ -3779,7 +3779,7 @@ fi
 %{_desktopdir}/ooimpress.desktop
 %{_iconsdir}/hicolor/*/apps/ooo-impress.png
 %{_pixmapsdir}/ooo-impress.png
-%{_datadir}/%{name}/help/en/simpress.*
+%{_libdir}/%{name}/basis*/help/en/simpress.*
 %{_libdir}/%{name}/basis*/share/config/soffice.cfg/modules/simpress
 %{_libdir}/%{name}/basis*/share/config/soffice.cfg/simpress/
 %{_libdir}/%{name}/basis*/share/registry/data/org/openoffice/Office/UI/Effects.xcu
@@ -3801,7 +3801,7 @@ fi
 %{_desktopdir}/oomath.desktop
 %{_iconsdir}/hicolor/*/apps/ooo-math.png
 %{_pixmapsdir}/ooo-math.png
-%{_datadir}/%{name}/help/en/smath.*
+%{_libdir}/%{name}/basis*/help/en/smath.*
 %{_libdir}/%{name}/basis*/program/resource/bf_smen-US.res
 %{_libdir}/%{name}/basis*/program/resource/smen-US.res
 %{_libdir}/%{name}/basis*/share/config/soffice.cfg/modules/smath
@@ -3844,9 +3844,9 @@ fi
 %if %{with java}
 %files javafilter
 %defattr(644,root,root,755)
-%{_libdir}/%{name}/basis*/program/classes/aportisdoc.jar
-%{_libdir}/%{name}/basis*/program/classes/pexcel.jar
-%{_libdir}/%{name}/basis*/program/classes/pocketword.jar
+%{_libdir}/%{name}/program/classes/aportisdoc.jar
+%{_libdir}/%{name}/program/classes/pexcel.jar
+%{_libdir}/%{name}/program/classes/pocketword.jar
 %{_libdir}/%{name}/basis*/share/registry/modules/org/openoffice/TypeDetection/Filter/fcfg_palm_filters.xcu
 %{_libdir}/%{name}/basis*/share/registry/modules/org/openoffice/TypeDetection/Filter/fcfg_pocketexcel_filters.xcu
 %{_libdir}/%{name}/basis*/share/registry/modules/org/openoffice/TypeDetection/Filter/fcfg_pocketword_filters.xcu
