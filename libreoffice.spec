@@ -2853,7 +2853,7 @@ fi
 %dir %{_libdir}/%{name}/basis*/share/template/wizard
 %dir %{_libdir}/%{name}/basis*/share/template/wizard/letter
 %dir %{_libdir}/%{name}/basis*/share/wordbook
-%{_libdir}/%{name}/basis*/share/readme
+%{_datadir}/%{name}/share/readme
 %dir %{_libdir}/%{name}/basis*/share/registry/res
 %dir %{_libdir}/%{name}/basis*/share/registry/data/org/openoffice/TypeDetection
 %dir %{_libdir}/%{name}/basis*/share/registry/data/org/openoffice/ucb
@@ -2862,8 +2862,8 @@ fi
 %{_libdir}/%{name}/basis*/share/registry/data/org/openoffice/LDAP.xcu.sample
 %{_libdir}/%{name}/basis*/share/registry/data/org/openoffice/Office/Calc.xcu
 %{_libdir}/%{name}/basis*/share/registry/data/org/openoffice/Office/Canvas.xcu
-%{_libdir}/%{name}/basis*/share/registry/data/org/openoffice/Office/Common.xcu
-%{_libdir}/%{name}/basis*/share/registry/data/org/openoffice/Office/Compatibility.xcu
+%{_datadir}/%{name}/share/registry/data/org/openoffice/Office/Common.xcu
+%{_datadir}/%{name}/share/registry/data/org/openoffice/Office/Compatibility.xcu
 %{_libdir}/%{name}/basis*/share/registry/data/org/openoffice/Office/DataAccess.xcu
 %{_libdir}/%{name}/basis*/share/registry/data/org/openoffice/Office/Embedding.xcu
 %{_libdir}/%{name}/basis*/share/registry/data/org/openoffice/Office/ExtendedColorScheme.xcu
@@ -3158,17 +3158,17 @@ fi
 %attr(755,root,root) %{_bindir}/ootool
 %attr(755,root,root) %{_bindir}/unopkg
 
-%attr(755,root,root) %{_libdir}/%{name}/basis*/program/configimport.bin
+#%attr(755,root,root) %{_libdir}/%{name}/basis*/program/configimport.bin
 %attr(755,root,root) %{_libdir}/%{name}/basis*/program/gengal.bin
-%{_libdir}/%{name}/basis*/program/pkgchk
-%attr(755,root,root) %{_libdir}/%{name}/basis*/program/pkgchk.bin
+#%{_libdir}/%{name}/basis*/program/pkgchk
+#%attr(755,root,root) %{_libdir}/%{name}/basis*/program/pkgchk.bin
 %attr(755,root,root) %{_libdir}/%{name}/basis*/program/pluginapp.bin
 %attr(755,root,root) %{_libdir}/%{name}/basis*/program/setofficelang.bin
-%attr(755,root,root) %{_libdir}/%{name}/basis*/program/soffice.bin
+%attr(755,root,root) %{_libdir}/%{name}/program/soffice.bin
 %attr(755,root,root) %{_libdir}/%{name}/basis*/program/spadmin.bin
-%attr(755,root,root) %{_libdir}/%{name}/basis*/program/uno
-%attr(755,root,root) %{_libdir}/%{name}/basis*/program/uno.bin
-%attr(755,root,root) %{_libdir}/%{name}/basis*/program/unopkg.bin
+%attr(755,root,root) %{_libdir}/%{name}/ure/bin/uno
+%attr(755,root,root) %{_libdir}/%{name}/ure/bin/uno.bin
+%attr(755,root,root) %{_libdir}/%{name}/program/unopkg.bin
 #%attr(755,root,root) %{_libdir}/%{name}/basis*/program/ooqstart
 %attr(755,root,root) %{_libdir}/%{name}/basis*/program/pagein*
 %attr(755,root,root) %{_libdir}/%{name}/program/regcomp
