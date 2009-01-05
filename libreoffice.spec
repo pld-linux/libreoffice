@@ -21,16 +21,6 @@
 #	- configure --without-ppds --without afms
 #	- /share/config/soffice.cfg/global/accelerator/es/ should be in i18n-es
 #	- fix locale names and other locale related things
-#   - broken directory dependencies:
-#       error: openoffice.org-i18n-de-2.4.1.7-ooh680_m17.1: req /usr/share/openoffice.org/share/config/soffice.cfg/modules/swform/accelerator/de not found
-#       error: openoffice.org-i18n-de-2.4.1.7-ooh680_m17.1: req /usr/share/openoffice.org/share/config/soffice.cfg/modules/swreport/accelerator/de not found
-#       error: openoffice.org-i18n-de-2.4.1.7-ooh680_m17.1: req /usr/share/openoffice.org/share/config/soffice.cfg/modules/swxform/accelerator/de not found
-#       error: openoffice.org-i18n-es-2.4.1.7-ooh680_m17.1: req /usr/share/openoffice.org/share/config/soffice.cfg/modules/swform/accelerator/es not found
-#       error: openoffice.org-i18n-es-2.4.1.7-ooh680_m17.1: req /usr/share/openoffice.org/share/config/soffice.cfg/modules/swreport/accelerator/es not found
-#       error: openoffice.org-i18n-es-2.4.1.7-ooh680_m17.1: req /usr/share/openoffice.org/share/config/soffice.cfg/modules/swxform/accelerator/es not found
-#       error: openoffice.org-i18n-fr-2.4.1.7-ooh680_m17.1: req /usr/share/openoffice.org/share/config/soffice.cfg/modules/swform/accelerator/fr not found
-#       error: openoffice.org-i18n-fr-2.4.1.7-ooh680_m17.1: req /usr/share/openoffice.org/share/config/soffice.cfg/modules/swreport/accelerator/fr not found
-#       error: openoffice.org-i18n-fr-2.4.1.7-ooh680_m17.1: req /usr/share/openoffice.org/share/config/soffice.cfg/modules/swxform/accelerator/fr not found
 #   - can't be just i18n-{be,gu,hi,kn,pa,ta} instead of *-{be_BY,*_IN}?
 #   - more system libs todo:
 #	- (SYSTEM_HYPH) bcond system_libhnj doesn't work - needs Debian-patched version of libhnj
@@ -90,7 +80,7 @@
 %define		tag			%(echo %{mws} | tr A-Z a-z)-%{milestone}
 %define		milestone	m17
 %define		_tag		%(echo %{tag} | tr - _)
-%define		_rel		4
+%define		_rel		5
 
 Summary:	OpenOffice.org - powerful office suite
 Summary(pl.UTF-8):	OpenOffice.org - potężny pakiet biurowy
@@ -2585,8 +2575,11 @@ find_lang() {
 		grep "/share/samples/${lang}/" ${lfile} >> ${lang}.lang || :
 		grep "/help/${lang}$" ${lfile} >> ${lang}.lang || :
 		grep "/help/${lang}/" ${lfile} >> ${lang}.lang || :
+		grep "/share/config/soffice.cfg/modules/swform/accelerator/${lang}$" build/common_list.txt >> ${lang}.lang || :
 		grep "/share/config/soffice.cfg/modules/swform/accelerator/${lang}/" build/common_list.txt >> ${lang}.lang || :
+		grep "/share/config/soffice.cfg/modules/swreport/accelerator/${lang}$" build/common_list.txt >> ${lang}.lang || :
 		grep "/share/config/soffice.cfg/modules/swreport/accelerator/${lang}/" build/common_list.txt >> ${lang}.lang || :
+		grep "/share/config/soffice.cfg/modules/swxform/accelerator/${lang}$" build/common_list.txt >> ${lang}.lang || :
 		grep "/share/config/soffice.cfg/modules/swxform/accelerator/${lang}/" build/common_list.txt >> ${lang}.lang || :
 	fi
 }
