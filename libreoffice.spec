@@ -88,60 +88,60 @@
 %define		upd			300
 %define		mws			OOO%{upd}
 %define		tag			%(echo %{mws} | tr A-Z a-z)-%{milestone}
-%define		milestone	m12
+%define		milestone	m15
 %define		_tag		%(echo %{tag} | tr - _)
 %define		_rel		0.1
 
 Summary:	OpenOffice.org - powerful office suite
 Summary(pl.UTF-8):	OpenOffice.org - potężny pakiet biurowy
 Name:		openoffice.org
-Version:	3.0.0.3.5
+Version:	3.0.1.0
 Release:	%{_tag}.%{_rel}
 Epoch:		1
 License:	GPL/LGPL
 Group:		X11/Applications
 # we use svn because released tarballs are buggy too often
 # svn export http://svn.gnome.org/svn/ooo-build/branches/ooo-build-3-0-1 ooo-build
-Source0:	ooo-build-14795.tar.bz2
-# Source0-md5:	a9edf07fa355005cd72e0175286dda2b
+Source0:	ooo-build-15110.tar.bz2
+# Source0-md5:	d1925c4a17dce0e624981ddb0c0891ff
 Source1:	http://download.go-oo.org/DEV300/ooo-cli-prebuilt-3.0.tar.bz2
 # Source1-md5:	8b3979cd7fd99b7e9722fd8f690e69a9
 Source2:	http://download.go-oo.org/%{mws}/%{tag}-base.tar.bz2
-# Source2-md5:	21e57ec27f6362c20d56e73c96ef0d6f
+# Source2-md5:	c2eb3afafe7305be70c46f0bbc82ccff
 Source3:	http://download.go-oo.org/%{mws}/%{tag}-calc.tar.bz2
-# Source3-md5:	6cc5dde31fd7f24d28c4a097d2d8df10
+# Source3-md5:	78bf10d9a15f5cb801999dc6be0144d1
 Source4:	http://download.go-oo.org/%{mws}/%{tag}-l10n.tar.bz2
-# Source4-md5:	d32577da83f7826ee237a01a7408044f
+# Source4-md5:	02b20bd978e342de45ef84d3232e3f94
 Source5:	http://download.go-oo.org/%{mws}/%{tag}-ure.tar.bz2
-# Source5-md5:	70c0990f03ef786c4762c54af99df37d
+# Source5-md5:	65565feb49307361209b610249e45dc7
 Source6:        http://download.go-oo.org/%{mws}/%{tag}-writer.tar.bz2
-# Source6-md5:	20a442f052817b7d019ff385a894ecda
+# Source6-md5:	04f68dfb9a34b5c0766a65e6ff48b841
 Source7:        http://download.go-oo.org/%{mws}/%{tag}-impress.tar.bz2
-# Source7-md5:	528cbf842aec3a52b172a60c1482acd1
+# Source7-md5:	00a1646d1913989bc432073f8954c92b
 Source8:        http://download.go-oo.org/%{mws}/%{tag}-artwork.tar.bz2
-# Source8-md5:	2d94f9ec8bc0ae2ad4a74d660fc11351
+# Source8-md5:	cc928a9c348121d82fb80c43dbf3901f
 Source9:        http://download.go-oo.org/%{mws}/%{tag}-filters.tar.bz2
-# Source9-md5:	8e3dee220519f49aaa0092ca46a3fa87
+# Source9-md5:	729550f40870eeaa94b2ae493e038848
 Source10:        http://download.go-oo.org/%{mws}/%{tag}-testing.tar.bz2
-# Source10-md5:	c7bed0864af15516834c5f7eb6c2639d
+# Source10-md5:	406087778a00ad68cc4e94aa5a677086
 Source11:        http://download.go-oo.org/%{mws}/%{tag}-bootstrap.tar.bz2
-# Source11-md5:	d27ca2ae5fff6a8cfbc57cc2d3a9b44d
+# Source11-md5:	6d680f8bfe532bb8833a0e6bb6d19cc9
 Source12:        http://download.go-oo.org/%{mws}/%{tag}-libs_gui.tar.bz2
-# Source12-md5:	9f085cba68f5946bcb7a66a89eebf04f
+# Source12-md5:	e23ba759d82041c665a24ea4ef3d8b9b
 Source13:        http://download.go-oo.org/%{mws}/%{tag}-libs_core.tar.bz2
-# Source13-md5:	9accbb43877b5d0b6b95f0a67558eaa1
+# Source13-md5:	bdd173a94ece251126ae0e4120cbb661
 Source14:        http://download.go-oo.org/%{mws}/%{tag}-libs_extern.tar.bz2
-# Source14-md5:	9139720ec2e1ad52611bf5e3686a8f7f
+# Source14-md5:	2582ddfe11a64cca9190a046e9a159df
 Source15:        http://download.go-oo.org/%{mws}/%{tag}-components.tar.bz2
-# Source15-md5:	3dbf9aa5d4d82969679e8c76f1907eda
+# Source15-md5:	d29035a293298c6e69d5d8a3acbab75f
 Source16:        http://download.go-oo.org/%{mws}/%{tag}-libs_extern_sys.tar.bz2
-# Source16-md5:	77181ab91290d4d996fc39e6ce52eede
+# Source16-md5:	8016fc38320ebd4ab7720df7eb4e4df0
 Source17:        http://download.go-oo.org/%{mws}/%{tag}-extensions.tar.bz2
-# Source17-md5:	a2c3ed16d08ec356d64384eab57800a5
+# Source17-md5:	f307de1b92d488484a53fa8ce45a7b3b
 Source18:        http://download.go-oo.org/%{mws}/%{tag}-sdk.tar.bz2
-# Source18-md5:	3259fb1d7e17c73b80dff2207264538e
+# Source18-md5:	f298e95232efdd4182345c095a497799
 Source19:        http://download.go-oo.org/%{mws}/%{tag}-postprocess.tar.bz2
-# Source19-md5:	9d363ee41496f3616bff5704e37b3dd1
+# Source19-md5:	73b6c538639310c2ad242d6cb5045c52
 Source50:	http://download.go-oo.org//DEV300/scsolver.2008-10-30.tar.bz2
 # Source50-md5:	04181e5ef82973eb349d3122a19d2274
 Source51:	http://download.go-oo.org/SRC/biblio.tar.bz2
