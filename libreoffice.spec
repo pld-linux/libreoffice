@@ -102,8 +102,8 @@ License:	GPL/LGPL
 Group:		X11/Applications
 # we use svn because released tarballs are buggy too often
 # svn export http://svn.gnome.org/svn/ooo-build/branches/ooo-build-3-0-1 ooo-build
-Source0:	ooo-build-15110.tar.bz2
-# Source0-md5:	d1925c4a17dce0e624981ddb0c0891ff
+Source0:	ooo-build-15266.tar.bz2
+# Source0-md5:	433ab20a5f47c3393637ed88ef061b71
 Source1:	http://download.go-oo.org/DEV300/ooo-cli-prebuilt-3.0.tar.bz2
 # Source1-md5:	8b3979cd7fd99b7e9722fd8f690e69a9
 Source2:	http://download.go-oo.org/%{mws}/%{tag}-base.tar.bz2
@@ -244,8 +244,6 @@ BuildRequires:	unzip
 %{?with_system_xalan:BuildRequires:	xalan-j}
 %{?with_system_xerces:BuildRequires:	xerces-j}
 %{?with_system_xml_apis:BuildRequires:	xml-commons}
-BuildRequires:	xmlsec1-devel
-BuildRequires:	xmlsec1-nss-devel
 BuildRequires:	xorg-lib-libX11-devel
 BuildRequires:	xorg-lib-libXaw-devel
 BuildRequires:	xorg-lib-libXtst-devel
@@ -2251,7 +2249,6 @@ CONFOPTS="\
 	--with-system-sndfile \
 	--with-system-stdlibs \
 	--with-system-x11-extensions-headers \
-	--with-system-xmlsec \
 	--with-system-xrender \
 	--with-system-xrender-headers=yes \
 	--with-system-zlib \
@@ -2276,7 +2273,6 @@ CONFOPTS="\
 %else
 	--without-java \
 	--with-system-libxslt \
-	--with-system-xmlsec \
 %endif
 %if %{with gnomevfs}
 	--enable-gnome-vfs \
