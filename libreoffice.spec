@@ -218,8 +218,6 @@ BuildRequires:	unzip
 %{?with_system_xalan:BuildRequires:	xalan-j}
 %{?with_system_xerces:BuildRequires:	xerces-j}
 %{?with_system_xml_apis:BuildRequires:	xml-commons}
-BuildRequires:	xmlsec1-devel
-BuildRequires:	xmlsec1-nss-devel
 BuildRequires:	xorg-lib-libX11-devel
 BuildRequires:	xorg-lib-libXaw-devel
 BuildRequires:	xorg-lib-libXtst-devel
@@ -2254,7 +2252,6 @@ CONFOPTS="\
 	--with-system-sndfile \
 	--with-system-stdlibs \
 	--with-system-x11-extensions-headers \
-	--with-system-xmlsec \
 	--with-system-xrender \
 	--with-system-xrender-headers=yes \
 	--with-system-zlib \
@@ -2279,7 +2276,6 @@ CONFOPTS="\
 %else
 	--without-java \
 	--with-system-libxslt \
-	--with-system-xmlsec \
 %endif
 %if %{with gnomevfs}
 	--enable-gnome-vfs \
@@ -2726,7 +2722,6 @@ fi
 %attr(755,root,root) %{_libdir}/%{name}/program/libvclplug_svp680*.so
 %attr(755,root,root) %{_libdir}/%{name}/program/libwpgimport680*.so
 %attr(755,root,root) %{_libdir}/%{name}/program/libwriterfilter680*.so
-# maybe external is possible?
 %attr(755,root,root) %{_libdir}/%{name}/program/libxmlsec1*.so
 %attr(755,root,root) %{_libdir}/%{name}/program/oosplash.bin
 %attr(755,root,root) %{_libdir}/%{name}/program/simplecanvas.uno.so
