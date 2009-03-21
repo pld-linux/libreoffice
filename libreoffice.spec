@@ -2411,6 +2411,9 @@ fi
 if [ ! -f installed.stamp ]; then
 	chmod -Rf a+rX,u+w,g-w,o-w $RPM_BUILD_ROOT
 
+	# this symlink only confuses the rest of install
+	rm $RPM_BUILD_ROOT%{_libdir}/%{name}/basis-link
+
 	# do we need those? large comparing to png
 	rm -r $RPM_BUILD_ROOT%{_datadir}/icons/hicolor/scalable/apps/*.svg
 
@@ -2687,37 +2690,19 @@ fi
 
 # TODO: check where these really belong
 %attr(755,root,root) %{_libdir}/%{name}/basis*/program/OGLTrans.uno.so
-%attr(755,root,root) %{_libdir}/%{name}/basis*/program/libbf_golx*.so
-%attr(755,root,root) %{_libdir}/%{name}/basis*/program/libdeploymentmisclx*.so
 %attr(755,root,root) %{_libdir}/%{name}/basis*/program/libvbaobj*.uno.so
 %attr(755,root,root) %{_libdir}/%{name}/ure/lib/bootstrap.uno.so
 %attr(755,root,root) %{_libdir}/%{name}/basis*/program/stringresource*.uno.so
 %attr(755,root,root) %{_libdir}/%{name}/basis*/program/updatefeed.uno.so
 %attr(755,root,root) %{_libdir}/%{name}/basis*/program/fastsax.uno.so
-%attr(755,root,root) %{_libdir}/%{name}/basis*/program/libacclx*.so
 %attr(755,root,root) %{_libdir}/%{name}/ure/lib/libaffine_uno_uno.so
-%attr(755,root,root) %{_libdir}/%{name}/basis*/program/libbasebmplx*.so
-%attr(755,root,root) %{_libdir}/%{name}/basis*/program/libbf_sblx*.so
-%attr(755,root,root) %{_libdir}/%{name}/basis*/program/libbf_solx*.so
 %{!?with_system_db:%attr(755,root,root) %{_libdir}/%{name}/basis*/program/libdb-4.2.so}
-%attr(755,root,root) %{_libdir}/%{name}/basis*/program/libguesslanglx*.so
-%attr(755,root,root) %{_libdir}/%{name}/basis*/program/libhelplinkerlx*.so
-%attr(755,root,root) %{_libdir}/%{name}/basis*/program/libloglx*.so
 %attr(755,root,root) %{_libdir}/%{name}/basis*/program/liblpsolve*.so
 #%attr(755,root,root) %{_libdir}/%{name}/basis*/program/libmtfrenderer.uno.so
-%attr(755,root,root) %{_libdir}/%{name}/basis*/program/libooxlx*.so
 %if %{with java}
-%attr(755,root,root) %{_libdir}/%{name}/basis*/program/librptlx*.so
-%attr(755,root,root) %{_libdir}/%{name}/basis*/program/librptuilx*.so
-%attr(755,root,root) %{_libdir}/%{name}/basis*/program/librptxmllx*.so
 %endif
-%attr(755,root,root) %{_libdir}/%{name}/basis*/program/libsaxlx*.so
-%attr(755,root,root) %{_libdir}/%{name}/basis*/program/libt602filterlx*.so
 %attr(755,root,root) %{_libdir}/%{name}/basis*/program/libtextcat.so
 %attr(755,root,root) %{_libdir}/%{name}/ure/lib/libunsafe_uno_uno.so
-%attr(755,root,root) %{_libdir}/%{name}/basis*/program/libvclplug_svplx*.so
-%attr(755,root,root) %{_libdir}/%{name}/basis*/program/libwpgimportlx*.so
-%attr(755,root,root) %{_libdir}/%{name}/basis*/program/libwriterfilterlx*.so
 # maybe external is possible?
 %attr(755,root,root) %{_libdir}/%{name}/basis*/program/libxmlsec1*.so
 %attr(755,root,root) %{_libdir}/%{name}/program/oosplash.bin
@@ -2858,7 +2843,6 @@ fi
 %{_libdir}/%{name}/basis*/share/registry/data/org/openoffice/LDAP.xcu.sample
 %{_libdir}/%{name}/basis*/share/registry/data/org/openoffice/Office/Calc.xcu
 %{_libdir}/%{name}/basis*/share/registry/data/org/openoffice/Office/Canvas.xcu
-%{_datadir}/%{name}/share/registry/data/org/openoffice/Office/Common.xcu
 %{_datadir}/%{name}/share/registry/data/org/openoffice/Office/Compatibility.xcu
 %{_libdir}/%{name}/basis*/share/registry/data/org/openoffice/Office/DataAccess.xcu
 %{_libdir}/%{name}/basis*/share/registry/data/org/openoffice/Office/Embedding.xcu
@@ -3009,7 +2993,6 @@ fi
 %{_libdir}/%{name}/basis*/share/registry/modules/org/openoffice/Office/Common/Common-ctl_ta-IN.xcu
 %{_libdir}/%{name}/basis*/share/registry/modules/org/openoffice/Office/Common/Common-ctl_th.xcu
 #%{_libdir}/%{name}/basis*/share/registry/modules/org/openoffice/Office/Common/Common-ctl_vi.xcu
-%{_libdir}/%{name}/basis*/share/registry/modules/org/openoffice/Office/Common/Common-dicooo.xcu
 %{_libdir}/%{name}/basis*/share/registry/modules/org/openoffice/Office/Common/Common-korea.xcu
 %{_libdir}/%{name}/basis*/share/registry/modules/org/openoffice/Office/Common/Common-unx.xcu
 %{_libdir}/%{name}/basis*/share/registry/modules/org/openoffice/Office/Common/Common-UseOOoFileDialogs.xcu
@@ -3167,21 +3150,11 @@ fi
 %attr(755,root,root) %{_libdir}/%{name}/program/unopkg.bin
 #%attr(755,root,root) %{_libdir}/%{name}/basis*/program/ooqstart
 %attr(755,root,root) %{_libdir}/%{name}/basis*/program/pagein*
-%attr(755,root,root) %{_libdir}/%{name}/program/regcomp
-%attr(755,root,root) %{_libdir}/%{name}/program/regcomp.bin
-%{_libdir}/%{name}/basis*/program/setuprc
-%attr(755,root,root) %{_libdir}/%{name}/basis*/program/smath
-%attr(755,root,root) %{_libdir}/%{name}/basis*/program/soffice
-%attr(755,root,root) %{_libdir}/%{name}/basis*/program/spadmin
 %attr(755,root,root) %{_libdir}/%{name}/basis*/program/open-url
 %attr(755,root,root) %{_libdir}/%{name}/basis*/program/gengal
-%attr(755,root,root) %{_libdir}/%{name}/basis*/program/configimport
-%attr(755,root,root) %{_libdir}/%{name}/basis*/program/sbase
 %attr(755,root,root) %{_libdir}/%{name}/basis*/program/senddoc
 %attr(755,root,root) %{_libdir}/%{name}/basis*/program/setofficelang
-%attr(755,root,root) %{_libdir}/%{name}/basis*/program/unopkg
 %attr(755,root,root) %{_libdir}/%{name}/basis*/program/uri-encode
-%attr(755,root,root) %{_libdir}/%{name}/basis*/program/viewdoc
 %{_libdir}/%{name}/basis*/program/versionrc
 
 %if %{with mono}
@@ -3194,7 +3167,6 @@ fi
 %attr(755,root,root) %{_libdir}/%{name}/basis*/program/libcli_uno_glue.so
 %endif
 
-%{_libdir}/%{name}/help
 %dir %{_libdir}/%{name}/basis*/help
 %dir %{_libdir}/%{name}/basis*/help/en
 %{_libdir}/%{name}/basis*/help/en/*.html
@@ -3205,10 +3177,7 @@ fi
 %{_libdir}/%{name}/basis*/help/*.xsl
 
 %if %{with java}
-%attr(755,root,root) %{_libdir}/%{name}/basis*/program/javaldx
 %attr(755,root,root) %{_libdir}/%{name}/basis*/program/java-set-classpath
-%{_libdir}/%{name}/basis*/program/jvmfwk3rc
-%{_libdir}/%{name}/basis*/program/JREProperties.class
 
 %dir %{_libdir}/%{name}/basis*/program/classes
 %{_libdir}/%{name}/basis*/program/classes/ScriptFramework.jar
@@ -3224,23 +3193,18 @@ fi
 %{_libdir}/%{name}/basis*/program/classes/fax.jar
 %{_libdir}/%{name}/basis*/program/classes/form.jar
 %{!?with_system_hsqldb:%{_libdir}/%{name}/basis*/program/classes/hsqldb.jar}
-%{_libdir}/%{name}/basis*/program/classes/java_uno.jar
 #%{_libdir}/%{name}/basis*/program/classes/java_uno_accessbridge.jar
 %{_libdir}/%{name}/basis*/program/classes/js.jar
-%{_libdir}/%{name}/basis*/program/classes/juh.jar
-%{_libdir}/%{name}/basis*/program/classes/jurt.jar
 %{_libdir}/%{name}/basis*/program/classes/jut.jar
 %{_libdir}/%{name}/basis*/program/classes/letter.jar
 %{_libdir}/%{name}/basis*/program/classes/officebean.jar
 %{_libdir}/%{name}/basis*/program/classes/query.jar
 %{_libdir}/%{name}/basis*/program/classes/report.jar
-%{_libdir}/%{name}/basis*/program/classes/ridl.jar
 %{_libdir}/%{name}/basis*/program/classes/sandbox.jar
 %{_libdir}/%{name}/basis*/program/classes/sdbc_hsqldb.jar
 %{!?with_system_xalan:%{_libdir}/%{name}/basis*/program/classes/serializer.jar}
 %{_libdir}/%{name}/basis*/program/classes/table.jar
 %{_libdir}/%{name}/basis*/program/classes/unoil.jar
-%{_libdir}/%{name}/basis*/program/classes/unoloader.jar
 %{_libdir}/%{name}/basis*/program/classes/web.jar
 %{!?with_system_xalan:%{_libdir}/%{name}/basis*/program/classes/xalan.jar}
 %{!?with_system_xerces:%{_libdir}/%{name}/basis*/program/classes/xercesImpl.jar}
@@ -3250,7 +3214,6 @@ fi
 %{_libdir}/%{name}/basis*/share/Scripts/beanshell
 %{_libdir}/%{name}/basis*/share/Scripts/javascript
 %{_libdir}/%{name}/basis*/share/Scripts/java
-%{_libdir}/%{name}/basis*/share/config/javavendors.xml
 
 %dir %{_libdir}/%{name}/basis*/share/xslt
 %{_libdir}/%{name}/basis*/share/xslt/common
@@ -3326,7 +3289,6 @@ fi
 %{_libdir}/%{name}/basis*/program/resource/galen-US.res
 %{_libdir}/%{name}/basis*/program/resource/impen-US.res
 %{_libdir}/%{name}/basis*/program/resource/ofaen-US.res
-%{_libdir}/%{name}/basis*/program/resource/oooen-US.res
 %{_libdir}/%{name}/basis*/program/resource/pcren-US.res
 %{_libdir}/%{name}/basis*/program/resource/pdffilteren-US.res
 %{_libdir}/%{name}/basis*/program/resource/preloaden-US.res
@@ -3384,151 +3346,48 @@ fi
 #%attr(755,root,root) %{_libdir}/%{name}/basis*/program/implreg.uno.so
 %attr(755,root,root) %{_libdir}/%{name}/ure/lib/introspection.uno.so
 %attr(755,root,root) %{_libdir}/%{name}/ure/lib/invocadapt.uno.so
-%attr(755,root,root) %{_libdir}/%{name}/basis*/program/invocation.uno.so
 %attr(755,root,root) %{_libdir}/%{name}/basis*/program/ldapbe2.uno.so
-%attr(755,root,root) %{_libdir}/%{name}/basis*/program/libabplx*.so
-%attr(755,root,root) %{_libdir}/%{name}/basis*/program/libadabas2.so
-%{!?with_system_agg:%attr(755,root,root) %{_libdir}/%{name}/basis*/program/libagglx*.so}
 %attr(755,root,root) %{_libdir}/%{name}/basis*/program/libanimcore.so
-%attr(755,root,root) %{_libdir}/%{name}/basis*/program/libavmedialx*.so
 %attr(755,root,root) %{_libdir}/%{name}/basis*/program/libavmediagst.so
-%attr(755,root,root) %{_libdir}/%{name}/basis*/program/libbasctllx*.so
-%attr(755,root,root) %{_libdir}/%{name}/basis*/program/libbasegfxlx*.so
-%attr(755,root,root) %{_libdir}/%{name}/basis*/program/libbf_frmlx*.so
 #%attr(755,root,root) %{_libdir}/%{name}/basis*/program/libbf_lnglx*.so
-%attr(755,root,root) %{_libdir}/%{name}/basis*/program/libbf_migratefilterlx*.so
-%attr(755,root,root) %{_libdir}/%{name}/basis*/program/libbf_ofalx*.so
-%attr(755,root,root) %{_libdir}/%{name}/basis*/program/libbf_schlx*.so
-%attr(755,root,root) %{_libdir}/%{name}/basis*/program/libbf_sdlx*.so
-%attr(755,root,root) %{_libdir}/%{name}/basis*/program/libbf_smlx*.so
-%attr(755,root,root) %{_libdir}/%{name}/basis*/program/libbf_svxlx*.so
-%attr(755,root,root) %{_libdir}/%{name}/basis*/program/libbf_swlx*.so
-%attr(755,root,root) %{_libdir}/%{name}/basis*/program/libbf_wrapperlx*.so
-%attr(755,root,root) %{_libdir}/%{name}/basis*/program/libbf_xolx*.so
-%attr(755,root,root) %{_libdir}/%{name}/basis*/program/libbiblx*.so
-%attr(755,root,root) %{_libdir}/%{name}/basis*/program/libbindetlx*.so
 %attr(755,root,root) %{_libdir}/%{name}/basis*/program/libcached1.so
-%attr(755,root,root) %{_libdir}/%{name}/basis*/program/libcanvastoolslx*.so
 %attr(755,root,root) %{_libdir}/%{name}/basis*/program/libcollator_data.so
 %attr(755,root,root) %{_libdir}/%{name}/basis*/program/libcomphelp4gcc3.so
-%attr(755,root,root) %{_libdir}/%{name}/basis*/program/libcppcanvaslx*.so
-%attr(755,root,root) %{_libdir}/%{name}/basis*/program/libctllx*.so
-%attr(755,root,root) %{_libdir}/%{name}/basis*/program/libcuilx*.so
-%attr(755,root,root) %{_libdir}/%{name}/basis*/program/libdbalx*.so
-%attr(755,root,root) %{_libdir}/%{name}/basis*/program/libdbacfglx*.so
-%attr(755,root,root) %{_libdir}/%{name}/basis*/program/libdbaselx*.so
-%attr(755,root,root) %{_libdir}/%{name}/basis*/program/libdbaxmllx*.so
-%attr(755,root,root) %{_libdir}/%{name}/basis*/program/libdbplx*.so
 %attr(755,root,root) %{_libdir}/%{name}/basis*/program/libdbpool2.so
-%attr(755,root,root) %{_libdir}/%{name}/basis*/program/libdbtoolslx*.so
-%attr(755,root,root) %{_libdir}/%{name}/basis*/program/libdbulx*.so
 %attr(755,root,root) %{_libdir}/%{name}/basis*/program/libdict_ja.so
 %attr(755,root,root) %{_libdir}/%{name}/basis*/program/libdict_zh.so
-%attr(755,root,root) %{_libdir}/%{name}/basis*/program/libdtransX11lx*.so
-%attr(755,root,root) %{_libdir}/%{name}/basis*/program/libeggtraylx*.so
-%attr(755,root,root) %{_libdir}/%{name}/basis*/program/libegilx*.so
 %attr(755,root,root) %{_libdir}/%{name}/basis*/program/libembobj.so
 %attr(755,root,root) %{_libdir}/%{name}/basis*/program/libemboleobj.so
-%attr(755,root,root) %{_libdir}/%{name}/basis*/program/libemelx*.so
-%attr(755,root,root) %{_libdir}/%{name}/basis*/program/libemplx*.so
-%attr(755,root,root) %{_libdir}/%{name}/basis*/program/libepblx*.so
-%attr(755,root,root) %{_libdir}/%{name}/basis*/program/libepglx*.so
-%attr(755,root,root) %{_libdir}/%{name}/basis*/program/libepplx*.so
-%attr(755,root,root) %{_libdir}/%{name}/basis*/program/libepslx*.so
-%attr(755,root,root) %{_libdir}/%{name}/basis*/program/libeptlx*.so
-%attr(755,root,root) %{_libdir}/%{name}/basis*/program/liberalx*.so
-%attr(755,root,root) %{_libdir}/%{name}/basis*/program/libetilx*.so
 %attr(755,root,root) %{_libdir}/%{name}/basis*/program/libevoab1.so
 %attr(755,root,root) %{_libdir}/%{name}/basis*/program/libevtatt.so
-%attr(755,root,root) %{_libdir}/%{name}/basis*/program/libexlinklx*.so
-%attr(755,root,root) %{_libdir}/%{name}/basis*/program/libexplx*.so
-%attr(755,root,root) %{_libdir}/%{name}/basis*/program/libfilelx*.so
 %attr(755,root,root) %{_libdir}/%{name}/basis*/program/libfileacc.so
 %attr(755,root,root) %{_libdir}/%{name}/basis*/program/libfilterconfig1.so
-%attr(755,root,root) %{_libdir}/%{name}/basis*/program/libflatlx*.so
-%attr(755,root,root) %{_libdir}/%{name}/basis*/program/libfrmlx*.so
-%attr(755,root,root) %{_libdir}/%{name}/basis*/program/libfwelx*.so
-%attr(755,root,root) %{_libdir}/%{name}/basis*/program/libfwilx*.so
-%attr(755,root,root) %{_libdir}/%{name}/basis*/program/libfwklx*.so
-%attr(755,root,root) %{_libdir}/%{name}/basis*/program/libfwllx*.so
-%attr(755,root,root) %{_libdir}/%{name}/basis*/program/libfwmlx*.so
-%attr(755,root,root) %{_libdir}/%{name}/basis*/program/libgcc3_uno.so
-%attr(755,root,root) %{_libdir}/%{name}/basis*/program/libgolx*.so
 %{!?with_system_hunspell:%attr(755,root,root) %{_libdir}/%{name}/basis*/program/libhunspell.so}
-%attr(755,root,root) %{_libdir}/%{name}/basis*/program/libhyphenlx*.so
-%attr(755,root,root) %{_libdir}/%{name}/basis*/program/libi18nisolang1gcc3.so
 %attr(755,root,root) %{_libdir}/%{name}/basis*/program/libi18nregexpgcc3.so
 %attr(755,root,root) %{_libdir}/%{name}/basis*/program/libi18nutilgcc3.so
-%attr(755,root,root) %{_libdir}/%{name}/basis*/program/libicdlx*.so
-%attr(755,root,root) %{_libdir}/%{name}/basis*/program/libicglx*.so
-%attr(755,root,root) %{_libdir}/%{name}/basis*/program/libidxlx*.so
-%attr(755,root,root) %{_libdir}/%{name}/basis*/program/libimelx*.so
 %attr(755,root,root) %{_libdir}/%{name}/basis*/program/libindex_data.so
-%attr(755,root,root) %{_libdir}/%{name}/basis*/program/libipblx*.so
-%attr(755,root,root) %{_libdir}/%{name}/basis*/program/libipdlx*.so
-%attr(755,root,root) %{_libdir}/%{name}/basis*/program/libipslx*.so
-%attr(755,root,root) %{_libdir}/%{name}/basis*/program/libiptlx*.so
-%attr(755,root,root) %{_libdir}/%{name}/basis*/program/libipxlx*.so
-%attr(755,root,root) %{_libdir}/%{name}/basis*/program/libiralx*.so
-%attr(755,root,root) %{_libdir}/%{name}/basis*/program/libitglx*.so
-%attr(755,root,root) %{_libdir}/%{name}/basis*/program/libitilx*.so
 %attr(755,root,root) %{_libdir}/%{name}/basis*/program/libjl*_g.so
 %attr(755,root,root) %{_libdir}/%{name}/basis*/program/libkab1.so
-%attr(755,root,root) %{_libdir}/%{name}/basis*/program/liblegacy_binfilterslx*.so
-%attr(755,root,root) %{_libdir}/%{name}/basis*/program/liblnglx*.so
-%attr(755,root,root) %{_libdir}/%{name}/basis*/program/liblnthlx*.so
 %attr(755,root,root) %{_libdir}/%{name}/basis*/program/liblocaledata_en.so
 %attr(755,root,root) %{_libdir}/%{name}/basis*/program/liblocaledata_es.so
 %attr(755,root,root) %{_libdir}/%{name}/basis*/program/liblocaledata_euro.so
 %attr(755,root,root) %{_libdir}/%{name}/basis*/program/liblocaledata_others.so
-%attr(755,root,root) %{_libdir}/%{name}/basis*/program/liblwpftlx*.so
 %attr(755,root,root) %{_libdir}/%{name}/basis*/program/libmcnttype.so
 #%attr(755,root,root) %{_libdir}/%{name}/basis*/program/libmdblx*.so
 #%attr(755,root,root) %{_libdir}/%{name}/basis*/program/libmdbimpllx*.so
-%attr(755,root,root) %{_libdir}/%{name}/basis*/program/libmsworkslx*.so
 %attr(755,root,root) %{_libdir}/%{name}/basis*/program/libmysql2.so
 %attr(755,root,root) %{_libdir}/%{name}/basis*/program/libodbc2.so
 %attr(755,root,root) %{_libdir}/%{name}/basis*/program/libodbcbase2.so
-%attr(755,root,root) %{_libdir}/%{name}/basis*/program/liboffacclx*.so
 %attr(755,root,root) %{_libdir}/%{name}/basis*/program/libpackage2.so
-%attr(755,root,root) %{_libdir}/%{name}/basis*/program/libpcrlx*.so
-%attr(755,root,root) %{_libdir}/%{name}/basis*/program/libpdffilterlx*.so
 #%attr(755,root,root) %{_libdir}/%{name}/basis*/program/libpklx*.so
-%attr(755,root,root) %{_libdir}/%{name}/basis*/program/libpllx*.so
-%attr(755,root,root) %{_libdir}/%{name}/basis*/program/libpreloadlx*.so
-%attr(755,root,root) %{_libdir}/%{name}/basis*/program/libprotocolhandlerlx*.so
-%attr(755,root,root) %{_libdir}/%{name}/basis*/program/libpsplx*.so
-%attr(755,root,root) %{_libdir}/%{name}/basis*/program/libqstart_gtklx*.so
 %attr(755,root,root) %{_libdir}/%{name}/basis*/program/librecentfile.so
-%attr(755,root,root) %{_libdir}/%{name}/basis*/program/libreslx*.so
-%attr(755,root,root) %{_libdir}/%{name}/basis*/program/libsblx*.so
 #%attr(755,root,root) %{_libdir}/%{name}/basis*/program/libschlx*.so
 #%attr(755,root,root) %{_libdir}/%{name}/basis*/program/libschdlx*.so
-%attr(755,root,root) %{_libdir}/%{name}/basis*/program/libscnlx*.so
 %attr(755,root,root) %{_libdir}/%{name}/basis*/program/libscriptframe.so
-%attr(755,root,root) %{_libdir}/%{name}/basis*/program/libsdlx*.so
 %attr(755,root,root) %{_libdir}/%{name}/basis*/program/libsdbc2.so
-%attr(755,root,root) %{_libdir}/%{name}/basis*/program/libsdbtlx*.so
-%attr(755,root,root) %{_libdir}/%{name}/basis*/program/libsddlx*.so
-%attr(755,root,root) %{_libdir}/%{name}/basis*/program/libsduilx*.so
-%attr(755,root,root) %{_libdir}/%{name}/basis*/program/libsfxlx*.so
 #%attr(755,root,root) %{_libdir}/%{name}/basis*/program/libsolx*.so
-%attr(755,root,root) %{_libdir}/%{name}/basis*/program/libsotlx*.so
-%attr(755,root,root) %{_libdir}/%{name}/basis*/program/libspalx*.so
-%attr(755,root,root) %{_libdir}/%{name}/basis*/program/libspelllx*.so
-%attr(755,root,root) %{_libdir}/%{name}/basis*/program/libspllx*.so
-%attr(755,root,root) %{_libdir}/%{name}/basis*/program/libspl_unxlx*.so
 %attr(755,root,root) %{_libdir}/%{name}/basis*/program/libsrtrs1.so
-%attr(755,root,root) %{_libdir}/%{name}/basis*/program/libstslx*.so
-%attr(755,root,root) %{_libdir}/%{name}/basis*/program/libsvllx*.so
-%attr(755,root,root) %{_libdir}/%{name}/basis*/program/libsvtlx*.so
-%attr(755,root,root) %{_libdir}/%{name}/basis*/program/libsvxlx*.so
-%attr(755,root,root) %{_libdir}/%{name}/basis*/program/libswlx*.so
 %attr(755,root,root) %{_libdir}/%{name}/basis*/program/libtextconv_dict.so
-%attr(755,root,root) %{_libdir}/%{name}/basis*/program/libtextconversiondlgslx*.so
-%attr(755,root,root) %{_libdir}/%{name}/basis*/program/libtfulx*.so
-%attr(755,root,root) %{_libdir}/%{name}/basis*/program/libtklx*.so
-%attr(755,root,root) %{_libdir}/%{name}/basis*/program/libtllx*.so
 %attr(755,root,root) %{_libdir}/%{name}/basis*/program/libtvhlp1.so
 %attr(755,root,root) %{_libdir}/%{name}/basis*/program/libucb1.so
 %attr(755,root,root) %{_libdir}/%{name}/basis*/program/libucbhelper4gcc3.so
@@ -3538,25 +3397,10 @@ fi
 %attr(755,root,root) %{_libdir}/%{name}/basis*/program/libucpftp1.so
 %attr(755,root,root) %{_libdir}/%{name}/basis*/program/libucphier1.so
 %attr(755,root,root) %{_libdir}/%{name}/basis*/program/libucppkg1.so
-%attr(755,root,root) %{_libdir}/%{name}/basis*/program/libunoxmllx*.so
-%attr(755,root,root) %{_libdir}/%{name}/basis*/program/libupdchklx*.so
-%attr(755,root,root) %{_libdir}/%{name}/basis*/program/liburp_uno.so
-%attr(755,root,root) %{_libdir}/%{name}/basis*/program/libutllx*.so
-%attr(755,root,root) %{_libdir}/%{name}/basis*/program/libuuilx*.so
-%attr(755,root,root) %{_libdir}/%{name}/basis*/program/libvcllx*.so
-%attr(755,root,root) %{_libdir}/%{name}/basis*/program/libvclplug_genlx*.so
 %attr(755,root,root) %{_libdir}/%{name}/basis*/program/libvos3gcc3.so
-%attr(755,root,root) %{_libdir}/%{name}/basis*/program/libxcrlx*.so
-%attr(755,root,root) %{_libdir}/%{name}/basis*/program/libxmlfalx*.so
-%attr(755,root,root) %{_libdir}/%{name}/basis*/program/libxmlfdlx*.so
 %attr(755,root,root) %{_libdir}/%{name}/basis*/program/libxmlsecurity.so
-%attr(755,root,root) %{_libdir}/%{name}/basis*/program/libxmxlx*.so
-%attr(755,root,root) %{_libdir}/%{name}/basis*/program/libxolx*.so
-%attr(755,root,root) %{_libdir}/%{name}/basis*/program/libxoflx*.so
 %attr(755,root,root) %{_libdir}/%{name}/basis*/program/libxsec_fw.so
 %attr(755,root,root) %{_libdir}/%{name}/basis*/program/libxsec_xmlsec.so
-%attr(755,root,root) %{_libdir}/%{name}/basis*/program/libxsltdlglx*.so
-%attr(755,root,root) %{_libdir}/%{name}/basis*/program/libxsltfilterlx*.so
 %attr(755,root,root) %{_libdir}/%{name}/basis*/program/libxstor.so
 %attr(755,root,root) %{_libdir}/%{name}/basis*/program/localebe1.uno.so
 %attr(755,root,root) %{_libdir}/%{name}/basis*/program/migrationoo2.uno.so
@@ -3594,32 +3438,13 @@ fi
 %attr(755,root,root) %{_libdir}/%{name}/ure/lib/javaloader.uno.so
 %attr(755,root,root) %{_libdir}/%{name}/ure/lib/javavm.uno.so
 %attr(755,root,root) %{_libdir}/%{name}/basis*/program/libhsqldb2.so
-%attr(755,root,root) %{_libdir}/%{name}/basis*/program/libjava_uno.so
 %attr(755,root,root) %{_libdir}/%{name}/basis*/program/libjdbc2.so
 %attr(755,root,root) %{_libdir}/%{name}/ure/lib/libjpipe.so
-%attr(755,root,root) %{_libdir}/%{name}/basis*/program/libjuh.so
-%attr(755,root,root) %{_libdir}/%{name}/basis*/program/libjuhx.so
 %attr(755,root,root) %{_libdir}/%{name}/basis*/program/libofficebean.so
-%attr(755,root,root) %{_libdir}/%{name}/basis*/program/sunjavaplugin.so
-%{_libdir}/%{name}/basis*/program/libjvmaccessgcc3.so
-%{_libdir}/%{name}/basis*/program/libjvmfwk.so
 %endif
 
 # versioned libraries and their symlinks
 %attr(755,root,root) %{_libdir}/%{name}/basis*/program/*.so.*
-%attr(755,root,root) %{_libdir}/%{name}/basis*/program/libcppu.so
-%attr(755,root,root) %{_libdir}/%{name}/basis*/program/libcppuhelper3gcc3.so
-%attr(755,root,root) %{_libdir}/%{name}/basis*/program/libcppuhelpergcc3.so
-%attr(755,root,root) %{_libdir}/%{name}/basis*/program/libreg.so
-%attr(755,root,root) %{_libdir}/%{name}/basis*/program/librmcxt.so
-%attr(755,root,root) %{_libdir}/%{name}/basis*/program/libsal.so
-%attr(755,root,root) %{_libdir}/%{name}/basis*/program/libsalhelper3gcc3.so
-%attr(755,root,root) %{_libdir}/%{name}/basis*/program/libsalhelpergcc3.so
-%attr(755,root,root) %{_libdir}/%{name}/basis*/program/libstore.so
-%attr(755,root,root) %{_libdir}/%{name}/basis*/program/libuno_cppu.so
-%attr(755,root,root) %{_libdir}/%{name}/basis*/program/libuno_cppuhelpergcc3.so
-%attr(755,root,root) %{_libdir}/%{name}/basis*/program/libuno_sal.so
-%attr(755,root,root) %{_libdir}/%{name}/basis*/program/libuno_salhelpergcc3.so
 
 %files -n fonts-TTF-OpenSymbol
 %defattr(644,root,root,755)
@@ -3652,7 +3477,6 @@ fi
 %files base
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_bindir}/oobase
-%attr(755,root,root) %{_libdir}/%{name}/basis*/program/sbase
 %{_mandir}/man1/oobase.1
 %{_desktopdir}/oobase.desktop
 %{_iconsdir}/hicolor/*/apps/ooo-base.png
@@ -3676,18 +3500,6 @@ fi
 %files calc
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_bindir}/oocalc
-%attr(755,root,root) %{_libdir}/%{name}/basis*/program/libanalysislx*.so
-%attr(755,root,root) %{_libdir}/%{name}/basis*/program/libbf_sclx*.so
-%attr(755,root,root) %{_libdir}/%{name}/basis*/program/libcalclx*.so
-%attr(755,root,root) %{_libdir}/%{name}/basis*/program/libdatelx*.so
-%attr(755,root,root) %{_libdir}/%{name}/basis*/program/libsclx*.so
-%attr(755,root,root) %{_libdir}/%{name}/basis*/program/libscdlx*.so
-%attr(755,root,root) %{_libdir}/%{name}/basis*/program/libchartcontrollerlx*.so
-%attr(755,root,root) %{_libdir}/%{name}/basis*/program/libchartmodellx*.so
-%attr(755,root,root) %{_libdir}/%{name}/basis*/program/libcharttoolslx*.so
-%attr(755,root,root) %{_libdir}/%{name}/basis*/program/libchartviewlx*.so
-%attr(755,root,root) %{_libdir}/%{name}/basis*/program/libscuilx*.so
-%attr(755,root,root) %{_libdir}/%{name}/basis*/program/scalc
 %{_mandir}/man1/oocalc.1
 %{_desktopdir}/oocalc.desktop
 %{_iconsdir}/hicolor/*/apps/ooo-calc.png
@@ -3711,7 +3523,6 @@ fi
 %files draw
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_bindir}/oodraw
-%attr(755,root,root) %{_libdir}/%{name}/basis*/program/sdraw
 %{_mandir}/man1/oodraw.1
 %{_desktopdir}/oodraw.desktop
 %{_iconsdir}/hicolor/*/apps/ooo-draw.png
@@ -3734,10 +3545,6 @@ fi
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_bindir}/oowriter
 %attr(755,root,root) %{_libdir}/%{name}/basis*/program/libhwp.so
-%attr(755,root,root) %{_libdir}/%{name}/basis*/program/libswdlx*.so
-%attr(755,root,root) %{_libdir}/%{name}/basis*/program/libswuilx*.so
-%attr(755,root,root) %{_libdir}/%{name}/basis*/program/libwpftlx*.so
-%attr(755,root,root) %{_libdir}/%{name}/basis*/program/swriter
 %{_mandir}/man1/oowriter.1
 %{_desktopdir}/oowriter.desktop
 %{_iconsdir}/hicolor/*/apps/ooo-writer.png
@@ -3770,7 +3577,6 @@ fi
 %attr(755,root,root) %{_bindir}/ooimpress
 %attr(755,root,root) %{_libdir}/%{name}/basis*/program/libanimcore.so
 %attr(755,root,root) %{_libdir}/%{name}/basis*/program/libplaceware*.so
-%attr(755,root,root) %{_libdir}/%{name}/basis*/program/simpress
 %{_mandir}/man1/ooimpress.1
 %{_desktopdir}/ooimpress.desktop
 %{_iconsdir}/hicolor/*/apps/ooo-impress.png
@@ -3790,9 +3596,6 @@ fi
 %files math
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_bindir}/oomath
-%attr(755,root,root) %{_libdir}/%{name}/basis*/program/libsmlx*.so
-%attr(755,root,root) %{_libdir}/%{name}/basis*/program/libsmdlx*.so
-%attr(755,root,root) %{_libdir}/%{name}/basis*/program/smath
 %{_mandir}/man1/oomath.1
 %{_desktopdir}/oomath.desktop
 %{_iconsdir}/hicolor/*/apps/ooo-math.png
@@ -3820,8 +3623,6 @@ fi
 
 %files graphicfilter
 %defattr(644,root,root,755)
-%attr(755,root,root) %{_libdir}/%{name}/basis*/program/libflashlx*.so
-%attr(755,root,root) %{_libdir}/%{name}/basis*/program/libsvgfilterlx*.so
 %{_libdir}/%{name}/basis*/share/registry/modules/org/openoffice/TypeDetection/Filter/fcfg_drawgraphics_filters.xcu
 %{_libdir}/%{name}/basis*/share/registry/modules/org/openoffice/TypeDetection/Filter/fcfg_impressgraphics_filters.xcu
 %{_libdir}/%{name}/basis*/share/registry/modules/org/openoffice/TypeDetection/Types/fcfg_drawgraphics_types.xcu
@@ -3840,9 +3641,6 @@ fi
 %if %{with java}
 %files javafilter
 %defattr(644,root,root,755)
-%{_libdir}/%{name}/program/classes/aportisdoc.jar
-%{_libdir}/%{name}/program/classes/pexcel.jar
-%{_libdir}/%{name}/program/classes/pocketword.jar
 %{_libdir}/%{name}/basis*/share/registry/modules/org/openoffice/TypeDetection/Filter/fcfg_palm_filters.xcu
 %{_libdir}/%{name}/basis*/share/registry/modules/org/openoffice/TypeDetection/Filter/fcfg_pocketexcel_filters.xcu
 %{_libdir}/%{name}/basis*/share/registry/modules/org/openoffice/TypeDetection/Filter/fcfg_pocketword_filters.xcu
@@ -3853,8 +3651,6 @@ fi
 
 %files testtools
 %defattr(644,root,root,755)
-%attr(755,root,root) %{_libdir}/%{name}/basis*/program/libcommunilx*.so
-%attr(755,root,root) %{_libdir}/%{name}/basis*/program/libsimplecmlx*.so
 %attr(755,root,root) %{_libdir}/%{name}/basis*/program/testtool.bin
 %if %{with java}
 %{_libdir}/%{name}/basis*/program/hid.lst
@@ -3883,7 +3679,6 @@ fi
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_browserpluginsdir}/libnpsoplugin.so
 %attr(755,root,root) %{_libdir}/%{name}/basis*/program/nsplugin
-%attr(755,root,root) %{_libdir}/%{name}/basis*/program/libnpsoplugin.so
 %endif
 
 %if %{with i18n}
@@ -3893,10 +3688,10 @@ fi
 %files i18n-ar -f ar.lang
 %defattr(644,root,root,755)
 
-%files i18n-as_IN -f as-IN.lang
+%files i18n-as_IN -f as_IN.lang
 %defattr(644,root,root,755)
 
-%files i18n-be_BY -f be-BY.lang
+%files i18n-be_BY -f be_BY.lang
 %defattr(644,root,root,755)
 
 %files i18n-bg -f bg.lang
@@ -3905,10 +3700,10 @@ fi
 %files i18n-bn -f bn.lang
 %defattr(644,root,root,755)
 
-%files i18n-bn_BD -f bn-BD.lang
+%files i18n-bn_BD -f bn_BD.lang
 %defattr(644,root,root,755)
 
-%files i18n-bn_IN -f bn-IN.lang
+%files i18n-bn_IN -f bn_IN.lang
 %defattr(644,root,root,755)
 
 %files i18n-br -f br.lang
@@ -3938,10 +3733,10 @@ fi
 %files i18n-el -f el.lang
 %defattr(644,root,root,755)
 
-%files i18n-en_GB -f en-GB.lang
+%files i18n-en_GB -f en_GB.lang
 %defattr(644,root,root,755)
 
-%files i18n-en_ZA -f en-ZA.lang
+%files i18n-en_ZA -f en_ZA.lang
 %defattr(644,root,root,755)
 
 %files i18n-eo -f eo.lang
@@ -3974,13 +3769,13 @@ fi
 %files i18n-gl -f gl.lang
 %defattr(644,root,root,755)
 
-%files i18n-gu_IN -f gu-IN.lang
+%files i18n-gu_IN -f gu_IN.lang
 %defattr(644,root,root,755)
 
 %files i18n-he -f he.lang
 %defattr(644,root,root,755)
 
-%files i18n-hi_IN -f hi-IN.lang
+%files i18n-hi_IN -f hi_IN.lang
 %defattr(644,root,root,755)
 
 %files i18n-hr -f hr.lang
@@ -4037,10 +3832,10 @@ fi
 %files i18n-mk -f mk.lang
 %defattr(644,root,root,755)
 
-%files i18n-ml_IN -f ml-IN.lang
+%files i18n-ml_IN -f ml_IN.lang
 %defattr(644,root,root,755)
 
-%files i18n-mr_IN -f mr-IN.lang
+%files i18n-mr_IN -f mr_IN.lang
 %defattr(644,root,root,755)
 
 %files i18n-ms -f ms.lang
@@ -4064,10 +3859,10 @@ fi
 %files i18n-nso -f ns.lang
 %defattr(644,root,root,755)
 
-%files i18n-or_IN -f or-IN.lang
+%files i18n-or_IN -f or_IN.lang
 %defattr(644,root,root,755)
 
-%files i18n-pa_IN -f pa-IN.lang
+%files i18n-pa_IN -f pa_IN.lang
 %defattr(644,root,root,755)
 
 %files i18n-pl -f pl.lang
@@ -4076,7 +3871,7 @@ fi
 %files i18n-pt -f pt.lang
 %defattr(644,root,root,755)
 
-%files i18n-pt_BR -f pt-BR.lang
+%files i18n-pt_BR -f pt_BR.lang
 %defattr(644,root,root,755)
 
 #%files i18n-ro -f ro.lang
@@ -4112,16 +3907,16 @@ fi
 %files i18n-sw -f sw.lang
 %defattr(644,root,root,755)
 
-%files i18n-sw_TZ -f sw-TZ.lang
+%files i18n-sw_TZ -f sw_TZ.lang
 %defattr(644,root,root,755)
 
 #%files i18n-sx -f sx.lang
 #%defattr(644,root,root,755)
 
-%files i18n-ta_IN -f ta-IN.lang
+%files i18n-ta_IN -f ta_IN.lang
 %defattr(644,root,root,755)
 
-%files i18n-te_IN -f te-IN.lang
+%files i18n-te_IN -f te_IN.lang
 %defattr(644,root,root,755)
 
 %files i18n-tg -f tg.lang
@@ -4130,7 +3925,7 @@ fi
 %files i18n-th -f th.lang
 %defattr(644,root,root,755)
 
-%files i18n-ti_ER -f ti-ER.lang
+%files i18n-ti_ER -f ti_ER.lang
 %defattr(644,root,root,755)
 
 %files i18n-tn -f tn.lang
@@ -4145,7 +3940,7 @@ fi
 %files i18n-uk -f uk.lang
 %defattr(644,root,root,755)
 
-%files i18n-ur_IN -f ur-IN.lang
+%files i18n-ur_IN -f ur_IN.lang
 %defattr(644,root,root,755)
 
 %files i18n-uz -f uz.lang
@@ -4160,10 +3955,10 @@ fi
 %files i18n-xh -f xh.lang
 %defattr(644,root,root,755)
 
-%files i18n-zh_CN -f zh-CN.lang
+%files i18n-zh_CN -f zh_CN.lang
 %defattr(644,root,root,755)
 
-%files i18n-zh_TW -f zh-TW.lang
+%files i18n-zh_TW -f zh_TW.lang
 %defattr(644,root,root,755)
 
 %files i18n-zu -f zu.lang
