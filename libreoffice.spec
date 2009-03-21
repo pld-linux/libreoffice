@@ -95,15 +95,15 @@
 Summary:	OpenOffice.org - powerful office suite
 Summary(pl.UTF-8):	OpenOffice.org - potężny pakiet biurowy
 Name:		openoffice.org
-Version:	3.0.1.0
+Version:	3.0.1.3
 Release:	%{_tag}.%{_rel}
 Epoch:		1
 License:	GPL/LGPL
 Group:		X11/Applications
 # we use svn because released tarballs are buggy too often
 # svn export http://svn.gnome.org/svn/ooo-build/branches/ooo-build-3-0-1 ooo-build
-Source0:	ooo-build-15266.tar.bz2
-# Source0-md5:	433ab20a5f47c3393637ed88ef061b71
+Source0:	ooo-build-15595.tar.bz2
+# Source0-md5:	f22014d2a404b6ba9fe43628a1dade1c
 Source1:	http://download.go-oo.org/DEV300/ooo-cli-prebuilt-3.0.tar.bz2
 # Source1-md5:	8b3979cd7fd99b7e9722fd8f690e69a9
 Source2:	http://download.go-oo.org/%{mws}/%{tag}-base.tar.bz2
