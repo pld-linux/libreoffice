@@ -168,6 +168,7 @@ Patch1005:	%{name}-nsplugin-path.diff
 Patch1006:	%{name}-perl-nodiag.patch
 Patch1007:	%{name}-gcc42-swregion.diff
 URL:		http://www.openoffice.org/
+BuildConflicts:	xmlsec1-devel
 BuildRequires:	/usr/bin/getopt
 BuildRequires:	GConf2-devel
 BuildRequires:	OpenGL-GLU-devel
