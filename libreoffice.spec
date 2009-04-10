@@ -98,8 +98,10 @@ Release:	%{_tag}.%{_rel}
 Epoch:		1
 License:	GPL/LGPL
 Group:		X11/Applications
-# we use svn because released tarballs are buggy too often
-# svn export http://svn.gnome.org/svn/ooo-build/branches/ooo-build-3-0-1 ooo-build
+# we use git because released tarballs are buggy too often
+# git clone git://anongit.freedesktop.org/git/ooo-build/ooo-build
+# cd ooo-build
+# git checkout -b ooo-build-3-0-1 origin/ooo-build-3-0-1
 Source0:	ooo-build-15595.tar.bz2
 # Source0-md5:	f22014d2a404b6ba9fe43628a1dade1c
 Source1:	http://download.go-oo.org/DEV300/ooo-cli-prebuilt-3.0.tar.bz2
