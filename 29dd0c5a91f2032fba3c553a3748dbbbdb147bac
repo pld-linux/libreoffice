@@ -1,0 +1,10 @@
+- added -ure, -i18n-by, -i18n-gd, -i18n-gu, -i18n-mn, i18n-my and i18n-oc
+  subpackages
+- build with system poppler, saxon, vigra and redland
+- enabled extensions: minimizer, presenter-console and pdfimport
+  (move them to subpackages?)
+- added --disable-access (didn't build without this flag)
+- %{_libdir}/%{name}/basis-link is back (OOo won't start without it)
+- packaged all remaining files
+- added -build.patch to fix build with recent ooo-build snap
+- I have built it --without-kde and seems to work on th-i686
