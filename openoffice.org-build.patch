@@ -1,0 +1,11 @@
+diff -urN ooo-build/patches/dev300/apply ooo-build.new/patches/dev300/apply
+--- ooo-build/patches/dev300/apply	2009-03-20 17:04:30.000000000 +0100
++++ ooo-build.new/patches/dev300/apply	2009-03-28 00:43:44.252860232 +0100
+@@ -826,7 +826,6 @@
+ 
+ # always store ranges in ODF using Calc A1 formula syntax.
+ chart-odf-always-calc-a1.diff, n#463305, kohei
+-chart-odf-export-correct-syntax.diff, n#487262, kohei
+ 
+ # fixed change track export to xls files wrt cell change records.
+ calc-change-track-xls-export-fix.diff, n#416045, i#93839, kohei
