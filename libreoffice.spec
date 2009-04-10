@@ -2579,7 +2579,7 @@ if [ ! -f installed.stamp ]; then
 
 	%if %{with mozilla}
 	install -d $RPM_BUILD_ROOT%{_browserpluginsdir}
-	ln -s %{_libdir}/%{name}/basis3.0/program/libnpsoplugin.so $RPM_BUILD_ROOT%{_browserpluginsdir}
+	ln -s %{ooobasisdir}/program/libnpsoplugin.so $RPM_BUILD_ROOT%{_browserpluginsdir}
 	%endif
 
 	# FIXME: OOo doesn't start when sofficerc is a symlink:
@@ -2600,7 +2600,7 @@ if [ ! -f installed.stamp ]; then
 	perl -pi -e 's/^[       ]*LD_LIBRARY_PATH/# LD_LIBRARY_PATH/;s/export LD_LIBRARY_PATH/# export LD_LIBRARY_PATH/' \
 		$RPM_BUILD_ROOT%{ooobasisdir}/program/setup
 
-	chmod +x $RPM_BUILD_ROOT%{_libdir}/%{name}/basis3.0/program/*.so
+	chmod +x $RPM_BUILD_ROOT%{ooobasisdir}/program/*.so
 
 	install -d $RPM_BUILD_ROOT%{_datadir}/%{name}
 	# put share to %{_datadir} so we're able to produce noarch packages
