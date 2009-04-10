@@ -7,7 +7,7 @@
 #
 #
 # TODO:
-#   - ON PPC help FILES ARE NOT BUILD DUE TO SOME REASON (is missing java the reason?)
+#   - ON PPC help FILES ARE NOT BUILT DUE TO SOME REASON (is missing java the reason?)
 #   -
 #   /usr/share/openoffice.org/share/registry/modules/org/openoffice/Office/Common/Common-ctl_dz.xcu
 #   /usr/share/openoffice.org/share/registry/modules/org/openoffice/Setup/Langpack-dz.xcu
@@ -37,6 +37,7 @@
 #	- --with-system-mythes + mythes package (http://lingucomponent.openoffice.org/thesaurus.html)
 #   - --with-system-mspack - use libmspack already installed on system
 #	- bcond system_xt doesn't work - xt in PLD is too old or broken
+#   - package (english) help files into subpackage
 #
 #	$ grep SYSTEM ooo-build-ooe-m6/build/ooe-m6/config_office/config.log |grep NO
 #
