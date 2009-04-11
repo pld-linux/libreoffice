@@ -171,6 +171,8 @@ Patch1007:	%{name}-gcc42-swregion.diff
 Patch2000:	%{name}-build.patch
 URL:		http://www.openoffice.org/
 BuildConflicts:	xmlsec1-devel
+# contains (dlopened) *.so libs
+BuildConflicts:	xmlsec1-nss
 BuildRequires:	/usr/bin/getopt
 BuildRequires:	GConf2-devel
 BuildRequires:	OpenGL-GLU-devel
