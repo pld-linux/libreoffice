@@ -18,16 +18,6 @@
 #	- configure --without-ppds --without afms
 #	- /share/config/soffice.cfg/global/accelerator/es/ should be in i18n-es
 #	- fix locale names and other locale related things
-#   - broken directory dependencies:
-#       error: openoffice.org-i18n-de-2.4.1.7-ooh_m17.1: req /usr/share/openoffice.org/share/config/soffice.cfg/modules/swform/accelerator/de not found
-#       error: openoffice.org-i18n-de-2.4.1.7-ooh_m17.1: req /usr/share/openoffice.org/share/config/soffice.cfg/modules/swreport/accelerator/de not found
-#       error: openoffice.org-i18n-de-2.4.1.7-ooh_m17.1: req /usr/share/openoffice.org/share/config/soffice.cfg/modules/swxform/accelerator/de not found
-#       error: openoffice.org-i18n-es-2.4.1.7-ooh_m17.1: req /usr/share/openoffice.org/share/config/soffice.cfg/modules/swform/accelerator/es not found
-#       error: openoffice.org-i18n-es-2.4.1.7-ooh_m17.1: req /usr/share/openoffice.org/share/config/soffice.cfg/modules/swreport/accelerator/es not found
-#       error: openoffice.org-i18n-es-2.4.1.7-ooh_m17.1: req /usr/share/openoffice.org/share/config/soffice.cfg/modules/swxform/accelerator/es not found
-#       error: openoffice.org-i18n-fr-2.4.1.7-ooh_m17.1: req /usr/share/openoffice.org/share/config/soffice.cfg/modules/swform/accelerator/fr not found
-#       error: openoffice.org-i18n-fr-2.4.1.7-ooh_m17.1: req /usr/share/openoffice.org/share/config/soffice.cfg/modules/swreport/accelerator/fr not found
-#       error: openoffice.org-i18n-fr-2.4.1.7-ooh_m17.1: req /usr/share/openoffice.org/share/config/soffice.cfg/modules/swxform/accelerator/fr not found
 #   - can't be just i18n-{be,gu,hi,kn,pa,ta} instead of *-{be_BY,*_IN}?
 #   - more system libs todo:
 #	- (SYSTEM_HYPH) bcond system_libhnj doesn't work - needs Debian-patched version of libhnj
@@ -35,6 +25,8 @@
 #   - --with-system-mspack - use libmspack already installed on system
 #	- bcond system_xt doesn't work - xt in PLD is too old or broken
 #   - package (english) help files into subpackage
+#   - vendor name from OOO_VENDOR is not respected. We should switch to --with-vendor=
+#   - fix build --with kde (kde4-kde3support?)
 #
 #	$ grep SYSTEM ooo-build-ooe-m6/build/ooe-m6/config_office/config.log |grep NO
 #
@@ -88,7 +80,7 @@
 %define		tag			%(echo %{mws} | tr A-Z a-z)-%{milestone}
 %define		milestone	m15
 %define		_tag		%(echo %{tag} | tr - _)
-%define		_rel		0.1
+%define		_rel		0.5
 
 Summary:	OpenOffice.org - powerful office suite
 Summary(pl.UTF-8):	OpenOffice.org - potężny pakiet biurowy
@@ -114,33 +106,33 @@ Source4:	http://download.go-oo.org/%{mws}/%{tag}-l10n.tar.bz2
 # Source4-md5:	02b20bd978e342de45ef84d3232e3f94
 Source5:	http://download.go-oo.org/%{mws}/%{tag}-ure.tar.bz2
 # Source5-md5:	65565feb49307361209b610249e45dc7
-Source6:        http://download.go-oo.org/%{mws}/%{tag}-writer.tar.bz2
+Source6:	http://download.go-oo.org/%{mws}/%{tag}-writer.tar.bz2
 # Source6-md5:	04f68dfb9a34b5c0766a65e6ff48b841
-Source7:        http://download.go-oo.org/%{mws}/%{tag}-impress.tar.bz2
+Source7:	http://download.go-oo.org/%{mws}/%{tag}-impress.tar.bz2
 # Source7-md5:	00a1646d1913989bc432073f8954c92b
-Source8:        http://download.go-oo.org/%{mws}/%{tag}-artwork.tar.bz2
+Source8:	http://download.go-oo.org/%{mws}/%{tag}-artwork.tar.bz2
 # Source8-md5:	cc928a9c348121d82fb80c43dbf3901f
-Source9:        http://download.go-oo.org/%{mws}/%{tag}-filters.tar.bz2
+Source9:	http://download.go-oo.org/%{mws}/%{tag}-filters.tar.bz2
 # Source9-md5:	729550f40870eeaa94b2ae493e038848
-Source10:        http://download.go-oo.org/%{mws}/%{tag}-testing.tar.bz2
+Source10:	http://download.go-oo.org/%{mws}/%{tag}-testing.tar.bz2
 # Source10-md5:	406087778a00ad68cc4e94aa5a677086
-Source11:        http://download.go-oo.org/%{mws}/%{tag}-bootstrap.tar.bz2
+Source11:	http://download.go-oo.org/%{mws}/%{tag}-bootstrap.tar.bz2
 # Source11-md5:	6d680f8bfe532bb8833a0e6bb6d19cc9
-Source12:        http://download.go-oo.org/%{mws}/%{tag}-libs_gui.tar.bz2
+Source12:	http://download.go-oo.org/%{mws}/%{tag}-libs_gui.tar.bz2
 # Source12-md5:	e23ba759d82041c665a24ea4ef3d8b9b
-Source13:        http://download.go-oo.org/%{mws}/%{tag}-libs_core.tar.bz2
+Source13:	http://download.go-oo.org/%{mws}/%{tag}-libs_core.tar.bz2
 # Source13-md5:	bdd173a94ece251126ae0e4120cbb661
-Source14:        http://download.go-oo.org/%{mws}/%{tag}-libs_extern.tar.bz2
+Source14:	http://download.go-oo.org/%{mws}/%{tag}-libs_extern.tar.bz2
 # Source14-md5:	2582ddfe11a64cca9190a046e9a159df
-Source15:        http://download.go-oo.org/%{mws}/%{tag}-components.tar.bz2
+Source15:	http://download.go-oo.org/%{mws}/%{tag}-components.tar.bz2
 # Source15-md5:	d29035a293298c6e69d5d8a3acbab75f
-Source16:        http://download.go-oo.org/%{mws}/%{tag}-libs_extern_sys.tar.bz2
+Source16:	http://download.go-oo.org/%{mws}/%{tag}-libs_extern_sys.tar.bz2
 # Source16-md5:	8016fc38320ebd4ab7720df7eb4e4df0
-Source17:        http://download.go-oo.org/%{mws}/%{tag}-extensions.tar.bz2
+Source17:	http://download.go-oo.org/%{mws}/%{tag}-extensions.tar.bz2
 # Source17-md5:	f307de1b92d488484a53fa8ce45a7b3b
-Source18:        http://download.go-oo.org/%{mws}/%{tag}-sdk.tar.bz2
+Source18:	http://download.go-oo.org/%{mws}/%{tag}-sdk.tar.bz2
 # Source18-md5:	f298e95232efdd4182345c095a497799
-Source19:        http://download.go-oo.org/%{mws}/%{tag}-postprocess.tar.bz2
+Source19:	http://download.go-oo.org/%{mws}/%{tag}-postprocess.tar.bz2
 # Source19-md5:	73b6c538639310c2ad242d6cb5045c52
 Source50:	http://download.go-oo.org//DEV300/scsolver.2008-10-30.tar.bz2
 # Source50-md5:	04181e5ef82973eb349d3122a19d2274
@@ -148,6 +140,8 @@ Source51:	http://download.go-oo.org/SRC/biblio.tar.bz2
 # Source51-md5:	1948e39a68f12bfa0b7eb309c14d940c
 Source52:	http://download.go-oo.org/SRC/extras-3.tar.bz2
 # Source52-md5:	36f323a55ee83e9dc968e1b92569b62a
+Source53:	%{name}-splash.bmp
+Source54:	%{name}-about.bmp
 # patches applied in prep section
 Patch0:		%{name}-PLD.patch
 Patch1:		%{name}-gcc-Wextra.patch
@@ -363,6 +357,7 @@ Summary(pl.UTF-8):	Podstawowe moduły dla OpenOffice.org
 Group:		X11/Applications
 Requires(post,postun):	desktop-file-utils
 Requires(post,postun):	shared-mime-info
+Requires:	%{name}-ure = %{epoch}:%{version}-%{release}
 %{?with_system_beanshell:Requires:	java-beanshell}
 # libcups.so.2 is dlopened (in cupsmgr.cxx); maybe Suggests instead?
 Requires:	cups-lib
@@ -377,8 +372,44 @@ Requires:	sed
 #Suggests:	chkfontpath
 Obsoletes:	oooqs
 Obsoletes:	openoffice
+Obsoletes:	openoffice-i18n-fo
+Obsoletes:	openoffice-i18n-fo-gtk
+Obsoletes:	openoffice-i18n-ia
+Obsoletes:	openoffice-i18n-ia-gtk
+Obsoletes:	openoffice-i18n-id
+Obsoletes:	openoffice-i18n-id-gtk
+Obsoletes:	openoffice-i18n-la
+Obsoletes:	openoffice-i18n-la-gtk
+Obsoletes:	openoffice-i18n-med
+Obsoletes:	openoffice-i18n-med-gtk
+Obsoletes:	openoffice-i18n-mi
+Obsoletes:	openoffice-i18n-mi-gtk
+Obsoletes:	openoffice-i18n-ro
+Obsoletes:	openoffice-i18n-ro-gtk
 Obsoletes:	openoffice-libs
 Obsoletes:	openoffice.org-dirs
+Obsoletes:	openoffice.org-i18n-fo
+Obsoletes:	openoffice.org-i18n-fo-gtk
+Obsoletes:	openoffice.org-i18n-fo-kde
+Obsoletes:	openoffice.org-i18n-ia
+Obsoletes:	openoffice.org-i18n-ia-gtk
+Obsoletes:	openoffice.org-i18n-ia-kde
+Obsoletes:	openoffice.org-i18n-id
+Obsoletes:	openoffice.org-i18n-id-gtk
+Obsoletes:	openoffice.org-i18n-id-kde
+Obsoletes:	openoffice.org-i18n-la
+Obsoletes:	openoffice.org-i18n-la-gtk
+Obsoletes:	openoffice.org-i18n-la-kde
+Obsoletes:	openoffice.org-i18n-med
+Obsoletes:	openoffice.org-i18n-med-gtk
+Obsoletes:	openoffice.org-i18n-med-kde
+Obsoletes:	openoffice.org-i18n-mi
+Obsoletes:	openoffice.org-i18n-mi-gtk
+Obsoletes:	openoffice.org-i18n-mi-kde
+Obsoletes:	openoffice.org-i18n-ro
+Obsoletes:	openoffice.org-i18n-ro-gtk
+Obsoletes:	openoffice.org-i18n-ro-kde
+Obsoletes:	openoffice.org-i18n-sx
 Obsoletes:	openoffice.org-libs < 1:2.1.0-0.m6.0.11
 
 %description core
@@ -1031,24 +1062,6 @@ Finnish language.
 Ten pakiet dostarcza zasoby zawierające menu i okna dialogowe w języku
 fińskim.
 
-%package i18n-fo
-Summary:	OpenOffice.org - interface in Faroese language
-Summary(pl.UTF-8):	OpenOffice.org - interfejs w języku farerskim
-Group:		I18n
-Requires:	%{name}-core = %{epoch}:%{version}-%{release}
-Obsoletes:	openoffice-i18n-fo
-Obsoletes:	openoffice-i18n-fo-gtk
-Obsoletes:	openoffice.org-i18n-fo-gtk
-Obsoletes:	openoffice.org-i18n-fo-kde
-
-%description i18n-fo
-This package provides resources containing menus and dialogs in
-Faroese language.
-
-%description i18n-fo -l pl.UTF-8
-Ten pakiet dostarcza zasoby zawierające menu i okna dialogowe w języku
-farerskim.
-
 %package i18n-fr
 Summary:	OpenOffice.org - interface in French language
 Summary(pl.UTF-8):	OpenOffice.org - interfejs w języku francuskim
@@ -1219,42 +1232,6 @@ Hungarian language.
 Ten pakiet dostarcza zasoby zawierające menu i okna dialogowe w języku
 węgierskim.
 
-%package i18n-ia
-Summary:	OpenOffice.org - interface in Interlingua language
-Summary(pl.UTF-8):	OpenOffice.org - interfejs w języku interlingua
-Group:		I18n
-Requires:	%{name}-core = %{epoch}:%{version}-%{release}
-Obsoletes:	openoffice-i18n-ia
-Obsoletes:	openoffice-i18n-ia-gtk
-Obsoletes:	openoffice.org-i18n-ia-gtk
-Obsoletes:	openoffice.org-i18n-ia-kde
-
-%description i18n-ia
-This package provides resources containing menus and dialogs in
-Interlingua language.
-
-%description i18n-ia -l pl.UTF-8
-Ten pakiet dostarcza zasoby zawierające menu i okna dialogowe w języku
-interlingua.
-
-%package i18n-id
-Summary:	OpenOffice.org - interface in Indonesian language
-Summary(pl.UTF-8):	OpenOffice.org - interfejs w języku indonezyjskim
-Group:		I18n
-Requires:	%{name}-core = %{epoch}:%{version}-%{release}
-Obsoletes:	openoffice-i18n-id
-Obsoletes:	openoffice-i18n-id-gtk
-Obsoletes:	openoffice.org-i18n-id-gtk
-Obsoletes:	openoffice.org-i18n-id-kde
-
-%description i18n-id
-This package provides resources containing menus and dialogs in
-Indonesian language.
-
-%description i18n-id -l pl.UTF-8
-Ten pakiet dostarcza zasoby zawierające menu i okna dialogowe w języku
-indonezyjskim.
-
 %package i18n-it
 Summary:	OpenOffice.org - interface in Italian language
 Summary(pl.UTF-8):	OpenOffice.org - interfejs w języku włoskim
@@ -1368,24 +1345,6 @@ Kurdish language.
 Ten pakiet dostarcza zasoby zawierające menu i okna dialogowe w języku
 kurdyjskim.
 
-%package i18n-la
-Summary:	OpenOffice.org - interface in Latin language
-Summary(pl.UTF-8):	OpenOffice.org - interfejs w języku łacińskim
-Group:		I18n
-Requires:	%{name}-core = %{epoch}:%{version}-%{release}
-Obsoletes:	openoffice-i18n-la
-Obsoletes:	openoffice-i18n-la-gtk
-Obsoletes:	openoffice.org-i18n-la-gtk
-Obsoletes:	openoffice.org-i18n-la-kde
-
-%description i18n-la
-This package provides resources containing menus and dialogs in Latin
-language.
-
-%description i18n-la -l pl.UTF-8
-Ten pakiet dostarcza zasoby zawierające menu i okna dialogowe w języku
-łacińskim.
-
 %package i18n-lo
 Summary:	OpenOffice.org - interface in Lao language
 Summary(pl.UTF-8):	OpenOffice.org - interfejs w języku laotańskim
@@ -1431,42 +1390,6 @@ Latvian language.
 %description i18n-lv -l pl.UTF-8
 Ten pakiet dostarcza zasoby zawierające menu i okna dialogowe w języku
 łotewskim.
-
-%package i18n-med
-Summary:	OpenOffice.org - interface in Melpa language
-Summary(pl.UTF-8):	OpenOffice.org - interfejs w języku melpa
-Group:		I18n
-Requires:	%{name}-core = %{epoch}:%{version}-%{release}
-Obsoletes:	openoffice-i18n-med
-Obsoletes:	openoffice-i18n-med-gtk
-Obsoletes:	openoffice.org-i18n-med-gtk
-Obsoletes:	openoffice.org-i18n-med-kde
-
-%description i18n-med
-This package provides resources containing menus and dialogs in Melpa
-language.
-
-%description i18n-med -l pl.UTF-8
-Ten pakiet dostarcza zasoby zawierające menu i okna dialogowe w języku
-melpa.
-
-%package i18n-mi
-Summary:	OpenOffice.org - interface in Maori language
-Summary(pl.UTF-8):	OpenOffice.org - interfejs w języku maoryjskim
-Group:		I18n
-Requires:	%{name}-core = %{epoch}:%{version}-%{release}
-Obsoletes:	openoffice-i18n-mi
-Obsoletes:	openoffice-i18n-mi-gtk
-Obsoletes:	openoffice.org-i18n-mi-gtk
-Obsoletes:	openoffice.org-i18n-mi-kde
-
-%description i18n-mi
-This package provides resources containing menus and dialogs in Maori
-language.
-
-%description i18n-mi -l pl.UTF-8
-Ten pakiet dostarcza zasoby zawierające menu i okna dialogowe w języku
-maoryjskim.
 
 %package i18n-mk
 Summary:	OpenOffice.org - interface in Macedonian language
@@ -1755,24 +1678,6 @@ Brazilian Portuguese language.
 Ten pakiet dostarcza zasoby zawierające menu i okna dialogowe w języku
 portugalskim dla Brazylii.
 
-%package i18n-ro
-Summary:	OpenOffice.org - interface in Romanian language
-Summary(pl.UTF-8):	OpenOffice.org - interfejs w języku rumuńskim
-Group:		I18n
-Requires:	%{name}-core = %{epoch}:%{version}-%{release}
-Obsoletes:	openoffice-i18n-ro
-Obsoletes:	openoffice-i18n-ro-gtk
-Obsoletes:	openoffice.org-i18n-ro-gtk
-Obsoletes:	openoffice.org-i18n-ro-kde
-
-%description i18n-ro
-This package provides resources containing menus and dialogs in
-Romanian language.
-
-%description i18n-ro -l pl.UTF-8
-Ten pakiet dostarcza zasoby zawierające menu i okna dialogowe w języku
-rumuńskim.
-
 %package i18n-ru
 Summary:	OpenOffice.org - interface in Russian language
 Summary(pl.UTF-8):	OpenOffice.org - interfejs w języku rosyjskim
@@ -1942,20 +1847,6 @@ Swahili language for Tanzania.
 %description i18n-sw_TZ -l pl.UTF-8
 Ten pakiet dostarcza zasoby zawierające menu i okna dialogowe w języku
 suahili dla Tanzanii.
-
-%package i18n-sx
-Summary:	OpenOffice.org - interface in Sutu language
-Summary(pl.UTF-8):	OpenOffice.org - interfejs w języku sutu
-Group:		I18n
-Requires:	%{name}-core = %{epoch}:%{version}-%{release}
-
-%description i18n-sx
-This package provides resources containing menus and dialogs in Sutu
-language.
-
-%description i18n-sx -l pl.UTF-8
-Ten pakiet dostarcza zasoby zawierające menu i okna dialogowe w języku
-sutu.
 
 %package i18n-ta_IN
 Summary:	OpenOffice.org - interface in Tamil language
@@ -2346,6 +2237,8 @@ CONFOPTS="\
 	--with-system-boost \
 	--with-system-cairo \
 	--with-system-curl \
+	--with-system-dicts \
+	--with-external-dict-dir=/usr/share/myspell \
 	--with-system-expat \
 	--with-system-freetype \
 	--with-system-gcc \
@@ -2356,6 +2249,7 @@ CONFOPTS="\
 	--with-system-libwpg \
 	--with-system-libwps \
 	--with-system-libxml \
+	--with-system-libxslt \
 	--with-system-nas \
 	--with-system-neon \
 	--with-system-odbc-headers \
@@ -2363,10 +2257,13 @@ CONFOPTS="\
 	--with-system-poppler \
 	--with-system-portaudio \
 	--with-system-python \
+	--with-system-redland \
 	--with-system-sablot \
 	--with-system-sane-header \
+	--with-system-saxon \
 	--with-system-sndfile \
 	--with-system-stdlibs \
+	--with-system-vigra \
 	--with-system-x11-extensions-headers \
 	--with-system-xrender \
 	--with-system-xrender-headers=yes \
@@ -2391,7 +2288,6 @@ CONFOPTS="\
 	--with-ant-home=$ANT_HOME \
 %else
 	--without-java \
-	--with-system-libxslt \
 %endif
 %if %{with gnomevfs}
 	--enable-gnome-vfs \
@@ -2441,9 +2337,6 @@ CONFOPTS="\
 	--enable-split-app-modules \
 	--enable-split-opt-features \
 	--disable-access \
-	--with-system-saxon \
-	--with-system-vigra \
-	--with-system-redland \
 	--enable-minimizer \
 	--enable-presenter-console \
 	--enable-pdfimport
@@ -2636,6 +2529,9 @@ if [ ! -f installed.stamp ]; then
 		mv $a $d/oo$f
 	done
 
+	install %{SOURCE53} $RPM_BUILD_ROOT%{_libdir}/%{name}/program/openintro_pld.bmp
+	install %{SOURCE54} $RPM_BUILD_ROOT%{_libdir}/%{name}/program/openabout_pld.bmp
+
 	touch installed.stamp
 fi
 
@@ -2702,8 +2598,11 @@ find_lang() {
 		grep "/share/samples/${lang}/" ${lfile} >> ${langfn}.lang || :
 		grep "/help/${lang}$" ${lfile} >> ${langfn}.lang || :
 		grep "/help/${lang}/" ${lfile} >> ${langfn}.lang || :
+		grep "/share/config/soffice.cfg/modules/swform/accelerator/${lang}$" build/common_list.txt >> ${langfn}.lang || :
 		grep "/share/config/soffice.cfg/modules/swform/accelerator/${lang}/" build/common_list.txt >> ${langfn}.lang || :
+		grep "/share/config/soffice.cfg/modules/swreport/accelerator/${lang}$" build/common_list.txt >> ${langfn}.lang || :
 		grep "/share/config/soffice.cfg/modules/swreport/accelerator/${lang}/" build/common_list.txt >> ${langfn}.lang || :
+		grep "/share/config/soffice.cfg/modules/swxform/accelerator/${lang}$" build/common_list.txt >> ${langfn}.lang || :
 		grep "/share/config/soffice.cfg/modules/swxform/accelerator/${lang}/" build/common_list.txt >> ${langfn}.lang || :
 	fi
 }
@@ -2878,8 +2777,8 @@ fi
 #%{_sysconfdir}/%{name}/unorc
 %config(noreplace) %verify(not md5 mtime size) %{ooobasisdir}/program/unorc
 
-%dir %{_libdir}/%{name}
 %dir %{_libdir}/%{name}/program
+%dir %{_libdir}/%{name}/program/resource
 %dir %{ooobasisdir}/program
 %dir %{ooobasisdir}/program/resource
 
@@ -2912,6 +2811,7 @@ fi
 %dir %{ooobasisdir}/share/registry/modules/org/openoffice/Office
 %dir %{ooobasisdir}/share/registry/modules/org/openoffice/Office/Common
 %dir %{ooobasisdir}/share/registry/modules/org/openoffice/Office/Embedding
+%dir %{ooobasisdir}/share/registry/modules/org/openoffice/Office/Linguistic
 %dir %{ooobasisdir}/share/registry/modules/org/openoffice/Office/Scripting
 %dir %{ooobasisdir}/share/registry/modules/org/openoffice/Office/Writer
 %dir %{ooobasisdir}/share/registry/modules/org/openoffice/Setup
@@ -3353,6 +3253,7 @@ fi
 %{ooobasisdir}/program/resource/xmlsecen-US.res
 %{ooobasisdir}/program/resource/xsltdlgen-US.res
 
+%dir %{_datadir}/%{name}
 %dir %{_datadir}/%{name}/licenses
 %{_datadir}/%{name}/licenses/LICENSE_en-US
 %{_datadir}/%{name}/licenses/LICENSE_en-US.html
@@ -3362,6 +3263,19 @@ fi
 %{_datadir}/%{name}/readmes/README_en-US.html
 
 %dir %{_datadir}/%{name}/share
+%dir %{_datadir}/%{name}/share/config
+%dir %{_datadir}/%{name}/share/registry
+%dir %{_datadir}/%{name}/share/registry/data
+%dir %{_datadir}/%{name}/share/registry/data/org
+%dir %{_datadir}/%{name}/share/registry/data/org/openoffice
+%dir %{_datadir}/%{name}/share/registry/data/org/openoffice/Office
+%dir %{_datadir}/%{name}/share/registry/modules
+%dir %{_datadir}/%{name}/share/registry/modules/org
+%dir %{_datadir}/%{name}/share/registry/modules/org/openoffice
+%dir %{_datadir}/%{name}/share/registry/modules/org/openoffice/Office
+%dir %{_datadir}/%{name}/share/registry/modules/org/openoffice/Office/Common
+%dir %{_datadir}/%{name}/share/registry/modules/org/openoffice/Office/UI
+%dir %{_datadir}/%{name}/share/registry/modules/org/openoffice/Setup
 
 %attr(755,root,root) %{ooobasisdir}/program/basprov*.uno.so
 %attr(755,root,root) %{ooobasisdir}/program/behelper.uno.so
@@ -3676,6 +3590,7 @@ fi
 %attr(755,root,root) %{_libdir}/%{name}/program/kdefilepicker
 %attr(755,root,root) %{ooobasisdir}/program/fps_kde.uno.so
 %attr(755,root,root) %{ooobasisdir}/program/libkabdrv1.so
+%attr(755,root,root) %{ooobasisdir}/program/libkab1.so
 %attr(755,root,root) %{ooobasisdir}/program/libvclplug_kde*.so
 %endif
 
@@ -3915,7 +3830,6 @@ fi
 %{ooobasisdir}/share/registry/modules/org/openoffice/TypeDetection/Types/fcfg_xslt_types.xcu
 %{ooobasisdir}/share/xslt/export/uof
 %if %{with java}
-# not exists when --system-libxslt ?
 %{ooobasisdir}/share/xslt/docbook
 %{ooobasisdir}/share/xslt/export/xhtml
 %endif
@@ -3947,6 +3861,7 @@ fi
 
 %files ure
 %defattr(644,root,root,755)
+%dir %{_libdir}/%{name}
 %dir %{_libdir}/%{name}/ure
 %dir %{_libdir}/%{name}/ure/bin
 %attr(755,root,root) %{_libdir}/%{name}/ure/bin/javaldx
@@ -4113,9 +4028,6 @@ fi
 %files i18n-fi -f fi.lang
 %defattr(644,root,root,755)
 
-#%files i18n-fo -f fo.lang
-#%defattr(644,root,root,755)
-
 %files i18n-fr -f fr.lang
 %defattr(644,root,root,755)
 
@@ -4146,12 +4058,6 @@ fi
 %files i18n-hu -f hu.lang
 %defattr(644,root,root,755)
 
-#%files i18n-ia -f ia.lang
-#%defattr(644,root,root,755)
-
-#%files i18n-id -f id.lang
-#%defattr(644,root,root,755)
-
 %files i18n-it -f it.lang
 %defattr(644,root,root,755)
 
@@ -4173,9 +4079,6 @@ fi
 %files i18n-ku -f ku.lang
 %defattr(644,root,root,755)
 
-#%files i18n-la -f la.lang
-#%defattr(644,root,root,755)
-
 %files i18n-lo -f lo.lang
 %defattr(644,root,root,755)
 
@@ -4184,12 +4087,6 @@ fi
 
 %files i18n-lv -f lv.lang
 %defattr(644,root,root,755)
-
-#%files i18n-med -f med.lang
-#%defattr(644,root,root,755)
-
-#%files i18n-mi -f mi.lang
-#%defattr(644,root,root,755)
 
 %files i18n-mk -f mk.lang
 %defattr(644,root,root,755)
@@ -4245,9 +4142,6 @@ fi
 %files i18n-pt_BR -f pt_BR.lang
 %defattr(644,root,root,755)
 
-#%files i18n-ro -f ro.lang
-#%defattr(644,root,root,755)
-
 %files i18n-ru -f ru.lang
 %defattr(644,root,root,755)
 
@@ -4280,9 +4174,6 @@ fi
 
 %files i18n-sw_TZ -f sw_TZ.lang
 %defattr(644,root,root,755)
-
-#%files i18n-sx -f sx.lang
-#%defattr(644,root,root,755)
 
 %files i18n-ta_IN -f ta_IN.lang
 %defattr(644,root,root,755)
