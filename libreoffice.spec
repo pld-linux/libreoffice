@@ -3387,141 +3387,141 @@ fi
 %{ooobasisdir}/program/fundamentalbasisrc
 %{ooobasisdir}/program/gengalrc
 %{ooobasisdir}/program/legacy_binfilters.rdb
-%attr(755,root,root) %{ooobasisdir}/program/libaccli.so
-%attr(755,root,root) %{ooobasisdir}/program/libadabasli.so
-%attr(755,root,root) %{ooobasisdir}/program/libaggli.so
-%attr(755,root,root) %{ooobasisdir}/program/libavmediali.so
-%attr(755,root,root) %{ooobasisdir}/program/libbasctlli.so
-%attr(755,root,root) %{ooobasisdir}/program/libbasebmpli.so
-%attr(755,root,root) %{ooobasisdir}/program/libbasegfxli.so
-%attr(755,root,root) %{ooobasisdir}/program/libbf_frmli.so
-%attr(755,root,root) %{ooobasisdir}/program/libbf_goli.so
-%attr(755,root,root) %{ooobasisdir}/program/libbf_migratefilterli.so
-%attr(755,root,root) %{ooobasisdir}/program/libbf_ofali.so
-%attr(755,root,root) %{ooobasisdir}/program/libbf_sbli.so
-%attr(755,root,root) %{ooobasisdir}/program/libbf_schli.so
-%attr(755,root,root) %{ooobasisdir}/program/libbf_scli.so
-%attr(755,root,root) %{ooobasisdir}/program/libbf_sdli.so
-%attr(755,root,root) %{ooobasisdir}/program/libbf_smli.so
-%attr(755,root,root) %{ooobasisdir}/program/libbf_soli.so
-%attr(755,root,root) %{ooobasisdir}/program/libbf_swli.so
-%attr(755,root,root) %{ooobasisdir}/program/libbf_svtli.so
-%attr(755,root,root) %{ooobasisdir}/program/libbf_svxli.so
-%attr(755,root,root) %{ooobasisdir}/program/libbf_wrapperli.so
-%attr(755,root,root) %{ooobasisdir}/program/libbf_xoli.so
-%attr(755,root,root) %{ooobasisdir}/program/libbibli.so
-%attr(755,root,root) %{ooobasisdir}/program/libbindetli.so
-%attr(755,root,root) %{ooobasisdir}/program/libcanvastoolsli.so
-%attr(755,root,root) %{ooobasisdir}/program/libchartcontrollerli.so
-%attr(755,root,root) %{ooobasisdir}/program/libchartmodelli.so
-%attr(755,root,root) %{ooobasisdir}/program/libcharttoolsli.so
-%attr(755,root,root) %{ooobasisdir}/program/libchartviewli.so
-%attr(755,root,root) %{ooobasisdir}/program/libcppcanvasli.so
-%attr(755,root,root) %{ooobasisdir}/program/libctlli.so
-%attr(755,root,root) %{ooobasisdir}/program/libcuili.so
-%attr(755,root,root) %{ooobasisdir}/program/libdbali.so
-%attr(755,root,root) %{ooobasisdir}/program/libdbaseli.so
-%attr(755,root,root) %{ooobasisdir}/program/libdbaxmlli.so
-%attr(755,root,root) %{ooobasisdir}/program/libdbmmli.so
-%attr(755,root,root) %{ooobasisdir}/program/libdbtoolsli.so
-%attr(755,root,root) %{ooobasisdir}/program/libdbuli.so
-%attr(755,root,root) %{ooobasisdir}/program/libdeploymentmiscli.so
-%attr(755,root,root) %{ooobasisdir}/program/libdtransX11li.so
-%attr(755,root,root) %{ooobasisdir}/program/libeggtrayli.so
-%attr(755,root,root) %{ooobasisdir}/program/libegili.so
-%attr(755,root,root) %{ooobasisdir}/program/libemeli.so
-%attr(755,root,root) %{ooobasisdir}/program/libempli.so
-%attr(755,root,root) %{ooobasisdir}/program/libepbli.so
-%attr(755,root,root) %{ooobasisdir}/program/libepgli.so
-%attr(755,root,root) %{ooobasisdir}/program/libeppli.so
-%attr(755,root,root) %{ooobasisdir}/program/libepsli.so
-%attr(755,root,root) %{ooobasisdir}/program/libeptli.so
-%attr(755,root,root) %{ooobasisdir}/program/liberali.so
-%attr(755,root,root) %{ooobasisdir}/program/libetili.so
-%attr(755,root,root) %{ooobasisdir}/program/libexlinkli.so
-%attr(755,root,root) %{ooobasisdir}/program/libexpli.so
-%attr(755,root,root) %{ooobasisdir}/program/libfileli.so
-%attr(755,root,root) %{ooobasisdir}/program/libflatli.so
-%attr(755,root,root) %{ooobasisdir}/program/libfrmli.so
-%attr(755,root,root) %{ooobasisdir}/program/libfweli.so
-%attr(755,root,root) %{ooobasisdir}/program/libfwili.so
-%attr(755,root,root) %{ooobasisdir}/program/libfwkli.so
-%attr(755,root,root) %{ooobasisdir}/program/libfwlli.so
-%attr(755,root,root) %{ooobasisdir}/program/libfwmli.so
-%attr(755,root,root) %{ooobasisdir}/program/libgoli.so
-%attr(755,root,root) %{ooobasisdir}/program/libguesslangli.so
-%attr(755,root,root) %{ooobasisdir}/program/libhelplinkerli.so
-%attr(755,root,root) %{ooobasisdir}/program/libhyphenli.so
+%attr(755,root,root) %{ooobasisdir}/program/libaccl[ix].so
+%attr(755,root,root) %{ooobasisdir}/program/libadabasl[ix].so
+%attr(755,root,root) %{ooobasisdir}/program/libaggl[ix].so
+%attr(755,root,root) %{ooobasisdir}/program/libavmedial[ix].so
+%attr(755,root,root) %{ooobasisdir}/program/libbasctll[ix].so
+%attr(755,root,root) %{ooobasisdir}/program/libbasebmpl[ix].so
+%attr(755,root,root) %{ooobasisdir}/program/libbasegfxl[ix].so
+%attr(755,root,root) %{ooobasisdir}/program/libbf_frml[ix].so
+%attr(755,root,root) %{ooobasisdir}/program/libbf_gol[ix].so
+%attr(755,root,root) %{ooobasisdir}/program/libbf_migratefilterl[ix].so
+%attr(755,root,root) %{ooobasisdir}/program/libbf_ofal[ix].so
+%attr(755,root,root) %{ooobasisdir}/program/libbf_sbl[ix].so
+%attr(755,root,root) %{ooobasisdir}/program/libbf_schl[ix].so
+%attr(755,root,root) %{ooobasisdir}/program/libbf_scl[ix].so
+%attr(755,root,root) %{ooobasisdir}/program/libbf_sdl[ix].so
+%attr(755,root,root) %{ooobasisdir}/program/libbf_sml[ix].so
+%attr(755,root,root) %{ooobasisdir}/program/libbf_sol[ix].so
+%attr(755,root,root) %{ooobasisdir}/program/libbf_swl[ix].so
+%attr(755,root,root) %{ooobasisdir}/program/libbf_svtl[ix].so
+%attr(755,root,root) %{ooobasisdir}/program/libbf_svxl[ix].so
+%attr(755,root,root) %{ooobasisdir}/program/libbf_wrapperl[ix].so
+%attr(755,root,root) %{ooobasisdir}/program/libbf_xol[ix].so
+%attr(755,root,root) %{ooobasisdir}/program/libbibl[ix].so
+%attr(755,root,root) %{ooobasisdir}/program/libbindetl[ix].so
+%attr(755,root,root) %{ooobasisdir}/program/libcanvastoolsl[ix].so
+%attr(755,root,root) %{ooobasisdir}/program/libchartcontrollerl[ix].so
+%attr(755,root,root) %{ooobasisdir}/program/libchartmodell[ix].so
+%attr(755,root,root) %{ooobasisdir}/program/libcharttoolsl[ix].so
+%attr(755,root,root) %{ooobasisdir}/program/libchartviewl[ix].so
+%attr(755,root,root) %{ooobasisdir}/program/libcppcanvasl[ix].so
+%attr(755,root,root) %{ooobasisdir}/program/libctll[ix].so
+%attr(755,root,root) %{ooobasisdir}/program/libcuil[ix].so
+%attr(755,root,root) %{ooobasisdir}/program/libdbal[ix].so
+%attr(755,root,root) %{ooobasisdir}/program/libdbasel[ix].so
+%attr(755,root,root) %{ooobasisdir}/program/libdbaxmll[ix].so
+%attr(755,root,root) %{ooobasisdir}/program/libdbmml[ix].so
+%attr(755,root,root) %{ooobasisdir}/program/libdbtoolsl[ix].so
+%attr(755,root,root) %{ooobasisdir}/program/libdbul[ix].so
+%attr(755,root,root) %{ooobasisdir}/program/libdeploymentmiscl[ix].so
+%attr(755,root,root) %{ooobasisdir}/program/libdtransX11l[ix].so
+%attr(755,root,root) %{ooobasisdir}/program/libeggtrayl[ix].so
+%attr(755,root,root) %{ooobasisdir}/program/libegil[ix].so
+%attr(755,root,root) %{ooobasisdir}/program/libemel[ix].so
+%attr(755,root,root) %{ooobasisdir}/program/libempl[ix].so
+%attr(755,root,root) %{ooobasisdir}/program/libepbl[ix].so
+%attr(755,root,root) %{ooobasisdir}/program/libepgl[ix].so
+%attr(755,root,root) %{ooobasisdir}/program/libeppl[ix].so
+%attr(755,root,root) %{ooobasisdir}/program/libepsl[ix].so
+%attr(755,root,root) %{ooobasisdir}/program/libeptl[ix].so
+%attr(755,root,root) %{ooobasisdir}/program/liberal[ix].so
+%attr(755,root,root) %{ooobasisdir}/program/libetil[ix].so
+%attr(755,root,root) %{ooobasisdir}/program/libexlinkl[ix].so
+%attr(755,root,root) %{ooobasisdir}/program/libexpl[ix].so
+%attr(755,root,root) %{ooobasisdir}/program/libfilel[ix].so
+%attr(755,root,root) %{ooobasisdir}/program/libflatl[ix].so
+%attr(755,root,root) %{ooobasisdir}/program/libfrml[ix].so
+%attr(755,root,root) %{ooobasisdir}/program/libfwel[ix].so
+%attr(755,root,root) %{ooobasisdir}/program/libfwil[ix].so
+%attr(755,root,root) %{ooobasisdir}/program/libfwkl[ix].so
+%attr(755,root,root) %{ooobasisdir}/program/libfwll[ix].so
+%attr(755,root,root) %{ooobasisdir}/program/libfwml[ix].so
+%attr(755,root,root) %{ooobasisdir}/program/libgol[ix].so
+%attr(755,root,root) %{ooobasisdir}/program/libguesslangl[ix].so
+%attr(755,root,root) %{ooobasisdir}/program/libhelplinkerl[ix].so
+%attr(755,root,root) %{ooobasisdir}/program/libhyphenl[ix].so
 %attr(755,root,root) %{ooobasisdir}/program/libi18nisolang1gcc3.so
-%attr(755,root,root) %{ooobasisdir}/program/libicdli.so
-%attr(755,root,root) %{ooobasisdir}/program/libicgli.so
-%attr(755,root,root) %{ooobasisdir}/program/libidxli.so
-%attr(755,root,root) %{ooobasisdir}/program/libimeli.so
-%attr(755,root,root) %{ooobasisdir}/program/libipbli.so
-%attr(755,root,root) %{ooobasisdir}/program/libipdli.so
-%attr(755,root,root) %{ooobasisdir}/program/libipsli.so
-%attr(755,root,root) %{ooobasisdir}/program/libiptli.so
-%attr(755,root,root) %{ooobasisdir}/program/libipxli.so
-%attr(755,root,root) %{ooobasisdir}/program/libirali.so
-%attr(755,root,root) %{ooobasisdir}/program/libitgli.so
-%attr(755,root,root) %{ooobasisdir}/program/libitili.so
-%attr(755,root,root) %{ooobasisdir}/program/liblegacy_binfiltersli.so
-%attr(755,root,root) %{ooobasisdir}/program/liblngli.so
-%attr(755,root,root) %{ooobasisdir}/program/liblnthli.so
-%attr(755,root,root) %{ooobasisdir}/program/liblogli.so
+%attr(755,root,root) %{ooobasisdir}/program/libicdl[ix].so
+%attr(755,root,root) %{ooobasisdir}/program/libicgl[ix].so
+%attr(755,root,root) %{ooobasisdir}/program/libidxl[ix].so
+%attr(755,root,root) %{ooobasisdir}/program/libimel[ix].so
+%attr(755,root,root) %{ooobasisdir}/program/libipbl[ix].so
+%attr(755,root,root) %{ooobasisdir}/program/libipdl[ix].so
+%attr(755,root,root) %{ooobasisdir}/program/libipsl[ix].so
+%attr(755,root,root) %{ooobasisdir}/program/libiptl[ix].so
+%attr(755,root,root) %{ooobasisdir}/program/libipxl[ix].so
+%attr(755,root,root) %{ooobasisdir}/program/libiral[ix].so
+%attr(755,root,root) %{ooobasisdir}/program/libitgl[ix].so
+%attr(755,root,root) %{ooobasisdir}/program/libitil[ix].so
+%attr(755,root,root) %{ooobasisdir}/program/liblegacy_binfiltersl[ix].so
+%attr(755,root,root) %{ooobasisdir}/program/liblngl[ix].so
+%attr(755,root,root) %{ooobasisdir}/program/liblnthl[ix].so
+%attr(755,root,root) %{ooobasisdir}/program/liblogl[ix].so
 %attr(755,root,root) %{ooobasisdir}/program/libmozbootstrap.so
-%attr(755,root,root) %{ooobasisdir}/program/liboffaccli.so
-%attr(755,root,root) %{ooobasisdir}/program/liboooimprovecoreli.so
-%attr(755,root,root) %{ooobasisdir}/program/libooxli.so
-%attr(755,root,root) %{ooobasisdir}/program/libpcrli.so
-%attr(755,root,root) %{ooobasisdir}/program/libpdffilterli.so
-%attr(755,root,root) %{ooobasisdir}/program/libplli.so
-%attr(755,root,root) %{ooobasisdir}/program/libpreloadli.so
-%attr(755,root,root) %{ooobasisdir}/program/libprotocolhandlerli.so
-%attr(755,root,root) %{ooobasisdir}/program/libpspli.so
-%attr(755,root,root) %{ooobasisdir}/program/libqstart_gtkli.so
-%attr(755,root,root) %{ooobasisdir}/program/libresli.so
-%attr(755,root,root) %{ooobasisdir}/program/libsaxli.so
-%attr(755,root,root) %{ooobasisdir}/program/libsbli.so
-%attr(755,root,root) %{ooobasisdir}/program/libscnli.so
-%attr(755,root,root) %{ooobasisdir}/program/libsdbtli.so
-%attr(755,root,root) %{ooobasisdir}/program/libsddli.so
-%attr(755,root,root) %{ooobasisdir}/program/libsdli.so
-%attr(755,root,root) %{ooobasisdir}/program/libsduili.so
-%attr(755,root,root) %{ooobasisdir}/program/libsfxli.so
+%attr(755,root,root) %{ooobasisdir}/program/liboffaccl[ix].so
+%attr(755,root,root) %{ooobasisdir}/program/liboooimprovecorel[ix].so
+%attr(755,root,root) %{ooobasisdir}/program/libooxl[ix].so
+%attr(755,root,root) %{ooobasisdir}/program/libpcrl[ix].so
+%attr(755,root,root) %{ooobasisdir}/program/libpdffilterl[ix].so
+%attr(755,root,root) %{ooobasisdir}/program/libpll[ix].so
+%attr(755,root,root) %{ooobasisdir}/program/libpreloadl[ix].so
+%attr(755,root,root) %{ooobasisdir}/program/libprotocolhandlerl[ix].so
+%attr(755,root,root) %{ooobasisdir}/program/libpspl[ix].so
+%attr(755,root,root) %{ooobasisdir}/program/libqstart_gtkl[ix].so
+%attr(755,root,root) %{ooobasisdir}/program/libresl[ix].so
+%attr(755,root,root) %{ooobasisdir}/program/libsaxl[ix].so
+%attr(755,root,root) %{ooobasisdir}/program/libsbl[ix].so
+%attr(755,root,root) %{ooobasisdir}/program/libscnl[ix].so
+%attr(755,root,root) %{ooobasisdir}/program/libsdbtl[ix].so
+%attr(755,root,root) %{ooobasisdir}/program/libsddl[ix].so
+%attr(755,root,root) %{ooobasisdir}/program/libsdl[ix].so
+%attr(755,root,root) %{ooobasisdir}/program/libsduil[ix].so
+%attr(755,root,root) %{ooobasisdir}/program/libsfxl[ix].so
 %attr(755,root,root) %{ooobasisdir}/program/libsofficeapp.so
-%attr(755,root,root) %{ooobasisdir}/program/libsotli.so
-%attr(755,root,root) %{ooobasisdir}/program/libspali.so
-%attr(755,root,root) %{ooobasisdir}/program/libspellli.so
-%attr(755,root,root) %{ooobasisdir}/program/libspl_unxli.so
-%attr(755,root,root) %{ooobasisdir}/program/libsplli.so
-%attr(755,root,root) %{ooobasisdir}/program/libstsli.so
-%attr(755,root,root) %{ooobasisdir}/program/libsvlli.so
-%attr(755,root,root) %{ooobasisdir}/program/libsvtli.so
-%attr(755,root,root) %{ooobasisdir}/program/libsvxli.so
-%attr(755,root,root) %{ooobasisdir}/program/libswli.so
-%attr(755,root,root) %{ooobasisdir}/program/libtextconversiondlgsli.so
-%attr(755,root,root) %{ooobasisdir}/program/libtfuli.so
-%attr(755,root,root) %{ooobasisdir}/program/libtkli.so
-%attr(755,root,root) %{ooobasisdir}/program/libtlli.so
+%attr(755,root,root) %{ooobasisdir}/program/libsotl[ix].so
+%attr(755,root,root) %{ooobasisdir}/program/libspal[ix].so
+%attr(755,root,root) %{ooobasisdir}/program/libspelll[ix].so
+%attr(755,root,root) %{ooobasisdir}/program/libspl_unxl[ix].so
+%attr(755,root,root) %{ooobasisdir}/program/libspll[ix].so
+%attr(755,root,root) %{ooobasisdir}/program/libstsl[ix].so
+%attr(755,root,root) %{ooobasisdir}/program/libsvll[ix].so
+%attr(755,root,root) %{ooobasisdir}/program/libsvtl[ix].so
+%attr(755,root,root) %{ooobasisdir}/program/libsvxl[ix].so
+%attr(755,root,root) %{ooobasisdir}/program/libswl[ix].so
+%attr(755,root,root) %{ooobasisdir}/program/libtextconversiondlgsl[ix].so
+%attr(755,root,root) %{ooobasisdir}/program/libtful[ix].so
+%attr(755,root,root) %{ooobasisdir}/program/libtkl[ix].so
+%attr(755,root,root) %{ooobasisdir}/program/libtll[ix].so
 %attr(755,root,root) %{ooobasisdir}/program/libunopkgapp.so
-%attr(755,root,root) %{ooobasisdir}/program/libunordfli.so
-%attr(755,root,root) %{ooobasisdir}/program/libunoxmlli.so
-%attr(755,root,root) %{ooobasisdir}/program/libupdchkli.so
-%attr(755,root,root) %{ooobasisdir}/program/libutlli.so
-%attr(755,root,root) %{ooobasisdir}/program/libuuili.so
-%attr(755,root,root) %{ooobasisdir}/program/libvclli.so
-%attr(755,root,root) %{ooobasisdir}/program/libvclplug_genli.so
-%attr(755,root,root) %{ooobasisdir}/program/libvclplug_svpli.so
-%attr(755,root,root) %{ooobasisdir}/program/libwpgimportli.so
-%attr(755,root,root) %{ooobasisdir}/program/libxcrli.so
-%attr(755,root,root) %{ooobasisdir}/program/libxmlfali.so
-%attr(755,root,root) %{ooobasisdir}/program/libxmlfdli.so
-%attr(755,root,root) %{ooobasisdir}/program/libxmxli.so
-%attr(755,root,root) %{ooobasisdir}/program/libxofli.so
-%attr(755,root,root) %{ooobasisdir}/program/libxoli.so
-%attr(755,root,root) %{ooobasisdir}/program/libxsltdlgli.so
-%attr(755,root,root) %{ooobasisdir}/program/libxsltfilterli.so
+%attr(755,root,root) %{ooobasisdir}/program/libunordfl[ix].so
+%attr(755,root,root) %{ooobasisdir}/program/libunoxmll[ix].so
+%attr(755,root,root) %{ooobasisdir}/program/libupdchkl[ix].so
+%attr(755,root,root) %{ooobasisdir}/program/libutll[ix].so
+%attr(755,root,root) %{ooobasisdir}/program/libuuil[ix].so
+%attr(755,root,root) %{ooobasisdir}/program/libvcll[ix].so
+%attr(755,root,root) %{ooobasisdir}/program/libvclplug_genl[ix].so
+%attr(755,root,root) %{ooobasisdir}/program/libvclplug_svpl[ix].so
+%attr(755,root,root) %{ooobasisdir}/program/libwpgimportl[ix].so
+%attr(755,root,root) %{ooobasisdir}/program/libxcrl[ix].so
+%attr(755,root,root) %{ooobasisdir}/program/libxmlfal[ix].so
+%attr(755,root,root) %{ooobasisdir}/program/libxmlfdl[ix].so
+%attr(755,root,root) %{ooobasisdir}/program/libxmxl[ix].so
+%attr(755,root,root) %{ooobasisdir}/program/libxofl[ix].so
+%attr(755,root,root) %{ooobasisdir}/program/libxol[ix].so
+%attr(755,root,root) %{ooobasisdir}/program/libxsltdlgl[ix].so
+%attr(755,root,root) %{ooobasisdir}/program/libxsltfilterl[ix].so
 %{ooobasisdir}/program/offapi.rdb
 %{ooobasisdir}/program/oovbaapi.rdb
 # seems to be exactly the same as in -ure
@@ -3626,13 +3626,13 @@ fi
 %endif
 
 %{ooobasisdir}/program/resource/adabasuien-US.res
-%attr(755,root,root) %{ooobasisdir}/program/libabpli.so
-%attr(755,root,root) %{ooobasisdir}/program/libadabasuili.so
-%attr(755,root,root) %{ooobasisdir}/program/libdbacfgli.so
-%attr(755,root,root) %{ooobasisdir}/program/libdbpli.so
-%attr(755,root,root) %{ooobasisdir}/program/librptli.so
-%attr(755,root,root) %{ooobasisdir}/program/librptuili.so
-%attr(755,root,root) %{ooobasisdir}/program/librptxmlli.so
+%attr(755,root,root) %{ooobasisdir}/program/libabpl[ix].so
+%attr(755,root,root) %{ooobasisdir}/program/libadabasuil[ix].so
+%attr(755,root,root) %{ooobasisdir}/program/libdbacfgl[ix].so
+%attr(755,root,root) %{ooobasisdir}/program/libdbpl[ix].so
+%attr(755,root,root) %{ooobasisdir}/program/librptl[ix].so
+%attr(755,root,root) %{ooobasisdir}/program/librptuil[ix].so
+%attr(755,root,root) %{ooobasisdir}/program/librptxmll[ix].so
 
 %{ooobasisdir}/help/en/sdatabase.*
 %{ooobasisdir}/share/config/soffice.cfg/modules/dbapp
@@ -3664,14 +3664,14 @@ fi
 %{ooobasisdir}/program/resource/dateen-US.res
 %{ooobasisdir}/program/resource/solveren-US.res
 %{ooobasisdir}/program/resource/scen-US.res
-%attr(755,root,root) %{ooobasisdir}/program/libanalysisli.so
-%attr(755,root,root) %{ooobasisdir}/program/libcalcli.so
-%attr(755,root,root) %{ooobasisdir}/program/libdateli.so
-%attr(755,root,root) %{ooobasisdir}/program/libscdli.so
-%attr(755,root,root) %{ooobasisdir}/program/libscli.so
-%attr(755,root,root) %{ooobasisdir}/program/libscuili.so
-%attr(755,root,root) %{ooobasisdir}/program/libsolverli.so
-%attr(755,root,root) %{ooobasisdir}/program/libvbaobjli.uno.so
+%attr(755,root,root) %{ooobasisdir}/program/libanalysisl[ix].so
+%attr(755,root,root) %{ooobasisdir}/program/libcalcl[ix].so
+%attr(755,root,root) %{ooobasisdir}/program/libdatel[ix].so
+%attr(755,root,root) %{ooobasisdir}/program/libscdl[ix].so
+%attr(755,root,root) %{ooobasisdir}/program/libscl[ix].so
+%attr(755,root,root) %{ooobasisdir}/program/libscuil[ix].so
+%attr(755,root,root) %{ooobasisdir}/program/libsolverl[ix].so
+%attr(755,root,root) %{ooobasisdir}/program/libvbaobjl[ix].uno.so
 %{ooobasisdir}/share/config/soffice.cfg/modules/scalc
 %{ooobasisdir}/share/config/soffice.cfg/modules/schart
 %{ooobasisdir}/share/registry/data/org/openoffice/Office/UI/CalcCommands.xcu
@@ -3715,13 +3715,13 @@ fi
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_bindir}/oowriter
 %attr(755,root,root) %{ooobasisdir}/program/libhwp.so
-%attr(755,root,root) %{ooobasisdir}/program/liblwpftli.so
-%attr(755,root,root) %{ooobasisdir}/program/libmsworksli.so
-%attr(755,root,root) %{ooobasisdir}/program/libswdli.so
-%attr(755,root,root) %{ooobasisdir}/program/libswuili.so
-%attr(755,root,root) %{ooobasisdir}/program/libt602filterli.so
-%attr(755,root,root) %{ooobasisdir}/program/libwpftli.so
-%attr(755,root,root) %{ooobasisdir}/program/libwriterfilterli.so
+%attr(755,root,root) %{ooobasisdir}/program/liblwpftl[ix].so
+%attr(755,root,root) %{ooobasisdir}/program/libmsworksl[ix].so
+%attr(755,root,root) %{ooobasisdir}/program/libswdl[ix].so
+%attr(755,root,root) %{ooobasisdir}/program/libswuil[ix].so
+%attr(755,root,root) %{ooobasisdir}/program/libt602filterl[ix].so
+%attr(755,root,root) %{ooobasisdir}/program/libwpftl[ix].so
+%attr(755,root,root) %{ooobasisdir}/program/libwriterfilterl[ix].so
 %attr(755,root,root) %{_libdir}/%{name}/program/swriter
 %{_mandir}/man1/oowriter.1
 %{_desktopdir}/oowriter.desktop
@@ -3788,8 +3788,8 @@ fi
 %{ooobasisdir}/help/en/smath.*
 %{ooobasisdir}/program/resource/bf_smen-US.res
 %{ooobasisdir}/program/resource/smen-US.res
-%attr(755,root,root) %{ooobasisdir}/program/libsmdli.so
-%attr(755,root,root) %{ooobasisdir}/program/libsmli.so
+%attr(755,root,root) %{ooobasisdir}/program/libsmdl[ix].so
+%attr(755,root,root) %{ooobasisdir}/program/libsml[ix].so
 %attr(755,root,root) %{_libdir}/%{name}/program/smath
 %{ooobasisdir}/share/config/soffice.cfg/modules/smath
 %{ooobasisdir}/share/registry/data/org/openoffice/Office/UI/MathCommands.xcu
@@ -3817,8 +3817,8 @@ fi
 
 %files graphicfilter
 %defattr(644,root,root,755)
-%attr(755,root,root) %{ooobasisdir}/program/libflashli.so
-%attr(755,root,root) %{ooobasisdir}/program/libsvgfilterli.so
+%attr(755,root,root) %{ooobasisdir}/program/libflashl[ix].so
+%attr(755,root,root) %{ooobasisdir}/program/libsvgfilterl[ix].so
 %{ooobasisdir}/share/registry/modules/org/openoffice/TypeDetection/Filter/fcfg_drawgraphics_filters.xcu
 %{ooobasisdir}/share/registry/modules/org/openoffice/TypeDetection/Filter/fcfg_impressgraphics_filters.xcu
 %{ooobasisdir}/share/registry/modules/org/openoffice/TypeDetection/Types/fcfg_drawgraphics_types.xcu
@@ -3850,8 +3850,8 @@ fi
 
 %files testtools
 %defattr(644,root,root,755)
-%attr(755,root,root) %{ooobasisdir}/program/libcommunili.so
-%attr(755,root,root) %{ooobasisdir}/program/libsimplecmli.so
+%attr(755,root,root) %{ooobasisdir}/program/libcommunil[ix].so
+%attr(755,root,root) %{ooobasisdir}/program/libsimplecml[ix].so
 %attr(755,root,root) %{ooobasisdir}/program/testtool.bin
 %{ooobasisdir}/program/resource/stten-US.res
 %if %{with java}
