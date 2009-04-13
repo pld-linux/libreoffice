@@ -3639,7 +3639,7 @@ fi
 %attr(755,root,root) %{ooobasisdir}/program/libscl[ix].so
 %attr(755,root,root) %{ooobasisdir}/program/libscuil[ix].so
 %attr(755,root,root) %{ooobasisdir}/program/libsolverl[ix].so
-%attr(755,root,root) %{ooobasisdir}/program/libvbaobjli.uno.so
+%attr(755,root,root) %{ooobasisdir}/program/libvbaobjl[ix].uno.so
 %{ooobasisdir}/program/resource/analysisen-US.res
 %{ooobasisdir}/program/resource/dateen-US.res
 %{ooobasisdir}/program/resource/solveren-US.res
