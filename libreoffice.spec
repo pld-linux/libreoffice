@@ -10,7 +10,6 @@
 #   - ON PPC help FILES ARE NOT BUILT DUE TO SOME REASON (is missing java the reason?)
 #   - --with mono wants static mono
 #	- without system_db will not work (w/ java) as it will use db4.2 which is too old (see r1.650)
-#	- problems with gcc-4.2.0: oowriter is useless (invisble text till refresh)
 #	- fix help files (broken links)
 #	- LFS support is disabled (no_lfs_hack.patch for xml2cmp crash) because it need LFS-ready STLport
 #	- maybe it could be build with gcc-java
@@ -24,14 +23,12 @@
 #   - --with-system-mspack - use libmspack already installed on system
 #	- bcond system_xt doesn't work - xt in PLD is too old or broken
 #   - package (english) help files into subpackage
-#   - vendor name from OOO_VENDOR is not respected. We should switch to --with-vendor=
 #   - fix build --with kde (kde4-kde3support?)
 #
 #	$ grep SYSTEM ooo-build-ooe-m6/build/ooe-m6/config_office/config.log |grep NO
 #
 # MAYBE TODO:
 #	- drop requirement on nas-devel
-#	- in gtk version menu highlight has almost the same colour as menu text
 #	- 6 user/config/*.so? files shared between -i18n-en and -i18n-sl
 #	- add ooglobal symlink and it's ooo-wrapper entry (among calc|draw|impress|math|web|writer)
 #
@@ -79,7 +76,7 @@
 %define		tag			%(echo %{mws} | tr A-Z a-z)-%{milestone}
 %define		milestone	m15
 %define		_tag		%(echo %{tag} | tr - _)
-%define		_rel		0.5
+%define		_rel		0.9
 
 Summary:	OpenOffice.org - powerful office suite
 Summary(pl.UTF-8):	OpenOffice.org - potężny pakiet biurowy
@@ -2381,9 +2378,8 @@ fi
 		--infodir=%{_infodir} \
 		--x-libraries=%{?_x_libraries}%{!?_x_libraries:%{_libdir}} \
 		%{?configure_cache:--cache-file=%{configure_cache_file}} \
+		--with-vendor="PLD/Linux Team" \
 		$CONFOPTS
-
-OOO_VENDOR="PLD/Linux Team"; export OOO_VENDOR
 
 # this limits processing some files but doesn't limit parallel build
 # processes of main OOo build (since OOo uses it's own build system)
@@ -2453,12 +2449,12 @@ if [ ! -f installed.stamp ]; then
 
 	%if %{without java}
 	# Java-releated bits
-	rm -r $RPM_BUILD_ROOT%{ooobasisdir}/program/hid.lst
-	rm -r $RPM_BUILD_ROOT%{ooobasisdir}/program/java-set-classpath
-	rm -r $RPM_BUILD_ROOT%{ooobasisdir}/program/jvmfwk3rc
-	rm -r $RPM_BUILD_ROOT%{_libdir}/%{name}/share/Scripts/beanshell
-	rm -r $RPM_BUILD_ROOT%{_libdir}/%{name}/share/Scripts/javascript
-	rm -r $RPM_BUILD_ROOT%{_libdir}/%{name}/share/xslt
+	#rm -r $RPM_BUILD_ROOT%{ooobasisdir}/program/hid.lst
+	#rm -r $RPM_BUILD_ROOT%{ooobasisdir}/program/java-set-classpath
+	#rm -r $RPM_BUILD_ROOT%{ooobasisdir}/program/jvmfwk3rc
+	#rm -r $RPM_BUILD_ROOT%{_libdir}/%{name}/share/Scripts/beanshell
+	#rm -r $RPM_BUILD_ROOT%{_libdir}/%{name}/share/Scripts/javascript
+	#rm -r $RPM_BUILD_ROOT%{_libdir}/%{name}/share/xslt
 	%endif
 
 	%if %{with mono}
@@ -2802,6 +2798,7 @@ fi
 %attr(755,root,root) %{ooobasisdir}/program/hatchwindowfactory.uno.so
 %attr(755,root,root) %{ooobasisdir}/program/i18npool.uno.so
 %attr(755,root,root) %{ooobasisdir}/program/i18nsearch.uno.so
+%attr(755,root,root) %{ooobasisdir}/program/java-set-classpath
 %attr(755,root,root) %{ooobasisdir}/program/ldapbe2.uno.so
 %attr(755,root,root) %{ooobasisdir}/program/libaccl[ix].so
 %attr(755,root,root) %{ooobasisdir}/program/libadabasl[ix].so
@@ -3023,7 +3020,6 @@ fi
 %attr(755,root,root) %{ooobasisdir}/program/*.so.*
 
 %if %{with java}
-%attr(755,root,root) %{ooobasisdir}/program/java-set-classpath
 %attr(755,root,root) %{ooobasisdir}/program/libhsqldb2.so
 %attr(755,root,root) %{ooobasisdir}/program/libjdbc2.so
 %attr(755,root,root) %{ooobasisdir}/program/libofficebean.so
@@ -3149,11 +3145,10 @@ fi
 %{ooobasisdir}/program/resource/xsltdlgen-US.res
 
 %dir %{ooobasisdir}/share
-
-%if %{with java}
 %dir %{ooobasisdir}/share/Scripts
 %{ooobasisdir}/share/Scripts/beanshell
 %{ooobasisdir}/share/Scripts/javascript
+%if %{with java}
 %{ooobasisdir}/share/Scripts/java
 %endif
 
@@ -3182,10 +3177,8 @@ fi
 %dir %{ooobasisdir}/share/config/soffice.cfg/modules/dbbrowser/accelerator
 %dir %{ooobasisdir}/share/config/soffice.cfg/modules/dbquery
 %dir %{ooobasisdir}/share/config/soffice.cfg/modules/dbquery/accelerator
-%if %{with java}
 %dir %{ooobasisdir}/share/config/soffice.cfg/modules/dbreport
 %dir %{ooobasisdir}/share/config/soffice.cfg/modules/dbreport/accelerator
-%endif
 %dir %{ooobasisdir}/share/config/soffice.cfg/modules/dbtdata
 %dir %{ooobasisdir}/share/config/soffice.cfg/modules/dbtdata/accelerator
 %dir %{ooobasisdir}/share/config/soffice.cfg/modules/scalc
@@ -3438,7 +3431,6 @@ fi
 %dir %{ooobasisdir}/share/wordbook
 %{ooobasisdir}/share/wordbook/en-US
 
-%if %{with java}
 %dir %{ooobasisdir}/share/xslt
 %{ooobasisdir}/share/xslt/common
 %dir %{ooobasisdir}/share/xslt/export
@@ -3447,7 +3439,6 @@ fi
 %{ooobasisdir}/share/xslt/export/uof
 %{ooobasisdir}/share/xslt/export/wordml
 %{ooobasisdir}/share/xslt/import
-%endif
 
 # symlink to directory
 %attr(755,root,root) %{ooobasisdir}/ure-link
@@ -3581,10 +3572,8 @@ fi
 %{ooobasisdir}/program/resource/cnren-US.res
 %{ooobasisdir}/program/resource/dbpen-US.res
 %{ooobasisdir}/program/resource/dbuen-US.res
-%if %{with java}
 %{ooobasisdir}/program/resource/rpten-US.res
 %{ooobasisdir}/program/resource/rptuien-US.res
-%endif
 %{ooobasisdir}/program/resource/sdbclen-US.res
 %{ooobasisdir}/program/resource/sdberren-US.res
 %{ooobasisdir}/share/config/soffice.cfg/modules/dbapp/accelerator/en-US
@@ -3598,12 +3587,10 @@ fi
 %{ooobasisdir}/share/config/soffice.cfg/modules/dbquery/menubar
 %{ooobasisdir}/share/config/soffice.cfg/modules/dbquery/toolbar
 %{ooobasisdir}/share/config/soffice.cfg/modules/dbrelation
-%if %{with java}
 %{ooobasisdir}/share/config/soffice.cfg/modules/dbreport/accelerator/en-US
 %{ooobasisdir}/share/config/soffice.cfg/modules/dbreport/menubar
 %{ooobasisdir}/share/config/soffice.cfg/modules/dbreport/statusbar
 %{ooobasisdir}/share/config/soffice.cfg/modules/dbreport/toolbar
-%endif
 %{ooobasisdir}/share/config/soffice.cfg/modules/dbtable
 %{ooobasisdir}/share/config/soffice.cfg/modules/dbtdata/accelerator/en-US
 %{ooobasisdir}/share/config/soffice.cfg/modules/dbtdata/menubar
@@ -3831,11 +3818,9 @@ fi
 %defattr(644,root,root,755)
 %{ooobasisdir}/share/registry/modules/org/openoffice/TypeDetection/Filter/fcfg_xslt_filters.xcu
 %{ooobasisdir}/share/registry/modules/org/openoffice/TypeDetection/Types/fcfg_xslt_types.xcu
-%if %{with java}
 %{ooobasisdir}/share/xslt/docbook
 %{ooobasisdir}/share/xslt/export/xhtml
 %{ooobasisdir}/share/xslt/odfflatxml
-%endif
 
 %if %{with java}
 %files javafilter
@@ -3857,17 +3842,14 @@ fi
 %attr(755,root,root) %{ooobasisdir}/program/libsimplecml[ix].so
 %attr(755,root,root) %{ooobasisdir}/program/testtool.bin
 %{ooobasisdir}/program/resource/stten-US.res
-%{ooobasisdir}/program/testtoolrc
-%if %{with java}
 %{ooobasisdir}/program/hid.lst
-%endif
+%{ooobasisdir}/program/testtoolrc
 
 %files ure
 %defattr(644,root,root,755)
 %dir %{_libdir}/%{name}
 %dir %{_libdir}/%{name}/ure
 %dir %{_libdir}/%{name}/ure/bin
-%attr(755,root,root) %{_libdir}/%{name}/ure/bin/javaldx
 %attr(755,root,root) %{_libdir}/%{name}/ure/bin/regcomp
 %attr(755,root,root) %{_libdir}/%{name}/ure/bin/regcomp.bin
 %attr(755,root,root) %{_libdir}/%{name}/ure/bin/regmerge
@@ -3876,11 +3858,10 @@ fi
 %attr(755,root,root) %{_libdir}/%{name}/ure/bin/uno
 %attr(755,root,root) %{_libdir}/%{name}/ure/bin/uno.bin
 %{_libdir}/%{name}/ure/bin/versionrc
+%if %{with java}
+%attr(755,root,root) %{_libdir}/%{name}/ure/bin/javaldx
+%endif
 %dir %{_libdir}/%{name}/ure/lib
-%{_libdir}/%{name}/ure/lib/JREProperties.class
-%attr(755,root,root) %{_libdir}/%{name}/ure/lib/javaloader.uno.so
-%attr(755,root,root) %{_libdir}/%{name}/ure/lib/javavm.uno.so
-%attr(755,root,root) %{_libdir}/%{name}/ure/lib/libjpipe.so
 %attr(755,root,root) %{_libdir}/%{name}/ure/lib/namingservice.uno.so
 %attr(755,root,root) %{_libdir}/%{name}/ure/lib/libaffine_uno_uno.so
 %attr(755,root,root) %{_libdir}/%{name}/ure/lib/bootstrap.uno.so
@@ -3905,29 +3886,39 @@ fi
 %attr(755,root,root) %{_libdir}/%{name}/ure/lib/libuno_salhelpergcc3.so.3
 %attr(755,root,root) %{_libdir}/%{name}/ure/lib/liburp_uno.so
 %attr(755,root,root) %{_libdir}/%{name}/ure/lib/stocservices.uno.so
-%attr(755,root,root) %{_libdir}/%{name}/ure/lib/sunjavaplugin.so
-%{_libdir}/%{name}/ure/lib/unorc
 %attr(755,root,root) %{_libdir}/%{name}/ure/lib/invocation.uno.so
-%{_libdir}/%{name}/ure/lib/jvmfwk3rc
 %attr(755,root,root) %{_libdir}/%{name}/ure/lib/libgcc3_uno.so
-%attr(755,root,root) %{_libdir}/%{name}/ure/lib/libjava_uno.so
-%attr(755,root,root) %{_libdir}/%{name}/ure/lib/libjuh.so
-%attr(755,root,root) %{_libdir}/%{name}/ure/lib/libjuhx.so
 %attr(755,root,root) %{_libdir}/%{name}/ure/lib/libjvmaccessgcc3.so.3
 %attr(755,root,root) %{_libdir}/%{name}/ure/lib/libjvmfwk.so.3
 %attr(755,root,root) %{_libdir}/%{name}/ure/lib/libreg.so.3
 %attr(755,root,root) %{_libdir}/%{name}/ure/lib/librmcxt.so.3
+%{_libdir}/%{name}/ure/lib/jvmfwk3rc
+%{_libdir}/%{name}/ure/lib/unorc
+%if %{with java}
+%attr(755,root,root) %{_libdir}/%{name}/ure/lib/libjava_uno.so
+%attr(755,root,root) %{_libdir}/%{name}/ure/lib/libjuh.so
+%attr(755,root,root) %{_libdir}/%{name}/ure/lib/libjuhx.so
+%attr(755,root,root) %{_libdir}/%{name}/ure/lib/sunjavaplugin.so
+%attr(755,root,root) %{_libdir}/%{name}/ure/lib/javaloader.uno.so
+%attr(755,root,root) %{_libdir}/%{name}/ure/lib/javavm.uno.so
+%attr(755,root,root) %{_libdir}/%{name}/ure/lib/libjpipe.so
+%{_libdir}/%{name}/ure/lib/JREProperties.class
+%endif
 %dir %{_libdir}/%{name}/ure/share
+%if %{with java}
 %dir %{_libdir}/%{name}/ure/share/java
 %{_libdir}/%{name}/ure/share/java/java_uno.jar
 %{_libdir}/%{name}/ure/share/java/juh.jar
 %{_libdir}/%{name}/ure/share/java/jurt.jar
 %{_libdir}/%{name}/ure/share/java/ridl.jar
 %{_libdir}/%{name}/ure/share/java/unoloader.jar
+%endif
 %dir %{_libdir}/%{name}/ure/share/misc
-%{_libdir}/%{name}/ure/share/misc/javavendors.xml
 %{_libdir}/%{name}/ure/share/misc/services.rdb
 %{_libdir}/%{name}/ure/share/misc/types.rdb
+%if %{with java}
+%{_libdir}/%{name}/ure/share/misc/javavendors.xml
+%endif
 
 %files pyuno
 %defattr(644,root,root,755)
