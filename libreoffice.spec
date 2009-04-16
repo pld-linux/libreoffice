@@ -252,7 +252,7 @@ BuildRequires:	ant
 %{?with_system_db:BuildRequires:	db-java >= 4.3}
 BuildRequires:	jar
 BuildRequires:	jdk >= 1.4.0_00
-BuildRequires:	jre-X11
+BuildRequires:	java-sun-jre-X11
 %endif
 BuildRequires:	libxslt-progs
 BuildRequires:	xulrunner-devel
