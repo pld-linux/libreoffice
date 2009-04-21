@@ -10,7 +10,6 @@
 #   - ON PPC help FILES ARE NOT BUILT DUE TO SOME REASON (is missing java the reason?)
 #   - --with mono wants static mono
 #	- without system_db will not work (w/ java) as it will use db4.2 which is too old (see r1.650)
-#	- fix help files (broken links)
 #	- LFS support is disabled (no_lfs_hack.patch for xml2cmp crash) because it need LFS-ready STLport
 #	- maybe it could be build with gcc-java
 #   - adapt help-support.diff to PLD
@@ -23,7 +22,6 @@
 #   - --with-system-mspack - use libmspack already installed on system
 #	- bcond system_xt doesn't work - xt in PLD is too old or broken
 #   - package (english) help files into subpackage
-#   - fix build --with kde (kde4-kde3support?)
 #
 #	$ grep SYSTEM ooo-build-ooe-m6/build/ooe-m6/config_office/config.log |grep NO
 #
@@ -76,7 +74,7 @@
 %define		tag			%(echo %{mws} | tr A-Z a-z)-%{milestone}
 %define		milestone	m15
 %define		_tag		%(echo %{tag} | tr - _)
-%define		_rel		0.9.1
+%define		_rel		1
 
 Summary:	OpenOffice.org - powerful office suite
 Summary(pl.UTF-8):	OpenOffice.org - potężny pakiet biurowy
@@ -159,6 +157,7 @@ Patch1006:	%{name}-perl-nodiag.patch
 Patch1007:	%{name}-gcc42-swregion.diff
 
 Patch2000:	%{name}-build.patch
+Patch2001:	%{name}-kde3support.patch
 URL:		http://www.openoffice.org/
 BuildConflicts:	xmlsec1-devel
 # contains (dlopened) *.so libs
@@ -196,7 +195,11 @@ BuildRequires:	gtk+2-devel >= 2:2.10
 %{?with_system_hunspell:BuildRequires:	hunspell-devel >=1.2.2}
 %{?with_icecream:BuildRequires:	icecream}
 BuildRequires:	icu
-%{?with_kde:BuildRequires:	kdelibs-devel}
+%if %{with kde}
+BuildConflicts:	kde4-kdelibs-devel
+BuildConflicts:	kde4-kdepimlibs-devel
+BuildRequires:	kde4-kde3support-devel
+%endif
 BuildRequires:	libart_lgpl-devel
 BuildRequires:	libbonobo-devel >= 2.0
 %{?with_system_libhnj:BuildRequires:	libhnj-devel}
@@ -210,6 +213,7 @@ BuildRequires:	libwpg-devel >= 0.1.0
 BuildRequires:	libwps-devel
 BuildRequires:	libxml2-devel >= 2.0
 BuildRequires:	libxslt-devel
+BuildRequires:	libxslt-progs
 %{?with_access:%{?with_system_mdbtools:BuildRequires:	mdbtools-devel >= 0.6}}
 %{?with_mono:BuildRequires:	mono-csharp >= 1.2.3}
 %{?with_mono:BuildRequires:	mono-static >= 1.2.3}
@@ -229,13 +233,16 @@ BuildRequires:	portaudio-devel
 BuildRequires:	python >= 2.2
 BuildRequires:	python-devel >= 2.2
 BuildRequires:	python-modules >= 2.2
+BuildRequires:	redland-devel
 BuildRequires:	rpm-pythonprov
 BuildRequires:	rpmbuild(macros) >= 1.357
 BuildRequires:	sablotron-devel
 BuildRequires:	sane-backends-devel
+BuildRequires:	saxon
 BuildRequires:	sed >= 4.0
 BuildRequires:	startup-notification-devel >= 0.5
 BuildRequires:	tcsh
+BuildRequires:	vigra-devel
 BuildRequires:	unixODBC-devel >= 2.2.12-2
 BuildRequires:	unzip
 %{?with_system_xalan:BuildRequires:	xalan-j}
@@ -254,12 +261,7 @@ BuildRequires:	jar
 BuildRequires:	jdk >= 1.4.0_00
 BuildRequires:	java-sun-jre-X11
 %endif
-BuildRequires:	libxslt-progs
 BuildRequires:	xulrunner-devel
-
-BuildRequires:	saxon
-BuildRequires:	vigra-devel
-BuildRequires:	redland-devel
 Requires:	%{name}-base = %{epoch}:%{version}-%{release}
 Requires:	%{name}-calc = %{epoch}:%{version}-%{release}
 Requires:	%{name}-draw = %{epoch}:%{version}-%{release}
@@ -1095,20 +1097,19 @@ language.
 Ten pakiet dostarcza zasoby zawierające menu i okna dialogowe w języku
 irlandzkim.
 
-# FIXME
 %package i18n-gd
-Summary:	OpenOffice.org - interface in ... language
-Summary(pl.UTF-8):	OpenOffice.org - interfejs w języku ...
+Summary:	OpenOffice.org - interface in Scottish Gaelic language
+Summary(pl.UTF-8):	OpenOffice.org - interfejs w języku gaelickim szkockim
 Group:		I18n
 Requires:	%{name}-core = %{epoch}:%{version}-%{release}
 
 %description i18n-gd
 This package provides resources containing menus and dialogs in
-... language.
+Scottish Gaelic language.
 
 %description i18n-gd -l pl.UTF-8
 Ten pakiet dostarcza zasoby zawierające menu i okna dialogowe w języku
-...
+gaelickim szkockim.
 
 %package i18n-gl
 Summary:	OpenOffice.org - interface in Galician language
@@ -1142,20 +1143,19 @@ Gujarati language.
 Ten pakiet dostarcza zasoby zawierające menu i okna dialogowe w języku
 gudźarati.
 
-# FIXME
 %package i18n-gu
-Summary:	OpenOffice.org - interface in ... language
-Summary(pl.UTF-8):	OpenOffice.org - interfejs w języku ...
+Summary:	OpenOffice.org - interface in Gujarati language
+Summary(pl.UTF-8):	OpenOffice.org - interfejs w języku gudźarati
 Group:		I18n
 Requires:	%{name}-core = %{epoch}:%{version}-%{release}
 
 %description i18n-gu
 This package provides resources containing menus and dialogs in
-... language.
+Gujarati language.
 
 %description i18n-gu -l pl.UTF-8
 Ten pakiet dostarcza zasoby zawierające menu i okna dialogowe w języku
-...
+gudźarati.
 
 %package i18n-he
 Summary:	OpenOffice.org - interface in Hebrew language
@@ -1430,20 +1430,19 @@ Marathi language for India.
 Ten pakiet dostarcza zasoby zawierające menu i okna dialogowe w języku
 marathi dla Indii.
 
-# FIXME
 %package i18n-mn
-Summary:	OpenOffice.org - interface in ... language
-Summary(pl.UTF-8):	OpenOffice.org - interfejs w języku ...
+Summary:	OpenOffice.org - interface in Mongolian language
+Summary(pl.UTF-8):	OpenOffice.org - interfejs w języku mongolskim
 Group:		I18n
 Requires:	%{name}-core = %{epoch}:%{version}-%{release}
 
 %description i18n-mn
 This package provides resources containing menus and dialogs in
-... language.
+Mongolian language.
 
 %description i18n-mn -l pl.UTF-8
 Ten pakiet dostarcza zasoby zawierające menu i okna dialogowe w języku
-...
+mongolskim.
 
 %package i18n-ms
 Summary:	OpenOffice.org - interface in Malay language
@@ -1463,20 +1462,19 @@ language.
 Ten pakiet dostarcza zasoby zawierające menu i okna dialogowe w języku
 malajskim.
 
-# FIXME
 %package i18n-my
-Summary:	OpenOffice.org - interface in ... language
-Summary(pl.UTF-8):	OpenOffice.org - interfejs w języku ...
+Summary:	OpenOffice.org - interface in Burmese language
+Summary(pl.UTF-8):	OpenOffice.org - interfejs w języku birmańskim
 Group:		I18n
 Requires:	%{name}-core = %{epoch}:%{version}-%{release}
 
 %description i18n-my
 This package provides resources containing menus and dialogs in
-... language.
+Burmese language.
 
 %description i18n-my -l pl.UTF-8
 Ten pakiet dostarcza zasoby zawierające menu i okna dialogowe w języku
-...
+birmańskim.
 
 %package i18n-nb
 Summary:	OpenOffice.org - interface in Norwegian Bokmaal language
@@ -1578,20 +1576,19 @@ Northern Sotho language.
 Ten pakiet dostarcza zasoby zawierające menu i okna dialogowe w języku
 ludu Soto.
 
-# FIXME
 %package i18n-oc
-Summary:	OpenOffice.org - interface in ... language
-Summary(pl.UTF-8):	OpenOffice.org - interfejs w języku ...
+Summary:	OpenOffice.org - interface in Occitan language
+Summary(pl.UTF-8):	OpenOffice.org - interfejs w języku oksytańskim
 Group:		I18n
 Requires:	%{name}-core = %{epoch}:%{version}-%{release}
 
 %description i18n-oc
 This package provides resources containing menus and dialogs in
-... language.
+Occitan language.
 
 %description i18n-oc -l pl.UTF-8
 Ten pakiet dostarcza zasoby zawierające menu i okna dialogowe w języku
-...
+oksytańskim.
 
 %package i18n-or_IN
 Summary:	OpenOffice.org - interface in Oriya language for India
@@ -2138,6 +2135,7 @@ ln -sf %{SOURCE1} %{SOURCE2} %{SOURCE3} %{SOURCE4} \
 	src
 
 %patch2000 -p1
+%patch2001 -p1
 
 # fixes
 ln -s %{PATCH104} patches/hotfixes/%{basename:%{PATCH104}}.diff
