@@ -74,7 +74,7 @@
 %define		tag			%(echo %{mws} | tr A-Z a-z)-%{milestone}
 %define		milestone	m15
 %define		_tag		%(echo %{tag} | tr - _)
-%define		_rel		1
+%define		_rel		2
 
 Summary:	OpenOffice.org - powerful office suite
 Summary(pl.UTF-8):	OpenOffice.org - potężny pakiet biurowy
@@ -257,9 +257,9 @@ BuildRequires:	zlib-devel
 %if %{with java}
 BuildRequires:	ant
 %{?with_system_db:BuildRequires:	db-java >= 4.3}
-BuildRequires:	jar
-BuildRequires:	jdk >= 1.4.0_00
 BuildRequires:	java-sun-jre-X11
+BuildRequires:	java-sun-tools
+BuildRequires:	java-sun >= 1.4.0_00
 %endif
 BuildRequires:	xulrunner-devel
 Requires:	%{name}-base = %{epoch}:%{version}-%{release}
