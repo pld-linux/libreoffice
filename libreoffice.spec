@@ -74,7 +74,7 @@
 %define		tag			%(echo %{mws} | tr A-Z a-z)-%{milestone}
 %define		milestone	m15
 %define		_tag		%(echo %{tag} | tr - _)
-%define		_rel		2
+%define		_rel		3
 
 Summary:	OpenOffice.org - powerful office suite
 Summary(pl.UTF-8):	OpenOffice.org - potężny pakiet biurowy
@@ -158,6 +158,7 @@ Patch1007:	%{name}-gcc42-swregion.diff
 
 Patch2000:	%{name}-build.patch
 Patch2001:	%{name}-kde3support.patch
+Patch2002:	%{name}-gcc44.patch
 URL:		http://www.openoffice.org/
 BuildConflicts:	xmlsec1-devel
 # contains (dlopened) *.so libs
@@ -2139,6 +2140,7 @@ ln -sf %{SOURCE1} %{SOURCE2} %{SOURCE3} %{SOURCE4} \
 
 # fixes
 ln -s %{PATCH104} patches/hotfixes/%{basename:%{PATCH104}}.diff
+ln -s %{PATCH2002} patches/hotfixes/%{basename:%{PATCH2002}}.diff
 
 %build
 # Make sure we have /proc mounted - otherwise idlc will fail later.
@@ -2237,7 +2239,7 @@ CONFOPTS="\
 	--with-system-expat \
 	--with-system-freetype \
 	--with-system-gcc \
-	--without-system-icu \
+	--with-system-icu \
 	--with-system-jpeg \
 	--with-system-libsvg \
 	--with-system-libwpd \
