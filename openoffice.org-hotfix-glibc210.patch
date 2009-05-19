@@ -1,0 +1,42 @@
+--- soltools/mkdepend/def.h	2009-05-19 18:54:47.610663688 +0200
++++ soltools/mkdepend/def.h.new	2009-05-19 18:55:32.283853795 +0200
+@@ -154,7 +154,7 @@
+ 
+ char			*copy();
+ char			*base_name();
+-char			*getline();
++char			*get_line();
+ char			*isdefined();
+ struct filepointer	*getfile();
+ struct inclist		*newinclude();
+--- soltools/mkdepend/main.c	2009-05-19 18:54:43.967194577 +0200
++++ soltools/mkdepend/main.c.new	2009-05-19 18:55:24.337603363 +0200
+@@ -548,7 +548,7 @@
+  * Get the next line.  We only return lines beginning with '#' since that
+  * is all this program is ever interested in.
+  */
+-char *getline(filep)
++char *get_line(filep)
+ 	register struct filepointer	*filep;
+ {
+ 	register char	*p,	/* walking pointer */
+--- soltools/mkdepend/parse.c	2009-05-19 18:54:39.814202678 +0200
++++ soltools/mkdepend/parse.c.new	2009-05-19 18:55:19.317186742 +0200
+@@ -45,7 +45,7 @@
+ 	register int	type;
+ 	boolean recfailOK;
+ 
+-	while ((line = getline(filep))) {
++	while ((line = get_line(filep))) {
+ 		switch(type = deftype(line, filep, file_red, file, TRUE, symbols)) {
+ 		case IF:
+ 		doif:
+@@ -168,7 +168,7 @@
+ 	register char	*line;
+ 	register int	type;
+ 
+-	while ((line = getline(filep))) {
++	while ((line = get_line(filep))) {
+ 		switch(type = deftype(line, filep, file_red, file, FALSE, symbols)) {
+ 		case IF:
+ 		case IFFALSE:
