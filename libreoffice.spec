@@ -22,6 +22,8 @@
 #   - --with-system-mspack - use libmspack already installed on system
 #	- bcond system_xt doesn't work - xt in PLD is too old or broken
 #   - package (english) help files into subpackage
+#   - if compiled with java-sun, libgcj not compatible:
+#     error: libjawt.so(SUNWprivate_1.1)(64bit) is required by installed openoffice.org-core-2.4.1.7-ooh680_m17.6.x86_64, give up
 #
 #	$ grep SYSTEM ooo-build-ooe-m6/build/ooe-m6/config_office/config.log |grep NO
 #
