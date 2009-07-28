@@ -76,7 +76,7 @@
 %define		tag			%(echo %{mws} | tr A-Z a-z)-%{milestone}
 %define		milestone	m15
 %define		_tag		%(echo %{tag} | tr - _)
-%define		_rel		6
+%define		_rel		7
 
 Summary:	OpenOffice.org - powerful office suite
 Summary(pl.UTF-8):	OpenOffice.org - potężny pakiet biurowy
@@ -90,8 +90,8 @@ Group:		X11/Applications
 # git clone git://anongit.freedesktop.org/git/ooo-build/ooo-build
 # cd ooo-build
 # git checkout -b ooo-build-3-0-1 origin/ooo-build-3-0-1
-Source0:	ooo-build-15595.tar.bz2
-# Source0-md5:	f22014d2a404b6ba9fe43628a1dade1c
+Source0:	ooo-build-20090727.tar.bz2
+# Source0-md5:	3fd9197e22fa801e2c2df408df462a22
 Source1:	http://download.go-oo.org/DEV300/ooo-cli-prebuilt-3.0.tar.bz2
 # Source1-md5:	8b3979cd7fd99b7e9722fd8f690e69a9
 Source2:	http://download.go-oo.org/%{mws}/%{tag}-base.tar.bz2
@@ -158,10 +158,10 @@ Patch1005:	%{name}-nsplugin-path.diff
 Patch1006:	%{name}-perl-nodiag.patch
 Patch1007:	%{name}-gcc42-swregion.diff
 
-Patch2000:	%{name}-build.patch
 Patch2001:	%{name}-kde3support.patch
 Patch2002:	%{name}-gcc44.patch
 Patch2003:	%{name}-hotfix-glibc210.patch
+Patch2004:	%{name}-hotfix-xulrunner.patch
 URL:		http://www.openoffice.org/
 BuildConflicts:	xmlsec1-devel
 # contains (dlopened) *.so libs
@@ -2138,13 +2138,13 @@ ln -sf %{SOURCE1} %{SOURCE2} %{SOURCE3} %{SOURCE4} \
 	%{SOURCE51} %{SOURCE52} \
 	src
 
-%patch2000 -p1
 %patch2001 -p1
 
 # fixes
 ln -s %{PATCH104} patches/hotfixes/%{basename:%{PATCH104}}.diff
 ln -s %{PATCH2002} patches/hotfixes/%{basename:%{PATCH2002}}.diff
 ln -s %{PATCH2003} patches/hotfixes/%{basename:%{PATCH2003}}.diff
+ln -s %{PATCH2004} patches/hotfixes/%{basename:%{PATCH2004}}.diff
 
 %build
 # Make sure we have /proc mounted - otherwise idlc will fail later.
@@ -2652,7 +2652,6 @@ done
 ' *.lang
 
 %clean
-exit 1
 rm -rf $RPM_BUILD_ROOT
 
 %pretrans core
