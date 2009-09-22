@@ -76,7 +76,7 @@
 %define		tag			%(echo %{mws} | tr A-Z a-z)-%{milestone}
 %define		milestone	m15
 %define		_tag		%(echo %{tag} | tr - _)
-%define		_rel		7
+%define		_rel		8
 
 Summary:	OpenOffice.org - powerful office suite
 Summary(pl.UTF-8):	OpenOffice.org - potężny pakiet biurowy
@@ -163,9 +163,6 @@ Patch2002:	%{name}-gcc44.patch
 Patch2003:	%{name}-hotfix-glibc210.patch
 Patch2004:	%{name}-hotfix-xulrunner.patch
 URL:		http://www.openoffice.org/
-BuildConflicts:	xmlsec1-devel
-# contains (dlopened) *.so libs
-BuildConflicts:	xmlsec1-nss
 BuildRequires:	/usr/bin/getopt
 BuildRequires:	GConf2-devel
 BuildRequires:	OpenGL-GLU-devel
@@ -174,7 +171,6 @@ BuildRequires:	OpenGL-devel
 BuildRequires:	atk-devel >= 1:1.9.0
 BuildRequires:	autoconf >= 2.51
 BuildRequires:	automake >= 1:1.9
-%{?with_system_beanshell:BuildRequires:	java-beanshell}
 BuildRequires:	bison >= 1.875-4
 BuildRequires:	boost-devel >= 1.35.0
 BuildRequires:	cairo-devel >= 1.2.0
@@ -184,8 +180,6 @@ BuildRequires:	curl-devel >= 7.9.8
 %{?with_system_db:BuildRequires:	db-cxx-devel}
 %{?with_system_db:BuildRequires:	db-devel}
 BuildRequires:	dbus-glib-devel >= 0.70
-# rpm has problems with determining this on builders
-# BuildRequires:	diskspace(%{_builddir}) >= 16Gb
 BuildRequires:	flex
 BuildRequires:	fontconfig-devel >= 1.0.1
 BuildRequires:	freetype-devel >= 2.1
@@ -199,10 +193,11 @@ BuildRequires:	gtk+2-devel >= 2:2.10
 %{?with_system_hunspell:BuildRequires:	hunspell-devel >=1.2.2}
 %{?with_icecream:BuildRequires:	icecream}
 BuildRequires:	icu
+%{?with_system_beanshell:BuildRequires:	java-beanshell}
 %if %{with kde}
+BuildRequires:	kde4-kde3support-devel
 BuildConflicts:	kde4-kdelibs-devel
 BuildConflicts:	kde4-kdepimlibs-devel
-BuildRequires:	kde4-kde3support-devel
 %endif
 BuildRequires:	libart_lgpl-devel
 BuildRequires:	libbonobo-devel >= 2.0
@@ -246,9 +241,9 @@ BuildRequires:	saxon
 BuildRequires:	sed >= 4.0
 BuildRequires:	startup-notification-devel >= 0.5
 BuildRequires:	tcsh
-BuildRequires:	vigra-devel
 BuildRequires:	unixODBC-devel >= 2.2.12-2
 BuildRequires:	unzip
+BuildRequires:	vigra-devel
 %{?with_system_xalan:BuildRequires:	xalan-j}
 %{?with_system_xerces:BuildRequires:	xerces-j}
 %{?with_system_xml_apis:BuildRequires:	xml-commons}
@@ -261,11 +256,14 @@ BuildRequires:	zlib-devel
 %if %{with java}
 BuildRequires:	ant
 %{?with_system_db:BuildRequires:	db-java >= 4.3}
+BuildRequires:	java-sun >= 1.4.0_00
 BuildRequires:	java-sun-jre-X11
 BuildRequires:	java-sun-tools
-BuildRequires:	java-sun >= 1.4.0_00
 %endif
 BuildRequires:	xulrunner-devel
+BuildConflicts:	xmlsec1-devel
+# contains (dlopened) *.so libs
+BuildConflicts:	xmlsec1-nss
 Requires:	%{name}-base = %{epoch}:%{version}-%{release}
 Requires:	%{name}-calc = %{epoch}:%{version}-%{release}
 Requires:	%{name}-draw = %{epoch}:%{version}-%{release}
@@ -279,7 +277,6 @@ Requires:	%{name}-testtools = %{epoch}:%{version}-%{release}
 Requires:	%{name}-web = %{epoch}:%{version}-%{release}
 Requires:	%{name}-writer = %{epoch}:%{version}-%{release}
 Requires:	%{name}-xsltfilter = %{epoch}:%{version}-%{release}
-Requires:	fonts-TTF-OpenSymbol
 ExclusiveArch:	%{ix86} %{x8664} ppc sparc sparcv9
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
@@ -360,14 +357,15 @@ Group:		X11/Applications
 Requires(post,postun):	desktop-file-utils
 Requires(post,postun):	shared-mime-info
 Requires:	%{name}-ure = %{epoch}:%{version}-%{release}
-%{?with_system_beanshell:Requires:	java-beanshell}
 # libcups.so.2 is dlopened (in cupsmgr.cxx); maybe Suggests instead?
 Requires:	cups-lib
-%{?with_system_hsqldb:Requires:	hsqldb >= 1.8.0}
+Requires:	fonts-TTF-OpenSymbol
+%{?with_system_hsqldb:Requires:	hsqldb:Requires:	hsqldb >= 1.8.0}
+%{?with_system_beanshell:Requires:	java-beanshell}
 Requires:	libstdc++ >= 5:3.2.1
 Requires:	mktemp
-Requires:	sed
 Requires:	saxon
+Requires:	sed
 %{?with_system_xalan:Requires:	xalan-j}
 %{?with_system_xerces:Requires:	xerces-j}
 %{?with_system_xml_apis:Requires:	xml-commons}
@@ -608,12 +606,13 @@ Summary:	UNO Runtime Environment
 Group:		Libraries
 
 %description ure
-UNO is the component model of OpenOffice.org. UNO offers interoperability
-between programming languages, other components models and hardware
-architectures, either in process or over process boundaries, in the Intranet
-as well as in the Internet. UNO components may be implemented in and accessed
-from any programming language for which a UNO implementation (AKA language
-binding) and an appropriate bridge or adapter exists.
+UNO is the component model of OpenOffice.org. UNO offers
+interoperability between programming languages, other components
+models and hardware architectures, either in process or over process
+boundaries, in the Intranet as well as in the Internet. UNO components
+may be implemented in and accessed from any programming language for
+which a UNO implementation (AKA language binding) and an appropriate
+bridge or adapter exists.
 
 %package -n fonts-TTF-OpenSymbol
 Summary:	OpenSymbol fonts
@@ -2537,7 +2536,7 @@ fi
 
 # Find out locales
 find_lang() {
-	local lang=$(echo $1 | sed -e 's/_/-/') 
+	local lang=$(echo $1 | sed -e 's/_/-/')
 	local langfn="$1"
 	echo "%%defattr(644,root,root,755)" > ${langfn}.lang
 
