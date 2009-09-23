@@ -76,7 +76,7 @@
 %define		tag			%(echo %{mws} | tr A-Z a-z)-%{milestone}
 %define		milestone	m15
 %define		_tag		%(echo %{tag} | tr - _)
-%define		_rel		8
+%define		_rel		9
 
 Summary:	OpenOffice.org - powerful office suite
 Summary(pl.UTF-8):	OpenOffice.org - potężny pakiet biurowy
@@ -360,7 +360,7 @@ Requires:	%{name}-ure = %{epoch}:%{version}-%{release}
 # libcups.so.2 is dlopened (in cupsmgr.cxx); maybe Suggests instead?
 Requires:	cups-lib
 Requires:	fonts-TTF-OpenSymbol
-%{?with_system_hsqldb:Requires:	hsqldb:Requires:	hsqldb >= 1.8.0}
+%{?with_system_hsqldb:Requires:	hsqldb >= 1.8.0}
 %{?with_system_beanshell:Requires:	java-beanshell}
 Requires:	libstdc++ >= 5:3.2.1
 Requires:	mktemp
