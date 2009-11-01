@@ -614,19 +614,6 @@ may be implemented in and accessed from any programming language for
 which a UNO implementation (AKA language binding) and an appropriate
 bridge or adapter exists.
 
-%package -n fonts-TTF-OpenSymbol
-Summary:	OpenSymbol fonts
-Summary(pl.UTF-8):	Fonty OpenSymbol
-Group:		Fonts
-Requires(post,postun):	fontpostinst
-Obsoletes:	openoffice.org-fonts-OpenSymbol
-
-%description -n fonts-TTF-OpenSymbol
-OpenSymbol TrueType fonts.
-
-%description -n fonts-TTF-OpenSymbol -l pl.UTF-8
-Fonty TrueType OpenSymbol.
-
 %package -n browser-plugin-%{name}
 Summary:	OpenOffice.org plugin for WWW browsers
 Summary(pl.UTF-8):	Wtyczka OpenOffice.org dla przeglądarek WWW
@@ -2513,10 +2500,6 @@ if [ ! -f installed.stamp ]; then
 	# fix python
 	#sed -i -e 's|#!/bin/python|#!%{_bindir}/python|g' $RPM_BUILD_ROOT%{ooobasisdir}/program/*.py
 
-	# Copy fixed OpenSymbol to correct location
-	install -d $RPM_BUILD_ROOT%{_fontsdir}/TTF
-	install build/%{tag}/extras/source/truetype/symbol/opens___.ttf $RPM_BUILD_ROOT%{_fontsdir}/TTF
-
 	# Add in the regcomp tool since some people need it for 3rd party add-ons
 	cp -a build/%{tag}/solver/%{upd}/unxlng*.pro/bin/regcomp{,.bin} $RPM_BUILD_ROOT%{ooobasisdir}/program/
 
@@ -2719,12 +2702,6 @@ fi
 
 %postun math
 %update_desktop_database_postun
-
-%post -n fonts-TTF-OpenSymbol
-fontpostinst TTF
-
-%postun -n fonts-TTF-OpenSymbol
-fontpostinst TTF
 
 %post -n browser-plugin-%{name}
 %update_browser_plugins
@@ -3522,10 +3499,6 @@ fi
 %{_mandir}/man1/oofromtemplate.1
 %{_mandir}/man1/openoffice.1*
 %{_mandir}/man1/unopkg.1*
-
-%files -n fonts-TTF-OpenSymbol
-%defattr(644,root,root,755)
-%{_fontsdir}/TTF/*.ttf
 
 %if %{with kde}
 %files libs-kde
