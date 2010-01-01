@@ -1225,7 +1225,7 @@ Summary(pl.UTF-8):	OpenOffice.org - interfejs w języku włoskim
 Group:		I18n
 Requires:	%{name}-core = %{epoch}:%{version}-%{release}
 Obsoletes:	openoffice-i18n-it
-ObsoleteS:	openoffice-i18n-it-gtk
+Obsoletes:	openoffice-i18n-it-gtk
 Obsoletes:	openoffice.org-i18n-it-gtk
 Obsoletes:	openoffice.org-i18n-it-kde
 
