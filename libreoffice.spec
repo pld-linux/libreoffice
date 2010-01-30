@@ -36,7 +36,8 @@
 # Conditional build:
 %bcond_with	gnomevfs	# GNOME VFS and Evolution 2 support
 %bcond_without	java		# without Java support (disables help support)
-%bcond_without	kde		# KDE L&F packages
+%bcond_with	kde		# KDE L&F packages
+%bcond_without	kde4		# KDE4 L&F packages
 %bcond_with	mono		# enable compilation of mono bindings
 %bcond_without	mozilla		# without mozilla components
 %bcond_without	i18n		# do not create i18n packages
@@ -183,6 +184,9 @@ BuildRequires:	icu
 BuildRequires:	kde4-kde3support-devel
 BuildConflicts:	kde4-kdelibs-devel
 BuildConflicts:	kde4-kdepimlibs-devel
+%endif
+%if %{with kde4}
+# BuildRequires: FIXME
 %endif
 BuildRequires:	libart_lgpl-devel
 BuildRequires:	libbonobo-devel >= 2.0
@@ -2558,6 +2562,8 @@ CONFOPTS="\
 	--disable-gnome-vfs \
 	--enable-gio \
 %endif
+	%{?with_kde:--enable-kde --disable-kde4} \
+	%{?with_kde4:--enable-kde4 --disable-kde} \
 	--with-docdir=%{_docdir}/%{name}-%{version} \
 	--with-python=%{__python} \
 	--without-stlport \
@@ -3824,6 +3830,12 @@ fi
 %attr(755,root,root) %{ooobasisdir}/program/libkabdrv1.so
 %attr(755,root,root) %{ooobasisdir}/program/libkab1.so
 %attr(755,root,root) %{ooobasisdir}/program/libvclplug_kde*.so
+%endif
+
+%if %{with kde4}
+%files libs-kde
+%defattr(644,root,root,755)
+# FIXME
 %endif
 
 %files libs-gtk
