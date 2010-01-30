@@ -94,49 +94,49 @@ Source0:	ooo-build-20100129.tar.bz2
 # Source0-md5:	dd6841fb58b5e4480d2c6135e4ab7e86
 Source1:	http://download.go-oo.org/DEV300/ooo-cli-prebuilt-3.2.tar.bz2
 # Source1-md5:	b4e4ad9da4cf1033096609c95ad50bdb
-Source2:	http://download.go-oo.org/%{mws}/%{tag}-base.tar.bz2
+Source2:	%{tag}-base.tar.bz2
 # Source2-md5:	d2986a9264f1b7812679c587938a046a
-Source3:	http://download.go-oo.org/%{mws}/%{tag}-calc.tar.bz2
+Source3:	%{tag}-calc.tar.bz2
 # Source3-md5:	8987f0268b11b95acb8ee73c9a04b982
-Source4:	http://download.go-oo.org/%{mws}/%{tag}-extras.tar.bz2
+Source4:	%{tag}-extras.tar.bz2
 # Source4-md5:	e132ea3a576962239ec5ea94ef15e984
-Source5:	http://download.go-oo.org/%{mws}/%{tag}-ure.tar.bz2
+Source5:	%{tag}-ure.tar.bz2
 # Source5-md5:	8110d7987beddbd569611db22fd0a979
-Source6:	http://download.go-oo.org/%{mws}/%{tag}-writer.tar.bz2
+Source6:	%{tag}-writer.tar.bz2
 # Source6-md5:	49cf1a676eaec973612cfdf36c1f5401
-Source7:	http://download.go-oo.org/%{mws}/%{tag}-impress.tar.bz2
+Source7:	%{tag}-impress.tar.bz2
 # Source7-md5:	b214862e9b937bd0f6ab7130b5163188
-Source8:	http://download.go-oo.org/%{mws}/%{tag}-artwork.tar.bz2
+Source8:	%{tag}-artwork.tar.bz2
 # Source8-md5:	b3b6a4c16c60d3de7a8e012bc423a3c4
-Source9:	http://download.go-oo.org/%{mws}/%{tag}-filters.tar.bz2
+Source9:	%{tag}-filters.tar.bz2
 # Source9-md5:	1f819d3885b3d08da050d22e0697c907
-Source10:	http://download.go-oo.org/%{mws}/%{tag}-testing.tar.bz2
+Source10:	%{tag}-testing.tar.bz2
 # Source10-md5:	8b5bf9ca8ac82af3d98b8afd4c55d6a6
-Source11:	http://download.go-oo.org/%{mws}/%{tag}-bootstrap.tar.bz2
+Source11:	%{tag}-bootstrap.tar.bz2
 # Source11-md5:	9f1b6875932aaad757f0a1e358353f04
-Source12:	http://download.go-oo.org/%{mws}/%{tag}-libs-gui.tar.bz2
+Source12:	%{tag}-libs-gui.tar.bz2
 # Source12-md5:	48266d60c39667a180f6c572553adb87
-Source13:	http://download.go-oo.org/%{mws}/%{tag}-libs-core.tar.bz2
+Source13:	%{tag}-libs-core.tar.bz2
 # Source13-md5:	36f2c1da3b3a5c4a2475dee66ba07bec
-Source14:	http://download.go-oo.org/%{mws}/%{tag}-libs-extern.tar.bz2
+Source14:	%{tag}-libs-extern.tar.bz2
 # Source14-md5:	bb9ff9b892512510bd24606c5767b41d
-Source15:	http://download.go-oo.org/%{mws}/%{tag}-components.tar.bz2
+Source15:	%{tag}-components.tar.bz2
 # Source15-md5:	f67696f26353d43a1868b625a51a46be
-Source16:	http://download.go-oo.org/%{mws}/%{tag}-libs-extern-sys.tar.bz2
+Source16:	%{tag}-libs-extern-sys.tar.bz2
 # Source16-md5:	5ee043a08c0f5e352654ed8aed9a4d35
-Source17:	http://download.go-oo.org/%{mws}/%{tag}-extensions.tar.bz2
+Source17:	%{tag}-extensions.tar.bz2
 # Source17-md5:	013a874ed0b18f293f68e8f5e1a22441
-Source18:	http://download.go-oo.org/%{mws}/%{tag}-sdk.tar.bz2
+Source18:	%{tag}-sdk.tar.bz2
 # Source18-md5:	d3ee9ccd3659d2e49e41853978b48d56
-Source19:	http://download.go-oo.org/%{mws}/%{tag}-postprocess.tar.bz2
+Source19:	%{tag}-postprocess.tar.bz2
 # Source19-md5:	1d7d89875ec93d5235891f24eb4d27fd
-Source20:	http://download.go-oo.org/%{mws}/%{tag}-help.tar.bz2
+Source20:	%{tag}-help.tar.bz2
 # Source20-md5:	db06182f82522fd1213b6a1466b1f7af
-Source21:	http://download.go-oo.org/%{mws}/%{tag}-l10n.tar.bz2
+Source21:	%{tag}-l10n.tar.bz2
 # Source21-md5:	8d802f5cfe1feacbe3ae6ccd941f1543
-Source22:	ooo_oxygen_images-2009-06-17.tar.gz
+Source22:	http://download.go-oo.org/DEV300/ooo_oxygen_images-2009-06-17.tar.gz
 # Source22-md5:	0b3ffc43231c525db1798495a6676902
-Source50:	http://download.go-oo.org//DEV300/scsolver.2008-10-30.tar.bz2
+Source50:	http://download.go-oo.org/DEV300/scsolver.2008-10-30.tar.bz2
 # Source50-md5:	04181e5ef82973eb349d3122a19d2274
 Source51:	http://download.go-oo.org/SRC/biblio.tar.bz2
 # Source51-md5:	1948e39a68f12bfa0b7eb309c14d940c
@@ -146,28 +146,6 @@ Source53:	%{name}-splash.bmp
 Source54:	%{name}-about.bmp
 # patches applied in prep section
 Patch0:		%{name}-PLD.patch
-Patch1:		%{name}-gcc-Wextra.patch
-# patch50/51 need review
-Patch50:	%{name}-mdbtools_fix.diff
-Patch51:	%{name}-nodictinst.patch
-# patches applied by ooo-patching-system
-Patch100:	%{name}-lang.patch
-#Patch101:	%{name}-java6.patch
-Patch103:	%{name}-missing-includes.diff
-Patch104:	%{name}-xulrunner.patch
-# patches 1000+ need review
-Patch1001:	%{name}-64bit-inline.diff
-Patch1002:	%{name}-build-pld-splash.diff
-Patch1003:	%{name}-portaudio_v19.diff
-Patch1004:	%{name}-agg25.patch
-Patch1005:	%{name}-nsplugin-path.diff
-Patch1006:	%{name}-perl-nodiag.patch
-Patch1007:	%{name}-gcc42-swregion.diff
-
-Patch2001:	%{name}-kde3support.patch
-Patch2002:	%{name}-gcc44.patch
-Patch2003:	%{name}-hotfix-glibc210.patch
-Patch2004:	%{name}-hotfix-xulrunner.patch
 URL:		http://www.openoffice.org/
 BuildRequires:	/usr/bin/getopt
 BuildRequires:	GConf2-devel
@@ -177,6 +155,7 @@ BuildRequires:	OpenGL-devel
 BuildRequires:	atk-devel >= 1:1.9.0
 BuildRequires:	autoconf >= 2.51
 BuildRequires:	automake >= 1:1.9
+BuildRequires:	bash
 BuildRequires:	bison >= 1.875-4
 BuildRequires:	boost-devel >= 1.35.0
 BuildRequires:	cairo-devel >= 1.2.0
@@ -246,7 +225,6 @@ BuildRequires:	sane-backends-devel
 BuildRequires:	saxon
 BuildRequires:	sed >= 4.0
 BuildRequires:	startup-notification-devel >= 0.5
-BuildRequires:	tcsh
 BuildRequires:	unixODBC-devel >= 2.2.12-2
 BuildRequires:	unzip
 BuildRequires:	vigra-devel
@@ -762,6 +740,20 @@ language for India.
 Ten pakiet dostarcza zasoby zawierające menu i okna dialogowe w języku
 bengalskim dla Indii.
 
+%package i18n-bo
+Summary:	OpenOffice.org - interface in Tibetan language
+Summary(pl.UTF-8):	OpenOffice.org - interfejs w języku tybetańskim
+Group:		I18n
+Requires:	%{name}-core = %{epoch}:%{version}-%{release}
+
+%description i18n-bo
+This package provides resources containing menus and dialogs in Tibetan
+language.
+
+%description i18n-bo -l pl.UTF-8
+Ten pakiet dostarcza zasoby zawierające menu i okna dialogowe w języku
+tybetańskim.
+
 %package i18n-br
 Summary:	OpenOffice.org - interface in Breton language
 Summary(pl.UTF-8):	OpenOffice.org - interfejs w języku bretońskim
@@ -775,6 +767,20 @@ language.
 %description i18n-br -l pl.UTF-8
 Ten pakiet dostarcza zasoby zawierające menu i okna dialogowe w języku
 bretońskim.
+
+%package i18n-brx
+Summary:	OpenOffice.org - interface in Bodo language
+Summary(pl.UTF-8):	OpenOffice.org - interfejs w języku boro
+Group:		I18n
+Requires:	%{name}-core = %{epoch}:%{version}-%{release}
+
+%description i18n-brx
+This package provides resources containing menus and dialogs in Bodo
+language.
+
+%description i18n-brx -l pl.UTF-8
+Ten pakiet dostarcza zasoby zawierające menu i okna dialogowe w języku
+boro.
 
 %package i18n-bs
 Summary:	OpenOffice.org - interface in Bosnian language
@@ -894,6 +900,20 @@ language.
 %description i18n-de -l pl.UTF-8
 Ten pakiet dostarcza zasoby zawierające menu i okna dialogowe w języku
 niemieckim.
+
+%package i18n-dgo
+Summary:	OpenOffice.org - interface in Dogri language
+Summary(pl.UTF-8):	OpenOffice.org - interfejs w języku dogri
+Group:		I18n
+Requires:	%{name}-core = %{epoch}:%{version}-%{release}
+
+%description i18n-dgo
+This package provides resources containing menus and dialogs in Dogri
+language.
+
+%description i18n-dgo -l pl.UTF-8
+Ten pakiet dostarcza zasoby zawierające menu i okna dialogowe w języku
+dogri.
 
 %package i18n-dz
 Summary:	OpenOffice.org - interface in Dzongkha language
@@ -1225,6 +1245,20 @@ Hungarian language.
 Ten pakiet dostarcza zasoby zawierające menu i okna dialogowe w języku
 węgierskim.
 
+%package i18n-is
+Summary:	OpenOffice.org - interface in Icelandic language
+Summary(pl.UTF-8):	OpenOffice.org - interfejs w języku islandzkim
+Group:		I18n
+Requires:	%{name}-core = %{epoch}:%{version}-%{release}
+
+%description i18n-is
+This package provides resources containing menus and dialogs in
+Icelandic language.
+
+%description i18n-is -l pl.UTF-8
+Ten pakiet dostarcza zasoby zawierające menu i okna dialogowe w języku
+islandzkim.
+
 %package i18n-it
 Summary:	OpenOffice.org - interface in Italian language
 Summary(pl.UTF-8):	OpenOffice.org - interfejs w języku włoskim
@@ -1275,6 +1309,35 @@ Georgian language.
 Ten pakiet dostarcza zasoby zawierające menu i okna dialogowe w języku
 gruzińskim.
 
+# FIXME
+%package i18n-kid
+Summary:	OpenOffice.org - interface in ... language
+Summary(pl.UTF-8):	OpenOffice.org - interfejs w języku ...
+Group:		I18n
+Requires:	%{name}-core = %{epoch}:%{version}-%{release}
+
+%description i18n-kid
+This package provides resources containing menus and dialogs in ...
+language.
+
+%description i18n-kid -l pl.UTF-8
+Ten pakiet dostarcza zasoby zawierające menu i okna dialogowe w języku
+... .
+
+%package i18n-kk
+Summary:	OpenOffice.org - interface in Kazakh language
+Summary(pl.UTF-8):	OpenOffice.org - interfejs w języku kazachskim
+Group:		I18n
+Requires:	%{name}-core = %{epoch}:%{version}-%{release}
+
+%description i18n-kk
+This package provides resources containing menus and dialogs in Kazakh
+language.
+
+%description i18n-kk -l pl.UTF-8
+Ten pakiet dostarcza zasoby zawierające menu i okna dialogowe w języku
+kazachskim.
+
 %package i18n-km
 Summary:	OpenOffice.org - interface in Khmer language
 Summary(pl.UTF-8):	OpenOffice.org - interfejs w języku khmerskim
@@ -1324,6 +1387,34 @@ language.
 Ten pakiet dostarcza zasoby zawierające menu i okna dialogowe w języku
 koreańskim.
 
+%package i18n-kok
+Summary:	OpenOffice.org - interface in Konkani language
+Summary(pl.UTF-8):	OpenOffice.org - interfejs w języku konkani
+Group:		I18n
+Requires:	%{name}-core = %{epoch}:%{version}-%{release}
+
+%description i18n-kok
+This package provides resources containing menus and dialogs in
+Konkani language.
+
+%description i18n-kok -l pl.UTF-8
+Ten pakiet dostarcza zasoby zawierające menu i okna dialogowe w języku
+konkani.
+
+%package i18n-ks
+Summary:	OpenOffice.org - interface in Kashmiri language
+Summary(pl.UTF-8):	OpenOffice.org - interfejs w języku kaszmirskim
+Group:		I18n
+Requires:	%{name}-core = %{epoch}:%{version}-%{release}
+
+%description i18n-ks
+This package provides resources containing menus and dialogs in
+Kashmiri language.
+
+%description i18n-ks -l pl.UTF-8
+Ten pakiet dostarcza zasoby zawierające menu i okna dialogowe w języku
+kaszmirskim.
+
 %package i18n-ku
 Summary:	OpenOffice.org - interface in Kurdish language
 Summary(pl.UTF-8):	OpenOffice.org - interfejs w języku kurdyjskim
@@ -1337,6 +1428,20 @@ Kurdish language.
 %description i18n-ku -l pl.UTF-8
 Ten pakiet dostarcza zasoby zawierające menu i okna dialogowe w języku
 kurdyjskim.
+
+%package i18n-ky
+Summary:	OpenOffice.org - interface in Kyrgyz language
+Summary(pl.UTF-8):	OpenOffice.org - interfejs w języku kirgiskim
+Group:		I18n
+Requires:	%{name}-core = %{epoch}:%{version}-%{release}
+
+%description i18n-ky
+This package provides resources containing menus and dialogs in
+Kyrgyz language.
+
+%description i18n-ky -l pl.UTF-8
+Ten pakiet dostarcza zasoby zawierające menu i okna dialogowe w języku
+kirgiskim.
 
 %package i18n-lo
 Summary:	OpenOffice.org - interface in Lao language
@@ -1384,6 +1489,20 @@ Latvian language.
 Ten pakiet dostarcza zasoby zawierające menu i okna dialogowe w języku
 łotewskim.
 
+%package i18n-mai
+Summary:	OpenOffice.org - interface in Maithili language
+Summary(pl.UTF-8):	OpenOffice.org - interfejs w języku maithili
+Group:		I18n
+Requires:	%{name}-core = %{epoch}:%{version}-%{release}
+
+%description i18n-mai
+This package provides resources containing menus and dialogs in
+Maithili language.
+
+%description i18n-mai -l pl.UTF-8
+Ten pakiet dostarcza zasoby zawierające menu i okna dialogowe w języku
+maithili.
+
 %package i18n-mk
 Summary:	OpenOffice.org - interface in Macedonian language
 Summary(pl.UTF-8):	OpenOffice.org - interfejs w języku macedońskim
@@ -1411,6 +1530,20 @@ Malayalam language for India.
 %description i18n-ml_IN -l pl.UTF-8
 Ten pakiet dostarcza zasoby zawierające menu i okna dialogowe w języku
 malajalamskim dla Indii.
+
+%package i18n-mni
+Summary:	OpenOffice.org - interface in Meitei language
+Summary(pl.UTF-8):	OpenOffice.org - interfejs w języku manipuri
+Group:		I18n
+Requires:	%{name}-core = %{epoch}:%{version}-%{release}
+
+%description i18n-mni
+This package provides resources containing menus and dialogs in
+Meitei language.
+
+%description i18n-mni -l pl.UTF-8
+Ten pakiet dostarcza zasoby zawierające menu i okna dialogowe w języku
+manipuri.
 
 %package i18n-mr_IN
 Summary:	OpenOffice.org - interface in Marathi language for India
@@ -1586,6 +1719,20 @@ Occitan language.
 Ten pakiet dostarcza zasoby zawierające menu i okna dialogowe w języku
 oksytańskim.
 
+%package i18n-om
+Summary:	OpenOffice.org - interface in Oromo language
+Summary(pl.UTF-8):	OpenOffice.org - interfejs w języku oromo
+Group:		I18n
+Requires:	%{name}-core = %{epoch}:%{version}-%{release}
+
+%description i18n-om
+This package provides resources containing menus and dialogs in
+Oromo language.
+
+%description i18n-om -l pl.UTF-8
+Ten pakiet dostarcza zasoby zawierające menu i okna dialogowe w języku
+oromo.
+
 %package i18n-or_IN
 Summary:	OpenOffice.org - interface in Oriya language for India
 Summary(pl.UTF-8):	OpenOffice.org - interfejs w języku orija dla Indii
@@ -1614,6 +1761,20 @@ Punjabi language.
 Ten pakiet dostarcza zasoby zawierające menu i okna dialogowe w języku
 pendżabskim.
 
+%package i18n-pap
+Summary:	OpenOffice.org - interface in Papiamento language
+Summary(pl.UTF-8):	OpenOffice.org - interfejs w języku papiamento
+Group:		I18n
+Requires:	%{name}-core = %{epoch}:%{version}-%{release}
+
+%description i18n-pap
+This package provides resources containing menus and dialogs in
+Papiamento language.
+
+%description i18n-pap -l pl.UTF-8
+Ten pakiet dostarcza zasoby zawierające menu i okna dialogowe w języku
+papiamento.
+
 %package i18n-pl
 Summary:	OpenOffice.org - interface in Polish language
 Summary(pl.UTF-8):	OpenOffice.org - interfejs w języku polskim
@@ -1631,6 +1792,20 @@ language.
 %description i18n-pl -l pl.UTF-8
 Ten pakiet dostarcza zasoby zawierające menu i okna dialogowe w języku
 polskim.
+
+%package i18n-ps
+Summary:	OpenOffice.org - interface in Pashto language
+Summary(pl.UTF-8):	OpenOffice.org - interfejs w języku paszto
+Group:		I18n
+Requires:	%{name}-core = %{epoch}:%{version}-%{release}
+
+%description i18n-ps
+This package provides resources containing menus and dialogs in
+Pashto language.
+
+%description i18n-ps -l pl.UTF-8
+Ten pakiet dostarcza zasoby zawierające menu i okna dialogowe w języku
+paszto.
 
 %package i18n-pt
 Summary:	OpenOffice.org - interface in Portuguese language
@@ -1668,6 +1843,20 @@ Brazilian Portuguese language.
 Ten pakiet dostarcza zasoby zawierające menu i okna dialogowe w języku
 portugalskim dla Brazylii.
 
+%package i18n-ro
+Summary:	OpenOffice.org - interface in Romanian language
+Summary(pl.UTF-8):	OpenOffice.org - interfejs w języku rumuńskim
+Group:		I18n
+Requires:	%{name}-core = %{epoch}:%{version}-%{release}
+
+%description i18n-ro
+This package provides resources containing menus and dialogs in
+Romanian language.
+
+%description i18n-ro -l pl.UTF-8
+Ten pakiet dostarcza zasoby zawierające menu i okna dialogowe w języku
+rumuńskim.
+
 %package i18n-ru
 Summary:	OpenOffice.org - interface in Russian language
 Summary(pl.UTF-8):	OpenOffice.org - interfejs w języku rosyjskim
@@ -1700,6 +1889,62 @@ Kinarwanda language.
 Ten pakiet dostarcza zasoby zawierające menu i okna dialogowe w języku
 kinya-ruanda.
 
+%package i18n-sa_IN
+Summary:	OpenOffice.org - interface in Sanskrit language
+Summary(pl.UTF-8):	OpenOffice.org - interfejs w sanskrycie
+Group:		I18n
+Requires:	%{name}-core = %{epoch}:%{version}-%{release}
+
+%description i18n-sa_IN
+This package provides resources containing menus and dialogs in
+Sanskrit language.
+
+%description i18n-sa_IN -l pl.UTF-8
+Ten pakiet dostarcza zasoby zawierające menu i okna dialogowe w
+sanskrycie.
+
+%package i18n-sat
+Summary:	OpenOffice.org - interface in Santali language
+Summary(pl.UTF-8):	OpenOffice.org - interfejs w języku santali
+Group:		I18n
+Requires:	%{name}-core = %{epoch}:%{version}-%{release}
+
+%description i18n-sat
+This package provides resources containing menus and dialogs in
+Santali language.
+
+%description i18n-sat -l pl.UTF-8
+Ten pakiet dostarcza zasoby zawierające menu i okna dialogowe w języku
+santali.
+
+%package i18n-sc
+Summary:	OpenOffice.org - interface in Sardinian language
+Summary(pl.UTF-8):	OpenOffice.org - interfejs w języku sardyńskim
+Group:		I18n
+Requires:	%{name}-core = %{epoch}:%{version}-%{release}
+
+%description i18n-sc
+This package provides resources containing menus and dialogs in
+Sardinian language.
+
+%description i18n-sc -l pl.UTF-8
+Ten pakiet dostarcza zasoby zawierające menu i okna dialogowe w języku
+sardyńskim.
+
+%package i18n-sd
+Summary:	OpenOffice.org - interface in Sindhi language
+Summary(pl.UTF-8):	OpenOffice.org - interfejs w języku sindhi
+Group:		I18n
+Requires:	%{name}-core = %{epoch}:%{version}-%{release}
+
+%description i18n-sd
+This package provides resources containing menus and dialogs in
+Sindhi language.
+
+%description i18n-sd -l pl.UTF-8
+Ten pakiet dostarcza zasoby zawierające menu i okna dialogowe w języku
+sindhi.
+
 %package i18n-sh
 Summary:	OpenOffice.org - interface in Serbo-Croatian language
 Summary(pl.UTF-8):	OpenOffice.org - interfejs w języku serbsko-chorwackim
@@ -1713,6 +1958,20 @@ Serbo-Croatian language.
 %description i18n-sh -l pl.UTF-8
 Ten pakiet dostarcza zasoby zawierające menu i okna dialogowe w języku
 serbsko-chorwackim.
+
+%package i18n-si
+Summary:	OpenOffice.org - interface in Sinhala language
+Summary(pl.UTF-8):	OpenOffice.org - interfejs w języku syngaleskim
+Group:		I18n
+Requires:	%{name}-core = %{epoch}:%{version}-%{release}
+
+%description i18n-si
+This package provides resources containing menus and dialogs in
+Sinhala language.
+
+%description i18n-si -l pl.UTF-8
+Ten pakiet dostarcza zasoby zawierające menu i okna dialogowe w języku
+syngaleskim.
 
 %package i18n-sk
 Summary:	OpenOffice.org - interface in Slovak language
@@ -1960,6 +2219,20 @@ language.
 Ten pakiet dostarcza zasoby zawierające menu i okna dialogowe w języku
 tsonga.
 
+%package i18n-ug
+Summary:	OpenOffice.org - interface in Uyghur language
+Summary(pl.UTF-8):	OpenOffice.org - interfejs w języku ujgurskim
+Group:		I18n
+Requires:	%{name}-core = %{epoch}:%{version}-%{release}
+
+%description i18n-ug
+This package provides resources containing menus and dialogs in Uyghur
+language.
+
+%description i18n-ug -l pl.UTF-8
+Ten pakiet dostarcza zasoby zawierające menu i okna dialogowe w języku
+ujgurskim.
+
 %package i18n-uk
 Summary:	OpenOffice.org - interface in Ukrainian language
 Summary(pl.UTF-8):	OpenOffice.org - interfejs w języku ukraińskim
@@ -2128,17 +2401,10 @@ ln -sf %{SOURCE1} %{SOURCE2} %{SOURCE3} %{SOURCE4} \
 	%{SOURCE5} %{SOURCE6} %{SOURCE7} %{SOURCE8} \
 	%{SOURCE9} %{SOURCE10} %{SOURCE11} %{SOURCE12} \
 	%{SOURCE13} %{SOURCE14} %{SOURCE15} %{SOURCE16} \
-	%{SOURCE17} %{SOURCE18} %{SOURCE19} %{SOURCE20} %{SOURCE21} %{SOURCE22} %{SOURCE50} \
-	%{SOURCE51} %{SOURCE52} \
+	%{SOURCE17} %{SOURCE18} %{SOURCE19} %{SOURCE20} \
+	%{SOURCE21} %{SOURCE22} %{SOURCE50} %{SOURCE51} \
+	%{SOURCE52} \
 	src
-
-#%patch2001 -p1
-
-# fixes
-#ln -s %{PATCH104} patches/hotfixes/%{basename:%{PATCH104}}.diff
-#ln -s %{PATCH2002} patches/hotfixes/%{basename:%{PATCH2002}}.diff
-#ln -s %{PATCH2003} patches/hotfixes/%{basename:%{PATCH2003}}.diff
-#ln -s %{PATCH2004} patches/hotfixes/%{basename:%{PATCH2004}}.diff
 
 %build
 # Make sure we have /proc mounted - otherwise idlc will fail later.
@@ -2332,7 +2598,8 @@ CONFOPTS="\
 	--enable-cups \
 	--enable-fontconfig \
 	--enable-lockdown \
-	--disable-layout
+	--disable-layout \
+	--with-use-shell=bash
 "
 
 
@@ -3996,7 +4263,13 @@ fi
 %files i18n-bn_IN -f bn_IN.lang
 %defattr(644,root,root,755)
 
+%files i18n-bo -f bo.lang
+%defattr(644,root,root,755)
+
 %files i18n-br -f br.lang
+%defattr(644,root,root,755)
+
+%files i18n-brx -f brx.lang
 %defattr(644,root,root,755)
 
 %files i18n-bs -f bs.lang
@@ -4021,6 +4294,9 @@ fi
 %defattr(644,root,root,755)
 %dir %{ooobasisdir}/share/config/soffice.cfg/modules/dbreport/accelerator/de-DE
 %{ooobasisdir}/share/config/soffice.cfg/modules/dbreport/accelerator/de-DE/default.xml
+
+%files i18n-dgo -f dgo.lang
+%defattr(644,root,root,755)
 
 %files i18n-dz -f dz.lang
 %defattr(644,root,root,755)
@@ -4082,6 +4358,9 @@ fi
 %files i18n-hu -f hu.lang
 %defattr(644,root,root,755)
 
+%files i18n-is -f is.lang
+%defattr(644,root,root,755)
+
 %files i18n-it -f it.lang
 %defattr(644,root,root,755)
 
@@ -4089,6 +4368,12 @@ fi
 %defattr(644,root,root,755)
 
 %files i18n-ka -f ka.lang
+%defattr(644,root,root,755)
+
+%files i18n-kid -f kid.lang
+%defattr(644,root,root,755)
+
+%files i18n-kk -f kk.lang
 %defattr(644,root,root,755)
 
 %files i18n-km -f km.lang
@@ -4099,9 +4384,18 @@ fi
 
 %files i18n-ko -f ko.lang
 %defattr(644,root,root,755)
-%{ooobasisdir}/share/registry/modules/org/openoffice/Office/Common/Common-korea.xcu
+%{_datadir}/%{name}/share/registry/modules/org/openoffice/Office/Common/Common-korea.xcu
+
+%files i18n-kok -f kok.lang
+%defattr(644,root,root,755)
+
+%files i18n-ks -f ks.lang
+%defattr(644,root,root,755)
 
 %files i18n-ku -f ku.lang
+%defattr(644,root,root,755)
+
+%files i18n-ky -f ky.lang
 %defattr(644,root,root,755)
 
 %files i18n-lo -f lo.lang
@@ -4113,6 +4407,9 @@ fi
 %files i18n-lv -f lv.lang
 %defattr(644,root,root,755)
 
+%files i18n-mai -f mai.lang
+%defattr(644,root,root,755)
+
 %files i18n-mk -f mk.lang
 %defattr(644,root,root,755)
 
@@ -4120,6 +4417,9 @@ fi
 %defattr(644,root,root,755)
 
 %files i18n-mn -f mn.lang
+%defattr(644,root,root,755)
+
+%files i18n-mni -f mni.lang
 %defattr(644,root,root,755)
 
 %files i18n-mr_IN -f mr_IN.lang
@@ -4152,13 +4452,22 @@ fi
 %files i18n-oc -f oc.lang
 %defattr(644,root,root,755)
 
+%files i18n-om -f om.lang
+%defattr(644,root,root,755)
+
 %files i18n-or_IN -f or_IN.lang
 %defattr(644,root,root,755)
 
 %files i18n-pa_IN -f pa_IN.lang
 %defattr(644,root,root,755)
 
+%files i18n-pap -f pap.lang
+%defattr(644,root,root,755)
+
 %files i18n-pl -f pl.lang
+%defattr(644,root,root,755)
+
+%files i18n-ps -f ps.lang
 %defattr(644,root,root,755)
 
 %files i18n-pt -f pt.lang
@@ -4167,13 +4476,31 @@ fi
 %files i18n-pt_BR -f pt_BR.lang
 %defattr(644,root,root,755)
 
+%files i18n-ro -f ro.lang
+%defattr(644,root,root,755)
+
 %files i18n-ru -f ru.lang
 %defattr(644,root,root,755)
 
 %files i18n-rw -f rw.lang
 %defattr(644,root,root,755)
 
+%files i18n-sa_IN -f sa_IN.lang
+%defattr(644,root,root,755)
+
+%files i18n-sat -f sat.lang
+%defattr(644,root,root,755)
+
+%files i18n-sc -f sc.lang
+%defattr(644,root,root,755)
+
+%files i18n-sd -f sd.lang
+%defattr(644,root,root,755)
+
 %files i18n-sh -f sh.lang
+%defattr(644,root,root,755)
+
+%files i18n-si -f si.lang
 %defattr(644,root,root,755)
 
 %files i18n-sk -f sk.lang
@@ -4222,6 +4549,9 @@ fi
 %defattr(644,root,root,755)
 
 %files i18n-ts -f ts.lang
+%defattr(644,root,root,755)
+
+%files i18n-ug -f ug.lang
 %defattr(644,root,root,755)
 
 %files i18n-uk -f uk.lang
