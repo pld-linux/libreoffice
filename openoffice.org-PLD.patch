@@ -1,19 +1,21 @@
---- ooo-build-2.0.2.7.orig/patches/src680/apply	2006-04-21 15:21:46.640348000 +0200
-+++ ooo-build-2.0.2.7/patches/src680/apply	2006-04-21 16:10:55.324630250 +0200
-@@ -864,16 +864,6 @@
- # Db 4.3/4.4 needs -lpthread
- system-db-4.3-use-lpthread.diff, i#58474, rengelha
+--- ooo-build/patches/dev300/apply	2009-12-19 12:50:32.394024392 +0100
++++ ooo-build/patches/dev300/apply.new	2009-12-19 12:50:59.453396860 +0100
+@@ -92,7 +92,7 @@
+ # Ark Linux
+ Ark: LinuxCommon, NotDebian, ArkOnly, BerkeleyDB43, KDE4
+ # www.pld-linux.org
+-PLDBase: LinuxCommon, NotDebian, CairoFonts, PLDOnly
++PLDBase: LinuxCommon, NotDebian, CairoFonts, Lockdown, PLDOnly
+ PLD: PLDBase
+ PLD64: PLDBase
+ # Mandriva Linux
+@@ -1331,9 +1331,6 @@
+ [ PLDOnly ]
+ SectionOwner => arekm
  
--
--[PLDOnly]
--SectionOwner => arekm
--
--# fix build of sal project
--solenv-unxlngi4-link.diff, i#66982
 -# fix for macro browser crash
 -sfx2-badscript.diff, i#67976
 -
--
  [ BuildBits ]
- # add automatical detection of serializer.jar into the configure
- # add it to classpath on one more place
+ # work around http://gcc.gnu.org/bugzilla/show_bug.cgi?id=22392
+ svx-customshapes-NOOPTFILES.diff, martink

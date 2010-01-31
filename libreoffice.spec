@@ -34,9 +34,10 @@
 #
 
 # Conditional build:
-%bcond_without	gnomevfs	# GNOME VFS and Evolution 2 support
+%bcond_with	gnomevfs	# GNOME VFS and Evolution 2 support
 %bcond_without	java		# without Java support (disables help support)
-%bcond_without	kde		# KDE L&F packages
+%bcond_with	kde		# KDE L&F packages
+%bcond_without	kde4		# KDE4 L&F packages
 %bcond_with	mono		# enable compilation of mono bindings
 %bcond_without	mozilla		# without mozilla components
 %bcond_without	i18n		# do not create i18n packages
@@ -71,17 +72,17 @@
 %undefine	with_system_hsqldb
 %endif
 
-%define		upd			300
+%define		upd			320
 %define		mws			OOO%{upd}
 %define		tag			%(echo %{mws} | tr A-Z a-z)-%{milestone}
-%define		milestone	m15
+%define		milestone	m11
 %define		_tag		%(echo %{tag} | tr - _)
-%define		_rel		9
+%define		_rel		1
 
 Summary:	OpenOffice.org - powerful office suite
 Summary(pl.UTF-8):	OpenOffice.org - potężny pakiet biurowy
 Name:		openoffice.org
-Version:	3.0.1.3
+Version:	3.2.0.4
 Release:	%{_tag}.%{_rel}
 Epoch:		1
 License:	GPL/LGPL
@@ -89,48 +90,54 @@ Group:		X11/Applications
 # we use git because released tarballs are buggy too often
 # git clone git://anongit.freedesktop.org/git/ooo-build/ooo-build
 # cd ooo-build
-# git checkout -b ooo-build-3-0-1 origin/ooo-build-3-0-1
-Source0:	ooo-build-20090727.tar.bz2
-# Source0-md5:	3fd9197e22fa801e2c2df408df462a22
-Source1:	http://download.go-oo.org/DEV300/ooo-cli-prebuilt-3.0.tar.bz2
-# Source1-md5:	8b3979cd7fd99b7e9722fd8f690e69a9
-Source2:	http://download.go-oo.org/%{mws}/%{tag}-base.tar.bz2
-# Source2-md5:	c2eb3afafe7305be70c46f0bbc82ccff
-Source3:	http://download.go-oo.org/%{mws}/%{tag}-calc.tar.bz2
-# Source3-md5:	78bf10d9a15f5cb801999dc6be0144d1
-Source4:	http://download.go-oo.org/%{mws}/%{tag}-l10n.tar.bz2
-# Source4-md5:	02b20bd978e342de45ef84d3232e3f94
-Source5:	http://download.go-oo.org/%{mws}/%{tag}-ure.tar.bz2
-# Source5-md5:	65565feb49307361209b610249e45dc7
-Source6:	http://download.go-oo.org/%{mws}/%{tag}-writer.tar.bz2
-# Source6-md5:	04f68dfb9a34b5c0766a65e6ff48b841
-Source7:	http://download.go-oo.org/%{mws}/%{tag}-impress.tar.bz2
-# Source7-md5:	00a1646d1913989bc432073f8954c92b
-Source8:	http://download.go-oo.org/%{mws}/%{tag}-artwork.tar.bz2
-# Source8-md5:	cc928a9c348121d82fb80c43dbf3901f
-Source9:	http://download.go-oo.org/%{mws}/%{tag}-filters.tar.bz2
-# Source9-md5:	729550f40870eeaa94b2ae493e038848
-Source10:	http://download.go-oo.org/%{mws}/%{tag}-testing.tar.bz2
-# Source10-md5:	406087778a00ad68cc4e94aa5a677086
-Source11:	http://download.go-oo.org/%{mws}/%{tag}-bootstrap.tar.bz2
-# Source11-md5:	6d680f8bfe532bb8833a0e6bb6d19cc9
-Source12:	http://download.go-oo.org/%{mws}/%{tag}-libs_gui.tar.bz2
-# Source12-md5:	e23ba759d82041c665a24ea4ef3d8b9b
-Source13:	http://download.go-oo.org/%{mws}/%{tag}-libs_core.tar.bz2
-# Source13-md5:	bdd173a94ece251126ae0e4120cbb661
-Source14:	http://download.go-oo.org/%{mws}/%{tag}-libs_extern.tar.bz2
-# Source14-md5:	2582ddfe11a64cca9190a046e9a159df
-Source15:	http://download.go-oo.org/%{mws}/%{tag}-components.tar.bz2
-# Source15-md5:	d29035a293298c6e69d5d8a3acbab75f
-Source16:	http://download.go-oo.org/%{mws}/%{tag}-libs_extern_sys.tar.bz2
-# Source16-md5:	8016fc38320ebd4ab7720df7eb4e4df0
-Source17:	http://download.go-oo.org/%{mws}/%{tag}-extensions.tar.bz2
-# Source17-md5:	f307de1b92d488484a53fa8ce45a7b3b
-Source18:	http://download.go-oo.org/%{mws}/%{tag}-sdk.tar.bz2
-# Source18-md5:	f298e95232efdd4182345c095a497799
-Source19:	http://download.go-oo.org/%{mws}/%{tag}-postprocess.tar.bz2
-# Source19-md5:	73b6c538639310c2ad242d6cb5045c52
-Source50:	http://download.go-oo.org//DEV300/scsolver.2008-10-30.tar.bz2
+# git checkout -b ooo-build-3-2 origin/ooo-build-3-2
+Source0:	ooo-build-20100129.tar.bz2
+# Source0-md5:	dd6841fb58b5e4480d2c6135e4ab7e86
+Source1:	http://download.go-oo.org/DEV300/ooo-cli-prebuilt-3.2.tar.bz2
+# Source1-md5:	b4e4ad9da4cf1033096609c95ad50bdb
+Source2:	%{tag}-base.tar.bz2
+# Source2-md5:	d2986a9264f1b7812679c587938a046a
+Source3:	%{tag}-calc.tar.bz2
+# Source3-md5:	8987f0268b11b95acb8ee73c9a04b982
+Source4:	%{tag}-extras.tar.bz2
+# Source4-md5:	e132ea3a576962239ec5ea94ef15e984
+Source5:	%{tag}-ure.tar.bz2
+# Source5-md5:	8110d7987beddbd569611db22fd0a979
+Source6:	%{tag}-writer.tar.bz2
+# Source6-md5:	49cf1a676eaec973612cfdf36c1f5401
+Source7:	%{tag}-impress.tar.bz2
+# Source7-md5:	b214862e9b937bd0f6ab7130b5163188
+Source8:	%{tag}-artwork.tar.bz2
+# Source8-md5:	b3b6a4c16c60d3de7a8e012bc423a3c4
+Source9:	%{tag}-filters.tar.bz2
+# Source9-md5:	1f819d3885b3d08da050d22e0697c907
+Source10:	%{tag}-testing.tar.bz2
+# Source10-md5:	8b5bf9ca8ac82af3d98b8afd4c55d6a6
+Source11:	%{tag}-bootstrap.tar.bz2
+# Source11-md5:	9f1b6875932aaad757f0a1e358353f04
+Source12:	%{tag}-libs-gui.tar.bz2
+# Source12-md5:	48266d60c39667a180f6c572553adb87
+Source13:	%{tag}-libs-core.tar.bz2
+# Source13-md5:	36f2c1da3b3a5c4a2475dee66ba07bec
+Source14:	%{tag}-libs-extern.tar.bz2
+# Source14-md5:	bb9ff9b892512510bd24606c5767b41d
+Source15:	%{tag}-components.tar.bz2
+# Source15-md5:	f67696f26353d43a1868b625a51a46be
+Source16:	%{tag}-libs-extern-sys.tar.bz2
+# Source16-md5:	5ee043a08c0f5e352654ed8aed9a4d35
+Source17:	%{tag}-extensions.tar.bz2
+# Source17-md5:	013a874ed0b18f293f68e8f5e1a22441
+Source18:	%{tag}-sdk.tar.bz2
+# Source18-md5:	d3ee9ccd3659d2e49e41853978b48d56
+Source19:	%{tag}-postprocess.tar.bz2
+# Source19-md5:	1d7d89875ec93d5235891f24eb4d27fd
+Source20:	%{tag}-help.tar.bz2
+# Source20-md5:	db06182f82522fd1213b6a1466b1f7af
+Source21:	%{tag}-l10n.tar.bz2
+# Source21-md5:	8d802f5cfe1feacbe3ae6ccd941f1543
+Source22:	http://download.go-oo.org/DEV300/ooo_oxygen_images-2009-06-17.tar.gz
+# Source22-md5:	0b3ffc43231c525db1798495a6676902
+Source50:	http://download.go-oo.org/DEV300/scsolver.2008-10-30.tar.bz2
 # Source50-md5:	04181e5ef82973eb349d3122a19d2274
 Source51:	http://download.go-oo.org/SRC/biblio.tar.bz2
 # Source51-md5:	1948e39a68f12bfa0b7eb309c14d940c
@@ -140,28 +147,6 @@ Source53:	%{name}-splash.bmp
 Source54:	%{name}-about.bmp
 # patches applied in prep section
 Patch0:		%{name}-PLD.patch
-Patch1:		%{name}-gcc-Wextra.patch
-# patch50/51 need review
-Patch50:	%{name}-mdbtools_fix.diff
-Patch51:	%{name}-nodictinst.patch
-# patches applied by ooo-patching-system
-Patch100:	%{name}-lang.patch
-#Patch101:	%{name}-java6.patch
-Patch103:	%{name}-missing-includes.diff
-Patch104:	%{name}-xulrunner.patch
-# patches 1000+ need review
-Patch1001:	%{name}-64bit-inline.diff
-Patch1002:	%{name}-build-pld-splash.diff
-Patch1003:	%{name}-portaudio_v19.diff
-Patch1004:	%{name}-agg25.patch
-Patch1005:	%{name}-nsplugin-path.diff
-Patch1006:	%{name}-perl-nodiag.patch
-Patch1007:	%{name}-gcc42-swregion.diff
-
-Patch2001:	%{name}-kde3support.patch
-Patch2002:	%{name}-gcc44.patch
-Patch2003:	%{name}-hotfix-glibc210.patch
-Patch2004:	%{name}-hotfix-xulrunner.patch
 URL:		http://www.openoffice.org/
 BuildRequires:	/usr/bin/getopt
 BuildRequires:	GConf2-devel
@@ -171,6 +156,7 @@ BuildRequires:	OpenGL-devel
 BuildRequires:	atk-devel >= 1:1.9.0
 BuildRequires:	autoconf >= 2.51
 BuildRequires:	automake >= 1:1.9
+BuildRequires:	bash
 BuildRequires:	bison >= 1.875-4
 BuildRequires:	boost-devel >= 1.35.0
 BuildRequires:	cairo-devel >= 1.2.0
@@ -196,8 +182,9 @@ BuildRequires:	icu
 %{?with_system_beanshell:BuildRequires:	java-beanshell}
 %if %{with kde}
 BuildRequires:	kde4-kde3support-devel
-BuildConflicts:	kde4-kdelibs-devel
-BuildConflicts:	kde4-kdepimlibs-devel
+%endif
+%if %{with kde4}
+BuildRequires:	kde4-kdelibs-devel
 %endif
 BuildRequires:	libart_lgpl-devel
 BuildRequires:	libbonobo-devel >= 2.0
@@ -240,7 +227,6 @@ BuildRequires:	sane-backends-devel
 BuildRequires:	saxon
 BuildRequires:	sed >= 4.0
 BuildRequires:	startup-notification-devel >= 0.5
-BuildRequires:	tcsh
 BuildRequires:	unixODBC-devel >= 2.2.12-2
 BuildRequires:	unzip
 BuildRequires:	vigra-devel
@@ -289,7 +275,7 @@ BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 %define		_noautostrip	.*\\(%{_datadir}\\|%{_libdir}/%{name}/basis*/program/resource\\)/.*
 %define		_noautochrpath	.*\\(%{_datadir}\\|%{_libdir}/%{name}/basis*/program/resource\\)/.*
 
-%define		ooobasisdir	%{_libdir}/%{name}/basis3.0
+%define		ooobasisdir	%{_libdir}/%{name}/basis3.2
 
 %description
 OpenOffice.org is an open-source project sponsored by Sun Microsystems
@@ -756,6 +742,20 @@ language for India.
 Ten pakiet dostarcza zasoby zawierające menu i okna dialogowe w języku
 bengalskim dla Indii.
 
+%package i18n-bo
+Summary:	OpenOffice.org - interface in Tibetan language
+Summary(pl.UTF-8):	OpenOffice.org - interfejs w języku tybetańskim
+Group:		I18n
+Requires:	%{name}-core = %{epoch}:%{version}-%{release}
+
+%description i18n-bo
+This package provides resources containing menus and dialogs in Tibetan
+language.
+
+%description i18n-bo -l pl.UTF-8
+Ten pakiet dostarcza zasoby zawierające menu i okna dialogowe w języku
+tybetańskim.
+
 %package i18n-br
 Summary:	OpenOffice.org - interface in Breton language
 Summary(pl.UTF-8):	OpenOffice.org - interfejs w języku bretońskim
@@ -769,6 +769,20 @@ language.
 %description i18n-br -l pl.UTF-8
 Ten pakiet dostarcza zasoby zawierające menu i okna dialogowe w języku
 bretońskim.
+
+%package i18n-brx
+Summary:	OpenOffice.org - interface in Bodo language
+Summary(pl.UTF-8):	OpenOffice.org - interfejs w języku boro
+Group:		I18n
+Requires:	%{name}-core = %{epoch}:%{version}-%{release}
+
+%description i18n-brx
+This package provides resources containing menus and dialogs in Bodo
+language.
+
+%description i18n-brx -l pl.UTF-8
+Ten pakiet dostarcza zasoby zawierające menu i okna dialogowe w języku
+boro.
 
 %package i18n-bs
 Summary:	OpenOffice.org - interface in Bosnian language
@@ -888,6 +902,20 @@ language.
 %description i18n-de -l pl.UTF-8
 Ten pakiet dostarcza zasoby zawierające menu i okna dialogowe w języku
 niemieckim.
+
+%package i18n-dgo
+Summary:	OpenOffice.org - interface in Dogri language
+Summary(pl.UTF-8):	OpenOffice.org - interfejs w języku dogri
+Group:		I18n
+Requires:	%{name}-core = %{epoch}:%{version}-%{release}
+
+%description i18n-dgo
+This package provides resources containing menus and dialogs in Dogri
+language.
+
+%description i18n-dgo -l pl.UTF-8
+Ten pakiet dostarcza zasoby zawierające menu i okna dialogowe w języku
+dogri.
 
 %package i18n-dz
 Summary:	OpenOffice.org - interface in Dzongkha language
@@ -1219,6 +1247,20 @@ Hungarian language.
 Ten pakiet dostarcza zasoby zawierające menu i okna dialogowe w języku
 węgierskim.
 
+%package i18n-is
+Summary:	OpenOffice.org - interface in Icelandic language
+Summary(pl.UTF-8):	OpenOffice.org - interfejs w języku islandzkim
+Group:		I18n
+Requires:	%{name}-core = %{epoch}:%{version}-%{release}
+
+%description i18n-is
+This package provides resources containing menus and dialogs in
+Icelandic language.
+
+%description i18n-is -l pl.UTF-8
+Ten pakiet dostarcza zasoby zawierające menu i okna dialogowe w języku
+islandzkim.
+
 %package i18n-it
 Summary:	OpenOffice.org - interface in Italian language
 Summary(pl.UTF-8):	OpenOffice.org - interfejs w języku włoskim
@@ -1269,6 +1311,35 @@ Georgian language.
 Ten pakiet dostarcza zasoby zawierające menu i okna dialogowe w języku
 gruzińskim.
 
+# FIXME
+%package i18n-kid
+Summary:	OpenOffice.org - interface in ... language
+Summary(pl.UTF-8):	OpenOffice.org - interfejs w języku ...
+Group:		I18n
+Requires:	%{name}-core = %{epoch}:%{version}-%{release}
+
+%description i18n-kid
+This package provides resources containing menus and dialogs in ...
+language.
+
+%description i18n-kid -l pl.UTF-8
+Ten pakiet dostarcza zasoby zawierające menu i okna dialogowe w języku
+... .
+
+%package i18n-kk
+Summary:	OpenOffice.org - interface in Kazakh language
+Summary(pl.UTF-8):	OpenOffice.org - interfejs w języku kazachskim
+Group:		I18n
+Requires:	%{name}-core = %{epoch}:%{version}-%{release}
+
+%description i18n-kk
+This package provides resources containing menus and dialogs in Kazakh
+language.
+
+%description i18n-kk -l pl.UTF-8
+Ten pakiet dostarcza zasoby zawierające menu i okna dialogowe w języku
+kazachskim.
+
 %package i18n-km
 Summary:	OpenOffice.org - interface in Khmer language
 Summary(pl.UTF-8):	OpenOffice.org - interfejs w języku khmerskim
@@ -1318,6 +1389,34 @@ language.
 Ten pakiet dostarcza zasoby zawierające menu i okna dialogowe w języku
 koreańskim.
 
+%package i18n-kok
+Summary:	OpenOffice.org - interface in Konkani language
+Summary(pl.UTF-8):	OpenOffice.org - interfejs w języku konkani
+Group:		I18n
+Requires:	%{name}-core = %{epoch}:%{version}-%{release}
+
+%description i18n-kok
+This package provides resources containing menus and dialogs in
+Konkani language.
+
+%description i18n-kok -l pl.UTF-8
+Ten pakiet dostarcza zasoby zawierające menu i okna dialogowe w języku
+konkani.
+
+%package i18n-ks
+Summary:	OpenOffice.org - interface in Kashmiri language
+Summary(pl.UTF-8):	OpenOffice.org - interfejs w języku kaszmirskim
+Group:		I18n
+Requires:	%{name}-core = %{epoch}:%{version}-%{release}
+
+%description i18n-ks
+This package provides resources containing menus and dialogs in
+Kashmiri language.
+
+%description i18n-ks -l pl.UTF-8
+Ten pakiet dostarcza zasoby zawierające menu i okna dialogowe w języku
+kaszmirskim.
+
 %package i18n-ku
 Summary:	OpenOffice.org - interface in Kurdish language
 Summary(pl.UTF-8):	OpenOffice.org - interfejs w języku kurdyjskim
@@ -1331,6 +1430,20 @@ Kurdish language.
 %description i18n-ku -l pl.UTF-8
 Ten pakiet dostarcza zasoby zawierające menu i okna dialogowe w języku
 kurdyjskim.
+
+%package i18n-ky
+Summary:	OpenOffice.org - interface in Kyrgyz language
+Summary(pl.UTF-8):	OpenOffice.org - interfejs w języku kirgiskim
+Group:		I18n
+Requires:	%{name}-core = %{epoch}:%{version}-%{release}
+
+%description i18n-ky
+This package provides resources containing menus and dialogs in
+Kyrgyz language.
+
+%description i18n-ky -l pl.UTF-8
+Ten pakiet dostarcza zasoby zawierające menu i okna dialogowe w języku
+kirgiskim.
 
 %package i18n-lo
 Summary:	OpenOffice.org - interface in Lao language
@@ -1378,6 +1491,20 @@ Latvian language.
 Ten pakiet dostarcza zasoby zawierające menu i okna dialogowe w języku
 łotewskim.
 
+%package i18n-mai
+Summary:	OpenOffice.org - interface in Maithili language
+Summary(pl.UTF-8):	OpenOffice.org - interfejs w języku maithili
+Group:		I18n
+Requires:	%{name}-core = %{epoch}:%{version}-%{release}
+
+%description i18n-mai
+This package provides resources containing menus and dialogs in
+Maithili language.
+
+%description i18n-mai -l pl.UTF-8
+Ten pakiet dostarcza zasoby zawierające menu i okna dialogowe w języku
+maithili.
+
 %package i18n-mk
 Summary:	OpenOffice.org - interface in Macedonian language
 Summary(pl.UTF-8):	OpenOffice.org - interfejs w języku macedońskim
@@ -1405,6 +1532,20 @@ Malayalam language for India.
 %description i18n-ml_IN -l pl.UTF-8
 Ten pakiet dostarcza zasoby zawierające menu i okna dialogowe w języku
 malajalamskim dla Indii.
+
+%package i18n-mni
+Summary:	OpenOffice.org - interface in Meitei language
+Summary(pl.UTF-8):	OpenOffice.org - interfejs w języku manipuri
+Group:		I18n
+Requires:	%{name}-core = %{epoch}:%{version}-%{release}
+
+%description i18n-mni
+This package provides resources containing menus and dialogs in
+Meitei language.
+
+%description i18n-mni -l pl.UTF-8
+Ten pakiet dostarcza zasoby zawierające menu i okna dialogowe w języku
+manipuri.
 
 %package i18n-mr_IN
 Summary:	OpenOffice.org - interface in Marathi language for India
@@ -1580,6 +1721,20 @@ Occitan language.
 Ten pakiet dostarcza zasoby zawierające menu i okna dialogowe w języku
 oksytańskim.
 
+%package i18n-om
+Summary:	OpenOffice.org - interface in Oromo language
+Summary(pl.UTF-8):	OpenOffice.org - interfejs w języku oromo
+Group:		I18n
+Requires:	%{name}-core = %{epoch}:%{version}-%{release}
+
+%description i18n-om
+This package provides resources containing menus and dialogs in
+Oromo language.
+
+%description i18n-om -l pl.UTF-8
+Ten pakiet dostarcza zasoby zawierające menu i okna dialogowe w języku
+oromo.
+
 %package i18n-or_IN
 Summary:	OpenOffice.org - interface in Oriya language for India
 Summary(pl.UTF-8):	OpenOffice.org - interfejs w języku orija dla Indii
@@ -1608,6 +1763,20 @@ Punjabi language.
 Ten pakiet dostarcza zasoby zawierające menu i okna dialogowe w języku
 pendżabskim.
 
+%package i18n-pap
+Summary:	OpenOffice.org - interface in Papiamento language
+Summary(pl.UTF-8):	OpenOffice.org - interfejs w języku papiamento
+Group:		I18n
+Requires:	%{name}-core = %{epoch}:%{version}-%{release}
+
+%description i18n-pap
+This package provides resources containing menus and dialogs in
+Papiamento language.
+
+%description i18n-pap -l pl.UTF-8
+Ten pakiet dostarcza zasoby zawierające menu i okna dialogowe w języku
+papiamento.
+
 %package i18n-pl
 Summary:	OpenOffice.org - interface in Polish language
 Summary(pl.UTF-8):	OpenOffice.org - interfejs w języku polskim
@@ -1625,6 +1794,20 @@ language.
 %description i18n-pl -l pl.UTF-8
 Ten pakiet dostarcza zasoby zawierające menu i okna dialogowe w języku
 polskim.
+
+%package i18n-ps
+Summary:	OpenOffice.org - interface in Pashto language
+Summary(pl.UTF-8):	OpenOffice.org - interfejs w języku paszto
+Group:		I18n
+Requires:	%{name}-core = %{epoch}:%{version}-%{release}
+
+%description i18n-ps
+This package provides resources containing menus and dialogs in
+Pashto language.
+
+%description i18n-ps -l pl.UTF-8
+Ten pakiet dostarcza zasoby zawierające menu i okna dialogowe w języku
+paszto.
 
 %package i18n-pt
 Summary:	OpenOffice.org - interface in Portuguese language
@@ -1662,6 +1845,20 @@ Brazilian Portuguese language.
 Ten pakiet dostarcza zasoby zawierające menu i okna dialogowe w języku
 portugalskim dla Brazylii.
 
+%package i18n-ro
+Summary:	OpenOffice.org - interface in Romanian language
+Summary(pl.UTF-8):	OpenOffice.org - interfejs w języku rumuńskim
+Group:		I18n
+Requires:	%{name}-core = %{epoch}:%{version}-%{release}
+
+%description i18n-ro
+This package provides resources containing menus and dialogs in
+Romanian language.
+
+%description i18n-ro -l pl.UTF-8
+Ten pakiet dostarcza zasoby zawierające menu i okna dialogowe w języku
+rumuńskim.
+
 %package i18n-ru
 Summary:	OpenOffice.org - interface in Russian language
 Summary(pl.UTF-8):	OpenOffice.org - interfejs w języku rosyjskim
@@ -1694,6 +1891,62 @@ Kinarwanda language.
 Ten pakiet dostarcza zasoby zawierające menu i okna dialogowe w języku
 kinya-ruanda.
 
+%package i18n-sa_IN
+Summary:	OpenOffice.org - interface in Sanskrit language
+Summary(pl.UTF-8):	OpenOffice.org - interfejs w sanskrycie
+Group:		I18n
+Requires:	%{name}-core = %{epoch}:%{version}-%{release}
+
+%description i18n-sa_IN
+This package provides resources containing menus and dialogs in
+Sanskrit language.
+
+%description i18n-sa_IN -l pl.UTF-8
+Ten pakiet dostarcza zasoby zawierające menu i okna dialogowe w
+sanskrycie.
+
+%package i18n-sat
+Summary:	OpenOffice.org - interface in Santali language
+Summary(pl.UTF-8):	OpenOffice.org - interfejs w języku santali
+Group:		I18n
+Requires:	%{name}-core = %{epoch}:%{version}-%{release}
+
+%description i18n-sat
+This package provides resources containing menus and dialogs in
+Santali language.
+
+%description i18n-sat -l pl.UTF-8
+Ten pakiet dostarcza zasoby zawierające menu i okna dialogowe w języku
+santali.
+
+%package i18n-sc
+Summary:	OpenOffice.org - interface in Sardinian language
+Summary(pl.UTF-8):	OpenOffice.org - interfejs w języku sardyńskim
+Group:		I18n
+Requires:	%{name}-core = %{epoch}:%{version}-%{release}
+
+%description i18n-sc
+This package provides resources containing menus and dialogs in
+Sardinian language.
+
+%description i18n-sc -l pl.UTF-8
+Ten pakiet dostarcza zasoby zawierające menu i okna dialogowe w języku
+sardyńskim.
+
+%package i18n-sd
+Summary:	OpenOffice.org - interface in Sindhi language
+Summary(pl.UTF-8):	OpenOffice.org - interfejs w języku sindhi
+Group:		I18n
+Requires:	%{name}-core = %{epoch}:%{version}-%{release}
+
+%description i18n-sd
+This package provides resources containing menus and dialogs in
+Sindhi language.
+
+%description i18n-sd -l pl.UTF-8
+Ten pakiet dostarcza zasoby zawierające menu i okna dialogowe w języku
+sindhi.
+
 %package i18n-sh
 Summary:	OpenOffice.org - interface in Serbo-Croatian language
 Summary(pl.UTF-8):	OpenOffice.org - interfejs w języku serbsko-chorwackim
@@ -1707,6 +1960,20 @@ Serbo-Croatian language.
 %description i18n-sh -l pl.UTF-8
 Ten pakiet dostarcza zasoby zawierające menu i okna dialogowe w języku
 serbsko-chorwackim.
+
+%package i18n-si
+Summary:	OpenOffice.org - interface in Sinhala language
+Summary(pl.UTF-8):	OpenOffice.org - interfejs w języku syngaleskim
+Group:		I18n
+Requires:	%{name}-core = %{epoch}:%{version}-%{release}
+
+%description i18n-si
+This package provides resources containing menus and dialogs in
+Sinhala language.
+
+%description i18n-si -l pl.UTF-8
+Ten pakiet dostarcza zasoby zawierające menu i okna dialogowe w języku
+syngaleskim.
 
 %package i18n-sk
 Summary:	OpenOffice.org - interface in Slovak language
@@ -1954,6 +2221,20 @@ language.
 Ten pakiet dostarcza zasoby zawierające menu i okna dialogowe w języku
 tsonga.
 
+%package i18n-ug
+Summary:	OpenOffice.org - interface in Uyghur language
+Summary(pl.UTF-8):	OpenOffice.org - interfejs w języku ujgurskim
+Group:		I18n
+Requires:	%{name}-core = %{epoch}:%{version}-%{release}
+
+%description i18n-ug
+This package provides resources containing menus and dialogs in Uyghur
+language.
+
+%description i18n-ug -l pl.UTF-8
+Ten pakiet dostarcza zasoby zawierające menu i okna dialogowe w języku
+ujgurskim.
+
 %package i18n-uk
 Summary:	OpenOffice.org - interface in Ukrainian language
 Summary(pl.UTF-8):	OpenOffice.org - interfejs w języku ukraińskim
@@ -2112,6 +2393,8 @@ bashowe uzupełnianie nazw dla Openoffice.org.
 
 %prep
 %setup -q -n ooo-build
+%patch0 -p1
+
 install -d src
 
 # sources, icons, KDE_icons. You can verify that all needed sources
@@ -2120,17 +2403,10 @@ ln -sf %{SOURCE1} %{SOURCE2} %{SOURCE3} %{SOURCE4} \
 	%{SOURCE5} %{SOURCE6} %{SOURCE7} %{SOURCE8} \
 	%{SOURCE9} %{SOURCE10} %{SOURCE11} %{SOURCE12} \
 	%{SOURCE13} %{SOURCE14} %{SOURCE15} %{SOURCE16} \
-	%{SOURCE17} %{SOURCE18} %{SOURCE19} %{SOURCE50} \
-	%{SOURCE51} %{SOURCE52} \
+	%{SOURCE17} %{SOURCE18} %{SOURCE19} %{SOURCE20} \
+	%{SOURCE21} %{SOURCE22} %{SOURCE50} %{SOURCE51} \
+	%{SOURCE52} \
 	src
-
-%patch2001 -p1
-
-# fixes
-ln -s %{PATCH104} patches/hotfixes/%{basename:%{PATCH104}}.diff
-ln -s %{PATCH2002} patches/hotfixes/%{basename:%{PATCH2002}}.diff
-ln -s %{PATCH2003} patches/hotfixes/%{basename:%{PATCH2003}}.diff
-ln -s %{PATCH2004} patches/hotfixes/%{basename:%{PATCH2004}}.diff
 
 %build
 # Make sure we have /proc mounted - otherwise idlc will fail later.
@@ -2193,6 +2469,11 @@ else
 	serializer_jar=%{_javadir}/xalan.jar
 fi
 
+#	%{?with_system_xalan:--with-system-xalan --with-xalan-jar=%{_javadir}/xalan.jar --with-serializer-jar=$serializer_jar} \
+#	%{?with_system_xerces:--with-system-xerces} \
+#	%{?with_system_xml_apis:--with-system-xml-apis} \
+#	%{?with_system_xt:--with-system-xt --with-xt-jar=%{_javadir}/classes} \
+
 CONFOPTS="\
 %ifarch %{ix86} \
 	--with-arch=x86 \
@@ -2217,10 +2498,6 @@ CONFOPTS="\
 	%{?with_system_libhnj:--with-system-altlinuxhyphen} \
 	%{?with_msaccess:%{?with_system_mdbtools:--with-system-mdbtools}} \
 	%{?with_system_myspell:--with-system-myspell} \
-	%{?with_system_xalan:--with-system-xalan --with-xalan-jar=%{_javadir}/xalan.jar --with-serializer-jar=$serializer_jar} \
-	%{?with_system_xerces:--with-system-xerces} \
-	%{?with_system_xml_apis:--with-system-xml-apis} \
-	%{?with_system_xt:--with-system-xt --with-xt-jar=%{_javadir}/classes} \
 	--with-system-boost \
 	--with-system-cairo \
 	--with-system-curl \
@@ -2256,7 +2533,7 @@ CONFOPTS="\
 	--with-system-xrender-headers=yes \
 	--with-system-zlib \
 %if %{with mozilla}
-	--with-system-mozilla=xulrunner \
+	--with-system-mozilla=libxul \
 %else
 	--disable-mozilla \
 %endif
@@ -2265,7 +2542,8 @@ CONFOPTS="\
 	--with-about-bitmaps="\$SRCDIR/openabout_pld.bmp" \
 	--with-distro="${DISTRO}" \
 	--enable-gtk \
-	--%{!?with_kde:dis}%{?with_kde:en}able-kde \
+	%{?with_kde:--enable-kde --disable-kde4} \
+	%{?with_kde4:--enable-kde4 --disable-kde} \
 	--without-binsuffix \
 	--with-installed-ooo-dirname=%{name} \
 	--with-lang=%{?with_i18n:ALL} \
@@ -2280,6 +2558,7 @@ CONFOPTS="\
 	--enable-gnome-vfs \
 %else
 	--disable-gnome-vfs \
+	--enable-gio \
 %endif
 	--with-docdir=%{_docdir}/%{name}-%{version} \
 	--with-python=%{__python} \
@@ -2289,9 +2568,6 @@ CONFOPTS="\
 	--without-gpc \
 	--disable-epm \
 	--disable-fontooo \
-	--disable-strip \
-	--enable-openxml \
-	--enable-atkbridge \
 	--%{?with_msaccess:en}%{!?with_msaccess:dis}able-access \
 	--enable-cairo \
 	--enable-crypt-link \
@@ -2299,14 +2575,7 @@ CONFOPTS="\
 	--%{?with_mono:en}%{!?with_mono:dis}able-mono \
 	--enable-pam-link \
 	--enable-opengl \
-	--enable-openldap \
-	--enable-openxml \
-	--enable-cups \
-	--enable-fontconfig \
-	--enable-libsn \
-	--enable-libart \
-	--enable-lockdown \
-	--enable-sdext \
+	--with-openldap \
 	--disable-rpath \
 %if 0%{?debug:1}
 	--enable-debug \
@@ -2324,10 +2593,17 @@ CONFOPTS="\
 	--enable-split-app-modules \
 	--enable-split-opt-features \
 	--disable-access \
+	--without-git \
 	--enable-minimizer \
-	--enable-presenter-console \
-	--enable-pdfimport
+	--disable-presenter-console \
+	--enable-pdfimport \
+	--enable-cups \
+	--enable-fontconfig \
+	--enable-lockdown \
+	--disable-layout \
+	--with-use-shell=bash
 "
+
 
 # build-ooo script will pickup these
 export CONFIGURE_OPTIONS="$CONFOPTS"
@@ -2749,6 +3025,7 @@ fi
 %{ooobasisdir}/presets/config/cmyk.soc
 %{ooobasisdir}/presets/config/gallery.soc
 %{ooobasisdir}/presets/config/html.soc
+%{ooobasisdir}/presets/config/scribus.soc
 %{ooobasisdir}/presets/config/standard.so?
 %{ooobasisdir}/presets/config/sun-color.soc
 %{ooobasisdir}/presets/config/web.soc
@@ -2825,15 +3102,17 @@ fi
 %attr(755,root,root) %{ooobasisdir}/program/libdbtoolsl[ipx].so
 %attr(755,root,root) %{ooobasisdir}/program/libdbul[ipx].so
 %attr(755,root,root) %{ooobasisdir}/program/libdeploymentmiscl[ipx].so
+%attr(755,root,root) %{ooobasisdir}/program/libdesktop_detectorl[ipx].so
 %attr(755,root,root) %{ooobasisdir}/program/libdict_ja.so
 %attr(755,root,root) %{ooobasisdir}/program/libdict_zh.so
-%attr(755,root,root) %{ooobasisdir}/program/libdtransX11l[ipx].so
+%attr(755,root,root) %{ooobasisdir}/program/libdrawinglayerl[ipx].so
+###%attr(755,root,root) %{ooobasisdir}/program/libdtransX11l[ipx].so
 %attr(755,root,root) %{ooobasisdir}/program/libeggtrayl[ipx].so
 %attr(755,root,root) %{ooobasisdir}/program/libegil[ipx].so
 %attr(755,root,root) %{ooobasisdir}/program/libembobj.so
 %attr(755,root,root) %{ooobasisdir}/program/libemboleobj.so
 %attr(755,root,root) %{ooobasisdir}/program/libemel[ipx].so
-%attr(755,root,root) %{ooobasisdir}/program/libempl[ipx].so
+###%attr(755,root,root) %{ooobasisdir}/program/libempl[ipx].so
 %attr(755,root,root) %{ooobasisdir}/program/libepbl[ipx].so
 %attr(755,root,root) %{ooobasisdir}/program/libepgl[ipx].so
 %attr(755,root,root) %{ooobasisdir}/program/libeppl[ipx].so
@@ -2841,7 +3120,6 @@ fi
 %attr(755,root,root) %{ooobasisdir}/program/libeptl[ipx].so
 %attr(755,root,root) %{ooobasisdir}/program/liberal[ipx].so
 %attr(755,root,root) %{ooobasisdir}/program/libetil[ipx].so
-%attr(755,root,root) %{ooobasisdir}/program/libevoab1.so
 %attr(755,root,root) %{ooobasisdir}/program/libevtatt.so
 %attr(755,root,root) %{ooobasisdir}/program/libexlinkl[ipx].so
 %attr(755,root,root) %{ooobasisdir}/program/libexpl[ipx].so
@@ -2849,6 +3127,8 @@ fi
 %attr(755,root,root) %{ooobasisdir}/program/libfilel[ipx].so
 %attr(755,root,root) %{ooobasisdir}/program/libfilterconfig1.so
 %attr(755,root,root) %{ooobasisdir}/program/libflatl[ipx].so
+%attr(755,root,root) %{ooobasisdir}/program/libforl[ipx].so
+%attr(755,root,root) %{ooobasisdir}/program/libforuil[ipx].so
 %attr(755,root,root) %{ooobasisdir}/program/libfrml[ipx].so
 %attr(755,root,root) %{ooobasisdir}/program/libfwel[ipx].so
 %attr(755,root,root) %{ooobasisdir}/program/libfwil[ipx].so
@@ -2861,6 +3141,7 @@ fi
 %{!?with_system_hunspell:%attr(755,root,root) %{ooobasisdir}/program/libhunspell.so}
 %attr(755,root,root) %{ooobasisdir}/program/libhyphenl[ipx].so
 %attr(755,root,root) %{ooobasisdir}/program/libi18nisolang1gcc3.so
+%attr(755,root,root) %{ooobasisdir}/program/libi18npaperl[ipx].so
 %attr(755,root,root) %{ooobasisdir}/program/libi18nregexpgcc3.so
 %attr(755,root,root) %{ooobasisdir}/program/libi18nutilgcc3.so
 %attr(755,root,root) %{ooobasisdir}/program/libicdl[ipx].so
@@ -2876,7 +3157,7 @@ fi
 %attr(755,root,root) %{ooobasisdir}/program/libiral[ipx].so
 %attr(755,root,root) %{ooobasisdir}/program/libitgl[ipx].so
 %attr(755,root,root) %{ooobasisdir}/program/libitil[ipx].so
-%attr(755,root,root) %{ooobasisdir}/program/libjl*_g.so
+###%attr(755,root,root) %{ooobasisdir}/program/libjl*_g.so
 %attr(755,root,root) %{ooobasisdir}/program/liblegacy_binfiltersl[ipx].so
 %attr(755,root,root) %{ooobasisdir}/program/liblngl[ipx].so
 %attr(755,root,root) %{ooobasisdir}/program/liblnthl[ipx].so
@@ -2887,9 +3168,10 @@ fi
 %attr(755,root,root) %{ooobasisdir}/program/liblogl[ipx].so
 %attr(755,root,root) %{ooobasisdir}/program/libmcnttype.so
 %attr(755,root,root) %{ooobasisdir}/program/libmozbootstrap.so
-%attr(755,root,root) %{ooobasisdir}/program/libmysql2.so
-%attr(755,root,root) %{ooobasisdir}/program/libodbc2.so
-%attr(755,root,root) %{ooobasisdir}/program/libodbcbase2.so
+%attr(755,root,root) %{ooobasisdir}/program/libmsformsl[ipx].uno.so
+%attr(755,root,root) %{ooobasisdir}/program/libmysqll[ipx].so
+%attr(755,root,root) %{ooobasisdir}/program/libodbcl[ipx].so
+%attr(755,root,root) %{ooobasisdir}/program/libodbcbasel[ipx].so
 %attr(755,root,root) %{ooobasisdir}/program/liboffaccl[ipx].so
 %attr(755,root,root) %{ooobasisdir}/program/liboooimprovecorel[ipx].so
 %attr(755,root,root) %{ooobasisdir}/program/libooxl[ipx].so
@@ -2897,9 +3179,10 @@ fi
 %attr(755,root,root) %{ooobasisdir}/program/libpcrl[ipx].so
 %attr(755,root,root) %{ooobasisdir}/program/libpdffilterl[ipx].so
 %attr(755,root,root) %{ooobasisdir}/program/libpll[ipx].so
+%attr(755,root,root) %{ooobasisdir}/program/libpptxl[ipx].so
 %attr(755,root,root) %{ooobasisdir}/program/libpreloadl[ipx].so
 %attr(755,root,root) %{ooobasisdir}/program/libprotocolhandlerl[ipx].so
-%attr(755,root,root) %{ooobasisdir}/program/libpspl[ipx].so
+###%attr(755,root,root) %{ooobasisdir}/program/libpspl[ipx].so
 %attr(755,root,root) %{ooobasisdir}/program/libqstart_gtkl[ipx].so
 %attr(755,root,root) %{ooobasisdir}/program/librecentfile.so
 %attr(755,root,root) %{ooobasisdir}/program/libresl[ipx].so
@@ -2910,6 +3193,7 @@ fi
 %attr(755,root,root) %{ooobasisdir}/program/libsdbc2.so
 %attr(755,root,root) %{ooobasisdir}/program/libsdbtl[ipx].so
 %attr(755,root,root) %{ooobasisdir}/program/libsddl[ipx].so
+%attr(755,root,root) %{ooobasisdir}/program/libsdfiltl[ipx].so
 %attr(755,root,root) %{ooobasisdir}/program/libsdl[ipx].so
 %attr(755,root,root) %{ooobasisdir}/program/libsduil[ipx].so
 %attr(755,root,root) %{ooobasisdir}/program/libsfxl[ipx].so
@@ -2923,6 +3207,8 @@ fi
 %attr(755,root,root) %{ooobasisdir}/program/libstsl[ipx].so
 %attr(755,root,root) %{ooobasisdir}/program/libsvll[ipx].so
 %attr(755,root,root) %{ooobasisdir}/program/libsvtl[ipx].so
+%attr(755,root,root) %{ooobasisdir}/program/libsvxcorel[ipx].so
+%attr(755,root,root) %{ooobasisdir}/program/libsvxmsfilterl[ipx].so
 %attr(755,root,root) %{ooobasisdir}/program/libsvxl[ipx].so
 %attr(755,root,root) %{ooobasisdir}/program/libswl[ipx].so
 %attr(755,root,root) %{ooobasisdir}/program/libtextcat.so
@@ -2946,6 +3232,8 @@ fi
 %attr(755,root,root) %{ooobasisdir}/program/libupdchkl[ipx].so
 %attr(755,root,root) %{ooobasisdir}/program/libutll[ipx].so
 %attr(755,root,root) %{ooobasisdir}/program/libuuil[ipx].so
+%attr(755,root,root) %{ooobasisdir}/program/libvbahelperl[ipx].so
+%attr(755,root,root) %{ooobasisdir}/program/libvbaswobjl[ipx].uno.so
 %attr(755,root,root) %{ooobasisdir}/program/libvcll[ipx].so
 %attr(755,root,root) %{ooobasisdir}/program/libvclplug_genl[ipx].so
 %attr(755,root,root) %{ooobasisdir}/program/libvclplug_svpl[ipx].so
@@ -2955,7 +3243,7 @@ fi
 %attr(755,root,root) %{ooobasisdir}/program/libxmlfdl[ipx].so
 ## maybe external is possible?
 # - external broken in 3.0.1
-%attr(755,root,root) %{ooobasisdir}/program/libxmlsec1*.so
+###%attr(755,root,root) %{ooobasisdir}/program/libxmlsec1*.so
 ##
 %attr(755,root,root) %{ooobasisdir}/program/libxmlsecurity.so
 %attr(755,root,root) %{ooobasisdir}/program/libxmxl[ipx].so
@@ -2979,12 +3267,12 @@ fi
 ##
 %attr(755,root,root) %{ooobasisdir}/program/sax.uno.so
 %attr(755,root,root) %{ooobasisdir}/program/senddoc
-%attr(755,root,root) %{ooobasisdir}/program/setofficelang
-%attr(755,root,root) %{ooobasisdir}/program/setofficelang.bin
+###%attr(755,root,root) %{ooobasisdir}/program/setofficelang
+###%attr(755,root,root) %{ooobasisdir}/program/setofficelang.bin
 %attr(755,root,root) %{ooobasisdir}/program/simplecanvas.uno.so
 %attr(755,root,root) %{ooobasisdir}/program/slideshow.uno.so
 %attr(755,root,root) %{ooobasisdir}/program/spadmin.bin
-%attr(755,root,root) %{ooobasisdir}/program/stocservices.uno.so
+###%attr(755,root,root) %{ooobasisdir}/program/stocservices.uno.so
 %attr(755,root,root) %{ooobasisdir}/program/stringresource*.uno.so
 %attr(755,root,root) %{ooobasisdir}/program/svtmisc.uno.so
 %attr(755,root,root) %{ooobasisdir}/program/sysmgr1.uno.so
@@ -2996,11 +3284,11 @@ fi
 %attr(755,root,root) %{ooobasisdir}/program/vbaevents*.uno.so
 %attr(755,root,root) %{ooobasisdir}/program/vclcanvas.uno.so
 # versioned libraries and their symlinks
-%attr(755,root,root) %{ooobasisdir}/program/*.so.*
+###%attr(755,root,root) %{ooobasisdir}/program/*.so.*
 
 %if %{with java}
-%attr(755,root,root) %{ooobasisdir}/program/libhsqldb2.so
-%attr(755,root,root) %{ooobasisdir}/program/libjdbc2.so
+%attr(755,root,root) %{ooobasisdir}/program/libhsqldb.so
+%attr(755,root,root) %{ooobasisdir}/program/libjdbcl[ipx].so
 %attr(755,root,root) %{ooobasisdir}/program/libofficebean.so
 %endif
 
@@ -3038,13 +3326,13 @@ fi
 %{ooobasisdir}/program/classes/XSLTFilter.jar
 %{ooobasisdir}/program/classes/XSLTValidate.jar
 %{ooobasisdir}/program/classes/agenda.jar
-%{ooobasisdir}/program/classes/classes.jar
+###%{ooobasisdir}/program/classes/classes.jar
 %{ooobasisdir}/program/classes/commonwizards.jar
 %{ooobasisdir}/program/classes/fax.jar
 %{ooobasisdir}/program/classes/form.jar
 %{!?with_system_hsqldb:%{ooobasisdir}/program/classes/hsqldb.jar}
 %{ooobasisdir}/program/classes/js.jar
-%{ooobasisdir}/program/classes/jut.jar
+###%{ooobasisdir}/program/classes/jut.jar
 %{ooobasisdir}/program/classes/letter.jar
 %{ooobasisdir}/program/classes/lucene-analyzers-2.3.jar
 %{ooobasisdir}/program/classes/lucene-core-2.3.jar
@@ -3091,6 +3379,8 @@ fi
 %{ooobasisdir}/program/resource/epsen-US.res
 %{ooobasisdir}/program/resource/epten-US.res
 %{ooobasisdir}/program/resource/euren-US.res
+%{ooobasisdir}/program/resource/foren-US.res
+%{ooobasisdir}/program/resource/foruien-US.res
 %{ooobasisdir}/program/resource/fps_officeen-US.res
 %{ooobasisdir}/program/resource/frmen-US.res
 %{ooobasisdir}/program/resource/fween-US.res
@@ -3142,6 +3432,7 @@ fi
 %{ooobasisdir}/share/config/images_crystal.zip
 %{ooobasisdir}/share/config/images_hicontrast.zip
 %{ooobasisdir}/share/config/images_industrial.zip
+%{ooobasisdir}/share/config/images_oxygen.zip
 %{ooobasisdir}/share/config/images_tango.zip
 %{ooobasisdir}/share/config/javasettingsunopkginstall.xml
 %{ooobasisdir}/share/config/*.xpm
@@ -3164,7 +3455,7 @@ fi
 %dir %{ooobasisdir}/share/config/soffice.cfg/modules/scalc/accelerator
 %{ooobasisdir}/share/config/soffice.cfg/modules/schart
 %dir %{ooobasisdir}/share/config/soffice.cfg/modules/sdraw
-%dir %{ooobasisdir}/share/config/soffice.cfg/modules/sdraw/accelerator
+###%dir %{ooobasisdir}/share/config/soffice.cfg/modules/sdraw/accelerator
 %dir %{ooobasisdir}/share/config/soffice.cfg/modules/sglobal
 %dir %{ooobasisdir}/share/config/soffice.cfg/modules/sglobal/accelerator
 %{ooobasisdir}/share/config/soffice.cfg/modules/sglobal/accelerator/en-US
@@ -3215,14 +3506,16 @@ fi
 %{ooobasisdir}/share/registry/data/org/openoffice/UserProfile.xcu
 %{ooobasisdir}/share/registry/data/org/openoffice/VCL.xcu
 %dir %{ooobasisdir}/share/registry/data/org/openoffice/Office
+%{ooobasisdir}/share/registry/data/org/openoffice/Office/Accelerators.xcu
 %{ooobasisdir}/share/registry/data/org/openoffice/Office/Calc.xcu
 %{ooobasisdir}/share/registry/data/org/openoffice/Office/Canvas.xcu
 %{ooobasisdir}/share/registry/data/org/openoffice/Office/Common.xcu
 %{ooobasisdir}/share/registry/data/org/openoffice/Office/DataAccess.xcu
 %{ooobasisdir}/share/registry/data/org/openoffice/Office/Embedding.xcu
-%{ooobasisdir}/share/registry/data/org/openoffice/Office/ExtendedColorScheme.xcu
+###%{ooobasisdir}/share/registry/data/org/openoffice/Office/ExtendedColorScheme.xcu
 %{ooobasisdir}/share/registry/data/org/openoffice/Office/ExtensionManager.xcu
 %{ooobasisdir}/share/registry/data/org/openoffice/Office/FormWizard.xcu
+%{ooobasisdir}/share/registry/data/org/openoffice/Office/Histories.xcu
 %{ooobasisdir}/share/registry/data/org/openoffice/Office/Impress.xcu
 %{ooobasisdir}/share/registry/data/org/openoffice/Office/Jobs.xcu
 %{ooobasisdir}/share/registry/data/org/openoffice/Office/Labels.xcu
@@ -3270,15 +3563,30 @@ fi
 %dir %{ooobasisdir}/share/registry/modules/org
 %dir %{ooobasisdir}/share/registry/modules/org/openoffice
 %dir %{ooobasisdir}/share/registry/modules/org/openoffice/Office
+%dir %{ooobasisdir}/share/registry/modules/org/openoffice/Office/Accelerators
+%{ooobasisdir}/share/registry/modules/org/openoffice/Office/Accelerators/Accelerators-unxwnt.xcu
 %dir %{ooobasisdir}/share/registry/modules/org/openoffice/Office/Common
 %{ooobasisdir}/share/registry/modules/org/openoffice/Office/Common/Common-unx.xcu
 %{ooobasisdir}/share/registry/modules/org/openoffice/Office/Common/Common-UseOOoFileDialogs.xcu
+%dir %{ooobasisdir}/share/registry/modules/org/openoffice/Office/DataAccess
+%dir %{ooobasisdir}/share/registry/modules/org/openoffice/Office/DataAccess/Drivers
+%{ooobasisdir}/share/registry/modules/org/openoffice/Office/DataAccess/Drivers/adabas.xcu
+%{ooobasisdir}/share/registry/modules/org/openoffice/Office/DataAccess/Drivers/calc.xcu
+%{ooobasisdir}/share/registry/modules/org/openoffice/Office/DataAccess/Drivers/dbase.xcu
+%{ooobasisdir}/share/registry/modules/org/openoffice/Office/DataAccess/Drivers/evoab2.xcu
+%{ooobasisdir}/share/registry/modules/org/openoffice/Office/DataAccess/Drivers/flat.xcu
+%{ooobasisdir}/share/registry/modules/org/openoffice/Office/DataAccess/Drivers/hsqldb.xcu
+%{ooobasisdir}/share/registry/modules/org/openoffice/Office/DataAccess/Drivers/jdbc.xcu
+%{ooobasisdir}/share/registry/modules/org/openoffice/Office/DataAccess/Drivers/mysql.xcu
+%{ooobasisdir}/share/registry/modules/org/openoffice/Office/DataAccess/Drivers/odbc.xcu
 %dir %{ooobasisdir}/share/registry/modules/org/openoffice/Office/Embedding
 %{ooobasisdir}/share/registry/modules/org/openoffice/Office/Embedding/Embedding-chart.xcu
 %dir %{ooobasisdir}/share/registry/modules/org/openoffice/Office/Linguistic
 %{ooobasisdir}/share/registry/modules/org/openoffice/Office/Linguistic/Linguistic-lingucomponent-hyphenator.xcu
 %{ooobasisdir}/share/registry/modules/org/openoffice/Office/Linguistic/Linguistic-lingucomponent-spellchecker.xcu
 %{ooobasisdir}/share/registry/modules/org/openoffice/Office/Linguistic/Linguistic-lingucomponent-thesaurus.xcu
+%dir %{ooobasisdir}/share/registry/modules/org/openoffice/Office/Paths
+%{ooobasisdir}/share/registry/modules/org/openoffice/Office/Paths/Paths-unxwnt.xcu
 %dir %{ooobasisdir}/share/registry/modules/org/openoffice/Office/Scripting
 %dir %{ooobasisdir}/share/registry/modules/org/openoffice/Office/Writer
 %dir %{ooobasisdir}/share/registry/modules/org/openoffice/Setup
@@ -3320,6 +3628,7 @@ fi
 %{ooobasisdir}/share/registry/schema/org/openoffice/UserProfile.xcs
 %{ooobasisdir}/share/registry/schema/org/openoffice/VCL.xcs
 %dir %{ooobasisdir}/share/registry/schema/org/openoffice/Office
+%{ooobasisdir}/share/registry/schema/org/openoffice/Office/Accelerators.xcs
 %{ooobasisdir}/share/registry/schema/org/openoffice/Office/Addons.xcs
 %{ooobasisdir}/share/registry/schema/org/openoffice/Office/CalcAddIns.xcs
 %{ooobasisdir}/share/registry/schema/org/openoffice/Office/Calc.xcs
@@ -3335,6 +3644,7 @@ fi
 %{ooobasisdir}/share/registry/schema/org/openoffice/Office/ExtendedColorScheme.xcs
 %{ooobasisdir}/share/registry/schema/org/openoffice/Office/ExtensionManager.xcs
 %{ooobasisdir}/share/registry/schema/org/openoffice/Office/FormWizard.xcs
+%{ooobasisdir}/share/registry/schema/org/openoffice/Office/Histories.xcs
 %{ooobasisdir}/share/registry/schema/org/openoffice/Office/Impress.xcs
 %{ooobasisdir}/share/registry/schema/org/openoffice/Office/Java.xcs
 %{ooobasisdir}/share/registry/schema/org/openoffice/Office/Jobs.xcs
@@ -3358,6 +3668,10 @@ fi
 %{ooobasisdir}/share/registry/schema/org/openoffice/Office/WebWizard.xcs
 %{ooobasisdir}/share/registry/schema/org/openoffice/Office/WriterWeb.xcs
 %{ooobasisdir}/share/registry/schema/org/openoffice/Office/Writer.xcs
+%dir %{ooobasisdir}/share/registry/schema/org/openoffice/Office/DataAccess
+%{ooobasisdir}/share/registry/schema/org/openoffice/Office/DataAccess/Drivers.xcs
+%dir %{ooobasisdir}/share/registry/schema/org/openoffice/Office/OOoImprovement
+%{ooobasisdir}/share/registry/schema/org/openoffice/Office/OOoImprovement/Settings.xcs
 %dir %{ooobasisdir}/share/registry/schema/org/openoffice/Office/UI
 %{ooobasisdir}/share/registry/schema/org/openoffice/Office/UI/BaseWindowState.xcs
 %{ooobasisdir}/share/registry/schema/org/openoffice/Office/UI/BasicIDECommands.xcs
@@ -3383,6 +3697,7 @@ fi
 %{ooobasisdir}/share/registry/schema/org/openoffice/Office/UI/MathWindowState.xcs
 %{ooobasisdir}/share/registry/schema/org/openoffice/Office/UI/StartModuleCommands.xcs
 %{ooobasisdir}/share/registry/schema/org/openoffice/Office/UI/StartModuleWindowState.xcs
+%{ooobasisdir}/share/registry/schema/org/openoffice/Office/UI/WindowContentFactories.xcs
 %{ooobasisdir}/share/registry/schema/org/openoffice/Office/UI/WindowState.xcs
 %{ooobasisdir}/share/registry/schema/org/openoffice/Office/UI/WriterFormWindowState.xcs
 %{ooobasisdir}/share/registry/schema/org/openoffice/Office/UI/WriterReportWindowState.xcs
@@ -3396,6 +3711,7 @@ fi
 %dir %{ooobasisdir}/share/registry/schema/org/openoffice/ucb
 %{ooobasisdir}/share/registry/schema/org/openoffice/ucb/Configuration.xcs
 %{ooobasisdir}/share/registry/schema/org/openoffice/ucb/Hierarchy.xcs
+%{ooobasisdir}/share/registry/schema/org/openoffice/ucb/InteractionHandler.xcs
 %{ooobasisdir}/share/registry/schema/org/openoffice/ucb/Store.xcs
 
 %dir %{ooobasisdir}/share/samples
@@ -3512,21 +3828,29 @@ fi
 %attr(755,root,root) %{ooobasisdir}/program/libvclplug_kde*.so
 %endif
 
+%if %{with kde4}
+%files libs-kde
+%defattr(644,root,root,755)
+%attr(755,root,root) %{ooobasisdir}/program/kde-open-url
+%attr(755,root,root) %{ooobasisdir}/program/fps_kde4.uno.so
+%attr(755,root,root) %{ooobasisdir}/program/libvclplug_kde4lx.so
+%endif
+
 %files libs-gtk
 %defattr(644,root,root,755)
 %attr(755,root,root) %{ooobasisdir}/program/fps_gnome.uno.so
+%attr(755,root,root) %{ooobasisdir}/program/gconfbe1.uno.so
 %attr(755,root,root) %{ooobasisdir}/program/gnome-open-url
 %attr(755,root,root) %{ooobasisdir}/program/gnome-open-url.bin
-%attr(755,root,root) %{ooobasisdir}/program/libevoab2.so
+%attr(755,root,root) %{ooobasisdir}/program/libevoabl[ipx].so
 %attr(755,root,root) %{ooobasisdir}/program/libvclplug_gtk*.so
 %if %{with gnomevfs}
-%attr(755,root,root) %{ooobasisdir}/program/gconfbe1.uno.so
 %attr(755,root,root) %{ooobasisdir}/program/ucpgvfs1.uno.so
+%else
+%attr(755,root,root) %{ooobasisdir}/program/ucpgio1.uno.so
 %endif
-## GIO files
-#%attr(755,root,root) %{ooobasisdir}/program/ucpgio1.uno.so
-#%{ooobasisdir}/share/registry/modules/org/openoffice/ucb/Configuration/Configuration-gio.xcu
-##
+%dir %{ooobasisdir}/share/registry/modules/org/openoffice/ucb/Configuration
+%{ooobasisdir}/share/registry/modules/org/openoffice/ucb/Configuration/Configuration-gio.xcu
 
 %files base
 %defattr(644,root,root,755)
@@ -3570,18 +3894,18 @@ fi
 %{ooobasisdir}/share/config/soffice.cfg/modules/dbtdata/accelerator/en-US
 %{ooobasisdir}/share/config/soffice.cfg/modules/dbtdata/menubar
 %{ooobasisdir}/share/config/soffice.cfg/modules/dbtdata/toolbar
-%{ooobasisdir}/share/registry/data/org/openoffice/Office/UI/DbReportWindowState.xcu
-%{ooobasisdir}/share/registry/data/org/openoffice/Office/UI/ReportCommands.xcu
+###%{ooobasisdir}/share/registry/data/org/openoffice/Office/UI/DbReportWindowState.xcu
+###%{ooobasisdir}/share/registry/data/org/openoffice/Office/UI/ReportCommands.xcu
 %{ooobasisdir}/share/registry/modules/org/openoffice/Office/Common/Common-base.xcu
-%{ooobasisdir}/share/registry/modules/org/openoffice/Office/Embedding/Embedding-report.xcu
+###%{ooobasisdir}/share/registry/modules/org/openoffice/Office/Embedding/Embedding-report.xcu
 %{ooobasisdir}/share/registry/modules/org/openoffice/Setup/Setup-base.xcu
-%{ooobasisdir}/share/registry/modules/org/openoffice/Setup/Setup-report.xcu
+###%{ooobasisdir}/share/registry/modules/org/openoffice/Setup/Setup-report.xcu
 %{ooobasisdir}/share/registry/modules/org/openoffice/TypeDetection/Filter/fcfg_database_filters.xcu
 %{ooobasisdir}/share/registry/modules/org/openoffice/TypeDetection/Misc/fcfg_database_others.xcu
 %{ooobasisdir}/share/registry/modules/org/openoffice/TypeDetection/Types/fcfg_database_types.xcu
-%{ooobasisdir}/share/registry/schema/org/openoffice/Office/ReportDesign.xcs
-%{ooobasisdir}/share/registry/schema/org/openoffice/Office/UI/DbReportWindowState.xcs
-%{ooobasisdir}/share/registry/schema/org/openoffice/Office/UI/ReportCommands.xcs
+###%{ooobasisdir}/share/registry/schema/org/openoffice/Office/ReportDesign.xcs
+###%{ooobasisdir}/share/registry/schema/org/openoffice/Office/UI/DbReportWindowState.xcs
+###%{ooobasisdir}/share/registry/schema/org/openoffice/Office/UI/ReportCommands.xcs
 %{ooobasisdir}/help/en/sdatabase.*
 
 %files calc
@@ -3598,10 +3922,12 @@ fi
 %attr(755,root,root) %{ooobasisdir}/program/libdatel[ipx].so
 %attr(755,root,root) %{ooobasisdir}/program/liblpsolve55.so
 %attr(755,root,root) %{ooobasisdir}/program/libscdl[ipx].so
+%attr(755,root,root) %{ooobasisdir}/program/libscfiltl[ipx].so
 %attr(755,root,root) %{ooobasisdir}/program/libscl[ipx].so
 %attr(755,root,root) %{ooobasisdir}/program/libscuil[ipx].so
 %attr(755,root,root) %{ooobasisdir}/program/libsolverl[ipx].so
 %attr(755,root,root) %{ooobasisdir}/program/libvbaobjl[ipx].uno.so
+%attr(755,root,root) %{ooobasisdir}/program/libxlsxl[ipx].so
 %{ooobasisdir}/program/resource/analysisen-US.res
 %{ooobasisdir}/program/resource/dateen-US.res
 %{ooobasisdir}/program/resource/solveren-US.res
@@ -3634,7 +3960,6 @@ fi
 %{_iconsdir}/hicolor/*/apps/ooo-draw.png
 %{_pixmapsdir}/ooo-draw.png
 %{ooobasisdir}/help/en/sdraw.*
-%{ooobasisdir}/share/config/soffice.cfg/modules/sdraw/accelerator/en-US
 %{ooobasisdir}/share/config/soffice.cfg/modules/sdraw/menubar
 %{ooobasisdir}/share/config/soffice.cfg/modules/sdraw/statusbar
 %{ooobasisdir}/share/config/soffice.cfg/modules/sdraw/toolbar
@@ -3660,6 +3985,7 @@ fi
 %attr(755,root,root) %{_bindir}/oowriter
 %attr(755,root,root) %{ooobasisdir}/program/libhwp.so
 %attr(755,root,root) %{ooobasisdir}/program/liblwpftl[ipx].so
+%attr(755,root,root) %{ooobasisdir}/program/libmswordl[ipx].so
 %attr(755,root,root) %{ooobasisdir}/program/libmsworksl[ipx].so
 %attr(755,root,root) %{ooobasisdir}/program/libswdl[ipx].so
 %attr(755,root,root) %{ooobasisdir}/program/libswuil[ipx].so
@@ -3673,7 +3999,7 @@ fi
 %{_pixmapsdir}/ooo-writer.png
 %{ooobasisdir}/help/en/swriter.*
 %if %{with java}
-%{ooobasisdir}/program/classes/writer2latex.jar
+###%{ooobasisdir}/program/classes/writer2latex.jar
 %endif
 %{ooobasisdir}/share/registry/data/org/openoffice/Office/UI/WriterCommands.xcu
 %{ooobasisdir}/share/registry/schema/org/openoffice/Office/UI/WriterCommands.xcs
@@ -3690,7 +4016,7 @@ fi
 %{ooobasisdir}/share/registry/modules/org/openoffice/TypeDetection/Filter/fcfg_writer_filters.xcu
 %{ooobasisdir}/share/registry/modules/org/openoffice/TypeDetection/Types/fcfg_global_types.xcu
 %{ooobasisdir}/share/registry/modules/org/openoffice/TypeDetection/Types/fcfg_writer_types.xcu
-%{ooobasisdir}/share/xslt/wiki
+###%{ooobasisdir}/share/xslt/wiki
 %{ooobasisdir}/program/resource/t602filteren-US.res
 %{ooobasisdir}/share/config/soffice.cfg/modules/sbibliography
 %{ooobasisdir}/share/config/soffice.cfg/modules/swriter/accelerator/en-US
@@ -3708,6 +4034,7 @@ fi
 %attr(755,root,root) %{_libdir}/%{name}/program/simpress
 %attr(755,root,root) %{ooobasisdir}/program/libanimcore.so
 %attr(755,root,root) %{ooobasisdir}/program/libplaceware*.so
+%attr(755,root,root) %{ooobasisdir}/program/libpptxl[ipx].so
 %{_mandir}/man1/ooimpress.1
 %{_desktopdir}/ooimpress.desktop
 %{_iconsdir}/hicolor/*/apps/ooo-impress.png
@@ -3720,11 +4047,13 @@ fi
 %{ooobasisdir}/share/registry/schema/org/openoffice/Office/UI/ImpressWindowState.xcs
 %{ooobasisdir}/share/registry/modules/org/openoffice/Office/Common/Common-impress.xcu
 %{ooobasisdir}/share/registry/modules/org/openoffice/Office/Embedding/Embedding-impress.xcu
+%dir %{ooobasisdir}/share/registry/modules/org/openoffice/Office/Impress
+%{ooobasisdir}/share/registry/modules/org/openoffice/Office/Impress/Impress-ogltrans.xcu
 %{ooobasisdir}/share/registry/modules/org/openoffice/Setup/Setup-impress.xcu
 %{ooobasisdir}/share/registry/modules/org/openoffice/TypeDetection/Filter/fcfg_impress_filters.xcu
 %{ooobasisdir}/share/registry/modules/org/openoffice/TypeDetection/Types/fcfg_impress_types.xcu
 %{ooobasisdir}/share/config/soffice.cfg/modules/simpress/accelerator/en-US
-%{ooobasisdir}/share/config/soffice.cfg/modules/simpress/accelerator/default.xml
+###%{ooobasisdir}/share/config/soffice.cfg/modules/simpress/accelerator/default.xml
 %{ooobasisdir}/share/config/soffice.cfg/modules/simpress/menubar
 %{ooobasisdir}/share/config/soffice.cfg/modules/simpress/statusbar
 %{ooobasisdir}/share/config/soffice.cfg/modules/simpress/toolbar
@@ -3853,6 +4182,7 @@ fi
 %attr(755,root,root) %{_libdir}/%{name}/ure/lib/textinstream.uno.so
 %attr(755,root,root) %{_libdir}/%{name}/ure/lib/textoutstream.uno.so
 %attr(755,root,root) %{_libdir}/%{name}/ure/lib/uuresolver.uno.so
+%attr(755,root,root) %{_libdir}/%{name}/ure/lib/liblog_uno_uno.so
 %attr(755,root,root) %{_libdir}/%{name}/ure/lib/libstore.so.3
 %attr(755,root,root) %{_libdir}/%{name}/ure/lib/libuno_cppu.so.3
 %attr(755,root,root) %{_libdir}/%{name}/ure/lib/libuno_cppuhelpergcc3.so.3
@@ -3943,7 +4273,13 @@ fi
 %files i18n-bn_IN -f bn_IN.lang
 %defattr(644,root,root,755)
 
+%files i18n-bo -f bo.lang
+%defattr(644,root,root,755)
+
 %files i18n-br -f br.lang
+%defattr(644,root,root,755)
+
+%files i18n-brx -f brx.lang
 %defattr(644,root,root,755)
 
 %files i18n-bs -f bs.lang
@@ -3968,6 +4304,9 @@ fi
 %defattr(644,root,root,755)
 %dir %{ooobasisdir}/share/config/soffice.cfg/modules/dbreport/accelerator/de-DE
 %{ooobasisdir}/share/config/soffice.cfg/modules/dbreport/accelerator/de-DE/default.xml
+
+%files i18n-dgo -f dgo.lang
+%defattr(644,root,root,755)
 
 %files i18n-dz -f dz.lang
 %defattr(644,root,root,755)
@@ -4029,6 +4368,9 @@ fi
 %files i18n-hu -f hu.lang
 %defattr(644,root,root,755)
 
+%files i18n-is -f is.lang
+%defattr(644,root,root,755)
+
 %files i18n-it -f it.lang
 %defattr(644,root,root,755)
 
@@ -4036,6 +4378,12 @@ fi
 %defattr(644,root,root,755)
 
 %files i18n-ka -f ka.lang
+%defattr(644,root,root,755)
+
+%files i18n-kid -f kid.lang
+%defattr(644,root,root,755)
+
+%files i18n-kk -f kk.lang
 %defattr(644,root,root,755)
 
 %files i18n-km -f km.lang
@@ -4046,9 +4394,18 @@ fi
 
 %files i18n-ko -f ko.lang
 %defattr(644,root,root,755)
-%{ooobasisdir}/share/registry/modules/org/openoffice/Office/Common/Common-korea.xcu
+%{_datadir}/%{name}/share/registry/modules/org/openoffice/Office/Common/Common-korea.xcu
+
+%files i18n-kok -f kok.lang
+%defattr(644,root,root,755)
+
+%files i18n-ks -f ks.lang
+%defattr(644,root,root,755)
 
 %files i18n-ku -f ku.lang
+%defattr(644,root,root,755)
+
+%files i18n-ky -f ky.lang
 %defattr(644,root,root,755)
 
 %files i18n-lo -f lo.lang
@@ -4060,6 +4417,9 @@ fi
 %files i18n-lv -f lv.lang
 %defattr(644,root,root,755)
 
+%files i18n-mai -f mai.lang
+%defattr(644,root,root,755)
+
 %files i18n-mk -f mk.lang
 %defattr(644,root,root,755)
 
@@ -4067,6 +4427,9 @@ fi
 %defattr(644,root,root,755)
 
 %files i18n-mn -f mn.lang
+%defattr(644,root,root,755)
+
+%files i18n-mni -f mni.lang
 %defattr(644,root,root,755)
 
 %files i18n-mr_IN -f mr_IN.lang
@@ -4099,13 +4462,22 @@ fi
 %files i18n-oc -f oc.lang
 %defattr(644,root,root,755)
 
+%files i18n-om -f om.lang
+%defattr(644,root,root,755)
+
 %files i18n-or_IN -f or_IN.lang
 %defattr(644,root,root,755)
 
 %files i18n-pa_IN -f pa_IN.lang
 %defattr(644,root,root,755)
 
+%files i18n-pap -f pap.lang
+%defattr(644,root,root,755)
+
 %files i18n-pl -f pl.lang
+%defattr(644,root,root,755)
+
+%files i18n-ps -f ps.lang
 %defattr(644,root,root,755)
 
 %files i18n-pt -f pt.lang
@@ -4114,13 +4486,31 @@ fi
 %files i18n-pt_BR -f pt_BR.lang
 %defattr(644,root,root,755)
 
+%files i18n-ro -f ro.lang
+%defattr(644,root,root,755)
+
 %files i18n-ru -f ru.lang
 %defattr(644,root,root,755)
 
 %files i18n-rw -f rw.lang
 %defattr(644,root,root,755)
 
+%files i18n-sa_IN -f sa_IN.lang
+%defattr(644,root,root,755)
+
+%files i18n-sat -f sat.lang
+%defattr(644,root,root,755)
+
+%files i18n-sc -f sc.lang
+%defattr(644,root,root,755)
+
+%files i18n-sd -f sd.lang
+%defattr(644,root,root,755)
+
 %files i18n-sh -f sh.lang
+%defattr(644,root,root,755)
+
+%files i18n-si -f si.lang
 %defattr(644,root,root,755)
 
 %files i18n-sk -f sk.lang
@@ -4169,6 +4559,9 @@ fi
 %defattr(644,root,root,755)
 
 %files i18n-ts -f ts.lang
+%defattr(644,root,root,755)
+
+%files i18n-ug -f ug.lang
 %defattr(644,root,root,755)
 
 %files i18n-uk -f uk.lang
