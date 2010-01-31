@@ -77,7 +77,7 @@
 %define		tag			%(echo %{mws} | tr A-Z a-z)-%{milestone}
 %define		milestone	m11
 %define		_tag		%(echo %{tag} | tr - _)
-%define		_rel		1
+%define		_rel		2
 
 Summary:	OpenOffice.org - powerful office suite
 Summary(pl.UTF-8):	OpenOffice.org - potężny pakiet biurowy
@@ -151,6 +151,7 @@ Source53:	%{name}-splash.bmp
 Source54:	%{name}-about.bmp
 # patches applied in prep section
 Patch0:		%{name}-PLD.patch
+Patch10:	%{name}-hotfix-kde4.patch
 URL:		http://www.openoffice.org/
 BuildRequires:	/usr/bin/getopt
 BuildRequires:	GConf2-devel
@@ -189,6 +190,7 @@ BuildRequires:	kde4-kde3support-devel
 %endif
 %if %{with kde4}
 BuildRequires:	kde4-kdelibs-devel
+BuildRequires:	qt4-build
 %endif
 BuildRequires:	libart_lgpl-devel
 BuildRequires:	libbonobo-devel >= 2.0
@@ -2411,6 +2413,8 @@ ln -sf %{SOURCE1} %{SOURCE2} %{SOURCE3} %{SOURCE4} \
 	%{SOURCE21} %{SOURCE22} %{SOURCE50} %{SOURCE51} \
 	%{SOURCE52} \
 	src
+
+ln -s %{PATCH10} patches/hotfixes/%{basename:%{PATCH10}}.diff
 
 %build
 # Make sure we have /proc mounted - otherwise idlc will fail later.
