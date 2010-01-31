@@ -1,0 +1,11 @@
+--- configure.in	2010-01-30 20:54:14.014499069 +0100
++++ configure.in.new	2010-01-30 21:07:03.703592227 +0100
+@@ -6443,7 +6443,7 @@
+    fi
+ 
+    dnl Check for Meta Object Compiler
+-   AC_PATH_PROG( MOC4, moc, no, [$PATH:$QT4DIR/bin] )
++   AC_PATH_PROG( MOC4, moc-qt4, no, [$PATH:$QT4DIR/bin] )
+    if test "$MOC4" = "no" ; then
+       AC_MSG_ERROR([Qt Meta Object Compiler not found.  Please specify
+ the root of your Qt installation by exporting QT4DIR before running "configure".])
