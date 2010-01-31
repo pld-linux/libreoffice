@@ -95,6 +95,10 @@ Source0:	ooo-build-20100129.tar.bz2
 # Source0-md5:	dd6841fb58b5e4480d2c6135e4ab7e86
 Source1:	http://download.go-oo.org/DEV300/ooo-cli-prebuilt-3.2.tar.bz2
 # Source1-md5:	b4e4ad9da4cf1033096609c95ad50bdb
+# Upstream OOo sources are available only via git.
+# cd ooo-build
+# ./autogen.sh --without-git --with-lang=ALL --with-distro=PlainLinux
+# ./download
 Source2:	%{tag}-base.tar.bz2
 # Source2-md5:	d2986a9264f1b7812679c587938a046a
 Source3:	%{tag}-calc.tar.bz2
