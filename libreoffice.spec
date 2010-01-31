@@ -182,11 +182,9 @@ BuildRequires:	icu
 %{?with_system_beanshell:BuildRequires:	java-beanshell}
 %if %{with kde}
 BuildRequires:	kde4-kde3support-devel
-BuildConflicts:	kde4-kdelibs-devel
-BuildConflicts:	kde4-kdepimlibs-devel
 %endif
 %if %{with kde4}
-# BuildRequires: FIXME
+BuildRequires:	kde4-kdelibs-devel
 %endif
 BuildRequires:	libart_lgpl-devel
 BuildRequires:	libbonobo-devel >= 2.0
@@ -3835,7 +3833,9 @@ fi
 %if %{with kde4}
 %files libs-kde
 %defattr(644,root,root,755)
-# FIXME
+%attr(755,root,root) %{ooobasisdir}/program/kde-open-url
+%attr(755,root,root) %{ooobasisdir}/program/fps_kde4.uno.so
+%attr(755,root,root) %{ooobasisdir}/program/libvclplug_kde4lx.so
 %endif
 
 %files libs-gtk
