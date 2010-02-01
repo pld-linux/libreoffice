@@ -2449,6 +2449,9 @@ export DESTDIR=$RPM_BUILD_ROOT
 export IGNORE_MANIFEST_CHANGES=1
 export QTINC="%{_includedir}/qt"
 export QTLIB="%{_libdir}"
+
+export QT4INC="%{_includedir}/qt4"
+export QT4LIB="%{_libdir}"
 export QT4DIR="%{_libdir}/qt4"
 
 %if %{with java}
