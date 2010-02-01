@@ -151,7 +151,6 @@ Source53:	%{name}-splash.bmp
 Source54:	%{name}-about.bmp
 # patches applied in prep section
 Patch0:		%{name}-PLD.patch
-Patch10:	%{name}-hotfix-kde4.patch
 URL:		http://www.openoffice.org/
 BuildRequires:	/usr/bin/getopt
 BuildRequires:	GConf2-devel
@@ -2414,8 +2413,6 @@ ln -sf %{SOURCE1} %{SOURCE2} %{SOURCE3} %{SOURCE4} \
 	%{SOURCE52} \
 	src
 
-ln -s %{PATCH10} patches/hotfixes/%{basename:%{PATCH10}}.diff
-
 %build
 # Make sure we have /proc mounted - otherwise idlc will fail later.
 if [ ! -f /proc/cpuinfo ]; then
@@ -2452,6 +2449,7 @@ export DESTDIR=$RPM_BUILD_ROOT
 export IGNORE_MANIFEST_CHANGES=1
 export QTINC="%{_includedir}/qt"
 export QTLIB="%{_libdir}"
+export QT4DIR="%{_libdir}/qt4"
 
 %if %{with java}
 export JAVA_HOME="%{java_home}"
