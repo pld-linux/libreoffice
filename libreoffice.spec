@@ -3842,7 +3842,7 @@ fi
 %defattr(644,root,root,755)
 %attr(755,root,root) %{ooobasisdir}/program/kde-open-url
 %attr(755,root,root) %{ooobasisdir}/program/fps_kde4.uno.so
-%attr(755,root,root) %{ooobasisdir}/program/libvclplug_kde4lx.so
+%attr(755,root,root) %{ooobasisdir}/program/libvclplug_kde4*.so
 %endif
 
 %files libs-gtk
