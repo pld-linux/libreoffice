@@ -77,7 +77,7 @@
 %define		tag			%(echo %{mws} | tr A-Z a-z)-%{milestone}
 %define		milestone	m11
 %define		_tag		%(echo %{tag} | tr - _)
-%define		_rel		3
+%define		_rel		4
 
 Summary:	OpenOffice.org - powerful office suite
 Summary(pl.UTF-8):	OpenOffice.org - potężny pakiet biurowy
@@ -3584,8 +3584,10 @@ fi
 %{ooobasisdir}/share/registry/modules/org/openoffice/Office/DataAccess/Drivers/dbase.xcu
 %{ooobasisdir}/share/registry/modules/org/openoffice/Office/DataAccess/Drivers/evoab2.xcu
 %{ooobasisdir}/share/registry/modules/org/openoffice/Office/DataAccess/Drivers/flat.xcu
+%if %{with java}
 %{ooobasisdir}/share/registry/modules/org/openoffice/Office/DataAccess/Drivers/hsqldb.xcu
 %{ooobasisdir}/share/registry/modules/org/openoffice/Office/DataAccess/Drivers/jdbc.xcu
+%endif
 %{ooobasisdir}/share/registry/modules/org/openoffice/Office/DataAccess/Drivers/mysql.xcu
 %{ooobasisdir}/share/registry/modules/org/openoffice/Office/DataAccess/Drivers/odbc.xcu
 %dir %{ooobasisdir}/share/registry/modules/org/openoffice/Office/Embedding
