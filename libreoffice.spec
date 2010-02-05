@@ -3860,6 +3860,7 @@ fi
 %else
 %attr(755,root,root) %{ooobasisdir}/program/ucpgio1.uno.so
 %endif
+%dir %{ooobasisdir}/share/registry/modules/org/openoffice/ucb
 %dir %{ooobasisdir}/share/registry/modules/org/openoffice/ucb/Configuration
 %{ooobasisdir}/share/registry/modules/org/openoffice/ucb/Configuration/Configuration-gio.xcu
 
