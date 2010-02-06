@@ -7,6 +7,12 @@
 #
 #
 # TODO:
+# error: openoffice.org-i18n-ja-3.2.0.4-ooo320_m11.4: req /usr/share/openoffice.org/share/registry/modules/org/openoffice/Office/Writer not found
+# error: openoffice.org-i18n-ko-3.2.0.4-ooo320_m11.4: req /usr/share/openoffice.org/share/registry/modules/org/openoffice/Office/Writer not found
+# error: openoffice.org-i18n-zh_CN-3.2.0.4-ooo320_m11.4: req /usr/share/openoffice.org/share/registry/modules/org/openoffice/Office/Writer not found
+# error: openoffice.org-i18n-zh_TW-3.2.0.4-ooo320_m11.4: req /usr/share/openoffice.org/share/registry/modules/org/openoffice/Office/Writer not found
+# error: openoffice.org-libs-gtk-3.2.0.4-ooo320_m11.4: req /usr/lib/openoffice.org/basis3.2/share/registry/modules/org/openoffice/ucb not found
+#
 #   - ON PPC help FILES ARE NOT BUILT DUE TO SOME REASON (is missing java the reason?)
 #   - --with mono wants static mono
 #	- without system_db will not work (w/ java) as it will use db4.2 which is too old (see r1.650)
