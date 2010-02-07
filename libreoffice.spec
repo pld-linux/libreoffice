@@ -194,7 +194,7 @@ BuildRequires:	qt4-build
 BuildRequires:	libart_lgpl-devel
 BuildRequires:	libbonobo-devel >= 2.0
 %{?with_system_libhnj:BuildRequires:	libhnj-devel}
-BuildRequires:	libicu-devel >= 3.4
+BuildRequires:	libicu-devel >= 4.0
 BuildRequires:	libjpeg-devel
 BuildRequires:	libsndfile-devel
 BuildRequires:	libstdc++-devel >= 5:3.2.1
