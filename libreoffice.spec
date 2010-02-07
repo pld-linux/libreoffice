@@ -1,17 +1,10 @@
 # NOTE:
-#	- normal build (athlon) requires about 25 GB of disk space:
+#	- normal build (i686) requires about 27 GB of disk space:
 #		$BUILD_ROOT	7.0 GB
-#		BUILD	       16.2 GB
-#		RPMS		1.2 GB
-#		SRPMS		0.3 GB
+#		BUILD		18  GB
+#		RPMS		1.8 GB
+#		SRPMS		0.4 GB
 #
-#
-# TODO:
-# error: openoffice.org-i18n-ja-3.2.0.4-ooo320_m11.4: req /usr/share/openoffice.org/share/registry/modules/org/openoffice/Office/Writer not found
-# error: openoffice.org-i18n-ko-3.2.0.4-ooo320_m11.4: req /usr/share/openoffice.org/share/registry/modules/org/openoffice/Office/Writer not found
-# error: openoffice.org-i18n-zh_CN-3.2.0.4-ooo320_m11.4: req /usr/share/openoffice.org/share/registry/modules/org/openoffice/Office/Writer not found
-# error: openoffice.org-i18n-zh_TW-3.2.0.4-ooo320_m11.4: req /usr/share/openoffice.org/share/registry/modules/org/openoffice/Office/Writer not found
-# error: openoffice.org-libs-gtk-3.2.0.4-ooo320_m11.4: req /usr/lib/openoffice.org/basis3.2/share/registry/modules/org/openoffice/ucb not found
 #
 #   - ON PPC help FILES ARE NOT BUILT DUE TO SOME REASON (is missing java the reason?)
 #   - --with mono wants static mono
@@ -81,14 +74,14 @@
 %define		upd			320
 %define		mws			OOO%{upd}
 %define		tag			%(echo %{mws} | tr A-Z a-z)-%{milestone}
-%define		milestone	m11
+%define		milestone	m12
 %define		_tag		%(echo %{tag} | tr - _)
-%define		_rel		4
+%define		_rel		1
 
 Summary:	OpenOffice.org - powerful office suite
 Summary(pl.UTF-8):	OpenOffice.org - potężny pakiet biurowy
 Name:		openoffice.org
-Version:	3.2.0.4
+Version:	3.2.0.5
 Release:	%{_tag}.%{_rel}
 Epoch:		1
 License:	GPL/LGPL
@@ -97,8 +90,8 @@ Group:		X11/Applications
 # git clone git://anongit.freedesktop.org/git/ooo-build/ooo-build
 # cd ooo-build
 # git checkout -b ooo-build-3-2 origin/ooo-build-3-2
-Source0:	ooo-build-20100129.tar.bz2
-# Source0-md5:	dd6841fb58b5e4480d2c6135e4ab7e86
+Source0:	ooo-build-20100206.tar.bz2
+# Source0-md5:	bdffbe28c925b8a0895ed36e3bee63a5
 Source1:	http://download.go-oo.org/DEV300/ooo-cli-prebuilt-3.2.tar.bz2
 # Source1-md5:	b4e4ad9da4cf1033096609c95ad50bdb
 # Upstream OOo sources are available only via git.
@@ -106,45 +99,45 @@ Source1:	http://download.go-oo.org/DEV300/ooo-cli-prebuilt-3.2.tar.bz2
 # ./autogen.sh --without-git --with-lang=ALL --with-distro=PlainLinux
 # ./download
 Source2:	%{tag}-base.tar.bz2
-# Source2-md5:	d2986a9264f1b7812679c587938a046a
+# Source2-md5:	43b9a450c8a273867869e9ec1b665868
 Source3:	%{tag}-calc.tar.bz2
-# Source3-md5:	8987f0268b11b95acb8ee73c9a04b982
+# Source3-md5:	3df77a6472b658da1d52c72149092765
 Source4:	%{tag}-extras.tar.bz2
-# Source4-md5:	e132ea3a576962239ec5ea94ef15e984
+# Source4-md5:	f1b5e88bce0a3789d925ac19d7a69edf
 Source5:	%{tag}-ure.tar.bz2
-# Source5-md5:	8110d7987beddbd569611db22fd0a979
+# Source5-md5:	96f65d08852b2d1309b21f26d0e2d498
 Source6:	%{tag}-writer.tar.bz2
-# Source6-md5:	49cf1a676eaec973612cfdf36c1f5401
+# Source6-md5:	2d33ba1e578bf2fe95682de9f884a24c
 Source7:	%{tag}-impress.tar.bz2
-# Source7-md5:	b214862e9b937bd0f6ab7130b5163188
+# Source7-md5:	1fb73f167d2dc60099ae9e4c43ad8a70
 Source8:	%{tag}-artwork.tar.bz2
-# Source8-md5:	b3b6a4c16c60d3de7a8e012bc423a3c4
+# Source8-md5:	18d08617d191cdb81227be47a1cff3f9
 Source9:	%{tag}-filters.tar.bz2
-# Source9-md5:	1f819d3885b3d08da050d22e0697c907
+# Source9-md5:	ed1264ccee664885bd839f263a8d8429
 Source10:	%{tag}-testing.tar.bz2
-# Source10-md5:	8b5bf9ca8ac82af3d98b8afd4c55d6a6
+# Source10-md5:	5434f569f064ef92255f7b77be9e6220
 Source11:	%{tag}-bootstrap.tar.bz2
-# Source11-md5:	9f1b6875932aaad757f0a1e358353f04
+# Source11-md5:	4d54a8b9bad5051ea1727db1fbab57cb
 Source12:	%{tag}-libs-gui.tar.bz2
-# Source12-md5:	48266d60c39667a180f6c572553adb87
+# Source12-md5:	8cdf3bd50b28219cc1a4cb5f929b75c4
 Source13:	%{tag}-libs-core.tar.bz2
-# Source13-md5:	36f2c1da3b3a5c4a2475dee66ba07bec
+# Source13-md5:	6a61db8aef956d94ba7d152697259391
 Source14:	%{tag}-libs-extern.tar.bz2
-# Source14-md5:	bb9ff9b892512510bd24606c5767b41d
+# Source14-md5:	95f656d4a9fb0c3cc8a08124f330e394
 Source15:	%{tag}-components.tar.bz2
-# Source15-md5:	f67696f26353d43a1868b625a51a46be
+# Source15-md5:	a150971af5b71093daaf8d6e52cb29b7
 Source16:	%{tag}-libs-extern-sys.tar.bz2
-# Source16-md5:	5ee043a08c0f5e352654ed8aed9a4d35
+# Source16-md5:	415082aac94b61d0521d77902857b27e
 Source17:	%{tag}-extensions.tar.bz2
-# Source17-md5:	013a874ed0b18f293f68e8f5e1a22441
+# Source17-md5:	63935a5640c16ed4c9c96541596f192b
 Source18:	%{tag}-sdk.tar.bz2
-# Source18-md5:	d3ee9ccd3659d2e49e41853978b48d56
+# Source18-md5:	e8b9b074120f3b0883d351e0cdccc304
 Source19:	%{tag}-postprocess.tar.bz2
-# Source19-md5:	1d7d89875ec93d5235891f24eb4d27fd
+# Source19-md5:	b4fd3857d52921612fccab7ab293e6b3
 Source20:	%{tag}-help.tar.bz2
-# Source20-md5:	db06182f82522fd1213b6a1466b1f7af
+# Source20-md5:	5c2e4a837921ec64b40e8d86ecc05fc7
 Source21:	%{tag}-l10n.tar.bz2
-# Source21-md5:	8d802f5cfe1feacbe3ae6ccd941f1543
+# Source21-md5:	7862b5e71d788d45a5962d70ba023f1d
 Source22:	http://download.go-oo.org/DEV300/ooo_oxygen_images-2009-06-17.tar.gz
 # Source22-md5:	0b3ffc43231c525db1798495a6676902
 Source50:	http://download.go-oo.org/DEV300/scsolver.2008-10-30.tar.bz2
@@ -157,7 +150,6 @@ Source53:	%{name}-splash.bmp
 Source54:	%{name}-about.bmp
 # patches applied in prep section
 Patch0:		%{name}-PLD.patch
-Patch10:	%{name}-hotfix-kde4.patch
 URL:		http://www.openoffice.org/
 BuildRequires:	/usr/bin/getopt
 BuildRequires:	GConf2-devel
@@ -253,6 +245,7 @@ BuildRequires:	zip
 BuildRequires:	zlib-devel
 %if %{with java}
 BuildRequires:	ant
+BuildRequires:	ant-apache-regexp
 %{?with_system_db:BuildRequires:	db-java >= 4.3}
 BuildRequires:	java-sun >= 1.4.0_00
 BuildRequires:	java-sun-jre-X11
@@ -2420,8 +2413,6 @@ ln -sf %{SOURCE1} %{SOURCE2} %{SOURCE3} %{SOURCE4} \
 	%{SOURCE52} \
 	src
 
-ln -s %{PATCH10} patches/hotfixes/%{basename:%{PATCH10}}.diff
-
 %build
 # Make sure we have /proc mounted - otherwise idlc will fail later.
 if [ ! -f /proc/cpuinfo ]; then
@@ -2610,13 +2601,15 @@ CONFOPTS="\
 	--disable-access \
 	--without-git \
 	--enable-minimizer \
-	--disable-presenter-console \
+	--enable-presenter-console \
 	--enable-pdfimport \
 	--enable-cups \
 	--enable-fontconfig \
 	--enable-lockdown \
 	--disable-layout \
-	--with-use-shell=bash
+	--with-use-shell=bash \
+	--enable-wiki-publisher \
+	--enable-report-builder
 "
 
 
@@ -3813,6 +3806,9 @@ fi
 %{_datadir}/%{name}/share/registry/modules/org/openoffice/Office/Common/Common-brand.xcu
 %dir %{_datadir}/%{name}/share/registry/modules/org/openoffice/Office/UI
 %{_datadir}/%{name}/share/registry/modules/org/openoffice/Office/UI/UI-brand.xcu
+%if %{with i18n}
+%dir %{_datadir}/%{name}/share/registry/modules/org/openoffice/Office/Writer
+%endif
 %dir %{_datadir}/%{name}/share/registry/modules/org/openoffice/Setup
 %{_datadir}/%{name}/share/registry/modules/org/openoffice/Setup/Setup-brand.xcu
 
