@@ -154,6 +154,7 @@ Patch0:		%{name}-PLD.patch
 URL:		http://www.openoffice.org/
 BuildRequires:	/usr/bin/getopt
 BuildRequires:	GConf2-devel
+BuildRequires:	ImageMagick
 BuildRequires:	OpenGL-GLU-devel
 BuildRequires:	OpenGL-devel
 %{?with_system_agg:BuildRequires:	agg-devel}
@@ -218,6 +219,7 @@ BuildRequires:	pam-devel
 BuildRequires:	pango-devel >= 1:1.17.3
 BuildRequires:	perl-Archive-Zip
 BuildRequires:	perl-base
+BuildRequires:	perl-devel
 BuildRequires:	pkgconfig
 BuildRequires:	poppler-devel >= 0.8.0
 BuildRequires:	portaudio-devel
