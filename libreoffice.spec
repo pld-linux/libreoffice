@@ -82,7 +82,7 @@
 Summary:	OpenOffice.org - powerful office suite
 Summary(pl.UTF-8):	OpenOffice.org - potężny pakiet biurowy
 Name:		openoffice.org
-Version:	3.2.0.6
+Version:	3.2.0.7
 Release:	%{_tag}.%{_rel}
 Epoch:		1
 License:	GPL/LGPL
@@ -91,8 +91,8 @@ Group:		X11/Applications
 # git clone git://anongit.freedesktop.org/git/ooo-build/ooo-build
 # cd ooo-build
 # git checkout -b ooo-build-3-2 origin/ooo-build-3-2
-Source0:	ooo-build-20100219.tar.bz2
-# Source0-md5:	5cf111cc94afd1f8be7a6a6cc05e5cdf
+Source0:	ooo-build-20100227.tar.bz2
+# Source0-md5:	cfcbd1d685e62e56a3b6e12750ed3291
 Source1:	http://download.go-oo.org/DEV300/ooo-cli-prebuilt-3.2.tar.bz2
 # Source1-md5:	b4e4ad9da4cf1033096609c95ad50bdb
 # Upstream OOo sources are available only via git.
