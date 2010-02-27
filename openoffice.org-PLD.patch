@@ -1,6 +1,7 @@
---- ooo-build/patches/dev300/apply	2009-12-19 12:50:32.394024392 +0100
-+++ ooo-build/patches/dev300/apply.new	2009-12-19 12:50:59.453396860 +0100
-@@ -92,7 +92,7 @@
+diff -urN ooo-build/patches/dev300/apply ooo-build.new//patches/dev300/apply
+--- ooo-build/patches/dev300/apply	2010-02-27 00:08:04.631918035 +0100
++++ ooo-build.new//patches/dev300/apply	2010-02-27 00:14:48.698752669 +0100
+@@ -93,7 +93,7 @@
  # Ark Linux
  Ark: LinuxCommon, NotDebian, ArkOnly, BerkeleyDB43, KDE4
  # www.pld-linux.org
@@ -9,7 +10,16 @@
  PLD: PLDBase
  PLD64: PLDBase
  # Mandriva Linux
-@@ -1331,9 +1331,6 @@
+@@ -875,7 +875,7 @@
+ calc-xls-import-slanted-border-oox.diff, n#549728, i#38709, kohei
+ 
+ # TAB key to auto-complete word and move the cell cursor.
+-calc-auto-tab-complete.diff, i#18748, muthusuba/kohei
++# calc-auto-tab-complete.diff, i#18748, muthusuba/kohei
+ 
+ # Speed up filtering performance with notes.
+ calc-perf-filtering-with-notes.diff, n#556927, kohei
+@@ -1402,9 +1402,6 @@
  [ PLDOnly ]
  SectionOwner => arekm
  
