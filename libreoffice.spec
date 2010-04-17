@@ -250,14 +250,14 @@ BuildRequires:	zlib-devel
 BuildRequires:	ant
 BuildRequires:	ant-apache-regexp
 %{?with_system_db:BuildRequires:	db-java >= 4.3}
-BuildRequires:	java-sun >= 1.4.0_00
-BuildRequires:	java-sun-jre-X11
-BuildRequires:	java-sun-tools
+BuildRequires:	jdk >= 1.4.0_00
+BuildRequires:	jre-X11
 %endif
 BuildRequires:	xulrunner-devel
 BuildConflicts:	xmlsec1-devel
 # contains (dlopened) *.so libs
 BuildConflicts:	xmlsec1-nss
+BuildConflicts:	java-gcj-compat
 Requires:	%{name}-base = %{epoch}:%{version}-%{release}
 Requires:	%{name}-calc = %{epoch}:%{version}-%{release}
 Requires:	%{name}-draw = %{epoch}:%{version}-%{release}
