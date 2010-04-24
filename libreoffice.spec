@@ -77,14 +77,14 @@
 %define		tag			%(echo %{mws} | tr A-Z a-z)-%{milestone}
 %define		milestone	m12
 %define		_tag		%(echo %{tag} | tr - _)
-%define		_rel		2
+%define		_rel		3
 
 Summary:	OpenOffice.org - powerful office suite
 Summary(pl.UTF-8):	OpenOffice.org - potężny pakiet biurowy
 Name:		openoffice.org
 Version:	3.2.0.7
 Release:	%{_tag}.%{_rel}
-Epoch:		2
+Epoch:		1
 License:	GPL/LGPL
 Group:		X11/Applications
 # we use git because released tarballs are buggy too often
