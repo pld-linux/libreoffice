@@ -84,7 +84,7 @@ Summary(pl.UTF-8):	OpenOffice.org - potężny pakiet biurowy
 Name:		openoffice.org
 Version:	3.2.0.7
 Release:	%{_tag}.%{_rel}
-Epoch:		1
+Epoch:		2
 License:	GPL/LGPL
 Group:		X11/Applications
 # we use git because released tarballs are buggy too often
@@ -180,7 +180,7 @@ BuildRequires:	gperf
 BuildRequires:	gstreamer-devel >= 0.10.0
 BuildRequires:	gstreamer-plugins-base-devel >= 0.10.0
 BuildRequires:	gtk+2-devel >= 2:2.10
-%{?with_system_hsqldb:BuildRequires:	hsqldb >= 1.8.0.9}
+%{?with_system_hsqldb:BuildRequires:	java-hsqldb}
 %{?with_system_hunspell:BuildRequires:	hunspell-devel >=1.2.2}
 %{?with_icecream:BuildRequires:	icecream}
 BuildRequires:	icu
@@ -354,7 +354,7 @@ Requires:	%{name}-ure = %{epoch}:%{version}-%{release}
 # libcups.so.2 is dlopened (in cupsmgr.cxx); maybe Suggests instead?
 Requires:	cups-lib
 Requires:	fonts-TTF-OpenSymbol
-%{?with_system_hsqldb:Requires:	hsqldb >= 1.8.0}
+%{?with_system_hsqldb:Requires:	java-hsqldb}
 %{?with_system_beanshell:Requires:	java-beanshell}
 Requires:	libstdc++ >= 5:3.2.1
 Requires:	mktemp
