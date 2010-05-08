@@ -92,7 +92,7 @@ Group:		X11/Applications
 # cd ooo-build
 # git checkout -b ooo-build-3-2 origin/ooo-build-3-2
 Source0:	ooo-build-20100506.tar.bz2
-# Source0-md5:	cfcbd1d685e62e56a3b6e12750ed3291
+# Source0-md5:	65990cb6b5a7f7ee4db882812e93e0d0
 Source1:	http://download.go-oo.org/DEV300/ooo-cli-prebuilt-3.2.tar.bz2
 # Source1-md5:	b4e4ad9da4cf1033096609c95ad50bdb
 # Upstream OOo sources are available only via git.
