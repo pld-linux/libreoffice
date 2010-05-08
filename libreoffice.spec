@@ -77,12 +77,12 @@
 %define		tag			%(echo %{mws} | tr A-Z a-z)-%{milestone}
 %define		milestone	m12
 %define		_tag		%(echo %{tag} | tr - _)
-%define		_rel		3
+%define		_rel		1
 
 Summary:	OpenOffice.org - powerful office suite
 Summary(pl.UTF-8):	OpenOffice.org - potężny pakiet biurowy
 Name:		openoffice.org
-Version:	3.2.0.7
+Version:	3.2.0.10
 Release:	%{_tag}.%{_rel}
 Epoch:		1
 License:	GPL/LGPL
@@ -91,7 +91,7 @@ Group:		X11/Applications
 # git clone git://anongit.freedesktop.org/git/ooo-build/ooo-build
 # cd ooo-build
 # git checkout -b ooo-build-3-2 origin/ooo-build-3-2
-Source0:	ooo-build-20100227.tar.bz2
+Source0:	ooo-build-20100506.tar.bz2
 # Source0-md5:	cfcbd1d685e62e56a3b6e12750ed3291
 Source1:	http://download.go-oo.org/DEV300/ooo-cli-prebuilt-3.2.tar.bz2
 # Source1-md5:	b4e4ad9da4cf1033096609c95ad50bdb
@@ -151,6 +151,7 @@ Source53:	%{name}-splash.bmp
 Source54:	%{name}-about.bmp
 # patches applied in prep section
 Patch0:		%{name}-PLD.patch
+Patch10:	%{name}-hotfix-gcc45.patch
 URL:		http://www.openoffice.org/
 BuildRequires:	/usr/bin/getopt
 BuildRequires:	GConf2-devel
@@ -2415,6 +2416,8 @@ ln -sf %{SOURCE1} %{SOURCE2} %{SOURCE3} %{SOURCE4} \
 	%{SOURCE21} %{SOURCE22} %{SOURCE50} %{SOURCE51} \
 	%{SOURCE52} \
 	src
+
+ln -s %{PATCH10} patches/hotfixes/%{basename:%{PATCH10}}.diff
 
 %build
 # Make sure we have /proc mounted - otherwise idlc will fail later.
