@@ -77,7 +77,7 @@
 %define		tag			%(echo %{mws} | tr A-Z a-z)-%{milestone}
 %define		milestone	m12
 %define		_tag		%(echo %{tag} | tr - _)
-%define		_rel		1
+%define		_rel		2
 
 Summary:	OpenOffice.org - powerful office suite
 Summary(pl.UTF-8):	OpenOffice.org - potężny pakiet biurowy
