@@ -1,0 +1,13 @@
+diff -urN libreoffice-build-3.3.0.1/patches/dev300/apply libreoffice-build-3.3.0.1.new//patches/dev300/apply
+--- libreoffice-build-3.3.0.1/patches/dev300/apply	2010-11-30 21:15:58.000000000 +0100
++++ libreoffice-build-3.3.0.1.new//patches/dev300/apply	2010-12-17 19:18:24.784697341 +0100
+@@ -817,9 +817,6 @@
+ [ PLDOnly ]
+ SectionOwner => arekm
+ 
+-# fix for macro browser crash
+-sfx2-badscript.diff, i#67976
+-
+ [ BuildBits ]
+ # work around http://gcc.gnu.org/bugzilla/show_bug.cgi?id=22392
+ svx-customshapes-NOOPTFILES.diff, martink
