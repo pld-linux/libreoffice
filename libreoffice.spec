@@ -440,6 +440,55 @@ Wiązania Pythona dla modelu komponentów UNO LibreOffice. Pozwala na
 oskryptowanie zarówno na zewnątrz LibreOffice, jak i na używanie
 skryptów w Pythonie w wewnętrznym module skryptów LibreOffice.
 
+%package pdfimport
+Summary:	PDF Importer for LibreOffice Draw
+Group:		X11/Applications
+Requires:	%{name}-draw = %{version}-%{release}
+
+%description pdfimport
+The PDF Importer imports PDF into drawing documents to preserve layout 
+and enable basic editing of PDF documents.
+
+%package presentation-minimizer
+Summary:	Shrink LibreOffice presentations
+Group:		X11/Applications
+Requires:	%{name}-impress = %{version}-%{release}
+
+%description presentation-minimizer
+The Presentation Minimizer is used to reduce the file size of the current 
+presentation. Images will be compressed, and data that is no longer needed will 
+be removed.
+
+%package presenter-screen
+Summary:	Presenter Screen for LibreOffice presentations
+Group:		X11/Applications
+Requires:	%{name}-impress = %{version}-%{release}
+
+%description presenter-screen
+The Presenter Screen is used to provides information on a second screen, that 
+typically is not visible to the audience when delivering a presentation. e.g. 
+slide notes.
+
+%package report-builder
+Summary:	Create database reports from LibreOffice
+Group:		X11/Applications
+Requires:	%{name}-base = %{version}-%{release}
+
+%description report-builder
+Creates database reports from LibreOffice databases. The report builder can
+define group and page headers as well as group, page footers and calculation
+fields to accomplish complex database reports.
+
+%package wiki-publisher
+Summary:	Create Wiki articles on MediaWiki servers with LibreOffice
+Group:		X11/Applications
+Requires:	%{name}-writer = %{version}-%{release}
+
+%description wiki-publisher
+The Wiki Publisher enables you to create Wiki articles on MediaWiki servers 
+without having to know the syntax of the MediaWiki markup language. Publish 
+your new and existing documents transparently with writer to a wiki page.
+
 %package base
 Summary:	Database frontend for LibreOffice
 Summary(pl.UTF-8):	Frontend do baz danych dla LibreOffice
@@ -4217,6 +4266,48 @@ fi
 
 # samples there
 %{ooobasisdir}/share/Scripts/python
+
+# FIXME: extensions should be moved to libdir (they provide arch-dependent files)
+%files pdfimport
+%defattr(644,root,root,755)
+%dir %{_datadir}/%{name}/share/extensions/pdfimport
+%attr(755,root,root) %{_datadir}/%{name}/share/extensions/pdfimport/pdfimport.uno.so
+%attr(755,root,root) %{_datadir}/%{name}/share/extensions/pdfimport/xpdfimport
+%{_datadir}/%{name}/share/extensions/pdfimport/META-INF
+%{_datadir}/%{name}/share/extensions/pdfimport/basic
+%{_datadir}/%{name}/share/extensions/pdfimport/description.xml
+%{_datadir}/%{name}/share/extensions/pdfimport/help
+%{_datadir}/%{name}/share/extensions/pdfimport/registration
+%{_datadir}/%{name}/share/extensions/pdfimport/*.xcu
+%{_datadir}/%{name}/share/extensions/pdfimport/*.pdf
+
+%files presentation-minimizer
+%defattr(644,root,root,755)
+%dir %{_datadir}/%{name}/share/extensions/presentation-minimizer
+%attr(755,root,root) %{_datadir}/%{name}/share/extensions/presentation-minimizer/SunPresentationMinimizer.uno.so
+%{_datadir}/%{name}/share/extensions/presentation-minimizer/META-INF
+%{_datadir}/%{name}/share/extensions/presentation-minimizer/bitmaps
+%{_datadir}/%{name}/share/extensions/presentation-minimizer/description.xml
+%{_datadir}/%{name}/share/extensions/presentation-minimizer/help
+%{_datadir}/%{name}/share/extensions/presentation-minimizer/registr*
+
+%files presenter-screen
+%defattr(644,root,root,755)
+%dir %{_datadir}/%{name}/share/extensions/presenter-screen
+%attr(755,root,root) %{_datadir}/%{name}/share/extensions/presenter-screen/PresenterScreen.uno.so
+%{_datadir}/%{name}/share/extensions/presenter-screen/META-INF
+%{_datadir}/%{name}/share/extensions/presenter-screen/bitmaps
+%{_datadir}/%{name}/share/extensions/presenter-screen/description.xml
+%{_datadir}/%{name}/share/extensions/presenter-screen/help
+%{_datadir}/%{name}/share/extensions/presenter-screen/registry
+
+%files report-builder
+%defattr(644,root,root,755)
+%{_datadir}/%{name}/share/extensions/report-builder
+
+%files wiki-publisher
+%defattr(644,root,root,755)
+%{_datadir}/%{name}/share/extensions/wiki-publisher
 
 %if %{with mozilla}
 %files -n browser-plugin-%{name}
