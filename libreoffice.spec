@@ -473,6 +473,7 @@ slide notes.
 Summary:	Create database reports from LibreOffice
 Group:		X11/Applications
 Requires:	%{name}-base = %{version}-%{release}
+Requires:	java-commons-logging
 
 %description report-builder
 Creates database reports from LibreOffice databases. The report builder can
@@ -483,6 +484,10 @@ fields to accomplish complex database reports.
 Summary:	Create Wiki articles on MediaWiki servers with LibreOffice
 Group:		X11/Applications
 Requires:	%{name}-writer = %{version}-%{release}
+Requires:	java-commons-codec
+Requires:	java-commons-httpclient
+Requires:	java-commons-lang
+Requires:	java-commons-logging
 
 %description wiki-publisher
 The Wiki Publisher enables you to create Wiki articles on MediaWiki servers 
@@ -2580,10 +2585,10 @@ Requires:	%{name}
 Requires:	bash-completion
 Obsoletes:	bash-completion-openoffice
 
-%description -n bash-completion-openoffice
+%description -n bash-completion-%{name}
 bash-completion for LibreOffice.
 
-%description -n bash-completion-openoffice -l pl.UTF-8
+%description -n bash-completion-%{name} -l pl.UTF-8
 bashowe uzupełnianie nazw dla LibreOffice.
 
 %prep
@@ -3209,6 +3214,7 @@ fi
 
 %files core
 %defattr(644,root,root,755)
+%doc %{_libdir}/%{name}/CREDITS*
 %doc %{_libdir}/%{name}/LICENSE*
 %doc %{_libdir}/%{name}/*README*
 
@@ -3251,7 +3257,6 @@ fi
 %dir %{ooobasisdir}/program
 %attr(755,root,root) %{ooobasisdir}/program/OGLTrans.uno.so
 %attr(755,root,root) %{ooobasisdir}/program/basprov*.uno.so
-#%attr(755,root,root) %{ooobasisdir}/program/behelper.uno.so
 %attr(755,root,root) %{ooobasisdir}/program/cairocanvas.uno.so
 %attr(755,root,root) %{ooobasisdir}/program/canvasfactory.uno.so
 %attr(755,root,root) %{ooobasisdir}/program/cde-open-url
@@ -3273,7 +3278,6 @@ fi
 %attr(755,root,root) %{ooobasisdir}/program/ldapbe2.uno.so
 %attr(755,root,root) %{ooobasisdir}/program/libaccl[ipx].so
 %attr(755,root,root) %{ooobasisdir}/program/libadabasl[ipx].so
-#%attr(755,root,root) %{ooobasisdir}/program/libaggl[ipx].so
 %attr(755,root,root) %{ooobasisdir}/program/libavmediagst.so
 %attr(755,root,root) %{ooobasisdir}/program/libavmedial[ipx].so
 %attr(755,root,root) %{ooobasisdir}/program/libbasctll[ipx].so
@@ -3321,14 +3325,12 @@ fi
 %attr(755,root,root) %{ooobasisdir}/program/libdict_ja.so
 %attr(755,root,root) %{ooobasisdir}/program/libdict_zh.so
 %attr(755,root,root) %{ooobasisdir}/program/libdrawinglayerl[ipx].so
-###%attr(755,root,root) %{ooobasisdir}/program/libdtransX11l[ipx].so
 %attr(755,root,root) %{ooobasisdir}/program/libeditengl[ipx].so
 %attr(755,root,root) %{ooobasisdir}/program/libeggtrayl[ipx].so
 %attr(755,root,root) %{ooobasisdir}/program/libegil[ipx].so
 %attr(755,root,root) %{ooobasisdir}/program/libembobj.so
 %attr(755,root,root) %{ooobasisdir}/program/libemboleobj.so
 %attr(755,root,root) %{ooobasisdir}/program/libemel[ipx].so
-###%attr(755,root,root) %{ooobasisdir}/program/libempl[ipx].so
 %attr(755,root,root) %{ooobasisdir}/program/libepbl[ipx].so
 %attr(755,root,root) %{ooobasisdir}/program/libepgl[ipx].so
 %attr(755,root,root) %{ooobasisdir}/program/libeppl[ipx].so
@@ -3351,7 +3353,6 @@ fi
 %attr(755,root,root) %{ooobasisdir}/program/libfwkl[ipx].so
 %attr(755,root,root) %{ooobasisdir}/program/libfwll[ipx].so
 %attr(755,root,root) %{ooobasisdir}/program/libfwml[ipx].so
-#%attr(755,root,root) %{ooobasisdir}/program/libgol[ipx].so
 %attr(755,root,root) %{ooobasisdir}/program/libguesslangl[ipx].so
 %attr(755,root,root) %{ooobasisdir}/program/libhelplinkerl[ipx].so
 %{!?with_system_hunspell:%attr(755,root,root) %{ooobasisdir}/program/libhunspell.so}
@@ -3373,7 +3374,6 @@ fi
 %attr(755,root,root) %{ooobasisdir}/program/libiral[ipx].so
 %attr(755,root,root) %{ooobasisdir}/program/libitgl[ipx].so
 %attr(755,root,root) %{ooobasisdir}/program/libitil[ipx].so
-###%attr(755,root,root) %{ooobasisdir}/program/libjl*_g.so
 %attr(755,root,root) %{ooobasisdir}/program/liblegacy_binfiltersl[ipx].so
 %attr(755,root,root) %{ooobasisdir}/program/liblngl[ipx].so
 %attr(755,root,root) %{ooobasisdir}/program/liblnthl[ipx].so
@@ -3397,10 +3397,8 @@ fi
 %attr(755,root,root) %{ooobasisdir}/program/libpcrl[ipx].so
 %attr(755,root,root) %{ooobasisdir}/program/libpdffilterl[ipx].so
 %attr(755,root,root) %{ooobasisdir}/program/libpll[ipx].so
-#%attr(755,root,root) %{ooobasisdir}/program/libpptxl[ipx].so
 %attr(755,root,root) %{ooobasisdir}/program/libpreloadl[ipx].so
 %attr(755,root,root) %{ooobasisdir}/program/libprotocolhandlerl[ipx].so
-###%attr(755,root,root) %{ooobasisdir}/program/libpspl[ipx].so
 %attr(755,root,root) %{ooobasisdir}/program/libqstart_gtkl[ipx].so
 %attr(755,root,root) %{ooobasisdir}/program/librecentfile.so
 %attr(755,root,root) %{ooobasisdir}/program/libresl[ipx].so
@@ -3426,13 +3424,11 @@ fi
 %attr(755,root,root) %{ooobasisdir}/program/libsvll[ipx].so
 %attr(755,root,root) %{ooobasisdir}/program/libsvtl[ipx].so
 %attr(755,root,root) %{ooobasisdir}/program/libsvxcorel[ipx].so
-#%attr(755,root,root) %{ooobasisdir}/program/libsvxmsfilterl[ipx].so
 %attr(755,root,root) %{ooobasisdir}/program/libsvxl[ipx].so
 %attr(755,root,root) %{ooobasisdir}/program/libswl[ipx].so
 %attr(755,root,root) %{ooobasisdir}/program/libtextcat.so
 %attr(755,root,root) %{ooobasisdir}/program/libtextconv_dict.so
 %attr(755,root,root) %{ooobasisdir}/program/libtextconversiondlgsl[ipx].so
-#%attr(755,root,root) %{ooobasisdir}/program/libtful[ipx].so
 %attr(755,root,root) %{ooobasisdir}/program/libtkl[ipx].so
 %attr(755,root,root) %{ooobasisdir}/program/libtll[ipx].so
 %attr(755,root,root) %{ooobasisdir}/program/libtvhlp1.so
@@ -3455,7 +3451,6 @@ fi
 %attr(755,root,root) %{ooobasisdir}/program/libvcll[ipx].so
 %attr(755,root,root) %{ooobasisdir}/program/libvclplug_genl[ipx].so
 %attr(755,root,root) %{ooobasisdir}/program/libvclplug_svpl[ipx].so
-#%attr(755,root,root) %{ooobasisdir}/program/libvos3gcc3.so
 %attr(755,root,root) %{ooobasisdir}/program/libxcrl[ipx].so
 %attr(755,root,root) %{ooobasisdir}/program/libxmlfal[ipx].so
 %attr(755,root,root) %{ooobasisdir}/program/libxmlfdl[ipx].so
@@ -3522,7 +3517,6 @@ fi
 %{ooobasisdir}/program/cli_ure.dll
 %endif
 
-#%{ooobasisdir}/program/configmgrrc
 %{ooobasisdir}/program/fundamentalbasisrc
 %{ooobasisdir}/program/gengalrc
 %{ooobasisdir}/program/legacy_binfilters.rdb
@@ -3546,13 +3540,11 @@ fi
 %{ooobasisdir}/program/classes/XSLTFilter.jar
 %{ooobasisdir}/program/classes/XSLTValidate.jar
 %{ooobasisdir}/program/classes/agenda.jar
-###%{ooobasisdir}/program/classes/classes.jar
 %{ooobasisdir}/program/classes/commonwizards.jar
 %{ooobasisdir}/program/classes/fax.jar
 %{ooobasisdir}/program/classes/form.jar
 %{!?with_system_hsqldb:%{ooobasisdir}/program/classes/hsqldb.jar}
 %{ooobasisdir}/program/classes/js.jar
-###%{ooobasisdir}/program/classes/jut.jar
 %{ooobasisdir}/program/classes/letter.jar
 %{ooobasisdir}/program/classes/officebean.jar
 %{ooobasisdir}/program/classes/query.jar
@@ -3622,7 +3614,6 @@ fi
 %{ooobasisdir}/program/resource/svxen-US.res
 %{ooobasisdir}/program/resource/swen-US.res
 %{ooobasisdir}/program/resource/textconversiondlgsen-US.res
-#%{ooobasisdir}/program/resource/tfuen-US.res
 %{ooobasisdir}/program/resource/tken-US.res
 %{ooobasisdir}/program/resource/tplen-US.res
 %{ooobasisdir}/program/resource/updchken-US.res
@@ -3651,58 +3642,38 @@ fi
 %{ooobasisdir}/share/config/images_classic.zip
 %{ooobasisdir}/share/config/images_crystal.zip
 %{ooobasisdir}/share/config/images_hicontrast.zip
-#%{ooobasisdir}/share/config/images_industrial.zip
 %{ooobasisdir}/share/config/images_oxygen.zip
 %{ooobasisdir}/share/config/images_tango.zip
 %{ooobasisdir}/share/config/javasettingsunopkginstall.xml
 %{ooobasisdir}/share/config/*.xpm
 %dir %{ooobasisdir}/share/config/soffice.cfg
-#%{ooobasisdir}/share/config/soffice.cfg/global
 %dir %{ooobasisdir}/share/config/soffice.cfg/modules
 %{ooobasisdir}/share/config/soffice.cfg/modules/BasicIDE
 %{ooobasisdir}/share/config/soffice.cfg/modules/StartModule
 %dir %{ooobasisdir}/share/config/soffice.cfg/modules/dbapp
-#%dir %{ooobasisdir}/share/config/soffice.cfg/modules/dbapp/accelerator
 %dir %{ooobasisdir}/share/config/soffice.cfg/modules/dbbrowser
-#%dir %{ooobasisdir}/share/config/soffice.cfg/modules/dbbrowser/accelerator
 %dir %{ooobasisdir}/share/config/soffice.cfg/modules/dbquery
-#%dir %{ooobasisdir}/share/config/soffice.cfg/modules/dbquery/accelerator
 %dir %{ooobasisdir}/share/config/soffice.cfg/modules/dbreport
-#%dir %{ooobasisdir}/share/config/soffice.cfg/modules/dbreport/accelerator
 %dir %{ooobasisdir}/share/config/soffice.cfg/modules/dbtdata
-#%dir %{ooobasisdir}/share/config/soffice.cfg/modules/dbtdata/accelerator
 %dir %{ooobasisdir}/share/config/soffice.cfg/modules/scalc
-#%dir %{ooobasisdir}/share/config/soffice.cfg/modules/scalc/accelerator
 %{ooobasisdir}/share/config/soffice.cfg/modules/schart
 %dir %{ooobasisdir}/share/config/soffice.cfg/modules/sdraw
-###%dir %{ooobasisdir}/share/config/soffice.cfg/modules/sdraw/accelerator
 %dir %{ooobasisdir}/share/config/soffice.cfg/modules/sglobal
-#%dir %{ooobasisdir}/share/config/soffice.cfg/modules/sglobal/accelerator
-#%{ooobasisdir}/share/config/soffice.cfg/modules/sglobal/accelerator/en-US
 %{ooobasisdir}/share/config/soffice.cfg/modules/sglobal/menubar
 %{ooobasisdir}/share/config/soffice.cfg/modules/sglobal/statusbar
 %{ooobasisdir}/share/config/soffice.cfg/modules/sglobal/toolbar
 %dir %{ooobasisdir}/share/config/soffice.cfg/modules/sweb
-#%dir %{ooobasisdir}/share/config/soffice.cfg/modules/sweb/accelerator
 %dir %{ooobasisdir}/share/config/soffice.cfg/modules/simpress
-#%dir %{ooobasisdir}/share/config/soffice.cfg/modules/simpress/accelerator
 %dir %{ooobasisdir}/share/config/soffice.cfg/modules/swform
-#%dir %{ooobasisdir}/share/config/soffice.cfg/modules/swform/accelerator
-#%{ooobasisdir}/share/config/soffice.cfg/modules/swform/accelerator/en-US
 %{ooobasisdir}/share/config/soffice.cfg/modules/swform/menubar
 %{ooobasisdir}/share/config/soffice.cfg/modules/swform/statusbar
 %{ooobasisdir}/share/config/soffice.cfg/modules/swform/toolbar
 %dir %{ooobasisdir}/share/config/soffice.cfg/modules/swreport
-#%dir %{ooobasisdir}/share/config/soffice.cfg/modules/swreport/accelerator
-#%{ooobasisdir}/share/config/soffice.cfg/modules/swreport/accelerator/en-US
 %{ooobasisdir}/share/config/soffice.cfg/modules/swreport/menubar
 %{ooobasisdir}/share/config/soffice.cfg/modules/swreport/statusbar
 %{ooobasisdir}/share/config/soffice.cfg/modules/swreport/toolbar
 %dir %{ooobasisdir}/share/config/soffice.cfg/modules/swriter
-#%dir %{ooobasisdir}/share/config/soffice.cfg/modules/swriter/accelerator
 %dir %{ooobasisdir}/share/config/soffice.cfg/modules/swxform
-#%dir %{ooobasisdir}/share/config/soffice.cfg/modules/swxform/accelerator
-#%{ooobasisdir}/share/config/soffice.cfg/modules/swxform/accelerator/en-US
 %{ooobasisdir}/share/config/soffice.cfg/modules/swxform/menubar
 %{ooobasisdir}/share/config/soffice.cfg/modules/swxform/statusbar
 %{ooobasisdir}/share/config/soffice.cfg/modules/swxform/toolbar
@@ -3786,13 +3757,13 @@ fi
 %dir %{_datadir}/%{name}
 %dir %{_datadir}/%{name}/licenses
 %{_datadir}/%{name}/licenses/LICENSE_en-US
-#%{_datadir}/%{name}/licenses/LICENSE_en-US.html
 %dir %{_datadir}/%{name}/readmes
 %{_datadir}/%{name}/readmes/README_en-US
-#%{_datadir}/%{name}/readmes/README_en-US.html
 %dir %{_datadir}/%{name}/share
 %dir %{_datadir}/%{name}/share/config
 %{_datadir}/%{name}/share/config/images_brand.zip
+%dir %{_datadir}/%{name}/share/extensions
+%{_datadir}/%{name}/share/extensions/package.txt
 %dir %{_datadir}/%{name}/share/readme
 %{_datadir}/%{name}/share/readme/LICENSE_en-US*
 %{_datadir}/%{name}/share/readme/README_en-US*
@@ -4277,6 +4248,7 @@ fi
 %{_datadir}/%{name}/share/extensions/pdfimport/basic
 %{_datadir}/%{name}/share/extensions/pdfimport/description.xml
 %{_datadir}/%{name}/share/extensions/pdfimport/help
+%{_datadir}/%{name}/share/extensions/pdfimport/images
 %{_datadir}/%{name}/share/extensions/pdfimport/registration
 %{_datadir}/%{name}/share/extensions/pdfimport/*.xcu
 %{_datadir}/%{name}/share/extensions/pdfimport/*.pdf
