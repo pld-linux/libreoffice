@@ -25,7 +25,7 @@
 %bcond_without	system_xalan
 %bcond_without	system_xerces
 %bcond_without	system_xml_apis
-%bcond_without	system_hsqldb
+%bcond_with	system_hsqldb
 %bcond_with	system_agg		# with system agg
 %bcond_without	system_hunspell
 %bcond_without	system_myspell
@@ -55,16 +55,16 @@
 Summary:	LibreOffice - powerful office suite
 Summary(pl.UTF-8):	LibreOffice - potężny pakiet biurowy
 Name:		libreoffice
-Version:	3.2.99.2
-Release:	%{_tag}.%{_rel}
-Epoch:		1
+Version:	3.3.0.1
+Release:	0.1
 License:	GPL/LGPL
 Group:		X11/Applications
 # we use git because released tarballs are buggy too often
-# git clone git://anongit.freedesktop.org/git/libreoffice
-# cd libreoffice
+# git clone git://anongit.freedesktop.org/git/libreoffice/build
+# cd build
 # git checkout -b ooo-build-3-2 origin/ooo-build-3-2
-Source0:	http://download.documentfoundation.org/libreoffice/src/libreoffice-build-3.2.99.2.tar.gz
+#Source0:	libreoffice-build-20101031.tar.bz2
+Source0:	libreoffice-build-%{version}.tar.gz
 # Source0-md5:	65990cb6b5a7f7ee4db882812e93e0d0
 Source1:	http://download.go-oo.org/DEV300/ooo-cli-prebuilt-3.3.tar.bz2
 # Source1-md5:	b4e4ad9da4cf1033096609c95ad50bdb
@@ -72,60 +72,94 @@ Source1:	http://download.go-oo.org/DEV300/ooo-cli-prebuilt-3.3.tar.bz2
 # cd ooo-build
 # ./autogen.sh --without-git --with-lang=ALL --with-distro=PlainLinux
 # ./download
-Source2:	%{tag}-base.tar.bz2
-# Source2-md5:	43b9a450c8a273867869e9ec1b665868
-Source3:	%{tag}-calc.tar.bz2
-# Source3-md5:	3df77a6472b658da1d52c72149092765
-Source4:	%{tag}-extras.tar.bz2
-# Source4-md5:	f1b5e88bce0a3789d925ac19d7a69edf
-Source5:	%{tag}-ure.tar.bz2
-# Source5-md5:	96f65d08852b2d1309b21f26d0e2d498
-Source6:	%{tag}-writer.tar.bz2
-# Source6-md5:	2d33ba1e578bf2fe95682de9f884a24c
-Source7:	%{tag}-impress.tar.bz2
-# Source7-md5:	1fb73f167d2dc60099ae9e4c43ad8a70
-Source8:	%{tag}-artwork.tar.bz2
+Source2:	http://download.documentfoundation.org/libreoffice/src/libreoffice-artwork-%{version}.tar.bz2
+# Source2-md5:	18d08617d191cdb81227be47a1cff3f9
+Source3:	http://download.documentfoundation.org/libreoffice/src/libreoffice-base-%{version}.tar.bz2
+# Source3-md5:	18d08617d191cdb81227be47a1cff3f9
+Source4:	http://download.documentfoundation.org/libreoffice/src/libreoffice-bootstrap-%{version}.tar.bz2
+# Source4-md5:	18d08617d191cdb81227be47a1cff3f9
+Source5:	http://download.documentfoundation.org/libreoffice/src/libreoffice-calc-%{version}.tar.bz2
+# Source5-md5:	18d08617d191cdb81227be47a1cff3f9
+Source6:	http://download.documentfoundation.org/libreoffice/src/libreoffice-components-%{version}.tar.bz2
+# Source6-md5:	18d08617d191cdb81227be47a1cff3f9
+Source7:	http://download.documentfoundation.org/libreoffice/src/libreoffice-extensions-%{version}.tar.bz2
+# Source7-md5:	18d08617d191cdb81227be47a1cff3f9
+Source8:	http://download.documentfoundation.org/libreoffice/src/libreoffice-extras-%{version}.tar.bz2
 # Source8-md5:	18d08617d191cdb81227be47a1cff3f9
-Source9:	%{tag}-filters.tar.bz2
-# Source9-md5:	ed1264ccee664885bd839f263a8d8429
-Source10:	%{tag}-testing.tar.bz2
-# Source10-md5:	5434f569f064ef92255f7b77be9e6220
-Source11:	%{tag}-bootstrap.tar.bz2
-# Source11-md5:	4d54a8b9bad5051ea1727db1fbab57cb
-Source12:	%{tag}-libs-gui.tar.bz2
-# Source12-md5:	8cdf3bd50b28219cc1a4cb5f929b75c4
-Source13:	%{tag}-libs-core.tar.bz2
-# Source13-md5:	6a61db8aef956d94ba7d152697259391
-Source14:	%{tag}-libs-extern.tar.bz2
-# Source14-md5:	95f656d4a9fb0c3cc8a08124f330e394
-Source15:	%{tag}-components.tar.bz2
-# Source15-md5:	a150971af5b71093daaf8d6e52cb29b7
-Source16:	%{tag}-libs-extern-sys.tar.bz2
-# Source16-md5:	415082aac94b61d0521d77902857b27e
-Source17:	%{tag}-extensions.tar.bz2
-# Source17-md5:	63935a5640c16ed4c9c96541596f192b
-Source18:	%{tag}-sdk.tar.bz2
-# Source18-md5:	e8b9b074120f3b0883d351e0cdccc304
-Source19:	%{tag}-postprocess.tar.bz2
-# Source19-md5:	b4fd3857d52921612fccab7ab293e6b3
-Source20:	%{tag}-help.tar.bz2
-# Source20-md5:	5c2e4a837921ec64b40e8d86ecc05fc7
-Source21:	%{tag}-l10n.tar.bz2
-# Source21-md5:	7862b5e71d788d45a5962d70ba023f1d
-Source22:	http://download.go-oo.org/DEV300/ooo_oxygen_images-2009-06-17.tar.gz
-# Source22-md5:	0b3ffc43231c525db1798495a6676902
-Source50:	http://download.go-oo.org/DEV300/scsolver.2008-10-30.tar.bz2
-# Source50-md5:	04181e5ef82973eb349d3122a19d2274
-Source51:	http://download.go-oo.org/SRC/biblio.tar.bz2
-# Source51-md5:	1948e39a68f12bfa0b7eb309c14d940c
-Source52:	http://download.go-oo.org/SRC/extras-3.tar.bz2
-# Source52-md5:	36f323a55ee83e9dc968e1b92569b62a
-Source53:	%{name}-splash.bmp
-Source54:	%{name}-about.bmp
+Source9:	http://download.documentfoundation.org/libreoffice/src/libreoffice-filters-%{version}.tar.bz2
+# Source9-md5:	18d08617d191cdb81227be47a1cff3f9
+Source10:	http://download.documentfoundation.org/libreoffice/src/libreoffice-help-%{version}.tar.bz2
+# Source10-md5:	18d08617d191cdb81227be47a1cff3f9
+Source11:	http://download.documentfoundation.org/libreoffice/src/libreoffice-impress-%{version}.tar.bz2
+# Source11-md5:	18d08617d191cdb81227be47a1cff3f9
+Source12:	http://download.documentfoundation.org/libreoffice/src/libreoffice-l10n-%{version}.tar.bz2
+# Source12-md5:	18d08617d191cdb81227be47a1cff3f9
+Source13:	http://download.documentfoundation.org/libreoffice/src/libreoffice-libs-core-%{version}.tar.bz2
+# Source13-md5:	18d08617d191cdb81227be47a1cff3f9
+Source14:	http://download.documentfoundation.org/libreoffice/src/libreoffice-libs-extern-%{version}.tar.bz2
+# Source14-md5:	18d08617d191cdb81227be47a1cff3f9
+Source15:	http://download.documentfoundation.org/libreoffice/src/libreoffice-libs-extern-sys-%{version}.tar.bz2
+# Source15-md5:	18d08617d191cdb81227be47a1cff3f9
+Source16:	http://download.documentfoundation.org/libreoffice/src/libreoffice-libs-gui-%{version}.tar.bz2
+# Source16-md5:	18d08617d191cdb81227be47a1cff3f9
+Source17:	http://download.documentfoundation.org/libreoffice/src/libreoffice-postprocess-%{version}.tar.bz2
+# Source17-md5:	18d08617d191cdb81227be47a1cff3f9
+Source18:	http://download.documentfoundation.org/libreoffice/src/libreoffice-sdk-%{version}.tar.bz2
+# Source18-md5:	18d08617d191cdb81227be47a1cff3f9
+Source19:	http://download.documentfoundation.org/libreoffice/src/libreoffice-testing-%{version}.tar.bz2
+# Source19-md5:	18d08617d191cdb81227be47a1cff3f9
+Source20:	http://download.documentfoundation.org/libreoffice/src/libreoffice-ure-%{version}.tar.bz2
+# Source20-md5:	18d08617d191cdb81227be47a1cff3f9
+Source21:	http://download.documentfoundation.org/libreoffice/src/libreoffice-writer-%{version}.tar.bz2
+# Source21-md5:	18d08617d191cdb81227be47a1cff3f9
+Source22:	http://download.go-oo.org/SRC680/biblio.tar.bz2
+# Source22-md5:	18d08617d191cdb81227be47a1cff3f9
+Source23:	http://download.go-oo.org/SRC680/extras-3.1.tar.bz2
+# Source23-md5:	18d08617d191cdb81227be47a1cff3f9
+Source100:	http://hg.services.openoffice.org/binaries/fdb27bfe2dbe2e7b57ae194d9bf36bab-SampleICC-1.3.2.tar.gz
+# Source100-md5:
+Source101:	http://hg.services.openoffice.org/binaries/17410483b5b5f267aa18b7e00b65e6e0-hsqldb_1_8_0.zip
+Source102:	http://hg.services.openoffice.org/binaries/26b3e95ddf3d9c077c480ea45874b3b8-lp_solve_5.5.tar.gz
+Source103:	http://hg.services.openoffice.org/binaries/cf8a6967f7de535ae257fa411c98eb88-mdds_0.3.0.tar.bz2
+Source104:	http://hg.services.openoffice.org/binaries/798b2ffdc8bcfe7bca2cf92b62caf685-rhino1_5R5.zip
+Source105:	http://hg.services.openoffice.org/binaries/128cfc86ed5953e57fe0f5ae98b62c2e-libtextcat-2.2.tar.gz
+Source106:	http://hg.services.openoffice.org/binaries/d0b5af6e408b8d2958f3d83b5244f5e8-hyphen-2.4.tar.gz
+Source107:	http://hg.services.openoffice.org/binaries/1f24ab1d39f4a51faf22244c94a6203f-xmlsec1-1.2.14.tar.gz
+Source108:	http://hg.services.openoffice.org/binaries/1756c4fa6c616ae15973c104cd8cb256-Adobe-Core35_AFMs-314.tar.gz
+Source109:	http://hg.services.openoffice.org/binaries/ada24d37d8d638b3d8a9985e80bc2978-source-9.0.0.7-bj.zip
+Source110:	http://hg.services.openoffice.org/binaries/067201ea8b126597670b5eff72e1f66c-mythes-1.2.0.tar.gz
+Source111:	http://hg.services.openoffice.org/binaries/a7983f859eafb2677d7ff386a023bc40-xsltml_2.1.2.zip
+Source112:	http://download.go-oo.org/src/0f63ee487fda8f21fafa767b3c447ac9-ixion-0.2.0.tar.gz
+Source113:	http://hg.services.openoffice.org/binaries/8ea307d71d11140574bfb9fcc2487e33-libbase.zip
+Source114:	http://hg.services.openoffice.org/binaries/a06a496d7a43cbdc35e69dbe678efadb-libloader.zip
+Source115:	http://hg.services.openoffice.org/binaries/39bb3fcea1514f1369fcfc87542390fd-sacjava-1.3.zip
+Source116:	http://hg.services.openoffice.org/binaries/f3e2febd267c8e4b13df00dac211dd6d-flute.zip
+Source117:	http://hg.services.openoffice.org/binaries/5aba06ede2daa9f2c11892fbd7bc3057-libserializer.zip
+Source118:	http://hg.services.openoffice.org/binaries/f7925ba8491fe570e5164d2c72791358-libfonts.zip
+Source119:	http://hg.services.openoffice.org/binaries/d1a3205871c3c52e8a50c9f18510ae12-libformula.zip
+Source120:	http://hg.services.openoffice.org/binaries/67b42915c8432abf0a922438f00860a2-libxml.zip
+Source121:	http://hg.services.openoffice.org/binaries/dbb3757275dc5cc80820c0b4dd24ed95-librepository.zip
+Source122:	http://hg.services.openoffice.org/binaries/79600e696a98ff95c2eba976f7a8dfbb-liblayout.zip
+Source123:	http://hg.services.openoffice.org/binaries/d4c4d91ab3a8e52a2e69d48d34ef4df4-core.zip
+Source124:	http://hg.services.openoffice.org/binaries/35c94d2df8893241173de1d16b6034c0-swingExSrc.zip
+#Source53:	%{name}-splash.bmp
+#Source54:	%{name}-about.bmp
 # patches applied in prep section
-Patch0:		%{name}-PLD.patch
-Patch10:	%{name}-hotfix-gcc45.patch
-URL:		http://www.libreoffice.org/
+Patch0:		%{name}-build-apply.patch
+#Patch10:	%{name}-hotfix-gcc45.patch
+URL:		http://www.openoffice.org/
+BuildRequires:	libwpd-devel >= 0.9.0
+BuildRequires:	libwps-devel >= 0.2.0
+BuildRequires:	libwpg-devel >= 0.2.0
+BuildRequires:	java-lucene
+BuildRequires:	java-lucene-contrib
+BuildRequires:	silgraphite-devel
+BuildRequires:	java-commons-codec
+BuildRequires:	java-commons-lang
+BuildRequires:	java-commons-httpclient
+BuildRequires:	java-commons-logging
+BuildRequires:	java-servletapi
+
 BuildRequires:	/usr/bin/getopt
 BuildRequires:	GConf2-devel
 BuildRequires:	ImageMagick
@@ -174,9 +208,6 @@ BuildRequires:	libjpeg-devel
 BuildRequires:	libsndfile-devel
 BuildRequires:	libstdc++-devel >= 5:3.2.1
 BuildRequires:	libsvg-devel >= 0.1.4
-BuildRequires:	libwpd-devel >= 0.8.6
-BuildRequires:	libwpg-devel >= 0.1.0
-BuildRequires:	libwps-devel
 BuildRequires:	libxml2-devel >= 2.0
 BuildRequires:	libxslt-devel
 BuildRequires:	libxslt-progs
@@ -221,7 +252,7 @@ BuildRequires:	xorg-lib-libXtst-devel
 BuildRequires:	zip
 BuildRequires:	zlib-devel
 %if %{with java}
-BuildRequires:	ant
+BuildRequires:	ant >= 1.7.0
 BuildRequires:	ant-apache-regexp
 %{?with_system_db:BuildRequires:	db-java >= 4.3}
 BuildRequires:	jdk >= 1.4.0_00
@@ -257,7 +288,7 @@ BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 %define		_noautostrip	.*\\(%{_datadir}\\|%{_libdir}/%{name}/basis*/program/resource\\)/.*
 %define		_noautochrpath	.*\\(%{_datadir}\\|%{_libdir}/%{name}/basis*/program/resource\\)/.*
 
-%define		ooobasisdir	%{_libdir}/%{name}/basis3.2
+%define		ooobasisdir	%{_libdir}/%{name}/basis3.3
 
 %description
 LibreOffice is an open-source project sponsored by Sun Microsystems
@@ -356,30 +387,30 @@ Obsoletes:	openoffice-i18n-mi-gtk
 Obsoletes:	openoffice-i18n-ro
 Obsoletes:	openoffice-i18n-ro-gtk
 Obsoletes:	openoffice-libs
-Obsoletes:	libreoffice-dirs
-Obsoletes:	libreoffice-i18n-fo
-Obsoletes:	libreoffice-i18n-fo-gtk
-Obsoletes:	libreoffice-i18n-fo-kde
-Obsoletes:	libreoffice-i18n-ia
-Obsoletes:	libreoffice-i18n-ia-gtk
-Obsoletes:	libreoffice-i18n-ia-kde
-Obsoletes:	libreoffice-i18n-id
-Obsoletes:	libreoffice-i18n-id-gtk
-Obsoletes:	libreoffice-i18n-id-kde
-Obsoletes:	libreoffice-i18n-la
-Obsoletes:	libreoffice-i18n-la-gtk
-Obsoletes:	libreoffice-i18n-la-kde
-Obsoletes:	libreoffice-i18n-med
-Obsoletes:	libreoffice-i18n-med-gtk
-Obsoletes:	libreoffice-i18n-med-kde
-Obsoletes:	libreoffice-i18n-mi
-Obsoletes:	libreoffice-i18n-mi-gtk
-Obsoletes:	libreoffice-i18n-mi-kde
-Obsoletes:	libreoffice-i18n-ro
-Obsoletes:	libreoffice-i18n-ro-gtk
-Obsoletes:	libreoffice-i18n-ro-kde
-Obsoletes:	libreoffice-i18n-sx
-Obsoletes:	libreoffice-libs < 1:2.1.0-0.m6.0.11
+Obsoletes:	openoffice.org-dirs
+Obsoletes:	openoffice.org-i18n-fo
+Obsoletes:	openoffice.org-i18n-fo-gtk
+Obsoletes:	openoffice.org-i18n-fo-kde
+Obsoletes:	openoffice.org-i18n-ia
+Obsoletes:	openoffice.org-i18n-ia-gtk
+Obsoletes:	openoffice.org-i18n-ia-kde
+Obsoletes:	openoffice.org-i18n-id
+Obsoletes:	openoffice.org-i18n-id-gtk
+Obsoletes:	openoffice.org-i18n-id-kde
+Obsoletes:	openoffice.org-i18n-la
+Obsoletes:	openoffice.org-i18n-la-gtk
+Obsoletes:	openoffice.org-i18n-la-kde
+Obsoletes:	openoffice.org-i18n-med
+Obsoletes:	openoffice.org-i18n-med-gtk
+Obsoletes:	openoffice.org-i18n-med-kde
+Obsoletes:	openoffice.org-i18n-mi
+Obsoletes:	openoffice.org-i18n-mi-gtk
+Obsoletes:	openoffice.org-i18n-mi-kde
+Obsoletes:	openoffice.org-i18n-ro
+Obsoletes:	openoffice.org-i18n-ro-gtk
+Obsoletes:	openoffice.org-i18n-ro-kde
+Obsoletes:	openoffice.org-i18n-sx
+Obsoletes:	openoffice.org-libs < 1:2.1.0-0.m6.0.11
 
 %description core
 Core libraries and support files for LibreOffice.
@@ -607,8 +638,8 @@ Group:		I18n
 Requires:	%{name}-core = %{epoch}:%{version}-%{release}
 Obsoletes:	openoffice-i18n-af
 Obsoletes:	openoffice-i18n-af-gtk
-Obsoletes:	libreoffice-i18n-af-gtk
-Obsoletes:	libreoffice-i18n-af-kde
+Obsoletes:	openoffice.org-i18n-af-gtk
+Obsoletes:	openoffice.org-i18n-af-kde
 
 %description i18n-af
 This package provides resources containing menus and dialogs in
@@ -625,8 +656,8 @@ Group:		I18n
 Requires:	%{name}-core = %{epoch}:%{version}-%{release}
 Obsoletes:	openoffice-i18n-ar
 Obsoletes:	openoffice-i18n-ar-gtk
-Obsoletes:	libreoffice-i18n-ar-gtk
-Obsoletes:	libreoffice-i18n-ar-kde
+Obsoletes:	openoffice.org-i18n-ar-gtk
+Obsoletes:	openoffice.org-i18n-ar-kde
 
 %description i18n-ar
 This package provides resources containing menus and dialogs in Arabic
@@ -671,8 +702,8 @@ Group:		I18n
 Requires:	%{name}-core = %{epoch}:%{version}-%{release}
 Obsoletes:	openoffice-i18n-bg
 Obsoletes:	openoffice-i18n-bg-gtk
-Obsoletes:	libreoffice-i18n-bg-gtk
-Obsoletes:	libreoffice-i18n-bg-kde
+Obsoletes:	openoffice.org-i18n-bg-gtk
+Obsoletes:	openoffice.org-i18n-bg-kde
 
 %description i18n-bg
 This package provides resources containing menus and dialogs in
@@ -802,8 +833,8 @@ Group:		I18n
 Requires:	%{name}-core = %{epoch}:%{version}-%{release}
 Obsoletes:	openoffice-i18n-ca
 Obsoletes:	openoffice-i18n-ca-gtk
-Obsoletes:	libreoffice-i18n-ca-gtk
-Obsoletes:	libreoffice-i18n-ca-kde
+Obsoletes:	openoffice.org-i18n-ca-gtk
+Obsoletes:	openoffice.org-i18n-ca-kde
 
 %description i18n-ca
 This package provides resources containing menus and dialogs in
@@ -820,8 +851,8 @@ Group:		I18n
 Requires:	%{name}-core = %{epoch}:%{version}-%{release}
 Obsoletes:	openoffice-i18n-cs
 Obsoletes:	openoffice-i18n-cs-gtk
-Obsoletes:	libreoffice-i18n-cs-gtk
-Obsoletes:	libreoffice-i18n-cs-kde
+Obsoletes:	openoffice.org-i18n-cs-gtk
+Obsoletes:	openoffice.org-i18n-cs-kde
 
 %description i18n-cs
 This package provides resources containing menus and dialogs in Czech
@@ -838,8 +869,8 @@ Group:		I18n
 Requires:	%{name}-core = %{epoch}:%{version}-%{release}
 Obsoletes:	openoffice-i18n-cy
 Obsoletes:	openoffice-i18n-cy-gtk
-Obsoletes:	libreoffice-i18n-cy-gtk
-Obsoletes:	libreoffice-i18n-cy-kde
+Obsoletes:	openoffice.org-i18n-cy-gtk
+Obsoletes:	openoffice.org-i18n-cy-kde
 
 %description i18n-cy
 This package provides resources containing menus and dialogs in
@@ -856,8 +887,8 @@ Group:		I18n
 Requires:	%{name}-core = %{epoch}:%{version}-%{release}
 Obsoletes:	openoffice-i18n-da
 Obsoletes:	openoffice-i18n-da-gtk
-Obsoletes:	libreoffice-i18n-da-gtk
-Obsoletes:	libreoffice-i18n-da-kde
+Obsoletes:	openoffice.org-i18n-da-gtk
+Obsoletes:	openoffice.org-i18n-da-kde
 
 %description i18n-da
 This package provides resources containing menus and dialogs in Danish
@@ -874,8 +905,8 @@ Group:		I18n
 Requires:	%{name}-core = %{epoch}:%{version}-%{release}
 Obsoletes:	openoffice-i18n-de
 Obsoletes:	openoffice-i18n-de-gtk
-Obsoletes:	libreoffice-i18n-de-gtk
-Obsoletes:	libreoffice-i18n-de-kde
+Obsoletes:	openoffice.org-i18n-de-gtk
+Obsoletes:	openoffice.org-i18n-de-kde
 
 %description i18n-de
 This package provides resources containing menus and dialogs in German
@@ -920,8 +951,8 @@ Group:		I18n
 Requires:	%{name}-core = %{epoch}:%{version}-%{release}
 Obsoletes:	openoffice-i18n-el
 Obsoletes:	openoffice-i18n-el-gtk
-Obsoletes:	libreoffice-i18n-el-gtk
-Obsoletes:	libreoffice-i18n-el-kde
+Obsoletes:	openoffice.org-i18n-el-gtk
+Obsoletes:	openoffice.org-i18n-el-kde
 
 %description i18n-el
 This package provides resources containing menus and dialogs in Greek
@@ -980,8 +1011,8 @@ Group:		I18n
 Requires:	%{name}-core = %{epoch}:%{version}-%{release}
 Obsoletes:	openoffice-i18n-es
 Obsoletes:	openoffice-i18n-es-gtk
-Obsoletes:	libreoffice-i18n-es-gtk
-Obsoletes:	libreoffice-i18n-es-kde
+Obsoletes:	openoffice.org-i18n-es-gtk
+Obsoletes:	openoffice.org-i18n-es-kde
 
 %description i18n-es
 This package provides resources containing menus and dialogs in
@@ -998,8 +1029,8 @@ Group:		I18n
 Requires:	%{name}-core = %{epoch}:%{version}-%{release}
 Obsoletes:	openoffice-i18n-et
 Obsoletes:	openoffice-i18n-et-gtk
-Obsoletes:	libreoffice-i18n-et-gtk
-Obsoletes:	libreoffice-i18n-et-kde
+Obsoletes:	openoffice.org-i18n-et-gtk
+Obsoletes:	openoffice.org-i18n-et-kde
 
 %description i18n-et
 This package provides resources containing menus and dialogs in
@@ -1050,8 +1081,8 @@ Group:		I18n
 Requires:	%{name}-core = %{epoch}:%{version}-%{release}
 Obsoletes:	openoffice-i18n-fi
 Obsoletes:	openoffice-i18n-fi-gtk
-Obsoletes:	libreoffice-i18n-fi-gtk
-Obsoletes:	libreoffice-i18n-fi-kde
+Obsoletes:	openoffice.org-i18n-fi-gtk
+Obsoletes:	openoffice.org-i18n-fi-kde
 
 %description i18n-fi
 This package provides resources containing menus and dialogs in
@@ -1068,8 +1099,8 @@ Group:		I18n
 Requires:	%{name}-core = %{epoch}:%{version}-%{release}
 Obsoletes:	openoffice-i18n-fr
 Obsoletes:	openoffice-i18n-fr-gtk
-Obsoletes:	libreoffice-i18n-fr-gtk
-Obsoletes:	libreoffice-i18n-fr-kde
+Obsoletes:	openoffice.org-i18n-fr-gtk
+Obsoletes:	openoffice.org-i18n-fr-kde
 
 %description i18n-fr
 This package provides resources containing menus and dialogs in French
@@ -1086,8 +1117,8 @@ Group:		I18n
 Requires:	%{name}-core = %{epoch}:%{version}-%{release}
 Obsoletes:	openoffice-i18n-ga
 Obsoletes:	openoffice-i18n-ga-gtk
-Obsoletes:	libreoffice-i18n-ga-gtk
-Obsoletes:	libreoffice-i18n-ga-kde
+Obsoletes:	openoffice.org-i18n-ga-gtk
+Obsoletes:	openoffice.org-i18n-ga-kde
 
 %description i18n-ga
 This package provides resources containing menus and dialogs in Irish
@@ -1118,8 +1149,8 @@ Group:		I18n
 Requires:	%{name}-core = %{epoch}:%{version}-%{release}
 Obsoletes:	openoffice-i18n-gl
 Obsoletes:	openoffice-i18n-gl-gtk
-Obsoletes:	libreoffice-i18n-gl-gtk
-Obsoletes:	libreoffice-i18n-gl-kde
+Obsoletes:	openoffice.org-i18n-gl-gtk
+Obsoletes:	openoffice.org-i18n-gl-kde
 
 %description i18n-gl
 This package provides resources containing menus and dialogs in
@@ -1164,8 +1195,8 @@ Group:		I18n
 Requires:	%{name}-core = %{epoch}:%{version}-%{release}
 Obsoletes:	openoffice-i18n-he
 Obsoletes:	openoffice-i18n-he-gtk
-Obsoletes:	libreoffice-i18n-he-gtk
-Obsoletes:	libreoffice-i18n-he-kde
+Obsoletes:	openoffice.org-i18n-he-gtk
+Obsoletes:	openoffice.org-i18n-he-kde
 
 %description i18n-he
 This package provides resources containing menus and dialogs in Hebrew
@@ -1182,8 +1213,8 @@ Group:		I18n
 Requires:	%{name}-core = %{epoch}:%{version}-%{release}
 Obsoletes:	openoffice-i18n-hi
 Obsoletes:	openoffice-i18n-hi-gtk
-Obsoletes:	libreoffice-i18n-hi-gtk
-Obsoletes:	libreoffice-i18n-hi-kde
+Obsoletes:	openoffice.org-i18n-hi-gtk
+Obsoletes:	openoffice.org-i18n-hi-kde
 
 %description i18n-hi_IN
 This package provides resources containing menus and dialogs in Hindi
@@ -1200,8 +1231,8 @@ Group:		I18n
 Requires:	%{name}-core = %{epoch}:%{version}-%{release}
 Obsoletes:	openoffice-i18n-hr
 Obsoletes:	openoffice-i18n-hr-gtk
-Obsoletes:	libreoffice-i18n-hr-gtk
-Obsoletes:	libreoffice-i18n-hr-kde
+Obsoletes:	openoffice.org-i18n-hr-gtk
+Obsoletes:	openoffice.org-i18n-hr-kde
 
 %description i18n-hr
 This package provides resources containing menus and dialogs in
@@ -1218,8 +1249,8 @@ Group:		I18n
 Requires:	%{name}-core = %{epoch}:%{version}-%{release}
 Obsoletes:	openoffice-i18n-hu
 Obsoletes:	openoffice-i18n-hu-gtk
-Obsoletes:	libreoffice-i18n-hu-gtk
-Obsoletes:	libreoffice-i18n-hu-kde
+Obsoletes:	openoffice.org-i18n-hu-gtk
+Obsoletes:	openoffice.org-i18n-hu-kde
 
 %description i18n-hu
 This package provides resources containing menus and dialogs in
@@ -1250,8 +1281,8 @@ Group:		I18n
 Requires:	%{name}-core = %{epoch}:%{version}-%{release}
 Obsoletes:	openoffice-i18n-it
 Obsoletes:	openoffice-i18n-it-gtk
-Obsoletes:	libreoffice-i18n-it-gtk
-Obsoletes:	libreoffice-i18n-it-kde
+Obsoletes:	openoffice.org-i18n-it-gtk
+Obsoletes:	openoffice.org-i18n-it-kde
 
 %description i18n-it
 This package provides resources containing menus and dialogs in
@@ -1268,8 +1299,8 @@ Group:		I18n
 Requires:	%{name}-core = %{epoch}:%{version}-%{release}
 Obsoletes:	openoffice-i18n-ja
 Obsoletes:	openoffice-i18n-ja-gtk
-Obsoletes:	libreoffice-i18n-ja-gtk
-Obsoletes:	libreoffice-i18n-ja-kde
+Obsoletes:	openoffice.org-i18n-ja-gtk
+Obsoletes:	openoffice.org-i18n-ja-kde
 
 %description i18n-ja
 This package provides resources containing menus and dialogs in Japan
@@ -1360,8 +1391,8 @@ Group:		I18n
 Requires:	%{name}-core = %{epoch}:%{version}-%{release}
 Obsoletes:	openoffice-i18n-ko
 Obsoletes:	openoffice-i18n-ko-gtk
-Obsoletes:	libreoffice-i18n-ko-gtk
-Obsoletes:	libreoffice-i18n-ko-kde
+Obsoletes:	openoffice.org-i18n-ko-gtk
+Obsoletes:	openoffice.org-i18n-ko-kde
 
 %description i18n-ko
 This package provides resources containing menus and dialogs in Korean
@@ -1448,8 +1479,8 @@ Group:		I18n
 Requires:	%{name}-core = %{epoch}:%{version}-%{release}
 Obsoletes:	openoffice-i18n-lt
 Obsoletes:	openoffice-i18n-lt-gtk
-Obsoletes:	libreoffice-i18n-lt-gtk
-Obsoletes:	libreoffice-i18n-lt-kde
+Obsoletes:	openoffice.org-i18n-lt-gtk
+Obsoletes:	openoffice.org-i18n-lt-kde
 
 %description i18n-lt
 This package provides resources containing menus and dialogs in
@@ -1564,8 +1595,8 @@ Group:		I18n
 Requires:	%{name}-core = %{epoch}:%{version}-%{release}
 Obsoletes:	openoffice-i18n-ms
 Obsoletes:	openoffice-i18n-ms-gtk
-Obsoletes:	libreoffice-i18n-ms-gtk
-Obsoletes:	libreoffice-i18n-ms-kde
+Obsoletes:	openoffice.org-i18n-ms-gtk
+Obsoletes:	openoffice.org-i18n-ms-kde
 
 %description i18n-ms
 This package provides resources containing menus and dialogs in Malay
@@ -1596,8 +1627,8 @@ Group:		I18n
 Requires:	%{name}-core = %{epoch}:%{version}-%{release}
 Obsoletes:	openoffice-i18n-nb
 Obsoletes:	openoffice-i18n-nb-gtk
-Obsoletes:	libreoffice-i18n-nb-gtk
-Obsoletes:	libreoffice-i18n-nb-kde
+Obsoletes:	openoffice.org-i18n-nb-gtk
+Obsoletes:	openoffice.org-i18n-nb-kde
 
 %description i18n-nb
 This package provides resources containing menus and dialogs in
@@ -1628,8 +1659,8 @@ Group:		I18n
 Requires:	%{name}-core = %{epoch}:%{version}-%{release}
 Obsoletes:	openoffice-i18n-nl
 Obsoletes:	openoffice-i18n-nl-gtk
-Obsoletes:	libreoffice-i18n-nl-gtk
-Obsoletes:	libreoffice-i18n-nl-kde
+Obsoletes:	openoffice.org-i18n-nl-gtk
+Obsoletes:	openoffice.org-i18n-nl-kde
 
 %description i18n-nl
 This package provides resources containing menus and dialogs in Dutch
@@ -1646,8 +1677,8 @@ Group:		I18n
 Requires:	%{name}-core = %{epoch}:%{version}-%{release}
 Obsoletes:	openoffice-i18n-nn
 Obsoletes:	openoffice-i18n-nn-gtk
-Obsoletes:	libreoffice-i18n-nn-gtk
-Obsoletes:	libreoffice-i18n-nn-kde
+Obsoletes:	openoffice.org-i18n-nn-gtk
+Obsoletes:	openoffice.org-i18n-nn-kde
 
 %description i18n-nn
 This package provides resources containing menus and dialogs in
@@ -1678,8 +1709,8 @@ Group:		I18n
 Requires:	%{name}-core = %{epoch}:%{version}-%{release}
 Obsoletes:	openoffice-i18n-nso
 Obsoletes:	openoffice-i18n-nso-gtk
-Obsoletes:	libreoffice-i18n-nso-gtk
-Obsoletes:	libreoffice-i18n-nso-kde
+Obsoletes:	openoffice.org-i18n-nso-gtk
+Obsoletes:	openoffice.org-i18n-nso-kde
 
 %description i18n-nso
 This package provides resources containing menus and dialogs in
@@ -1766,8 +1797,8 @@ Group:		I18n
 Requires:	%{name}-core = %{epoch}:%{version}-%{release}
 Obsoletes:	openoffice-i18n-pl
 Obsoletes:	openoffice-i18n-pl-gtk
-Obsoletes:	libreoffice-i18n-pl-gtk
-Obsoletes:	libreoffice-i18n-pl-kde
+Obsoletes:	openoffice.org-i18n-pl-gtk
+Obsoletes:	openoffice.org-i18n-pl-kde
 
 %description i18n-pl
 This package provides resources containing menus and dialogs in Polish
@@ -1798,8 +1829,8 @@ Group:		I18n
 Requires:	%{name}-core = %{epoch}:%{version}-%{release}
 Obsoletes:	openoffice-i18n-pt
 Obsoletes:	openoffice-i18n-pt-gtk
-Obsoletes:	libreoffice-i18n-pt-gtk
-Obsoletes:	libreoffice-i18n-pt-kde
+Obsoletes:	openoffice.org-i18n-pt-gtk
+Obsoletes:	openoffice.org-i18n-pt-kde
 
 %description i18n-pt
 This package provides resources containing menus and dialogs in
@@ -1816,8 +1847,8 @@ Group:		I18n
 Requires:	%{name}-core = %{epoch}:%{version}-%{release}
 Obsoletes:	openoffice-i18n-pt_BR
 Obsoletes:	openoffice-i18n-pt_BR-gtk
-Obsoletes:	libreoffice-i18n-pt_BR-gtk
-Obsoletes:	libreoffice-i18n-pt_BR-kde
+Obsoletes:	openoffice.org-i18n-pt_BR-gtk
+Obsoletes:	openoffice.org-i18n-pt_BR-kde
 
 %description i18n-pt_BR
 This package provides resources containing menus and dialogs in
@@ -1848,8 +1879,8 @@ Group:		I18n
 Requires:	%{name}-core = %{epoch}:%{version}-%{release}
 Obsoletes:	openoffice-i18n-ru
 Obsoletes:	openoffice-i18n-ru-gtk
-Obsoletes:	libreoffice-i18n-ru-gtk
-Obsoletes:	libreoffice-i18n-ru-kde
+Obsoletes:	openoffice.org-i18n-ru-gtk
+Obsoletes:	openoffice.org-i18n-ru-kde
 
 %description i18n-ru
 This package provides resources containing menus and dialogs in
@@ -1964,8 +1995,8 @@ Group:		I18n
 Requires:	%{name}-core = %{epoch}:%{version}-%{release}
 Obsoletes:	openoffice-i18n-sk
 Obsoletes:	openoffice-i18n-sk-gtk
-Obsoletes:	libreoffice-i18n-sk-gtk
-Obsoletes:	libreoffice-i18n-sk-kde
+Obsoletes:	openoffice.org-i18n-sk-gtk
+Obsoletes:	openoffice.org-i18n-sk-kde
 
 %description i18n-sk
 This package provides resources containing menus and dialogs in Slovak
@@ -1982,8 +2013,8 @@ Group:		I18n
 Requires:	%{name}-core = %{epoch}:%{version}-%{release}
 Obsoletes:	openoffice-i18n-sl
 Obsoletes:	openoffice-i18n-sl-gtk
-Obsoletes:	libreoffice-i18n-sl-gtk
-Obsoletes:	libreoffice-i18n-sl-kde
+Obsoletes:	openoffice.org-i18n-sl-gtk
+Obsoletes:	openoffice.org-i18n-sl-kde
 
 %description i18n-sl
 This package provides resources containing menus and dialogs in
@@ -2042,8 +2073,8 @@ Group:		I18n
 Requires:	%{name}-core = %{epoch}:%{version}-%{release}
 Obsoletes:	openoffice-i18n-sv
 Obsoletes:	openoffice-i18n-sv-gtk
-Obsoletes:	libreoffice-i18n-sv-gtk
-Obsoletes:	libreoffice-i18n-sv-kde
+Obsoletes:	openoffice.org-i18n-sv-gtk
+Obsoletes:	openoffice.org-i18n-sv-kde
 
 %description i18n-sv
 This package provides resources containing menus and dialogs in
@@ -2178,8 +2209,8 @@ Group:		I18n
 Requires:	%{name}-core = %{epoch}:%{version}-%{release}
 Obsoletes:	openoffice-i18n-tr
 Obsoletes:	openoffice-i18n-tr-gtk
-Obsoletes:	libreoffice-i18n-tr-gtk
-Obsoletes:	libreoffice-i18n-tr-kde
+Obsoletes:	openoffice.org-i18n-tr-gtk
+Obsoletes:	openoffice.org-i18n-tr-kde
 
 %description i18n-tr
 This package provides resources containing menus and dialogs in
@@ -2224,8 +2255,8 @@ Group:		I18n
 Requires:	%{name}-core = %{epoch}:%{version}-%{release}
 Obsoletes:	openoffice-i18n-uk
 Obsoletes:	openoffice-i18n-uk-gtk
-Obsoletes:	libreoffice-i18n-uk-gtk
-Obsoletes:	libreoffice-i18n-uk-kde
+Obsoletes:	openoffice.org-i18n-uk-gtk
+Obsoletes:	openoffice.org-i18n-uk-kde
 
 %description i18n-uk
 This package provides resources containing menus and dialogs in
@@ -2312,8 +2343,8 @@ Requires:	%{name}-core = %{epoch}:%{version}-%{release}
 Obsoletes:	openoffice-i18n-zh
 Obsoletes:	openoffice-i18n-zh_CN
 Obsoletes:	openoffice-i18n-zh_CN-gtk
-Obsoletes:	libreoffice-i18n-zh_CN-gtk
-Obsoletes:	libreoffice-i18n-zh_CN-kde
+Obsoletes:	openoffice.org-i18n-zh_CN-gtk
+Obsoletes:	openoffice.org-i18n-zh_CN-kde
 
 %description i18n-zh_CN
 This package provides resources containing menus and dialogs in
@@ -2331,8 +2362,8 @@ Requires:	%{name}-core = %{epoch}:%{version}-%{release}
 Obsoletes:	openoffice-i18n-zh
 Obsoletes:	openoffice-i18n-zh_TW
 Obsoletes:	openoffice-i18n-zh_TW-gtk
-Obsoletes:	libreoffice-i18n-zh_TW-gtk
-Obsoletes:	libreoffice-i18n-zh_TW-kde
+Obsoletes:	openoffice.org-i18n-zh_TW-gtk
+Obsoletes:	openoffice.org-i18n-zh_TW-kde
 
 %description i18n-zh_TW
 This package provides resources containing menus and dialogs in
@@ -2349,8 +2380,8 @@ Group:		I18n
 Requires:	%{name}-core = %{epoch}:%{version}-%{release}
 Obsoletes:	openoffice-i18n-zu
 Obsoletes:	openoffice-i18n-zu-gtk
-Obsoletes:	libreoffice-i18n-zu-gtk
-Obsoletes:	libreoffice-i18n-zu-kde
+Obsoletes:	openoffice.org-i18n-zu-gtk
+Obsoletes:	openoffice.org-i18n-zu-kde
 
 %description i18n-zu
 This package provides resources containing menus and dialogs in Zulu
@@ -2371,10 +2402,10 @@ Requires:	bash-completion
 bash-completion for LibreOffice.
 
 %description -n bash-completion-openoffice -l pl.UTF-8
-bashowe uzupełnianie nazw dla Openoffice.org.
+bashowe uzupełnianie nazw dla LibreOffice.
 
 %prep
-%setup -q -n ooo-build
+%setup -q -n libreoffice-build-%{version}
 %patch0 -p1
 
 install -d src
@@ -2386,11 +2417,16 @@ ln -sf %{SOURCE1} %{SOURCE2} %{SOURCE3} %{SOURCE4} \
 	%{SOURCE9} %{SOURCE10} %{SOURCE11} %{SOURCE12} \
 	%{SOURCE13} %{SOURCE14} %{SOURCE15} %{SOURCE16} \
 	%{SOURCE17} %{SOURCE18} %{SOURCE19} %{SOURCE20} \
-	%{SOURCE21} %{SOURCE22} %{SOURCE50} %{SOURCE51} \
-	%{SOURCE52} \
+	%{SOURCE21} %{SOURCE22} %{SOURCE23} %{SOURCE100} \
+	%{SOURCE101} %{SOURCE102} %{SOURCE103} %{SOURCE104} \
+	%{SOURCE105} %{SOURCE106} %{SOURCE107} %{SOURCE108} \
+	%{SOURCE109} %{SOURCE110} %{SOURCE111} %{SOURCE112} \
+	%{SOURCE113} %{SOURCE114} %{SOURCE115} %{SOURCE116} \
+	%{SOURCE117} %{SOURCE118} %{SOURCE119} %{SOURCE120} \
+	%{SOURCE121} %{SOURCE122} %{SOURCE123} %{SOURCE124} \
 	src
 
-ln -s %{PATCH10} patches/hotfixes/%{basename:%{PATCH10}}.diff
+#ln -s %{PATCH10} patches/hotfixes/%{basename:%{PATCH10}}.diff
 
 %build
 # Make sure we have /proc mounted - otherwise idlc will fail later.
@@ -2463,7 +2499,6 @@ fi
 #	%{?with_system_xt:--with-system-xt --with-xt-jar=%{_javadir}/classes} \
 
 CONFOPTS="\
-	--without-git \
 %ifarch %{ix86} \
 	--with-arch=x86 \
 %endif
@@ -2490,9 +2525,11 @@ CONFOPTS="\
 	--with-system-boost \
 	--with-system-cairo \
 	--with-system-curl \
+	--with-system-cppunit \
 	--with-system-dicts \
 	--with-external-dict-dir=/usr/share/myspell \
 	--with-system-expat \
+	--with-system-graphite \
 	--with-system-freetype \
 	--with-system-gcc \
 	--with-system-icu \
@@ -2513,7 +2550,6 @@ CONFOPTS="\
 	--with-system-redland \
 	--with-system-sablot \
 	--with-system-sane-header \
-	--with-system-saxon \
 	--with-system-sndfile \
 	--with-system-stdlibs \
 	--with-system-vigra \
@@ -2591,10 +2627,15 @@ CONFOPTS="\
 	--enable-lockdown \
 	--disable-layout \
 	--with-use-shell=bash \
+	\
 	--enable-wiki-publisher \
-	--enable-report-builder
+	--enable-report-builder \
+	--disable-fetch-external \
+	--with-system-apache-commons \
+	--with-system-servlet-api \
+	--with-system-lucene \
+	--with-lucene-analyzers-jar=%{_javadir}/lucene-analyzers.jar
 "
-
 
 # build-ooo script will pickup these
 export CONFIGURE_OPTIONS="$CONFOPTS"
@@ -2614,7 +2655,7 @@ fi
 # main build
 # don't use %%configure here. We don't want cflags/ldflags to be set that way since
 # it breaks things (like preventing NOOPTFILES from working)
-./configure \
+bash ./configure \
 		CC="$CC" \
 		CXX="$CXX" \
 		CPP="$CPP" \
@@ -2768,7 +2809,7 @@ if [ ! -f installed.stamp ]; then
 	#sed -i -e 's|#!/bin/python|#!%{_bindir}/python|g' $RPM_BUILD_ROOT%{ooobasisdir}/program/*.py
 
 	# Add in the regcomp tool since some people need it for 3rd party add-ons
-	cp -a build/%{tag}/solver/%{upd}/unxlng*.pro/bin/regcomp{,.bin} $RPM_BUILD_ROOT%{ooobasisdir}/program/
+	#cp -a build/%{tag}/solver/%{upd}/unxlng*.pro/bin/regcomp{,.bin} $RPM_BUILD_ROOT%{ooobasisdir}/program/
 
 	# Rename .desktop files to avoid conflicts with other applications .desktops
 	# TODO: make patch instead.
@@ -2778,8 +2819,8 @@ if [ ! -f installed.stamp ]; then
 		mv $a $d/oo$f
 	done
 
-	install %{SOURCE53} $RPM_BUILD_ROOT%{_libdir}/%{name}/program/openintro_pld.bmp
-	install %{SOURCE54} $RPM_BUILD_ROOT%{_libdir}/%{name}/program/openabout_pld.bmp
+	#install %{SOURCE53} $RPM_BUILD_ROOT%{_libdir}/%{name}/program/openintro_pld.bmp
+	#install %{SOURCE54} $RPM_BUILD_ROOT%{_libdir}/%{name}/program/openabout_pld.bmp
 
 	touch installed.stamp
 fi
@@ -2815,42 +2856,42 @@ find_lang() {
 		grep "/readmes/README_${lang}" ${lfile} >> ${langfn}.lang || :
 		grep "share/readme/LICENSE_${lang}" ${lfile} >> ${langfn}.lang || :
 		grep "share/readme/README_${lang}" ${lfile} >> ${langfn}.lang || :
-		# lib/libreoffice/presers/config/*.so[cdegh]
+		# lib/openoffice.org/presers/config/*.so[cdegh]
 		grep "/presets/config/.*_${lang}\.so[cdegh]$" ${lfile} >> ${langfn}.lang || :
 		if [ "x${lprefix}" != "x" ] ; then
 			grep "/presets/config/${lprefix}.*\.so[cdegh]$" ${lfile} >> ${langfn}.lang || :
 		fi
-		# lib/libreoffice/program/resource/*.res
+		# lib/openoffice.org/program/resource/*.res
 		grep "/program/resource/.*${lang}.res$" ${lfile} >> ${langfn}.lang || :
-		# lib/libreoffice/share/autocorr/*.dat
+		# lib/openoffice.org/share/autocorr/*.dat
 		grep "/share/autocorr/.*${lang}.dat$" ${lfile} >> ${langfn}.lang || :
 		grep -i "/share/autocorr/.*${lang}-${lang}.dat$" ${lfile} >> ${langfn}.lang || :
-		# lib/libreoffice/share/autotext/$lang
+		# lib/openoffice.org/share/autotext/$lang
 		grep "/share/autotext/${lang}$" ${lfile} >> ${langfn}.lang || :
 		grep "/share/autotext/${lang}/" ${lfile} >> ${langfn}.lang || :
-		# lib/libreoffice/share/registry/modules/org/openoffice/Office/Common/Common-cjk_$lang.xcu
+		# lib/openoffice.org/share/registry/modules/org/openoffice/Office/Common/Common-cjk_$lang.xcu
 		grep "/share/registry/modules/org/openoffice/Office/Common/Common-cjk_${lang}.xcu$" ${lfile} >> ${langfn}.lang || :
-		# lib/libreoffice/share/registry/modules/org/openoffice/Office/Common/Common-ctl_$lang.xcu
+		# lib/openoffice.org/share/registry/modules/org/openoffice/Office/Common/Common-ctl_$lang.xcu
 		grep "/share/registry/modules/org/openoffice/Office/Common/Common-ctl_${lang}.xcu$" ${lfile} >> ${langfn}.lang || :
-		# lib/libreoffice/share/registry/modules/org/openoffice/Office/Writer/Writer-cjk_$lang.xcu
+		# lib/openoffice.org/share/registry/modules/org/openoffice/Office/Writer/Writer-cjk_$lang.xcu
 		grep "/share/registry/modules/org/openoffice/Office/Writer/Writer-cjk_${lang}.xcu" ${lfile} >> ${langfn}.lang || :
-		# lib/libreoffice/share/registry/modules/org/openoffice/Setup/Langpack-$lang.xcu
+		# lib/openoffice.org/share/registry/modules/org/openoffice/Setup/Langpack-$lang.xcu
 		grep "/share/registry/modules/org/openoffice/Setup/Langpack-${lang}.xcu$" ${lfile} >> ${langfn}.lang || :
-		# lib/libreoffice/share/registry/res/$lang
+		# lib/openoffice.org/share/registry/res/$lang
 		grep "/share/registry/res/${lang}$" ${lfile} >> ${langfn}.lang || :
 		grep "/share/registry/res/${lang}/" ${lfile} >> ${langfn}.lang || :
-		# lib/libreoffice/share/template/$lang
+		# lib/openoffice.org/share/template/$lang
 		grep "/share/template/${lang}$" ${lfile} >> ${langfn}.lang || :
 		grep "/share/template/${lang}/" ${lfile} >> ${langfn}.lang || :
-		# lib/libreoffice/share/template/wizard/letter/lang
+		# lib/openoffice.org/share/template/wizard/letter/lang
 		grep "/share/template/wizard/letter/${lang}$" ${lfile} >> ${langfn}.lang || :
 		grep "/share/template/wizard/letter/${lang}$" build/common_list.txt >> ${langfn}.lang || :
 		grep "/share/template/wizard/letter/${lang}/" ${lfile} >> ${langfn}.lang || :
 		grep "/share/template/wizard/letter/${lang}/" build/common_list.txt >> ${langfn}.lang || :
-		# lib/libreoffice/share/wordbook/$lang
+		# lib/openoffice.org/share/wordbook/$lang
 		grep "/share/wordbook/${lang}$" ${lfile} >> ${langfn}.lang || :
 		grep "/share/wordbook/${lang}/" ${lfile} >> ${langfn}.lang || :
-		# lib/libreoffice/share/samples/$lang
+		# lib/openoffice.org/share/samples/$lang
 		grep "/share/samples/${lang}$" ${lfile} >> ${langfn}.lang || :
 		grep "/share/samples/${lang}/" ${lfile} >> ${langfn}.lang || :
 		grep "/help/${lang}$" ${lfile} >> ${langfn}.lang || :
@@ -3016,9 +3057,10 @@ fi
 %{ooobasisdir}/presets/config/cmyk.soc
 %{ooobasisdir}/presets/config/gallery.soc
 %{ooobasisdir}/presets/config/html.soc
+%{ooobasisdir}/presets/config/libreoffice.soc
 %{ooobasisdir}/presets/config/scribus.soc
 %{ooobasisdir}/presets/config/standard.so?
-%{ooobasisdir}/presets/config/sun-color.soc
+%{ooobasisdir}/presets/config/tango.soc
 %{ooobasisdir}/presets/config/web.soc
 %{ooobasisdir}/presets/database
 %{ooobasisdir}/presets/gallery
@@ -3027,12 +3069,12 @@ fi
 %dir %{ooobasisdir}/program
 %attr(755,root,root) %{ooobasisdir}/program/OGLTrans.uno.so
 %attr(755,root,root) %{ooobasisdir}/program/basprov*.uno.so
-%attr(755,root,root) %{ooobasisdir}/program/behelper.uno.so
+#%attr(755,root,root) %{ooobasisdir}/program/behelper.uno.so
 %attr(755,root,root) %{ooobasisdir}/program/cairocanvas.uno.so
 %attr(755,root,root) %{ooobasisdir}/program/canvasfactory.uno.so
 %attr(755,root,root) %{ooobasisdir}/program/cde-open-url
 %attr(755,root,root) %{ooobasisdir}/program/cmdmail.uno.so
-%attr(755,root,root) %{ooobasisdir}/program/configmgr2.uno.so
+%attr(755,root,root) %{ooobasisdir}/program/configmgr.uno.so
 %attr(755,root,root) %{ooobasisdir}/program/deployment*.uno.so
 %attr(755,root,root) %{ooobasisdir}/program/desktopbe1.uno.so
 %attr(755,root,root) %{ooobasisdir}/program/dlgprov*.uno.so
@@ -3049,7 +3091,7 @@ fi
 %attr(755,root,root) %{ooobasisdir}/program/ldapbe2.uno.so
 %attr(755,root,root) %{ooobasisdir}/program/libaccl[ipx].so
 %attr(755,root,root) %{ooobasisdir}/program/libadabasl[ipx].so
-%attr(755,root,root) %{ooobasisdir}/program/libaggl[ipx].so
+#%attr(755,root,root) %{ooobasisdir}/program/libaggl[ipx].so
 %attr(755,root,root) %{ooobasisdir}/program/libavmediagst.so
 %attr(755,root,root) %{ooobasisdir}/program/libavmedial[ipx].so
 %attr(755,root,root) %{ooobasisdir}/program/libbasctll[ipx].so
@@ -3098,6 +3140,7 @@ fi
 %attr(755,root,root) %{ooobasisdir}/program/libdict_zh.so
 %attr(755,root,root) %{ooobasisdir}/program/libdrawinglayerl[ipx].so
 ###%attr(755,root,root) %{ooobasisdir}/program/libdtransX11l[ipx].so
+%attr(755,root,root) %{ooobasisdir}/program/libeditengl[ipx].so
 %attr(755,root,root) %{ooobasisdir}/program/libeggtrayl[ipx].so
 %attr(755,root,root) %{ooobasisdir}/program/libegil[ipx].so
 %attr(755,root,root) %{ooobasisdir}/program/libembobj.so
@@ -3126,7 +3169,7 @@ fi
 %attr(755,root,root) %{ooobasisdir}/program/libfwkl[ipx].so
 %attr(755,root,root) %{ooobasisdir}/program/libfwll[ipx].so
 %attr(755,root,root) %{ooobasisdir}/program/libfwml[ipx].so
-%attr(755,root,root) %{ooobasisdir}/program/libgol[ipx].so
+#%attr(755,root,root) %{ooobasisdir}/program/libgol[ipx].so
 %attr(755,root,root) %{ooobasisdir}/program/libguesslangl[ipx].so
 %attr(755,root,root) %{ooobasisdir}/program/libhelplinkerl[ipx].so
 %{!?with_system_hunspell:%attr(755,root,root) %{ooobasisdir}/program/libhunspell.so}
@@ -3159,7 +3202,9 @@ fi
 %attr(755,root,root) %{ooobasisdir}/program/liblogl[ipx].so
 %attr(755,root,root) %{ooobasisdir}/program/libmcnttype.so
 %attr(755,root,root) %{ooobasisdir}/program/libmozbootstrap.so
+%attr(755,root,root) %{ooobasisdir}/program/libmsfilterl[ipx].uno.so
 %attr(755,root,root) %{ooobasisdir}/program/libmsformsl[ipx].uno.so
+%attr(755,root,root) %{ooobasisdir}/program/libmtfrenderer.uno.so
 %attr(755,root,root) %{ooobasisdir}/program/libmysqll[ipx].so
 %attr(755,root,root) %{ooobasisdir}/program/libodbcl[ipx].so
 %attr(755,root,root) %{ooobasisdir}/program/libodbcbasel[ipx].so
@@ -3170,7 +3215,7 @@ fi
 %attr(755,root,root) %{ooobasisdir}/program/libpcrl[ipx].so
 %attr(755,root,root) %{ooobasisdir}/program/libpdffilterl[ipx].so
 %attr(755,root,root) %{ooobasisdir}/program/libpll[ipx].so
-%attr(755,root,root) %{ooobasisdir}/program/libpptxl[ipx].so
+#%attr(755,root,root) %{ooobasisdir}/program/libpptxl[ipx].so
 %attr(755,root,root) %{ooobasisdir}/program/libpreloadl[ipx].so
 %attr(755,root,root) %{ooobasisdir}/program/libprotocolhandlerl[ipx].so
 ###%attr(755,root,root) %{ooobasisdir}/program/libpspl[ipx].so
@@ -3199,13 +3244,13 @@ fi
 %attr(755,root,root) %{ooobasisdir}/program/libsvll[ipx].so
 %attr(755,root,root) %{ooobasisdir}/program/libsvtl[ipx].so
 %attr(755,root,root) %{ooobasisdir}/program/libsvxcorel[ipx].so
-%attr(755,root,root) %{ooobasisdir}/program/libsvxmsfilterl[ipx].so
+#%attr(755,root,root) %{ooobasisdir}/program/libsvxmsfilterl[ipx].so
 %attr(755,root,root) %{ooobasisdir}/program/libsvxl[ipx].so
 %attr(755,root,root) %{ooobasisdir}/program/libswl[ipx].so
 %attr(755,root,root) %{ooobasisdir}/program/libtextcat.so
 %attr(755,root,root) %{ooobasisdir}/program/libtextconv_dict.so
 %attr(755,root,root) %{ooobasisdir}/program/libtextconversiondlgsl[ipx].so
-%attr(755,root,root) %{ooobasisdir}/program/libtful[ipx].so
+#%attr(755,root,root) %{ooobasisdir}/program/libtful[ipx].so
 %attr(755,root,root) %{ooobasisdir}/program/libtkl[ipx].so
 %attr(755,root,root) %{ooobasisdir}/program/libtll[ipx].so
 %attr(755,root,root) %{ooobasisdir}/program/libtvhlp1.so
@@ -3228,7 +3273,7 @@ fi
 %attr(755,root,root) %{ooobasisdir}/program/libvcll[ipx].so
 %attr(755,root,root) %{ooobasisdir}/program/libvclplug_genl[ipx].so
 %attr(755,root,root) %{ooobasisdir}/program/libvclplug_svpl[ipx].so
-%attr(755,root,root) %{ooobasisdir}/program/libvos3gcc3.so
+#%attr(755,root,root) %{ooobasisdir}/program/libvos3gcc3.so
 %attr(755,root,root) %{ooobasisdir}/program/libxcrl[ipx].so
 %attr(755,root,root) %{ooobasisdir}/program/libxmlfal[ipx].so
 %attr(755,root,root) %{ooobasisdir}/program/libxmlfdl[ipx].so
@@ -3247,14 +3292,15 @@ fi
 %attr(755,root,root) %{ooobasisdir}/program/libxstor.so
 %attr(755,root,root) %{ooobasisdir}/program/localebe1.uno.so
 %attr(755,root,root) %{ooobasisdir}/program/migrationoo2.uno.so
+%attr(755,root,root) %{ooobasisdir}/program/migrationoo3.uno.so
 %attr(755,root,root) %{ooobasisdir}/program/open-url
 %attr(755,root,root) %{ooobasisdir}/program/pagein*
 %attr(755,root,root) %{ooobasisdir}/program/passwordcontainer.uno.so
 %attr(755,root,root) %{ooobasisdir}/program/pluginapp.bin
 %attr(755,root,root) %{ooobasisdir}/program/productregistration.uno.so
 ## seems to be exactly the same as in -ure
-%attr(755,root,root) %{ooobasisdir}/program/regcomp
-%attr(755,root,root) %{ooobasisdir}/program/regcomp.bin
+#%attr(755,root,root) %{ooobasisdir}/program/regcomp
+#%attr(755,root,root) %{ooobasisdir}/program/regcomp.bin
 ##
 %attr(755,root,root) %{ooobasisdir}/program/sax.uno.so
 %attr(755,root,root) %{ooobasisdir}/program/senddoc
@@ -3265,10 +3311,11 @@ fi
 %attr(755,root,root) %{ooobasisdir}/program/spadmin.bin
 ###%attr(755,root,root) %{ooobasisdir}/program/stocservices.uno.so
 %attr(755,root,root) %{ooobasisdir}/program/stringresource*.uno.so
-%attr(755,root,root) %{ooobasisdir}/program/svtmisc.uno.so
-%attr(755,root,root) %{ooobasisdir}/program/sysmgr1.uno.so
+#%attr(755,root,root) %{ooobasisdir}/program/svtmisc.uno.so
+#%attr(755,root,root) %{ooobasisdir}/program/sysmgr1.uno.so
 %attr(755,root,root) %{ooobasisdir}/program/syssh.uno.so
 %attr(755,root,root) %{ooobasisdir}/program/ucpexpand1.uno.so
+%attr(755,root,root) %{ooobasisdir}/program/ucpext.uno.so
 %attr(755,root,root) %{ooobasisdir}/program/ucptdoc1.uno.so
 %attr(755,root,root) %{ooobasisdir}/program/updatefeed.uno.so
 %attr(755,root,root) %{ooobasisdir}/program/uri-encode
@@ -3293,7 +3340,7 @@ fi
 %{ooobasisdir}/program/cli_ure.dll
 %endif
 
-%{ooobasisdir}/program/configmgrrc
+#%{ooobasisdir}/program/configmgrrc
 %{ooobasisdir}/program/fundamentalbasisrc
 %{ooobasisdir}/program/gengalrc
 %{ooobasisdir}/program/legacy_binfilters.rdb
@@ -3325,12 +3372,10 @@ fi
 %{ooobasisdir}/program/classes/js.jar
 ###%{ooobasisdir}/program/classes/jut.jar
 %{ooobasisdir}/program/classes/letter.jar
-%{ooobasisdir}/program/classes/lucene-analyzers-2.3.jar
-%{ooobasisdir}/program/classes/lucene-core-2.3.jar
 %{ooobasisdir}/program/classes/officebean.jar
 %{ooobasisdir}/program/classes/query.jar
 %{ooobasisdir}/program/classes/report.jar
-%{ooobasisdir}/program/classes/sandbox.jar
+%{ooobasisdir}/program/classes/saxon9.jar
 %{ooobasisdir}/program/classes/sdbc_hsqldb.jar
 %{!?with_system_xalan:%{ooobasisdir}/program/classes/serializer.jar}
 %{ooobasisdir}/program/classes/table.jar
@@ -3355,6 +3400,7 @@ fi
 %{ooobasisdir}/program/resource/bf_swen-US.res
 %{ooobasisdir}/program/resource/biben-US.res
 %{ooobasisdir}/program/resource/calen-US.res
+%{ooobasisdir}/program/resource/cuien-US.res
 %{ooobasisdir}/program/resource/chartcontrolleren-US.res
 %{ooobasisdir}/program/resource/dbaen-US.res
 %{ooobasisdir}/program/resource/dbmmen-US.res
@@ -3362,6 +3408,7 @@ fi
 %{ooobasisdir}/program/resource/deploymenten-US.res
 %{ooobasisdir}/program/resource/deploymentguien-US.res
 %{ooobasisdir}/program/resource/dkten-US.res
+%{ooobasisdir}/program/resource/editengen-US.res
 %{ooobasisdir}/program/resource/egien-US.res
 %{ooobasisdir}/program/resource/emeen-US.res
 %{ooobasisdir}/program/resource/epben-US.res
@@ -3393,7 +3440,7 @@ fi
 %{ooobasisdir}/program/resource/svxen-US.res
 %{ooobasisdir}/program/resource/swen-US.res
 %{ooobasisdir}/program/resource/textconversiondlgsen-US.res
-%{ooobasisdir}/program/resource/tfuen-US.res
+#%{ooobasisdir}/program/resource/tfuen-US.res
 %{ooobasisdir}/program/resource/tken-US.res
 %{ooobasisdir}/program/resource/tplen-US.res
 %{ooobasisdir}/program/resource/updchken-US.res
@@ -3422,58 +3469,58 @@ fi
 %{ooobasisdir}/share/config/images_classic.zip
 %{ooobasisdir}/share/config/images_crystal.zip
 %{ooobasisdir}/share/config/images_hicontrast.zip
-%{ooobasisdir}/share/config/images_industrial.zip
+#%{ooobasisdir}/share/config/images_industrial.zip
 %{ooobasisdir}/share/config/images_oxygen.zip
 %{ooobasisdir}/share/config/images_tango.zip
 %{ooobasisdir}/share/config/javasettingsunopkginstall.xml
 %{ooobasisdir}/share/config/*.xpm
 %dir %{ooobasisdir}/share/config/soffice.cfg
-%{ooobasisdir}/share/config/soffice.cfg/global
+#%{ooobasisdir}/share/config/soffice.cfg/global
 %dir %{ooobasisdir}/share/config/soffice.cfg/modules
 %{ooobasisdir}/share/config/soffice.cfg/modules/BasicIDE
 %{ooobasisdir}/share/config/soffice.cfg/modules/StartModule
 %dir %{ooobasisdir}/share/config/soffice.cfg/modules/dbapp
-%dir %{ooobasisdir}/share/config/soffice.cfg/modules/dbapp/accelerator
+#%dir %{ooobasisdir}/share/config/soffice.cfg/modules/dbapp/accelerator
 %dir %{ooobasisdir}/share/config/soffice.cfg/modules/dbbrowser
-%dir %{ooobasisdir}/share/config/soffice.cfg/modules/dbbrowser/accelerator
+#%dir %{ooobasisdir}/share/config/soffice.cfg/modules/dbbrowser/accelerator
 %dir %{ooobasisdir}/share/config/soffice.cfg/modules/dbquery
-%dir %{ooobasisdir}/share/config/soffice.cfg/modules/dbquery/accelerator
+#%dir %{ooobasisdir}/share/config/soffice.cfg/modules/dbquery/accelerator
 %dir %{ooobasisdir}/share/config/soffice.cfg/modules/dbreport
-%dir %{ooobasisdir}/share/config/soffice.cfg/modules/dbreport/accelerator
+#%dir %{ooobasisdir}/share/config/soffice.cfg/modules/dbreport/accelerator
 %dir %{ooobasisdir}/share/config/soffice.cfg/modules/dbtdata
-%dir %{ooobasisdir}/share/config/soffice.cfg/modules/dbtdata/accelerator
+#%dir %{ooobasisdir}/share/config/soffice.cfg/modules/dbtdata/accelerator
 %dir %{ooobasisdir}/share/config/soffice.cfg/modules/scalc
-%dir %{ooobasisdir}/share/config/soffice.cfg/modules/scalc/accelerator
+#%dir %{ooobasisdir}/share/config/soffice.cfg/modules/scalc/accelerator
 %{ooobasisdir}/share/config/soffice.cfg/modules/schart
 %dir %{ooobasisdir}/share/config/soffice.cfg/modules/sdraw
 ###%dir %{ooobasisdir}/share/config/soffice.cfg/modules/sdraw/accelerator
 %dir %{ooobasisdir}/share/config/soffice.cfg/modules/sglobal
-%dir %{ooobasisdir}/share/config/soffice.cfg/modules/sglobal/accelerator
-%{ooobasisdir}/share/config/soffice.cfg/modules/sglobal/accelerator/en-US
+#%dir %{ooobasisdir}/share/config/soffice.cfg/modules/sglobal/accelerator
+#%{ooobasisdir}/share/config/soffice.cfg/modules/sglobal/accelerator/en-US
 %{ooobasisdir}/share/config/soffice.cfg/modules/sglobal/menubar
 %{ooobasisdir}/share/config/soffice.cfg/modules/sglobal/statusbar
 %{ooobasisdir}/share/config/soffice.cfg/modules/sglobal/toolbar
 %dir %{ooobasisdir}/share/config/soffice.cfg/modules/sweb
-%dir %{ooobasisdir}/share/config/soffice.cfg/modules/sweb/accelerator
+#%dir %{ooobasisdir}/share/config/soffice.cfg/modules/sweb/accelerator
 %dir %{ooobasisdir}/share/config/soffice.cfg/modules/simpress
-%dir %{ooobasisdir}/share/config/soffice.cfg/modules/simpress/accelerator
+#%dir %{ooobasisdir}/share/config/soffice.cfg/modules/simpress/accelerator
 %dir %{ooobasisdir}/share/config/soffice.cfg/modules/swform
-%dir %{ooobasisdir}/share/config/soffice.cfg/modules/swform/accelerator
-%{ooobasisdir}/share/config/soffice.cfg/modules/swform/accelerator/en-US
+#%dir %{ooobasisdir}/share/config/soffice.cfg/modules/swform/accelerator
+#%{ooobasisdir}/share/config/soffice.cfg/modules/swform/accelerator/en-US
 %{ooobasisdir}/share/config/soffice.cfg/modules/swform/menubar
 %{ooobasisdir}/share/config/soffice.cfg/modules/swform/statusbar
 %{ooobasisdir}/share/config/soffice.cfg/modules/swform/toolbar
 %dir %{ooobasisdir}/share/config/soffice.cfg/modules/swreport
-%dir %{ooobasisdir}/share/config/soffice.cfg/modules/swreport/accelerator
-%{ooobasisdir}/share/config/soffice.cfg/modules/swreport/accelerator/en-US
+#%dir %{ooobasisdir}/share/config/soffice.cfg/modules/swreport/accelerator
+#%{ooobasisdir}/share/config/soffice.cfg/modules/swreport/accelerator/en-US
 %{ooobasisdir}/share/config/soffice.cfg/modules/swreport/menubar
 %{ooobasisdir}/share/config/soffice.cfg/modules/swreport/statusbar
 %{ooobasisdir}/share/config/soffice.cfg/modules/swreport/toolbar
 %dir %{ooobasisdir}/share/config/soffice.cfg/modules/swriter
-%dir %{ooobasisdir}/share/config/soffice.cfg/modules/swriter/accelerator
+#%dir %{ooobasisdir}/share/config/soffice.cfg/modules/swriter/accelerator
 %dir %{ooobasisdir}/share/config/soffice.cfg/modules/swxform
-%dir %{ooobasisdir}/share/config/soffice.cfg/modules/swxform/accelerator
-%{ooobasisdir}/share/config/soffice.cfg/modules/swxform/accelerator/en-US
+#%dir %{ooobasisdir}/share/config/soffice.cfg/modules/swxform/accelerator
+#%{ooobasisdir}/share/config/soffice.cfg/modules/swxform/accelerator/en-US
 %{ooobasisdir}/share/config/soffice.cfg/modules/swxform/menubar
 %{ooobasisdir}/share/config/soffice.cfg/modules/swxform/statusbar
 %{ooobasisdir}/share/config/soffice.cfg/modules/swxform/toolbar
@@ -3486,226 +3533,16 @@ fi
 %{ooobasisdir}/share/fonts
 %{ooobasisdir}/share/gallery
 %{ooobasisdir}/share/psprint
+
 %dir %{ooobasisdir}/share/registry
-%dir %{ooobasisdir}/share/registry/data
-%dir %{ooobasisdir}/share/registry/data/org
-%dir %{ooobasisdir}/share/registry/data/org/openoffice
-%{ooobasisdir}/share/registry/data/org/openoffice/FirstStartWizard.xcu
-%{ooobasisdir}/share/registry/data/org/openoffice/Inet.xcu
-%{ooobasisdir}/share/registry/data/org/openoffice/LDAP.xcu.sample
-%{ooobasisdir}/share/registry/data/org/openoffice/Setup.xcu
-%{ooobasisdir}/share/registry/data/org/openoffice/UserProfile.xcu
-%{ooobasisdir}/share/registry/data/org/openoffice/VCL.xcu
-%dir %{ooobasisdir}/share/registry/data/org/openoffice/Office
-%{ooobasisdir}/share/registry/data/org/openoffice/Office/Accelerators.xcu
-%{ooobasisdir}/share/registry/data/org/openoffice/Office/Calc.xcu
-%{ooobasisdir}/share/registry/data/org/openoffice/Office/Canvas.xcu
-%{ooobasisdir}/share/registry/data/org/openoffice/Office/Common.xcu
-%{ooobasisdir}/share/registry/data/org/openoffice/Office/DataAccess.xcu
-%{ooobasisdir}/share/registry/data/org/openoffice/Office/Embedding.xcu
-###%{ooobasisdir}/share/registry/data/org/openoffice/Office/ExtendedColorScheme.xcu
-%{ooobasisdir}/share/registry/data/org/openoffice/Office/ExtensionManager.xcu
-%{ooobasisdir}/share/registry/data/org/openoffice/Office/FormWizard.xcu
-%{ooobasisdir}/share/registry/data/org/openoffice/Office/Histories.xcu
-%{ooobasisdir}/share/registry/data/org/openoffice/Office/Impress.xcu
-%{ooobasisdir}/share/registry/data/org/openoffice/Office/Jobs.xcu
-%{ooobasisdir}/share/registry/data/org/openoffice/Office/Labels.xcu
-%{ooobasisdir}/share/registry/data/org/openoffice/Office/Logging.xcu
-%{ooobasisdir}/share/registry/data/org/openoffice/Office/Math.xcu
-%{ooobasisdir}/share/registry/data/org/openoffice/Office/Paths.xcu
-%{ooobasisdir}/share/registry/data/org/openoffice/Office/ProtocolHandler.xcu
-%{ooobasisdir}/share/registry/data/org/openoffice/Office/Scripting.xcu
-%{ooobasisdir}/share/registry/data/org/openoffice/Office/Security.xcu
-%{ooobasisdir}/share/registry/data/org/openoffice/Office/SFX.xcu
-%{ooobasisdir}/share/registry/data/org/openoffice/Office/TableWizard.xcu
-%{ooobasisdir}/share/registry/data/org/openoffice/Office/Views.xcu
-%{ooobasisdir}/share/registry/data/org/openoffice/Office/WebWizard.xcu
-%{ooobasisdir}/share/registry/data/org/openoffice/Office/Writer.xcu
-%dir %{ooobasisdir}/share/registry/data/org/openoffice/Office/UI
-%{ooobasisdir}/share/registry/data/org/openoffice/Office/UI/BaseWindowState.xcu
-%{ooobasisdir}/share/registry/data/org/openoffice/Office/UI/BasicIDECommands.xcu
-%{ooobasisdir}/share/registry/data/org/openoffice/Office/UI/BasicIDEWindowState.xcu
-%{ooobasisdir}/share/registry/data/org/openoffice/Office/UI/BibliographyCommands.xcu
-%{ooobasisdir}/share/registry/data/org/openoffice/Office/UI/ChartCommands.xcu
-%{ooobasisdir}/share/registry/data/org/openoffice/Office/UI/ChartWindowState.xcu
-%{ooobasisdir}/share/registry/data/org/openoffice/Office/UI/Controller.xcu
-%{ooobasisdir}/share/registry/data/org/openoffice/Office/UI/DbBrowserWindowState.xcu
-%{ooobasisdir}/share/registry/data/org/openoffice/Office/UI/DbQueryWindowState.xcu
-%{ooobasisdir}/share/registry/data/org/openoffice/Office/UI/DbRelationWindowState.xcu
-%{ooobasisdir}/share/registry/data/org/openoffice/Office/UI/DbTableWindowState.xcu
-%{ooobasisdir}/share/registry/data/org/openoffice/Office/UI/DbTableDataWindowState.xcu
-%{ooobasisdir}/share/registry/data/org/openoffice/Office/UI/DbuCommands.xcu
-%{ooobasisdir}/share/registry/data/org/openoffice/Office/UI/DrawImpressCommands.xcu
-%{ooobasisdir}/share/registry/data/org/openoffice/Office/UI/Factories.xcu
-%{ooobasisdir}/share/registry/data/org/openoffice/Office/UI/GenericCategories.xcu
-%{ooobasisdir}/share/registry/data/org/openoffice/Office/UI/GenericCommands.xcu
-%{ooobasisdir}/share/registry/data/org/openoffice/Office/UI/StartModuleCommands.xcu
-%{ooobasisdir}/share/registry/data/org/openoffice/Office/UI/StartModuleWindowState.xcu
-%{ooobasisdir}/share/registry/data/org/openoffice/Office/UI/WriterFormWindowState.xcu
-%{ooobasisdir}/share/registry/data/org/openoffice/Office/UI/WriterReportWindowState.xcu
-%{ooobasisdir}/share/registry/data/org/openoffice/Office/UI.xcu
-%{ooobasisdir}/share/registry/data/org/openoffice/Office/UI/XFormsWindowState.xcu
-%dir %{ooobasisdir}/share/registry/data/org/openoffice/TypeDetection
-%{ooobasisdir}/share/registry/data/org/openoffice/TypeDetection/UISort.xcu
-%dir %{ooobasisdir}/share/registry/data/org/openoffice/ucb
-%{ooobasisdir}/share/registry/data/org/openoffice/ucb/Configuration.xcu
-%{ooobasisdir}/share/registry/ldap
-%dir %{ooobasisdir}/share/registry/modules
-%dir %{ooobasisdir}/share/registry/modules/org
-%dir %{ooobasisdir}/share/registry/modules/org/openoffice
-%dir %{ooobasisdir}/share/registry/modules/org/openoffice/Office
-%dir %{ooobasisdir}/share/registry/modules/org/openoffice/Office/Accelerators
-%{ooobasisdir}/share/registry/modules/org/openoffice/Office/Accelerators/Accelerators-unxwnt.xcu
-%dir %{ooobasisdir}/share/registry/modules/org/openoffice/Office/Common
-%{ooobasisdir}/share/registry/modules/org/openoffice/Office/Common/Common-unx.xcu
-%{ooobasisdir}/share/registry/modules/org/openoffice/Office/Common/Common-UseOOoFileDialogs.xcu
-%dir %{ooobasisdir}/share/registry/modules/org/openoffice/Office/DataAccess
-%dir %{ooobasisdir}/share/registry/modules/org/openoffice/Office/DataAccess/Drivers
-%{ooobasisdir}/share/registry/modules/org/openoffice/Office/DataAccess/Drivers/adabas.xcu
-%{ooobasisdir}/share/registry/modules/org/openoffice/Office/DataAccess/Drivers/calc.xcu
-%{ooobasisdir}/share/registry/modules/org/openoffice/Office/DataAccess/Drivers/dbase.xcu
-%{ooobasisdir}/share/registry/modules/org/openoffice/Office/DataAccess/Drivers/evoab2.xcu
-%{ooobasisdir}/share/registry/modules/org/openoffice/Office/DataAccess/Drivers/flat.xcu
-%if %{with java}
-%{ooobasisdir}/share/registry/modules/org/openoffice/Office/DataAccess/Drivers/hsqldb.xcu
-%{ooobasisdir}/share/registry/modules/org/openoffice/Office/DataAccess/Drivers/jdbc.xcu
-%endif
-%{ooobasisdir}/share/registry/modules/org/openoffice/Office/DataAccess/Drivers/mysql.xcu
-%{ooobasisdir}/share/registry/modules/org/openoffice/Office/DataAccess/Drivers/odbc.xcu
-%dir %{ooobasisdir}/share/registry/modules/org/openoffice/Office/Embedding
-%{ooobasisdir}/share/registry/modules/org/openoffice/Office/Embedding/Embedding-chart.xcu
-%dir %{ooobasisdir}/share/registry/modules/org/openoffice/Office/Linguistic
-%{ooobasisdir}/share/registry/modules/org/openoffice/Office/Linguistic/Linguistic-lingucomponent-hyphenator.xcu
-%{ooobasisdir}/share/registry/modules/org/openoffice/Office/Linguistic/Linguistic-lingucomponent-spellchecker.xcu
-%{ooobasisdir}/share/registry/modules/org/openoffice/Office/Linguistic/Linguistic-lingucomponent-thesaurus.xcu
-%dir %{ooobasisdir}/share/registry/modules/org/openoffice/Office/Paths
-%{ooobasisdir}/share/registry/modules/org/openoffice/Office/Paths/Paths-unxwnt.xcu
-%dir %{ooobasisdir}/share/registry/modules/org/openoffice/Office/Scripting
-%dir %{ooobasisdir}/share/registry/modules/org/openoffice/Office/Writer
-%dir %{ooobasisdir}/share/registry/modules/org/openoffice/Setup
-%{ooobasisdir}/share/registry/modules/org/openoffice/Setup/Langpack-en-US.xcu
-%{ooobasisdir}/share/registry/modules/org/openoffice/Setup/Setup-start.xcu
-%dir %{ooobasisdir}/share/registry/modules/org/openoffice/TypeDetection
-%dir %{ooobasisdir}/share/registry/modules/org/openoffice/TypeDetection/Filter
-%{ooobasisdir}/share/registry/modules/org/openoffice/TypeDetection/Filter/fcfg_base_filters.xcu
-%{ooobasisdir}/share/registry/modules/org/openoffice/TypeDetection/Filter/fcfg_chart_filters.xcu
-%{ooobasisdir}/share/registry/modules/org/openoffice/TypeDetection/Filter/fcfg_chart_bf_filters.xcu
-%{ooobasisdir}/share/registry/modules/org/openoffice/TypeDetection/Filter/fcfg_global_bf_filters.xcu
-%dir %{ooobasisdir}/share/registry/modules/org/openoffice/TypeDetection/GraphicFilter
-%{ooobasisdir}/share/registry/modules/org/openoffice/TypeDetection/GraphicFilter/fcfg_internalgraphics_filters.xcu
-%dir %{ooobasisdir}/share/registry/modules/org/openoffice/TypeDetection/Misc
-%{ooobasisdir}/share/registry/modules/org/openoffice/TypeDetection/Misc/fcfg_base_others.xcu
-%{ooobasisdir}/share/registry/modules/org/openoffice/TypeDetection/Misc/fcfg_chart_others.xcu
-%dir %{ooobasisdir}/share/registry/modules/org/openoffice/TypeDetection/Types
-%{ooobasisdir}/share/registry/modules/org/openoffice/TypeDetection/Types/fcfg_base_types.xcu
-%{ooobasisdir}/share/registry/modules/org/openoffice/TypeDetection/Types/fcfg_chart_types.xcu
-%{ooobasisdir}/share/registry/modules/org/openoffice/TypeDetection/Types/fcfg_internalgraphics_types.xcu
-%{ooobasisdir}/share/registry/modules/org/openoffice/TypeDetection/Types/fcfg_chart_bf_types.xcu
-%{ooobasisdir}/share/registry/modules/org/openoffice/TypeDetection/Types/fcfg_global_bf_types.xcu
-%dir %{ooobasisdir}/share/registry/modules/org/openoffice/TypeDetection/UISort
-%{ooobasisdir}/share/registry/modules/org/openoffice/TypeDetection/UISort/UISort-calc.xcu
-%{ooobasisdir}/share/registry/modules/org/openoffice/TypeDetection/UISort/UISort-draw.xcu
-%{ooobasisdir}/share/registry/modules/org/openoffice/TypeDetection/UISort/UISort-impress.xcu
-%{ooobasisdir}/share/registry/modules/org/openoffice/TypeDetection/UISort/UISort-math.xcu
-%{ooobasisdir}/share/registry/modules/org/openoffice/TypeDetection/UISort/UISort-writer.xcu
+%{ooobasisdir}/share/registry/Langpack-en-US.xcd
+%{ooobasisdir}/share/registry/binfilter.xcd
+%{ooobasisdir}/share/registry/lingucomponent.xcd
+%{ooobasisdir}/share/registry/main.xcd
+%{ooobasisdir}/share/registry/oo-ad-ldap.xcd.sample
+%{ooobasisdir}/share/registry/oo-ldap.xcd.sample
 %dir %{ooobasisdir}/share/registry/res
-%{ooobasisdir}/share/registry/res/en-US
-%dir %{ooobasisdir}/share/registry/schema
-%dir %{ooobasisdir}/share/registry/schema/org
-%dir %{ooobasisdir}/share/registry/schema/org/openoffice
-%{ooobasisdir}/share/registry/schema/org/openoffice/FirstStartWizard.xcs
-%{ooobasisdir}/share/registry/schema/org/openoffice/Inet.xcs
-%{ooobasisdir}/share/registry/schema/org/openoffice/LDAP.xcs
-%{ooobasisdir}/share/registry/schema/org/openoffice/Setup.xcs
-%{ooobasisdir}/share/registry/schema/org/openoffice/System.xcs
-%{ooobasisdir}/share/registry/schema/org/openoffice/UserProfile.xcs
-%{ooobasisdir}/share/registry/schema/org/openoffice/VCL.xcs
-%dir %{ooobasisdir}/share/registry/schema/org/openoffice/Office
-%{ooobasisdir}/share/registry/schema/org/openoffice/Office/Accelerators.xcs
-%{ooobasisdir}/share/registry/schema/org/openoffice/Office/Addons.xcs
-%{ooobasisdir}/share/registry/schema/org/openoffice/Office/CalcAddIns.xcs
-%{ooobasisdir}/share/registry/schema/org/openoffice/Office/Calc.xcs
-%{ooobasisdir}/share/registry/schema/org/openoffice/Office/Canvas.xcs
-%{ooobasisdir}/share/registry/schema/org/openoffice/Office/Chart.xcs
-%{ooobasisdir}/share/registry/schema/org/openoffice/Office/Commands.xcs
-%{ooobasisdir}/share/registry/schema/org/openoffice/Office/Common.xcs
-%{ooobasisdir}/share/registry/schema/org/openoffice/Office/Compatibility.xcs
-%{ooobasisdir}/share/registry/schema/org/openoffice/Office/DataAccess.xcs
-%{ooobasisdir}/share/registry/schema/org/openoffice/Office/Draw.xcs
-%{ooobasisdir}/share/registry/schema/org/openoffice/Office/Embedding.xcs
-%{ooobasisdir}/share/registry/schema/org/openoffice/Office/Events.xcs
-%{ooobasisdir}/share/registry/schema/org/openoffice/Office/ExtendedColorScheme.xcs
-%{ooobasisdir}/share/registry/schema/org/openoffice/Office/ExtensionManager.xcs
-%{ooobasisdir}/share/registry/schema/org/openoffice/Office/FormWizard.xcs
-%{ooobasisdir}/share/registry/schema/org/openoffice/Office/Histories.xcs
-%{ooobasisdir}/share/registry/schema/org/openoffice/Office/Impress.xcs
-%{ooobasisdir}/share/registry/schema/org/openoffice/Office/Java.xcs
-%{ooobasisdir}/share/registry/schema/org/openoffice/Office/Jobs.xcs
-%{ooobasisdir}/share/registry/schema/org/openoffice/Office/Labels.xcs
-%{ooobasisdir}/share/registry/schema/org/openoffice/Office/Linguistic.xcs
-%{ooobasisdir}/share/registry/schema/org/openoffice/Office/Logging.xcs
-%{ooobasisdir}/share/registry/schema/org/openoffice/Office/Math.xcs
-%{ooobasisdir}/share/registry/schema/org/openoffice/Office/OptionsDialog.xcs
-%{ooobasisdir}/share/registry/schema/org/openoffice/Office/Paths.xcs
-%{ooobasisdir}/share/registry/schema/org/openoffice/Office/ProtocolHandler.xcs
-%{ooobasisdir}/share/registry/schema/org/openoffice/Office/Recovery.xcs
-%{ooobasisdir}/share/registry/schema/org/openoffice/Office/Scripting.xcs
-%{ooobasisdir}/share/registry/schema/org/openoffice/Office/Security.xcs
-%{ooobasisdir}/share/registry/schema/org/openoffice/Office/SFX.xcs
-%{ooobasisdir}/share/registry/schema/org/openoffice/Office/Substitution.xcs
-%{ooobasisdir}/share/registry/schema/org/openoffice/Office/TabBrowse.xcs
-%{ooobasisdir}/share/registry/schema/org/openoffice/Office/TableWizard.xcs
-%{ooobasisdir}/share/registry/schema/org/openoffice/Office/TypeDetection.xcs
-%{ooobasisdir}/share/registry/schema/org/openoffice/Office/UI.xcs
-%{ooobasisdir}/share/registry/schema/org/openoffice/Office/Views.xcs
-%{ooobasisdir}/share/registry/schema/org/openoffice/Office/WebWizard.xcs
-%{ooobasisdir}/share/registry/schema/org/openoffice/Office/WriterWeb.xcs
-%{ooobasisdir}/share/registry/schema/org/openoffice/Office/Writer.xcs
-%dir %{ooobasisdir}/share/registry/schema/org/openoffice/Office/DataAccess
-%{ooobasisdir}/share/registry/schema/org/openoffice/Office/DataAccess/Drivers.xcs
-%dir %{ooobasisdir}/share/registry/schema/org/openoffice/Office/OOoImprovement
-%{ooobasisdir}/share/registry/schema/org/openoffice/Office/OOoImprovement/Settings.xcs
-%dir %{ooobasisdir}/share/registry/schema/org/openoffice/Office/UI
-%{ooobasisdir}/share/registry/schema/org/openoffice/Office/UI/BaseWindowState.xcs
-%{ooobasisdir}/share/registry/schema/org/openoffice/Office/UI/BasicIDECommands.xcs
-%{ooobasisdir}/share/registry/schema/org/openoffice/Office/UI/BasicIDEWindowState.xcs
-%{ooobasisdir}/share/registry/schema/org/openoffice/Office/UI/BibliographyCommands.xcs
-%{ooobasisdir}/share/registry/schema/org/openoffice/Office/UI/BibliographyWindowState.xcs
-%{ooobasisdir}/share/registry/schema/org/openoffice/Office/UI/Category.xcs
-%{ooobasisdir}/share/registry/schema/org/openoffice/Office/UI/ChartCommands.xcs
-%{ooobasisdir}/share/registry/schema/org/openoffice/Office/UI/ChartWindowState.xcs
-%{ooobasisdir}/share/registry/schema/org/openoffice/Office/UI/Commands.xcs
-%{ooobasisdir}/share/registry/schema/org/openoffice/Office/UI/Controller.xcs
-%{ooobasisdir}/share/registry/schema/org/openoffice/Office/UI/DbBrowserWindowState.xcs
-%{ooobasisdir}/share/registry/schema/org/openoffice/Office/UI/DbQueryWindowState.xcs
-%{ooobasisdir}/share/registry/schema/org/openoffice/Office/UI/DbRelationWindowState.xcs
-%{ooobasisdir}/share/registry/schema/org/openoffice/Office/UI/DbTableWindowState.xcs
-%{ooobasisdir}/share/registry/schema/org/openoffice/Office/UI/DbTableDataWindowState.xcs
-%{ooobasisdir}/share/registry/schema/org/openoffice/Office/UI/DbuCommands.xcs
-%{ooobasisdir}/share/registry/schema/org/openoffice/Office/UI/DrawImpressCommands.xcs
-%{ooobasisdir}/share/registry/schema/org/openoffice/Office/UI/Factories.xcs
-%{ooobasisdir}/share/registry/schema/org/openoffice/Office/UI/GenericCategories.xcs
-%{ooobasisdir}/share/registry/schema/org/openoffice/Office/UI/GenericCommands.xcs
-%{ooobasisdir}/share/registry/schema/org/openoffice/Office/UI/GlobalSettings.xcs
-%{ooobasisdir}/share/registry/schema/org/openoffice/Office/UI/MathWindowState.xcs
-%{ooobasisdir}/share/registry/schema/org/openoffice/Office/UI/StartModuleCommands.xcs
-%{ooobasisdir}/share/registry/schema/org/openoffice/Office/UI/StartModuleWindowState.xcs
-%{ooobasisdir}/share/registry/schema/org/openoffice/Office/UI/WindowContentFactories.xcs
-%{ooobasisdir}/share/registry/schema/org/openoffice/Office/UI/WindowState.xcs
-%{ooobasisdir}/share/registry/schema/org/openoffice/Office/UI/WriterFormWindowState.xcs
-%{ooobasisdir}/share/registry/schema/org/openoffice/Office/UI/WriterReportWindowState.xcs
-%{ooobasisdir}/share/registry/schema/org/openoffice/Office/UI/XFormsWindowState.xcs
-%dir %{ooobasisdir}/share/registry/schema/org/openoffice/TypeDetection
-%{ooobasisdir}/share/registry/schema/org/openoffice/TypeDetection/Filter.xcs
-%{ooobasisdir}/share/registry/schema/org/openoffice/TypeDetection/GraphicFilter.xcs
-%{ooobasisdir}/share/registry/schema/org/openoffice/TypeDetection/Misc.xcs
-%{ooobasisdir}/share/registry/schema/org/openoffice/TypeDetection/Types.xcs
-%{ooobasisdir}/share/registry/schema/org/openoffice/TypeDetection/UISort.xcs
-%dir %{ooobasisdir}/share/registry/schema/org/openoffice/ucb
-%{ooobasisdir}/share/registry/schema/org/openoffice/ucb/Configuration.xcs
-%{ooobasisdir}/share/registry/schema/org/openoffice/ucb/Hierarchy.xcs
-%{ooobasisdir}/share/registry/schema/org/openoffice/ucb/InteractionHandler.xcs
-%{ooobasisdir}/share/registry/schema/org/openoffice/ucb/Store.xcs
+%{ooobasisdir}/share/registry/res/fcfg_langpack_en-US.xcd
 
 %dir %{ooobasisdir}/share/samples
 %dir %{ooobasisdir}/share/samples/en-US
@@ -3713,6 +3550,7 @@ fi
 %dir %{ooobasisdir}/share/template
 %{ooobasisdir}/share/template/en-US
 %dir %{ooobasisdir}/share/template/wizard
+%{ooobasisdir}/share/template/wizard/bitmap
 %dir %{ooobasisdir}/share/template/wizard/letter
 %{ooobasisdir}/share/template/wizard/letter/en-US
 
@@ -3746,6 +3584,7 @@ fi
 %{_libdir}/%{name}/program/openintro_pld.bmp
 %{_libdir}/%{name}/program/redirectrc
 %{_libdir}/%{name}/program/setuprc
+%{_libdir}/%{name}/program/shell
 #%dir %{_sysconfdir}/%{name}
 %{_libdir}/%{name}/program/sofficerc
 #%config(noreplace) %verify(not md5 mtime size) %{_sysconfdir}/%{name}/sofficerc
@@ -3765,10 +3604,10 @@ fi
 %dir %{_datadir}/%{name}
 %dir %{_datadir}/%{name}/licenses
 %{_datadir}/%{name}/licenses/LICENSE_en-US
-%{_datadir}/%{name}/licenses/LICENSE_en-US.html
+#%{_datadir}/%{name}/licenses/LICENSE_en-US.html
 %dir %{_datadir}/%{name}/readmes
 %{_datadir}/%{name}/readmes/README_en-US
-%{_datadir}/%{name}/readmes/README_en-US.html
+#%{_datadir}/%{name}/readmes/README_en-US.html
 %dir %{_datadir}/%{name}/share
 %dir %{_datadir}/%{name}/share/config
 %{_datadir}/%{name}/share/config/images_brand.zip
@@ -3776,24 +3615,25 @@ fi
 %{_datadir}/%{name}/share/readme/LICENSE_en-US*
 %{_datadir}/%{name}/share/readme/README_en-US*
 %dir %{_datadir}/%{name}/share/registry
-%dir %{_datadir}/%{name}/share/registry/data
-%dir %{_datadir}/%{name}/share/registry/data/org
-%dir %{_datadir}/%{name}/share/registry/data/org/openoffice
-%dir %{_datadir}/%{name}/share/registry/data/org/openoffice/Office
-%{_datadir}/%{name}/share/registry/data/org/openoffice/Office/Compatibility.xcu
-%dir %{_datadir}/%{name}/share/registry/modules
-%dir %{_datadir}/%{name}/share/registry/modules/org
-%dir %{_datadir}/%{name}/share/registry/modules/org/openoffice
-%dir %{_datadir}/%{name}/share/registry/modules/org/openoffice/Office
-%dir %{_datadir}/%{name}/share/registry/modules/org/openoffice/Office/Common
-%{_datadir}/%{name}/share/registry/modules/org/openoffice/Office/Common/Common-brand.xcu
-%dir %{_datadir}/%{name}/share/registry/modules/org/openoffice/Office/UI
-%{_datadir}/%{name}/share/registry/modules/org/openoffice/Office/UI/UI-brand.xcu
+%{_datadir}/%{name}/share/registry/brand.xcd
+#%dir %{_datadir}/%{name}/share/registry/data
+#%dir %{_datadir}/%{name}/share/registry/data/org
+#%dir %{_datadir}/%{name}/share/registry/data/org/openoffice
+#%dir %{_datadir}/%{name}/share/registry/data/org/openoffice/Office
+#%{_datadir}/%{name}/share/registry/data/org/openoffice/Office/Compatibility.xcu
+#%dir %{_datadir}/%{name}/share/registry/modules
+#%dir %{_datadir}/%{name}/share/registry/modules/org
+#%dir %{_datadir}/%{name}/share/registry/modules/org/openoffice
+#%dir %{_datadir}/%{name}/share/registry/modules/org/openoffice/Office
+#%dir %{_datadir}/%{name}/share/registry/modules/org/openoffice/Office/Common
+#%{_datadir}/%{name}/share/registry/modules/org/openoffice/Office/Common/Common-brand.xcu
+#%dir %{_datadir}/%{name}/share/registry/modules/org/openoffice/Office/UI
+#%{_datadir}/%{name}/share/registry/modules/org/openoffice/Office/UI/UI-brand.xcu
 %if %{with i18n}
-%dir %{_datadir}/%{name}/share/registry/modules/org/openoffice/Office/Writer
+#%dir %{_datadir}/%{name}/share/registry/modules/org/openoffice/Office/Writer
 %endif
-%dir %{_datadir}/%{name}/share/registry/modules/org/openoffice/Setup
-%{_datadir}/%{name}/share/registry/modules/org/openoffice/Setup/Setup-brand.xcu
+#%dir %{_datadir}/%{name}/share/registry/modules/org/openoffice/Setup
+#%{_datadir}/%{name}/share/registry/modules/org/openoffice/Setup/Setup-brand.xcu
 
 
 %{_datadir}/mime/packages/openoffice.xml
@@ -3845,9 +3685,9 @@ fi
 %else
 %attr(755,root,root) %{ooobasisdir}/program/ucpgio1.uno.so
 %endif
-%dir %{ooobasisdir}/share/registry/modules/org/openoffice/ucb
-%dir %{ooobasisdir}/share/registry/modules/org/openoffice/ucb/Configuration
-%{ooobasisdir}/share/registry/modules/org/openoffice/ucb/Configuration/Configuration-gio.xcu
+#%dir %{ooobasisdir}/share/registry/modules/org/openoffice/ucb
+#%dir %{ooobasisdir}/share/registry/modules/org/openoffice/ucb/Configuration
+#%{ooobasisdir}/share/registry/modules/org/openoffice/ucb/Configuration/Configuration-gio.xcu
 
 %files base
 %defattr(644,root,root,755)
@@ -3872,37 +3712,38 @@ fi
 %{ooobasisdir}/program/resource/rptuien-US.res
 %{ooobasisdir}/program/resource/sdbclen-US.res
 %{ooobasisdir}/program/resource/sdberren-US.res
-%{ooobasisdir}/share/config/soffice.cfg/modules/dbapp/accelerator/en-US
+#%{ooobasisdir}/share/config/soffice.cfg/modules/dbapp/accelerator/en-US
 %{ooobasisdir}/share/config/soffice.cfg/modules/dbapp/menubar
 %{ooobasisdir}/share/config/soffice.cfg/modules/dbapp/statusbar
 %{ooobasisdir}/share/config/soffice.cfg/modules/dbapp/toolbar
-%{ooobasisdir}/share/config/soffice.cfg/modules/dbbrowser/accelerator/en-US
+#%{ooobasisdir}/share/config/soffice.cfg/modules/dbbrowser/accelerator/en-US
 %{ooobasisdir}/share/config/soffice.cfg/modules/dbbrowser/menubar
 %{ooobasisdir}/share/config/soffice.cfg/modules/dbbrowser/toolbar
-%{ooobasisdir}/share/config/soffice.cfg/modules/dbquery/accelerator/en-US
+#%{ooobasisdir}/share/config/soffice.cfg/modules/dbquery/accelerator/en-US
 %{ooobasisdir}/share/config/soffice.cfg/modules/dbquery/menubar
 %{ooobasisdir}/share/config/soffice.cfg/modules/dbquery/toolbar
 %{ooobasisdir}/share/config/soffice.cfg/modules/dbrelation
-%{ooobasisdir}/share/config/soffice.cfg/modules/dbreport/accelerator/en-US
+#%{ooobasisdir}/share/config/soffice.cfg/modules/dbreport/accelerator/en-US
 %{ooobasisdir}/share/config/soffice.cfg/modules/dbreport/menubar
 %{ooobasisdir}/share/config/soffice.cfg/modules/dbreport/statusbar
 %{ooobasisdir}/share/config/soffice.cfg/modules/dbreport/toolbar
 %{ooobasisdir}/share/config/soffice.cfg/modules/dbtable
-%{ooobasisdir}/share/config/soffice.cfg/modules/dbtdata/accelerator/en-US
+#%{ooobasisdir}/share/config/soffice.cfg/modules/dbtdata/accelerator/en-US
 %{ooobasisdir}/share/config/soffice.cfg/modules/dbtdata/menubar
 %{ooobasisdir}/share/config/soffice.cfg/modules/dbtdata/toolbar
 ###%{ooobasisdir}/share/registry/data/org/openoffice/Office/UI/DbReportWindowState.xcu
 ###%{ooobasisdir}/share/registry/data/org/openoffice/Office/UI/ReportCommands.xcu
-%{ooobasisdir}/share/registry/modules/org/openoffice/Office/Common/Common-base.xcu
+#%{ooobasisdir}/share/registry/modules/org/openoffice/Office/Common/Common-base.xcu
 ###%{ooobasisdir}/share/registry/modules/org/openoffice/Office/Embedding/Embedding-report.xcu
-%{ooobasisdir}/share/registry/modules/org/openoffice/Setup/Setup-base.xcu
+#%{ooobasisdir}/share/registry/modules/org/openoffice/Setup/Setup-base.xcu
 ###%{ooobasisdir}/share/registry/modules/org/openoffice/Setup/Setup-report.xcu
-%{ooobasisdir}/share/registry/modules/org/openoffice/TypeDetection/Filter/fcfg_database_filters.xcu
-%{ooobasisdir}/share/registry/modules/org/openoffice/TypeDetection/Misc/fcfg_database_others.xcu
-%{ooobasisdir}/share/registry/modules/org/openoffice/TypeDetection/Types/fcfg_database_types.xcu
+#%{ooobasisdir}/share/registry/modules/org/openoffice/TypeDetection/Filter/fcfg_database_filters.xcu
+#%{ooobasisdir}/share/registry/modules/org/openoffice/TypeDetection/Misc/fcfg_database_others.xcu
+#%{ooobasisdir}/share/registry/modules/org/openoffice/TypeDetection/Types/fcfg_database_types.xcu
 ###%{ooobasisdir}/share/registry/schema/org/openoffice/Office/ReportDesign.xcs
 ###%{ooobasisdir}/share/registry/schema/org/openoffice/Office/UI/DbReportWindowState.xcs
 ###%{ooobasisdir}/share/registry/schema/org/openoffice/Office/UI/ReportCommands.xcs
+%{ooobasisdir}/share/registry/base.xcd
 %{ooobasisdir}/help/en/sdatabase.*
 
 %files calc
@@ -3924,29 +3765,30 @@ fi
 %attr(755,root,root) %{ooobasisdir}/program/libscuil[ipx].so
 %attr(755,root,root) %{ooobasisdir}/program/libsolverl[ipx].so
 %attr(755,root,root) %{ooobasisdir}/program/libvbaobjl[ipx].uno.so
-%attr(755,root,root) %{ooobasisdir}/program/libxlsxl[ipx].so
+#%attr(755,root,root) %{ooobasisdir}/program/libxlsxl[ipx].so
 %{ooobasisdir}/program/resource/analysisen-US.res
 %{ooobasisdir}/program/resource/dateen-US.res
 %{ooobasisdir}/program/resource/solveren-US.res
 %{ooobasisdir}/program/resource/scen-US.res
-%{ooobasisdir}/share/config/soffice.cfg/modules/scalc/accelerator/en-US
+#%{ooobasisdir}/share/config/soffice.cfg/modules/scalc/accelerator/en-US
 %{ooobasisdir}/share/config/soffice.cfg/modules/scalc/menubar
 %{ooobasisdir}/share/config/soffice.cfg/modules/scalc/statusbar
 %{ooobasisdir}/share/config/soffice.cfg/modules/scalc/toolbar
-%{ooobasisdir}/share/registry/data/org/openoffice/Office/UI/CalcCommands.xcu
-%{ooobasisdir}/share/registry/data/org/openoffice/Office/UI/CalcWindowState.xcu
-%{ooobasisdir}/share/registry/modules/org/openoffice/Office/Common/Common-calc.xcu
-%{ooobasisdir}/share/registry/modules/org/openoffice/Office/Embedding/Embedding-calc.xcu
-%{ooobasisdir}/share/registry/modules/org/openoffice/Setup/Setup-calc.xcu
-%{ooobasisdir}/share/registry/modules/org/openoffice/TypeDetection/Filter/fcfg_calc_filters.xcu
-%{ooobasisdir}/share/registry/modules/org/openoffice/TypeDetection/Types/fcfg_calc_types.xcu
-%{ooobasisdir}/share/registry/schema/org/openoffice/Office/UI/CalcCommands.xcs
-%{ooobasisdir}/share/registry/schema/org/openoffice/Office/UI/CalcWindowState.xcs
+#%{ooobasisdir}/share/registry/data/org/openoffice/Office/UI/CalcCommands.xcu
+#%{ooobasisdir}/share/registry/data/org/openoffice/Office/UI/CalcWindowState.xcu
+#%{ooobasisdir}/share/registry/modules/org/openoffice/Office/Common/Common-calc.xcu
+#%{ooobasisdir}/share/registry/modules/org/openoffice/Office/Embedding/Embedding-calc.xcu
+#%{ooobasisdir}/share/registry/modules/org/openoffice/Setup/Setup-calc.xcu
+#%{ooobasisdir}/share/registry/modules/org/openoffice/TypeDetection/Filter/fcfg_calc_filters.xcu
+#%{ooobasisdir}/share/registry/modules/org/openoffice/TypeDetection/Types/fcfg_calc_types.xcu
+#%{ooobasisdir}/share/registry/schema/org/openoffice/Office/UI/CalcCommands.xcs
+#%{ooobasisdir}/share/registry/schema/org/openoffice/Office/UI/CalcWindowState.xcs
+%{ooobasisdir}/share/registry/calc.xcd
 
 #BF
 %{ooobasisdir}/program/resource/bf_scen-US.res
-%{ooobasisdir}/share/registry/modules/org/openoffice/TypeDetection/Filter/fcfg_calc_bf_filters.xcu
-%{ooobasisdir}/share/registry/modules/org/openoffice/TypeDetection/Types/fcfg_calc_bf_types.xcu
+#%{ooobasisdir}/share/registry/modules/org/openoffice/TypeDetection/Filter/fcfg_calc_bf_filters.xcu
+#%{ooobasisdir}/share/registry/modules/org/openoffice/TypeDetection/Types/fcfg_calc_bf_types.xcu
 
 %files draw
 %defattr(644,root,root,755)
@@ -3960,22 +3802,23 @@ fi
 %{ooobasisdir}/share/config/soffice.cfg/modules/sdraw/menubar
 %{ooobasisdir}/share/config/soffice.cfg/modules/sdraw/statusbar
 %{ooobasisdir}/share/config/soffice.cfg/modules/sdraw/toolbar
-%{ooobasisdir}/share/registry/data/org/openoffice/Office/UI/DrawWindowState.xcu
-%{ooobasisdir}/share/registry/modules/org/openoffice/Office/Common/Common-draw.xcu
-%{ooobasisdir}/share/registry/modules/org/openoffice/Office/Embedding/Embedding-draw.xcu
-%{ooobasisdir}/share/registry/modules/org/openoffice/Setup/Setup-draw.xcu
-%{ooobasisdir}/share/registry/modules/org/openoffice/TypeDetection/Filter/fcfg_draw_filters.xcu
-%{ooobasisdir}/share/registry/modules/org/openoffice/TypeDetection/Types/fcfg_draw_types.xcu
-%{ooobasisdir}/share/registry/schema/org/openoffice/Office/UI/DrawWindowState.xcs
+#%{ooobasisdir}/share/registry/data/org/openoffice/Office/UI/DrawWindowState.xcu
+#%{ooobasisdir}/share/registry/modules/org/openoffice/Office/Common/Common-draw.xcu
+#%{ooobasisdir}/share/registry/modules/org/openoffice/Office/Embedding/Embedding-draw.xcu
+#%{ooobasisdir}/share/registry/modules/org/openoffice/Setup/Setup-draw.xcu
+#%{ooobasisdir}/share/registry/modules/org/openoffice/TypeDetection/Filter/fcfg_draw_filters.xcu
+#%{ooobasisdir}/share/registry/modules/org/openoffice/TypeDetection/Types/fcfg_draw_types.xcu
+#%{ooobasisdir}/share/registry/schema/org/openoffice/Office/UI/DrawWindowState.xcs
+%{ooobasisdir}/share/registry/draw.xcd
 
 #BF
-%{ooobasisdir}/share/registry/modules/org/openoffice/TypeDetection/Filter/fcfg_draw_bf_filters.xcu
-%{ooobasisdir}/share/registry/modules/org/openoffice/TypeDetection/Types/fcfg_draw_bf_types.xcu
+#%{ooobasisdir}/share/registry/modules/org/openoffice/TypeDetection/Filter/fcfg_draw_bf_filters.xcu
+#%{ooobasisdir}/share/registry/modules/org/openoffice/TypeDetection/Types/fcfg_draw_bf_types.xcu
 
 %files emailmerge
 %defattr(644,root,root,755)
 %{ooobasisdir}/program/mailmerge.py*
-%{ooobasisdir}/share/registry/modules/org/openoffice/Office/Writer/Writer-javamail.xcu
+#%{ooobasisdir}/share/registry/modules/org/openoffice/Office/Writer/Writer-javamail.xcu
 
 %files writer
 %defattr(644,root,root,755)
@@ -3998,32 +3841,32 @@ fi
 %if %{with java}
 ###%{ooobasisdir}/program/classes/writer2latex.jar
 %endif
-%{ooobasisdir}/share/registry/data/org/openoffice/Office/UI/WriterCommands.xcu
-%{ooobasisdir}/share/registry/schema/org/openoffice/Office/UI/WriterCommands.xcs
-%{ooobasisdir}/share/registry/data/org/openoffice/Office/UI/WriterGlobalWindowState.xcu
-%{ooobasisdir}/share/registry/schema/org/openoffice/Office/UI/WriterGlobalWindowState.xcs
-%{ooobasisdir}/share/registry/data/org/openoffice/Office/UI/WriterWebWindowState.xcu
-%{ooobasisdir}/share/registry/schema/org/openoffice/Office/UI/WriterWebWindowState.xcs
-%{ooobasisdir}/share/registry/schema/org/openoffice/Office/UI/WriterWindowState.xcs
-%{ooobasisdir}/share/registry/data/org/openoffice/Office/UI/WriterWindowState.xcu
-%{ooobasisdir}/share/registry/modules/org/openoffice/Office/Common/Common-writer.xcu
-%{ooobasisdir}/share/registry/modules/org/openoffice/Setup/Setup-writer.xcu
-%{ooobasisdir}/share/registry/modules/org/openoffice/Office/Embedding/Embedding-writer.xcu
-%{ooobasisdir}/share/registry/modules/org/openoffice/TypeDetection/Filter/fcfg_global_filters.xcu
-%{ooobasisdir}/share/registry/modules/org/openoffice/TypeDetection/Filter/fcfg_writer_filters.xcu
-%{ooobasisdir}/share/registry/modules/org/openoffice/TypeDetection/Types/fcfg_global_types.xcu
-%{ooobasisdir}/share/registry/modules/org/openoffice/TypeDetection/Types/fcfg_writer_types.xcu
+#%{ooobasisdir}/share/registry/data/org/openoffice/Office/UI/WriterCommands.xcu
+#%{ooobasisdir}/share/registry/schema/org/openoffice/Office/UI/WriterCommands.xcs
+#%{ooobasisdir}/share/registry/data/org/openoffice/Office/UI/WriterGlobalWindowState.xcu
+#%{ooobasisdir}/share/registry/schema/org/openoffice/Office/UI/WriterGlobalWindowState.xcs
+#%{ooobasisdir}/share/registry/data/org/openoffice/Office/UI/WriterWebWindowState.xcu
+#%{ooobasisdir}/share/registry/schema/org/openoffice/Office/UI/WriterWebWindowState.xcs
+#%{ooobasisdir}/share/registry/schema/org/openoffice/Office/UI/WriterWindowState.xcs
+#%{ooobasisdir}/share/registry/data/org/openoffice/Office/UI/WriterWindowState.xcu
+#%{ooobasisdir}/share/registry/modules/org/openoffice/Office/Common/Common-writer.xcu
+#%{ooobasisdir}/share/registry/modules/org/openoffice/Setup/Setup-writer.xcu
+#%{ooobasisdir}/share/registry/modules/org/openoffice/Office/Embedding/Embedding-writer.xcu
+#%{ooobasisdir}/share/registry/modules/org/openoffice/TypeDetection/Filter/fcfg_global_filters.xcu
+#%{ooobasisdir}/share/registry/modules/org/openoffice/TypeDetection/Filter/fcfg_writer_filters.xcu
+#%{ooobasisdir}/share/registry/modules/org/openoffice/TypeDetection/Types/fcfg_global_types.xcu
+#%{ooobasisdir}/share/registry/modules/org/openoffice/TypeDetection/Types/fcfg_writer_types.xcu
 ###%{ooobasisdir}/share/xslt/wiki
 %{ooobasisdir}/program/resource/t602filteren-US.res
 %{ooobasisdir}/share/config/soffice.cfg/modules/sbibliography
-%{ooobasisdir}/share/config/soffice.cfg/modules/swriter/accelerator/en-US
+#%{ooobasisdir}/share/config/soffice.cfg/modules/swriter/accelerator/en-US
 %{ooobasisdir}/share/config/soffice.cfg/modules/swriter/menubar
 %{ooobasisdir}/share/config/soffice.cfg/modules/swriter/statusbar
 %{ooobasisdir}/share/config/soffice.cfg/modules/swriter/toolbar
-
+%{ooobasisdir}/share/registry/writer.xcd
 #BF
-%{ooobasisdir}/share/registry/modules/org/openoffice/TypeDetection/Filter/fcfg_writer_bf_filters.xcu
-%{ooobasisdir}/share/registry/modules/org/openoffice/TypeDetection/Types/fcfg_writer_bf_types.xcu
+#%{ooobasisdir}/share/registry/modules/org/openoffice/TypeDetection/Filter/fcfg_writer_bf_filters.xcu
+#%{ooobasisdir}/share/registry/modules/org/openoffice/TypeDetection/Types/fcfg_writer_bf_types.xcu
 
 %files impress
 %defattr(644,root,root,755)
@@ -4031,33 +3874,34 @@ fi
 %attr(755,root,root) %{_libdir}/%{name}/program/simpress
 %attr(755,root,root) %{ooobasisdir}/program/libanimcore.so
 %attr(755,root,root) %{ooobasisdir}/program/libplaceware*.so
-%attr(755,root,root) %{ooobasisdir}/program/libpptxl[ipx].so
+#%attr(755,root,root) %{ooobasisdir}/program/libpptxl[ipx].so
 %{_mandir}/man1/ooimpress.1
 %{_desktopdir}/ooimpress.desktop
 %{_iconsdir}/hicolor/*/apps/ooo-impress.png
 %{_pixmapsdir}/ooo-impress.png
 %{ooobasisdir}/help/en/simpress.*
 %{ooobasisdir}/share/config/soffice.cfg/simpress
-%{ooobasisdir}/share/registry/data/org/openoffice/Office/UI/Effects.xcu
-%{ooobasisdir}/share/registry/schema/org/openoffice/Office/UI/Effects.xcs
-%{ooobasisdir}/share/registry/data/org/openoffice/Office/UI/ImpressWindowState.xcu
-%{ooobasisdir}/share/registry/schema/org/openoffice/Office/UI/ImpressWindowState.xcs
-%{ooobasisdir}/share/registry/modules/org/openoffice/Office/Common/Common-impress.xcu
-%{ooobasisdir}/share/registry/modules/org/openoffice/Office/Embedding/Embedding-impress.xcu
-%dir %{ooobasisdir}/share/registry/modules/org/openoffice/Office/Impress
-%{ooobasisdir}/share/registry/modules/org/openoffice/Office/Impress/Impress-ogltrans.xcu
-%{ooobasisdir}/share/registry/modules/org/openoffice/Setup/Setup-impress.xcu
-%{ooobasisdir}/share/registry/modules/org/openoffice/TypeDetection/Filter/fcfg_impress_filters.xcu
-%{ooobasisdir}/share/registry/modules/org/openoffice/TypeDetection/Types/fcfg_impress_types.xcu
-%{ooobasisdir}/share/config/soffice.cfg/modules/simpress/accelerator/en-US
+#%{ooobasisdir}/share/registry/data/org/openoffice/Office/UI/Effects.xcu
+#%{ooobasisdir}/share/registry/schema/org/openoffice/Office/UI/Effects.xcs
+#%{ooobasisdir}/share/registry/data/org/openoffice/Office/UI/ImpressWindowState.xcu
+#%{ooobasisdir}/share/registry/schema/org/openoffice/Office/UI/ImpressWindowState.xcs
+#%{ooobasisdir}/share/registry/modules/org/openoffice/Office/Common/Common-impress.xcu
+#%{ooobasisdir}/share/registry/modules/org/openoffice/Office/Embedding/Embedding-impress.xcu
+#%dir %{ooobasisdir}/share/registry/modules/org/openoffice/Office/Impress
+#%{ooobasisdir}/share/registry/modules/org/openoffice/Office/Impress/Impress-ogltrans.xcu
+#%{ooobasisdir}/share/registry/modules/org/openoffice/Setup/Setup-impress.xcu
+#%{ooobasisdir}/share/registry/modules/org/openoffice/TypeDetection/Filter/fcfg_impress_filters.xcu
+#%{ooobasisdir}/share/registry/modules/org/openoffice/TypeDetection/Types/fcfg_impress_types.xcu
+#%{ooobasisdir}/share/config/soffice.cfg/modules/simpress/accelerator/en-US
 ###%{ooobasisdir}/share/config/soffice.cfg/modules/simpress/accelerator/default.xml
 %{ooobasisdir}/share/config/soffice.cfg/modules/simpress/menubar
 %{ooobasisdir}/share/config/soffice.cfg/modules/simpress/statusbar
 %{ooobasisdir}/share/config/soffice.cfg/modules/simpress/toolbar
+%{ooobasisdir}/share/registry/impress.xcd
 
 #BF
-%{ooobasisdir}/share/registry/modules/org/openoffice/TypeDetection/Filter/fcfg_impress_bf_filters.xcu
-%{ooobasisdir}/share/registry/modules/org/openoffice/TypeDetection/Types/fcfg_impress_bf_types.xcu
+#%{ooobasisdir}/share/registry/modules/org/openoffice/TypeDetection/Filter/fcfg_impress_bf_filters.xcu
+#%{ooobasisdir}/share/registry/modules/org/openoffice/TypeDetection/Types/fcfg_impress_bf_types.xcu
 
 %files math
 %defattr(644,root,root,755)
@@ -4071,21 +3915,21 @@ fi
 %attr(755,root,root) %{ooobasisdir}/program/libsml[ipx].so
 %attr(755,root,root) %{_libdir}/%{name}/program/smath
 %{ooobasisdir}/share/dtd/math
-%{ooobasisdir}/share/registry/data/org/openoffice/Office/UI/MathCommands.xcu
-%{ooobasisdir}/share/registry/modules/org/openoffice/Office/Common/Common-math.xcu
-%{ooobasisdir}/share/registry/modules/org/openoffice/Setup/Setup-math.xcu
-%{ooobasisdir}/share/registry/schema/org/openoffice/Office/UI/MathCommands.xcs
-%{ooobasisdir}/share/registry/data/org/openoffice/Office/UI/MathWindowState.xcu
-%{ooobasisdir}/share/registry/modules/org/openoffice/Office/Embedding/Embedding-math.xcu
-%{ooobasisdir}/share/registry/modules/org/openoffice/TypeDetection/Filter/fcfg_math_filters.xcu
-%{ooobasisdir}/share/registry/modules/org/openoffice/TypeDetection/Types/fcfg_math_types.xcu
+#%{ooobasisdir}/share/registry/data/org/openoffice/Office/UI/MathCommands.xcu
+#%{ooobasisdir}/share/registry/modules/org/openoffice/Office/Common/Common-math.xcu
+#%{ooobasisdir}/share/registry/modules/org/openoffice/Setup/Setup-math.xcu
+#%{ooobasisdir}/share/registry/schema/org/openoffice/Office/UI/MathCommands.xcs
+#%{ooobasisdir}/share/registry/data/org/openoffice/Office/UI/MathWindowState.xcu
+#%{ooobasisdir}/share/registry/modules/org/openoffice/Office/Embedding/Embedding-math.xcu
+#%{ooobasisdir}/share/registry/modules/org/openoffice/TypeDetection/Filter/fcfg_math_filters.xcu
+#%{ooobasisdir}/share/registry/modules/org/openoffice/TypeDetection/Types/fcfg_math_types.xcu
 %{ooobasisdir}/program/resource/smen-US.res
 %{ooobasisdir}/share/config/soffice.cfg/modules/smath
-
+%{ooobasisdir}/share/registry/math.xcd
 #BF
 %{ooobasisdir}/program/resource/bf_smen-US.res
-%{ooobasisdir}/share/registry/modules/org/openoffice/TypeDetection/Filter/fcfg_math_bf_filters.xcu
-%{ooobasisdir}/share/registry/modules/org/openoffice/TypeDetection/Types/fcfg_math_bf_types.xcu
+#%{ooobasisdir}/share/registry/modules/org/openoffice/TypeDetection/Filter/fcfg_math_bf_filters.xcu
+#%{ooobasisdir}/share/registry/modules/org/openoffice/TypeDetection/Types/fcfg_math_bf_types.xcu
 
 %files web
 %defattr(644,root,root,755)
@@ -4094,31 +3938,33 @@ fi
 %{_desktopdir}/ooweb.desktop
 %{_iconsdir}/hicolor/*/apps/ooo-web.png
 %{_pixmapsdir}/ooo-web.png
-%{ooobasisdir}/share/registry/modules/org/openoffice/TypeDetection/Filter/fcfg_web_filters.xcu
-%{ooobasisdir}/share/registry/modules/org/openoffice/TypeDetection/Types/fcfg_web_types.xcu
-%{ooobasisdir}/share/config/soffice.cfg/modules/sweb/accelerator/en-US
+#%{ooobasisdir}/share/registry/modules/org/openoffice/TypeDetection/Filter/fcfg_web_filters.xcu
+#%{ooobasisdir}/share/registry/modules/org/openoffice/TypeDetection/Types/fcfg_web_types.xcu
+#%{ooobasisdir}/share/config/soffice.cfg/modules/sweb/accelerator/en-US
 %{ooobasisdir}/share/config/soffice.cfg/modules/sweb/menubar
 %{ooobasisdir}/share/config/soffice.cfg/modules/sweb/statusbar
 %{ooobasisdir}/share/config/soffice.cfg/modules/sweb/toolbar
 
 #BF
-%{ooobasisdir}/share/registry/modules/org/openoffice/TypeDetection/Types/fcfg_web_bf_types.xcu
-%{ooobasisdir}/share/registry/modules/org/openoffice/TypeDetection/Filter/fcfg_web_bf_filters.xcu
+#%{ooobasisdir}/share/registry/modules/org/openoffice/TypeDetection/Types/fcfg_web_bf_types.xcu
+#%{ooobasisdir}/share/registry/modules/org/openoffice/TypeDetection/Filter/fcfg_web_bf_filters.xcu
 
 %files graphicfilter
 %defattr(644,root,root,755)
 %attr(755,root,root) %{ooobasisdir}/program/libflashl[ipx].so
 %attr(755,root,root) %{ooobasisdir}/program/libsvgfilterl[ipx].so
 %attr(755,root,root) %{ooobasisdir}/program/libwpgimportl[ipx].so
-%{ooobasisdir}/share/registry/modules/org/openoffice/TypeDetection/Filter/fcfg_drawgraphics_filters.xcu
-%{ooobasisdir}/share/registry/modules/org/openoffice/TypeDetection/Filter/fcfg_impressgraphics_filters.xcu
-%{ooobasisdir}/share/registry/modules/org/openoffice/TypeDetection/Types/fcfg_drawgraphics_types.xcu
-%{ooobasisdir}/share/registry/modules/org/openoffice/TypeDetection/Types/fcfg_impressgraphics_types.xcu
+#%{ooobasisdir}/share/registry/modules/org/openoffice/TypeDetection/Filter/fcfg_drawgraphics_filters.xcu
+#%{ooobasisdir}/share/registry/modules/org/openoffice/TypeDetection/Filter/fcfg_impressgraphics_filters.xcu
+#%{ooobasisdir}/share/registry/modules/org/openoffice/TypeDetection/Types/fcfg_drawgraphics_types.xcu
+#%{ooobasisdir}/share/registry/modules/org/openoffice/TypeDetection/Types/fcfg_impressgraphics_types.xcu
+%{ooobasisdir}/share/registry/graphicfilter.xcd
 
 %files xsltfilter
 %defattr(644,root,root,755)
-%{ooobasisdir}/share/registry/modules/org/openoffice/TypeDetection/Filter/fcfg_xslt_filters.xcu
-%{ooobasisdir}/share/registry/modules/org/openoffice/TypeDetection/Types/fcfg_xslt_types.xcu
+#%{ooobasisdir}/share/registry/modules/org/openoffice/TypeDetection/Filter/fcfg_xslt_filters.xcu
+#%{ooobasisdir}/share/registry/modules/org/openoffice/TypeDetection/Types/fcfg_xslt_types.xcu
+%{ooobasisdir}/share/registry/xsltfilter.xcd
 %{ooobasisdir}/share/xslt/docbook
 %{ooobasisdir}/share/xslt/export/xhtml
 %{ooobasisdir}/share/xslt/odfflatxml
@@ -4129,12 +3975,12 @@ fi
 %{ooobasisdir}/program/classes/pexcel.jar
 %{ooobasisdir}/program/classes/pocketword.jar
 %{ooobasisdir}/program/classes/aportisdoc.jar
-%{ooobasisdir}/share/registry/modules/org/openoffice/TypeDetection/Filter/fcfg_palm_filters.xcu
-%{ooobasisdir}/share/registry/modules/org/openoffice/TypeDetection/Filter/fcfg_pocketexcel_filters.xcu
-%{ooobasisdir}/share/registry/modules/org/openoffice/TypeDetection/Filter/fcfg_pocketword_filters.xcu
-%{ooobasisdir}/share/registry/modules/org/openoffice/TypeDetection/Types/fcfg_palm_types.xcu
-%{ooobasisdir}/share/registry/modules/org/openoffice/TypeDetection/Types/fcfg_pocketexcel_types.xcu
-%{ooobasisdir}/share/registry/modules/org/openoffice/TypeDetection/Types/fcfg_pocketword_types.xcu
+#%{ooobasisdir}/share/registry/modules/org/openoffice/TypeDetection/Filter/fcfg_palm_filters.xcu
+#%{ooobasisdir}/share/registry/modules/org/openoffice/TypeDetection/Filter/fcfg_pocketexcel_filters.xcu
+#%{ooobasisdir}/share/registry/modules/org/openoffice/TypeDetection/Filter/fcfg_pocketword_filters.xcu
+#%{ooobasisdir}/share/registry/modules/org/openoffice/TypeDetection/Types/fcfg_palm_types.xcu
+#%{ooobasisdir}/share/registry/modules/org/openoffice/TypeDetection/Types/fcfg_pocketexcel_types.xcu
+#%{ooobasisdir}/share/registry/modules/org/openoffice/TypeDetection/Types/fcfg_pocketword_types.xcu
 %endif
 
 %files testtools
@@ -4233,7 +4079,8 @@ fi
 %{ooobasisdir}/program/pythonscript.py
 %{ooobasisdir}/program/uno.py
 %{ooobasisdir}/program/unohelper.py
-%{ooobasisdir}/share/registry/modules/org/openoffice/Office/Scripting/Scripting-python.xcu
+#%{ooobasisdir}/share/registry/modules/org/openoffice/Office/Scripting/Scripting-python.xcu
+%{ooobasisdir}/share/registry/pyuno.xcd
 
 # samples there
 %{ooobasisdir}/share/Scripts/python
