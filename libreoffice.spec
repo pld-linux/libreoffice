@@ -147,7 +147,7 @@ Source124:	http://hg.services.openoffice.org/binaries/35c94d2df8893241173de1d16b
 # patches applied in prep section
 Patch0:		%{name}-build-apply.patch
 #Patch10:	%{name}-hotfix-gcc45.patch
-URL:		http://www.openoffice.org/
+URL:		http://www.documentfoundation.org/
 BuildRequires:	libwpd-devel >= 0.9.0
 BuildRequires:	libwps-devel >= 0.2.0
 BuildRequires:	libwpg-devel >= 0.2.0
