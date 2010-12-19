@@ -276,6 +276,7 @@ Requires:	%{name}-testtools = %{epoch}:%{version}-%{release}
 Requires:	%{name}-web = %{epoch}:%{version}-%{release}
 Requires:	%{name}-writer = %{epoch}:%{version}-%{release}
 Requires:	%{name}-xsltfilter = %{epoch}:%{version}-%{release}
+Obsoletes:	openoffice.org
 ExclusiveArch:	%{ix86} %{x8664} ppc sparc sparcv9
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
@@ -327,6 +328,7 @@ Requires:	%{name}-core = %{epoch}:%{version}-%{release}
 Obsoletes:	openoffice-i18n-en
 Obsoletes:	openoffice-i18n-en-kde
 Obsoletes:	openoffice-libs-kde
+Obsoletes:	openoffice.org-libs-kde
 
 %description libs-kde
 LibreOffice productivity suite - KDE Interface.
@@ -342,6 +344,7 @@ Requires:	%{name}-core = %{epoch}:%{version}-%{release}
 Obsoletes:	openoffice-i18n-en
 Obsoletes:	openoffice-i18n-en-gtk
 Obsoletes:	openoffice-libs-gtk
+Obsoletes:	openoffice.org-libs-gtk
 
 %description libs-gtk
 LibreOffice productivity suite - GTK+ Interface.
@@ -387,6 +390,7 @@ Obsoletes:	openoffice-i18n-mi-gtk
 Obsoletes:	openoffice-i18n-ro
 Obsoletes:	openoffice-i18n-ro-gtk
 Obsoletes:	openoffice-libs
+Obsoletes:	openoffice.org-core
 Obsoletes:	openoffice.org-dirs
 Obsoletes:	openoffice.org-i18n-fo
 Obsoletes:	openoffice.org-i18n-fo-gtk
@@ -424,6 +428,7 @@ Summary(pl.UTF-8):	Wiązania Pythona dla LibreOffice
 Group:		Libraries
 Requires:	%{name}-core = %{epoch}:%{version}-%{release}
 Requires:	python
+Obsoletes:	openoffice.org-pyuno
 
 %description pyuno
 Cool Python bindings for the LibreOffice UNO component model.
@@ -441,6 +446,7 @@ Summary(pl.UTF-8):	Frontend do baz danych dla LibreOffice
 Group:		X11/Applications
 Requires(post,postun):	desktop-file-utils
 Requires:	%{name}-core = %{epoch}:%{version}-%{release}
+Obsoletes:	openoffice.org-base
 
 %description base
 GUI database frontend for LibreOffice. Allows creation and
@@ -458,6 +464,7 @@ Group:		X11/Applications
 Requires(post,postun):	desktop-file-utils
 Requires:	%{name}-core = %{epoch}:%{version}-%{release}
 Requires:	%{name}-writer = %{epoch}:%{version}-%{release}
+Obsoletes:	openoffice.org-web
 
 %description web
 Web publishing application of LibreOffice.
@@ -471,6 +478,7 @@ Summary(pl.UTF-8):	Moduł Writer dla LibreOffice
 Group:		X11/Applications
 Requires(post,postun):	desktop-file-utils
 Requires:	%{name}-core = %{epoch}:%{version}-%{release}
+Obsoletes:	openoffice.org-writer
 
 %description writer
 Wordprocessor application of LibreOffice.
@@ -484,6 +492,7 @@ Summary(pl.UTF-8):	Kompolent email mail merge dla LibreOffice
 Group:		X11/Applications
 Requires:	%{name}-pyuno = %{epoch}:%{version}-%{release}
 Requires:	%{name}-writer = %{epoch}:%{version}-%{release}
+Obsoletes:	openoffice.org-emailmerge
 
 %description emailmerge
 Enables LibreOffice Writer module to enable mail merge to email.
@@ -498,6 +507,7 @@ Summary(pl.UTF-8):	Moduł Calc dla LibreOffice
 Group:		X11/Applications
 Requires(post,postun):	desktop-file-utils
 Requires:	%{name}-core = %{epoch}:%{version}-%{release}
+Obsoletes:	openoffice.org-calc
 
 %description calc
 Spreadsheet application of LibreOffice.
@@ -511,6 +521,7 @@ Summary(pl.UTF-8):	Moduł Draw dla LibreOffice
 Group:		X11/Applications
 Requires(post,postun):	desktop-file-utils
 Requires:	%{name}-core = %{epoch}:%{version}-%{release}
+Obsoletes:	openoffice.org-draw
 
 %description draw
 Drawing application of LibreOffice.
@@ -524,6 +535,7 @@ Summary(pl.UTF-8):	Moduł Impress dla LibreOffice
 Group:		X11/Applications
 Requires(post,postun):	desktop-file-utils
 Requires:	%{name}-core = %{epoch}:%{version}-%{release}
+Obsoletes:	openoffice.org-impress
 
 %description impress
 Presentation application of LibreOffice.
@@ -537,6 +549,7 @@ Summary(pl.UTF-8):	Moduł Math dla LibreOffice
 Group:		X11/Applications
 Requires(post,postun):	desktop-file-utils
 Requires:	%{name}-core = %{epoch}:%{version}-%{release}
+Obsoletes:	openoffice.org-math
 
 %description math
 Math editor of LibreOffice.
@@ -549,6 +562,7 @@ Summary:	Extra graphicfilter module for LibreOffice
 Summary(pl.UTF-8):	Dodatkowy moduł graphicfilter dla LibreOffice
 Group:		X11/Applications
 Requires:	%{name}-core = %{epoch}:%{version}-%{release}
+Obsoletes:	openoffice.org-graphicfilter
 
 %description graphicfilter
 Graphicfilter module for LibreOffice, provides additional SVG and
@@ -563,6 +577,7 @@ Summary:	Extra xsltfilter module for LibreOffice
 Summary(pl.UTF-8):	Dodatkowy moduł xsltfilter dla LibreOffice
 Group:		X11/Applications
 Requires:	%{name}-core = %{epoch}:%{version}-%{release}
+Obsoletes:	openoffice.org-xsltfilter
 
 %description xsltfilter
 xsltfilter module for LibreOffice, provides additional docbook and
@@ -578,6 +593,7 @@ Summary:	Extra javafilter module for LibreOffice
 Summary(pl.UTF-8):	Dodatkowy moduł javafilter dla LibreOffice
 Group:		X11/Applications
 Requires:	%{name}-core = %{epoch}:%{version}-%{release}
+Obsoletes:	openoffice.org-javafilter
 
 %description javafilter
 javafilter module for LibreOffice, provides additional aportisdoc,
@@ -592,6 +608,7 @@ Summary:	testtools for LibreOffice
 Summary(pl.UTF-8):	Narzędzia testowe dla LibreOffice
 Group:		Development/Libraries
 Requires:	%{name}-core = %{epoch}:%{version}-%{release}
+Obsoletes:	openoffice.org-testtools
 
 %description testtools
 QA tools for LibreOffice, enables automated testing.
@@ -603,6 +620,7 @@ Narzędzia QA dla LibreOffice, pozwalają na automatyczne testowanie.
 %package ure
 Summary:	UNO Runtime Environment
 Group:		Libraries
+Obsoletes:	openoffice.org-ure
 
 %description ure
 UNO is the component model of LibreOffice. UNO offers
@@ -620,6 +638,7 @@ Group:		X11/Applications
 Requires:	%{name}-core = %{epoch}:%{version}-%{release}
 Requires:	browser-plugins >= 2.0
 Requires:	browser-plugins(%{_target_base_arch})
+Obsoletes:	browser-plugin-openoffice.org
 
 %description -n browser-plugin-%{name}
 LibreOffice plugin for WWW browsers.
@@ -640,6 +659,7 @@ Obsoletes:	openoffice-i18n-af
 Obsoletes:	openoffice-i18n-af-gtk
 Obsoletes:	openoffice.org-i18n-af-gtk
 Obsoletes:	openoffice.org-i18n-af-kde
+Obsoletes:	openoffice.org-i18n-af
 
 %description i18n-af
 This package provides resources containing menus and dialogs in
@@ -658,6 +678,7 @@ Obsoletes:	openoffice-i18n-ar
 Obsoletes:	openoffice-i18n-ar-gtk
 Obsoletes:	openoffice.org-i18n-ar-gtk
 Obsoletes:	openoffice.org-i18n-ar-kde
+Obsoletes:	openoffice.org-i18n-ar
 
 %description i18n-ar
 This package provides resources containing menus and dialogs in Arabic
@@ -672,6 +693,7 @@ Summary:	LibreOffice - interface in Assamese language for India
 Summary(pl.UTF-8):	LibreOffice - interfejs w języku asamskim dla Indii
 Group:		I18n
 Requires:	%{name}-core = %{epoch}:%{version}-%{release}
+Obsoletes:	openoffice.org-i18n-as_IN
 
 %description i18n-as_IN
 This package provides resources containing menus and dialogs in
@@ -686,6 +708,7 @@ Summary:	LibreOffice - interface in Belarusian language
 Summary(pl.UTF-8):	LibreOffice - interfejs w języku białoruskim
 Group:		I18n
 Requires:	%{name}-core = %{epoch}:%{version}-%{release}
+Obsoletes:	openoffice.org-i18n-be_BY
 
 %description i18n-be_BY
 This package provides resources containing menus and dialogs in
@@ -704,6 +727,7 @@ Obsoletes:	openoffice-i18n-bg
 Obsoletes:	openoffice-i18n-bg-gtk
 Obsoletes:	openoffice.org-i18n-bg-gtk
 Obsoletes:	openoffice.org-i18n-bg-kde
+Obsoletes:	openoffice.org-i18n-bg
 
 %description i18n-bg
 This package provides resources containing menus and dialogs in
@@ -718,6 +742,7 @@ Summary:	LibreOffice - interface in Bangla language
 Summary(pl.UTF-8):	LibreOffice - interfejs w języku bengalskim
 Group:		I18n
 Requires:	%{name}-core = %{epoch}:%{version}-%{release}
+Obsoletes:	openoffice.org-i18n-bn
 
 %description i18n-bn
 This package provides resources containing menus and dialogs in Bangla
@@ -732,6 +757,7 @@ Summary:	LibreOffice - interface in Bangla language for Bangladesh
 Summary(pl.UTF-8):	LibreOffice - interfejs w języku bengalskim dla Bangladeszu
 Group:		I18n
 Requires:	%{name}-core = %{epoch}:%{version}-%{release}
+Obsoletes:	openoffice.org-i18n-bn_BD
 
 %description i18n-bn_BD
 This package provides resources containing menus and dialogs in Bangla
@@ -746,6 +772,7 @@ Summary:	LibreOffice - interface in Bangla language for India
 Summary(pl.UTF-8):	LibreOffice - interfejs w języku bengalskim dla Indii
 Group:		I18n
 Requires:	%{name}-core = %{epoch}:%{version}-%{release}
+Obsoletes:	openoffice.org-i18n-bn_IN
 
 %description i18n-bn_IN
 This package provides resources containing menus and dialogs in Bangla
@@ -760,6 +787,7 @@ Summary:	LibreOffice - interface in Tibetan language
 Summary(pl.UTF-8):	LibreOffice - interfejs w języku tybetańskim
 Group:		I18n
 Requires:	%{name}-core = %{epoch}:%{version}-%{release}
+Obsoletes:	openoffice.org-i18n-bo
 
 %description i18n-bo
 This package provides resources containing menus and dialogs in Tibetan
@@ -774,6 +802,7 @@ Summary:	LibreOffice - interface in Breton language
 Summary(pl.UTF-8):	LibreOffice - interfejs w języku bretońskim
 Group:		I18n
 Requires:	%{name}-core = %{epoch}:%{version}-%{release}
+Obsoletes:	openoffice.org-i18n-br
 
 %description i18n-br
 This package provides resources containing menus and dialogs in Breton
@@ -788,6 +817,7 @@ Summary:	LibreOffice - interface in Bodo language
 Summary(pl.UTF-8):	LibreOffice - interfejs w języku boro
 Group:		I18n
 Requires:	%{name}-core = %{epoch}:%{version}-%{release}
+Obsoletes:	openoffice.org-i18n-brx
 
 %description i18n-brx
 This package provides resources containing menus and dialogs in Bodo
@@ -802,6 +832,7 @@ Summary:	LibreOffice - interface in Bosnian language
 Summary(pl.UTF-8):	LibreOffice - interfejs w języku bośniackim
 Group:		I18n
 Requires:	%{name}-core = %{epoch}:%{version}-%{release}
+Obsoletes:	openoffice.org-i18n-bs
 
 %description i18n-bs
 This package provides resources containing menus and dialogs in
@@ -817,6 +848,7 @@ Summary:	LibreOffice - interface in ... language
 Summary(pl.UTF-8):	LibreOffice - interfejs w języku ...
 Group:		I18n
 Requires:	%{name}-core = %{epoch}:%{version}-%{release}
+Obsoletes:	openoffice.org-i18n-by
 
 %description i18n-by
 This package provides resources containing menus and dialogs in
@@ -835,6 +867,7 @@ Obsoletes:	openoffice-i18n-ca
 Obsoletes:	openoffice-i18n-ca-gtk
 Obsoletes:	openoffice.org-i18n-ca-gtk
 Obsoletes:	openoffice.org-i18n-ca-kde
+Obsoletes:	openoffice.org-i18n-ca
 
 %description i18n-ca
 This package provides resources containing menus and dialogs in
@@ -853,6 +886,7 @@ Obsoletes:	openoffice-i18n-cs
 Obsoletes:	openoffice-i18n-cs-gtk
 Obsoletes:	openoffice.org-i18n-cs-gtk
 Obsoletes:	openoffice.org-i18n-cs-kde
+Obsoletes:	openoffice.org-i18n-cs
 
 %description i18n-cs
 This package provides resources containing menus and dialogs in Czech
@@ -871,6 +905,7 @@ Obsoletes:	openoffice-i18n-cy
 Obsoletes:	openoffice-i18n-cy-gtk
 Obsoletes:	openoffice.org-i18n-cy-gtk
 Obsoletes:	openoffice.org-i18n-cy-kde
+Obsoletes:	openoffice.org-i18n-cy
 
 %description i18n-cy
 This package provides resources containing menus and dialogs in
@@ -889,6 +924,7 @@ Obsoletes:	openoffice-i18n-da
 Obsoletes:	openoffice-i18n-da-gtk
 Obsoletes:	openoffice.org-i18n-da-gtk
 Obsoletes:	openoffice.org-i18n-da-kde
+Obsoletes:	openoffice.org-i18n-da
 
 %description i18n-da
 This package provides resources containing menus and dialogs in Danish
@@ -907,6 +943,7 @@ Obsoletes:	openoffice-i18n-de
 Obsoletes:	openoffice-i18n-de-gtk
 Obsoletes:	openoffice.org-i18n-de-gtk
 Obsoletes:	openoffice.org-i18n-de-kde
+Obsoletes:	openoffice.org-i18n-de
 
 %description i18n-de
 This package provides resources containing menus and dialogs in German
@@ -921,6 +958,7 @@ Summary:	LibreOffice - interface in Dogri language
 Summary(pl.UTF-8):	LibreOffice - interfejs w języku dogri
 Group:		I18n
 Requires:	%{name}-core = %{epoch}:%{version}-%{release}
+Obsoletes:	openoffice.org-i18n-dgo
 
 %description i18n-dgo
 This package provides resources containing menus and dialogs in Dogri
@@ -935,6 +973,7 @@ Summary:	LibreOffice - interface in Dzongkha language
 Summary(pl.UTF-8):	Openoffice.org - interfejs w języku dżongkha
 Group:		I18n
 Requires:	%{name}-core = %{epoch}:%{version}-%{release}
+Obsoletes:	openoffice.org-i18n-dz
 
 %description i18n-dz
 This package provides resources containing menus and dialogs in
@@ -953,6 +992,7 @@ Obsoletes:	openoffice-i18n-el
 Obsoletes:	openoffice-i18n-el-gtk
 Obsoletes:	openoffice.org-i18n-el-gtk
 Obsoletes:	openoffice.org-i18n-el-kde
+Obsoletes:	openoffice.org-i18n-el
 
 %description i18n-el
 This package provides resources containing menus and dialogs in Greek
@@ -967,6 +1007,7 @@ Summary:	LibreOffice - interface in English language for United Kingdom
 Summary(pl.UTF-8):	LibreOffice - interfejs w języku anglieskim dla Wielkiej Brytanii
 Group:		I18n
 Requires:	%{name}-core = %{epoch}:%{version}-%{release}
+Obsoletes:	openoffice.org-i18n-en_GB
 
 %description i18n-en_GB
 This package provides resources containing menus and dialogs in
@@ -981,6 +1022,7 @@ Summary:	LibreOffice - interface in English language for South Africa
 Summary(pl.UTF-8):	LibreOffice - interfejs w języku anglieskim dla Południowej Afryki
 Group:		I18n
 Requires:	%{name}-core = %{epoch}:%{version}-%{release}
+Obsoletes:	openoffice.org-i18n-en_ZA
 
 %description i18n-en_ZA
 This package provides resources containing menus and dialogs in
@@ -995,6 +1037,7 @@ Summary:	LibreOffice - interface in Esperanto language
 Summary(pl.UTF-8):	LibreOffice - interfejs w języku esperanto
 Group:		I18n
 Requires:	%{name}-core = %{epoch}:%{version}-%{release}
+Obsoletes:	openoffice.org-i18n-eo
 
 %description i18n-eo
 This package provides resources containing menus and dialogs in
@@ -1013,6 +1056,7 @@ Obsoletes:	openoffice-i18n-es
 Obsoletes:	openoffice-i18n-es-gtk
 Obsoletes:	openoffice.org-i18n-es-gtk
 Obsoletes:	openoffice.org-i18n-es-kde
+Obsoletes:	openoffice.org-i18n-es
 
 %description i18n-es
 This package provides resources containing menus and dialogs in
@@ -1031,6 +1075,7 @@ Obsoletes:	openoffice-i18n-et
 Obsoletes:	openoffice-i18n-et-gtk
 Obsoletes:	openoffice.org-i18n-et-gtk
 Obsoletes:	openoffice.org-i18n-et-kde
+Obsoletes:	openoffice.org-i18n-et
 
 %description i18n-et
 This package provides resources containing menus and dialogs in
@@ -1048,6 +1093,7 @@ Requires:	%{name}-core = %{epoch}:%{version}-%{release}
 Obsoletes:	openoffice-i18n-eu
 Obsoletes:	openoffice-i18n-eu-gtk
 Obsoletes:	openoffice-i18n-eu-kde
+Obsoletes:	openoffice.org-i18n-eu
 
 %description i18n-eu
 This package provides resources containing menus and dialogs in Basque
@@ -1065,6 +1111,7 @@ Requires:	%{name}-core = %{epoch}:%{version}-%{release}
 Obsoletes:	openoffice-i18n-fa
 Obsoletes:	openoffice-i18n-fa-gtk
 Obsoletes:	openoffice-i18n-fa-kde
+Obsoletes:	openoffice.org-i18n-fa
 
 %description i18n-fa
 This package provides resources containing menus and dialogs in
@@ -1083,6 +1130,7 @@ Obsoletes:	openoffice-i18n-fi
 Obsoletes:	openoffice-i18n-fi-gtk
 Obsoletes:	openoffice.org-i18n-fi-gtk
 Obsoletes:	openoffice.org-i18n-fi-kde
+Obsoletes:	openoffice.org-i18n-fi
 
 %description i18n-fi
 This package provides resources containing menus and dialogs in
@@ -1101,6 +1149,7 @@ Obsoletes:	openoffice-i18n-fr
 Obsoletes:	openoffice-i18n-fr-gtk
 Obsoletes:	openoffice.org-i18n-fr-gtk
 Obsoletes:	openoffice.org-i18n-fr-kde
+Obsoletes:	openoffice.org-i18n-fr
 
 %description i18n-fr
 This package provides resources containing menus and dialogs in French
@@ -1119,6 +1168,7 @@ Obsoletes:	openoffice-i18n-ga
 Obsoletes:	openoffice-i18n-ga-gtk
 Obsoletes:	openoffice.org-i18n-ga-gtk
 Obsoletes:	openoffice.org-i18n-ga-kde
+Obsoletes:	openoffice.org-i18n-ga
 
 %description i18n-ga
 This package provides resources containing menus and dialogs in Irish
@@ -1133,6 +1183,7 @@ Summary:	LibreOffice - interface in Scottish Gaelic language
 Summary(pl.UTF-8):	LibreOffice - interfejs w języku gaelickim szkockim
 Group:		I18n
 Requires:	%{name}-core = %{epoch}:%{version}-%{release}
+Obsoletes:	openoffice.org-i18n-gd
 
 %description i18n-gd
 This package provides resources containing menus and dialogs in
@@ -1151,6 +1202,7 @@ Obsoletes:	openoffice-i18n-gl
 Obsoletes:	openoffice-i18n-gl-gtk
 Obsoletes:	openoffice.org-i18n-gl-gtk
 Obsoletes:	openoffice.org-i18n-gl-kde
+Obsoletes:	openoffice.org-i18n-gl
 
 %description i18n-gl
 This package provides resources containing menus and dialogs in
@@ -1165,6 +1217,7 @@ Summary:	LibreOffice - interface in Gujarati language
 Summary(pl.UTF-8):	LibreOffice - interfejs w języku gudźarati
 Group:		I18n
 Requires:	%{name}-core = %{epoch}:%{version}-%{release}
+Obsoletes:	openoffice.org-i18n-gu_IN
 
 %description i18n-gu_IN
 This package provides resources containing menus and dialogs in
@@ -1179,6 +1232,7 @@ Summary:	LibreOffice - interface in Gujarati language
 Summary(pl.UTF-8):	LibreOffice - interfejs w języku gudźarati
 Group:		I18n
 Requires:	%{name}-core = %{epoch}:%{version}-%{release}
+Obsoletes:	openoffice.org-i18n-gu
 
 %description i18n-gu
 This package provides resources containing menus and dialogs in
@@ -1197,6 +1251,7 @@ Obsoletes:	openoffice-i18n-he
 Obsoletes:	openoffice-i18n-he-gtk
 Obsoletes:	openoffice.org-i18n-he-gtk
 Obsoletes:	openoffice.org-i18n-he-kde
+Obsoletes:	openoffice.org-i18n-he
 
 %description i18n-he
 This package provides resources containing menus and dialogs in Hebrew
@@ -1215,6 +1270,7 @@ Obsoletes:	openoffice-i18n-hi
 Obsoletes:	openoffice-i18n-hi-gtk
 Obsoletes:	openoffice.org-i18n-hi-gtk
 Obsoletes:	openoffice.org-i18n-hi-kde
+Obsoletes:	openoffice.org-i18n-hi_IN
 
 %description i18n-hi_IN
 This package provides resources containing menus and dialogs in Hindi
@@ -1233,6 +1289,7 @@ Obsoletes:	openoffice-i18n-hr
 Obsoletes:	openoffice-i18n-hr-gtk
 Obsoletes:	openoffice.org-i18n-hr-gtk
 Obsoletes:	openoffice.org-i18n-hr-kde
+Obsoletes:	openoffice.org-i18n-hr
 
 %description i18n-hr
 This package provides resources containing menus and dialogs in
@@ -1251,6 +1308,7 @@ Obsoletes:	openoffice-i18n-hu
 Obsoletes:	openoffice-i18n-hu-gtk
 Obsoletes:	openoffice.org-i18n-hu-gtk
 Obsoletes:	openoffice.org-i18n-hu-kde
+Obsoletes:	openoffice.org-i18n-hu
 
 %description i18n-hu
 This package provides resources containing menus and dialogs in
@@ -1265,6 +1323,7 @@ Summary:	LibreOffice - interface in Icelandic language
 Summary(pl.UTF-8):	LibreOffice - interfejs w języku islandzkim
 Group:		I18n
 Requires:	%{name}-core = %{epoch}:%{version}-%{release}
+Obsoletes:	openoffice.org-i18n-is
 
 %description i18n-is
 This package provides resources containing menus and dialogs in
@@ -1283,6 +1342,7 @@ Obsoletes:	openoffice-i18n-it
 Obsoletes:	openoffice-i18n-it-gtk
 Obsoletes:	openoffice.org-i18n-it-gtk
 Obsoletes:	openoffice.org-i18n-it-kde
+Obsoletes:	openoffice.org-i18n-it
 
 %description i18n-it
 This package provides resources containing menus and dialogs in
@@ -1301,6 +1361,7 @@ Obsoletes:	openoffice-i18n-ja
 Obsoletes:	openoffice-i18n-ja-gtk
 Obsoletes:	openoffice.org-i18n-ja-gtk
 Obsoletes:	openoffice.org-i18n-ja-kde
+Obsoletes:	openoffice.org-i18n-ja
 
 %description i18n-ja
 This package provides resources containing menus and dialogs in Japan
@@ -1315,6 +1376,7 @@ Summary:	LibreOffice - interface in Georgian language
 Summary(pl.UTF-8):	LibreOffice - interfejs w języku gruzińskim
 Group:		I18n
 Requires:	%{name}-core = %{epoch}:%{version}-%{release}
+Obsoletes:	openoffice.org-i18n-ka
 
 %description i18n-ka
 This package provides resources containing menus and dialogs in
@@ -1330,6 +1392,7 @@ Summary:	LibreOffice - interface in ... language
 Summary(pl.UTF-8):	LibreOffice - interfejs w języku ...
 Group:		I18n
 Requires:	%{name}-core = %{epoch}:%{version}-%{release}
+Obsoletes:	openoffice.org-i18n-kid
 
 %description i18n-kid
 This package provides resources containing menus and dialogs in ...
@@ -1344,6 +1407,7 @@ Summary:	LibreOffice - interface in Kazakh language
 Summary(pl.UTF-8):	LibreOffice - interfejs w języku kazachskim
 Group:		I18n
 Requires:	%{name}-core = %{epoch}:%{version}-%{release}
+Obsoletes:	openoffice.org-i18n-kk
 
 %description i18n-kk
 This package provides resources containing menus and dialogs in Kazakh
@@ -1358,6 +1422,7 @@ Summary:	LibreOffice - interface in Khmer language
 Summary(pl.UTF-8):	LibreOffice - interfejs w języku khmerskim
 Group:		I18n
 Requires:	%{name}-core = %{epoch}:%{version}-%{release}
+Obsoletes:	openoffice.org-i18n-km
 
 %description i18n-km
 This package provides resources containing menus and dialogs in Khmer
@@ -1375,6 +1440,7 @@ Requires:	%{name}-core = %{epoch}:%{version}-%{release}
 Obsoletes:	openoffice-i18n-kn
 Obsoletes:	openoffice-i18n-kn-gtk
 Obsoletes:	openoffice-i18n-kn-kde
+Obsoletes:	openoffice.org-i18n-kn_IN
 
 %description i18n-kn_IN
 This package provides resources containing menus and dialogs in
@@ -1393,6 +1459,7 @@ Obsoletes:	openoffice-i18n-ko
 Obsoletes:	openoffice-i18n-ko-gtk
 Obsoletes:	openoffice.org-i18n-ko-gtk
 Obsoletes:	openoffice.org-i18n-ko-kde
+Obsoletes:	openoffice.org-i18n-ko
 
 %description i18n-ko
 This package provides resources containing menus and dialogs in Korean
@@ -1407,6 +1474,7 @@ Summary:	LibreOffice - interface in Konkani language
 Summary(pl.UTF-8):	LibreOffice - interfejs w języku konkani
 Group:		I18n
 Requires:	%{name}-core = %{epoch}:%{version}-%{release}
+Obsoletes:	openoffice.org-i18n-kok
 
 %description i18n-kok
 This package provides resources containing menus and dialogs in
@@ -1421,6 +1489,7 @@ Summary:	LibreOffice - interface in Kashmiri language
 Summary(pl.UTF-8):	LibreOffice - interfejs w języku kaszmirskim
 Group:		I18n
 Requires:	%{name}-core = %{epoch}:%{version}-%{release}
+Obsoletes:	openoffice.org-i18n-ks
 
 %description i18n-ks
 This package provides resources containing menus and dialogs in
@@ -1435,6 +1504,7 @@ Summary:	LibreOffice - interface in Kurdish language
 Summary(pl.UTF-8):	LibreOffice - interfejs w języku kurdyjskim
 Group:		I18n
 Requires:	%{name}-core = %{epoch}:%{version}-%{release}
+Obsoletes:	openoffice.org-i18n-ku
 
 %description i18n-ku
 This package provides resources containing menus and dialogs in
@@ -1449,6 +1519,7 @@ Summary:	LibreOffice - interface in Kyrgyz language
 Summary(pl.UTF-8):	LibreOffice - interfejs w języku kirgiskim
 Group:		I18n
 Requires:	%{name}-core = %{epoch}:%{version}-%{release}
+Obsoletes:	openoffice.org-i18n-ky
 
 %description i18n-ky
 This package provides resources containing menus and dialogs in
@@ -1463,6 +1534,7 @@ Summary:	LibreOffice - interface in Lao language
 Summary(pl.UTF-8):	LibreOffice - interfejs w języku laotańskim
 Group:		I18n
 Requires:	%{name}-core = %{epoch}:%{version}-%{release}
+Obsoletes:	openoffice.org-i18n-lo
 
 %description i18n-lo
 This package provides resources containing menus and dialogs in Lao
@@ -1481,6 +1553,7 @@ Obsoletes:	openoffice-i18n-lt
 Obsoletes:	openoffice-i18n-lt-gtk
 Obsoletes:	openoffice.org-i18n-lt-gtk
 Obsoletes:	openoffice.org-i18n-lt-kde
+Obsoletes:	openoffice.org-i18n-lt
 
 %description i18n-lt
 This package provides resources containing menus and dialogs in
@@ -1495,6 +1568,7 @@ Summary:	LibreOffice - interface in Latvian language
 Summary(pl.UTF-8):	LibreOffice - interfejs w języku łotewskim
 Group:		I18n
 Requires:	%{name}-core = %{epoch}:%{version}-%{release}
+Obsoletes:	openoffice.org-i18n-lv
 
 %description i18n-lv
 This package provides resources containing menus and dialogs in
@@ -1509,6 +1583,7 @@ Summary:	LibreOffice - interface in Maithili language
 Summary(pl.UTF-8):	LibreOffice - interfejs w języku maithili
 Group:		I18n
 Requires:	%{name}-core = %{epoch}:%{version}-%{release}
+Obsoletes:	openoffice.org-i18n-mai
 
 %description i18n-mai
 This package provides resources containing menus and dialogs in
@@ -1523,6 +1598,7 @@ Summary:	LibreOffice - interface in Macedonian language
 Summary(pl.UTF-8):	LibreOffice - interfejs w języku macedońskim
 Group:		I18n
 Requires:	%{name}-core = %{epoch}:%{version}-%{release}
+Obsoletes:	openoffice.org-i18n-mk
 
 %description i18n-mk
 This package provides resources containing menus and dialogs in
@@ -1537,6 +1613,7 @@ Summary:	LibreOffice - interface in Malayalam language for India
 Summary(pl.UTF-8):	LibreOffice - interfejs w języku malajalamskim dla Indii
 Group:		I18n
 Requires:	%{name}-core = %{epoch}:%{version}-%{release}
+Obsoletes:	openoffice.org-i18n-ml_IN
 
 %description i18n-ml_IN
 This package provides resources containing menus and dialogs in
@@ -1551,6 +1628,7 @@ Summary:	LibreOffice - interface in Meitei language
 Summary(pl.UTF-8):	LibreOffice - interfejs w języku manipuri
 Group:		I18n
 Requires:	%{name}-core = %{epoch}:%{version}-%{release}
+Obsoletes:	openoffice.org-i18n-mni
 
 %description i18n-mni
 This package provides resources containing menus and dialogs in
@@ -1565,6 +1643,7 @@ Summary:	LibreOffice - interface in Marathi language for India
 Summary(pl.UTF-8):	LibreOffice - interfejs w języku marathi dla Indii
 Group:		I18n
 Requires:	%{name}-core = %{epoch}:%{version}-%{release}
+Obsoletes:	openoffice.org-i18n-mr_IN
 
 %description i18n-mr_IN
 This package provides resources containing menus and dialogs in
@@ -1579,6 +1658,7 @@ Summary:	LibreOffice - interface in Mongolian language
 Summary(pl.UTF-8):	LibreOffice - interfejs w języku mongolskim
 Group:		I18n
 Requires:	%{name}-core = %{epoch}:%{version}-%{release}
+Obsoletes:	openoffice.org-i18n-mn
 
 %description i18n-mn
 This package provides resources containing menus and dialogs in
@@ -1597,6 +1677,7 @@ Obsoletes:	openoffice-i18n-ms
 Obsoletes:	openoffice-i18n-ms-gtk
 Obsoletes:	openoffice.org-i18n-ms-gtk
 Obsoletes:	openoffice.org-i18n-ms-kde
+Obsoletes:	openoffice.org-i18n-ms
 
 %description i18n-ms
 This package provides resources containing menus and dialogs in Malay
@@ -1611,6 +1692,7 @@ Summary:	LibreOffice - interface in Burmese language
 Summary(pl.UTF-8):	LibreOffice - interfejs w języku birmańskim
 Group:		I18n
 Requires:	%{name}-core = %{epoch}:%{version}-%{release}
+Obsoletes:	openoffice.org-i18n-my
 
 %description i18n-my
 This package provides resources containing menus and dialogs in
@@ -1629,6 +1711,7 @@ Obsoletes:	openoffice-i18n-nb
 Obsoletes:	openoffice-i18n-nb-gtk
 Obsoletes:	openoffice.org-i18n-nb-gtk
 Obsoletes:	openoffice.org-i18n-nb-kde
+Obsoletes:	openoffice.org-i18n-nb
 
 %description i18n-nb
 This package provides resources containing menus and dialogs in
@@ -1643,6 +1726,7 @@ Summary:	LibreOffice - interface in Nepali language
 Summary(pl.UTF-8):	LibreOffice - interfejs w języku nepalskim
 Group:		I18n
 Requires:	%{name}-core = %{epoch}:%{version}-%{release}
+Obsoletes:	openoffice.org-i18n-ne
 
 %description i18n-ne
 This package provides resources containing menus and dialogs in Nepali
@@ -1661,6 +1745,7 @@ Obsoletes:	openoffice-i18n-nl
 Obsoletes:	openoffice-i18n-nl-gtk
 Obsoletes:	openoffice.org-i18n-nl-gtk
 Obsoletes:	openoffice.org-i18n-nl-kde
+Obsoletes:	openoffice.org-i18n-nl
 
 %description i18n-nl
 This package provides resources containing menus and dialogs in Dutch
@@ -1679,6 +1764,7 @@ Obsoletes:	openoffice-i18n-nn
 Obsoletes:	openoffice-i18n-nn-gtk
 Obsoletes:	openoffice.org-i18n-nn-gtk
 Obsoletes:	openoffice.org-i18n-nn-kde
+Obsoletes:	openoffice.org-i18n-nn
 
 %description i18n-nn
 This package provides resources containing menus and dialogs in
@@ -1693,6 +1779,7 @@ Summary:	LibreOffice - interface in South Ndebele language
 Summary(pl.UTF-8):	LibreOffice - interfejs w języku ndebele (południowym)
 Group:		I18n
 Requires:	%{name}-core = %{epoch}:%{version}-%{release}
+Obsoletes:	openoffice.org-i18n-nr
 
 %description i18n-nr
 This package provides resources containing menus and dialogs in South
@@ -1711,6 +1798,7 @@ Obsoletes:	openoffice-i18n-nso
 Obsoletes:	openoffice-i18n-nso-gtk
 Obsoletes:	openoffice.org-i18n-nso-gtk
 Obsoletes:	openoffice.org-i18n-nso-kde
+Obsoletes:	openoffice.org-i18n-nso
 
 %description i18n-nso
 This package provides resources containing menus and dialogs in
@@ -1725,6 +1813,7 @@ Summary:	LibreOffice - interface in Occitan language
 Summary(pl.UTF-8):	LibreOffice - interfejs w języku oksytańskim
 Group:		I18n
 Requires:	%{name}-core = %{epoch}:%{version}-%{release}
+Obsoletes:	openoffice.org-i18n-oc
 
 %description i18n-oc
 This package provides resources containing menus and dialogs in
@@ -1739,6 +1828,7 @@ Summary:	LibreOffice - interface in Oromo language
 Summary(pl.UTF-8):	LibreOffice - interfejs w języku oromo
 Group:		I18n
 Requires:	%{name}-core = %{epoch}:%{version}-%{release}
+Obsoletes:	openoffice.org-i18n-om
 
 %description i18n-om
 This package provides resources containing menus and dialogs in
@@ -1753,6 +1843,7 @@ Summary:	LibreOffice - interface in Oriya language for India
 Summary(pl.UTF-8):	LibreOffice - interfejs w języku orija dla Indii
 Group:		I18n
 Requires:	%{name}-core = %{epoch}:%{version}-%{release}
+Obsoletes:	openoffice.org-i18n-or_IN
 
 %description i18n-or_IN
 This package provides resources containing menus and dialogs in Oriya
@@ -1767,6 +1858,7 @@ Summary:	LibreOffice - interface in Punjabi language
 Summary(pl.UTF-8):	LibreOffice - interfejs w języku pendżabskim
 Group:		I18n
 Requires:	%{name}-core = %{epoch}:%{version}-%{release}
+Obsoletes:	openoffice.org-i18n-pa_IN
 
 %description i18n-pa_IN
 This package provides resources containing menus and dialogs in
@@ -1781,6 +1873,7 @@ Summary:	LibreOffice - interface in Papiamento language
 Summary(pl.UTF-8):	LibreOffice - interfejs w języku papiamento
 Group:		I18n
 Requires:	%{name}-core = %{epoch}:%{version}-%{release}
+Obsoletes:	openoffice.org-i18n-pap
 
 %description i18n-pap
 This package provides resources containing menus and dialogs in
@@ -1799,6 +1892,7 @@ Obsoletes:	openoffice-i18n-pl
 Obsoletes:	openoffice-i18n-pl-gtk
 Obsoletes:	openoffice.org-i18n-pl-gtk
 Obsoletes:	openoffice.org-i18n-pl-kde
+Obsoletes:	openoffice.org-i18n-pl
 
 %description i18n-pl
 This package provides resources containing menus and dialogs in Polish
@@ -1813,6 +1907,7 @@ Summary:	LibreOffice - interface in Pashto language
 Summary(pl.UTF-8):	LibreOffice - interfejs w języku paszto
 Group:		I18n
 Requires:	%{name}-core = %{epoch}:%{version}-%{release}
+Obsoletes:	openoffice.org-i18n-ps
 
 %description i18n-ps
 This package provides resources containing menus and dialogs in
@@ -1831,6 +1926,7 @@ Obsoletes:	openoffice-i18n-pt
 Obsoletes:	openoffice-i18n-pt-gtk
 Obsoletes:	openoffice.org-i18n-pt-gtk
 Obsoletes:	openoffice.org-i18n-pt-kde
+Obsoletes:	openoffice.org-i18n-pt
 
 %description i18n-pt
 This package provides resources containing menus and dialogs in
@@ -1849,6 +1945,7 @@ Obsoletes:	openoffice-i18n-pt_BR
 Obsoletes:	openoffice-i18n-pt_BR-gtk
 Obsoletes:	openoffice.org-i18n-pt_BR-gtk
 Obsoletes:	openoffice.org-i18n-pt_BR-kde
+Obsoletes:	openoffice.org-i18n-pt_BR
 
 %description i18n-pt_BR
 This package provides resources containing menus and dialogs in
@@ -1863,6 +1960,7 @@ Summary:	LibreOffice - interface in Romanian language
 Summary(pl.UTF-8):	LibreOffice - interfejs w języku rumuńskim
 Group:		I18n
 Requires:	%{name}-core = %{epoch}:%{version}-%{release}
+Obsoletes:	openoffice.org-i18n-ro
 
 %description i18n-ro
 This package provides resources containing menus and dialogs in
@@ -1881,6 +1979,7 @@ Obsoletes:	openoffice-i18n-ru
 Obsoletes:	openoffice-i18n-ru-gtk
 Obsoletes:	openoffice.org-i18n-ru-gtk
 Obsoletes:	openoffice.org-i18n-ru-kde
+Obsoletes:	openoffice.org-i18n-ru
 
 %description i18n-ru
 This package provides resources containing menus and dialogs in
@@ -1895,6 +1994,7 @@ Summary:	LibreOffice - interface in Kinarwanda language
 Summary(pl.UTF-8):	LibreOffice - interfejs w języku kinya-ruanda
 Group:		I18n
 Requires:	%{name}-core = %{epoch}:%{version}-%{release}
+Obsoletes:	openoffice.org-i18n-rw
 
 %description i18n-rw
 This package provides resources containing menus and dialogs in
@@ -1909,6 +2009,7 @@ Summary:	LibreOffice - interface in Sanskrit language
 Summary(pl.UTF-8):	LibreOffice - interfejs w sanskrycie
 Group:		I18n
 Requires:	%{name}-core = %{epoch}:%{version}-%{release}
+Obsoletes:	openoffice.org-i18n-sa_IN
 
 %description i18n-sa_IN
 This package provides resources containing menus and dialogs in
@@ -1923,6 +2024,7 @@ Summary:	LibreOffice - interface in Santali language
 Summary(pl.UTF-8):	LibreOffice - interfejs w języku santali
 Group:		I18n
 Requires:	%{name}-core = %{epoch}:%{version}-%{release}
+Obsoletes:	openoffice.org-i18n-sat
 
 %description i18n-sat
 This package provides resources containing menus and dialogs in
@@ -1937,6 +2039,7 @@ Summary:	LibreOffice - interface in Sardinian language
 Summary(pl.UTF-8):	LibreOffice - interfejs w języku sardyńskim
 Group:		I18n
 Requires:	%{name}-core = %{epoch}:%{version}-%{release}
+Obsoletes:	openoffice.org-i18n-sc
 
 %description i18n-sc
 This package provides resources containing menus and dialogs in
@@ -1951,6 +2054,7 @@ Summary:	LibreOffice - interface in Sindhi language
 Summary(pl.UTF-8):	LibreOffice - interfejs w języku sindhi
 Group:		I18n
 Requires:	%{name}-core = %{epoch}:%{version}-%{release}
+Obsoletes:	openoffice.org-i18n-sd
 
 %description i18n-sd
 This package provides resources containing menus and dialogs in
@@ -1965,6 +2069,7 @@ Summary:	LibreOffice - interface in Serbo-Croatian language
 Summary(pl.UTF-8):	LibreOffice - interfejs w języku serbsko-chorwackim
 Group:		I18n
 Requires:	%{name}-core = %{epoch}:%{version}-%{release}
+Obsoletes:	openoffice.org-i18n-sh
 
 %description i18n-sh
 This package provides resources containing menus and dialogs in
@@ -1979,6 +2084,7 @@ Summary:	LibreOffice - interface in Sinhala language
 Summary(pl.UTF-8):	LibreOffice - interfejs w języku syngaleskim
 Group:		I18n
 Requires:	%{name}-core = %{epoch}:%{version}-%{release}
+Obsoletes:	openoffice.org-i18n-si
 
 %description i18n-si
 This package provides resources containing menus and dialogs in
@@ -1997,6 +2103,7 @@ Obsoletes:	openoffice-i18n-sk
 Obsoletes:	openoffice-i18n-sk-gtk
 Obsoletes:	openoffice.org-i18n-sk-gtk
 Obsoletes:	openoffice.org-i18n-sk-kde
+Obsoletes:	openoffice.org-i18n-sk
 
 %description i18n-sk
 This package provides resources containing menus and dialogs in Slovak
@@ -2015,6 +2122,7 @@ Obsoletes:	openoffice-i18n-sl
 Obsoletes:	openoffice-i18n-sl-gtk
 Obsoletes:	openoffice.org-i18n-sl-gtk
 Obsoletes:	openoffice.org-i18n-sl-kde
+Obsoletes:	openoffice.org-i18n-sl
 
 %description i18n-sl
 This package provides resources containing menus and dialogs in
@@ -2029,6 +2137,7 @@ Summary:	LibreOffice - interface in Serbian language
 Summary(pl.UTF-8):	LibreOffice - interfejs w języku serbskim
 Group:		I18n
 Requires:	%{name}-core = %{epoch}:%{version}-%{release}
+Obsoletes:	openoffice.org-i18n-sr
 
 %description i18n-sr
 This package provides resources containing menus and dialogs in
@@ -2043,6 +2152,7 @@ Summary:	LibreOffice - interface in Swati language
 Summary(pl.UTF-8):	LibreOffice - interfejs w języku suazi (siswati)
 Group:		I18n
 Requires:	%{name}-core = %{epoch}:%{version}-%{release}
+Obsoletes:	openoffice.org-i18n-ss
 
 %description i18n-ss
 This package provides resources containing menus and dialogs in Swati
@@ -2057,6 +2167,7 @@ Summary:	LibreOffice - interface in Southern Sotho language
 Summary(pl.UTF-8):	LibreOffice - interfejs w języku południowym sotho
 Group:		I18n
 Requires:	%{name}-core = %{epoch}:%{version}-%{release}
+Obsoletes:	openoffice.org-i18n-st
 
 %description i18n-st
 This package provides resources containing menus and dialogs in
@@ -2075,6 +2186,7 @@ Obsoletes:	openoffice-i18n-sv
 Obsoletes:	openoffice-i18n-sv-gtk
 Obsoletes:	openoffice.org-i18n-sv-gtk
 Obsoletes:	openoffice.org-i18n-sv-kde
+Obsoletes:	openoffice.org-i18n-sv
 
 %description i18n-sv
 This package provides resources containing menus and dialogs in
@@ -2089,6 +2201,7 @@ Summary:	LibreOffice - interface in Swahili language
 Summary(pl.UTF-8):	LibreOffice - interfejs w języku suahili
 Group:		I18n
 Requires:	%{name}-core = %{epoch}:%{version}-%{release}
+Obsoletes:	openoffice.org-i18n-sw
 
 %description i18n-sw
 This package provides resources containing menus and dialogs in
@@ -2103,6 +2216,7 @@ Summary:	LibreOffice - interface in Swahili language for Tanzania
 Summary(pl.UTF-8):	LibreOffice - interfejs w języku suahili dla Tanzanii
 Group:		I18n
 Requires:	%{name}-core = %{epoch}:%{version}-%{release}
+Obsoletes:	openoffice.org-i18n-sw_TZ
 
 %description i18n-sw_TZ
 This package provides resources containing menus and dialogs in
@@ -2117,6 +2231,7 @@ Summary:	LibreOffice - interface in Tamil language
 Summary(pl.UTF-8):	LibreOffice - interfejs w języku tamiskim
 Group:		I18n
 Requires:	%{name}-core = %{epoch}:%{version}-%{release}
+Obsoletes:	openoffice.org-i18n-ta_IN
 
 %description i18n-ta_IN
 This package provides resources containing menus and dialogs in Tamil
@@ -2131,6 +2246,7 @@ Summary:	LibreOffice - interface in Telugu language for India
 Summary(pl.UTF-8):	LibreOffice - interfejs w języku telugu dla Indii
 Group:		I18n
 Requires:	%{name}-core = %{epoch}:%{version}-%{release}
+Obsoletes:	openoffice.org-i18n-te_IN
 
 %description i18n-te_IN
 This package provides resources containing menus and dialogs in Telugu
@@ -2145,6 +2261,7 @@ Summary:	LibreOffice - interface in Tajik language
 Summary(pl.UTF-8):	LibreOffice - interfejs w języku tadżyckim
 Group:		I18n
 Requires:	%{name}-core = %{epoch}:%{version}-%{release}
+Obsoletes:	openoffice.org-i18n-tg
 
 %description i18n-tg
 This package provides resources containing menus and dialogs in Tajik
@@ -2162,6 +2279,7 @@ Requires:	%{name}-core = %{epoch}:%{version}-%{release}
 Obsoletes:	openoffice-i18n-th
 Obsoletes:	openoffice-i18n-th-gtk
 Obsoletes:	openoffice-i18n-th-kde
+Obsoletes:	openoffice.org-i18n-th
 
 %description i18n-th
 This package provides resources containing menus and dialogs in Thai
@@ -2176,6 +2294,7 @@ Summary:	LibreOffice - interface in Tigrigna language for Eritrea
 Summary(pl.UTF-8):	LibreOffice - interfejs w języku tigrinia dla Erytrei
 Group:		I18n
 Requires:	%{name}-core = %{epoch}:%{version}-%{release}
+Obsoletes:	openoffice.org-i18n-ti_ER
 
 %description i18n-ti_ER
 This package provides resources containing menus and dialogs in
@@ -2193,6 +2312,7 @@ Requires:	%{name}-core = %{epoch}:%{version}-%{release}
 Obsoletes:	openoffice-i18n-tn
 Obsoletes:	openoffice-i18n-tn-gtk
 Obsoletes:	openoffice-i18n-tn-kde
+Obsoletes:	openoffice.org-i18n-tn
 
 %description i18n-tn
 This package provides resources containing menus and dialogs in Tswana
@@ -2211,6 +2331,7 @@ Obsoletes:	openoffice-i18n-tr
 Obsoletes:	openoffice-i18n-tr-gtk
 Obsoletes:	openoffice.org-i18n-tr-gtk
 Obsoletes:	openoffice.org-i18n-tr-kde
+Obsoletes:	openoffice.org-i18n-tr
 
 %description i18n-tr
 This package provides resources containing menus and dialogs in
@@ -2225,6 +2346,7 @@ Summary:	LibreOffice - interface in Tsonga language
 Summary(pl.UTF-8):	LibreOffice - interfejs w języku tsonga
 Group:		I18n
 Requires:	%{name}-core = %{epoch}:%{version}-%{release}
+Obsoletes:	openoffice.org-i18n-ts
 
 %description i18n-ts
 This package provides resources containing menus and dialogs in Tsonga
@@ -2239,6 +2361,7 @@ Summary:	LibreOffice - interface in Uyghur language
 Summary(pl.UTF-8):	LibreOffice - interfejs w języku ujgurskim
 Group:		I18n
 Requires:	%{name}-core = %{epoch}:%{version}-%{release}
+Obsoletes:	openoffice.org-i18n-ug
 
 %description i18n-ug
 This package provides resources containing menus and dialogs in Uyghur
@@ -2257,6 +2380,7 @@ Obsoletes:	openoffice-i18n-uk
 Obsoletes:	openoffice-i18n-uk-gtk
 Obsoletes:	openoffice.org-i18n-uk-gtk
 Obsoletes:	openoffice.org-i18n-uk-kde
+Obsoletes:	openoffice.org-i18n-uk
 
 %description i18n-uk
 This package provides resources containing menus and dialogs in
@@ -2271,6 +2395,7 @@ Summary:	LibreOffice - interface in Urdu language for India
 Summary(pl.UTF-8):	LibreOffice - interfejs w języku urdu dla Indii
 Group:		I18n
 Requires:	%{name}-core = %{epoch}:%{version}-%{release}
+Obsoletes:	openoffice.org-i18n-ur_IN
 
 %description i18n-ur_IN
 This package provides resources containing menus and dialogs in Urdu
@@ -2285,6 +2410,7 @@ Summary:	LibreOffice - interface in Uzbek language
 Summary(pl.UTF-8):	LibreOffice - interfejs w języku uzbeckim
 Group:		I18n
 Requires:	%{name}-core = %{epoch}:%{version}-%{release}
+Obsoletes:	openoffice.org-i18n-uz
 
 %description i18n-uz
 This package provides resources containing menus and dialogs in Uzbek.
@@ -2298,6 +2424,7 @@ Summary:	LibreOffice - interface in Venda language
 Summary(pl.UTF-8):	LibreOffice - interfejs w języku venda
 Group:		I18n
 Requires:	%{name}-core = %{epoch}:%{version}-%{release}
+Obsoletes:	openoffice.org-i18n-ve
 
 %description i18n-ve
 This package provides resources containing menus and dialogs in Venda
@@ -2312,6 +2439,7 @@ Summary:	LibreOffice - interface in Vietnamese language
 Summary(pl.UTF-8):	LibreOffice - interfejs w języku wietnamskim
 Group:		I18n
 Requires:	%{name}-core = %{epoch}:%{version}-%{release}
+Obsoletes:	openoffice.org-i18n-vi
 
 %description i18n-vi
 This package provides resources containing menus and dialogs in
@@ -2326,6 +2454,7 @@ Summary:	LibreOffice - interface in Xhosa language
 Summary(pl.UTF-8):	LibreOffice - interfejs w języku khosa
 Group:		I18n
 Requires:	%{name}-core = %{epoch}:%{version}-%{release}
+Obsoletes:	openoffice.org-i18n-xh
 
 %description i18n-xh
 This package provides resources containing menus and dialogs in Xhosa
@@ -2345,6 +2474,7 @@ Obsoletes:	openoffice-i18n-zh_CN
 Obsoletes:	openoffice-i18n-zh_CN-gtk
 Obsoletes:	openoffice.org-i18n-zh_CN-gtk
 Obsoletes:	openoffice.org-i18n-zh_CN-kde
+Obsoletes:	openoffice.org-i18n-zh_CN
 
 %description i18n-zh_CN
 This package provides resources containing menus and dialogs in
@@ -2364,6 +2494,7 @@ Obsoletes:	openoffice-i18n-zh_TW
 Obsoletes:	openoffice-i18n-zh_TW-gtk
 Obsoletes:	openoffice.org-i18n-zh_TW-gtk
 Obsoletes:	openoffice.org-i18n-zh_TW-kde
+Obsoletes:	openoffice.org-i18n-zh_TW
 
 %description i18n-zh_TW
 This package provides resources containing menus and dialogs in
@@ -2382,6 +2513,7 @@ Obsoletes:	openoffice-i18n-zu
 Obsoletes:	openoffice-i18n-zu-gtk
 Obsoletes:	openoffice.org-i18n-zu-gtk
 Obsoletes:	openoffice.org-i18n-zu-kde
+Obsoletes:	openoffice.org-i18n-zu
 
 %description i18n-zu
 This package provides resources containing menus and dialogs in Zulu
@@ -2391,12 +2523,13 @@ language.
 Ten pakiet dostarcza zasoby zawierające menu i okna dialogowe w języku
 zuluskim.
 
-%package -n bash-completion-openoffice
+%package -n bash-completion-%{name}
 Summary:	bash-completion for LibreOffice
 Summary(pl.UTF-8):	bashowe uzupełnianie nazw dla LibreOffice
 Group:		Applications/Shells
 Requires:	%{name}
 Requires:	bash-completion
+Obsoletes:	bash-completion-openoffice
 
 %description -n bash-completion-openoffice
 bash-completion for LibreOffice.
@@ -3202,7 +3335,7 @@ fi
 %attr(755,root,root) %{ooobasisdir}/program/liblogl[ipx].so
 %attr(755,root,root) %{ooobasisdir}/program/libmcnttype.so
 %attr(755,root,root) %{ooobasisdir}/program/libmozbootstrap.so
-%attr(755,root,root) %{ooobasisdir}/program/libmsfilterl[ipx].uno.so
+%attr(755,root,root) %{ooobasisdir}/program/libmsfilterl[ipx].so
 %attr(755,root,root) %{ooobasisdir}/program/libmsformsl[ipx].uno.so
 %attr(755,root,root) %{ooobasisdir}/program/libmtfrenderer.uno.so
 %attr(755,root,root) %{ooobasisdir}/program/libmysqll[ipx].so
@@ -4436,6 +4569,6 @@ fi
 %defattr(644,root,root,755)
 %endif
 
-%files -n bash-completion-openoffice
+%files -n bash-completion-%{name}
 %defattr(644,root,root,755)
 /etc/bash_completion.d/*
