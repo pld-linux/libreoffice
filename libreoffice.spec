@@ -63,15 +63,10 @@ Group:		X11/Applications
 # git clone git://anongit.freedesktop.org/git/libreoffice/build
 # cd build
 # git checkout -b ooo-build-3-2 origin/ooo-build-3-2
-#Source0:	libreoffice-build-20101031.tar.bz2
 Source0:	libreoffice-build-%{version}.tar.gz
 # Source0-md5:	65990cb6b5a7f7ee4db882812e93e0d0
 Source1:	http://download.go-oo.org/DEV300/ooo-cli-prebuilt-3.3.tar.bz2
 # Source1-md5:	b4e4ad9da4cf1033096609c95ad50bdb
-# Upstream OOo sources are available only via git.
-# cd ooo-build
-# ./autogen.sh --without-git --with-lang=ALL --with-distro=PlainLinux
-# ./download
 Source2:	http://download.documentfoundation.org/libreoffice/src/libreoffice-artwork-%{version}.tar.bz2
 # Source2-md5:	18d08617d191cdb81227be47a1cff3f9
 Source3:	http://download.documentfoundation.org/libreoffice/src/libreoffice-base-%{version}.tar.bz2
@@ -119,34 +114,59 @@ Source23:	http://download.go-oo.org/SRC680/extras-3.1.tar.bz2
 Source100:	http://hg.services.openoffice.org/binaries/fdb27bfe2dbe2e7b57ae194d9bf36bab-SampleICC-1.3.2.tar.gz
 # Source100-md5:
 Source101:	http://hg.services.openoffice.org/binaries/17410483b5b5f267aa18b7e00b65e6e0-hsqldb_1_8_0.zip
+# Source101-md5:
 Source102:	http://hg.services.openoffice.org/binaries/26b3e95ddf3d9c077c480ea45874b3b8-lp_solve_5.5.tar.gz
+# Source102-md5:
 Source103:	http://hg.services.openoffice.org/binaries/cf8a6967f7de535ae257fa411c98eb88-mdds_0.3.0.tar.bz2
+# Source103-md5:
 Source104:	http://hg.services.openoffice.org/binaries/798b2ffdc8bcfe7bca2cf92b62caf685-rhino1_5R5.zip
+# Source104-md5:
 Source105:	http://hg.services.openoffice.org/binaries/128cfc86ed5953e57fe0f5ae98b62c2e-libtextcat-2.2.tar.gz
+# Source105-md5:
 Source106:	http://hg.services.openoffice.org/binaries/d0b5af6e408b8d2958f3d83b5244f5e8-hyphen-2.4.tar.gz
+# Source106-md5:
 Source107:	http://hg.services.openoffice.org/binaries/1f24ab1d39f4a51faf22244c94a6203f-xmlsec1-1.2.14.tar.gz
+# Source107-md5:
 Source108:	http://hg.services.openoffice.org/binaries/1756c4fa6c616ae15973c104cd8cb256-Adobe-Core35_AFMs-314.tar.gz
+# Source108-md5:
 Source109:	http://hg.services.openoffice.org/binaries/ada24d37d8d638b3d8a9985e80bc2978-source-9.0.0.7-bj.zip
+# Source109-md5:
 Source110:	http://hg.services.openoffice.org/binaries/067201ea8b126597670b5eff72e1f66c-mythes-1.2.0.tar.gz
+# Source110-md5:
 Source111:	http://hg.services.openoffice.org/binaries/a7983f859eafb2677d7ff386a023bc40-xsltml_2.1.2.zip
+# Source111-md5:
 Source112:	http://download.go-oo.org/src/0f63ee487fda8f21fafa767b3c447ac9-ixion-0.2.0.tar.gz
+# Source112-md5:
 Source113:	http://hg.services.openoffice.org/binaries/8ea307d71d11140574bfb9fcc2487e33-libbase.zip
+# Source113-md5:
 Source114:	http://hg.services.openoffice.org/binaries/a06a496d7a43cbdc35e69dbe678efadb-libloader.zip
+# Source114-md5:
 Source115:	http://hg.services.openoffice.org/binaries/39bb3fcea1514f1369fcfc87542390fd-sacjava-1.3.zip
+# Source115-md5:
 Source116:	http://hg.services.openoffice.org/binaries/f3e2febd267c8e4b13df00dac211dd6d-flute.zip
+# Source116-md5:
 Source117:	http://hg.services.openoffice.org/binaries/5aba06ede2daa9f2c11892fbd7bc3057-libserializer.zip
+# Source117-md5:
 Source118:	http://hg.services.openoffice.org/binaries/f7925ba8491fe570e5164d2c72791358-libfonts.zip
+# Source118-md5:
 Source119:	http://hg.services.openoffice.org/binaries/d1a3205871c3c52e8a50c9f18510ae12-libformula.zip
+# Source119-md5:
 Source120:	http://hg.services.openoffice.org/binaries/67b42915c8432abf0a922438f00860a2-libxml.zip
+# Source120-md5:
 Source121:	http://hg.services.openoffice.org/binaries/dbb3757275dc5cc80820c0b4dd24ed95-librepository.zip
+# Source121-md5:
 Source122:	http://hg.services.openoffice.org/binaries/79600e696a98ff95c2eba976f7a8dfbb-liblayout.zip
+# Source122-md5:
 Source123:	http://hg.services.openoffice.org/binaries/d4c4d91ab3a8e52a2e69d48d34ef4df4-core.zip
+# Source123-md5:
 Source124:	http://hg.services.openoffice.org/binaries/35c94d2df8893241173de1d16b6034c0-swingExSrc.zip
+# Source124-md5:
 #Source53:	%{name}-splash.bmp
 #Source54:	%{name}-about.bmp
 # patches applied in prep section
 Patch0:		%{name}-build-apply.patch
-#Patch10:	%{name}-hotfix-gcc45.patch
+# https://bugs.freedesktop.org/show_bug.cgi?id=31871
+Patch100:	%{name}-hotfix-with-lang-all.patch
 URL:		http://www.documentfoundation.org/
 BuildRequires:	libwpd-devel >= 0.9.0
 BuildRequires:	libwps-devel >= 0.2.0
@@ -263,19 +283,19 @@ BuildConflicts:	xmlsec1-devel
 # contains (dlopened) *.so libs
 BuildConflicts:	xmlsec1-nss
 BuildConflicts:	java-gcj-compat
-Requires:	%{name}-base = %{epoch}:%{version}-%{release}
-Requires:	%{name}-calc = %{epoch}:%{version}-%{release}
-Requires:	%{name}-draw = %{epoch}:%{version}-%{release}
-Requires:	%{name}-emailmerge = %{epoch}:%{version}-%{release}
-Requires:	%{name}-graphicfilter = %{epoch}:%{version}-%{release}
-Requires:	%{name}-impress = %{epoch}:%{version}-%{release}
-%{?with_java:Requires:	%{name}-javafilter = %{epoch}:%{version}-%{release}}
-Requires:	%{name}-math = %{epoch}:%{version}-%{release}
-Requires:	%{name}-pyuno = %{epoch}:%{version}-%{release}
-Requires:	%{name}-testtools = %{epoch}:%{version}-%{release}
-Requires:	%{name}-web = %{epoch}:%{version}-%{release}
-Requires:	%{name}-writer = %{epoch}:%{version}-%{release}
-Requires:	%{name}-xsltfilter = %{epoch}:%{version}-%{release}
+Requires:	%{name}-base = %{version}-%{release}
+Requires:	%{name}-calc = %{version}-%{release}
+Requires:	%{name}-draw = %{version}-%{release}
+Requires:	%{name}-emailmerge = %{version}-%{release}
+Requires:	%{name}-graphicfilter = %{version}-%{release}
+Requires:	%{name}-impress = %{version}-%{release}
+%{?with_java:Requires:	%{name}-javafilter = %{version}-%{release}}
+Requires:	%{name}-math = %{version}-%{release}
+Requires:	%{name}-pyuno = %{version}-%{release}
+Requires:	%{name}-testtools = %{version}-%{release}
+Requires:	%{name}-web = %{version}-%{release}
+Requires:	%{name}-writer = %{version}-%{release}
+Requires:	%{name}-xsltfilter = %{version}-%{release}
 Obsoletes:	openoffice.org
 ExclusiveArch:	%{ix86} %{x8664} ppc sparc sparcv9
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
@@ -324,7 +344,7 @@ Do zalet LibreOffice można zaliczyć:
 Summary:	LibreOffice KDE Interface
 Summary(pl.UTF-8):	Interfejs KDE dla LibreOffice
 Group:		X11/Libraries
-Requires:	%{name}-core = %{epoch}:%{version}-%{release}
+Requires:	%{name}-core = %{version}-%{release}
 Obsoletes:	openoffice-i18n-en
 Obsoletes:	openoffice-i18n-en-kde
 Obsoletes:	openoffice-libs-kde
@@ -340,7 +360,7 @@ Pakiet biurowy LibreOffice - Interfejs KDE.
 Summary:	LibreOffice GTK+ Interface
 Summary(pl.UTF-8):	Interfejs GTK+ dla LibreOffice
 Group:		X11/Libraries
-Requires:	%{name}-core = %{epoch}:%{version}-%{release}
+Requires:	%{name}-core = %{version}-%{release}
 Obsoletes:	openoffice-i18n-en
 Obsoletes:	openoffice-i18n-en-gtk
 Obsoletes:	openoffice-libs-gtk
@@ -358,7 +378,7 @@ Summary(pl.UTF-8):	Podstawowe moduły dla LibreOffice
 Group:		X11/Applications
 Requires(post,postun):	desktop-file-utils
 Requires(post,postun):	shared-mime-info
-Requires:	%{name}-ure = %{epoch}:%{version}-%{release}
+Requires:	%{name}-ure = %{version}-%{release}
 # libcups.so.2 is dlopened (in cupsmgr.cxx); maybe Suggests instead?
 Requires:	cups-lib
 Requires:	fonts-TTF-OpenSymbol
@@ -392,9 +412,13 @@ Obsoletes:	openoffice-i18n-ro-gtk
 Obsoletes:	openoffice-libs
 Obsoletes:	openoffice.org-core
 Obsoletes:	openoffice.org-dirs
+Obsoletes:	openoffice.org-i18n-bn_BD
+Obsoletes:	openoffice.org-i18n-bn_IN
+Obsoletes:	openoffice.org-i18n-by
 Obsoletes:	openoffice.org-i18n-fo
 Obsoletes:	openoffice.org-i18n-fo-gtk
 Obsoletes:	openoffice.org-i18n-fo-kde
+Obsoletes:	openoffice.org-i18n-gu_IN
 Obsoletes:	openoffice.org-i18n-ia
 Obsoletes:	openoffice.org-i18n-ia-gtk
 Obsoletes:	openoffice.org-i18n-ia-kde
@@ -414,6 +438,7 @@ Obsoletes:	openoffice.org-i18n-ro
 Obsoletes:	openoffice.org-i18n-ro-gtk
 Obsoletes:	openoffice.org-i18n-ro-kde
 Obsoletes:	openoffice.org-i18n-sx
+Obsoletes:	openoffice.org-i18n-sw
 Obsoletes:	openoffice.org-libs < 1:2.1.0-0.m6.0.11
 
 %description core
@@ -426,7 +451,7 @@ Podstawowe moduły dla LibreOffice.
 Summary:	Python bindings for LibreOffice
 Summary(pl.UTF-8):	Wiązania Pythona dla LibreOffice
 Group:		Libraries
-Requires:	%{name}-core = %{epoch}:%{version}-%{release}
+Requires:	%{name}-core = %{version}-%{release}
 Requires:	python
 Obsoletes:	openoffice.org-pyuno
 
@@ -499,7 +524,7 @@ Summary:	Database frontend for LibreOffice
 Summary(pl.UTF-8):	Frontend do baz danych dla LibreOffice
 Group:		X11/Applications
 Requires(post,postun):	desktop-file-utils
-Requires:	%{name}-core = %{epoch}:%{version}-%{release}
+Requires:	%{name}-core = %{version}-%{release}
 Obsoletes:	openoffice.org-base
 
 %description base
@@ -516,8 +541,8 @@ Summary:	Web module for LibreOffice
 Summary(pl.UTF-8):	Moduł Web dla LibreOffice
 Group:		X11/Applications
 Requires(post,postun):	desktop-file-utils
-Requires:	%{name}-core = %{epoch}:%{version}-%{release}
-Requires:	%{name}-writer = %{epoch}:%{version}-%{release}
+Requires:	%{name}-core = %{version}-%{release}
+Requires:	%{name}-writer = %{version}-%{release}
 Obsoletes:	openoffice.org-web
 
 %description web
@@ -531,7 +556,7 @@ Summary:	Writer module for LibreOffice
 Summary(pl.UTF-8):	Moduł Writer dla LibreOffice
 Group:		X11/Applications
 Requires(post,postun):	desktop-file-utils
-Requires:	%{name}-core = %{epoch}:%{version}-%{release}
+Requires:	%{name}-core = %{version}-%{release}
 Obsoletes:	openoffice.org-writer
 
 %description writer
@@ -544,8 +569,8 @@ Procesor tekstu z LibreOffice.
 Summary:	email mail merge component for LibreOffice
 Summary(pl.UTF-8):	Kompolent email mail merge dla LibreOffice
 Group:		X11/Applications
-Requires:	%{name}-pyuno = %{epoch}:%{version}-%{release}
-Requires:	%{name}-writer = %{epoch}:%{version}-%{release}
+Requires:	%{name}-pyuno = %{version}-%{release}
+Requires:	%{name}-writer = %{version}-%{release}
 Obsoletes:	openoffice.org-emailmerge
 
 %description emailmerge
@@ -560,7 +585,7 @@ Summary:	Calc module for LibreOffice
 Summary(pl.UTF-8):	Moduł Calc dla LibreOffice
 Group:		X11/Applications
 Requires(post,postun):	desktop-file-utils
-Requires:	%{name}-core = %{epoch}:%{version}-%{release}
+Requires:	%{name}-core = %{version}-%{release}
 Obsoletes:	openoffice.org-calc
 
 %description calc
@@ -574,7 +599,7 @@ Summary:	Draw module for LibreOffice
 Summary(pl.UTF-8):	Moduł Draw dla LibreOffice
 Group:		X11/Applications
 Requires(post,postun):	desktop-file-utils
-Requires:	%{name}-core = %{epoch}:%{version}-%{release}
+Requires:	%{name}-core = %{version}-%{release}
 Obsoletes:	openoffice.org-draw
 
 %description draw
@@ -588,7 +613,7 @@ Summary:	Impress module for LibreOffice
 Summary(pl.UTF-8):	Moduł Impress dla LibreOffice
 Group:		X11/Applications
 Requires(post,postun):	desktop-file-utils
-Requires:	%{name}-core = %{epoch}:%{version}-%{release}
+Requires:	%{name}-core = %{version}-%{release}
 Obsoletes:	openoffice.org-impress
 
 %description impress
@@ -602,7 +627,7 @@ Summary:	Math module for LibreOffice
 Summary(pl.UTF-8):	Moduł Math dla LibreOffice
 Group:		X11/Applications
 Requires(post,postun):	desktop-file-utils
-Requires:	%{name}-core = %{epoch}:%{version}-%{release}
+Requires:	%{name}-core = %{version}-%{release}
 Obsoletes:	openoffice.org-math
 
 %description math
@@ -615,7 +640,7 @@ Edytor równań matematycznych z LibreOffice.
 Summary:	Extra graphicfilter module for LibreOffice
 Summary(pl.UTF-8):	Dodatkowy moduł graphicfilter dla LibreOffice
 Group:		X11/Applications
-Requires:	%{name}-core = %{epoch}:%{version}-%{release}
+Requires:	%{name}-core = %{version}-%{release}
 Obsoletes:	openoffice.org-graphicfilter
 
 %description graphicfilter
@@ -630,7 +655,7 @@ eksportu SVG i Flash.
 Summary:	Extra xsltfilter module for LibreOffice
 Summary(pl.UTF-8):	Dodatkowy moduł xsltfilter dla LibreOffice
 Group:		X11/Applications
-Requires:	%{name}-core = %{epoch}:%{version}-%{release}
+Requires:	%{name}-core = %{version}-%{release}
 Obsoletes:	openoffice.org-xsltfilter
 
 %description xsltfilter
@@ -646,7 +671,7 @@ do eksportu do docbooka.
 Summary:	Extra javafilter module for LibreOffice
 Summary(pl.UTF-8):	Dodatkowy moduł javafilter dla LibreOffice
 Group:		X11/Applications
-Requires:	%{name}-core = %{epoch}:%{version}-%{release}
+Requires:	%{name}-core = %{version}-%{release}
 Obsoletes:	openoffice.org-javafilter
 
 %description javafilter
@@ -661,7 +686,7 @@ importu aportisdoc, Pocket Excel i Pocket Word.
 Summary:	testtools for LibreOffice
 Summary(pl.UTF-8):	Narzędzia testowe dla LibreOffice
 Group:		Development/Libraries
-Requires:	%{name}-core = %{epoch}:%{version}-%{release}
+Requires:	%{name}-core = %{version}-%{release}
 Obsoletes:	openoffice.org-testtools
 
 %description testtools
@@ -689,7 +714,7 @@ bridge or adapter exists.
 Summary:	LibreOffice plugin for WWW browsers
 Summary(pl.UTF-8):	Wtyczka LibreOffice dla przeglądarek WWW
 Group:		X11/Applications
-Requires:	%{name}-core = %{epoch}:%{version}-%{release}
+Requires:	%{name}-core = %{version}-%{release}
 Requires:	browser-plugins >= 2.0
 Requires:	browser-plugins(%{_target_base_arch})
 Obsoletes:	browser-plugin-openoffice.org
@@ -708,7 +733,7 @@ Ta wtyczka umożliwia wyświetlanie dokumentów OOo wewnątrz stron.
 Summary:	LibreOffice - interface in Afrikaans language
 Summary(pl.UTF-8):	LibreOffice - interfejs w języku afrykanerskim
 Group:		I18n
-Requires:	%{name}-core = %{epoch}:%{version}-%{release}
+Requires:	%{name}-core = %{version}-%{release}
 Obsoletes:	openoffice-i18n-af
 Obsoletes:	openoffice-i18n-af-gtk
 Obsoletes:	openoffice.org-i18n-af-gtk
@@ -727,7 +752,7 @@ afrykanerskim.
 Summary:	LibreOffice - interface in Arabic language
 Summary(pl.UTF-8):	LibreOffice - interfejs w języku arabskim
 Group:		I18n
-Requires:	%{name}-core = %{epoch}:%{version}-%{release}
+Requires:	%{name}-core = %{version}-%{release}
 Obsoletes:	openoffice-i18n-ar
 Obsoletes:	openoffice-i18n-ar-gtk
 Obsoletes:	openoffice.org-i18n-ar-gtk
@@ -742,26 +767,26 @@ language.
 Ten pakiet dostarcza zasoby zawierające menu i okna dialogowe w języku
 arabskim.
 
-%package i18n-as_IN
-Summary:	LibreOffice - interface in Assamese language for India
-Summary(pl.UTF-8):	LibreOffice - interfejs w języku asamskim dla Indii
+%package i18n-as
+Summary:	LibreOffice - interface in Assamese language
+Summary(pl.UTF-8):	LibreOffice - interfejs w języku asamskim
 Group:		I18n
-Requires:	%{name}-core = %{epoch}:%{version}-%{release}
+Requires:	%{name}-core = %{version}-%{release}
 Obsoletes:	openoffice.org-i18n-as_IN
 
-%description i18n-as_IN
+%description i18n-as
 This package provides resources containing menus and dialogs in
-Assamese language for India.
+Assamese language.
 
-%description i18n-as_IN -l pl.UTF-8
+%description i18n-as -l pl.UTF-8
 Ten pakiet dostarcza zasoby zawierające menu i okna dialogowe w języku
-asamskim dla Indii.
+asamskim.
 
 %package i18n-be_BY
 Summary:	LibreOffice - interface in Belarusian language
 Summary(pl.UTF-8):	LibreOffice - interfejs w języku białoruskim
 Group:		I18n
-Requires:	%{name}-core = %{epoch}:%{version}-%{release}
+Requires:	%{name}-core = %{version}-%{release}
 Obsoletes:	openoffice.org-i18n-be_BY
 
 %description i18n-be_BY
@@ -776,7 +801,7 @@ białoruskim.
 Summary:	LibreOffice - interface in Bulgarian language
 Summary(pl.UTF-8):	LibreOffice - interfejs w języku bułgarskim
 Group:		I18n
-Requires:	%{name}-core = %{epoch}:%{version}-%{release}
+Requires:	%{name}-core = %{version}-%{release}
 Obsoletes:	openoffice-i18n-bg
 Obsoletes:	openoffice-i18n-bg-gtk
 Obsoletes:	openoffice.org-i18n-bg-gtk
@@ -795,7 +820,7 @@ bułgarskim.
 Summary:	LibreOffice - interface in Bangla language
 Summary(pl.UTF-8):	LibreOffice - interfejs w języku bengalskim
 Group:		I18n
-Requires:	%{name}-core = %{epoch}:%{version}-%{release}
+Requires:	%{name}-core = %{version}-%{release}
 Obsoletes:	openoffice.org-i18n-bn
 
 %description i18n-bn
@@ -806,41 +831,11 @@ language.
 Ten pakiet dostarcza zasoby zawierające menu i okna dialogowe w języku
 bengalskim.
 
-%package i18n-bn_BD
-Summary:	LibreOffice - interface in Bangla language for Bangladesh
-Summary(pl.UTF-8):	LibreOffice - interfejs w języku bengalskim dla Bangladeszu
-Group:		I18n
-Requires:	%{name}-core = %{epoch}:%{version}-%{release}
-Obsoletes:	openoffice.org-i18n-bn_BD
-
-%description i18n-bn_BD
-This package provides resources containing menus and dialogs in Bangla
-language for Bangladesh.
-
-%description i18n-bn_BD -l pl.UTF-8
-Ten pakiet dostarcza zasoby zawierające menu i okna dialogowe w języku
-bengalskim dla Bangladeszu.
-
-%package i18n-bn_IN
-Summary:	LibreOffice - interface in Bangla language for India
-Summary(pl.UTF-8):	LibreOffice - interfejs w języku bengalskim dla Indii
-Group:		I18n
-Requires:	%{name}-core = %{epoch}:%{version}-%{release}
-Obsoletes:	openoffice.org-i18n-bn_IN
-
-%description i18n-bn_IN
-This package provides resources containing menus and dialogs in Bangla
-language for India.
-
-%description i18n-bn_IN -l pl.UTF-8
-Ten pakiet dostarcza zasoby zawierające menu i okna dialogowe w języku
-bengalskim dla Indii.
-
 %package i18n-bo
 Summary:	LibreOffice - interface in Tibetan language
 Summary(pl.UTF-8):	LibreOffice - interfejs w języku tybetańskim
 Group:		I18n
-Requires:	%{name}-core = %{epoch}:%{version}-%{release}
+Requires:	%{name}-core = %{version}-%{release}
 Obsoletes:	openoffice.org-i18n-bo
 
 %description i18n-bo
@@ -855,7 +850,7 @@ tybetańskim.
 Summary:	LibreOffice - interface in Breton language
 Summary(pl.UTF-8):	LibreOffice - interfejs w języku bretońskim
 Group:		I18n
-Requires:	%{name}-core = %{epoch}:%{version}-%{release}
+Requires:	%{name}-core = %{version}-%{release}
 Obsoletes:	openoffice.org-i18n-br
 
 %description i18n-br
@@ -870,7 +865,7 @@ bretońskim.
 Summary:	LibreOffice - interface in Bodo language
 Summary(pl.UTF-8):	LibreOffice - interfejs w języku boro
 Group:		I18n
-Requires:	%{name}-core = %{epoch}:%{version}-%{release}
+Requires:	%{name}-core = %{version}-%{release}
 Obsoletes:	openoffice.org-i18n-brx
 
 %description i18n-brx
@@ -885,7 +880,7 @@ boro.
 Summary:	LibreOffice - interface in Bosnian language
 Summary(pl.UTF-8):	LibreOffice - interfejs w języku bośniackim
 Group:		I18n
-Requires:	%{name}-core = %{epoch}:%{version}-%{release}
+Requires:	%{name}-core = %{version}-%{release}
 Obsoletes:	openoffice.org-i18n-bs
 
 %description i18n-bs
@@ -896,27 +891,11 @@ Bosnian language.
 Ten pakiet dostarcza zasoby zawierające menu i okna dialogowe w języku
 bośniackim.
 
-# FIXME
-%package i18n-by
-Summary:	LibreOffice - interface in ... language
-Summary(pl.UTF-8):	LibreOffice - interfejs w języku ...
-Group:		I18n
-Requires:	%{name}-core = %{epoch}:%{version}-%{release}
-Obsoletes:	openoffice.org-i18n-by
-
-%description i18n-by
-This package provides resources containing menus and dialogs in
-... language.
-
-%description i18n-by -l pl.UTF-8
-Ten pakiet dostarcza zasoby zawierające menu i okna dialogowe w języku
-...
-
 %package i18n-ca
 Summary:	LibreOffice - interface in Catalan language
 Summary(pl.UTF-8):	LibreOffice - interfejs w języku katalońskim
 Group:		I18n
-Requires:	%{name}-core = %{epoch}:%{version}-%{release}
+Requires:	%{name}-core = %{version}-%{release}
 Obsoletes:	openoffice-i18n-ca
 Obsoletes:	openoffice-i18n-ca-gtk
 Obsoletes:	openoffice.org-i18n-ca-gtk
@@ -935,7 +914,7 @@ katalońskim.
 Summary:	LibreOffice - interface in Czech language
 Summary(pl.UTF-8):	LibreOffice - interfejs w języku czeskim
 Group:		I18n
-Requires:	%{name}-core = %{epoch}:%{version}-%{release}
+Requires:	%{name}-core = %{version}-%{release}
 Obsoletes:	openoffice-i18n-cs
 Obsoletes:	openoffice-i18n-cs-gtk
 Obsoletes:	openoffice.org-i18n-cs-gtk
@@ -954,7 +933,7 @@ czeskim.
 Summary:	LibreOffice - interface in Cymraeg language
 Summary(pl.UTF-8):	LibreOffice - interfejs w języku walijskim
 Group:		I18n
-Requires:	%{name}-core = %{epoch}:%{version}-%{release}
+Requires:	%{name}-core = %{version}-%{release}
 Obsoletes:	openoffice-i18n-cy
 Obsoletes:	openoffice-i18n-cy-gtk
 Obsoletes:	openoffice.org-i18n-cy-gtk
@@ -973,7 +952,7 @@ walijskim.
 Summary:	LibreOffice - interface in Danish language
 Summary(pl.UTF-8):	LibreOffice - interfejs w języku duńskim
 Group:		I18n
-Requires:	%{name}-core = %{epoch}:%{version}-%{release}
+Requires:	%{name}-core = %{version}-%{release}
 Obsoletes:	openoffice-i18n-da
 Obsoletes:	openoffice-i18n-da-gtk
 Obsoletes:	openoffice.org-i18n-da-gtk
@@ -992,7 +971,7 @@ duńskim.
 Summary:	LibreOffice - interface in German language
 Summary(pl.UTF-8):	LibreOffice - interfejs w języku niemieckim
 Group:		I18n
-Requires:	%{name}-core = %{epoch}:%{version}-%{release}
+Requires:	%{name}-core = %{version}-%{release}
 Obsoletes:	openoffice-i18n-de
 Obsoletes:	openoffice-i18n-de-gtk
 Obsoletes:	openoffice.org-i18n-de-gtk
@@ -1011,7 +990,7 @@ niemieckim.
 Summary:	LibreOffice - interface in Dogri language
 Summary(pl.UTF-8):	LibreOffice - interfejs w języku dogri
 Group:		I18n
-Requires:	%{name}-core = %{epoch}:%{version}-%{release}
+Requires:	%{name}-core = %{version}-%{release}
 Obsoletes:	openoffice.org-i18n-dgo
 
 %description i18n-dgo
@@ -1026,7 +1005,7 @@ dogri.
 Summary:	LibreOffice - interface in Dzongkha language
 Summary(pl.UTF-8):	Openoffice.org - interfejs w języku dżongkha
 Group:		I18n
-Requires:	%{name}-core = %{epoch}:%{version}-%{release}
+Requires:	%{name}-core = %{version}-%{release}
 Obsoletes:	openoffice.org-i18n-dz
 
 %description i18n-dz
@@ -1041,7 +1020,7 @@ dżongkha.
 Summary:	LibreOffice - interface in Greek language
 Summary(pl.UTF-8):	LibreOffice - interfejs w języku greckim
 Group:		I18n
-Requires:	%{name}-core = %{epoch}:%{version}-%{release}
+Requires:	%{name}-core = %{version}-%{release}
 Obsoletes:	openoffice-i18n-el
 Obsoletes:	openoffice-i18n-el-gtk
 Obsoletes:	openoffice.org-i18n-el-gtk
@@ -1060,7 +1039,7 @@ greckim.
 Summary:	LibreOffice - interface in English language for United Kingdom
 Summary(pl.UTF-8):	LibreOffice - interfejs w języku anglieskim dla Wielkiej Brytanii
 Group:		I18n
-Requires:	%{name}-core = %{epoch}:%{version}-%{release}
+Requires:	%{name}-core = %{version}-%{release}
 Obsoletes:	openoffice.org-i18n-en_GB
 
 %description i18n-en_GB
@@ -1075,7 +1054,7 @@ anglieskim dla Wielkiej Brytanii.
 Summary:	LibreOffice - interface in English language for South Africa
 Summary(pl.UTF-8):	LibreOffice - interfejs w języku anglieskim dla Południowej Afryki
 Group:		I18n
-Requires:	%{name}-core = %{epoch}:%{version}-%{release}
+Requires:	%{name}-core = %{version}-%{release}
 Obsoletes:	openoffice.org-i18n-en_ZA
 
 %description i18n-en_ZA
@@ -1090,7 +1069,7 @@ anglieskim dla Południowej Afryki.
 Summary:	LibreOffice - interface in Esperanto language
 Summary(pl.UTF-8):	LibreOffice - interfejs w języku esperanto
 Group:		I18n
-Requires:	%{name}-core = %{epoch}:%{version}-%{release}
+Requires:	%{name}-core = %{version}-%{release}
 Obsoletes:	openoffice.org-i18n-eo
 
 %description i18n-eo
@@ -1105,7 +1084,7 @@ esperanto.
 Summary:	LibreOffice - interface in Spanish language
 Summary(pl.UTF-8):	LibreOffice - interfejs w języku hiszpańskim
 Group:		I18n
-Requires:	%{name}-core = %{epoch}:%{version}-%{release}
+Requires:	%{name}-core = %{version}-%{release}
 Obsoletes:	openoffice-i18n-es
 Obsoletes:	openoffice-i18n-es-gtk
 Obsoletes:	openoffice.org-i18n-es-gtk
@@ -1124,7 +1103,7 @@ hiszpańskim.
 Summary:	LibreOffice - interface in Estonian language
 Summary(pl.UTF-8):	LibreOffice - interfejs w języku estońskim
 Group:		I18n
-Requires:	%{name}-core = %{epoch}:%{version}-%{release}
+Requires:	%{name}-core = %{version}-%{release}
 Obsoletes:	openoffice-i18n-et
 Obsoletes:	openoffice-i18n-et-gtk
 Obsoletes:	openoffice.org-i18n-et-gtk
@@ -1143,7 +1122,7 @@ estońskim.
 Summary:	LibreOffice - interface in Basque (Euskara) language
 Summary(pl.UTF-8):	LibreOffice - interfejs w języku baskijskim (euskera)
 Group:		I18n
-Requires:	%{name}-core = %{epoch}:%{version}-%{release}
+Requires:	%{name}-core = %{version}-%{release}
 Obsoletes:	openoffice-i18n-eu
 Obsoletes:	openoffice-i18n-eu-gtk
 Obsoletes:	openoffice-i18n-eu-kde
@@ -1161,7 +1140,7 @@ baskijskim (euskera).
 Summary:	LibreOffice - interface in Persian language
 Summary(pl.UTF-8):	LibreOffice - interfejs w języku perskim
 Group:		I18n
-Requires:	%{name}-core = %{epoch}:%{version}-%{release}
+Requires:	%{name}-core = %{version}-%{release}
 Obsoletes:	openoffice-i18n-fa
 Obsoletes:	openoffice-i18n-fa-gtk
 Obsoletes:	openoffice-i18n-fa-kde
@@ -1179,7 +1158,7 @@ perskim.
 Summary:	LibreOffice - interface in Finnish language
 Summary(pl.UTF-8):	LibreOffice - interfejs w języku fińskim
 Group:		I18n
-Requires:	%{name}-core = %{epoch}:%{version}-%{release}
+Requires:	%{name}-core = %{version}-%{release}
 Obsoletes:	openoffice-i18n-fi
 Obsoletes:	openoffice-i18n-fi-gtk
 Obsoletes:	openoffice.org-i18n-fi-gtk
@@ -1198,7 +1177,7 @@ fińskim.
 Summary:	LibreOffice - interface in French language
 Summary(pl.UTF-8):	LibreOffice - interfejs w języku francuskim
 Group:		I18n
-Requires:	%{name}-core = %{epoch}:%{version}-%{release}
+Requires:	%{name}-core = %{version}-%{release}
 Obsoletes:	openoffice-i18n-fr
 Obsoletes:	openoffice-i18n-fr-gtk
 Obsoletes:	openoffice.org-i18n-fr-gtk
@@ -1217,7 +1196,7 @@ francuskim.
 Summary:	LibreOffice - interface in Irish language
 Summary(pl.UTF-8):	LibreOffice - interfejs w języku irlandzkim
 Group:		I18n
-Requires:	%{name}-core = %{epoch}:%{version}-%{release}
+Requires:	%{name}-core = %{version}-%{release}
 Obsoletes:	openoffice-i18n-ga
 Obsoletes:	openoffice-i18n-ga-gtk
 Obsoletes:	openoffice.org-i18n-ga-gtk
@@ -1236,7 +1215,7 @@ irlandzkim.
 Summary:	LibreOffice - interface in Scottish Gaelic language
 Summary(pl.UTF-8):	LibreOffice - interfejs w języku gaelickim szkockim
 Group:		I18n
-Requires:	%{name}-core = %{epoch}:%{version}-%{release}
+Requires:	%{name}-core = %{version}-%{release}
 Obsoletes:	openoffice.org-i18n-gd
 
 %description i18n-gd
@@ -1251,7 +1230,7 @@ gaelickim szkockim.
 Summary:	LibreOffice - interface in Galician language
 Summary(pl.UTF-8):	LibreOffice - interfejs w języku galicyjskim
 Group:		I18n
-Requires:	%{name}-core = %{epoch}:%{version}-%{release}
+Requires:	%{name}-core = %{version}-%{release}
 Obsoletes:	openoffice-i18n-gl
 Obsoletes:	openoffice-i18n-gl-gtk
 Obsoletes:	openoffice.org-i18n-gl-gtk
@@ -1266,26 +1245,11 @@ Galician language.
 Ten pakiet dostarcza zasoby zawierające menu i okna dialogowe w języku
 galicyjskim.
 
-%package i18n-gu_IN
-Summary:	LibreOffice - interface in Gujarati language
-Summary(pl.UTF-8):	LibreOffice - interfejs w języku gudźarati
-Group:		I18n
-Requires:	%{name}-core = %{epoch}:%{version}-%{release}
-Obsoletes:	openoffice.org-i18n-gu_IN
-
-%description i18n-gu_IN
-This package provides resources containing menus and dialogs in
-Gujarati language.
-
-%description i18n-gu_IN -l pl.UTF-8
-Ten pakiet dostarcza zasoby zawierające menu i okna dialogowe w języku
-gudźarati.
-
 %package i18n-gu
 Summary:	LibreOffice - interface in Gujarati language
 Summary(pl.UTF-8):	LibreOffice - interfejs w języku gudźarati
 Group:		I18n
-Requires:	%{name}-core = %{epoch}:%{version}-%{release}
+Requires:	%{name}-core = %{version}-%{release}
 Obsoletes:	openoffice.org-i18n-gu
 
 %description i18n-gu
@@ -1300,7 +1264,7 @@ gudźarati.
 Summary:	LibreOffice - interface in Hebrew language
 Summary(pl.UTF-8):	LibreOffice - interfejs w języku hebrajskim
 Group:		I18n
-Requires:	%{name}-core = %{epoch}:%{version}-%{release}
+Requires:	%{name}-core = %{version}-%{release}
 Obsoletes:	openoffice-i18n-he
 Obsoletes:	openoffice-i18n-he-gtk
 Obsoletes:	openoffice.org-i18n-he-gtk
@@ -1315,22 +1279,22 @@ language.
 Ten pakiet dostarcza zasoby zawierające menu i okna dialogowe w języku
 hebrajskim.
 
-%package i18n-hi_IN
+%package i18n-hi
 Summary:	LibreOffice - interface in Hindi language
 Summary(pl.UTF-8):	LibreOffice - interfejs w języku hindi
 Group:		I18n
-Requires:	%{name}-core = %{epoch}:%{version}-%{release}
+Requires:	%{name}-core = %{version}-%{release}
 Obsoletes:	openoffice-i18n-hi
 Obsoletes:	openoffice-i18n-hi-gtk
 Obsoletes:	openoffice.org-i18n-hi-gtk
 Obsoletes:	openoffice.org-i18n-hi-kde
 Obsoletes:	openoffice.org-i18n-hi_IN
 
-%description i18n-hi_IN
+%description i18n-hi
 This package provides resources containing menus and dialogs in Hindi
 language.
 
-%description i18n-hi_IN -l pl.UTF-8
+%description i18n-hi -l pl.UTF-8
 Ten pakiet dostarcza zasoby zawierające menu i okna dialogowe w języku
 hindi.
 
@@ -1338,7 +1302,7 @@ hindi.
 Summary:	LibreOffice - interface in Croatian language
 Summary(pl.UTF-8):	LibreOffice - interfejs w języku chorwackim
 Group:		I18n
-Requires:	%{name}-core = %{epoch}:%{version}-%{release}
+Requires:	%{name}-core = %{version}-%{release}
 Obsoletes:	openoffice-i18n-hr
 Obsoletes:	openoffice-i18n-hr-gtk
 Obsoletes:	openoffice.org-i18n-hr-gtk
@@ -1357,7 +1321,7 @@ chorwackim.
 Summary:	LibreOffice - interface in Hungarian language
 Summary(pl.UTF-8):	LibreOffice - interfejs w języku węgierskim
 Group:		I18n
-Requires:	%{name}-core = %{epoch}:%{version}-%{release}
+Requires:	%{name}-core = %{version}-%{release}
 Obsoletes:	openoffice-i18n-hu
 Obsoletes:	openoffice-i18n-hu-gtk
 Obsoletes:	openoffice.org-i18n-hu-gtk
@@ -1376,7 +1340,7 @@ węgierskim.
 Summary:	LibreOffice - interface in Icelandic language
 Summary(pl.UTF-8):	LibreOffice - interfejs w języku islandzkim
 Group:		I18n
-Requires:	%{name}-core = %{epoch}:%{version}-%{release}
+Requires:	%{name}-core = %{version}-%{release}
 Obsoletes:	openoffice.org-i18n-is
 
 %description i18n-is
@@ -1391,7 +1355,7 @@ islandzkim.
 Summary:	LibreOffice - interface in Italian language
 Summary(pl.UTF-8):	LibreOffice - interfejs w języku włoskim
 Group:		I18n
-Requires:	%{name}-core = %{epoch}:%{version}-%{release}
+Requires:	%{name}-core = %{version}-%{release}
 Obsoletes:	openoffice-i18n-it
 Obsoletes:	openoffice-i18n-it-gtk
 Obsoletes:	openoffice.org-i18n-it-gtk
@@ -1410,7 +1374,7 @@ włoskim.
 Summary:	LibreOffice - interface in Japan language
 Summary(pl.UTF-8):	LibreOffice - interfejs w języku japońskim
 Group:		I18n
-Requires:	%{name}-core = %{epoch}:%{version}-%{release}
+Requires:	%{name}-core = %{version}-%{release}
 Obsoletes:	openoffice-i18n-ja
 Obsoletes:	openoffice-i18n-ja-gtk
 Obsoletes:	openoffice.org-i18n-ja-gtk
@@ -1429,7 +1393,7 @@ japońskim.
 Summary:	LibreOffice - interface in Georgian language
 Summary(pl.UTF-8):	LibreOffice - interfejs w języku gruzińskim
 Group:		I18n
-Requires:	%{name}-core = %{epoch}:%{version}-%{release}
+Requires:	%{name}-core = %{version}-%{release}
 Obsoletes:	openoffice.org-i18n-ka
 
 %description i18n-ka
@@ -1440,27 +1404,26 @@ Georgian language.
 Ten pakiet dostarcza zasoby zawierające menu i okna dialogowe w języku
 gruzińskim.
 
-# FIXME
 %package i18n-kid
-Summary:	LibreOffice - interface in ... language
-Summary(pl.UTF-8):	LibreOffice - interfejs w języku ...
+Summary:	LibreOffice - interface in Koshin language
+Summary(pl.UTF-8):	LibreOffice - interfejs w języku koshin
 Group:		I18n
-Requires:	%{name}-core = %{epoch}:%{version}-%{release}
+Requires:	%{name}-core = %{version}-%{release}
 Obsoletes:	openoffice.org-i18n-kid
 
 %description i18n-kid
-This package provides resources containing menus and dialogs in ...
+This package provides resources containing menus and dialogs in Koshin
 language.
 
 %description i18n-kid -l pl.UTF-8
 Ten pakiet dostarcza zasoby zawierające menu i okna dialogowe w języku
-... .
+koshin.
 
 %package i18n-kk
 Summary:	LibreOffice - interface in Kazakh language
 Summary(pl.UTF-8):	LibreOffice - interfejs w języku kazachskim
 Group:		I18n
-Requires:	%{name}-core = %{epoch}:%{version}-%{release}
+Requires:	%{name}-core = %{version}-%{release}
 Obsoletes:	openoffice.org-i18n-kk
 
 %description i18n-kk
@@ -1475,7 +1438,7 @@ kazachskim.
 Summary:	LibreOffice - interface in Khmer language
 Summary(pl.UTF-8):	LibreOffice - interfejs w języku khmerskim
 Group:		I18n
-Requires:	%{name}-core = %{epoch}:%{version}-%{release}
+Requires:	%{name}-core = %{version}-%{release}
 Obsoletes:	openoffice.org-i18n-km
 
 %description i18n-km
@@ -1490,7 +1453,7 @@ khmerskim.
 Summary:	LibreOffice - interface in Kannada language
 Summary(pl.UTF-8):	LibreOffice - interfejs w języku kannara
 Group:		I18n
-Requires:	%{name}-core = %{epoch}:%{version}-%{release}
+Requires:	%{name}-core = %{version}-%{release}
 Obsoletes:	openoffice-i18n-kn
 Obsoletes:	openoffice-i18n-kn-gtk
 Obsoletes:	openoffice-i18n-kn-kde
@@ -1508,7 +1471,7 @@ kannara.
 Summary:	LibreOffice - interface in Korean language
 Summary(pl.UTF-8):	LibreOffice - interfejs w języku koreańskim
 Group:		I18n
-Requires:	%{name}-core = %{epoch}:%{version}-%{release}
+Requires:	%{name}-core = %{version}-%{release}
 Obsoletes:	openoffice-i18n-ko
 Obsoletes:	openoffice-i18n-ko-gtk
 Obsoletes:	openoffice.org-i18n-ko-gtk
@@ -1527,7 +1490,7 @@ koreańskim.
 Summary:	LibreOffice - interface in Konkani language
 Summary(pl.UTF-8):	LibreOffice - interfejs w języku konkani
 Group:		I18n
-Requires:	%{name}-core = %{epoch}:%{version}-%{release}
+Requires:	%{name}-core = %{version}-%{release}
 Obsoletes:	openoffice.org-i18n-kok
 
 %description i18n-kok
@@ -1542,7 +1505,7 @@ konkani.
 Summary:	LibreOffice - interface in Kashmiri language
 Summary(pl.UTF-8):	LibreOffice - interfejs w języku kaszmirskim
 Group:		I18n
-Requires:	%{name}-core = %{epoch}:%{version}-%{release}
+Requires:	%{name}-core = %{version}-%{release}
 Obsoletes:	openoffice.org-i18n-ks
 
 %description i18n-ks
@@ -1557,7 +1520,7 @@ kaszmirskim.
 Summary:	LibreOffice - interface in Kurdish language
 Summary(pl.UTF-8):	LibreOffice - interfejs w języku kurdyjskim
 Group:		I18n
-Requires:	%{name}-core = %{epoch}:%{version}-%{release}
+Requires:	%{name}-core = %{version}-%{release}
 Obsoletes:	openoffice.org-i18n-ku
 
 %description i18n-ku
@@ -1572,7 +1535,7 @@ kurdyjskim.
 Summary:	LibreOffice - interface in Kyrgyz language
 Summary(pl.UTF-8):	LibreOffice - interfejs w języku kirgiskim
 Group:		I18n
-Requires:	%{name}-core = %{epoch}:%{version}-%{release}
+Requires:	%{name}-core = %{version}-%{release}
 Obsoletes:	openoffice.org-i18n-ky
 
 %description i18n-ky
@@ -1587,7 +1550,7 @@ kirgiskim.
 Summary:	LibreOffice - interface in Lao language
 Summary(pl.UTF-8):	LibreOffice - interfejs w języku laotańskim
 Group:		I18n
-Requires:	%{name}-core = %{epoch}:%{version}-%{release}
+Requires:	%{name}-core = %{version}-%{release}
 Obsoletes:	openoffice.org-i18n-lo
 
 %description i18n-lo
@@ -1602,7 +1565,7 @@ laotańskim.
 Summary:	LibreOffice - interface in Lithuanian language
 Summary(pl.UTF-8):	LibreOffice - interfejs w języku litewskim
 Group:		I18n
-Requires:	%{name}-core = %{epoch}:%{version}-%{release}
+Requires:	%{name}-core = %{version}-%{release}
 Obsoletes:	openoffice-i18n-lt
 Obsoletes:	openoffice-i18n-lt-gtk
 Obsoletes:	openoffice.org-i18n-lt-gtk
@@ -1621,7 +1584,7 @@ litewskim.
 Summary:	LibreOffice - interface in Latvian language
 Summary(pl.UTF-8):	LibreOffice - interfejs w języku łotewskim
 Group:		I18n
-Requires:	%{name}-core = %{epoch}:%{version}-%{release}
+Requires:	%{name}-core = %{version}-%{release}
 Obsoletes:	openoffice.org-i18n-lv
 
 %description i18n-lv
@@ -1636,7 +1599,7 @@ Ten pakiet dostarcza zasoby zawierające menu i okna dialogowe w języku
 Summary:	LibreOffice - interface in Maithili language
 Summary(pl.UTF-8):	LibreOffice - interfejs w języku maithili
 Group:		I18n
-Requires:	%{name}-core = %{epoch}:%{version}-%{release}
+Requires:	%{name}-core = %{version}-%{release}
 Obsoletes:	openoffice.org-i18n-mai
 
 %description i18n-mai
@@ -1651,7 +1614,7 @@ maithili.
 Summary:	LibreOffice - interface in Macedonian language
 Summary(pl.UTF-8):	LibreOffice - interfejs w języku macedońskim
 Group:		I18n
-Requires:	%{name}-core = %{epoch}:%{version}-%{release}
+Requires:	%{name}-core = %{version}-%{release}
 Obsoletes:	openoffice.org-i18n-mk
 
 %description i18n-mk
@@ -1662,26 +1625,26 @@ Macedonian language.
 Ten pakiet dostarcza zasoby zawierające menu i okna dialogowe w języku
 macedońskim.
 
-%package i18n-ml_IN
-Summary:	LibreOffice - interface in Malayalam language for India
-Summary(pl.UTF-8):	LibreOffice - interfejs w języku malajalamskim dla Indii
+%package i18n-ml
+Summary:	LibreOffice - interface in Malayalam language
+Summary(pl.UTF-8):	LibreOffice - interfejs w języku malajalamskim
 Group:		I18n
-Requires:	%{name}-core = %{epoch}:%{version}-%{release}
+Requires:	%{name}-core = %{version}-%{release}
 Obsoletes:	openoffice.org-i18n-ml_IN
 
-%description i18n-ml_IN
+%description i18n-ml
 This package provides resources containing menus and dialogs in
-Malayalam language for India.
+Malayalam language.
 
-%description i18n-ml_IN -l pl.UTF-8
+%description i18n-ml -l pl.UTF-8
 Ten pakiet dostarcza zasoby zawierające menu i okna dialogowe w języku
-malajalamskim dla Indii.
+malajalamskim.
 
 %package i18n-mni
 Summary:	LibreOffice - interface in Meitei language
 Summary(pl.UTF-8):	LibreOffice - interfejs w języku manipuri
 Group:		I18n
-Requires:	%{name}-core = %{epoch}:%{version}-%{release}
+Requires:	%{name}-core = %{version}-%{release}
 Obsoletes:	openoffice.org-i18n-mni
 
 %description i18n-mni
@@ -1692,26 +1655,26 @@ Meitei language.
 Ten pakiet dostarcza zasoby zawierające menu i okna dialogowe w języku
 manipuri.
 
-%package i18n-mr_IN
-Summary:	LibreOffice - interface in Marathi language for India
-Summary(pl.UTF-8):	LibreOffice - interfejs w języku marathi dla Indii
+%package i18n-mr
+Summary:	LibreOffice - interface in Marathi language
+Summary(pl.UTF-8):	LibreOffice - interfejs w języku marathi
 Group:		I18n
-Requires:	%{name}-core = %{epoch}:%{version}-%{release}
+Requires:	%{name}-core = %{version}-%{release}
 Obsoletes:	openoffice.org-i18n-mr_IN
 
-%description i18n-mr_IN
+%description i18n-mr
 This package provides resources containing menus and dialogs in
-Marathi language for India.
+Marathi language.
 
-%description i18n-mr_IN -l pl.UTF-8
+%description i18n-mr -l pl.UTF-8
 Ten pakiet dostarcza zasoby zawierające menu i okna dialogowe w języku
-marathi dla Indii.
+marathi.
 
 %package i18n-mn
 Summary:	LibreOffice - interface in Mongolian language
 Summary(pl.UTF-8):	LibreOffice - interfejs w języku mongolskim
 Group:		I18n
-Requires:	%{name}-core = %{epoch}:%{version}-%{release}
+Requires:	%{name}-core = %{version}-%{release}
 Obsoletes:	openoffice.org-i18n-mn
 
 %description i18n-mn
@@ -1726,7 +1689,7 @@ mongolskim.
 Summary:	LibreOffice - interface in Malay language
 Summary(pl.UTF-8):	LibreOffice - interfejs w języku malajskim
 Group:		I18n
-Requires:	%{name}-core = %{epoch}:%{version}-%{release}
+Requires:	%{name}-core = %{version}-%{release}
 Obsoletes:	openoffice-i18n-ms
 Obsoletes:	openoffice-i18n-ms-gtk
 Obsoletes:	openoffice.org-i18n-ms-gtk
@@ -1745,7 +1708,7 @@ malajskim.
 Summary:	LibreOffice - interface in Burmese language
 Summary(pl.UTF-8):	LibreOffice - interfejs w języku birmańskim
 Group:		I18n
-Requires:	%{name}-core = %{epoch}:%{version}-%{release}
+Requires:	%{name}-core = %{version}-%{release}
 Obsoletes:	openoffice.org-i18n-my
 
 %description i18n-my
@@ -1760,7 +1723,7 @@ birmańskim.
 Summary:	LibreOffice - interface in Norwegian Bokmaal language
 Summary(pl.UTF-8):	LibreOffice - interfejs w języku norweskim (odmiana Bokmaal)
 Group:		I18n
-Requires:	%{name}-core = %{epoch}:%{version}-%{release}
+Requires:	%{name}-core = %{version}-%{release}
 Obsoletes:	openoffice-i18n-nb
 Obsoletes:	openoffice-i18n-nb-gtk
 Obsoletes:	openoffice.org-i18n-nb-gtk
@@ -1779,7 +1742,7 @@ norweskim w odmianie Bokmaal.
 Summary:	LibreOffice - interface in Nepali language
 Summary(pl.UTF-8):	LibreOffice - interfejs w języku nepalskim
 Group:		I18n
-Requires:	%{name}-core = %{epoch}:%{version}-%{release}
+Requires:	%{name}-core = %{version}-%{release}
 Obsoletes:	openoffice.org-i18n-ne
 
 %description i18n-ne
@@ -1794,7 +1757,7 @@ nepalskim.
 Summary:	LibreOffice - interface in Dutch language
 Summary(pl.UTF-8):	LibreOffice - interfejs w języku holenderskim
 Group:		I18n
-Requires:	%{name}-core = %{epoch}:%{version}-%{release}
+Requires:	%{name}-core = %{version}-%{release}
 Obsoletes:	openoffice-i18n-nl
 Obsoletes:	openoffice-i18n-nl-gtk
 Obsoletes:	openoffice.org-i18n-nl-gtk
@@ -1813,7 +1776,7 @@ holenderskim.
 Summary:	LibreOffice - interface in Norwegian Nynorsk language
 Summary(pl.UTF-8):	LibreOffice - interfejs w języku norweskim (odmiana Nynorsk)
 Group:		I18n
-Requires:	%{name}-core = %{epoch}:%{version}-%{release}
+Requires:	%{name}-core = %{version}-%{release}
 Obsoletes:	openoffice-i18n-nn
 Obsoletes:	openoffice-i18n-nn-gtk
 Obsoletes:	openoffice.org-i18n-nn-gtk
@@ -1832,7 +1795,7 @@ norweskim w odmianie Nynorsk.
 Summary:	LibreOffice - interface in South Ndebele language
 Summary(pl.UTF-8):	LibreOffice - interfejs w języku ndebele (południowym)
 Group:		I18n
-Requires:	%{name}-core = %{epoch}:%{version}-%{release}
+Requires:	%{name}-core = %{version}-%{release}
 Obsoletes:	openoffice.org-i18n-nr
 
 %description i18n-nr
@@ -1847,7 +1810,7 @@ ndebele (południowym).
 Summary:	LibreOffice - interface in Northern Sotho language
 Summary(pl.UTF-8):	LibreOffice - interfejs w języku ludu Soto
 Group:		I18n
-Requires:	%{name}-core = %{epoch}:%{version}-%{release}
+Requires:	%{name}-core = %{version}-%{release}
 Obsoletes:	openoffice-i18n-nso
 Obsoletes:	openoffice-i18n-nso-gtk
 Obsoletes:	openoffice.org-i18n-nso-gtk
@@ -1866,7 +1829,7 @@ ludu Soto.
 Summary:	LibreOffice - interface in Occitan language
 Summary(pl.UTF-8):	LibreOffice - interfejs w języku oksytańskim
 Group:		I18n
-Requires:	%{name}-core = %{epoch}:%{version}-%{release}
+Requires:	%{name}-core = %{version}-%{release}
 Obsoletes:	openoffice.org-i18n-oc
 
 %description i18n-oc
@@ -1881,7 +1844,7 @@ oksytańskim.
 Summary:	LibreOffice - interface in Oromo language
 Summary(pl.UTF-8):	LibreOffice - interfejs w języku oromo
 Group:		I18n
-Requires:	%{name}-core = %{epoch}:%{version}-%{release}
+Requires:	%{name}-core = %{version}-%{release}
 Obsoletes:	openoffice.org-i18n-om
 
 %description i18n-om
@@ -1892,26 +1855,26 @@ Oromo language.
 Ten pakiet dostarcza zasoby zawierające menu i okna dialogowe w języku
 oromo.
 
-%package i18n-or_IN
-Summary:	LibreOffice - interface in Oriya language for India
-Summary(pl.UTF-8):	LibreOffice - interfejs w języku orija dla Indii
+%package i18n-or
+Summary:	LibreOffice - interface in Oriya language
+Summary(pl.UTF-8):	LibreOffice - interfejs w języku orija
 Group:		I18n
-Requires:	%{name}-core = %{epoch}:%{version}-%{release}
+Requires:	%{name}-core = %{version}-%{release}
 Obsoletes:	openoffice.org-i18n-or_IN
 
-%description i18n-or_IN
+%description i18n-or
 This package provides resources containing menus and dialogs in Oriya
-language for India.
+language.
 
-%description i18n-or_IN -l pl.UTF-8
+%description i18n-or -l pl.UTF-8
 Ten pakiet dostarcza zasoby zawierające menu i okna dialogowe w języku
-orija dla Indii.
+orija.
 
 %package i18n-pa_IN
 Summary:	LibreOffice - interface in Punjabi language
 Summary(pl.UTF-8):	LibreOffice - interfejs w języku pendżabskim
 Group:		I18n
-Requires:	%{name}-core = %{epoch}:%{version}-%{release}
+Requires:	%{name}-core = %{version}-%{release}
 Obsoletes:	openoffice.org-i18n-pa_IN
 
 %description i18n-pa_IN
@@ -1926,7 +1889,7 @@ pendżabskim.
 Summary:	LibreOffice - interface in Papiamento language
 Summary(pl.UTF-8):	LibreOffice - interfejs w języku papiamento
 Group:		I18n
-Requires:	%{name}-core = %{epoch}:%{version}-%{release}
+Requires:	%{name}-core = %{version}-%{release}
 Obsoletes:	openoffice.org-i18n-pap
 
 %description i18n-pap
@@ -1941,7 +1904,7 @@ papiamento.
 Summary:	LibreOffice - interface in Polish language
 Summary(pl.UTF-8):	LibreOffice - interfejs w języku polskim
 Group:		I18n
-Requires:	%{name}-core = %{epoch}:%{version}-%{release}
+Requires:	%{name}-core = %{version}-%{release}
 Obsoletes:	openoffice-i18n-pl
 Obsoletes:	openoffice-i18n-pl-gtk
 Obsoletes:	openoffice.org-i18n-pl-gtk
@@ -1960,7 +1923,7 @@ polskim.
 Summary:	LibreOffice - interface in Pashto language
 Summary(pl.UTF-8):	LibreOffice - interfejs w języku paszto
 Group:		I18n
-Requires:	%{name}-core = %{epoch}:%{version}-%{release}
+Requires:	%{name}-core = %{version}-%{release}
 Obsoletes:	openoffice.org-i18n-ps
 
 %description i18n-ps
@@ -1975,7 +1938,7 @@ paszto.
 Summary:	LibreOffice - interface in Portuguese language
 Summary(pl.UTF-8):	LibreOffice - interfejs w języku portugalskim
 Group:		I18n
-Requires:	%{name}-core = %{epoch}:%{version}-%{release}
+Requires:	%{name}-core = %{version}-%{release}
 Obsoletes:	openoffice-i18n-pt
 Obsoletes:	openoffice-i18n-pt-gtk
 Obsoletes:	openoffice.org-i18n-pt-gtk
@@ -1994,7 +1957,7 @@ portugalskim.
 Summary:	LibreOffice - interface in Brazilian Portuguese language
 Summary(pl.UTF-8):	LibreOffice - interfejs w języku portugalskim dla Brazylii
 Group:		I18n
-Requires:	%{name}-core = %{epoch}:%{version}-%{release}
+Requires:	%{name}-core = %{version}-%{release}
 Obsoletes:	openoffice-i18n-pt_BR
 Obsoletes:	openoffice-i18n-pt_BR-gtk
 Obsoletes:	openoffice.org-i18n-pt_BR-gtk
@@ -2013,7 +1976,7 @@ portugalskim dla Brazylii.
 Summary:	LibreOffice - interface in Romanian language
 Summary(pl.UTF-8):	LibreOffice - interfejs w języku rumuńskim
 Group:		I18n
-Requires:	%{name}-core = %{epoch}:%{version}-%{release}
+Requires:	%{name}-core = %{version}-%{release}
 Obsoletes:	openoffice.org-i18n-ro
 
 %description i18n-ro
@@ -2028,7 +1991,7 @@ rumuńskim.
 Summary:	LibreOffice - interface in Russian language
 Summary(pl.UTF-8):	LibreOffice - interfejs w języku rosyjskim
 Group:		I18n
-Requires:	%{name}-core = %{epoch}:%{version}-%{release}
+Requires:	%{name}-core = %{version}-%{release}
 Obsoletes:	openoffice-i18n-ru
 Obsoletes:	openoffice-i18n-ru-gtk
 Obsoletes:	openoffice.org-i18n-ru-gtk
@@ -2047,7 +2010,7 @@ rosyjskim.
 Summary:	LibreOffice - interface in Kinarwanda language
 Summary(pl.UTF-8):	LibreOffice - interfejs w języku kinya-ruanda
 Group:		I18n
-Requires:	%{name}-core = %{epoch}:%{version}-%{release}
+Requires:	%{name}-core = %{version}-%{release}
 Obsoletes:	openoffice.org-i18n-rw
 
 %description i18n-rw
@@ -2062,7 +2025,7 @@ kinya-ruanda.
 Summary:	LibreOffice - interface in Sanskrit language
 Summary(pl.UTF-8):	LibreOffice - interfejs w sanskrycie
 Group:		I18n
-Requires:	%{name}-core = %{epoch}:%{version}-%{release}
+Requires:	%{name}-core = %{version}-%{release}
 Obsoletes:	openoffice.org-i18n-sa_IN
 
 %description i18n-sa_IN
@@ -2077,7 +2040,7 @@ sanskrycie.
 Summary:	LibreOffice - interface in Santali language
 Summary(pl.UTF-8):	LibreOffice - interfejs w języku santali
 Group:		I18n
-Requires:	%{name}-core = %{epoch}:%{version}-%{release}
+Requires:	%{name}-core = %{version}-%{release}
 Obsoletes:	openoffice.org-i18n-sat
 
 %description i18n-sat
@@ -2092,7 +2055,7 @@ santali.
 Summary:	LibreOffice - interface in Sardinian language
 Summary(pl.UTF-8):	LibreOffice - interfejs w języku sardyńskim
 Group:		I18n
-Requires:	%{name}-core = %{epoch}:%{version}-%{release}
+Requires:	%{name}-core = %{version}-%{release}
 Obsoletes:	openoffice.org-i18n-sc
 
 %description i18n-sc
@@ -2107,7 +2070,7 @@ sardyńskim.
 Summary:	LibreOffice - interface in Sindhi language
 Summary(pl.UTF-8):	LibreOffice - interfejs w języku sindhi
 Group:		I18n
-Requires:	%{name}-core = %{epoch}:%{version}-%{release}
+Requires:	%{name}-core = %{version}-%{release}
 Obsoletes:	openoffice.org-i18n-sd
 
 %description i18n-sd
@@ -2122,7 +2085,7 @@ sindhi.
 Summary:	LibreOffice - interface in Serbo-Croatian language
 Summary(pl.UTF-8):	LibreOffice - interfejs w języku serbsko-chorwackim
 Group:		I18n
-Requires:	%{name}-core = %{epoch}:%{version}-%{release}
+Requires:	%{name}-core = %{version}-%{release}
 Obsoletes:	openoffice.org-i18n-sh
 
 %description i18n-sh
@@ -2137,7 +2100,7 @@ serbsko-chorwackim.
 Summary:	LibreOffice - interface in Sinhala language
 Summary(pl.UTF-8):	LibreOffice - interfejs w języku syngaleskim
 Group:		I18n
-Requires:	%{name}-core = %{epoch}:%{version}-%{release}
+Requires:	%{name}-core = %{version}-%{release}
 Obsoletes:	openoffice.org-i18n-si
 
 %description i18n-si
@@ -2152,7 +2115,7 @@ syngaleskim.
 Summary:	LibreOffice - interface in Slovak language
 Summary(pl.UTF-8):	LibreOffice - interfejs w języku słowackim
 Group:		I18n
-Requires:	%{name}-core = %{epoch}:%{version}-%{release}
+Requires:	%{name}-core = %{version}-%{release}
 Obsoletes:	openoffice-i18n-sk
 Obsoletes:	openoffice-i18n-sk-gtk
 Obsoletes:	openoffice.org-i18n-sk-gtk
@@ -2171,7 +2134,7 @@ słowackim.
 Summary:	LibreOffice - interface in Slovenian language
 Summary(pl.UTF-8):	LibreOffice - interfejs w języku słoweńskim
 Group:		I18n
-Requires:	%{name}-core = %{epoch}:%{version}-%{release}
+Requires:	%{name}-core = %{version}-%{release}
 Obsoletes:	openoffice-i18n-sl
 Obsoletes:	openoffice-i18n-sl-gtk
 Obsoletes:	openoffice.org-i18n-sl-gtk
@@ -2186,11 +2149,25 @@ Slovenian language.
 Ten pakiet dostarcza zasoby zawierające menu i okna dialogowe w języku
 słoweńskim.
 
+%package i18n-sq
+Summary:	LibreOffice - interface in Albanian language
+Summary(pl.UTF-8):	LibreOffice - interfejs w języku albańskim
+Group:		I18n
+Requires:	%{name}-core = %{version}-%{release}
+
+%description i18n-sq
+This package provides resources containing menus and dialogs in
+Albanian language.
+
+%description i18n-sq -l pl.UTF-8
+Ten pakiet dostarcza zasoby zawierające menu i okna dialogowe w języku
+albańskim.
+
 %package i18n-sr
 Summary:	LibreOffice - interface in Serbian language
 Summary(pl.UTF-8):	LibreOffice - interfejs w języku serbskim
 Group:		I18n
-Requires:	%{name}-core = %{epoch}:%{version}-%{release}
+Requires:	%{name}-core = %{version}-%{release}
 Obsoletes:	openoffice.org-i18n-sr
 
 %description i18n-sr
@@ -2205,7 +2182,7 @@ serbskim.
 Summary:	LibreOffice - interface in Swati language
 Summary(pl.UTF-8):	LibreOffice - interfejs w języku suazi (siswati)
 Group:		I18n
-Requires:	%{name}-core = %{epoch}:%{version}-%{release}
+Requires:	%{name}-core = %{version}-%{release}
 Obsoletes:	openoffice.org-i18n-ss
 
 %description i18n-ss
@@ -2220,7 +2197,7 @@ suazi (siswati).
 Summary:	LibreOffice - interface in Southern Sotho language
 Summary(pl.UTF-8):	LibreOffice - interfejs w języku południowym sotho
 Group:		I18n
-Requires:	%{name}-core = %{epoch}:%{version}-%{release}
+Requires:	%{name}-core = %{version}-%{release}
 Obsoletes:	openoffice.org-i18n-st
 
 %description i18n-st
@@ -2235,7 +2212,7 @@ południowym sotho.
 Summary:	LibreOffice - interface in Swedish language
 Summary(pl.UTF-8):	LibreOffice - interfejs w języku szwedzkim
 Group:		I18n
-Requires:	%{name}-core = %{epoch}:%{version}-%{release}
+Requires:	%{name}-core = %{version}-%{release}
 Obsoletes:	openoffice-i18n-sv
 Obsoletes:	openoffice-i18n-sv-gtk
 Obsoletes:	openoffice.org-i18n-sv-gtk
@@ -2250,26 +2227,11 @@ Swedish language.
 Ten pakiet dostarcza zasoby zawierające menu i okna dialogowe w języku
 szwedzkim.
 
-%package i18n-sw
-Summary:	LibreOffice - interface in Swahili language
-Summary(pl.UTF-8):	LibreOffice - interfejs w języku suahili
-Group:		I18n
-Requires:	%{name}-core = %{epoch}:%{version}-%{release}
-Obsoletes:	openoffice.org-i18n-sw
-
-%description i18n-sw
-This package provides resources containing menus and dialogs in
-Swahili language.
-
-%description i18n-sw -l pl.UTF-8
-Ten pakiet dostarcza zasoby zawierające menu i okna dialogowe w języku
-suahili.
-
 %package i18n-sw_TZ
 Summary:	LibreOffice - interface in Swahili language for Tanzania
 Summary(pl.UTF-8):	LibreOffice - interfejs w języku suahili dla Tanzanii
 Group:		I18n
-Requires:	%{name}-core = %{epoch}:%{version}-%{release}
+Requires:	%{name}-core = %{version}-%{release}
 Obsoletes:	openoffice.org-i18n-sw_TZ
 
 %description i18n-sw_TZ
@@ -2280,41 +2242,41 @@ Swahili language for Tanzania.
 Ten pakiet dostarcza zasoby zawierające menu i okna dialogowe w języku
 suahili dla Tanzanii.
 
-%package i18n-ta_IN
+%package i18n-ta
 Summary:	LibreOffice - interface in Tamil language
 Summary(pl.UTF-8):	LibreOffice - interfejs w języku tamiskim
 Group:		I18n
-Requires:	%{name}-core = %{epoch}:%{version}-%{release}
+Requires:	%{name}-core = %{version}-%{release}
 Obsoletes:	openoffice.org-i18n-ta_IN
 
-%description i18n-ta_IN
+%description i18n-ta
 This package provides resources containing menus and dialogs in Tamil
 language.
 
-%description i18n-ta_IN -l pl.UTF-8
+%description i18n-ta -l pl.UTF-8
 Ten pakiet dostarcza zasoby zawierające menu i okna dialogowe w języku
 tamilskim.
 
-%package i18n-te_IN
-Summary:	LibreOffice - interface in Telugu language for India
-Summary(pl.UTF-8):	LibreOffice - interfejs w języku telugu dla Indii
+%package i18n-te
+Summary:	LibreOffice - interface in Telugu language
+Summary(pl.UTF-8):	LibreOffice - interfejs w języku telugu
 Group:		I18n
-Requires:	%{name}-core = %{epoch}:%{version}-%{release}
+Requires:	%{name}-core = %{version}-%{release}
 Obsoletes:	openoffice.org-i18n-te_IN
 
-%description i18n-te_IN
+%description i18n-te
 This package provides resources containing menus and dialogs in Telugu
-language for India.
+language.
 
-%description i18n-te_IN -l pl.UTF-8
+%description i18n-te -l pl.UTF-8
 Ten pakiet dostarcza zasoby zawierające menu i okna dialogowe w języku
-telugu dla Indii.
+telugu.
 
 %package i18n-tg
 Summary:	LibreOffice - interface in Tajik language
 Summary(pl.UTF-8):	LibreOffice - interfejs w języku tadżyckim
 Group:		I18n
-Requires:	%{name}-core = %{epoch}:%{version}-%{release}
+Requires:	%{name}-core = %{version}-%{release}
 Obsoletes:	openoffice.org-i18n-tg
 
 %description i18n-tg
@@ -2329,7 +2291,7 @@ tadżyckim.
 Summary:	LibreOffice - interface in Thai language
 Summary(pl.UTF-8):	LibreOffice - interfejs w języku tajskim
 Group:		I18n
-Requires:	%{name}-core = %{epoch}:%{version}-%{release}
+Requires:	%{name}-core = %{version}-%{release}
 Obsoletes:	openoffice-i18n-th
 Obsoletes:	openoffice-i18n-th-gtk
 Obsoletes:	openoffice-i18n-th-kde
@@ -2343,26 +2305,26 @@ language.
 Ten pakiet dostarcza zasoby zawierające menu i okna dialogowe w języku
 tajskim.
 
-%package i18n-ti_ER
-Summary:	LibreOffice - interface in Tigrigna language for Eritrea
-Summary(pl.UTF-8):	LibreOffice - interfejs w języku tigrinia dla Erytrei
+%package i18n-ti
+Summary:	LibreOffice - interface in Tigrigna language
+Summary(pl.UTF-8):	LibreOffice - interfejs w języku tigrinia
 Group:		I18n
-Requires:	%{name}-core = %{epoch}:%{version}-%{release}
+Requires:	%{name}-core = %{version}-%{release}
 Obsoletes:	openoffice.org-i18n-ti_ER
 
-%description i18n-ti_ER
+%description i18n-ti
 This package provides resources containing menus and dialogs in
-Tigrigna language for Eritrea.
+Tigrigna language.
 
-%description i18n-ti_ER -l pl.UTF-8
+%description i18n-ti -l pl.UTF-8
 Ten pakiet dostarcza zasoby zawierające menu i okna dialogowe w języku
-tigrinia dla Erytrei.
+tigrinia.
 
 %package i18n-tn
 Summary:	LibreOffice - interface in Tswana language
 Summary(pl.UTF-8):	LibreOffice - interfejs w języku tswana
 Group:		I18n
-Requires:	%{name}-core = %{epoch}:%{version}-%{release}
+Requires:	%{name}-core = %{version}-%{release}
 Obsoletes:	openoffice-i18n-tn
 Obsoletes:	openoffice-i18n-tn-gtk
 Obsoletes:	openoffice-i18n-tn-kde
@@ -2380,7 +2342,7 @@ tswana.
 Summary:	LibreOffice - interface in Turkish language
 Summary(pl.UTF-8):	LibreOffice - interfejs w języku tureckim
 Group:		I18n
-Requires:	%{name}-core = %{epoch}:%{version}-%{release}
+Requires:	%{name}-core = %{version}-%{release}
 Obsoletes:	openoffice-i18n-tr
 Obsoletes:	openoffice-i18n-tr-gtk
 Obsoletes:	openoffice.org-i18n-tr-gtk
@@ -2399,7 +2361,7 @@ tureckim.
 Summary:	LibreOffice - interface in Tsonga language
 Summary(pl.UTF-8):	LibreOffice - interfejs w języku tsonga
 Group:		I18n
-Requires:	%{name}-core = %{epoch}:%{version}-%{release}
+Requires:	%{name}-core = %{version}-%{release}
 Obsoletes:	openoffice.org-i18n-ts
 
 %description i18n-ts
@@ -2414,7 +2376,7 @@ tsonga.
 Summary:	LibreOffice - interface in Uyghur language
 Summary(pl.UTF-8):	LibreOffice - interfejs w języku ujgurskim
 Group:		I18n
-Requires:	%{name}-core = %{epoch}:%{version}-%{release}
+Requires:	%{name}-core = %{version}-%{release}
 Obsoletes:	openoffice.org-i18n-ug
 
 %description i18n-ug
@@ -2429,7 +2391,7 @@ ujgurskim.
 Summary:	LibreOffice - interface in Ukrainian language
 Summary(pl.UTF-8):	LibreOffice - interfejs w języku ukraińskim
 Group:		I18n
-Requires:	%{name}-core = %{epoch}:%{version}-%{release}
+Requires:	%{name}-core = %{version}-%{release}
 Obsoletes:	openoffice-i18n-uk
 Obsoletes:	openoffice-i18n-uk-gtk
 Obsoletes:	openoffice.org-i18n-uk-gtk
@@ -2444,26 +2406,26 @@ Ukrainian language.
 Ten pakiet dostarcza zasoby zawierające menu i okna dialogowe w języku
 ukraińskim.
 
-%package i18n-ur_IN
-Summary:	LibreOffice - interface in Urdu language for India
-Summary(pl.UTF-8):	LibreOffice - interfejs w języku urdu dla Indii
+%package i18n-ur
+Summary:	LibreOffice - interface in Urdu language
+Summary(pl.UTF-8):	LibreOffice - interfejs w języku urdu
 Group:		I18n
-Requires:	%{name}-core = %{epoch}:%{version}-%{release}
+Requires:	%{name}-core = %{version}-%{release}
 Obsoletes:	openoffice.org-i18n-ur_IN
 
-%description i18n-ur_IN
+%description i18n-ur
 This package provides resources containing menus and dialogs in Urdu
-language for India.
+language.
 
-%description i18n-ur_IN -l pl.UTF-8
+%description i18n-ur -l pl.UTF-8
 Ten pakiet dostarcza zasoby zawierające menu i okna dialogowe w języku
-urdu dla Indii.
+urdu.
 
 %package i18n-uz
 Summary:	LibreOffice - interface in Uzbek language
 Summary(pl.UTF-8):	LibreOffice - interfejs w języku uzbeckim
 Group:		I18n
-Requires:	%{name}-core = %{epoch}:%{version}-%{release}
+Requires:	%{name}-core = %{version}-%{release}
 Obsoletes:	openoffice.org-i18n-uz
 
 %description i18n-uz
@@ -2477,7 +2439,7 @@ uzbeckim.
 Summary:	LibreOffice - interface in Venda language
 Summary(pl.UTF-8):	LibreOffice - interfejs w języku venda
 Group:		I18n
-Requires:	%{name}-core = %{epoch}:%{version}-%{release}
+Requires:	%{name}-core = %{version}-%{release}
 Obsoletes:	openoffice.org-i18n-ve
 
 %description i18n-ve
@@ -2492,7 +2454,7 @@ venda.
 Summary:	LibreOffice - interface in Vietnamese language
 Summary(pl.UTF-8):	LibreOffice - interfejs w języku wietnamskim
 Group:		I18n
-Requires:	%{name}-core = %{epoch}:%{version}-%{release}
+Requires:	%{name}-core = %{version}-%{release}
 Obsoletes:	openoffice.org-i18n-vi
 
 %description i18n-vi
@@ -2507,7 +2469,7 @@ wietnamskim.
 Summary:	LibreOffice - interface in Xhosa language
 Summary(pl.UTF-8):	LibreOffice - interfejs w języku khosa
 Group:		I18n
-Requires:	%{name}-core = %{epoch}:%{version}-%{release}
+Requires:	%{name}-core = %{version}-%{release}
 Obsoletes:	openoffice.org-i18n-xh
 
 %description i18n-xh
@@ -2522,7 +2484,7 @@ khosa.
 Summary:	LibreOffice - interface in Chinese language for China
 Summary(pl.UTF-8):	LibreOffice - interfejs w języku chińskim dla Chin
 Group:		I18n
-Requires:	%{name}-core = %{epoch}:%{version}-%{release}
+Requires:	%{name}-core = %{version}-%{release}
 Obsoletes:	openoffice-i18n-zh
 Obsoletes:	openoffice-i18n-zh_CN
 Obsoletes:	openoffice-i18n-zh_CN-gtk
@@ -2542,7 +2504,7 @@ chińskim dla Chin.
 Summary:	LibreOffice - interface in Chinese language for Taiwan
 Summary(pl.UTF-8):	LibreOffice - interfejs w języku chińskim dla Tajwanu
 Group:		I18n
-Requires:	%{name}-core = %{epoch}:%{version}-%{release}
+Requires:	%{name}-core = %{version}-%{release}
 Obsoletes:	openoffice-i18n-zh
 Obsoletes:	openoffice-i18n-zh_TW
 Obsoletes:	openoffice-i18n-zh_TW-gtk
@@ -2562,7 +2524,7 @@ chińskim dla Tajwanu.
 Summary:	LibreOffice - interface in Zulu language
 Summary(pl.UTF-8):	LibreOffice - interfejs w języku zuluskim
 Group:		I18n
-Requires:	%{name}-core = %{epoch}:%{version}-%{release}
+Requires:	%{name}-core = %{version}-%{release}
 Obsoletes:	openoffice-i18n-zu
 Obsoletes:	openoffice-i18n-zu-gtk
 Obsoletes:	openoffice.org-i18n-zu-gtk
@@ -2592,7 +2554,7 @@ bash-completion for LibreOffice.
 bashowe uzupełnianie nazw dla LibreOffice.
 
 %prep
-%setup -q -n libreoffice-build-%{version}
+%setup -q -n %{name}-build-%{version}
 %patch0 -p1
 
 install -d src
@@ -2613,7 +2575,7 @@ ln -sf %{SOURCE1} %{SOURCE2} %{SOURCE3} %{SOURCE4} \
 	%{SOURCE121} %{SOURCE122} %{SOURCE123} %{SOURCE124} \
 	src
 
-#ln -s %{PATCH10} patches/hotfixes/%{basename:%{PATCH10}}.diff
+ln -s %{PATCH100} patches/hotfixes/%{basename:%{PATCH100}}.diff
 
 %build
 # Make sure we have /proc mounted - otherwise idlc will fail later.
@@ -2674,17 +2636,6 @@ RPM_BUILD_NR_THREADS=$(echo %{_smp_mflags} | cut -dj -f2)
 RPM_BUILD_NR_THREADS="1"
 %endif
 
-if [ -f %{_javadir}/serializer.jar ];then
-	serializer_jar=%{_javadir}/serializer.jar
-else
-	serializer_jar=%{_javadir}/xalan.jar
-fi
-
-#	%{?with_system_xalan:--with-system-xalan --with-xalan-jar=%{_javadir}/xalan.jar --with-serializer-jar=$serializer_jar} \
-#	%{?with_system_xerces:--with-system-xerces} \
-#	%{?with_system_xml_apis:--with-system-xml-apis} \
-#	%{?with_system_xt:--with-system-xt --with-xt-jar=%{_javadir}/classes} \
-
 CONFOPTS="\
 %ifarch %{ix86} \
 	--with-arch=x86 \
@@ -2709,6 +2660,7 @@ CONFOPTS="\
 	%{?with_system_libhnj:--with-system-altlinuxhyphen} \
 	%{?with_msaccess:%{?with_system_mdbtools:--with-system-mdbtools}} \
 	%{?with_system_myspell:--with-system-myspell} \
+	--with-system-apache-commons \
 	--with-system-boost \
 	--with-system-cairo \
 	--with-system-curl \
@@ -2727,6 +2679,8 @@ CONFOPTS="\
 	--with-system-libwps \
 	--with-system-libxml \
 	--with-system-libxslt \
+	--with-system-lucene \
+	--with-lucene-analyzers-jar=%{_javadir}/lucene-analyzers.jar \
 	--with-system-nas \
 	--with-system-neon \
 	--with-system-odbc-headers \
@@ -2737,6 +2691,7 @@ CONFOPTS="\
 	--with-system-redland \
 	--with-system-sablot \
 	--with-system-sane-header \
+	--with-system-servlet-api \
 	--with-system-sndfile \
 	--with-system-stdlibs \
 	--with-system-vigra \
@@ -2750,8 +2705,6 @@ CONFOPTS="\
 	--disable-mozilla \
 %endif
 	--with-dynamic-xinerama \
-	--with-intro-bitmaps="\$SRCDIR/openintro_pld.bmp" \
-	--with-about-bitmaps="\$SRCDIR/openabout_pld.bmp" \
 	--with-distro="${DISTRO}" \
 	--enable-gtk \
 	%{?with_kde:--enable-kde --disable-kde4} \
@@ -2814,14 +2767,9 @@ CONFOPTS="\
 	--enable-lockdown \
 	--disable-layout \
 	--with-use-shell=bash \
-	\
 	--enable-wiki-publisher \
 	--enable-report-builder \
-	--disable-fetch-external \
-	--with-system-apache-commons \
-	--with-system-servlet-api \
-	--with-system-lucene \
-	--with-lucene-analyzers-jar=%{_javadir}/lucene-analyzers.jar
+	--disable-fetch-external
 "
 
 # build-ooo script will pickup these
@@ -3056,61 +3004,25 @@ find_lang() {
 		# lib/openoffice.org/share/autotext/$lang
 		grep "/share/autotext/${lang}$" ${lfile} >> ${langfn}.lang || :
 		grep "/share/autotext/${lang}/" ${lfile} >> ${langfn}.lang || :
-		# lib/openoffice.org/share/registry/modules/org/openoffice/Office/Common/Common-cjk_$lang.xcu
-		grep "/share/registry/modules/org/openoffice/Office/Common/Common-cjk_${lang}.xcu$" ${lfile} >> ${langfn}.lang || :
-		# lib/openoffice.org/share/registry/modules/org/openoffice/Office/Common/Common-ctl_$lang.xcu
-		grep "/share/registry/modules/org/openoffice/Office/Common/Common-ctl_${lang}.xcu$" ${lfile} >> ${langfn}.lang || :
-		# lib/openoffice.org/share/registry/modules/org/openoffice/Office/Writer/Writer-cjk_$lang.xcu
-		grep "/share/registry/modules/org/openoffice/Office/Writer/Writer-cjk_${lang}.xcu" ${lfile} >> ${langfn}.lang || :
-		# lib/openoffice.org/share/registry/modules/org/openoffice/Setup/Langpack-$lang.xcu
-		grep "/share/registry/modules/org/openoffice/Setup/Langpack-${lang}.xcu$" ${lfile} >> ${langfn}.lang || :
-		# lib/openoffice.org/share/registry/res/$lang
-		grep "/share/registry/res/${lang}$" ${lfile} >> ${langfn}.lang || :
-		grep "/share/registry/res/${lang}/" ${lfile} >> ${langfn}.lang || :
-		# lib/openoffice.org/share/template/$lang
+		# %{basisdir}/share/registry/.*[_-]$lang.xcd
+		grep "/share/registry/.*[_-]${lang}.xcd$" ${lfile} >> ${langfn}.lang || :
+		# %{basisdir}/share/template/$lang
 		grep "/share/template/${lang}$" ${lfile} >> ${langfn}.lang || :
 		grep "/share/template/${lang}/" ${lfile} >> ${langfn}.lang || :
-		# lib/openoffice.org/share/template/wizard/letter/lang
+		# %{basisdir}/share/template/wizard/letter/lang
 		grep "/share/template/wizard/letter/${lang}$" ${lfile} >> ${langfn}.lang || :
 		grep "/share/template/wizard/letter/${lang}$" build/common_list.txt >> ${langfn}.lang || :
 		grep "/share/template/wizard/letter/${lang}/" ${lfile} >> ${langfn}.lang || :
 		grep "/share/template/wizard/letter/${lang}/" build/common_list.txt >> ${langfn}.lang || :
-		# lib/openoffice.org/share/wordbook/$lang
+		# %{basisdir}/share/wordbook/$lang
 		grep "/share/wordbook/${lang}$" ${lfile} >> ${langfn}.lang || :
 		grep "/share/wordbook/${lang}/" ${lfile} >> ${langfn}.lang || :
-		# lib/openoffice.org/share/samples/$lang
+		# %{basisdir}/share/samples/$lang
 		grep "/share/samples/${lang}$" ${lfile} >> ${langfn}.lang || :
 		grep "/share/samples/${lang}/" ${lfile} >> ${langfn}.lang || :
+		# %{basisdir}/help/$lang
 		grep "/help/${lang}$" ${lfile} >> ${langfn}.lang || :
 		grep "/help/${lang}/" ${lfile} >> ${langfn}.lang || :
-		grep "/share/config/soffice.cfg/modules/dbapp/accelerator/${lang}$" build/common_list.txt >> ${langfn}.lang || :
-		grep "/share/config/soffice.cfg/modules/dbapp/accelerator/${lang}/" build/common_list.txt >> ${langfn}.lang || :
-		grep "/share/config/soffice.cfg/modules/dbbrowser/accelerator/${lang}$" build/common_list.txt >> ${langfn}.lang || :
-		grep "/share/config/soffice.cfg/modules/dbbrowser/accelerator/${lang}/" build/common_list.txt >> ${langfn}.lang || :
-		grep "/share/config/soffice.cfg/modules/dbquery/accelerator/${lang}$" build/common_list.txt >> ${langfn}.lang || :
-		grep "/share/config/soffice.cfg/modules/dbquery/accelerator/${lang}/" build/common_list.txt >> ${langfn}.lang || :
-		grep "/share/config/soffice.cfg/modules/dbreport/accelerator/${lang}$" build/common_list.txt >> ${langfn}.lang || :
-		grep "/share/config/soffice.cfg/modules/dbreport/accelerator/${lang}/" build/common_list.txt >> ${langfn}.lang || :
-		grep "/share/config/soffice.cfg/modules/dbtdata/accelerator/${lang}$" build/common_list.txt >> ${langfn}.lang || :
-		grep "/share/config/soffice.cfg/modules/dbtdata/accelerator/${lang}/" build/common_list.txt >> ${langfn}.lang || :
-		grep "/share/config/soffice.cfg/modules/scalc/accelerator/${lang}$" build/common_list.txt >> ${langfn}.lang || :
-		grep "/share/config/soffice.cfg/modules/scalc/accelerator/${lang}/" build/common_list.txt >> ${langfn}.lang || :
-		grep "/share/config/soffice.cfg/modules/sdraw/accelerator/${lang}$" build/common_list.txt >> ${langfn}.lang || :
-		grep "/share/config/soffice.cfg/modules/sdraw/accelerator/${lang}/" build/common_list.txt >> ${langfn}.lang || :
-		grep "/share/config/soffice.cfg/modules/sglobal/accelerator/${lang}$" build/common_list.txt >> ${langfn}.lang || :
-		grep "/share/config/soffice.cfg/modules/sglobal/accelerator/${lang}/" build/common_list.txt >> ${langfn}.lang || :
-		grep "/share/config/soffice.cfg/modules/simpress/accelerator/${lang}$" build/common_list.txt >> ${langfn}.lang || :
-		grep "/share/config/soffice.cfg/modules/simpress/accelerator/${lang}/" build/common_list.txt >> ${langfn}.lang || :
-		grep "/share/config/soffice.cfg/modules/sweb/accelerator/${lang}$" build/common_list.txt >> ${langfn}.lang || :
-		grep "/share/config/soffice.cfg/modules/sweb/accelerator/${lang}/" build/common_list.txt >> ${langfn}.lang || :
-		grep "/share/config/soffice.cfg/modules/swform/accelerator/${lang}$" build/common_list.txt >> ${langfn}.lang || :
-		grep "/share/config/soffice.cfg/modules/swform/accelerator/${lang}/" build/common_list.txt >> ${langfn}.lang || :
-		grep "/share/config/soffice.cfg/modules/swreport/accelerator/${lang}$" build/common_list.txt >> ${langfn}.lang || :
-		grep "/share/config/soffice.cfg/modules/swreport/accelerator/${lang}/" build/common_list.txt >> ${langfn}.lang || :
-		grep "/share/config/soffice.cfg/modules/swriter/accelerator/${lang}$" build/common_list.txt >> ${langfn}.lang || :
-		grep "/share/config/soffice.cfg/modules/swriter/accelerator/${lang}/" build/common_list.txt >> ${langfn}.lang || :
-		grep "/share/config/soffice.cfg/modules/swxform/accelerator/${lang}$" build/common_list.txt >> ${langfn}.lang || :
-		grep "/share/config/soffice.cfg/modules/swxform/accelerator/${lang}/" build/common_list.txt >> ${langfn}.lang || :
 	fi
 }
 
@@ -3255,7 +3167,6 @@ fi
 %{ooobasisdir}/presets/psprint
 
 %dir %{ooobasisdir}/program
-%attr(755,root,root) %{ooobasisdir}/program/OGLTrans.uno.so
 %attr(755,root,root) %{ooobasisdir}/program/basprov*.uno.so
 %attr(755,root,root) %{ooobasisdir}/program/cairocanvas.uno.so
 %attr(755,root,root) %{ooobasisdir}/program/canvasfactory.uno.so
@@ -3481,15 +3392,10 @@ fi
 ##
 %attr(755,root,root) %{ooobasisdir}/program/sax.uno.so
 %attr(755,root,root) %{ooobasisdir}/program/senddoc
-###%attr(755,root,root) %{ooobasisdir}/program/setofficelang
-###%attr(755,root,root) %{ooobasisdir}/program/setofficelang.bin
 %attr(755,root,root) %{ooobasisdir}/program/simplecanvas.uno.so
 %attr(755,root,root) %{ooobasisdir}/program/slideshow.uno.so
 %attr(755,root,root) %{ooobasisdir}/program/spadmin.bin
-###%attr(755,root,root) %{ooobasisdir}/program/stocservices.uno.so
 %attr(755,root,root) %{ooobasisdir}/program/stringresource*.uno.so
-#%attr(755,root,root) %{ooobasisdir}/program/svtmisc.uno.so
-#%attr(755,root,root) %{ooobasisdir}/program/sysmgr1.uno.so
 %attr(755,root,root) %{ooobasisdir}/program/syssh.uno.so
 %attr(755,root,root) %{ooobasisdir}/program/ucpexpand1.uno.so
 %attr(755,root,root) %{ooobasisdir}/program/ucpext.uno.so
@@ -3498,8 +3404,6 @@ fi
 %attr(755,root,root) %{ooobasisdir}/program/uri-encode
 %attr(755,root,root) %{ooobasisdir}/program/vbaevents*.uno.so
 %attr(755,root,root) %{ooobasisdir}/program/vclcanvas.uno.so
-# versioned libraries and their symlinks
-###%attr(755,root,root) %{ooobasisdir}/program/*.so.*
 
 %if %{with java}
 %attr(755,root,root) %{ooobasisdir}/program/libhsqldb.so
@@ -3733,15 +3637,12 @@ fi
 %attr(755,root,root) %{_libdir}/%{name}/program/unopkg.bin
 %{_libdir}/%{name}/program/bootstraprc
 %{_libdir}/%{name}/program/fundamentalrc
-%{_libdir}/%{name}/program/openabout_pld.bmp
-%{_libdir}/%{name}/program/openintro_pld.bmp
+%{_libdir}/%{name}/program/about.png
+%{_libdir}/%{name}/program/intro.png
 %{_libdir}/%{name}/program/redirectrc
 %{_libdir}/%{name}/program/setuprc
 %{_libdir}/%{name}/program/shell
-#%dir %{_sysconfdir}/%{name}
 %{_libdir}/%{name}/program/sofficerc
-#%config(noreplace) %verify(not md5 mtime size) %{_sysconfdir}/%{name}/sofficerc
-#%{_sysconfdir}/%{name}/unorc
 %{_libdir}/%{name}/program/versionrc
 
 %dir %{_libdir}/%{name}/program/resource
@@ -3749,14 +3650,14 @@ fi
 
 # symlinks
 %{_libdir}/%{name}/basis-link
-%{_libdir}/%{name}/licenses
+#%{_libdir}/%{name}/licenses
 %{_libdir}/%{name}/readmes
 %{_libdir}/%{name}/share
 
 
 %dir %{_datadir}/%{name}
-%dir %{_datadir}/%{name}/licenses
-%{_datadir}/%{name}/licenses/LICENSE_en-US
+#%dir %{_datadir}/%{name}/licenses
+#%{_datadir}/%{name}/licenses/LICENSE_en-US
 %dir %{_datadir}/%{name}/readmes
 %{_datadir}/%{name}/readmes/README_en-US
 %dir %{_datadir}/%{name}/share
@@ -3764,30 +3665,11 @@ fi
 %{_datadir}/%{name}/share/config/images_brand.zip
 %dir %{_datadir}/%{name}/share/extensions
 %{_datadir}/%{name}/share/extensions/package.txt
-%dir %{_datadir}/%{name}/share/readme
-%{_datadir}/%{name}/share/readme/LICENSE_en-US*
-%{_datadir}/%{name}/share/readme/README_en-US*
+#%dir %{_datadir}/%{name}/share/readme
+#%{_datadir}/%{name}/share/readme/LICENSE_en-US*
+#%{_datadir}/%{name}/share/readme/README_en-US*
 %dir %{_datadir}/%{name}/share/registry
 %{_datadir}/%{name}/share/registry/brand.xcd
-#%dir %{_datadir}/%{name}/share/registry/data
-#%dir %{_datadir}/%{name}/share/registry/data/org
-#%dir %{_datadir}/%{name}/share/registry/data/org/openoffice
-#%dir %{_datadir}/%{name}/share/registry/data/org/openoffice/Office
-#%{_datadir}/%{name}/share/registry/data/org/openoffice/Office/Compatibility.xcu
-#%dir %{_datadir}/%{name}/share/registry/modules
-#%dir %{_datadir}/%{name}/share/registry/modules/org
-#%dir %{_datadir}/%{name}/share/registry/modules/org/openoffice
-#%dir %{_datadir}/%{name}/share/registry/modules/org/openoffice/Office
-#%dir %{_datadir}/%{name}/share/registry/modules/org/openoffice/Office/Common
-#%{_datadir}/%{name}/share/registry/modules/org/openoffice/Office/Common/Common-brand.xcu
-#%dir %{_datadir}/%{name}/share/registry/modules/org/openoffice/Office/UI
-#%{_datadir}/%{name}/share/registry/modules/org/openoffice/Office/UI/UI-brand.xcu
-%if %{with i18n}
-#%dir %{_datadir}/%{name}/share/registry/modules/org/openoffice/Office/Writer
-%endif
-#%dir %{_datadir}/%{name}/share/registry/modules/org/openoffice/Setup
-#%{_datadir}/%{name}/share/registry/modules/org/openoffice/Setup/Setup-brand.xcu
-
 
 %{_datadir}/mime/packages/openoffice.xml
 
@@ -3838,9 +3720,6 @@ fi
 %else
 %attr(755,root,root) %{ooobasisdir}/program/ucpgio1.uno.so
 %endif
-#%dir %{ooobasisdir}/share/registry/modules/org/openoffice/ucb
-#%dir %{ooobasisdir}/share/registry/modules/org/openoffice/ucb/Configuration
-#%{ooobasisdir}/share/registry/modules/org/openoffice/ucb/Configuration/Configuration-gio.xcu
 
 %files base
 %defattr(644,root,root,755)
@@ -3865,37 +3744,20 @@ fi
 %{ooobasisdir}/program/resource/rptuien-US.res
 %{ooobasisdir}/program/resource/sdbclen-US.res
 %{ooobasisdir}/program/resource/sdberren-US.res
-#%{ooobasisdir}/share/config/soffice.cfg/modules/dbapp/accelerator/en-US
 %{ooobasisdir}/share/config/soffice.cfg/modules/dbapp/menubar
 %{ooobasisdir}/share/config/soffice.cfg/modules/dbapp/statusbar
 %{ooobasisdir}/share/config/soffice.cfg/modules/dbapp/toolbar
-#%{ooobasisdir}/share/config/soffice.cfg/modules/dbbrowser/accelerator/en-US
 %{ooobasisdir}/share/config/soffice.cfg/modules/dbbrowser/menubar
 %{ooobasisdir}/share/config/soffice.cfg/modules/dbbrowser/toolbar
-#%{ooobasisdir}/share/config/soffice.cfg/modules/dbquery/accelerator/en-US
 %{ooobasisdir}/share/config/soffice.cfg/modules/dbquery/menubar
 %{ooobasisdir}/share/config/soffice.cfg/modules/dbquery/toolbar
 %{ooobasisdir}/share/config/soffice.cfg/modules/dbrelation
-#%{ooobasisdir}/share/config/soffice.cfg/modules/dbreport/accelerator/en-US
 %{ooobasisdir}/share/config/soffice.cfg/modules/dbreport/menubar
 %{ooobasisdir}/share/config/soffice.cfg/modules/dbreport/statusbar
 %{ooobasisdir}/share/config/soffice.cfg/modules/dbreport/toolbar
 %{ooobasisdir}/share/config/soffice.cfg/modules/dbtable
-#%{ooobasisdir}/share/config/soffice.cfg/modules/dbtdata/accelerator/en-US
 %{ooobasisdir}/share/config/soffice.cfg/modules/dbtdata/menubar
 %{ooobasisdir}/share/config/soffice.cfg/modules/dbtdata/toolbar
-###%{ooobasisdir}/share/registry/data/org/openoffice/Office/UI/DbReportWindowState.xcu
-###%{ooobasisdir}/share/registry/data/org/openoffice/Office/UI/ReportCommands.xcu
-#%{ooobasisdir}/share/registry/modules/org/openoffice/Office/Common/Common-base.xcu
-###%{ooobasisdir}/share/registry/modules/org/openoffice/Office/Embedding/Embedding-report.xcu
-#%{ooobasisdir}/share/registry/modules/org/openoffice/Setup/Setup-base.xcu
-###%{ooobasisdir}/share/registry/modules/org/openoffice/Setup/Setup-report.xcu
-#%{ooobasisdir}/share/registry/modules/org/openoffice/TypeDetection/Filter/fcfg_database_filters.xcu
-#%{ooobasisdir}/share/registry/modules/org/openoffice/TypeDetection/Misc/fcfg_database_others.xcu
-#%{ooobasisdir}/share/registry/modules/org/openoffice/TypeDetection/Types/fcfg_database_types.xcu
-###%{ooobasisdir}/share/registry/schema/org/openoffice/Office/ReportDesign.xcs
-###%{ooobasisdir}/share/registry/schema/org/openoffice/Office/UI/DbReportWindowState.xcs
-###%{ooobasisdir}/share/registry/schema/org/openoffice/Office/UI/ReportCommands.xcs
 %{ooobasisdir}/share/registry/base.xcd
 %{ooobasisdir}/help/en/sdatabase.*
 
@@ -3918,30 +3780,15 @@ fi
 %attr(755,root,root) %{ooobasisdir}/program/libscuil[ipx].so
 %attr(755,root,root) %{ooobasisdir}/program/libsolverl[ipx].so
 %attr(755,root,root) %{ooobasisdir}/program/libvbaobjl[ipx].uno.so
-#%attr(755,root,root) %{ooobasisdir}/program/libxlsxl[ipx].so
 %{ooobasisdir}/program/resource/analysisen-US.res
+%{ooobasisdir}/program/resource/bf_scen-US.res
 %{ooobasisdir}/program/resource/dateen-US.res
 %{ooobasisdir}/program/resource/solveren-US.res
 %{ooobasisdir}/program/resource/scen-US.res
-#%{ooobasisdir}/share/config/soffice.cfg/modules/scalc/accelerator/en-US
 %{ooobasisdir}/share/config/soffice.cfg/modules/scalc/menubar
 %{ooobasisdir}/share/config/soffice.cfg/modules/scalc/statusbar
 %{ooobasisdir}/share/config/soffice.cfg/modules/scalc/toolbar
-#%{ooobasisdir}/share/registry/data/org/openoffice/Office/UI/CalcCommands.xcu
-#%{ooobasisdir}/share/registry/data/org/openoffice/Office/UI/CalcWindowState.xcu
-#%{ooobasisdir}/share/registry/modules/org/openoffice/Office/Common/Common-calc.xcu
-#%{ooobasisdir}/share/registry/modules/org/openoffice/Office/Embedding/Embedding-calc.xcu
-#%{ooobasisdir}/share/registry/modules/org/openoffice/Setup/Setup-calc.xcu
-#%{ooobasisdir}/share/registry/modules/org/openoffice/TypeDetection/Filter/fcfg_calc_filters.xcu
-#%{ooobasisdir}/share/registry/modules/org/openoffice/TypeDetection/Types/fcfg_calc_types.xcu
-#%{ooobasisdir}/share/registry/schema/org/openoffice/Office/UI/CalcCommands.xcs
-#%{ooobasisdir}/share/registry/schema/org/openoffice/Office/UI/CalcWindowState.xcs
 %{ooobasisdir}/share/registry/calc.xcd
-
-#BF
-%{ooobasisdir}/program/resource/bf_scen-US.res
-#%{ooobasisdir}/share/registry/modules/org/openoffice/TypeDetection/Filter/fcfg_calc_bf_filters.xcu
-#%{ooobasisdir}/share/registry/modules/org/openoffice/TypeDetection/Types/fcfg_calc_bf_types.xcu
 
 %files draw
 %defattr(644,root,root,755)
@@ -3955,23 +3802,11 @@ fi
 %{ooobasisdir}/share/config/soffice.cfg/modules/sdraw/menubar
 %{ooobasisdir}/share/config/soffice.cfg/modules/sdraw/statusbar
 %{ooobasisdir}/share/config/soffice.cfg/modules/sdraw/toolbar
-#%{ooobasisdir}/share/registry/data/org/openoffice/Office/UI/DrawWindowState.xcu
-#%{ooobasisdir}/share/registry/modules/org/openoffice/Office/Common/Common-draw.xcu
-#%{ooobasisdir}/share/registry/modules/org/openoffice/Office/Embedding/Embedding-draw.xcu
-#%{ooobasisdir}/share/registry/modules/org/openoffice/Setup/Setup-draw.xcu
-#%{ooobasisdir}/share/registry/modules/org/openoffice/TypeDetection/Filter/fcfg_draw_filters.xcu
-#%{ooobasisdir}/share/registry/modules/org/openoffice/TypeDetection/Types/fcfg_draw_types.xcu
-#%{ooobasisdir}/share/registry/schema/org/openoffice/Office/UI/DrawWindowState.xcs
 %{ooobasisdir}/share/registry/draw.xcd
-
-#BF
-#%{ooobasisdir}/share/registry/modules/org/openoffice/TypeDetection/Filter/fcfg_draw_bf_filters.xcu
-#%{ooobasisdir}/share/registry/modules/org/openoffice/TypeDetection/Types/fcfg_draw_bf_types.xcu
 
 %files emailmerge
 %defattr(644,root,root,755)
 %{ooobasisdir}/program/mailmerge.py*
-#%{ooobasisdir}/share/registry/modules/org/openoffice/Office/Writer/Writer-javamail.xcu
 
 %files writer
 %defattr(644,root,root,755)
@@ -3991,70 +3826,31 @@ fi
 %{_iconsdir}/hicolor/*/apps/ooo-writer.png
 %{_pixmapsdir}/ooo-writer.png
 %{ooobasisdir}/help/en/swriter.*
-%if %{with java}
-###%{ooobasisdir}/program/classes/writer2latex.jar
-%endif
-#%{ooobasisdir}/share/registry/data/org/openoffice/Office/UI/WriterCommands.xcu
-#%{ooobasisdir}/share/registry/schema/org/openoffice/Office/UI/WriterCommands.xcs
-#%{ooobasisdir}/share/registry/data/org/openoffice/Office/UI/WriterGlobalWindowState.xcu
-#%{ooobasisdir}/share/registry/schema/org/openoffice/Office/UI/WriterGlobalWindowState.xcs
-#%{ooobasisdir}/share/registry/data/org/openoffice/Office/UI/WriterWebWindowState.xcu
-#%{ooobasisdir}/share/registry/schema/org/openoffice/Office/UI/WriterWebWindowState.xcs
-#%{ooobasisdir}/share/registry/schema/org/openoffice/Office/UI/WriterWindowState.xcs
-#%{ooobasisdir}/share/registry/data/org/openoffice/Office/UI/WriterWindowState.xcu
-#%{ooobasisdir}/share/registry/modules/org/openoffice/Office/Common/Common-writer.xcu
-#%{ooobasisdir}/share/registry/modules/org/openoffice/Setup/Setup-writer.xcu
-#%{ooobasisdir}/share/registry/modules/org/openoffice/Office/Embedding/Embedding-writer.xcu
-#%{ooobasisdir}/share/registry/modules/org/openoffice/TypeDetection/Filter/fcfg_global_filters.xcu
-#%{ooobasisdir}/share/registry/modules/org/openoffice/TypeDetection/Filter/fcfg_writer_filters.xcu
-#%{ooobasisdir}/share/registry/modules/org/openoffice/TypeDetection/Types/fcfg_global_types.xcu
-#%{ooobasisdir}/share/registry/modules/org/openoffice/TypeDetection/Types/fcfg_writer_types.xcu
-###%{ooobasisdir}/share/xslt/wiki
 %{ooobasisdir}/program/resource/t602filteren-US.res
 %{ooobasisdir}/share/config/soffice.cfg/modules/sbibliography
-#%{ooobasisdir}/share/config/soffice.cfg/modules/swriter/accelerator/en-US
 %{ooobasisdir}/share/config/soffice.cfg/modules/swriter/menubar
 %{ooobasisdir}/share/config/soffice.cfg/modules/swriter/statusbar
 %{ooobasisdir}/share/config/soffice.cfg/modules/swriter/toolbar
 %{ooobasisdir}/share/registry/writer.xcd
-#BF
-#%{ooobasisdir}/share/registry/modules/org/openoffice/TypeDetection/Filter/fcfg_writer_bf_filters.xcu
-#%{ooobasisdir}/share/registry/modules/org/openoffice/TypeDetection/Types/fcfg_writer_bf_types.xcu
 
 %files impress
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_bindir}/ooimpress
 %attr(755,root,root) %{_libdir}/%{name}/program/simpress
+%attr(755,root,root) %{ooobasisdir}/program/OGLTrans.uno.so
 %attr(755,root,root) %{ooobasisdir}/program/libanimcore.so
 %attr(755,root,root) %{ooobasisdir}/program/libplaceware*.so
-#%attr(755,root,root) %{ooobasisdir}/program/libpptxl[ipx].so
 %{_mandir}/man1/ooimpress.1
 %{_desktopdir}/ooimpress.desktop
 %{_iconsdir}/hicolor/*/apps/ooo-impress.png
 %{_pixmapsdir}/ooo-impress.png
 %{ooobasisdir}/help/en/simpress.*
 %{ooobasisdir}/share/config/soffice.cfg/simpress
-#%{ooobasisdir}/share/registry/data/org/openoffice/Office/UI/Effects.xcu
-#%{ooobasisdir}/share/registry/schema/org/openoffice/Office/UI/Effects.xcs
-#%{ooobasisdir}/share/registry/data/org/openoffice/Office/UI/ImpressWindowState.xcu
-#%{ooobasisdir}/share/registry/schema/org/openoffice/Office/UI/ImpressWindowState.xcs
-#%{ooobasisdir}/share/registry/modules/org/openoffice/Office/Common/Common-impress.xcu
-#%{ooobasisdir}/share/registry/modules/org/openoffice/Office/Embedding/Embedding-impress.xcu
-#%dir %{ooobasisdir}/share/registry/modules/org/openoffice/Office/Impress
-#%{ooobasisdir}/share/registry/modules/org/openoffice/Office/Impress/Impress-ogltrans.xcu
-#%{ooobasisdir}/share/registry/modules/org/openoffice/Setup/Setup-impress.xcu
-#%{ooobasisdir}/share/registry/modules/org/openoffice/TypeDetection/Filter/fcfg_impress_filters.xcu
-#%{ooobasisdir}/share/registry/modules/org/openoffice/TypeDetection/Types/fcfg_impress_types.xcu
-#%{ooobasisdir}/share/config/soffice.cfg/modules/simpress/accelerator/en-US
-###%{ooobasisdir}/share/config/soffice.cfg/modules/simpress/accelerator/default.xml
 %{ooobasisdir}/share/config/soffice.cfg/modules/simpress/menubar
 %{ooobasisdir}/share/config/soffice.cfg/modules/simpress/statusbar
 %{ooobasisdir}/share/config/soffice.cfg/modules/simpress/toolbar
 %{ooobasisdir}/share/registry/impress.xcd
-
-#BF
-#%{ooobasisdir}/share/registry/modules/org/openoffice/TypeDetection/Filter/fcfg_impress_bf_filters.xcu
-#%{ooobasisdir}/share/registry/modules/org/openoffice/TypeDetection/Types/fcfg_impress_bf_types.xcu
+%{ooobasisdir}/share/registry/ogltrans.xcd
 
 %files math
 %defattr(644,root,root,755)
@@ -4068,21 +3864,10 @@ fi
 %attr(755,root,root) %{ooobasisdir}/program/libsml[ipx].so
 %attr(755,root,root) %{_libdir}/%{name}/program/smath
 %{ooobasisdir}/share/dtd/math
-#%{ooobasisdir}/share/registry/data/org/openoffice/Office/UI/MathCommands.xcu
-#%{ooobasisdir}/share/registry/modules/org/openoffice/Office/Common/Common-math.xcu
-#%{ooobasisdir}/share/registry/modules/org/openoffice/Setup/Setup-math.xcu
-#%{ooobasisdir}/share/registry/schema/org/openoffice/Office/UI/MathCommands.xcs
-#%{ooobasisdir}/share/registry/data/org/openoffice/Office/UI/MathWindowState.xcu
-#%{ooobasisdir}/share/registry/modules/org/openoffice/Office/Embedding/Embedding-math.xcu
-#%{ooobasisdir}/share/registry/modules/org/openoffice/TypeDetection/Filter/fcfg_math_filters.xcu
-#%{ooobasisdir}/share/registry/modules/org/openoffice/TypeDetection/Types/fcfg_math_types.xcu
+%{ooobasisdir}/program/resource/bf_smen-US.res
 %{ooobasisdir}/program/resource/smen-US.res
 %{ooobasisdir}/share/config/soffice.cfg/modules/smath
 %{ooobasisdir}/share/registry/math.xcd
-#BF
-%{ooobasisdir}/program/resource/bf_smen-US.res
-#%{ooobasisdir}/share/registry/modules/org/openoffice/TypeDetection/Filter/fcfg_math_bf_filters.xcu
-#%{ooobasisdir}/share/registry/modules/org/openoffice/TypeDetection/Types/fcfg_math_bf_types.xcu
 
 %files web
 %defattr(644,root,root,755)
@@ -4091,32 +3876,19 @@ fi
 %{_desktopdir}/ooweb.desktop
 %{_iconsdir}/hicolor/*/apps/ooo-web.png
 %{_pixmapsdir}/ooo-web.png
-#%{ooobasisdir}/share/registry/modules/org/openoffice/TypeDetection/Filter/fcfg_web_filters.xcu
-#%{ooobasisdir}/share/registry/modules/org/openoffice/TypeDetection/Types/fcfg_web_types.xcu
-#%{ooobasisdir}/share/config/soffice.cfg/modules/sweb/accelerator/en-US
 %{ooobasisdir}/share/config/soffice.cfg/modules/sweb/menubar
 %{ooobasisdir}/share/config/soffice.cfg/modules/sweb/statusbar
 %{ooobasisdir}/share/config/soffice.cfg/modules/sweb/toolbar
-
-#BF
-#%{ooobasisdir}/share/registry/modules/org/openoffice/TypeDetection/Types/fcfg_web_bf_types.xcu
-#%{ooobasisdir}/share/registry/modules/org/openoffice/TypeDetection/Filter/fcfg_web_bf_filters.xcu
 
 %files graphicfilter
 %defattr(644,root,root,755)
 %attr(755,root,root) %{ooobasisdir}/program/libflashl[ipx].so
 %attr(755,root,root) %{ooobasisdir}/program/libsvgfilterl[ipx].so
 %attr(755,root,root) %{ooobasisdir}/program/libwpgimportl[ipx].so
-#%{ooobasisdir}/share/registry/modules/org/openoffice/TypeDetection/Filter/fcfg_drawgraphics_filters.xcu
-#%{ooobasisdir}/share/registry/modules/org/openoffice/TypeDetection/Filter/fcfg_impressgraphics_filters.xcu
-#%{ooobasisdir}/share/registry/modules/org/openoffice/TypeDetection/Types/fcfg_drawgraphics_types.xcu
-#%{ooobasisdir}/share/registry/modules/org/openoffice/TypeDetection/Types/fcfg_impressgraphics_types.xcu
 %{ooobasisdir}/share/registry/graphicfilter.xcd
 
 %files xsltfilter
 %defattr(644,root,root,755)
-#%{ooobasisdir}/share/registry/modules/org/openoffice/TypeDetection/Filter/fcfg_xslt_filters.xcu
-#%{ooobasisdir}/share/registry/modules/org/openoffice/TypeDetection/Types/fcfg_xslt_types.xcu
 %{ooobasisdir}/share/registry/xsltfilter.xcd
 %{ooobasisdir}/share/xslt/docbook
 %{ooobasisdir}/share/xslt/export/xhtml
@@ -4128,12 +3900,9 @@ fi
 %{ooobasisdir}/program/classes/pexcel.jar
 %{ooobasisdir}/program/classes/pocketword.jar
 %{ooobasisdir}/program/classes/aportisdoc.jar
-#%{ooobasisdir}/share/registry/modules/org/openoffice/TypeDetection/Filter/fcfg_palm_filters.xcu
-#%{ooobasisdir}/share/registry/modules/org/openoffice/TypeDetection/Filter/fcfg_pocketexcel_filters.xcu
-#%{ooobasisdir}/share/registry/modules/org/openoffice/TypeDetection/Filter/fcfg_pocketword_filters.xcu
-#%{ooobasisdir}/share/registry/modules/org/openoffice/TypeDetection/Types/fcfg_palm_types.xcu
-#%{ooobasisdir}/share/registry/modules/org/openoffice/TypeDetection/Types/fcfg_pocketexcel_types.xcu
-#%{ooobasisdir}/share/registry/modules/org/openoffice/TypeDetection/Types/fcfg_pocketword_types.xcu
+%{ooobasisdir}/share/registry/palm.xcd
+%{ooobasisdir}/share/registry/pocketexcel.xcd
+%{ooobasisdir}/share/registry/pocketword.xcd
 %endif
 
 %files testtools
@@ -4232,7 +4001,6 @@ fi
 %{ooobasisdir}/program/pythonscript.py
 %{ooobasisdir}/program/uno.py
 %{ooobasisdir}/program/unohelper.py
-#%{ooobasisdir}/share/registry/modules/org/openoffice/Office/Scripting/Scripting-python.xcu
 %{ooobasisdir}/share/registry/pyuno.xcd
 
 # samples there
@@ -4295,7 +4063,7 @@ fi
 %files i18n-ar -f ar.lang
 %defattr(644,root,root,755)
 
-%files i18n-as_IN -f as_IN.lang
+%files i18n-as -f as.lang
 %defattr(644,root,root,755)
 
 %files i18n-be_BY -f be_BY.lang
@@ -4305,12 +4073,6 @@ fi
 %defattr(644,root,root,755)
 
 %files i18n-bn -f bn.lang
-%defattr(644,root,root,755)
-
-%files i18n-bn_BD -f bn_BD.lang
-%defattr(644,root,root,755)
-
-%files i18n-bn_IN -f bn_IN.lang
 %defattr(644,root,root,755)
 
 %files i18n-bo -f bo.lang
@@ -4323,9 +4085,6 @@ fi
 %defattr(644,root,root,755)
 
 %files i18n-bs -f bs.lang
-%defattr(644,root,root,755)
-
-%files i18n-by -f by.lang
 %defattr(644,root,root,755)
 
 %files i18n-ca -f ca.lang
@@ -4342,8 +4101,6 @@ fi
 
 %files i18n-de -f de.lang
 %defattr(644,root,root,755)
-%dir %{ooobasisdir}/share/config/soffice.cfg/modules/dbreport/accelerator/de-DE
-%{ooobasisdir}/share/config/soffice.cfg/modules/dbreport/accelerator/de-DE/default.xml
 
 %files i18n-dgo -f dgo.lang
 %defattr(644,root,root,755)
@@ -4390,16 +4147,13 @@ fi
 %files i18n-gl -f gl.lang
 %defattr(644,root,root,755)
 
-%files i18n-gu_IN -f gu_IN.lang
-%defattr(644,root,root,755)
-
 %files i18n-gu -f gu.lang
 %defattr(644,root,root,755)
 
 %files i18n-he -f he.lang
 %defattr(644,root,root,755)
 
-%files i18n-hi_IN -f hi_IN.lang
+%files i18n-hi -f hi.lang
 %defattr(644,root,root,755)
 
 %files i18n-hr -f hr.lang
@@ -4434,7 +4188,6 @@ fi
 
 %files i18n-ko -f ko.lang
 %defattr(644,root,root,755)
-%{_datadir}/%{name}/share/registry/modules/org/openoffice/Office/Common/Common-korea.xcu
 
 %files i18n-kok -f kok.lang
 %defattr(644,root,root,755)
@@ -4463,7 +4216,7 @@ fi
 %files i18n-mk -f mk.lang
 %defattr(644,root,root,755)
 
-%files i18n-ml_IN -f ml_IN.lang
+%files i18n-ml -f ml.lang
 %defattr(644,root,root,755)
 
 %files i18n-mn -f mn.lang
@@ -4472,7 +4225,7 @@ fi
 %files i18n-mni -f mni.lang
 %defattr(644,root,root,755)
 
-%files i18n-mr_IN -f mr_IN.lang
+%files i18n-mr -f mr.lang
 %defattr(644,root,root,755)
 
 %files i18n-ms -f ms.lang
@@ -4505,7 +4258,7 @@ fi
 %files i18n-om -f om.lang
 %defattr(644,root,root,755)
 
-%files i18n-or_IN -f or_IN.lang
+%files i18n-or -f or.lang
 %defattr(644,root,root,755)
 
 %files i18n-pa_IN -f pa_IN.lang
@@ -4559,6 +4312,9 @@ fi
 %files i18n-sl -f sl.lang
 %defattr(644,root,root,755)
 
+%files i18n-sq -f sq.lang
+%defattr(644,root,root,755)
+
 %files i18n-sr -f sr.lang
 %defattr(644,root,root,755)
 
@@ -4571,16 +4327,13 @@ fi
 %files i18n-sv -f sv.lang
 %defattr(644,root,root,755)
 
-%files i18n-sw -f sw.lang
-%defattr(644,root,root,755)
-
 %files i18n-sw_TZ -f sw_TZ.lang
 %defattr(644,root,root,755)
 
-%files i18n-ta_IN -f ta_IN.lang
+%files i18n-ta -f ta.lang
 %defattr(644,root,root,755)
 
-%files i18n-te_IN -f te_IN.lang
+%files i18n-te -f te.lang
 %defattr(644,root,root,755)
 
 %files i18n-tg -f tg.lang
@@ -4589,7 +4342,7 @@ fi
 %files i18n-th -f th.lang
 %defattr(644,root,root,755)
 
-%files i18n-ti_ER -f ti_ER.lang
+%files i18n-ti -f ti.lang
 %defattr(644,root,root,755)
 
 %files i18n-tn -f tn.lang
@@ -4607,7 +4360,7 @@ fi
 %files i18n-uk -f uk.lang
 %defattr(644,root,root,755)
 
-%files i18n-ur_IN -f ur_IN.lang
+%files i18n-ur -f ur.lang
 %defattr(644,root,root,755)
 
 %files i18n-uz -f uz.lang
