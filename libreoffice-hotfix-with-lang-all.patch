@@ -1,0 +1,10 @@
+--- configure.inold	2010-12-22 22:08:07.123879026 +0100
++++ configure.in	2010-12-22 23:39:10.232519642 +0100
+@@ -7887,6 +7887,7 @@
+ if test -z "$WITH_LANG"; then
+    AC_MSG_RESULT([en-US])
+ else
++   WITH_LANG="$(sed -e :a -e '/\\$/N; s/\\\n//; ta' -n -e '/^completelangiso/p' $_solenv/inc/postset.mk | sed -e 's/completelangiso=//')"
+    AC_MSG_RESULT([$WITH_LANG])
+ fi
+ AC_SUBST(WITH_LANG)
