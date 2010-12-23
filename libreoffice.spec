@@ -45,7 +45,7 @@
 %undefine	with_system_hsqldb
 %endif
 
-%define		upd			320
+%define		upd			330
 %define		mws			OOO%{upd}
 %define		tag			%(echo %{mws} | tr A-Z a-z)-%{milestone}
 %define		milestone	m12
@@ -55,7 +55,7 @@
 Summary:	LibreOffice - powerful office suite
 Summary(pl.UTF-8):	LibreOffice - potężny pakiet biurowy
 Name:		libreoffice
-Version:	3.3.0.1
+Version:	3.3.0.2
 Release:	0.1
 License:	GPL/LGPL
 Group:		X11/Applications
@@ -2851,6 +2851,30 @@ if [ ! -f makeinstall.stamp -o ! -d $RPM_BUILD_ROOT ]; then
 	%{__make} install \
 		DESTDIR=$RPM_BUILD_ROOT
 
+	cd build/%{name}-%{version}
+
+	# unpack report-builder extension
+	install -d $RPM_BUILD_ROOT%{_libdir}/%{name}/share/extensions/report-builder
+	unzip solver/330/unxlng*/bin/report-builder.oxt -d $RPM_BUILD_ROOT%{_libdir}/%{name}/share/extensions/report-builder
+
+	# unpack wiki-publisher extension
+	install -d $RPM_BUILD_ROOT%{_libdir}/%{name}/share/extensions/wiki-publisher
+	unzip solver/330/unxlng*/bin/swext/wiki-publisher.oxt -d $RPM_BUILD_ROOT%{_libdir}/%{name}/share/extensions/wiki-publisher
+
+	# unpack presentation-minimizer extension
+	install -d $RPM_BUILD_ROOT%{_libdir}/%{name}/share/extensions/presentation-minimizer
+	unzip solver/330/unxlng*/bin/minimizer/presentation-minimizer.oxt -d $RPM_BUILD_ROOT%{_libdir}/%{name}/share/extensions/presentation-minimizer
+
+	# unpack presenter screen extension
+	install -d $RPM_BUILD_ROOT%{_libdir}/%{name}/share/extensions/presenter-screen
+	unzip solver/330/unxlng*/bin/presenter/presenter-screen.oxt -d $RPM_BUILD_ROOT%{_libdir}/%{name}/share/extensions/presenter-screen
+	
+	# unpack pdfimport extension
+	install -d $RPM_BUILD_ROOT%{_libdir}/%{name}/share/extensions/pdfimport
+	unzip solver/330/unxlng*/bin/pdfimport/pdfimport.oxt -d $RPM_BUILD_ROOT%{_libdir}/%{name}/share/extensions/pdfimport
+	
+	cd ../..
+	
 	# save orignal install layout
 	find $RPM_BUILD_ROOT -ls > ls.txt
 	touch makeinstall.stamp
@@ -2935,8 +2959,8 @@ if [ ! -f installed.stamp ]; then
 	# more non-archidecture dependant nature data
 	#mv $RPM_BUILD_ROOT%{_libdir}/%{name}/help $RPM_BUILD_ROOT%{_datadir}/%{name}
 	#ln -s ../../share/%{name}/help $RPM_BUILD_ROOT%{_libdir}/%{name}/help
-	mv $RPM_BUILD_ROOT%{_libdir}/%{name}/licenses $RPM_BUILD_ROOT%{_datadir}/%{name}
-	ln -s ../../share/%{name}/licenses $RPM_BUILD_ROOT%{_libdir}/%{name}/licenses
+	#mv $RPM_BUILD_ROOT%{_libdir}/%{name}/licenses $RPM_BUILD_ROOT%{_datadir}/%{name}
+	#ln -s ../../share/%{name}/licenses $RPM_BUILD_ROOT%{_libdir}/%{name}/licenses
 	mv $RPM_BUILD_ROOT%{_libdir}/%{name}/readmes $RPM_BUILD_ROOT%{_datadir}/%{name}
 	ln -s ../../share/%{name}/readmes $RPM_BUILD_ROOT%{_libdir}/%{name}/readmes
 
