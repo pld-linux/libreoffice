@@ -167,6 +167,7 @@ Source124:	http://hg.services.openoffice.org/binaries/35c94d2df8893241173de1d16b
 Patch0:		%{name}-build-apply.patch
 # https://bugs.freedesktop.org/show_bug.cgi?id=31871
 Patch100:	%{name}-hotfix-with-lang-all.patch
+Patch101:	%{name}-hotfix-kde4.patch
 URL:		http://www.documentfoundation.org/
 BuildRequires:	libwpd-devel >= 0.9.0
 BuildRequires:	libwps-devel >= 0.2.0
@@ -2576,6 +2577,7 @@ ln -sf %{SOURCE1} %{SOURCE2} %{SOURCE3} %{SOURCE4} \
 	src
 
 ln -s %{PATCH100} patches/hotfixes/%{basename:%{PATCH100}}.diff
+ln -s %{PATCH101} patches/hotfixes/%{basename:%{PATCH101}}.diff
 
 %build
 # Make sure we have /proc mounted - otherwise idlc will fail later.
@@ -3728,6 +3730,7 @@ fi
 %defattr(644,root,root,755)
 %attr(755,root,root) %{ooobasisdir}/program/kde-open-url
 %attr(755,root,root) %{ooobasisdir}/program/fps_kde4.uno.so
+%attr(755,root,root) %{ooobasisdir}/program/kde4be1.uno.so
 %attr(755,root,root) %{ooobasisdir}/program/libvclplug_kde4*.so
 %endif
 
