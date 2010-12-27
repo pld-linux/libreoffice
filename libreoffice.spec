@@ -44,7 +44,7 @@ Summary:	LibreOffice - powerful office suite
 Summary(pl.UTF-8):	LibreOffice - potężny pakiet biurowy
 Name:		libreoffice
 Version:	3.3.0.2
-Release:	0.9
+Release:	1
 License:	GPL/LGPL
 Group:		X11/Applications
 # we use git because released tarballs are buggy too often
@@ -191,6 +191,7 @@ BuildRequires:	java-commons-httpclient
 BuildRequires:	java-commons-lang
 BuildRequires:	java-commons-logging
 %{?with_system_hsqldb:BuildRequires:	java-hsqldb}
+BuildRequires:	java-junit
 BuildRequires:	java-lucene
 BuildRequires:	java-lucene-contrib
 BuildRequires:	java-servletapi
@@ -273,9 +274,14 @@ Requires:	%{name}-graphicfilter = %{version}-%{release}
 Requires:	%{name}-impress = %{version}-%{release}
 %{?with_java:Requires:	%{name}-javafilter = %{version}-%{release}}
 Requires:	%{name}-math = %{version}-%{release}
+Requires:	%{name}-pdfimport = %{version}-%{release}
+Requires:	%{name}-presentation-minimizer = %{version}-%{release}
+Requires:	%{name}-presenter-screen = %{version}-%{release}
 Requires:	%{name}-pyuno = %{version}-%{release}
+Requires:	%{name}-report-builder = %{version}-%{release}
 Requires:	%{name}-testtools = %{version}-%{release}
 Requires:	%{name}-web = %{version}-%{release}
+Requires:	%{name}-wiki-publisher = %{version}-%{release}
 Requires:	%{name}-writer = %{version}-%{release}
 Requires:	%{name}-xsltfilter = %{version}-%{release}
 Obsoletes:	openoffice.org
