@@ -27,8 +27,8 @@
 %bcond_without	system_hunspell
 %bcond_without	system_myspell
 
-# this list is same as java-sun
-%ifnarch i586 i686 pentium3 pentium4 athlon %{x8664}
+# this list is same as icedtea6
+%ifnarch i486 i586 i686 pentium3 pentium4 athlon %{x8664}
 %undefine	with_java
 %endif
 
