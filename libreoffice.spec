@@ -441,6 +441,7 @@ Group:		Libraries
 Requires:	%{name}-core = %{version}-%{release}
 Requires:	python
 Obsoletes:	openoffice.org-pyuno
+Provides:	pyuno
 
 %description pyuno
 Cool Python bindings for the LibreOffice UNO component model. Allows
