@@ -1,5 +1,5 @@
---- libreoffice-build-3.3.0.2/build/libreoffice-3.3.0.2/sd/source/ui/slideshow/slideshow.cxx.orig	2010-11-11 16:20:26.000000000 +0100
-+++ libreoffice-build-3.3.0.2/build/libreoffice-3.3.0.2/sd/source/ui/slideshow/slideshow.cxx	2011-02-14 14:50:45.877089981 +0100
+--- sd/source/ui/slideshow/slideshow.cxx.orig	2010-11-11 16:20:26.000000000 +0100
++++ sd/source/ui/slideshow/slideshow.cxx	2011-02-14 14:50:45.877089981 +0100
 @@ -781,23 +781,6 @@
                  if( pViewShell->GetDoc()->IsStartWithPresentation() )
                  {
