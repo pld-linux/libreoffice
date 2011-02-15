@@ -154,6 +154,7 @@ Patch0:		%{name}-build-apply.patch
 # https://bugs.freedesktop.org/show_bug.cgi?id=31871
 Patch100:	%{name}-hotfix-with-lang-all.patch
 Patch101:	%{name}-hotfix-kde4.patch
+Patch102:	%{name}-impress-dont-exit-after-pps-autoplay.patch
 URL:		http://www.documentfoundation.org/
 BuildRequires:	/usr/bin/getopt
 BuildRequires:	GConf2-devel
@@ -169,6 +170,7 @@ BuildRequires:	bison >= 1.875-4
 BuildRequires:	boost-devel >= 1.35.0
 BuildRequires:	cairo-devel >= 1.2.0
 %{?with_ccache:BuildRequires:	ccache}
+BuildRequires:	cppunit-devel >= 1.12.0
 BuildRequires:	cups-devel
 BuildRequires:	curl-devel >= 7.9.8
 %{?with_system_db:BuildRequires:	db-cxx-devel}
@@ -2565,6 +2567,7 @@ ln -sf %{SOURCE1} %{SOURCE2} %{SOURCE3} %{SOURCE4} \
 
 ln -s %{PATCH100} patches/hotfixes/%{basename:%{PATCH100}}.diff
 ln -s %{PATCH101} patches/hotfixes/%{basename:%{PATCH101}}.diff
+ln -s %{PATCH102} patches/hotfixes/%{basename:%{PATCH102}}.diff
 
 %build
 # Make sure we have /proc mounted - otherwise idlc will fail later.
@@ -2826,6 +2829,9 @@ if [ ! -f makeinstall.stamp -o ! -d $RPM_BUILD_ROOT ]; then
 	# limit to single process installation, it's safe at least
 	%{__sed} -i -e 's#^BUILD_NCPUS=.*#BUILD_NCPUS=1#g' bin/setup
 
+	export QTINC="%{_includedir}/qt"
+	export QTLIB="%{_libdir}"
+	export QT4DIR="%{_libdir}/qt4"
 	export DESTDIR=$RPM_BUILD_ROOT
 	export TMP="%{tmpdir}"
 	export TMPDIR="%{tmpdir}"
