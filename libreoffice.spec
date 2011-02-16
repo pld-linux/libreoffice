@@ -408,12 +408,15 @@ Obsoletes:	openoffice.org-i18n-fo
 Obsoletes:	openoffice.org-i18n-fo-gtk
 Obsoletes:	openoffice.org-i18n-fo-kde
 Obsoletes:	openoffice.org-i18n-gu_IN
+Obsoletes:	openoffice.org-i18n-gd
 Obsoletes:	openoffice.org-i18n-ia
 Obsoletes:	openoffice.org-i18n-ia-gtk
 Obsoletes:	openoffice.org-i18n-ia-kde
 Obsoletes:	openoffice.org-i18n-id
 Obsoletes:	openoffice.org-i18n-id-gtk
 Obsoletes:	openoffice.org-i18n-id-kde
+Obsoletes:	openoffice.org-i18n-kid
+Obsoletes:	openoffice.org-i18n-ky
 Obsoletes:	openoffice.org-i18n-la
 Obsoletes:	openoffice.org-i18n-la-gtk
 Obsoletes:	openoffice.org-i18n-la-kde
@@ -423,11 +426,16 @@ Obsoletes:	openoffice.org-i18n-med-kde
 Obsoletes:	openoffice.org-i18n-mi
 Obsoletes:	openoffice.org-i18n-mi-gtk
 Obsoletes:	openoffice.org-i18n-mi-kde
+Obsoletes:	openoffice.org-i18n-ms
+Obsoletes:	openoffice.org-i18n-pap
 Obsoletes:	openoffice.org-i18n-ro
 Obsoletes:	openoffice.org-i18n-ro-gtk
 Obsoletes:	openoffice.org-i18n-ro-kde
+Obsoletes:	openoffice.org-i18n-sc
 Obsoletes:	openoffice.org-i18n-sx
 Obsoletes:	openoffice.org-i18n-sw
+Obsoletes:	openoffice.org-i18n-ti
+Obsoletes:	openoffice.org-i18n-ur
 Obsoletes:	openoffice.org-libs < 1:2.1.0-0.m6.0.11
 
 %description core
@@ -772,6 +780,21 @@ Assamese language.
 Ten pakiet dostarcza zasoby zawierające menu i okna dialogowe w języku
 asamskim.
 
+%package i18n-ast
+Summary:	LibreOffice - interface in Asturian language
+Summary(pl.UTF-8):	LibreOffice - interfejs w języku asturyjskim
+Group:		I18n
+Requires:	%{name}-core = %{version}-%{release}
+Obsoletes:	openoffice.org-i18n-ast
+
+%description i18n-ast
+This package provides resources containing menus and dialogs in
+Asturian language.
+
+%description i18n-ast -l pl.UTF-8
+Ten pakiet dostarcza zasoby zawierające menu i okna dialogowe w języku
+asturyjskim.
+
 %package i18n-be_BY
 Summary:	LibreOffice - interface in Belarusian language
 Summary(pl.UTF-8):	LibreOffice - interfejs w języku białoruskim
@@ -899,6 +922,20 @@ Catalan language.
 %description i18n-ca -l pl.UTF-8
 Ten pakiet dostarcza zasoby zawierające menu i okna dialogowe w języku
 katalońskim.
+
+%package i18n-ca_XV
+Summary:	LibreOffice - interface in Catalan Valencian language
+Summary(pl.UTF-8):	LibreOffice - interfejs w języku katalońskim walenckim
+Group:		I18n
+Requires:	%{name}-core = %{version}-%{release}
+
+%description i18n-ca_XV
+This package provides resources containing menus and dialogs in
+Catalan Valencian language.
+
+%description i18n-ca_XV -l pl.UTF-8
+Ten pakiet dostarcza zasoby zawierające menu i okna dialogowe w języku
+katalońskim walenckim.
 
 %package i18n-cs
 Summary:	LibreOffice - interface in Czech language
@@ -1201,21 +1238,6 @@ language.
 Ten pakiet dostarcza zasoby zawierające menu i okna dialogowe w języku
 irlandzkim.
 
-%package i18n-gd
-Summary:	LibreOffice - interface in Scottish Gaelic language
-Summary(pl.UTF-8):	LibreOffice - interfejs w języku gaelickim szkockim
-Group:		I18n
-Requires:	%{name}-core = %{version}-%{release}
-Obsoletes:	openoffice.org-i18n-gd
-
-%description i18n-gd
-This package provides resources containing menus and dialogs in
-Scottish Gaelic language.
-
-%description i18n-gd -l pl.UTF-8
-Ten pakiet dostarcza zasoby zawierające menu i okna dialogowe w języku
-gaelickim szkockim.
-
 %package i18n-gl
 Summary:	LibreOffice - interface in Galician language
 Summary(pl.UTF-8):	LibreOffice - interfejs w języku galicyjskim
@@ -1326,6 +1348,20 @@ Hungarian language.
 Ten pakiet dostarcza zasoby zawierające menu i okna dialogowe w języku
 węgierskim.
 
+%package i18n-id
+Summary:	LibreOffice - interface in Indonesian language
+Summary(pl.UTF-8):	LibreOffice - interfejs w języku indonezyjskim
+Group:		I18n
+Requires:	%{name}-core = %{version}-%{release}
+
+%description i18n-id
+This package provides resources containing menus and dialogs in
+Indonesian language.
+
+%description i18n-id -l pl.UTF-8
+Ten pakiet dostarcza zasoby zawierające menu i okna dialogowe w języku
+indonezyjskim.
+
 %package i18n-is
 Summary:	LibreOffice - interface in Icelandic language
 Summary(pl.UTF-8):	LibreOffice - interfejs w języku islandzkim
@@ -1393,21 +1429,6 @@ Georgian language.
 %description i18n-ka -l pl.UTF-8
 Ten pakiet dostarcza zasoby zawierające menu i okna dialogowe w języku
 gruzińskim.
-
-%package i18n-kid
-Summary:	LibreOffice - interface in Koshin language
-Summary(pl.UTF-8):	LibreOffice - interfejs w języku koshin
-Group:		I18n
-Requires:	%{name}-core = %{version}-%{release}
-Obsoletes:	openoffice.org-i18n-kid
-
-%description i18n-kid
-This package provides resources containing menus and dialogs in Koshin
-language.
-
-%description i18n-kid -l pl.UTF-8
-Ten pakiet dostarcza zasoby zawierające menu i okna dialogowe w języku
-koshin.
 
 %package i18n-kk
 Summary:	LibreOffice - interface in Kazakh language
@@ -1520,21 +1541,6 @@ Kurdish language.
 %description i18n-ku -l pl.UTF-8
 Ten pakiet dostarcza zasoby zawierające menu i okna dialogowe w języku
 kurdyjskim.
-
-%package i18n-ky
-Summary:	LibreOffice - interface in Kyrgyz language
-Summary(pl.UTF-8):	LibreOffice - interfejs w języku kirgiskim
-Group:		I18n
-Requires:	%{name}-core = %{version}-%{release}
-Obsoletes:	openoffice.org-i18n-ky
-
-%description i18n-ky
-This package provides resources containing menus and dialogs in Kyrgyz
-language.
-
-%description i18n-ky -l pl.UTF-8
-Ten pakiet dostarcza zasoby zawierające menu i okna dialogowe w języku
-kirgiskim.
 
 %package i18n-lo
 Summary:	LibreOffice - interface in Lao language
@@ -1674,25 +1680,6 @@ Mongolian language.
 %description i18n-mn -l pl.UTF-8
 Ten pakiet dostarcza zasoby zawierające menu i okna dialogowe w języku
 mongolskim.
-
-%package i18n-ms
-Summary:	LibreOffice - interface in Malay language
-Summary(pl.UTF-8):	LibreOffice - interfejs w języku malajskim
-Group:		I18n
-Requires:	%{name}-core = %{version}-%{release}
-Obsoletes:	openoffice-i18n-ms
-Obsoletes:	openoffice-i18n-ms-gtk
-Obsoletes:	openoffice.org-i18n-ms
-Obsoletes:	openoffice.org-i18n-ms-gtk
-Obsoletes:	openoffice.org-i18n-ms-kde
-
-%description i18n-ms
-This package provides resources containing menus and dialogs in Malay
-language.
-
-%description i18n-ms -l pl.UTF-8
-Ten pakiet dostarcza zasoby zawierające menu i okna dialogowe w języku
-malajskim.
 
 %package i18n-my
 Summary:	LibreOffice - interface in Burmese language
@@ -1875,21 +1862,6 @@ Punjabi language.
 Ten pakiet dostarcza zasoby zawierające menu i okna dialogowe w języku
 pendżabskim.
 
-%package i18n-pap
-Summary:	LibreOffice - interface in Papiamento language
-Summary(pl.UTF-8):	LibreOffice - interfejs w języku papiamento
-Group:		I18n
-Requires:	%{name}-core = %{version}-%{release}
-Obsoletes:	openoffice.org-i18n-pap
-
-%description i18n-pap
-This package provides resources containing menus and dialogs in
-Papiamento language.
-
-%description i18n-pap -l pl.UTF-8
-Ten pakiet dostarcza zasoby zawierające menu i okna dialogowe w języku
-papiamento.
-
 %package i18n-pl
 Summary:	LibreOffice - interface in Polish language
 Summary(pl.UTF-8):	LibreOffice - interfejs w języku polskim
@@ -1908,21 +1880,6 @@ language.
 %description i18n-pl -l pl.UTF-8
 Ten pakiet dostarcza zasoby zawierające menu i okna dialogowe w języku
 polskim.
-
-%package i18n-ps
-Summary:	LibreOffice - interface in Pashto language
-Summary(pl.UTF-8):	LibreOffice - interfejs w języku paszto
-Group:		I18n
-Requires:	%{name}-core = %{version}-%{release}
-Obsoletes:	openoffice.org-i18n-ps
-
-%description i18n-ps
-This package provides resources containing menus and dialogs in Pashto
-language.
-
-%description i18n-ps -l pl.UTF-8
-Ten pakiet dostarcza zasoby zawierające menu i okna dialogowe w języku
-paszto.
 
 %package i18n-pt
 Summary:	LibreOffice - interface in Portuguese language
@@ -2040,21 +1997,6 @@ Santali language.
 %description i18n-sat -l pl.UTF-8
 Ten pakiet dostarcza zasoby zawierające menu i okna dialogowe w języku
 santali.
-
-%package i18n-sc
-Summary:	LibreOffice - interface in Sardinian language
-Summary(pl.UTF-8):	LibreOffice - interfejs w języku sardyńskim
-Group:		I18n
-Requires:	%{name}-core = %{version}-%{release}
-Obsoletes:	openoffice.org-i18n-sc
-
-%description i18n-sc
-This package provides resources containing menus and dialogs in
-Sardinian language.
-
-%description i18n-sc -l pl.UTF-8
-Ten pakiet dostarcza zasoby zawierające menu i okna dialogowe w języku
-sardyńskim.
 
 %package i18n-sd
 Summary:	LibreOffice - interface in Sindhi language
@@ -2295,21 +2237,6 @@ language.
 Ten pakiet dostarcza zasoby zawierające menu i okna dialogowe w języku
 tajskim.
 
-%package i18n-ti
-Summary:	LibreOffice - interface in Tigrigna language
-Summary(pl.UTF-8):	LibreOffice - interfejs w języku tigrinia
-Group:		I18n
-Requires:	%{name}-core = %{version}-%{release}
-Obsoletes:	openoffice.org-i18n-ti_ER
-
-%description i18n-ti
-This package provides resources containing menus and dialogs in
-Tigrigna language.
-
-%description i18n-ti -l pl.UTF-8
-Ten pakiet dostarcza zasoby zawierające menu i okna dialogowe w języku
-tigrinia.
-
 %package i18n-tn
 Summary:	LibreOffice - interface in Tswana language
 Summary(pl.UTF-8):	LibreOffice - interfejs w języku tswana
@@ -2395,21 +2322,6 @@ Ukrainian language.
 %description i18n-uk -l pl.UTF-8
 Ten pakiet dostarcza zasoby zawierające menu i okna dialogowe w języku
 ukraińskim.
-
-%package i18n-ur
-Summary:	LibreOffice - interface in Urdu language
-Summary(pl.UTF-8):	LibreOffice - interfejs w języku urdu
-Group:		I18n
-Requires:	%{name}-core = %{version}-%{release}
-Obsoletes:	openoffice.org-i18n-ur_IN
-
-%description i18n-ur
-This package provides resources containing menus and dialogs in Urdu
-language.
-
-%description i18n-ur -l pl.UTF-8
-Ten pakiet dostarcza zasoby zawierające menu i okna dialogowe w języku
-urdu.
 
 %package i18n-uz
 Summary:	LibreOffice - interface in Uzbek language
@@ -2904,7 +2816,7 @@ if [ ! -f installed.stamp ]; then
 	for a in $RPM_BUILD_ROOT%{_desktopdir}/*.desktop; do
 		d=$(dirname "$a")
 		f=$(basename "$a")
-		mv $a $d/oo$f
+		mv $a $d/lo$f
 	done
 
 	touch installed.stamp
@@ -3062,8 +2974,8 @@ fi
 %doc %{_libdir}/%{name}/*README*
 
 %attr(755,root,root) %{_bindir}/ooconfig
-%attr(755,root,root) %{_bindir}/ooffice
-%attr(755,root,root) %{_bindir}/oofromtemplate
+%attr(755,root,root) %{_bindir}/libreoffice
+%attr(755,root,root) %{_bindir}/lofromtemplate
 %attr(755,root,root) %{_bindir}/ootool
 %attr(755,root,root) %{_bindir}/soffice
 %attr(755,root,root) %{_bindir}/unopkg
@@ -3598,8 +3510,9 @@ fi
 
 %{_datadir}/mime/packages/openoffice.xml
 
-%{_desktopdir}/ootemplate.desktop
-%{_desktopdir}/ooooo-extension-manager.desktop
+%{_desktopdir}/lostartcenter.desktop
+%{_desktopdir}/lotemplate.desktop
+%{_desktopdir}/loooo-extension-manager.desktop
 
 %{_iconsdir}/hicolor/*/apps/ooo-gulls.png
 %{_iconsdir}/hicolor/*/apps/ooo-printeradmin.png
@@ -3607,9 +3520,8 @@ fi
 %{_pixmapsdir}/ooo-gulls.png
 %{_pixmapsdir}/ooo-template.png
 
-%{_mandir}/man1/ooffice.1
-%{_mandir}/man1/oofromtemplate.1
-%{_mandir}/man1/openoffice.1*
+%{_mandir}/man1/lofromtemplate.1
+%{_mandir}/man1/libreoffice.1*
 %{_mandir}/man1/unopkg.1*
 
 %if %{with kde}
@@ -3646,10 +3558,10 @@ fi
 
 %files base
 %defattr(644,root,root,755)
-%attr(755,root,root) %{_bindir}/oobase
+%attr(755,root,root) %{_bindir}/lobase
 %attr(755,root,root) %{_libdir}/%{name}/program/sbase
-%{_mandir}/man1/oobase.1
-%{_desktopdir}/oobase.desktop
+%{_mandir}/man1/lobase.1
+%{_desktopdir}/lobase.desktop
 %{_iconsdir}/hicolor/*/apps/ooo-base.png
 %{_pixmapsdir}/ooo-base.png
 %attr(755,root,root) %{basisdir}/program/libabpl[ipx].so
@@ -3686,10 +3598,10 @@ fi
 
 %files calc
 %defattr(644,root,root,755)
-%attr(755,root,root) %{_bindir}/oocalc
+%attr(755,root,root) %{_bindir}/localc
 %attr(755,root,root) %{_libdir}/%{name}/program/scalc
-%{_mandir}/man1/oocalc.1
-%{_desktopdir}/oocalc.desktop
+%{_mandir}/man1/localc.1
+%{_desktopdir}/localc.desktop
 %{_iconsdir}/hicolor/*/apps/ooo-calc.png
 %{_pixmapsdir}/ooo-calc.png
 %{databasisdir}/help/en/scalc.*
@@ -3715,10 +3627,10 @@ fi
 
 %files draw
 %defattr(644,root,root,755)
-%attr(755,root,root) %{_bindir}/oodraw
+%attr(755,root,root) %{_bindir}/lodraw
 %attr(755,root,root) %{_libdir}/%{name}/program/sdraw
-%{_mandir}/man1/oodraw.1
-%{_desktopdir}/oodraw.desktop
+%{_mandir}/man1/lodraw.1
+%{_desktopdir}/lodraw.desktop
 %{_iconsdir}/hicolor/*/apps/ooo-draw.png
 %{_pixmapsdir}/ooo-draw.png
 %{databasisdir}/help/en/sdraw.*
@@ -3733,7 +3645,7 @@ fi
 
 %files writer
 %defattr(644,root,root,755)
-%attr(755,root,root) %{_bindir}/oowriter
+%attr(755,root,root) %{_bindir}/lowriter
 %attr(755,root,root) %{basisdir}/program/libhwp.so
 %attr(755,root,root) %{basisdir}/program/liblwpftl[ipx].so
 %attr(755,root,root) %{basisdir}/program/libmswordl[ipx].so
@@ -3744,8 +3656,8 @@ fi
 %attr(755,root,root) %{basisdir}/program/libwpftl[ipx].so
 %attr(755,root,root) %{basisdir}/program/libwriterfilterl[ipx].so
 %attr(755,root,root) %{_libdir}/%{name}/program/swriter
-%{_mandir}/man1/oowriter.1
-%{_desktopdir}/oowriter.desktop
+%{_mandir}/man1/lowriter.1
+%{_desktopdir}/lowriter.desktop
 %{_iconsdir}/hicolor/*/apps/ooo-writer.png
 %{_pixmapsdir}/ooo-writer.png
 %{databasisdir}/help/en/swriter.*
@@ -3758,13 +3670,13 @@ fi
 
 %files impress
 %defattr(644,root,root,755)
-%attr(755,root,root) %{_bindir}/ooimpress
+%attr(755,root,root) %{_bindir}/loimpress
 %attr(755,root,root) %{_libdir}/%{name}/program/simpress
 %attr(755,root,root) %{basisdir}/program/OGLTrans.uno.so
 %attr(755,root,root) %{basisdir}/program/libanimcore.so
 %attr(755,root,root) %{basisdir}/program/libplaceware*.so
-%{_mandir}/man1/ooimpress.1
-%{_desktopdir}/ooimpress.desktop
+%{_mandir}/man1/loimpress.1
+%{_desktopdir}/loimpress.desktop
 %{_iconsdir}/hicolor/*/apps/ooo-impress.png
 %{_pixmapsdir}/ooo-impress.png
 %{databasisdir}/help/en/simpress.*
@@ -3777,9 +3689,9 @@ fi
 
 %files math
 %defattr(644,root,root,755)
-%attr(755,root,root) %{_bindir}/oomath
-%{_mandir}/man1/oomath.1
-%{_desktopdir}/oomath.desktop
+%attr(755,root,root) %{_bindir}/lomath
+%{_mandir}/man1/lomath.1
+%{_desktopdir}/lomath.desktop
 %{_iconsdir}/hicolor/*/apps/ooo-math.png
 %{_pixmapsdir}/ooo-math.png
 %{databasisdir}/help/en/smath.*
@@ -3794,9 +3706,9 @@ fi
 
 %files web
 %defattr(644,root,root,755)
-%attr(755,root,root) %{_bindir}/ooweb
-%{_mandir}/man1/ooweb.1
-%{_desktopdir}/ooweb.desktop
+%attr(755,root,root) %{_bindir}/loweb
+%{_mandir}/man1/loweb.1
+%{_desktopdir}/loweb.desktop
 %{_iconsdir}/hicolor/*/apps/ooo-web.png
 %{_pixmapsdir}/ooo-web.png
 %{basisdir}/share/config/soffice.cfg/modules/sweb/menubar
@@ -3988,6 +3900,9 @@ fi
 %files i18n-as -f as.lang
 %defattr(644,root,root,755)
 
+%files i18n-ast -f ast.lang
+%defattr(644,root,root,755)
+
 %files i18n-be_BY -f be_BY.lang
 %defattr(644,root,root,755)
 
@@ -4010,6 +3925,9 @@ fi
 %defattr(644,root,root,755)
 
 %files i18n-ca -f ca.lang
+%defattr(644,root,root,755)
+
+%files i18n-ca_XV -f ca_XV.lang
 %defattr(644,root,root,755)
 
 %files i18n-cs -f cs.lang
@@ -4063,9 +3981,6 @@ fi
 %files i18n-ga -f ga.lang
 %defattr(644,root,root,755)
 
-%files i18n-gd -f gd.lang
-%defattr(644,root,root,755)
-
 %files i18n-gl -f gl.lang
 %defattr(644,root,root,755)
 
@@ -4084,6 +3999,9 @@ fi
 %files i18n-hu -f hu.lang
 %defattr(644,root,root,755)
 
+%files i18n-id -f id.lang
+%defattr(644,root,root,755)
+
 %files i18n-is -f is.lang
 %defattr(644,root,root,755)
 
@@ -4094,9 +4012,6 @@ fi
 %defattr(644,root,root,755)
 
 %files i18n-ka -f ka.lang
-%defattr(644,root,root,755)
-
-%files i18n-kid -f kid.lang
 %defattr(644,root,root,755)
 
 %files i18n-kk -f kk.lang
@@ -4119,9 +4034,6 @@ fi
 %defattr(644,root,root,755)
 
 %files i18n-ku -f ku.lang
-%defattr(644,root,root,755)
-
-%files i18n-ky -f ky.lang
 %defattr(644,root,root,755)
 
 %files i18n-lo -f lo.lang
@@ -4149,9 +4061,6 @@ fi
 %defattr(644,root,root,755)
 
 %files i18n-mr -f mr.lang
-%defattr(644,root,root,755)
-
-%files i18n-ms -f ms.lang
 %defattr(644,root,root,755)
 
 %files i18n-my -f my.lang
@@ -4187,13 +4096,7 @@ fi
 %files i18n-pa_IN -f pa_IN.lang
 %defattr(644,root,root,755)
 
-%files i18n-pap -f pap.lang
-%defattr(644,root,root,755)
-
 %files i18n-pl -f pl.lang
-%defattr(644,root,root,755)
-
-%files i18n-ps -f ps.lang
 %defattr(644,root,root,755)
 
 %files i18n-pt -f pt.lang
@@ -4215,9 +4118,6 @@ fi
 %defattr(644,root,root,755)
 
 %files i18n-sat -f sat.lang
-%defattr(644,root,root,755)
-
-%files i18n-sc -f sc.lang
 %defattr(644,root,root,755)
 
 %files i18n-sd -f sd.lang
@@ -4265,9 +4165,6 @@ fi
 %files i18n-th -f th.lang
 %defattr(644,root,root,755)
 
-%files i18n-ti -f ti.lang
-%defattr(644,root,root,755)
-
 %files i18n-tn -f tn.lang
 %defattr(644,root,root,755)
 
@@ -4281,9 +4178,6 @@ fi
 %defattr(644,root,root,755)
 
 %files i18n-uk -f uk.lang
-%defattr(644,root,root,755)
-
-%files i18n-ur -f ur.lang
 %defattr(644,root,root,755)
 
 %files i18n-uz -f uz.lang
