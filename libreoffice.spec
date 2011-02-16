@@ -44,7 +44,7 @@ Summary:	LibreOffice - powerful office suite
 Summary(pl.UTF-8):	LibreOffice - potężny pakiet biurowy
 Name:		libreoffice
 Version:	3.3.1.1
-Release:	1.1
+Release:	2
 License:	GPL/LGPL
 Group:		X11/Applications
 # we use git because released tarballs are buggy too often
@@ -2823,7 +2823,7 @@ if [ ! -f installed.stamp ]; then
 	# for example mailcap
 	ln -s libreoffice $RPM_BUILD_ROOT%{_bindir}/ooffice 
 	for a in fromtemplate base calc draw writer impress math web; do
-		ln -s lo$a $RPM_BUILD_ROOT%{_bindir}/oo$ae
+		ln -s lo$a $RPM_BUILD_ROOT%{_bindir}/oo$a
 	done
 
 	touch installed.stamp
