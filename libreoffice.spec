@@ -44,7 +44,7 @@ Summary:	LibreOffice - powerful office suite
 Summary(pl.UTF-8):	LibreOffice - potężny pakiet biurowy
 Name:		libreoffice
 Version:	3.3.1.1
-Release:	1
+Release:	1.1
 License:	GPL/LGPL
 Group:		X11/Applications
 # we use git because released tarballs are buggy too often
@@ -2819,6 +2819,13 @@ if [ ! -f installed.stamp ]; then
 		mv $a $d/lo$f
 	done
 
+	# Make oo* -> lo* symlinks for compatibility with misc software,
+	# for example mailcap
+	ln -s libreoffice $RPM_BUILD_ROOT%{_bindir}/ooffice 
+	for a in fromtemplate base calc draw writer impress math web; do
+		ln -s lo$a $RPM_BUILD_ROOT%{_bindir}/oo$ae
+	done
+
 	touch installed.stamp
 fi
 
@@ -2976,6 +2983,8 @@ fi
 %attr(755,root,root) %{_bindir}/ooconfig
 %attr(755,root,root) %{_bindir}/libreoffice
 %attr(755,root,root) %{_bindir}/lofromtemplate
+%attr(755,root,root) %{_bindir}/ooffice
+%attr(755,root,root) %{_bindir}/oofromtemplate
 %attr(755,root,root) %{_bindir}/ootool
 %attr(755,root,root) %{_bindir}/soffice
 %attr(755,root,root) %{_bindir}/unopkg
@@ -3559,6 +3568,7 @@ fi
 %files base
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_bindir}/lobase
+%attr(755,root,root) %{_bindir}/oobase
 %attr(755,root,root) %{_libdir}/%{name}/program/sbase
 %{_mandir}/man1/lobase.1
 %{_desktopdir}/lobase.desktop
@@ -3599,6 +3609,7 @@ fi
 %files calc
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_bindir}/localc
+%attr(755,root,root) %{_bindir}/oocalc
 %attr(755,root,root) %{_libdir}/%{name}/program/scalc
 %{_mandir}/man1/localc.1
 %{_desktopdir}/localc.desktop
@@ -3628,6 +3639,7 @@ fi
 %files draw
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_bindir}/lodraw
+%attr(755,root,root) %{_bindir}/oodraw
 %attr(755,root,root) %{_libdir}/%{name}/program/sdraw
 %{_mandir}/man1/lodraw.1
 %{_desktopdir}/lodraw.desktop
@@ -3646,6 +3658,7 @@ fi
 %files writer
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_bindir}/lowriter
+%attr(755,root,root) %{_bindir}/oowriter
 %attr(755,root,root) %{basisdir}/program/libhwp.so
 %attr(755,root,root) %{basisdir}/program/liblwpftl[ipx].so
 %attr(755,root,root) %{basisdir}/program/libmswordl[ipx].so
@@ -3671,6 +3684,7 @@ fi
 %files impress
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_bindir}/loimpress
+%attr(755,root,root) %{_bindir}/ooimpress
 %attr(755,root,root) %{_libdir}/%{name}/program/simpress
 %attr(755,root,root) %{basisdir}/program/OGLTrans.uno.so
 %attr(755,root,root) %{basisdir}/program/libanimcore.so
@@ -3690,6 +3704,7 @@ fi
 %files math
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_bindir}/lomath
+%attr(755,root,root) %{_bindir}/oomath
 %{_mandir}/man1/lomath.1
 %{_desktopdir}/lomath.desktop
 %{_iconsdir}/hicolor/*/apps/ooo-math.png
@@ -3707,6 +3722,7 @@ fi
 %files web
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_bindir}/loweb
+%attr(755,root,root) %{_bindir}/ooweb
 %{_mandir}/man1/loweb.1
 %{_desktopdir}/loweb.desktop
 %{_iconsdir}/hicolor/*/apps/ooo-web.png
