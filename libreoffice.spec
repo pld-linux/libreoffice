@@ -44,7 +44,7 @@ Summary:	LibreOffice - powerful office suite
 Summary(pl.UTF-8):	LibreOffice - potężny pakiet biurowy
 Name:		libreoffice
 Version:	3.3.1.1
-Release:	2
+Release:	3
 License:	GPL/LGPL
 Group:		X11/Applications
 # we use git because released tarballs are buggy too often
@@ -382,6 +382,15 @@ Requires:	saxon
 Requires:	sed
 %{?with_system_xalan:Requires:	xalan-j}
 #Suggests:	chkfontpath
+Obsoletes:	libreoffice-i18n-gd
+Obsoletes:	libreoffice-i18n-kid
+Obsoletes:	libreoffice-i18n-ky
+Obsoletes:	libreoffice-i18n-ms
+Obsoletes:	libreoffice-i18n-pap
+Obsoletes:	libreoffice-i18n-ps
+Obsoletes:	libreoffice-i18n-sc
+Obsoletes:	libreoffice-i18n-ti
+Obsoletes:	libreoffice-i18n-ur
 Obsoletes:	oooqs
 Obsoletes:	openoffice
 Obsoletes:	openoffice-i18n-fo
