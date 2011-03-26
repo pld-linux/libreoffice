@@ -43,8 +43,8 @@
 Summary:	LibreOffice - powerful office suite
 Summary(pl.UTF-8):	LibreOffice - potężny pakiet biurowy
 Name:		libreoffice
-Version:	3.3.1.1
-Release:	6
+Version:	3.3.2.2
+Release:	1
 License:	GPL/LGPL
 Group:		X11/Applications
 # we use git because released tarballs are buggy too often
@@ -52,49 +52,49 @@ Group:		X11/Applications
 # cd build
 # git checkout -b libreoffice-3-3 origin/libreoffice-3-3
 Source0:	http://download.documentfoundation.org/libreoffice/src/%{name}-build-%{version}.tar.gz
-# Source0-md5:	f1f491ba75e1a6529d1df21b5bf27716
+# Source0-md5:	2f54261deaf89d8154440ea33bf12cc2
 Source1:	http://download.go-oo.org/DEV300/ooo-cli-prebuilt-3.3.tar.bz2
 # Source1-md5:	fc46e64367c3b09a1668fb9ab40c031b
 Source2:	http://download.documentfoundation.org/libreoffice/src/%{name}-artwork-%{version}.tar.bz2
-# Source2-md5:	c895996b025926db51fcebc7172377f6
+# Source2-md5:	cd9f83d8dc2f85f06b2999fd3d23a74d
 Source3:	http://download.documentfoundation.org/libreoffice/src/%{name}-base-%{version}.tar.bz2
-# Source3-md5:	5c87200380f56dbf026685fc50d18a04
+# Source3-md5:	46fb3c85cc878daabb58d94fa848a59d
 Source4:	http://download.documentfoundation.org/libreoffice/src/%{name}-bootstrap-%{version}.tar.bz2
-# Source4-md5:	daceed41d7081425d3339488ef409b17
+# Source4-md5:	19698765fe35dcbb1f6d7d55c617c39f
 Source5:	http://download.documentfoundation.org/libreoffice/src/%{name}-calc-%{version}.tar.bz2
-# Source5-md5:	b84d06aadd0cebc85b91f533b242e036
+# Source5-md5:	0274eb33f462e620cb2f37aa696d18b1
 Source6:	http://download.documentfoundation.org/libreoffice/src/%{name}-components-%{version}.tar.bz2
-# Source6-md5:	2eb935a19202063017039690ce957a8a
+# Source6-md5:	a5f11a035faa6160121dd2d3f984065f
 Source7:	http://download.documentfoundation.org/libreoffice/src/%{name}-extensions-%{version}.tar.bz2
-# Source7-md5:	828f13a55a45026407e83b03bfa26196
+# Source7-md5:	d54e5f7e5cde7f648d74e382eb5e44fc
 Source8:	http://download.documentfoundation.org/libreoffice/src/%{name}-extras-%{version}.tar.bz2
-# Source8-md5:	53a43bfafa80e8cb014fa1b48aff9880
+# Source8-md5:	db5d3a8886ec451c11e1ef3cea132ce0
 Source9:	http://download.documentfoundation.org/libreoffice/src/%{name}-filters-%{version}.tar.bz2
-# Source9-md5:	0ccddb0585199ecd127bdeccb0a2d27a
+# Source9-md5:	4ae9b40116ef3f840b232cb3454be4e3
 Source10:	http://download.documentfoundation.org/libreoffice/src/%{name}-help-%{version}.tar.bz2
-# Source10-md5:	d8862572c051cb61f192d7f6d46c7787
+# Source10-md5:	2dc8e4b347866f9469eb6c42a9cb0b81
 Source11:	http://download.documentfoundation.org/libreoffice/src/%{name}-impress-%{version}.tar.bz2
-# Source11-md5:	ab4a2b1cb1979d0c3ff2d012cc43fb01
+# Source11-md5:	e9211340b2a7f48c17883db76d1e8e03
 Source12:	http://download.documentfoundation.org/libreoffice/src/%{name}-l10n-%{version}.tar.bz2
-# Source12-md5:	7ab7411a4419e38065c3b0153e764a77
+# Source12-md5:	688768909f823b5006162d27638aa15e
 Source13:	http://download.documentfoundation.org/libreoffice/src/%{name}-libs-core-%{version}.tar.bz2
-# Source13-md5:	eff16454048a44196f5b43c2d8458e5d
+# Source13-md5:	26ca2152535ba45bf71d8aa3b26fc967
 Source14:	http://download.documentfoundation.org/libreoffice/src/%{name}-libs-extern-%{version}.tar.bz2
-# Source14-md5:	f5b3f83b9a2a8d2caf2c53b8a57ba6fa
+# Source14-md5:	9df0af97ec8d085864c5341678bb1d0d
 Source15:	http://download.documentfoundation.org/libreoffice/src/%{name}-libs-extern-sys-%{version}.tar.bz2
-# Source15-md5:	76032412e782ba76dde20211bffa518b
+# Source15-md5:	09b22bf1a812affbfe561230940d7da2
 Source16:	http://download.documentfoundation.org/libreoffice/src/%{name}-libs-gui-%{version}.tar.bz2
-# Source16-md5:	35a88eec8a1a82b975a9502c0c6bbb14
+# Source16-md5:	e3dc1c328dfdf4a288946957c69ad32b
 Source17:	http://download.documentfoundation.org/libreoffice/src/%{name}-postprocess-%{version}.tar.bz2
-# Source17-md5:	3c272828e0254c6b670d02c5e3b6cc62
+# Source17-md5:	5c0a8203253d053f23613e68cdb69565
 Source18:	http://download.documentfoundation.org/libreoffice/src/%{name}-sdk-%{version}.tar.bz2
-# Source18-md5:	567400ca3242d92a95cacb00a623c0c8
+# Source18-md5:	2e68a800e323fd3286a0a3305e3d3e39
 Source19:	http://download.documentfoundation.org/libreoffice/src/%{name}-testing-%{version}.tar.bz2
-# Source19-md5:	6de9dc64c022eb92d98e7d60b283a3ef
+# Source19-md5:	e91523550f9cae015923685ad3fce5ad
 Source20:	http://download.documentfoundation.org/libreoffice/src/%{name}-ure-%{version}.tar.bz2
-# Source20-md5:	4a87924b009d1d3a00c40916d6e80672
+# Source20-md5:	a17434cc2469a263ffabd345e90d8911
 Source21:	http://download.documentfoundation.org/libreoffice/src/%{name}-writer-%{version}.tar.bz2
-# Source21-md5:	fa10537cc6e1a6d550decf5d4e728b33
+# Source21-md5:	6faf9924a74b836527906f49fcea40c2
 Source22:	http://download.go-oo.org/SRC680/biblio.tar.bz2
 # Source22-md5:	1948e39a68f12bfa0b7eb309c14d940c
 Source23:	http://download.go-oo.org/SRC680/extras-3.1.tar.bz2
