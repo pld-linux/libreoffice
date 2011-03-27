@@ -15,7 +15,7 @@
 %bcond_with	ccache		# use ccache to speed up builds
 %bcond_with	icecream	# use icecream to speed up builds
 %bcond_with	msaccess	# with ms access import pieces
-%bcond_with	parallelbuild	# use greater number of jobs to speed up build (default: 1)
+%bcond_without	parallelbuild	# use greater number of jobs to speed up build (default: 1)
 
 %bcond_without	system_beanshell
 %bcond_without	system_db		# without system (i.e. with internal) Berkeley DB
