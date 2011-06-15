@@ -155,6 +155,7 @@ Patch0:		%{name}-build-apply.patch
 Patch100:	%{name}-hotfix-with-lang-all.patch
 Patch101:	%{name}-hotfix-kde4.patch
 Patch102:	%{name}-impress-dont-exit-after-pps-autoplay.patch
+Patch103:	%{name}-3.3.2-bison25.diff
 URL:		http://www.documentfoundation.org/
 BuildRequires:	/usr/bin/getopt
 BuildRequires:	GConf2-devel
@@ -374,8 +375,8 @@ Requires:	%{name}-ure = %{version}-%{release}
 # libcups.so.2 is dlopened (in cupsmgr.cxx); maybe Suggests instead?
 Requires:	cups-lib
 Requires:	fonts-TTF-OpenSymbol
-%{?with_system_hsqldb:Requires:	java-hsqldb}
 %{?with_system_beanshell:Requires:	java-beanshell}
+%{?with_system_hsqldb:Requires:	java-hsqldb}
 Requires:	libstdc++ >= 5:3.2.1
 Requires:	mktemp
 Requires:	saxon
@@ -416,8 +417,8 @@ Obsoletes:	openoffice.org-i18n-by
 Obsoletes:	openoffice.org-i18n-fo
 Obsoletes:	openoffice.org-i18n-fo-gtk
 Obsoletes:	openoffice.org-i18n-fo-kde
-Obsoletes:	openoffice.org-i18n-gu_IN
 Obsoletes:	openoffice.org-i18n-gd
+Obsoletes:	openoffice.org-i18n-gu_IN
 Obsoletes:	openoffice.org-i18n-ia
 Obsoletes:	openoffice.org-i18n-ia-gtk
 Obsoletes:	openoffice.org-i18n-ia-kde
@@ -441,8 +442,8 @@ Obsoletes:	openoffice.org-i18n-ro
 Obsoletes:	openoffice.org-i18n-ro-gtk
 Obsoletes:	openoffice.org-i18n-ro-kde
 Obsoletes:	openoffice.org-i18n-sc
-Obsoletes:	openoffice.org-i18n-sx
 Obsoletes:	openoffice.org-i18n-sw
+Obsoletes:	openoffice.org-i18n-sx
 Obsoletes:	openoffice.org-i18n-ti
 Obsoletes:	openoffice.org-i18n-ur
 Obsoletes:	openoffice.org-libs < 1:2.1.0-0.m6.0.11
@@ -459,8 +460,8 @@ Summary(pl.UTF-8):	Wiązania Pythona dla LibreOffice
 Group:		Libraries
 Requires:	%{name}-core = %{version}-%{release}
 Requires:	python
-Obsoletes:	openoffice.org-pyuno
 Provides:	pyuno
+Obsoletes:	openoffice.org-pyuno
 
 %description pyuno
 Cool Python bindings for the LibreOffice UNO component model. Allows
@@ -2489,6 +2490,7 @@ ln -sf %{SOURCE1} %{SOURCE2} %{SOURCE3} %{SOURCE4} \
 ln -s %{PATCH100} patches/hotfixes/%{basename:%{PATCH100}}.diff
 ln -s %{PATCH101} patches/hotfixes/%{basename:%{PATCH101}}.diff
 ln -s %{PATCH102} patches/hotfixes/%{basename:%{PATCH102}}.diff
+ln -s %{PATCH103} patches/hotfixes/%{basename:%{PATCH103}}.diff
 
 %build
 # Make sure we have /proc mounted - otherwise idlc will fail later.
