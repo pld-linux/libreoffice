@@ -38,64 +38,66 @@
 %undefine	with_system_hsqldb
 %endif
 
+%define		major_ver		3.4.3
 %define		upd			330
 
 Summary:	LibreOffice - powerful office suite
 Summary(pl.UTF-8):	LibreOffice - potężny pakiet biurowy
 Name:		libreoffice
-Version:	3.4.0.2
+Version:	%{major_ver}.2
 Release:	0.1
 License:	GPL/LGPL
 Group:		X11/Applications
-# http://wiki.documentfoundation.org/Development/Native_Build
 # we use git because released tarballs are buggy too often
-# git clone git://anongit.freedesktop.org/libreoffice/bootstrap
-# cd bootstrap
-# git checkout -b libreoffice-3-4 origin/libreoffice-3-4
-Source0:        http://download.documentfoundation.org/libreoffice/src/libreoffice-bootstrap-3.4.0.2.tar.bz2
-# Source0-md5:	7427ddd5ae63b6ee7aa868201dfbccaa
-Source1:        http://download.documentfoundation.org/libreoffice/src/libreoffice-artwork-3.4.0.2.tar.bz2
-# Source1-md5:	a78a8e08731213da02c65060cedc5589
-Source2:        http://download.documentfoundation.org/libreoffice/src/libreoffice-base-3.4.0.2.tar.bz2
-# Source2-md5:	596da255e2728faccc8f2361171270ec
-Source3:        http://download.documentfoundation.org/libreoffice/src/libreoffice-calc-3.4.0.2.tar.bz2
-# Source3-md5:	8ed9803a34d13da1764e7523d550d6b0
-Source4:        http://download.documentfoundation.org/libreoffice/src/libreoffice-components-3.4.0.2.tar.bz2
-# Source4-md5:	9be46d7c4bf3a60ee8dd0a5ef3638f82
-Source5:        http://download.documentfoundation.org/libreoffice/src/libreoffice-extensions-3.4.0.2.tar.bz2
-# Source5-md5:	b60db802866ab71c485de42e6382d1bb
-Source6:        http://download.documentfoundation.org/libreoffice/src/libreoffice-extras-3.4.0.2.tar.bz2
-# Source6-md5:	09e374cf3bd8f07a043883393012d69b
-Source7:        http://download.documentfoundation.org/libreoffice/src/libreoffice-filters-3.4.0.2.tar.bz2
-# Source7-md5:	af9f25aa04dc4ef7b797f7bcc743877c
-Source8:        http://download.documentfoundation.org/libreoffice/src/libreoffice-help-3.4.0.2.tar.bz2
-# Source8-md5:	ad29de786d76d67759f9d2dd574b29be
-Source9:        http://download.documentfoundation.org/libreoffice/src/libreoffice-impress-3.4.0.2.tar.bz2
-# Source9-md5:	ff13a8ac0ea324122b75773fd80a9245
-Source10:        http://download.documentfoundation.org/libreoffice/src/libreoffice-libs-core-3.4.0.2.tar.bz2
-# Source10-md5:	6eb8f53e01da7a945ee4cd42b7297732
-Source11:        http://download.documentfoundation.org/libreoffice/src/libreoffice-libs-extern-3.4.0.2.tar.bz2
-# Source11-md5:	90df27d4cbf490668ce4f03ff7dba521
-Source12:        http://download.documentfoundation.org/libreoffice/src/libreoffice-libs-extern-sys-3.4.0.2.tar.bz2
-# Source12-md5:	c0ea197183564c49306a1c79ca571e51
-Source13:        http://download.documentfoundation.org/libreoffice/src/libreoffice-libs-gui-3.4.0.2.tar.bz2
-# Source13-md5:	91e69ed3c0be542fa7f69ca3da2d7808
-Source14:        http://download.documentfoundation.org/libreoffice/src/libreoffice-postprocess-3.4.0.2.tar.bz2
-# Source14-md5:	a81c787b2e5469c2acc9f335b2c9e52f
-Source15:        http://download.documentfoundation.org/libreoffice/src/libreoffice-sdk-3.4.0.2.tar.bz2
-# Source15-md5:	ee1c78af6553657614b1a43adf4750ac
-Source16:        http://download.documentfoundation.org/libreoffice/src/libreoffice-testing-3.4.0.2.tar.bz2
-# Source16-md5:	c970d6212618fc9b34526907eb030ce6
-Source17:        http://download.documentfoundation.org/libreoffice/src/libreoffice-translations-3.4.0.2.tar.bz2
-# Source17-md5:	04d1a5a05aed8d217a5e45ba6759b4be
-Source18:        http://download.documentfoundation.org/libreoffice/src/libreoffice-ure-3.4.0.2.tar.bz2
-# Source18-md5:	6d25488c81af09d87015bf487243042f
-Source19:        http://download.documentfoundation.org/libreoffice/src/libreoffice-writer-3.4.0.2.tar.bz2
-# Source19-md5:	9a39234a49516b7035309e28dd4f0784
-Source20:	http://download.go-oo.org/SRC680/biblio.tar.bz2
-# Source20-md5:	1948e39a68f12bfa0b7eb309c14d940c
-Source21:	http://download.go-oo.org/SRC680/extras-3.1.tar.bz2
-# Source21-md5:	1aa219782c41ff6cabef9ecaf147556f
+# git clone git://anongit.freedesktop.org/git/libreoffice/build
+# cd build
+# git checkout -b libreoffice-3-3 origin/libreoffice-3-3
+Source0:	http://download.documentfoundation.org/libreoffice/src/%{major_ver}/%{name}-bootstrap-%{version}.tar.bz2
+# Source0-md5:	465b3be0e30f88e1139c45d2e2217927
+Source1:	http://download.go-oo.org/DEV300/ooo-cli-prebuilt-3.3.tar.bz2
+# Source1-md5:	fc46e64367c3b09a1668fb9ab40c031b
+Source2:	http://download.documentfoundation.org/libreoffice/src/%{major_ver}/%{name}-artwork-%{version}.tar.bz2
+# Source2-md5:	7c2e73f1197d169519f86efe422e5df9
+Source3:	http://download.documentfoundation.org/libreoffice/src/%{major_ver}/%{name}-base-%{version}.tar.bz2
+# Source3-md5:	823956297a7e0b7603c585c49bd9fd4e
+Source4:	http://download.documentfoundation.org/libreoffice/src/%{major_ver}/%{name}-writer-%{version}.tar.bz2
+# Source4-md5:	da8a40cac4bd9d4f6f326e0e3b1b7e2a
+Source5:	http://download.documentfoundation.org/libreoffice/src/%{major_ver}/%{name}-calc-%{version}.tar.bz2
+# Source5-md5:	a1d5af5be5eb522c8a24feacbb0161fa
+Source6:	http://download.documentfoundation.org/libreoffice/src/%{major_ver}/%{name}-components-%{version}.tar.bz2
+# Source6-md5:	8b972e130dfe62eb41d1d71d72de4b76
+Source7:	http://download.documentfoundation.org/libreoffice/src/%{major_ver}/%{name}-extensions-%{version}.tar.bz2
+# Source7-md5:	a6b22494e3a65a3b242ecb896aa7ab48
+Source8:	http://download.documentfoundation.org/libreoffice/src/%{major_ver}/%{name}-extras-%{version}.tar.bz2
+# Source8-md5:	b7d86f8baee5b31af210cc81785e5676
+Source9:	http://download.documentfoundation.org/libreoffice/src/%{major_ver}/%{name}-filters-%{version}.tar.bz2
+# Source9-md5:	de6c062d334daab99cf0592aa3568215
+Source10:	http://download.documentfoundation.org/libreoffice/src/%{major_ver}/%{name}-help-%{version}.tar.bz2
+# Source10-md5:	df46914d540ef0126cd746d09c68ca2a
+Source11:	http://download.documentfoundation.org/libreoffice/src/%{major_ver}/%{name}-impress-%{version}.tar.bz2
+# Source11-md5:	8f308250c397ddc6fdb1aae13e102927
+Source12:	http://download.documentfoundation.org/libreoffice/src/%{major_ver}/%{name}-translations-%{version}.tar.bz2
+# Source12-md5:	502e89e7a190c2b955467215f7894af0
+Source13:	http://download.documentfoundation.org/libreoffice/src/%{major_ver}/%{name}-libs-core-%{version}.tar.bz2
+# Source13-md5:	1fd00a0fcfd4a5d1956c3f6a0990d1ce
+Source14:	http://download.documentfoundation.org/libreoffice/src/%{major_ver}/%{name}-libs-extern-%{version}.tar.bz2
+# Source14-md5:	86914ac8bc30ea721b708b2f2faa3111
+Source15:	http://download.documentfoundation.org/libreoffice/src/%{major_ver}/%{name}-libs-extern-sys-%{version}.tar.bz2
+# Source15-md5:	1452229e57ac3c4191e798eac4c0a7e0
+Source16:	http://download.documentfoundation.org/libreoffice/src/%{major_ver}/%{name}-libs-gui-%{version}.tar.bz2
+# Source16-md5:	bb46bdb682689629d432cdbf5f3f42c2
+Source17:	http://download.documentfoundation.org/libreoffice/src/%{major_ver}/%{name}-postprocess-%{version}.tar.bz2
+# Source17-md5:	bec7f633562762debdf810690002e688
+Source18:	http://download.documentfoundation.org/libreoffice/src/%{major_ver}/%{name}-sdk-%{version}.tar.bz2
+# Source18-md5:	87061613efece1c253906a90cd4dc01f
+Source19:	http://download.documentfoundation.org/libreoffice/src/%{major_ver}/%{name}-testing-%{version}.tar.bz2
+# Source19-md5:	308284d7d1d1bd6860d128b26e24390b
+Source20:	http://download.documentfoundation.org/libreoffice/src/%{major_ver}/%{name}-ure-%{version}.tar.bz2
+# Source20-md5:	fa8b36365a2b2fb110c44886d7069774
+Source21:	http://download.go-oo.org/SRC680/biblio.tar.bz2
+Source22:	http://download.go-oo.org/SRC680/extras-3.1.tar.bz2
+# Source22-md5:	1aa219782c41ff6cabef9ecaf147556f
+# Source23-md5:	1aa219782c41ff6cabef9ecaf147556f
 Source100:	http://hg.services.openoffice.org/binaries/fdb27bfe2dbe2e7b57ae194d9bf36bab-SampleICC-1.3.2.tar.gz
 # Source100-md5:	fdb27bfe2dbe2e7b57ae194d9bf36bab
 Source101:	http://hg.services.openoffice.org/binaries/17410483b5b5f267aa18b7e00b65e6e0-hsqldb_1_8_0.zip
@@ -179,6 +181,7 @@ BuildRequires:	fontconfig-devel >= 1.0.1
 BuildRequires:	freetype-devel >= 2.1
 BuildRequires:	glib2-devel >= 2.13.5
 BuildRequires:	gperf
+BuildRequires:	graphite2-devel
 BuildRequires:	gstreamer-devel >= 0.10.0
 BuildRequires:	gstreamer-plugins-base-devel >= 0.10.0
 BuildRequires:	gtk+2-devel >= 2:2.10
@@ -2463,31 +2466,8 @@ bash-completion for LibreOffice.
 bashowe uzupełnianie nazw dla LibreOffice.
 
 %prep
-%setup -q -n %{name}-bootstrap-%{version} -b1 -b2 -b3 -b4 -b5 -b6 -b7 -b8 -b9 -b10 -b11 -b12 -b13 -b14 -b15 -b16 -b17 -b18 -b19 -b20
-%patch0 -p1
-
-install -d src
-
-# sources, icons, KDE_icons. You can verify that all needed sources
-# are here by running ./download script manually after rpmbuild -bp
-ln -sf %{SOURCE1} %{SOURCE2} %{SOURCE3} %{SOURCE4} \
-	%{SOURCE5} %{SOURCE6} %{SOURCE7} %{SOURCE8} \
-	%{SOURCE9} %{SOURCE10} %{SOURCE11} %{SOURCE12} \
-	%{SOURCE13} %{SOURCE14} %{SOURCE15} %{SOURCE16} \
-	%{SOURCE17} %{SOURCE18} %{SOURCE19} %{SOURCE20} \
-	%{SOURCE21} %{SOURCE100} \
-	%{SOURCE101} %{SOURCE102} %{SOURCE103} %{SOURCE104} \
-	%{SOURCE105} %{SOURCE106} %{SOURCE107} %{SOURCE108} \
-	%{SOURCE109} %{SOURCE110} %{SOURCE111} %{SOURCE112} \
-	%{SOURCE113} %{SOURCE114} %{SOURCE115} %{SOURCE116} \
-	%{SOURCE117} %{SOURCE118} %{SOURCE119} %{SOURCE120} \
-	%{SOURCE121} %{SOURCE122} %{SOURCE123} %{SOURCE124} \
-	src
-
-ln -s %{PATCH100} patches/hotfixes/%{basename:%{PATCH100}}.diff
-ln -s %{PATCH101} patches/hotfixes/%{basename:%{PATCH101}}.diff
-ln -s %{PATCH102} patches/hotfixes/%{basename:%{PATCH102}}.diff
-ln -s %{PATCH103} patches/hotfixes/%{basename:%{PATCH103}}.diff
+%setup -q -n %{name}-bootstrap-%{version} -b1 -b2 -b3 -b4 -b5 -b6 -b7 -b8 \
+	-b9 -b10 -b11 -b12 -b13 -b14 -b15 -b16 -b17 -b18 -b19 -b20 -b21 -b22
 
 %build
 # Make sure we have /proc mounted - otherwise idlc will fail later.
