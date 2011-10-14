@@ -2466,8 +2466,7 @@ bash-completion for LibreOffice.
 bashowe uzupełnianie nazw dla LibreOffice.
 
 %prep
-%setup -q -n %{name}-bootstrap-%{version} -b1 -b2 -b3 -b4 -b5 -b6 -b7 -b8 \
-	-b9 -b10 -b11 -b12 -b13 -b14 -b15 -b16 -b17 -b18 -b19 -b20 -b21 -b22
+%setup -q -n %{name}-bootstrap-%{version} -b1 -b2 -b3 -b4 -b5 -b6 -b7 -b8 -b9 -b10 -b11 -b12 -b13 -b14 -b15 -b16 -b17 -b18 -b19 -b20 -b21 -b22
 
 %build
 # Make sure we have /proc mounted - otherwise idlc will fail later.
