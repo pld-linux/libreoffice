@@ -185,6 +185,7 @@ BuildRequires:	graphite2-devel
 BuildRequires:	gstreamer-devel >= 0.10.0
 BuildRequires:	gstreamer-plugins-base-devel >= 0.10.0
 BuildRequires:	gtk+2-devel >= 2:2.10
+BuildRequires:	hyphen-devel
 %{?with_system_hunspell:BuildRequires:	hunspell-devel >=1.2.2}
 %{?with_icecream:BuildRequires:	icecream}
 BuildRequires:	icu
@@ -2468,6 +2469,9 @@ bashowe uzupełnianie nazw dla LibreOffice.
 %prep
 %setup -q -n %{name}-bootstrap-%{version} -b1 -b2 -b3 -b4 -b5 -b6 -b7 -b8 -b9 -b10 -b11 -b12 -b13 -b14 -b15 -b16 -b17 -b18 -b19 -b20 -b21 -b22
 
+install -d ext_sources
+#install external tarballs into ext_sources
+
 %build
 # Make sure we have /proc mounted - otherwise idlc will fail later.
 if [ ! -f /proc/cpuinfo ]; then
@@ -2518,6 +2522,7 @@ if [ "$CCACHE_DIR" = "" ] ; then
 fi
 %endif
 
+
 export DEFAULT_TO_ENGLISH_FOR_PACKING=1
 
 %if %{with parallelbuild}
@@ -2527,30 +2532,20 @@ RPM_BUILD_NR_THREADS=$(echo %{_smp_mflags} | cut -dj -f2)
 RPM_BUILD_NR_THREADS="1"
 %endif
 
-CONFOPTS="\
-%ifarch %{ix86} \
-	--with-arch=x86 \
-%endif
-%ifarch ppc
-	--with-arch=ppc \
-%endif
-%ifarch sparc sparcv9
-	--with-arch=sparc \
-%endif
-%ifarch %{x8664}
-	--with-arch=x86_64 \
-%endif
+%configure \
+	--with-num-cpus=$RPM_BUILD_NR_THREADS \
+	--with-max-jobs=1 \
+	--with-unix-wrapper=%{name} \
 	--disable-odk \
 	%{?with_ccache:--with-gcc-speedup=ccache} \
 	%{?with_icecream:--with-gcc-speedup=icecream} \
 	%{?with_system_agg:--with-system-agg} \
 	%{?with_system_beanshell:--with-system-beanshell} \
 	%{?with_system_db:--with-system-db} \
-	%{?with_system_hsqldb:--with-system-hsqldb} \
+	--with%{!?with_system_hsqldb:out}-system-hsqldb \
 	%{?with_system_hunspell:--with-system-hunspell --without-myspell-dicts} \
 	%{?with_system_libhnj:--with-system-altlinuxhyphen} \
 	%{?with_msaccess:%{?with_system_mdbtools:--with-system-mdbtools}} \
-	%{?with_system_myspell:--with-system-myspell} \
 	--with-system-apache-commons \
 	--with-system-boost \
 	--with-system-cairo \
@@ -2558,13 +2553,11 @@ CONFOPTS="\
 	--with-system-cppunit \
 	--with-system-dicts \
 	--with-external-dict-dir=/usr/share/myspell \
+	--with-external-tar=$(pwd)/ext_sources \
 	--with-system-expat \
 	--with-system-graphite \
-	--with-system-freetype \
-	--with-system-gcc \
 	--with-system-icu \
 	--with-system-jpeg \
-	--with-system-libsvg \
 	--with-system-libwpd \
 	--with-system-libwpg \
 	--with-system-libwps \
@@ -2572,36 +2565,43 @@ CONFOPTS="\
 	--with-system-libxslt \
 	--with-system-lucene \
 	--with-lucene-analyzers-jar=%{_javadir}/lucene-analyzers.jar \
-	--with-system-nas \
 	--with-system-neon \
-	--with-system-odbc-headers \
 	--with-system-openssl \
 	--with-system-poppler \
-	--with-system-portaudio \
 	--with-system-python \
 	--with-system-redland \
-	--with-system-sablot \
 	--with-system-sane-header \
-	--with-system-servlet-api \
-	--with-system-sndfile \
 	--with-system-stdlibs \
 	--with-system-vigra \
-	--with-system-x11-extensions-headers \
-	--with-system-xrender \
 	--with-system-xrender-headers=yes \
 	--with-system-zlib \
+	--with-system-libtextcat \
+	--with-external-libtextcat-data \
+	--with-system-jfreereport \
+	--with-vba-package-format="builtin" \
+	--with-system-libs \
+	--with-system-headers \
+	--with-system-mythes \
+	--with-system-dicts \
+	--with-system-apache-commons \
+	--without-system-saxon \
+	--without-system-translate-toolkit \
+	--enable-ext-presenter-minimizer \
+	--enable-ext-presenter-console \
+	--enable-ext-pdfimport \
+	--enable-ext-wiki-publisher \
+	--enable-ext-report-builder \
+	--enable-ext-scripting-beanshell \
+	--enable-ext-scripting-javascript \
+	--enable-ext-scripting-python \
 %if %{with mozilla}
 	--with-system-mozilla=libxul \
 %else
 	--disable-mozilla \
 %endif
-	--with-dynamic-xinerama \
-	--with-distro="${DISTRO}" \
 	--enable-gtk \
 	%{?with_kde:--enable-kde --disable-kde4} \
 	%{?with_kde4:--enable-kde4 --disable-kde} \
-	--without-binsuffix \
-	--with-installed-ooo-dirname=%{name} \
 	--with-lang=%{?with_i18n:ALL} \
 %if %{with java}
 	--with-java \
@@ -2612,20 +2612,14 @@ CONFOPTS="\
 %endif
 	--disable-gnome-vfs \
 	--enable-gio \
-	--with-docdir=%{_docdir}/%{name}-%{version} \
-	--with-python=%{__python} \
 	--without-stlport \
 	--with-x \
 	--without-fonts \
-	--without-gpc \
+	--without-ppds \
+	--without-afms \
 	--disable-epm \
-	--disable-fontooo \
-	--%{?with_msaccess:en}%{!?with_msaccess:dis}able-access \
 	--enable-cairo \
-	--enable-crypt-link \
 	--enable-dbus \
-	--%{?with_mono:en}%{!?with_mono:dis}able-mono \
-	--enable-pam-link \
 	--enable-opengl \
 	--with-openldap \
 	--disable-rpath \
@@ -2637,69 +2631,15 @@ CONFOPTS="\
 	--enable-crashdump=no \
 	--disable-symbols \
 %endif
-	--disable-strip \
-	--with-num-cpus=$RPM_BUILD_NR_THREADS \
 	--with-build-version=%{version}-%{release} \
-	--with-drink=coffee \
 	--enable-split-app-modules \
 	--enable-split-opt-features \
-	--disable-access \
-	--without-git \
-	--enable-minimizer \
-	--enable-presenter-console \
-	--enable-pdfimport \
 	--enable-cups \
 	--enable-fontconfig \
 	--enable-lockdown \
 	--disable-layout \
-	--with-use-shell=bash \
-	--enable-wiki-publisher \
-	--enable-report-builder \
 	--disable-fetch-external
 "
-
-# build-ooo script will pickup these
-export CONFIGURE_OPTIONS="$CONFOPTS"
-
-:> distro-configs/Common.conf
-:> distro-configs/Common.conf.in
-echo -n "$CONFOPTS" > distro-configs/PLD.conf
-echo -n "$CONFOPTS" > distro-configs/PLD64.conf
-if [ $(cat distro-configs/PLD.conf | wc -l) -gt 1 ]; then
-	: 'newline(s) found in distro-configs. some of the options might be lost'
-	exit 1
-fi
-
-# for cvs snaps
-[ -x ./autogen.sh ] && ./autogen.sh $CONFOPTS
-
-# main build
-# don't use %%configure here. We don't want cflags/ldflags to be set that way since
-# it breaks things (like preventing NOOPTFILES from working)
-bash ./configure \
-		CC="$CC" \
-		CXX="$CXX" \
-		CPP="$CPP" \
-		--host=%{_target_platform} \
-		--build=%{_target_platform} \
-		--prefix=%{_prefix} \
-		--exec-prefix=%{_exec_prefix} \
-		--bindir=%{_bindir} \
-		--sbindir=%{_sbindir} \
-		--sysconfdir=%{_sysconfdir} \
-		--datadir=%{_datadir} \
-		--includedir=%{_includedir} \
-		--libdir=%{_libdir} \
-		--libexecdir=%{_libexecdir} \
-		--localstatedir=%{_localstatedir} \
-		--sharedstatedir=%{_sharedstatedir} \
-		--mandir=%{_mandir} \
-		--infodir=%{_infodir} \
-		--x-libraries=%{?_x_libraries}%{!?_x_libraries:%{_libdir}} \
-		%{?configure_cache:--cache-file=%{configure_cache_file}} \
-		--with-vendor="PLD/Linux Team" \
-		$CONFOPTS
-
 # this limits processing some files but doesn't limit parallel build
 # processes of main OOo build (since OOo uses it's own build system)
 %{__make} -j1 \
