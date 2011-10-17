@@ -202,6 +202,7 @@ BuildRequires:	java-servletapi
 BuildRequires:	libwpd-devel >= 0.9.0
 BuildRequires:	libwpg-devel >= 0.2.0
 BuildRequires:	libwps-devel >= 0.2.0
+BuildRequires:	lp_solve-devel
 BuildRequires:	silgraphite-devel
 %if %{with kde}
 BuildRequires:	kde4-kde3support-devel
@@ -218,13 +219,16 @@ BuildRequires:	libjpeg-devel
 BuildRequires:	libsndfile-devel
 BuildRequires:	libstdc++-devel >= 5:3.2.1
 BuildRequires:	libsvg-devel >= 0.1.4
+BuildRequires:	libtextcat-devel
 BuildRequires:	libxml2-devel >= 2.0
 BuildRequires:	libxslt-devel
 BuildRequires:	libxslt-progs
 %{?with_access:%{?with_system_mdbtools:BuildRequires:	mdbtools-devel >= 0.6}}
+BuildRequires:	mdds-devel
 %{?with_mono:BuildRequires:	mono-csharp >= 1.2.3}
 %{?with_mono:BuildRequires:	mono-static >= 1.2.3}
 %{?with_system_myspell:BuildRequires:	myspell-devel}
+BuildRequires:	mythes-devel
 BuildRequires:	nas-devel >= 1.7-1
 BuildRequires:	neon-devel
 BuildRequires:	nspr-devel >= 1:4.6-0.20041030.3
@@ -246,6 +250,7 @@ BuildRequires:	rpm-pythonprov
 BuildRequires:	rpmbuild(macros) >= 1.357
 BuildRequires:	sablotron-devel
 BuildRequires:	sane-backends-devel
+BuildRequires:	sac
 BuildRequires:	saxon
 BuildRequires:	sed >= 4.0
 BuildRequires:	startup-notification-devel >= 0.5
