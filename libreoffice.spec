@@ -185,8 +185,8 @@ BuildRequires:	graphite2-devel
 BuildRequires:	gstreamer-devel >= 0.10.0
 BuildRequires:	gstreamer-plugins-base-devel >= 0.10.0
 BuildRequires:	gtk+2-devel >= 2:2.10
-BuildRequires:	hyphen-devel
 %{?with_system_hunspell:BuildRequires:	hunspell-devel >=1.2.2}
+BuildRequires:	hyphen-devel
 %{?with_icecream:BuildRequires:	icecream}
 BuildRequires:	icu
 %{?with_system_beanshell:BuildRequires:	java-beanshell}
@@ -211,6 +211,8 @@ BuildRequires:	kde4-kde3support-devel
 BuildRequires:	kde4-kdelibs-devel
 BuildRequires:	qt4-build
 %endif
+BuildRequires:	java-libxml
+BuildRequires:	java-sac
 BuildRequires:	libart_lgpl-devel
 BuildRequires:	libbonobo-devel >= 2.0
 %{?with_system_libhnj:BuildRequires:	libhnj-devel}
@@ -236,7 +238,6 @@ BuildRequires:	nss-devel >= 1:3.10
 BuildRequires:	openldap-devel
 BuildRequires:	pam-devel
 BuildRequires:	pango-devel >= 1:1.17.3
-BuildRequires:	java-pentaho-libxml
 BuildRequires:	perl-Archive-Zip
 BuildRequires:	perl-base
 BuildRequires:	perl-devel
@@ -251,7 +252,6 @@ BuildRequires:	rpm-pythonprov
 BuildRequires:	rpmbuild(macros) >= 1.357
 BuildRequires:	sablotron-devel
 BuildRequires:	sane-backends-devel
-BuildRequires:	java-sac
 BuildRequires:	saxon
 BuildRequires:	sed >= 4.0
 BuildRequires:	startup-notification-devel >= 0.5
@@ -2724,7 +2724,7 @@ if [ ! -f installed.stamp ]; then
 	rm -r $RPM_BUILD_ROOT%{_libdir}/%{name}/share/xdg
 
 	%if %{with mono}
-	rm $RPM_BUILD_ROOT%{_libdir}/pkgconfig/mono-ooo-2.1.pc
+	rm $RPM_BUILD_ROOT%{_pkgconfigdir}/mono-ooo-2.1.pc
 	%endif
 
 	%if %{with mozilla}
@@ -2754,7 +2754,7 @@ if [ ! -f installed.stamp ]; then
 
 	# Make oo* -> lo* symlinks for compatibility with misc software,
 	# for example mailcap
-	ln -s libreoffice $RPM_BUILD_ROOT%{_bindir}/ooffice 
+	ln -s libreoffice $RPM_BUILD_ROOT%{_bindir}/ooffice
 	for a in fromtemplate base calc draw writer impress math web; do
 		ln -s lo$a $RPM_BUILD_ROOT%{_bindir}/oo$a
 	done
