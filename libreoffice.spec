@@ -236,7 +236,7 @@ BuildRequires:	nss-devel >= 1:3.10
 BuildRequires:	openldap-devel
 BuildRequires:	pam-devel
 BuildRequires:	pango-devel >= 1:1.17.3
-BuildRequires:	pentaho-libxml
+BuildRequires:	java-pentaho-libxml
 BuildRequires:	perl-Archive-Zip
 BuildRequires:	perl-base
 BuildRequires:	perl-devel
@@ -251,7 +251,7 @@ BuildRequires:	rpm-pythonprov
 BuildRequires:	rpmbuild(macros) >= 1.357
 BuildRequires:	sablotron-devel
 BuildRequires:	sane-backends-devel
-BuildRequires:	sac
+BuildRequires:	java-sac
 BuildRequires:	saxon
 BuildRequires:	sed >= 4.0
 BuildRequires:	startup-notification-devel >= 0.5
