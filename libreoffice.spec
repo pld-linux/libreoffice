@@ -95,6 +95,7 @@ Source19:	http://download.documentfoundation.org/libreoffice/src/%{major_ver}/%{
 Source20:	http://download.documentfoundation.org/libreoffice/src/%{major_ver}/%{name}-ure-%{version}.tar.bz2
 # Source20-md5:	fa8b36365a2b2fb110c44886d7069774
 Source21:	http://download.go-oo.org/SRC680/biblio.tar.bz2
+# Source21-md5:	1948e39a68f12bfa0b7eb309c14d940c
 Source22:	http://download.go-oo.org/SRC680/extras-3.1.tar.bz2
 # Source22-md5:	1aa219782c41ff6cabef9ecaf147556f
 # Source23-md5:	1aa219782c41ff6cabef9ecaf147556f
