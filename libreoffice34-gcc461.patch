@@ -1,0 +1,352 @@
+commit 18744f661be29d5f41421c5b71b2434097e8ef4c
+Author: Caolán McNamara <caolanm@redhat.com>
+Date:   Thu Sep 29 21:59:28 2011 +0100
+
+    help gcc 4.6.1 out with ambiguity
+
+diff --git a/vcl/unx/gtk/a11y/atkutil.cxx b/vcl/unx/gtk/a11y/atkutil.cxx
+index 68bb949..e662f6e 100644
+--- a/vcl/unx/gtk/a11y/atkutil.cxx
++++ b/vcl/unx/gtk/a11y/atkutil.cxx
+@@ -312,8 +312,12 @@ void DocumentFocusListener::attachRecursive(
+     uno::Reference< accessibility::XAccessibleEventBroadcaster > xBroadcaster =
+         uno::Reference< accessibility::XAccessibleEventBroadcaster >(xContext, uno::UNO_QUERY);
+ 
++    if (!xBroadcaster.is())
++        return;
++
+     // If not already done, add the broadcaster to the list and attach as listener.
+-    if( xBroadcaster.is() && m_aRefList.insert(xBroadcaster).second )
++    uno::Reference< uno::XInterface > xInterface = xBroadcaster;
++    if( m_aRefList.insert(xInterface).second )
+     {
+         xBroadcaster->addEventListener(static_cast< accessibility::XAccessibleEventListener *>(this));
+ 
+commit 3c7a0b5d5455805210262529fbd9815aed6fe267
+Author: Caolán McNamara <caolanm@redhat.com>
+Date:   Thu Sep 29 23:02:56 2011 +0100
+
+    tweak ambiguities for F-15 gcc 4.6.1-9
+
+diff --git a/dbaccess/source/core/dataaccess/databasedocument.cxx b/dbaccess/source/core/dataaccess/databasedocument.cxx
+index c72d7f7..e1c7347 100644
+--- a/dbaccess/source/core/dataaccess/databasedocument.cxx
++++ b/dbaccess/source/core/dataaccess/databasedocument.cxx
+@@ -1696,10 +1696,13 @@ void ODatabaseDocument::disposing()
+     ::osl::ClearableMutexGuard aGuard( m_aMutex );
+ 
+     OSL_ENSURE( m_aControllers.empty(), "ODatabaseDocument::disposing: there still are controllers!" );
+-        // normally, nobody should explicitly dispose, but only XCloseable::close the document. And upon
+-        // closing, our controllers are closed, too
++    // normally, nobody should explicitly dispose, but only XCloseable::close
++    // the document. And upon closing, our controllers are closed, too
+ 
+-    aKeepAlive.push_back( m_xUIConfigurationManager );
++    {
++        uno::Reference<uno::XInterface> xUIInterface = m_xUIConfigurationManager;
++        aKeepAlive.push_back( xUIInterface );
++    }
+     m_xUIConfigurationManager = NULL;
+ 
+     clearObjectContainer( m_xForms );
+@@ -1721,10 +1724,16 @@ void ODatabaseDocument::disposing()
+     OSL_ENSURE( m_aControllers.empty(), "ODatabaseDocument::disposing: there still are controllers!" );
+     impl_disposeControllerFrames_nothrow();
+ 
+-    aKeepAlive.push_back( m_xModuleManager );
++    {
++        uno::Reference<uno::XInterface> xModuleInterface = m_xModuleManager;
++        aKeepAlive.push_back( xModuleInterface );
++    }
+     m_xModuleManager.clear();
+ 
+-    aKeepAlive.push_back( m_xTitleHelper );
++    {
++        uno::Reference<uno::XInterface> xTitleInterface = m_xTitleHelper;
++        aKeepAlive.push_back( xTitleInterface );
++    }
+     m_xTitleHelper.clear();
+ 
+     m_pImpl.clear();
+diff --git a/dbaccess/source/ui/browser/unodatbr.cxx b/dbaccess/source/ui/browser/unodatbr.cxx
+index 017794d..37f0880 100644
+--- a/dbaccess/source/ui/browser/unodatbr.cxx
++++ b/dbaccess/source/ui/browser/unodatbr.cxx
+@@ -781,7 +781,7 @@ sal_Bool SbaTableQueryBrowser::InitializeGridModel(const Reference< ::com::sun::
+                         if ( xSupplier.is() )
+                             aInitialValues.push_back( NamedValue( ::rtl::OUString(RTL_CONSTASCII_USTRINGPARAM("FormatsSupplier")), makeAny( xSupplier ) ) );
+                         aInitialValues.push_back( NamedValue( ::rtl::OUString(RTL_CONSTASCII_USTRINGPARAM("TreatAsNumber")), makeAny( (sal_Bool)bFormattedIsNumeric ) ) );
+-                        aCopyProperties.push_back( PROPERTY_FORMATKEY );
++                        aCopyProperties.push_back( static_cast<const rtl::OUString&>(PROPERTY_FORMATKEY) );
+                         break;
+                 }
+ 
+@@ -814,8 +814,8 @@ sal_Bool SbaTableQueryBrowser::InitializeGridModel(const Reference< ::com::sun::
+                     aInitialValues.push_back( NamedValue( sDefaultProperty, aDefault ) );
+ 
+                 // transfer properties from the definition to the UNO-model :
+-                aCopyProperties.push_back( PROPERTY_HIDDEN );
+-                aCopyProperties.push_back( PROPERTY_WIDTH );
++                aCopyProperties.push_back( static_cast<const rtl::OUString&>(PROPERTY_HIDDEN) );
++                aCopyProperties.push_back( static_cast<const rtl::OUString&>(PROPERTY_WIDTH) );
+ 
+                 // help text to display for the column
+                 Any aDescription;
+diff --git a/dbaccess/source/ui/querydesign/TableWindowAccess.cxx b/dbaccess/source/ui/querydesign/TableWindowAccess.cxx
+index 9ffe63e..eac0c75 100644
+--- a/dbaccess/source/ui/querydesign/TableWindowAccess.cxx
++++ b/dbaccess/source/ui/querydesign/TableWindowAccess.cxx
+@@ -254,7 +254,11 @@ namespace dbaui
+             ::std::vector< Reference<XInterface> > aRelations;
+             aRelations.reserve(5); // just guessing
+             for (; aIter != aEnd ; ++aIter )
+-                aRelations.push_back(getParentChild(aIter - pConnectionList->begin()));
++            {
++                uno::Reference<uno::XInterface> xInterface =
++                    getParentChild(aIter - pConnectionList->begin());
++                aRelations.push_back(xInterface);
++            }
+             
+             Reference<XInterface> *pRelations = aRelations.empty() ? 0 : &aRelations[0];
+             Sequence< Reference<XInterface> > aSeq(pRelations, aRelations.size());
+diff --git a/reportdesign/source/filter/xml/xmlExport.cxx b/reportdesign/source/filter/xml/xmlExport.cxx
+index b0f6db2..1f37f3a 100644
+--- a/reportdesign/source/filter/xml/xmlExport.cxx
++++ b/reportdesign/source/filter/xml/xmlExport.cxx
+@@ -1201,15 +1201,15 @@ void ORptExport::exportAutoStyle(XPropertySet* _xProp,const Reference<XFormatted
+             if ( !aPos.X )
+             {
+                 sBorderProp = PROPERTY_BORDERLEFT;
+-                aProps.push_back(PROPERTY_BORDERRIGHT);
++                aProps.push_back(static_cast<const rtl::OUString&>(PROPERTY_BORDERRIGHT));
+             }
+             else
+             {
+                 sBorderProp = PROPERTY_BORDERRIGHT;
+-                aProps.push_back(PROPERTY_BORDERLEFT);
++                aProps.push_back(static_cast<const rtl::OUString&>(PROPERTY_BORDERLEFT));
+             }
+-            aProps.push_back(PROPERTY_BORDERTOP);
+-            aProps.push_back(PROPERTY_BORDERBOTTOM);
++            aProps.push_back(static_cast<const rtl::OUString&>(PROPERTY_BORDERTOP));
++            aProps.push_back(static_cast<const rtl::OUString&>(PROPERTY_BORDERBOTTOM));
+         }
+         else // horizontal
+         {
+@@ -1217,15 +1217,15 @@ void ORptExport::exportAutoStyle(XPropertySet* _xProp,const Reference<XFormatted
+             if ( (aPos.Y + aSize.Height) == nSectionHeight )
+             {
+                 sBorderProp = PROPERTY_BORDERBOTTOM;
+-                aProps.push_back(PROPERTY_BORDERTOP);
++                aProps.push_back(static_cast<const rtl::OUString&>(PROPERTY_BORDERTOP));
+             }
+             else
+             {
+                 sBorderProp = PROPERTY_BORDERTOP;
+-                aProps.push_back(PROPERTY_BORDERBOTTOM);
++                aProps.push_back(static_cast<const rtl::OUString&>(PROPERTY_BORDERBOTTOM));
+             }
+-            aProps.push_back(PROPERTY_BORDERRIGHT);
+-            aProps.push_back(PROPERTY_BORDERLEFT);
++            aProps.push_back(static_cast<const rtl::OUString&>(PROPERTY_BORDERRIGHT));
++            aProps.push_back(static_cast<const rtl::OUString&>(PROPERTY_BORDERLEFT));
+         }
+ 
+         xBorderProp->setPropertyValue(sBorderProp,uno::makeAny(aValue));
+diff --git a/reportdesign/source/ui/report/ReportController.cxx b/reportdesign/source/ui/report/ReportController.cxx
+index 2ff973f..38407f1 100644
+--- a/reportdesign/source/ui/report/ReportController.cxx
++++ b/reportdesign/source/ui/report/ReportController.cxx
+@@ -257,7 +257,8 @@ void lcl_getReportControlFormat(const Sequence< PropertyValue >& aArgs,
+     }
+     else
+     {
+-        _rControlsFormats.push_back(xReportControlFormat);
++        uno::Reference<uno::XInterface> xInterface = xReportControlFormat;
++        _rControlsFormats.push_back(xInterface);
+     }
+ 
+     if ( !_xWindow.is() )
+diff --git a/reportdesign/source/ui/report/ReportSection.cxx b/reportdesign/source/ui/report/ReportSection.cxx
+index 66b5658..af6947f 100644
+--- a/reportdesign/source/ui/report/ReportSection.cxx
++++ b/reportdesign/source/ui/report/ReportSection.cxx
+@@ -726,7 +726,11 @@ void OReportSection::fillControlModelSelection(::std::vector< uno::Reference< un
+             const SdrObject* pDlgEdObj = rMarkList.GetMark(i)->GetMarkedSdrObj();
+             const OObjectBase* pObj = dynamic_cast<const OObjectBase*>(pDlgEdObj);
+             if ( pObj )
+-                _rSelection.push_back(pObj->getReportComponent());
++            {
++                uno::Reference<uno::XInterface> xInterface =
++                    pObj->getReportComponent();
++                _rSelection.push_back(xInterface);
++            }
+         }
+     }
+ }
+commit 242f1bee6e0df3c58c257178058d61a1c349c2ed
+Author: Caolán McNamara <caolanm@redhat.com>
+Date:   Thu Sep 29 21:32:08 2011 +0100
+
+    get this building with gcc 4.6.1
+
+diff --git a/extensions/source/propctrlr/editpropertyhandler.cxx b/extensions/source/propctrlr/editpropertyhandler.cxx
+index a1693ae..363f685 100644
+--- a/extensions/source/propctrlr/editpropertyhandler.cxx
++++ b/extensions/source/propctrlr/editpropertyhandler.cxx
+@@ -248,13 +248,13 @@ namespace pcr
+         ::std::vector< ::rtl::OUString > aSuperseded;
+         if ( implHaveBothScrollBarProperties() )
+         {
+-            aSuperseded.push_back( PROPERTY_HSCROLL );
+-            aSuperseded.push_back( PROPERTY_VSCROLL );
++            aSuperseded.push_back( static_cast<const rtl::OUString&>(PROPERTY_HSCROLL) );
++            aSuperseded.push_back( static_cast<const rtl::OUString&>(PROPERTY_VSCROLL) );
+         }
+         if ( implHaveTextTypeProperty() )
+         {
+-            aSuperseded.push_back( PROPERTY_RICHTEXT );
+-            aSuperseded.push_back( PROPERTY_MULTILINE );
++            aSuperseded.push_back(  static_cast<const rtl::OUString&>(PROPERTY_RICHTEXT) );
++            aSuperseded.push_back(  static_cast<const rtl::OUString&>(PROPERTY_MULTILINE) );
+         }
+         if ( aSuperseded.empty() )
+             return Sequence< ::rtl::OUString >();
+@@ -267,8 +267,8 @@ namespace pcr
+         ::osl::MutexGuard aGuard( m_aMutex );
+         ::std::vector< ::rtl::OUString > aInterestingActuatingProps;
+         if ( implHaveTextTypeProperty() )
+-            aInterestingActuatingProps.push_back( PROPERTY_TEXTTYPE );
+-        aInterestingActuatingProps.push_back( PROPERTY_MULTILINE );
++            aInterestingActuatingProps.push_back(  static_cast<const rtl::OUString&>(PROPERTY_TEXTTYPE) );
++        aInterestingActuatingProps.push_back( static_cast<const rtl::OUString&>(PROPERTY_MULTILINE) );
+         return Sequence< ::rtl::OUString >( &(*aInterestingActuatingProps.begin()), aInterestingActuatingProps.size() );;
+     }
+ 
+diff --git a/extensions/source/propctrlr/formcomponenthandler.cxx b/extensions/source/propctrlr/formcomponenthandler.cxx
+index 48d0bbe..a006ab5 100644
+--- a/extensions/source/propctrlr/formcomponenthandler.cxx
++++ b/extensions/source/propctrlr/formcomponenthandler.cxx
+@@ -947,28 +947,28 @@ namespace pcr
+     {
+         ::osl::MutexGuard aGuard( m_aMutex );
+         ::std::vector< ::rtl::OUString > aInterestingProperties;
+-        aInterestingProperties.push_back( PROPERTY_DATASOURCE );
+-        aInterestingProperties.push_back( PROPERTY_COMMAND );
+-        aInterestingProperties.push_back( PROPERTY_COMMANDTYPE );
+-        aInterestingProperties.push_back( PROPERTY_LISTSOURCE );
+-        aInterestingProperties.push_back( PROPERTY_LISTSOURCETYPE );
+-        aInterestingProperties.push_back( PROPERTY_SUBMIT_ENCODING );
+-        aInterestingProperties.push_back( PROPERTY_REPEAT );
+-        aInterestingProperties.push_back( PROPERTY_TABSTOP );
+-        aInterestingProperties.push_back( PROPERTY_BORDER );
+-        aInterestingProperties.push_back( PROPERTY_CONTROLSOURCE );
+-        aInterestingProperties.push_back( PROPERTY_DROPDOWN );
+-        aInterestingProperties.push_back( PROPERTY_IMAGE_URL );
+-        aInterestingProperties.push_back( PROPERTY_TARGET_URL );
+-        aInterestingProperties.push_back( PROPERTY_STRINGITEMLIST );
+-        aInterestingProperties.push_back( PROPERTY_BUTTONTYPE );
+-        aInterestingProperties.push_back( PROPERTY_ESCAPE_PROCESSING );
+-        aInterestingProperties.push_back( PROPERTY_TRISTATE );
+-        aInterestingProperties.push_back( PROPERTY_DECIMAL_ACCURACY );
+-        aInterestingProperties.push_back( PROPERTY_SHOWTHOUSANDSEP );
+-        aInterestingProperties.push_back( PROPERTY_FORMATKEY );
+-        aInterestingProperties.push_back( PROPERTY_EMPTY_IS_NULL );
+-        aInterestingProperties.push_back( PROPERTY_TOGGLE );
++        aInterestingProperties.push_back(  static_cast<const rtl::OUString&>(PROPERTY_DATASOURCE) );
++        aInterestingProperties.push_back(  static_cast<const rtl::OUString&>(PROPERTY_COMMAND) );
++        aInterestingProperties.push_back(  static_cast<const rtl::OUString&>(PROPERTY_COMMANDTYPE) );
++        aInterestingProperties.push_back(  static_cast<const rtl::OUString&>(PROPERTY_LISTSOURCE) );
++        aInterestingProperties.push_back(  static_cast<const rtl::OUString&>(PROPERTY_LISTSOURCETYPE) );
++        aInterestingProperties.push_back(  static_cast<const rtl::OUString&>(PROPERTY_SUBMIT_ENCODING) );
++        aInterestingProperties.push_back(  static_cast<const rtl::OUString&>(PROPERTY_REPEAT) );
++        aInterestingProperties.push_back(  static_cast<const rtl::OUString&>(PROPERTY_TABSTOP) );
++        aInterestingProperties.push_back(  static_cast<const rtl::OUString&>(PROPERTY_BORDER) );
++        aInterestingProperties.push_back(  static_cast<const rtl::OUString&>(PROPERTY_CONTROLSOURCE) );
++        aInterestingProperties.push_back(  static_cast<const rtl::OUString&>(PROPERTY_DROPDOWN) );
++        aInterestingProperties.push_back(  static_cast<const rtl::OUString&>(PROPERTY_IMAGE_URL) );
++        aInterestingProperties.push_back(  static_cast<const rtl::OUString&>(PROPERTY_TARGET_URL) );
++        aInterestingProperties.push_back(  static_cast<const rtl::OUString&>(PROPERTY_STRINGITEMLIST) );
++        aInterestingProperties.push_back(  static_cast<const rtl::OUString&>(PROPERTY_BUTTONTYPE) );
++        aInterestingProperties.push_back(  static_cast<const rtl::OUString&>(PROPERTY_ESCAPE_PROCESSING) );
++        aInterestingProperties.push_back(  static_cast<const rtl::OUString&>(PROPERTY_TRISTATE) );
++        aInterestingProperties.push_back(  static_cast<const rtl::OUString&>(PROPERTY_DECIMAL_ACCURACY) );
++        aInterestingProperties.push_back(  static_cast<const rtl::OUString&>(PROPERTY_SHOWTHOUSANDSEP) );
++        aInterestingProperties.push_back(  static_cast<const rtl::OUString&>(PROPERTY_FORMATKEY) );
++        aInterestingProperties.push_back(  static_cast<const rtl::OUString&>(PROPERTY_EMPTY_IS_NULL) );
++        aInterestingProperties.push_back(  static_cast<const rtl::OUString&>(PROPERTY_TOGGLE) );
+         return Sequence< ::rtl::OUString >( &(*aInterestingProperties.begin()), aInterestingProperties.size() );
+     }
+ 
+diff --git a/extensions/source/propctrlr/xsdvalidationhelper.cxx b/extensions/source/propctrlr/xsdvalidationhelper.cxx
+index 4ade7c5..54338a3 100644
+--- a/extensions/source/propctrlr/xsdvalidationhelper.cxx
++++ b/extensions/source/propctrlr/xsdvalidationhelper.cxx
+@@ -271,7 +271,7 @@ namespace pcr
+                 Reference< XPropertySet > xNewType( getDataType( _rName ), UNO_QUERY );
+ 
+                 // fire any changes in the properties which result from this new type
+-                std::set< ::rtl::OUString > aFilter; aFilter.insert( PROPERTY_NAME );
++                std::set< ::rtl::OUString > aFilter; aFilter.insert( static_cast<const rtl::OUString&>(PROPERTY_NAME) );
+                 firePropertyChanges( xOldType, xNewType, aFilter );
+ 
+                 // fire the change in the Data Type property
+diff --git a/extensions/source/propctrlr/xsdvalidationpropertyhandler.cxx b/extensions/source/propctrlr/xsdvalidationpropertyhandler.cxx
+index b9ca345..31c6ba2 100644
+--- a/extensions/source/propctrlr/xsdvalidationpropertyhandler.cxx
++++ b/extensions/source/propctrlr/xsdvalidationpropertyhandler.cxx
+@@ -247,27 +247,27 @@ namespace pcr
+         ::std::vector< ::rtl::OUString > aSuperfluous;
+         if ( m_pHelper.get() )
+         {
+-            aSuperfluous.push_back( PROPERTY_CONTROLSOURCE );
+-            aSuperfluous.push_back( PROPERTY_EMPTY_IS_NULL );
+-            aSuperfluous.push_back( PROPERTY_FILTERPROPOSAL );
+-            aSuperfluous.push_back( PROPERTY_LISTSOURCETYPE );
+-            aSuperfluous.push_back( PROPERTY_LISTSOURCE );
+-            aSuperfluous.push_back( PROPERTY_BOUNDCOLUMN );
++            aSuperfluous.push_back(  static_cast<const rtl::OUString&>(PROPERTY_CONTROLSOURCE) );
++            aSuperfluous.push_back(  static_cast<const rtl::OUString&>(PROPERTY_EMPTY_IS_NULL) );
++            aSuperfluous.push_back(  static_cast<const rtl::OUString&>(PROPERTY_FILTERPROPOSAL) );
++            aSuperfluous.push_back(  static_cast<const rtl::OUString&>(PROPERTY_LISTSOURCETYPE) );
++            aSuperfluous.push_back(  static_cast<const rtl::OUString&>(PROPERTY_LISTSOURCE) );
++            aSuperfluous.push_back(  static_cast<const rtl::OUString&>(PROPERTY_BOUNDCOLUMN) );
+ 
+             bool bAllowBinding = m_pHelper->canBindToAnyDataType();
+ 
+             if ( bAllowBinding )
+             {
+-                aSuperfluous.push_back( PROPERTY_MAXTEXTLEN );
+-                aSuperfluous.push_back( PROPERTY_VALUEMIN );
+-                aSuperfluous.push_back( PROPERTY_VALUEMAX );
+-                aSuperfluous.push_back( PROPERTY_DECIMAL_ACCURACY );
+-                aSuperfluous.push_back( PROPERTY_TIMEMIN );
+-                aSuperfluous.push_back( PROPERTY_TIMEMAX );
+-                aSuperfluous.push_back( PROPERTY_DATEMIN );
+-                aSuperfluous.push_back( PROPERTY_DATEMAX );
+-                aSuperfluous.push_back( PROPERTY_EFFECTIVE_MIN );
+-                aSuperfluous.push_back( PROPERTY_EFFECTIVE_MAX );
++                aSuperfluous.push_back(  static_cast<const rtl::OUString&>(PROPERTY_MAXTEXTLEN) );
++                aSuperfluous.push_back(  static_cast<const rtl::OUString&>(PROPERTY_VALUEMIN) );
++                aSuperfluous.push_back(  static_cast<const rtl::OUString&>(PROPERTY_VALUEMAX) );
++                aSuperfluous.push_back(  static_cast<const rtl::OUString&>(PROPERTY_DECIMAL_ACCURACY) );
++                aSuperfluous.push_back(  static_cast<const rtl::OUString&>(PROPERTY_TIMEMIN) );
++                aSuperfluous.push_back(  static_cast<const rtl::OUString&>(PROPERTY_TIMEMAX) );
++                aSuperfluous.push_back(  static_cast<const rtl::OUString&>(PROPERTY_DATEMIN) );
++                aSuperfluous.push_back(  static_cast<const rtl::OUString&>(PROPERTY_DATEMAX) );
++                aSuperfluous.push_back(  static_cast<const rtl::OUString&>(PROPERTY_EFFECTIVE_MIN) );
++                aSuperfluous.push_back(  static_cast<const rtl::OUString&>(PROPERTY_EFFECTIVE_MAX) );
+             }
+         }
+ 
+@@ -283,8 +283,8 @@ namespace pcr
+         ::std::vector< ::rtl::OUString > aInterestedInActuations( 2 );
+         if ( m_pHelper.get() )
+         {
+-            aInterestedInActuations.push_back( PROPERTY_XSD_DATA_TYPE );
+-            aInterestedInActuations.push_back( PROPERTY_XML_DATA_MODEL );
++            aInterestedInActuations.push_back(  static_cast<const rtl::OUString&>(PROPERTY_XSD_DATA_TYPE) );
++            aInterestedInActuations.push_back(  static_cast<const rtl::OUString&>(PROPERTY_XML_DATA_MODEL) );
+         }
+         if ( aInterestedInActuations.empty() )
+             return Sequence< ::rtl::OUString >();

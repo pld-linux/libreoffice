@@ -1,4 +1,4 @@
-# NOTE:
+# NOTE - FIXME FOR 3.4.3 !!!:
 #	- normal build (i686) requires about 27 GB of disk space:
 #		$BUILD_ROOT	7.0 GB
 #		BUILD		18  GB
@@ -112,13 +112,7 @@ Source30:       http://hg.services.openoffice.org/binaries/17410483b5b5f267aa18b
 # Source30-md5:	17410483b5b5f267aa18b7e00b65e6e0
 Source31:       http://download.go-oo.org/extern/b4cae0700aa1c2aef7eb7f345365e6f1-translate-toolkit-1.8.1.tar.bz2
 # Source31-md5:	b4cae0700aa1c2aef7eb7f345365e6f1
-# patches applied in prep section
-Patch0:		%{name}-build-apply.patch
-# https://bugs.freedesktop.org/show_bug.cgi?id=31871
-Patch100:	%{name}-hotfix-with-lang-all.patch
-Patch101:	%{name}-hotfix-kde4.patch
-Patch102:	%{name}-impress-dont-exit-after-pps-autoplay.patch
-Patch103:	%{name}-3.3.2-bison25.diff
+Patch0:		libreoffice34-gcc461.patch
 URL:		http://www.documentfoundation.org/
 BuildRequires:	/usr/bin/getopt
 BuildRequires:	GConf2-devel
@@ -2443,6 +2437,8 @@ for dir in *-%{version}; do
 	[ -f $dir/ChangeLog ] && mv $dir/ChangeLog ChangeLog-$dir
 	mv $dir/* .
 done
+
+%patch0 -p1
 
 install -d ext_sources
 ln %{SOURCE20} ext_sources
