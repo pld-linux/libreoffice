@@ -54,101 +54,64 @@ Group:		X11/Applications
 # git checkout -b libreoffice-3-3 origin/libreoffice-3-3
 Source0:	http://download.documentfoundation.org/libreoffice/src/%{major_ver}/%{name}-bootstrap-%{version}.tar.bz2
 # Source0-md5:	465b3be0e30f88e1139c45d2e2217927
-Source1:	http://download.go-oo.org/DEV300/ooo-cli-prebuilt-3.3.tar.bz2
-# Source1-md5:	fc46e64367c3b09a1668fb9ab40c031b
-Source2:	http://download.documentfoundation.org/libreoffice/src/%{major_ver}/%{name}-artwork-%{version}.tar.bz2
-# Source2-md5:	7c2e73f1197d169519f86efe422e5df9
-Source3:	http://download.documentfoundation.org/libreoffice/src/%{major_ver}/%{name}-base-%{version}.tar.bz2
-# Source3-md5:	823956297a7e0b7603c585c49bd9fd4e
-Source4:	http://download.documentfoundation.org/libreoffice/src/%{major_ver}/%{name}-writer-%{version}.tar.bz2
-# Source4-md5:	da8a40cac4bd9d4f6f326e0e3b1b7e2a
-Source5:	http://download.documentfoundation.org/libreoffice/src/%{major_ver}/%{name}-calc-%{version}.tar.bz2
-# Source5-md5:	a1d5af5be5eb522c8a24feacbb0161fa
-Source6:	http://download.documentfoundation.org/libreoffice/src/%{major_ver}/%{name}-components-%{version}.tar.bz2
-# Source6-md5:	8b972e130dfe62eb41d1d71d72de4b76
-Source7:	http://download.documentfoundation.org/libreoffice/src/%{major_ver}/%{name}-extensions-%{version}.tar.bz2
-# Source7-md5:	a6b22494e3a65a3b242ecb896aa7ab48
-Source8:	http://download.documentfoundation.org/libreoffice/src/%{major_ver}/%{name}-extras-%{version}.tar.bz2
-# Source8-md5:	b7d86f8baee5b31af210cc81785e5676
-Source9:	http://download.documentfoundation.org/libreoffice/src/%{major_ver}/%{name}-filters-%{version}.tar.bz2
-# Source9-md5:	de6c062d334daab99cf0592aa3568215
-Source10:	http://download.documentfoundation.org/libreoffice/src/%{major_ver}/%{name}-help-%{version}.tar.bz2
-# Source10-md5:	df46914d540ef0126cd746d09c68ca2a
-Source11:	http://download.documentfoundation.org/libreoffice/src/%{major_ver}/%{name}-impress-%{version}.tar.bz2
-# Source11-md5:	8f308250c397ddc6fdb1aae13e102927
-Source12:	http://download.documentfoundation.org/libreoffice/src/%{major_ver}/%{name}-translations-%{version}.tar.bz2
-# Source12-md5:	502e89e7a190c2b955467215f7894af0
-Source13:	http://download.documentfoundation.org/libreoffice/src/%{major_ver}/%{name}-libs-core-%{version}.tar.bz2
-# Source13-md5:	1fd00a0fcfd4a5d1956c3f6a0990d1ce
-Source14:	http://download.documentfoundation.org/libreoffice/src/%{major_ver}/%{name}-libs-extern-%{version}.tar.bz2
-# Source14-md5:	86914ac8bc30ea721b708b2f2faa3111
-Source15:	http://download.documentfoundation.org/libreoffice/src/%{major_ver}/%{name}-libs-extern-sys-%{version}.tar.bz2
-# Source15-md5:	1452229e57ac3c4191e798eac4c0a7e0
-Source16:	http://download.documentfoundation.org/libreoffice/src/%{major_ver}/%{name}-libs-gui-%{version}.tar.bz2
-# Source16-md5:	bb46bdb682689629d432cdbf5f3f42c2
-Source17:	http://download.documentfoundation.org/libreoffice/src/%{major_ver}/%{name}-postprocess-%{version}.tar.bz2
-# Source17-md5:	bec7f633562762debdf810690002e688
-Source18:	http://download.documentfoundation.org/libreoffice/src/%{major_ver}/%{name}-sdk-%{version}.tar.bz2
-# Source18-md5:	87061613efece1c253906a90cd4dc01f
-Source19:	http://download.documentfoundation.org/libreoffice/src/%{major_ver}/%{name}-testing-%{version}.tar.bz2
-# Source19-md5:	308284d7d1d1bd6860d128b26e24390b
-Source20:	http://download.documentfoundation.org/libreoffice/src/%{major_ver}/%{name}-ure-%{version}.tar.bz2
-# Source20-md5:	fa8b36365a2b2fb110c44886d7069774
-Source21:	http://download.go-oo.org/SRC680/biblio.tar.bz2
-# Source21-md5:	1948e39a68f12bfa0b7eb309c14d940c
-Source22:	http://download.go-oo.org/SRC680/extras-3.1.tar.bz2
-# Source22-md5:	1aa219782c41ff6cabef9ecaf147556f
-# Source23-md5:	1aa219782c41ff6cabef9ecaf147556f
-Source100:	http://hg.services.openoffice.org/binaries/fdb27bfe2dbe2e7b57ae194d9bf36bab-SampleICC-1.3.2.tar.gz
-# Source100-md5:	fdb27bfe2dbe2e7b57ae194d9bf36bab
-Source101:	http://hg.services.openoffice.org/binaries/17410483b5b5f267aa18b7e00b65e6e0-hsqldb_1_8_0.zip
-# Source101-md5:	17410483b5b5f267aa18b7e00b65e6e0
-Source102:	http://hg.services.openoffice.org/binaries/26b3e95ddf3d9c077c480ea45874b3b8-lp_solve_5.5.tar.gz
-# Source102-md5:	26b3e95ddf3d9c077c480ea45874b3b8
-Source103:	http://hg.services.openoffice.org/binaries/cf8a6967f7de535ae257fa411c98eb88-mdds_0.3.0.tar.bz2
-# Source103-md5:	cf8a6967f7de535ae257fa411c98eb88
-Source104:	http://hg.services.openoffice.org/binaries/798b2ffdc8bcfe7bca2cf92b62caf685-rhino1_5R5.zip
-# Source104-md5:	798b2ffdc8bcfe7bca2cf92b62caf685
-Source105:	http://hg.services.openoffice.org/binaries/128cfc86ed5953e57fe0f5ae98b62c2e-libtextcat-2.2.tar.gz
-# Source105-md5:	128cfc86ed5953e57fe0f5ae98b62c2e
-Source106:	http://hg.services.openoffice.org/binaries/d0b5af6e408b8d2958f3d83b5244f5e8-hyphen-2.4.tar.gz
-# Source106-md5:	d0b5af6e408b8d2958f3d83b5244f5e8
-Source107:	http://hg.services.openoffice.org/binaries/1f24ab1d39f4a51faf22244c94a6203f-xmlsec1-1.2.14.tar.gz
-# Source107-md5:	1f24ab1d39f4a51faf22244c94a6203f
-Source108:	http://hg.services.openoffice.org/binaries/1756c4fa6c616ae15973c104cd8cb256-Adobe-Core35_AFMs-314.tar.gz
-# Source108-md5:	1756c4fa6c616ae15973c104cd8cb256
-Source109:	http://hg.services.openoffice.org/binaries/ada24d37d8d638b3d8a9985e80bc2978-source-9.0.0.7-bj.zip
-# Source109-md5:	ada24d37d8d638b3d8a9985e80bc2978
-Source110:	http://hg.services.openoffice.org/binaries/067201ea8b126597670b5eff72e1f66c-mythes-1.2.0.tar.gz
-# Source110-md5:	067201ea8b126597670b5eff72e1f66c
-Source111:	http://hg.services.openoffice.org/binaries/a7983f859eafb2677d7ff386a023bc40-xsltml_2.1.2.zip
-# Source111-md5:	a7983f859eafb2677d7ff386a023bc40
-Source112:	http://download.go-oo.org/src/0f63ee487fda8f21fafa767b3c447ac9-ixion-0.2.0.tar.gz
-# Source112-md5:	0f63ee487fda8f21fafa767b3c447ac9
-Source113:	http://hg.services.openoffice.org/binaries/8ea307d71d11140574bfb9fcc2487e33-libbase.zip
-# Source113-md5:	8ea307d71d11140574bfb9fcc2487e33
-Source114:	http://hg.services.openoffice.org/binaries/a06a496d7a43cbdc35e69dbe678efadb-libloader.zip
-# Source114-md5:	a06a496d7a43cbdc35e69dbe678efadb
-Source115:	http://hg.services.openoffice.org/binaries/39bb3fcea1514f1369fcfc87542390fd-sacjava-1.3.zip
-# Source115-md5:	39bb3fcea1514f1369fcfc87542390fd
-Source116:	http://hg.services.openoffice.org/binaries/f3e2febd267c8e4b13df00dac211dd6d-flute.zip
-# Source116-md5:	f3e2febd267c8e4b13df00dac211dd6d
-Source117:	http://hg.services.openoffice.org/binaries/5aba06ede2daa9f2c11892fbd7bc3057-libserializer.zip
-# Source117-md5:	5aba06ede2daa9f2c11892fbd7bc3057
-Source118:	http://hg.services.openoffice.org/binaries/f7925ba8491fe570e5164d2c72791358-libfonts.zip
-# Source118-md5:	f7925ba8491fe570e5164d2c72791358
-Source119:	http://hg.services.openoffice.org/binaries/d1a3205871c3c52e8a50c9f18510ae12-libformula.zip
-# Source119-md5:	d1a3205871c3c52e8a50c9f18510ae12
-Source120:	http://hg.services.openoffice.org/binaries/67b42915c8432abf0a922438f00860a2-libxml.zip
-# Source120-md5:	67b42915c8432abf0a922438f00860a2
-Source121:	http://hg.services.openoffice.org/binaries/dbb3757275dc5cc80820c0b4dd24ed95-librepository.zip
-# Source121-md5:	dbb3757275dc5cc80820c0b4dd24ed95
-Source122:	http://hg.services.openoffice.org/binaries/79600e696a98ff95c2eba976f7a8dfbb-liblayout.zip
-# Source122-md5:	79600e696a98ff95c2eba976f7a8dfbb
-Source123:	http://hg.services.openoffice.org/binaries/d4c4d91ab3a8e52a2e69d48d34ef4df4-core.zip
-# Source123-md5:	d4c4d91ab3a8e52a2e69d48d34ef4df4
-Source124:	http://hg.services.openoffice.org/binaries/35c94d2df8893241173de1d16b6034c0-swingExSrc.zip
-# Source124-md5:	35c94d2df8893241173de1d16b6034c0
+Source1:	http://download.documentfoundation.org/libreoffice/src/%{major_ver}/%{name}-artwork-%{version}.tar.bz2
+# Source1-md5:	7c2e73f1197d169519f86efe422e5df9
+Source2:	http://download.documentfoundation.org/libreoffice/src/%{major_ver}/%{name}-base-%{version}.tar.bz2
+# Source2-md5:	823956297a7e0b7603c585c49bd9fd4e
+Source3:	http://download.documentfoundation.org/libreoffice/src/%{major_ver}/%{name}-writer-%{version}.tar.bz2
+# Source3-md5:	da8a40cac4bd9d4f6f326e0e3b1b7e2a
+Source4:	http://download.documentfoundation.org/libreoffice/src/%{major_ver}/%{name}-calc-%{version}.tar.bz2
+# Source4-md5:	a1d5af5be5eb522c8a24feacbb0161fa
+Source5:	http://download.documentfoundation.org/libreoffice/src/%{major_ver}/%{name}-components-%{version}.tar.bz2
+# Source5-md5:	8b972e130dfe62eb41d1d71d72de4b76
+Source6:	http://download.documentfoundation.org/libreoffice/src/%{major_ver}/%{name}-extensions-%{version}.tar.bz2
+# Source6-md5:	a6b22494e3a65a3b242ecb896aa7ab48
+Source7:	http://download.documentfoundation.org/libreoffice/src/%{major_ver}/%{name}-extras-%{version}.tar.bz2
+# Source7-md5:	b7d86f8baee5b31af210cc81785e5676
+Source8:	http://download.documentfoundation.org/libreoffice/src/%{major_ver}/%{name}-filters-%{version}.tar.bz2
+# Source8-md5:	de6c062d334daab99cf0592aa3568215
+Source9:	http://download.documentfoundation.org/libreoffice/src/%{major_ver}/%{name}-help-%{version}.tar.bz2
+# Source9-md5:	df46914d540ef0126cd746d09c68ca2a
+Source10:	http://download.documentfoundation.org/libreoffice/src/%{major_ver}/%{name}-impress-%{version}.tar.bz2
+# Source10-md5:	8f308250c397ddc6fdb1aae13e102927
+Source11:	http://download.documentfoundation.org/libreoffice/src/%{major_ver}/%{name}-translations-%{version}.tar.bz2
+# Source11-md5:	502e89e7a190c2b955467215f7894af0
+Source12:	http://download.documentfoundation.org/libreoffice/src/%{major_ver}/%{name}-libs-core-%{version}.tar.bz2
+# Source12-md5:	1fd00a0fcfd4a5d1956c3f6a0990d1ce
+Source13:	http://download.documentfoundation.org/libreoffice/src/%{major_ver}/%{name}-libs-extern-%{version}.tar.bz2
+# Source13-md5:	86914ac8bc30ea721b708b2f2faa3111
+Source14:	http://download.documentfoundation.org/libreoffice/src/%{major_ver}/%{name}-libs-extern-sys-%{version}.tar.bz2
+# Source14-md5:	1452229e57ac3c4191e798eac4c0a7e0
+Source15:	http://download.documentfoundation.org/libreoffice/src/%{major_ver}/%{name}-libs-gui-%{version}.tar.bz2
+# Source15-md5:	bb46bdb682689629d432cdbf5f3f42c2
+Source16:	http://download.documentfoundation.org/libreoffice/src/%{major_ver}/%{name}-postprocess-%{version}.tar.bz2
+# Source16-md5:	bec7f633562762debdf810690002e688
+Source17:	http://download.documentfoundation.org/libreoffice/src/%{major_ver}/%{name}-sdk-%{version}.tar.bz2
+# Source17-md5:	87061613efece1c253906a90cd4dc01f
+Source18:	http://download.documentfoundation.org/libreoffice/src/%{major_ver}/%{name}-testing-%{version}.tar.bz2
+# Source18-md5:	308284d7d1d1bd6860d128b26e24390b
+Source19:	http://download.documentfoundation.org/libreoffice/src/%{major_ver}/%{name}-ure-%{version}.tar.bz2
+# Source19-md5:	fa8b36365a2b2fb110c44886d7069774
+Source20:       http://download.go-oo.org/extern/185d60944ea767075d27247c3162b3bc-unowinreg.dll
+# Source20-md5:	185d60944ea767075d27247c3162b3bc
+Source23:       http://hg.services.openoffice.org/binaries/fdb27bfe2dbe2e7b57ae194d9bf36bab-SampleICC-1.3.2.tar.gz
+# Source23-md5:	fdb27bfe2dbe2e7b57ae194d9bf36bab
+Source24:       http://hg.services.openoffice.org/binaries/a7983f859eafb2677d7ff386a023bc40-xsltml_2.1.2.zip
+# Source24-md5:	a7983f859eafb2677d7ff386a023bc40
+Source25:       http://hg.services.openoffice.org/binaries/1f24ab1d39f4a51faf22244c94a6203f-xmlsec1-1.2.14.tar.gz
+# Source25-md5:	1f24ab1d39f4a51faf22244c94a6203f
+Source26:       http://hg.services.openoffice.org/binaries/798b2ffdc8bcfe7bca2cf92b62caf685-rhino1_5R5.zip
+# Source26-md5:	798b2ffdc8bcfe7bca2cf92b62caf685
+Source27:       http://hg.services.openoffice.org/binaries/35c94d2df8893241173de1d16b6034c0-swingExSrc.zip
+# Source27-md5:	35c94d2df8893241173de1d16b6034c0
+Source28:       http://hg.services.openoffice.org/binaries/ada24d37d8d638b3d8a9985e80bc2978-source-9.0.0.7-bj.zip
+# Source28-md5:	ada24d37d8d638b3d8a9985e80bc2978
+Source29:       http://hg.services.openoffice.org/binaries/18f577b374d60b3c760a3a3350407632-STLport-4.5.tar.gz 
+# Source29-md5:	18f577b374d60b3c760a3a3350407632
+Source30:       http://hg.services.openoffice.org/binaries/17410483b5b5f267aa18b7e00b65e6e0-hsqldb_1_8_0.zip
+# Source30-md5:	17410483b5b5f267aa18b7e00b65e6e0
+Source31:       http://download.go-oo.org/extern/b4cae0700aa1c2aef7eb7f345365e6f1-translate-toolkit-1.8.1.tar.bz2
+# Source31-md5:	b4cae0700aa1c2aef7eb7f345365e6f1
 # patches applied in prep section
 Patch0:		%{name}-build-apply.patch
 # https://bugs.freedesktop.org/show_bug.cgi?id=31871
@@ -195,6 +158,7 @@ BuildRequires:	java-commons-codec
 BuildRequires:	java-commons-httpclient
 BuildRequires:	java-commons-lang
 BuildRequires:	java-commons-logging
+BuildRequires:	java-flow-engine
 %{?with_system_hsqldb:BuildRequires:	java-hsqldb}
 BuildRequires:	java-junit
 BuildRequires:	java-lucene
@@ -2474,10 +2438,20 @@ bash-completion for LibreOffice.
 bashowe uzupełnianie nazw dla LibreOffice.
 
 %prep
-%setup -q -n %{name}-bootstrap-%{version} -b1 -b2 -b3 -b4 -b5 -b6 -b7 -b8 -b9 -b10 -b11 -b12 -b13 -b14 -b15 -b16 -b17 -b18 -b19 -b20 -b21 -b22
+%setup -q -n %{name}-bootstrap-%{version} -b1 -b2 -b3 -b4 -b5 -b6 -b7 -b8 -b9 -b10 -b11 -b12 -b13 -b14 -b15 -b16 -b17 -b18 -b19
 
 install -d ext_sources
-#install external tarballs into ext_sources
+ln %{SOURCE20} ext_sources
+ln %{SOURCE23} ext_sources
+ln %{SOURCE24} ext_sources
+ln %{SOURCE25} ext_sources
+ln %{SOURCE26} ext_sources
+ln %{SOURCE27} ext_sources
+ln %{SOURCE28} ext_sources
+ln %{SOURCE29} ext_sources
+ln %{SOURCE30} ext_sources
+ln %{SOURCE31} ext_sources
+:> src.downloaded
 
 %build
 # Make sure we have /proc mounted - otherwise idlc will fail later.
@@ -2490,7 +2464,7 @@ fi
 SAFE_CFLAGS=""
 for i in %{rpmcflags}; do
 	case "$i" in
-	-O?)
+	-O?|-pipe|-Wall|-g|-fexceptions)
 		;;
 	*)
 		SAFE_CFLAGS="$SAFE_CFLAGS $i"
@@ -2504,12 +2478,6 @@ export CPP="%{__cpp}"
 
 %{__aclocal}
 %{__autoconf}
-
-%ifarch %{x8664} sparc64 ppc64 alpha
-DISTRO="PLD64"
-%else
-DISTRO="PLD"
-%endif
 
 export DESTDIR=$RPM_BUILD_ROOT
 export IGNORE_MANIFEST_CHANGES=1
@@ -2529,8 +2497,6 @@ if [ "$CCACHE_DIR" = "" ] ; then
 fi
 %endif
 
-
-export DEFAULT_TO_ENGLISH_FOR_PACKING=1
 
 %if %{with parallelbuild}
 RPM_BUILD_NR_THREADS=$(echo %{_smp_mflags} | cut -dj -f2)
@@ -2646,7 +2612,7 @@ RPM_BUILD_NR_THREADS="1"
 	--enable-lockdown \
 	--disable-layout \
 	--disable-fetch-external
-"
+
 # this limits processing some files but doesn't limit parallel build
 # processes of main OOo build (since OOo uses it's own build system)
 %{__make} -j1 \
