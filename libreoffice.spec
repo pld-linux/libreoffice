@@ -113,6 +113,7 @@ Source30:       http://hg.services.openoffice.org/binaries/17410483b5b5f267aa18b
 Source31:       http://download.go-oo.org/extern/b4cae0700aa1c2aef7eb7f345365e6f1-translate-toolkit-1.8.1.tar.bz2
 # Source31-md5:	b4cae0700aa1c2aef7eb7f345365e6f1
 Patch0:		libreoffice34-gcc461.patch
+Patch1:		%{name}-kde4.patch
 URL:		http://www.documentfoundation.org/
 BuildRequires:	/usr/bin/getopt
 BuildRequires:	GConf2-devel
@@ -2439,6 +2440,7 @@ for dir in *-%{version}; do
 done
 
 %patch0 -p1
+%patch1 -p1
 
 install -d ext_sources
 ln %{SOURCE20} ext_sources

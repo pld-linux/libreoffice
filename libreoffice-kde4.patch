@@ -1,0 +1,11 @@
+--- libreoffice-bootstrap-3.4.3.2/configure.in~	2011-08-15 20:34:27.000000000 +0200
++++ libreoffice-bootstrap-3.4.3.2/configure.in	2011-11-02 15:58:50.492921855 +0100
+@@ -6958,7 +6958,7 @@
+    fi
+ 
+    dnl Check for Meta Object Compiler
+-   AC_PATH_PROG( MOC4, moc, no, [`dirname $qt_lib_dir`/bin:$QT4DIR/bin:$PATH] )
++   AC_PATH_PROG( MOC4, moc, no, [$QT4DIR/bin:$PATH] )
+    if test "$MOC4" = "no" ; then
+       AC_MSG_ERROR([Qt Meta Object Compiler not found.  Please specify
+ the root of your Qt installation by exporting QT4DIR before running "configure".])
