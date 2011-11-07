@@ -2720,6 +2720,7 @@ find_lang() {
 	fi
 }
 
+%if %{with i18n}
 rm -f *.lang*
 langlist=$(ls build/lang_*_list.txt | sed -e 's=build/lang_\(.*\)_list.txt=\1=g')
 
@@ -2731,6 +2732,7 @@ done
 	s,%{_libdir}/%{name}/readmes,%{_datadir}/%{name}/readmes,;
 	s,%{basisdir}/help,%{databasisdir}/help,;
 ' *.lang
+%endif
 
 %clean
 rm -rf $RPM_BUILD_ROOT
