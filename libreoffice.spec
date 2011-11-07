@@ -11,7 +11,7 @@
 %bcond_without	kde4		# KDE4 L&F packages
 %bcond_with	mono		# enable compilation of mono bindings
 %bcond_without	mozilla		# without mozilla components
-%bcond_without	i18n		# do not create i18n packages
+%bcond_without	i18n		# do not create i18n packages (extra build time)
 %bcond_with	ccache		# use ccache to speed up builds
 %bcond_with	icecream	# use icecream to speed up builds
 %bcond_with	msaccess	# with ms access import pieces
@@ -2634,9 +2634,25 @@ if [ $RPM_BUILD_NR_THREADS -gt 1 ]; then
 fi
 
 %install
+# install just once (based on makeinstall.stamp)
+# this will make packaging newer versions simplier
+if [ ! -f makeinstall.stamp -o ! -d $RPM_BUILD_ROOT ]; then
+	rm -rf makeinstall.stamp installed.stamp $RPM_BUILD_ROOT
 
-%{__make} install \
-	DESTDIR=$RPM_BUILD_ROOT
+	%{__make} install \
+		DESTDIR=$RPM_BUILD_ROOT
+
+	# save orignal install layout
+	find $RPM_BUILD_ROOT -ls > ls.txt
+	touch makeinstall.stamp
+fi
+
+# mangle files installed in build root
+if [ ! -f installed.stamp ]; then
+	chmod -Rf a+rX,u+w,g-w,o-w $RPM_BUILD_ROOT
+
+	touch installed.stamp
+fi
 
 # Find out locales
 find_lang() {
