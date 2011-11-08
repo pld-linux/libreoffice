@@ -2731,7 +2731,7 @@ if [ ! -f installed.stamp ]; then
 	rm -r $RPM_BUILD_ROOT%{_desktopdir}/*.desktop \
 		$RPM_BUILD_ROOT%{_iconsdir}/gnome \
 		$RPM_BUILD_ROOT%{_datadir}/application-registry \
-		$RPM_BUILD_ROOT%{_datadir}/mime*
+		$RPM_BUILD_ROOT%{_datadir}/mime{lnk,-info}
 	for a in $RPM_BUILD_ROOT%{_libdir}/%{name}/share/xdg/*.desktop; do
 		cp $a $RPM_BUILD_ROOT%{_desktopdir}/libreoffice-$(basename "$a")
 	done
