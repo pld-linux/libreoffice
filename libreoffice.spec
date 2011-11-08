@@ -11,7 +11,7 @@
 %bcond_without	kde4		# KDE4 L&F packages
 %bcond_with	mono		# enable compilation of mono bindings
 %bcond_without	mozilla		# without mozilla components
-%bcond_without i18n        # do not create i18n packages (extra build time)
+%bcond_without	i18n        # do not create i18n packages (extra build time)
 %bcond_with	ccache		# use ccache to speed up builds
 %bcond_with	icecream	# use icecream to speed up builds
 %bcond_with	msaccess	# with ms access import pieces
@@ -45,7 +45,7 @@ Summary:	LibreOffice - powerful office suite
 Summary(pl.UTF-8):	LibreOffice - potężny pakiet biurowy
 Name:		libreoffice
 Version:	%{major_ver}.2
-Release:	0.2
+Release:	0.3
 License:	GPL/LGPL
 Group:		X11/Applications
 # we use git because released tarballs are buggy too often
@@ -337,11 +337,13 @@ Summary:	Core modules for LibreOffice
 Summary(pl.UTF-8):	Podstawowe moduły dla LibreOffice
 Group:		X11/Applications
 Requires(post,postun):	desktop-file-utils
+Requires(post,postun):	gtk-update-icon-cache
 Requires(post,postun):	shared-mime-info
 Requires:	%{name}-ure = %{version}-%{release}
 # libcups.so.2 is dlopened (in cupsmgr.cxx); maybe Suggests instead?
 Requires:	cups-lib
 Requires:	fonts-TTF-OpenSymbol
+Requires:	hicolor-icon-theme
 %{?with_system_beanshell:Requires:	java-beanshell}
 %{?with_system_hsqldb:Requires:	java-hsqldb}
 Requires:	libstdc++ >= 5:3.2.1
@@ -500,7 +502,9 @@ Summary:	Database frontend for LibreOffice
 Summary(pl.UTF-8):	Frontend do baz danych dla LibreOffice
 Group:		X11/Applications
 Requires(post,postun):	desktop-file-utils
+Requires(post,postun):	gtk-update-icon-cache
 Requires:	%{name}-core = %{version}-%{release}
+Requires:	hicolor-icon-theme
 Obsoletes:	openoffice.org-base
 
 %description base
@@ -531,7 +535,9 @@ Summary:	Writer module for LibreOffice
 Summary(pl.UTF-8):	Moduł Writer dla LibreOffice
 Group:		X11/Applications
 Requires(post,postun):	desktop-file-utils
+Requires(post,postun):	gtk-update-icon-cache
 Requires:	%{name}-core = %{version}-%{release}
+Requires:	hicolor-icon-theme
 Obsoletes:	openoffice.org-writer
 
 %description writer
@@ -560,7 +566,9 @@ Summary:	Calc module for LibreOffice
 Summary(pl.UTF-8):	Moduł Calc dla LibreOffice
 Group:		X11/Applications
 Requires(post,postun):	desktop-file-utils
+Requires(post,postun):	gtk-update-icon-cache
 Requires:	%{name}-core = %{version}-%{release}
+Requires:	hicolor-icon-theme
 Obsoletes:	openoffice.org-calc
 
 %description calc
@@ -574,7 +582,9 @@ Summary:	Draw module for LibreOffice
 Summary(pl.UTF-8):	Moduł Draw dla LibreOffice
 Group:		X11/Applications
 Requires(post,postun):	desktop-file-utils
+Requires(post,postun):	gtk-update-icon-cache
 Requires:	%{name}-core = %{version}-%{release}
+Requires:	hicolor-icon-theme
 Obsoletes:	openoffice.org-draw
 
 %description draw
@@ -588,7 +598,9 @@ Summary:	Impress module for LibreOffice
 Summary(pl.UTF-8):	Moduł Impress dla LibreOffice
 Group:		X11/Applications
 Requires(post,postun):	desktop-file-utils
+Requires(post,postun):	gtk-update-icon-cache
 Requires:	%{name}-core = %{version}-%{release}
+Requires:	hicolor-icon-theme
 Obsoletes:	openoffice.org-impress
 
 %description impress
@@ -602,7 +614,9 @@ Summary:	Math module for LibreOffice
 Summary(pl.UTF-8):	Moduł Math dla LibreOffice
 Group:		X11/Applications
 Requires(post,postun):	desktop-file-utils
+Requires(post,postun):	gtk-update-icon-cache
 Requires:	%{name}-core = %{version}-%{release}
+Requires:	hicolor-icon-theme
 Obsoletes:	openoffice.org-math
 
 %description math
@@ -2717,7 +2731,7 @@ if [ ! -f installed.stamp ]; then
 	rm -r $RPM_BUILD_ROOT%{_desktopdir}/*.desktop \
 		$RPM_BUILD_ROOT%{_iconsdir}/gnome \
 		$RPM_BUILD_ROOT%{_datadir}/application-registry \
-		$RPM_BUILD_ROOT%{_datadir}/mimelnk
+		$RPM_BUILD_ROOT%{_datadir}/mime*
 	for a in $RPM_BUILD_ROOT%{_libdir}/%{name}/share/xdg/*.desktop; do
 		cp $a $RPM_BUILD_ROOT%{_desktopdir}/libreoffice-$(basename "$a")
 	done
@@ -2819,16 +2833,20 @@ rm -rf $RPM_BUILD_ROOT
 %post core
 %update_mime_database
 %update_desktop_database_post
+%update_icon_cache hicolor
 
 %postun core
 %update_desktop_database_postun
 %update_mime_database
+%update_icon_cache hicolor
 
 %post base
 %update_desktop_database_post
+%update_icon_cache hicolor
 
 %postun base
 %update_desktop_database_postun
+%update_icon_cache hicolor
 
 %post web
 %update_desktop_database_post
@@ -2838,33 +2856,43 @@ rm -rf $RPM_BUILD_ROOT
 
 %post writer
 %update_desktop_database_post
+%update_icon_cache hicolor
 
 %postun writer
 %update_desktop_database_postun
+%update_icon_cache hicolor
 
 %post calc
 %update_desktop_database_post
+%update_icon_cache hicolor
 
 %postun calc
 %update_desktop_database_postun
+%update_icon_cache hicolor
 
 %post draw
 %update_desktop_database_post
+%update_icon_cache hicolor
 
 %postun draw
 %update_desktop_database_postun
+%update_icon_cache hicolor
 
 %post impress
 %update_desktop_database_post
+%update_icon_cache hicolor
 
 %postun impress
 %update_desktop_database_postun
+%update_icon_cache hicolor
 
 %post math
 %update_desktop_database_post
+%update_icon_cache hicolor
 
 %postun math
 %update_desktop_database_postun
+%update_icon_cache hicolor
 
 %post -n browser-plugin-%{name}
 %update_browser_plugins
@@ -3372,7 +3400,6 @@ fi
 %{_datadir}/mime/packages/libreoffice.xml
 
 %{_desktopdir}/libreoffice-startcenter.desktop
-
 %{_iconsdir}/hicolor/*/apps/libreoffice-startcenter.png
 
 %{_mandir}/man1/loffice.1
@@ -3407,7 +3434,6 @@ fi
 %attr(755,root,root) %{basisdir}/program/gconfbe1.uno.so
 %attr(755,root,root) %{basisdir}/program/gnome-open-url
 %attr(755,root,root) %{basisdir}/program/gnome-open-url.bin
-#%attr(755,root,root) %{basisdir}/program/libevoabl[ipx].so
 %attr(755,root,root) %{basisdir}/program/libvclplug_gtk*.so
 %attr(755,root,root) %{basisdir}/program/ucpgio1.uno.so
 %{basisdir}/share/registry/gnome.xcd
