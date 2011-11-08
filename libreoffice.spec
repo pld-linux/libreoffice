@@ -45,7 +45,7 @@ Summary:	LibreOffice - powerful office suite
 Summary(pl.UTF-8):	LibreOffice - potężny pakiet biurowy
 Name:		libreoffice
 Version:	%{major_ver}.2
-Release:	0.1
+Release:	0.2
 License:	GPL/LGPL
 Group:		X11/Applications
 # we use git because released tarballs are buggy too often
@@ -3311,6 +3311,7 @@ fi
 
 %dir %{basisdir}/share/template
 %{basisdir}/share/template/en-US
+%dir %{basisdir}/share/template/common
 %{basisdir}/share/template/common/layout
 %dir %{basisdir}/share/template/wizard
 %{basisdir}/share/template/wizard/bitmap
