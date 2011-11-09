@@ -2729,7 +2729,7 @@ if [ ! -f installed.stamp ]; then
 	ln -s ../../share/%{name}/readmes $RPM_BUILD_ROOT%{_libdir}/%{name}/readmes
 
 	rm -r $RPM_BUILD_ROOT%{_desktopdir}/*.desktop \
-		$RPM_BUILD_ROOT%{_iconsdir}/gnome \
+		$RPM_BUILD_ROOT%{_iconsdir}/{gnome,locolor} \
 		$RPM_BUILD_ROOT%{_datadir}/application-registry \
 		$RPM_BUILD_ROOT%{_datadir}/mime{lnk,-info}
 	for a in $RPM_BUILD_ROOT%{_libdir}/%{name}/share/xdg/*.desktop; do
@@ -3398,6 +3398,7 @@ fi
 %{_libdir}/%{name}/share/registry/brand.xcd
 
 %{_datadir}/mime/packages/libreoffice.xml
+%{_iconsdir}/hicolor/*/mimetypes/libreoffice-*.png
 
 %{_desktopdir}/libreoffice-startcenter.desktop
 %{_iconsdir}/hicolor/*/apps/libreoffice-startcenter.png
