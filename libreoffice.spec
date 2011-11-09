@@ -660,6 +660,7 @@ docbooka.
 Summary:	Extra javafilter module for LibreOffice
 Summary(pl.UTF-8):	Dodatkowy moduł javafilter dla LibreOffice
 Group:		X11/Applications
+Requires(post,postun):	desktop-file-utils
 Requires:	%{name}-core = %{version}-%{release}
 Obsoletes:	openoffice.org-javafilter
 
@@ -2664,7 +2665,7 @@ fi
 # install just once (based on makeinstall.stamp)
 # this will make packaging newer versions simplier
 if [ ! -f makeinstall.stamp -o ! -d $RPM_BUILD_ROOT ]; then
-	rm -rf makeinstall.stamp installed.stamp $RPM_BUILD_ROOT
+	%{__rm} -rf makeinstall.stamp installed.stamp $RPM_BUILD_ROOT
 
 	export QTINC="%{_includedir}/qt"
 	export QTLIB="%{_libdir}"
@@ -2708,7 +2709,7 @@ if [ ! -f installed.stamp ]; then
 	chmod -Rf a+rX,u+w,g-w,o-w $RPM_BUILD_ROOT
 
 	%if %{with mono}
-	rm $RPM_BUILD_ROOT%{_pkgconfigdir}/mono-ooo-2.1.pc
+	%{__rm} $RPM_BUILD_ROOT%{_pkgconfigdir}/mono-ooo-2.1.pc
 	%endif
 
 	%if %{with mozilla}
@@ -2728,14 +2729,14 @@ if [ ! -f installed.stamp ]; then
 	mv $RPM_BUILD_ROOT%{_libdir}/%{name}/readmes $RPM_BUILD_ROOT%{_datadir}/%{name}
 	ln -s ../../share/%{name}/readmes $RPM_BUILD_ROOT%{_libdir}/%{name}/readmes
 
-	rm -r $RPM_BUILD_ROOT%{_desktopdir}/*.desktop \
+	%{__rm} -r $RPM_BUILD_ROOT%{_desktopdir}/*.desktop \
 		$RPM_BUILD_ROOT%{_iconsdir}/{gnome,locolor} \
 		$RPM_BUILD_ROOT%{_datadir}/application-registry \
 		$RPM_BUILD_ROOT%{_datadir}/mime{lnk,-info}
 	for a in $RPM_BUILD_ROOT%{_libdir}/%{name}/share/xdg/*.desktop; do
 		cp $a $RPM_BUILD_ROOT%{_desktopdir}/libreoffice-$(basename "$a")
 	done
-	rm -r $RPM_BUILD_ROOT%{_libdir}/%{name}/share/xdg
+	%{__rm} -r $RPM_BUILD_ROOT%{_libdir}/%{name}/share/xdg
 
 	# Make oo* -> lo* symlinks for compatibility with misc software,
 	# for example mailcap
@@ -2743,6 +2744,10 @@ if [ ! -f installed.stamp ]; then
 	for a in fromtemplate base calc draw writer impress math web; do
 		ln -s lo$a $RPM_BUILD_ROOT%{_bindir}/oo$a
 	done
+
+	# remove printeradmin .desktop file and icons
+	%{__rm} $RPM_BUILD_ROOT%{_iconsdir}/hicolor/*/apps/libreoffice-printeradmin.png \
+		$RPM_BUILD_ROOT%{_desktopdir}/libreoffice-printeradmin.desktop
 
 	touch installed.stamp
 fi
@@ -2814,7 +2819,7 @@ find_lang() {
 }
 
 %if %{with i18n}
-rm -f *.lang*
+%{__rm} -f *.lang*
 langlist=$(ls file-lists/lang_*_list.txt | sed -e 's=file-lists/lang_\(.*\)_list.txt=\1=g')
 
 for lang in $langlist; do
@@ -2893,6 +2898,12 @@ rm -rf $RPM_BUILD_ROOT
 %postun math
 %update_desktop_database_postun
 %update_icon_cache hicolor
+
+%post javafilter
+%update_desktop_database_post
+
+%postun javafilter
+%update_desktop_database_postun
 
 %post -n browser-plugin-%{name}
 %update_browser_plugins
@@ -3399,7 +3410,10 @@ fi
 
 %{_datadir}/mime/packages/libreoffice.xml
 %{_iconsdir}/hicolor/*/mimetypes/libreoffice-*.png
+%{_iconsdir}/hicolor/*/apps/libreoffice-main.png
 
+%{_desktopdir}/libreoffice-qstart.desktop
+%{_iconsdir}/hicolor/*/apps/libreoffice-qstart.png
 %{_desktopdir}/libreoffice-startcenter.desktop
 %{_iconsdir}/hicolor/*/apps/libreoffice-startcenter.png
 
@@ -3617,6 +3631,7 @@ fi
 %{basisdir}/share/registry/palm.xcd
 %{basisdir}/share/registry/pocketexcel.xcd
 %{basisdir}/share/registry/pocketword.xcd
+%{_desktopdir}/libreoffice-javafilter.desktop
 %endif
 
 %files testtools
