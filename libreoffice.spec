@@ -3067,7 +3067,7 @@ fi
 %attr(755,root,root) %{basisdir}/program/libmysqll[ipx].so
 %attr(755,root,root) %{basisdir}/program/libodbcl[ipx].so
 %attr(755,root,root) %{basisdir}/program/libodbcbasel[ipx].so
-%attr(755,root,root) %{basisdir}/program/libodfflatxmllx.so
+%attr(755,root,root) %{basisdir}/program/libodfflatxmll[ipx].so
 %attr(755,root,root) %{basisdir}/program/liboffaccl[ipx].so
 %attr(755,root,root) %{basisdir}/program/liboooimprovecorel[ipx].so
 %attr(755,root,root) %{basisdir}/program/libooxl[ipx].so
