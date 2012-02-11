@@ -38,60 +38,31 @@
 %undefine	with_system_hsqldb
 %endif
 
-%define		major_ver		3.4.5
+%define		major_ver		3.5.0
 %define		upd			340
 
 Summary:	LibreOffice - powerful office suite
 Summary(pl.UTF-8):	LibreOffice - potężny pakiet biurowy
 Name:		libreoffice
-Version:	%{major_ver}.2
-Release:	3
+Version:	%{major_ver}.3
+Release:	0.1
 License:	GPL/LGPL
 Group:		X11/Applications
 # we use git because released tarballs are buggy too often
 # git clone git://anongit.freedesktop.org/git/libreoffice/build
 # cd build
 # git checkout -b libreoffice-3-3 origin/libreoffice-3-3
-Source0:	http://download.documentfoundation.org/libreoffice/src/%{major_ver}/%{name}-bootstrap-%{version}.tar.bz2
-# Source0-md5:	79c9c7fc208e7f56af09f284f261a7da
-Source1:	http://download.documentfoundation.org/libreoffice/src/%{major_ver}/%{name}-artwork-%{version}.tar.bz2
-# Source1-md5:	a75d7d4ebefb4c9a4bb256acf866fa81
-Source2:	http://download.documentfoundation.org/libreoffice/src/%{major_ver}/%{name}-base-%{version}.tar.bz2
-# Source2-md5:	c1e2dabdf4cfcd5957779014a7f9787e
-Source3:	http://download.documentfoundation.org/libreoffice/src/%{major_ver}/%{name}-writer-%{version}.tar.bz2
-# Source3-md5:	97a1e3de430b124faf35bf334248ad53
-Source4:	http://download.documentfoundation.org/libreoffice/src/%{major_ver}/%{name}-calc-%{version}.tar.bz2
-# Source4-md5:	c83a8a374d3d5cc83c6ac3b5ff613e46
-Source5:	http://download.documentfoundation.org/libreoffice/src/%{major_ver}/%{name}-components-%{version}.tar.bz2
-# Source5-md5:	fa64799ebad8cbd2c160ac2f87bd5599
-Source6:	http://download.documentfoundation.org/libreoffice/src/%{major_ver}/%{name}-extensions-%{version}.tar.bz2
-# Source6-md5:	b24fba57aa4185934e86a0a8db4a3433
-Source7:	http://download.documentfoundation.org/libreoffice/src/%{major_ver}/%{name}-extras-%{version}.tar.bz2
-# Source7-md5:	4f98020088ab9b597fc21b617121bd47
-Source8:	http://download.documentfoundation.org/libreoffice/src/%{major_ver}/%{name}-filters-%{version}.tar.bz2
-# Source8-md5:	3c3be7c5f923339c90b0d1d6ecad0243
-Source9:	http://download.documentfoundation.org/libreoffice/src/%{major_ver}/%{name}-help-%{version}.tar.bz2
-# Source9-md5:	3a0bb4bb096b7488533ed2ee466a2bc9
-Source10:	http://download.documentfoundation.org/libreoffice/src/%{major_ver}/%{name}-impress-%{version}.tar.bz2
-# Source10-md5:	f2b180aa1eff3884b4ca81c048f1e327
-Source11:	http://download.documentfoundation.org/libreoffice/src/%{major_ver}/%{name}-translations-%{version}.tar.bz2
-# Source11-md5:	12afa34b3045a1bc91cfe84d86211919
-Source12:	http://download.documentfoundation.org/libreoffice/src/%{major_ver}/%{name}-libs-core-%{version}.tar.bz2
-# Source12-md5:	a9af488ef92ad4442eafba874249c529
-Source13:	http://download.documentfoundation.org/libreoffice/src/%{major_ver}/%{name}-libs-extern-%{version}.tar.bz2
-# Source13-md5:	db6a67c96a9090bc5e21b64e202a984e
-Source14:	http://download.documentfoundation.org/libreoffice/src/%{major_ver}/%{name}-libs-extern-sys-%{version}.tar.bz2
-# Source14-md5:	e00187ae0840e1f6a00fa3290cacf0d1
-Source15:	http://download.documentfoundation.org/libreoffice/src/%{major_ver}/%{name}-libs-gui-%{version}.tar.bz2
-# Source15-md5:	20fbf6cffd2b06e90a52105b75a57828
-Source16:	http://download.documentfoundation.org/libreoffice/src/%{major_ver}/%{name}-postprocess-%{version}.tar.bz2
-# Source16-md5:	4af055f590732ec19a2534b2278ac49c
-Source17:	http://download.documentfoundation.org/libreoffice/src/%{major_ver}/%{name}-sdk-%{version}.tar.bz2
-# Source17-md5:	c84693796d2b1d9c8269425b1fa53aef
-Source18:	http://download.documentfoundation.org/libreoffice/src/%{major_ver}/%{name}-testing-%{version}.tar.bz2
-# Source18-md5:	d4926dc27b6884656feec6753f4fdf22
-Source19:	http://download.documentfoundation.org/libreoffice/src/%{major_ver}/%{name}-ure-%{version}.tar.bz2
-# Source19-md5:	770678ca19cca0f7985c1c82b2dccf48
+Source0:	http://download.documentfoundation.org/libreoffice/src/%{major_ver}/%{name}-core-%{version}.tar.xz
+# Source0-md5:	209bbbc369b36963d25334c3ef7933e8
+Source1:	http://download.documentfoundation.org/libreoffice/src/%{major_ver}/%{name}-binfilter-%{version}.tar.xz
+# Source1-md5:	6e5066332a2b25b1847d3836f1260e0c
+Source2:	http://download.documentfoundation.org/libreoffice/src/%{major_ver}/%{name}-dictionaries-%{version}.tar.xz
+# Source2-md5:	dedde5df1752f7a489a5a7a41943ebde
+Source3:	http://download.documentfoundation.org/libreoffice/src/%{major_ver}/%{name}-help-%{version}.tar.xz
+# Source3-md5:	9df4051a689526888da0467c29186e8c
+Source4:	http://download.documentfoundation.org/libreoffice/src/%{major_ver}/%{name}-translations-%{version}.tar.xz
+# Source4-md5:	8f7d2774f635f83cebc74e1d4f609d0f
+
 Source20:	http://download.go-oo.org/extern/185d60944ea767075d27247c3162b3bc-unowinreg.dll
 # Source20-md5:	185d60944ea767075d27247c3162b3bc
 Source23:	http://hg.services.openoffice.org/binaries/fdb27bfe2dbe2e7b57ae194d9bf36bab-SampleICC-1.3.2.tar.gz
@@ -112,7 +83,6 @@ Source30:	http://hg.services.openoffice.org/binaries/17410483b5b5f267aa18b7e00b6
 # Source30-md5:	17410483b5b5f267aa18b7e00b65e6e0
 Source31:	http://download.go-oo.org/extern/b4cae0700aa1c2aef7eb7f345365e6f1-translate-toolkit-1.8.1.tar.bz2
 # Source31-md5:	b4cae0700aa1c2aef7eb7f345365e6f1
-Patch0:		%{name}-kde4.patch
 URL:		http://www.documentfoundation.org/
 BuildRequires:	/usr/bin/getopt
 BuildRequires:	GConf2-devel
@@ -158,6 +128,8 @@ BuildRequires:	java-junit
 BuildRequires:	java-lucene
 BuildRequires:	java-lucene-contrib
 BuildRequires:	java-servletapi
+BuildRequires:	libcmis-devel
+BuildRequires:	libvisio-devel
 BuildRequires:	libwpd-devel >= 0.9.0
 BuildRequires:	libwpg-devel >= 0.2.0
 BuildRequires:	libwps-devel >= 0.2.0
@@ -2462,13 +2434,12 @@ bash-completion for LibreOffice.
 bashowe uzupełnianie nazw dla LibreOffice.
 
 %prep
-%setup -q -n %{name}-bootstrap-%{version} -a1 -a2 -a3 -a4 -a5 -a6 -a7 -a8 -a9 -a10 -a11 -a12 -a13 -a14 -a15 -a16 -a17 -a18 -a19
+%setup -q -n %{name}-core-%{version} -a1 -a2 -a3 -a4
 for dir in *-%{version}; do
 	[ -f $dir/ChangeLog ] && mv $dir/ChangeLog ChangeLog-$dir
+	rm -rf $dir/git-hooks
 	mv $dir/* .
 done
-
-%patch0 -p1
 
 install -d ext_sources
 ln %{SOURCE20} ext_sources
