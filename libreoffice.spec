@@ -81,8 +81,6 @@ Source29:	http://hg.services.openoffice.org/binaries/18f577b374d60b3c760a3a33504
 # Source29-md5:	18f577b374d60b3c760a3a3350407632
 Source30:	http://hg.services.openoffice.org/binaries/17410483b5b5f267aa18b7e00b65e6e0-hsqldb_1_8_0.zip
 # Source30-md5:	17410483b5b5f267aa18b7e00b65e6e0
-Source31:	http://download.go-oo.org/extern/b4cae0700aa1c2aef7eb7f345365e6f1-translate-toolkit-1.8.1.tar.bz2
-# Source31-md5:	b4cae0700aa1c2aef7eb7f345365e6f1
 URL:		http://www.documentfoundation.org/
 BuildRequires:	/usr/bin/getopt
 BuildRequires:	GConf2-devel
@@ -152,7 +150,7 @@ BuildRequires:	libjpeg-devel
 BuildRequires:	libsndfile-devel
 BuildRequires:	libstdc++-devel >= 5:3.2.1
 BuildRequires:	libsvg-devel >= 0.1.4
-BuildRequires:	libtextcat-devel
+BuildRequires:	libexttextcat-devel
 BuildRequires:	libxml2-devel >= 2.0
 BuildRequires:	libxslt-devel
 BuildRequires:	libxslt-progs
@@ -2451,7 +2449,6 @@ ln %{SOURCE27} ext_sources
 ln %{SOURCE28} ext_sources
 ln %{SOURCE29} ext_sources
 ln %{SOURCE30} ext_sources
-ln %{SOURCE31} ext_sources
 :> src.downloaded
 
 %build
@@ -2549,8 +2546,7 @@ RPM_BUILD_NR_THREADS="1"
 	--with-system-vigra \
 	--with-system-xrender-headers=yes \
 	--with-system-zlib \
-	--with-system-libtextcat \
-	--with-external-libtextcat-data \
+	--with-system-libexttextcat \
 	--with-system-jfreereport \
 	--with-vba-package-format="builtin" \
 	--with-system-libs \
@@ -2558,8 +2554,9 @@ RPM_BUILD_NR_THREADS="1"
 	--with-system-mythes \
 	--with-system-dicts \
 	--with-system-apache-commons \
+	--with-junit=%{_datadir}/java/junit.jar \
 	--without-system-saxon \
-	--without-system-translate-toolkit \
+	--without-system-sampleicc \
 	--enable-ext-presenter-minimizer \
 	--enable-ext-presenter-console \
 	--enable-ext-pdfimport \
