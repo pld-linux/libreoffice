@@ -147,6 +147,7 @@ BuildRequires:	libbonobo-devel >= 2.0
 %{?with_system_libhnj:BuildRequires:	libhnj-devel}
 BuildRequires:	libicu-devel >= 4.0
 BuildRequires:	libjpeg-devel
+BuildRequires:	librsvg-devel >= 2.14
 BuildRequires:	libsndfile-devel
 BuildRequires:	libstdc++-devel >= 5:3.2.1
 BuildRequires:	libsvg-devel >= 0.1.4
@@ -171,6 +172,7 @@ BuildRequires:	perl-Archive-Zip
 BuildRequires:	perl-base
 BuildRequires:	perl-devel
 BuildRequires:	pkgconfig
+BuildRequires:	postgresql-devel
 BuildRequires:	poppler-cpp-devel >= 0.8.0
 BuildRequires:	poppler-devel >= 0.8.0
 BuildRequires:	portaudio-devel
