@@ -1,0 +1,23 @@
+--- configure.in.orig	2012-02-01 13:56:49.000000000 +0100
++++ configure.in	2012-02-23 18:57:32.000000000 +0100
+@@ -7561,6 +7561,11 @@
+                     [AC_MSG_ERROR(commons-logging.jar not found.)], [])
+             fi
+         fi
++        # hamcrest is a dependency of junit, add it to the classpath if
++        # found
++        if test -e /usr/share/java/hamcrest-core.jar; then
++            OOO_JUNIT_JAR=$OOO_JUNIT_JAR:/usr/share/java/hamcrest-core.jar
++        fi
+     else
+         AC_MSG_RESULT([internal])
+         SYSTEM_APACHE_COMMONS=NO
+@@ -9128,7 +9133,7 @@
+     if test $? -eq 0; then
+         # check if either class-path entry is available for hamcrest or
+         # it's bundled
+-        if "$JAVA_HOME/bin/jar" tf "$OOO_JUNIT_JAR" |grep -q hamcrest || \
++        if "$JAVA_HOME/bin/jar" tf /usr/share/java/hamcrest-core.jar |grep -q hamcrest || \
+             "$UNZIP" -c "$OOO_JUNIT_JAR" META-INF/MANIFEST.MF |grep -q 'Class-Path: hamcrest'; then
+             AC_MSG_RESULT([$OOO_JUNIT_JAR])
+         else
