@@ -39,7 +39,6 @@
 %endif
 
 %define		major_ver		3.5.0
-%define		upd			340
 
 Summary:	LibreOffice - powerful office suite
 Summary(pl.UTF-8):	LibreOffice - potężny pakiet biurowy
@@ -2658,23 +2657,23 @@ if [ ! -f makeinstall.stamp -o ! -d $RPM_BUILD_ROOT ]; then
 
 	# unpack report-builder extension
 	install -d $RPM_BUILD_ROOT%{_libdir}/%{name}/share/extensions/report-builder
-	unzip solver/%{upd}/unxlng*/bin/report-builder.oxt -d $RPM_BUILD_ROOT%{_libdir}/%{name}/share/extensions/report-builder
+	unzip solver/unxlng*/bin/report-builder.oxt -d $RPM_BUILD_ROOT%{_libdir}/%{name}/share/extensions/report-builder
 
 	# unpack wiki-publisher extension
 	install -d $RPM_BUILD_ROOT%{_libdir}/%{name}/share/extensions/wiki-publisher
-	unzip solver/%{upd}/unxlng*/bin/swext/wiki-publisher.oxt -d $RPM_BUILD_ROOT%{_libdir}/%{name}/share/extensions/wiki-publisher
+	unzip solver/unxlng*/bin/swext/wiki-publisher.oxt -d $RPM_BUILD_ROOT%{_libdir}/%{name}/share/extensions/wiki-publisher
 
 	# unpack presentation-minimizer extension
 	install -d $RPM_BUILD_ROOT%{_libdir}/%{name}/share/extensions/presentation-minimizer
-	unzip solver/%{upd}/unxlng*/bin/minimizer/presentation-minimizer.oxt -d $RPM_BUILD_ROOT%{_libdir}/%{name}/share/extensions/presentation-minimizer
+	unzip solver/unxlng*/bin/minimizer/presentation-minimizer.oxt -d $RPM_BUILD_ROOT%{_libdir}/%{name}/share/extensions/presentation-minimizer
 
 	# unpack presenter screen extension
 	install -d $RPM_BUILD_ROOT%{_libdir}/%{name}/share/extensions/presenter-screen
-	unzip solver/%{upd}/unxlng*/bin/presenter/presenter-screen.oxt -d $RPM_BUILD_ROOT%{_libdir}/%{name}/share/extensions/presenter-screen
+	unzip solver/unxlng*/bin/presenter/presenter-screen.oxt -d $RPM_BUILD_ROOT%{_libdir}/%{name}/share/extensions/presenter-screen
 
 	# unpack pdfimport extension
 	install -d $RPM_BUILD_ROOT%{_libdir}/%{name}/share/extensions/pdfimport
-	unzip solver/%{upd}/unxlng*/bin/pdfimport/pdfimport.oxt -d $RPM_BUILD_ROOT%{_libdir}/%{name}/share/extensions/pdfimport
+	unzip solver/unxlng*/bin/pdfimport/pdfimport.oxt -d $RPM_BUILD_ROOT%{_libdir}/%{name}/share/extensions/pdfimport
 
 	# save orignal install layout
 	find $RPM_BUILD_ROOT -ls > ls.txt
