@@ -81,6 +81,7 @@ Source29:	http://hg.services.openoffice.org/binaries/18f577b374d60b3c760a3a33504
 # Source29-md5:	18f577b374d60b3c760a3a3350407632
 Source30:	http://hg.services.openoffice.org/binaries/17410483b5b5f267aa18b7e00b65e6e0-hsqldb_1_8_0.zip
 # Source30-md5:	17410483b5b5f267aa18b7e00b65e6e0
+Patch0:		%{name}-buildpath.patch
 Patch1:		%{name}-hamcrest.patch
 URL:		http://www.documentfoundation.org/
 BuildRequires:	/usr/bin/getopt
@@ -122,6 +123,7 @@ BuildRequires:	java-commons-httpclient
 BuildRequires:	java-commons-lang
 BuildRequires:	java-commons-logging
 BuildRequires:	java-flow-engine
+BuildRequires:	java-hamcrest
 %{?with_system_hsqldb:BuildRequires:	java-hsqldb}
 BuildRequires:	java-junit
 BuildRequires:	java-lucene
@@ -2437,6 +2439,7 @@ bashowe uzupełnianie nazw dla LibreOffice.
 %prep
 %setup -q -n %{name}-core-%{version} -a1 -a2 -a3 -a4
 
+%patch0 -p1
 %patch1 -p0
 
 for dir in *-%{version}; do
