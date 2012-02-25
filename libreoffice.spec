@@ -222,12 +222,13 @@ Requires:	%{name}-presentation-minimizer = %{version}-%{release}
 Requires:	%{name}-presenter-screen = %{version}-%{release}
 Requires:	%{name}-pyuno = %{version}-%{release}
 Requires:	%{name}-report-builder = %{version}-%{release}
-Requires:	%{name}-testtools = %{version}-%{release}
 Requires:	%{name}-web = %{version}-%{release}
 Requires:	%{name}-wiki-publisher = %{version}-%{release}
 Requires:	%{name}-writer = %{version}-%{release}
 Requires:	%{name}-xsltfilter = %{version}-%{release}
 Obsoletes:	openoffice.org
+Obsoletes:	openoffice.org-testtools
+Obsoletes:	libreoffice-testtools
 ExclusiveArch:	%{ix86} %{x8664} ppc sparc sparcv9
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
@@ -237,12 +238,8 @@ BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 # - share/ - 17000 files of 415M
 # - help/ - 6500 files of 1.4G
 # - program/resource/ - 5610 files of 216M
-%define		_noautostrip	.*\\(%{_datadir}\\|%{_libdir}/%{name}/basis*/program/resource\\)/.*
-%define		_noautochrpath	.*\\(%{_datadir}\\|%{_libdir}/%{name}/basis*/program/resource\\)/.*
-
-%define		basis		basis3.4
-%define		basisdir	%{_libdir}/%{name}/%{basis}
-%define		databasisdir	%{_datadir}/%{name}/%{basis}
+%define		_noautostrip	.*\\(%{_datadir}\\|%{_libdir}/%{name}/program/resource\\)/.*
+%define		_noautochrpath	.*\\(%{_datadir}\\|%{_libdir}/%{name}/program/resource\\)/.*
 
 %description
 LibreOffice is an open-source project sponsored by Sun Microsystems
@@ -644,19 +641,6 @@ Pocket Excel and Pocket Word import filters.
 %description javafilter -l pl.UTF-8
 Moduł javafilter dla LibreOffice, udostępnia dodatkowe filtry importu
 aportisdoc, Pocket Excel i Pocket Word.
-
-%package testtools
-Summary:	testtools for LibreOffice
-Summary(pl.UTF-8):	Narzędzia testowe dla LibreOffice
-Group:		Development/Libraries
-Requires:	%{name}-core = %{version}-%{release}
-Obsoletes:	openoffice.org-testtools
-
-%description testtools
-QA tools for LibreOffice, enables automated testing.
-
-%description testtools -l pl.UTF-8
-Narzędzia QA dla LibreOffice, pozwalają na automatyczne testowanie.
 
 # FIXME
 %package ure
@@ -2480,9 +2464,6 @@ export CC="%{__cc}"
 export CXX="%{__cxx}"
 export CPP="%{__cpp}"
 
-%{__aclocal}
-%{__autoconf}
-
 export IGNORE_MANIFEST_CHANGES=1
 export QT4INC="%{_includedir}/qt4"
 export QT4LIB="%{_libdir}"
@@ -2500,13 +2481,16 @@ if [ "$CCACHE_DIR" = "" ] ; then
 fi
 %endif
 
-
 %if %{with parallelbuild}
 RPM_BUILD_NR_THREADS=$(echo %{_smp_mflags} | cut -dj -f2)
 [ -z "$RPM_BUILD_NR_THREADS" ] && RPM_BUILD_NR_THREADS=1
 %else
 RPM_BUILD_NR_THREADS="1"
 %endif
+
+%{__aclocal}
+%{__autoconf}
+touch autogen.lastrun
 
 %configure \
 	--with-num-cpus=$RPM_BUILD_NR_THREADS \
@@ -2654,23 +2638,23 @@ if [ ! -f makeinstall.stamp -o ! -d $RPM_BUILD_ROOT ]; then
 
 	# unpack report-builder extension
 	install -d $RPM_BUILD_ROOT%{_libdir}/%{name}/share/extensions/report-builder
-	unzip solver/unxlng*/bin/report-builder.oxt -d $RPM_BUILD_ROOT%{_libdir}/%{name}/share/extensions/report-builder
+	unzip -o solver/unxlng*/bin/report-builder.oxt -d $RPM_BUILD_ROOT%{_libdir}/%{name}/share/extensions/report-builder
 
 	# unpack wiki-publisher extension
 	install -d $RPM_BUILD_ROOT%{_libdir}/%{name}/share/extensions/wiki-publisher
-	unzip solver/unxlng*/bin/swext/wiki-publisher.oxt -d $RPM_BUILD_ROOT%{_libdir}/%{name}/share/extensions/wiki-publisher
+	unzip -o solver/unxlng*/bin/wiki-publisher.oxt -d $RPM_BUILD_ROOT%{_libdir}/%{name}/share/extensions/wiki-publisher
 
 	# unpack presentation-minimizer extension
 	install -d $RPM_BUILD_ROOT%{_libdir}/%{name}/share/extensions/presentation-minimizer
-	unzip solver/unxlng*/bin/minimizer/presentation-minimizer.oxt -d $RPM_BUILD_ROOT%{_libdir}/%{name}/share/extensions/presentation-minimizer
+	unzip -o solver/unxlng*/bin/minimizer/presentation-minimizer.oxt -d $RPM_BUILD_ROOT%{_libdir}/%{name}/share/extensions/presentation-minimizer
 
 	# unpack presenter screen extension
 	install -d $RPM_BUILD_ROOT%{_libdir}/%{name}/share/extensions/presenter-screen
-	unzip solver/unxlng*/bin/presenter/presenter-screen.oxt -d $RPM_BUILD_ROOT%{_libdir}/%{name}/share/extensions/presenter-screen
+	unzip -o solver/unxlng*/bin/presenter/presenter-screen.oxt -d $RPM_BUILD_ROOT%{_libdir}/%{name}/share/extensions/presenter-screen
 
 	# unpack pdfimport extension
 	install -d $RPM_BUILD_ROOT%{_libdir}/%{name}/share/extensions/pdfimport
-	unzip solver/unxlng*/bin/pdfimport/pdfimport.oxt -d $RPM_BUILD_ROOT%{_libdir}/%{name}/share/extensions/pdfimport
+	unzip -o solver/unxlng*/bin/pdfimport/pdfimport.oxt -d $RPM_BUILD_ROOT%{_libdir}/%{name}/share/extensions/pdfimport
 
 	# save orignal install layout
 	find $RPM_BUILD_ROOT -ls > ls.txt
@@ -2687,18 +2671,18 @@ if [ ! -f installed.stamp ]; then
 
 	%if %{with mozilla}
 	install -d $RPM_BUILD_ROOT%{_browserpluginsdir}
-	ln -s %{basisdir}/program/libnpsoplugin.so $RPM_BUILD_ROOT%{_browserpluginsdir}
+	ln -s %{_libdir}/%{name}/program/libnpsoplugin.so $RPM_BUILD_ROOT%{_browserpluginsdir}
 	%endif
 
 	perl -pi -e 's/^[       ]*LD_LIBRARY_PATH/# LD_LIBRARY_PATH/;s/export LD_LIBRARY_PATH/# export LD_LIBRARY_PATH/' \
-		$RPM_BUILD_ROOT%{basisdir}/program/setup
+		$RPM_BUILD_ROOT%{_libdir}/%{name}/program/setup
 
-	chmod +x $RPM_BUILD_ROOT%{basisdir}/program/*.so
+	chmod +x $RPM_BUILD_ROOT%{_libdir}/%{name}/program/*.so
 
-	install -d $RPM_BUILD_ROOT%{databasisdir}
+	install -d $RPM_BUILD_ROOT%{_datadir}/%{name}
 	# put share to %{_datadir} so we're able to produce noarch packages
-	mv $RPM_BUILD_ROOT%{basisdir}/help $RPM_BUILD_ROOT/%{databasisdir}
-	ln -s ../../../share/%{name}/%{basis}/help $RPM_BUILD_ROOT%{basisdir}/help
+	mv $RPM_BUILD_ROOT%{_libdir}/%{name}/help $RPM_BUILD_ROOT/%{_datadir}/%{name}
+	ln -s ../../../share/%{name}/help $RPM_BUILD_ROOT%{_libdir}/%{name}/help
 	mv $RPM_BUILD_ROOT%{_libdir}/%{name}/readmes $RPM_BUILD_ROOT%{_datadir}/%{name}
 	ln -s ../../share/%{name}/readmes $RPM_BUILD_ROOT%{_libdir}/%{name}/readmes
 
@@ -2769,23 +2753,23 @@ find_lang() {
 		# lib/openoffice.org/share/autotext/$lang
 		grep "/share/autotext/${lang}$" ${lfile} >> ${langfn}.lang || :
 		grep "/share/autotext/${lang}/" ${lfile} >> ${langfn}.lang || :
-		# %{basisdir}/share/registry/.*[_-]$lang.xcd
+		# %{_libdir}/%{name}/share/registry/.*[_-]$lang.xcd
 		grep "/share/registry/.*[_-]${lang}.xcd$" ${lfile} >> ${langfn}.lang || :
-		# %{basisdir}/share/template/$lang
+		# %{_libdir}/%{name}/share/template/$lang
 		grep "/share/template/${lang}$" ${lfile} >> ${langfn}.lang || :
 		grep "/share/template/${lang}/" ${lfile} >> ${langfn}.lang || :
-		# %{basisdir}/share/template/wizard/letter/lang
+		# %{_libdir}/%{name}/share/template/wizard/letter/lang
 		grep "/share/template/wizard/letter/${lang}$" ${lfile} >> ${langfn}.lang || :
 		grep "/share/template/wizard/letter/${lang}$" file-lists/common_list.txt >> ${langfn}.lang || :
 		grep "/share/template/wizard/letter/${lang}/" ${lfile} >> ${langfn}.lang || :
 		grep "/share/template/wizard/letter/${lang}/" file-lists/common_list.txt >> ${langfn}.lang || :
-		# %{basisdir}/share/wordbook/$lang
+		# %{_libdir}/%{name}/share/wordbook/$lang
 		grep "/share/wordbook/${lang}$" ${lfile} >> ${langfn}.lang || :
 		grep "/share/wordbook/${lang}/" ${lfile} >> ${langfn}.lang || :
-		# %{basisdir}/share/samples/$lang
+		# %{_libdir}/%{name}/share/samples/$lang
 		grep "/share/samples/${lang}$" ${lfile} >> ${langfn}.lang || :
 		grep "/share/samples/${lang}/" ${lfile} >> ${langfn}.lang || :
-		# %{basisdir}/help/$lang
+		# %{_libdir}/%{name}/help/$lang
 		grep "/help/${lang}$" ${lfile} >> ${langfn}.lang || :
 		grep "/help/${lang}/" ${lfile} >> ${langfn}.lang || :
 	fi
@@ -2801,7 +2785,7 @@ done
 
 %{__sed} -i -e '
 	s,%{_libdir}/%{name}/readmes,%{_datadir}/%{name}/readmes,;
-	s,%{basisdir}/help,%{databasisdir}/help,;
+	s,%{_libdir}/%{name}/help,%{_datadir}/%{name}/help,;
 ' *.lang
 %endif
 
@@ -2906,448 +2890,310 @@ fi
 %attr(755,root,root) %{_bindir}/soffice
 %attr(755,root,root) %{_bindir}/unopkg
 
-%dir %{basisdir}
-%dir %{databasisdir}
-%dir %{databasisdir}/help
-%{databasisdir}/help/*.xsl
-%dir %{databasisdir}/help/en
-%{databasisdir}/help/en/*.html
-%{databasisdir}/help/en/*.css
-%{databasisdir}/help/en/sbasic.*
-%{databasisdir}/help/en/schart.*
-%{databasisdir}/help/en/shared.*
+%dir %{_libdir}/%{name}
+%dir %{_datadir}/%{name}
+%dir %{_datadir}/%{name}/help
+%{_datadir}/%{name}/help/*.xsl
+%dir %{_datadir}/%{name}/help/en
+%{_datadir}/%{name}/help/en/*.html
+%{_datadir}/%{name}/help/en/*.css
+%{_datadir}/%{name}/help/en/sbasic.*
+%{_datadir}/%{name}/help/en/schart.*
+%{_datadir}/%{name}/help/en/shared.*
 
-%dir %{basisdir}/presets
-%dir %{basisdir}/presets/autotext
-%{basisdir}/presets/autotext/mytexts.bau
-%{basisdir}/presets/basic
-%dir %{basisdir}/presets/config
-%{basisdir}/presets/config/autotbl.fmt
-%{basisdir}/presets/config/*.so[bcdegh]
-%{basisdir}/presets/database
-%{basisdir}/presets/gallery
-%{basisdir}/presets/psprint
+%dir %{_libdir}/%{name}/presets
+%dir %{_libdir}/%{name}/presets/autotext
+%{_libdir}/%{name}/presets/autotext/mytexts.bau
+%{_libdir}/%{name}/presets/basic
+%dir %{_libdir}/%{name}/presets/config
+%{_libdir}/%{name}/presets/config/autotbl.fmt
+%{_libdir}/%{name}/presets/config/*.so[bcdegh]
+%{_libdir}/%{name}/presets/database
+%{_libdir}/%{name}/presets/gallery
+%{_libdir}/%{name}/presets/psprint
 
-%dir %{basisdir}/program
-%attr(755,root,root) %{basisdir}/program/basprov*.uno.so
-%attr(755,root,root) %{basisdir}/program/cairocanvas.uno.so
-%attr(755,root,root) %{basisdir}/program/canvasfactory.uno.so
-%attr(755,root,root) %{basisdir}/program/cde-open-url
-%attr(755,root,root) %{basisdir}/program/cmdmail.uno.so
-%attr(755,root,root) %{basisdir}/program/configmgr.uno.so
-%attr(755,root,root) %{basisdir}/program/deployment*.uno.so
-%attr(755,root,root) %{basisdir}/program/desktopbe1.uno.so
-%attr(755,root,root) %{basisdir}/program/dlgprov*.uno.so
-%attr(755,root,root) %{basisdir}/program/fastsax.uno.so
-%attr(755,root,root) %{basisdir}/program/fpicker.uno.so
-%attr(755,root,root) %{basisdir}/program/fps_office.uno.so
-%attr(755,root,root) %{basisdir}/program/fsstorage.uno.so
-%attr(755,root,root) %{basisdir}/program/hatchwindowfactory.uno.so
-%attr(755,root,root) %{basisdir}/program/i18npool.uno.so
-%attr(755,root,root) %{basisdir}/program/i18nsearch.uno.so
-%attr(755,root,root) %{basisdir}/program/java-set-classpath
-%attr(755,root,root) %{basisdir}/program/ldapbe2.uno.so
-%attr(755,root,root) %{basisdir}/program/libaccl[ipx].so
-%attr(755,root,root) %{basisdir}/program/libadabasl[ipx].so
-%attr(755,root,root) %{basisdir}/program/libavmediagst.so
-%attr(755,root,root) %{basisdir}/program/libavmedial[ipx].so
-%attr(755,root,root) %{basisdir}/program/libbasctll[ipx].so
-%attr(755,root,root) %{basisdir}/program/libbasebmpl[ipx].so
-%attr(755,root,root) %{basisdir}/program/libbasegfxl[ipx].so
-%attr(755,root,root) %{basisdir}/program/libbibl[ipx].so
-%attr(755,root,root) %{basisdir}/program/libcached1.so
-%attr(755,root,root) %{basisdir}/program/libcanvastoolsl[ipx].so
-%attr(755,root,root) %{basisdir}/program/libchartcontrollerl[ipx].so
-%attr(755,root,root) %{basisdir}/program/libchartmodell[ipx].so
-%attr(755,root,root) %{basisdir}/program/libcharttoolsl[ipx].so
-%attr(755,root,root) %{basisdir}/program/libchartviewl[ipx].so
-%attr(755,root,root) %{basisdir}/program/libcollator_data.so
-%attr(755,root,root) %{basisdir}/program/libcomphelpgcc3.so
-%attr(755,root,root) %{basisdir}/program/libcppcanvasl[ipx].so
-%attr(755,root,root) %{basisdir}/program/libctll[ipx].so
-%attr(755,root,root) %{basisdir}/program/libcuil[ipx].so
-%{!?with_system_db:%attr(755,root,root) %{basisdir}/program/libdb-4.2.so}
-%attr(755,root,root) %{basisdir}/program/libdbal[ipx].so
-%attr(755,root,root) %{basisdir}/program/libdbasel[ipx].so
-%attr(755,root,root) %{basisdir}/program/libdbaxmll[ipx].so
-%attr(755,root,root) %{basisdir}/program/libdbmml[ipx].so
-%attr(755,root,root) %{basisdir}/program/libdbpool2.so
-%attr(755,root,root) %{basisdir}/program/libdbtoolsl[ipx].so
-%attr(755,root,root) %{basisdir}/program/libdbul[ipx].so
-%attr(755,root,root) %{basisdir}/program/libdeploymentmiscl[ipx].so
-%attr(755,root,root) %{basisdir}/program/libdesktop_detectorl[ipx].so
-%attr(755,root,root) %{basisdir}/program/libdict_ja.so
-%attr(755,root,root) %{basisdir}/program/libdict_zh.so
-%attr(755,root,root) %{basisdir}/program/libdrawinglayerl[ipx].so
-%attr(755,root,root) %{basisdir}/program/libeditengl[ipx].so
-%attr(755,root,root) %{basisdir}/program/libegil[ipx].so
-%attr(755,root,root) %{basisdir}/program/libembobj.so
-%attr(755,root,root) %{basisdir}/program/libemboleobj.so
-%attr(755,root,root) %{basisdir}/program/libemel[ipx].so
-%attr(755,root,root) %{basisdir}/program/libepbl[ipx].so
-%attr(755,root,root) %{basisdir}/program/libepgl[ipx].so
-%attr(755,root,root) %{basisdir}/program/libeppl[ipx].so
-%attr(755,root,root) %{basisdir}/program/libepsl[ipx].so
-%attr(755,root,root) %{basisdir}/program/libeptl[ipx].so
-%attr(755,root,root) %{basisdir}/program/liberal[ipx].so
-%attr(755,root,root) %{basisdir}/program/libetil[ipx].so
-%attr(755,root,root) %{basisdir}/program/libevtatt.so
-%attr(755,root,root) %{basisdir}/program/libexpl[ipx].so
-%attr(755,root,root) %{basisdir}/program/libfileacc.so
-%attr(755,root,root) %{basisdir}/program/libfilel[ipx].so
-%attr(755,root,root) %{basisdir}/program/libfilterconfig1.so
-%attr(755,root,root) %{basisdir}/program/libflatl[ipx].so
-%attr(755,root,root) %{basisdir}/program/libforl[ipx].so
-%attr(755,root,root) %{basisdir}/program/libforuil[ipx].so
-%attr(755,root,root) %{basisdir}/program/libfrml[ipx].so
-%attr(755,root,root) %{basisdir}/program/libfwel[ipx].so
-%attr(755,root,root) %{basisdir}/program/libfwil[ipx].so
-%attr(755,root,root) %{basisdir}/program/libfwkl[ipx].so
-%attr(755,root,root) %{basisdir}/program/libfwll[ipx].so
-%attr(755,root,root) %{basisdir}/program/libfwml[ipx].so
-%attr(755,root,root) %{basisdir}/program/libguesslangl[ipx].so
-%attr(755,root,root) %{basisdir}/program/libhelplinkerl[ipx].so
-%{!?with_system_hunspell:%attr(755,root,root) %{basisdir}/program/libhunspell.so}
-%attr(755,root,root) %{basisdir}/program/libhyphenl[ipx].so
-%attr(755,root,root) %{basisdir}/program/libi18nisolang1gcc3.so
-%attr(755,root,root) %{basisdir}/program/libi18npaperl[ipx].so
-%attr(755,root,root) %{basisdir}/program/libi18nregexpgcc3.so
-%attr(755,root,root) %{basisdir}/program/libi18nutilgcc3.so
-%attr(755,root,root) %{basisdir}/program/libicdl[ipx].so
-%attr(755,root,root) %{basisdir}/program/libicgl[ipx].so
-%attr(755,root,root) %{basisdir}/program/libidxl[ipx].so
-%attr(755,root,root) %{basisdir}/program/libindex_data.so
-%attr(755,root,root) %{basisdir}/program/libimel[ipx].so
-%attr(755,root,root) %{basisdir}/program/libipbl[ipx].so
-%attr(755,root,root) %{basisdir}/program/libipdl[ipx].so
-%attr(755,root,root) %{basisdir}/program/libipsl[ipx].so
-%attr(755,root,root) %{basisdir}/program/libiptl[ipx].so
-%attr(755,root,root) %{basisdir}/program/libipxl[ipx].so
-%attr(755,root,root) %{basisdir}/program/libiral[ipx].so
-%attr(755,root,root) %{basisdir}/program/libitgl[ipx].so
-%attr(755,root,root) %{basisdir}/program/libitil[ipx].so
-%attr(755,root,root) %{basisdir}/program/liblngl[ipx].so
-%attr(755,root,root) %{basisdir}/program/liblnthl[ipx].so
-%attr(755,root,root) %{basisdir}/program/liblocaledata_en.so
-%attr(755,root,root) %{basisdir}/program/liblocaledata_es.so
-%attr(755,root,root) %{basisdir}/program/liblocaledata_euro.so
-%attr(755,root,root) %{basisdir}/program/liblocaledata_others.so
-%attr(755,root,root) %{basisdir}/program/liblogl[ipx].so
-%attr(755,root,root) %{basisdir}/program/libmcnttype.so
-%attr(755,root,root) %{basisdir}/program/libmozbootstrap.so
-%attr(755,root,root) %{basisdir}/program/libmsfilterl[ipx].so
-%attr(755,root,root) %{basisdir}/program/libmtfrenderer.uno.so
-%attr(755,root,root) %{basisdir}/program/libmysqll[ipx].so
-%attr(755,root,root) %{basisdir}/program/libodbcl[ipx].so
-%attr(755,root,root) %{basisdir}/program/libodbcbasel[ipx].so
-%attr(755,root,root) %{basisdir}/program/libodfflatxmll[ipx].so
-%attr(755,root,root) %{basisdir}/program/liboffaccl[ipx].so
-%attr(755,root,root) %{basisdir}/program/liboooimprovecorel[ipx].so
-%attr(755,root,root) %{basisdir}/program/libooxl[ipx].so
-%attr(755,root,root) %{basisdir}/program/libpackage2.so
-%attr(755,root,root) %{basisdir}/program/libpcrl[ipx].so
-%attr(755,root,root) %{basisdir}/program/libpdffilterl[ipx].so
-%attr(755,root,root) %{basisdir}/program/libpll[ipx].so
-%attr(755,root,root) %{basisdir}/program/libpreloadl[ipx].so
-%attr(755,root,root) %{basisdir}/program/libprotocolhandlerl[ipx].so
-%attr(755,root,root) %{basisdir}/program/libqstart_gtkl[ipx].so
-%attr(755,root,root) %{basisdir}/program/librecentfile.so
-%attr(755,root,root) %{basisdir}/program/libresl[ipx].so
-%attr(755,root,root) %{basisdir}/program/libsaxl[ipx].so
-%attr(755,root,root) %{basisdir}/program/libsbl[ipx].so
-%attr(755,root,root) %{basisdir}/program/libscnl[ipx].so
-%attr(755,root,root) %{basisdir}/program/libscriptframe.so
-%attr(755,root,root) %{basisdir}/program/libsdbc2.so
-%attr(755,root,root) %{basisdir}/program/libsdbtl[ipx].so
-%attr(755,root,root) %{basisdir}/program/libsddl[ipx].so
-%attr(755,root,root) %{basisdir}/program/libsdfiltl[ipx].so
-%attr(755,root,root) %{basisdir}/program/libsdl[ipx].so
-%attr(755,root,root) %{basisdir}/program/libsduil[ipx].so
-%attr(755,root,root) %{basisdir}/program/libsfxl[ipx].so
-%attr(755,root,root) %{basisdir}/program/libsofficeapp.so
-%attr(755,root,root) %{basisdir}/program/libsotl[ipx].so
-%attr(755,root,root) %{basisdir}/program/libspal[ipx].so
-%attr(755,root,root) %{basisdir}/program/libspelll[ipx].so
-%attr(755,root,root) %{basisdir}/program/libspl_unxl[ipx].so
-%attr(755,root,root) %{basisdir}/program/libspll[ipx].so
-%attr(755,root,root) %{basisdir}/program/libsrtrs1.so
-%attr(755,root,root) %{basisdir}/program/libstsl[ipx].so
-%attr(755,root,root) %{basisdir}/program/libsvll[ipx].so
-%attr(755,root,root) %{basisdir}/program/libsvtl[ipx].so
-%attr(755,root,root) %{basisdir}/program/libsvxcorel[ipx].so
-%attr(755,root,root) %{basisdir}/program/libsvxl[ipx].so
-%attr(755,root,root) %{basisdir}/program/libswl[ipx].so
-%attr(755,root,root) %{basisdir}/program/libtextconv_dict.so
-%attr(755,root,root) %{basisdir}/program/libtextconversiondlgsl[ipx].so
-%attr(755,root,root) %{basisdir}/program/libtkl[ipx].so
-%attr(755,root,root) %{basisdir}/program/libtll[ipx].so
-%attr(755,root,root) %{basisdir}/program/libtvhlp1.so
-%attr(755,root,root) %{basisdir}/program/libucb1.so
-%attr(755,root,root) %{basisdir}/program/libucbhelper4gcc3.so
-%attr(755,root,root) %{basisdir}/program/libucpchelp1.so
-%attr(755,root,root) %{basisdir}/program/libucpdav1.so
-%attr(755,root,root) %{basisdir}/program/libucpfile1.so
-%attr(755,root,root) %{basisdir}/program/libucpftp1.so
-%attr(755,root,root) %{basisdir}/program/libucphier1.so
-%attr(755,root,root) %{basisdir}/program/libucppkg1.so
-%attr(755,root,root) %{basisdir}/program/libunopkgapp.so
-%attr(755,root,root) %{basisdir}/program/libunordfl[ipx].so
-%attr(755,root,root) %{basisdir}/program/libunoxmll[ipx].so
-%attr(755,root,root) %{basisdir}/program/libupdchkl[ipx].so
-%attr(755,root,root) %{basisdir}/program/libutll[ipx].so
-%attr(755,root,root) %{basisdir}/program/libuuil[ipx].so
-%attr(755,root,root) %{basisdir}/program/libvbahelperl[ipx].so
-%attr(755,root,root) %{basisdir}/program/libvcll[ipx].so
-%attr(755,root,root) %{basisdir}/program/libvclplug_genl[ipx].so
-%attr(755,root,root) %{basisdir}/program/libvclplug_svpl[ipx].so
-%attr(755,root,root) %{basisdir}/program/libxcrl[ipx].so
-%attr(755,root,root) %{basisdir}/program/libxmlfal[ipx].so
-%attr(755,root,root) %{basisdir}/program/libxmlfdl[ipx].so
+%dir %{_libdir}/%{name}/program
+%attr(755,root,root) %{_libdir}/%{name}/program/basprov*.uno.so
+%attr(755,root,root) %{_libdir}/%{name}/program/cairocanvas.uno.so
+%attr(755,root,root) %{_libdir}/%{name}/program/canvasfactory.uno.so
+%attr(755,root,root) %{_libdir}/%{name}/program/cde-open-url
+%attr(755,root,root) %{_libdir}/%{name}/program/cmdmail.uno.so
+%attr(755,root,root) %{_libdir}/%{name}/program/configmgr.uno.so
+%attr(755,root,root) %{_libdir}/%{name}/program/desktopbe1.uno.so
+%attr(755,root,root) %{_libdir}/%{name}/program/dlgprov*.uno.so
+%attr(755,root,root) %{_libdir}/%{name}/program/fastsax.uno.so
+%attr(755,root,root) %{_libdir}/%{name}/program/fpicker.uno.so
+%attr(755,root,root) %{_libdir}/%{name}/program/fps_office.uno.so
+%attr(755,root,root) %{_libdir}/%{name}/program/fsstorage.uno.so
+%attr(755,root,root) %{_libdir}/%{name}/program/hatchwindowfactory.uno.so
+%attr(755,root,root) %{_libdir}/%{name}/program/i18npool.uno.so
+%attr(755,root,root) %{_libdir}/%{name}/program/i18nsearch.uno.so
+%attr(755,root,root) %{_libdir}/%{name}/program/java-set-classpath
+%attr(755,root,root) %{_libdir}/%{name}/program/ldapbe2.uno.so
+%attr(755,root,root) %{_libdir}/%{name}/program/libavmediagst.so
+%attr(755,root,root) %{_libdir}/%{name}/program/libcached1.so
+%attr(755,root,root) %{_libdir}/%{name}/program/libcollator_data.so
+%attr(755,root,root) %{_libdir}/%{name}/program/libcomphelpgcc3.so
+%{!?with_system_db:%attr(755,root,root) %{_libdir}/%{name}/program/libdb-4.2.so}
+%attr(755,root,root) %{_libdir}/%{name}/program/libdbpool2.so
+%attr(755,root,root) %{_libdir}/%{name}/program/libdict_ja.so
+%attr(755,root,root) %{_libdir}/%{name}/program/libdict_zh.so
+%attr(755,root,root) %{_libdir}/%{name}/program/libembobj.so
+%attr(755,root,root) %{_libdir}/%{name}/program/libemboleobj.so
+%attr(755,root,root) %{_libdir}/%{name}/program/libfileacc.so
+%{!?with_system_hunspell:%attr(755,root,root) %{_libdir}/%{name}/program/libhunspell.so}
+%attr(755,root,root) %{_libdir}/%{name}/program/libi18nisolang1gcc3.so
+%attr(755,root,root) %{_libdir}/%{name}/program/libi18nutilgcc3.so
+%attr(755,root,root) %{_libdir}/%{name}/program/libindex_data.so
+%attr(755,root,root) %{_libdir}/%{name}/program/liblocaledata_en.so
+%attr(755,root,root) %{_libdir}/%{name}/program/liblocaledata_es.so
+%attr(755,root,root) %{_libdir}/%{name}/program/liblocaledata_euro.so
+%attr(755,root,root) %{_libdir}/%{name}/program/liblocaledata_others.so
+%attr(755,root,root) %{_libdir}/%{name}/program/libmcnttype.so
+%attr(755,root,root) %{_libdir}/%{name}/program/libmozbootstrap.so
+%attr(755,root,root) %{_libdir}/%{name}/program/libpackage2.so
+%attr(755,root,root) %{_libdir}/%{name}/program/librecentfile.so
+%attr(755,root,root) %{_libdir}/%{name}/program/libscriptframe.so
+%attr(755,root,root) %{_libdir}/%{name}/program/libsdbc2.so
+%attr(755,root,root) %{_libdir}/%{name}/program/libsofficeapp.so
+%attr(755,root,root) %{_libdir}/%{name}/program/libsrtrs1.so
+%attr(755,root,root) %{_libdir}/%{name}/program/libtextconv_dict.so
+%attr(755,root,root) %{_libdir}/%{name}/program/libtvhlp1.so
+%attr(755,root,root) %{_libdir}/%{name}/program/libucb1.so
+%attr(755,root,root) %{_libdir}/%{name}/program/libucbhelper4gcc3.so
+%attr(755,root,root) %{_libdir}/%{name}/program/libucpchelp1.so
+%attr(755,root,root) %{_libdir}/%{name}/program/libucpdav1.so
+%attr(755,root,root) %{_libdir}/%{name}/program/libucpfile1.so
+%attr(755,root,root) %{_libdir}/%{name}/program/libucpftp1.so
+%attr(755,root,root) %{_libdir}/%{name}/program/libucphier1.so
+%attr(755,root,root) %{_libdir}/%{name}/program/libucppkg1.so
+%attr(755,root,root) %{_libdir}/%{name}/program/libunopkgapp.so
 ## maybe external is possible?
 # - external broken in 3.0.1
-###%attr(755,root,root) %{basisdir}/program/libxmlsec1*.so
+###%attr(755,root,root) %{_libdir}/%{name}/program/libxmlsec1*.so
 ##
-%attr(755,root,root) %{basisdir}/program/libxmlsecurity.so
-%attr(755,root,root) %{basisdir}/program/libxmxl[ipx].so
-%attr(755,root,root) %{basisdir}/program/libxofl[ipx].so
-%attr(755,root,root) %{basisdir}/program/libxol[ipx].so
-%attr(755,root,root) %{basisdir}/program/libxsec_fw.so
-%attr(755,root,root) %{basisdir}/program/libxsec_xmlsec.so
-%attr(755,root,root) %{basisdir}/program/libxsltdlgl[ipx].so
-%attr(755,root,root) %{basisdir}/program/libxsltfilterl[ipx].so
-%attr(755,root,root) %{basisdir}/program/libxstor.so
-%attr(755,root,root) %{basisdir}/program/localebe1.uno.so
-%attr(755,root,root) %{basisdir}/program/migrationoo2.uno.so
-%attr(755,root,root) %{basisdir}/program/migrationoo3.uno.so
-%attr(755,root,root) %{basisdir}/program/msforms.uno.so
-%attr(755,root,root) %{basisdir}/program/open-url
-%attr(755,root,root) %{basisdir}/program/pagein*
-%attr(755,root,root) %{basisdir}/program/passwordcontainer.uno.so
-%attr(755,root,root) %{basisdir}/program/pluginapp.bin
-%attr(755,root,root) %{basisdir}/program/productregistration.uno.so
+%attr(755,root,root) %{_libdir}/%{name}/program/libxmlsecurity.so
+%attr(755,root,root) %{_libdir}/%{name}/program/libxsec_fw.so
+%attr(755,root,root) %{_libdir}/%{name}/program/libxsec_xmlsec.so
+%attr(755,root,root) %{_libdir}/%{name}/program/libxstor.so
+%attr(755,root,root) %{_libdir}/%{name}/program/localebe1.uno.so
+%attr(755,root,root) %{_libdir}/%{name}/program/migrationoo2.uno.so
+%attr(755,root,root) %{_libdir}/%{name}/program/migrationoo3.uno.so
+%attr(755,root,root) %{_libdir}/%{name}/program/msforms.uno.so
+%attr(755,root,root) %{_libdir}/%{name}/program/open-url
+%attr(755,root,root) %{_libdir}/%{name}/program/pagein*
+%attr(755,root,root) %{_libdir}/%{name}/program/passwordcontainer.uno.so
+%attr(755,root,root) %{_libdir}/%{name}/program/pluginapp.bin
 ## seems to be exactly the same as in -ure
-#%attr(755,root,root) %{basisdir}/program/regcomp
-#%attr(755,root,root) %{basisdir}/program/regcomp.bin
+#%attr(755,root,root) %{_libdir}/%{name}/program/regcomp
+#%attr(755,root,root) %{_libdir}/%{name}/program/regcomp.bin
 ##
-%attr(755,root,root) %{basisdir}/program/sax.uno.so
-%attr(755,root,root) %{basisdir}/program/senddoc
-%attr(755,root,root) %{basisdir}/program/simplecanvas.uno.so
-%attr(755,root,root) %{basisdir}/program/slideshow.uno.so
-%attr(755,root,root) %{basisdir}/program/spadmin.bin
-%attr(755,root,root) %{basisdir}/program/stringresource*.uno.so
-%attr(755,root,root) %{basisdir}/program/syssh.uno.so
-%attr(755,root,root) %{basisdir}/program/ucpexpand1.uno.so
-%attr(755,root,root) %{basisdir}/program/ucpext.uno.so
-%attr(755,root,root) %{basisdir}/program/ucptdoc1.uno.so
-%attr(755,root,root) %{basisdir}/program/updatefeed.uno.so
-%attr(755,root,root) %{basisdir}/program/uri-encode
-%attr(755,root,root) %{basisdir}/program/vbaevents*.uno.so
-%attr(755,root,root) %{basisdir}/program/vclcanvas.uno.so
+%attr(755,root,root) %{_libdir}/%{name}/program/senddoc
+%attr(755,root,root) %{_libdir}/%{name}/program/simplecanvas.uno.so
+%attr(755,root,root) %{_libdir}/%{name}/program/slideshow.uno.so
+%attr(755,root,root) %{_libdir}/%{name}/program/spadmin.bin
+%attr(755,root,root) %{_libdir}/%{name}/program/stringresource*.uno.so
+%attr(755,root,root) %{_libdir}/%{name}/program/syssh.uno.so
+%attr(755,root,root) %{_libdir}/%{name}/program/ucpexpand1.uno.so
+%attr(755,root,root) %{_libdir}/%{name}/program/ucpext.uno.so
+%attr(755,root,root) %{_libdir}/%{name}/program/ucptdoc1.uno.so
+%attr(755,root,root) %{_libdir}/%{name}/program/updatefeed.uno.so
+%attr(755,root,root) %{_libdir}/%{name}/program/uri-encode
+%attr(755,root,root) %{_libdir}/%{name}/program/vbaevents*.uno.so
+%attr(755,root,root) %{_libdir}/%{name}/program/vclcanvas.uno.so
 
 %if %{with java}
-%attr(755,root,root) %{basisdir}/program/libhsqldb.so
-%attr(755,root,root) %{basisdir}/program/libjdbcl[ipx].so
-%attr(755,root,root) %{basisdir}/program/libofficebean.so
+%attr(755,root,root) %{_libdir}/%{name}/program/libhsqldb.so
 %endif
 
 %if %{with mono}
-%attr(755,root,root) %{basisdir}/program/libcli_uno.so
-%attr(755,root,root) %{basisdir}/program/libcli_uno_glue.so
-%{basisdir}/program/cli_basetypes.dll
-%{basisdir}/program/cli_cppuhelper.dll
-%{basisdir}/program/cli_types.dll
-%{basisdir}/program/cli_uno_bridge.dll
-%{basisdir}/program/cli_ure.dll
+%attr(755,root,root) %{_libdir}/%{name}/program/libcli_uno.so
+%attr(755,root,root) %{_libdir}/%{name}/program/libcli_uno_glue.so
+%{_libdir}/%{name}/program/cli_basetypes.dll
+%{_libdir}/%{name}/program/cli_cppuhelper.dll
+%{_libdir}/%{name}/program/cli_types.dll
+%{_libdir}/%{name}/program/cli_uno_bridge.dll
+%{_libdir}/%{name}/program/cli_ure.dll
 %endif
 
-%{basisdir}/program/fundamentalbasisrc
-%{basisdir}/program/offapi.rdb
-%{basisdir}/program/oovbaapi.rdb
-%{basisdir}/program/root3.dat
-%{basisdir}/program/root4.dat
-%{basisdir}/program/root5.dat
-%{basisdir}/program/services.rdb
-%{_libdir}/%{name}/program/services.rdb
-%config(noreplace) %verify(not md5 mtime size) %{basisdir}/program/unorc
-%{basisdir}/program/versionrc
+%{_libdir}/%{name}/program/root3.dat
+%{_libdir}/%{name}/program/root4.dat
+%{_libdir}/%{name}/program/root5.dat
+%config(noreplace) %verify(not md5 mtime size) %{_libdir}/%{name}/program/unorc
+%{_libdir}/%{name}/program/versionrc
 
 %if %{with java}
-%dir %{basisdir}/program/classes
-%{basisdir}/program/classes/LuceneHelpWrapper.jar
-%{basisdir}/program/classes/ScriptFramework.jar
-%{basisdir}/program/classes/ScriptProviderForJava.jar
-%{basisdir}/program/classes/XMergeBridge.jar
-%{basisdir}/program/classes/XSLTFilter.jar
-%{basisdir}/program/classes/XSLTValidate.jar
-%{basisdir}/program/classes/agenda.jar
-%{basisdir}/program/classes/commonwizards.jar
-%{basisdir}/program/classes/fax.jar
-%{basisdir}/program/classes/form.jar
-%{!?with_system_hsqldb:%{basisdir}/program/classes/hsqldb.jar}
-%{basisdir}/program/classes/letter.jar
-%{basisdir}/program/classes/officebean.jar
-%{basisdir}/program/classes/query.jar
-%{basisdir}/program/classes/report.jar
-%{basisdir}/program/classes/saxon9.jar
-%{basisdir}/program/classes/sdbc_hsqldb.jar
-%{!?with_system_xalan:%{basisdir}/program/classes/serializer.jar}
-%{basisdir}/program/classes/table.jar
-%{basisdir}/program/classes/unoil.jar
-%{basisdir}/program/classes/web.jar
-%{!?with_system_xalan:%{basisdir}/program/classes/xalan.jar}
-%{basisdir}/program/classes/xmerge.jar
+%dir %{_libdir}/%{name}/program/classes
+%{_libdir}/%{name}/program/classes/LuceneHelpWrapper.jar
+%{_libdir}/%{name}/program/classes/ScriptFramework.jar
+%{_libdir}/%{name}/program/classes/ScriptProviderForJava.jar
+%{_libdir}/%{name}/program/classes/XMergeBridge.jar
+%{_libdir}/%{name}/program/classes/XSLTFilter.jar
+%{_libdir}/%{name}/program/classes/XSLTValidate.jar
+%{_libdir}/%{name}/program/classes/agenda.jar
+%{_libdir}/%{name}/program/classes/commonwizards.jar
+%{_libdir}/%{name}/program/classes/fax.jar
+%{_libdir}/%{name}/program/classes/form.jar
+%{!?with_system_hsqldb:%{_libdir}/%{name}/program/classes/hsqldb.jar}
+%{_libdir}/%{name}/program/classes/letter.jar
+%{_libdir}/%{name}/program/classes/officebean.jar
+%{_libdir}/%{name}/program/classes/query.jar
+%{_libdir}/%{name}/program/classes/report.jar
+%{_libdir}/%{name}/program/classes/saxon9.jar
+%{_libdir}/%{name}/program/classes/sdbc_hsqldb.jar
+%{!?with_system_xalan:%{_libdir}/%{name}/program/classes/serializer.jar}
+%{_libdir}/%{name}/program/classes/table.jar
+%{_libdir}/%{name}/program/classes/unoil.jar
+%{_libdir}/%{name}/program/classes/web.jar
+%{!?with_system_xalan:%{_libdir}/%{name}/program/classes/xalan.jar}
+%{_libdir}/%{name}/program/classes/xmerge.jar
 %endif
 
-%dir %{basisdir}/program/resource
-%{basisdir}/program/resource/accen-US.res
-%{basisdir}/program/resource/avmediaen-US.res
-%{basisdir}/program/resource/basctlen-US.res
-%{basisdir}/program/resource/biben-US.res
-%{basisdir}/program/resource/calen-US.res
-%{basisdir}/program/resource/cuien-US.res
-%{basisdir}/program/resource/chartcontrolleren-US.res
-%{basisdir}/program/resource/dbaen-US.res
-%{basisdir}/program/resource/dbmmen-US.res
-%{basisdir}/program/resource/dbwen-US.res
-%{basisdir}/program/resource/deploymenten-US.res
-%{basisdir}/program/resource/deploymentguien-US.res
-%{basisdir}/program/resource/dkten-US.res
-%{basisdir}/program/resource/editengen-US.res
-%{basisdir}/program/resource/epsen-US.res
-%{basisdir}/program/resource/euren-US.res
-%{basisdir}/program/resource/foren-US.res
-%{basisdir}/program/resource/foruien-US.res
-%{basisdir}/program/resource/fps_officeen-US.res
-%{basisdir}/program/resource/frmen-US.res
-%{basisdir}/program/resource/fween-US.res
-%{basisdir}/program/resource/galen-US.res
-%{basisdir}/program/resource/impen-US.res
-%{basisdir}/program/resource/ofaen-US.res
-%{basisdir}/program/resource/pcren-US.res
-%{basisdir}/program/resource/pdffilteren-US.res
-%{basisdir}/program/resource/preloaden-US.res
-%{basisdir}/program/resource/productregistrationen-US.res
-%{basisdir}/program/resource/sanen-US.res
-%{basisdir}/program/resource/sben-US.res
-%{basisdir}/program/resource/sden-US.res
-%{basisdir}/program/resource/sdbten-US.res
-%{basisdir}/program/resource/sfxen-US.res
-%{basisdir}/program/resource/spaen-US.res
-%{basisdir}/program/resource/svlen-US.res
-%{basisdir}/program/resource/svten-US.res
-%{basisdir}/program/resource/svxen-US.res
-%{basisdir}/program/resource/swen-US.res
-%{basisdir}/program/resource/textconversiondlgsen-US.res
-%{basisdir}/program/resource/tken-US.res
-%{basisdir}/program/resource/tplen-US.res
-%{basisdir}/program/resource/updchken-US.res
-%{basisdir}/program/resource/upden-US.res
-%{basisdir}/program/resource/uuien-US.res
-%{basisdir}/program/resource/vclen-US.res
-%{basisdir}/program/resource/wzien-US.res
-%{basisdir}/program/resource/xmlsecen-US.res
-%{basisdir}/program/resource/xsltdlgen-US.res
+%dir %{_libdir}/%{name}/program/resource
+%{_libdir}/%{name}/program/resource/accen-US.res
+%{_libdir}/%{name}/program/resource/avmediaen-US.res
+%{_libdir}/%{name}/program/resource/basctlen-US.res
+%{_libdir}/%{name}/program/resource/biben-US.res
+%{_libdir}/%{name}/program/resource/calen-US.res
+%{_libdir}/%{name}/program/resource/cuien-US.res
+%{_libdir}/%{name}/program/resource/chartcontrolleren-US.res
+%{_libdir}/%{name}/program/resource/dbaen-US.res
+%{_libdir}/%{name}/program/resource/dbmmen-US.res
+%{_libdir}/%{name}/program/resource/dbwen-US.res
+%{_libdir}/%{name}/program/resource/deploymenten-US.res
+%{_libdir}/%{name}/program/resource/deploymentguien-US.res
+%{_libdir}/%{name}/program/resource/dkten-US.res
+%{_libdir}/%{name}/program/resource/editengen-US.res
+%{_libdir}/%{name}/program/resource/epsen-US.res
+%{_libdir}/%{name}/program/resource/euren-US.res
+%{_libdir}/%{name}/program/resource/foren-US.res
+%{_libdir}/%{name}/program/resource/foruien-US.res
+%{_libdir}/%{name}/program/resource/fps_officeen-US.res
+%{_libdir}/%{name}/program/resource/frmen-US.res
+%{_libdir}/%{name}/program/resource/fween-US.res
+%{_libdir}/%{name}/program/resource/galen-US.res
+%{_libdir}/%{name}/program/resource/impen-US.res
+%{_libdir}/%{name}/program/resource/ofaen-US.res
+%{_libdir}/%{name}/program/resource/pcren-US.res
+%{_libdir}/%{name}/program/resource/pdffilteren-US.res
+%{_libdir}/%{name}/program/resource/sanen-US.res
+%{_libdir}/%{name}/program/resource/sben-US.res
+%{_libdir}/%{name}/program/resource/sden-US.res
+%{_libdir}/%{name}/program/resource/sdbten-US.res
+%{_libdir}/%{name}/program/resource/sfxen-US.res
+%{_libdir}/%{name}/program/resource/spaen-US.res
+%{_libdir}/%{name}/program/resource/svlen-US.res
+%{_libdir}/%{name}/program/resource/svten-US.res
+%{_libdir}/%{name}/program/resource/svxen-US.res
+%{_libdir}/%{name}/program/resource/swen-US.res
+%{_libdir}/%{name}/program/resource/textconversiondlgsen-US.res
+%{_libdir}/%{name}/program/resource/tken-US.res
+%{_libdir}/%{name}/program/resource/tplen-US.res
+%{_libdir}/%{name}/program/resource/updchken-US.res
+%{_libdir}/%{name}/program/resource/upden-US.res
+%{_libdir}/%{name}/program/resource/uuien-US.res
+%{_libdir}/%{name}/program/resource/vclen-US.res
+%{_libdir}/%{name}/program/resource/wzien-US.res
+%{_libdir}/%{name}/program/resource/xmlsecen-US.res
+%{_libdir}/%{name}/program/resource/xsltdlgen-US.res
 
-%dir %{basisdir}/share
-%dir %{basisdir}/share/Scripts
-%{basisdir}/share/Scripts/beanshell
-%{basisdir}/share/Scripts/javascript
+%dir %{_libdir}/%{name}/share
+%dir %{_libdir}/%{name}/share/Scripts
+%{_libdir}/%{name}/share/Scripts/beanshell
+%{_libdir}/%{name}/share/Scripts/javascript
 %if %{with java}
-%{basisdir}/share/Scripts/java
+%{_libdir}/%{name}/share/Scripts/java
 %endif
 
-%dir %{basisdir}/share/autocorr
-%{basisdir}/share/autocorr/acor_*.dat
-%dir %{basisdir}/share/autotext
-%{basisdir}/share/autotext/en-US
-%{basisdir}/share/basic
-%dir %{basisdir}/share/config
-%{basisdir}/share/config/images.zip
-%{basisdir}/share/config/images_crystal.zip
-%{basisdir}/share/config/images_hicontrast.zip
-%{basisdir}/share/config/images_oxygen.zip
-%{basisdir}/share/config/images_tango.zip
-%{basisdir}/share/config/javasettingsunopkginstall.xml
-%{basisdir}/share/config/*.xpm
-%dir %{basisdir}/share/config/soffice.cfg
-%dir %{basisdir}/share/config/soffice.cfg/modules
-%{basisdir}/share/config/soffice.cfg/modules/BasicIDE
-%{basisdir}/share/config/soffice.cfg/modules/StartModule
-%dir %{basisdir}/share/config/soffice.cfg/modules/dbapp
-%dir %{basisdir}/share/config/soffice.cfg/modules/dbbrowser
-%dir %{basisdir}/share/config/soffice.cfg/modules/dbquery
-%dir %{basisdir}/share/config/soffice.cfg/modules/dbreport
-%dir %{basisdir}/share/config/soffice.cfg/modules/dbtdata
-%dir %{basisdir}/share/config/soffice.cfg/modules/scalc
-%{basisdir}/share/config/soffice.cfg/modules/schart
-%dir %{basisdir}/share/config/soffice.cfg/modules/sdraw
-%dir %{basisdir}/share/config/soffice.cfg/modules/sglobal
-%{basisdir}/share/config/soffice.cfg/modules/sglobal/menubar
-%{basisdir}/share/config/soffice.cfg/modules/sglobal/statusbar
-%{basisdir}/share/config/soffice.cfg/modules/sglobal/toolbar
-%dir %{basisdir}/share/config/soffice.cfg/modules/sweb
-%dir %{basisdir}/share/config/soffice.cfg/modules/simpress
-%dir %{basisdir}/share/config/soffice.cfg/modules/swform
-%{basisdir}/share/config/soffice.cfg/modules/swform/menubar
-%{basisdir}/share/config/soffice.cfg/modules/swform/statusbar
-%{basisdir}/share/config/soffice.cfg/modules/swform/toolbar
-%dir %{basisdir}/share/config/soffice.cfg/modules/swreport
-%{basisdir}/share/config/soffice.cfg/modules/swreport/menubar
-%{basisdir}/share/config/soffice.cfg/modules/swreport/statusbar
-%{basisdir}/share/config/soffice.cfg/modules/swreport/toolbar
-%dir %{basisdir}/share/config/soffice.cfg/modules/swriter
-%dir %{basisdir}/share/config/soffice.cfg/modules/swxform
-%{basisdir}/share/config/soffice.cfg/modules/swxform/menubar
-%{basisdir}/share/config/soffice.cfg/modules/swxform/statusbar
-%{basisdir}/share/config/soffice.cfg/modules/swxform/toolbar
-%{basisdir}/share/config/symbol
-%{basisdir}/share/config/webcast
-%{basisdir}/share/config/wizard
-%dir %{basisdir}/share/dtd
-%{basisdir}/share/dtd/officedocument
-%{basisdir}/share/fonts
-%{basisdir}/share/gallery
-%{basisdir}/share/psprint
+%dir %{_libdir}/%{name}/share/autocorr
+%{_libdir}/%{name}/share/autocorr/acor_*.dat
+%dir %{_libdir}/%{name}/share/autotext
+%{_libdir}/%{name}/share/autotext/en-US
+%{_libdir}/%{name}/share/basic
+%dir %{_libdir}/%{name}/share/config
+%{_libdir}/%{name}/share/config/images.zip
+%{_libdir}/%{name}/share/config/images_crystal.zip
+%{_libdir}/%{name}/share/config/images_hicontrast.zip
+%{_libdir}/%{name}/share/config/images_oxygen.zip
+%{_libdir}/%{name}/share/config/images_tango.zip
+%{_libdir}/%{name}/share/config/javasettingsunopkginstall.xml
+%{_libdir}/%{name}/share/config/*.xpm
+%dir %{_libdir}/%{name}/share/config/soffice.cfg
+%dir %{_libdir}/%{name}/share/config/soffice.cfg/modules
+%{_libdir}/%{name}/share/config/soffice.cfg/modules/BasicIDE
+%{_libdir}/%{name}/share/config/soffice.cfg/modules/StartModule
+%dir %{_libdir}/%{name}/share/config/soffice.cfg/modules/dbapp
+%dir %{_libdir}/%{name}/share/config/soffice.cfg/modules/dbbrowser
+%dir %{_libdir}/%{name}/share/config/soffice.cfg/modules/dbquery
+%dir %{_libdir}/%{name}/share/config/soffice.cfg/modules/dbreport
+%dir %{_libdir}/%{name}/share/config/soffice.cfg/modules/dbtdata
+%dir %{_libdir}/%{name}/share/config/soffice.cfg/modules/scalc
+%{_libdir}/%{name}/share/config/soffice.cfg/modules/schart
+%dir %{_libdir}/%{name}/share/config/soffice.cfg/modules/sdraw
+%dir %{_libdir}/%{name}/share/config/soffice.cfg/modules/sglobal
+%{_libdir}/%{name}/share/config/soffice.cfg/modules/sglobal/menubar
+%{_libdir}/%{name}/share/config/soffice.cfg/modules/sglobal/statusbar
+%{_libdir}/%{name}/share/config/soffice.cfg/modules/sglobal/toolbar
+%dir %{_libdir}/%{name}/share/config/soffice.cfg/modules/sweb
+%dir %{_libdir}/%{name}/share/config/soffice.cfg/modules/simpress
+%dir %{_libdir}/%{name}/share/config/soffice.cfg/modules/swform
+%{_libdir}/%{name}/share/config/soffice.cfg/modules/swform/menubar
+%{_libdir}/%{name}/share/config/soffice.cfg/modules/swform/statusbar
+%{_libdir}/%{name}/share/config/soffice.cfg/modules/swform/toolbar
+%dir %{_libdir}/%{name}/share/config/soffice.cfg/modules/swreport
+%{_libdir}/%{name}/share/config/soffice.cfg/modules/swreport/menubar
+%{_libdir}/%{name}/share/config/soffice.cfg/modules/swreport/statusbar
+%{_libdir}/%{name}/share/config/soffice.cfg/modules/swreport/toolbar
+%dir %{_libdir}/%{name}/share/config/soffice.cfg/modules/swriter
+%dir %{_libdir}/%{name}/share/config/soffice.cfg/modules/swxform
+%{_libdir}/%{name}/share/config/soffice.cfg/modules/swxform/menubar
+%{_libdir}/%{name}/share/config/soffice.cfg/modules/swxform/statusbar
+%{_libdir}/%{name}/share/config/soffice.cfg/modules/swxform/toolbar
+%{_libdir}/%{name}/share/config/symbol
+%{_libdir}/%{name}/share/config/webcast
+%{_libdir}/%{name}/share/config/wizard
+%dir %{_libdir}/%{name}/share/dtd
+%{_libdir}/%{name}/share/dtd/officedocument
+%{_libdir}/%{name}/share/fonts
+%{_libdir}/%{name}/share/gallery
+%{_libdir}/%{name}/share/psprint
 
-%dir %{basisdir}/share/registry
-%{basisdir}/share/registry/Langpack-en-US.xcd
-%{basisdir}/share/registry/lingucomponent.xcd
-%{basisdir}/share/registry/main.xcd
-%{basisdir}/share/registry/oo-ad-ldap.xcd.sample
-%{basisdir}/share/registry/oo-ldap.xcd.sample
-%dir %{basisdir}/share/registry/res
-%{basisdir}/share/registry/res/fcfg_langpack_en-US.xcd
+%dir %{_libdir}/%{name}/share/registry
+%{_libdir}/%{name}/share/registry/Langpack-en-US.xcd
+%{_libdir}/%{name}/share/registry/lingucomponent.xcd
+%{_libdir}/%{name}/share/registry/main.xcd
+%{_libdir}/%{name}/share/registry/oo-ad-ldap.xcd.sample
+%{_libdir}/%{name}/share/registry/oo-ldap.xcd.sample
+%dir %{_libdir}/%{name}/share/registry/res
+%{_libdir}/%{name}/share/registry/res/fcfg_langpack_en-US.xcd
 
-%dir %{basisdir}/share/samples
-%dir %{basisdir}/share/samples/en-US
+%dir %{_libdir}/%{name}/share/samples
+%dir %{_libdir}/%{name}/share/samples/en-US
 
-%dir %{basisdir}/share/template
-%{basisdir}/share/template/en-US
-%dir %{basisdir}/share/template/common
-%{basisdir}/share/template/common/layout
-%dir %{basisdir}/share/template/wizard
-%{basisdir}/share/template/wizard/bitmap
-%dir %{basisdir}/share/template/wizard/letter
-%{basisdir}/share/template/wizard/letter/en-US
+%dir %{_libdir}/%{name}/share/template
+%{_libdir}/%{name}/share/template/en-US
+%dir %{_libdir}/%{name}/share/template/common
+%{_libdir}/%{name}/share/template/common/layout
+%dir %{_libdir}/%{name}/share/template/wizard
+%{_libdir}/%{name}/share/template/wizard/bitmap
+%dir %{_libdir}/%{name}/share/template/wizard/letter
+%{_libdir}/%{name}/share/template/wizard/letter/en-US
 
-%dir %{basisdir}/share/wordbook
-%{basisdir}/share/wordbook/en-US
+%dir %{_libdir}/%{name}/share/wordbook
 
-%dir %{basisdir}/share/xslt
-%{basisdir}/share/xslt/common
-%dir %{basisdir}/share/xslt/export
-%{basisdir}/share/xslt/export/common
-%{basisdir}/share/xslt/export/spreadsheetml
-%{basisdir}/share/xslt/export/uof
-%{basisdir}/share/xslt/export/wordml
-%{basisdir}/share/xslt/import
+%dir %{_libdir}/%{name}/share/xslt
+%{_libdir}/%{name}/share/xslt/common
+%dir %{_libdir}/%{name}/share/xslt/export
+%{_libdir}/%{name}/share/xslt/export/common
+%{_libdir}/%{name}/share/xslt/export/spreadsheetml
+%{_libdir}/%{name}/share/xslt/export/uof
+%{_libdir}/%{name}/share/xslt/export/wordml
+%{_libdir}/%{name}/share/xslt/import
 
 # symlink to directory
-%attr(755,root,root) %{basisdir}/ure-link
+%attr(755,root,root) %{_libdir}/%{name}/ure-link
 
-%dir %{_libdir}/%{name}/program
 %attr(755,root,root) %{_libdir}/%{name}/program/libnpsoplugin.so
-%attr(755,root,root) %{_libdir}/%{name}/program/oosplash.bin
 %attr(755,root,root) %{_libdir}/%{name}/program/spadmin
 %attr(755,root,root) %{_libdir}/%{name}/program/soffice
 %attr(755,root,root) %{_libdir}/%{name}/program/soffice.bin
@@ -3362,24 +3208,16 @@ fi
 %{_libdir}/%{name}/program/setuprc
 %{_libdir}/%{name}/program/shell
 %{_libdir}/%{name}/program/sofficerc
-%{_libdir}/%{name}/program/versionrc
 
 # symlinks
-%{_libdir}/%{name}/basis-link
-%{basisdir}/help
+%{_libdir}/%{name}/help
 %{_libdir}/%{name}/readmes
 
-
-%dir %{_datadir}/%{name}
 %dir %{_datadir}/%{name}/readmes
 %{_datadir}/%{name}/readmes/README_en-US
-%dir %{_libdir}/%{name}/share
-%dir %{_libdir}/%{name}/share/config
 %{_libdir}/%{name}/share/config/images_brand.zip
 %dir %{_libdir}/%{name}/share/extensions
 %{_libdir}/%{name}/share/extensions/package.txt
-%dir %{_libdir}/%{name}/share/registry
-%{_libdir}/%{name}/share/registry/brand.xcd
 
 %{_datadir}/mime/packages/libreoffice.xml
 %{_iconsdir}/hicolor/*/mimetypes/libreoffice-*.png
@@ -3397,33 +3235,32 @@ fi
 %if %{with kde}
 %files libs-kde
 %defattr(644,root,root,755)
-%attr(755,root,root) %{basisdir}/program/kde-open-url
-%attr(755,root,root) %{basisdir}/program/kdebe1.uno.so
+%attr(755,root,root) %{_libdir}/%{name}/program/kde-open-url
+%attr(755,root,root) %{_libdir}/%{name}/program/kdebe1.uno.so
 %attr(755,root,root) %{_libdir}/%{name}/program/kdefilepicker
-%attr(755,root,root) %{basisdir}/program/fps_kde.uno.so
-%attr(755,root,root) %{basisdir}/program/libkabdrv1.so
-%attr(755,root,root) %{basisdir}/program/libkab1.so
-%attr(755,root,root) %{basisdir}/program/libvclplug_kde*.so
+%attr(755,root,root) %{_libdir}/%{name}/program/fps_kde.uno.so
+%attr(755,root,root) %{_libdir}/%{name}/program/libkabdrv1.so
+%attr(755,root,root) %{_libdir}/%{name}/program/libkab1.so
+%attr(755,root,root) %{_libdir}/%{name}/program/libvclplug_kde*.so
 %endif
 
 %if %{with kde4}
 %files libs-kde
 %defattr(644,root,root,755)
-%attr(755,root,root) %{basisdir}/program/kde-open-url
-%attr(755,root,root) %{basisdir}/program/fps_kde4.uno.so
-%attr(755,root,root) %{basisdir}/program/kde4be1.uno.so
-%attr(755,root,root) %{basisdir}/program/libvclplug_kde4*.so
+%attr(755,root,root) %{_libdir}/%{name}/program/kde-open-url
+%attr(755,root,root) %{_libdir}/%{name}/program/fps_kde4.uno.so
+%attr(755,root,root) %{_libdir}/%{name}/program/kde4be1.uno.so
+%attr(755,root,root) %{_libdir}/%{name}/program/libvclplug_kde4*.so
 %endif
 
 %files libs-gtk
 %defattr(644,root,root,755)
-%attr(755,root,root) %{basisdir}/program/fps_gnome.uno.so
-%attr(755,root,root) %{basisdir}/program/gconfbe1.uno.so
-%attr(755,root,root) %{basisdir}/program/gnome-open-url
-%attr(755,root,root) %{basisdir}/program/gnome-open-url.bin
-%attr(755,root,root) %{basisdir}/program/libvclplug_gtk*.so
-%attr(755,root,root) %{basisdir}/program/ucpgio1.uno.so
-%{basisdir}/share/registry/gnome.xcd
+%attr(755,root,root) %{_libdir}/%{name}/program/gconfbe1.uno.so
+%attr(755,root,root) %{_libdir}/%{name}/program/gnome-open-url
+%attr(755,root,root) %{_libdir}/%{name}/program/gnome-open-url.bin
+%attr(755,root,root) %{_libdir}/%{name}/program/libvclplug_gtk*.so
+%attr(755,root,root) %{_libdir}/%{name}/program/ucpgio1.uno.so
+%{_libdir}/%{name}/share/registry/gnome.xcd
 
 %files base
 %defattr(644,root,root,755)
@@ -3433,37 +3270,31 @@ fi
 %{_mandir}/man1/lobase.1
 %{_desktopdir}/libreoffice-base.desktop
 %{_iconsdir}/hicolor/*/apps/libreoffice-base.png
-%attr(755,root,root) %{basisdir}/program/libabpl[ipx].so
-%attr(755,root,root) %{basisdir}/program/libadabasuil[ipx].so
-%attr(755,root,root) %{basisdir}/program/libdbpl[ipx].so
-%attr(755,root,root) %{basisdir}/program/librptl[ipx].so
-%attr(755,root,root) %{basisdir}/program/librptuil[ipx].so
-%attr(755,root,root) %{basisdir}/program/librptxmll[ipx].so
-%{basisdir}/program/resource/abpen-US.res
-%{basisdir}/program/resource/adabasuien-US.res
-%{basisdir}/program/resource/cnren-US.res
-%{basisdir}/program/resource/dbpen-US.res
-%{basisdir}/program/resource/dbuen-US.res
-%{basisdir}/program/resource/rpten-US.res
-%{basisdir}/program/resource/rptuien-US.res
-%{basisdir}/program/resource/sdbclen-US.res
-%{basisdir}/program/resource/sdberren-US.res
-%{basisdir}/share/config/soffice.cfg/modules/dbapp/menubar
-%{basisdir}/share/config/soffice.cfg/modules/dbapp/statusbar
-%{basisdir}/share/config/soffice.cfg/modules/dbapp/toolbar
-%{basisdir}/share/config/soffice.cfg/modules/dbbrowser/menubar
-%{basisdir}/share/config/soffice.cfg/modules/dbbrowser/toolbar
-%{basisdir}/share/config/soffice.cfg/modules/dbquery/menubar
-%{basisdir}/share/config/soffice.cfg/modules/dbquery/toolbar
-%{basisdir}/share/config/soffice.cfg/modules/dbrelation
-%{basisdir}/share/config/soffice.cfg/modules/dbreport/menubar
-%{basisdir}/share/config/soffice.cfg/modules/dbreport/statusbar
-%{basisdir}/share/config/soffice.cfg/modules/dbreport/toolbar
-%{basisdir}/share/config/soffice.cfg/modules/dbtable
-%{basisdir}/share/config/soffice.cfg/modules/dbtdata/menubar
-%{basisdir}/share/config/soffice.cfg/modules/dbtdata/toolbar
-%{basisdir}/share/registry/base.xcd
-%{databasisdir}/help/en/sdatabase.*
+%{_libdir}/%{name}/program/resource/abpen-US.res
+%{_libdir}/%{name}/program/resource/adabasuien-US.res
+%{_libdir}/%{name}/program/resource/cnren-US.res
+%{_libdir}/%{name}/program/resource/dbpen-US.res
+%{_libdir}/%{name}/program/resource/dbuen-US.res
+%{_libdir}/%{name}/program/resource/rpten-US.res
+%{_libdir}/%{name}/program/resource/rptuien-US.res
+%{_libdir}/%{name}/program/resource/sdbclen-US.res
+%{_libdir}/%{name}/program/resource/sdberren-US.res
+%{_libdir}/%{name}/share/config/soffice.cfg/modules/dbapp/menubar
+%{_libdir}/%{name}/share/config/soffice.cfg/modules/dbapp/statusbar
+%{_libdir}/%{name}/share/config/soffice.cfg/modules/dbapp/toolbar
+%{_libdir}/%{name}/share/config/soffice.cfg/modules/dbbrowser/menubar
+%{_libdir}/%{name}/share/config/soffice.cfg/modules/dbbrowser/toolbar
+%{_libdir}/%{name}/share/config/soffice.cfg/modules/dbquery/menubar
+%{_libdir}/%{name}/share/config/soffice.cfg/modules/dbquery/toolbar
+%{_libdir}/%{name}/share/config/soffice.cfg/modules/dbrelation
+%{_libdir}/%{name}/share/config/soffice.cfg/modules/dbreport/menubar
+%{_libdir}/%{name}/share/config/soffice.cfg/modules/dbreport/statusbar
+%{_libdir}/%{name}/share/config/soffice.cfg/modules/dbreport/toolbar
+%{_libdir}/%{name}/share/config/soffice.cfg/modules/dbtable
+%{_libdir}/%{name}/share/config/soffice.cfg/modules/dbtdata/menubar
+%{_libdir}/%{name}/share/config/soffice.cfg/modules/dbtdata/toolbar
+%{_libdir}/%{name}/share/registry/base.xcd
+%{_datadir}/%{name}/help/en/sdatabase.*
 
 %files calc
 %defattr(644,root,root,755)
@@ -3473,25 +3304,16 @@ fi
 %{_mandir}/man1/localc.1
 %{_desktopdir}/libreoffice-calc.desktop
 %{_iconsdir}/hicolor/*/apps/libreoffice-calc.png
-%{databasisdir}/help/en/scalc.*
-%attr(755,root,root) %{basisdir}/program/libanalysisl[ipx].so
-%attr(755,root,root) %{basisdir}/program/libcalcl[ipx].so
-%attr(755,root,root) %{basisdir}/program/libdatel[ipx].so
-%attr(755,root,root) %{basisdir}/program/libscdl[ipx].so
-%attr(755,root,root) %{basisdir}/program/libscfiltl[ipx].so
-%attr(755,root,root) %{basisdir}/program/libscl[ipx].so
-%attr(755,root,root) %{basisdir}/program/libscuil[ipx].so
-%attr(755,root,root) %{basisdir}/program/libsolverl[ipx].so
-%attr(755,root,root) %{basisdir}/program/vbaobj.uno.so
-%{basisdir}/program/resource/analysisen-US.res
-%{basisdir}/program/resource/dateen-US.res
-%{basisdir}/program/resource/solveren-US.res
-%{basisdir}/program/resource/scen-US.res
-%{basisdir}/share/config/soffice.cfg/modules/scalc/layout
-%{basisdir}/share/config/soffice.cfg/modules/scalc/menubar
-%{basisdir}/share/config/soffice.cfg/modules/scalc/statusbar
-%{basisdir}/share/config/soffice.cfg/modules/scalc/toolbar
-%{basisdir}/share/registry/calc.xcd
+%{_datadir}/%{name}/help/en/scalc.*
+%attr(755,root,root) %{_libdir}/%{name}/program/vbaobj.uno.so
+%{_libdir}/%{name}/program/resource/analysisen-US.res
+%{_libdir}/%{name}/program/resource/dateen-US.res
+%{_libdir}/%{name}/program/resource/solveren-US.res
+%{_libdir}/%{name}/program/resource/scen-US.res
+%{_libdir}/%{name}/share/config/soffice.cfg/modules/scalc/menubar
+%{_libdir}/%{name}/share/config/soffice.cfg/modules/scalc/statusbar
+%{_libdir}/%{name}/share/config/soffice.cfg/modules/scalc/toolbar
+%{_libdir}/%{name}/share/registry/calc.xcd
 
 %files draw
 %defattr(644,root,root,755)
@@ -3501,60 +3323,50 @@ fi
 %{_mandir}/man1/lodraw.1
 %{_desktopdir}/libreoffice-draw.desktop
 %{_iconsdir}/hicolor/*/apps/libreoffice-draw.png
-%{databasisdir}/help/en/sdraw.*
-%{basisdir}/share/config/soffice.cfg/modules/sdraw/menubar
-%{basisdir}/share/config/soffice.cfg/modules/sdraw/statusbar
-%{basisdir}/share/config/soffice.cfg/modules/sdraw/toolbar
-%{basisdir}/share/registry/draw.xcd
+%{_datadir}/%{name}/help/en/sdraw.*
+%{_libdir}/%{name}/share/config/soffice.cfg/modules/sdraw/menubar
+%{_libdir}/%{name}/share/config/soffice.cfg/modules/sdraw/statusbar
+%{_libdir}/%{name}/share/config/soffice.cfg/modules/sdraw/toolbar
+%{_libdir}/%{name}/share/registry/draw.xcd
 
 %files emailmerge
 %defattr(644,root,root,755)
-%{basisdir}/program/mailmerge.py*
+%{_libdir}/%{name}/program/mailmerge.py*
 
 %files writer
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_bindir}/lowriter
 %attr(755,root,root) %{_bindir}/oowriter
-%attr(755,root,root) %{basisdir}/program/libhwp.so
-%attr(755,root,root) %{basisdir}/program/liblwpftl[ipx].so
-%attr(755,root,root) %{basisdir}/program/libmswordl[ipx].so
-%attr(755,root,root) %{basisdir}/program/libmsworksl[ipx].so
-%attr(755,root,root) %{basisdir}/program/libswdl[ipx].so
-%attr(755,root,root) %{basisdir}/program/libswuil[ipx].so
-%attr(755,root,root) %{basisdir}/program/libt602filterl[ipx].so
-%attr(755,root,root) %{basisdir}/program/libwpftl[ipx].so
-%attr(755,root,root) %{basisdir}/program/libwriterfilterl[ipx].so
-%attr(755,root,root) %{basisdir}/program/vbaswobj.uno.so
+%attr(755,root,root) %{_libdir}/%{name}/program/vbaswobj.uno.so
 %attr(755,root,root) %{_libdir}/%{name}/program/swriter
 %{_mandir}/man1/lowriter.1
 %{_desktopdir}/libreoffice-writer.desktop
 %{_iconsdir}/hicolor/*/apps/libreoffice-writer.png
-%{databasisdir}/help/en/swriter.*
-%{basisdir}/program/resource/t602filteren-US.res
-%{basisdir}/share/config/soffice.cfg/modules/sbibliography
-%{basisdir}/share/config/soffice.cfg/modules/swriter/menubar
-%{basisdir}/share/config/soffice.cfg/modules/swriter/statusbar
-%{basisdir}/share/config/soffice.cfg/modules/swriter/toolbar
-%{basisdir}/share/registry/writer.xcd
+%{_datadir}/%{name}/help/en/swriter.*
+%{_libdir}/%{name}/program/resource/t602filteren-US.res
+%{_libdir}/%{name}/share/config/soffice.cfg/modules/sbibliography
+%{_libdir}/%{name}/share/config/soffice.cfg/modules/swriter/menubar
+%{_libdir}/%{name}/share/config/soffice.cfg/modules/swriter/statusbar
+%{_libdir}/%{name}/share/config/soffice.cfg/modules/swriter/toolbar
+%{_libdir}/%{name}/share/registry/writer.xcd
 
 %files impress
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_bindir}/loimpress
 %attr(755,root,root) %{_bindir}/ooimpress
 %attr(755,root,root) %{_libdir}/%{name}/program/simpress
-%attr(755,root,root) %{basisdir}/program/OGLTrans.uno.so
-%attr(755,root,root) %{basisdir}/program/libanimcore.so
-%attr(755,root,root) %{basisdir}/program/libplaceware*.so
+%attr(755,root,root) %{_libdir}/%{name}/program/OGLTrans.uno.so
+%attr(755,root,root) %{_libdir}/%{name}/program/libplaceware*.so
 %{_mandir}/man1/loimpress.1
 %{_desktopdir}/libreoffice-impress.desktop
 %{_iconsdir}/hicolor/*/apps/libreoffice-impress.png
-%{databasisdir}/help/en/simpress.*
-%{basisdir}/share/config/soffice.cfg/simpress
-%{basisdir}/share/config/soffice.cfg/modules/simpress/menubar
-%{basisdir}/share/config/soffice.cfg/modules/simpress/statusbar
-%{basisdir}/share/config/soffice.cfg/modules/simpress/toolbar
-%{basisdir}/share/registry/impress.xcd
-%{basisdir}/share/registry/ogltrans.xcd
+%{_datadir}/%{name}/help/en/simpress.*
+%{_libdir}/%{name}/share/config/soffice.cfg/simpress
+%{_libdir}/%{name}/share/config/soffice.cfg/modules/simpress/menubar
+%{_libdir}/%{name}/share/config/soffice.cfg/modules/simpress/statusbar
+%{_libdir}/%{name}/share/config/soffice.cfg/modules/simpress/toolbar
+%{_libdir}/%{name}/share/registry/impress.xcd
+%{_libdir}/%{name}/share/registry/ogltrans.xcd
 
 %files math
 %defattr(644,root,root,755)
@@ -3563,56 +3375,42 @@ fi
 %{_mandir}/man1/lomath.1
 %{_desktopdir}/libreoffice-math.desktop
 %{_iconsdir}/hicolor/*/apps/libreoffice-math.png
-%{databasisdir}/help/en/smath.*
-%attr(755,root,root) %{basisdir}/program/libsmdl[ipx].so
-%attr(755,root,root) %{basisdir}/program/libsml[ipx].so
+%{_datadir}/%{name}/help/en/smath.*
 %attr(755,root,root) %{_libdir}/%{name}/program/smath
-%{basisdir}/share/dtd/math
-%{basisdir}/program/resource/smen-US.res
-%{basisdir}/share/config/soffice.cfg/modules/smath
-%{basisdir}/share/registry/math.xcd
+%{_libdir}/%{name}/program/resource/smen-US.res
+%{_libdir}/%{name}/share/config/soffice.cfg/modules/smath
+%{_libdir}/%{name}/share/registry/math.xcd
 
 %files web
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_bindir}/loweb
 %attr(755,root,root) %{_bindir}/ooweb
 %{_mandir}/man1/loweb.1
-%{basisdir}/share/config/soffice.cfg/modules/sweb/menubar
-%{basisdir}/share/config/soffice.cfg/modules/sweb/statusbar
-%{basisdir}/share/config/soffice.cfg/modules/sweb/toolbar
+%{_libdir}/%{name}/share/config/soffice.cfg/modules/sweb/menubar
+%{_libdir}/%{name}/share/config/soffice.cfg/modules/sweb/statusbar
+%{_libdir}/%{name}/share/config/soffice.cfg/modules/sweb/toolbar
 
 %files graphicfilter
 %defattr(644,root,root,755)
-%attr(755,root,root) %{basisdir}/program/libflashl[ipx].so
-%attr(755,root,root) %{basisdir}/program/libsvgfilterl[ipx].so
-%attr(755,root,root) %{basisdir}/program/libwpgimportl[ipx].so
-%{basisdir}/share/registry/graphicfilter.xcd
+%{_libdir}/%{name}/share/registry/graphicfilter.xcd
 
 %files xsltfilter
 %defattr(644,root,root,755)
-%{basisdir}/share/registry/xsltfilter.xcd
-%{basisdir}/share/xslt/docbook
-%{basisdir}/share/xslt/export/xhtml
+%{_libdir}/%{name}/share/registry/xsltfilter.xcd
+%{_libdir}/%{name}/share/xslt/docbook
+%{_libdir}/%{name}/share/xslt/export/xhtml
 
 %if %{with java}
 %files javafilter
 %defattr(644,root,root,755)
-%{basisdir}/program/classes/pexcel.jar
-%{basisdir}/program/classes/pocketword.jar
-%{basisdir}/program/classes/aportisdoc.jar
-%{basisdir}/share/registry/palm.xcd
-%{basisdir}/share/registry/pocketexcel.xcd
-%{basisdir}/share/registry/pocketword.xcd
+%{_libdir}/%{name}/program/classes/pexcel.jar
+%{_libdir}/%{name}/program/classes/pocketword.jar
+%{_libdir}/%{name}/program/classes/aportisdoc.jar
+%{_libdir}/%{name}/share/registry/palm.xcd
+%{_libdir}/%{name}/share/registry/pocketexcel.xcd
+%{_libdir}/%{name}/share/registry/pocketword.xcd
 %{_desktopdir}/libreoffice-javafilter.desktop
 %endif
-
-%files testtools
-%defattr(644,root,root,755)
-%attr(755,root,root) %{basisdir}/program/libcommunil[ipx].so
-%attr(755,root,root) %{basisdir}/program/libsimplecml[ipx].so
-%attr(755,root,root) %{basisdir}/program/testtool.bin
-%{basisdir}/program/resource/stten-US.res
-%{basisdir}/program/testtoolrc
 
 %files ure
 %defattr(644,root,root,755)
@@ -3626,7 +3424,6 @@ fi
 %attr(755,root,root) %{_libdir}/%{name}/ure/bin/startup.sh
 %attr(755,root,root) %{_libdir}/%{name}/ure/bin/uno
 %attr(755,root,root) %{_libdir}/%{name}/ure/bin/uno.bin
-%{_libdir}/%{name}/ure/bin/versionrc
 %if %{with java}
 %attr(755,root,root) %{_libdir}/%{name}/ure/bin/javaldx
 %endif
@@ -3659,7 +3456,6 @@ fi
 %attr(755,root,root) %{_libdir}/%{name}/ure/lib/libjvmfwk.so.3
 %attr(755,root,root) %{_libdir}/%{name}/ure/lib/libreg.so.3
 %attr(755,root,root) %{_libdir}/%{name}/ure/lib/binaryurp.uno.so
-%attr(755,root,root) %{_libdir}/%{name}/ure/lib/libsal_textenc.so.3
 %attr(755,root,root) %{_libdir}/%{name}/ure/lib/libxmlreader.so
 %{_libdir}/%{name}/ure/lib/jvmfwk3rc
 %{_libdir}/%{name}/ure/lib/unorc
@@ -3691,18 +3487,18 @@ fi
 
 %files pyuno
 %defattr(644,root,root,755)
-%attr(755,root,root) %{basisdir}/program/libpyuno.so
-%attr(755,root,root) %{basisdir}/program/pythonloader.uno.so
-%attr(755,root,root) %{basisdir}/program/pyuno.so
-%{basisdir}/program/pythonloader.unorc
-%{basisdir}/program/officehelper.py
-%{basisdir}/program/pythonloader.py
-%{basisdir}/program/uno.py
-%{basisdir}/program/unohelper.py
-%{basisdir}/share/registry/pyuno.xcd
+%attr(755,root,root) %{_libdir}/%{name}/program/libpyuno.so
+%attr(755,root,root) %{_libdir}/%{name}/program/pythonloader.uno.so
+%attr(755,root,root) %{_libdir}/%{name}/program/pyuno.so
+%{_libdir}/%{name}/program/pythonloader.unorc
+%{_libdir}/%{name}/program/officehelper.py
+%{_libdir}/%{name}/program/pythonloader.py
+%{_libdir}/%{name}/program/uno.py
+%{_libdir}/%{name}/program/unohelper.py
+%{_libdir}/%{name}/share/registry/pyuno.xcd
 
 # samples there
-%{basisdir}/share/Scripts/python
+%{_libdir}/%{name}/share/Scripts/python
 
 %files pdfimport
 %defattr(644,root,root,755)
@@ -3712,7 +3508,6 @@ fi
 %{_libdir}/%{name}/share/extensions/pdfimport/META-INF
 %{_libdir}/%{name}/share/extensions/pdfimport/basic
 %{_libdir}/%{name}/share/extensions/pdfimport/description.xml
-%{_libdir}/%{name}/share/extensions/pdfimport/help
 %{_libdir}/%{name}/share/extensions/pdfimport/images
 %{_libdir}/%{name}/share/extensions/pdfimport/registration
 %{_libdir}/%{name}/share/extensions/pdfimport/*.xcu
@@ -3725,7 +3520,6 @@ fi
 %{_libdir}/%{name}/share/extensions/presentation-minimizer/META-INF
 %{_libdir}/%{name}/share/extensions/presentation-minimizer/bitmaps
 %{_libdir}/%{name}/share/extensions/presentation-minimizer/description.xml
-%{_libdir}/%{name}/share/extensions/presentation-minimizer/help
 %{_libdir}/%{name}/share/extensions/presentation-minimizer/registr*
 
 %files presenter-screen
@@ -3750,7 +3544,7 @@ fi
 %files -n browser-plugin-%{name}
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_browserpluginsdir}/libnpsoplugin.so
-%attr(755,root,root) %{basisdir}/program/nsplugin
+%attr(755,root,root) %{_libdir}/%{name}/program/nsplugin
 %endif
 
 %if %{with i18n}
