@@ -1,0 +1,1 @@
+- libreoffice-npshell.cxx.patch to build against xulrunner declaration mismatch
