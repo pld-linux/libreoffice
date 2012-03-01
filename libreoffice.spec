@@ -8,6 +8,7 @@
 # TODO:
 #	- package postgresql SDBC
 #	- package script-provider-for-python extension
+#	- new i18n - lb, qtz, tt
 #
 # Conditional build:
 %bcond_without	java		# without Java support (disables help support)
@@ -48,7 +49,7 @@ Summary:	LibreOffice - powerful office suite
 Summary(pl.UTF-8):	LibreOffice - potężny pakiet biurowy
 Name:		libreoffice
 Version:	%{major_ver}.3
-Release:	0.1
+Release:	1
 License:	GPL/LGPL
 Group:		X11/Applications
 # we use git because released tarballs are buggy too often
@@ -327,7 +328,6 @@ Requires:	saxon
 Requires:	sed
 %{?with_system_xalan:Requires:	xalan-j}
 #Suggests:	chkfontpath
-Obsoletes:	libreoffice-i18n-gd
 Obsoletes:	libreoffice-i18n-kid
 Obsoletes:	libreoffice-i18n-ky
 Obsoletes:	libreoffice-i18n-ms
@@ -361,7 +361,6 @@ Obsoletes:	openoffice.org-i18n-by
 Obsoletes:	openoffice.org-i18n-fo
 Obsoletes:	openoffice.org-i18n-fo-gtk
 Obsoletes:	openoffice.org-i18n-fo-kde
-Obsoletes:	openoffice.org-i18n-gd
 Obsoletes:	openoffice.org-i18n-gu_IN
 Obsoletes:	openoffice.org-i18n-ia
 Obsoletes:	openoffice.org-i18n-ia-gtk
@@ -2779,8 +2778,15 @@ find_lang() {
 		grep "/help/${lang}$" ${lfile} >> ${langfn}.lang || :
 		grep "/help/${lang}/" ${lfile} >> ${langfn}.lang || :
 
-		for d in $RPM_BUILD_ROOT%{_libdir}/%{name}/share/extensions/*/description-${lang}.txt ; do
-			[ -f $d ] && echo $d | sed -e "s|$RPM_BUILD_ROOT||g" >> ${langfn}.lang || :
+		for e in pdfimport \
+				presentation-minimizer \
+				presenter-screen \
+				report-builder \
+				script-provider-for-python \
+				wiki-publisher ; do
+			for d in $RPM_BUILD_ROOT%{_libdir}/%{name}/share/extensions/$e/description-${lang}.txt ; do
+				[ -f $d ] && echo "%lang(${lang}) $d" | sed -e "s|$RPM_BUILD_ROOT||g" >> $e.lang || :
+			done
 		done
 	fi
 }
@@ -3693,7 +3699,7 @@ fi
 # samples there
 %{_libdir}/%{name}/share/Scripts/python
 
-%files pdfimport
+%files pdfimport -f pdfimport.lang
 %defattr(644,root,root,755)
 %dir %{_libdir}/%{name}/share/extensions/pdfimport
 %attr(755,root,root) %{_libdir}/%{name}/share/extensions/pdfimport/pdfimport.uno.so
@@ -3707,7 +3713,7 @@ fi
 %{_libdir}/%{name}/share/extensions/pdfimport/*.xcu
 %{_libdir}/%{name}/share/extensions/pdfimport/*.pdf
 
-%files presentation-minimizer
+%files presentation-minimizer -f presentation-minimizer.lang
 %defattr(644,root,root,755)
 %dir %{_libdir}/%{name}/share/extensions/presentation-minimizer
 %attr(755,root,root) %{_libdir}/%{name}/share/extensions/presentation-minimizer/SunPresentationMinimizer.uno.so
@@ -3717,7 +3723,7 @@ fi
 %{_libdir}/%{name}/share/extensions/presentation-minimizer/description.xml
 %{_libdir}/%{name}/share/extensions/presentation-minimizer/registr*
 
-%files presenter-screen
+%files presenter-screen -f presenter-screen.lang
 %defattr(644,root,root,755)
 %dir %{_libdir}/%{name}/share/extensions/presenter-screen
 %attr(755,root,root) %{_libdir}/%{name}/share/extensions/presenter-screen/PresenterScreen.uno.so
@@ -3728,13 +3734,36 @@ fi
 %{_libdir}/%{name}/share/extensions/presenter-screen/help
 %{_libdir}/%{name}/share/extensions/presenter-screen/registry
 
-%files report-builder
+%files report-builder -f report-builder.lang
 %defattr(644,root,root,755)
-%{_libdir}/%{name}/share/extensions/report-builder
+%dir %{_libdir}/%{name}/share/extensions/report-builder
+%{_libdir}/%{name}/share/extensions/report-builder/META-INF
+%{_libdir}/%{name}/share/extensions/report-builder/images
+%{_libdir}/%{name}/share/extensions/report-builder/registration
+%{_libdir}/%{name}/share/extensions/report-builder/registry
+%{_libdir}/%{name}/share/extensions/report-builder/template
+%{_libdir}/%{name}/share/extensions/report-builder/THIRDPARTYREADMELICENSE.html
+%{_libdir}/%{name}/share/extensions/report-builder/components.rdb
+%{_libdir}/%{name}/share/extensions/report-builder/description-en-US.txt
+%{_libdir}/%{name}/share/extensions/report-builder/description.xml
+%{_libdir}/%{name}/share/extensions/report-builder/readme*
+%{_libdir}/%{name}/share/extensions/report-builder/*.jar
 
-%files wiki-publisher
+%files wiki-publisher -f wiki-publisher.lang
 %defattr(644,root,root,755)
-%{_libdir}/%{name}/share/extensions/wiki-publisher
+%dir %{_libdir}/%{name}/share/extensions/wiki-publisher
+%{_libdir}/%{name}/share/extensions/wiki-publisher/META-INF
+%{_libdir}/%{name}/share/extensions/wiki-publisher/WikiEditor
+%{_libdir}/%{name}/share/extensions/wiki-publisher/filter
+%{_libdir}/%{name}/share/extensions/wiki-publisher/help
+%{_libdir}/%{name}/share/extensions/wiki-publisher/license
+%{_libdir}/%{name}/share/extensions/wiki-publisher/registration
+%{_libdir}/%{name}/share/extensions/wiki-publisher/templates
+%{_libdir}/%{name}/share/extensions/wiki-publisher/*.xc*
+%{_libdir}/%{name}/share/extensions/wiki-publisher/components.rdb
+%{_libdir}/%{name}/share/extensions/wiki-publisher/description-en-US.txt
+%{_libdir}/%{name}/share/extensions/wiki-publisher/description.xml
+%{_libdir}/%{name}/share/extensions/wiki-publisher/mediawiki.jar
 
 %if %{with mozilla}
 %files -n browser-plugin-%{name}
