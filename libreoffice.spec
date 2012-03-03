@@ -198,6 +198,7 @@ BuildRequires:	unixODBC-devel >= 2.2.12-2
 BuildRequires:	unzip
 BuildRequires:	vigra-devel
 %{?with_system_xalan:BuildRequires:	xalan-j}
+BuildRequires:	xorg-font-font-adobe-utopia-type1
 BuildRequires:	xorg-lib-libX11-devel
 BuildRequires:	xorg-lib-libXaw-devel
 BuildRequires:	xorg-lib-libXtst-devel
