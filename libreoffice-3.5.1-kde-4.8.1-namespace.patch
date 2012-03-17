@@ -1,0 +1,35 @@
+From 14dfa9de27ddab9bb0bbe64e6c0a4b5e4caab742 Mon Sep 17 00:00:00 2001
+From: David Tardon <dtardon@redhat.com>
+Date: Thu, 8 Mar 2012 14:15:09 +0100
+Subject: [PATCH] yet another clash with macro name
+
+Signed-off-by: Tomas Chvatal <tchvatal@suse.cz>
+---
+ fpicker/source/unx/kde4/KDE4FilePicker.cxx |    4 ++++
+ 1 files changed, 4 insertions(+), 0 deletions(-)
+
+diff --git a/fpicker/source/unx/kde4/KDE4FilePicker.cxx b/fpicker/source/unx/kde4/KDE4FilePicker.cxx
+index 69be3b1..9c3ded3 100644
+--- a/fpicker/source/unx/kde4/KDE4FilePicker.cxx
++++ b/fpicker/source/unx/kde4/KDE4FilePicker.cxx
+@@ -60,6 +60,8 @@
+ #undef SETTINGS_MOUSE
+ #define LO_SETTINGS_LOCALE SETTINGS_LOCALE
+ #undef SETTINGS_LOCALE
++#define LO_SETTINGS_STYLE SETTINGS_STYLE
++#undef SETTINGS_STYLE
+ 
+ #include <kfiledialog.h>
+ #include <kwindowsystem.h>
+@@ -77,6 +79,8 @@
+ #undef LO_SETTINGS_MOUSE
+ #define SETTINGS_LOCALE LO_SETTINGS_LOCALE
+ #undef LO_SETTINGS_LOCALE
++#define SETTINGS_STYLE LO_SETTINGS_STYLE
++#undef LO_SETTINGS_STYLE
+ 
+ using namespace ::com::sun::star;
+ 
+-- 
+1.7.3.4
+

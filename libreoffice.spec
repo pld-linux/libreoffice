@@ -43,12 +43,12 @@
 %undefine	with_system_hsqldb
 %endif
 
-%define		major_ver		3.5.0
+%define		major_ver		3.5.1
 
 Summary:	LibreOffice - powerful office suite
 Summary(pl.UTF-8):	LibreOffice - potężny pakiet biurowy
 Name:		libreoffice
-Version:	%{major_ver}.3
+Version:	%{major_ver}.2
 Release:	1
 License:	GPL/LGPL
 Group:		X11/Applications
@@ -57,15 +57,15 @@ Group:		X11/Applications
 # cd build
 # git checkout -b libreoffice-3-3 origin/libreoffice-3-3
 Source0:	http://download.documentfoundation.org/libreoffice/src/%{major_ver}/%{name}-core-%{version}.tar.xz
-# Source0-md5:	209bbbc369b36963d25334c3ef7933e8
+# Source0-md5:	1edf0d39a7a921f6415f6a6ec7b314b3
 Source1:	http://download.documentfoundation.org/libreoffice/src/%{major_ver}/%{name}-binfilter-%{version}.tar.xz
-# Source1-md5:	6e5066332a2b25b1847d3836f1260e0c
+# Source1-md5:	15d242aefa61993f2324a3bea953862b
 Source2:	http://download.documentfoundation.org/libreoffice/src/%{major_ver}/%{name}-dictionaries-%{version}.tar.xz
-# Source2-md5:	dedde5df1752f7a489a5a7a41943ebde
+# Source2-md5:	b2d520d47394dde43879638599372652
 Source3:	http://download.documentfoundation.org/libreoffice/src/%{major_ver}/%{name}-help-%{version}.tar.xz
-# Source3-md5:	9df4051a689526888da0467c29186e8c
+# Source3-md5:	607b544cd7b38f9e6db6fe7da25007a7
 Source4:	http://download.documentfoundation.org/libreoffice/src/%{major_ver}/%{name}-translations-%{version}.tar.xz
-# Source4-md5:	8f7d2774f635f83cebc74e1d4f609d0f
+# Source4-md5:	a3fa7818bfab14a6cccec645193e9982
 
 Source20:	http://download.go-oo.org/extern/185d60944ea767075d27247c3162b3bc-unowinreg.dll
 # Source20-md5:	185d60944ea767075d27247c3162b3bc
@@ -85,7 +85,7 @@ Source29:	http://hg.services.openoffice.org/binaries/18f577b374d60b3c760a3a33504
 # Source29-md5:	18f577b374d60b3c760a3a3350407632
 Source30:	http://hg.services.openoffice.org/binaries/17410483b5b5f267aa18b7e00b65e6e0-hsqldb_1_8_0.zip
 # Source30-md5:	17410483b5b5f267aa18b7e00b65e6e0
-Patch0:		%{name}-npshell.cxx.patch
+Patch0:		%{name}-3.5.1-kde-4.8.1-namespace.patch
 Patch1:		%{name}-hamcrest.patch
 URL:		http://www.documentfoundation.org/
 BuildRequires:	/usr/bin/getopt
@@ -2426,7 +2426,7 @@ bashowe uzupełnianie nazw dla LibreOffice.
 %prep
 %setup -q -n %{name}-core-%{version} -a1 -a2 -a3 -a4
 
-%patch0 -p0
+%patch0 -p1
 %patch1 -p0
 
 for dir in *-%{version}; do
