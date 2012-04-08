@@ -12,12 +12,13 @@
      else
          AC_MSG_RESULT([internal])
          SYSTEM_APACHE_COMMONS=NO
-@@ -9128,7 +9133,7 @@
+@@ -9159,7 +9159,7 @@
      if test $? -eq 0; then
          # check if either class-path entry is available for hamcrest or
          # it's bundled
--        if "$JAVA_HOME/bin/jar" tf "$OOO_JUNIT_JAR" |grep -q hamcrest || \
-+        if "$JAVA_HOME/bin/jar" tf /usr/share/java/hamcrest-core.jar |grep -q hamcrest || \
-             "$UNZIP" -c "$OOO_JUNIT_JAR" META-INF/MANIFEST.MF |grep -q 'Class-Path: hamcrest'; then
+-        if "$JAVA_HOME/bin/jar" tf "$OOO_JUNIT_JAR" |$GREP -q hamcrest || \
++        if "$JAVA_HOME/bin/jar" tf /usr/share/java/hamcrest-core.jar |$GREP -q hamcrest || \
+             "$UNZIP" -c "$OOO_JUNIT_JAR" META-INF/MANIFEST.MF |$GREP 'Class-Path:' | $GREP -q 'hamcrest'; then
              AC_MSG_RESULT([$OOO_JUNIT_JAR])
          else
+
