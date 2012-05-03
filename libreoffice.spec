@@ -43,7 +43,7 @@
 %undefine	with_system_hsqldb
 %endif
 
-%define		major_ver		3.5.2
+%define		major_ver		3.5.3
 
 Summary:	LibreOffice - powerful office suite
 Summary(pl.UTF-8):	LibreOffice - potężny pakiet biurowy
@@ -57,15 +57,15 @@ Group:		X11/Applications
 # cd build
 # git checkout -b libreoffice-3-3 origin/libreoffice-3-3
 Source0:	http://download.documentfoundation.org/libreoffice/src/%{major_ver}/%{name}-core-%{version}.tar.xz
-# Source0-md5:	a21156d5657b8619a523ffdc5cc0003e
+# Source0-md5:	d22cd79e7463ac4caf0a4b47d78a82ac
 Source1:	http://download.documentfoundation.org/libreoffice/src/%{major_ver}/%{name}-binfilter-%{version}.tar.xz
-# Source1-md5:	fed222d9a1bf22891d1e3939025874d6
+# Source1-md5:	d8c5da3f1f298d2ac35444f9dc4ce8f2
 Source2:	http://download.documentfoundation.org/libreoffice/src/%{major_ver}/%{name}-dictionaries-%{version}.tar.xz
-# Source2-md5:	782d0cecfccc200f8ad0a07f0cb53f08
+# Source2-md5:	f4ebfe04dc035dd075709a3f6cb76284
 Source3:	http://download.documentfoundation.org/libreoffice/src/%{major_ver}/%{name}-help-%{version}.tar.xz
-# Source3-md5:	3c064a24191274fcd8fd466ce9d5dc42
+# Source3-md5:	3455f3f523d739aa391b5a5bf04ff958
 Source4:	http://download.documentfoundation.org/libreoffice/src/%{major_ver}/%{name}-translations-%{version}.tar.xz
-# Source4-md5:	17ebcd0d25e716d3905b1a905907fd67
+# Source4-md5:	945fbf7888c464f4e1cf7282d370b257
 
 Source20:	http://download.go-oo.org/extern/185d60944ea767075d27247c3162b3bc-unowinreg.dll
 # Source20-md5:	185d60944ea767075d27247c3162b3bc
