@@ -201,7 +201,7 @@ BuildRequires:	xorg-font-font-adobe-utopia-type1
 BuildRequires:	xorg-lib-libX11-devel
 BuildRequires:	xorg-lib-libXaw-devel
 BuildRequires:	xorg-lib-libXtst-devel
-BuildRequires:	zip
+BuildRequires:	zip >= 3.0
 BuildRequires:	zlib-devel
 %if %{with java}
 BuildRequires:	ant >= 1.7.0
