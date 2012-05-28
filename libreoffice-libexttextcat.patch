@@ -1,0 +1,12 @@
+--- libreoffice-core-3.5.3.2/lingucomponent/source/languageguessing/simpleguesser.cxx~	2012-04-24 16:08:03.000000000 +0200
++++ libreoffice-core-3.5.3.2/lingucomponent/source/languageguessing/simpleguesser.cxx	2012-05-28 21:39:22.945899024 +0200
+@@ -117,8 +117,7 @@
+     if (!h)
+         return guesses;
+ 
+-    //calculate le number of unicode charcters (symbols)
+-    int len = utfstrlen(text);
++    int len = strlen(text);
+ 
+     if (len > MAX_STRING_LENGTH_TO_ANALYSE)
+         len = MAX_STRING_LENGTH_TO_ANALYSE;

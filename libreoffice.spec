@@ -49,7 +49,7 @@ Summary:	LibreOffice - powerful office suite
 Summary(pl.UTF-8):	LibreOffice - potężny pakiet biurowy
 Name:		libreoffice
 Version:	%{major_ver}.2
-Release:	3
+Release:	4
 License:	GPL/LGPL
 Group:		X11/Applications
 # we use git because released tarballs are buggy too often
@@ -87,6 +87,7 @@ Source30:	http://hg.services.openoffice.org/binaries/17410483b5b5f267aa18b7e00b6
 # Source30-md5:	17410483b5b5f267aa18b7e00b65e6e0
 Patch0:		%{name}-hamcrest.patch
 Patch1:		%{name}-poppler.patch
+Patch2:		%{name}-libexttextcat.patch
 URL:		http://www.documentfoundation.org/
 BuildRequires:	/usr/bin/getopt
 BuildRequires:	GConf2-devel
@@ -2428,6 +2429,7 @@ bashowe uzupełnianie nazw dla LibreOffice.
 
 %patch0 -p0
 %patch1 -p1
+%patch2 -p1
 
 for dir in *-%{version}; do
 	[ -f $dir/ChangeLog ] && mv $dir/ChangeLog ChangeLog-$dir
