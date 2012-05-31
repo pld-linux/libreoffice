@@ -43,13 +43,13 @@
 %undefine	with_system_hsqldb
 %endif
 
-%define		major_ver		3.5.3
+%define		major_ver		3.5.4
 
 Summary:	LibreOffice - powerful office suite
 Summary(pl.UTF-8):	LibreOffice - potężny pakiet biurowy
 Name:		libreoffice
 Version:	%{major_ver}.2
-Release:	4
+Release:	1
 License:	GPL/LGPL
 Group:		X11/Applications
 # we use git because released tarballs are buggy too often
@@ -57,15 +57,15 @@ Group:		X11/Applications
 # cd build
 # git checkout -b libreoffice-3-3 origin/libreoffice-3-3
 Source0:	http://download.documentfoundation.org/libreoffice/src/%{major_ver}/%{name}-core-%{version}.tar.xz
-# Source0-md5:	d22cd79e7463ac4caf0a4b47d78a82ac
+# Source0-md5:	61afc900785dd7d071b96d9ab0af46f3
 Source1:	http://download.documentfoundation.org/libreoffice/src/%{major_ver}/%{name}-binfilter-%{version}.tar.xz
-# Source1-md5:	d8c5da3f1f298d2ac35444f9dc4ce8f2
+# Source1-md5:	e0ea910f2a6fbe1dbe44e437c89b8cd7
 Source2:	http://download.documentfoundation.org/libreoffice/src/%{major_ver}/%{name}-dictionaries-%{version}.tar.xz
-# Source2-md5:	f4ebfe04dc035dd075709a3f6cb76284
+# Source2-md5:	f5b21e92bebabffe634aabb4e36cdd87
 Source3:	http://download.documentfoundation.org/libreoffice/src/%{major_ver}/%{name}-help-%{version}.tar.xz
-# Source3-md5:	3455f3f523d739aa391b5a5bf04ff958
+# Source3-md5:	d2e7414a60eacafef45fbc4bc1a8ccb3
 Source4:	http://download.documentfoundation.org/libreoffice/src/%{major_ver}/%{name}-translations-%{version}.tar.xz
-# Source4-md5:	945fbf7888c464f4e1cf7282d370b257
+# Source4-md5:	545d1608da2cc736be5c8bf941adbbfb
 
 Source20:	http://download.go-oo.org/extern/185d60944ea767075d27247c3162b3bc-unowinreg.dll
 # Source20-md5:	185d60944ea767075d27247c3162b3bc
@@ -86,8 +86,7 @@ Source29:	http://hg.services.openoffice.org/binaries/18f577b374d60b3c760a3a33504
 Source30:	http://hg.services.openoffice.org/binaries/17410483b5b5f267aa18b7e00b65e6e0-hsqldb_1_8_0.zip
 # Source30-md5:	17410483b5b5f267aa18b7e00b65e6e0
 Patch0:		%{name}-hamcrest.patch
-Patch1:		%{name}-poppler.patch
-Patch2:		%{name}-libexttextcat.patch
+Patch1:		%{name}-libexttextcat.patch
 URL:		http://www.documentfoundation.org/
 BuildRequires:	/usr/bin/getopt
 BuildRequires:	GConf2-devel
@@ -2429,7 +2428,6 @@ bashowe uzupełnianie nazw dla LibreOffice.
 
 %patch0 -p0
 %patch1 -p1
-%patch2 -p1
 
 for dir in *-%{version}; do
 	[ -f $dir/ChangeLog ] && mv $dir/ChangeLog ChangeLog-$dir
@@ -3160,7 +3158,7 @@ fi
 %if %{with java}
 %attr(755,root,root) %{_libdir}/%{name}/program/libhsqldb.so
 %attr(755,root,root) %{_libdir}/%{name}/program/libjdbclo.so
-%attr(755,root,root) %{_libdir}/%{name}/program/libofficebeanlo.so
+%attr(755,root,root) %{_libdir}/%{name}/program/libofficebean.so
 %endif
 
 %if %{with mono}
@@ -3709,7 +3707,6 @@ fi
 %attr(755,root,root) %{_libdir}/%{name}/share/extensions/pdfimport/xpdfimport
 %{_libdir}/%{name}/share/extensions/pdfimport/META-INF
 %{_libdir}/%{name}/share/extensions/pdfimport/basic
-%{_libdir}/%{name}/share/extensions/pdfimport/description-en-US.txt
 %{_libdir}/%{name}/share/extensions/pdfimport/description.xml
 %{_libdir}/%{name}/share/extensions/pdfimport/images
 %{_libdir}/%{name}/share/extensions/pdfimport/registration
@@ -3722,7 +3719,6 @@ fi
 %attr(755,root,root) %{_libdir}/%{name}/share/extensions/presentation-minimizer/SunPresentationMinimizer.uno.so
 %{_libdir}/%{name}/share/extensions/presentation-minimizer/META-INF
 %{_libdir}/%{name}/share/extensions/presentation-minimizer/bitmaps
-%{_libdir}/%{name}/share/extensions/presentation-minimizer/description-en-US.txt
 %{_libdir}/%{name}/share/extensions/presentation-minimizer/description.xml
 %{_libdir}/%{name}/share/extensions/presentation-minimizer/registr*
 
@@ -3732,7 +3728,6 @@ fi
 %attr(755,root,root) %{_libdir}/%{name}/share/extensions/presenter-screen/PresenterScreen.uno.so
 %{_libdir}/%{name}/share/extensions/presenter-screen/META-INF
 %{_libdir}/%{name}/share/extensions/presenter-screen/bitmaps
-%{_libdir}/%{name}/share/extensions/presenter-screen/description-en-US.txt
 %{_libdir}/%{name}/share/extensions/presenter-screen/description.xml
 %{_libdir}/%{name}/share/extensions/presenter-screen/help
 %{_libdir}/%{name}/share/extensions/presenter-screen/registry
@@ -3747,7 +3742,6 @@ fi
 %{_libdir}/%{name}/share/extensions/report-builder/template
 %{_libdir}/%{name}/share/extensions/report-builder/THIRDPARTYREADMELICENSE.html
 %{_libdir}/%{name}/share/extensions/report-builder/components.rdb
-%{_libdir}/%{name}/share/extensions/report-builder/description-en-US.txt
 %{_libdir}/%{name}/share/extensions/report-builder/description.xml
 %{_libdir}/%{name}/share/extensions/report-builder/readme*
 %{_libdir}/%{name}/share/extensions/report-builder/*.jar
@@ -3764,7 +3758,6 @@ fi
 %{_libdir}/%{name}/share/extensions/wiki-publisher/templates
 %{_libdir}/%{name}/share/extensions/wiki-publisher/*.xc*
 %{_libdir}/%{name}/share/extensions/wiki-publisher/components.rdb
-%{_libdir}/%{name}/share/extensions/wiki-publisher/description-en-US.txt
 %{_libdir}/%{name}/share/extensions/wiki-publisher/description.xml
 %{_libdir}/%{name}/share/extensions/wiki-publisher/mediawiki.jar
 
