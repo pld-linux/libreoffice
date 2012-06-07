@@ -5,11 +5,6 @@
 #		RPMS		1.8 GB
 #		SRPMS		0.4 GB
 #
-# TODO:
-#	- package postgresql SDBC
-#	- package script-provider-for-python extension
-#	- new i18n - lb, qtz, tt
-#
 # Conditional build:
 %bcond_without	java		# without Java support (disables help support)
 %bcond_with	kde		# KDE L&F packages
@@ -225,6 +220,7 @@ Requires:	%{name}-impress = %{version}-%{release}
 %{?with_java:Requires:	%{name}-javafilter = %{version}-%{release}}
 Requires:	%{name}-math = %{version}-%{release}
 Requires:	%{name}-pdfimport = %{version}-%{release}
+Requires:	%{name}-postgresql = %{version}-%{release}
 Requires:	%{name}-presentation-minimizer = %{version}-%{release}
 Requires:	%{name}-presenter-screen = %{version}-%{release}
 Requires:	%{name}-pyuno = %{version}-%{release}
@@ -646,6 +642,16 @@ Pocket Excel and Pocket Word import filters.
 %description javafilter -l pl.UTF-8
 Moduł javafilter dla LibreOffice, udostępnia dodatkowe filtry importu
 aportisdoc, Pocket Excel i Pocket Word.
+
+%package postgresql
+Summary:	PostgreSQL connector for LibreOffice
+Group:		X11/Applications
+Requires:	%{name}-core = %{version}-%{release}
+Requires:	postgresql-libs
+
+%description postgresql
+A PostgreSQL connector for the database front-end for LibreOffice.
+Allows creation and management of PostgreSQL databases through a GUI.
 
 # FIXME
 %package ure
@@ -1510,6 +1516,21 @@ Kurdish language.
 Ten pakiet dostarcza zasoby zawierające menu i okna dialogowe w języku
 kurdyjskim.
 
+%package i18n-lb
+Summary:	LibreOffice - interface in Luxembourgish language
+Summary(pl.UTF-8):	LibreOffice - interfejs w języku luksemburgskim
+Group:		I18n
+Requires:	%{name}-core = %{version}-%{release}
+Obsoletes:	openoffice.org-i18n-lb
+
+%description i18n-lb
+This package provides resources containing menus and dialogs in
+Luxembourgish language.
+
+%description i18n-lb -l pl.UTF-8
+Ten pakiet dostarcza zasoby zawierające menu i okna dialogowe w języku
+luksemburgskim.
+
 %package i18n-lo
 Summary:	LibreOffice - interface in Lao language
 Summary(pl.UTF-8):	LibreOffice - interfejs w języku laotańskim
@@ -1887,6 +1908,21 @@ Brazilian Portuguese language.
 Ten pakiet dostarcza zasoby zawierające menu i okna dialogowe w języku
 portugalskim dla Brazylii.
 
+%package i18n-qtz
+Summary:	LibreOffice - interface in "KeyID language" pseudo-locale
+Summary(pl.UTF-8):	LibreOffice - interfejs w pseudo-lokalizacji "KeyID"
+Group:		I18n
+Requires:	%{name}-core = %{version}-%{release}
+Obsoletes:	openoffice.org-i18n-qtz
+
+%description i18n-qtz
+The "KeyID language" is a pseudo-locale that is available in
+LibreOffice. It shows all KeyID's in the UI itself.
+
+%description i18n-qtz -l pl.UTF-8
+"Język KeyID" jest pseudo-lokalizacją dostępną w LibreOffice.
+Pokazuje wszystkie wartości KeyID w interfejsie programu.
+
 %package i18n-ro
 Summary:	LibreOffice - interface in Romanian language
 Summary(pl.UTF-8):	LibreOffice - interfejs w języku rumuńskim
@@ -2256,6 +2292,21 @@ language.
 %description i18n-ts -l pl.UTF-8
 Ten pakiet dostarcza zasoby zawierające menu i okna dialogowe w języku
 tsonga.
+
+%package i18n-tt
+Summary:	LibreOffice - interface in Tatar language
+Summary(pl.UTF-8):	LibreOffice - interfejs w języku tatarskim
+Group:		I18n
+Requires:	%{name}-core = %{version}-%{release}
+Obsoletes:	openoffice.org-i18n-tt
+
+%description i18n-tt
+This package provides resources containing menus and dialogs in Tatar
+language.
+
+%description i18n-tt -l pl.UTF-8
+Ten pakiet dostarcza zasoby zawierające menu i okna dialogowe w języku
+tatarskim.
 
 %package i18n-ug
 Summary:	LibreOffice - interface in Uyghur language
@@ -2806,8 +2857,13 @@ done
 ' *.lang
 %endif
 
+# Fix incorrect file list, help files listed but not installed
+for l in lb; do
+	%{__sed} -i -e '/.*\/help\/.*/d' $l.lang
+done
+
 ## Remove unsupported locale files to avoid confusion about unpackaged files
-#for l in lb qtz ; do
+#for l in ???; do
 #	for f in `cat file-lists/lang_${l}_list.txt` ; do
 #		%{__rm} -f $RPM_BUILD_ROOT/$f
 #	done
@@ -2950,6 +3006,8 @@ fi
 %attr(755,root,root) %{_libdir}/%{name}/program/fpicker.uno.so
 %attr(755,root,root) %{_libdir}/%{name}/program/fps_office.uno.so
 %attr(755,root,root) %{_libdir}/%{name}/program/fsstorage.uno.so
+%attr(755,root,root) %{_libdir}/%{name}/program/gengal
+%attr(755,root,root) %{_libdir}/%{name}/program/gengal.bin
 %attr(755,root,root) %{_libdir}/%{name}/program/hatchwindowfactory.uno.so
 %attr(755,root,root) %{_libdir}/%{name}/program/i18npool.uno.so
 %attr(755,root,root) %{_libdir}/%{name}/program/i18nsearch.uno.so
@@ -3515,6 +3573,7 @@ fi
 %files emailmerge
 %defattr(644,root,root,755)
 %{_libdir}/%{name}/program/mailmerge.py*
+%{_libdir}/%{name}/program/msgbox.py*
 
 %files writer
 %defattr(644,root,root,755)
@@ -3611,6 +3670,14 @@ fi
 %{_desktopdir}/libreoffice-javafilter.desktop
 %endif
 
+%files postgresql
+%defattr(644,root,root,755)
+%attr(755,root,root) %{_libdir}/%{name}/program/postgresql-sdbc.uno.so
+%attr(755,root,root) %{_libdir}/%{name}/program/postgresql-sdbc-impl.uno.so
+%{_libdir}/%{name}/program/postgresql-sdbc.ini
+%{_libdir}/%{name}/program/services/postgresql-sdbc.rdb
+%{_libdir}/%{name}/share/registry/postgresqlsdbc.xcd
+
 %files ure
 %defattr(644,root,root,755)
 %dir %{_libdir}/%{name}
@@ -3685,7 +3752,7 @@ fi
 %{_libdir}/%{name}/ure/share/misc/javavendors.xml
 %endif
 
-%files pyuno
+%files pyuno -f script-provider-for-python.lang
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_libdir}/%{name}/program/libpyuno.so
 %attr(755,root,root) %{_libdir}/%{name}/program/pythonloader.uno.so
@@ -3696,6 +3763,30 @@ fi
 %{_libdir}/%{name}/program/uno.py
 %{_libdir}/%{name}/program/unohelper.py
 %{_libdir}/%{name}/share/registry/pyuno.xcd
+
+# script-provider-for-python extension
+%dir %{_libdir}/%{name}/share/extensions/script-provider-for-python
+%{_libdir}/%{name}/share/extensions/script-provider-for-python/META-INF
+%{_libdir}/%{name}/share/extensions/script-provider-for-python/components.rdb
+%{_libdir}/%{name}/share/extensions/script-provider-for-python/description.xml
+%{_libdir}/%{name}/share/extensions/script-provider-for-python/*.py
+%{_libdir}/%{name}/share/extensions/script-provider-for-python/registration
+
+# python wizards
+%dir %{_libdir}/%{name}/program/wizards
+%{_libdir}/%{name}/program/wizards/*.py
+%dir %{_libdir}/%{name}/program/wizards/common
+%{_libdir}/%{name}/program/wizards/common/*.py
+%dir %{_libdir}/%{name}/program/wizards/document
+%{_libdir}/%{name}/program/wizards/document/*.py
+%dir %{_libdir}/%{name}/program/wizards/fax
+%{_libdir}/%{name}/program/wizards/fax/*.py
+%dir %{_libdir}/%{name}/program/wizards/text
+%{_libdir}/%{name}/program/wizards/text/*.py
+%dir %{_libdir}/%{name}/program/wizards/ui
+%{_libdir}/%{name}/program/wizards/ui/*.py
+%dir %{_libdir}/%{name}/program/wizards/ui/event
+%{_libdir}/%{name}/program/wizards/ui/event/*.py
 
 # samples there
 %{_libdir}/%{name}/share/Scripts/python
@@ -3917,6 +4008,9 @@ fi
 %files i18n-ku -f ku.lang
 %defattr(644,root,root,755)
 
+%files i18n-lb -f lb.lang
+%defattr(644,root,root,755)
+
 %files i18n-lo -f lo.lang
 %defattr(644,root,root,755)
 
@@ -3986,6 +4080,9 @@ fi
 %files i18n-pt_BR -f pt_BR.lang
 %defattr(644,root,root,755)
 
+%files i18n-qtz -f qtz.lang
+%defattr(644,root,root,755)
+
 %files i18n-ro -f ro.lang
 %defattr(644,root,root,755)
 
@@ -4053,6 +4150,9 @@ fi
 %defattr(644,root,root,755)
 
 %files i18n-ts -f ts.lang
+%defattr(644,root,root,755)
+
+%files i18n-tt -f tt.lang
 %defattr(644,root,root,755)
 
 %files i18n-ug -f ug.lang
