@@ -38,13 +38,13 @@
 %undefine	with_system_hsqldb
 %endif
 
-%define		major_ver		3.5.4
+%define		major_ver		3.6.0
 
 Summary:	LibreOffice - powerful office suite
 Summary(pl.UTF-8):	LibreOffice - potężny pakiet biurowy
 Name:		libreoffice
-Version:	%{major_ver}.2
-Release:	6
+Version:	%{major_ver}.4
+Release:	0.1
 License:	GPL/LGPL
 Group:		X11/Applications
 # we use git because released tarballs are buggy too often
@@ -52,15 +52,15 @@ Group:		X11/Applications
 # cd build
 # git checkout -b libreoffice-3-3 origin/libreoffice-3-3
 Source0:	http://download.documentfoundation.org/libreoffice/src/%{major_ver}/%{name}-core-%{version}.tar.xz
-# Source0-md5:	61afc900785dd7d071b96d9ab0af46f3
+# Source0-md5:	67cf97e86c75363238a371f64ef5f606
 Source1:	http://download.documentfoundation.org/libreoffice/src/%{major_ver}/%{name}-binfilter-%{version}.tar.xz
-# Source1-md5:	e0ea910f2a6fbe1dbe44e437c89b8cd7
+# Source1-md5:	d63fed7dd5b368d1753eeebb5972c740
 Source2:	http://download.documentfoundation.org/libreoffice/src/%{major_ver}/%{name}-dictionaries-%{version}.tar.xz
-# Source2-md5:	f5b21e92bebabffe634aabb4e36cdd87
+# Source2-md5:	228e928d174321762b2020aa5b9104f1
 Source3:	http://download.documentfoundation.org/libreoffice/src/%{major_ver}/%{name}-help-%{version}.tar.xz
-# Source3-md5:	d2e7414a60eacafef45fbc4bc1a8ccb3
+# Source3-md5:	8422b0c4c797abeefed3ee4490586dd2
 Source4:	http://download.documentfoundation.org/libreoffice/src/%{major_ver}/%{name}-translations-%{version}.tar.xz
-# Source4-md5:	545d1608da2cc736be5c8bf941adbbfb
+# Source4-md5:	6cc8fa86be8c657ba23434c6c8d99416
 
 Source20:	http://download.go-oo.org/extern/185d60944ea767075d27247c3162b3bc-unowinreg.dll
 # Source20-md5:	185d60944ea767075d27247c3162b3bc
@@ -81,7 +81,8 @@ Source29:	http://hg.services.openoffice.org/binaries/18f577b374d60b3c760a3a33504
 Source30:	http://hg.services.openoffice.org/binaries/17410483b5b5f267aa18b7e00b65e6e0-hsqldb_1_8_0.zip
 # Source30-md5:	17410483b5b5f267aa18b7e00b65e6e0
 Patch0:		%{name}-hamcrest.patch
-Patch1:		%{name}-libexttextcat.patch
+# HACK: remove in future version or when proper fix found
+Patch1:		libreoffice-build-hack.patch
 URL:		http://www.documentfoundation.org/
 BuildRequires:	/usr/bin/getopt
 BuildRequires:	GConf2-devel
@@ -97,6 +98,7 @@ BuildRequires:	bison >= 1.875-4
 BuildRequires:	boost-devel >= 1.35.0
 BuildRequires:	cairo-devel >= 1.2.0
 %{?with_ccache:BuildRequires:	ccache}
+BuildRequires:	clucene-core-devel >= 2.3
 BuildRequires:	cppunit-devel >= 1.12.0
 BuildRequires:	cups-devel
 BuildRequires:	curl-devel >= 7.9.8
@@ -128,7 +130,7 @@ BuildRequires:	java-junit
 BuildRequires:	java-lucene
 BuildRequires:	java-lucene-contrib
 BuildRequires:	java-servletapi
-BuildRequires:	libcmis-devel
+BuildRequires:	libcmis-devel >= 0.2
 BuildRequires:	libvisio-devel
 BuildRequires:	libwpd-devel >= 0.9.0
 BuildRequires:	libwpg-devel >= 0.2.0
@@ -146,6 +148,7 @@ BuildRequires:	java-libxml
 BuildRequires:	java-sac
 BuildRequires:	libart_lgpl-devel
 BuildRequires:	libbonobo-devel >= 2.0
+BuildRequires:	libcdr-devel >= 0.0.8
 %{?with_system_libhnj:BuildRequires:	libhnj-devel}
 BuildRequires:	libicu-devel >= 4.0
 BuildRequires:	libjpeg-devel
@@ -158,7 +161,7 @@ BuildRequires:	libxml2-devel >= 2.0
 BuildRequires:	libxslt-devel
 BuildRequires:	libxslt-progs
 %{?with_access:%{?with_system_mdbtools:BuildRequires:	mdbtools-devel >= 0.6}}
-BuildRequires:	mdds-devel
+BuildRequires:	mdds-devel >= 0.6.0
 %{?with_mono:BuildRequires:	mono-csharp >= 1.2.3}
 %{?with_mono:BuildRequires:	mono-static >= 1.2.3}
 %{?with_system_myspell:BuildRequires:	myspell-devel}
@@ -2545,7 +2548,7 @@ RPM_BUILD_NR_THREADS=$(echo %{_smp_mflags} | cut -dj -f2)
 RPM_BUILD_NR_THREADS="1"
 %endif
 
-%{__aclocal}
+%{__aclocal} -I m4
 %{__autoconf}
 touch autogen.lastrun
 
@@ -2703,15 +2706,23 @@ if [ ! -f makeinstall.stamp -o ! -d $RPM_BUILD_ROOT ]; then
 
 	# unpack presentation-minimizer extension
 	install -d $RPM_BUILD_ROOT%{_libdir}/%{name}/share/extensions/presentation-minimizer
-	unzip -o solver/unxlng*/bin/minimizer/presentation-minimizer.oxt -d $RPM_BUILD_ROOT%{_libdir}/%{name}/share/extensions/presentation-minimizer
+	unzip -o solver/unxlng*/bin/presentation-minimizer.oxt -d $RPM_BUILD_ROOT%{_libdir}/%{name}/share/extensions/presentation-minimizer
 
 	# unpack presenter screen extension
 	install -d $RPM_BUILD_ROOT%{_libdir}/%{name}/share/extensions/presenter-screen
-	unzip -o solver/unxlng*/bin/presenter/presenter-screen.oxt -d $RPM_BUILD_ROOT%{_libdir}/%{name}/share/extensions/presenter-screen
+	unzip -o solver/unxlng*/bin/presenter-screen.oxt -d $RPM_BUILD_ROOT%{_libdir}/%{name}/share/extensions/presenter-screen
 
 	# unpack pdfimport extension
 	install -d $RPM_BUILD_ROOT%{_libdir}/%{name}/share/extensions/pdfimport
-	unzip -o solver/unxlng*/bin/pdfimport/pdfimport.oxt -d $RPM_BUILD_ROOT%{_libdir}/%{name}/share/extensions/pdfimport
+	unzip -o solver/unxlng*/bin/pdfimport.oxt -d $RPM_BUILD_ROOT%{_libdir}/%{name}/share/extensions/pdfimport
+
+	# unpack wiki-publisher extension
+	install -d $RPM_BUILD_ROOT%{_libdir}/%{name}/share/extensions/wiki-publisher
+	unzip -o solver/unxlng*/bin/wiki-publisher.oxt -d $RPM_BUILD_ROOT%{_libdir}/%{name}/share/extensions/wiki-publisher
+
+	# unpack script-provider-for-python extension
+	install -d $RPM_BUILD_ROOT%{_libdir}/%{name}/share/extensions/script-provider-for-python
+	unzip -o solver/unxlng*/bin/script-provider-for-python.oxt -d $RPM_BUILD_ROOT%{_libdir}/%{name}/share/extensions/script-provider-for-python
 
 	# save orignal install layout
 	find $RPM_BUILD_ROOT -ls > ls.txt
