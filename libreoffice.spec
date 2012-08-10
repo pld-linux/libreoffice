@@ -16,6 +16,7 @@
 %bcond_with	icecream	# use icecream to speed up builds
 %bcond_with	msaccess	# with ms access import pieces
 %bcond_without	parallelbuild	# use greater number of jobs to speed up build (default: 1)
+%bcond_without	binfilter	# build without old binary filters
 
 %bcond_without	system_beanshell
 %bcond_without	system_db		# without system (i.e. with internal) Berkeley DB
@@ -688,6 +689,14 @@ This plugin allows browsers to display OOo documents inline.
 Wtyczka LibreOffice dla przeglądarek WWW.
 
 Ta wtyczka umożliwia wyświetlanie dokumentów OOo wewnątrz stron.
+
+%package binfilter
+Summary:	Legacy binary filters for LibreOffice
+Group:		X11/Applications
+Requires:	%{name}-core = %{version}-%{release}
+
+%description binfilter
+Filters for old StarOffice binary formats.
 
 %package i18n-af
 Summary:	LibreOffice - interface in Afrikaans language
@@ -2686,6 +2695,7 @@ touch autogen.lastrun
 	--enable-fontconfig \
 	--enable-lockdown \
 	--disable-layout \
+	%{?with_binfilter:--enable-binfilter} \
 	--disable-fetch-external
 
 # this limits processing some files but doesn't limit parallel build
@@ -3894,6 +3904,40 @@ fi
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_browserpluginsdir}/libnpsoplugin.so
 %attr(755,root,root) %{_libdir}/%{name}/program/nsplugin
+%endif
+
+%if %{with binfilter}
+%files binfilter
+%defattr(644,root,root,755)
+%{_libdir}/%{name}/program/legacy_binfilters.rdb
+%{_libdir}/%{name}/program/libbf_frmlo.so
+%{_libdir}/%{name}/program/libbf_golo.so
+%{_libdir}/%{name}/program/libbf_migratefilterlo.so
+%{_libdir}/%{name}/program/libbf_ofalo.so
+%{_libdir}/%{name}/program/libbf_sblo.so
+%{_libdir}/%{name}/program/libbf_schlo.so
+%{_libdir}/%{name}/program/libbf_sclo.so
+%{_libdir}/%{name}/program/libbf_sdlo.so
+%{_libdir}/%{name}/program/libbf_smlo.so
+%{_libdir}/%{name}/program/libbf_solo.so
+%{_libdir}/%{name}/program/libbf_svtlo.so
+%{_libdir}/%{name}/program/libbf_svxlo.so
+%{_libdir}/%{name}/program/libbf_swlo.so
+%{_libdir}/%{name}/program/libbf_wrapperlo.so
+%{_libdir}/%{name}/program/libbf_xolo.so
+%{_libdir}/%{name}/program/libbindetlo.so
+%{_libdir}/%{name}/program/liblegacy_binfilterslo.so
+%{_libdir}/%{name}/program/resource/bf_frmen-US.res
+%{_libdir}/%{name}/program/resource/bf_ofaen-US.res
+%{_libdir}/%{name}/program/resource/bf_scen-US.res
+%{_libdir}/%{name}/program/resource/bf_schen-US.res
+%{_libdir}/%{name}/program/resource/bf_sden-US.res
+%{_libdir}/%{name}/program/resource/bf_smen-US.res
+%{_libdir}/%{name}/program/resource/bf_svten-US.res
+%{_libdir}/%{name}/program/resource/bf_svxen-US.res
+%{_libdir}/%{name}/program/resource/bf_swen-US.res
+%{_libdir}/%{name}/share/registry/binfilter.xcd
+%{_desktopdir}/libreoffice-binfilter.desktop
 %endif
 
 %if %{with i18n}
