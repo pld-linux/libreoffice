@@ -816,7 +816,7 @@ bułgarskim.
 
 %package i18n-bn_IN
 Summary:	LibreOffice - interface in Indian Bangla language
-Summary(pl.UTF-8):	LibreOffice - interfejs w języku indysjskim bengalskim
+Summary(pl.UTF-8):	LibreOffice - interfejs w języku indyjskim bengalskim
 Group:		I18n
 Requires:	%{name}-core = %{version}-%{release}
 Obsoletes:	openoffice.org-i18n-bn_IN
