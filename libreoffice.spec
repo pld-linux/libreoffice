@@ -2995,7 +2995,7 @@ fi
 %defattr(644,root,root,755)
 %doc %{_libdir}/%{name}/CREDITS*
 %doc %{_libdir}/%{name}/LICENSE*
-%doc %{_libdir}/%{name}/*README*
+#%doc %{_libdir}/%{name}/*README*
 
 %attr(755,root,root) %{_bindir}/libreoffice
 %attr(755,root,root) %{_bindir}/lofromtemplate
@@ -3049,7 +3049,7 @@ fi
 %attr(755,root,root) %{_libdir}/%{name}/program/java-set-classpath
 %attr(755,root,root) %{_libdir}/%{name}/program/ldapbe2.uno.so
 %attr(755,root,root) %{_libdir}/%{name}/program/libacclo.so
-%attr(755,root,root) %{_libdir}/%{name}/program/libavmediagst.so
+%attr(755,root,root) %{_libdir}/%{name}/program/libavmediagst*.so
 %attr(755,root,root) %{_libdir}/%{name}/program/libavmedialo.so
 %attr(755,root,root) %{_libdir}/%{name}/program/libbasctllo.so
 %attr(755,root,root) %{_libdir}/%{name}/program/libbasebmplo.so
@@ -3058,9 +3058,7 @@ fi
 %attr(755,root,root) %{_libdir}/%{name}/program/libcached1.so
 %attr(755,root,root) %{_libdir}/%{name}/program/libcanvastoolslo.so
 %attr(755,root,root) %{_libdir}/%{name}/program/libchartcontrollerlo.so
-%attr(755,root,root) %{_libdir}/%{name}/program/libchartmodello.so
-%attr(755,root,root) %{_libdir}/%{name}/program/libcharttoolslo.so
-%attr(755,root,root) %{_libdir}/%{name}/program/libchartviewlo.so
+%attr(755,root,root) %{_libdir}/%{name}/program/libchartcorelo.so
 %attr(755,root,root) %{_libdir}/%{name}/program/libcollator_data.so
 %attr(755,root,root) %{_libdir}/%{name}/program/libcomphelpgcc3.so
 %attr(755,root,root) %{_libdir}/%{name}/program/libcppcanvaslo.so
@@ -3111,7 +3109,7 @@ fi
 %{!?with_system_hunspell:%attr(755,root,root) %{_libdir}/%{name}/program/libhunspell.so}
 %attr(755,root,root) %{_libdir}/%{name}/program/libhyphenlo.so
 %attr(755,root,root) %{_libdir}/%{name}/program/libi18nisolang1gcc3.so
-%attr(755,root,root) %{_libdir}/%{name}/program/libi18nregexplo.so
+#%attr(755,root,root) %{_libdir}/%{name}/program/libi18nregexplo.so
 %attr(755,root,root) %{_libdir}/%{name}/program/libi18nutilgcc3.so
 %attr(755,root,root) %{_libdir}/%{name}/program/libicdlo.so
 %attr(755,root,root) %{_libdir}/%{name}/program/libicglo.so
@@ -3134,6 +3132,7 @@ fi
 %attr(755,root,root) %{_libdir}/%{name}/program/liblocaledata_others.so
 %attr(755,root,root) %{_libdir}/%{name}/program/libloglo.so
 %attr(755,root,root) %{_libdir}/%{name}/program/libmcnttype.so
+%attr(755,root,root) %{_libdir}/%{name}/program/libmorklo.so
 %attr(755,root,root) %{_libdir}/%{name}/program/libmozbootstrap.so
 %attr(755,root,root) %{_libdir}/%{name}/program/libmsfilterlo.so
 %attr(755,root,root) %{_libdir}/%{name}/program/libmysqllo.so
@@ -3150,6 +3149,7 @@ fi
 %attr(755,root,root) %{_libdir}/%{name}/program/libqstart_gtklo.so
 %attr(755,root,root) %{_libdir}/%{name}/program/librecentfile.so
 %attr(755,root,root) %{_libdir}/%{name}/program/libreslo.so
+%attr(755,root,root) %{_libdir}/%{name}/program/libpricinglo.so
 %attr(755,root,root) %{_libdir}/%{name}/program/libsaxlo.so
 %attr(755,root,root) %{_libdir}/%{name}/program/libsblo.so
 %attr(755,root,root) %{_libdir}/%{name}/program/libscnlo.so
@@ -3160,6 +3160,7 @@ fi
 %attr(755,root,root) %{_libdir}/%{name}/program/libsdfiltlo.so
 %attr(755,root,root) %{_libdir}/%{name}/program/libsdlo.so
 %attr(755,root,root) %{_libdir}/%{name}/program/libsduilo.so
+%attr(755,root,root) %{_libdir}/%{name}/program/losessioninstall.uno.so
 %attr(755,root,root) %{_libdir}/%{name}/program/libsfxlo.so
 %attr(755,root,root) %{_libdir}/%{name}/program/libsofficeapp.so
 %attr(755,root,root) %{_libdir}/%{name}/program/libsotlo.so
@@ -3168,6 +3169,7 @@ fi
 %attr(755,root,root) %{_libdir}/%{name}/program/libspl_unxlo.so
 %attr(755,root,root) %{_libdir}/%{name}/program/libspllo.so
 %attr(755,root,root) %{_libdir}/%{name}/program/libsrtrs1.so
+%attr(755,root,root) %{_libdir}/%{name}/program/libsvgiolo.so
 %attr(755,root,root) %{_libdir}/%{name}/program/libsvllo.so
 %attr(755,root,root) %{_libdir}/%{name}/program/libsvtlo.so
 %attr(755,root,root) %{_libdir}/%{name}/program/libsvxcorelo.so
@@ -3197,9 +3199,9 @@ fi
 %attr(755,root,root) %{_libdir}/%{name}/program/libvclplug_genlo.so
 %attr(755,root,root) %{_libdir}/%{name}/program/libvclplug_svplo.so
 %attr(755,root,root) %{_libdir}/%{name}/program/libwpftdrawlo.so
-%attr(755,root,root) %{_libdir}/%{name}/program/libxcrlo.so
 %attr(755,root,root) %{_libdir}/%{name}/program/libxmlfalo.so
 %attr(755,root,root) %{_libdir}/%{name}/program/libxmlfdlo.so
+%attr(755,root,root) %{_libdir}/%{name}/program/libxmlscriptlo.so
 ## maybe external is possible?
 # - external broken in 3.0.1
 ###%attr(755,root,root) %{_libdir}/%{name}/program/libxmlsec1*.so
@@ -3270,19 +3272,19 @@ fi
 %{_libdir}/%{name}/program/classes/ScriptProviderForJavaScript.jar
 %{_libdir}/%{name}/program/classes/ScriptProviderForJava.jar
 %{_libdir}/%{name}/program/classes/XMergeBridge.jar
-%{_libdir}/%{name}/program/classes/XSLTFilter.jar
-%{_libdir}/%{name}/program/classes/XSLTValidate.jar
+#%{_libdir}/%{name}/program/classes/XSLTFilter.jar
+#%{_libdir}/%{name}/program/classes/XSLTValidate.jar
 %{_libdir}/%{name}/program/classes/agenda.jar
 %{_libdir}/%{name}/program/classes/commonwizards.jar
-%{_libdir}/%{name}/program/classes/fax.jar
+#%{_libdir}/%{name}/program/classes/fax.jar
 %{_libdir}/%{name}/program/classes/form.jar
 %{!?with_system_hsqldb:%{_libdir}/%{name}/program/classes/hsqldb.jar}
 %{_libdir}/%{name}/program/classes/js.jar
-%{_libdir}/%{name}/program/classes/letter.jar
+#%{_libdir}/%{name}/program/classes/letter.jar
 %{_libdir}/%{name}/program/classes/officebean.jar
 %{_libdir}/%{name}/program/classes/query.jar
 %{_libdir}/%{name}/program/classes/report.jar
-%{_libdir}/%{name}/program/classes/saxon9.jar
+#%{_libdir}/%{name}/program/classes/saxon9.jar
 %{_libdir}/%{name}/program/classes/sdbc_hsqldb.jar
 %{!?with_system_xalan:%{_libdir}/%{name}/program/classes/serializer.jar}
 %{_libdir}/%{name}/program/classes/table.jar
@@ -3304,7 +3306,7 @@ fi
 %{_libdir}/%{name}/program/resource/avmediaen-US.res
 %{_libdir}/%{name}/program/resource/basctlen-US.res
 %{_libdir}/%{name}/program/resource/biben-US.res
-%{_libdir}/%{name}/program/resource/calen-US.res
+#%{_libdir}/%{name}/program/resource/calen-US.res
 %{_libdir}/%{name}/program/resource/cuien-US.res
 %{_libdir}/%{name}/program/resource/chartcontrolleren-US.res
 %{_libdir}/%{name}/program/resource/dbaen-US.res
@@ -3415,17 +3417,17 @@ fi
 %dir %{_libdir}/%{name}/share/registry/res
 %{_libdir}/%{name}/share/registry/res/fcfg_langpack_en-US.xcd
 
-%dir %{_libdir}/%{name}/share/samples
-%dir %{_libdir}/%{name}/share/samples/en-US
+#%dir %{_libdir}/%{name}/share/samples
+#%dir %{_libdir}/%{name}/share/samples/en-US
 
 %dir %{_libdir}/%{name}/share/template
-%{_libdir}/%{name}/share/template/en-US
+#%{_libdir}/%{name}/share/template/en-US
 %dir %{_libdir}/%{name}/share/template/common
 %{_libdir}/%{name}/share/template/common/layout
 %dir %{_libdir}/%{name}/share/template/wizard
 %{_libdir}/%{name}/share/template/wizard/bitmap
-%dir %{_libdir}/%{name}/share/template/wizard/letter
-%{_libdir}/%{name}/share/template/wizard/letter/en-US
+#%dir %{_libdir}/%{name}/share/template/wizard/letter
+#%{_libdir}/%{name}/share/template/wizard/letter/en-US
 
 %dir %{_libdir}/%{name}/share/wordbook
 %{_libdir}/%{name}/share/wordbook/en-GB.dic
@@ -3781,7 +3783,8 @@ fi
 %{_libdir}/%{name}/ure/share/misc/javavendors.xml
 %endif
 
-%files pyuno -f script-provider-for-python.lang
+%files pyuno
+# -f script-provider-for-python.lang
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_libdir}/%{name}/program/libpyuno.so
 %attr(755,root,root) %{_libdir}/%{name}/program/pythonloader.uno.so
@@ -3794,12 +3797,12 @@ fi
 %{_libdir}/%{name}/share/registry/pyuno.xcd
 
 # script-provider-for-python extension
-%dir %{_libdir}/%{name}/share/extensions/script-provider-for-python
-%{_libdir}/%{name}/share/extensions/script-provider-for-python/META-INF
-%{_libdir}/%{name}/share/extensions/script-provider-for-python/components.rdb
-%{_libdir}/%{name}/share/extensions/script-provider-for-python/description.xml
-%{_libdir}/%{name}/share/extensions/script-provider-for-python/*.py
-%{_libdir}/%{name}/share/extensions/script-provider-for-python/registration
+#%dir %{_libdir}/%{name}/share/extensions/script-provider-for-python
+#%{_libdir}/%{name}/share/extensions/script-provider-for-python/META-INF
+#%{_libdir}/%{name}/share/extensions/script-provider-for-python/components.rdb
+#%{_libdir}/%{name}/share/extensions/script-provider-for-python/description.xml
+#%{_libdir}/%{name}/share/extensions/script-provider-for-python/*.py
+#%{_libdir}/%{name}/share/extensions/script-provider-for-python/registration
 
 # python wizards
 %dir %{_libdir}/%{name}/program/wizards
@@ -3820,7 +3823,8 @@ fi
 # samples there
 %{_libdir}/%{name}/share/Scripts/python
 
-%files pdfimport -f pdfimport.lang
+%files
+# pdfimport -f pdfimport.lang
 %defattr(644,root,root,755)
 %dir %{_libdir}/%{name}/share/extensions/pdfimport
 %attr(755,root,root) %{_libdir}/%{name}/share/extensions/pdfimport/pdfimport.uno.so
