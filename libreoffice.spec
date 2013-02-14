@@ -2699,16 +2699,6 @@ touch autogen.lastrun
 	ARCH_FLAGS_CXX="$SAFE_CFLAGS -fno-omit-frame-pointer -fno-strict-aliasing -fpermissive -fvisibility-inlines-hidden" \
 	ARCH_FLAGS_OPT="$SAFE_CFLAGS"
 
-# hack for parallel build
-if [ $RPM_BUILD_NR_THREADS -gt 1 ]; then
-	doit=1
-	while [ "$doit" -eq 1 ]; do
-		echo "Waiting one more time..."
-		FCH=$(nice -n 20 find . -type f ! -mmin +3 -print 2> /dev/null | wc -l)
-		[ "$FCH" -eq 0 ] && doit=0 || sleep 30
-	done
-fi
-
 %install
 # install just once (based on makeinstall.stamp)
 # this will make packaging newer versions simplier
