@@ -2729,21 +2729,24 @@ if [ ! -f makeinstall.stamp -o ! -d $RPM_BUILD_ROOT ]; then
 	install -d $RPM_BUILD_ROOT%{_libdir}/%{name}/share/extensions/presentation-minimizer
 	unzip -o solver/unxlng*/bin/presentation-minimizer.oxt -d $RPM_BUILD_ROOT%{_libdir}/%{name}/share/extensions/presentation-minimizer
 
+	# XXX - gone in 4.0.0.3?
 	# unpack presenter screen extension
-	install -d $RPM_BUILD_ROOT%{_libdir}/%{name}/share/extensions/presenter-screen
-	unzip -o solver/unxlng*/bin/presenter-screen.oxt -d $RPM_BUILD_ROOT%{_libdir}/%{name}/share/extensions/presenter-screen
+	#install -d $RPM_BUILD_ROOT%{_libdir}/%{name}/share/extensions/presenter-screen
+	#unzip -o solver/unxlng*/bin/presenter-screen.oxt -d $RPM_BUILD_ROOT%{_libdir}/%{name}/share/extensions/presenter-screen
 
+	# XXX se above
 	# unpack pdfimport extension
-	install -d $RPM_BUILD_ROOT%{_libdir}/%{name}/share/extensions/pdfimport
-	unzip -o solver/unxlng*/bin/pdfimport.oxt -d $RPM_BUILD_ROOT%{_libdir}/%{name}/share/extensions/pdfimport
+	#install -d $RPM_BUILD_ROOT%{_libdir}/%{name}/share/extensions/pdfimport
+	#unzip -o solver/unxlng*/bin/pdfimport.oxt -d $RPM_BUILD_ROOT%{_libdir}/%{name}/share/extensions/pdfimport
 
 	# unpack wiki-publisher extension
 	install -d $RPM_BUILD_ROOT%{_libdir}/%{name}/share/extensions/wiki-publisher
 	unzip -o solver/unxlng*/bin/wiki-publisher.oxt -d $RPM_BUILD_ROOT%{_libdir}/%{name}/share/extensions/wiki-publisher
 
+	# XXX
 	# unpack script-provider-for-python extension
-	install -d $RPM_BUILD_ROOT%{_libdir}/%{name}/share/extensions/script-provider-for-python
-	unzip -o solver/unxlng*/bin/script-provider-for-python.oxt -d $RPM_BUILD_ROOT%{_libdir}/%{name}/share/extensions/script-provider-for-python
+	#install -d $RPM_BUILD_ROOT%{_libdir}/%{name}/share/extensions/script-provider-for-python
+	#unzip -o solver/unxlng*/bin/script-provider-for-python.oxt -d $RPM_BUILD_ROOT%{_libdir}/%{name}/share/extensions/script-provider-for-python
 
 	# save orignal install layout
 	find $RPM_BUILD_ROOT -ls > ls.txt
