@@ -1,3 +1,6 @@
+# TODO:
+# - fix configure arguments (+ compare with FC)
+#
 # NOTE - FIXME FOR 3.4.3 !!!:
 #	- normal build (i686) requires about 27 GB of disk space:
 #		$BUILD_ROOT	7.0 GB
@@ -39,51 +42,42 @@
 %undefine	with_system_hsqldb
 %endif
 
-%define		major_ver		3.6.3
+%define		major_ver		4.0.0
 
 Summary:	LibreOffice - powerful office suite
 Summary(pl.UTF-8):	LibreOffice - potężny pakiet biurowy
 Name:		libreoffice
-Version:	%{major_ver}.2
-Release:	4
+Version:	%{major_ver}.3
+Release:	0.1
 License:	GPL/LGPL
 Group:		X11/Applications
 # we use git because released tarballs are buggy too often
 # git clone git://anongit.freedesktop.org/git/libreoffice/build
 # cd build
 # git checkout -b libreoffice-3-3 origin/libreoffice-3-3
-Source0:	http://download.documentfoundation.org/libreoffice/src/%{major_ver}/%{name}-core-%{version}.tar.xz
-# Source0-md5:	17ccf623caa77dc135d5343a51fa1ddd
-Source1:	http://download.documentfoundation.org/libreoffice/src/%{major_ver}/%{name}-binfilter-%{version}.tar.xz
-# Source1-md5:	80439aafc2250cc878f503062f864b80
-Source2:	http://download.documentfoundation.org/libreoffice/src/%{major_ver}/%{name}-dictionaries-%{version}.tar.xz
-# Source2-md5:	c1fb46a2ea382b8c84e3a25154e05036
-Source3:	http://download.documentfoundation.org/libreoffice/src/%{major_ver}/%{name}-help-%{version}.tar.xz
-# Source3-md5:	94a8d18009f8e0e4ae80dc34c43604d7
-Source4:	http://download.documentfoundation.org/libreoffice/src/%{major_ver}/%{name}-translations-%{version}.tar.xz
-# Source4-md5:	f76c4439c211f229d49e5fb10ca2ba73
+Source0:	http://download.documentfoundation.org/libreoffice/src/%{major_ver}/%{name}-%{version}.tar.xz
+# Source0-md5:	a3c01489036823e9f5b5caf3a8db1f9e
+Source1:	http://download.documentfoundation.org/libreoffice/src/%{major_ver}/%{name}-dictionaries-%{version}.tar.xz
+# Source1-md5:	99b7a045525411c9148331ab04bdedff
+Source2:	http://download.documentfoundation.org/libreoffice/src/%{major_ver}/%{name}-help-%{version}.tar.xz
+# Source2-md5:	716f624d7a39b99da8a5d550b6a87875
+Source3:	http://download.documentfoundation.org/libreoffice/src/%{major_ver}/%{name}-translations-%{version}.tar.xz
+# Source3-md5:	09ec7331354c6f9a0b2f48efe344ce7d
 
-Source20:	http://download.go-oo.org/extern/185d60944ea767075d27247c3162b3bc-unowinreg.dll
-# Source20-md5:	185d60944ea767075d27247c3162b3bc
-Source23:	http://hg.services.openoffice.org/binaries/fdb27bfe2dbe2e7b57ae194d9bf36bab-SampleICC-1.3.2.tar.gz
-# Source23-md5:	fdb27bfe2dbe2e7b57ae194d9bf36bab
-Source24:	http://hg.services.openoffice.org/binaries/a7983f859eafb2677d7ff386a023bc40-xsltml_2.1.2.zip
-# Source24-md5:	a7983f859eafb2677d7ff386a023bc40
-Source25:	http://hg.services.openoffice.org/binaries/1f24ab1d39f4a51faf22244c94a6203f-xmlsec1-1.2.14.tar.gz
-# Source25-md5:	1f24ab1d39f4a51faf22244c94a6203f
-Source26:	http://hg.services.openoffice.org/binaries/798b2ffdc8bcfe7bca2cf92b62caf685-rhino1_5R5.zip
-# Source26-md5:	798b2ffdc8bcfe7bca2cf92b62caf685
-Source27:	http://hg.services.openoffice.org/binaries/35c94d2df8893241173de1d16b6034c0-swingExSrc.zip
-# Source27-md5:	35c94d2df8893241173de1d16b6034c0
-Source28:	http://hg.services.openoffice.org/binaries/ada24d37d8d638b3d8a9985e80bc2978-source-9.0.0.7-bj.zip
-# Source28-md5:	ada24d37d8d638b3d8a9985e80bc2978
-Source29:	http://hg.services.openoffice.org/binaries/18f577b374d60b3c760a3a3350407632-STLport-4.5.tar.gz
-# Source29-md5:	18f577b374d60b3c760a3a3350407632
-Source30:	http://hg.services.openoffice.org/binaries/17410483b5b5f267aa18b7e00b65e6e0-hsqldb_1_8_0.zip
-# Source30-md5:	17410483b5b5f267aa18b7e00b65e6e0
+Source20:       http://dev-www.libreoffice.org/src/0168229624cfac409e766913506961a8-ucpp-1.3.2.tar.gz
+# Source20-md5:	0168229624cfac409e766913506961a8
+Source21:	http://dev-www.libreoffice.org/src/17410483b5b5f267aa18b7e00b65e6e0-hsqldb_1_8_0.zip
+# Source21-md5:	17410483b5b5f267aa18b7e00b65e6e0
+Source22:	http://dev-www.libreoffice.org/src/1f24ab1d39f4a51faf22244c94a6203f-xmlsec1-1.2.14.tar.gz
+# Source22-md5:	1f24ab1d39f4a51faf22244c94a6203f
+Source23:	http://dev-www.libreoffice.org/src/798b2ffdc8bcfe7bca2cf92b62caf685-rhino1_5R5.zip
+# Source23-md5:	798b2ffdc8bcfe7bca2cf92b62caf685
+Source24:	http://dev-www.libreoffice.org/src/35c94d2df8893241173de1d16b6034c0-swingExSrc.zip
+# Source24-md5:	35c94d2df8893241173de1d16b6034c0
+Source25:	http://dev-www.libreoffice.org/src/a7983f859eafb2677d7ff386a023bc40-xsltml_2.1.2.zip
+# Source25-md5:	a7983f859eafb2677d7ff386a023bc40
+
 Patch0:		%{name}-hamcrest.patch
-# HACK: remove in future version or when proper fix found
-Patch1:		libreoffice-build-hack.patch
 URL:		http://www.documentfoundation.org/
 BuildRequires:	/usr/bin/getopt
 BuildRequires:	GConf2-devel
@@ -131,7 +125,10 @@ BuildRequires:	java-junit
 BuildRequires:	java-lucene
 BuildRequires:	java-lucene-contrib
 BuildRequires:	java-servletapi
-BuildRequires:	libcmis-devel >= 0.2
+BuildRequires:	libcmis-devel >= 0.3
+BuildRequires:	liblangtag-devel
+BuildRequires:	libmspub-devel
+BuildRequires:	liborcus-devel
 BuildRequires:	libvisio-devel
 BuildRequires:	libwpd-devel >= 0.9.0
 BuildRequires:	libwpg-devel >= 0.2.0
@@ -2515,10 +2512,9 @@ bash-completion for LibreOffice.
 bashowe uzupełnianie nazw dla LibreOffice.
 
 %prep
-%setup -q -n %{name}-core-%{version} -a1 -a2 -a3 -a4
+%setup -q -n %{name}-%{version} -a1 -a2 -a3
 
 %patch0 -p0
-%patch1 -p1
 
 for dir in *-%{version}; do
 	[ -f $dir/ChangeLog ] && mv $dir/ChangeLog ChangeLog-$dir
@@ -2528,14 +2524,11 @@ done
 
 install -d ext_sources
 ln %{SOURCE20} ext_sources
+ln %{SOURCE21} ext_sources
+ln %{SOURCE22} ext_sources
 ln %{SOURCE23} ext_sources
 ln %{SOURCE24} ext_sources
 ln %{SOURCE25} ext_sources
-ln %{SOURCE26} ext_sources
-ln %{SOURCE27} ext_sources
-ln %{SOURCE28} ext_sources
-ln %{SOURCE29} ext_sources
-ln %{SOURCE30} ext_sources
 :> src.downloaded
 
 %build
@@ -2590,7 +2583,7 @@ RPM_BUILD_NR_THREADS="1"
 touch autogen.lastrun
 
 %configure \
-	--with-num-cpus=$RPM_BUILD_NR_THREADS \
+	--with-parallelism=$RPM_BUILD_NR_THREADS \
 	--with-max-jobs=1 \
 	--with-unix-wrapper=%{name} \
 	--disable-odk \

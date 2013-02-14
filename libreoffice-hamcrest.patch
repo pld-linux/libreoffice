@@ -1,5 +1,5 @@
---- configure.in.orig	2012-02-01 13:56:49.000000000 +0100
-+++ configure.in	2012-02-23 18:57:32.000000000 +0100
+--- configure.ac.orig	2012-02-01 13:56:49.000000000 +0100
++++ configure.ac	2012-02-23 18:57:32.000000000 +0100
 @@ -7561,6 +7561,11 @@
                      [AC_MSG_ERROR(commons-logging.jar not found.)], [])
              fi
