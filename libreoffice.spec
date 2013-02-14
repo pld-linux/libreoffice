@@ -3423,11 +3423,15 @@ fi
 %dir %{_libdir}/%{name}/share/template
 #%{_libdir}/%{name}/share/template/en-US
 %dir %{_libdir}/%{name}/share/template/common
+%{_libdir}/%{name}/share/template/common/internal
 %{_libdir}/%{name}/share/template/common/layout
 %dir %{_libdir}/%{name}/share/template/wizard
+%{_libdir}/%{name}/share/template/wizard/agenda
 %{_libdir}/%{name}/share/template/wizard/bitmap
-#%dir %{_libdir}/%{name}/share/template/wizard/letter
-#%{_libdir}/%{name}/share/template/wizard/letter/en-US
+%{_libdir}/%{name}/share/template/wizard/fax
+%{_libdir}/%{name}/share/template/wizard/letter
+%{_libdir}/%{name}/share/template/wizard/report
+%{_libdir}/%{name}/share/template/wizard/styles
 
 %dir %{_libdir}/%{name}/share/wordbook
 %{_libdir}/%{name}/share/wordbook/en-GB.dic
@@ -3823,8 +3827,8 @@ fi
 # samples there
 %{_libdir}/%{name}/share/Scripts/python
 
-%files
-# pdfimport -f pdfimport.lang
+%files pdfimport
+# -f pdfimport.lang
 %defattr(644,root,root,755)
 %dir %{_libdir}/%{name}/share/extensions/pdfimport
 %attr(755,root,root) %{_libdir}/%{name}/share/extensions/pdfimport/pdfimport.uno.so
@@ -3837,6 +3841,7 @@ fi
 %{_libdir}/%{name}/share/extensions/pdfimport/registration
 %{_libdir}/%{name}/share/extensions/pdfimport/*.xcu
 %{_libdir}/%{name}/share/extensions/pdfimport/*.pdf
+%{_libdir}/%{name}/share/xpdfimport
 
 %files presentation-minimizer -f presentation-minimizer.lang
 %defattr(644,root,root,755)
