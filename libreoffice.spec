@@ -19,7 +19,6 @@
 %bcond_with	icecream	# use icecream to speed up builds
 %bcond_with	msaccess	# with ms access import pieces
 %bcond_without	parallelbuild	# use greater number of jobs to speed up build (default: 1)
-%bcond_without	binfilter	# build without old binary filters
 
 %bcond_without	system_beanshell
 %bcond_without	system_db		# without system (i.e. with internal) Berkeley DB
@@ -223,7 +222,6 @@ Requires:	%{name}-math = %{version}-%{release}
 Requires:	%{name}-pdfimport = %{version}-%{release}
 Requires:	%{name}-postgresql = %{version}-%{release}
 Requires:	%{name}-presentation-minimizer = %{version}-%{release}
-Requires:	%{name}-presenter-screen = %{version}-%{release}
 Requires:	%{name}-pyuno = %{version}-%{release}
 Requires:	%{name}-report-builder = %{version}-%{release}
 Requires:	%{name}-web = %{version}-%{release}
@@ -326,6 +324,7 @@ Requires:	saxon
 Requires:	sed
 %{?with_system_xalan:Requires:	xalan-j}
 #Suggests:	chkfontpath
+Obsoletes:	libreoffice-binfilter < 4.0.0.0
 Obsoletes:	libreoffice-i18n-kid
 Obsoletes:	libreoffice-i18n-ky
 Obsoletes:	libreoffice-i18n-ms
@@ -431,16 +430,6 @@ Requires:	%{name}-impress = %{version}-%{release}
 The Presentation Minimizer is used to reduce the file size of the
 current presentation. Images will be compressed, and data that is no
 longer needed will be removed.
-
-%package presenter-screen
-Summary:	Presenter Screen for LibreOffice presentations
-Group:		X11/Applications
-Requires:	%{name}-impress = %{version}-%{release}
-
-%description presenter-screen
-The Presenter Screen is used to provides information on a second
-screen, that typically is not visible to the audience when delivering
-a presentation. e.g. slide notes.
 
 %package report-builder
 Summary:	Create database reports from LibreOffice
@@ -573,6 +562,7 @@ Requires(post,postun):	gtk-update-icon-cache
 Requires:	%{name}-core = %{version}-%{release}
 Requires:	hicolor-icon-theme
 Obsoletes:	openoffice.org-impress
+Obsoletes:	libreoffice-presenter-screen < 4.0.0.0-1
 
 %description impress
 Presentation application of LibreOffice.
@@ -686,14 +676,6 @@ This plugin allows browsers to display OOo documents inline.
 Wtyczka LibreOffice dla przeglądarek WWW.
 
 Ta wtyczka umożliwia wyświetlanie dokumentów OOo wewnątrz stron.
-
-%package binfilter
-Summary:	Legacy binary filters for LibreOffice
-Group:		X11/Applications
-Requires:	%{name}-core = %{version}-%{release}
-
-%description binfilter
-Filters for old StarOffice binary formats.
 
 %package i18n-af
 Summary:	LibreOffice - interface in Afrikaans language
@@ -2688,7 +2670,6 @@ touch autogen.lastrun
 	--enable-fontconfig \
 	--enable-lockdown \
 	--disable-layout \
-	%{?with_binfilter:--enable-binfilter} \
 	--disable-fetch-external
 
 # this limits processing some files but doesn't limit parallel build
@@ -2728,16 +2709,6 @@ if [ ! -f makeinstall.stamp -o ! -d $RPM_BUILD_ROOT ]; then
 	# unpack presentation-minimizer extension
 	install -d $RPM_BUILD_ROOT%{_libdir}/%{name}/share/extensions/presentation-minimizer
 	unzip -o solver/unxlng*/bin/presentation-minimizer.oxt -d $RPM_BUILD_ROOT%{_libdir}/%{name}/share/extensions/presentation-minimizer
-
-	# XXX - gone in 4.0.0.3?
-	# unpack presenter screen extension
-	#install -d $RPM_BUILD_ROOT%{_libdir}/%{name}/share/extensions/presenter-screen
-	#unzip -o solver/unxlng*/bin/presenter-screen.oxt -d $RPM_BUILD_ROOT%{_libdir}/%{name}/share/extensions/presenter-screen
-
-	# XXX se above
-	# unpack pdfimport extension
-	#install -d $RPM_BUILD_ROOT%{_libdir}/%{name}/share/extensions/pdfimport
-	#unzip -o solver/unxlng*/bin/pdfimport.oxt -d $RPM_BUILD_ROOT%{_libdir}/%{name}/share/extensions/pdfimport
 
 	# unpack wiki-publisher extension
 	install -d $RPM_BUILD_ROOT%{_libdir}/%{name}/share/extensions/wiki-publisher
@@ -2864,10 +2835,13 @@ find_lang() {
 		# %{_libdir}/%{name}/help/$lang
 		grep "/help/${lang}$" ${lfile} >> ${langfn}.lang || :
 		grep "/help/${lang}/" ${lfile} >> ${langfn}.lang || :
+		# UI translations
+		grep "/soffice.cfg/[^/]*/ui/res/${lang}$" ${lfile} >> ${langfn}.lang || :
+		grep "/soffice.cfg/[^/]*/ui/res/${lang}/" ${lfile} >> ${langfn}.lang || :
+		grep "/soffice.cfg/modules/[^/]*/ui/res/${lang}$" ${lfile} >> ${langfn}.lang || :
+		grep "/soffice.cfg/modules/[^/]*/ui/res/${lang}/" ${lfile} >> ${langfn}.lang || :
 
-		for e in pdfimport \
-				presentation-minimizer \
-				presenter-screen \
+		for e in presentation-minimizer \
 				report-builder \
 				script-provider-for-python \
 				wiki-publisher ; do
@@ -3373,6 +3347,7 @@ fi
 %dir %{_libdir}/%{name}/share/config/soffice.cfg/modules
 %{_libdir}/%{name}/share/config/soffice.cfg/modules/BasicIDE
 %{_libdir}/%{name}/share/config/soffice.cfg/modules/StartModule
+%exclude %{_libdir}/%{name}/share/config/soffice.cfg/modules/BasicIDE/ui/res
 %dir %{_libdir}/%{name}/share/config/soffice.cfg/modules/dbapp
 %dir %{_libdir}/%{name}/share/config/soffice.cfg/modules/dbbrowser
 %dir %{_libdir}/%{name}/share/config/soffice.cfg/modules/dbquery
@@ -3426,12 +3401,13 @@ fi
 %{_libdir}/%{name}/share/template/common/internal
 %{_libdir}/%{name}/share/template/common/layout
 %dir %{_libdir}/%{name}/share/template/wizard
-%{_libdir}/%{name}/share/template/wizard/agenda
 %{_libdir}/%{name}/share/template/wizard/bitmap
-%{_libdir}/%{name}/share/template/wizard/fax
-%{_libdir}/%{name}/share/template/wizard/letter
-%{_libdir}/%{name}/share/template/wizard/report
-%{_libdir}/%{name}/share/template/wizard/styles
+%dir %{_libdir}/%{name}/share/template/common/wizard
+%{_libdir}/%{name}/share/template/common/wizard/agenda
+%{_libdir}/%{name}/share/template/common/wizard/fax
+%{_libdir}/%{name}/share/template/common/wizard/letter
+%{_libdir}/%{name}/share/template/common/wizard/report
+%{_libdir}/%{name}/share/template/common/wizard/styles
 
 %dir %{_libdir}/%{name}/share/wordbook
 %{_libdir}/%{name}/share/wordbook/en-GB.dic
@@ -3669,6 +3645,7 @@ fi
 %attr(755,root,root) %{_libdir}/%{name}/program/smath
 %{_libdir}/%{name}/program/resource/smen-US.res
 %{_libdir}/%{name}/share/config/soffice.cfg/modules/smath
+%exclude %{_libdir}/%{name}/share/config/soffice.cfg/modules/smath/ui/res
 %{_libdir}/%{name}/share/registry/math.xcd
 
 %files web
@@ -3817,6 +3794,8 @@ fi
 %{_libdir}/%{name}/program/wizards/document/*.py
 %dir %{_libdir}/%{name}/program/wizards/fax
 %{_libdir}/%{name}/program/wizards/fax/*.py
+%dir %{_libdir}/%{name}/program/wizards/letter
+%{_libdir}/%{name}/program/wizards/letter/*.py
 %dir %{_libdir}/%{name}/program/wizards/text
 %{_libdir}/%{name}/program/wizards/text/*.py
 %dir %{_libdir}/%{name}/program/wizards/ui
@@ -3830,17 +3809,9 @@ fi
 %files pdfimport
 # -f pdfimport.lang
 %defattr(644,root,root,755)
-%dir %{_libdir}/%{name}/share/extensions/pdfimport
-%attr(755,root,root) %{_libdir}/%{name}/share/extensions/pdfimport/pdfimport.uno.so
-%attr(755,root,root) %{_libdir}/%{name}/share/extensions/pdfimport/xpdfimport
-%{_libdir}/%{name}/share/extensions/pdfimport/META-INF
-%{_libdir}/%{name}/share/extensions/pdfimport/basic
-%{_libdir}/%{name}/share/extensions/pdfimport/components.rdb
-%{_libdir}/%{name}/share/extensions/pdfimport/description.xml
-%{_libdir}/%{name}/share/extensions/pdfimport/images
-%{_libdir}/%{name}/share/extensions/pdfimport/registration
-%{_libdir}/%{name}/share/extensions/pdfimport/*.xcu
-%{_libdir}/%{name}/share/extensions/pdfimport/*.pdf
+%{_libdir}/%{name}/program/pdfimport.uno.so
+%{_libdir}/%{name}/program/xpdfimport
+%{_libdir}/%{name}/share/registry/pdfimport.xcd
 %{_libdir}/%{name}/share/xpdfimport
 
 %files presentation-minimizer -f presentation-minimizer.lang
@@ -3853,17 +3824,6 @@ fi
 %{_libdir}/%{name}/share/extensions/presentation-minimizer/description.xml
 %{_libdir}/%{name}/share/extensions/presentation-minimizer/registr*
 
-%files presenter-screen -f presenter-screen.lang
-%defattr(644,root,root,755)
-%dir %{_libdir}/%{name}/share/extensions/presenter-screen
-%attr(755,root,root) %{_libdir}/%{name}/share/extensions/presenter-screen/PresenterScreen.uno.so
-%{_libdir}/%{name}/share/extensions/presenter-screen/META-INF
-%{_libdir}/%{name}/share/extensions/presenter-screen/bitmaps
-%{_libdir}/%{name}/share/extensions/presenter-screen/components.rdb
-%{_libdir}/%{name}/share/extensions/presenter-screen/description.xml
-%{_libdir}/%{name}/share/extensions/presenter-screen/help
-%{_libdir}/%{name}/share/extensions/presenter-screen/registry
-
 %files report-builder -f report-builder.lang
 %defattr(644,root,root,755)
 %dir %{_libdir}/%{name}/share/extensions/report-builder
@@ -3872,7 +3832,7 @@ fi
 %{_libdir}/%{name}/share/extensions/report-builder/registration
 %{_libdir}/%{name}/share/extensions/report-builder/registry
 %{_libdir}/%{name}/share/extensions/report-builder/template
-%{_libdir}/%{name}/share/extensions/report-builder/THIRDPARTYREADMELICENSE.html
+#%{_libdir}/%{name}/share/extensions/report-builder/THIRDPARTYREADMELICENSE.html
 %{_libdir}/%{name}/share/extensions/report-builder/components.rdb
 %{_libdir}/%{name}/share/extensions/report-builder/description.xml
 %{_libdir}/%{name}/share/extensions/report-builder/readme*
@@ -3898,40 +3858,6 @@ fi
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_browserpluginsdir}/libnpsoplugin.so
 %attr(755,root,root) %{_libdir}/%{name}/program/nsplugin
-%endif
-
-%if %{with binfilter}
-%files binfilter
-%defattr(644,root,root,755)
-%{_libdir}/%{name}/program/legacy_binfilters.rdb
-%{_libdir}/%{name}/program/libbf_frmlo.so
-%{_libdir}/%{name}/program/libbf_golo.so
-%{_libdir}/%{name}/program/libbf_migratefilterlo.so
-%{_libdir}/%{name}/program/libbf_ofalo.so
-%{_libdir}/%{name}/program/libbf_sblo.so
-%{_libdir}/%{name}/program/libbf_schlo.so
-%{_libdir}/%{name}/program/libbf_sclo.so
-%{_libdir}/%{name}/program/libbf_sdlo.so
-%{_libdir}/%{name}/program/libbf_smlo.so
-%{_libdir}/%{name}/program/libbf_solo.so
-%{_libdir}/%{name}/program/libbf_svtlo.so
-%{_libdir}/%{name}/program/libbf_svxlo.so
-%{_libdir}/%{name}/program/libbf_swlo.so
-%{_libdir}/%{name}/program/libbf_wrapperlo.so
-%{_libdir}/%{name}/program/libbf_xolo.so
-%{_libdir}/%{name}/program/libbindetlo.so
-%{_libdir}/%{name}/program/liblegacy_binfilterslo.so
-%{_libdir}/%{name}/program/resource/bf_frmen-US.res
-%{_libdir}/%{name}/program/resource/bf_ofaen-US.res
-%{_libdir}/%{name}/program/resource/bf_scen-US.res
-%{_libdir}/%{name}/program/resource/bf_schen-US.res
-%{_libdir}/%{name}/program/resource/bf_sden-US.res
-%{_libdir}/%{name}/program/resource/bf_smen-US.res
-%{_libdir}/%{name}/program/resource/bf_svten-US.res
-%{_libdir}/%{name}/program/resource/bf_svxen-US.res
-%{_libdir}/%{name}/program/resource/bf_swen-US.res
-%{_libdir}/%{name}/share/registry/binfilter.xcd
-%{_desktopdir}/libreoffice-binfilter.desktop
 %endif
 
 %if %{with i18n}
