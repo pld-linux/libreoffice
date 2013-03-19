@@ -41,12 +41,12 @@
 %undefine	with_system_hsqldb
 %endif
 
-%define		major_ver		4.0.0
+%define		major_ver		4.0.1
 
 Summary:	LibreOffice - powerful office suite
 Summary(pl.UTF-8):	LibreOffice - potężny pakiet biurowy
 Name:		libreoffice
-Version:	%{major_ver}.3
+Version:	%{major_ver}.2
 Release:	0.1
 License:	GPL/LGPL
 Group:		X11/Applications
@@ -55,13 +55,13 @@ Group:		X11/Applications
 # cd build
 # git checkout -b libreoffice-3-3 origin/libreoffice-3-3
 Source0:	http://download.documentfoundation.org/libreoffice/src/%{major_ver}/%{name}-%{version}.tar.xz
-# Source0-md5:	a3c01489036823e9f5b5caf3a8db1f9e
+# Source0-md5:	52c3bacdf46b4648c5697cc55b648784
 Source1:	http://download.documentfoundation.org/libreoffice/src/%{major_ver}/%{name}-dictionaries-%{version}.tar.xz
-# Source1-md5:	99b7a045525411c9148331ab04bdedff
+# Source1-md5:	619278fe413e7579d298a4b41abbd996
 Source2:	http://download.documentfoundation.org/libreoffice/src/%{major_ver}/%{name}-help-%{version}.tar.xz
-# Source2-md5:	716f624d7a39b99da8a5d550b6a87875
+# Source2-md5:	916da8f21945895e04eebb74e60f854d
 Source3:	http://download.documentfoundation.org/libreoffice/src/%{major_ver}/%{name}-translations-%{version}.tar.xz
-# Source3-md5:	09ec7331354c6f9a0b2f48efe344ce7d
+# Source3-md5:	98477b5c9e8a7954d321dd143ac9336e
 
 Source20:       http://dev-www.libreoffice.org/src/0168229624cfac409e766913506961a8-ucpp-1.3.2.tar.gz
 # Source20-md5:	0168229624cfac409e766913506961a8
@@ -2565,6 +2565,7 @@ RPM_BUILD_NR_THREADS="1"
 touch autogen.lastrun
 
 %configure \
+	--enable-release-build \
 	--with-parallelism=$RPM_BUILD_NR_THREADS \
 	--with-max-jobs=1 \
 	--with-unix-wrapper=%{name} \
@@ -2609,17 +2610,18 @@ touch autogen.lastrun
 	--with-system-zlib \
 	--with-system-libexttextcat \
 	--with-system-jfreereport \
+	--enable-vba \
 	--with-vba-package-format="builtin" \
 	--with-system-libs \
 	--with-system-headers \
 	--with-system-mythes \
-	--with-system-dicts \
 	--with-system-apache-commons \
 	--with-junit=%{_datadir}/java/junit.jar \
 	--without-system-saxon \
 	--without-system-sampleicc \
 	--enable-ext-presenter-minimizer \
 	--enable-ext-presenter-console \
+	--enable-ext-nlpsolver \
 	--enable-ext-pdfimport \
 	--enable-ext-wiki-publisher \
 	--enable-ext-report-builder \
