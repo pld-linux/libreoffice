@@ -4089,8 +4089,8 @@ fi
 %files i18n-pt_BR -f pt_BR.lang
 %defattr(644,root,root,755)
 
-%files i18n-qtz -f qtz.lang
-%defattr(644,root,root,755)
+#%files i18n-qtz -f qtz.lang
+#%defattr(644,root,root,755)
 
 %files i18n-ro -f ro.lang
 %defattr(644,root,root,755)
