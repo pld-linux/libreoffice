@@ -643,6 +643,18 @@ Requires:	postgresql-libs
 A PostgreSQL connector for the database front-end for LibreOffice.
 Allows creation and management of PostgreSQL databases through a GUI.
 
+%package nlpsolver
+Summary:	Non-linear solver engine for LibreOffice Calc
+Group:		X11/Applications
+Requires:	%{name}-calc = %{version}-%{release}
+Requires:	%{name}-core = %{version}-%{release}
+Requires:	%{name}-ure = %{version}-%{release}
+
+%description nlpsolver
+A non-linear solver engine for Calc as an alternative to the default
+linear programming model when more complex, nonlinear programming is
+required.
+
 # FIXME
 %package ure
 Summary:	UNO Runtime Environment
@@ -2066,6 +2078,20 @@ Sinhala language.
 Ten pakiet dostarcza zasoby zawierające menu i okna dialogowe w języku
 syngaleskim.
 
+%package i18n-sid
+Summary:	LibreOffice - interface in Sidama language
+Summary(pl.UTF-8):	LibreOffice - interfejs w języku sidamo
+Group:		I18n
+Requires:	%{name}-core = %{version}-%{release}
+
+%description i18n-sid
+This package provides resources containing menus and dialogs in
+Sidama language.
+
+%description i18n-sid -l pl.UTF-8
+Ten pakiet dostarcza zasoby zawierające menu i okna dialogowe w języku
+sidamo.
+
 %package i18n-sk
 Summary:	LibreOffice - interface in Slovak language
 Summary(pl.UTF-8):	LibreOffice - interfejs w języku słowackim
@@ -2846,7 +2872,8 @@ find_lang() {
 		for e in presentation-minimizer \
 				report-builder \
 				script-provider-for-python \
-				wiki-publisher ; do
+				wiki-publisher \
+				nlpsolver ; do
 			for d in $RPM_BUILD_ROOT%{_libdir}/%{name}/share/extensions/$e/description-${lang}.txt ; do
 				[ -f $d ] && echo "%lang(${lang}) $d" | sed -e "s|$RPM_BUILD_ROOT||g" >> $e.lang || :
 			done
@@ -3058,6 +3085,7 @@ fi
 %attr(755,root,root) %{_libdir}/%{name}/program/libeditenglo.so
 %attr(755,root,root) %{_libdir}/%{name}/program/libegilo.so
 %attr(755,root,root) %{_libdir}/%{name}/program/libembobj.so
+%attr(755,root,root) %{_libdir}/%{name}/program/libemboleobj.so
 %attr(755,root,root) %{_libdir}/%{name}/program/libemelo.so
 %attr(755,root,root) %{_libdir}/%{name}/program/libepblo.so
 %attr(755,root,root) %{_libdir}/%{name}/program/libepglo.so
@@ -3216,6 +3244,7 @@ fi
 %attr(755,root,root) %{_libdir}/%{name}/program/ucptdoc1.uno.so
 %attr(755,root,root) %{_libdir}/%{name}/program/updatefeed.uno.so
 %attr(755,root,root) %{_libdir}/%{name}/program/uri-encode
+%attr(755,root,root) %{_libdir}/%{name}/program/ui-previewer
 %attr(755,root,root) %{_libdir}/%{name}/program/vbaevents*.uno.so
 %attr(755,root,root) %{_libdir}/%{name}/program/vclcanvas.uno.so
 
@@ -3346,6 +3375,12 @@ fi
 %{_libdir}/%{name}/share/config/images_tango.zip
 %{_libdir}/%{name}/share/config/*.xpm
 %dir %{_libdir}/%{name}/share/config/soffice.cfg
+%{_libdir}/%{name}/share/config/soffice.cfg/cui/ui
+%exclude %{_libdir}/%{name}/share/config/soffice.cfg/cui/ui/res
+%{_libdir}/%{name}/share/config/soffice.cfg/desktop/ui
+%exclude %{_libdir}/%{name}/share/config/soffice.cfg/desktop/ui/res
+%{_libdir}/%{name}/share/config/soffice.cfg/filter/ui
+%exclude %{_libdir}/%{name}/share/config/soffice.cfg/filter/ui/res
 %dir %{_libdir}/%{name}/share/config/soffice.cfg/modules
 %{_libdir}/%{name}/share/config/soffice.cfg/modules/BasicIDE
 %{_libdir}/%{name}/share/config/soffice.cfg/modules/StartModule
@@ -3362,6 +3397,7 @@ fi
 %{_libdir}/%{name}/share/config/soffice.cfg/modules/sglobal/menubar
 %{_libdir}/%{name}/share/config/soffice.cfg/modules/sglobal/statusbar
 %{_libdir}/%{name}/share/config/soffice.cfg/modules/sglobal/toolbar
+%dir %{_libdir}/%{name}/share/config/soffice.cfg/modules/smath
 %dir %{_libdir}/%{name}/share/config/soffice.cfg/modules/sweb
 %dir %{_libdir}/%{name}/share/config/soffice.cfg/modules/simpress
 %dir %{_libdir}/%{name}/share/config/soffice.cfg/modules/swform
@@ -3377,6 +3413,14 @@ fi
 %{_libdir}/%{name}/share/config/soffice.cfg/modules/swxform/menubar
 %{_libdir}/%{name}/share/config/soffice.cfg/modules/swxform/statusbar
 %{_libdir}/%{name}/share/config/soffice.cfg/modules/swxform/toolbar
+%{_libdir}/%{name}/share/config/soffice.cfg/sfx/ui
+%exclude %{_libdir}/%{name}/share/config/soffice.cfg/sfx/ui/res
+%{_libdir}/%{name}/share/config/soffice.cfg/svt/ui
+%exclude %{_libdir}/%{name}/share/config/soffice.cfg/svt/ui/res
+%{_libdir}/%{name}/share/config/soffice.cfg/svx/ui
+%exclude %{_libdir}/%{name}/share/config/soffice.cfg/svx/ui/res
+%{_libdir}/%{name}/share/config/soffice.cfg/vcl/ui
+%exclude %{_libdir}/%{name}/share/config/soffice.cfg/vcl/ui/res
 %{_libdir}/%{name}/share/config/webcast
 %{_libdir}/%{name}/share/config/wizard
 %dir %{_libdir}/%{name}/share/dtd
@@ -3560,11 +3604,14 @@ fi
 %attr(755,root,root) %{_libdir}/%{name}/program/vbaobj.uno.so
 %{_libdir}/%{name}/program/resource/analysisen-US.res
 %{_libdir}/%{name}/program/resource/dateen-US.res
+%{_libdir}/%{name}/program/resource/pricingen-US.res
 %{_libdir}/%{name}/program/resource/solveren-US.res
 %{_libdir}/%{name}/program/resource/scen-US.res
 %{_libdir}/%{name}/share/config/soffice.cfg/modules/scalc/menubar
 %{_libdir}/%{name}/share/config/soffice.cfg/modules/scalc/statusbar
 %{_libdir}/%{name}/share/config/soffice.cfg/modules/scalc/toolbar
+%{_libdir}/%{name}/share/config/soffice.cfg/modules/scalc/ui
+%exclude %{_libdir}/%{name}/share/config/soffice.cfg/modules/scalc/ui/res/*
 %{_libdir}/%{name}/share/registry/calc.xcd
 
 %files draw
@@ -3580,6 +3627,8 @@ fi
 %{_libdir}/%{name}/share/config/soffice.cfg/modules/sdraw/menubar
 %{_libdir}/%{name}/share/config/soffice.cfg/modules/sdraw/statusbar
 %{_libdir}/%{name}/share/config/soffice.cfg/modules/sdraw/toolbar
+%{_libdir}/%{name}/share/config/soffice.cfg/modules/sdraw/ui
+%exclude %{_libdir}/%{name}/share/config/soffice.cfg/modules/sdraw/ui/res/*
 %{_libdir}/%{name}/share/registry/draw.xcd
 
 %files emailmerge
@@ -3611,6 +3660,8 @@ fi
 %{_libdir}/%{name}/share/config/soffice.cfg/modules/swriter/menubar
 %{_libdir}/%{name}/share/config/soffice.cfg/modules/swriter/statusbar
 %{_libdir}/%{name}/share/config/soffice.cfg/modules/swriter/toolbar
+%{_libdir}/%{name}/share/config/soffice.cfg/modules/swriter/ui
+%exclude %{_libdir}/%{name}/share/config/soffice.cfg/modules/swriter/ui/res/*
 %{_libdir}/%{name}/share/registry/writer.xcd
 
 %files impress
@@ -3621,6 +3672,7 @@ fi
 %attr(755,root,root) %{_libdir}/%{name}/program/OGLTrans.uno.so
 %attr(755,root,root) %{_libdir}/%{name}/program/libanimcorelo.so
 %attr(755,root,root) %{_libdir}/%{name}/program/libplaceware*.so
+%attr(755,root,root) %{_libdir}/%{name}/program/PresenterScreen.uno.so
 %{_mandir}/man1/loimpress.1
 %{_desktopdir}/libreoffice-impress.desktop
 %{_iconsdir}/hicolor/*/apps/libreoffice-impress.png
@@ -3630,6 +3682,8 @@ fi
 %{_libdir}/%{name}/share/config/soffice.cfg/modules/simpress/menubar
 %{_libdir}/%{name}/share/config/soffice.cfg/modules/simpress/statusbar
 %{_libdir}/%{name}/share/config/soffice.cfg/modules/simpress/toolbar
+%{_libdir}/%{name}/share/config/soffice.cfg/modules/simpress/ui
+%exclude %{_libdir}/%{name}/share/config/soffice.cfg/modules/simpress/ui/res/*
 %{_libdir}/%{name}/share/registry/impress.xcd
 %{_libdir}/%{name}/share/registry/ogltrans.xcd
 
@@ -3646,8 +3700,11 @@ fi
 %attr(755,root,root) %{_libdir}/%{name}/program/libsmlo.so
 %attr(755,root,root) %{_libdir}/%{name}/program/smath
 %{_libdir}/%{name}/program/resource/smen-US.res
-%{_libdir}/%{name}/share/config/soffice.cfg/modules/smath
-%exclude %{_libdir}/%{name}/share/config/soffice.cfg/modules/smath/ui/res
+%{_libdir}/%{name}/share/config/soffice.cfg/modules/smath/menubar
+%{_libdir}/%{name}/share/config/soffice.cfg/modules/smath/statusbar
+%{_libdir}/%{name}/share/config/soffice.cfg/modules/smath/toolbar
+%{_libdir}/%{name}/share/config/soffice.cfg/modules/smath/ui
+%exclude %{_libdir}/%{name}/share/config/soffice.cfg/modules/smath/ui/res/*
 %{_libdir}/%{name}/share/registry/math.xcd
 
 %files web
@@ -3775,8 +3832,11 @@ fi
 %{_libdir}/%{name}/program/pythonloader.unorc
 %{_libdir}/%{name}/program/officehelper.py
 %{_libdir}/%{name}/program/pythonloader.py
+%{_libdir}/%{name}/program/pythonscript.py
 %{_libdir}/%{name}/program/uno.py
 %{_libdir}/%{name}/program/unohelper.py
+%{_libdir}/%{name}/program/services/scriptproviderforpython.rdb
+%{_libdir}/%{name}/share/registry/librelogo.xcd
 %{_libdir}/%{name}/share/registry/pyuno.xcd
 
 # script-provider-for-python extension
@@ -3854,6 +3914,18 @@ fi
 %{_libdir}/%{name}/share/extensions/wiki-publisher/components.rdb
 %{_libdir}/%{name}/share/extensions/wiki-publisher/description.xml
 %{_libdir}/%{name}/share/extensions/wiki-publisher/mediawiki.jar
+
+%files nlpsolver -f nlpsolver.lang
+%defattr(644,root,root,755)
+%dir %{_libdir}/%{name}/share/extensions/nlpsolver
+%{_libdir}/%{name}/share/extensions/nlpsolver/META-INF
+%{_libdir}/%{name}/share/extensions/nlpsolver/help
+%{_libdir}/%{name}/share/extensions/nlpsolver/locale
+%{_libdir}/%{name}/share/extensions/nlpsolver/registration
+%{_libdir}/%{name}/share/extensions/nlpsolver/EvolutionarySolver.jar
+%{_libdir}/%{name}/share/extensions/nlpsolver/components.rdb
+%{_libdir}/%{name}/share/extensions/nlpsolver/description.xml
+%{_libdir}/%{name}/share/extensions/nlpsolver/nlpsolver.jar
 
 %if %{with mozilla}
 %files -n browser-plugin-%{name}
@@ -4114,6 +4186,9 @@ fi
 %defattr(644,root,root,755)
 
 %files i18n-si -f si.lang
+%defattr(644,root,root,755)
+
+%files i18n-sid -f sid.lang
 %defattr(644,root,root,755)
 
 %files i18n-sk -f sk.lang
