@@ -3375,10 +3375,13 @@ fi
 %{_libdir}/%{name}/share/config/images_tango.zip
 %{_libdir}/%{name}/share/config/*.xpm
 %dir %{_libdir}/%{name}/share/config/soffice.cfg
+%dir %{_libdir}/%{name}/share/config/soffice.cfg/cui
 %{_libdir}/%{name}/share/config/soffice.cfg/cui/ui
 %exclude %{_libdir}/%{name}/share/config/soffice.cfg/cui/ui/res
+%dir %{_libdir}/%{name}/share/config/soffice.cfg/desktop
 %{_libdir}/%{name}/share/config/soffice.cfg/desktop/ui
 %exclude %{_libdir}/%{name}/share/config/soffice.cfg/desktop/ui/res
+%dir %{_libdir}/%{name}/share/config/soffice.cfg/filter
 %{_libdir}/%{name}/share/config/soffice.cfg/filter/ui
 %exclude %{_libdir}/%{name}/share/config/soffice.cfg/filter/ui/res
 %dir %{_libdir}/%{name}/share/config/soffice.cfg/modules
@@ -3413,12 +3416,16 @@ fi
 %{_libdir}/%{name}/share/config/soffice.cfg/modules/swxform/menubar
 %{_libdir}/%{name}/share/config/soffice.cfg/modules/swxform/statusbar
 %{_libdir}/%{name}/share/config/soffice.cfg/modules/swxform/toolbar
+%dir %{_libdir}/%{name}/share/config/soffice.cfg/sfx
 %{_libdir}/%{name}/share/config/soffice.cfg/sfx/ui
 %exclude %{_libdir}/%{name}/share/config/soffice.cfg/sfx/ui/res
+%dir %{_libdir}/%{name}/share/config/soffice.cfg/svt
 %{_libdir}/%{name}/share/config/soffice.cfg/svt/ui
 %exclude %{_libdir}/%{name}/share/config/soffice.cfg/svt/ui/res
+%dir %{_libdir}/%{name}/share/config/soffice.cfg/svx
 %{_libdir}/%{name}/share/config/soffice.cfg/svx/ui
 %exclude %{_libdir}/%{name}/share/config/soffice.cfg/svx/ui/res
+%dir %{_libdir}/%{name}/share/config/soffice.cfg/vcl
 %{_libdir}/%{name}/share/config/soffice.cfg/vcl/ui
 %exclude %{_libdir}/%{name}/share/config/soffice.cfg/vcl/ui/res
 %{_libdir}/%{name}/share/config/webcast
