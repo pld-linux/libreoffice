@@ -3377,17 +3377,17 @@ fi
 %dir %{_libdir}/%{name}/share/config/soffice.cfg
 %dir %{_libdir}/%{name}/share/config/soffice.cfg/cui
 %{_libdir}/%{name}/share/config/soffice.cfg/cui/ui
-%exclude %{_libdir}/%{name}/share/config/soffice.cfg/cui/ui/res
+%exclude %{_libdir}/%{name}/share/config/soffice.cfg/cui/ui/res/*
 %dir %{_libdir}/%{name}/share/config/soffice.cfg/desktop
 %{_libdir}/%{name}/share/config/soffice.cfg/desktop/ui
-%exclude %{_libdir}/%{name}/share/config/soffice.cfg/desktop/ui/res
+%exclude %{_libdir}/%{name}/share/config/soffice.cfg/desktop/ui/res/*
 %dir %{_libdir}/%{name}/share/config/soffice.cfg/filter
 %{_libdir}/%{name}/share/config/soffice.cfg/filter/ui
-%exclude %{_libdir}/%{name}/share/config/soffice.cfg/filter/ui/res
+%exclude %{_libdir}/%{name}/share/config/soffice.cfg/filter/ui/res/*
 %dir %{_libdir}/%{name}/share/config/soffice.cfg/modules
 %{_libdir}/%{name}/share/config/soffice.cfg/modules/BasicIDE
 %{_libdir}/%{name}/share/config/soffice.cfg/modules/StartModule
-%exclude %{_libdir}/%{name}/share/config/soffice.cfg/modules/BasicIDE/ui/res
+%exclude %{_libdir}/%{name}/share/config/soffice.cfg/modules/BasicIDE/ui/res/*
 %dir %{_libdir}/%{name}/share/config/soffice.cfg/modules/dbapp
 %dir %{_libdir}/%{name}/share/config/soffice.cfg/modules/dbbrowser
 %dir %{_libdir}/%{name}/share/config/soffice.cfg/modules/dbquery
@@ -3418,16 +3418,16 @@ fi
 %{_libdir}/%{name}/share/config/soffice.cfg/modules/swxform/toolbar
 %dir %{_libdir}/%{name}/share/config/soffice.cfg/sfx
 %{_libdir}/%{name}/share/config/soffice.cfg/sfx/ui
-%exclude %{_libdir}/%{name}/share/config/soffice.cfg/sfx/ui/res
+%exclude %{_libdir}/%{name}/share/config/soffice.cfg/sfx/ui/res/*
 %dir %{_libdir}/%{name}/share/config/soffice.cfg/svt
 %{_libdir}/%{name}/share/config/soffice.cfg/svt/ui
-%exclude %{_libdir}/%{name}/share/config/soffice.cfg/svt/ui/res
+%exclude %{_libdir}/%{name}/share/config/soffice.cfg/svt/ui/res/*
 %dir %{_libdir}/%{name}/share/config/soffice.cfg/svx
 %{_libdir}/%{name}/share/config/soffice.cfg/svx/ui
-%exclude %{_libdir}/%{name}/share/config/soffice.cfg/svx/ui/res
+%exclude %{_libdir}/%{name}/share/config/soffice.cfg/svx/ui/res/*
 %dir %{_libdir}/%{name}/share/config/soffice.cfg/vcl
 %{_libdir}/%{name}/share/config/soffice.cfg/vcl/ui
-%exclude %{_libdir}/%{name}/share/config/soffice.cfg/vcl/ui/res
+%exclude %{_libdir}/%{name}/share/config/soffice.cfg/vcl/ui/res/*
 %{_libdir}/%{name}/share/config/webcast
 %{_libdir}/%{name}/share/config/wizard
 %dir %{_libdir}/%{name}/share/dtd
