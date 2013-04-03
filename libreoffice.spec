@@ -235,6 +235,9 @@ ExclusiveArch:	%{ix86} %{x8664} ppc sparc sparcv9
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %define		specflags	-fno-strict-aliasing -O2
+%define		filterout_c	-fomit-frame-pointer
+%define		filterout_cpp	-fomit-frame-pointer
+%define		filterout_cxx	-fomit-frame-pointer
 
 # No ELF objects there to strip/chrpath, skips processing:
 # - share/ - 17000 files of 415M
