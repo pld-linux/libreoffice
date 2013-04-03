@@ -2550,7 +2550,7 @@ fi
 SAFE_CFLAGS=""
 for i in %{rpmcflags}; do
 	case "$i" in
-	-O?|-pipe|-Wall|-g|-fexceptions)
+	-O?|-pipe|-Wall|-g|-fexceptions|-fomit-frame-pointer)
 		;;
 	*)
 		SAFE_CFLAGS="$SAFE_CFLAGS $i"
