@@ -183,7 +183,7 @@ BuildRequires:	python-devel >= 2.2
 BuildRequires:	python-modules >= 2.2
 BuildRequires:	redland-devel
 BuildRequires:	rpm-pythonprov
-BuildRequires:	rpmbuild(macros) >= 1.357
+BuildRequires:	rpmbuild(macros) >= 1.660
 BuildRequires:	sablotron-devel
 BuildRequires:	sane-backends-devel
 BuildRequires:	saxon
