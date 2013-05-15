@@ -41,13 +41,13 @@
 %undefine	with_system_hsqldb
 %endif
 
-%define		major_ver		4.0.2
+%define		major_ver		4.0.3
 
 Summary:	LibreOffice - powerful office suite
 Summary(pl.UTF-8):	LibreOffice - potężny pakiet biurowy
 Name:		libreoffice
-Version:	%{major_ver}.2
-Release:	2
+Version:	%{major_ver}.3
+Release:	0.1
 License:	GPL/LGPL
 Group:		X11/Applications
 # we use git because released tarballs are buggy too often
@@ -55,13 +55,13 @@ Group:		X11/Applications
 # cd build
 # git checkout -b libreoffice-3-3 origin/libreoffice-3-3
 Source0:	http://download.documentfoundation.org/libreoffice/src/%{major_ver}/%{name}-%{version}.tar.xz
-# Source0-md5:	2c92879fa8c50d0071c4703afb7d10bf
+# Source0-md5:	7bcde561375f3bbce08f6d05451c8ad7
 Source1:	http://download.documentfoundation.org/libreoffice/src/%{major_ver}/%{name}-dictionaries-%{version}.tar.xz
-# Source1-md5:	056674846d65d105dd8af642db0b57b7
+# Source1-md5:	c2f0ce1e9e08a068dc270989054920ae
 Source2:	http://download.documentfoundation.org/libreoffice/src/%{major_ver}/%{name}-help-%{version}.tar.xz
-# Source2-md5:	22e99e58aa32417dd7c132f40ae7654b
+# Source2-md5:	994b1f3015668335c30b53ddd3d60dc8
 Source3:	http://download.documentfoundation.org/libreoffice/src/%{major_ver}/%{name}-translations-%{version}.tar.xz
-# Source3-md5:	8b61fbfa6bcd18213b5744f2b8a289b0
+# Source3-md5:	05b9ba0e86181bda3afeadcaba9202a3
 
 Source20:       http://dev-www.libreoffice.org/src/0168229624cfac409e766913506961a8-ucpp-1.3.2.tar.gz
 # Source20-md5:	0168229624cfac409e766913506961a8
@@ -77,6 +77,8 @@ Source25:	http://dev-www.libreoffice.org/src/a7983f859eafb2677d7ff386a023bc40-xs
 # Source25-md5:	a7983f859eafb2677d7ff386a023bc40
 
 Patch0:		%{name}-hamcrest.patch
+Patch1:		%{name}-liborcus.patch
+Patch2:		%{name}-mdds.patch
 URL:		http://www.documentfoundation.org/
 BuildRequires:	/usr/bin/getopt
 BuildRequires:	GConf2-devel
@@ -127,7 +129,7 @@ BuildRequires:	java-servletapi
 BuildRequires:	libcmis-devel >= 0.3
 BuildRequires:	liblangtag-devel
 BuildRequires:	libmspub-devel
-BuildRequires:	liborcus-devel
+BuildRequires:	liborcus-devel >= 0.4
 BuildRequires:	libvisio-devel
 BuildRequires:	libwpd-devel >= 0.9.0
 BuildRequires:	libwpg-devel >= 0.2.0
@@ -2526,6 +2528,8 @@ bashowe uzupełnianie nazw dla LibreOffice.
 %setup -q -n %{name}-%{version} -a1 -a2 -a3
 
 %patch0 -p0
+%patch1 -p1
+%patch2 -p1
 
 for dir in *-%{version}; do
 	[ -f $dir/ChangeLog ] && mv $dir/ChangeLog ChangeLog-$dir

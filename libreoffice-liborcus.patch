@@ -1,0 +1,12 @@
+--- libreoffice-4.0.3.3/configure.ac~	2013-05-13 08:15:42.000000000 +0200
++++ libreoffice-4.0.3.3/configure.ac	2013-05-13 08:26:51.147726419 +0200
+@@ -8583,7 +8583,7 @@
+ if test "$with_system_orcus" = "yes"; then
+     AC_MSG_RESULT([external])
+     SYSTEM_LIBORCUS=YES
+-    PKG_CHECK_MODULES(ORCUS, liborcus-0.4 >= 0.3.0)
++    PKG_CHECK_MODULES(ORCUS, liborcus-0.6 >= 0.5.0)
+ else
+     AC_MSG_RESULT([internal])
+     BUILD_TYPE="$BUILD_TYPE ORCUS"
+
