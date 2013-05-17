@@ -91,6 +91,7 @@ BuildRequires:	autoconf >= 2.51
 BuildRequires:	automake >= 1:1.9
 BuildRequires:	bash
 BuildRequires:	bison >= 1.875-4
+BuildRequires:	bluez-libs-devel
 BuildRequires:	boost-devel >= 1.35.0
 BuildRequires:	cairo-devel >= 1.2.0
 %{?with_ccache:BuildRequires:	ccache}
@@ -107,8 +108,8 @@ BuildRequires:	freetype-devel >= 2.1
 BuildRequires:	glib2-devel >= 2.13.5
 BuildRequires:	gperf
 BuildRequires:	graphite2-devel
-BuildRequires:	gstreamer-devel >= 0.10.0
-BuildRequires:	gstreamer-plugins-base-devel >= 0.10.0
+BuildRequires:	gstreamer0.10-devel >= 0.10.0
+BuildRequires:	gstreamer0.10-plugins-base-devel >= 0.10.0
 BuildRequires:	gtk+2-devel >= 2:2.10
 %{?with_system_hunspell:BuildRequires:	hunspell-devel >=1.2.2}
 BuildRequires:	hyphen-devel
@@ -180,9 +181,9 @@ BuildRequires:	postgresql-devel
 BuildRequires:	poppler-cpp-devel >= 0.8.0
 BuildRequires:	poppler-devel >= 0.8.0
 BuildRequires:	portaudio-devel
-BuildRequires:	python >= 2.2
-BuildRequires:	python-devel >= 2.2
-BuildRequires:	python-modules >= 2.2
+BuildRequires:	python3 >= 3.3
+BuildRequires:	python3-devel >= 3.3
+BuildRequires:	python3-modules >= 3.3
 BuildRequires:	redland-devel
 BuildRequires:	rpm-pythonprov
 BuildRequires:	rpmbuild(macros) >= 1.660
