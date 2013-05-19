@@ -79,6 +79,7 @@ Source25:	http://dev-www.libreoffice.org/src/a7983f859eafb2677d7ff386a023bc40-xs
 Patch0:		%{name}-hamcrest.patch
 Patch1:		%{name}-liborcus.patch
 Patch2:		%{name}-mdds.patch
+Patch3:		%{name}-liborcus-build.patch
 URL:		http://www.documentfoundation.org/
 BuildRequires:	/usr/bin/getopt
 BuildRequires:	GConf2-devel
@@ -2531,6 +2532,7 @@ bashowe uzupełnianie nazw dla LibreOffice.
 %patch0 -p0
 %patch1 -p1
 %patch2 -p1
+%patch3 -p1
 
 for dir in *-%{version}; do
 	[ -f $dir/ChangeLog ] && mv $dir/ChangeLog ChangeLog-$dir
