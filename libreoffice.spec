@@ -41,13 +41,13 @@
 %undefine	with_system_hsqldb
 %endif
 
-%define		major_ver		4.0.3
+%define		major_ver		4.0.4
 
 Summary:	LibreOffice - powerful office suite
 Summary(pl.UTF-8):	LibreOffice - potężny pakiet biurowy
 Name:		libreoffice
-Version:	%{major_ver}.3
-Release:	2
+Version:	%{major_ver}.2
+Release:	0.1
 License:	GPL/LGPL
 Group:		X11/Applications
 # we use git because released tarballs are buggy too often
@@ -55,13 +55,13 @@ Group:		X11/Applications
 # cd build
 # git checkout -b libreoffice-3-3 origin/libreoffice-3-3
 Source0:	http://download.documentfoundation.org/libreoffice/src/%{major_ver}/%{name}-%{version}.tar.xz
-# Source0-md5:	7bcde561375f3bbce08f6d05451c8ad7
+# Source0-md5:	19462798bbf6e1dc75a8b12bd1775ea2
 Source1:	http://download.documentfoundation.org/libreoffice/src/%{major_ver}/%{name}-dictionaries-%{version}.tar.xz
-# Source1-md5:	c2f0ce1e9e08a068dc270989054920ae
+# Source1-md5:	12609fdd74047287c7853fa97c14f089
 Source2:	http://download.documentfoundation.org/libreoffice/src/%{major_ver}/%{name}-help-%{version}.tar.xz
-# Source2-md5:	994b1f3015668335c30b53ddd3d60dc8
+# Source2-md5:	a4d5e6504a3251b7a7fbe17216f8d6e7
 Source3:	http://download.documentfoundation.org/libreoffice/src/%{major_ver}/%{name}-translations-%{version}.tar.xz
-# Source3-md5:	05b9ba0e86181bda3afeadcaba9202a3
+# Source3-md5:	0ba553eea7284abe1370157bb35bd355
 
 Source20:       http://dev-www.libreoffice.org/src/0168229624cfac409e766913506961a8-ucpp-1.3.2.tar.gz
 # Source20-md5:	0168229624cfac409e766913506961a8
@@ -2532,7 +2532,7 @@ bashowe uzupełnianie nazw dla LibreOffice.
 %patch0 -p0
 %patch1 -p1
 %patch2 -p1
-%patch3 -p1
+#%patch3 -p1
 
 for dir in *-%{version}; do
 	[ -f $dir/ChangeLog ] && mv $dir/ChangeLog ChangeLog-$dir
