@@ -3334,6 +3334,7 @@ fi
 %dir %{_libdir}/%{name}/share/config/soffice.cfg/modules/dbtdata
 %dir %{_libdir}/%{name}/share/config/soffice.cfg/modules/scalc
 %{_libdir}/%{name}/share/config/soffice.cfg/modules/schart
+%exclude %{_libdir}/%{name}/share/config/soffice.cfg/modules/schart/ui/res/*
 %dir %{_libdir}/%{name}/share/config/soffice.cfg/modules/sdraw
 %dir %{_libdir}/%{name}/share/config/soffice.cfg/modules/sglobal
 %{_libdir}/%{name}/share/config/soffice.cfg/modules/sglobal/menubar
