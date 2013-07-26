@@ -2996,12 +2996,6 @@ fi
 %dir %{_datadir}/%{name}
 %dir %{_datadir}/%{name}/help
 %{_datadir}/%{name}/help/*.xsl
-%dir %{_datadir}/%{name}/help/en
-%{_datadir}/%{name}/help/en/*.html
-%{_datadir}/%{name}/help/en/*.css
-%{_datadir}/%{name}/help/en/sbasic.*
-%{_datadir}/%{name}/help/en/schart.*
-%{_datadir}/%{name}/help/en/shared.*
 
 %dir %{_libdir}/%{name}/presets
 %dir %{_libdir}/%{name}/presets/autotext
@@ -3015,26 +3009,10 @@ fi
 %{_libdir}/%{name}/presets/psprint
 
 %dir %{_libdir}/%{name}/program
-%attr(755,root,root) %{_libdir}/%{name}/program/basprov*.uno.so
-%attr(755,root,root) %{_libdir}/%{name}/program/cairocanvas.uno.so
-%attr(755,root,root) %{_libdir}/%{name}/program/canvasfactory.uno.so
 %attr(755,root,root) %{_libdir}/%{name}/program/cde-open-url
-%attr(755,root,root) %{_libdir}/%{name}/program/cmdmail.uno.so
-%attr(755,root,root) %{_libdir}/%{name}/program/configmgr.uno.so
-%attr(755,root,root) %{_libdir}/%{name}/program/desktopbe1.uno.so
-%attr(755,root,root) %{_libdir}/%{name}/program/dlgprov*.uno.so
-%attr(755,root,root) %{_libdir}/%{name}/program/expwrap.uno.so
-%attr(755,root,root) %{_libdir}/%{name}/program/fastsax.uno.so
-%attr(755,root,root) %{_libdir}/%{name}/program/fpicker.uno.so
-%attr(755,root,root) %{_libdir}/%{name}/program/fps_office.uno.so
-%attr(755,root,root) %{_libdir}/%{name}/program/fsstorage.uno.so
 %attr(755,root,root) %{_libdir}/%{name}/program/gengal
 %attr(755,root,root) %{_libdir}/%{name}/program/gengal.bin
-%attr(755,root,root) %{_libdir}/%{name}/program/hatchwindowfactory.uno.so
-%attr(755,root,root) %{_libdir}/%{name}/program/i18npool.uno.so
-%attr(755,root,root) %{_libdir}/%{name}/program/i18nsearch.uno.so
 %attr(755,root,root) %{_libdir}/%{name}/program/java-set-classpath
-%attr(755,root,root) %{_libdir}/%{name}/program/ldapbe2.uno.so
 %attr(755,root,root) %{_libdir}/%{name}/program/libacclo.so
 %attr(755,root,root) %{_libdir}/%{name}/program/libavmediagst*.so
 %attr(755,root,root) %{_libdir}/%{name}/program/libavmedialo.so
@@ -3047,7 +3025,6 @@ fi
 %attr(755,root,root) %{_libdir}/%{name}/program/libchartcontrollerlo.so
 %attr(755,root,root) %{_libdir}/%{name}/program/libchartcorelo.so
 %attr(755,root,root) %{_libdir}/%{name}/program/libcollator_data.so
-%attr(755,root,root) %{_libdir}/%{name}/program/libcomphelpgcc3.so
 %attr(755,root,root) %{_libdir}/%{name}/program/libcppcanvaslo.so
 %attr(755,root,root) %{_libdir}/%{name}/program/libctllo.so
 %attr(755,root,root) %{_libdir}/%{name}/program/libcuilo.so
@@ -3096,9 +3073,6 @@ fi
 %attr(755,root,root) %{_libdir}/%{name}/program/libhelplinkerlo.so
 %{!?with_system_hunspell:%attr(755,root,root) %{_libdir}/%{name}/program/libhunspell.so}
 %attr(755,root,root) %{_libdir}/%{name}/program/libhyphenlo.so
-%attr(755,root,root) %{_libdir}/%{name}/program/libi18nisolang1gcc3.so
-#%attr(755,root,root) %{_libdir}/%{name}/program/libi18nregexplo.so
-%attr(755,root,root) %{_libdir}/%{name}/program/libi18nutilgcc3.so
 %attr(755,root,root) %{_libdir}/%{name}/program/libicdlo.so
 %attr(755,root,root) %{_libdir}/%{name}/program/libicglo.so
 %attr(755,root,root) %{_libdir}/%{name}/program/libidxlo.so
@@ -3148,7 +3122,6 @@ fi
 %attr(755,root,root) %{_libdir}/%{name}/program/libsdfiltlo.so
 %attr(755,root,root) %{_libdir}/%{name}/program/libsdlo.so
 %attr(755,root,root) %{_libdir}/%{name}/program/libsduilo.so
-%attr(755,root,root) %{_libdir}/%{name}/program/losessioninstall.uno.so
 %attr(755,root,root) %{_libdir}/%{name}/program/libsfxlo.so
 %attr(755,root,root) %{_libdir}/%{name}/program/libsofficeapp.so
 %attr(755,root,root) %{_libdir}/%{name}/program/libsotlo.so
@@ -3170,7 +3143,6 @@ fi
 %attr(755,root,root) %{_libdir}/%{name}/program/libtllo.so
 %attr(755,root,root) %{_libdir}/%{name}/program/libtvhlp1.so
 %attr(755,root,root) %{_libdir}/%{name}/program/libucb1.so
-%attr(755,root,root) %{_libdir}/%{name}/program/libucbhelper4gcc3.so
 %attr(755,root,root) %{_libdir}/%{name}/program/libucpchelp1.so
 %attr(755,root,root) %{_libdir}/%{name}/program/libucpdav1.so
 %attr(755,root,root) %{_libdir}/%{name}/program/libucpfile1.so
@@ -3202,35 +3174,18 @@ fi
 %attr(755,root,root) %{_libdir}/%{name}/program/libxsltdlglo.so
 %attr(755,root,root) %{_libdir}/%{name}/program/libxsltfilterlo.so
 %attr(755,root,root) %{_libdir}/%{name}/program/libxstor.so
-%attr(755,root,root) %{_libdir}/%{name}/program/localebe1.uno.so
-%attr(755,root,root) %{_libdir}/%{name}/program/mtfrenderer.uno.so
-%attr(755,root,root) %{_libdir}/%{name}/program/migrationoo2.uno.so
-%attr(755,root,root) %{_libdir}/%{name}/program/migrationoo3.uno.so
-%attr(755,root,root) %{_libdir}/%{name}/program/msforms.uno.so
 %attr(755,root,root) %{_libdir}/%{name}/program/open-url
 %attr(755,root,root) %{_libdir}/%{name}/program/oosplash
 %attr(755,root,root) %{_libdir}/%{name}/program/pagein*
-%attr(755,root,root) %{_libdir}/%{name}/program/passwordcontainer.uno.so
 %attr(755,root,root) %{_libdir}/%{name}/program/pluginapp.bin
 ## seems to be exactly the same as in -ure
 #%attr(755,root,root) %{_libdir}/%{name}/program/regcomp
 #%attr(755,root,root) %{_libdir}/%{name}/program/regcomp.bin
 ##
 %attr(755,root,root) %{_libdir}/%{name}/program/senddoc
-%attr(755,root,root) %{_libdir}/%{name}/program/simplecanvas.uno.so
-%attr(755,root,root) %{_libdir}/%{name}/program/slideshow.uno.so
 %attr(755,root,root) %{_libdir}/%{name}/program/spadmin.bin
-%attr(755,root,root) %{_libdir}/%{name}/program/stringresource*.uno.so
-%attr(755,root,root) %{_libdir}/%{name}/program/syssh.uno.so
-%attr(755,root,root) %{_libdir}/%{name}/program/ucpcmis1.uno.so
-%attr(755,root,root) %{_libdir}/%{name}/program/ucpexpand1.uno.so
-%attr(755,root,root) %{_libdir}/%{name}/program/ucpext.uno.so
-%attr(755,root,root) %{_libdir}/%{name}/program/ucptdoc1.uno.so
-%attr(755,root,root) %{_libdir}/%{name}/program/updatefeed.uno.so
 %attr(755,root,root) %{_libdir}/%{name}/program/uri-encode
 %attr(755,root,root) %{_libdir}/%{name}/program/ui-previewer
-%attr(755,root,root) %{_libdir}/%{name}/program/vbaevents*.uno.so
-%attr(755,root,root) %{_libdir}/%{name}/program/vclcanvas.uno.so
 
 %if %{with java}
 %attr(755,root,root) %{_libdir}/%{name}/program/libhsqldb.so
@@ -3263,7 +3218,6 @@ fi
 %{_libdir}/%{name}/program/classes/XMergeBridge.jar
 #%{_libdir}/%{name}/program/classes/XSLTFilter.jar
 #%{_libdir}/%{name}/program/classes/XSLTValidate.jar
-%{_libdir}/%{name}/program/classes/agenda.jar
 %{_libdir}/%{name}/program/classes/commonwizards.jar
 #%{_libdir}/%{name}/program/classes/fax.jar
 %{_libdir}/%{name}/program/classes/form.jar
@@ -3278,7 +3232,6 @@ fi
 %{!?with_system_xalan:%{_libdir}/%{name}/program/classes/serializer.jar}
 %{_libdir}/%{name}/program/classes/table.jar
 %{_libdir}/%{name}/program/classes/unoil.jar
-%{_libdir}/%{name}/program/classes/web.jar
 %{!?with_system_xalan:%{_libdir}/%{name}/program/classes/xalan.jar}
 %{_libdir}/%{name}/program/classes/xmerge.jar
 %{_libdir}/%{name}/program/services/scriptproviderforbeanshell.rdb
@@ -3486,7 +3439,6 @@ fi
 
 %dir %{_datadir}/%{name}/readmes
 %{_datadir}/%{name}/readmes/README_en-US
-%{_libdir}/%{name}/share/config/images_brand.zip
 %dir %{_libdir}/%{name}/share/extensions
 %{_libdir}/%{name}/share/extensions/package.txt
 
@@ -3569,7 +3521,6 @@ fi
 %{_libdir}/%{name}/share/config/soffice.cfg/modules/dbtdata/menubar
 %{_libdir}/%{name}/share/config/soffice.cfg/modules/dbtdata/toolbar
 %{_libdir}/%{name}/share/registry/base.xcd
-%{_datadir}/%{name}/help/en/sdatabase.*
 
 %files calc
 %defattr(644,root,root,755)
@@ -3580,7 +3531,6 @@ fi
 %{_desktopdir}/libreoffice-calc.desktop
 %{_iconsdir}/hicolor/*/apps/libreoffice-calc.png
 %{_iconsdir}/hicolor/*/apps/libreoffice-calc.svg
-%{_datadir}/%{name}/help/en/scalc.*
 %attr(755,root,root) %{_libdir}/%{name}/program/libanalysislo.so
 %attr(755,root,root) %{_libdir}/%{name}/program/libcalclo.so
 %attr(755,root,root) %{_libdir}/%{name}/program/libdatelo.so
@@ -3589,7 +3539,6 @@ fi
 %attr(755,root,root) %{_libdir}/%{name}/program/libsclo.so
 %attr(755,root,root) %{_libdir}/%{name}/program/libscuilo.so
 %attr(755,root,root) %{_libdir}/%{name}/program/libsolverlo.so
-%attr(755,root,root) %{_libdir}/%{name}/program/vbaobj.uno.so
 %{_libdir}/%{name}/program/resource/analysisen-US.res
 %{_libdir}/%{name}/program/resource/dateen-US.res
 %{_libdir}/%{name}/program/resource/pricingen-US.res
@@ -3611,7 +3560,6 @@ fi
 %{_desktopdir}/libreoffice-draw.desktop
 %{_iconsdir}/hicolor/*/apps/libreoffice-draw.png
 %{_iconsdir}/hicolor/*/apps/libreoffice-draw.svg
-%{_datadir}/%{name}/help/en/sdraw.*
 %{_libdir}/%{name}/share/config/soffice.cfg/modules/sdraw/menubar
 %{_libdir}/%{name}/share/config/soffice.cfg/modules/sdraw/statusbar
 %{_libdir}/%{name}/share/config/soffice.cfg/modules/sdraw/toolbar
@@ -3636,13 +3584,11 @@ fi
 %attr(755,root,root) %{_libdir}/%{name}/program/libt602filterlo.so
 %attr(755,root,root) %{_libdir}/%{name}/program/libwpftwriterlo.so
 %attr(755,root,root) %{_libdir}/%{name}/program/libwriterfilterlo.so
-%attr(755,root,root) %{_libdir}/%{name}/program/vbaswobj.uno.so
 %attr(755,root,root) %{_libdir}/%{name}/program/swriter
 %{_mandir}/man1/lowriter.1
 %{_desktopdir}/libreoffice-writer.desktop
 %{_iconsdir}/hicolor/*/apps/libreoffice-writer.png
 %{_iconsdir}/hicolor/*/apps/libreoffice-writer.svg
-%{_datadir}/%{name}/help/en/swriter.*
 %{_libdir}/%{name}/program/resource/t602filteren-US.res
 %{_libdir}/%{name}/share/config/soffice.cfg/modules/sbibliography
 %{_libdir}/%{name}/share/config/soffice.cfg/modules/swriter/menubar
@@ -3657,15 +3603,12 @@ fi
 %attr(755,root,root) %{_bindir}/loimpress
 %attr(755,root,root) %{_bindir}/ooimpress
 %attr(755,root,root) %{_libdir}/%{name}/program/simpress
-%attr(755,root,root) %{_libdir}/%{name}/program/OGLTrans.uno.so
 %attr(755,root,root) %{_libdir}/%{name}/program/libanimcorelo.so
 %attr(755,root,root) %{_libdir}/%{name}/program/libplaceware*.so
-%attr(755,root,root) %{_libdir}/%{name}/program/PresenterScreen.uno.so
 %{_mandir}/man1/loimpress.1
 %{_desktopdir}/libreoffice-impress.desktop
 %{_iconsdir}/hicolor/*/apps/libreoffice-impress.png
 %{_iconsdir}/hicolor/*/apps/libreoffice-impress.svg
-%{_datadir}/%{name}/help/en/simpress.*
 %{_libdir}/%{name}/share/config/soffice.cfg/simpress
 %{_libdir}/%{name}/share/config/soffice.cfg/modules/simpress/menubar
 %{_libdir}/%{name}/share/config/soffice.cfg/modules/simpress/statusbar
@@ -3683,7 +3626,6 @@ fi
 %{_desktopdir}/libreoffice-math.desktop
 %{_iconsdir}/hicolor/*/apps/libreoffice-math.png
 %{_iconsdir}/hicolor/*/apps/libreoffice-math.svg
-%{_datadir}/%{name}/help/en/smath.*
 %attr(755,root,root) %{_libdir}/%{name}/program/libsmdlo.so
 %attr(755,root,root) %{_libdir}/%{name}/program/libsmlo.so
 %attr(755,root,root) %{_libdir}/%{name}/program/smath
@@ -3720,19 +3662,10 @@ fi
 %if %{with java}
 %files javafilter
 %defattr(644,root,root,755)
-%{_libdir}/%{name}/program/classes/pexcel.jar
-%{_libdir}/%{name}/program/classes/pocketword.jar
-%{_libdir}/%{name}/program/classes/aportisdoc.jar
-%{_libdir}/%{name}/share/registry/palm.xcd
-%{_libdir}/%{name}/share/registry/pocketexcel.xcd
-%{_libdir}/%{name}/share/registry/pocketword.xcd
-%{_desktopdir}/libreoffice-javafilter.desktop
 %endif
 
 %files postgresql
 %defattr(644,root,root,755)
-%attr(755,root,root) %{_libdir}/%{name}/program/postgresql-sdbc.uno.so
-%attr(755,root,root) %{_libdir}/%{name}/program/postgresql-sdbc-impl.uno.so
 %{_libdir}/%{name}/program/postgresql-sdbc.ini
 %{_libdir}/%{name}/program/services/postgresql-sdbc.rdb
 %{_libdir}/%{name}/share/registry/postgresqlsdbc.xcd
@@ -3742,8 +3675,6 @@ fi
 %dir %{_libdir}/%{name}
 %dir %{_libdir}/%{name}/ure
 %dir %{_libdir}/%{name}/ure/bin
-%attr(755,root,root) %{_libdir}/%{name}/ure/bin/regcomp
-%attr(755,root,root) %{_libdir}/%{name}/ure/bin/regcomp.bin
 %attr(755,root,root) %{_libdir}/%{name}/ure/bin/regmerge
 %attr(755,root,root) %{_libdir}/%{name}/ure/bin/regview
 %attr(755,root,root) %{_libdir}/%{name}/ure/bin/startup.sh
@@ -3769,7 +3700,6 @@ fi
 %attr(755,root,root) %{_libdir}/%{name}/ure/lib/uuresolver.uno.so
 %attr(755,root,root) %{_libdir}/%{name}/ure/lib/liblog_uno_uno.so
 %attr(755,root,root) %{_libdir}/%{name}/ure/lib/libsal_textenc.so
-%attr(755,root,root) %{_libdir}/%{name}/ure/lib/libstore.so.3
 %attr(755,root,root) %{_libdir}/%{name}/ure/lib/libsunjavaplugin.so
 %attr(755,root,root) %{_libdir}/%{name}/ure/lib/libuno_cppu.so.3
 %attr(755,root,root) %{_libdir}/%{name}/ure/lib/libuno_cppuhelpergcc3.so.3
@@ -3779,9 +3709,6 @@ fi
 %attr(755,root,root) %{_libdir}/%{name}/ure/lib/stocservices.uno.so
 %attr(755,root,root) %{_libdir}/%{name}/ure/lib/invocation.uno.so
 %attr(755,root,root) %{_libdir}/%{name}/ure/lib/libgcc3_uno.so
-%attr(755,root,root) %{_libdir}/%{name}/ure/lib/libjvmaccessgcc3.so.3
-%attr(755,root,root) %{_libdir}/%{name}/ure/lib/libjvmfwk.so.3
-%attr(755,root,root) %{_libdir}/%{name}/ure/lib/libreg.so.3
 %attr(755,root,root) %{_libdir}/%{name}/ure/lib/binaryurp.uno.so
 %attr(755,root,root) %{_libdir}/%{name}/ure/lib/libxmlreader.so
 %{_libdir}/%{name}/ure/lib/jvmfwk3rc
@@ -3815,7 +3742,6 @@ fi
 # -f script-provider-for-python.lang
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_libdir}/%{name}/program/libpyuno.so
-%attr(755,root,root) %{_libdir}/%{name}/program/pythonloader.uno.so
 %attr(755,root,root) %{_libdir}/%{name}/program/pyuno.so
 %{_libdir}/%{name}/program/pythonloader.unorc
 %{_libdir}/%{name}/program/officehelper.py
@@ -3859,7 +3785,6 @@ fi
 %files pdfimport
 # -f pdfimport.lang
 %defattr(644,root,root,755)
-%{_libdir}/%{name}/program/pdfimport.uno.so
 %{_libdir}/%{name}/program/xpdfimport
 %{_libdir}/%{name}/share/registry/pdfimport.xcd
 %{_libdir}/%{name}/share/xpdfimport
@@ -3874,19 +3799,9 @@ fi
 %{_libdir}/%{name}/share/extensions/presentation-minimizer/description.xml
 %{_libdir}/%{name}/share/extensions/presentation-minimizer/registr*
 
-%files report-builder -f report-builder.lang
+#%files report-builder -f report-builder.lang
+%files report-builder
 %defattr(644,root,root,755)
-%dir %{_libdir}/%{name}/share/extensions/report-builder
-%{_libdir}/%{name}/share/extensions/report-builder/META-INF
-%{_libdir}/%{name}/share/extensions/report-builder/images
-%{_libdir}/%{name}/share/extensions/report-builder/registration
-%{_libdir}/%{name}/share/extensions/report-builder/registry
-%{_libdir}/%{name}/share/extensions/report-builder/template
-#%{_libdir}/%{name}/share/extensions/report-builder/THIRDPARTYREADMELICENSE.html
-%{_libdir}/%{name}/share/extensions/report-builder/components.rdb
-%{_libdir}/%{name}/share/extensions/report-builder/description.xml
-%{_libdir}/%{name}/share/extensions/report-builder/readme*
-%{_libdir}/%{name}/share/extensions/report-builder/*.jar
 
 %files wiki-publisher -f wiki-publisher.lang
 %defattr(644,root,root,755)
