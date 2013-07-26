@@ -2781,10 +2781,6 @@ if [ ! -f installed.stamp ]; then
 		ln -s lo$a $RPM_BUILD_ROOT%{_bindir}/oo$a
 	done
 
-	# remove printeradmin .desktop file and icons
-	%{__rm} $RPM_BUILD_ROOT%{_iconsdir}/hicolor/*/apps/libreoffice-printeradmin.png \
-		$RPM_BUILD_ROOT%{_desktopdir}/libreoffice-printeradmin.desktop
-
 	touch installed.stamp
 fi
 
@@ -3526,17 +3522,14 @@ fi
 %files libs-kde
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_libdir}/%{name}/program/kde-open-url
-%attr(755,root,root) %{_libdir}/%{name}/program/kde4be1.uno.so
 %attr(755,root,root) %{_libdir}/%{name}/program/libvclplug_kde4*.so
 %endif
 
 %files libs-gtk
 %defattr(644,root,root,755)
-%attr(755,root,root) %{_libdir}/%{name}/program/gconfbe1.uno.so
 %attr(755,root,root) %{_libdir}/%{name}/program/gnome-open-url
 %attr(755,root,root) %{_libdir}/%{name}/program/gnome-open-url.bin
 %attr(755,root,root) %{_libdir}/%{name}/program/libvclplug_gtk*.so
-%attr(755,root,root) %{_libdir}/%{name}/program/ucpgio1.uno.so
 %{_libdir}/%{name}/share/registry/gnome.xcd
 
 %files base
