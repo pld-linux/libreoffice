@@ -223,13 +223,11 @@ Requires:	%{name}-draw = %{version}-%{release}
 Requires:	%{name}-emailmerge = %{version}-%{release}
 Requires:	%{name}-graphicfilter = %{version}-%{release}
 Requires:	%{name}-impress = %{version}-%{release}
-%{?with_java:Requires:	%{name}-javafilter = %{version}-%{release}}
 Requires:	%{name}-math = %{version}-%{release}
 Requires:	%{name}-pdfimport = %{version}-%{release}
 Requires:	%{name}-postgresql = %{version}-%{release}
 Requires:	%{name}-presentation-minimizer = %{version}-%{release}
 Requires:	%{name}-pyuno = %{version}-%{release}
-Requires:	%{name}-report-builder = %{version}-%{release}
 Requires:	%{name}-web = %{version}-%{release}
 Requires:	%{name}-wiki-publisher = %{version}-%{release}
 Requires:	%{name}-writer = %{version}-%{release}
@@ -334,6 +332,8 @@ Requires:	sed
 %{?with_system_xalan:Requires:	xalan-j}
 #Suggests:	chkfontpath
 Obsoletes:	libreoffice-binfilter < 4.0.0.0
+Obsoletes:	libreoffice-report-builder < 4.1.0.0
+Obsoletes:	libreoffice-javafilter < 4.1.0.0
 Obsoletes:	libreoffice-i18n-kid
 Obsoletes:	libreoffice-i18n-ky
 Obsoletes:	libreoffice-i18n-ms
@@ -439,17 +439,6 @@ Requires:	%{name}-impress = %{version}-%{release}
 The Presentation Minimizer is used to reduce the file size of the
 current presentation. Images will be compressed, and data that is no
 longer needed will be removed.
-
-%package report-builder
-Summary:	Create database reports from LibreOffice
-Group:		X11/Applications
-Requires:	%{name}-base = %{version}-%{release}
-Requires:	java-commons-logging
-
-%description report-builder
-Creates database reports from LibreOffice databases. The report
-builder can define group and page headers as well as group, page
-footers and calculation fields to accomplish complex database reports.
 
 %package wiki-publisher
 Summary:	Create Wiki articles on MediaWiki servers with LibreOffice
@@ -625,22 +614,6 @@ xhtml export transforms. Install this to enable docbook export.
 Moduł xsltfilter dla LibreOffice, udostępnia dodatkowe przekształcenia
 wyjściowe dla formatów docbook i xhtml. Jest potrzebny do eksportu do
 docbooka.
-
-%package javafilter
-Summary:	Extra javafilter module for LibreOffice
-Summary(pl.UTF-8):	Dodatkowy moduł javafilter dla LibreOffice
-Group:		X11/Applications
-Requires(post,postun):	desktop-file-utils
-Requires:	%{name}-core = %{version}-%{release}
-Obsoletes:	openoffice.org-javafilter
-
-%description javafilter
-javafilter module for LibreOffice, provides additional aportisdoc,
-Pocket Excel and Pocket Word import filters.
-
-%description javafilter -l pl.UTF-8
-Moduł javafilter dla LibreOffice, udostępnia dodatkowe filtry importu
-aportisdoc, Pocket Excel i Pocket Word.
 
 %package postgresql
 Summary:	PostgreSQL connector for LibreOffice
@@ -2528,6 +2501,17 @@ bash-completion for LibreOffice.
 %description -n bash-completion-%{name} -l pl.UTF-8
 bashowe uzupełnianie nazw dla LibreOffice.
 
+%package glade
+Summary:	Support for creating LibreOffice dialogs in glade
+Group:		Development/Libraries
+Requires:	%{name}-core = %{version}-%{release}
+Requires:	libgladeui
+
+%description glade
+libreoffice-glade contains a catalog of LibreOffice-specific widgets
+for glade and ui-previewer tool to check the visual appearance of
+dialogs.
+
 %prep
 %setup -q -n %{name}-%{version} -a1 -a2 -a3
 
@@ -2856,7 +2840,6 @@ find_lang() {
 		grep "/soffice.cfg/modules/[^/]*/ui/res/${lang}/" ${lfile} >> ${langfn}.lang || :
 
 		for e in presentation-minimizer \
-				report-builder \
 				script-provider-for-python \
 				wiki-publisher \
 				nlpsolver ; do
@@ -2960,12 +2943,6 @@ rm -rf $RPM_BUILD_ROOT
 %update_desktop_database_postun
 %update_icon_cache hicolor
 
-%post javafilter
-%update_desktop_database_post
-
-%postun javafilter
-%update_desktop_database_postun
-
 %post -n browser-plugin-%{name}
 %update_browser_plugins
 
@@ -3011,6 +2988,40 @@ fi
 %{_libdir}/%{name}/presets/psprint
 
 %dir %{_libdir}/%{name}/program
+%attr(755,root,root) %{_libdir}/%{name}/program/libbasprovlo.so
+%attr(755,root,root) %{_libdir}/%{name}/program/libcairocanvaslo.so
+%attr(755,root,root) %{_libdir}/%{name}/program/libcanvasfactorylo.so
+%attr(755,root,root) %{_libdir}/%{name}/program/libcmdmaillo.so
+%attr(755,root,root) %{_libdir}/%{name}/program/libconfigmgrlo.so
+%attr(755,root,root) %{_libdir}/%{name}/program/libdesktopbe1lo.so
+%attr(755,root,root) %{_libdir}/%{name}/program/libdlgprovlo.so
+%attr(755,root,root) %{_libdir}/%{name}/program/libexpwraplo.so
+%attr(755,root,root) %{_libdir}/%{name}/program/libfastsaxlo.so
+%attr(755,root,root) %{_libdir}/%{name}/program/libfpickerlo.so
+%attr(755,root,root) %{_libdir}/%{name}/program/libfps_officelo.so
+%attr(755,root,root) %{_libdir}/%{name}/program/libfsstoragelo.so
+%attr(755,root,root) %{_libdir}/%{name}/program/libhatchwindowfactorylo.so
+%attr(755,root,root) %{_libdir}/%{name}/program/libi18npoollo.so
+%attr(755,root,root) %{_libdir}/%{name}/program/libi18nsearchlo.so
+%attr(755,root,root) %{_libdir}/%{name}/program/libldapbe2lo.so
+%attr(755,root,root) %{_libdir}/%{name}/program/liblosessioninstalllo.so
+%attr(755,root,root) %{_libdir}/%{name}/program/liblocalebe1lo.so
+%attr(755,root,root) %{_libdir}/%{name}/program/libmtfrendererlo.so
+%attr(755,root,root) %{_libdir}/%{name}/program/libmigrationoo2lo.so
+%attr(755,root,root) %{_libdir}/%{name}/program/libmigrationoo3lo.so
+%attr(755,root,root) %{_libdir}/%{name}/program/libmsformslo.so
+%attr(755,root,root) %{_libdir}/%{name}/program/libpasswordcontainerlo.so
+%attr(755,root,root) %{_libdir}/%{name}/program/libsimplecanvaslo.so
+%attr(755,root,root) %{_libdir}/%{name}/program/libslideshowlo.so
+%attr(755,root,root) %{_libdir}/%{name}/program/libstringresourcelo.so
+%attr(755,root,root) %{_libdir}/%{name}/program/libsysshlo.so
+%attr(755,root,root) %{_libdir}/%{name}/program/libucpcmis1lo.so
+%attr(755,root,root) %{_libdir}/%{name}/program/libucpexpand1lo.so
+%attr(755,root,root) %{_libdir}/%{name}/program/libucpextlo.so
+%attr(755,root,root) %{_libdir}/%{name}/program/libucptdoc1lo.so
+%attr(755,root,root) %{_libdir}/%{name}/program/libupdatefeedlo.so
+%attr(755,root,root) %{_libdir}/%{name}/program/libvbaeventslo.so
+%attr(755,root,root) %{_libdir}/%{name}/program/libvclcanvaslo.so
 %attr(755,root,root) %{_libdir}/%{name}/program/cde-open-url
 %attr(755,root,root) %{_libdir}/%{name}/program/gengal
 %attr(755,root,root) %{_libdir}/%{name}/program/gengal.bin
@@ -3075,6 +3086,8 @@ fi
 %attr(755,root,root) %{_libdir}/%{name}/program/libhelplinkerlo.so
 %{!?with_system_hunspell:%attr(755,root,root) %{_libdir}/%{name}/program/libhunspell.so}
 %attr(755,root,root) %{_libdir}/%{name}/program/libhyphenlo.so
+%attr(755,root,root) %{_libdir}/%{name}/program/libi18nlangtag.so
+%attr(755,root,root) %{_libdir}/%{name}/program/libi18nutil.so
 %attr(755,root,root) %{_libdir}/%{name}/program/libicdlo.so
 %attr(755,root,root) %{_libdir}/%{name}/program/libicglo.so
 %attr(755,root,root) %{_libdir}/%{name}/program/libidxlo.so
@@ -3145,6 +3158,7 @@ fi
 %attr(755,root,root) %{_libdir}/%{name}/program/libtllo.so
 %attr(755,root,root) %{_libdir}/%{name}/program/libtvhlp1.so
 %attr(755,root,root) %{_libdir}/%{name}/program/libucb1.so
+%attr(755,root,root) %{_libdir}/%{name}/program/libucbhelper.so
 %attr(755,root,root) %{_libdir}/%{name}/program/libucpchelp1.so
 %attr(755,root,root) %{_libdir}/%{name}/program/libucpdav1.so
 %attr(755,root,root) %{_libdir}/%{name}/program/libucpfile1.so
@@ -3164,6 +3178,7 @@ fi
 %attr(755,root,root) %{_libdir}/%{name}/program/libxmlfalo.so
 %attr(755,root,root) %{_libdir}/%{name}/program/libxmlfdlo.so
 %attr(755,root,root) %{_libdir}/%{name}/program/libxmlscriptlo.so
+%attr(755,root,root) %{_libdir}/%{name}/program/libcomphelper.so
 ## maybe external is possible?
 # - external broken in 3.0.1
 ###%attr(755,root,root) %{_libdir}/%{name}/program/libxmlsec1*.so
@@ -3187,7 +3202,6 @@ fi
 %attr(755,root,root) %{_libdir}/%{name}/program/senddoc
 %attr(755,root,root) %{_libdir}/%{name}/program/spadmin.bin
 %attr(755,root,root) %{_libdir}/%{name}/program/uri-encode
-%attr(755,root,root) %{_libdir}/%{name}/program/ui-previewer
 
 %if %{with java}
 %attr(755,root,root) %{_libdir}/%{name}/program/libhsqldb.so
@@ -3213,6 +3227,8 @@ fi
 
 %if %{with java}
 %dir %{_libdir}/%{name}/program/classes
+%{_libdir}/%{name}/program/classes/reportbuilder.jar
+%{_libdir}/%{name}/program/classes/reportbuilderwizard.jar
 %{_libdir}/%{name}/program/classes/ScriptFramework.jar
 %{_libdir}/%{name}/program/classes/ScriptProviderForBeanShell.jar
 %{_libdir}/%{name}/program/classes/ScriptProviderForJavaScript.jar
@@ -3294,6 +3310,8 @@ fi
 %{_libdir}/%{name}/program/tde-open-url
 
 %dir %{_libdir}/%{name}/share
+%dir %{_libdir}/%{name}/share/labels
+%{_libdir}/%{name}/share/labels/labels.xml
 %dir %{_libdir}/%{name}/share/Scripts
 %{_libdir}/%{name}/share/Scripts/beanshell
 %{_libdir}/%{name}/share/Scripts/javascript
@@ -3317,6 +3335,9 @@ fi
 %dir %{_libdir}/%{name}/share/config/soffice.cfg/cui
 %{_libdir}/%{name}/share/config/soffice.cfg/cui/ui
 %exclude %{_libdir}/%{name}/share/config/soffice.cfg/cui/ui/res/*
+%dir %{_libdir}/%{name}/share/config/soffice.cfg/dbaccess
+%{_libdir}/%{name}/share/config/soffice.cfg/dbaccess/ui
+%exclude %{_libdir}/%{name}/share/config/soffice.cfg/dbaccess/ui/res/*
 %dir %{_libdir}/%{name}/share/config/soffice.cfg/desktop
 %{_libdir}/%{name}/share/config/soffice.cfg/desktop/ui
 %exclude %{_libdir}/%{name}/share/config/soffice.cfg/desktop/ui/res/*
@@ -3356,6 +3377,9 @@ fi
 %{_libdir}/%{name}/share/config/soffice.cfg/modules/swxform/menubar
 %{_libdir}/%{name}/share/config/soffice.cfg/modules/swxform/statusbar
 %{_libdir}/%{name}/share/config/soffice.cfg/modules/swxform/toolbar
+%dir %{_libdir}/%{name}/share/config/soffice.cfg/spa
+%{_libdir}/%{name}/share/config/soffice.cfg/spa/ui
+%exclude %{_libdir}/%{name}/share/config/soffice.cfg/spa/ui/res/*
 %dir %{_libdir}/%{name}/share/config/soffice.cfg/sfx
 %{_libdir}/%{name}/share/config/soffice.cfg/sfx/ui
 %exclude %{_libdir}/%{name}/share/config/soffice.cfg/sfx/ui/res/*
@@ -3365,9 +3389,15 @@ fi
 %dir %{_libdir}/%{name}/share/config/soffice.cfg/svx
 %{_libdir}/%{name}/share/config/soffice.cfg/svx/ui
 %exclude %{_libdir}/%{name}/share/config/soffice.cfg/svx/ui/res/*
+%dir %{_libdir}/%{name}/share/config/soffice.cfg/uui
+%{_libdir}/%{name}/share/config/soffice.cfg/uui/ui
+%exclude %{_libdir}/%{name}/share/config/soffice.cfg/uui/ui/res/*
 %dir %{_libdir}/%{name}/share/config/soffice.cfg/vcl
 %{_libdir}/%{name}/share/config/soffice.cfg/vcl/ui
 %exclude %{_libdir}/%{name}/share/config/soffice.cfg/vcl/ui/res/*
+%dir %{_libdir}/%{name}/share/config/soffice.cfg/xmlsec
+%{_libdir}/%{name}/share/config/soffice.cfg/xmlsec/ui
+%exclude %{_libdir}/%{name}/share/config/soffice.cfg/xmlsec/ui/res/*
 %{_libdir}/%{name}/share/config/webcast
 %{_libdir}/%{name}/share/config/wizard
 %dir %{_libdir}/%{name}/share/dtd
@@ -3377,6 +3407,7 @@ fi
 %{_libdir}/%{name}/share/psprint
 
 %dir %{_libdir}/%{name}/share/registry
+%{_libdir}/%{name}/share/registry/reportbuilder.xcd
 %{_libdir}/%{name}/share/registry/Langpack-en-US.xcd
 %{_libdir}/%{name}/share/registry/lingucomponent.xcd
 %{_libdir}/%{name}/share/registry/main.xcd
@@ -3478,6 +3509,7 @@ fi
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_libdir}/%{name}/program/kde-open-url
 %attr(755,root,root) %{_libdir}/%{name}/program/libvclplug_kde4*.so
+%attr(755,root,root) %{_libdir}/%{name}/program/libkde4be1lo.so
 %endif
 
 %files libs-gtk
@@ -3485,6 +3517,8 @@ fi
 %attr(755,root,root) %{_libdir}/%{name}/program/gnome-open-url
 %attr(755,root,root) %{_libdir}/%{name}/program/gnome-open-url.bin
 %attr(755,root,root) %{_libdir}/%{name}/program/libvclplug_gtk*.so
+%attr(755,root,root) %{_libdir}/%{name}/program/libgconfbe1lo.so
+%attr(755,root,root) %{_libdir}/%{name}/program/libucpgio1lo.so
 %{_libdir}/%{name}/share/registry/gnome.xcd
 
 %files base
@@ -3542,6 +3576,7 @@ fi
 %attr(755,root,root) %{_libdir}/%{name}/program/libsclo.so
 %attr(755,root,root) %{_libdir}/%{name}/program/libscuilo.so
 %attr(755,root,root) %{_libdir}/%{name}/program/libsolverlo.so
+%attr(755,root,root) %{_libdir}/%{name}/program/libvbaobjlo.so
 %{_libdir}/%{name}/program/resource/analysisen-US.res
 %{_libdir}/%{name}/program/resource/dateen-US.res
 %{_libdir}/%{name}/program/resource/pricingen-US.res
@@ -3587,6 +3622,7 @@ fi
 %attr(755,root,root) %{_libdir}/%{name}/program/libt602filterlo.so
 %attr(755,root,root) %{_libdir}/%{name}/program/libwpftwriterlo.so
 %attr(755,root,root) %{_libdir}/%{name}/program/libwriterfilterlo.so
+%attr(755,root,root) %{_libdir}/%{name}/program/libvbaswobjlo.so
 %attr(755,root,root) %{_libdir}/%{name}/program/swriter
 %{_mandir}/man1/lowriter.1
 %{_desktopdir}/libreoffice-writer.desktop
@@ -3606,8 +3642,10 @@ fi
 %attr(755,root,root) %{_bindir}/loimpress
 %attr(755,root,root) %{_bindir}/ooimpress
 %attr(755,root,root) %{_libdir}/%{name}/program/simpress
+%attr(755,root,root) %{_libdir}/%{name}/program/libOGLTranslo.so
 %attr(755,root,root) %{_libdir}/%{name}/program/libanimcorelo.so
 %attr(755,root,root) %{_libdir}/%{name}/program/libplaceware*.so
+%attr(755,root,root) %{_libdir}/%{name}/program/libPresenterScreenlo.so
 %{_mandir}/man1/loimpress.1
 %{_desktopdir}/libreoffice-impress.desktop
 %{_iconsdir}/hicolor/*/apps/libreoffice-impress.png
@@ -3654,6 +3692,8 @@ fi
 %attr(755,root,root) %{_libdir}/%{name}/program/libflashlo.so
 %attr(755,root,root) %{_libdir}/%{name}/program/libsvgfilterlo.so
 %{_libdir}/%{name}/share/registry/graphicfilter.xcd
+%attr(755,root,root) %{_libdir}/%{name}/program/libgraphicfilterlo.so
+%{_libdir}/%{name}/program/resource/flashen-US.res
 
 %files xsltfilter
 %defattr(644,root,root,755)
@@ -3662,16 +3702,13 @@ fi
 %{_libdir}/%{name}/share/xslt/export/xhtml
 %{_desktopdir}/libreoffice-xsltfilter.desktop
 
-%if %{with java}
-%files javafilter
-%defattr(644,root,root,755)
-%endif
-
 %files postgresql
 %defattr(644,root,root,755)
 %{_libdir}/%{name}/program/postgresql-sdbc.ini
 %{_libdir}/%{name}/program/services/postgresql-sdbc.rdb
 %{_libdir}/%{name}/share/registry/postgresqlsdbc.xcd
+%attr(755,root,root) %{_libdir}/%{name}/program/libpostgresql-sdbclo.so
+%attr(755,root,root) %{_libdir}/%{name}/program/libpostgresql-sdbc-impllo.so
 
 %files ure
 %defattr(644,root,root,755)
@@ -3687,6 +3724,7 @@ fi
 %attr(755,root,root) %{_libdir}/%{name}/ure/bin/javaldx
 %endif
 %dir %{_libdir}/%{name}/ure/lib
+%attr(755,root,root) %{_libdir}/%{name}/ure/lib/libunoidl.so
 %attr(755,root,root) %{_libdir}/%{name}/ure/lib/namingservice.uno.so
 %attr(755,root,root) %{_libdir}/%{name}/ure/lib/libaffine_uno_uno.so
 %attr(755,root,root) %{_libdir}/%{name}/ure/lib/bootstrap.uno.so
@@ -3714,6 +3752,10 @@ fi
 %attr(755,root,root) %{_libdir}/%{name}/ure/lib/libgcc3_uno.so
 %attr(755,root,root) %{_libdir}/%{name}/ure/lib/binaryurp.uno.so
 %attr(755,root,root) %{_libdir}/%{name}/ure/lib/libxmlreader.so
+%attr(755,root,root) %{_libdir}/%{name}/ure/lib/libjvmaccess.so
+%attr(755,root,root) %{_libdir}/%{name}/ure/lib/libjvmfwk.so
+%attr(755,root,root) %{_libdir}/%{name}/ure/lib/libreg.so
+%attr(755,root,root) %{_libdir}/%{name}/ure/lib/libstore.so
 %{_libdir}/%{name}/ure/lib/jvmfwk3rc
 %{_libdir}/%{name}/ure/lib/unorc
 %if %{with java}
@@ -3746,6 +3788,7 @@ fi
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_libdir}/%{name}/program/libpyuno.so
 %attr(755,root,root) %{_libdir}/%{name}/program/pyuno.so
+%attr(755,root,root) %{_libdir}/%{name}/program/libpythonloaderlo.so
 %{_libdir}/%{name}/program/pythonloader.unorc
 %{_libdir}/%{name}/program/officehelper.py
 %{_libdir}/%{name}/program/pythonloader.py
@@ -3767,6 +3810,8 @@ fi
 # python wizards
 %dir %{_libdir}/%{name}/program/wizards
 %{_libdir}/%{name}/program/wizards/*.py
+%dir %{_libdir}/%{name}/program/wizards/agenda
+%{_libdir}/%{name}/program/wizards/agenda/*.py
 %dir %{_libdir}/%{name}/program/wizards/common
 %{_libdir}/%{name}/program/wizards/common/*.py
 %dir %{_libdir}/%{name}/program/wizards/document
@@ -3781,6 +3826,12 @@ fi
 %{_libdir}/%{name}/program/wizards/ui/*.py
 %dir %{_libdir}/%{name}/program/wizards/ui/event
 %{_libdir}/%{name}/program/wizards/ui/event/*.py
+%dir %{_libdir}/%{name}/program/wizards/web
+%{_libdir}/%{name}/program/wizards/web/*.py
+%dir %{_libdir}/%{name}/program/wizards/web/data
+%{_libdir}/%{name}/program/wizards/web/data/*.py
+%dir %{_libdir}/%{name}/program/wizards/web/export
+%{_libdir}/%{name}/program/wizards/web/export/*.py
 
 # samples there
 %{_libdir}/%{name}/share/Scripts/python
@@ -3791,6 +3842,7 @@ fi
 %{_libdir}/%{name}/program/xpdfimport
 %{_libdir}/%{name}/share/registry/pdfimport.xcd
 %{_libdir}/%{name}/share/xpdfimport
+%{_libdir}/%{name}/program/libpdfimportlo.so
 
 %files presentation-minimizer -f presentation-minimizer.lang
 %defattr(644,root,root,755)
@@ -3801,10 +3853,6 @@ fi
 %{_libdir}/%{name}/share/extensions/presentation-minimizer/components.rdb
 %{_libdir}/%{name}/share/extensions/presentation-minimizer/description.xml
 %{_libdir}/%{name}/share/extensions/presentation-minimizer/registr*
-
-#%files report-builder -f report-builder.lang
-%files report-builder
-%defattr(644,root,root,755)
 
 %files wiki-publisher -f wiki-publisher.lang
 %defattr(644,root,root,755)
@@ -4176,3 +4224,8 @@ fi
 %files -n bash-completion-%{name}
 %defattr(644,root,root,755)
 /etc/bash_completion.d/*
+
+%files glade
+%attr(755,root,root) %{_libdir}/%{name}/program/ui-previewer
+%dir %{_libdir}/%{name}/share/glade
+%{_libdir}/%{name}/share/glade/libreoffice-catalog.xml
