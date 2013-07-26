@@ -41,13 +41,13 @@
 %undefine	with_system_hsqldb
 %endif
 
-%define		major_ver		4.0.4
+%define		major_ver		4.1.0
 
 Summary:	LibreOffice - powerful office suite
 Summary(pl.UTF-8):	LibreOffice - potężny pakiet biurowy
 Name:		libreoffice
-Version:	%{major_ver}.2
-Release:	1
+Version:	%{major_ver}.4
+Release:	0.1
 License:	GPL/LGPL
 Group:		X11/Applications
 # we use git because released tarballs are buggy too often
@@ -55,13 +55,13 @@ Group:		X11/Applications
 # cd build
 # git checkout -b libreoffice-3-3 origin/libreoffice-3-3
 Source0:	http://download.documentfoundation.org/libreoffice/src/%{major_ver}/%{name}-%{version}.tar.xz
-# Source0-md5:	19462798bbf6e1dc75a8b12bd1775ea2
+# Source0-md5:	5311656e1b54eadd4b93f948dfd5e68e
 Source1:	http://download.documentfoundation.org/libreoffice/src/%{major_ver}/%{name}-dictionaries-%{version}.tar.xz
-# Source1-md5:	12609fdd74047287c7853fa97c14f089
+# Source1-md5:	2bbe7adab2b9bc0042c72ba60c30acc4
 Source2:	http://download.documentfoundation.org/libreoffice/src/%{major_ver}/%{name}-help-%{version}.tar.xz
-# Source2-md5:	a4d5e6504a3251b7a7fbe17216f8d6e7
+# Source2-md5:	e2cd3b63e3050771a1330fc98e41a701
 Source3:	http://download.documentfoundation.org/libreoffice/src/%{major_ver}/%{name}-translations-%{version}.tar.xz
-# Source3-md5:	0ba553eea7284abe1370157bb35bd355
+# Source3-md5:	1f4438828cbcf83c257742482dade3ef
 
 Source20:       http://dev-www.libreoffice.org/src/0168229624cfac409e766913506961a8-ucpp-1.3.2.tar.gz
 # Source20-md5:	0168229624cfac409e766913506961a8
@@ -77,9 +77,7 @@ Source25:	http://dev-www.libreoffice.org/src/a7983f859eafb2677d7ff386a023bc40-xs
 # Source25-md5:	a7983f859eafb2677d7ff386a023bc40
 
 Patch0:		%{name}-hamcrest.patch
-Patch1:		%{name}-liborcus.patch
-Patch2:		%{name}-mdds.patch
-Patch3:		liborcus-0.5.x.patch
+Patch1:		%{name}-mdds.patch
 URL:		http://www.documentfoundation.org/
 BuildRequires:	/usr/bin/getopt
 BuildRequires:	GConf2-devel
@@ -112,6 +110,7 @@ BuildRequires:	graphite2-devel
 BuildRequires:	gstreamer0.10-devel >= 0.10.0
 BuildRequires:	gstreamer0.10-plugins-base-devel >= 0.10.0
 BuildRequires:	gtk+2-devel >= 2:2.10
+BuildRequires:	harfbuzz-icu-devel
 %{?with_system_hunspell:BuildRequires:	hunspell-devel >=1.2.2}
 BuildRequires:	hyphen-devel
 %{?with_icecream:BuildRequires:	icecream}
@@ -131,6 +130,8 @@ BuildRequires:	java-servletapi
 BuildRequires:	libcmis-devel >= 0.3
 BuildRequires:	liblangtag-devel
 BuildRequires:	libmspub-devel
+BuildRequires:	libmwaw-devel
+BuildRequires:	libodfgen-devel
 BuildRequires:	liborcus-devel >= 0.4
 BuildRequires:	libvisio-devel
 BuildRequires:	libwpd-devel >= 0.9.0
@@ -162,7 +163,7 @@ BuildRequires:	libxml2-devel >= 2.0
 BuildRequires:	libxslt-devel
 BuildRequires:	libxslt-progs
 %{?with_access:%{?with_system_mdbtools:BuildRequires:	mdbtools-devel >= 0.6}}
-BuildRequires:	mdds-devel >= 0.8.0
+BuildRequires:	mdds-devel >= 0.9.0
 %{?with_mono:BuildRequires:	mono-csharp >= 1.2.3}
 %{?with_mono:BuildRequires:	mono-static >= 1.2.3}
 %{?with_system_myspell:BuildRequires:	myspell-devel}
@@ -185,7 +186,7 @@ BuildRequires:	portaudio-devel
 BuildRequires:	python3 >= 3.3
 BuildRequires:	python3-devel >= 3.3
 BuildRequires:	python3-modules >= 3.3
-BuildRequires:	redland-devel
+BuildRequires:	redland-devel >= 1.0.16
 BuildRequires:	rpm-pythonprov
 BuildRequires:	rpmbuild(macros) >= 1.660
 BuildRequires:	sablotron-devel
@@ -2531,8 +2532,6 @@ bashowe uzupełnianie nazw dla LibreOffice.
 
 %patch0 -p0
 %patch1 -p1
-%patch2 -p1
-%patch3 -p0
 
 for dir in *-%{version}; do
 	[ -f $dir/ChangeLog ] && mv $dir/ChangeLog ChangeLog-$dir
@@ -2735,27 +2734,6 @@ if [ ! -f makeinstall.stamp -o ! -d $RPM_BUILD_ROOT ]; then
 
 	%{__make} distro-pack-install \
 		DESTDIR=$RPM_BUILD_ROOT
-
-	# unpack report-builder extension
-	install -d $RPM_BUILD_ROOT%{_libdir}/%{name}/share/extensions/report-builder
-	unzip -o solver/unxlng*/bin/report-builder.oxt -d $RPM_BUILD_ROOT%{_libdir}/%{name}/share/extensions/report-builder
-
-	# unpack wiki-publisher extension
-	install -d $RPM_BUILD_ROOT%{_libdir}/%{name}/share/extensions/wiki-publisher
-	unzip -o solver/unxlng*/bin/wiki-publisher.oxt -d $RPM_BUILD_ROOT%{_libdir}/%{name}/share/extensions/wiki-publisher
-
-	# unpack presentation-minimizer extension
-	install -d $RPM_BUILD_ROOT%{_libdir}/%{name}/share/extensions/presentation-minimizer
-	unzip -o solver/unxlng*/bin/presentation-minimizer.oxt -d $RPM_BUILD_ROOT%{_libdir}/%{name}/share/extensions/presentation-minimizer
-
-	# unpack wiki-publisher extension
-	install -d $RPM_BUILD_ROOT%{_libdir}/%{name}/share/extensions/wiki-publisher
-	unzip -o solver/unxlng*/bin/wiki-publisher.oxt -d $RPM_BUILD_ROOT%{_libdir}/%{name}/share/extensions/wiki-publisher
-
-	# XXX
-	# unpack script-provider-for-python extension
-	#install -d $RPM_BUILD_ROOT%{_libdir}/%{name}/share/extensions/script-provider-for-python
-	#unzip -o solver/unxlng*/bin/script-provider-for-python.oxt -d $RPM_BUILD_ROOT%{_libdir}/%{name}/share/extensions/script-provider-for-python
 
 	# save orignal install layout
 	find $RPM_BUILD_ROOT -ls > ls.txt
