@@ -41,13 +41,13 @@
 %undefine	with_system_hsqldb
 %endif
 
-%define		major_ver		4.1.0
+%define		major_ver		4.1.2
 
 Summary:	LibreOffice - powerful office suite
 Summary(pl.UTF-8):	LibreOffice - potężny pakiet biurowy
 Name:		libreoffice
-Version:	%{major_ver}.4
-Release:	2
+Version:	%{major_ver}.3
+Release:	1
 License:	GPL/LGPL
 Group:		X11/Applications
 # we use git because released tarballs are buggy too often
@@ -55,13 +55,13 @@ Group:		X11/Applications
 # cd build
 # git checkout -b libreoffice-3-3 origin/libreoffice-3-3
 Source0:	http://download.documentfoundation.org/libreoffice/src/%{major_ver}/%{name}-%{version}.tar.xz
-# Source0-md5:	5311656e1b54eadd4b93f948dfd5e68e
+# Source0-md5:	bb2fe0056ae92e70ee8816a36dd0696c
 Source1:	http://download.documentfoundation.org/libreoffice/src/%{major_ver}/%{name}-dictionaries-%{version}.tar.xz
-# Source1-md5:	2bbe7adab2b9bc0042c72ba60c30acc4
+# Source1-md5:	8f00e7e3bf089de4b403fdb05724da5c
 Source2:	http://download.documentfoundation.org/libreoffice/src/%{major_ver}/%{name}-help-%{version}.tar.xz
-# Source2-md5:	e2cd3b63e3050771a1330fc98e41a701
+# Source2-md5:	761323fae73ef156f5cf188d8bd983f1
 Source3:	http://download.documentfoundation.org/libreoffice/src/%{major_ver}/%{name}-translations-%{version}.tar.xz
-# Source3-md5:	1f4438828cbcf83c257742482dade3ef
+# Source3-md5:	54f36cf305ae018ad685c331587d83e3
 
 Source20:       http://dev-www.libreoffice.org/src/0168229624cfac409e766913506961a8-ucpp-1.3.2.tar.gz
 # Source20-md5:	0168229624cfac409e766913506961a8
@@ -3724,46 +3724,46 @@ fi
 %attr(755,root,root) %{_libdir}/%{name}/ure/bin/javaldx
 %endif
 %dir %{_libdir}/%{name}/ure/lib
-%attr(755,root,root) %{_libdir}/%{name}/ure/lib/libunoidl.so
-%attr(755,root,root) %{_libdir}/%{name}/ure/lib/namingservice.uno.so
+%attr(755,root,root) %{_libdir}/%{name}/ure/lib/libunoidllo.so
+%attr(755,root,root) %{_libdir}/%{name}/ure/lib/libnamingservicelo.so
 %attr(755,root,root) %{_libdir}/%{name}/ure/lib/libaffine_uno_uno.so
-%attr(755,root,root) %{_libdir}/%{name}/ure/lib/bootstrap.uno.so
-%attr(755,root,root) %{_libdir}/%{name}/ure/lib/acceptor.uno.so
-%attr(755,root,root) %{_libdir}/%{name}/ure/lib/connector.uno.so
-%attr(755,root,root) %{_libdir}/%{name}/ure/lib/introspection.uno.so
-%attr(755,root,root) %{_libdir}/%{name}/ure/lib/invocadapt.uno.so
-%attr(755,root,root) %{_libdir}/%{name}/ure/lib/proxyfac.uno.so
-%attr(755,root,root) %{_libdir}/%{name}/ure/lib/reflection.uno.so
+%attr(755,root,root) %{_libdir}/%{name}/ure/lib/libbootstraplo.so
+%attr(755,root,root) %{_libdir}/%{name}/ure/lib/libacceptorlo.so
+%attr(755,root,root) %{_libdir}/%{name}/ure/lib/libconnectorlo.so
+%attr(755,root,root) %{_libdir}/%{name}/ure/lib/libintrospectionlo.so
+%attr(755,root,root) %{_libdir}/%{name}/ure/lib/libinvocadaptlo.so
+%attr(755,root,root) %{_libdir}/%{name}/ure/lib/libproxyfaclo.so
+%attr(755,root,root) %{_libdir}/%{name}/ure/lib/libreflectionlo.so
 %attr(755,root,root) %{_libdir}/%{name}/ure/lib/libunsafe_uno_uno.so
-%attr(755,root,root) %{_libdir}/%{name}/ure/lib/streams.uno.so
-%attr(755,root,root) %{_libdir}/%{name}/ure/lib/textinstream.uno.so
-%attr(755,root,root) %{_libdir}/%{name}/ure/lib/textoutstream.uno.so
-%attr(755,root,root) %{_libdir}/%{name}/ure/lib/uuresolver.uno.so
+%attr(755,root,root) %{_libdir}/%{name}/ure/lib/libstreamslo.so
+%attr(755,root,root) %{_libdir}/%{name}/ure/lib/libtextinstreamlo.so
+%attr(755,root,root) %{_libdir}/%{name}/ure/lib/libtextoutstreamlo.so
+%attr(755,root,root) %{_libdir}/%{name}/ure/lib/libuuresolverlo.so
 %attr(755,root,root) %{_libdir}/%{name}/ure/lib/liblog_uno_uno.so
-%attr(755,root,root) %{_libdir}/%{name}/ure/lib/libsal_textenc.so
-%attr(755,root,root) %{_libdir}/%{name}/ure/lib/libsunjavaplugin.so
+%attr(755,root,root) %{_libdir}/%{name}/ure/lib/libsal_textenclo.so
+%attr(755,root,root) %{_libdir}/%{name}/ure/lib/libsunjavapluginlo.so
 %attr(755,root,root) %{_libdir}/%{name}/ure/lib/libuno_cppu.so.3
 %attr(755,root,root) %{_libdir}/%{name}/ure/lib/libuno_cppuhelpergcc3.so.3
 %attr(755,root,root) %{_libdir}/%{name}/ure/lib/libuno_purpenvhelpergcc3.so.3
 %attr(755,root,root) %{_libdir}/%{name}/ure/lib/libuno_sal.so.3
 %attr(755,root,root) %{_libdir}/%{name}/ure/lib/libuno_salhelpergcc3.so.3
-%attr(755,root,root) %{_libdir}/%{name}/ure/lib/stocservices.uno.so
-%attr(755,root,root) %{_libdir}/%{name}/ure/lib/invocation.uno.so
+%attr(755,root,root) %{_libdir}/%{name}/ure/lib/libstocserviceslo.so
+%attr(755,root,root) %{_libdir}/%{name}/ure/lib/libinvocationlo.so
 %attr(755,root,root) %{_libdir}/%{name}/ure/lib/libgcc3_uno.so
-%attr(755,root,root) %{_libdir}/%{name}/ure/lib/binaryurp.uno.so
-%attr(755,root,root) %{_libdir}/%{name}/ure/lib/libxmlreader.so
-%attr(755,root,root) %{_libdir}/%{name}/ure/lib/libjvmaccess.so
-%attr(755,root,root) %{_libdir}/%{name}/ure/lib/libjvmfwk.so
-%attr(755,root,root) %{_libdir}/%{name}/ure/lib/libreg.so
-%attr(755,root,root) %{_libdir}/%{name}/ure/lib/libstore.so
+%attr(755,root,root) %{_libdir}/%{name}/ure/lib/libbinaryurplo.so
+%attr(755,root,root) %{_libdir}/%{name}/ure/lib/libxmlreaderlo.so
+%attr(755,root,root) %{_libdir}/%{name}/ure/lib/libjvmaccesslo.so
+%attr(755,root,root) %{_libdir}/%{name}/ure/lib/libjvmfwklo.so
+%attr(755,root,root) %{_libdir}/%{name}/ure/lib/libreglo.so
+%attr(755,root,root) %{_libdir}/%{name}/ure/lib/libstorelo.so
 %{_libdir}/%{name}/ure/lib/jvmfwk3rc
 %{_libdir}/%{name}/ure/lib/unorc
 %if %{with java}
 %attr(755,root,root) %{_libdir}/%{name}/ure/lib/libjava_uno.so
 %attr(755,root,root) %{_libdir}/%{name}/ure/lib/libjuh.so
 %attr(755,root,root) %{_libdir}/%{name}/ure/lib/libjuhx.so
-%attr(755,root,root) %{_libdir}/%{name}/ure/lib/javaloader.uno.so
-%attr(755,root,root) %{_libdir}/%{name}/ure/lib/javavm.uno.so
+%attr(755,root,root) %{_libdir}/%{name}/ure/lib/libjavaloaderlo.so
+%attr(755,root,root) %{_libdir}/%{name}/ure/lib/libjavavmlo.so
 %attr(755,root,root) %{_libdir}/%{name}/ure/lib/libjpipe.so
 %{_libdir}/%{name}/ure/lib/JREProperties.class
 %endif
