@@ -41,13 +41,13 @@
 %undefine	with_system_hsqldb
 %endif
 
-%define		major_ver		4.1.2
+%define		major_ver		4.1.3
 
 Summary:	LibreOffice - powerful office suite
 Summary(pl.UTF-8):	LibreOffice - potężny pakiet biurowy
 Name:		libreoffice
-Version:	%{major_ver}.3
-Release:	5
+Version:	%{major_ver}.2
+Release:	1
 License:	GPL/LGPL
 Group:		X11/Applications
 # we use git because released tarballs are buggy too often
@@ -55,13 +55,13 @@ Group:		X11/Applications
 # cd build
 # git checkout -b libreoffice-3-3 origin/libreoffice-3-3
 Source0:	http://download.documentfoundation.org/libreoffice/src/%{major_ver}/%{name}-%{version}.tar.xz
-# Source0-md5:	bb2fe0056ae92e70ee8816a36dd0696c
+# Source0-md5:	7c5248b9141df6c4844c81515a41942f
 Source1:	http://download.documentfoundation.org/libreoffice/src/%{major_ver}/%{name}-dictionaries-%{version}.tar.xz
-# Source1-md5:	8f00e7e3bf089de4b403fdb05724da5c
+# Source1-md5:	4a464980edb2cd8d6119a5495c7bd801
 Source2:	http://download.documentfoundation.org/libreoffice/src/%{major_ver}/%{name}-help-%{version}.tar.xz
-# Source2-md5:	761323fae73ef156f5cf188d8bd983f1
+# Source2-md5:	c5a692983c429a142b1c109fd28425fa
 Source3:	http://download.documentfoundation.org/libreoffice/src/%{major_ver}/%{name}-translations-%{version}.tar.xz
-# Source3-md5:	54f36cf305ae018ad685c331587d83e3
+# Source3-md5:	f5131da6395034246eb26aa94c7de8b2
 
 Source20:       http://dev-www.libreoffice.org/src/0168229624cfac409e766913506961a8-ucpp-1.3.2.tar.gz
 # Source20-md5:	0168229624cfac409e766913506961a8
@@ -78,7 +78,6 @@ Source25:	http://dev-www.libreoffice.org/src/a7983f859eafb2677d7ff386a023bc40-xs
 
 Patch0:		%{name}-hamcrest.patch
 Patch1:		%{name}-mdds.patch
-Patch2:		%{name}-md5.patch
 URL:		http://www.documentfoundation.org/
 BuildRequires:	/usr/bin/getopt
 BuildRequires:	GConf2-devel
@@ -131,7 +130,8 @@ BuildRequires:	java-servletapi
 BuildRequires:	libcmis-devel >= 0.3
 BuildRequires:	liblangtag-devel
 BuildRequires:	libmspub-devel
-BuildRequires:	libmwaw-devel
+BuildRequires:	libmwaw-devel >= 0.1.0
+BuildRequires:	libmwaw-devel < 0.2.0
 BuildRequires:	libodfgen-devel
 BuildRequires:	liborcus-devel >= 0.4
 BuildRequires:	libvisio-devel
@@ -2517,7 +2517,6 @@ dialogs.
 
 %patch0 -p0
 %patch1 -p1
-%patch2 -p1
 
 for dir in *-%{version}; do
 	[ -f $dir/ChangeLog ] && mv $dir/ChangeLog ChangeLog-$dir
