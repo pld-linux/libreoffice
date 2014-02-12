@@ -47,7 +47,7 @@ Summary:	LibreOffice - powerful office suite
 Summary(pl.UTF-8):	LibreOffice - potężny pakiet biurowy
 Name:		libreoffice
 Version:	%{major_ver}.4
-Release:	1
+Release:	2
 License:	GPL/LGPL
 Group:		X11/Applications
 # we use git because released tarballs are buggy too often
@@ -109,6 +109,7 @@ BuildRequires:	gperf
 BuildRequires:	graphite2-devel
 BuildRequires:	gstreamer0.10-devel >= 0.10.0
 BuildRequires:	gstreamer0.10-plugins-base-devel >= 0.10.0
+BuildRequires:	gtk+2-devel >= 2:2.10
 BuildRequires:	gtk+3-devel
 BuildRequires:	harfbuzz-icu-devel
 %{?with_system_hunspell:BuildRequires:	hunspell-devel >=1.2.2}
@@ -2606,7 +2607,7 @@ export PATH=$PATH:%{_libdir}/interbase/bin
 	--without-ppds \
 	--without-afms \
 	--disable-epm \
-	--disable-gtk \
+	--enable-gtk \
 	--enable-gtk3 \
 	--enable-dbus \
 	--enable-opengl \
