@@ -12,6 +12,8 @@
 %bcond_without	java		# without Java support (disables help support)
 %bcond_with	kde		# KDE L&F packages
 %bcond_without	kde4		# KDE4 L&F packages
+%bcond_without	gtk		# GTK2 L&F
+%bcond_with	gtk3		# GTK3 L&F (experimental)
 %bcond_with	mono		# enable compilation of mono bindings
 %bcond_without	mozilla		# without mozilla components
 %bcond_without	i18n        # do not create i18n packages (extra build time)
@@ -109,8 +111,8 @@ BuildRequires:	gperf
 BuildRequires:	graphite2-devel
 BuildRequires:	gstreamer0.10-devel >= 0.10.0
 BuildRequires:	gstreamer0.10-plugins-base-devel >= 0.10.0
-BuildRequires:	gtk+2-devel >= 2:2.10
-BuildRequires:	gtk+3-devel
+%{?with_gtk:BuildRequires:	gtk+2-devel >= 2:2.10}
+%{?with_gtk3:BuildRequires:	gtk+3-devel}
 BuildRequires:	harfbuzz-icu-devel
 %{?with_system_hunspell:BuildRequires:	hunspell-devel >=1.2.2}
 BuildRequires:	hyphen-devel
@@ -2607,8 +2609,8 @@ export PATH=$PATH:%{_libdir}/interbase/bin
 	--without-ppds \
 	--without-afms \
 	--disable-epm \
-	--enable-gtk \
-	--enable-gtk3 \
+	--%{?with_gtk:en}%{!?with_gtk:dis}able-gtk \
+	--%{?with_gtk3:en}%{!?with_gtk3:dis}able-gtk3 \
 	--enable-dbus \
 	--enable-opengl \
 	--with-system-openldap \
@@ -3421,12 +3423,14 @@ fi
 %attr(755,root,root) %{_libdir}/%{name}/program/libkde4be1lo.so
 %endif
 
+%if %{with gtk} || %{with gtk3}
 %files libs-gtk
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_libdir}/%{name}/program/gnome-open-url
 %attr(755,root,root) %{_libdir}/%{name}/program/gnome-open-url.bin
 %attr(755,root,root) %{_libdir}/%{name}/program/libvclplug_gtk*.so
 %attr(755,root,root) %{_libdir}/%{name}/program/libgconfbe1lo.so
+%endif
 
 %files base
 %defattr(644,root,root,755)
