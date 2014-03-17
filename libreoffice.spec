@@ -49,7 +49,7 @@ Summary:	LibreOffice - powerful office suite
 Summary(pl.UTF-8):	LibreOffice - potężny pakiet biurowy
 Name:		libreoffice
 Version:	%{major_ver}.1
-Release:	0.1
+Release:	1
 License:	GPL/LGPL
 Group:		X11/Applications
 # we use git because released tarballs are buggy too often
@@ -2940,10 +2940,12 @@ fi
 %attr(755,root,root) %{_libdir}/%{name}/program/libi18nsearchlo.so
 %attr(755,root,root) %{_libdir}/%{name}/program/libldapbe2lo.so
 %attr(755,root,root) %{_libdir}/%{name}/program/liblocalebe1lo.so
+%attr(755,root,root) %{_libdir}/%{name}/program/liblosessioninstalllo.so
 %attr(755,root,root) %{_libdir}/%{name}/program/libmtfrendererlo.so
 %attr(755,root,root) %{_libdir}/%{name}/program/libmigrationoo2lo.so
 %attr(755,root,root) %{_libdir}/%{name}/program/libmigrationoo3lo.so
 %attr(755,root,root) %{_libdir}/%{name}/program/libmsformslo.so
+%attr(755,root,root) %{_libdir}/%{name}/program/libnpsoplugin.so
 %attr(755,root,root) %{_libdir}/%{name}/program/libpasswordcontainerlo.so
 %attr(755,root,root) %{_libdir}/%{name}/program/libsimplecanvaslo.so
 %attr(755,root,root) %{_libdir}/%{name}/program/libslideshowlo.so
@@ -2952,6 +2954,7 @@ fi
 %attr(755,root,root) %{_libdir}/%{name}/program/libucpcmis1lo.so
 %attr(755,root,root) %{_libdir}/%{name}/program/libucpexpand1lo.so
 %attr(755,root,root) %{_libdir}/%{name}/program/libucpextlo.so
+%attr(755,root,root) %{_libdir}/%{name}/program/libucpgio1lo.so
 %attr(755,root,root) %{_libdir}/%{name}/program/libucptdoc1lo.so
 %attr(755,root,root) %{_libdir}/%{name}/program/libupdatefeedlo.so
 %attr(755,root,root) %{_libdir}/%{name}/program/libvbaeventslo.so
@@ -3121,6 +3124,7 @@ fi
 %attr(755,root,root) %{_libdir}/%{name}/program/libxsltdlglo.so
 %attr(755,root,root) %{_libdir}/%{name}/program/libxsltfilterlo.so
 %attr(755,root,root) %{_libdir}/%{name}/program/libxstor.so
+%attr(755,root,root) %{_libdir}/%{name}/program/nsplugin
 %attr(755,root,root) %{_libdir}/%{name}/program/open-url
 %attr(755,root,root) %{_libdir}/%{name}/program/oosplash
 %attr(755,root,root) %{_libdir}/%{name}/program/pagein*
@@ -3128,6 +3132,7 @@ fi
 %attr(755,root,root) %{_libdir}/%{name}/program/senddoc
 %attr(755,root,root) %{_libdir}/%{name}/program/spadmin.bin
 %attr(755,root,root) %{_libdir}/%{name}/program/uri-encode
+%attr(755,root,root) %{_libdir}/%{name}/program/xid-fullscreen-on-all-monitors
 
 %if %{with java}
 %attr(755,root,root) %{_libdir}/%{name}/program/libhsqldb.so
@@ -3395,6 +3400,7 @@ fi
 %{_iconsdir}/hicolor/*/apps/libreoffice-main.svg
 
 %{_desktopdir}/libreoffice-startcenter.desktop
+%{_desktopdir}/libreoffice-qstart.desktop
 %{_iconsdir}/hicolor/*/apps/libreoffice-startcenter.png
 %{_iconsdir}/hicolor/*/apps/libreoffice-startcenter.svg
 
@@ -3430,6 +3436,8 @@ fi
 %attr(755,root,root) %{_libdir}/%{name}/program/gnome-open-url.bin
 %attr(755,root,root) %{_libdir}/%{name}/program/libvclplug_gtk*.so
 %attr(755,root,root) %{_libdir}/%{name}/program/libgconfbe1lo.so
+%attr(755,root,root) %{_libdir}/%{name}/program/libqstart_gtklo.so
+%{_libdir}/%{name}/share/registry/gnome.xcd
 %endif
 
 %files base
