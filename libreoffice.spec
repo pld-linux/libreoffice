@@ -43,13 +43,13 @@
 %undefine	with_system_hsqldb
 %endif
 
-%define		major_ver		4.2.2
+%define		major_ver		4.2.5
 
 Summary:	LibreOffice - powerful office suite
 Summary(pl.UTF-8):	LibreOffice - potężny pakiet biurowy
 Name:		libreoffice
-Version:	%{major_ver}.1
-Release:	2
+Version:	%{major_ver}.2
+Release:	1
 License:	GPL/LGPL
 Group:		X11/Applications
 # we use git because released tarballs are buggy too often
@@ -57,13 +57,13 @@ Group:		X11/Applications
 # cd build
 # git checkout -b libreoffice-3-3 origin/libreoffice-3-3
 Source0:	http://download.documentfoundation.org/libreoffice/src/%{major_ver}/%{name}-%{version}.tar.xz
-# Source0-md5:	b8b00aac99c056e8908c1a89ad999f4b
+# Source0-md5:	eb44cc33bb9331db4c1b6ae0b03fff9f
 Source1:	http://download.documentfoundation.org/libreoffice/src/%{major_ver}/%{name}-dictionaries-%{version}.tar.xz
-# Source1-md5:	e01d5476336c25a02d6bfa4620f7c684
+# Source1-md5:	8ac6a48b78c34f52e8bf43f29cf14bfe
 Source2:	http://download.documentfoundation.org/libreoffice/src/%{major_ver}/%{name}-help-%{version}.tar.xz
-# Source2-md5:	3c11900dce8a5e520abc8350045b2407
+# Source2-md5:	867c10167b05ba19162b78032405524b
 Source3:	http://download.documentfoundation.org/libreoffice/src/%{major_ver}/%{name}-translations-%{version}.tar.xz
-# Source3-md5:	5ac66bd46617d00f759602c00e755ea0
+# Source3-md5:	6bcd61a3f977f78c64b1eaa13a40524c
 
 Source20:       http://dev-www.libreoffice.org/src/0168229624cfac409e766913506961a8-ucpp-1.3.2.tar.gz
 # Source20-md5:	0168229624cfac409e766913506961a8
@@ -3628,7 +3628,7 @@ fi
 %defattr(644,root,root,755)
 %{_libdir}/%{name}/program/postgresql-sdbc.ini
 %{_libdir}/%{name}/program/services/postgresql-sdbc.rdb
-%{_libdir}/%{name}/share/registry/postgresqlsdbc.xcd
+%{_libdir}/%{name}/share/registry/postgresql.xcd
 %attr(755,root,root) %{_libdir}/%{name}/program/libpostgresql-sdbclo.so
 %attr(755,root,root) %{_libdir}/%{name}/program/libpostgresql-sdbc-impllo.so
 
