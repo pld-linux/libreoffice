@@ -43,29 +43,28 @@
 %undefine	with_system_hsqldb
 %endif
 
-%define		major_ver		4.2.5
+%define		major_ver		4.3.2
 
 Summary:	LibreOffice - powerful office suite
 Summary(pl.UTF-8):	LibreOffice - potężny pakiet biurowy
 Name:		libreoffice
 Version:	%{major_ver}.2
-Release:	2
+Release:	0.1
 License:	GPL/LGPL
 Group:		X11/Applications
-# we use git because released tarballs are buggy too often
-# git clone git://anongit.freedesktop.org/git/libreoffice/build
-# cd build
-# git checkout -b libreoffice-3-3 origin/libreoffice-3-3
 Source0:	http://download.documentfoundation.org/libreoffice/src/%{major_ver}/%{name}-%{version}.tar.xz
-# Source0-md5:	eb44cc33bb9331db4c1b6ae0b03fff9f
+# Source0-md5:	86aa9cad125fec16c5cd1d9d964e1d20
 Source1:	http://download.documentfoundation.org/libreoffice/src/%{major_ver}/%{name}-dictionaries-%{version}.tar.xz
-# Source1-md5:	8ac6a48b78c34f52e8bf43f29cf14bfe
+# Source1-md5:	996ec400156194fe26d24ffbccbc5b7a
 Source2:	http://download.documentfoundation.org/libreoffice/src/%{major_ver}/%{name}-help-%{version}.tar.xz
-# Source2-md5:	867c10167b05ba19162b78032405524b
+# Source2-md5:	63a59a4c77a72856b47caf1871cfc48f
 Source3:	http://download.documentfoundation.org/libreoffice/src/%{major_ver}/%{name}-translations-%{version}.tar.xz
-# Source3-md5:	6bcd61a3f977f78c64b1eaa13a40524c
+# Source3-md5:	0236e56349006fc8fec8e7df749c13b1
 
-Source20:       http://dev-www.libreoffice.org/src/0168229624cfac409e766913506961a8-ucpp-1.3.2.tar.gz
+
+# make fetch DO_FETCH_TARBALLS=1 WGET=wget
+# but not sure if all are needed?
+Source20:	http://dev-www.libreoffice.org/src/0168229624cfac409e766913506961a8-ucpp-1.3.2.tar.gz
 # Source20-md5:	0168229624cfac409e766913506961a8
 Source21:	http://dev-www.libreoffice.org/src/17410483b5b5f267aa18b7e00b65e6e0-hsqldb_1_8_0.zip
 # Source21-md5:	17410483b5b5f267aa18b7e00b65e6e0
@@ -77,12 +76,24 @@ Source24:	http://dev-www.libreoffice.org/src/35c94d2df8893241173de1d16b6034c0-sw
 # Source24-md5:	35c94d2df8893241173de1d16b6034c0
 Source25:	http://dev-www.libreoffice.org/src/a7983f859eafb2677d7ff386a023bc40-xsltml_2.1.2.zip
 # Source25-md5:	a7983f859eafb2677d7ff386a023bc40
+Source26:	http://dev-www.libreoffice.org/src/4b87018f7fff1d054939d19920b751a0-collada2gltf-master-cb1d97788a.tar.bz2
+# Source26-md5:	4b87018f7fff1d054939d19920b751a0
+Source27:	http://dev-www.libreoffice.org/src/CoinMP-1.7.6.tgz
+# Source27-md5:	1cce53bf4b40ae29790d2c5c9f8b1129
+Source28:	http://dev-www.libreoffice.org/src/OpenCOLLADA-master-6509aa13af.tar.bz2
+# Source28-md5:	4ca8a6ef0afeefc864e9ef21b9f14bd6
+
+# put into separate spec?
+Source29:	http://dev-www.libreoffice.org/src/libgltf/libgltf-0.0.1.tar.bz2
+# Source29-md5:	03821c9c827e647fb5fedb12496e0067
 
 Patch0:		%{name}-hamcrest.patch
+Patch1:		%{name}-build.patch
 URL:		http://www.documentfoundation.org/
 BuildRequires:	/usr/bin/getopt
 BuildRequires:	Firebird-devel
 BuildRequires:	GConf2-devel
+BuildRequires:	GLM
 BuildRequires:	ImageMagick
 BuildRequires:	OpenGL-GLU-devel
 BuildRequires:	OpenGL-devel
@@ -130,19 +141,20 @@ BuildRequires:	java-junit
 BuildRequires:	java-lucene
 BuildRequires:	java-lucene-contrib
 BuildRequires:	java-servletapi
-BuildRequires:	libabw-devel
+BuildRequires:	libabw-devel >= 0.1.0
 BuildRequires:	libcmis-devel >= 0.4
 BuildRequires:	libe-book-devel >= 0.0.2
-BuildRequires:	libfreehand-devel
+BuildRequires:	libetonyek-devel >= 0.1.1
+BuildRequires:	libfreehand-devel >= 0.1.0
 BuildRequires:	liblangtag-devel
 BuildRequires:	libmspub-devel
-BuildRequires:	libmwaw-devel >= 0.2.0
-BuildRequires:	libodfgen-devel
-BuildRequires:	liborcus-devel >= 0.4
+BuildRequires:	libmwaw-devel >= 0.3.0
+BuildRequires:	libodfgen-devel >= 0.1.1
+BuildRequires:	liborcus-devel >= 0.7.0
 BuildRequires:	libvisio-devel
-BuildRequires:	libwpd-devel >= 0.9.0
-BuildRequires:	libwpg-devel >= 0.2.0
-BuildRequires:	libwps-devel >= 0.2.0
+BuildRequires:	libwpd-devel >= 0.10.0
+BuildRequires:	libwpg-devel >= 0.3.0
+BuildRequires:	libwps-devel >= 0.3.0
 BuildRequires:	lp_solve-devel
 BuildRequires:	silgraphite-devel
 %if %{with kde}
@@ -2469,6 +2481,7 @@ dialogs.
 %setup -q -n %{name}-%{version} -a1 -a2 -a3
 
 %patch0 -p0
+%patch1 -p1
 
 for dir in *-%{version}; do
 	[ -f $dir/ChangeLog ] && mv $dir/ChangeLog ChangeLog-$dir
@@ -2483,6 +2496,10 @@ ln %{SOURCE22} ext_sources
 ln %{SOURCE23} ext_sources
 ln %{SOURCE24} ext_sources
 ln %{SOURCE25} ext_sources
+ln %{SOURCE26} ext_sources
+ln %{SOURCE27} ext_sources
+ln %{SOURCE28} ext_sources
+ln %{SOURCE29} ext_sources
 :> src.downloaded
 
 %build

@@ -1,0 +1,29 @@
+--- libreoffice-4.3.2.2/configure.ac~	2014-10-09 15:00:49.000000000 +0200
++++ libreoffice-4.3.2.2/configure.ac	2014-10-09 15:12:08.242486104 +0200
+@@ -11752,10 +11752,11 @@
+     FONTFILE_LOWER="$(echo $FONTFILE | $AWK '{print tolower($0)}')"
+ 
+     TESTEXPR="'${FONTFILE_LOWER}' = '$(echo $FONT | $AWK '{print tolower($0)}').ttf'"
+-    while true ; do
+-        MAPPING="$(echo $1 | $AWK '{print tolower($0)}')"; shift
+-        test -n "$MAPPING" || break
++    MAPPING="$(echo $1 | $AWK '{print tolower($0)}')"
++    while test -n "$MAPPING"; do
+         TESTEXPR="${TESTEXPR} -o '${FONTFILE_LOWER}' = '$MAPPING-regular.ttf'"
++        shift
++        MAPPING="$(echo $1 | $AWK '{print tolower($0)}')"
+     done
+     if test $TESTEXPR
+     then
+
+--- libreoffice-4.3.2.2/configure.ac~	2014-10-09 19:45:15.000000000 +0200
++++ libreoffice-4.3.2.2/configure.ac	2014-10-09 20:04:53.352980291 +0200
+@@ -72,7 +72,7 @@
+     if test -d "$rel" ; then
+         cd "$rel" || AC_MSG_ERROR([absolute path resolution failed for "$rel".])
+         absolute_path="$(pwd)"
+-        cd - &> /dev/null
++        cd - > /dev/null 2>&1
+     else
+         AC_MSG_ERROR([Failed to resolve absolute path.  "$rel" does not exist or is not a directory.])
+     fi
