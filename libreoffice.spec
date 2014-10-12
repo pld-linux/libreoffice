@@ -2941,57 +2941,38 @@ fi
 %{_libdir}/%{name}/presets/psprint
 
 %dir %{_libdir}/%{name}/program
-%attr(755,root,root) %{_libdir}/%{name}/program/libbasprovlo.so
-%attr(755,root,root) %{_libdir}/%{name}/program/libcairocanvaslo.so
-%attr(755,root,root) %{_libdir}/%{name}/program/libcanvasfactorylo.so
-%attr(755,root,root) %{_libdir}/%{name}/program/libcmdmaillo.so
-%attr(755,root,root) %{_libdir}/%{name}/program/libconfigmgrlo.so
-%attr(755,root,root) %{_libdir}/%{name}/program/libdesktopbe1lo.so
-%attr(755,root,root) %{_libdir}/%{name}/program/libdlgprovlo.so
-%attr(755,root,root) %{_libdir}/%{name}/program/libexpwraplo.so
-%attr(755,root,root) %{_libdir}/%{name}/program/libfastsaxlo.so
-%attr(755,root,root) %{_libdir}/%{name}/program/libfps_officelo.so
-%attr(755,root,root) %{_libdir}/%{name}/program/libfsstoragelo.so
-%attr(755,root,root) %{_libdir}/%{name}/program/libhatchwindowfactorylo.so
-%attr(755,root,root) %{_libdir}/%{name}/program/libi18npoollo.so
-%attr(755,root,root) %{_libdir}/%{name}/program/libi18nsearchlo.so
-%attr(755,root,root) %{_libdir}/%{name}/program/libldapbe2lo.so
-%attr(755,root,root) %{_libdir}/%{name}/program/liblocalebe1lo.so
-%attr(755,root,root) %{_libdir}/%{name}/program/liblosessioninstalllo.so
-%attr(755,root,root) %{_libdir}/%{name}/program/libmtfrendererlo.so
-%attr(755,root,root) %{_libdir}/%{name}/program/libmigrationoo2lo.so
-%attr(755,root,root) %{_libdir}/%{name}/program/libmigrationoo3lo.so
-%attr(755,root,root) %{_libdir}/%{name}/program/libmsformslo.so
-%attr(755,root,root) %{_libdir}/%{name}/program/libnpsoplugin.so
-%attr(755,root,root) %{_libdir}/%{name}/program/libpasswordcontainerlo.so
-%attr(755,root,root) %{_libdir}/%{name}/program/libsimplecanvaslo.so
-%attr(755,root,root) %{_libdir}/%{name}/program/libslideshowlo.so
-%attr(755,root,root) %{_libdir}/%{name}/program/libstringresourcelo.so
-%attr(755,root,root) %{_libdir}/%{name}/program/libsysshlo.so
-%attr(755,root,root) %{_libdir}/%{name}/program/libucpcmis1lo.so
-%attr(755,root,root) %{_libdir}/%{name}/program/libucpexpand1lo.so
-%attr(755,root,root) %{_libdir}/%{name}/program/libucpextlo.so
-%attr(755,root,root) %{_libdir}/%{name}/program/libucpgio1lo.so
-%attr(755,root,root) %{_libdir}/%{name}/program/libucptdoc1lo.so
-%attr(755,root,root) %{_libdir}/%{name}/program/libupdatefeedlo.so
-%attr(755,root,root) %{_libdir}/%{name}/program/libvbaeventslo.so
-%attr(755,root,root) %{_libdir}/%{name}/program/libvclcanvaslo.so
+%attr(755,root,root) %{_libdir}/%{name}/program/gdbtrace
 %attr(755,root,root) %{_libdir}/%{name}/program/gengal
 %attr(755,root,root) %{_libdir}/%{name}/program/gengal.bin
-%attr(755,root,root) %{_libdir}/%{name}/program/gdbtrace
 %attr(755,root,root) %{_libdir}/%{name}/program/java-set-classpath
+%attr(755,root,root) %{_libdir}/%{name}/program/libCbc.so.3
+%attr(755,root,root) %{_libdir}/%{name}/program/libCbcSolver.so.3
+%attr(755,root,root) %{_libdir}/%{name}/program/libCgl.so.1
+%attr(755,root,root) %{_libdir}/%{name}/program/libClp.so.1
+%attr(755,root,root) %{_libdir}/%{name}/program/libCoinMP.so.1
+%attr(755,root,root) %{_libdir}/%{name}/program/libCoinUtils.so.3
+%attr(755,root,root) %{_libdir}/%{name}/program/libOsi.so.1
+%attr(755,root,root) %{_libdir}/%{name}/program/libOsiClp.so.1
 %attr(755,root,root) %{_libdir}/%{name}/program/libacclo.so
 %attr(755,root,root) %{_libdir}/%{name}/program/libavmediagst*.so
 %attr(755,root,root) %{_libdir}/%{name}/program/libavmedialo.so
+%attr(755,root,root) %{_libdir}/%{name}/program/libavmediaogl.so
 %attr(755,root,root) %{_libdir}/%{name}/program/libbasctllo.so
 %attr(755,root,root) %{_libdir}/%{name}/program/libbasebmplo.so
 %attr(755,root,root) %{_libdir}/%{name}/program/libbasegfxlo.so
+%attr(755,root,root) %{_libdir}/%{name}/program/libbasprovlo.so
 %attr(755,root,root) %{_libdir}/%{name}/program/libbiblo.so
 %attr(755,root,root) %{_libdir}/%{name}/program/libcached1.so
+%attr(755,root,root) %{_libdir}/%{name}/program/libcairocanvaslo.so
+%attr(755,root,root) %{_libdir}/%{name}/program/libcanvasfactorylo.so
 %attr(755,root,root) %{_libdir}/%{name}/program/libcanvastoolslo.so
 %attr(755,root,root) %{_libdir}/%{name}/program/libchartcontrollerlo.so
 %attr(755,root,root) %{_libdir}/%{name}/program/libchartcorelo.so
+%attr(755,root,root) %{_libdir}/%{name}/program/libchartopengllo.so
+%attr(755,root,root) %{_libdir}/%{name}/program/libcmdmaillo.so
 %attr(755,root,root) %{_libdir}/%{name}/program/libcollator_data.so
+%attr(755,root,root) %{_libdir}/%{name}/program/libcomphelper.so
+%attr(755,root,root) %{_libdir}/%{name}/program/libconfigmgrlo.so
 %attr(755,root,root) %{_libdir}/%{name}/program/libcppcanvaslo.so
 %attr(755,root,root) %{_libdir}/%{name}/program/libctllo.so
 %attr(755,root,root) %{_libdir}/%{name}/program/libcuilo.so
@@ -3007,8 +2988,10 @@ fi
 %attr(755,root,root) %{_libdir}/%{name}/program/libdeploymentgui.so
 %attr(755,root,root) %{_libdir}/%{name}/program/libdeploymentmisclo.so
 %attr(755,root,root) %{_libdir}/%{name}/program/libdesktop_detectorlo.so
+%attr(755,root,root) %{_libdir}/%{name}/program/libdesktopbe1lo.so
 %attr(755,root,root) %{_libdir}/%{name}/program/libdict_ja.so
 %attr(755,root,root) %{_libdir}/%{name}/program/libdict_zh.so
+%attr(755,root,root) %{_libdir}/%{name}/program/libdlgprovlo.so
 %attr(755,root,root) %{_libdir}/%{name}/program/libdrawinglayerlo.so
 %attr(755,root,root) %{_libdir}/%{name}/program/libeditenglo.so
 %attr(755,root,root) %{_libdir}/%{name}/program/libegilo.so
@@ -3024,13 +3007,16 @@ fi
 %attr(755,root,root) %{_libdir}/%{name}/program/libetilo.so
 %attr(755,root,root) %{_libdir}/%{name}/program/libevtattlo.so
 %attr(755,root,root) %{_libdir}/%{name}/program/libexplo.so
+%attr(755,root,root) %{_libdir}/%{name}/program/libexpwraplo.so
 %attr(755,root,root) %{_libdir}/%{name}/program/libfilelo.so
 %attr(755,root,root) %{_libdir}/%{name}/program/libfilterconfiglo.so
 %attr(755,root,root) %{_libdir}/%{name}/program/libfirebird_sdbclo.so
 %attr(755,root,root) %{_libdir}/%{name}/program/libflatlo.so
 %attr(755,root,root) %{_libdir}/%{name}/program/libforlo.so
 %attr(755,root,root) %{_libdir}/%{name}/program/libforuilo.so
+%attr(755,root,root) %{_libdir}/%{name}/program/libfps_officelo.so
 %attr(755,root,root) %{_libdir}/%{name}/program/libfrmlo.so
+%attr(755,root,root) %{_libdir}/%{name}/program/libfsstoragelo.so
 %attr(755,root,root) %{_libdir}/%{name}/program/libfwelo.so
 %attr(755,root,root) %{_libdir}/%{name}/program/libfwilo.so
 %attr(755,root,root) %{_libdir}/%{name}/program/libfwklo.so
@@ -3041,12 +3027,14 @@ fi
 %{!?with_system_hunspell:%attr(755,root,root) %{_libdir}/%{name}/program/libhunspell.so}
 %attr(755,root,root) %{_libdir}/%{name}/program/libhyphenlo.so
 %attr(755,root,root) %{_libdir}/%{name}/program/libi18nlangtag.so
+%attr(755,root,root) %{_libdir}/%{name}/program/libi18npoollo.so
+%attr(755,root,root) %{_libdir}/%{name}/program/libi18nsearchlo.so
 %attr(755,root,root) %{_libdir}/%{name}/program/libi18nutil.so
 %attr(755,root,root) %{_libdir}/%{name}/program/libicdlo.so
 %attr(755,root,root) %{_libdir}/%{name}/program/libicglo.so
 %attr(755,root,root) %{_libdir}/%{name}/program/libidxlo.so
-%attr(755,root,root) %{_libdir}/%{name}/program/libindex_data.so
 %attr(755,root,root) %{_libdir}/%{name}/program/libimelo.so
+%attr(755,root,root) %{_libdir}/%{name}/program/libindex_data.so
 %attr(755,root,root) %{_libdir}/%{name}/program/libipblo.so
 %attr(755,root,root) %{_libdir}/%{name}/program/libipdlo.so
 %attr(755,root,root) %{_libdir}/%{name}/program/libipslo.so
@@ -3055,32 +3043,40 @@ fi
 %attr(755,root,root) %{_libdir}/%{name}/program/libiralo.so
 %attr(755,root,root) %{_libdir}/%{name}/program/libitglo.so
 %attr(755,root,root) %{_libdir}/%{name}/program/libitilo.so
+%attr(755,root,root) %{_libdir}/%{name}/program/libldapbe2lo.so
 %attr(755,root,root) %{_libdir}/%{name}/program/liblnglo.so
 %attr(755,root,root) %{_libdir}/%{name}/program/liblnthlo.so
+%attr(755,root,root) %{_libdir}/%{name}/program/liblocalebe1lo.so
 %attr(755,root,root) %{_libdir}/%{name}/program/liblocaledata_en.so
 %attr(755,root,root) %{_libdir}/%{name}/program/liblocaledata_es.so
 %attr(755,root,root) %{_libdir}/%{name}/program/liblocaledata_euro.so
 %attr(755,root,root) %{_libdir}/%{name}/program/liblocaledata_others.so
 %attr(755,root,root) %{_libdir}/%{name}/program/libloglo.so
+%attr(755,root,root) %{_libdir}/%{name}/program/liblosessioninstalllo.so
 %attr(755,root,root) %{_libdir}/%{name}/program/libmcnttype.so
+%attr(755,root,root) %{_libdir}/%{name}/program/libmigrationoo2lo.so
+%attr(755,root,root) %{_libdir}/%{name}/program/libmigrationoo3lo.so
 %attr(755,root,root) %{_libdir}/%{name}/program/libmorklo.so
 %attr(755,root,root) %{_libdir}/%{name}/program/libmozbootstraplo.so
 %attr(755,root,root) %{_libdir}/%{name}/program/libmsfilterlo.so
+%attr(755,root,root) %{_libdir}/%{name}/program/libmsformslo.so
+%attr(755,root,root) %{_libdir}/%{name}/program/libmtfrendererlo.so
 %attr(755,root,root) %{_libdir}/%{name}/program/libmysqllo.so
+%attr(755,root,root) %{_libdir}/%{name}/program/libnpsoplugin.so
 %attr(755,root,root) %{_libdir}/%{name}/program/libodbclo.so
-%attr(755,root,root) %{_libdir}/%{name}/program/libodbcbaselo.so
 %attr(755,root,root) %{_libdir}/%{name}/program/libodfflatxmllo.so
 %attr(755,root,root) %{_libdir}/%{name}/program/liboffacclo.so
 %attr(755,root,root) %{_libdir}/%{name}/program/liboglcanvaslo.so
 %attr(755,root,root) %{_libdir}/%{name}/program/libooxlo.so
 %attr(755,root,root) %{_libdir}/%{name}/program/libpackage2.so
+%attr(755,root,root) %{_libdir}/%{name}/program/libpasswordcontainerlo.so
 %attr(755,root,root) %{_libdir}/%{name}/program/libpcrlo.so
 %attr(755,root,root) %{_libdir}/%{name}/program/libpdffilterlo.so
 %attr(755,root,root) %{_libdir}/%{name}/program/libpllo.so
+%attr(755,root,root) %{_libdir}/%{name}/program/libpricinglo.so
 %attr(755,root,root) %{_libdir}/%{name}/program/libprotocolhandlerlo.so
 %attr(755,root,root) %{_libdir}/%{name}/program/librecentfile.so
 %attr(755,root,root) %{_libdir}/%{name}/program/libreslo.so
-%attr(755,root,root) %{_libdir}/%{name}/program/libpricinglo.so
 %attr(755,root,root) %{_libdir}/%{name}/program/libsaxlo.so
 %attr(755,root,root) %{_libdir}/%{name}/program/libsblo.so
 %attr(755,root,root) %{_libdir}/%{name}/program/libscnlo.so
@@ -3092,47 +3088,58 @@ fi
 %attr(755,root,root) %{_libdir}/%{name}/program/libsdlo.so
 %attr(755,root,root) %{_libdir}/%{name}/program/libsduilo.so
 %attr(755,root,root) %{_libdir}/%{name}/program/libsfxlo.so
+%attr(755,root,root) %{_libdir}/%{name}/program/libsimplecanvaslo.so
+%attr(755,root,root) %{_libdir}/%{name}/program/libslideshowlo.so
 %attr(755,root,root) %{_libdir}/%{name}/program/libsofficeapp.so
 %attr(755,root,root) %{_libdir}/%{name}/program/libsotlo.so
-%attr(755,root,root) %{_libdir}/%{name}/program/libspalo.so
 %attr(755,root,root) %{_libdir}/%{name}/program/libspelllo.so
-%attr(755,root,root) %{_libdir}/%{name}/program/libspl_unxlo.so
 %attr(755,root,root) %{_libdir}/%{name}/program/libspllo.so
 %attr(755,root,root) %{_libdir}/%{name}/program/libsrtrs1.so
+%attr(755,root,root) %{_libdir}/%{name}/program/libstoragefdlo.so
+%attr(755,root,root) %{_libdir}/%{name}/program/libstringresourcelo.so
 %attr(755,root,root) %{_libdir}/%{name}/program/libsvgiolo.so
 %attr(755,root,root) %{_libdir}/%{name}/program/libsvllo.so
 %attr(755,root,root) %{_libdir}/%{name}/program/libsvtlo.so
 %attr(755,root,root) %{_libdir}/%{name}/program/libsvxcorelo.so
 %attr(755,root,root) %{_libdir}/%{name}/program/libsvxlo.so
 %attr(755,root,root) %{_libdir}/%{name}/program/libswlo.so
-%attr(755,root,root) %{_libdir}/%{name}/program/libtextfdlo.so
+%attr(755,root,root) %{_libdir}/%{name}/program/libsysshlo.so
 %attr(755,root,root) %{_libdir}/%{name}/program/libtextconv_dict.so
 %attr(755,root,root) %{_libdir}/%{name}/program/libtextconversiondlgslo.so
+%attr(755,root,root) %{_libdir}/%{name}/program/libtextfdlo.so
 %attr(755,root,root) %{_libdir}/%{name}/program/libtklo.so
 %attr(755,root,root) %{_libdir}/%{name}/program/libtllo.so
-%attr(755,root,root) %{_libdir}/%{name}/program/libtvhlp1.so
 %attr(755,root,root) %{_libdir}/%{name}/program/libucb1.so
 %attr(755,root,root) %{_libdir}/%{name}/program/libucbhelper.so
 %attr(755,root,root) %{_libdir}/%{name}/program/libucpchelp1.so
+%attr(755,root,root) %{_libdir}/%{name}/program/libucpcmis1lo.so
 %attr(755,root,root) %{_libdir}/%{name}/program/libucpdav1.so
+%attr(755,root,root) %{_libdir}/%{name}/program/libucpexpand1lo.so
+%attr(755,root,root) %{_libdir}/%{name}/program/libucpextlo.so
 %attr(755,root,root) %{_libdir}/%{name}/program/libucpfile1.so
 %attr(755,root,root) %{_libdir}/%{name}/program/libucpftp1.so
+%attr(755,root,root) %{_libdir}/%{name}/program/libucpgio1lo.so
 %attr(755,root,root) %{_libdir}/%{name}/program/libucphier1.so
 %attr(755,root,root) %{_libdir}/%{name}/program/libucppkg1.so
+%attr(755,root,root) %{_libdir}/%{name}/program/libucptdoc1lo.so
 %attr(755,root,root) %{_libdir}/%{name}/program/libunopkgapp.so
 %attr(755,root,root) %{_libdir}/%{name}/program/libunordflo.so
 %attr(755,root,root) %{_libdir}/%{name}/program/libunoxmllo.so
+%attr(755,root,root) %{_libdir}/%{name}/program/libupdatefeedlo.so
 %attr(755,root,root) %{_libdir}/%{name}/program/libutllo.so
 %attr(755,root,root) %{_libdir}/%{name}/program/libuuilo.so
+%attr(755,root,root) %{_libdir}/%{name}/program/libvbaeventslo.so
 %attr(755,root,root) %{_libdir}/%{name}/program/libvbahelperlo.so
+%attr(755,root,root) %{_libdir}/%{name}/program/libvclcanvaslo.so
 %attr(755,root,root) %{_libdir}/%{name}/program/libvcllo.so
+%attr(755,root,root) %{_libdir}/%{name}/program/libvclopengllo.so
 %attr(755,root,root) %{_libdir}/%{name}/program/libvclplug_genlo.so
 %attr(755,root,root) %{_libdir}/%{name}/program/libvclplug_svplo.so
 %attr(755,root,root) %{_libdir}/%{name}/program/libwpftdrawlo.so
+%attr(755,root,root) %{_libdir}/%{name}/program/libwriterperfectlo.so
 %attr(755,root,root) %{_libdir}/%{name}/program/libxmlfalo.so
 %attr(755,root,root) %{_libdir}/%{name}/program/libxmlfdlo.so
 %attr(755,root,root) %{_libdir}/%{name}/program/libxmlscriptlo.so
-%attr(755,root,root) %{_libdir}/%{name}/program/libcomphelper.so
 %attr(755,root,root) %{_libdir}/%{name}/program/libxmlsecurity.so
 %attr(755,root,root) %{_libdir}/%{name}/program/libxoflo.so
 %attr(755,root,root) %{_libdir}/%{name}/program/libxolo.so
@@ -3142,12 +3149,11 @@ fi
 %attr(755,root,root) %{_libdir}/%{name}/program/libxsltfilterlo.so
 %attr(755,root,root) %{_libdir}/%{name}/program/libxstor.so
 %attr(755,root,root) %{_libdir}/%{name}/program/nsplugin
-%attr(755,root,root) %{_libdir}/%{name}/program/open-url
 %attr(755,root,root) %{_libdir}/%{name}/program/oosplash
+%attr(755,root,root) %{_libdir}/%{name}/program/open-url
 %attr(755,root,root) %{_libdir}/%{name}/program/pagein*
 %attr(755,root,root) %{_libdir}/%{name}/program/pluginapp.bin
 %attr(755,root,root) %{_libdir}/%{name}/program/senddoc
-%attr(755,root,root) %{_libdir}/%{name}/program/spadmin.bin
 %attr(755,root,root) %{_libdir}/%{name}/program/uri-encode
 %attr(755,root,root) %{_libdir}/%{name}/program/xid-fullscreen-on-all-monitors
 
@@ -3232,12 +3238,10 @@ fi
 %{_libdir}/%{name}/program/resource/sden-US.res
 %{_libdir}/%{name}/program/resource/sdbten-US.res
 %{_libdir}/%{name}/program/resource/sfxen-US.res
-%{_libdir}/%{name}/program/resource/spaen-US.res
 %{_libdir}/%{name}/program/resource/svlen-US.res
 %{_libdir}/%{name}/program/resource/svten-US.res
 %{_libdir}/%{name}/program/resource/svxen-US.res
 %{_libdir}/%{name}/program/resource/swen-US.res
-%{_libdir}/%{name}/program/resource/textconversiondlgsen-US.res
 %{_libdir}/%{name}/program/resource/tplen-US.res
 %{_libdir}/%{name}/program/resource/upden-US.res
 %{_libdir}/%{name}/program/resource/uuien-US.res
@@ -3268,7 +3272,6 @@ fi
 %{_libdir}/%{name}/share/config/images_oxygen.zip
 %{_libdir}/%{name}/share/config/images_sifr.zip
 %{_libdir}/%{name}/share/config/images_tango.zip
-%{_libdir}/%{name}/share/config/*.xpm
 %dir %{_libdir}/%{name}/share/config/soffice.cfg
 %dir %{_libdir}/%{name}/share/config/soffice.cfg/cui
 %{_libdir}/%{name}/share/config/soffice.cfg/cui/ui
@@ -3303,6 +3306,7 @@ fi
 %dir %{_libdir}/%{name}/share/config/soffice.cfg/modules/sweb
 %dir %{_libdir}/%{name}/share/config/soffice.cfg/modules/simpress
 %{_libdir}/%{name}/share/config/soffice.cfg/modules/spropctrlr
+%exclude %{_libdir}/%{name}/share/config/soffice.cfg/modules/spropctrlr/ui/res/*
 %dir %{_libdir}/%{name}/share/config/soffice.cfg/modules/swform
 %{_libdir}/%{name}/share/config/soffice.cfg/modules/swform/menubar
 %{_libdir}/%{name}/share/config/soffice.cfg/modules/swform/statusbar
@@ -3316,9 +3320,6 @@ fi
 %{_libdir}/%{name}/share/config/soffice.cfg/modules/swxform/menubar
 %{_libdir}/%{name}/share/config/soffice.cfg/modules/swxform/statusbar
 %{_libdir}/%{name}/share/config/soffice.cfg/modules/swxform/toolbar
-%dir %{_libdir}/%{name}/share/config/soffice.cfg/spa
-%{_libdir}/%{name}/share/config/soffice.cfg/spa/ui
-%exclude %{_libdir}/%{name}/share/config/soffice.cfg/spa/ui/res/*
 %dir %{_libdir}/%{name}/share/config/soffice.cfg/sfx
 %{_libdir}/%{name}/share/config/soffice.cfg/sfx/ui
 %exclude %{_libdir}/%{name}/share/config/soffice.cfg/sfx/ui/res/*
@@ -3386,7 +3387,6 @@ fi
 # symlink to directory
 %attr(755,root,root) %{_libdir}/%{name}/ure-link
 
-%attr(755,root,root) %{_libdir}/%{name}/program/spadmin
 %attr(755,root,root) %{_libdir}/%{name}/program/soffice
 %attr(755,root,root) %{_libdir}/%{name}/program/soffice.bin
 %attr(755,root,root) %{_libdir}/%{name}/program/unoinfo
@@ -3491,6 +3491,7 @@ fi
 %{_libdir}/%{name}/share/config/soffice.cfg/modules/dbreport/statusbar
 %{_libdir}/%{name}/share/config/soffice.cfg/modules/dbreport/toolbar
 %{_libdir}/%{name}/share/config/soffice.cfg/modules/dbreport/ui
+%exclude %{_libdir}/%{name}/share/config/soffice.cfg/modules/dbreport/ui/res/*
 %{_libdir}/%{name}/share/config/soffice.cfg/modules/dbtable
 %{_libdir}/%{name}/share/config/soffice.cfg/modules/dbtdata/menubar
 %{_libdir}/%{name}/share/config/soffice.cfg/modules/dbtdata/toolbar
@@ -3515,6 +3516,7 @@ fi
 %attr(755,root,root) %{_libdir}/%{name}/program/libscuilo.so
 %attr(755,root,root) %{_libdir}/%{name}/program/libsolverlo.so
 %attr(755,root,root) %{_libdir}/%{name}/program/libvbaobjlo.so
+%attr(755,root,root) %{_libdir}/%{name}/program/libwpftcalclo.so
 %{_libdir}/%{name}/program/resource/analysisen-US.res
 %{_libdir}/%{name}/program/resource/dateen-US.res
 %{_libdir}/%{name}/program/resource/pricingen-US.res
@@ -3568,6 +3570,7 @@ fi
 %{_iconsdir}/hicolor/*/apps/libreoffice-writer.svg
 %{_libdir}/%{name}/program/resource/t602filteren-US.res
 %{_libdir}/%{name}/share/config/soffice.cfg/modules/sbibliography
+%exclude %{_libdir}/%{name}/share/config/soffice.cfg/modules/sbibliography/ui/res/*
 %{_libdir}/%{name}/share/config/soffice.cfg/modules/swriter/menubar
 %{_libdir}/%{name}/share/config/soffice.cfg/modules/swriter/statusbar
 %{_libdir}/%{name}/share/config/soffice.cfg/modules/swriter/toolbar
