@@ -1,5 +1,5 @@
---- ../BUILD/libreoffice-4.3.2.2/configure.ac.orig	2014-10-12 14:42:16.760723674 +0200
-+++ ../BUILD/libreoffice-4.3.2.2/configure.ac	2014-10-12 14:59:04.195877183 +0200
+--- libreoffice-4.3.2.2/configure.ac.orig	2014-10-12 14:42:16.760723674 +0200
++++ libreoffice-4.3.2.2/configure.ac	2014-10-12 14:59:04.195877183 +0200
 @@ -12315,6 +12315,10 @@
      if test "$_os" = "WINNT"; then
          OOO_JUNIT_JAR=`cygpath -m "$OOO_JUNIT_JAR"`
