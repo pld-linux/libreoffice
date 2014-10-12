@@ -215,7 +215,7 @@ BuildRequires:	startup-notification-devel >= 0.5
 BuildRequires:	unixODBC-devel >= 2.2.12-2
 BuildRequires:	unzip
 BuildRequires:	vigra-devel
-%{?with_system_xalan:BuildRequires:	xalan-j}
+%{?with_system_xalan:BuildRequires:	java-xalan}
 BuildRequires:	xorg-font-font-adobe-utopia-type1
 BuildRequires:	xorg-lib-libX11-devel
 BuildRequires:	xorg-lib-libXaw-devel
