@@ -2718,6 +2718,10 @@ if [ ! -f installed.stamp ]; then
 		ln -s lo$a $RPM_BUILD_ROOT%{_bindir}/oo$a
 	done
 
+	%{__rm} $RPM_BUILD_ROOT%{_libdir}/%{name}/share/extensions/nlpsolver/help/*.done
+	%{__rm} $RPM_BUILD_ROOT%{_libdir}/%{name}/share/extensions/wiki-publisher/help/*.done
+	%{__rm} $RPM_BUILD_ROOT%{_libdir}/%{name}/program/classes/smoketest.jar
+
 	touch installed.stamp
 fi
 
@@ -2816,10 +2820,6 @@ done
 for l in lb bn_IN; do
 	%{__sed} -i -e '/.*\/help\/.*/d' $l.lang
 done
-
-%{__rm} $RPM_BUILD_ROOT%{_libdir}/%{name}/share/extensions/nlpsolver/help/*.done
-%{__rm} $RPM_BUILD_ROOT%{_libdir}/%{name}/share/extensions/wiki-publisher/help/*.done
-%{__rm} $RPM_BUILD_ROOT%{_libdir}/%{name}/program/classes/smoketest.jar
 
 # Remove unsupported locale files to avoid confusion about unpackaged files
 #for l in kmr_Latn sr_Latn; do
