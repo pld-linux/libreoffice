@@ -117,6 +117,7 @@ BuildRequires:	dbus-glib-devel >= 0.70
 BuildRequires:	flex
 BuildRequires:	fontconfig-devel >= 1.0.1
 BuildRequires:	freetype-devel >= 2.1
+BuildRequires:	glew-devel >= 1.10.0
 BuildRequires:	glib2-devel >= 2.13.5
 BuildRequires:	gperf
 BuildRequires:	graphite2-devel
@@ -2624,7 +2625,6 @@ export PATH=$PATH:%{_libdir}/interbase/bin
 	--with-x \
 	--without-fonts \
 	--without-ppds \
-	--without-afms \
 	--disable-epm \
 	--%{?with_gtk:en}%{!?with_gtk:dis}able-gtk \
 	--%{?with_gtk3:en}%{!?with_gtk3:dis}able-gtk3 \
