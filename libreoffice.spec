@@ -2481,7 +2481,7 @@ dialogs.
 %prep
 %setup -q -n %{name}-%{version} -a1 -a2 -a3
 
-%patch0 -p0
+%patch0 -p1
 %patch1 -p1
 
 for dir in *-%{version}; do
