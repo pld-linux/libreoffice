@@ -49,7 +49,7 @@ Summary:	LibreOffice - powerful office suite
 Summary(pl.UTF-8):	LibreOffice - potężny pakiet biurowy
 Name:		libreoffice
 Version:	%{major_ver}.2
-Release:	1
+Release:	2
 License:	GPL/LGPL
 Group:		X11/Applications
 Source0:	http://download.documentfoundation.org/libreoffice/src/%{major_ver}/%{name}-%{version}.tar.xz
@@ -3268,6 +3268,7 @@ fi
 %dir %{_libdir}/%{name}/share/config
 %{_libdir}/%{name}/share/config/images.zip
 %{_libdir}/%{name}/share/config/images_crystal.zip
+%{_libdir}/%{name}/share/config/images_galaxy.zip
 %{_libdir}/%{name}/share/config/images_hicontrast.zip
 %{_libdir}/%{name}/share/config/images_oxygen.zip
 %{_libdir}/%{name}/share/config/images_sifr.zip
@@ -3285,6 +3286,9 @@ fi
 %dir %{_libdir}/%{name}/share/config/soffice.cfg/filter
 %{_libdir}/%{name}/share/config/soffice.cfg/filter/ui
 %exclude %{_libdir}/%{name}/share/config/soffice.cfg/filter/ui/res/*
+%dir %{_libdir}/%{name}/share/config/soffice.cfg/fps
+%{_libdir}/%{name}/share/config/soffice.cfg/fps/ui
+%exclude %{_libdir}/%{name}/share/config/soffice.cfg/fps/ui/res/*
 %dir %{_libdir}/%{name}/share/config/soffice.cfg/modules
 %{_libdir}/%{name}/share/config/soffice.cfg/modules/BasicIDE
 %{_libdir}/%{name}/share/config/soffice.cfg/modules/StartModule
@@ -3294,6 +3298,8 @@ fi
 %dir %{_libdir}/%{name}/share/config/soffice.cfg/modules/dbquery
 %dir %{_libdir}/%{name}/share/config/soffice.cfg/modules/dbreport
 %dir %{_libdir}/%{name}/share/config/soffice.cfg/modules/dbtdata
+%{_libdir}/%{name}/share/config/soffice.cfg/modules/sabpilot
+%exclude %{_libdir}/%{name}/share/config/soffice.cfg/modules/sabpilot/ui/res/*
 %dir %{_libdir}/%{name}/share/config/soffice.cfg/modules/scalc
 %{_libdir}/%{name}/share/config/soffice.cfg/modules/schart
 %exclude %{_libdir}/%{name}/share/config/soffice.cfg/modules/schart/ui/res/*
@@ -3342,6 +3348,7 @@ fi
 %{_libdir}/%{name}/share/config/wizard
 %dir %{_libdir}/%{name}/share/dtd
 %{_libdir}/%{name}/share/dtd/officedocument
+%{_libdir}/%{name}/share/filter
 %{_libdir}/%{name}/share/fonts
 %{_libdir}/%{name}/share/gallery
 %{_libdir}/%{name}/share/psprint
