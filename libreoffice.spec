@@ -89,6 +89,7 @@ Source29:	http://dev-www.libreoffice.org/src/libgltf/libgltf-0.0.2.tar.bz2
 
 Patch0:		%{name}-hamcrest.patch
 Patch1:		%{name}-build.patch
+Patch2:		%{name}-boost.patch
 URL:		http://www.documentfoundation.org/
 BuildRequires:	/usr/bin/getopt
 BuildRequires:	Firebird-devel
@@ -2483,6 +2484,7 @@ dialogs.
 
 %patch0 -p1
 %patch1 -p1
+%patch2 -p1
 
 for dir in *-%{version}; do
 	[ -f $dir/ChangeLog ] && mv $dir/ChangeLog ChangeLog-$dir
