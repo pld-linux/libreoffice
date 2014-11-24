@@ -84,8 +84,8 @@ Source28:	http://dev-www.libreoffice.org/src/OpenCOLLADA-master-6509aa13af.tar.b
 # Source28-md5:	4ca8a6ef0afeefc864e9ef21b9f14bd6
 
 # put into separate spec?
-Source29:	http://dev-www.libreoffice.org/src/libgltf/libgltf-0.0.1.tar.bz2
-# Source29-md5:	03821c9c827e647fb5fedb12496e0067
+Source29:	http://dev-www.libreoffice.org/src/libgltf/libgltf-0.0.2.tar.bz2
+# Source29-md5:	d63a9f47ab048f5009d90693d6aa6424
 
 Patch0:		%{name}-hamcrest.patch
 Patch1:		%{name}-build.patch
