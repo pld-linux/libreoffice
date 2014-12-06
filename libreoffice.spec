@@ -49,7 +49,7 @@ Summary:	LibreOffice - powerful office suite
 Summary(pl.UTF-8):	LibreOffice - potężny pakiet biurowy
 Name:		libreoffice
 Version:	%{major_ver}.1
-Release:	1
+Release:	2
 License:	GPL/LGPL
 Group:		X11/Applications
 Source0:	http://download.documentfoundation.org/libreoffice/src/%{major_ver}/%{name}-%{version}.tar.xz
@@ -82,10 +82,6 @@ Source27:	http://dev-www.libreoffice.org/src/CoinMP-1.7.6.tgz
 # Source27-md5:	1cce53bf4b40ae29790d2c5c9f8b1129
 Source28:	http://dev-www.libreoffice.org/src/OpenCOLLADA-master-6509aa13af.tar.bz2
 # Source28-md5:	4ca8a6ef0afeefc864e9ef21b9f14bd6
-
-# put into separate spec?
-Source29:	http://dev-www.libreoffice.org/src/libgltf/libgltf-0.0.2.tar.bz2
-# Source29-md5:	d63a9f47ab048f5009d90693d6aa6424
 
 Patch0:		%{name}-hamcrest.patch
 Patch1:		%{name}-build.patch
@@ -171,6 +167,7 @@ BuildRequires:	java-sac
 BuildRequires:	libart_lgpl-devel
 BuildRequires:	libbonobo-devel >= 2.0
 BuildRequires:	libcdr-devel >= 0.0.8
+BuildRequires:	libgltf-devel >= 0.0.2
 %{?with_system_libhnj:BuildRequires:	libhnj-devel}
 BuildRequires:	libicu-devel >= 4.0
 BuildRequires:	libjpeg-devel
@@ -459,6 +456,9 @@ Requires:	java-commons-codec
 Requires:	java-commons-httpclient
 Requires:	java-commons-lang
 Requires:	java-commons-logging
+%if "%{_rpmversion}" >= "5"
+BuildArch:	noarch
+%endif
 
 %description wiki-publisher
 The Wiki Publisher enables you to create Wiki articles on MediaWiki
@@ -643,6 +643,9 @@ Group:		X11/Applications
 Requires:	%{name}-calc = %{version}-%{release}
 Requires:	%{name}-core = %{version}-%{release}
 Requires:	%{name}-ure = %{version}-%{release}
+%if "%{_rpmversion}" >= "5"
+BuildArch:	noarch
+%endif
 
 %description nlpsolver
 A non-linear solver engine for Calc as an alternative to the default
@@ -693,6 +696,9 @@ Obsoletes:	openoffice-i18n-af-gtk
 Obsoletes:	openoffice.org-i18n-af
 Obsoletes:	openoffice.org-i18n-af-gtk
 Obsoletes:	openoffice.org-i18n-af-kde
+%if "%{_rpmversion}" >= "5"
+BuildArch:	noarch
+%endif
 
 %description i18n-af
 This package provides resources containing menus and dialogs in
@@ -707,6 +713,9 @@ Summary:	LibreOffice - interface in Amharic language
 Summary(pl.UTF-8):	LibreOffice - interfejs w języku amharskim
 Group:		I18n
 Requires:	%{name}-core = %{version}-%{release}
+%if "%{_rpmversion}" >= "5"
+BuildArch:	noarch
+%endif
 
 %description i18n-am
 This package provides resources containing menus and dialogs in
@@ -726,6 +735,9 @@ Obsoletes:	openoffice-i18n-ar-gtk
 Obsoletes:	openoffice.org-i18n-ar
 Obsoletes:	openoffice.org-i18n-ar-gtk
 Obsoletes:	openoffice.org-i18n-ar-kde
+%if "%{_rpmversion}" >= "5"
+BuildArch:	noarch
+%endif
 
 %description i18n-ar
 This package provides resources containing menus and dialogs in Arabic
@@ -741,6 +753,9 @@ Summary(pl.UTF-8):	LibreOffice - interfejs w języku asamskim
 Group:		I18n
 Requires:	%{name}-core = %{version}-%{release}
 Obsoletes:	openoffice.org-i18n-as_IN
+%if "%{_rpmversion}" >= "5"
+BuildArch:	noarch
+%endif
 
 %description i18n-as
 This package provides resources containing menus and dialogs in
@@ -756,6 +771,9 @@ Summary(pl.UTF-8):	LibreOffice - interfejs w języku asturyjskim
 Group:		I18n
 Requires:	%{name}-core = %{version}-%{release}
 Obsoletes:	openoffice.org-i18n-ast
+%if "%{_rpmversion}" >= "5"
+BuildArch:	noarch
+%endif
 
 %description i18n-ast
 This package provides resources containing menus and dialogs in
@@ -771,6 +789,9 @@ Summary(pl.UTF-8):	LibreOffice - interfejs w języku białoruskim
 Group:		I18n
 Requires:	%{name}-core = %{version}-%{release}
 Obsoletes:	openoffice.org-i18n-be_BY
+%if "%{_rpmversion}" >= "5"
+BuildArch:	noarch
+%endif
 
 %description i18n-be_BY
 This package provides resources containing menus and dialogs in
@@ -790,6 +811,9 @@ Obsoletes:	openoffice-i18n-bg-gtk
 Obsoletes:	openoffice.org-i18n-bg
 Obsoletes:	openoffice.org-i18n-bg-gtk
 Obsoletes:	openoffice.org-i18n-bg-kde
+%if "%{_rpmversion}" >= "5"
+BuildArch:	noarch
+%endif
 
 %description i18n-bg
 This package provides resources containing menus and dialogs in
@@ -805,6 +829,9 @@ Summary(pl.UTF-8):	LibreOffice - interfejs w języku indyjskim bengalskim
 Group:		I18n
 Requires:	%{name}-core = %{version}-%{release}
 Obsoletes:	openoffice.org-i18n-bn_IN
+%if "%{_rpmversion}" >= "5"
+BuildArch:	noarch
+%endif
 
 %description i18n-bn_IN
 This package provides resources containing menus and dialogs in Indian
@@ -820,6 +847,9 @@ Summary(pl.UTF-8):	LibreOffice - interfejs w języku bengalskim
 Group:		I18n
 Requires:	%{name}-core = %{version}-%{release}
 Obsoletes:	openoffice.org-i18n-bn
+%if "%{_rpmversion}" >= "5"
+BuildArch:	noarch
+%endif
 
 %description i18n-bn
 This package provides resources containing menus and dialogs in Bangla
@@ -835,6 +865,9 @@ Summary(pl.UTF-8):	LibreOffice - interfejs w języku tybetańskim
 Group:		I18n
 Requires:	%{name}-core = %{version}-%{release}
 Obsoletes:	openoffice.org-i18n-bo
+%if "%{_rpmversion}" >= "5"
+BuildArch:	noarch
+%endif
 
 %description i18n-bo
 This package provides resources containing menus and dialogs in
@@ -850,6 +883,9 @@ Summary(pl.UTF-8):	LibreOffice - interfejs w języku bretońskim
 Group:		I18n
 Requires:	%{name}-core = %{version}-%{release}
 Obsoletes:	openoffice.org-i18n-br
+%if "%{_rpmversion}" >= "5"
+BuildArch:	noarch
+%endif
 
 %description i18n-br
 This package provides resources containing menus and dialogs in Breton
@@ -865,6 +901,9 @@ Summary(pl.UTF-8):	LibreOffice - interfejs w języku boro
 Group:		I18n
 Requires:	%{name}-core = %{version}-%{release}
 Obsoletes:	openoffice.org-i18n-brx
+%if "%{_rpmversion}" >= "5"
+BuildArch:	noarch
+%endif
 
 %description i18n-brx
 This package provides resources containing menus and dialogs in Bodo
@@ -880,6 +919,9 @@ Summary(pl.UTF-8):	LibreOffice - interfejs w języku bośniackim
 Group:		I18n
 Requires:	%{name}-core = %{version}-%{release}
 Obsoletes:	openoffice.org-i18n-bs
+%if "%{_rpmversion}" >= "5"
+BuildArch:	noarch
+%endif
 
 %description i18n-bs
 This package provides resources containing menus and dialogs in
@@ -899,6 +941,9 @@ Obsoletes:	openoffice-i18n-ca-gtk
 Obsoletes:	openoffice.org-i18n-ca
 Obsoletes:	openoffice.org-i18n-ca-gtk
 Obsoletes:	openoffice.org-i18n-ca-kde
+%if "%{_rpmversion}" >= "5"
+BuildArch:	noarch
+%endif
 
 %description i18n-ca
 This package provides resources containing menus and dialogs in
@@ -913,6 +958,9 @@ Summary:	LibreOffice - interface in Catalan Valencian language
 Summary(pl.UTF-8):	LibreOffice - interfejs w języku katalońskim walenckim
 Group:		I18n
 Requires:	%{name}-core = %{version}-%{release}
+%if "%{_rpmversion}" >= "5"
+BuildArch:	noarch
+%endif
 
 %description i18n-ca_XV
 This package provides resources containing menus and dialogs in
@@ -932,6 +980,9 @@ Obsoletes:	openoffice-i18n-cs-gtk
 Obsoletes:	openoffice.org-i18n-cs
 Obsoletes:	openoffice.org-i18n-cs-gtk
 Obsoletes:	openoffice.org-i18n-cs-kde
+%if "%{_rpmversion}" >= "5"
+BuildArch:	noarch
+%endif
 
 %description i18n-cs
 This package provides resources containing menus and dialogs in Czech
@@ -951,6 +1002,9 @@ Obsoletes:	openoffice-i18n-cy-gtk
 Obsoletes:	openoffice.org-i18n-cy
 Obsoletes:	openoffice.org-i18n-cy-gtk
 Obsoletes:	openoffice.org-i18n-cy-kde
+%if "%{_rpmversion}" >= "5"
+BuildArch:	noarch
+%endif
 
 %description i18n-cy
 This package provides resources containing menus and dialogs in
@@ -970,6 +1024,9 @@ Obsoletes:	openoffice-i18n-da-gtk
 Obsoletes:	openoffice.org-i18n-da
 Obsoletes:	openoffice.org-i18n-da-gtk
 Obsoletes:	openoffice.org-i18n-da-kde
+%if "%{_rpmversion}" >= "5"
+BuildArch:	noarch
+%endif
 
 %description i18n-da
 This package provides resources containing menus and dialogs in Danish
@@ -989,6 +1046,9 @@ Obsoletes:	openoffice-i18n-de-gtk
 Obsoletes:	openoffice.org-i18n-de
 Obsoletes:	openoffice.org-i18n-de-gtk
 Obsoletes:	openoffice.org-i18n-de-kde
+%if "%{_rpmversion}" >= "5"
+BuildArch:	noarch
+%endif
 
 %description i18n-de
 This package provides resources containing menus and dialogs in German
@@ -1004,6 +1064,9 @@ Summary(pl.UTF-8):	LibreOffice - interfejs w języku dogri
 Group:		I18n
 Requires:	%{name}-core = %{version}-%{release}
 Obsoletes:	openoffice.org-i18n-dgo
+%if "%{_rpmversion}" >= "5"
+BuildArch:	noarch
+%endif
 
 %description i18n-dgo
 This package provides resources containing menus and dialogs in Dogri
@@ -1019,6 +1082,9 @@ Summary(pl.UTF-8):	Openoffice.org - interfejs w języku dżongkha
 Group:		I18n
 Requires:	%{name}-core = %{version}-%{release}
 Obsoletes:	openoffice.org-i18n-dz
+%if "%{_rpmversion}" >= "5"
+BuildArch:	noarch
+%endif
 
 %description i18n-dz
 This package provides resources containing menus and dialogs in
@@ -1038,6 +1104,9 @@ Obsoletes:	openoffice-i18n-el-gtk
 Obsoletes:	openoffice.org-i18n-el
 Obsoletes:	openoffice.org-i18n-el-gtk
 Obsoletes:	openoffice.org-i18n-el-kde
+%if "%{_rpmversion}" >= "5"
+BuildArch:	noarch
+%endif
 
 %description i18n-el
 This package provides resources containing menus and dialogs in Greek
@@ -1053,6 +1122,9 @@ Summary(pl.UTF-8):	LibreOffice - interfejs w języku anglieskim dla Wielkiej Bry
 Group:		I18n
 Requires:	%{name}-core = %{version}-%{release}
 Obsoletes:	openoffice.org-i18n-en_GB
+%if "%{_rpmversion}" >= "5"
+BuildArch:	noarch
+%endif
 
 %description i18n-en_GB
 This package provides resources containing menus and dialogs in
@@ -1068,6 +1140,9 @@ Summary(pl.UTF-8):	LibreOffice - interfejs w języku anglieskim dla Południowej
 Group:		I18n
 Requires:	%{name}-core = %{version}-%{release}
 Obsoletes:	openoffice.org-i18n-en_ZA
+%if "%{_rpmversion}" >= "5"
+BuildArch:	noarch
+%endif
 
 %description i18n-en_ZA
 This package provides resources containing menus and dialogs in
@@ -1083,6 +1158,9 @@ Summary(pl.UTF-8):	LibreOffice - interfejs w języku esperanto
 Group:		I18n
 Requires:	%{name}-core = %{version}-%{release}
 Obsoletes:	openoffice.org-i18n-eo
+%if "%{_rpmversion}" >= "5"
+BuildArch:	noarch
+%endif
 
 %description i18n-eo
 This package provides resources containing menus and dialogs in
@@ -1102,6 +1180,9 @@ Obsoletes:	openoffice-i18n-es-gtk
 Obsoletes:	openoffice.org-i18n-es
 Obsoletes:	openoffice.org-i18n-es-gtk
 Obsoletes:	openoffice.org-i18n-es-kde
+%if "%{_rpmversion}" >= "5"
+BuildArch:	noarch
+%endif
 
 %description i18n-es
 This package provides resources containing menus and dialogs in
@@ -1121,6 +1202,9 @@ Obsoletes:	openoffice-i18n-et-gtk
 Obsoletes:	openoffice.org-i18n-et
 Obsoletes:	openoffice.org-i18n-et-gtk
 Obsoletes:	openoffice.org-i18n-et-kde
+%if "%{_rpmversion}" >= "5"
+BuildArch:	noarch
+%endif
 
 %description i18n-et
 This package provides resources containing menus and dialogs in
@@ -1139,6 +1223,9 @@ Obsoletes:	openoffice-i18n-eu
 Obsoletes:	openoffice-i18n-eu-gtk
 Obsoletes:	openoffice-i18n-eu-kde
 Obsoletes:	openoffice.org-i18n-eu
+%if "%{_rpmversion}" >= "5"
+BuildArch:	noarch
+%endif
 
 %description i18n-eu
 This package provides resources containing menus and dialogs in Basque
@@ -1157,6 +1244,9 @@ Obsoletes:	openoffice-i18n-fa
 Obsoletes:	openoffice-i18n-fa-gtk
 Obsoletes:	openoffice-i18n-fa-kde
 Obsoletes:	openoffice.org-i18n-fa
+%if "%{_rpmversion}" >= "5"
+BuildArch:	noarch
+%endif
 
 %description i18n-fa
 This package provides resources containing menus and dialogs in
@@ -1176,6 +1266,9 @@ Obsoletes:	openoffice-i18n-fi-gtk
 Obsoletes:	openoffice.org-i18n-fi
 Obsoletes:	openoffice.org-i18n-fi-gtk
 Obsoletes:	openoffice.org-i18n-fi-kde
+%if "%{_rpmversion}" >= "5"
+BuildArch:	noarch
+%endif
 
 %description i18n-fi
 This package provides resources containing menus and dialogs in
@@ -1195,6 +1288,9 @@ Obsoletes:	openoffice-i18n-fr-gtk
 Obsoletes:	openoffice.org-i18n-fr
 Obsoletes:	openoffice.org-i18n-fr-gtk
 Obsoletes:	openoffice.org-i18n-fr-kde
+%if "%{_rpmversion}" >= "5"
+BuildArch:	noarch
+%endif
 
 %description i18n-fr
 This package provides resources containing menus and dialogs in French
@@ -1214,6 +1310,9 @@ Obsoletes:	openoffice-i18n-ga-gtk
 Obsoletes:	openoffice.org-i18n-ga
 Obsoletes:	openoffice.org-i18n-ga-gtk
 Obsoletes:	openoffice.org-i18n-ga-kde
+%if "%{_rpmversion}" >= "5"
+BuildArch:	noarch
+%endif
 
 %description i18n-ga
 This package provides resources containing menus and dialogs in Irish
@@ -1228,6 +1327,9 @@ Summary:	LibreOffice - interface in Scottish Gaelic language
 Summary(pl.UTF-8):	LibreOffice - interfejs w języku gaelickim szkockim
 Group:		I18n
 Requires:	%{name}-core = %{version}-%{release}
+%if "%{_rpmversion}" >= "5"
+BuildArch:	noarch
+%endif
 
 %description i18n-gd
 This package provides resources containing menus and dialogs in
@@ -1247,6 +1349,9 @@ Obsoletes:	openoffice-i18n-gl-gtk
 Obsoletes:	openoffice.org-i18n-gl
 Obsoletes:	openoffice.org-i18n-gl-gtk
 Obsoletes:	openoffice.org-i18n-gl-kde
+%if "%{_rpmversion}" >= "5"
+BuildArch:	noarch
+%endif
 
 %description i18n-gl
 This package provides resources containing menus and dialogs in
@@ -1262,6 +1367,9 @@ Summary(pl.UTF-8):	LibreOffice - interfejs w języku gudźarati
 Group:		I18n
 Requires:	%{name}-core = %{version}-%{release}
 Obsoletes:	openoffice.org-i18n-gu
+%if "%{_rpmversion}" >= "5"
+BuildArch:	noarch
+%endif
 
 %description i18n-gu
 This package provides resources containing menus and dialogs in
@@ -1281,6 +1389,9 @@ Obsoletes:	openoffice-i18n-he-gtk
 Obsoletes:	openoffice.org-i18n-he
 Obsoletes:	openoffice.org-i18n-he-gtk
 Obsoletes:	openoffice.org-i18n-he-kde
+%if "%{_rpmversion}" >= "5"
+BuildArch:	noarch
+%endif
 
 %description i18n-he
 This package provides resources containing menus and dialogs in Hebrew
@@ -1300,6 +1411,9 @@ Obsoletes:	openoffice-i18n-hi-gtk
 Obsoletes:	openoffice.org-i18n-hi-gtk
 Obsoletes:	openoffice.org-i18n-hi-kde
 Obsoletes:	openoffice.org-i18n-hi_IN
+%if "%{_rpmversion}" >= "5"
+BuildArch:	noarch
+%endif
 
 %description i18n-hi
 This package provides resources containing menus and dialogs in Hindi
@@ -1319,6 +1433,9 @@ Obsoletes:	openoffice-i18n-hr-gtk
 Obsoletes:	openoffice.org-i18n-hr
 Obsoletes:	openoffice.org-i18n-hr-gtk
 Obsoletes:	openoffice.org-i18n-hr-kde
+%if "%{_rpmversion}" >= "5"
+BuildArch:	noarch
+%endif
 
 %description i18n-hr
 This package provides resources containing menus and dialogs in
@@ -1338,6 +1455,9 @@ Obsoletes:	openoffice-i18n-hu-gtk
 Obsoletes:	openoffice.org-i18n-hu
 Obsoletes:	openoffice.org-i18n-hu-gtk
 Obsoletes:	openoffice.org-i18n-hu-kde
+%if "%{_rpmversion}" >= "5"
+BuildArch:	noarch
+%endif
 
 %description i18n-hu
 This package provides resources containing menus and dialogs in
@@ -1352,6 +1472,9 @@ Summary:	LibreOffice - interface in Indonesian language
 Summary(pl.UTF-8):	LibreOffice - interfejs w języku indonezyjskim
 Group:		I18n
 Requires:	%{name}-core = %{version}-%{release}
+%if "%{_rpmversion}" >= "5"
+BuildArch:	noarch
+%endif
 
 %description i18n-id
 This package provides resources containing menus and dialogs in
@@ -1367,6 +1490,9 @@ Summary(pl.UTF-8):	LibreOffice - interfejs w języku islandzkim
 Group:		I18n
 Requires:	%{name}-core = %{version}-%{release}
 Obsoletes:	openoffice.org-i18n-is
+%if "%{_rpmversion}" >= "5"
+BuildArch:	noarch
+%endif
 
 %description i18n-is
 This package provides resources containing menus and dialogs in
@@ -1386,6 +1512,9 @@ Obsoletes:	openoffice-i18n-it-gtk
 Obsoletes:	openoffice.org-i18n-it
 Obsoletes:	openoffice.org-i18n-it-gtk
 Obsoletes:	openoffice.org-i18n-it-kde
+%if "%{_rpmversion}" >= "5"
+BuildArch:	noarch
+%endif
 
 %description i18n-it
 This package provides resources containing menus and dialogs in
@@ -1405,6 +1534,9 @@ Obsoletes:	openoffice-i18n-ja-gtk
 Obsoletes:	openoffice.org-i18n-ja
 Obsoletes:	openoffice.org-i18n-ja-gtk
 Obsoletes:	openoffice.org-i18n-ja-kde
+%if "%{_rpmversion}" >= "5"
+BuildArch:	noarch
+%endif
 
 %description i18n-ja
 This package provides resources containing menus and dialogs in Japan
@@ -1420,6 +1552,9 @@ Summary(pl.UTF-8):	LibreOffice - interfejs w języku gruzińskim
 Group:		I18n
 Requires:	%{name}-core = %{version}-%{release}
 Obsoletes:	openoffice.org-i18n-ka
+%if "%{_rpmversion}" >= "5"
+BuildArch:	noarch
+%endif
 
 %description i18n-ka
 This package provides resources containing menus and dialogs in
@@ -1435,6 +1570,9 @@ Summary(pl.UTF-8):	LibreOffice - interfejs w języku kazachskim
 Group:		I18n
 Requires:	%{name}-core = %{version}-%{release}
 Obsoletes:	openoffice.org-i18n-kk
+%if "%{_rpmversion}" >= "5"
+BuildArch:	noarch
+%endif
 
 %description i18n-kk
 This package provides resources containing menus and dialogs in Kazakh
@@ -1450,6 +1588,9 @@ Summary(pl.UTF-8):	LibreOffice - interfejs w języku khmerskim
 Group:		I18n
 Requires:	%{name}-core = %{version}-%{release}
 Obsoletes:	openoffice.org-i18n-km
+%if "%{_rpmversion}" >= "5"
+BuildArch:	noarch
+%endif
 
 %description i18n-km
 This package provides resources containing menus and dialogs in Khmer
@@ -1468,6 +1609,9 @@ Obsoletes:	openoffice-i18n-kn
 Obsoletes:	openoffice-i18n-kn-gtk
 Obsoletes:	openoffice-i18n-kn-kde
 Obsoletes:	openoffice.org-i18n-kn_IN
+%if "%{_rpmversion}" >= "5"
+BuildArch:	noarch
+%endif
 
 %description i18n-kn_IN
 This package provides resources containing menus and dialogs in
@@ -1487,6 +1631,9 @@ Obsoletes:	openoffice-i18n-ko-gtk
 Obsoletes:	openoffice.org-i18n-ko
 Obsoletes:	openoffice.org-i18n-ko-gtk
 Obsoletes:	openoffice.org-i18n-ko-kde
+%if "%{_rpmversion}" >= "5"
+BuildArch:	noarch
+%endif
 
 %description i18n-ko
 This package provides resources containing menus and dialogs in Korean
@@ -1502,6 +1649,9 @@ Summary(pl.UTF-8):	LibreOffice - interfejs w języku konkani
 Group:		I18n
 Requires:	%{name}-core = %{version}-%{release}
 Obsoletes:	openoffice.org-i18n-kok
+%if "%{_rpmversion}" >= "5"
+BuildArch:	noarch
+%endif
 
 %description i18n-kok
 This package provides resources containing menus and dialogs in
@@ -1517,6 +1667,9 @@ Summary(pl.UTF-8):	LibreOffice - interfejs w języku kaszmirskim
 Group:		I18n
 Requires:	%{name}-core = %{version}-%{release}
 Obsoletes:	openoffice.org-i18n-ks
+%if "%{_rpmversion}" >= "5"
+BuildArch:	noarch
+%endif
 
 %description i18n-ks
 This package provides resources containing menus and dialogs in
@@ -1532,6 +1685,9 @@ Summary(pl.UTF-8):	LibreOffice - interfejs w języku luksemburgskim
 Group:		I18n
 Requires:	%{name}-core = %{version}-%{release}
 Obsoletes:	openoffice.org-i18n-lb
+%if "%{_rpmversion}" >= "5"
+BuildArch:	noarch
+%endif
 
 %description i18n-lb
 This package provides resources containing menus and dialogs in
@@ -1547,6 +1703,9 @@ Summary(pl.UTF-8):	LibreOffice - interfejs w języku laotańskim
 Group:		I18n
 Requires:	%{name}-core = %{version}-%{release}
 Obsoletes:	openoffice.org-i18n-lo
+%if "%{_rpmversion}" >= "5"
+BuildArch:	noarch
+%endif
 
 %description i18n-lo
 This package provides resources containing menus and dialogs in Lao
@@ -1566,6 +1725,9 @@ Obsoletes:	openoffice-i18n-lt-gtk
 Obsoletes:	openoffice.org-i18n-lt
 Obsoletes:	openoffice.org-i18n-lt-gtk
 Obsoletes:	openoffice.org-i18n-lt-kde
+%if "%{_rpmversion}" >= "5"
+BuildArch:	noarch
+%endif
 
 %description i18n-lt
 This package provides resources containing menus and dialogs in
@@ -1581,6 +1743,9 @@ Summary(pl.UTF-8):	LibreOffice - interfejs w języku łotewskim
 Group:		I18n
 Requires:	%{name}-core = %{version}-%{release}
 Obsoletes:	openoffice.org-i18n-lv
+%if "%{_rpmversion}" >= "5"
+BuildArch:	noarch
+%endif
 
 %description i18n-lv
 This package provides resources containing menus and dialogs in
@@ -1596,6 +1761,9 @@ Summary(pl.UTF-8):	LibreOffice - interfejs w języku maithili
 Group:		I18n
 Requires:	%{name}-core = %{version}-%{release}
 Obsoletes:	openoffice.org-i18n-mai
+%if "%{_rpmversion}" >= "5"
+BuildArch:	noarch
+%endif
 
 %description i18n-mai
 This package provides resources containing menus and dialogs in
@@ -1611,6 +1779,9 @@ Summary(pl.UTF-8):	LibreOffice - interfejs w języku macedońskim
 Group:		I18n
 Requires:	%{name}-core = %{version}-%{release}
 Obsoletes:	openoffice.org-i18n-mk
+%if "%{_rpmversion}" >= "5"
+BuildArch:	noarch
+%endif
 
 %description i18n-mk
 This package provides resources containing menus and dialogs in
@@ -1626,6 +1797,9 @@ Summary(pl.UTF-8):	LibreOffice - interfejs w języku malajalamskim
 Group:		I18n
 Requires:	%{name}-core = %{version}-%{release}
 Obsoletes:	openoffice.org-i18n-ml_IN
+%if "%{_rpmversion}" >= "5"
+BuildArch:	noarch
+%endif
 
 %description i18n-ml
 This package provides resources containing menus and dialogs in
@@ -1641,6 +1815,9 @@ Summary(pl.UTF-8):	LibreOffice - interfejs w języku manipuri
 Group:		I18n
 Requires:	%{name}-core = %{version}-%{release}
 Obsoletes:	openoffice.org-i18n-mni
+%if "%{_rpmversion}" >= "5"
+BuildArch:	noarch
+%endif
 
 %description i18n-mni
 This package provides resources containing menus and dialogs in Meitei
@@ -1656,6 +1833,9 @@ Summary(pl.UTF-8):	LibreOffice - interfejs w języku marathi
 Group:		I18n
 Requires:	%{name}-core = %{version}-%{release}
 Obsoletes:	openoffice.org-i18n-mr_IN
+%if "%{_rpmversion}" >= "5"
+BuildArch:	noarch
+%endif
 
 %description i18n-mr
 This package provides resources containing menus and dialogs in
@@ -1671,6 +1851,9 @@ Summary(pl.UTF-8):	LibreOffice - interfejs w języku mongolskim
 Group:		I18n
 Requires:	%{name}-core = %{version}-%{release}
 Obsoletes:	openoffice.org-i18n-mn
+%if "%{_rpmversion}" >= "5"
+BuildArch:	noarch
+%endif
 
 %description i18n-mn
 This package provides resources containing menus and dialogs in
@@ -1686,6 +1869,9 @@ Summary(pl.UTF-8):	LibreOffice - interfejs w języku birmańskim
 Group:		I18n
 Requires:	%{name}-core = %{version}-%{release}
 Obsoletes:	openoffice.org-i18n-my
+%if "%{_rpmversion}" >= "5"
+BuildArch:	noarch
+%endif
 
 %description i18n-my
 This package provides resources containing menus and dialogs in
@@ -1705,6 +1891,9 @@ Obsoletes:	openoffice-i18n-nb-gtk
 Obsoletes:	openoffice.org-i18n-nb
 Obsoletes:	openoffice.org-i18n-nb-gtk
 Obsoletes:	openoffice.org-i18n-nb-kde
+%if "%{_rpmversion}" >= "5"
+BuildArch:	noarch
+%endif
 
 %description i18n-nb
 This package provides resources containing menus and dialogs in
@@ -1720,6 +1909,9 @@ Summary(pl.UTF-8):	LibreOffice - interfejs w języku nepalskim
 Group:		I18n
 Requires:	%{name}-core = %{version}-%{release}
 Obsoletes:	openoffice.org-i18n-ne
+%if "%{_rpmversion}" >= "5"
+BuildArch:	noarch
+%endif
 
 %description i18n-ne
 This package provides resources containing menus and dialogs in Nepali
@@ -1739,6 +1931,9 @@ Obsoletes:	openoffice-i18n-nl-gtk
 Obsoletes:	openoffice.org-i18n-nl
 Obsoletes:	openoffice.org-i18n-nl-gtk
 Obsoletes:	openoffice.org-i18n-nl-kde
+%if "%{_rpmversion}" >= "5"
+BuildArch:	noarch
+%endif
 
 %description i18n-nl
 This package provides resources containing menus and dialogs in Dutch
@@ -1758,6 +1953,9 @@ Obsoletes:	openoffice-i18n-nn-gtk
 Obsoletes:	openoffice.org-i18n-nn
 Obsoletes:	openoffice.org-i18n-nn-gtk
 Obsoletes:	openoffice.org-i18n-nn-kde
+%if "%{_rpmversion}" >= "5"
+BuildArch:	noarch
+%endif
 
 %description i18n-nn
 This package provides resources containing menus and dialogs in
@@ -1773,6 +1971,9 @@ Summary(pl.UTF-8):	LibreOffice - interfejs w języku ndebele (południowym)
 Group:		I18n
 Requires:	%{name}-core = %{version}-%{release}
 Obsoletes:	openoffice.org-i18n-nr
+%if "%{_rpmversion}" >= "5"
+BuildArch:	noarch
+%endif
 
 %description i18n-nr
 This package provides resources containing menus and dialogs in South
@@ -1792,6 +1993,9 @@ Obsoletes:	openoffice-i18n-nso-gtk
 Obsoletes:	openoffice.org-i18n-nso
 Obsoletes:	openoffice.org-i18n-nso-gtk
 Obsoletes:	openoffice.org-i18n-nso-kde
+%if "%{_rpmversion}" >= "5"
+BuildArch:	noarch
+%endif
 
 %description i18n-nso
 This package provides resources containing menus and dialogs in
@@ -1807,6 +2011,9 @@ Summary(pl.UTF-8):	LibreOffice - interfejs w języku oksytańskim
 Group:		I18n
 Requires:	%{name}-core = %{version}-%{release}
 Obsoletes:	openoffice.org-i18n-oc
+%if "%{_rpmversion}" >= "5"
+BuildArch:	noarch
+%endif
 
 %description i18n-oc
 This package provides resources containing menus and dialogs in
@@ -1822,6 +2029,9 @@ Summary(pl.UTF-8):	LibreOffice - interfejs w języku oromo
 Group:		I18n
 Requires:	%{name}-core = %{version}-%{release}
 Obsoletes:	openoffice.org-i18n-om
+%if "%{_rpmversion}" >= "5"
+BuildArch:	noarch
+%endif
 
 %description i18n-om
 This package provides resources containing menus and dialogs in Oromo
@@ -1837,6 +2047,9 @@ Summary(pl.UTF-8):	LibreOffice - interfejs w języku orija
 Group:		I18n
 Requires:	%{name}-core = %{version}-%{release}
 Obsoletes:	openoffice.org-i18n-or_IN
+%if "%{_rpmversion}" >= "5"
+BuildArch:	noarch
+%endif
 
 %description i18n-or
 This package provides resources containing menus and dialogs in Oriya
@@ -1852,6 +2065,9 @@ Summary(pl.UTF-8):	LibreOffice - interfejs w języku pendżabskim
 Group:		I18n
 Requires:	%{name}-core = %{version}-%{release}
 Obsoletes:	openoffice.org-i18n-pa_IN
+%if "%{_rpmversion}" >= "5"
+BuildArch:	noarch
+%endif
 
 %description i18n-pa_IN
 This package provides resources containing menus and dialogs in
@@ -1871,6 +2087,9 @@ Obsoletes:	openoffice-i18n-pl-gtk
 Obsoletes:	openoffice.org-i18n-pl
 Obsoletes:	openoffice.org-i18n-pl-gtk
 Obsoletes:	openoffice.org-i18n-pl-kde
+%if "%{_rpmversion}" >= "5"
+BuildArch:	noarch
+%endif
 
 %description i18n-pl
 This package provides resources containing menus and dialogs in Polish
@@ -1890,6 +2109,9 @@ Obsoletes:	openoffice-i18n-pt-gtk
 Obsoletes:	openoffice.org-i18n-pt
 Obsoletes:	openoffice.org-i18n-pt-gtk
 Obsoletes:	openoffice.org-i18n-pt-kde
+%if "%{_rpmversion}" >= "5"
+BuildArch:	noarch
+%endif
 
 %description i18n-pt
 This package provides resources containing menus and dialogs in
@@ -1909,6 +2131,9 @@ Obsoletes:	openoffice-i18n-pt_BR-gtk
 Obsoletes:	openoffice.org-i18n-pt_BR
 Obsoletes:	openoffice.org-i18n-pt_BR-gtk
 Obsoletes:	openoffice.org-i18n-pt_BR-kde
+%if "%{_rpmversion}" >= "5"
+BuildArch:	noarch
+%endif
 
 %description i18n-pt_BR
 This package provides resources containing menus and dialogs in
@@ -1924,6 +2149,9 @@ Summary(pl.UTF-8):	LibreOffice - interfejs w języku rumuńskim
 Group:		I18n
 Requires:	%{name}-core = %{version}-%{release}
 Obsoletes:	openoffice.org-i18n-ro
+%if "%{_rpmversion}" >= "5"
+BuildArch:	noarch
+%endif
 
 %description i18n-ro
 This package provides resources containing menus and dialogs in
@@ -1943,6 +2171,9 @@ Obsoletes:	openoffice-i18n-ru-gtk
 Obsoletes:	openoffice.org-i18n-ru
 Obsoletes:	openoffice.org-i18n-ru-gtk
 Obsoletes:	openoffice.org-i18n-ru-kde
+%if "%{_rpmversion}" >= "5"
+BuildArch:	noarch
+%endif
 
 %description i18n-ru
 This package provides resources containing menus and dialogs in
@@ -1958,6 +2189,9 @@ Summary(pl.UTF-8):	LibreOffice - interfejs w języku kinya-ruanda
 Group:		I18n
 Requires:	%{name}-core = %{version}-%{release}
 Obsoletes:	openoffice.org-i18n-rw
+%if "%{_rpmversion}" >= "5"
+BuildArch:	noarch
+%endif
 
 %description i18n-rw
 This package provides resources containing menus and dialogs in
@@ -1973,6 +2207,9 @@ Summary(pl.UTF-8):	LibreOffice - interfejs w sanskrycie
 Group:		I18n
 Requires:	%{name}-core = %{version}-%{release}
 Obsoletes:	openoffice.org-i18n-sa_IN
+%if "%{_rpmversion}" >= "5"
+BuildArch:	noarch
+%endif
 
 %description i18n-sa_IN
 This package provides resources containing menus and dialogs in
@@ -1988,6 +2225,9 @@ Summary(pl.UTF-8):	LibreOffice - interfejs w języku santali
 Group:		I18n
 Requires:	%{name}-core = %{version}-%{release}
 Obsoletes:	openoffice.org-i18n-sat
+%if "%{_rpmversion}" >= "5"
+BuildArch:	noarch
+%endif
 
 %description i18n-sat
 This package provides resources containing menus and dialogs in
@@ -2003,6 +2243,9 @@ Summary(pl.UTF-8):	LibreOffice - interfejs w języku sindhi
 Group:		I18n
 Requires:	%{name}-core = %{version}-%{release}
 Obsoletes:	openoffice.org-i18n-sd
+%if "%{_rpmversion}" >= "5"
+BuildArch:	noarch
+%endif
 
 %description i18n-sd
 This package provides resources containing menus and dialogs in Sindhi
@@ -2018,6 +2261,9 @@ Summary(pl.UTF-8):	LibreOffice - interfejs w języku syngaleskim
 Group:		I18n
 Requires:	%{name}-core = %{version}-%{release}
 Obsoletes:	openoffice.org-i18n-si
+%if "%{_rpmversion}" >= "5"
+BuildArch:	noarch
+%endif
 
 %description i18n-si
 This package provides resources containing menus and dialogs in
@@ -2032,6 +2278,9 @@ Summary:	LibreOffice - interface in Sidama language
 Summary(pl.UTF-8):	LibreOffice - interfejs w języku sidamo
 Group:		I18n
 Requires:	%{name}-core = %{version}-%{release}
+%if "%{_rpmversion}" >= "5"
+BuildArch:	noarch
+%endif
 
 %description i18n-sid
 This package provides resources containing menus and dialogs in
@@ -2051,6 +2300,9 @@ Obsoletes:	openoffice-i18n-sk-gtk
 Obsoletes:	openoffice.org-i18n-sk
 Obsoletes:	openoffice.org-i18n-sk-gtk
 Obsoletes:	openoffice.org-i18n-sk-kde
+%if "%{_rpmversion}" >= "5"
+BuildArch:	noarch
+%endif
 
 %description i18n-sk
 This package provides resources containing menus and dialogs in Slovak
@@ -2070,6 +2322,9 @@ Obsoletes:	openoffice-i18n-sl-gtk
 Obsoletes:	openoffice.org-i18n-sl
 Obsoletes:	openoffice.org-i18n-sl-gtk
 Obsoletes:	openoffice.org-i18n-sl-kde
+%if "%{_rpmversion}" >= "5"
+BuildArch:	noarch
+%endif
 
 %description i18n-sl
 This package provides resources containing menus and dialogs in
@@ -2084,6 +2339,9 @@ Summary:	LibreOffice - interface in Albanian language
 Summary(pl.UTF-8):	LibreOffice - interfejs w języku albańskim
 Group:		I18n
 Requires:	%{name}-core = %{version}-%{release}
+%if "%{_rpmversion}" >= "5"
+BuildArch:	noarch
+%endif
 
 %description i18n-sq
 This package provides resources containing menus and dialogs in
@@ -2099,6 +2357,9 @@ Summary(pl.UTF-8):	LibreOffice - interfejs w języku serbskim
 Group:		I18n
 Requires:	%{name}-core = %{version}-%{release}
 Obsoletes:	openoffice.org-i18n-sr
+%if "%{_rpmversion}" >= "5"
+BuildArch:	noarch
+%endif
 
 %description i18n-sr
 This package provides resources containing menus and dialogs in
@@ -2114,6 +2375,9 @@ Summary(pl.UTF-8):	LibreOffice - interfejs w języku suazi (siswati)
 Group:		I18n
 Requires:	%{name}-core = %{version}-%{release}
 Obsoletes:	openoffice.org-i18n-ss
+%if "%{_rpmversion}" >= "5"
+BuildArch:	noarch
+%endif
 
 %description i18n-ss
 This package provides resources containing menus and dialogs in Swati
@@ -2129,6 +2393,9 @@ Summary(pl.UTF-8):	LibreOffice - interfejs w języku południowym sotho
 Group:		I18n
 Requires:	%{name}-core = %{version}-%{release}
 Obsoletes:	openoffice.org-i18n-st
+%if "%{_rpmversion}" >= "5"
+BuildArch:	noarch
+%endif
 
 %description i18n-st
 This package provides resources containing menus and dialogs in
@@ -2148,6 +2415,9 @@ Obsoletes:	openoffice-i18n-sv-gtk
 Obsoletes:	openoffice.org-i18n-sv
 Obsoletes:	openoffice.org-i18n-sv-gtk
 Obsoletes:	openoffice.org-i18n-sv-kde
+%if "%{_rpmversion}" >= "5"
+BuildArch:	noarch
+%endif
 
 %description i18n-sv
 This package provides resources containing menus and dialogs in
@@ -2163,6 +2433,9 @@ Summary(pl.UTF-8):	LibreOffice - interfejs w języku suahili dla Tanzanii
 Group:		I18n
 Requires:	%{name}-core = %{version}-%{release}
 Obsoletes:	openoffice.org-i18n-sw_TZ
+%if "%{_rpmversion}" >= "5"
+BuildArch:	noarch
+%endif
 
 %description i18n-sw_TZ
 This package provides resources containing menus and dialogs in
@@ -2178,6 +2451,9 @@ Summary(pl.UTF-8):	LibreOffice - interfejs w języku tamiskim
 Group:		I18n
 Requires:	%{name}-core = %{version}-%{release}
 Obsoletes:	openoffice.org-i18n-ta_IN
+%if "%{_rpmversion}" >= "5"
+BuildArch:	noarch
+%endif
 
 %description i18n-ta
 This package provides resources containing menus and dialogs in Tamil
@@ -2193,6 +2469,9 @@ Summary(pl.UTF-8):	LibreOffice - interfejs w języku telugu
 Group:		I18n
 Requires:	%{name}-core = %{version}-%{release}
 Obsoletes:	openoffice.org-i18n-te_IN
+%if "%{_rpmversion}" >= "5"
+BuildArch:	noarch
+%endif
 
 %description i18n-te
 This package provides resources containing menus and dialogs in Telugu
@@ -2208,6 +2487,9 @@ Summary(pl.UTF-8):	LibreOffice - interfejs w języku tadżyckim
 Group:		I18n
 Requires:	%{name}-core = %{version}-%{release}
 Obsoletes:	openoffice.org-i18n-tg
+%if "%{_rpmversion}" >= "5"
+BuildArch:	noarch
+%endif
 
 %description i18n-tg
 This package provides resources containing menus and dialogs in Tajik
@@ -2226,6 +2508,9 @@ Obsoletes:	openoffice-i18n-th
 Obsoletes:	openoffice-i18n-th-gtk
 Obsoletes:	openoffice-i18n-th-kde
 Obsoletes:	openoffice.org-i18n-th
+%if "%{_rpmversion}" >= "5"
+BuildArch:	noarch
+%endif
 
 %description i18n-th
 This package provides resources containing menus and dialogs in Thai
@@ -2244,6 +2529,9 @@ Obsoletes:	openoffice-i18n-tn
 Obsoletes:	openoffice-i18n-tn-gtk
 Obsoletes:	openoffice-i18n-tn-kde
 Obsoletes:	openoffice.org-i18n-tn
+%if "%{_rpmversion}" >= "5"
+BuildArch:	noarch
+%endif
 
 %description i18n-tn
 This package provides resources containing menus and dialogs in Tswana
@@ -2263,6 +2551,9 @@ Obsoletes:	openoffice-i18n-tr-gtk
 Obsoletes:	openoffice.org-i18n-tr
 Obsoletes:	openoffice.org-i18n-tr-gtk
 Obsoletes:	openoffice.org-i18n-tr-kde
+%if "%{_rpmversion}" >= "5"
+BuildArch:	noarch
+%endif
 
 %description i18n-tr
 This package provides resources containing menus and dialogs in
@@ -2278,6 +2569,9 @@ Summary(pl.UTF-8):	LibreOffice - interfejs w języku tsonga
 Group:		I18n
 Requires:	%{name}-core = %{version}-%{release}
 Obsoletes:	openoffice.org-i18n-ts
+%if "%{_rpmversion}" >= "5"
+BuildArch:	noarch
+%endif
 
 %description i18n-ts
 This package provides resources containing menus and dialogs in Tsonga
@@ -2293,6 +2587,9 @@ Summary(pl.UTF-8):	LibreOffice - interfejs w języku tatarskim
 Group:		I18n
 Requires:	%{name}-core = %{version}-%{release}
 Obsoletes:	openoffice.org-i18n-tt
+%if "%{_rpmversion}" >= "5"
+BuildArch:	noarch
+%endif
 
 %description i18n-tt
 This package provides resources containing menus and dialogs in Tatar
@@ -2308,6 +2605,9 @@ Summary(pl.UTF-8):	LibreOffice - interfejs w języku ujgurskim
 Group:		I18n
 Requires:	%{name}-core = %{version}-%{release}
 Obsoletes:	openoffice.org-i18n-ug
+%if "%{_rpmversion}" >= "5"
+BuildArch:	noarch
+%endif
 
 %description i18n-ug
 This package provides resources containing menus and dialogs in Uyghur
@@ -2327,6 +2627,9 @@ Obsoletes:	openoffice-i18n-uk-gtk
 Obsoletes:	openoffice.org-i18n-uk
 Obsoletes:	openoffice.org-i18n-uk-gtk
 Obsoletes:	openoffice.org-i18n-uk-kde
+%if "%{_rpmversion}" >= "5"
+BuildArch:	noarch
+%endif
 
 %description i18n-uk
 This package provides resources containing menus and dialogs in
@@ -2342,6 +2645,9 @@ Summary(pl.UTF-8):	LibreOffice - interfejs w języku uzbeckim
 Group:		I18n
 Requires:	%{name}-core = %{version}-%{release}
 Obsoletes:	openoffice.org-i18n-uz
+%if "%{_rpmversion}" >= "5"
+BuildArch:	noarch
+%endif
 
 %description i18n-uz
 This package provides resources containing menus and dialogs in Uzbek.
@@ -2356,6 +2662,9 @@ Summary(pl.UTF-8):	LibreOffice - interfejs w języku venda
 Group:		I18n
 Requires:	%{name}-core = %{version}-%{release}
 Obsoletes:	openoffice.org-i18n-ve
+%if "%{_rpmversion}" >= "5"
+BuildArch:	noarch
+%endif
 
 %description i18n-ve
 This package provides resources containing menus and dialogs in Venda
@@ -2371,6 +2680,9 @@ Summary(pl.UTF-8):	LibreOffice - interfejs w języku wietnamskim
 Group:		I18n
 Requires:	%{name}-core = %{version}-%{release}
 Obsoletes:	openoffice.org-i18n-vi
+%if "%{_rpmversion}" >= "5"
+BuildArch:	noarch
+%endif
 
 %description i18n-vi
 This package provides resources containing menus and dialogs in
@@ -2386,6 +2698,9 @@ Summary(pl.UTF-8):	LibreOffice - interfejs w języku khosa
 Group:		I18n
 Requires:	%{name}-core = %{version}-%{release}
 Obsoletes:	openoffice.org-i18n-xh
+%if "%{_rpmversion}" >= "5"
+BuildArch:	noarch
+%endif
 
 %description i18n-xh
 This package provides resources containing menus and dialogs in Xhosa
@@ -2406,6 +2721,9 @@ Obsoletes:	openoffice-i18n-zh_CN-gtk
 Obsoletes:	openoffice.org-i18n-zh_CN
 Obsoletes:	openoffice.org-i18n-zh_CN-gtk
 Obsoletes:	openoffice.org-i18n-zh_CN-kde
+%if "%{_rpmversion}" >= "5"
+BuildArch:	noarch
+%endif
 
 %description i18n-zh_CN
 This package provides resources containing menus and dialogs in
@@ -2426,6 +2744,9 @@ Obsoletes:	openoffice-i18n-zh_TW-gtk
 Obsoletes:	openoffice.org-i18n-zh_TW
 Obsoletes:	openoffice.org-i18n-zh_TW-gtk
 Obsoletes:	openoffice.org-i18n-zh_TW-kde
+%if "%{_rpmversion}" >= "5"
+BuildArch:	noarch
+%endif
 
 %description i18n-zh_TW
 This package provides resources containing menus and dialogs in
@@ -2445,6 +2766,9 @@ Obsoletes:	openoffice-i18n-zu-gtk
 Obsoletes:	openoffice.org-i18n-zu
 Obsoletes:	openoffice.org-i18n-zu-gtk
 Obsoletes:	openoffice.org-i18n-zu-kde
+%if "%{_rpmversion}" >= "5"
+BuildArch:	noarch
+%endif
 
 %description i18n-zu
 This package provides resources containing menus and dialogs in Zulu
@@ -2461,6 +2785,9 @@ Group:		Applications/Shells
 Requires:	%{name}
 Requires:	bash-completion
 Obsoletes:	bash-completion-openoffice
+%if "%{_rpmversion}" >= "5"
+BuildArch:	noarch
+%endif
 
 %description -n bash-completion-%{name}
 bash-completion for LibreOffice.
@@ -2502,7 +2829,6 @@ ln %{SOURCE25} ext_sources
 ln %{SOURCE26} ext_sources
 ln %{SOURCE27} ext_sources
 ln %{SOURCE28} ext_sources
-ln %{SOURCE29} ext_sources
 :> src.downloaded
 
 %build
@@ -2703,15 +3029,17 @@ if [ ! -f installed.stamp ]; then
 	ln -s ../../share/%{name}/help $RPM_BUILD_ROOT%{_libdir}/%{name}/help
 	mv $RPM_BUILD_ROOT%{_libdir}/%{name}/readmes $RPM_BUILD_ROOT%{_datadir}/%{name}
 	ln -s ../../share/%{name}/readmes $RPM_BUILD_ROOT%{_libdir}/%{name}/readmes
+	mv $RPM_BUILD_ROOT%{_libdir}/%{name}/share $RPM_BUILD_ROOT%{_datadir}/%{name}
+	ln -s ../../share/%{name}/share $RPM_BUILD_ROOT%{_libdir}/%{name}/share
 
 	%{__rm} -r $RPM_BUILD_ROOT%{_desktopdir}/*.desktop \
 		$RPM_BUILD_ROOT%{_iconsdir}/{gnome,locolor} \
 		$RPM_BUILD_ROOT%{_datadir}/application-registry \
 		$RPM_BUILD_ROOT%{_datadir}/mime{lnk,-info}
-	for a in $RPM_BUILD_ROOT%{_libdir}/%{name}/share/xdg/*.desktop; do
+	for a in $RPM_BUILD_ROOT%{_datadir}/%{name}/share/xdg/*.desktop; do
 		cp $a $RPM_BUILD_ROOT%{_desktopdir}/libreoffice-$(basename "$a")
 	done
-	%{__rm} -r $RPM_BUILD_ROOT%{_libdir}/%{name}/share/xdg
+	%{__rm} -r $RPM_BUILD_ROOT%{_datadir}/%{name}/share/xdg
 
 	# Make oo* -> lo* symlinks for compatibility with misc software,
 	# for example mailcap
@@ -2720,8 +3048,8 @@ if [ ! -f installed.stamp ]; then
 		ln -s lo$a $RPM_BUILD_ROOT%{_bindir}/oo$a
 	done
 
-	%{__rm} $RPM_BUILD_ROOT%{_libdir}/%{name}/share/extensions/nlpsolver/help/*.done
-	%{__rm} $RPM_BUILD_ROOT%{_libdir}/%{name}/share/extensions/wiki-publisher/help/*.done
+	%{__rm} $RPM_BUILD_ROOT%{_datadir}/%{name}/share/extensions/nlpsolver/help/*.done
+	%{__rm} $RPM_BUILD_ROOT%{_datadir}/%{name}/share/extensions/wiki-publisher/help/*.done
 	%{__rm} $RPM_BUILD_ROOT%{_libdir}/%{name}/program/classes/smoketest.jar
 
 	touch installed.stamp
@@ -2771,20 +3099,20 @@ find_lang() {
 		# lib/openoffice.org/share/autotext/$lang
 		grep "/share/autotext/${lang}$" ${lfile} >> ${langfn}.lang || :
 		grep "/share/autotext/${lang}/" ${lfile} >> ${langfn}.lang || :
-		# %{_libdir}/%{name}/share/registry/.*[_-]$lang.xcd
+		# %{_datadir}/%{name}/share/registry/.*[_-]$lang.xcd
 		grep "/share/registry/.*[_-]${lang}.xcd$" ${lfile} >> ${langfn}.lang || :
-		# %{_libdir}/%{name}/share/template/$lang
+		# %{_datadir}/%{name}/share/template/$lang
 		grep "/share/template/${lang}$" ${lfile} >> ${langfn}.lang || :
 		grep "/share/template/${lang}/" ${lfile} >> ${langfn}.lang || :
-		# %{_libdir}/%{name}/share/template/wizard/letter/lang
+		# %{_datadir}/%{name}/share/template/wizard/letter/lang
 		grep "/share/template/wizard/letter/${lang}$" ${lfile} >> ${langfn}.lang || :
 		grep "/share/template/wizard/letter/${lang}$" file-lists/common_list.txt >> ${langfn}.lang || :
 		grep "/share/template/wizard/letter/${lang}/" ${lfile} >> ${langfn}.lang || :
 		grep "/share/template/wizard/letter/${lang}/" file-lists/common_list.txt >> ${langfn}.lang || :
-		# %{_libdir}/%{name}/share/wordbook/$lang
+		# %{_datadir}/%{name}/share/wordbook/$lang
 		grep "/share/wordbook/${lang}$" ${lfile} >> ${langfn}.lang || :
 		grep "/share/wordbook/${lang}/" ${lfile} >> ${langfn}.lang || :
-		# %{_libdir}/%{name}/share/samples/$lang
+		# %{_datadir}/%{name}/share/samples/$lang
 		grep "/share/samples/${lang}$" ${lfile} >> ${langfn}.lang || :
 		grep "/share/samples/${lang}/" ${lfile} >> ${langfn}.lang || :
 		# %{_libdir}/%{name}/help/$lang
@@ -2795,9 +3123,9 @@ find_lang() {
 		grep "/soffice.cfg/modules/[^/]*/ui/res/${lang}.zip" ${lfile} >> ${langfn}.lang || :
 
 		for e in wiki-publisher nlpsolver ; do
-			for f in $RPM_BUILD_ROOT%{_libdir}/%{name}/share/extensions/$e/description-${lang}.txt \
-					$RPM_BUILD_ROOT%{_libdir}/%{name}/share/extensions/$e/locale/*_${langfn}.properties \
-					$RPM_BUILD_ROOT%{_libdir}/%{name}/share/extensions/$e/help/${lang} ; do
+			for f in $RPM_BUILD_ROOT%{_datadir}/%{name}/share/extensions/$e/description-${lang}.txt \
+					$RPM_BUILD_ROOT%{_datadir}/%{name}/share/extensions/$e/locale/*_${langfn}.properties \
+					$RPM_BUILD_ROOT%{_datadir}/%{name}/share/extensions/$e/help/${lang} ; do
 				[ -e $f ] && echo "%lang(${langfn}) $f" | sed -e "s|$RPM_BUILD_ROOT||g" >> $e.lang || :
 			done
 		done
@@ -2813,6 +3141,7 @@ for lang in $langlist; do
 done
 
 %{__sed} -i -e '
+	s,%{_libdir}/%{name}/share,%{_datadir}/%{name}/share,;
 	s,%{_libdir}/%{name}/readmes,%{_datadir}/%{name}/readmes,;
 	s,%{_libdir}/%{name}/help,%{_datadir}/%{name}/help,;
 ' *.lang
@@ -3252,146 +3581,148 @@ fi
 %{_libdir}/%{name}/program/resource/xmlsecen-US.res
 %{_libdir}/%{name}/program/resource/xsltdlgen-US.res
 
-%dir %{_libdir}/%{name}/share
-%dir %{_libdir}/%{name}/share/labels
-%{_libdir}/%{name}/share/labels/labels.xml
-%dir %{_libdir}/%{name}/share/Scripts
-%{_libdir}/%{name}/share/Scripts/beanshell
-%{_libdir}/%{name}/share/Scripts/javascript
+%dir %{_datadir}/%{name}/share
+%dir %{_datadir}/%{name}/share/labels
+%{_datadir}/%{name}/share/labels/labels.xml
+%dir %{_datadir}/%{name}/share/Scripts
+%{_datadir}/%{name}/share/Scripts/beanshell
+%{_datadir}/%{name}/share/Scripts/javascript
 %if %{with java}
-%{_libdir}/%{name}/share/Scripts/java
+%{_datadir}/%{name}/share/Scripts/java
 %endif
 
-%dir %{_libdir}/%{name}/share/autocorr
-%{_libdir}/%{name}/share/autocorr/acor_*.dat
-%dir %{_libdir}/%{name}/share/autotext
-%{_libdir}/%{name}/share/autotext/en-US
-%{_libdir}/%{name}/share/basic
-%dir %{_libdir}/%{name}/share/config
-%{_libdir}/%{name}/share/config/images.zip
-%{_libdir}/%{name}/share/config/images_crystal.zip
-%{_libdir}/%{name}/share/config/images_galaxy.zip
-%{_libdir}/%{name}/share/config/images_hicontrast.zip
-%{_libdir}/%{name}/share/config/images_oxygen.zip
-%{_libdir}/%{name}/share/config/images_sifr.zip
-%{_libdir}/%{name}/share/config/images_tango.zip
-%dir %{_libdir}/%{name}/share/config/soffice.cfg
-%dir %{_libdir}/%{name}/share/config/soffice.cfg/cui
-%{_libdir}/%{name}/share/config/soffice.cfg/cui/ui
-%exclude %{_libdir}/%{name}/share/config/soffice.cfg/cui/ui/res/*
-%dir %{_libdir}/%{name}/share/config/soffice.cfg/dbaccess
-%{_libdir}/%{name}/share/config/soffice.cfg/dbaccess/ui
-%exclude %{_libdir}/%{name}/share/config/soffice.cfg/dbaccess/ui/res/*
-%dir %{_libdir}/%{name}/share/config/soffice.cfg/desktop
-%{_libdir}/%{name}/share/config/soffice.cfg/desktop/ui
-%exclude %{_libdir}/%{name}/share/config/soffice.cfg/desktop/ui/res/*
-%dir %{_libdir}/%{name}/share/config/soffice.cfg/filter
-%{_libdir}/%{name}/share/config/soffice.cfg/filter/ui
-%exclude %{_libdir}/%{name}/share/config/soffice.cfg/filter/ui/res/*
-%dir %{_libdir}/%{name}/share/config/soffice.cfg/fps
-%{_libdir}/%{name}/share/config/soffice.cfg/fps/ui
-%exclude %{_libdir}/%{name}/share/config/soffice.cfg/fps/ui/res/*
-%dir %{_libdir}/%{name}/share/config/soffice.cfg/modules
-%{_libdir}/%{name}/share/config/soffice.cfg/modules/BasicIDE
-%{_libdir}/%{name}/share/config/soffice.cfg/modules/StartModule
-%exclude %{_libdir}/%{name}/share/config/soffice.cfg/modules/BasicIDE/ui/res/*
-%dir %{_libdir}/%{name}/share/config/soffice.cfg/modules/dbapp
-%dir %{_libdir}/%{name}/share/config/soffice.cfg/modules/dbbrowser
-%dir %{_libdir}/%{name}/share/config/soffice.cfg/modules/dbquery
-%dir %{_libdir}/%{name}/share/config/soffice.cfg/modules/dbreport
-%dir %{_libdir}/%{name}/share/config/soffice.cfg/modules/dbtdata
-%{_libdir}/%{name}/share/config/soffice.cfg/modules/sabpilot
-%exclude %{_libdir}/%{name}/share/config/soffice.cfg/modules/sabpilot/ui/res/*
-%dir %{_libdir}/%{name}/share/config/soffice.cfg/modules/scalc
-%{_libdir}/%{name}/share/config/soffice.cfg/modules/schart
-%exclude %{_libdir}/%{name}/share/config/soffice.cfg/modules/schart/ui/res/*
-%dir %{_libdir}/%{name}/share/config/soffice.cfg/modules/sdraw
-%dir %{_libdir}/%{name}/share/config/soffice.cfg/modules/sglobal
-%{_libdir}/%{name}/share/config/soffice.cfg/modules/sglobal/menubar
-%{_libdir}/%{name}/share/config/soffice.cfg/modules/sglobal/statusbar
-%{_libdir}/%{name}/share/config/soffice.cfg/modules/sglobal/toolbar
-%dir %{_libdir}/%{name}/share/config/soffice.cfg/modules/smath
-%dir %{_libdir}/%{name}/share/config/soffice.cfg/modules/sweb
-%dir %{_libdir}/%{name}/share/config/soffice.cfg/modules/simpress
-%{_libdir}/%{name}/share/config/soffice.cfg/modules/spropctrlr
-%exclude %{_libdir}/%{name}/share/config/soffice.cfg/modules/spropctrlr/ui/res/*
-%dir %{_libdir}/%{name}/share/config/soffice.cfg/modules/swform
-%{_libdir}/%{name}/share/config/soffice.cfg/modules/swform/menubar
-%{_libdir}/%{name}/share/config/soffice.cfg/modules/swform/statusbar
-%{_libdir}/%{name}/share/config/soffice.cfg/modules/swform/toolbar
-%dir %{_libdir}/%{name}/share/config/soffice.cfg/modules/swreport
-%{_libdir}/%{name}/share/config/soffice.cfg/modules/swreport/menubar
-%{_libdir}/%{name}/share/config/soffice.cfg/modules/swreport/statusbar
-%{_libdir}/%{name}/share/config/soffice.cfg/modules/swreport/toolbar
-%dir %{_libdir}/%{name}/share/config/soffice.cfg/modules/swriter
-%dir %{_libdir}/%{name}/share/config/soffice.cfg/modules/swxform
-%{_libdir}/%{name}/share/config/soffice.cfg/modules/swxform/menubar
-%{_libdir}/%{name}/share/config/soffice.cfg/modules/swxform/statusbar
-%{_libdir}/%{name}/share/config/soffice.cfg/modules/swxform/toolbar
-%dir %{_libdir}/%{name}/share/config/soffice.cfg/sfx
-%{_libdir}/%{name}/share/config/soffice.cfg/sfx/ui
-%exclude %{_libdir}/%{name}/share/config/soffice.cfg/sfx/ui/res/*
-%dir %{_libdir}/%{name}/share/config/soffice.cfg/svt
-%{_libdir}/%{name}/share/config/soffice.cfg/svt/ui
-%exclude %{_libdir}/%{name}/share/config/soffice.cfg/svt/ui/res/*
-%dir %{_libdir}/%{name}/share/config/soffice.cfg/svx
-%{_libdir}/%{name}/share/config/soffice.cfg/svx/ui
-%exclude %{_libdir}/%{name}/share/config/soffice.cfg/svx/ui/res/*
-%dir %{_libdir}/%{name}/share/config/soffice.cfg/uui
-%{_libdir}/%{name}/share/config/soffice.cfg/uui/ui
-%exclude %{_libdir}/%{name}/share/config/soffice.cfg/uui/ui/res/*
-%dir %{_libdir}/%{name}/share/config/soffice.cfg/vcl
-%{_libdir}/%{name}/share/config/soffice.cfg/vcl/ui
-%exclude %{_libdir}/%{name}/share/config/soffice.cfg/vcl/ui/res/*
-%dir %{_libdir}/%{name}/share/config/soffice.cfg/xmlsec
-%{_libdir}/%{name}/share/config/soffice.cfg/xmlsec/ui
-%exclude %{_libdir}/%{name}/share/config/soffice.cfg/xmlsec/ui/res/*
-%{_libdir}/%{name}/share/config/webcast
-%{_libdir}/%{name}/share/config/wizard
-%dir %{_libdir}/%{name}/share/dtd
-%{_libdir}/%{name}/share/dtd/officedocument
-%{_libdir}/%{name}/share/filter
-%{_libdir}/%{name}/share/fonts
-%{_libdir}/%{name}/share/gallery
-%{_libdir}/%{name}/share/psprint
+%dir %{_datadir}/%{name}/share/autocorr
+%{_datadir}/%{name}/share/autocorr/acor_*.dat
+%dir %{_datadir}/%{name}/share/autotext
+%{_datadir}/%{name}/share/autotext/en-US
+%{_datadir}/%{name}/share/basic
+%dir %{_datadir}/%{name}/share/config
+%{_datadir}/%{name}/share/config/images.zip
+%{_datadir}/%{name}/share/config/images_crystal.zip
+%{_datadir}/%{name}/share/config/images_galaxy.zip
+%{_datadir}/%{name}/share/config/images_hicontrast.zip
+%{_datadir}/%{name}/share/config/images_oxygen.zip
+%{_datadir}/%{name}/share/config/images_sifr.zip
+%{_datadir}/%{name}/share/config/images_tango.zip
+%dir %{_datadir}/%{name}/share/config/soffice.cfg
+%dir %{_datadir}/%{name}/share/config/soffice.cfg/cui
+%{_datadir}/%{name}/share/config/soffice.cfg/cui/ui
+%exclude %{_datadir}/%{name}/share/config/soffice.cfg/cui/ui/res/*
+%dir %{_datadir}/%{name}/share/config/soffice.cfg/dbaccess
+%{_datadir}/%{name}/share/config/soffice.cfg/dbaccess/ui
+%exclude %{_datadir}/%{name}/share/config/soffice.cfg/dbaccess/ui/res/*
+%dir %{_datadir}/%{name}/share/config/soffice.cfg/desktop
+%{_datadir}/%{name}/share/config/soffice.cfg/desktop/ui
+%exclude %{_datadir}/%{name}/share/config/soffice.cfg/desktop/ui/res/*
+%dir %{_datadir}/%{name}/share/config/soffice.cfg/filter
+%{_datadir}/%{name}/share/config/soffice.cfg/filter/ui
+%exclude %{_datadir}/%{name}/share/config/soffice.cfg/filter/ui/res/*
+%dir %{_datadir}/%{name}/share/config/soffice.cfg/fps
+%{_datadir}/%{name}/share/config/soffice.cfg/fps/ui
+%exclude %{_datadir}/%{name}/share/config/soffice.cfg/fps/ui/res/*
+%dir %{_datadir}/%{name}/share/config/soffice.cfg/modules
+%{_datadir}/%{name}/share/config/soffice.cfg/modules/BasicIDE
+%{_datadir}/%{name}/share/config/soffice.cfg/modules/StartModule
+%exclude %{_datadir}/%{name}/share/config/soffice.cfg/modules/BasicIDE/ui/res/*
+%dir %{_datadir}/%{name}/share/config/soffice.cfg/modules/dbapp
+%dir %{_datadir}/%{name}/share/config/soffice.cfg/modules/dbbrowser
+%dir %{_datadir}/%{name}/share/config/soffice.cfg/modules/dbquery
+%dir %{_datadir}/%{name}/share/config/soffice.cfg/modules/dbreport
+%dir %{_datadir}/%{name}/share/config/soffice.cfg/modules/dbtdata
+%{_datadir}/%{name}/share/config/soffice.cfg/modules/sabpilot
+%exclude %{_datadir}/%{name}/share/config/soffice.cfg/modules/sabpilot/ui/res/*
+%dir %{_datadir}/%{name}/share/config/soffice.cfg/modules/scalc
+%{_datadir}/%{name}/share/config/soffice.cfg/modules/schart
+%exclude %{_datadir}/%{name}/share/config/soffice.cfg/modules/schart/ui/res/*
+%dir %{_datadir}/%{name}/share/config/soffice.cfg/modules/sdraw
+%dir %{_datadir}/%{name}/share/config/soffice.cfg/modules/sglobal
+%{_datadir}/%{name}/share/config/soffice.cfg/modules/sglobal/menubar
+%{_datadir}/%{name}/share/config/soffice.cfg/modules/sglobal/statusbar
+%{_datadir}/%{name}/share/config/soffice.cfg/modules/sglobal/toolbar
+%dir %{_datadir}/%{name}/share/config/soffice.cfg/modules/smath
+%dir %{_datadir}/%{name}/share/config/soffice.cfg/modules/sweb
+%dir %{_datadir}/%{name}/share/config/soffice.cfg/modules/simpress
+%{_datadir}/%{name}/share/config/soffice.cfg/modules/spropctrlr
+%exclude %{_datadir}/%{name}/share/config/soffice.cfg/modules/spropctrlr/ui/res/*
+%dir %{_datadir}/%{name}/share/config/soffice.cfg/modules/swform
+%{_datadir}/%{name}/share/config/soffice.cfg/modules/swform/menubar
+%{_datadir}/%{name}/share/config/soffice.cfg/modules/swform/statusbar
+%{_datadir}/%{name}/share/config/soffice.cfg/modules/swform/toolbar
+%dir %{_datadir}/%{name}/share/config/soffice.cfg/modules/swreport
+%{_datadir}/%{name}/share/config/soffice.cfg/modules/swreport/menubar
+%{_datadir}/%{name}/share/config/soffice.cfg/modules/swreport/statusbar
+%{_datadir}/%{name}/share/config/soffice.cfg/modules/swreport/toolbar
+%dir %{_datadir}/%{name}/share/config/soffice.cfg/modules/swriter
+%dir %{_datadir}/%{name}/share/config/soffice.cfg/modules/swxform
+%{_datadir}/%{name}/share/config/soffice.cfg/modules/swxform/menubar
+%{_datadir}/%{name}/share/config/soffice.cfg/modules/swxform/statusbar
+%{_datadir}/%{name}/share/config/soffice.cfg/modules/swxform/toolbar
+%dir %{_datadir}/%{name}/share/config/soffice.cfg/sfx
+%{_datadir}/%{name}/share/config/soffice.cfg/sfx/ui
+%exclude %{_datadir}/%{name}/share/config/soffice.cfg/sfx/ui/res/*
+%dir %{_datadir}/%{name}/share/config/soffice.cfg/svt
+%{_datadir}/%{name}/share/config/soffice.cfg/svt/ui
+%exclude %{_datadir}/%{name}/share/config/soffice.cfg/svt/ui/res/*
+%dir %{_datadir}/%{name}/share/config/soffice.cfg/svx
+%{_datadir}/%{name}/share/config/soffice.cfg/svx/ui
+%exclude %{_datadir}/%{name}/share/config/soffice.cfg/svx/ui/res/*
+%dir %{_datadir}/%{name}/share/config/soffice.cfg/uui
+%{_datadir}/%{name}/share/config/soffice.cfg/uui/ui
+%exclude %{_datadir}/%{name}/share/config/soffice.cfg/uui/ui/res/*
+%dir %{_datadir}/%{name}/share/config/soffice.cfg/vcl
+%{_datadir}/%{name}/share/config/soffice.cfg/vcl/ui
+%exclude %{_datadir}/%{name}/share/config/soffice.cfg/vcl/ui/res/*
+%dir %{_datadir}/%{name}/share/config/soffice.cfg/xmlsec
+%{_datadir}/%{name}/share/config/soffice.cfg/xmlsec/ui
+%exclude %{_datadir}/%{name}/share/config/soffice.cfg/xmlsec/ui/res/*
+%{_datadir}/%{name}/share/config/webcast
+%{_datadir}/%{name}/share/config/wizard
+%dir %{_datadir}/%{name}/share/dtd
+%{_datadir}/%{name}/share/dtd/officedocument
+%dir %{_datadir}/%{name}/share/extensions
+%{_datadir}/%{name}/share/extensions/package.txt
+%{_datadir}/%{name}/share/filter
+%{_datadir}/%{name}/share/fonts
+%{_datadir}/%{name}/share/gallery
+%{_datadir}/%{name}/share/psprint
 
-%dir %{_libdir}/%{name}/share/registry
-%{_libdir}/%{name}/share/registry/reportbuilder.xcd
-%{_libdir}/%{name}/share/registry/Langpack-en-US.xcd
-%{_libdir}/%{name}/share/registry/lingucomponent.xcd
-%{_libdir}/%{name}/share/registry/main.xcd
-%{_libdir}/%{name}/share/registry/oo-ad-ldap.xcd.sample
-%{_libdir}/%{name}/share/registry/oo-ldap.xcd.sample
-%dir %{_libdir}/%{name}/share/registry/res
-%{_libdir}/%{name}/share/registry/res/fcfg_langpack_en-US.xcd
+%dir %{_datadir}/%{name}/share/registry
+%{_datadir}/%{name}/share/registry/reportbuilder.xcd
+%{_datadir}/%{name}/share/registry/Langpack-en-US.xcd
+%{_datadir}/%{name}/share/registry/lingucomponent.xcd
+%{_datadir}/%{name}/share/registry/main.xcd
+%{_datadir}/%{name}/share/registry/oo-ad-ldap.xcd.sample
+%{_datadir}/%{name}/share/registry/oo-ldap.xcd.sample
+%dir %{_datadir}/%{name}/share/registry/res
+%{_datadir}/%{name}/share/registry/res/fcfg_langpack_en-US.xcd
 
-%dir %{_libdir}/%{name}/share/template
-%dir %{_libdir}/%{name}/share/template/common
-%{_libdir}/%{name}/share/template/common/internal
-%{_libdir}/%{name}/share/template/common/layout
-%dir %{_libdir}/%{name}/share/template/wizard
-%{_libdir}/%{name}/share/template/wizard/bitmap
-%dir %{_libdir}/%{name}/share/template/common/wizard
-%{_libdir}/%{name}/share/template/common/wizard/agenda
-%{_libdir}/%{name}/share/template/common/wizard/fax
-%{_libdir}/%{name}/share/template/common/wizard/letter
-%{_libdir}/%{name}/share/template/common/wizard/report
-%{_libdir}/%{name}/share/template/common/wizard/styles
+%dir %{_datadir}/%{name}/share/template
+%dir %{_datadir}/%{name}/share/template/common
+%{_datadir}/%{name}/share/template/common/internal
+%{_datadir}/%{name}/share/template/common/layout
+%dir %{_datadir}/%{name}/share/template/wizard
+%{_datadir}/%{name}/share/template/wizard/bitmap
+%dir %{_datadir}/%{name}/share/template/common/wizard
+%{_datadir}/%{name}/share/template/common/wizard/agenda
+%{_datadir}/%{name}/share/template/common/wizard/fax
+%{_datadir}/%{name}/share/template/common/wizard/letter
+%{_datadir}/%{name}/share/template/common/wizard/report
+%{_datadir}/%{name}/share/template/common/wizard/styles
 
-%dir %{_libdir}/%{name}/share/wordbook
-%{_libdir}/%{name}/share/wordbook/en-GB.dic
-%{_libdir}/%{name}/share/wordbook/en-US.dic
-%{_libdir}/%{name}/share/wordbook/sl.dic
-%{_libdir}/%{name}/share/wordbook/technical.dic
+%dir %{_datadir}/%{name}/share/wordbook
+%{_datadir}/%{name}/share/wordbook/en-GB.dic
+%{_datadir}/%{name}/share/wordbook/en-US.dic
+%{_datadir}/%{name}/share/wordbook/sl.dic
+%{_datadir}/%{name}/share/wordbook/technical.dic
 
-%dir %{_libdir}/%{name}/share/xslt
-%{_libdir}/%{name}/share/xslt/common
-%dir %{_libdir}/%{name}/share/xslt/export
-%{_libdir}/%{name}/share/xslt/export/common
-%{_libdir}/%{name}/share/xslt/export/spreadsheetml
-%{_libdir}/%{name}/share/xslt/export/uof
-%{_libdir}/%{name}/share/xslt/export/wordml
-%{_libdir}/%{name}/share/xslt/import
+%dir %{_datadir}/%{name}/share/xslt
+%{_datadir}/%{name}/share/xslt/common
+%dir %{_datadir}/%{name}/share/xslt/export
+%{_datadir}/%{name}/share/xslt/export/common
+%{_datadir}/%{name}/share/xslt/export/spreadsheetml
+%{_datadir}/%{name}/share/xslt/export/uof
+%{_datadir}/%{name}/share/xslt/export/wordml
+%{_datadir}/%{name}/share/xslt/import
 
 # symlink to directory
 %attr(755,root,root) %{_libdir}/%{name}/ure-link
@@ -3413,11 +3744,10 @@ fi
 # symlinks
 %{_libdir}/%{name}/help
 %{_libdir}/%{name}/readmes
+%{_libdir}/%{name}/share
 
 %dir %{_datadir}/%{name}/readmes
 %{_datadir}/%{name}/readmes/README_en-US
-%dir %{_libdir}/%{name}/share/extensions
-%{_libdir}/%{name}/share/extensions/package.txt
 
 %{_datadir}/mime/packages/libreoffice.xml
 %{_iconsdir}/hicolor/*/mimetypes/libreoffice-*.png
@@ -3463,7 +3793,7 @@ fi
 %attr(755,root,root) %{_libdir}/%{name}/program/libvclplug_gtk*.so
 %attr(755,root,root) %{_libdir}/%{name}/program/libgconfbe1lo.so
 %attr(755,root,root) %{_libdir}/%{name}/program/libqstart_gtklo.so
-%{_libdir}/%{name}/share/registry/gnome.xcd
+%{_datadir}/%{name}/share/registry/gnome.xcd
 %endif
 
 %files base
@@ -3488,23 +3818,23 @@ fi
 %{_libdir}/%{name}/program/resource/rptuien-US.res
 %{_libdir}/%{name}/program/resource/sdbclen-US.res
 %{_libdir}/%{name}/program/resource/sdberren-US.res
-%{_libdir}/%{name}/share/config/soffice.cfg/modules/dbapp/menubar
-%{_libdir}/%{name}/share/config/soffice.cfg/modules/dbapp/statusbar
-%{_libdir}/%{name}/share/config/soffice.cfg/modules/dbapp/toolbar
-%{_libdir}/%{name}/share/config/soffice.cfg/modules/dbbrowser/menubar
-%{_libdir}/%{name}/share/config/soffice.cfg/modules/dbbrowser/toolbar
-%{_libdir}/%{name}/share/config/soffice.cfg/modules/dbquery/menubar
-%{_libdir}/%{name}/share/config/soffice.cfg/modules/dbquery/toolbar
-%{_libdir}/%{name}/share/config/soffice.cfg/modules/dbrelation
-%{_libdir}/%{name}/share/config/soffice.cfg/modules/dbreport/menubar
-%{_libdir}/%{name}/share/config/soffice.cfg/modules/dbreport/statusbar
-%{_libdir}/%{name}/share/config/soffice.cfg/modules/dbreport/toolbar
-%{_libdir}/%{name}/share/config/soffice.cfg/modules/dbreport/ui
-%exclude %{_libdir}/%{name}/share/config/soffice.cfg/modules/dbreport/ui/res/*
-%{_libdir}/%{name}/share/config/soffice.cfg/modules/dbtable
-%{_libdir}/%{name}/share/config/soffice.cfg/modules/dbtdata/menubar
-%{_libdir}/%{name}/share/config/soffice.cfg/modules/dbtdata/toolbar
-%{_libdir}/%{name}/share/registry/base.xcd
+%{_datadir}/%{name}/share/config/soffice.cfg/modules/dbapp/menubar
+%{_datadir}/%{name}/share/config/soffice.cfg/modules/dbapp/statusbar
+%{_datadir}/%{name}/share/config/soffice.cfg/modules/dbapp/toolbar
+%{_datadir}/%{name}/share/config/soffice.cfg/modules/dbbrowser/menubar
+%{_datadir}/%{name}/share/config/soffice.cfg/modules/dbbrowser/toolbar
+%{_datadir}/%{name}/share/config/soffice.cfg/modules/dbquery/menubar
+%{_datadir}/%{name}/share/config/soffice.cfg/modules/dbquery/toolbar
+%{_datadir}/%{name}/share/config/soffice.cfg/modules/dbrelation
+%{_datadir}/%{name}/share/config/soffice.cfg/modules/dbreport/menubar
+%{_datadir}/%{name}/share/config/soffice.cfg/modules/dbreport/statusbar
+%{_datadir}/%{name}/share/config/soffice.cfg/modules/dbreport/toolbar
+%{_datadir}/%{name}/share/config/soffice.cfg/modules/dbreport/ui
+%exclude %{_datadir}/%{name}/share/config/soffice.cfg/modules/dbreport/ui/res/*
+%{_datadir}/%{name}/share/config/soffice.cfg/modules/dbtable
+%{_datadir}/%{name}/share/config/soffice.cfg/modules/dbtdata/menubar
+%{_datadir}/%{name}/share/config/soffice.cfg/modules/dbtdata/toolbar
+%{_datadir}/%{name}/share/registry/base.xcd
 
 %files calc
 %defattr(644,root,root,755)
@@ -3531,12 +3861,12 @@ fi
 %{_libdir}/%{name}/program/resource/pricingen-US.res
 %{_libdir}/%{name}/program/resource/solveren-US.res
 %{_libdir}/%{name}/program/resource/scen-US.res
-%{_libdir}/%{name}/share/config/soffice.cfg/modules/scalc/menubar
-%{_libdir}/%{name}/share/config/soffice.cfg/modules/scalc/statusbar
-%{_libdir}/%{name}/share/config/soffice.cfg/modules/scalc/toolbar
-%{_libdir}/%{name}/share/config/soffice.cfg/modules/scalc/ui
-%exclude %{_libdir}/%{name}/share/config/soffice.cfg/modules/scalc/ui/res/*
-%{_libdir}/%{name}/share/registry/calc.xcd
+%{_datadir}/%{name}/share/config/soffice.cfg/modules/scalc/menubar
+%{_datadir}/%{name}/share/config/soffice.cfg/modules/scalc/statusbar
+%{_datadir}/%{name}/share/config/soffice.cfg/modules/scalc/toolbar
+%{_datadir}/%{name}/share/config/soffice.cfg/modules/scalc/ui
+%exclude %{_datadir}/%{name}/share/config/soffice.cfg/modules/scalc/ui/res/*
+%{_datadir}/%{name}/share/registry/calc.xcd
 
 %files draw
 %defattr(644,root,root,755)
@@ -3547,12 +3877,12 @@ fi
 %{_desktopdir}/libreoffice-draw.desktop
 %{_iconsdir}/hicolor/*/apps/libreoffice-draw.png
 %{_iconsdir}/hicolor/*/apps/libreoffice-draw.svg
-%{_libdir}/%{name}/share/config/soffice.cfg/modules/sdraw/menubar
-%{_libdir}/%{name}/share/config/soffice.cfg/modules/sdraw/statusbar
-%{_libdir}/%{name}/share/config/soffice.cfg/modules/sdraw/toolbar
-%{_libdir}/%{name}/share/config/soffice.cfg/modules/sdraw/ui
-%exclude %{_libdir}/%{name}/share/config/soffice.cfg/modules/sdraw/ui/res/*
-%{_libdir}/%{name}/share/registry/draw.xcd
+%{_datadir}/%{name}/share/config/soffice.cfg/modules/sdraw/menubar
+%{_datadir}/%{name}/share/config/soffice.cfg/modules/sdraw/statusbar
+%{_datadir}/%{name}/share/config/soffice.cfg/modules/sdraw/toolbar
+%{_datadir}/%{name}/share/config/soffice.cfg/modules/sdraw/ui
+%exclude %{_datadir}/%{name}/share/config/soffice.cfg/modules/sdraw/ui/res/*
+%{_datadir}/%{name}/share/registry/draw.xcd
 
 %files emailmerge
 %defattr(644,root,root,755)
@@ -3578,14 +3908,14 @@ fi
 %{_iconsdir}/hicolor/*/apps/libreoffice-writer.png
 %{_iconsdir}/hicolor/*/apps/libreoffice-writer.svg
 %{_libdir}/%{name}/program/resource/t602filteren-US.res
-%{_libdir}/%{name}/share/config/soffice.cfg/modules/sbibliography
-%exclude %{_libdir}/%{name}/share/config/soffice.cfg/modules/sbibliography/ui/res/*
-%{_libdir}/%{name}/share/config/soffice.cfg/modules/swriter/menubar
-%{_libdir}/%{name}/share/config/soffice.cfg/modules/swriter/statusbar
-%{_libdir}/%{name}/share/config/soffice.cfg/modules/swriter/toolbar
-%{_libdir}/%{name}/share/config/soffice.cfg/modules/swriter/ui
-%exclude %{_libdir}/%{name}/share/config/soffice.cfg/modules/swriter/ui/res/*
-%{_libdir}/%{name}/share/registry/writer.xcd
+%{_datadir}/%{name}/share/config/soffice.cfg/modules/sbibliography
+%exclude %{_datadir}/%{name}/share/config/soffice.cfg/modules/sbibliography/ui/res/*
+%{_datadir}/%{name}/share/config/soffice.cfg/modules/swriter/menubar
+%{_datadir}/%{name}/share/config/soffice.cfg/modules/swriter/statusbar
+%{_datadir}/%{name}/share/config/soffice.cfg/modules/swriter/toolbar
+%{_datadir}/%{name}/share/config/soffice.cfg/modules/swriter/ui
+%exclude %{_datadir}/%{name}/share/config/soffice.cfg/modules/swriter/ui/res/*
+%{_datadir}/%{name}/share/registry/writer.xcd
 
 %files impress
 %defattr(644,root,root,755)
@@ -3602,14 +3932,14 @@ fi
 %{_desktopdir}/libreoffice-impress.desktop
 %{_iconsdir}/hicolor/*/apps/libreoffice-impress.png
 %{_iconsdir}/hicolor/*/apps/libreoffice-impress.svg
-%{_libdir}/%{name}/share/config/soffice.cfg/simpress
-%{_libdir}/%{name}/share/config/soffice.cfg/modules/simpress/menubar
-%{_libdir}/%{name}/share/config/soffice.cfg/modules/simpress/statusbar
-%{_libdir}/%{name}/share/config/soffice.cfg/modules/simpress/toolbar
-%{_libdir}/%{name}/share/config/soffice.cfg/modules/simpress/ui
-%exclude %{_libdir}/%{name}/share/config/soffice.cfg/modules/simpress/ui/res/*
-%{_libdir}/%{name}/share/registry/impress.xcd
-%{_libdir}/%{name}/share/registry/ogltrans.xcd
+%{_datadir}/%{name}/share/config/soffice.cfg/simpress
+%{_datadir}/%{name}/share/config/soffice.cfg/modules/simpress/menubar
+%{_datadir}/%{name}/share/config/soffice.cfg/modules/simpress/statusbar
+%{_datadir}/%{name}/share/config/soffice.cfg/modules/simpress/toolbar
+%{_datadir}/%{name}/share/config/soffice.cfg/modules/simpress/ui
+%exclude %{_datadir}/%{name}/share/config/soffice.cfg/modules/simpress/ui/res/*
+%{_datadir}/%{name}/share/registry/impress.xcd
+%{_datadir}/%{name}/share/registry/ogltrans.xcd
 
 %files math
 %defattr(644,root,root,755)
@@ -3623,41 +3953,41 @@ fi
 %attr(755,root,root) %{_libdir}/%{name}/program/libsmlo.so
 %attr(755,root,root) %{_libdir}/%{name}/program/smath
 %{_libdir}/%{name}/program/resource/smen-US.res
-%{_libdir}/%{name}/share/config/soffice.cfg/modules/smath/menubar
-%{_libdir}/%{name}/share/config/soffice.cfg/modules/smath/statusbar
-%{_libdir}/%{name}/share/config/soffice.cfg/modules/smath/toolbar
-%{_libdir}/%{name}/share/config/soffice.cfg/modules/smath/ui
-%exclude %{_libdir}/%{name}/share/config/soffice.cfg/modules/smath/ui/res/*
-%{_libdir}/%{name}/share/registry/math.xcd
+%{_datadir}/%{name}/share/config/soffice.cfg/modules/smath/menubar
+%{_datadir}/%{name}/share/config/soffice.cfg/modules/smath/statusbar
+%{_datadir}/%{name}/share/config/soffice.cfg/modules/smath/toolbar
+%{_datadir}/%{name}/share/config/soffice.cfg/modules/smath/ui
+%exclude %{_datadir}/%{name}/share/config/soffice.cfg/modules/smath/ui/res/*
+%{_datadir}/%{name}/share/registry/math.xcd
 
 %files web
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_bindir}/loweb
 %attr(755,root,root) %{_bindir}/ooweb
 %{_mandir}/man1/loweb.1
-%{_libdir}/%{name}/share/config/soffice.cfg/modules/sweb/menubar
-%{_libdir}/%{name}/share/config/soffice.cfg/modules/sweb/statusbar
-%{_libdir}/%{name}/share/config/soffice.cfg/modules/sweb/toolbar
+%{_datadir}/%{name}/share/config/soffice.cfg/modules/sweb/menubar
+%{_datadir}/%{name}/share/config/soffice.cfg/modules/sweb/statusbar
+%{_datadir}/%{name}/share/config/soffice.cfg/modules/sweb/toolbar
 
 %files graphicfilter
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_libdir}/%{name}/program/libflashlo.so
 %attr(755,root,root) %{_libdir}/%{name}/program/libsvgfilterlo.so
-%{_libdir}/%{name}/share/registry/graphicfilter.xcd
+%{_datadir}/%{name}/share/registry/graphicfilter.xcd
 %attr(755,root,root) %{_libdir}/%{name}/program/libgraphicfilterlo.so
 
 %files xsltfilter
 %defattr(644,root,root,755)
-%{_libdir}/%{name}/share/registry/xsltfilter.xcd
-%{_libdir}/%{name}/share/xslt/docbook
-%{_libdir}/%{name}/share/xslt/export/xhtml
+%{_datadir}/%{name}/share/registry/xsltfilter.xcd
+%{_datadir}/%{name}/share/xslt/docbook
+%{_datadir}/%{name}/share/xslt/export/xhtml
 %{_desktopdir}/libreoffice-xsltfilter.desktop
 
 %files postgresql
 %defattr(644,root,root,755)
 %{_libdir}/%{name}/program/postgresql-sdbc.ini
 %{_libdir}/%{name}/program/services/postgresql-sdbc.rdb
-%{_libdir}/%{name}/share/registry/postgresql.xcd
+%{_datadir}/%{name}/share/registry/postgresql.xcd
 %attr(755,root,root) %{_libdir}/%{name}/program/libpostgresql-sdbclo.so
 %attr(755,root,root) %{_libdir}/%{name}/program/libpostgresql-sdbc-impllo.so
 
@@ -3743,8 +4073,8 @@ fi
 %{_libdir}/%{name}/program/unohelper.py
 %{_libdir}/%{name}/program/services/pyuno.rdb
 %{_libdir}/%{name}/program/services/scriptproviderforpython.rdb
-%{_libdir}/%{name}/share/registry/librelogo.xcd
-%{_libdir}/%{name}/share/registry/pyuno.xcd
+%{_datadir}/%{name}/share/registry/librelogo.xcd
+%{_datadir}/%{name}/share/registry/pyuno.xcd
 
 # python wizards
 %dir %{_libdir}/%{name}/program/wizards
@@ -3766,50 +4096,50 @@ fi
 %dir %{_libdir}/%{name}/program/wizards/ui/event
 %{_libdir}/%{name}/program/wizards/ui/event/*.py
 %dir %{_libdir}/%{name}/program/wizards/web
-%{_libdir}/%{name}/program/wizards/web/*.py
+%{_libdir}/%{namedatarogram/wizards/web/*.py
 %dir %{_libdir}/%{name}/program/wizards/web/data
 %{_libdir}/%{name}/program/wizards/web/data/*.py
 %dir %{_libdir}/%{name}/program/wizards/web/export
 %{_libdir}/%{name}/program/wizards/web/export/*.py
 
 # samples there
-%{_libdir}/%{name}/share/Scripts/python
+%{_datadir}/%{name}/share/Scripts/python
 
 %files pdfimport
 # -f pdfimport.lang
 %defattr(644,root,root,755)
 %{_libdir}/%{name}/program/xpdfimport
-%{_libdir}/%{name}/share/registry/pdfimport.xcd
-%{_libdir}/%{name}/share/xpdfimport
+%{_datadir}/%{name}/share/registry/pdfimport.xcd
+%{_datadir}/%{name}/share/xpdfimport
 %{_libdir}/%{name}/program/libpdfimportlo.so
 
 %files wiki-publisher -f wiki-publisher.lang
 %defattr(644,root,root,755)
-%dir %{_libdir}/%{name}/share/extensions/wiki-publisher
-%{_libdir}/%{name}/share/extensions/wiki-publisher/META-INF
-%{_libdir}/%{name}/share/extensions/wiki-publisher/WikiEditor
-%{_libdir}/%{name}/share/extensions/wiki-publisher/filter
-%dir %{_libdir}/%{name}/share/extensions/wiki-publisher/help
-%{_libdir}/%{name}/share/extensions/wiki-publisher/license
-%{_libdir}/%{name}/share/extensions/wiki-publisher/registration
-%{_libdir}/%{name}/share/extensions/wiki-publisher/templates
-%{_libdir}/%{name}/share/extensions/wiki-publisher/*.xc*
-%{_libdir}/%{name}/share/extensions/wiki-publisher/components.rdb
-%{_libdir}/%{name}/share/extensions/wiki-publisher/description.xml
-%{_libdir}/%{name}/share/extensions/wiki-publisher/mediawiki.jar
+%dir %{_datadir}/%{name}/share/extensions/wiki-publisher
+%{_datadir}/%{name}/share/extensions/wiki-publisher/META-INF
+%{_datadir}/%{name}/share/extensions/wiki-publisher/WikiEditor
+%{_datadir}/%{name}/share/extensions/wiki-publisher/filter
+%dir %{_datadir}/%{name}/share/extensions/wiki-publisher/help
+%{_datadir}/%{name}/share/extensions/wiki-publisher/license
+%{_datadir}/%{name}/share/extensions/wiki-publisher/registration
+%{_datadir}/%{name}/share/extensions/wiki-publisher/templates
+%{_datadir}/%{name}/share/extensions/wiki-publisher/*.xc*
+%{_datadir}/%{name}/share/extensions/wiki-publisher/components.rdb
+%{_datadir}/%{name}/share/extensions/wiki-publisher/description.xml
+%{_datadir}/%{name}/share/extensions/wiki-publisher/mediawiki.jar
 
 %files nlpsolver -f nlpsolver.lang
 %defattr(644,root,root,755)
-%dir %{_libdir}/%{name}/share/extensions/nlpsolver
-%{_libdir}/%{name}/share/extensions/nlpsolver/META-INF
-%dir %{_libdir}/%{name}/share/extensions/nlpsolver/help
-%dir %{_libdir}/%{name}/share/extensions/nlpsolver/locale
-%{_libdir}/%{name}/share/extensions/nlpsolver/locale/*_en_US.default
-%{_libdir}/%{name}/share/extensions/nlpsolver/registration
-%{_libdir}/%{name}/share/extensions/nlpsolver/EvolutionarySolver.jar
-%{_libdir}/%{name}/share/extensions/nlpsolver/components.rdb
-%{_libdir}/%{name}/share/extensions/nlpsolver/description.xml
-%{_libdir}/%{name}/share/extensions/nlpsolver/nlpsolver.jar
+%dir %{_datadir}/%{name}/share/extensions/nlpsolver
+%{_datadir}/%{name}/share/extensions/nlpsolver/META-INF
+%dir %{_datadir}/%{name}/share/extensions/nlpsolver/help
+%dir %{_datadir}/%{name}/share/extensions/nlpsolver/locale
+%{_datadir}/%{name}/share/extensions/nlpsolver/locale/*_en_US.default
+%{_datadir}/%{name}/share/extensions/nlpsolver/registration
+%{_datadir}/%{name}/share/extensions/nlpsolver/EvolutionarySolver.jar
+%{_datadir}/%{name}/share/extensions/nlpsolver/components.rdb
+%{_datadir}/%{name}/share/extensions/nlpsolver/description.xml
+%{_datadir}/%{name}/share/extensions/nlpsolver/nlpsolver.jar
 
 %if %{with mozilla}
 %files -n browser-plugin-%{name}
@@ -3961,7 +4291,7 @@ fi
 
 %files i18n-ko -f ko.lang
 %defattr(644,root,root,755)
-%{_libdir}/%{name}/share/registry/korea.xcd
+%{_datadir}/%{name}/share/registry/korea.xcd
 
 %files i18n-kok -f kok.lang
 %defattr(644,root,root,755)
@@ -4147,5 +4477,5 @@ fi
 
 %files glade
 %attr(755,root,root) %{_libdir}/%{name}/program/ui-previewer
-%dir %{_libdir}/%{name}/share/glade
-%{_libdir}/%{name}/share/glade/libreoffice-catalog.xml
+%dir %{_datadir}/%{name}/share/glade
+%{_datadir}/%{name}/share/glade/libreoffice-catalog.xml
