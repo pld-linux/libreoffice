@@ -16,7 +16,7 @@
 %bcond_with	gtk3		# GTK3 L&F (experimental)
 %bcond_with	mono		# enable compilation of mono bindings
 %bcond_without	mozilla		# without mozilla components
-%bcond_without	i18n        # do not create i18n packages (extra build time)
+%bcond_without	i18n		# do not create i18n packages (extra build time)
 %bcond_with	ccache		# use ccache to speed up builds
 %bcond_with	icecream	# use icecream to speed up builds
 %bcond_with	msaccess	# with ms access import pieces
@@ -4097,7 +4097,7 @@ fi
 %dir %{_libdir}/%{name}/program/wizards/ui/event
 %{_libdir}/%{name}/program/wizards/ui/event/*.py
 %dir %{_libdir}/%{name}/program/wizards/web
-%{_libdir}/%{namedatarogram/wizards/web/*.py
+%{_libdir}/%{name}/program/wizards/web/*.py
 %dir %{_libdir}/%{name}/program/wizards/web/data
 %{_libdir}/%{name}/program/wizards/web/data/*.py
 %dir %{_libdir}/%{name}/program/wizards/web/export
