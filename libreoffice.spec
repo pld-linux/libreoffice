@@ -2910,6 +2910,7 @@ export PATH=$PATH:%{_libdir}/interbase/bin
 	--with-system-graphite \
 	--with-system-icu \
 	--with-system-jpeg \
+	--with-system-libgltf \
 	--with-system-libwpd \
 	--with-system-libwpg \
 	--with-system-libwps \
