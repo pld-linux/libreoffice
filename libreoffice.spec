@@ -262,8 +262,8 @@ BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 # - share/ - 17000 files of 415M
 # - help/ - 6500 files of 1.4G
 # - program/resource/ - 5610 files of 216M
-%define		_noautostrip	.*\\(%{_datadir}\\|%{_libdir}/%{name}/program/resource\\)/.*
-%define		_noautochrpath	.*\\(%{_datadir}\\|%{_libdir}/%{name}/program/resource\\)/.*
+%define		_noautostrip	.*%{_datadir}/.*
+%define		_noautochrpath	.*%{_datadir}/.*
 
 %description
 LibreOffice is an open-source project sponsored by Sun Microsystems
@@ -3024,7 +3024,7 @@ if [ ! -f installed.stamp ]; then
 
 	chmod +x $RPM_BUILD_ROOT%{_libdir}/%{name}/program/*.so
 
-	install -d $RPM_BUILD_ROOT%{_datadir}/%{name}
+	install -d $RPM_BUILD_ROOT%{_datadir}/%{name}/program
 	# put share to %{_datadir} so we're able to produce noarch packages
 	mv $RPM_BUILD_ROOT%{_libdir}/%{name}/help $RPM_BUILD_ROOT/%{_datadir}/%{name}
 	ln -s ../../share/%{name}/help $RPM_BUILD_ROOT%{_libdir}/%{name}/help
@@ -3032,6 +3032,8 @@ if [ ! -f installed.stamp ]; then
 	ln -s ../../share/%{name}/readmes $RPM_BUILD_ROOT%{_libdir}/%{name}/readmes
 	mv $RPM_BUILD_ROOT%{_libdir}/%{name}/share $RPM_BUILD_ROOT%{_datadir}/%{name}
 	ln -s ../../share/%{name}/share $RPM_BUILD_ROOT%{_libdir}/%{name}/share
+	mv $RPM_BUILD_ROOT%{_libdir}/%{name}/program/resource $RPM_BUILD_ROOT%{_datadir}/%{name}/program
+	ln -s ../../../share/%{name}/program/resource $RPM_BUILD_ROOT%{_libdir}/%{name}/program/resource
 
 	%{__rm} -r $RPM_BUILD_ROOT%{_desktopdir}/*.desktop \
 		$RPM_BUILD_ROOT%{_iconsdir}/{gnome,locolor} \
@@ -3145,6 +3147,7 @@ done
 	s,%{_libdir}/%{name}/share,%{_datadir}/%{name}/share,;
 	s,%{_libdir}/%{name}/readmes,%{_datadir}/%{name}/readmes,;
 	s,%{_libdir}/%{name}/help,%{_datadir}/%{name}/help,;
+	s,%{_libdir}/%{name}/program/resource,%{_datadir}/%{name}/program/resource,;
 ' *.lang
 %endif
 
@@ -3539,48 +3542,50 @@ fi
 %{_libdir}/%{name}/program/types/offapi.rdb
 %{_libdir}/%{name}/program/types/oovbaapi.rdb
 
-%dir %{_libdir}/%{name}/program/resource
-%{_libdir}/%{name}/program/resource/accen-US.res
-%{_libdir}/%{name}/program/resource/avmediaen-US.res
-%{_libdir}/%{name}/program/resource/basctlen-US.res
-%{_libdir}/%{name}/program/resource/biben-US.res
-%{_libdir}/%{name}/program/resource/cuien-US.res
-%{_libdir}/%{name}/program/resource/chartcontrolleren-US.res
-%{_libdir}/%{name}/program/resource/dbaen-US.res
-%{_libdir}/%{name}/program/resource/dbmmen-US.res
-%{_libdir}/%{name}/program/resource/dbwen-US.res
-%{_libdir}/%{name}/program/resource/deploymenten-US.res
-%{_libdir}/%{name}/program/resource/deploymentguien-US.res
-%{_libdir}/%{name}/program/resource/dkten-US.res
-%{_libdir}/%{name}/program/resource/editengen-US.res
-%{_libdir}/%{name}/program/resource/epsen-US.res
-%{_libdir}/%{name}/program/resource/euren-US.res
-%{_libdir}/%{name}/program/resource/foren-US.res
-%{_libdir}/%{name}/program/resource/foruien-US.res
-%{_libdir}/%{name}/program/resource/fps_officeen-US.res
-%{_libdir}/%{name}/program/resource/frmen-US.res
-%{_libdir}/%{name}/program/resource/fween-US.res
-%{_libdir}/%{name}/program/resource/galen-US.res
-%{_libdir}/%{name}/program/resource/impen-US.res
-%{_libdir}/%{name}/program/resource/ofaen-US.res
-%{_libdir}/%{name}/program/resource/pcren-US.res
-%{_libdir}/%{name}/program/resource/pdffilteren-US.res
-%{_libdir}/%{name}/program/resource/sben-US.res
-%{_libdir}/%{name}/program/resource/scnen-US.res
-%{_libdir}/%{name}/program/resource/sden-US.res
-%{_libdir}/%{name}/program/resource/sdbten-US.res
-%{_libdir}/%{name}/program/resource/sfxen-US.res
-%{_libdir}/%{name}/program/resource/svlen-US.res
-%{_libdir}/%{name}/program/resource/svten-US.res
-%{_libdir}/%{name}/program/resource/svxen-US.res
-%{_libdir}/%{name}/program/resource/swen-US.res
-%{_libdir}/%{name}/program/resource/tplen-US.res
-%{_libdir}/%{name}/program/resource/upden-US.res
-%{_libdir}/%{name}/program/resource/uuien-US.res
-%{_libdir}/%{name}/program/resource/vclen-US.res
-%{_libdir}/%{name}/program/resource/wzien-US.res
-%{_libdir}/%{name}/program/resource/xmlsecen-US.res
-%{_libdir}/%{name}/program/resource/xsltdlgen-US.res
+# symlink
+%{_libdir}/%{name}/program/resource
+%dir %{_datadir}/%{name}/program/resource
+%{_datadir}/%{name}/program/resource/accen-US.res
+%{_datadir}/%{name}/program/resource/avmediaen-US.res
+%{_datadir}/%{name}/program/resource/basctlen-US.res
+%{_datadir}/%{name}/program/resource/biben-US.res
+%{_datadir}/%{name}/program/resource/cuien-US.res
+%{_datadir}/%{name}/program/resource/chartcontrolleren-US.res
+%{_datadir}/%{name}/program/resource/dbaen-US.res
+%{_datadir}/%{name}/program/resource/dbmmen-US.res
+%{_datadir}/%{name}/program/resource/dbwen-US.res
+%{_datadir}/%{name}/program/resource/deploymenten-US.res
+%{_datadir}/%{name}/program/resource/deploymentguien-US.res
+%{_datadir}/%{name}/program/resource/dkten-US.res
+%{_datadir}/%{name}/program/resource/editengen-US.res
+%{_datadir}/%{name}/program/resource/epsen-US.res
+%{_datadir}/%{name}/program/resource/euren-US.res
+%{_datadir}/%{name}/program/resource/foren-US.res
+%{_datadir}/%{name}/program/resource/foruien-US.res
+%{_datadir}/%{name}/program/resource/fps_officeen-US.res
+%{_datadir}/%{name}/program/resource/frmen-US.res
+%{_datadir}/%{name}/program/resource/fween-US.res
+%{_datadir}/%{name}/program/resource/galen-US.res
+%{_datadir}/%{name}/program/resource/impen-US.res
+%{_datadir}/%{name}/program/resource/ofaen-US.res
+%{_datadir}/%{name}/program/resource/pcren-US.res
+%{_datadir}/%{name}/program/resource/pdffilteren-US.res
+%{_datadir}/%{name}/program/resource/sben-US.res
+%{_datadir}/%{name}/program/resource/scnen-US.res
+%{_datadir}/%{name}/program/resource/sden-US.res
+%{_datadir}/%{name}/program/resource/sdbten-US.res
+%{_datadir}/%{name}/program/resource/sfxen-US.res
+%{_datadir}/%{name}/program/resource/svlen-US.res
+%{_datadir}/%{name}/program/resource/svten-US.res
+%{_datadir}/%{name}/program/resource/svxen-US.res
+%{_datadir}/%{name}/program/resource/swen-US.res
+%{_datadir}/%{name}/program/resource/tplen-US.res
+%{_datadir}/%{name}/program/resource/upden-US.res
+%{_datadir}/%{name}/program/resource/uuien-US.res
+%{_datadir}/%{name}/program/resource/vclen-US.res
+%{_datadir}/%{name}/program/resource/wzien-US.res
+%{_datadir}/%{name}/program/resource/xmlsecen-US.res
+%{_datadir}/%{name}/program/resource/xsltdlgen-US.res
 
 %dir %{_datadir}/%{name}/share
 %dir %{_datadir}/%{name}/share/labels
@@ -3811,14 +3816,14 @@ fi
 %attr(755,root,root) %{_libdir}/%{name}/program/librptlo.so
 %attr(755,root,root) %{_libdir}/%{name}/program/librptuilo.so
 %attr(755,root,root) %{_libdir}/%{name}/program/librptxmllo.so
-%{_libdir}/%{name}/program/resource/abpen-US.res
-%{_libdir}/%{name}/program/resource/cnren-US.res
-%{_libdir}/%{name}/program/resource/dbpen-US.res
-%{_libdir}/%{name}/program/resource/dbuen-US.res
-%{_libdir}/%{name}/program/resource/rpten-US.res
-%{_libdir}/%{name}/program/resource/rptuien-US.res
-%{_libdir}/%{name}/program/resource/sdbclen-US.res
-%{_libdir}/%{name}/program/resource/sdberren-US.res
+%{_datadir}/%{name}/program/resource/abpen-US.res
+%{_datadir}/%{name}/program/resource/cnren-US.res
+%{_datadir}/%{name}/program/resource/dbpen-US.res
+%{_datadir}/%{name}/program/resource/dbuen-US.res
+%{_datadir}/%{name}/program/resource/rpten-US.res
+%{_datadir}/%{name}/program/resource/rptuien-US.res
+%{_datadir}/%{name}/program/resource/sdbclen-US.res
+%{_datadir}/%{name}/program/resource/sdberren-US.res
 %{_datadir}/%{name}/share/config/soffice.cfg/modules/dbapp/menubar
 %{_datadir}/%{name}/share/config/soffice.cfg/modules/dbapp/statusbar
 %{_datadir}/%{name}/share/config/soffice.cfg/modules/dbapp/toolbar
@@ -3857,11 +3862,11 @@ fi
 %attr(755,root,root) %{_libdir}/%{name}/program/libsolverlo.so
 %attr(755,root,root) %{_libdir}/%{name}/program/libvbaobjlo.so
 %attr(755,root,root) %{_libdir}/%{name}/program/libwpftcalclo.so
-%{_libdir}/%{name}/program/resource/analysisen-US.res
-%{_libdir}/%{name}/program/resource/dateen-US.res
-%{_libdir}/%{name}/program/resource/pricingen-US.res
-%{_libdir}/%{name}/program/resource/solveren-US.res
-%{_libdir}/%{name}/program/resource/scen-US.res
+%{_datadir}/%{name}/program/resource/analysisen-US.res
+%{_datadir}/%{name}/program/resource/dateen-US.res
+%{_datadir}/%{name}/program/resource/pricingen-US.res
+%{_datadir}/%{name}/program/resource/solveren-US.res
+%{_datadir}/%{name}/program/resource/scen-US.res
 %{_datadir}/%{name}/share/config/soffice.cfg/modules/scalc/menubar
 %{_datadir}/%{name}/share/config/soffice.cfg/modules/scalc/statusbar
 %{_datadir}/%{name}/share/config/soffice.cfg/modules/scalc/toolbar
@@ -3908,7 +3913,7 @@ fi
 %{_desktopdir}/libreoffice-writer.desktop
 %{_iconsdir}/hicolor/*/apps/libreoffice-writer.png
 %{_iconsdir}/hicolor/*/apps/libreoffice-writer.svg
-%{_libdir}/%{name}/program/resource/t602filteren-US.res
+%{_datadir}/%{name}/program/resource/t602filteren-US.res
 %{_datadir}/%{name}/share/config/soffice.cfg/modules/sbibliography
 %exclude %{_datadir}/%{name}/share/config/soffice.cfg/modules/sbibliography/ui/res/*
 %{_datadir}/%{name}/share/config/soffice.cfg/modules/swriter/menubar
@@ -3953,7 +3958,7 @@ fi
 %attr(755,root,root) %{_libdir}/%{name}/program/libsmdlo.so
 %attr(755,root,root) %{_libdir}/%{name}/program/libsmlo.so
 %attr(755,root,root) %{_libdir}/%{name}/program/smath
-%{_libdir}/%{name}/program/resource/smen-US.res
+%{_datadir}/%{name}/program/resource/smen-US.res
 %{_datadir}/%{name}/share/config/soffice.cfg/modules/smath/menubar
 %{_datadir}/%{name}/share/config/soffice.cfg/modules/smath/statusbar
 %{_datadir}/%{name}/share/config/soffice.cfg/modules/smath/toolbar
