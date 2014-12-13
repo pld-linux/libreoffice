@@ -49,7 +49,7 @@ Summary:	LibreOffice - powerful office suite
 Summary(pl.UTF-8):	LibreOffice - potężny pakiet biurowy
 Name:		libreoffice
 Version:	%{major_ver}.1
-Release:	4
+Release:	5
 License:	GPL/LGPL
 Group:		X11/Applications
 Source0:	http://download.documentfoundation.org/libreoffice/src/%{major_ver}/%{name}-%{version}.tar.xz
@@ -3544,6 +3544,7 @@ fi
 
 # symlink
 %{_libdir}/%{name}/program/resource
+%dir %{_datadir}/%{name}/program
 %dir %{_datadir}/%{name}/program/resource
 %{_datadir}/%{name}/program/resource/accen-US.res
 %{_datadir}/%{name}/program/resource/avmediaen-US.res
