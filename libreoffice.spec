@@ -3167,6 +3167,25 @@ done
 %clean
 rm -rf $RPM_BUILD_ROOT
 
+%pretrans core
+if [ -d %{_libdir}/%{name}/program/resource ] && [ ! -L %{_libdir}/%{name}/program/resource ]; then
+	install -d %{_datadir}/%{name}/program
+	if [ -e %{_datadir}/%{name}/program/resource ]; then
+		mv %{_datadir}/%{name}/program/resource{,.rpmsave}
+	fi
+	%{__mv} -v %{_libdir}/%{name}/program/resource %{_datadir}/%{name}/program/resource
+	ln -vs %{_datadir}/%{name}/program/resource %{_libdir}/%{name}/program/resource
+fi
+if [ -d %{_libdir}/%{name}/share ] && [ ! -L %{_libdir}/%{name}/share ]; then
+	install -d %{_datadir}/%{name}
+	if [ -e %{_datadir}/%{name}/share ]; then
+		mv %{_datadir}/%{name}/share{,.rpmsave}
+	fi
+	%{__mv} -v %{_libdir}/%{name}/share %{_datadir}/%{name}/share
+	ln -vs %{_datadir}/%{name}/share %{_libdir}/%{name}/share
+fi
+exit 0
+
 %post core
 %update_mime_database
 %update_desktop_database_post
