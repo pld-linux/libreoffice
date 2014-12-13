@@ -3171,18 +3171,18 @@ rm -rf $RPM_BUILD_ROOT
 if [ -d %{_libdir}/%{name}/program/resource ] && [ ! -L %{_libdir}/%{name}/program/resource ]; then
 	install -d %{_datadir}/%{name}/program
 	if [ -e %{_datadir}/%{name}/program/resource ]; then
-		mv %{_datadir}/%{name}/program/resource{,.rpmsave}
+		%{__mv} %{_datadir}/%{name}/program/resource{,.rpmsave}
 	fi
 	%{__mv} -v %{_libdir}/%{name}/program/resource %{_datadir}/%{name}/program/resource
-	ln -vs %{_datadir}/%{name}/program/resource %{_libdir}/%{name}/program/resource
+	ln -s %{_datadir}/%{name}/program/resource %{_libdir}/%{name}/program/resource
 fi
 if [ -d %{_libdir}/%{name}/share ] && [ ! -L %{_libdir}/%{name}/share ]; then
 	install -d %{_datadir}/%{name}
 	if [ -e %{_datadir}/%{name}/share ]; then
-		mv %{_datadir}/%{name}/share{,.rpmsave}
+		%{__mv} %{_datadir}/%{name}/share{,.rpmsave}
 	fi
 	%{__mv} -v %{_libdir}/%{name}/share %{_datadir}/%{name}/share
-	ln -vs %{_datadir}/%{name}/share %{_libdir}/%{name}/share
+	ln -s %{_datadir}/%{name}/share %{_libdir}/%{name}/share
 fi
 exit 0
 
