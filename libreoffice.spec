@@ -106,7 +106,7 @@ BuildRequires:	cairo-devel >= 1.2.0
 %{?with_ccache:BuildRequires:	ccache}
 BuildRequires:	clucene-core-devel >= 2.3
 BuildRequires:	cppunit-devel >= 1.12.0
-%{!?with_system_coinmp:BuildRequires:	coinmp-devel}
+%{?with_system_coinmp:BuildRequires:	coinmp-devel}
 BuildRequires:	cups-devel
 BuildRequires:	curl-devel >= 7.9.8
 %{?with_system_db:BuildRequires:	db-devel}
