@@ -1,5 +1,6 @@
 # TODO:
 # - fix configure arguments (+ compare with FC)
+# - create CoinMP library package for PLD (https://projects.coin-or.org/CoinMP)
 #
 # NOTE - FIXME FOR 3.4.3 !!!:
 #	- normal build (i686) requires about 27 GB of disk space:
@@ -24,6 +25,7 @@
 
 %bcond_without	system_beanshell
 %bcond_without	system_db		# without system (i.e. with internal) Berkeley DB
+%bcond_with	system_coinmp		# use system CoinMP library (not in PLD yet)
 %bcond_with	system_libhnj		# with system ALTLinuxhyph (NFY)
 %bcond_without	system_mdbtools		# with system mdbtools
 %bcond_without	system_xalan
@@ -43,23 +45,23 @@
 %undefine	with_system_hsqldb
 %endif
 
-%define		major_ver		4.3.4
+%define		major_ver		4.4.2
 
 Summary:	LibreOffice - powerful office suite
 Summary(pl.UTF-8):	LibreOffice - potężny pakiet biurowy
 Name:		libreoffice
 Version:	%{major_ver}.1
-Release:	5
+Release:	0.1
 License:	GPL/LGPL
 Group:		X11/Applications
 Source0:	http://download.documentfoundation.org/libreoffice/src/%{major_ver}/%{name}-%{version}.tar.xz
-# Source0-md5:	98312fcb1e1ab37321f29f64f312160a
+# Source0-md5:	95a3c794f4c6e17d6ced1bd2be414568
 Source1:	http://download.documentfoundation.org/libreoffice/src/%{major_ver}/%{name}-dictionaries-%{version}.tar.xz
-# Source1-md5:	c323e5d646b3681c81fdd98510c2ae5a
+# Source1-md5:	05d21814f36942d840e813ca41d09511
 Source2:	http://download.documentfoundation.org/libreoffice/src/%{major_ver}/%{name}-help-%{version}.tar.xz
-# Source2-md5:	71ed47d8148dd66275bd87699b31c242
+# Source2-md5:	291b5bef617ac3af1d46f8c1c13f67c8
 Source3:	http://download.documentfoundation.org/libreoffice/src/%{major_ver}/%{name}-translations-%{version}.tar.xz
-# Source3-md5:	6e405e2b499ce28bce1e926bcb7268da
+# Source3-md5:	d528a5b5d10162f38775ee408f35a587
 
 
 # make fetch DO_FETCH_TARBALLS=1 WGET=wget
@@ -83,9 +85,7 @@ Source27:	http://dev-www.libreoffice.org/src/CoinMP-1.7.6.tgz
 Source28:	http://dev-www.libreoffice.org/src/OpenCOLLADA-master-6509aa13af.tar.bz2
 # Source28-md5:	4ca8a6ef0afeefc864e9ef21b9f14bd6
 
-Patch0:		%{name}-hamcrest.patch
 Patch1:		%{name}-build.patch
-Patch2:		%{name}-boost.patch
 URL:		http://www.documentfoundation.org/
 BuildRequires:	/usr/bin/getopt
 BuildRequires:	Firebird-devel
@@ -106,9 +106,9 @@ BuildRequires:	cairo-devel >= 1.2.0
 %{?with_ccache:BuildRequires:	ccache}
 BuildRequires:	clucene-core-devel >= 2.3
 BuildRequires:	cppunit-devel >= 1.12.0
+%{!?with_system_coinmp:BuildRequires:	coinmp-devel}
 BuildRequires:	cups-devel
 BuildRequires:	curl-devel >= 7.9.8
-%{?with_system_db:BuildRequires:	db-cxx-devel}
 %{?with_system_db:BuildRequires:	db-devel}
 BuildRequires:	dbus-glib-devel >= 0.70
 BuildRequires:	flex
@@ -149,6 +149,7 @@ BuildRequires:	libmspub-devel
 BuildRequires:	libmwaw-devel >= 0.3.0
 BuildRequires:	libodfgen-devel >= 0.1.1
 BuildRequires:	liborcus-devel >= 0.7.0
+BuildRequires:	libpagemaker-devel >= 0.0.2
 BuildRequires:	libvisio-devel
 BuildRequires:	libwpd-devel >= 0.10.0
 BuildRequires:	libwpg-devel >= 0.3.0
@@ -167,6 +168,7 @@ BuildRequires:	java-sac
 BuildRequires:	libart_lgpl-devel
 BuildRequires:	libbonobo-devel >= 2.0
 BuildRequires:	libcdr-devel >= 0.0.8
+BuildRequires:	libcmis-devel >= 0.5
 BuildRequires:	libgltf-devel >= 0.0.2
 %{?with_system_libhnj:BuildRequires:	libhnj-devel}
 BuildRequires:	libicu-devel >= 4.0
@@ -224,11 +226,9 @@ BuildRequires:	zlib-devel
 %if %{with java}
 BuildRequires:	ant >= 1.7.0
 BuildRequires:	ant-apache-regexp
-%{?with_system_db:BuildRequires:	db-java >= 4.3}
 BuildRequires:	jdk >= 1.4.0_00
 BuildRequires:	jre-X11
 %endif
-BuildRequires:	xulrunner-devel
 BuildConflicts:	xmlsec1-devel
 # contains (dlopened) *.so libs
 BuildConflicts:	java-gcj-compat
@@ -2809,9 +2809,7 @@ dialogs.
 %prep
 %setup -q -n %{name}-%{version} -a1 -a2 -a3
 
-%patch0 -p1
 %patch1 -p1
-%patch2 -p1
 
 for dir in *-%{version}; do
 	[ -f $dir/ChangeLog ] && mv $dir/ChangeLog ChangeLog-$dir
@@ -2890,6 +2888,7 @@ export PATH=$PATH:%{_libdir}/interbase/bin
 	--with-parallelism=$RPM_BUILD_NR_THREADS \
 	--disable-odk \
 	%{?with_ccache:--with-gcc-speedup=ccache} \
+	%{!?with_system_coinmp:--without-system-coinmp} \
 	%{?with_icecream:--with-gcc-speedup=icecream} \
 	%{?with_system_agg:--with-system-agg} \
 	%{?with_system_beanshell:--with-system-beanshell} \
@@ -2926,7 +2925,6 @@ export PATH=$PATH:%{_libdir}/interbase/bin
 	--with-system-zlib \
 	--with-system-libexttextcat \
 	--with-system-jfreereport \
-	--enable-vba \
 	--with-system-libs \
 	--with-system-headers \
 	--with-system-mythes \
@@ -2953,12 +2951,10 @@ export PATH=$PATH:%{_libdir}/interbase/bin
 	--enable-gio \
 	--with-x \
 	--without-fonts \
-	--without-ppds \
 	--disable-epm \
 	--%{?with_gtk:en}%{!?with_gtk:dis}able-gtk \
 	--%{?with_gtk3:en}%{!?with_gtk3:dis}able-gtk3 \
 	--enable-dbus \
-	--enable-opengl \
 	--with-system-openldap \
 %if 0%{?debug:1}
 	--enable-debug \
