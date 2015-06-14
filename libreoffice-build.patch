@@ -16,14 +16,3 @@
      if test $TESTEXPR
      then
 
---- libreoffice-4.4.3.2/vcl/unx/gtk/a11y/atktextattributes.cxx~	2015-04-28 23:09:05.000000000 +0200
-+++ libreoffice-4.4.3.2/vcl/unx/gtk/a11y/atktextattributes.cxx	2015-05-28 15:36:43.650187360 +0200
-@@ -1235,7 +1235,7 @@ attribute_set_new_from_extended_attribut
- 
-         pSet = attribute_set_prepend( pSet,
-                                       atk_text_attribute_register( sPropertyName.getStr() ),
--                                      g_strdup_printf( sPropertyValue.getStr() ) );
-+                                      g_strdup_printf( "%s", sPropertyValue.getStr() ) );
-     }
-     while ( nIndex >= 0 && nIndex < sExtendedAttrs.getLength() );
- 
