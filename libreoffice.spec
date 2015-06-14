@@ -86,6 +86,7 @@ Source28:	http://dev-www.libreoffice.org/src/OpenCOLLADA-master-6509aa13af.tar.b
 # Source28-md5:	4ca8a6ef0afeefc864e9ef21b9f14bd6
 
 Patch1:		%{name}-build.patch
+Patch2:		liborcus-0.9.patch
 URL:		http://www.documentfoundation.org/
 BuildRequires:	/usr/bin/getopt
 BuildRequires:	Firebird-devel
@@ -148,7 +149,7 @@ BuildRequires:	liblangtag-devel
 BuildRequires:	libmspub-devel
 BuildRequires:	libmwaw-devel >= 0.3.0
 BuildRequires:	libodfgen-devel >= 0.1.1
-BuildRequires:	liborcus-devel >= 0.7.0
+BuildRequires:	liborcus-devel >= 0.9.0
 BuildRequires:	libpagemaker-devel >= 0.0.2
 BuildRequires:	libvisio-devel
 BuildRequires:	libwpd-devel >= 0.10.0
@@ -2810,6 +2811,7 @@ dialogs.
 %setup -q -n %{name}-%{version} -a1 -a2 -a3
 
 %patch1 -p1
+%patch2 -p1
 
 for dir in *-%{version}; do
 	[ -f $dir/ChangeLog ] && mv $dir/ChangeLog ChangeLog-$dir
