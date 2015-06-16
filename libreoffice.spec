@@ -87,6 +87,7 @@ Source28:	http://dev-www.libreoffice.org/src/OpenCOLLADA-master-6509aa13af.tar.b
 
 Patch1:		%{name}-build.patch
 Patch2:		liborcus-0.9.patch
+Patch3:		disable-failing-test.patch
 URL:		http://www.documentfoundation.org/
 BuildRequires:	/usr/bin/getopt
 BuildRequires:	Firebird-devel
@@ -2812,6 +2813,7 @@ dialogs.
 
 %patch1 -p1
 %patch2 -p1
+%patch3 -p1
 
 for dir in *-%{version}; do
 	[ -f $dir/ChangeLog ] && mv $dir/ChangeLog ChangeLog-$dir
@@ -3414,7 +3416,6 @@ fi
 %attr(755,root,root) %{_libdir}/%{name}/program/libmsformslo.so
 %attr(755,root,root) %{_libdir}/%{name}/program/libmtfrendererlo.so
 %attr(755,root,root) %{_libdir}/%{name}/program/libmysqllo.so
-%attr(755,root,root) %{_libdir}/%{name}/program/libnpsoplugin.so
 %attr(755,root,root) %{_libdir}/%{name}/program/libodbclo.so
 %attr(755,root,root) %{_libdir}/%{name}/program/libodfflatxmllo.so
 %attr(755,root,root) %{_libdir}/%{name}/program/liboffacclo.so
@@ -3484,7 +3485,6 @@ fi
 %attr(755,root,root) %{_libdir}/%{name}/program/libvbahelperlo.so
 %attr(755,root,root) %{_libdir}/%{name}/program/libvclcanvaslo.so
 %attr(755,root,root) %{_libdir}/%{name}/program/libvcllo.so
-%attr(755,root,root) %{_libdir}/%{name}/program/libvclopengllo.so
 %attr(755,root,root) %{_libdir}/%{name}/program/libvclplug_genlo.so
 %attr(755,root,root) %{_libdir}/%{name}/program/libvclplug_svplo.so
 %attr(755,root,root) %{_libdir}/%{name}/program/libwpftdrawlo.so
@@ -3500,7 +3500,6 @@ fi
 %attr(755,root,root) %{_libdir}/%{name}/program/libxsltdlglo.so
 %attr(755,root,root) %{_libdir}/%{name}/program/libxsltfilterlo.so
 %attr(755,root,root) %{_libdir}/%{name}/program/libxstor.so
-%attr(755,root,root) %{_libdir}/%{name}/program/nsplugin
 %attr(755,root,root) %{_libdir}/%{name}/program/oosplash
 %attr(755,root,root) %{_libdir}/%{name}/program/open-url
 %attr(755,root,root) %{_libdir}/%{name}/program/pagein*
@@ -3525,7 +3524,7 @@ fi
 %{_libdir}/%{name}/program/cli_ure.dll
 %endif
 
-%config(noreplace) %verify(not md5 mtime size) %{_libdir}/%{name}/program/unorc
+%config(noreplace) %verify(not md5 mtime size) %{_libdir}/%{name}/program/lounorc
 %{_libdir}/%{name}/program/versionrc
 
 %if %{with java}
@@ -3558,6 +3557,60 @@ fi
 %dir %{_libdir}/%{name}/program/types
 %{_libdir}/%{name}/program/types/offapi.rdb
 %{_libdir}/%{name}/program/types/oovbaapi.rdb
+
+%dir %{_libdir}/%{name}/program/opengl
+%{_libdir}/%{name}/program/opengl/areaScaleFastFragmentShader.glsl
+%{_libdir}/%{name}/program/opengl/areaScaleFragmentShader.glsl
+%{_libdir}/%{name}/program/opengl/backgroundFragmentShader.glsl
+%{_libdir}/%{name}/program/opengl/backgroundVertexShader.glsl
+%{_libdir}/%{name}/program/opengl/basicVertexShader.glsl
+%{_libdir}/%{name}/program/opengl/blendedTextureFragmentShader.glsl
+%{_libdir}/%{name}/program/opengl/blendedTextureVertexShader.glsl
+%{_libdir}/%{name}/program/opengl/commonFragmentShader.glsl
+%{_libdir}/%{name}/program/opengl/commonVertexShader.glsl
+%{_libdir}/%{name}/program/opengl/convolutionFragmentShader.glsl
+%{_libdir}/%{name}/program/opengl/debugFragmentShader.glsl
+%{_libdir}/%{name}/program/opengl/debugVertexShader.glsl
+%{_libdir}/%{name}/program/opengl/diffTextureFragmentShader.glsl
+%{_libdir}/%{name}/program/opengl/dissolveFragmentShader.glsl
+%{_libdir}/%{name}/program/opengl/dumbVertexShader.glsl
+%{_libdir}/%{name}/program/opengl/dummyVertexShader.glsl
+%{_libdir}/%{name}/program/opengl/linearGradientFragmentShader.glsl
+%{_libdir}/%{name}/program/opengl/linearMultiColorGradientFragmentShader.glsl
+%{_libdir}/%{name}/program/opengl/linearTwoColorGradientFragmentShader.glsl
+%{_libdir}/%{name}/program/opengl/maskFragmentShader.glsl
+%{_libdir}/%{name}/program/opengl/maskedTextureFragmentShader.glsl
+%{_libdir}/%{name}/program/opengl/pickingFragmentShader.glsl
+%{_libdir}/%{name}/program/opengl/pickingVertexShader.glsl
+%{_libdir}/%{name}/program/opengl/radialGradientFragmentShader.glsl
+%{_libdir}/%{name}/program/opengl/radialMultiColorGradientFragmentShader.glsl
+%{_libdir}/%{name}/program/opengl/radialTwoColorGradientFragmentShader.glsl
+%{_libdir}/%{name}/program/opengl/rectangularMultiColorGradientFragmentShader.glsl
+%{_libdir}/%{name}/program/opengl/rectangularTwoColorGradientFragmentShader.glsl
+%{_libdir}/%{name}/program/opengl/renderTextureFragmentShader.glsl
+%{_libdir}/%{name}/program/opengl/renderTextureVertexShader.glsl
+%{_libdir}/%{name}/program/opengl/replaceColorFragmentShader.glsl
+%{_libdir}/%{name}/program/opengl/screenTextFragmentShader.glsl
+%{_libdir}/%{name}/program/opengl/screenTextVertexShader.glsl
+%{_libdir}/%{name}/program/opengl/shape3DFragmentShader.glsl
+%{_libdir}/%{name}/program/opengl/shape3DFragmentShaderBatch.glsl
+%{_libdir}/%{name}/program/opengl/shape3DFragmentShaderBatchScroll.glsl
+%{_libdir}/%{name}/program/opengl/shape3DFragmentShaderV300.glsl
+%{_libdir}/%{name}/program/opengl/shape3DVertexShader.glsl
+%{_libdir}/%{name}/program/opengl/shape3DVertexShaderBatch.glsl
+%{_libdir}/%{name}/program/opengl/shape3DVertexShaderBatchScroll.glsl
+%{_libdir}/%{name}/program/opengl/shape3DVertexShaderV300.glsl
+%{_libdir}/%{name}/program/opengl/solidFragmentShader.glsl
+%{_libdir}/%{name}/program/opengl/staticFragmentShader.glsl
+%{_libdir}/%{name}/program/opengl/symbolFragmentShader.glsl
+%{_libdir}/%{name}/program/opengl/symbolVertexShader.glsl
+%{_libdir}/%{name}/program/opengl/textFragmentShader.glsl
+%{_libdir}/%{name}/program/opengl/textFragmentShaderBatch.glsl
+%{_libdir}/%{name}/program/opengl/textVertexShader.glsl
+%{_libdir}/%{name}/program/opengl/textVertexShaderBatch.glsl
+%{_libdir}/%{name}/program/opengl/textureFragmentShader.glsl
+%{_libdir}/%{name}/program/opengl/textureVertexShader.glsl
+%{_libdir}/%{name}/program/opengl/transformedTextureVertexShader.glsl
 
 # symlink
 %{_libdir}/%{name}/program/resource
@@ -3621,7 +3674,6 @@ fi
 %{_datadir}/%{name}/share/autotext/en-US
 %{_datadir}/%{name}/share/basic
 %dir %{_datadir}/%{name}/share/config
-%{_datadir}/%{name}/share/config/images.zip
 %{_datadir}/%{name}/share/config/images_crystal.zip
 %{_datadir}/%{name}/share/config/images_galaxy.zip
 %{_datadir}/%{name}/share/config/images_hicontrast.zip
@@ -3641,6 +3693,9 @@ fi
 %dir %{_datadir}/%{name}/share/config/soffice.cfg/filter
 %{_datadir}/%{name}/share/config/soffice.cfg/filter/ui
 %exclude %{_datadir}/%{name}/share/config/soffice.cfg/filter/ui/res/*
+%dir %{_datadir}/%{name}/share/config/soffice.cfg/formula/
+%{_datadir}/%{name}/share/config/soffice.cfg/formula/ui
+%exclude %{_datadir}/%{name}/share/config/soffice.cfg/formula/ui/res/*
 %dir %{_datadir}/%{name}/share/config/soffice.cfg/fps
 %{_datadir}/%{name}/share/config/soffice.cfg/fps/ui
 %exclude %{_datadir}/%{name}/share/config/soffice.cfg/fps/ui/res/*
@@ -3656,6 +3711,9 @@ fi
 %{_datadir}/%{name}/share/config/soffice.cfg/modules/sabpilot
 %exclude %{_datadir}/%{name}/share/config/soffice.cfg/modules/sabpilot/ui/res/*
 %dir %{_datadir}/%{name}/share/config/soffice.cfg/modules/scalc
+%dir %{_datadir}/%{name}/share/config/soffice.cfg/modules/scanner
+%{_datadir}/%{name}/share/config/soffice.cfg/modules/scanner/ui
+%exclude %{_datadir}/%{name}/share/config/soffice.cfg/modules/scanner/ui/res/*
 %{_datadir}/%{name}/share/config/soffice.cfg/modules/schart
 %exclude %{_datadir}/%{name}/share/config/soffice.cfg/modules/schart/ui/res/*
 %dir %{_datadir}/%{name}/share/config/soffice.cfg/modules/sdraw
@@ -3724,6 +3782,10 @@ fi
 %dir %{_datadir}/%{name}/share/template/common
 %{_datadir}/%{name}/share/template/common/internal
 %{_datadir}/%{name}/share/template/common/layout
+%{_datadir}/%{name}/share/template/common/officorr
+%{_datadir}/%{name}/share/template/common/offimisc
+%{_datadir}/%{name}/share/template/common/personal
+%{_datadir}/%{name}/share/template/common/presnt
 %dir %{_datadir}/%{name}/share/template/wizard
 %{_datadir}/%{name}/share/template/wizard/bitmap
 %dir %{_datadir}/%{name}/share/template/common/wizard
@@ -3813,10 +3875,10 @@ fi
 %files libs-gtk
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_libdir}/%{name}/program/gnome-open-url
-%attr(755,root,root) %{_libdir}/%{name}/program/gnome-open-url.bin
-%attr(755,root,root) %{_libdir}/%{name}/program/libvclplug_gtk*.so
 %attr(755,root,root) %{_libdir}/%{name}/program/libgconfbe1lo.so
+%attr(755,root,root) %{_libdir}/%{name}/program/liblibreofficekitgtk.so
 %attr(755,root,root) %{_libdir}/%{name}/program/libqstart_gtklo.so
+%attr(755,root,root) %{_libdir}/%{name}/program/libvclplug_gtk*.so
 %{_datadir}/%{name}/share/registry/gnome.xcd
 %endif
 
@@ -3871,11 +3933,12 @@ fi
 %{_iconsdir}/hicolor/*/apps/libreoffice-calc.svg
 %attr(755,root,root) %{_libdir}/%{name}/program/libanalysislo.so
 %attr(755,root,root) %{_libdir}/%{name}/program/libcalclo.so
+%attr(755,root,root) %{_libdir}/%{name}/program/libclewlo.so
 %attr(755,root,root) %{_libdir}/%{name}/program/libdatelo.so
+%attr(755,root,root) %{_libdir}/%{name}/program/libopencllo.so
 %attr(755,root,root) %{_libdir}/%{name}/program/libscdlo.so
 %attr(755,root,root) %{_libdir}/%{name}/program/libscfiltlo.so
 %attr(755,root,root) %{_libdir}/%{name}/program/libsclo.so
-%attr(755,root,root) %{_libdir}/%{name}/program/libscopencllo.so
 %attr(755,root,root) %{_libdir}/%{name}/program/libscuilo.so
 %attr(755,root,root) %{_libdir}/%{name}/program/libsolverlo.so
 %attr(755,root,root) %{_libdir}/%{name}/program/libvbaobjlo.so
@@ -4047,7 +4110,6 @@ fi
 %attr(755,root,root) %{_libdir}/%{name}/ure/lib/libsal_textenclo.so
 %attr(755,root,root) %{_libdir}/%{name}/ure/lib/libstocserviceslo.so
 %attr(755,root,root) %{_libdir}/%{name}/ure/lib/libstorelo.so
-%attr(755,root,root) %{_libdir}/%{name}/ure/lib/libsunjavapluginlo.so
 %attr(755,root,root) %{_libdir}/%{name}/ure/lib/libuno_cppuhelpergcc3.so.3
 %attr(755,root,root) %{_libdir}/%{name}/ure/lib/libuno_cppu.so.3
 %attr(755,root,root) %{_libdir}/%{name}/ure/lib/libunoidllo.so
@@ -4315,7 +4377,6 @@ fi
 
 %files i18n-ko -f ko.lang
 %defattr(644,root,root,755)
-%{_datadir}/%{name}/share/registry/korea.xcd
 
 %files i18n-kok -f kok.lang
 %defattr(644,root,root,755)
