@@ -142,7 +142,6 @@ BuildRequires:	java-lucene
 BuildRequires:	java-lucene-contrib
 BuildRequires:	java-servletapi
 BuildRequires:	libabw-devel >= 0.1.0
-BuildRequires:	libcmis-devel >= 0.4
 BuildRequires:	libe-book-devel >= 0.0.2
 BuildRequires:	libetonyek-devel >= 0.1.1
 BuildRequires:	libfreehand-devel >= 0.1.0
