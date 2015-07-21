@@ -1,0 +1,37 @@
+--- a/configure.ac-old	2015-06-16 18:09:30.351631561 +0200
++++ b/configure.ac	2015-06-16 18:09:46.000000000 +0200
+@@ -7604,7 +7645,7 @@
+ dnl ===================================================================
+ dnl Check for system libwps
+ dnl ===================================================================
+-libo_CHECK_SYSTEM_MODULE([libwps],[WPS],[libwps-0.3])
++libo_CHECK_SYSTEM_MODULE([libwps],[WPS],[libwps-0.4])
+ 
+ dnl ===================================================================
+ dnl Check for system libwpg
+--- a/writerperfect/source/writer/MSWorksImportFilter.cxx-old	2015-06-16 18:16:01.703195434 +0200
++++ b/writerperfect/source/writer/MSWorksImportFilter.cxx	2015-06-16 18:16:43.059571839 +0200
+@@ -39,7 +39,9 @@
+ bool MSWorksImportFilter::doDetectFormat(librevenge::RVNGInputStream &rInput, OUString &rTypeName)
+ {
+     libwps::WPSKind kind = libwps::WPS_TEXT;
+-    const libwps::WPSConfidence confidence = libwps::WPSDocument::isFileFormatSupported(&rInput, kind);
++    libwps::WPSCreator creator;
++    bool needsEncoding = false;
++    const libwps::WPSConfidence confidence = libwps::WPSDocument::isFileFormatSupported(&rInput, kind, creator, needsEncoding);
+ 
+     if ((kind == libwps::WPS_TEXT) && (confidence == libwps::WPS_CONFIDENCE_EXCELLENT))
+     {
+--- a/writerperfect/source/calc/MSWorksCalcImportFilter.cxx-old	2015-06-16 18:14:12.910205066 +0200
++++ b/writerperfect/source/calc/MSWorksCalcImportFilter.cxx	2015-06-16 18:14:49.378537077 +0200
+@@ -32,7 +32,9 @@
+ bool MSWorksCalcImportFilter::doDetectFormat(librevenge::RVNGInputStream &rInput, OUString &rTypeName)
+ {
+     libwps::WPSKind kind = libwps::WPS_TEXT;
+-    const libwps::WPSConfidence confidence = libwps::WPSDocument::isFileFormatSupported(&rInput, kind);
++    libwps::WPSCreator creator;
++    bool needsEncoding = false;
++    const libwps::WPSConfidence confidence = libwps::WPSDocument::isFileFormatSupported(&rInput, kind, creator, needsEncoding);
+ 
+     if ((kind == libwps::WPS_SPREADSHEET || kind == libwps::WPS_DATABASE) && (confidence == libwps::WPS_CONFIDENCE_EXCELLENT))
+     {

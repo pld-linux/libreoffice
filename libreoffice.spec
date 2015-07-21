@@ -88,6 +88,7 @@ Source28:	http://dev-www.libreoffice.org/src/OpenCOLLADA-master-6509aa13af.tar.b
 Patch1:		%{name}-build.patch
 Patch2:		liborcus-0.9.patch
 Patch3:		disable-failing-test.patch
+Patch4:		libwps-0.4.patch
 URL:		http://www.documentfoundation.org/
 BuildRequires:	/usr/bin/getopt
 BuildRequires:	Firebird-devel
@@ -2813,6 +2814,7 @@ dialogs.
 %patch1 -p1
 %patch2 -p1
 %patch3 -p1
+%patch4 -p1
 
 for dir in *-%{version}; do
 	[ -f $dir/ChangeLog ] && mv $dir/ChangeLog ChangeLog-$dir
