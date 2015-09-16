@@ -3997,6 +3997,7 @@ fi
 %{_datadir}/%{name}/share/config/soffice.cfg/modules/swriter/statusbar
 %{_datadir}/%{name}/share/config/soffice.cfg/modules/swriter/toolbar
 %{_datadir}/%{name}/share/config/soffice.cfg/modules/swriter/ui
+%{_datadir}/%{name}/share/config/soffice.cfg/writerperfect
 %exclude %{_datadir}/%{name}/share/config/soffice.cfg/modules/swriter/ui/res/*
 %{_datadir}/%{name}/share/registry/writer.xcd
 
