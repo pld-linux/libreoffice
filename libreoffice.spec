@@ -45,23 +45,23 @@
 %undefine	with_system_hsqldb
 %endif
 
-%define		major_ver		4.4.4
+%define		major_ver		5.0.2
 
 Summary:	LibreOffice - powerful office suite
 Summary(pl.UTF-8):	LibreOffice - potężny pakiet biurowy
 Name:		libreoffice
-Version:	%{major_ver}.2
-Release:	3
+Version:	%{major_ver}.1
+Release:	1
 License:	GPL/LGPL
 Group:		X11/Applications
 Source0:	http://download.documentfoundation.org/libreoffice/src/%{major_ver}/%{name}-%{version}.tar.xz
-# Source0-md5:	533a0841d89587e9bd7d6e22b38a0b25
+# Source0-md5:	1c8e92d9d7cb30ba0ec68c780ef61178
 Source1:	http://download.documentfoundation.org/libreoffice/src/%{major_ver}/%{name}-dictionaries-%{version}.tar.xz
-# Source1-md5:	fe7388352df08b51aae98b4e375fcd5d
+# Source1-md5:	faec52fd3cd74fc5068bda35287cdbd4
 Source2:	http://download.documentfoundation.org/libreoffice/src/%{major_ver}/%{name}-help-%{version}.tar.xz
-# Source2-md5:	fbc8304040ff9f1a79fff1f06164c221
+# Source2-md5:	34208f0803ece06bf1600076f7d8000d
 Source3:	http://download.documentfoundation.org/libreoffice/src/%{major_ver}/%{name}-translations-%{version}.tar.xz
-# Source3-md5:	64158e34fd8f00ee3f7aa3004b8b1280
+# Source3-md5:	1842bb569fda247920e7a5c46e8a5a20
 
 
 # make fetch DO_FETCH_TARBALLS=1 WGET=wget
@@ -85,10 +85,8 @@ Source27:	http://dev-www.libreoffice.org/src/CoinMP-1.7.6.tgz
 Source28:	http://dev-www.libreoffice.org/src/OpenCOLLADA-master-6509aa13af.tar.bz2
 # Source28-md5:	4ca8a6ef0afeefc864e9ef21b9f14bd6
 
-Patch1:		%{name}-build.patch
-Patch2:		liborcus-0.9.patch
-Patch3:		disable-failing-test.patch
-Patch4:		libwps-0.4.patch
+Patch0:		disable-failing-test.patch
+Patch1:		liborcus-0.9.patch
 URL:		http://www.documentfoundation.org/
 BuildRequires:	/usr/bin/getopt
 BuildRequires:	Firebird-devel
@@ -2810,11 +2808,8 @@ dialogs.
 
 %prep
 %setup -q -n %{name}-%{version} -a1 -a2 -a3
-
+%patch0 -p1
 %patch1 -p1
-%patch2 -p1
-%patch3 -p1
-%patch4 -p1
 
 for dir in *-%{version}; do
 	[ -f $dir/ChangeLog ] && mv $dir/ChangeLog ChangeLog-$dir
@@ -3293,7 +3288,6 @@ fi
 %{_libdir}/%{name}/presets/config/*.so[bcdegh]
 %{_libdir}/%{name}/presets/database
 %{_libdir}/%{name}/presets/gallery
-%{_libdir}/%{name}/presets/psprint
 
 %dir %{_libdir}/%{name}/program
 %attr(755,root,root) %{_libdir}/%{name}/program/gdbtrace
@@ -3487,7 +3481,6 @@ fi
 %attr(755,root,root) %{_libdir}/%{name}/program/libvclcanvaslo.so
 %attr(755,root,root) %{_libdir}/%{name}/program/libvcllo.so
 %attr(755,root,root) %{_libdir}/%{name}/program/libvclplug_genlo.so
-%attr(755,root,root) %{_libdir}/%{name}/program/libvclplug_svplo.so
 %attr(755,root,root) %{_libdir}/%{name}/program/libwpftdrawlo.so
 %attr(755,root,root) %{_libdir}/%{name}/program/libwriterperfectlo.so
 %attr(755,root,root) %{_libdir}/%{name}/program/libxmlfalo.so
@@ -3528,6 +3521,10 @@ fi
 %config(noreplace) %verify(not md5 mtime size) %{_libdir}/%{name}/program/lounorc
 %{_libdir}/%{name}/program/versionrc
 
+%{_libdir}/%{name}/program/services.rdb
+%dir %{_libdir}/%{name}/program/services
+%{_libdir}/%{name}/program/services/services.rdb
+
 %if %{with java}
 %dir %{_libdir}/%{name}/program/classes
 %{_libdir}/%{name}/program/classes/reportbuilder.jar
@@ -3553,13 +3550,12 @@ fi
 %{_libdir}/%{name}/program/services/scriptproviderforbeanshell.rdb
 %{_libdir}/%{name}/program/services/scriptproviderforjavascript.rdb
 %endif
-%dir %{_libdir}/%{name}/program/services
-%{_libdir}/%{name}/program/services/services.rdb
 %dir %{_libdir}/%{name}/program/types
 %{_libdir}/%{name}/program/types/offapi.rdb
 %{_libdir}/%{name}/program/types/oovbaapi.rdb
 
 %dir %{_libdir}/%{name}/program/opengl
+%{_libdir}/%{name}/program/opengl/areaHashCRC64TFragmentShader.glsl
 %{_libdir}/%{name}/program/opengl/areaScaleFastFragmentShader.glsl
 %{_libdir}/%{name}/program/opengl/areaScaleFragmentShader.glsl
 %{_libdir}/%{name}/program/opengl/backgroundFragmentShader.glsl
@@ -3581,6 +3577,7 @@ fi
 %{_libdir}/%{name}/program/opengl/linearTwoColorGradientFragmentShader.glsl
 %{_libdir}/%{name}/program/opengl/maskFragmentShader.glsl
 %{_libdir}/%{name}/program/opengl/maskedTextureFragmentShader.glsl
+%{_libdir}/%{name}/program/opengl/maskedTextureVertexShader.glsl
 %{_libdir}/%{name}/program/opengl/pickingFragmentShader.glsl
 %{_libdir}/%{name}/program/opengl/pickingVertexShader.glsl
 %{_libdir}/%{name}/program/opengl/radialGradientFragmentShader.glsl
@@ -3675,7 +3672,7 @@ fi
 %{_datadir}/%{name}/share/autotext/en-US
 %{_datadir}/%{name}/share/basic
 %dir %{_datadir}/%{name}/share/config
-%{_datadir}/%{name}/share/config/images_crystal.zip
+%{_datadir}/%{name}/share/config/images_breeze.zip
 %{_datadir}/%{name}/share/config/images_galaxy.zip
 %{_datadir}/%{name}/share/config/images_hicontrast.zip
 %{_datadir}/%{name}/share/config/images_oxygen.zip
@@ -3787,6 +3784,7 @@ fi
 %{_datadir}/%{name}/share/template/common/offimisc
 %{_datadir}/%{name}/share/template/common/personal
 %{_datadir}/%{name}/share/template/common/presnt
+%{_datadir}/%{name}/share/template/common/styles
 %dir %{_datadir}/%{name}/share/template/wizard
 %{_datadir}/%{name}/share/template/wizard/bitmap
 %dir %{_datadir}/%{name}/share/template/common/wizard
@@ -3810,9 +3808,6 @@ fi
 %{_datadir}/%{name}/share/xslt/export/uof
 %{_datadir}/%{name}/share/xslt/export/wordml
 %{_datadir}/%{name}/share/xslt/import
-
-# symlink to directory
-%attr(755,root,root) %{_libdir}/%{name}/ure-link
 
 %attr(755,root,root) %{_libdir}/%{name}/program/soffice
 %attr(755,root,root) %{_libdir}/%{name}/program/soffice.bin
@@ -3855,7 +3850,7 @@ fi
 %if %{with kde}
 %files libs-kde
 %defattr(644,root,root,755)
-%attr(755,root,root) %{_libdir}/%{name}/program/kde-open-url
+%attr(755,root,root) %{_libdir}/%{name}/program/kde4-open-url
 %attr(755,root,root) %{_libdir}/%{name}/program/kdebe1.uno.so
 %attr(755,root,root) %{_libdir}/%{name}/program/kdefilepicker
 %attr(755,root,root) %{_libdir}/%{name}/program/fps_kde.uno.so
@@ -3867,7 +3862,7 @@ fi
 %if %{with kde4}
 %files libs-kde
 %defattr(644,root,root,755)
-%attr(755,root,root) %{_libdir}/%{name}/program/kde-open-url
+%attr(755,root,root) %{_libdir}/%{name}/program/kde4-open-url
 %attr(755,root,root) %{_libdir}/%{name}/program/libvclplug_kde4*.so
 %attr(755,root,root) %{_libdir}/%{name}/program/libkde4be1lo.so
 %endif
@@ -4082,70 +4077,64 @@ fi
 %files ure
 %defattr(644,root,root,755)
 %dir %{_libdir}/%{name}
-%dir %{_libdir}/%{name}/ure
-%dir %{_libdir}/%{name}/ure/bin
-%attr(755,root,root) %{_libdir}/%{name}/ure/bin/regmerge
-%attr(755,root,root) %{_libdir}/%{name}/ure/bin/regview
-%attr(755,root,root) %{_libdir}/%{name}/ure/bin/startup.sh
-%attr(755,root,root) %{_libdir}/%{name}/ure/bin/uno
-%attr(755,root,root) %{_libdir}/%{name}/ure/bin/uno.bin
+%attr(755,root,root) %{_libdir}/%{name}/program/regmerge
+%attr(755,root,root) %{_libdir}/%{name}/program/regview
+%attr(755,root,root) %{_libdir}/%{name}/program/uno
+%attr(755,root,root) %{_libdir}/%{name}/program/uno.bin
 %if %{with java}
-%attr(755,root,root) %{_libdir}/%{name}/ure/bin/javaldx
+%attr(755,root,root) %{_libdir}/%{name}/program/javaldx
 %endif
-%dir %{_libdir}/%{name}/ure/lib
-%attr(755,root,root) %{_libdir}/%{name}/ure/lib/libaffine_uno_uno.so
-%attr(755,root,root) %{_libdir}/%{name}/ure/lib/libbinaryurplo.so
-%attr(755,root,root) %{_libdir}/%{name}/ure/lib/libbootstraplo.so
-%attr(755,root,root) %{_libdir}/%{name}/ure/lib/libgcc3_uno.so
-%attr(755,root,root) %{_libdir}/%{name}/ure/lib/libintrospectionlo.so
-%attr(755,root,root) %{_libdir}/%{name}/ure/lib/libinvocadaptlo.so
-%attr(755,root,root) %{_libdir}/%{name}/ure/lib/libinvocationlo.so
-%attr(755,root,root) %{_libdir}/%{name}/ure/lib/libiolo.so
-%attr(755,root,root) %{_libdir}/%{name}/ure/lib/libjvmaccesslo.so
-%attr(755,root,root) %{_libdir}/%{name}/ure/lib/libjvmfwklo.so
-%attr(755,root,root) %{_libdir}/%{name}/ure/lib/liblog_uno_uno.so
-%attr(755,root,root) %{_libdir}/%{name}/ure/lib/libnamingservicelo.so
-%attr(755,root,root) %{_libdir}/%{name}/ure/lib/libproxyfaclo.so
-%attr(755,root,root) %{_libdir}/%{name}/ure/lib/libreflectionlo.so
-%attr(755,root,root) %{_libdir}/%{name}/ure/lib/libreglo.so
-%attr(755,root,root) %{_libdir}/%{name}/ure/lib/libsal_textenclo.so
-%attr(755,root,root) %{_libdir}/%{name}/ure/lib/libstocserviceslo.so
-%attr(755,root,root) %{_libdir}/%{name}/ure/lib/libstorelo.so
-%attr(755,root,root) %{_libdir}/%{name}/ure/lib/libuno_cppuhelpergcc3.so.3
-%attr(755,root,root) %{_libdir}/%{name}/ure/lib/libuno_cppu.so.3
-%attr(755,root,root) %{_libdir}/%{name}/ure/lib/libunoidllo.so
-%attr(755,root,root) %{_libdir}/%{name}/ure/lib/libuno_purpenvhelpergcc3.so.3
-%attr(755,root,root) %{_libdir}/%{name}/ure/lib/libuno_salhelpergcc3.so.3
-%attr(755,root,root) %{_libdir}/%{name}/ure/lib/libuno_sal.so.3
-%attr(755,root,root) %{_libdir}/%{name}/ure/lib/libunsafe_uno_uno.so
-%attr(755,root,root) %{_libdir}/%{name}/ure/lib/libuuresolverlo.so
-%attr(755,root,root) %{_libdir}/%{name}/ure/lib/libxmlreaderlo.so
-%{_libdir}/%{name}/ure/lib/jvmfwk3rc
-%{_libdir}/%{name}/ure/lib/unorc
+%dir %{_libdir}/%{name}/program
+%attr(755,root,root) %{_libdir}/%{name}/program/libaffine_uno_uno.so
+%attr(755,root,root) %{_libdir}/%{name}/program/libbinaryurplo.so
+%attr(755,root,root) %{_libdir}/%{name}/program/libbootstraplo.so
+%attr(755,root,root) %{_libdir}/%{name}/program/libgcc3_uno.so
+%attr(755,root,root) %{_libdir}/%{name}/program/libintrospectionlo.so
+%attr(755,root,root) %{_libdir}/%{name}/program/libinvocadaptlo.so
+%attr(755,root,root) %{_libdir}/%{name}/program/libinvocationlo.so
+%attr(755,root,root) %{_libdir}/%{name}/program/libiolo.so
+%attr(755,root,root) %{_libdir}/%{name}/program/libjvmaccesslo.so
+%attr(755,root,root) %{_libdir}/%{name}/program/libjvmfwklo.so
+%attr(755,root,root) %{_libdir}/%{name}/program/liblog_uno_uno.so
+%attr(755,root,root) %{_libdir}/%{name}/program/libnamingservicelo.so
+%attr(755,root,root) %{_libdir}/%{name}/program/libproxyfaclo.so
+%attr(755,root,root) %{_libdir}/%{name}/program/libreflectionlo.so
+%attr(755,root,root) %{_libdir}/%{name}/program/libreglo.so
+%attr(755,root,root) %{_libdir}/%{name}/program/libsal_textenclo.so
+%attr(755,root,root) %{_libdir}/%{name}/program/libstocserviceslo.so
+%attr(755,root,root) %{_libdir}/%{name}/program/libstorelo.so
+%attr(755,root,root) %{_libdir}/%{name}/program/libuno_cppuhelpergcc3.so.3
+%attr(755,root,root) %{_libdir}/%{name}/program/libuno_cppu.so.3
+%attr(755,root,root) %{_libdir}/%{name}/program/libunoidllo.so
+%attr(755,root,root) %{_libdir}/%{name}/program/libuno_purpenvhelpergcc3.so.3
+%attr(755,root,root) %{_libdir}/%{name}/program/libuno_salhelpergcc3.so.3
+%attr(755,root,root) %{_libdir}/%{name}/program/libuno_sal.so.3
+%attr(755,root,root) %{_libdir}/%{name}/program/libunsafe_uno_uno.so
+%attr(755,root,root) %{_libdir}/%{name}/program/libuuresolverlo.so
+%attr(755,root,root) %{_libdir}/%{name}/program/libxmlreaderlo.so
+%{_libdir}/%{name}/program/jvmfwk3rc
+%{_libdir}/%{name}/program/unorc
 %if %{with java}
-%{_libdir}/%{name}/ure/lib/JREProperties.class
-%attr(755,root,root) %{_libdir}/%{name}/ure/lib/libjavaloaderlo.so
-%attr(755,root,root) %{_libdir}/%{name}/ure/lib/libjava_uno.so
-%attr(755,root,root) %{_libdir}/%{name}/ure/lib/libjavavmlo.so
-%attr(755,root,root) %{_libdir}/%{name}/ure/lib/libjpipe.so
-%attr(755,root,root) %{_libdir}/%{name}/ure/lib/libjuh.so
-%attr(755,root,root) %{_libdir}/%{name}/ure/lib/libjuhx.so
+%{_libdir}/%{name}/program/JREProperties.class
+%attr(755,root,root) %{_libdir}/%{name}/program/libjavaloaderlo.so
+%attr(755,root,root) %{_libdir}/%{name}/program/libjava_uno.so
+%attr(755,root,root) %{_libdir}/%{name}/program/libjavavmlo.so
+%attr(755,root,root) %{_libdir}/%{name}/program/libjpipe.so
+%attr(755,root,root) %{_libdir}/%{name}/program/libjuh.so
+%attr(755,root,root) %{_libdir}/%{name}/program/libjuhx.so
 %endif
-%dir %{_libdir}/%{name}/ure/share
 %if %{with java}
-%dir %{_libdir}/%{name}/ure/share/java
-%{_libdir}/%{name}/ure/share/java/java_uno.jar
-%{_libdir}/%{name}/ure/share/java/juh.jar
-%{_libdir}/%{name}/ure/share/java/jurt.jar
-%{_libdir}/%{name}/ure/share/java/ridl.jar
-%{_libdir}/%{name}/ure/share/java/unoloader.jar
+%dir %{_libdir}/%{name}/program/classes
+%{_libdir}/%{name}/program/classes/java_uno.jar
+%{_libdir}/%{name}/program/classes/juh.jar
+%{_libdir}/%{name}/program/classes/jurt.jar
+%{_libdir}/%{name}/program/classes/ridl.jar
+%{_libdir}/%{name}/program/classes/unoloader.jar
 %endif
-%dir %{_libdir}/%{name}/ure/share/misc
-%{_libdir}/%{name}/ure/share/misc/services.rdb
-%{_libdir}/%{name}/ure/share/misc/types.rdb
 %if %{with java}
-%{_libdir}/%{name}/ure/share/misc/javavendors.xml
+%{_libdir}/%{name}/program/javavendors.xml
 %endif
+%{_libdir}/%{name}/program/types.rdb
 
 %files pyuno
 %defattr(644,root,root,755)
