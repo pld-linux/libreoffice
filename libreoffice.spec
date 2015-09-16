@@ -112,9 +112,11 @@ BuildRequires:	cups-devel
 BuildRequires:	curl-devel >= 7.9.8
 %{?with_system_db:BuildRequires:	db-devel}
 BuildRequires:	dbus-glib-devel >= 0.70
+BuildRequires:	findutils
 BuildRequires:	flex
 BuildRequires:	fontconfig-devel >= 1.0.1
 BuildRequires:	freetype-devel >= 2.1
+BuildRequires:	gdb
 BuildRequires:	glew-devel >= 1.10.0
 BuildRequires:	glib2-devel >= 2.13.5
 BuildRequires:	gperf
@@ -2879,6 +2881,9 @@ RPM_BUILD_NR_THREADS="1"
 %{__aclocal} -I m4
 %{__autoconf}
 touch autogen.lastrun
+
+# get automatic backtraces while building (required gdb, too)
+ulimit -c unlimited
 
 export PATH=$PATH:%{_libdir}/interbase/bin
 %configure \
