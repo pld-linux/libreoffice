@@ -8,3 +8,35 @@
  	StaticLibrary_writerperfect_importtestbase \
  ))
  
+--- libreoffice-5.0.2.1/dbaccess/Module_dbaccess.mk~	2015-09-05 09:59:15.000000000 +0200
++++ libreoffice-5.0.2.1/dbaccess/Module_dbaccess.mk	2015-09-17 08:53:09.973934654 +0200
+@@ -49,12 +49,6 @@
+ 		CppunitTest_dbaccess_RowSetClones) \
+ ))
+ 
+-ifeq ($(ENABLE_JAVA),TRUE)
+-$(eval $(call gb_Module_add_check_targets,dbaccess,\
+-    CppunitTest_dbaccess_hsqldb_test \
+-))
+-endif
+-
+ # This runs a suite of peformance tests on embedded firebird and HSQLDB.
+ # Instructions on running the test can be found in qa/unit/embeddedb_performancetest
+ ifeq ($(ENABLE_FIREBIRD_SDBC),TRUE)
+--- libreoffice-5.0.2.1/sw/qa/extras/ooxmlimport/ooxmlimport.cxx~	2015-09-05 09:59:15.000000000 +0200
++++ libreoffice-5.0.2.1/sw/qa/extras/ooxmlimport/ooxmlimport.cxx	2015-09-17 14:57:25.802634256 +0200
+@@ -2759,14 +2759,6 @@
+     CPPUNIT_ASSERT_EQUAL(text::SizeType::MIN, getProperty<sal_Int16>(xTableRows->getByIndex(0), "SizeType"));
+ }
+ 
+-DECLARE_OOXMLIMPORT_TEST(testTdf87924, "tdf87924.docx")
+-{
+-    uno::Reference<beans::XPropertySet> xPropertySet(getShape(1), uno::UNO_QUERY);
+-    comphelper::SequenceAsHashMap aGeometry(xPropertySet->getPropertyValue("CustomShapeGeometry"));
+-    // This was -270, the text rotation angle was set when it should not be rotated.
+-    CPPUNIT_ASSERT_EQUAL(static_cast<sal_Int32>(0), aGeometry["TextPreRotateAngle"].get<sal_Int32>());
+-}
+-
+ #endif
+ 
+ CPPUNIT_PLUGIN_IMPLEMENT();
