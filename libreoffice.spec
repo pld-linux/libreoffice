@@ -51,7 +51,7 @@ Summary:	LibreOffice - powerful office suite
 Summary(pl.UTF-8):	LibreOffice - potężny pakiet biurowy
 Name:		libreoffice
 Version:	%{major_ver}.1
-Release:	2
+Release:	3
 License:	GPL/LGPL
 Group:		X11/Applications
 Source0:	http://download.documentfoundation.org/libreoffice/src/%{major_ver}/%{name}-%{version}.tar.xz
@@ -2883,7 +2883,7 @@ RPM_BUILD_NR_THREADS="1"
 touch autogen.lastrun
 
 # get automatic backtraces while building (required gdb, too)
-ulimit -c unlimited
+ulimit -c unlimited || :
 
 export PATH=$PATH:%{_libdir}/interbase/bin
 %configure \
