@@ -1,0 +1,11 @@
+--- libreoffice-5.0.2.1/sdext/Library_pdfimport.mk~	2015-09-05 09:59:15.000000000 +0200
++++ libreoffice-5.0.2.1/sdext/Library_pdfimport.mk	2015-11-17 20:22:25.619990753 +0100
+@@ -31,7 +31,8 @@
+ ))
+ 
+ $(eval $(call gb_Library_use_externals,pdfimport,\
+ 	boost_headers \
++    boost_system \
+     zlib \
+     $(if $(filter-out WNT MACOSX,$(OS)),fontconfig) \
+ ))

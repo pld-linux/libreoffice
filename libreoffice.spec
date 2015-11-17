@@ -87,6 +87,7 @@ Source28:	http://dev-www.libreoffice.org/src/OpenCOLLADA-master-6509aa13af.tar.b
 
 Patch0:		disable-failing-test.patch
 Patch1:		liborcus-0.9.patch
+Patch2:		boost-1.59.patch
 URL:		http://www.documentfoundation.org/
 BuildRequires:	/usr/bin/getopt
 BuildRequires:	Firebird-devel
@@ -2812,6 +2813,7 @@ dialogs.
 %setup -q -n %{name}-%{version} -a1 -a2 -a3
 %patch0 -p1
 %patch1 -p1
+%patch2 -p1
 
 for dir in *-%{version}; do
 	[ -f $dir/ChangeLog ] && mv $dir/ChangeLog ChangeLog-$dir
@@ -4190,10 +4192,10 @@ fi
 %files pdfimport
 # -f pdfimport.lang
 %defattr(644,root,root,755)
-%{_libdir}/%{name}/program/xpdfimport
+%attr(755,root,root) %{_libdir}/%{name}/program/xpdfimport
 %{_datadir}/%{name}/share/registry/pdfimport.xcd
 %{_datadir}/%{name}/share/xpdfimport
-%{_libdir}/%{name}/program/libpdfimportlo.so
+%attr(755,root,root) %{_libdir}/%{name}/program/libpdfimportlo.so
 
 %files wiki-publisher -f wiki-publisher.lang
 %defattr(644,root,root,755)
