@@ -9,3 +9,53 @@
      zlib \
      $(if $(filter-out WNT MACOSX,$(OS)),fontconfig) \
  ))
+--- libreoffice-5.0.2.1/sdext/Executable_pdfunzip.mk~	2015-09-05 09:59:15.000000000 +0200
++++ libreoffice-5.0.2.1/sdext/Executable_pdfunzip.mk	2015-11-17 23:54:08.725597556 +0100
+@@ -13,6 +13,7 @@
+ 
+ $(eval $(call gb_Executable_use_externals,pdfunzip,\
+     boost_headers \
++    boost_system \
+     zlib \
+ ))
+ 
+--- libreoffice-5.0.2.1/sdext/CppunitTest_sdext_pdfimport.mk~	2015-09-05 09:59:15.000000000 +0200
++++ libreoffice-5.0.2.1/sdext/CppunitTest_sdext_pdfimport.mk	2015-11-17 23:54:30.339491441 +0100
+@@ -21,6 +21,7 @@
+ 
+ $(eval $(call gb_CppunitTest_use_externals,sdext_pdfimport,\
+     boost_headers \
++    boost_system \
+     zlib \
+ ))
+ 
+--- libreoffice-5.0.2.1/sdext/Executable_pdf2xml.mk~	2015-09-05 09:59:15.000000000 +0200
++++ libreoffice-5.0.2.1/sdext/Executable_pdf2xml.mk	2015-11-17 23:54:44.283181837 +0100
+@@ -13,6 +13,7 @@
+ 
+ $(eval $(call gb_Executable_use_externals,pdf2xml,\
+     boost_headers \
++    boost_system \
+     cppunit \
+     zlib \
+ ))
+--- libreoffice-5.0.2.1/sdext/Executable_xpdfimport.mk~	2015-09-05 09:59:15.000000000 +0200
++++ libreoffice-5.0.2.1/sdext/Executable_xpdfimport.mk	2015-11-17 23:54:54.916785137 +0100
+@@ -11,6 +11,7 @@
+ 
+ $(eval $(call gb_Executable_use_externals,xpdfimport,\
+     boost_headers \
++    boost_system \
+     poppler \
+     $(if $(filter-out WNT MACOSX,$(OS)),fontconfig) \
+     zlib \
+--- libreoffice-5.0.2.1/sdext/StaticLibrary_pdfimport_s.mk~	2015-09-05 09:59:15.000000000 +0200
++++ libreoffice-5.0.2.1/sdext/StaticLibrary_pdfimport_s.mk	2015-11-17 23:55:21.907461607 +0100
+@@ -16,6 +16,7 @@
+ 
+ $(eval $(call gb_StaticLibrary_use_externals,pdfimport_s,\
+     boost_headers \
++    boost_system \
+     zlib \
+ ))
+ 
