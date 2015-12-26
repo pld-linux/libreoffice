@@ -45,23 +45,23 @@
 %undefine	with_system_hsqldb
 %endif
 
-%define		major_ver		5.0.2
+%define		major_ver		5.1.0
 
 Summary:	LibreOffice - powerful office suite
 Summary(pl.UTF-8):	LibreOffice - potężny pakiet biurowy
 Name:		libreoffice
 Version:	%{major_ver}.1
-Release:	9
+Release:	1
 License:	GPL/LGPL
 Group:		X11/Applications
 Source0:	http://download.documentfoundation.org/libreoffice/src/%{major_ver}/%{name}-%{version}.tar.xz
-# Source0-md5:	1c8e92d9d7cb30ba0ec68c780ef61178
+# Source0-md5:	ffe9ba75cad5bfe42d5ee6e858fe6518
 Source1:	http://download.documentfoundation.org/libreoffice/src/%{major_ver}/%{name}-dictionaries-%{version}.tar.xz
-# Source1-md5:	faec52fd3cd74fc5068bda35287cdbd4
+# Source1-md5:	256c3f5d948a42349d9bad3760ae1204
 Source2:	http://download.documentfoundation.org/libreoffice/src/%{major_ver}/%{name}-help-%{version}.tar.xz
-# Source2-md5:	34208f0803ece06bf1600076f7d8000d
+# Source2-md5:	63ffc6c7deb13237ae75249bcfb2fa3f
 Source3:	http://download.documentfoundation.org/libreoffice/src/%{major_ver}/%{name}-translations-%{version}.tar.xz
-# Source3-md5:	1842bb569fda247920e7a5c46e8a5a20
+# Source3-md5:	bb6d31cc5e4934be3ebdbd5dca167ca5
 
 
 # make fetch DO_FETCH_TARBALLS=1 WGET=wget
@@ -86,7 +86,7 @@ Source28:	http://dev-www.libreoffice.org/src/OpenCOLLADA-master-6509aa13af.tar.b
 # Source28-md5:	4ca8a6ef0afeefc864e9ef21b9f14bd6
 
 Patch0:		disable-failing-test.patch
-Patch1:		liborcus-0.9.patch
+Patch1:		mdds-1.0.patch
 Patch2:		boost-1.59.patch
 URL:		http://www.documentfoundation.org/
 BuildRequires:	/usr/bin/getopt
@@ -145,7 +145,7 @@ BuildRequires:	java-lucene-contrib
 BuildRequires:	java-servletapi
 BuildRequires:	libabw-devel >= 0.1.0
 BuildRequires:	libe-book-devel >= 0.0.2
-BuildRequires:	libetonyek-devel >= 0.1.1
+BuildRequires:	libetonyek-devel >= 0.1.4
 BuildRequires:	libfreehand-devel >= 0.1.0
 BuildRequires:	liblangtag-devel
 BuildRequires:	libmspub-devel
@@ -1382,6 +1382,23 @@ Gujarati language.
 Ten pakiet dostarcza zasoby zawierające menu i okna dialogowe w języku
 gudźarati.
 
+%package i18n-gug
+Summary:	LibreOffice - interface in Paraguayan Gujarati language
+Summary(pl.UTF-8):	LibreOffice - interfejs w języku paragwajskim gudźarati
+Group:		I18n
+Requires:	%{name}-core = %{version}-%{release}
+%if "%{_rpmversion}" >= "5"
+BuildArch:	noarch
+%endif
+
+%description i18n-gug
+This package provides resources containing menus and dialogs in
+Paraguayan Gujarati language.
+
+%description i18n-gug -l pl.UTF-8
+Ten pakiet dostarcza zasoby zawierające menu i okna dialogowe w języku
+paragwajskim gudźarati.
+
 %package i18n-he
 Summary:	LibreOffice - interface in Hebrew language
 Summary(pl.UTF-8):	LibreOffice - interfejs w języku hebrajskim
@@ -1602,6 +1619,23 @@ language.
 %description i18n-km -l pl.UTF-8
 Ten pakiet dostarcza zasoby zawierające menu i okna dialogowe w języku
 khmerskim.
+
+%package i18n-kmr-Latn
+Summary:	LibreOffice - interface in Kurdisk language
+Summary(pl.UTF-8):	LibreOffice - interfejs w języku kurdyjskim
+Group:		I18n
+Requires:	%{name}-core = %{version}-%{release}
+%if "%{_rpmversion}" >= "5"
+BuildArch:	noarch
+%endif
+
+%description i18n-kmr-Latn
+This package provides resources containing menus and dialogs in
+Kurdish language.
+
+%description i18n-km -l pl.UTF-8
+Ten pakiet dostarcza zasoby zawierające menu i okna dialogowe w języku
+kurdyjskim.
 
 %package i18n-kn_IN
 Summary:	LibreOffice - interface in Kannada language
@@ -2369,6 +2403,23 @@ This package provides resources containing menus and dialogs in
 Serbian language.
 
 %description i18n-sr -l pl.UTF-8
+Ten pakiet dostarcza zasoby zawierające menu i okna dialogowe w języku
+serbskim.
+
+%package i18n-sr-Latn
+Summary:	LibreOffice - interface in Serbian language
+Summary(pl.UTF-8):	LibreOffice - interfejs w języku serbskim
+Group:		I18n
+Requires:	%{name}-core = %{version}-%{release}
+%if "%{_rpmversion}" >= "5"
+BuildArch:	noarch
+%endif
+
+%description i18n-sr-Latn
+This package provides resources containing menus and dialogs in
+Serbian language.
+
+%description i18n-sr-Latn -l pl.UTF-8
 Ten pakiet dostarcza zasoby zawierające menu i okna dialogowe w języku
 serbskim.
 
@@ -3159,14 +3210,6 @@ for l in lb bn_IN; do
 	%{__sed} -i -e '/.*\/help\/.*/d' $l.lang
 done
 
-# Remove unsupported locale files to avoid confusion about unpackaged files
-#for l in kmr_Latn sr_Latn; do
-#	for f in `cat file-lists/lang_${l}_list.txt` ; do
-#		[ -f $RPM_BUILD_ROOT/$f ] || continue
-#		%{__rm} -f $RPM_BUILD_ROOT/$f
-#	done
-#done
-
 %clean
 rm -rf $RPM_BUILD_ROOT
 
@@ -3292,7 +3335,6 @@ fi
 %{_libdir}/%{name}/presets/basic
 %dir %{_libdir}/%{name}/presets/config
 %{_libdir}/%{name}/presets/config/autotbl.fmt
-%{_libdir}/%{name}/presets/config/*.so[bcdegh]
 %{_libdir}/%{name}/presets/database
 %{_libdir}/%{name}/presets/gallery
 
@@ -3350,19 +3392,9 @@ fi
 %attr(755,root,root) %{_libdir}/%{name}/program/libdlgprovlo.so
 %attr(755,root,root) %{_libdir}/%{name}/program/libdrawinglayerlo.so
 %attr(755,root,root) %{_libdir}/%{name}/program/libeditenglo.so
-%attr(755,root,root) %{_libdir}/%{name}/program/libegilo.so
 %attr(755,root,root) %{_libdir}/%{name}/program/libembobj.so
 %attr(755,root,root) %{_libdir}/%{name}/program/libemboleobj.so
-%attr(755,root,root) %{_libdir}/%{name}/program/libemelo.so
-%attr(755,root,root) %{_libdir}/%{name}/program/libepblo.so
-%attr(755,root,root) %{_libdir}/%{name}/program/libepglo.so
-%attr(755,root,root) %{_libdir}/%{name}/program/libepplo.so
-%attr(755,root,root) %{_libdir}/%{name}/program/libepslo.so
-%attr(755,root,root) %{_libdir}/%{name}/program/libeptlo.so
-%attr(755,root,root) %{_libdir}/%{name}/program/liberalo.so
-%attr(755,root,root) %{_libdir}/%{name}/program/libetilo.so
 %attr(755,root,root) %{_libdir}/%{name}/program/libevtattlo.so
-%attr(755,root,root) %{_libdir}/%{name}/program/libexplo.so
 %attr(755,root,root) %{_libdir}/%{name}/program/libexpwraplo.so
 %attr(755,root,root) %{_libdir}/%{name}/program/libfilelo.so
 %attr(755,root,root) %{_libdir}/%{name}/program/libfilterconfiglo.so
@@ -3378,6 +3410,7 @@ fi
 %attr(755,root,root) %{_libdir}/%{name}/program/libfwklo.so
 %attr(755,root,root) %{_libdir}/%{name}/program/libfwllo.so
 %attr(755,root,root) %{_libdir}/%{name}/program/libfwmlo.so
+%attr(755,root,root) %{_libdir}/%{name}/program/libgielo.so
 %attr(755,root,root) %{_libdir}/%{name}/program/libguesslanglo.so
 %attr(755,root,root) %{_libdir}/%{name}/program/libhelplinkerlo.so
 %{!?with_system_hunspell:%attr(755,root,root) %{_libdir}/%{name}/program/libhunspell.so}
@@ -3386,19 +3419,8 @@ fi
 %attr(755,root,root) %{_libdir}/%{name}/program/libi18npoollo.so
 %attr(755,root,root) %{_libdir}/%{name}/program/libi18nsearchlo.so
 %attr(755,root,root) %{_libdir}/%{name}/program/libi18nutil.so
-%attr(755,root,root) %{_libdir}/%{name}/program/libicdlo.so
 %attr(755,root,root) %{_libdir}/%{name}/program/libicglo.so
-%attr(755,root,root) %{_libdir}/%{name}/program/libidxlo.so
-%attr(755,root,root) %{_libdir}/%{name}/program/libimelo.so
 %attr(755,root,root) %{_libdir}/%{name}/program/libindex_data.so
-%attr(755,root,root) %{_libdir}/%{name}/program/libipblo.so
-%attr(755,root,root) %{_libdir}/%{name}/program/libipdlo.so
-%attr(755,root,root) %{_libdir}/%{name}/program/libipslo.so
-%attr(755,root,root) %{_libdir}/%{name}/program/libiptlo.so
-%attr(755,root,root) %{_libdir}/%{name}/program/libipxlo.so
-%attr(755,root,root) %{_libdir}/%{name}/program/libiralo.so
-%attr(755,root,root) %{_libdir}/%{name}/program/libitglo.so
-%attr(755,root,root) %{_libdir}/%{name}/program/libitilo.so
 %attr(755,root,root) %{_libdir}/%{name}/program/libldapbe2lo.so
 %attr(755,root,root) %{_libdir}/%{name}/program/liblnglo.so
 %attr(755,root,root) %{_libdir}/%{name}/program/liblnthlo.so
@@ -3475,6 +3497,7 @@ fi
 %attr(755,root,root) %{_libdir}/%{name}/program/libucpftp1.so
 %attr(755,root,root) %{_libdir}/%{name}/program/libucpgio1lo.so
 %attr(755,root,root) %{_libdir}/%{name}/program/libucphier1.so
+%attr(755,root,root) %{_libdir}/%{name}/program/libucpimagelo.so
 %attr(755,root,root) %{_libdir}/%{name}/program/libucppkg1.so
 %attr(755,root,root) %{_libdir}/%{name}/program/libucptdoc1lo.so
 %attr(755,root,root) %{_libdir}/%{name}/program/libunopkgapp.so
@@ -3616,6 +3639,19 @@ fi
 %{_libdir}/%{name}/program/opengl/textureFragmentShader.glsl
 %{_libdir}/%{name}/program/opengl/textureVertexShader.glsl
 %{_libdir}/%{name}/program/opengl/transformedTextureVertexShader.glsl
+%{_libdir}/%{name}/program/opengl/basicFragmentShader.glsl
+%{_libdir}/%{name}/program/opengl/fadeBlackFragmentShader.glsl
+%{_libdir}/%{name}/program/opengl/fadeFragmentShader.glsl
+%{_libdir}/%{name}/program/opengl/glitterFragmentShader.glsl
+%{_libdir}/%{name}/program/opengl/glitterVertexShader.glsl
+%{_libdir}/%{name}/program/opengl/honeycombFragmentShader.glsl
+%{_libdir}/%{name}/program/opengl/honeycombGeometryShader.glsl
+%{_libdir}/%{name}/program/opengl/honeycombVertexShader.glsl
+%{_libdir}/%{name}/program/opengl/reflectionFragmentShader.glsl
+%{_libdir}/%{name}/program/opengl/reflectionVertexShader.glsl
+%{_libdir}/%{name}/program/opengl/rippleFragmentShader.glsl
+%{_libdir}/%{name}/program/opengl/vortexFragmentShader.glsl
+%{_libdir}/%{name}/program/opengl/vortexVertexShader.glsl
 
 # symlink
 %{_libdir}/%{name}/program/resource
@@ -3771,6 +3807,7 @@ fi
 %{_datadir}/%{name}/share/filter
 %{_datadir}/%{name}/share/fonts
 %{_datadir}/%{name}/share/gallery
+%{_datadir}/%{name}/share/palette
 %{_datadir}/%{name}/share/psprint
 
 %dir %{_datadir}/%{name}/share/registry
@@ -3878,8 +3915,6 @@ fi
 %files libs-gtk
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_libdir}/%{name}/program/gnome-open-url
-%attr(755,root,root) %{_libdir}/%{name}/program/libgconfbe1lo.so
-%attr(755,root,root) %{_libdir}/%{name}/program/liblibreofficekitgtk.so
 %attr(755,root,root) %{_libdir}/%{name}/program/libqstart_gtklo.so
 %attr(755,root,root) %{_libdir}/%{name}/program/libvclplug_gtk*.so
 %{_datadir}/%{name}/share/registry/gnome.xcd
@@ -3924,6 +3959,7 @@ fi
 %{_datadir}/%{name}/share/config/soffice.cfg/modules/dbtdata/menubar
 %{_datadir}/%{name}/share/config/soffice.cfg/modules/dbtdata/toolbar
 %{_datadir}/%{name}/share/registry/base.xcd
+/usr/share/appdata/libreoffice-base.appdata.xml
 
 %files calc
 %defattr(644,root,root,755)
@@ -3957,6 +3993,7 @@ fi
 %{_datadir}/%{name}/share/config/soffice.cfg/modules/scalc/ui
 %exclude %{_datadir}/%{name}/share/config/soffice.cfg/modules/scalc/ui/res/*
 %{_datadir}/%{name}/share/registry/calc.xcd
+/usr/share/appdata/libreoffice-calc.appdata.xml
 
 %files draw
 %defattr(644,root,root,755)
@@ -3973,6 +4010,7 @@ fi
 %{_datadir}/%{name}/share/config/soffice.cfg/modules/sdraw/ui
 %exclude %{_datadir}/%{name}/share/config/soffice.cfg/modules/sdraw/ui/res/*
 %{_datadir}/%{name}/share/registry/draw.xcd
+/usr/share/appdata/libreoffice-draw.appdata.xml
 
 %files emailmerge
 %defattr(644,root,root,755)
@@ -4007,6 +4045,7 @@ fi
 %{_datadir}/%{name}/share/config/soffice.cfg/writerperfect
 %exclude %{_datadir}/%{name}/share/config/soffice.cfg/modules/swriter/ui/res/*
 %{_datadir}/%{name}/share/registry/writer.xcd
+/usr/share/appdata/libreoffice-writer.appdata.xml
 
 %files impress
 %defattr(644,root,root,755)
@@ -4031,6 +4070,7 @@ fi
 %exclude %{_datadir}/%{name}/share/config/soffice.cfg/modules/simpress/ui/res/*
 %{_datadir}/%{name}/share/registry/impress.xcd
 %{_datadir}/%{name}/share/registry/ogltrans.xcd
+/usr/share/appdata/libreoffice-impress.appdata.xml
 
 %files math
 %defattr(644,root,root,755)
@@ -4337,6 +4377,9 @@ fi
 %files i18n-gu -f gu.lang
 %defattr(644,root,root,755)
 
+%files i18n-gug -f gug.lang
+%defattr(644,root,root,755)
+
 %files i18n-he -f he.lang
 %defattr(644,root,root,755)
 
@@ -4368,6 +4411,9 @@ fi
 %defattr(644,root,root,755)
 
 %files i18n-km -f km.lang
+%defattr(644,root,root,755)
+
+%files i18n-kmr-Latn -f kmr_Latn.lang
 %defattr(644,root,root,755)
 
 %files i18n-kn_IN -f kn.lang
@@ -4488,6 +4534,9 @@ fi
 %defattr(644,root,root,755)
 
 %files i18n-sr -f sr.lang
+%defattr(644,root,root,755)
+
+%files i18n-sr-Latn -f sr_Latn.lang
 %defattr(644,root,root,755)
 
 %files i18n-ss -f ss.lang
