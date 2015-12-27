@@ -10,8 +10,12 @@
  
 --- libreoffice-5.0.2.1/dbaccess/Module_dbaccess.mk~	2015-09-05 09:59:15.000000000 +0200
 +++ libreoffice-5.0.2.1/dbaccess/Module_dbaccess.mk	2015-09-17 08:53:09.973934654 +0200
-@@ -49,12 +49,6 @@
- 		CppunitTest_dbaccess_RowSetClones) \
+@@ -45,16 +45,8 @@ $(eval $(call gb_Module_add_check_targets,dbaccess,\
+ 	CppunitTest_dbaccess_empty_stdlib_save \
+ 	CppunitTest_dbaccess_nolib_save \
+ 	CppunitTest_dbaccess_macros_test \
+-	$(if $(ENABLE_JAVA), \
+-		CppunitTest_dbaccess_RowSetClones) \
  ))
  
 -ifeq ($(ENABLE_JAVA),TRUE)
