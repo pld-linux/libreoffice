@@ -51,7 +51,7 @@ Summary:	LibreOffice - powerful office suite
 Summary(pl.UTF-8):	LibreOffice - potężny pakiet biurowy
 Name:		libreoffice
 Version:	%{major_ver}.1
-Release:	0.1
+Release:	1
 License:	GPL/LGPL
 Group:		X11/Applications
 Source0:	http://download.documentfoundation.org/libreoffice/src/%{major_ver}/%{name}-%{version}.tar.xz
@@ -3590,6 +3590,7 @@ fi
 %{_libdir}/%{name}/program/opengl/areaScaleFragmentShader.glsl
 %{_libdir}/%{name}/program/opengl/backgroundFragmentShader.glsl
 %{_libdir}/%{name}/program/opengl/backgroundVertexShader.glsl
+%{_libdir}/%{name}/program/opengl/basicFragmentShader.glsl
 %{_libdir}/%{name}/program/opengl/basicVertexShader.glsl
 %{_libdir}/%{name}/program/opengl/blendedTextureFragmentShader.glsl
 %{_libdir}/%{name}/program/opengl/blendedTextureVertexShader.glsl
@@ -3602,12 +3603,23 @@ fi
 %{_libdir}/%{name}/program/opengl/dissolveFragmentShader.glsl
 %{_libdir}/%{name}/program/opengl/dumbVertexShader.glsl
 %{_libdir}/%{name}/program/opengl/dummyVertexShader.glsl
+%{_libdir}/%{name}/program/opengl/fadeBlackFragmentShader.glsl
+%{_libdir}/%{name}/program/opengl/fadeFragmentShader.glsl
+%{_libdir}/%{name}/program/opengl/glitterFragmentShader.glsl
+%{_libdir}/%{name}/program/opengl/glitterVertexShader.glsl
+%{_libdir}/%{name}/program/opengl/greyscaleFragmentShader.glsl
+%{_libdir}/%{name}/program/opengl/honeycombFragmentShader.glsl
+%{_libdir}/%{name}/program/opengl/honeycombGeometryShader.glsl
+%{_libdir}/%{name}/program/opengl/honeycombVertexShader.glsl
+%{_libdir}/%{name}/program/opengl/invert50FragmentShader.glsl
 %{_libdir}/%{name}/program/opengl/linearGradientFragmentShader.glsl
 %{_libdir}/%{name}/program/opengl/linearMultiColorGradientFragmentShader.glsl
 %{_libdir}/%{name}/program/opengl/linearTwoColorGradientFragmentShader.glsl
-%{_libdir}/%{name}/program/opengl/maskFragmentShader.glsl
+%{_libdir}/%{name}/program/opengl/lineFragmentShader.glsl
+%{_libdir}/%{name}/program/opengl/lineVertexShader.glsl
 %{_libdir}/%{name}/program/opengl/maskedTextureFragmentShader.glsl
 %{_libdir}/%{name}/program/opengl/maskedTextureVertexShader.glsl
+%{_libdir}/%{name}/program/opengl/maskFragmentShader.glsl
 %{_libdir}/%{name}/program/opengl/pickingFragmentShader.glsl
 %{_libdir}/%{name}/program/opengl/pickingVertexShader.glsl
 %{_libdir}/%{name}/program/opengl/radialGradientFragmentShader.glsl
@@ -3615,42 +3627,35 @@ fi
 %{_libdir}/%{name}/program/opengl/radialTwoColorGradientFragmentShader.glsl
 %{_libdir}/%{name}/program/opengl/rectangularMultiColorGradientFragmentShader.glsl
 %{_libdir}/%{name}/program/opengl/rectangularTwoColorGradientFragmentShader.glsl
+%{_libdir}/%{name}/program/opengl/reflectionFragmentShader.glsl
+%{_libdir}/%{name}/program/opengl/reflectionVertexShader.glsl
 %{_libdir}/%{name}/program/opengl/renderTextureFragmentShader.glsl
 %{_libdir}/%{name}/program/opengl/renderTextureVertexShader.glsl
 %{_libdir}/%{name}/program/opengl/replaceColorFragmentShader.glsl
+%{_libdir}/%{name}/program/opengl/rippleFragmentShader.glsl
 %{_libdir}/%{name}/program/opengl/screenTextFragmentShader.glsl
 %{_libdir}/%{name}/program/opengl/screenTextVertexShader.glsl
-%{_libdir}/%{name}/program/opengl/shape3DFragmentShader.glsl
 %{_libdir}/%{name}/program/opengl/shape3DFragmentShaderBatch.glsl
 %{_libdir}/%{name}/program/opengl/shape3DFragmentShaderBatchScroll.glsl
+%{_libdir}/%{name}/program/opengl/shape3DFragmentShader.glsl
 %{_libdir}/%{name}/program/opengl/shape3DFragmentShaderV300.glsl
-%{_libdir}/%{name}/program/opengl/shape3DVertexShader.glsl
 %{_libdir}/%{name}/program/opengl/shape3DVertexShaderBatch.glsl
 %{_libdir}/%{name}/program/opengl/shape3DVertexShaderBatchScroll.glsl
+%{_libdir}/%{name}/program/opengl/shape3DVertexShader.glsl
 %{_libdir}/%{name}/program/opengl/shape3DVertexShaderV300.glsl
 %{_libdir}/%{name}/program/opengl/solidFragmentShader.glsl
 %{_libdir}/%{name}/program/opengl/staticFragmentShader.glsl
 %{_libdir}/%{name}/program/opengl/symbolFragmentShader.glsl
 %{_libdir}/%{name}/program/opengl/symbolVertexShader.glsl
-%{_libdir}/%{name}/program/opengl/textFragmentShader.glsl
 %{_libdir}/%{name}/program/opengl/textFragmentShaderBatch.glsl
-%{_libdir}/%{name}/program/opengl/textVertexShader.glsl
-%{_libdir}/%{name}/program/opengl/textVertexShaderBatch.glsl
+%{_libdir}/%{name}/program/opengl/textFragmentShader.glsl
 %{_libdir}/%{name}/program/opengl/textureFragmentShader.glsl
 %{_libdir}/%{name}/program/opengl/textureVertexShader.glsl
+%{_libdir}/%{name}/program/opengl/textVertexShaderBatch.glsl
+%{_libdir}/%{name}/program/opengl/textVertexShader.glsl
 %{_libdir}/%{name}/program/opengl/transformedTextureVertexShader.glsl
-%{_libdir}/%{name}/program/opengl/basicFragmentShader.glsl
-%{_libdir}/%{name}/program/opengl/fadeBlackFragmentShader.glsl
-%{_libdir}/%{name}/program/opengl/fadeFragmentShader.glsl
-%{_libdir}/%{name}/program/opengl/glitterFragmentShader.glsl
-%{_libdir}/%{name}/program/opengl/glitterVertexShader.glsl
-%{_libdir}/%{name}/program/opengl/honeycombFragmentShader.glsl
-%{_libdir}/%{name}/program/opengl/honeycombGeometryShader.glsl
-%{_libdir}/%{name}/program/opengl/honeycombVertexShader.glsl
-%{_libdir}/%{name}/program/opengl/reflectionFragmentShader.glsl
-%{_libdir}/%{name}/program/opengl/reflectionVertexShader.glsl
-%{_libdir}/%{name}/program/opengl/rippleFragmentShader.glsl
 %{_libdir}/%{name}/program/opengl/vortexFragmentShader.glsl
+%{_libdir}/%{name}/program/opengl/vortexGeometryShader.glsl
 %{_libdir}/%{name}/program/opengl/vortexVertexShader.glsl
 
 # symlink
