@@ -88,6 +88,9 @@ Source28:	http://dev-www.libreoffice.org/src/OpenCOLLADA-master-6509aa13af.tar.b
 Patch0:		disable-failing-test.patch
 Patch1:		mdds-1.2.0.patch
 Patch2:		boost-1.59.patch
+Patch3:		boost-filesystem1.patch
+Patch4:		boost-filesystem2.patch
+Patch5:		liborcus-0.11.patch
 URL:		http://www.documentfoundation.org/
 BuildRequires:	/usr/bin/getopt
 BuildRequires:	Firebird-devel
@@ -2865,6 +2868,9 @@ dialogs.
 %patch0 -p1
 %patch1 -p1
 %patch2 -p1
+%patch3 -p1
+%patch4 -p1
+%patch5 -p1
 
 for dir in *-%{version}; do
 	[ -f $dir/ChangeLog ] && mv $dir/ChangeLog ChangeLog-$dir
