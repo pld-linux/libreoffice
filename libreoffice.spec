@@ -51,7 +51,7 @@ Summary:	LibreOffice - powerful office suite
 Summary(pl.UTF-8):	LibreOffice - potężny pakiet biurowy
 Name:		libreoffice
 Version:	%{major_ver}.1
-Release:	2
+Release:	1
 License:	GPL/LGPL
 Group:		X11/Applications
 Source0:	http://download.documentfoundation.org/libreoffice/src/%{major_ver}/%{name}-%{version}.tar.xz
@@ -86,7 +86,7 @@ Source28:	http://dev-www.libreoffice.org/src/OpenCOLLADA-master-6509aa13af.tar.b
 # Source28-md5:	4ca8a6ef0afeefc864e9ef21b9f14bd6
 
 Patch0:		disable-failing-test.patch
-Patch1:		mdds-1.0.patch
+Patch1:		mdds-1.2.0.patch
 Patch2:		boost-1.59.patch
 URL:		http://www.documentfoundation.org/
 BuildRequires:	/usr/bin/getopt
@@ -185,7 +185,7 @@ BuildRequires:	libxml2-devel >= 2.0
 BuildRequires:	libxslt-devel
 BuildRequires:	libxslt-progs
 %{?with_access:%{?with_system_mdbtools:BuildRequires:	mdbtools-devel >= 0.6}}
-BuildRequires:	mdds-devel >= 1.0
+BuildRequires:	mdds-devel >= 1.2
 %{?with_mono:BuildRequires:	mono-csharp >= 1.2.3}
 %{?with_mono:BuildRequires:	mono-static >= 1.2.3}
 %{?with_system_myspell:BuildRequires:	myspell-devel}
