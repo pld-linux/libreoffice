@@ -45,23 +45,23 @@
 %undefine	with_system_hsqldb
 %endif
 
-%define		major_ver		5.1.2
+%define		major_ver		5.1.3
 
 Summary:	LibreOffice - powerful office suite
 Summary(pl.UTF-8):	LibreOffice - potężny pakiet biurowy
 Name:		libreoffice
-Version:	%{major_ver}.1
-Release:	2
+Version:	%{major_ver}.2
+Release:	1
 License:	GPL/LGPL
 Group:		X11/Applications
 Source0:	http://download.documentfoundation.org/libreoffice/src/%{major_ver}/%{name}-%{version}.tar.xz
-# Source0-md5:	81f5f045fc82f9704e3d12479cd66139
+# Source0-md5:	cbe602264e58f7c93e72068c408e3551
 Source1:	http://download.documentfoundation.org/libreoffice/src/%{major_ver}/%{name}-dictionaries-%{version}.tar.xz
-# Source1-md5:	92338f3617af3d810b79540fe625071f
+# Source1-md5:	063b3218651a93198c8a558c6ab365cc
 Source2:	http://download.documentfoundation.org/libreoffice/src/%{major_ver}/%{name}-help-%{version}.tar.xz
-# Source2-md5:	f66f2ec791f3d985c6b890bac84652ae
+# Source2-md5:	f485479a135582f37335a92d773416fe
 Source3:	http://download.documentfoundation.org/libreoffice/src/%{major_ver}/%{name}-translations-%{version}.tar.xz
-# Source3-md5:	f61491559c3c1a2a442272a6dd84f2c7
+# Source3-md5:	a93714b74f1c04c534729a9511311886
 
 
 # make fetch DO_FETCH_TARBALLS=1 WGET=wget
@@ -88,9 +88,7 @@ Source28:	http://dev-www.libreoffice.org/src/OpenCOLLADA-master-6509aa13af.tar.b
 Patch0:		disable-failing-test.patch
 Patch1:		mdds-1.2.0.patch
 Patch2:		boost-1.59.patch
-Patch3:		boost-filesystem1.patch
-Patch4:		boost-filesystem2.patch
-Patch5:		liborcus-0.11.patch
+Patch3:		liborcus-0.11.patch
 URL:		http://www.documentfoundation.org/
 BuildRequires:	/usr/bin/getopt
 BuildRequires:	Firebird-devel
@@ -2869,8 +2867,6 @@ dialogs.
 %patch1 -p1
 %patch2 -p1
 %patch3 -p1
-%patch4 -p1
-%patch5 -p1
 
 for dir in *-%{version}; do
 	[ -f $dir/ChangeLog ] && mv $dir/ChangeLog ChangeLog-$dir
