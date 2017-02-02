@@ -27,30 +27,33 @@
  # This runs a suite of peformance tests on embedded firebird and HSQLDB.
  # Instructions on running the test can be found in qa/unit/embeddedb_performancetest
  ifeq ($(ENABLE_FIREBIRD_SDBC),TRUE)
---- libreoffice-5.0.2.1/sw/qa/extras/ooxmlimport/ooxmlimport.cxx~	2015-09-05 09:59:15.000000000 +0200
-+++ libreoffice-5.0.2.1/sw/qa/extras/ooxmlimport/ooxmlimport.cxx	2015-09-17 14:57:25.802634256 +0200
-@@ -2759,14 +2759,6 @@
-     CPPUNIT_ASSERT_EQUAL(text::SizeType::MIN, getProperty<sal_Int16>(xTableRows->getByIndex(0), "SizeType"));
- }
+
+--- libreoffice-5.3.0.3/dbaccess/Module_dbaccess.mk~	2017-02-02 13:13:39.000000000 +0100
++++ libreoffice-5.3.0.3/dbaccess/Module_dbaccess.mk	2017-02-02 14:38:31.994811891 +0100
+@@ -34,12 +34,6 @@ $(eval $(call gb_Module_add_l10n_targets
+ 	UIConfig_dbtdata \
+ ))
  
--DECLARE_OOXMLIMPORT_TEST(testTdf87924, "tdf87924.docx")
--{
--    uno::Reference<beans::XPropertySet> xPropertySet(getShape(1), uno::UNO_QUERY);
--    comphelper::SequenceAsHashMap aGeometry(xPropertySet->getPropertyValue("CustomShapeGeometry"));
--    // This was -270, the text rotation angle was set when it should not be rotated.
--    CPPUNIT_ASSERT_EQUAL(static_cast<sal_Int32>(0), aGeometry["TextPreRotateAngle"].get<sal_Int32>());
--}
+-ifeq ($(ENABLE_FIREBIRD_SDBC),TRUE)
+-$(eval $(call gb_Module_add_check_targets,dbaccess,\
+-    CppunitTest_dbaccess_firebird_test \
+-))
+-endif
 -
- #endif
+ $(eval $(call gb_Module_add_check_targets,dbaccess,\
+ 	CppunitTest_dbaccess_dialog_save \
+ 	CppunitTest_dbaccess_empty_stdlib_save \
+@@ -49,13 +43,6 @@ $(eval $(call gb_Module_add_check_target
  
- CPPUNIT_PLUGIN_IMPLEMENT();
---- libreoffice-5.1.2.1/sw/Module_sw.mk~	2016-03-16 09:44:00.000000000 +0900
-+++ libreoffice-5.1.2.1/sw/Module_sw.mk	2016-03-30 17:57:21.514589545 +0900
-@@ -58,7 +58,6 @@
-     CppunitTest_sw_ooxmlexport4 \
-     CppunitTest_sw_ooxmlexport5 \
-     CppunitTest_sw_ooxmlexport6 \
--    CppunitTest_sw_ooxmlexport7 \
-     CppunitTest_sw_ooxmlfieldexport \
-     CppunitTest_sw_ooxmlw14export \
-     CppunitTest_sw_ooxmlimport \
+ # This runs a suite of peformance tests on embedded firebird and HSQLDB.
+ # Instructions on running the test can be found in qa/unit/embeddedb_performancetest
+-ifeq ($(ENABLE_FIREBIRD_SDBC),TRUE)
+-ifeq ($(ENABLE_JAVA),TRUE)
+-$(eval $(call gb_Module_add_check_targets,dbaccess,\
+-    CppunitTest_dbaccess_embeddeddb_performancetest \
+-))
+-endif
+-endif
+ 
+ $(eval $(call gb_Module_add_subsequentcheck_targets,dbaccess,\
+ 	JunitTest_dbaccess_complex \

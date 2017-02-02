@@ -11,7 +11,6 @@
 #
 # Conditional build:
 %bcond_without	java		# without Java support (disables help support)
-%bcond_with	kde		# KDE L&F packages
 %bcond_without	kde4		# KDE4 L&F packages
 %bcond_without	gtk		# GTK2 L&F
 %bcond_with	gtk3		# GTK3 L&F (experimental)
@@ -45,53 +44,57 @@
 %undefine	with_system_hsqldb
 %endif
 
-%define		major_ver		5.1.3
+%define		major_ver		5.3.0
 
 Summary:	LibreOffice - powerful office suite
 Summary(pl.UTF-8):	LibreOffice - potężny pakiet biurowy
 Name:		libreoffice
-Version:	%{major_ver}.2
-Release:	4
+Version:	%{major_ver}.3
+Release:	1
 License:	GPL/LGPL
 Group:		X11/Applications
 Source0:	http://download.documentfoundation.org/libreoffice/src/%{major_ver}/%{name}-%{version}.tar.xz
-# Source0-md5:	cbe602264e58f7c93e72068c408e3551
+# Source0-md5:	204c492a0b5e58dd0be9788c74a364ab
 Source1:	http://download.documentfoundation.org/libreoffice/src/%{major_ver}/%{name}-dictionaries-%{version}.tar.xz
-# Source1-md5:	063b3218651a93198c8a558c6ab365cc
+# Source1-md5:	f9e3e741b929c5af19b1321569537b68
 Source2:	http://download.documentfoundation.org/libreoffice/src/%{major_ver}/%{name}-help-%{version}.tar.xz
-# Source2-md5:	f485479a135582f37335a92d773416fe
+# Source2-md5:	1b76f6bf2e5b3bb9a70831fa3a4e3471
 Source3:	http://download.documentfoundation.org/libreoffice/src/%{major_ver}/%{name}-translations-%{version}.tar.xz
-# Source3-md5:	a93714b74f1c04c534729a9511311886
+# Source3-md5:	6ad27f9d0348010afca53167c9e350cb
 
 
 # make fetch DO_FETCH_TARBALLS=1 WGET=wget
 # but not sure if all are needed?
-Source20:	http://dev-www.libreoffice.org/src/0168229624cfac409e766913506961a8-ucpp-1.3.2.tar.gz
+Source20: http://dev-www.libreoffice.org/src/0168229624cfac409e766913506961a8-ucpp-1.3.2.tar.gz
 # Source20-md5:	0168229624cfac409e766913506961a8
-Source21:	http://dev-www.libreoffice.org/src/17410483b5b5f267aa18b7e00b65e6e0-hsqldb_1_8_0.zip
+Source21: http://dev-www.libreoffice.org/src/17410483b5b5f267aa18b7e00b65e6e0-hsqldb_1_8_0.zip
 # Source21-md5:	17410483b5b5f267aa18b7e00b65e6e0
-Source22:	http://dev-www.libreoffice.org/src/1f24ab1d39f4a51faf22244c94a6203f-xmlsec1-1.2.14.tar.gz
+Source22: http://dev-www.libreoffice.org/src/1f24ab1d39f4a51faf22244c94a6203f-xmlsec1-1.2.14.tar.gz
 # Source22-md5:	1f24ab1d39f4a51faf22244c94a6203f
-Source23:	http://dev-www.libreoffice.org/src/798b2ffdc8bcfe7bca2cf92b62caf685-rhino1_5R5.zip
-# Source23-md5:	798b2ffdc8bcfe7bca2cf92b62caf685
-Source24:	http://dev-www.libreoffice.org/src/35c94d2df8893241173de1d16b6034c0-swingExSrc.zip
-# Source24-md5:	35c94d2df8893241173de1d16b6034c0
-Source25:	http://dev-www.libreoffice.org/src/a7983f859eafb2677d7ff386a023bc40-xsltml_2.1.2.zip
-# Source25-md5:	a7983f859eafb2677d7ff386a023bc40
-Source26:	http://dev-www.libreoffice.org/src/4b87018f7fff1d054939d19920b751a0-collada2gltf-master-cb1d97788a.tar.bz2
-# Source26-md5:	4b87018f7fff1d054939d19920b751a0
-Source27:	http://dev-www.libreoffice.org/src/CoinMP-1.7.6.tgz
-# Source27-md5:	1cce53bf4b40ae29790d2c5c9f8b1129
-Source28:	http://dev-www.libreoffice.org/src/OpenCOLLADA-master-6509aa13af.tar.bz2
-# Source28-md5:	4ca8a6ef0afeefc864e9ef21b9f14bd6
+Source23: http://dev-www.libreoffice.org/src/35c94d2df8893241173de1d16b6034c0-swingExSrc.zip
+# Source23-md5:	35c94d2df8893241173de1d16b6034c0
+Source24: http://dev-www.libreoffice.org/src/4b87018f7fff1d054939d19920b751a0-collada2gltf-master-cb1d97788a.tar.bz2
+# Source24-md5:	4b87018f7fff1d054939d19920b751a0
+Source25: http://dev-www.libreoffice.org/src/798b2ffdc8bcfe7bca2cf92b62caf685-rhino1_5R5.zip
+# Source25-md5:	798b2ffdc8bcfe7bca2cf92b62caf685
+Source26: http://dev-www.libreoffice.org/extern/8249374c274932a21846fa7629c2aa9b-officeotron-0.7.4-master.jar
+# Source26-md5:	8249374c274932a21846fa7629c2aa9b
+Source27: http://dev-www.libreoffice.org/src/86b1daaa438f5a7bea9a52d7b9799ac0-xmlsec1-1.2.23.tar.gz
+# Source27-md5:	86b1daaa438f5a7bea9a52d7b9799ac0
+Source28: http://dev-www.libreoffice.org/extern/a084cd548b586552cb7d3ee51f1af969-odfvalidator-1.1.8-incubating-SNAPSHOT-jar-with-dependencies.jar
+# Source28-md5:	a084cd548b586552cb7d3ee51f1af969
+Source29: http://dev-www.libreoffice.org/src/a7983f859eafb2677d7ff386a023bc40-xsltml_2.1.2.zip
+# Source29-md5:	a7983f859eafb2677d7ff386a023bc40
+Source30: http://dev-www.libreoffice.org/src/CoinMP-1.7.6.tgz
+# Source30-md5:	1cce53bf4b40ae29790d2c5c9f8b1129
+Source31: http://dev-www.libreoffice.org/src/OpenCOLLADA-master-6509aa13af.tar.bz2
+# Source31-md5:	4ca8a6ef0afeefc864e9ef21b9f14bd6
 
 Patch0:		disable-failing-test.patch
-Patch1:		mdds-1.2.0.patch
-Patch2:		boost-1.59.patch
-Patch3:		liborcus-0.11.patch
+
 URL:		http://www.documentfoundation.org/
 BuildRequires:	/usr/bin/getopt
-BuildRequires:	Firebird-devel
+BuildRequires:	Firebird-devel >= 3.0.0.0
 BuildRequires:	GConf2-devel
 BuildRequires:	GLM
 BuildRequires:	ImageMagick
@@ -152,17 +155,16 @@ BuildRequires:	liblangtag-devel
 BuildRequires:	libmspub-devel
 BuildRequires:	libmwaw-devel >= 0.3.0
 BuildRequires:	libodfgen-devel >= 0.1.1
-BuildRequires:	liborcus-devel >= 0.9.0
+BuildRequires:	liborcus-devel >= 0.12.0
 BuildRequires:	libpagemaker-devel >= 0.0.2
+BuildRequires:	libstaroffice-devel
 BuildRequires:	libvisio-devel
 BuildRequires:	libwpd-devel >= 0.10.0
 BuildRequires:	libwpg-devel >= 0.3.0
 BuildRequires:	libwps-devel >= 0.3.0
+BuildRequires:	libzmf-devel
 BuildRequires:	lp_solve-devel
 BuildRequires:	silgraphite-devel
-%if %{with kde}
-BuildRequires:	kde4-kde3support-devel
-%endif
 %if %{with kde4}
 BuildRequires:	kde4-kdelibs-devel
 BuildRequires:	qt4-build
@@ -2811,6 +2813,23 @@ Chinese language for Taiwan.
 Ten pakiet dostarcza zasoby zawierające menu i okna dialogowe w języku
 chińskim dla Tajwanu.
 
+%package i18n-vec
+Summary:	LibreOffice - interface in Venetian language
+Summary(pl.UTF-8):	LibreOffice - interfejs w języku Venetian
+Group:		I18n
+Requires:	%{name}-core = %{version}-%{release}
+%if "%{_rpmversion}" >= "5"
+BuildArch:	noarch
+%endif
+
+%description i18n-vec
+This package provides resources containing menus and dialogs in
+Venetian language.
+
+%description i18n-vec -l pl.UTF-8
+Ten pakiet dostarcza zasoby zawierające menu i okna dialogowe w języku
+Venetian.
+
 %package i18n-zu
 Summary:	LibreOffice - interface in Zulu language
 Summary(pl.UTF-8):	LibreOffice - interfejs w języku zuluskim
@@ -2864,9 +2883,6 @@ dialogs.
 %prep
 %setup -q -n %{name}-%{version} -a1 -a2 -a3
 %patch0 -p1
-%patch1 -p1
-%patch2 -p1
-%patch3 -p1
 
 for dir in *-%{version}; do
 	[ -f $dir/ChangeLog ] && mv $dir/ChangeLog ChangeLog-$dir
@@ -2884,6 +2900,9 @@ ln %{SOURCE25} ext_sources
 ln %{SOURCE26} ext_sources
 ln %{SOURCE27} ext_sources
 ln %{SOURCE28} ext_sources
+ln %{SOURCE29} ext_sources
+ln %{SOURCE30} ext_sources
+ln %{SOURCE31} ext_sources
 :> src.downloaded
 
 %build
@@ -2969,11 +2988,16 @@ export PATH=$PATH:%{_libdir}/interbase/bin
 	--with-system-graphite \
 	--with-system-icu \
 	--with-system-jpeg \
+	--with-system-libcdr \
 	--with-system-libgltf \
+	--with-system-libmspub \
+	--with-system-libmwaw \
+	--with-system-libvisio \
 	--with-system-libwpd \
 	--with-system-libwpg \
 	--with-system-libwps \
 	--with-system-libxml \
+	--with-system-libzmf \
 	--with-system-clucene \
 	--with-system-neon \
 	--with-system-openssl \
@@ -2981,7 +3005,6 @@ export PATH=$PATH:%{_libdir}/interbase/bin
 	--enable-python=system \
 	--with-system-redland \
 	--with-system-sane \
-	--with-system-vigra \
 	--with-system-zlib \
 	--with-system-libexttextcat \
 	--with-system-jfreereport \
@@ -2996,9 +3019,7 @@ export PATH=$PATH:%{_libdir}/interbase/bin
 	--enable-report-builder \
 	--enable-scripting-beanshell \
 	--enable-scripting-javascript \
-	--with%{!?mozilla:out}-system-npapi-headers \
-	%{?with_kde:--enable-kde --disable-kde4} \
-	%{?with_kde4:--enable-kde4 --disable-kde} \
+	--%{?with_kde4:en}%{!?with_kde4:dis}able-kde4 \
 	--with-lang=%{?with_i18n:ALL} \
 %if %{with java}
 	--with-java \
@@ -3007,7 +3028,6 @@ export PATH=$PATH:%{_libdir}/interbase/bin
 %else
 	--without-java \
 %endif
-	--disable-gnome-vfs \
 	--enable-gio \
 	--with-x \
 	--without-fonts \
@@ -3018,17 +3038,16 @@ export PATH=$PATH:%{_libdir}/interbase/bin
 	--with-system-openldap \
 %if 0%{?debug:1}
 	--enable-debug \
-	--enable-crashdump=yes \
+	--enable-breakpad=yes \
 	--enable-symbols=FULL \
 %else
-	--enable-crashdump=no \
+	--enable-breakpad=no \
 	--disable-symbols \
 %endif
 	--with-build-version=%{version}-%{release} \
 	--enable-split-app-modules \
 	--enable-split-opt-features \
 	--enable-cups \
-	--enable-lockdown \
 	--disable-fetch-external
 
 # this limits processing some files but doesn't limit parallel build
@@ -3358,7 +3377,6 @@ fi
 %attr(755,root,root) %{_libdir}/%{name}/program/libavmedialo.so
 %attr(755,root,root) %{_libdir}/%{name}/program/libavmediaogl.so
 %attr(755,root,root) %{_libdir}/%{name}/program/libbasctllo.so
-%attr(755,root,root) %{_libdir}/%{name}/program/libbasebmplo.so
 %attr(755,root,root) %{_libdir}/%{name}/program/libbasegfxlo.so
 %attr(755,root,root) %{_libdir}/%{name}/program/libbasprovlo.so
 %attr(755,root,root) %{_libdir}/%{name}/program/libbiblo.so
@@ -3451,7 +3469,6 @@ fi
 %attr(755,root,root) %{_libdir}/%{name}/program/libpasswordcontainerlo.so
 %attr(755,root,root) %{_libdir}/%{name}/program/libpcrlo.so
 %attr(755,root,root) %{_libdir}/%{name}/program/libpdffilterlo.so
-%attr(755,root,root) %{_libdir}/%{name}/program/libpllo.so
 %attr(755,root,root) %{_libdir}/%{name}/program/libpricinglo.so
 %attr(755,root,root) %{_libdir}/%{name}/program/libprotocolhandlerlo.so
 %attr(755,root,root) %{_libdir}/%{name}/program/librecentfile.so
@@ -3527,9 +3544,7 @@ fi
 %attr(755,root,root) %{_libdir}/%{name}/program/libxsltfilterlo.so
 %attr(755,root,root) %{_libdir}/%{name}/program/libxstor.so
 %attr(755,root,root) %{_libdir}/%{name}/program/oosplash
-%attr(755,root,root) %{_libdir}/%{name}/program/open-url
 %attr(755,root,root) %{_libdir}/%{name}/program/pagein*
-%attr(755,root,root) %{_libdir}/%{name}/program/pluginapp.bin
 %attr(755,root,root) %{_libdir}/%{name}/program/senddoc
 %attr(755,root,root) %{_libdir}/%{name}/program/uri-encode
 %attr(755,root,root) %{_libdir}/%{name}/program/xid-fullscreen-on-all-monitors
@@ -3596,6 +3611,10 @@ fi
 %{_libdir}/%{name}/program/opengl/basicVertexShader.glsl
 %{_libdir}/%{name}/program/opengl/blendedTextureFragmentShader.glsl
 %{_libdir}/%{name}/program/opengl/blendedTextureVertexShader.glsl
+%{_libdir}/%{name}/program/opengl/combinedFragmentShader.glsl
+%{_libdir}/%{name}/program/opengl/combinedTextureFragmentShader.glsl
+%{_libdir}/%{name}/program/opengl/combinedTextureVertexShader.glsl
+%{_libdir}/%{name}/program/opengl/combinedVertexShader.glsl
 %{_libdir}/%{name}/program/opengl/commonFragmentShader.glsl
 %{_libdir}/%{name}/program/opengl/commonVertexShader.glsl
 %{_libdir}/%{name}/program/opengl/convolutionFragmentShader.glsl
@@ -3721,8 +3740,10 @@ fi
 %dir %{_datadir}/%{name}/share/autotext
 %{_datadir}/%{name}/share/autotext/en-US
 %{_datadir}/%{name}/share/basic
+%{_datadir}/%{name}/share/classification
 %dir %{_datadir}/%{name}/share/config
 %{_datadir}/%{name}/share/config/images_breeze.zip
+%{_datadir}/%{name}/share/config/images_breeze_dark.zip
 %{_datadir}/%{name}/share/config/images_galaxy.zip
 %{_datadir}/%{name}/share/config/images_hicontrast.zip
 %{_datadir}/%{name}/share/config/images_oxygen.zip
@@ -3767,6 +3788,7 @@ fi
 %dir %{_datadir}/%{name}/share/config/soffice.cfg/modules/sdraw
 %dir %{_datadir}/%{name}/share/config/soffice.cfg/modules/sglobal
 %{_datadir}/%{name}/share/config/soffice.cfg/modules/sglobal/menubar
+%{_datadir}/%{name}/share/config/soffice.cfg/modules/sglobal/popupmenu
 %{_datadir}/%{name}/share/config/soffice.cfg/modules/sglobal/statusbar
 %{_datadir}/%{name}/share/config/soffice.cfg/modules/sglobal/toolbar
 %dir %{_datadir}/%{name}/share/config/soffice.cfg/modules/smath
@@ -3776,15 +3798,18 @@ fi
 %exclude %{_datadir}/%{name}/share/config/soffice.cfg/modules/spropctrlr/ui/res/*
 %dir %{_datadir}/%{name}/share/config/soffice.cfg/modules/swform
 %{_datadir}/%{name}/share/config/soffice.cfg/modules/swform/menubar
+%{_datadir}/%{name}/share/config/soffice.cfg/modules/swform/popupmenu
 %{_datadir}/%{name}/share/config/soffice.cfg/modules/swform/statusbar
 %{_datadir}/%{name}/share/config/soffice.cfg/modules/swform/toolbar
 %dir %{_datadir}/%{name}/share/config/soffice.cfg/modules/swreport
 %{_datadir}/%{name}/share/config/soffice.cfg/modules/swreport/menubar
+%{_datadir}/%{name}/share/config/soffice.cfg/modules/swreport/popupmenu
 %{_datadir}/%{name}/share/config/soffice.cfg/modules/swreport/statusbar
 %{_datadir}/%{name}/share/config/soffice.cfg/modules/swreport/toolbar
 %dir %{_datadir}/%{name}/share/config/soffice.cfg/modules/swriter
 %dir %{_datadir}/%{name}/share/config/soffice.cfg/modules/swxform
 %{_datadir}/%{name}/share/config/soffice.cfg/modules/swxform/menubar
+%{_datadir}/%{name}/share/config/soffice.cfg/modules/swxform/popupmenu
 %{_datadir}/%{name}/share/config/soffice.cfg/modules/swxform/statusbar
 %{_datadir}/%{name}/share/config/soffice.cfg/modules/swxform/toolbar
 %dir %{_datadir}/%{name}/share/config/soffice.cfg/sfx
@@ -3809,6 +3834,7 @@ fi
 %{_datadir}/%{name}/share/config/wizard
 %dir %{_datadir}/%{name}/share/dtd
 %{_datadir}/%{name}/share/dtd/officedocument
+%{_datadir}/%{name}/share/emojiconfig
 %dir %{_datadir}/%{name}/share/extensions
 %{_datadir}/%{name}/share/extensions/package.txt
 %{_datadir}/%{name}/share/filter
@@ -3830,7 +3856,6 @@ fi
 %dir %{_datadir}/%{name}/share/template
 %dir %{_datadir}/%{name}/share/template/common
 %{_datadir}/%{name}/share/template/common/internal
-%{_datadir}/%{name}/share/template/common/layout
 %{_datadir}/%{name}/share/template/common/officorr
 %{_datadir}/%{name}/share/template/common/offimisc
 %{_datadir}/%{name}/share/template/common/personal
@@ -3898,22 +3923,9 @@ fi
 %{_mandir}/man1/libreoffice.1*
 %{_mandir}/man1/unopkg.1*
 
-%if %{with kde}
-%files libs-kde
-%defattr(644,root,root,755)
-%attr(755,root,root) %{_libdir}/%{name}/program/kde4-open-url
-%attr(755,root,root) %{_libdir}/%{name}/program/kdebe1.uno.so
-%attr(755,root,root) %{_libdir}/%{name}/program/kdefilepicker
-%attr(755,root,root) %{_libdir}/%{name}/program/fps_kde.uno.so
-%attr(755,root,root) %{_libdir}/%{name}/program/libkabdrv1.so
-%attr(755,root,root) %{_libdir}/%{name}/program/libkab1.so
-%attr(755,root,root) %{_libdir}/%{name}/program/libvclplug_kde*.so
-%endif
-
 %if %{with kde4}
 %files libs-kde
 %defattr(644,root,root,755)
-%attr(755,root,root) %{_libdir}/%{name}/program/kde4-open-url
 %attr(755,root,root) %{_libdir}/%{name}/program/libvclplug_kde4*.so
 %attr(755,root,root) %{_libdir}/%{name}/program/libkde4be1lo.so
 %endif
@@ -3921,7 +3933,6 @@ fi
 %if %{with gtk} || %{with gtk3}
 %files libs-gtk
 %defattr(644,root,root,755)
-%attr(755,root,root) %{_libdir}/%{name}/program/gnome-open-url
 %attr(755,root,root) %{_libdir}/%{name}/program/libqstart_gtklo.so
 %attr(755,root,root) %{_libdir}/%{name}/program/libvclplug_gtk*.so
 %{_datadir}/%{name}/share/registry/gnome.xcd
@@ -3950,9 +3961,11 @@ fi
 %{_datadir}/%{name}/program/resource/sdbclen-US.res
 %{_datadir}/%{name}/program/resource/sdberren-US.res
 %{_datadir}/%{name}/share/config/soffice.cfg/modules/dbapp/menubar
+%{_datadir}/%{name}/share/config/soffice.cfg/modules/dbapp/popupmenu
 %{_datadir}/%{name}/share/config/soffice.cfg/modules/dbapp/statusbar
 %{_datadir}/%{name}/share/config/soffice.cfg/modules/dbapp/toolbar
 %{_datadir}/%{name}/share/config/soffice.cfg/modules/dbbrowser/menubar
+%{_datadir}/%{name}/share/config/soffice.cfg/modules/dbbrowser/popupmenu
 %{_datadir}/%{name}/share/config/soffice.cfg/modules/dbbrowser/toolbar
 %{_datadir}/%{name}/share/config/soffice.cfg/modules/dbquery/menubar
 %{_datadir}/%{name}/share/config/soffice.cfg/modules/dbquery/toolbar
@@ -3964,6 +3977,7 @@ fi
 %exclude %{_datadir}/%{name}/share/config/soffice.cfg/modules/dbreport/ui/res/*
 %{_datadir}/%{name}/share/config/soffice.cfg/modules/dbtable
 %{_datadir}/%{name}/share/config/soffice.cfg/modules/dbtdata/menubar
+%{_datadir}/%{name}/share/config/soffice.cfg/modules/dbtdata/popupmenu
 %{_datadir}/%{name}/share/config/soffice.cfg/modules/dbtdata/toolbar
 %{_datadir}/%{name}/share/registry/base.xcd
 /usr/share/appdata/libreoffice-base.appdata.xml
@@ -3994,7 +4008,9 @@ fi
 %{_datadir}/%{name}/program/resource/pricingen-US.res
 %{_datadir}/%{name}/program/resource/solveren-US.res
 %{_datadir}/%{name}/program/resource/scen-US.res
+%{_datadir}/%{name}/share/calc
 %{_datadir}/%{name}/share/config/soffice.cfg/modules/scalc/menubar
+%{_datadir}/%{name}/share/config/soffice.cfg/modules/scalc/popupmenu
 %{_datadir}/%{name}/share/config/soffice.cfg/modules/scalc/statusbar
 %{_datadir}/%{name}/share/config/soffice.cfg/modules/scalc/toolbar
 %{_datadir}/%{name}/share/config/soffice.cfg/modules/scalc/ui
@@ -4012,6 +4028,7 @@ fi
 %{_iconsdir}/hicolor/*/apps/libreoffice-draw.png
 %{_iconsdir}/hicolor/*/apps/libreoffice-draw.svg
 %{_datadir}/%{name}/share/config/soffice.cfg/modules/sdraw/menubar
+%{_datadir}/%{name}/share/config/soffice.cfg/modules/sdraw/popupmenu
 %{_datadir}/%{name}/share/config/soffice.cfg/modules/sdraw/statusbar
 %{_datadir}/%{name}/share/config/soffice.cfg/modules/sdraw/toolbar
 %{_datadir}/%{name}/share/config/soffice.cfg/modules/sdraw/ui
@@ -4043,9 +4060,11 @@ fi
 %{_iconsdir}/hicolor/*/apps/libreoffice-writer.png
 %{_iconsdir}/hicolor/*/apps/libreoffice-writer.svg
 %{_datadir}/%{name}/program/resource/t602filteren-US.res
+%{_datadir}/%{name}/program/resource/writerperfecten-US.res
 %{_datadir}/%{name}/share/config/soffice.cfg/modules/sbibliography
 %exclude %{_datadir}/%{name}/share/config/soffice.cfg/modules/sbibliography/ui/res/*
 %{_datadir}/%{name}/share/config/soffice.cfg/modules/swriter/menubar
+%{_datadir}/%{name}/share/config/soffice.cfg/modules/swriter/popupmenu
 %{_datadir}/%{name}/share/config/soffice.cfg/modules/swriter/statusbar
 %{_datadir}/%{name}/share/config/soffice.cfg/modules/swriter/toolbar
 %{_datadir}/%{name}/share/config/soffice.cfg/modules/swriter/ui
@@ -4071,6 +4090,7 @@ fi
 %{_iconsdir}/hicolor/*/apps/libreoffice-impress.svg
 %{_datadir}/%{name}/share/config/soffice.cfg/simpress
 %{_datadir}/%{name}/share/config/soffice.cfg/modules/simpress/menubar
+%{_datadir}/%{name}/share/config/soffice.cfg/modules/simpress/popupmenu
 %{_datadir}/%{name}/share/config/soffice.cfg/modules/simpress/statusbar
 %{_datadir}/%{name}/share/config/soffice.cfg/modules/simpress/toolbar
 %{_datadir}/%{name}/share/config/soffice.cfg/modules/simpress/ui
@@ -4092,6 +4112,7 @@ fi
 %attr(755,root,root) %{_libdir}/%{name}/program/smath
 %{_datadir}/%{name}/program/resource/smen-US.res
 %{_datadir}/%{name}/share/config/soffice.cfg/modules/smath/menubar
+%{_datadir}/%{name}/share/config/soffice.cfg/modules/smath/popupmenu
 %{_datadir}/%{name}/share/config/soffice.cfg/modules/smath/statusbar
 %{_datadir}/%{name}/share/config/soffice.cfg/modules/smath/toolbar
 %{_datadir}/%{name}/share/config/soffice.cfg/modules/smath/ui
@@ -4104,6 +4125,7 @@ fi
 %attr(755,root,root) %{_bindir}/ooweb
 %{_mandir}/man1/loweb.1
 %{_datadir}/%{name}/share/config/soffice.cfg/modules/sweb/menubar
+%{_datadir}/%{name}/share/config/soffice.cfg/modules/sweb/popupmenu
 %{_datadir}/%{name}/share/config/soffice.cfg/modules/sweb/statusbar
 %{_datadir}/%{name}/share/config/soffice.cfg/modules/sweb/toolbar
 
@@ -4594,6 +4616,9 @@ fi
 %files i18n-ve -f ve.lang
 %defattr(644,root,root,755)
 
+%files i18n-vec -f vec.lang
+%defattr(644,root,root,755)
+
 %files i18n-vi -f vi.lang
 %defattr(644,root,root,755)
 
@@ -4612,7 +4637,7 @@ fi
 
 %files -n bash-completion-%{name}
 %defattr(644,root,root,755)
-/etc/bash_completion.d/*
+%{_datadir}/bash-completion/completions/%{name}.sh
 
 %files glade
 %attr(755,root,root) %{_libdir}/%{name}/program/ui-previewer
