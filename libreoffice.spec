@@ -44,23 +44,23 @@
 %undefine	with_system_hsqldb
 %endif
 
-%define		major_ver		5.3.1
+%define		major_ver		5.3.2
 
 Summary:	LibreOffice - powerful office suite
 Summary(pl.UTF-8):	LibreOffice - potężny pakiet biurowy
 Name:		libreoffice
 Version:	%{major_ver}.2
-Release:	3
+Release:	1
 License:	GPL/LGPL
 Group:		X11/Applications
 Source0:	http://download.documentfoundation.org/libreoffice/src/%{major_ver}/%{name}-%{version}.tar.xz
-# Source0-md5:	4ba66c0812165af9af8e03f3f60280a5
+# Source0-md5:	7775d814f0c13d0f2e3d7cafd930ae17
 Source1:	http://download.documentfoundation.org/libreoffice/src/%{major_ver}/%{name}-dictionaries-%{version}.tar.xz
-# Source1-md5:	7adaac5d4c25bff9400042c02434fefe
+# Source1-md5:	7e49e8bb68cc362840c5b71f1f496334
 Source2:	http://download.documentfoundation.org/libreoffice/src/%{major_ver}/%{name}-help-%{version}.tar.xz
-# Source2-md5:	43a5f7b785817d19472facc4b737e591
+# Source2-md5:	06719421724dd0d94243756afc188748
 Source3:	http://download.documentfoundation.org/libreoffice/src/%{major_ver}/%{name}-translations-%{version}.tar.xz
-# Source3-md5:	5ae2f99556f0140ed00b2ea0749988cd
+# Source3-md5:	8967530095b6df7d695fc23bc3c277d2
 
 
 # make fetch DO_FETCH_TARBALLS=1 WGET=wget
