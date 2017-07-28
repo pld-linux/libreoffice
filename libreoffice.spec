@@ -44,23 +44,23 @@
 %undefine	with_system_hsqldb
 %endif
 
-%define		major_ver		5.3.2
+%define		major_ver		5.4.0
 
 Summary:	LibreOffice - powerful office suite
 Summary(pl.UTF-8):	LibreOffice - potężny pakiet biurowy
 Name:		libreoffice
-Version:	%{major_ver}.2
-Release:	1
+Version:	%{major_ver}.3
+Release:	0.1
 License:	GPL/LGPL
 Group:		X11/Applications
 Source0:	http://download.documentfoundation.org/libreoffice/src/%{major_ver}/%{name}-%{version}.tar.xz
-# Source0-md5:	7775d814f0c13d0f2e3d7cafd930ae17
+# Source0-md5:	3491becc5b7e3b1658239b8be877770c
 Source1:	http://download.documentfoundation.org/libreoffice/src/%{major_ver}/%{name}-dictionaries-%{version}.tar.xz
-# Source1-md5:	7e49e8bb68cc362840c5b71f1f496334
+# Source1-md5:	df72048ade4fe7a63a7934af65f2e5bd
 Source2:	http://download.documentfoundation.org/libreoffice/src/%{major_ver}/%{name}-help-%{version}.tar.xz
-# Source2-md5:	06719421724dd0d94243756afc188748
+# Source2-md5:	c3e731156d2b5594cd3e0dc8c36d7ea3
 Source3:	http://download.documentfoundation.org/libreoffice/src/%{major_ver}/%{name}-translations-%{version}.tar.xz
-# Source3-md5:	8967530095b6df7d695fc23bc3c277d2
+# Source3-md5:	18ea9867fea2fd0f9149df43ce286e30
 
 
 # make fetch DO_FETCH_TARBALLS=1 WGET=wget
@@ -69,8 +69,9 @@ Source20: http://dev-www.libreoffice.org/src/0168229624cfac409e766913506961a8-uc
 # Source20-md5:	0168229624cfac409e766913506961a8
 Source21: http://dev-www.libreoffice.org/src/17410483b5b5f267aa18b7e00b65e6e0-hsqldb_1_8_0.zip
 # Source21-md5:	17410483b5b5f267aa18b7e00b65e6e0
-Source22: http://dev-www.libreoffice.org/src/1f24ab1d39f4a51faf22244c94a6203f-xmlsec1-1.2.14.tar.gz
-# Source22-md5:	1f24ab1d39f4a51faf22244c94a6203f
+# DROP xmlsec1
+Source22: http://dev-www.libreoffice.org/src/0fb1bb06d60d7708abc4797008209bcc-xmlsec1-1.2.22.tar.gz
+# Source22-md5:	0fb1bb06d60d7708abc4797008209bcc
 Source23: http://dev-www.libreoffice.org/src/35c94d2df8893241173de1d16b6034c0-swingExSrc.zip
 # Source23-md5:	35c94d2df8893241173de1d16b6034c0
 Source24: http://dev-www.libreoffice.org/src/4b87018f7fff1d054939d19920b751a0-collada2gltf-master-cb1d97788a.tar.bz2
@@ -175,7 +176,7 @@ BuildRequires:	libart_lgpl-devel
 BuildRequires:	libbonobo-devel >= 2.0
 BuildRequires:	libcdr-devel >= 0.0.8
 BuildRequires:	libcmis-devel >= 0.5
-BuildRequires:	libgltf-devel >= 0.0.2
+BuildRequires:	libgltf-devel >= 0.1.0
 %{?with_system_libhnj:BuildRequires:	libhnj-devel}
 BuildRequires:	libicu-devel >= 4.0
 BuildRequires:	libjpeg-devel
@@ -227,6 +228,7 @@ BuildRequires:	xorg-font-font-adobe-utopia-type1
 BuildRequires:	xorg-lib-libX11-devel
 BuildRequires:	xorg-lib-libXaw-devel
 BuildRequires:	xorg-lib-libXtst-devel
+BuildRequires:	xmlsec1-nss-devel >= 1.2.24
 BuildRequires:	zip >= 3.0
 BuildRequires:	zlib-devel
 %if %{with java}
@@ -235,10 +237,8 @@ BuildRequires:	ant-apache-regexp
 BuildRequires:	jdk >= 1.4.0_00
 BuildRequires:	jre-X11
 %endif
-BuildConflicts:	xmlsec1-devel
 # contains (dlopened) *.so libs
 BuildConflicts:	java-gcj-compat
-BuildConflicts:	xmlsec1-nss
 Requires:	%{name}-base = %{version}-%{release}
 Requires:	%{name}-calc = %{version}-%{release}
 Requires:	%{name}-draw = %{version}-%{release}

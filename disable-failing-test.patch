@@ -1,16 +1,6 @@
---- a/writerperfect/Module_writerperfect.mk
-+++ b/writerperfect/Module_writerperfect.mk
-@@ -31,7 +31,6 @@ $(eval $(call gb_Module_add_check_targets,writerperfect,\
- 	CppunitTest_writerperfect_calc \
- 	CppunitTest_writerperfect_draw \
- 	CppunitTest_writerperfect_impress \
--	CppunitTest_writerperfect_writer \
- 	StaticLibrary_writerperfect_importtestbase \
- ))
- 
 --- libreoffice-5.0.2.1/dbaccess/Module_dbaccess.mk~	2015-09-05 09:59:15.000000000 +0200
 +++ libreoffice-5.0.2.1/dbaccess/Module_dbaccess.mk	2015-09-17 08:53:09.973934654 +0200
-@@ -45,16 +45,8 @@ $(eval $(call gb_Module_add_check_targets,dbaccess,\
+@@ -39,16 +39,8 @@ $(eval $(call gb_Module_add_check_target
  	CppunitTest_dbaccess_empty_stdlib_save \
  	CppunitTest_dbaccess_nolib_save \
  	CppunitTest_dbaccess_macros_test \
@@ -24,10 +14,9 @@
 -))
 -endif
 -
- # This runs a suite of peformance tests on embedded firebird and HSQLDB.
+ # This runs a suite of performance tests on embedded firebird and HSQLDB.
  # Instructions on running the test can be found in qa/unit/embeddedb_performancetest
- ifeq ($(ENABLE_FIREBIRD_SDBC),TRUE)
-
+ 
 --- libreoffice-5.3.0.3/dbaccess/Module_dbaccess.mk~	2017-02-02 13:13:39.000000000 +0100
 +++ libreoffice-5.3.0.3/dbaccess/Module_dbaccess.mk	2017-02-02 14:38:31.994811891 +0100
 @@ -34,12 +34,6 @@ $(eval $(call gb_Module_add_l10n_targets
