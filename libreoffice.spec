@@ -126,6 +126,7 @@ BuildRequires:	gdb
 BuildRequires:	glew-devel >= 1.10.0
 BuildRequires:	glib2-devel >= 2.13.5
 BuildRequires:	gperf
+BuildRequires:	gpgme-c++-devel
 BuildRequires:	graphite2-devel
 BuildRequires:	gstreamer0.10-devel >= 0.10.0
 BuildRequires:	gstreamer0.10-plugins-base-devel >= 0.10.0
