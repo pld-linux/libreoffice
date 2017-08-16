@@ -178,6 +178,7 @@ BuildRequires:	libbonobo-devel >= 2.0
 BuildRequires:	libcdr-devel >= 0.0.8
 BuildRequires:	libcmis-devel >= 0.5
 BuildRequires:	libgltf-devel >= 0.1.0
+BuildRequires:	libgltf-devel < 0.1.0
 %{?with_system_libhnj:BuildRequires:	libhnj-devel}
 BuildRequires:	libicu-devel >= 4.0
 BuildRequires:	libjpeg-devel
