@@ -63,33 +63,26 @@ Source3:	http://download.documentfoundation.org/libreoffice/src/%{major_ver}/%{n
 # Source3-md5:	18ea9867fea2fd0f9149df43ce286e30
 
 
-# make fetch DO_FETCH_TARBALLS=1 WGET=wget
+# make (download|fetch) DO_FETCH_TARBALLS=1 WGET=wget
 # but not sure if all are needed?
-Source20: http://dev-www.libreoffice.org/src/0168229624cfac409e766913506961a8-ucpp-1.3.2.tar.gz
-# Source20-md5:	0168229624cfac409e766913506961a8
-Source21: http://dev-www.libreoffice.org/src/17410483b5b5f267aa18b7e00b65e6e0-hsqldb_1_8_0.zip
-# Source21-md5:	17410483b5b5f267aa18b7e00b65e6e0
-# DROP xmlsec1
-Source22: http://dev-www.libreoffice.org/src/0fb1bb06d60d7708abc4797008209bcc-xmlsec1-1.2.22.tar.gz
-# Source22-md5:	0fb1bb06d60d7708abc4797008209bcc
-Source23: http://dev-www.libreoffice.org/src/35c94d2df8893241173de1d16b6034c0-swingExSrc.zip
-# Source23-md5:	35c94d2df8893241173de1d16b6034c0
-Source24: http://dev-www.libreoffice.org/src/4b87018f7fff1d054939d19920b751a0-collada2gltf-master-cb1d97788a.tar.bz2
-# Source24-md5:	4b87018f7fff1d054939d19920b751a0
-Source25: http://dev-www.libreoffice.org/src/798b2ffdc8bcfe7bca2cf92b62caf685-rhino1_5R5.zip
+Source20:	http://dev-www.libreoffice.org/src/pdfium-3064.tar.bz2
+# Source20-md5:	5e97e37a615314a77f53a08eeb8d8a42
+Source21:	http://dev-www.libreoffice.org/src/4b87018f7fff1d054939d19920b751a0-collada2gltf-master-cb1d97788a.tar.bz2
+# Source21-md5:	4b87018f7fff1d054939d19920b751a0
+Source22:	http://dev-www.libreoffice.org/src/OpenCOLLADA-master-6509aa13af.tar.bz2
+# Source22-md5:	4ca8a6ef0afeefc864e9ef21b9f14bd6
+Source23:	http://dev-www.libreoffice.org/src/17410483b5b5f267aa18b7e00b65e6e0-hsqldb_1_8_0.zip
+# Source23-md5:	17410483b5b5f267aa18b7e00b65e6e0
+Source24:	http://dev-www.libreoffice.org/src/CoinMP-1.7.6.tgz
+# Source24-md5:	1cce53bf4b40ae29790d2c5c9f8b1129
+Source25:	http://dev-www.libreoffice.org/src/798b2ffdc8bcfe7bca2cf92b62caf685-rhino1_5R5.zip
 # Source25-md5:	798b2ffdc8bcfe7bca2cf92b62caf685
-Source26: http://dev-www.libreoffice.org/extern/8249374c274932a21846fa7629c2aa9b-officeotron-0.7.4-master.jar
-# Source26-md5:	8249374c274932a21846fa7629c2aa9b
-Source27: http://dev-www.libreoffice.org/src/86b1daaa438f5a7bea9a52d7b9799ac0-xmlsec1-1.2.23.tar.gz
-# Source27-md5:	86b1daaa438f5a7bea9a52d7b9799ac0
-Source28: http://dev-www.libreoffice.org/extern/a084cd548b586552cb7d3ee51f1af969-odfvalidator-1.1.8-incubating-SNAPSHOT-jar-with-dependencies.jar
-# Source28-md5:	a084cd548b586552cb7d3ee51f1af969
-Source29: http://dev-www.libreoffice.org/src/a7983f859eafb2677d7ff386a023bc40-xsltml_2.1.2.zip
-# Source29-md5:	a7983f859eafb2677d7ff386a023bc40
-Source30: http://dev-www.libreoffice.org/src/CoinMP-1.7.6.tgz
-# Source30-md5:	1cce53bf4b40ae29790d2c5c9f8b1129
-Source31: http://dev-www.libreoffice.org/src/OpenCOLLADA-master-6509aa13af.tar.bz2
-# Source31-md5:	4ca8a6ef0afeefc864e9ef21b9f14bd6
+Source26:	http://dev-www.libreoffice.org/src/0168229624cfac409e766913506961a8-ucpp-1.3.2.tar.gz
+# Source26-md5:	0168229624cfac409e766913506961a8
+Source27:	http://dev-www.libreoffice.org/src/a7983f859eafb2677d7ff386a023bc40-xsltml_2.1.2.zip
+# Source27-md5:	a7983f859eafb2677d7ff386a023bc40
+Source28:	http://dev-www.libreoffice.org/src/35c94d2df8893241173de1d16b6034c0-swingExSrc.zip
+# Source28-md5:	35c94d2df8893241173de1d16b6034c0
 
 Patch0:		disable-failing-test.patch
 
@@ -177,8 +170,8 @@ BuildRequires:	libart_lgpl-devel
 BuildRequires:	libbonobo-devel >= 2.0
 BuildRequires:	libcdr-devel >= 0.0.8
 BuildRequires:	libcmis-devel >= 0.5
-BuildRequires:	libgltf-devel >= 0.0.0
-BuildRequires:	libgltf-devel < 0.1.0
+BuildRequires:	libgltf-devel >= 0.1.0
+BuildRequires:	libgltf-devel < 0.2.0
 %{?with_system_libhnj:BuildRequires:	libhnj-devel}
 BuildRequires:	libicu-devel >= 4.0
 BuildRequires:	libjpeg-devel
@@ -2902,9 +2895,6 @@ ln %{SOURCE25} ext_sources
 ln %{SOURCE26} ext_sources
 ln %{SOURCE27} ext_sources
 ln %{SOURCE28} ext_sources
-ln %{SOURCE29} ext_sources
-ln %{SOURCE30} ext_sources
-ln %{SOURCE31} ext_sources
 :> src.downloaded
 
 %build
@@ -2968,6 +2958,7 @@ export PATH=$PATH:%{_libdir}/interbase/bin
 	--enable-release-build \
 	--with-parallelism=$RPM_BUILD_NR_THREADS \
 	--disable-odk \
+	--with-system-libs \
 	%{?with_ccache:--with-gcc-speedup=ccache} \
 	%{!?with_system_coinmp:--without-system-coinmp} \
 	%{?with_icecream:--with-gcc-speedup=icecream} \
@@ -2976,44 +2967,10 @@ export PATH=$PATH:%{_libdir}/interbase/bin
 	--with%{!?with_system_hsqldb:out}-system-hsqldb \
 	%{?with_system_hunspell:--with-system-hunspell --without-myspell-dicts} \
 	%{?with_system_libhnj:--with-system-altlinuxhyphen} \
-	%{?with_msaccess:%{?with_system_mdbtools:--with-system-mdbtools}} \
-	--with-system-apache-commons \
-	--with-system-boost \
-	--with-system-cairo \
-	--with-system-curl \
-	--with-system-cppunit \
-	--with-system-dicts \
+	%{?with_msaccess:--with%{!?with_system_mdbtools:out}-system-mdbtools}} \
+	--enable-python=system \
 	--with-external-dict-dir=/usr/share/myspell \
 	--with-external-tar=$(pwd)/ext_sources \
-	--with-system-expat \
-	--with-system-firebird \
-	--with-system-graphite \
-	--with-system-icu \
-	--with-system-jpeg \
-	--with-system-libcdr \
-	--with-system-libgltf \
-	--with-system-libmspub \
-	--with-system-libmwaw \
-	--with-system-libvisio \
-	--with-system-libwpd \
-	--with-system-libwpg \
-	--with-system-libwps \
-	--with-system-libxml \
-	--with-system-libzmf \
-	--with-system-clucene \
-	--with-system-neon \
-	--with-system-openssl \
-	--with-system-poppler \
-	--enable-python=system \
-	--with-system-redland \
-	--with-system-sane \
-	--with-system-zlib \
-	--with-system-libexttextcat \
-	--with-system-jfreereport \
-	--with-system-libs \
-	--with-system-headers \
-	--with-system-mythes \
-	--with-system-apache-commons \
 	--with-junit=%{_datadir}/java/junit.jar \
 	--enable-ext-nlpsolver \
 	--enable-pdfimport \
