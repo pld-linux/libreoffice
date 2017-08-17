@@ -83,6 +83,10 @@ Source27:	http://dev-www.libreoffice.org/src/a7983f859eafb2677d7ff386a023bc40-xs
 # Source27-md5:	a7983f859eafb2677d7ff386a023bc40
 Source28:	http://dev-www.libreoffice.org/src/35c94d2df8893241173de1d16b6034c0-swingExSrc.zip
 # Source28-md5:	35c94d2df8893241173de1d16b6034c0
+Source29:	http://dev-www.libreoffice.org/src/8249374c274932a21846fa7629c2aa9b-officeotron-0.7.4-master.jar
+# Source29-md5:	8249374c274932a21846fa7629c2aa9b
+Source30:	http://dev-www.libreoffice.org/src/a084cd548b586552cb7d3ee51f1af969-odfvalidator-1.1.8-incubating-SNAPSHOT-jar-with-dependencies.jar
+# Source30-md5:	a084cd548b586552cb7d3ee51f1af969
 
 Patch0:		disable-failing-test.patch
 
@@ -2895,6 +2899,8 @@ ln %{SOURCE25} ext_sources
 ln %{SOURCE26} ext_sources
 ln %{SOURCE27} ext_sources
 ln %{SOURCE28} ext_sources
+ln %{SOURCE29} ext_sources
+ln %{SOURCE30} ext_sources
 :> src.downloaded
 
 %build
