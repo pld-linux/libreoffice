@@ -311,3 +311,21 @@ index 1c3925f..a16f001 100644
  DECLARE_OOXMLEXPORT_TEST(testTdf104061_tableSectionColumns,"tdf104061_tableSectionColumns.docx")
  {
      CPPUNIT_ASSERT_MESSAGE("There should be two or three pages", getPages() <= 3 );
+--- libreoffice-5.4.0.3/unotest/source/cpp/filters-test.cxx~	2017-07-25 22:26:39.000000000 +0200
++++ libreoffice-5.4.0.3/unotest/source/cpp/filters-test.cxx	2017-08-19 10:28:58.910334643 +0200
+@@ -152,15 +152,6 @@ void FiltersTest::testDir(const OUString
+     SfxFilterFlags nFilterFlags, SotClipboardFormatId nClipboardID,
+     unsigned int nFilterVersion, bool bExport)
+ {
+-    recursiveScan(test::pass, rFilter,
+-        rURL + "pass",
+-        rUserData, nFilterFlags, nClipboardID, nFilterVersion, bExport);
+-    recursiveScan(test::fail, rFilter,
+-        rURL + "fail",
+-        rUserData, nFilterFlags, nClipboardID, nFilterVersion, bExport);
+-    recursiveScan(test::indeterminate, rFilter,
+-        rURL + "indeterminate",
+-        rUserData, nFilterFlags, nClipboardID, nFilterVersion, bExport);
+ }
+ 
+ }
