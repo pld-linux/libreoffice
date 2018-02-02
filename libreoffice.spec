@@ -21,6 +21,7 @@
 %bcond_with	icecream	# use icecream to speed up builds
 %bcond_with	msaccess	# with ms access import pieces
 %bcond_without	parallelbuild	# use greater number of jobs to speed up build (default: 1)
+%bcond_with     tests
 
 %bcond_without	system_beanshell
 %bcond_without	system_db		# without system (i.e. with internal) Berkeley DB
@@ -44,7 +45,7 @@
 %undefine	with_system_hsqldb
 %endif
 
-%define		major_ver		5.4.0
+%define		major_ver		6.0.0
 
 Summary:	LibreOffice - powerful office suite
 Summary(pl.UTF-8):	LibreOffice - potężny pakiet biurowy
@@ -54,39 +55,33 @@ Release:	0.1
 License:	GPL/LGPL
 Group:		X11/Applications
 Source0:	http://download.documentfoundation.org/libreoffice/src/%{major_ver}/%{name}-%{version}.tar.xz
-# Source0-md5:	3491becc5b7e3b1658239b8be877770c
+# Source0-md5:	36e417cf7f0c2a0a3b6af6d4435b687a
 Source1:	http://download.documentfoundation.org/libreoffice/src/%{major_ver}/%{name}-dictionaries-%{version}.tar.xz
-# Source1-md5:	df72048ade4fe7a63a7934af65f2e5bd
+# Source1-md5:	68e0f223d4b82988a1a849382e4d7bcb
 Source2:	http://download.documentfoundation.org/libreoffice/src/%{major_ver}/%{name}-help-%{version}.tar.xz
-# Source2-md5:	c3e731156d2b5594cd3e0dc8c36d7ea3
+# Source2-md5:	021bb9c6f06780b78429bb6240d7c7f7
 Source3:	http://download.documentfoundation.org/libreoffice/src/%{major_ver}/%{name}-translations-%{version}.tar.xz
-# Source3-md5:	18ea9867fea2fd0f9149df43ce286e30
+# Source3-md5:	9dcdf0eb7c072dfe05e68c6f21baeaa8
 
 
 # make (download|fetch) DO_FETCH_TARBALLS=1 WGET=wget
 # but not sure if all are needed?
-Source20:	http://dev-www.libreoffice.org/src/pdfium-3064.tar.bz2
-# Source20-md5:	5e97e37a615314a77f53a08eeb8d8a42
-Source21:	http://dev-www.libreoffice.org/src/4b87018f7fff1d054939d19920b751a0-collada2gltf-master-cb1d97788a.tar.bz2
-# Source21-md5:	4b87018f7fff1d054939d19920b751a0
-Source22:	http://dev-www.libreoffice.org/src/OpenCOLLADA-master-6509aa13af.tar.bz2
-# Source22-md5:	4ca8a6ef0afeefc864e9ef21b9f14bd6
-Source23:	http://dev-www.libreoffice.org/src/17410483b5b5f267aa18b7e00b65e6e0-hsqldb_1_8_0.zip
-# Source23-md5:	17410483b5b5f267aa18b7e00b65e6e0
-Source24:	http://dev-www.libreoffice.org/src/CoinMP-1.7.6.tgz
-# Source24-md5:	1cce53bf4b40ae29790d2c5c9f8b1129
-Source25:	http://dev-www.libreoffice.org/src/798b2ffdc8bcfe7bca2cf92b62caf685-rhino1_5R5.zip
-# Source25-md5:	798b2ffdc8bcfe7bca2cf92b62caf685
-Source26:	http://dev-www.libreoffice.org/src/0168229624cfac409e766913506961a8-ucpp-1.3.2.tar.gz
-# Source26-md5:	0168229624cfac409e766913506961a8
+Source20:	http://dev-www.libreoffice.org/src/pdfium-3235.tar.bz2
+# Source20-md5:	a7c08f44c6e2e1d7a71f7073cb9d5786
+Source21:	http://dev-www.libreoffice.org/src/17410483b5b5f267aa18b7e00b65e6e0-hsqldb_1_8_0.zip
+# Source21-md5:	17410483b5b5f267aa18b7e00b65e6e0
+Source22:	http://dev-www.libreoffice.org/src/CoinMP-1.7.6.tgz
+# Source22-md5:	1cce53bf4b40ae29790d2c5c9f8b1129
+Source23:	http://dev-www.libreoffice.org/src/798b2ffdc8bcfe7bca2cf92b62caf685-rhino1_5R5.zip
+# Source23-md5:	798b2ffdc8bcfe7bca2cf92b62caf685
+Source24:	http://dev-www.libreoffice.org/src/0168229624cfac409e766913506961a8-ucpp-1.3.2.tar.gz
+# Source24-md5:	0168229624cfac409e766913506961a8
+Source25:	http://dev-www.libreoffice.org/src/35c94d2df8893241173de1d16b6034c0-swingExSrc.zip
+# Source25-md5:	35c94d2df8893241173de1d16b6034c0
+Source26:	https://dev-www.libreoffice.org/extern/odfvalidator-1.2.0-incubating-SNAPSHOT-jar-with-dependencies+ODFTOOLKIT-460+ODFTOOLKIT-461.jar
+# Source26-md5:	f430ee376fea2bee62c8510d8b94e813
 Source27:	http://dev-www.libreoffice.org/src/a7983f859eafb2677d7ff386a023bc40-xsltml_2.1.2.zip
-# Source27-md5:	a7983f859eafb2677d7ff386a023bc40
-Source28:	http://dev-www.libreoffice.org/src/35c94d2df8893241173de1d16b6034c0-swingExSrc.zip
-# Source28-md5:	35c94d2df8893241173de1d16b6034c0
-Source29:	http://dev-www.libreoffice.org/src/8249374c274932a21846fa7629c2aa9b-officeotron-0.7.4-master.jar
-# Source29-md5:	8249374c274932a21846fa7629c2aa9b
-Source30:	http://dev-www.libreoffice.org/src/a084cd548b586552cb7d3ee51f1af969-odfvalidator-1.1.8-incubating-SNAPSHOT-jar-with-dependencies.jar
-# Source30-md5:	a084cd548b586552cb7d3ee51f1af969
+# Source27-md5:        a7983f859eafb2677d7ff386a023bc40
 
 Patch0:		disable-failing-test.patch
 
@@ -109,13 +104,12 @@ BuildRequires:	boost-devel >= 1.35.0
 BuildRequires:	cairo-devel >= 1.2.0
 %{?with_ccache:BuildRequires:	ccache}
 BuildRequires:	clucene-core-devel >= 2.3
-BuildRequires:	cppunit-devel >= 1.12.0
 %{?with_system_coinmp:BuildRequires:	coinmp-devel}
+BuildRequires:	cppunit-devel >= 1.12.0
 BuildRequires:	cups-devel
 BuildRequires:	curl-devel >= 7.9.8
 %{?with_system_db:BuildRequires:	db-devel}
 BuildRequires:	dbus-glib-devel >= 0.70
-BuildRequires:	findutils
 BuildRequires:	flex
 BuildRequires:	fontconfig-devel >= 1.0.1
 BuildRequires:	freetype-devel >= 2.1
@@ -154,7 +148,7 @@ BuildRequires:	liblangtag-devel
 BuildRequires:	libmspub-devel
 BuildRequires:	libmwaw-devel >= 0.3.0
 BuildRequires:	libodfgen-devel >= 0.1.1
-BuildRequires:	liborcus-devel >= 0.12.0
+BuildRequires:	liborcus-devel >= 0.13.0
 BuildRequires:	libpagemaker-devel >= 0.0.2
 BuildRequires:	libstaroffice-devel
 BuildRequires:	libvisio-devel
@@ -170,20 +164,24 @@ BuildRequires:	qt4-build
 %endif
 BuildRequires:	java-libxml
 BuildRequires:	java-sac
+%{?with_system_xalan:BuildRequires:	java-xalan}
+%{?with_system_xalan:BuildRequires:	java-xalan}
 BuildRequires:	libart_lgpl-devel
 BuildRequires:	libbonobo-devel >= 2.0
 BuildRequires:	libcdr-devel >= 0.0.8
 BuildRequires:	libcmis-devel >= 0.5
-BuildRequires:	libgltf-devel >= 0.1.0
+BuildRequires:	libepubgen-devel >= 0.1.0
+BuildRequires:	libexttextcat-devel
 BuildRequires:	libgltf-devel < 0.2.0
+BuildRequires:	libgltf-devel >= 0.1.0
 %{?with_system_libhnj:BuildRequires:	libhnj-devel}
 BuildRequires:	libicu-devel >= 4.0
 BuildRequires:	libjpeg-devel
+BuildRequires:	libqxp-devel
 BuildRequires:	librsvg-devel >= 2.14
 BuildRequires:	libsndfile-devel
 BuildRequires:	libstdc++-devel >= 5:3.2.1
 BuildRequires:	libsvg-devel >= 0.1.4
-BuildRequires:	libexttextcat-devel
 BuildRequires:	libxml2-devel >= 2.0
 BuildRequires:	libxslt-devel
 BuildRequires:	libxslt-progs
@@ -204,10 +202,10 @@ BuildRequires:	perl-Archive-Zip
 BuildRequires:	perl-base
 BuildRequires:	perl-devel
 BuildRequires:	pkgconfig
-BuildRequires:	postgresql-devel
 BuildRequires:	poppler-cpp-devel >= 0.8.0
 BuildRequires:	poppler-devel >= 0.8.0
 BuildRequires:	portaudio-devel
+BuildRequires:	postgresql-devel
 BuildRequires:	python3 >= 3.3
 BuildRequires:	python3-devel >= 3.3
 BuildRequires:	python3-modules >= 3.3
@@ -222,12 +220,11 @@ BuildRequires:	startup-notification-devel >= 0.5
 BuildRequires:	unixODBC-devel >= 2.2.12-2
 BuildRequires:	unzip
 BuildRequires:	vigra-devel
-%{?with_system_xalan:BuildRequires:	java-xalan}
+BuildRequires:	xmlsec1-nss-devel >= 1.2.24
 BuildRequires:	xorg-font-font-adobe-utopia-type1
 BuildRequires:	xorg-lib-libX11-devel
 BuildRequires:	xorg-lib-libXaw-devel
 BuildRequires:	xorg-lib-libXtst-devel
-BuildRequires:	xmlsec1-nss-devel >= 1.2.24
 BuildRequires:	zip >= 3.0
 BuildRequires:	zlib-devel
 %if %{with java}
@@ -252,9 +249,9 @@ Requires:	%{name}-web = %{version}-%{release}
 Requires:	%{name}-wiki-publisher = %{version}-%{release}
 Requires:	%{name}-writer = %{version}-%{release}
 Requires:	%{name}-xsltfilter = %{version}-%{release}
+Obsoletes:	libreoffice-testtools
 Obsoletes:	openoffice.org
 Obsoletes:	openoffice.org-testtools
-Obsoletes:	libreoffice-testtools
 ExclusiveArch:	%{ix86} %{x8664} ppc sparc sparcv9
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
@@ -343,17 +340,15 @@ Requires:	%{name}-ure = %{version}-%{release}
 Requires:	cups-lib
 Requires:	fonts-TTF-OpenSymbol
 Requires:	hicolor-icon-theme
-%{?with_system_beanshell:Requires:	java-beanshell}
-%{?with_system_hsqldb:Requires:	java-hsqldb}
+%{?with_system_beanshell:Requires: java-beanshell}
+%{?with_system_hsqldb:Requires: java-hsqldb}
 Requires:	libstdc++ >= 5:3.2.1
 Requires:	mktemp
 Requires:	saxon
 Requires:	sed
-%{?with_system_xalan:Requires:	xalan-j}
-#Suggests:	chkfontpath
+%{?with_system_xalan:Requires: xalan-j}
+#Suggests: chkfontpath
 Obsoletes:	libreoffice-binfilter < 4.0.0.0
-Obsoletes:	libreoffice-report-builder < 4.1.0.0
-Obsoletes:	libreoffice-javafilter < 4.1.0.0
 Obsoletes:	libreoffice-i18n-kid
 Obsoletes:	libreoffice-i18n-ku
 Obsoletes:	libreoffice-i18n-ky
@@ -365,6 +360,8 @@ Obsoletes:	libreoffice-i18n-sc
 Obsoletes:	libreoffice-i18n-sh
 Obsoletes:	libreoffice-i18n-ti
 Obsoletes:	libreoffice-i18n-ur
+Obsoletes:	libreoffice-javafilter < 4.1.0.0
+Obsoletes:	libreoffice-report-builder < 4.1.0.0
 Obsoletes:	oooqs
 Obsoletes:	openoffice
 Obsoletes:	openoffice-i18n-fo
@@ -575,9 +572,9 @@ Requires(post,postun):	desktop-file-utils
 Requires(post,postun):	gtk-update-icon-cache
 Requires:	%{name}-core = %{version}-%{release}
 Requires:	hicolor-icon-theme
-Obsoletes:	openoffice.org-impress
-Obsoletes:	libreoffice-presenter-screen < 4.0.0.0-1
 Obsoletes:	libreoffice-presentation-minimizer < 4.2.0.0
+Obsoletes:	libreoffice-presenter-screen < 4.0.0.0-1
+Obsoletes:	openoffice.org-impress
 
 %description impress
 Presentation application of LibreOffice.
@@ -2322,8 +2319,8 @@ BuildArch:	noarch
 %endif
 
 %description i18n-sid
-This package provides resources containing menus and dialogs in
-Sidama language.
+This package provides resources containing menus and dialogs in Sidama
+language.
 
 %description i18n-sid -l pl.UTF-8
 Ten pakiet dostarcza zasoby zawierające menu i okna dialogowe w języku
@@ -2880,7 +2877,7 @@ for glade and ui-previewer tool to check the visual appearance of
 dialogs.
 
 %prep
-%setup -q -n %{name}-%{version} -a1 -a2 -a3
+%setup -q -a1 -a2 -a3
 %patch0 -p1
 
 for dir in *-%{version}; do
@@ -2898,9 +2895,6 @@ ln %{SOURCE24} ext_sources
 ln %{SOURCE25} ext_sources
 ln %{SOURCE26} ext_sources
 ln %{SOURCE27} ext_sources
-ln %{SOURCE28} ext_sources
-ln %{SOURCE29} ext_sources
-ln %{SOURCE30} ext_sources
 :> src.downloaded
 
 %build
@@ -2975,9 +2969,9 @@ export PATH=$PATH:%{_libdir}/interbase/bin
 	%{?with_system_libhnj:--with-system-altlinuxhyphen} \
 	%{?with_msaccess:--with%{!?with_system_mdbtools:out}-system-mdbtools}} \
 	--enable-python=system \
-	--with-external-dict-dir=/usr/share/myspell \
+        --with-external-dict-dir=%{_datadir}/myspell \
 	--with-external-tar=$(pwd)/ext_sources \
-	--with-junit=%{_datadir}/java/junit.jar \
+	--with-junit=%{_javadir}/junit.jar \
 	--enable-ext-nlpsolver \
 	--enable-pdfimport \
 	--enable-ext-wiki-publisher \
@@ -3017,13 +3011,19 @@ export PATH=$PATH:%{_libdir}/interbase/bin
 
 # this limits processing some files but doesn't limit parallel build
 # processes of main OOo build (since OOo uses it's own build system)
-%{__make} -j1 \
-	ARCH_FLAGS="$SAFE_CFLAGS -fno-omit-frame-pointer -fno-strict-aliasing" \
-	ARCH_FLAGS_CC="$SAFE_CFLAGS -fno-omit-frame-pointer -fno-strict-aliasing" \
-	ARCH_FLAGS_CXX="$SAFE_CFLAGS -fno-omit-frame-pointer -fno-strict-aliasing -fpermissive -fvisibility-inlines-hidden" \
-	ARCH_FLAGS_OPT="$SAFE_CFLAGS"
+export ARCH_FLAGS="$SAFE_CFLAGS -fno-omit-frame-pointer -fno-strict-aliasing"
+export ARCH_FLAGS_CC="$SAFE_CFLAGS -fno-omit-frame-pointer -fno-strict-aliasing"
+export ARCH_FLAGS_CXX="$SAFE_CFLAGS -fno-omit-frame-pointer -fno-strict-aliasing -fpermissive -fvisibility-inlines-hidden"
+export ARCH_FLAGS_OPT="$SAFE_CFLAGS"
+
+%{__make} -j1 verbose=true build-nocheck
+
+%if %{with tests}
+%{__make} -j1 verbose=true check
+%endif
 
 %install
+rm -rf $RPM_BUILD_ROOT
 # install just once (based on makeinstall.stamp)
 # this will make packaging newer versions simplier
 if [ ! -f makeinstall.stamp -o ! -d $RPM_BUILD_ROOT ]; then
@@ -3947,7 +3947,7 @@ fi
 %{_datadir}/%{name}/share/config/soffice.cfg/modules/dbtdata/popupmenu
 %{_datadir}/%{name}/share/config/soffice.cfg/modules/dbtdata/toolbar
 %{_datadir}/%{name}/share/registry/base.xcd
-/usr/share/appdata/libreoffice-base.appdata.xml
+%{_datadir}/appdata/libreoffice-base.appdata.xml
 
 %files calc
 %defattr(644,root,root,755)
@@ -3983,7 +3983,7 @@ fi
 %{_datadir}/%{name}/share/config/soffice.cfg/modules/scalc/ui
 %exclude %{_datadir}/%{name}/share/config/soffice.cfg/modules/scalc/ui/res/*
 %{_datadir}/%{name}/share/registry/calc.xcd
-/usr/share/appdata/libreoffice-calc.appdata.xml
+%{_datadir}/appdata/libreoffice-calc.appdata.xml
 
 %files draw
 %defattr(644,root,root,755)
@@ -4001,7 +4001,7 @@ fi
 %{_datadir}/%{name}/share/config/soffice.cfg/modules/sdraw/ui
 %exclude %{_datadir}/%{name}/share/config/soffice.cfg/modules/sdraw/ui/res/*
 %{_datadir}/%{name}/share/registry/draw.xcd
-/usr/share/appdata/libreoffice-draw.appdata.xml
+%{_datadir}/appdata/libreoffice-draw.appdata.xml
 
 %files emailmerge
 %defattr(644,root,root,755)
@@ -4038,7 +4038,7 @@ fi
 %{_datadir}/%{name}/share/config/soffice.cfg/writerperfect
 %exclude %{_datadir}/%{name}/share/config/soffice.cfg/modules/swriter/ui/res/*
 %{_datadir}/%{name}/share/registry/writer.xcd
-/usr/share/appdata/libreoffice-writer.appdata.xml
+%{_datadir}/appdata/libreoffice-writer.appdata.xml
 
 %files impress
 %defattr(644,root,root,755)
@@ -4064,7 +4064,7 @@ fi
 %exclude %{_datadir}/%{name}/share/config/soffice.cfg/modules/simpress/ui/res/*
 %{_datadir}/%{name}/share/registry/impress.xcd
 %{_datadir}/%{name}/share/registry/ogltrans.xcd
-/usr/share/appdata/libreoffice-impress.appdata.xml
+%{_datadir}/appdata/libreoffice-impress.appdata.xml
 
 %files math
 %defattr(644,root,root,755)
@@ -4226,6 +4226,7 @@ fi
 %{_datadir}/%{name}/share/Scripts/python
 
 %files pdfimport
+%defattr(644,root,root,755)
 # -f pdfimport.lang
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_libdir}/%{name}/program/xpdfimport
@@ -4604,9 +4605,10 @@ fi
 
 %files -n bash-completion-%{name}
 %defattr(644,root,root,755)
-%{_datadir}/bash-completion/completions/%{name}.sh
+%{bash_compdir}/%{name}.sh
 
 %files glade
+%defattr(644,root,root,755)
 %attr(755,root,root) %{_libdir}/%{name}/program/ui-previewer
 %dir %{_datadir}/%{name}/share/glade
 %{_datadir}/%{name}/share/glade/libreoffice-catalog.xml
