@@ -3077,8 +3077,7 @@ if [ ! -f installed.stamp ]; then
 
 	%{__rm} -r $RPM_BUILD_ROOT%{_desktopdir}/*.desktop \
 		$RPM_BUILD_ROOT%{_iconsdir}/{gnome,locolor} \
-		$RPM_BUILD_ROOT%{_datadir}/application-registry \
-		$RPM_BUILD_ROOT%{_datadir}/mime{lnk,-info}
+		$RPM_BUILD_ROOT%{_datadir}/application-registry
 	for a in $RPM_BUILD_ROOT%{_datadir}/%{name}/share/xdg/*.desktop; do
 		cp $a $RPM_BUILD_ROOT%{_desktopdir}/libreoffice-$(basename "$a")
 	done
@@ -3340,7 +3339,6 @@ fi
 %attr(755,root,root) %{_libdir}/%{name}/program/libacclo.so
 %attr(755,root,root) %{_libdir}/%{name}/program/libavmediagst*.so
 %attr(755,root,root) %{_libdir}/%{name}/program/libavmedialo.so
-%attr(755,root,root) %{_libdir}/%{name}/program/libavmediaogl.so
 %attr(755,root,root) %{_libdir}/%{name}/program/libbasctllo.so
 %attr(755,root,root) %{_libdir}/%{name}/program/libbasegfxlo.so
 %attr(755,root,root) %{_libdir}/%{name}/program/libbasprovlo.so
@@ -3437,7 +3435,6 @@ fi
 %attr(755,root,root) %{_libdir}/%{name}/program/libpricinglo.so
 %attr(755,root,root) %{_libdir}/%{name}/program/libprotocolhandlerlo.so
 %attr(755,root,root) %{_libdir}/%{name}/program/librecentfile.so
-%attr(755,root,root) %{_libdir}/%{name}/program/libreslo.so
 %attr(755,root,root) %{_libdir}/%{name}/program/libsaxlo.so
 %attr(755,root,root) %{_libdir}/%{name}/program/libsblo.so
 %attr(755,root,root) %{_libdir}/%{name}/program/libscnlo.so
@@ -3650,47 +3647,6 @@ fi
 %{_libdir}/%{name}/program/resource
 %dir %{_datadir}/%{name}/program
 %dir %{_datadir}/%{name}/program/resource
-%{_datadir}/%{name}/program/resource/accen-US.res
-%{_datadir}/%{name}/program/resource/avmediaen-US.res
-%{_datadir}/%{name}/program/resource/basctlen-US.res
-%{_datadir}/%{name}/program/resource/biben-US.res
-%{_datadir}/%{name}/program/resource/cuien-US.res
-%{_datadir}/%{name}/program/resource/chartcontrolleren-US.res
-%{_datadir}/%{name}/program/resource/dbaen-US.res
-%{_datadir}/%{name}/program/resource/dbmmen-US.res
-%{_datadir}/%{name}/program/resource/dbwen-US.res
-%{_datadir}/%{name}/program/resource/deploymenten-US.res
-%{_datadir}/%{name}/program/resource/deploymentguien-US.res
-%{_datadir}/%{name}/program/resource/dkten-US.res
-%{_datadir}/%{name}/program/resource/editengen-US.res
-%{_datadir}/%{name}/program/resource/epsen-US.res
-%{_datadir}/%{name}/program/resource/euren-US.res
-%{_datadir}/%{name}/program/resource/foren-US.res
-%{_datadir}/%{name}/program/resource/foruien-US.res
-%{_datadir}/%{name}/program/resource/fps_officeen-US.res
-%{_datadir}/%{name}/program/resource/frmen-US.res
-%{_datadir}/%{name}/program/resource/fween-US.res
-%{_datadir}/%{name}/program/resource/galen-US.res
-%{_datadir}/%{name}/program/resource/impen-US.res
-%{_datadir}/%{name}/program/resource/ofaen-US.res
-%{_datadir}/%{name}/program/resource/pcren-US.res
-%{_datadir}/%{name}/program/resource/pdffilteren-US.res
-%{_datadir}/%{name}/program/resource/sben-US.res
-%{_datadir}/%{name}/program/resource/scnen-US.res
-%{_datadir}/%{name}/program/resource/sden-US.res
-%{_datadir}/%{name}/program/resource/sdbten-US.res
-%{_datadir}/%{name}/program/resource/sfxen-US.res
-%{_datadir}/%{name}/program/resource/svlen-US.res
-%{_datadir}/%{name}/program/resource/svten-US.res
-%{_datadir}/%{name}/program/resource/svxen-US.res
-%{_datadir}/%{name}/program/resource/swen-US.res
-%{_datadir}/%{name}/program/resource/tplen-US.res
-%{_datadir}/%{name}/program/resource/upden-US.res
-%{_datadir}/%{name}/program/resource/uuien-US.res
-%{_datadir}/%{name}/program/resource/vclen-US.res
-%{_datadir}/%{name}/program/resource/wzien-US.res
-%{_datadir}/%{name}/program/resource/xmlsecen-US.res
-%{_datadir}/%{name}/program/resource/xsltdlgen-US.res
 
 %dir %{_datadir}/%{name}/share
 %dir %{_datadir}/%{name}/share/labels
@@ -3713,45 +3669,34 @@ fi
 %{_datadir}/%{name}/share/config/images_breeze_dark.zip
 %{_datadir}/%{name}/share/config/images_galaxy.zip
 %{_datadir}/%{name}/share/config/images_hicontrast.zip
-%{_datadir}/%{name}/share/config/images_oxygen.zip
 %{_datadir}/%{name}/share/config/images_sifr.zip
 %{_datadir}/%{name}/share/config/images_tango.zip
 %dir %{_datadir}/%{name}/share/config/soffice.cfg
 %dir %{_datadir}/%{name}/share/config/soffice.cfg/cui
 %{_datadir}/%{name}/share/config/soffice.cfg/cui/ui
-%exclude %{_datadir}/%{name}/share/config/soffice.cfg/cui/ui/res/*
 %dir %{_datadir}/%{name}/share/config/soffice.cfg/dbaccess
 %{_datadir}/%{name}/share/config/soffice.cfg/dbaccess/ui
-%exclude %{_datadir}/%{name}/share/config/soffice.cfg/dbaccess/ui/res/*
 %dir %{_datadir}/%{name}/share/config/soffice.cfg/desktop
 %{_datadir}/%{name}/share/config/soffice.cfg/desktop/ui
-%exclude %{_datadir}/%{name}/share/config/soffice.cfg/desktop/ui/res/*
 %dir %{_datadir}/%{name}/share/config/soffice.cfg/filter
 %{_datadir}/%{name}/share/config/soffice.cfg/filter/ui
-%exclude %{_datadir}/%{name}/share/config/soffice.cfg/filter/ui/res/*
 %dir %{_datadir}/%{name}/share/config/soffice.cfg/formula/
 %{_datadir}/%{name}/share/config/soffice.cfg/formula/ui
-%exclude %{_datadir}/%{name}/share/config/soffice.cfg/formula/ui/res/*
 %dir %{_datadir}/%{name}/share/config/soffice.cfg/fps
 %{_datadir}/%{name}/share/config/soffice.cfg/fps/ui
-%exclude %{_datadir}/%{name}/share/config/soffice.cfg/fps/ui/res/*
 %dir %{_datadir}/%{name}/share/config/soffice.cfg/modules
 %{_datadir}/%{name}/share/config/soffice.cfg/modules/BasicIDE
 %{_datadir}/%{name}/share/config/soffice.cfg/modules/StartModule
-%exclude %{_datadir}/%{name}/share/config/soffice.cfg/modules/BasicIDE/ui/res/*
 %dir %{_datadir}/%{name}/share/config/soffice.cfg/modules/dbapp
 %dir %{_datadir}/%{name}/share/config/soffice.cfg/modules/dbbrowser
 %dir %{_datadir}/%{name}/share/config/soffice.cfg/modules/dbquery
 %dir %{_datadir}/%{name}/share/config/soffice.cfg/modules/dbreport
 %dir %{_datadir}/%{name}/share/config/soffice.cfg/modules/dbtdata
 %{_datadir}/%{name}/share/config/soffice.cfg/modules/sabpilot
-%exclude %{_datadir}/%{name}/share/config/soffice.cfg/modules/sabpilot/ui/res/*
 %dir %{_datadir}/%{name}/share/config/soffice.cfg/modules/scalc
 %dir %{_datadir}/%{name}/share/config/soffice.cfg/modules/scanner
 %{_datadir}/%{name}/share/config/soffice.cfg/modules/scanner/ui
-%exclude %{_datadir}/%{name}/share/config/soffice.cfg/modules/scanner/ui/res/*
 %{_datadir}/%{name}/share/config/soffice.cfg/modules/schart
-%exclude %{_datadir}/%{name}/share/config/soffice.cfg/modules/schart/ui/res/*
 %dir %{_datadir}/%{name}/share/config/soffice.cfg/modules/sdraw
 %dir %{_datadir}/%{name}/share/config/soffice.cfg/modules/sglobal
 %{_datadir}/%{name}/share/config/soffice.cfg/modules/sglobal/menubar
@@ -3762,7 +3707,6 @@ fi
 %dir %{_datadir}/%{name}/share/config/soffice.cfg/modules/sweb
 %dir %{_datadir}/%{name}/share/config/soffice.cfg/modules/simpress
 %{_datadir}/%{name}/share/config/soffice.cfg/modules/spropctrlr
-%exclude %{_datadir}/%{name}/share/config/soffice.cfg/modules/spropctrlr/ui/res/*
 %dir %{_datadir}/%{name}/share/config/soffice.cfg/modules/swform
 %{_datadir}/%{name}/share/config/soffice.cfg/modules/swform/menubar
 %{_datadir}/%{name}/share/config/soffice.cfg/modules/swform/popupmenu
@@ -3781,22 +3725,16 @@ fi
 %{_datadir}/%{name}/share/config/soffice.cfg/modules/swxform/toolbar
 %dir %{_datadir}/%{name}/share/config/soffice.cfg/sfx
 %{_datadir}/%{name}/share/config/soffice.cfg/sfx/ui
-%exclude %{_datadir}/%{name}/share/config/soffice.cfg/sfx/ui/res/*
 %dir %{_datadir}/%{name}/share/config/soffice.cfg/svt
 %{_datadir}/%{name}/share/config/soffice.cfg/svt/ui
-%exclude %{_datadir}/%{name}/share/config/soffice.cfg/svt/ui/res/*
 %dir %{_datadir}/%{name}/share/config/soffice.cfg/svx
 %{_datadir}/%{name}/share/config/soffice.cfg/svx/ui
-%exclude %{_datadir}/%{name}/share/config/soffice.cfg/svx/ui/res/*
 %dir %{_datadir}/%{name}/share/config/soffice.cfg/uui
 %{_datadir}/%{name}/share/config/soffice.cfg/uui/ui
-%exclude %{_datadir}/%{name}/share/config/soffice.cfg/uui/ui/res/*
 %dir %{_datadir}/%{name}/share/config/soffice.cfg/vcl
 %{_datadir}/%{name}/share/config/soffice.cfg/vcl/ui
-%exclude %{_datadir}/%{name}/share/config/soffice.cfg/vcl/ui/res/*
 %dir %{_datadir}/%{name}/share/config/soffice.cfg/xmlsec
 %{_datadir}/%{name}/share/config/soffice.cfg/xmlsec/ui
-%exclude %{_datadir}/%{name}/share/config/soffice.cfg/xmlsec/ui/res/*
 %{_datadir}/%{name}/share/config/webcast
 %{_datadir}/%{name}/share/config/wizard
 %dir %{_datadir}/%{name}/share/dtd
@@ -3919,14 +3857,6 @@ fi
 %attr(755,root,root) %{_libdir}/%{name}/program/librptlo.so
 %attr(755,root,root) %{_libdir}/%{name}/program/librptuilo.so
 %attr(755,root,root) %{_libdir}/%{name}/program/librptxmllo.so
-%{_datadir}/%{name}/program/resource/abpen-US.res
-%{_datadir}/%{name}/program/resource/cnren-US.res
-%{_datadir}/%{name}/program/resource/dbpen-US.res
-%{_datadir}/%{name}/program/resource/dbuen-US.res
-%{_datadir}/%{name}/program/resource/rpten-US.res
-%{_datadir}/%{name}/program/resource/rptuien-US.res
-%{_datadir}/%{name}/program/resource/sdbclen-US.res
-%{_datadir}/%{name}/program/resource/sdberren-US.res
 %{_datadir}/%{name}/share/config/soffice.cfg/modules/dbapp/menubar
 %{_datadir}/%{name}/share/config/soffice.cfg/modules/dbapp/popupmenu
 %{_datadir}/%{name}/share/config/soffice.cfg/modules/dbapp/statusbar
@@ -3941,7 +3871,6 @@ fi
 %{_datadir}/%{name}/share/config/soffice.cfg/modules/dbreport/statusbar
 %{_datadir}/%{name}/share/config/soffice.cfg/modules/dbreport/toolbar
 %{_datadir}/%{name}/share/config/soffice.cfg/modules/dbreport/ui
-%exclude %{_datadir}/%{name}/share/config/soffice.cfg/modules/dbreport/ui/res/*
 %{_datadir}/%{name}/share/config/soffice.cfg/modules/dbtable
 %{_datadir}/%{name}/share/config/soffice.cfg/modules/dbtdata/menubar
 %{_datadir}/%{name}/share/config/soffice.cfg/modules/dbtdata/popupmenu
@@ -3970,18 +3899,12 @@ fi
 %attr(755,root,root) %{_libdir}/%{name}/program/libsolverlo.so
 %attr(755,root,root) %{_libdir}/%{name}/program/libvbaobjlo.so
 %attr(755,root,root) %{_libdir}/%{name}/program/libwpftcalclo.so
-%{_datadir}/%{name}/program/resource/analysisen-US.res
-%{_datadir}/%{name}/program/resource/dateen-US.res
-%{_datadir}/%{name}/program/resource/pricingen-US.res
-%{_datadir}/%{name}/program/resource/solveren-US.res
-%{_datadir}/%{name}/program/resource/scen-US.res
 %{_datadir}/%{name}/share/calc
 %{_datadir}/%{name}/share/config/soffice.cfg/modules/scalc/menubar
 %{_datadir}/%{name}/share/config/soffice.cfg/modules/scalc/popupmenu
 %{_datadir}/%{name}/share/config/soffice.cfg/modules/scalc/statusbar
 %{_datadir}/%{name}/share/config/soffice.cfg/modules/scalc/toolbar
 %{_datadir}/%{name}/share/config/soffice.cfg/modules/scalc/ui
-%exclude %{_datadir}/%{name}/share/config/soffice.cfg/modules/scalc/ui/res/*
 %{_datadir}/%{name}/share/registry/calc.xcd
 %{_datadir}/appdata/libreoffice-calc.appdata.xml
 
@@ -3999,7 +3922,6 @@ fi
 %{_datadir}/%{name}/share/config/soffice.cfg/modules/sdraw/statusbar
 %{_datadir}/%{name}/share/config/soffice.cfg/modules/sdraw/toolbar
 %{_datadir}/%{name}/share/config/soffice.cfg/modules/sdraw/ui
-%exclude %{_datadir}/%{name}/share/config/soffice.cfg/modules/sdraw/ui/res/*
 %{_datadir}/%{name}/share/registry/draw.xcd
 %{_datadir}/appdata/libreoffice-draw.appdata.xml
 
@@ -4026,17 +3948,13 @@ fi
 %{_desktopdir}/libreoffice-writer.desktop
 %{_iconsdir}/hicolor/*/apps/libreoffice-writer.png
 %{_iconsdir}/hicolor/*/apps/libreoffice-writer.svg
-%{_datadir}/%{name}/program/resource/t602filteren-US.res
-%{_datadir}/%{name}/program/resource/writerperfecten-US.res
 %{_datadir}/%{name}/share/config/soffice.cfg/modules/sbibliography
-%exclude %{_datadir}/%{name}/share/config/soffice.cfg/modules/sbibliography/ui/res/*
 %{_datadir}/%{name}/share/config/soffice.cfg/modules/swriter/menubar
 %{_datadir}/%{name}/share/config/soffice.cfg/modules/swriter/popupmenu
 %{_datadir}/%{name}/share/config/soffice.cfg/modules/swriter/statusbar
 %{_datadir}/%{name}/share/config/soffice.cfg/modules/swriter/toolbar
 %{_datadir}/%{name}/share/config/soffice.cfg/modules/swriter/ui
 %{_datadir}/%{name}/share/config/soffice.cfg/writerperfect
-%exclude %{_datadir}/%{name}/share/config/soffice.cfg/modules/swriter/ui/res/*
 %{_datadir}/%{name}/share/registry/writer.xcd
 %{_datadir}/appdata/libreoffice-writer.appdata.xml
 
@@ -4047,7 +3965,6 @@ fi
 %attr(755,root,root) %{_libdir}/%{name}/program/simpress
 %attr(755,root,root) %{_libdir}/%{name}/program/libOGLTranslo.so
 %attr(755,root,root) %{_libdir}/%{name}/program/libanimcorelo.so
-%attr(755,root,root) %{_libdir}/%{name}/program/libplaceware*.so
 %attr(755,root,root) %{_libdir}/%{name}/program/libPresentationMinimizerlo.so
 %attr(755,root,root) %{_libdir}/%{name}/program/libPresenterScreenlo.so
 %attr(755,root,root) %{_libdir}/%{name}/program/libwpftimpresslo.so
@@ -4061,7 +3978,6 @@ fi
 %{_datadir}/%{name}/share/config/soffice.cfg/modules/simpress/statusbar
 %{_datadir}/%{name}/share/config/soffice.cfg/modules/simpress/toolbar
 %{_datadir}/%{name}/share/config/soffice.cfg/modules/simpress/ui
-%exclude %{_datadir}/%{name}/share/config/soffice.cfg/modules/simpress/ui/res/*
 %{_datadir}/%{name}/share/registry/impress.xcd
 %{_datadir}/%{name}/share/registry/ogltrans.xcd
 %{_datadir}/appdata/libreoffice-impress.appdata.xml
@@ -4077,13 +3993,11 @@ fi
 %attr(755,root,root) %{_libdir}/%{name}/program/libsmdlo.so
 %attr(755,root,root) %{_libdir}/%{name}/program/libsmlo.so
 %attr(755,root,root) %{_libdir}/%{name}/program/smath
-%{_datadir}/%{name}/program/resource/smen-US.res
 %{_datadir}/%{name}/share/config/soffice.cfg/modules/smath/menubar
 %{_datadir}/%{name}/share/config/soffice.cfg/modules/smath/popupmenu
 %{_datadir}/%{name}/share/config/soffice.cfg/modules/smath/statusbar
 %{_datadir}/%{name}/share/config/soffice.cfg/modules/smath/toolbar
 %{_datadir}/%{name}/share/config/soffice.cfg/modules/smath/ui
-%exclude %{_datadir}/%{name}/share/config/soffice.cfg/modules/smath/ui/res/*
 %{_datadir}/%{name}/share/registry/math.xcd
 
 %files web
@@ -4215,12 +4129,6 @@ fi
 %{_libdir}/%{name}/program/wizards/ui/*.py
 %dir %{_libdir}/%{name}/program/wizards/ui/event
 %{_libdir}/%{name}/program/wizards/ui/event/*.py
-%dir %{_libdir}/%{name}/program/wizards/web
-%{_libdir}/%{name}/program/wizards/web/*.py
-%dir %{_libdir}/%{name}/program/wizards/web/data
-%{_libdir}/%{name}/program/wizards/web/data/*.py
-%dir %{_libdir}/%{name}/program/wizards/web/export
-%{_libdir}/%{name}/program/wizards/web/export/*.py
 
 # samples there
 %{_datadir}/%{name}/share/Scripts/python
