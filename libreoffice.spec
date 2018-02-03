@@ -3163,6 +3163,13 @@ find_lang() {
 		# UI translations
 		grep "/soffice.cfg/[^/]*/ui/res/${lang}.zip" ${lfile} >> ${langfn}.lang || :
 		grep "/soffice.cfg/modules/[^/]*/ui/res/${lang}.zip" ${lfile} >> ${langfn}.lang || :
+		# Translations
+		if [ -d "$RPM_BUILD_ROOT%{_datadir}/%{name}/program/resource/${langfn}" ]; then
+			echo "%lang(${langfn}) %{_datadir}/%{name}/program/resource/${langfn}" >> ${langfn}.lang
+		fi
+		if [ -f "$RPM_BUILD_ROOT%{_datadir}/%{name}/share/wizards/resources_${langfn}.properties" ]; then
+			echo "%lang(${langfn}) %{_datadir}/%{name}/share/wizards/resources_${langfn}.properties" >> ${langfn}.lang
+		fi
 
 		for e in wiki-publisher nlpsolver ; do
 			for f in $RPM_BUILD_ROOT%{_datadir}/%{name}/share/extensions/$e/description-${lang}.txt \
@@ -3377,6 +3384,7 @@ fi
 %attr(755,root,root) %{_libdir}/%{name}/program/libeditenglo.so
 %attr(755,root,root) %{_libdir}/%{name}/program/libembobj.so
 %attr(755,root,root) %{_libdir}/%{name}/program/libemboleobj.so
+%attr(755,root,root) %{_libdir}/%{name}/program/libemfiolo.so
 %attr(755,root,root) %{_libdir}/%{name}/program/libevtattlo.so
 %attr(755,root,root) %{_libdir}/%{name}/program/libexpwraplo.so
 %attr(755,root,root) %{_libdir}/%{name}/program/libfilelo.so
@@ -3432,6 +3440,7 @@ fi
 %attr(755,root,root) %{_libdir}/%{name}/program/libpasswordcontainerlo.so
 %attr(755,root,root) %{_libdir}/%{name}/program/libpcrlo.so
 %attr(755,root,root) %{_libdir}/%{name}/program/libpdffilterlo.so
+%attr(755,root,root) %{_libdir}/%{name}/program/libpdfiumlo.so
 %attr(755,root,root) %{_libdir}/%{name}/program/libpricinglo.so
 %attr(755,root,root) %{_libdir}/%{name}/program/libprotocolhandlerlo.so
 %attr(755,root,root) %{_libdir}/%{name}/program/librecentfile.so
@@ -3493,6 +3502,7 @@ fi
 %attr(755,root,root) %{_libdir}/%{name}/program/libvcllo.so
 %attr(755,root,root) %{_libdir}/%{name}/program/libvclplug_genlo.so
 %attr(755,root,root) %{_libdir}/%{name}/program/libwpftdrawlo.so
+%attr(755,root,root) %{_libdir}/%{name}/program/libwriterlo.so
 %attr(755,root,root) %{_libdir}/%{name}/program/libwriterperfectlo.so
 %attr(755,root,root) %{_libdir}/%{name}/program/libxmlfalo.so
 %attr(755,root,root) %{_libdir}/%{name}/program/libxmlfdlo.so
@@ -3529,6 +3539,8 @@ fi
 
 %config(noreplace) %verify(not md5 mtime size) %{_libdir}/%{name}/program/lounorc
 %{_libdir}/%{name}/program/versionrc
+
+%{_libdir}/%{name}/program/intro-highres.png
 
 %{_libdir}/%{name}/program/services.rdb
 %dir %{_libdir}/%{name}/program/services
@@ -3667,9 +3679,11 @@ fi
 %dir %{_datadir}/%{name}/share/config
 %{_datadir}/%{name}/share/config/images_breeze.zip
 %{_datadir}/%{name}/share/config/images_breeze_dark.zip
+%{_datadir}/%{name}/share/config/images_elementary.zip
 %{_datadir}/%{name}/share/config/images_galaxy.zip
 %{_datadir}/%{name}/share/config/images_hicontrast.zip
 %{_datadir}/%{name}/share/config/images_sifr.zip
+%{_datadir}/%{name}/share/config/images_sifr_dark.zip
 %{_datadir}/%{name}/share/config/images_tango.zip
 %dir %{_datadir}/%{name}/share/config/soffice.cfg
 %dir %{_datadir}/%{name}/share/config/soffice.cfg/cui
@@ -3678,6 +3692,8 @@ fi
 %{_datadir}/%{name}/share/config/soffice.cfg/dbaccess/ui
 %dir %{_datadir}/%{name}/share/config/soffice.cfg/desktop
 %{_datadir}/%{name}/share/config/soffice.cfg/desktop/ui
+%dir %{_datadir}/%{name}/share/config/soffice.cfg/editeng
+%{_datadir}/%{name}/share/config/soffice.cfg/editeng/ui
 %dir %{_datadir}/%{name}/share/config/soffice.cfg/filter
 %{_datadir}/%{name}/share/config/soffice.cfg/filter/ui
 %dir %{_datadir}/%{name}/share/config/soffice.cfg/formula/
@@ -3868,6 +3884,7 @@ fi
 %{_datadir}/%{name}/share/config/soffice.cfg/modules/dbquery/toolbar
 %{_datadir}/%{name}/share/config/soffice.cfg/modules/dbrelation
 %{_datadir}/%{name}/share/config/soffice.cfg/modules/dbreport/menubar
+%{_datadir}/%{name}/share/config/soffice.cfg/modules/dbreport/popupmenu
 %{_datadir}/%{name}/share/config/soffice.cfg/modules/dbreport/statusbar
 %{_datadir}/%{name}/share/config/soffice.cfg/modules/dbreport/toolbar
 %{_datadir}/%{name}/share/config/soffice.cfg/modules/dbreport/ui
@@ -3877,6 +3894,7 @@ fi
 %{_datadir}/%{name}/share/config/soffice.cfg/modules/dbtdata/toolbar
 %{_datadir}/%{name}/share/registry/base.xcd
 %{_datadir}/appdata/libreoffice-base.appdata.xml
+%{_datadir}/appdata/org.libreoffice.kde.metainfo.xml
 
 %files calc
 %defattr(644,root,root,755)
@@ -4117,6 +4135,7 @@ fi
 %{_libdir}/%{name}/program/wizards/agenda/*.py
 %dir %{_libdir}/%{name}/program/wizards/common
 %{_libdir}/%{name}/program/wizards/common/*.py
+%{_libdir}/%{name}/program/wizards/common/strings.hrc
 %dir %{_libdir}/%{name}/program/wizards/document
 %{_libdir}/%{name}/program/wizards/document/*.py
 %dir %{_libdir}/%{name}/program/wizards/fax
