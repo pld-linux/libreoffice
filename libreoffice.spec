@@ -1464,6 +1464,28 @@ Croatian language.
 Ten pakiet dostarcza zasoby zawierające menu i okna dialogowe w języku
 chorwackim.
 
+%package i18n-hsb
+Summary:	LibreOffice - interface in Upper Sorbian language
+Summary(pl.UTF-8):	LibreOffice - interfejs w języku górnołużyckim
+Group:		I18n
+Requires:	%{name}-core = %{version}-%{release}
+Obsoletes:	openoffice-i18n-hsb
+Obsoletes:	openoffice-i18n-hsb-gtk
+Obsoletes:	openoffice.org-i18n-hsb
+Obsoletes:	openoffice.org-i18n-hsb-gtk
+Obsoletes:	openoffice.org-i18n-hsb-kde
+%if "%{_rpmversion}" >= "5"
+BuildArch:	noarch
+%endif
+
+%description i18n-hsb
+This package provides resources containing menus and dialogs in
+Upper Sorbian language.
+
+%description i18n-hsb -l pl.UTF-8
+Ten pakiet dostarcza zasoby zawierające menu i okna dialogowe w języku
+górnołużycki.
+
 %package i18n-hu
 Summary:	LibreOffice - interface in Hungarian language
 Summary(pl.UTF-8):	LibreOffice - interfejs w języku węgierskim
@@ -3791,6 +3813,8 @@ fi
 %{_datadir}/%{name}/share/template/common/wizard/report
 %{_datadir}/%{name}/share/template/common/wizard/styles
 
+%dir %{_datadir}/%{name}/share/wizards
+
 %dir %{_datadir}/%{name}/share/wordbook
 %{_datadir}/%{name}/share/wordbook/en-GB.dic
 %{_datadir}/%{name}/share/wordbook/en-US.dic
@@ -4311,6 +4335,9 @@ fi
 %defattr(644,root,root,755)
 
 %files i18n-hr -f hr.lang
+%defattr(644,root,root,755)
+
+%files i18n-hsb -f hsb.lang
 %defattr(644,root,root,755)
 
 %files i18n-hu -f hu.lang
