@@ -45,23 +45,23 @@
 %undefine	with_system_hsqldb
 %endif
 
-%define		major_ver		6.0.0
+%define		major_ver		6.0.4
 
 Summary:	LibreOffice - powerful office suite
 Summary(pl.UTF-8):	LibreOffice - potężny pakiet biurowy
 Name:		libreoffice
-Version:	%{major_ver}.3
+Version:	%{major_ver}.2
 Release:	1
 License:	GPL/LGPL
 Group:		X11/Applications
 Source0:	http://download.documentfoundation.org/libreoffice/src/%{major_ver}/%{name}-%{version}.tar.xz
-# Source0-md5:	36e417cf7f0c2a0a3b6af6d4435b687a
+# Source0-md5:	35cf97f2a9bd8fc173fc75b05e38bf29
 Source1:	http://download.documentfoundation.org/libreoffice/src/%{major_ver}/%{name}-dictionaries-%{version}.tar.xz
-# Source1-md5:	68e0f223d4b82988a1a849382e4d7bcb
+# Source1-md5:	141cba04584b87f4bf77adf54293818c
 Source2:	http://download.documentfoundation.org/libreoffice/src/%{major_ver}/%{name}-help-%{version}.tar.xz
-# Source2-md5:	021bb9c6f06780b78429bb6240d7c7f7
+# Source2-md5:	0dd519a43ad53d0dbfcabbbebbd9ec2a
 Source3:	http://download.documentfoundation.org/libreoffice/src/%{major_ver}/%{name}-translations-%{version}.tar.xz
-# Source3-md5:	9dcdf0eb7c072dfe05e68c6f21baeaa8
+# Source3-md5:	8677d98f37ea964f9e5bdc7b83e9b9ff
 
 
 # make (download|fetch) DO_FETCH_TARBALLS=1 WGET=wget
@@ -81,7 +81,7 @@ Source25:	http://dev-www.libreoffice.org/src/35c94d2df8893241173de1d16b6034c0-sw
 Source26:	https://dev-www.libreoffice.org/extern/odfvalidator-1.2.0-incubating-SNAPSHOT-jar-with-dependencies+ODFTOOLKIT-460+ODFTOOLKIT-461.jar
 # Source26-md5:	f430ee376fea2bee62c8510d8b94e813
 Source27:	http://dev-www.libreoffice.org/src/a7983f859eafb2677d7ff386a023bc40-xsltml_2.1.2.zip
-# Source27-md5:        a7983f859eafb2677d7ff386a023bc40
+# Source27-md5:	a7983f859eafb2677d7ff386a023bc40
 
 Patch0:		disable-failing-test.patch
 
@@ -148,7 +148,7 @@ BuildRequires:	liblangtag-devel
 BuildRequires:	libmspub-devel
 BuildRequires:	libmwaw-devel >= 0.3.0
 BuildRequires:	libodfgen-devel >= 0.1.1
-BuildRequires:	liborcus-devel >= 0.13.0
+BuildRequires:	liborcus-devel >= 0.13.3
 BuildRequires:	libpagemaker-devel >= 0.0.2
 BuildRequires:	libstaroffice-devel
 BuildRequires:	libvisio-devel
