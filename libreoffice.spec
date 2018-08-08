@@ -45,29 +45,29 @@
 %undefine	with_system_hsqldb
 %endif
 
-%define		major_ver		6.0.5
+%define		major_ver		6.1.0
 
 Summary:	LibreOffice - powerful office suite
 Summary(pl.UTF-8):	LibreOffice - potężny pakiet biurowy
 Name:		libreoffice
-Version:	%{major_ver}.2
+Version:	%{major_ver}.3
 Release:	1
 License:	GPL/LGPL
 Group:		X11/Applications
 Source0:	http://download.documentfoundation.org/libreoffice/src/%{major_ver}/%{name}-%{version}.tar.xz
-# Source0-md5:	04e50cf96598790feada18cbeea7bf1f
+# Source0-md5:	df908c245f1dca4b822345b82af2ea64
 Source1:	http://download.documentfoundation.org/libreoffice/src/%{major_ver}/%{name}-dictionaries-%{version}.tar.xz
-# Source1-md5:	53807d4d8f75d0ea514c0a7fec35431f
+# Source1-md5:	d04eb21110e9e58ecdb6b361aff8feaf
 Source2:	http://download.documentfoundation.org/libreoffice/src/%{major_ver}/%{name}-help-%{version}.tar.xz
-# Source2-md5:	1327c6fd9f65136f905a1b26ba9076b8
+# Source2-md5:	6958c0501d60c75fc1eb65f3e0182ef8
 Source3:	http://download.documentfoundation.org/libreoffice/src/%{major_ver}/%{name}-translations-%{version}.tar.xz
-# Source3-md5:	5f77cd5eff3fc5b84b963d760d7af071
+# Source3-md5:	7f8bd2d2102cfb434d8d22df7c907ab5
 
 
 # make (download|fetch) DO_FETCH_TARBALLS=1 WGET=wget
 # but not sure if all are needed?
-Source20:	http://dev-www.libreoffice.org/src/pdfium-3235.tar.bz2
-# Source20-md5:	a7c08f44c6e2e1d7a71f7073cb9d5786
+Source20:	http://dev-www.libreoffice.org/src/pdfium-3426.tar.bz2
+# Source20-md5:	a66dbb357661c36b3e412a54de4c8fc2
 Source21:	http://dev-www.libreoffice.org/src/17410483b5b5f267aa18b7e00b65e6e0-hsqldb_1_8_0.zip
 # Source21-md5:	17410483b5b5f267aa18b7e00b65e6e0
 Source22:	http://dev-www.libreoffice.org/src/CoinMP-1.7.6.tgz
@@ -84,7 +84,6 @@ Source27:	http://dev-www.libreoffice.org/src/a7983f859eafb2677d7ff386a023bc40-xs
 # Source27-md5:	a7983f859eafb2677d7ff386a023bc40
 
 Patch0:		disable-failing-test.patch
-Patch1:         python.patch
 
 URL:		http://www.documentfoundation.org/
 BuildRequires:	/usr/bin/getopt
@@ -148,6 +147,7 @@ BuildRequires:	libfreehand-devel >= 0.1.0
 BuildRequires:	liblangtag-devel
 BuildRequires:	libmspub-devel
 BuildRequires:	libmwaw-devel >= 0.3.0
+BuildRequires:	libnumbertext-devel >= 1.0.0
 BuildRequires:	libodfgen-devel >= 0.1.1
 BuildRequires:	liborcus-devel >= 0.13.3
 BuildRequires:	libpagemaker-devel >= 0.0.2
@@ -2902,7 +2902,6 @@ dialogs.
 %prep
 %setup -q -a1 -a2 -a3
 %patch0 -p1
-%patch1 -p1
 
 for dir in *-%{version}; do
 	[ -f $dir/ChangeLog ] && mv $dir/ChangeLog ChangeLog-$dir
@@ -3534,7 +3533,6 @@ fi
 %attr(755,root,root) %{_libdir}/%{name}/program/libxmlsecurity.so
 %attr(755,root,root) %{_libdir}/%{name}/program/libxoflo.so
 %attr(755,root,root) %{_libdir}/%{name}/program/libxolo.so
-%attr(755,root,root) %{_libdir}/%{name}/program/libxsec_fw.so
 %attr(755,root,root) %{_libdir}/%{name}/program/libxsec_xmlsec.so
 %attr(755,root,root) %{_libdir}/%{name}/program/libxsltdlglo.so
 %attr(755,root,root) %{_libdir}/%{name}/program/libxsltfilterlo.so
@@ -3703,9 +3701,9 @@ fi
 %dir %{_datadir}/%{name}/share/config
 %{_datadir}/%{name}/share/config/images_breeze.zip
 %{_datadir}/%{name}/share/config/images_breeze_dark.zip
+%{_datadir}/%{name}/share/config/images_colibre.zip
 %{_datadir}/%{name}/share/config/images_elementary.zip
-%{_datadir}/%{name}/share/config/images_galaxy.zip
-%{_datadir}/%{name}/share/config/images_hicontrast.zip
+%{_datadir}/%{name}/share/config/images_karasa_jaga.zip
 %{_datadir}/%{name}/share/config/images_sifr.zip
 %{_datadir}/%{name}/share/config/images_sifr_dark.zip
 %{_datadir}/%{name}/share/config/images_tango.zip
@@ -3854,14 +3852,17 @@ fi
 %dir %{_datadir}/%{name}/readmes
 %{_datadir}/%{name}/readmes/README_en-US
 
+%{_datadir}/%{name}/share/libreofficekit
+
 %{_datadir}/mime/packages/libreoffice.xml
 %{_iconsdir}/hicolor/*/mimetypes/libreoffice-*.png
 %{_iconsdir}/hicolor/*/mimetypes/libreoffice-*.svg
 %{_iconsdir}/hicolor/*/apps/libreoffice-main.png
 %{_iconsdir}/hicolor/*/apps/libreoffice-main.svg
+%{_iconsdir}/hicolor/*/apps/libreoffice-chart.png
+%{_iconsdir}/hicolor/*/apps/libreoffice-chart.svg
 
 %{_desktopdir}/libreoffice-startcenter.desktop
-%{_desktopdir}/libreoffice-qstart.desktop
 %{_iconsdir}/hicolor/*/apps/libreoffice-startcenter.png
 %{_iconsdir}/hicolor/*/apps/libreoffice-startcenter.svg
 
@@ -3880,7 +3881,6 @@ fi
 %if %{with gtk} || %{with gtk3}
 %files libs-gtk
 %defattr(644,root,root,755)
-%attr(755,root,root) %{_libdir}/%{name}/program/libqstart_gtklo.so
 %attr(755,root,root) %{_libdir}/%{name}/program/libvclplug_gtk*.so
 %{_datadir}/%{name}/share/registry/gnome.xcd
 %endif
@@ -3895,7 +3895,9 @@ fi
 %{_iconsdir}/hicolor/*/apps/libreoffice-base.png
 %{_iconsdir}/hicolor/*/apps/libreoffice-base.svg
 %attr(755,root,root) %{_libdir}/%{name}/program/libabplo.so
+%attr(755,root,root) %{_libdir}/%{name}/program/libdbahsqllo.so
 %attr(755,root,root) %{_libdir}/%{name}/program/libdbplo.so
+%attr(755,root,root) %{_libdir}/%{name}/program/libnumbertextlo.so
 %attr(755,root,root) %{_libdir}/%{name}/program/librptlo.so
 %attr(755,root,root) %{_libdir}/%{name}/program/librptuilo.so
 %attr(755,root,root) %{_libdir}/%{name}/program/librptxmllo.so

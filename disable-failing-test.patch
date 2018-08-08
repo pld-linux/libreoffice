@@ -25,12 +25,12 @@
      CPPUNIT_TEST(testN778859);
 --- libreoffice-6.0.0.3/sw/qa/extras/uiwriter/uiwriter.cxx~	2018-01-24 21:31:03.000000000 +0100
 +++ libreoffice-6.0.0.3/sw/qa/extras/uiwriter/uiwriter.cxx	2018-02-02 08:41:59.126211831 +0100
-@@ -480,7 +480,6 @@ public:
-     CPPUNIT_TEST(testTdf113790);
-     CPPUNIT_TEST(testTdf114306);
+@@ -532,7 +532,6 @@ public:
      CPPUNIT_TEST(testTdf114306_2);
+     CPPUNIT_TEST(testTdf113481);
+     CPPUNIT_TEST(testTdf115013);
 -    CPPUNIT_TEST(testTdf114536);
      CPPUNIT_TEST(testTdf115065);
-     CPPUNIT_TEST(testTdf115013);
-     CPPUNIT_TEST_SUITE_END();
+     CPPUNIT_TEST(testTdf115132);
+     CPPUNIT_TEST(testXDrawPagesSupplier);
 
