@@ -45,23 +45,23 @@
 %undefine	with_system_hsqldb
 %endif
 
-%define		major_ver		6.1.0
+%define		major_ver		6.1.4
 
 Summary:	LibreOffice - powerful office suite
 Summary(pl.UTF-8):	LibreOffice - potężny pakiet biurowy
 Name:		libreoffice
-Version:	%{major_ver}.3
-Release:	3
+Version:	%{major_ver}.2
+Release:	0.1
 License:	GPL/LGPL
 Group:		X11/Applications
 Source0:	http://download.documentfoundation.org/libreoffice/src/%{major_ver}/%{name}-%{version}.tar.xz
-# Source0-md5:	df908c245f1dca4b822345b82af2ea64
+# Source0-md5:	f6e69df90d8d6de6dd223d5309f71caa
 Source1:	http://download.documentfoundation.org/libreoffice/src/%{major_ver}/%{name}-dictionaries-%{version}.tar.xz
-# Source1-md5:	d04eb21110e9e58ecdb6b361aff8feaf
+# Source1-md5:	e5bb56a92b72c3102f4917aafebba3b4
 Source2:	http://download.documentfoundation.org/libreoffice/src/%{major_ver}/%{name}-help-%{version}.tar.xz
-# Source2-md5:	6958c0501d60c75fc1eb65f3e0182ef8
+# Source2-md5:	e02680a25ab4f5eee112170f20bf47d0
 Source3:	http://download.documentfoundation.org/libreoffice/src/%{major_ver}/%{name}-translations-%{version}.tar.xz
-# Source3-md5:	7f8bd2d2102cfb434d8d22df7c907ab5
+# Source3-md5:	8c99e7da7bfc9515f5d074ca7449471b
 
 
 # make (download|fetch) DO_FETCH_TARBALLS=1 WGET=wget
@@ -84,6 +84,9 @@ Source27:	http://dev-www.libreoffice.org/src/a7983f859eafb2677d7ff386a023bc40-xs
 # Source27-md5:	a7983f859eafb2677d7ff386a023bc40
 
 Patch0:		disable-failing-test.patch
+Patch1:		poppler-0.70.patch
+Patch2:		poppler-0.71.patch
+Patch3:		poppler-0.72.patch
 
 URL:		http://www.documentfoundation.org/
 BuildRequires:	/usr/bin/getopt
@@ -2902,6 +2905,9 @@ dialogs.
 %prep
 %setup -q -a1 -a2 -a3
 %patch0 -p1
+%patch1 -p1
+%patch2 -p1
+%patch3 -p1
 
 for dir in *-%{version}; do
 	[ -f $dir/ChangeLog ] && mv $dir/ChangeLog ChangeLog-$dir

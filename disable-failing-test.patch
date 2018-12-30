@@ -1,10 +1,16 @@
 --- libreoffice-6.0.0.3/dbaccess/Module_dbaccess.mk~	2018-01-24 21:31:03.000000000 +0100
 +++ libreoffice-6.0.0.3/dbaccess/Module_dbaccess.mk	2018-02-02 08:33:38.287577102 +0100
-@@ -32,12 +32,6 @@ $(eval $(call gb_Module_add_l10n_targets
+@@ -32,18 +32,6 @@ $(eval $(call gb_Module_add_l10n_targets
  ))
  
  ifneq ($(OS),IOS)
 -ifeq ($(ENABLE_FIREBIRD_SDBC),TRUE)
+-# remove if we have a be file for this
+-ifeq ($(ENDIANNESS),little)
+-$(eval $(call gb_Module_add_check_targets,dbaccess,\
+-    CppunitTest_dbaccess_firebird_regression_test \
+-))
+-endif
 -$(eval $(call gb_Module_add_check_targets,dbaccess,\
 -    CppunitTest_dbaccess_firebird_test \
 -))
