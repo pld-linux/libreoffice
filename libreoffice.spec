@@ -1,6 +1,7 @@
 # TODO:
 # - fix configure arguments (+ compare with FC)
 # - create CoinMP library package for PLD (https://projects.coin-or.org/CoinMP)
+# - new language packs: ca@valencia, fy, kab, kmr@latin, sr@latin
 #
 # NOTE - FIXME FOR 3.4.3 !!!:
 #	- normal build (i686) requires about 27 GB of disk space:
@@ -51,7 +52,7 @@ Summary:	LibreOffice - powerful office suite
 Summary(pl.UTF-8):	LibreOffice - potężny pakiet biurowy
 Name:		libreoffice
 Version:	%{major_ver}.2
-Release:	0.1
+Release:	1
 License:	GPL/LGPL
 Group:		X11/Applications
 Source0:	http://download.documentfoundation.org/libreoffice/src/%{major_ver}/%{name}-%{version}.tar.xz
@@ -3820,6 +3821,7 @@ fi
 %{_datadir}/%{name}/share/template/common/wizard/styles
 
 %dir %{_datadir}/%{name}/share/wizards
+%{_datadir}/%{name}/share/wizards/resources_en_US.properties
 
 %dir %{_datadir}/%{name}/share/wordbook
 %{_datadir}/%{name}/share/wordbook/en-GB.dic
@@ -3867,10 +3869,15 @@ fi
 %{_iconsdir}/hicolor/*/apps/libreoffice-main.svg
 %{_iconsdir}/hicolor/*/apps/libreoffice-chart.png
 %{_iconsdir}/hicolor/*/apps/libreoffice-chart.svg
+%{_iconsdir}/hicolor/*/apps/libreoffice-basic.svg
+%{_iconsdir}/hicolor/*/apps/libreoffice-extension.svg
 
 %{_desktopdir}/libreoffice-startcenter.desktop
 %{_iconsdir}/hicolor/*/apps/libreoffice-startcenter.png
 %{_iconsdir}/hicolor/*/apps/libreoffice-startcenter.svg
+
+%{_datadir}/mime-info/libreoffice.keys
+%{_datadir}/mime-info/libreoffice.mime
 
 %{_mandir}/man1/loffice.1
 %{_mandir}/man1/lofromtemplate.1
