@@ -46,29 +46,29 @@
 %undefine	with_system_hsqldb
 %endif
 
-%define		major_ver		6.1.4
+%define		major_ver		6.2.3
 
 Summary:	LibreOffice - powerful office suite
 Summary(pl.UTF-8):	LibreOffice - potężny pakiet biurowy
 Name:		libreoffice
-Version:	%{major_ver}.2
+Version:	%{major_ver}.1
 Release:	1
 License:	GPL/LGPL
 Group:		X11/Applications
 Source0:	http://download.documentfoundation.org/libreoffice/src/%{major_ver}/%{name}-%{version}.tar.xz
-# Source0-md5:	f6e69df90d8d6de6dd223d5309f71caa
+# Source0-md5:	317b0a49e4530e3024ef2387d1546052
 Source1:	http://download.documentfoundation.org/libreoffice/src/%{major_ver}/%{name}-dictionaries-%{version}.tar.xz
-# Source1-md5:	e5bb56a92b72c3102f4917aafebba3b4
+# Source1-md5:	bc0df852dd2d8070183a9b1cc6eb5533
 Source2:	http://download.documentfoundation.org/libreoffice/src/%{major_ver}/%{name}-help-%{version}.tar.xz
-# Source2-md5:	e02680a25ab4f5eee112170f20bf47d0
+# Source2-md5:	f0c202f99e2ce5da1b50cf272b328784
 Source3:	http://download.documentfoundation.org/libreoffice/src/%{major_ver}/%{name}-translations-%{version}.tar.xz
-# Source3-md5:	8c99e7da7bfc9515f5d074ca7449471b
+# Source3-md5:	d0ce31efd93d4f8e0d292cfc58c98c80
 
 
 # make (download|fetch) DO_FETCH_TARBALLS=1 WGET=wget
 # but not sure if all are needed?
-Source20:	http://dev-www.libreoffice.org/src/pdfium-3426.tar.bz2
-# Source20-md5:	a66dbb357661c36b3e412a54de4c8fc2
+Source20:	http://dev-www.libreoffice.org/src/pdfium-3550.tar.bz2
+# Source20-md5:	f30752217c6eb4f895a03c4f3c8c835b
 Source21:	http://dev-www.libreoffice.org/src/17410483b5b5f267aa18b7e00b65e6e0-hsqldb_1_8_0.zip
 # Source21-md5:	17410483b5b5f267aa18b7e00b65e6e0
 Source22:	http://dev-www.libreoffice.org/src/CoinMP-1.7.6.tgz
@@ -79,15 +79,14 @@ Source24:	http://dev-www.libreoffice.org/src/0168229624cfac409e766913506961a8-uc
 # Source24-md5:	0168229624cfac409e766913506961a8
 Source25:	http://dev-www.libreoffice.org/src/35c94d2df8893241173de1d16b6034c0-swingExSrc.zip
 # Source25-md5:	35c94d2df8893241173de1d16b6034c0
-Source26:	https://dev-www.libreoffice.org/extern/odfvalidator-1.2.0-incubating-SNAPSHOT-jar-with-dependencies+ODFTOOLKIT-460+ODFTOOLKIT-461.jar
-# Source26-md5:	f430ee376fea2bee62c8510d8b94e813
+Source26:	https://dev-www.libreoffice.org/extern/odfvalidator-1.2.0-incubating-SNAPSHOT-jar-with-dependencies-971c54fd38a968f5860014b44301872706f9e540.jar
+# Source26-md5:	52edf061bc1063dd624cf69170db4d5f
 Source27:	http://dev-www.libreoffice.org/src/a7983f859eafb2677d7ff386a023bc40-xsltml_2.1.2.zip
 # Source27-md5:	a7983f859eafb2677d7ff386a023bc40
+Source28:	https://dev-www.libreoffice.org/extern/49a64f3bcf20a7909ba2751349231d6652ded9cd2840e961b5164d09de3ffa63-opens___.ttf
+# Source28-md5:	8a1bf9fdd3ccd488d781956f73f2208d
 
 Patch0:		disable-failing-test.patch
-Patch1:		poppler-0.70.patch
-Patch2:		poppler-0.71.patch
-Patch3:		poppler-0.72.patch
 
 URL:		http://www.documentfoundation.org/
 BuildRequires:	/usr/bin/getopt
@@ -122,12 +121,12 @@ BuildRequires:	glew-devel >= 1.10.0
 BuildRequires:	glib2-devel >= 2.13.5
 BuildRequires:	gperf
 BuildRequires:	gpgme-c++-devel
-BuildRequires:	graphite2-devel
+BuildRequires:	graphite2-devel >= 0.9.3
 BuildRequires:	gstreamer0.10-devel >= 0.10.0
 BuildRequires:	gstreamer0.10-plugins-base-devel >= 0.10.0
 %{?with_gtk:BuildRequires:	gtk+2-devel >= 2:2.10}
 %{?with_gtk3:BuildRequires:	gtk+3-devel}
-BuildRequires:	harfbuzz-icu-devel
+BuildRequires:	harfbuzz-icu-devel >= 0.9.42
 %{?with_system_hunspell:BuildRequires:	hunspell-devel >=1.2.2}
 BuildRequires:	hyphen-devel
 %{?with_icecream:BuildRequires:	icecream}
@@ -153,7 +152,7 @@ BuildRequires:	libmspub-devel
 BuildRequires:	libmwaw-devel >= 0.3.0
 BuildRequires:	libnumbertext-devel >= 1.0.0
 BuildRequires:	libodfgen-devel >= 0.1.1
-BuildRequires:	liborcus-devel >= 0.13.3
+BuildRequires:	liborcus-devel >= 0.14.0
 BuildRequires:	libpagemaker-devel >= 0.0.2
 BuildRequires:	libstaroffice-devel
 BuildRequires:	libvisio-devel
@@ -176,7 +175,7 @@ BuildRequires:	libbonobo-devel >= 2.0
 BuildRequires:	libcdr-devel >= 0.0.8
 BuildRequires:	libcmis-devel >= 0.5
 BuildRequires:	libepubgen-devel >= 0.1.0
-BuildRequires:	libexttextcat-devel
+BuildRequires:	libexttextcat-devel >= 3.4.1
 BuildRequires:	libgltf-devel < 0.2.0
 BuildRequires:	libgltf-devel >= 0.1.0
 %{?with_system_libhnj:BuildRequires:	libhnj-devel}
@@ -191,7 +190,7 @@ BuildRequires:	libxml2-devel >= 2.0
 BuildRequires:	libxslt-devel
 BuildRequires:	libxslt-progs
 %{?with_access:%{?with_system_mdbtools:BuildRequires:	mdbtools-devel >= 0.6}}
-BuildRequires:	mdds-devel >= 1.2
+BuildRequires:	mdds-devel >= 1.4.1
 %{?with_mono:BuildRequires:	mono-csharp >= 1.2.3}
 %{?with_mono:BuildRequires:	mono-static >= 1.2.3}
 %{?with_system_myspell:BuildRequires:	myspell-devel}
@@ -2906,9 +2905,6 @@ dialogs.
 %prep
 %setup -q -a1 -a2 -a3
 %patch0 -p1
-%patch1 -p1
-%patch2 -p1
-%patch3 -p1
 
 for dir in *-%{version}; do
 	[ -f $dir/ChangeLog ] && mv $dir/ChangeLog ChangeLog-$dir
@@ -2925,6 +2921,7 @@ ln %{SOURCE24} ext_sources
 ln %{SOURCE25} ext_sources
 ln %{SOURCE26} ext_sources
 ln %{SOURCE27} ext_sources
+ln %{SOURCE28} ext_sources
 :> src.downloaded
 
 %build
@@ -3386,7 +3383,6 @@ fi
 %attr(755,root,root) %{_libdir}/%{name}/program/libcanvastoolslo.so
 %attr(755,root,root) %{_libdir}/%{name}/program/libchartcontrollerlo.so
 %attr(755,root,root) %{_libdir}/%{name}/program/libchartcorelo.so
-%attr(755,root,root) %{_libdir}/%{name}/program/libchartopengllo.so
 %attr(755,root,root) %{_libdir}/%{name}/program/libcmdmaillo.so
 %attr(755,root,root) %{_libdir}/%{name}/program/libcollator_data.so
 %attr(755,root,root) %{_libdir}/%{name}/program/libcomphelper.so
@@ -3460,7 +3456,8 @@ fi
 %attr(755,root,root) %{_libdir}/%{name}/program/libmsfilterlo.so
 %attr(755,root,root) %{_libdir}/%{name}/program/libmsformslo.so
 %attr(755,root,root) %{_libdir}/%{name}/program/libmtfrendererlo.so
-%attr(755,root,root) %{_libdir}/%{name}/program/libmysqllo.so
+%attr(755,root,root) %{_libdir}/%{name}/program/libmysql_jdbclo.so
+%attr(755,root,root) %{_libdir}/%{name}/program/libmysqlclo.so
 %attr(755,root,root) %{_libdir}/%{name}/program/libodbclo.so
 %attr(755,root,root) %{_libdir}/%{name}/program/libodfflatxmllo.so
 %attr(755,root,root) %{_libdir}/%{name}/program/liboffacclo.so
@@ -3610,8 +3607,6 @@ fi
 %{_libdir}/%{name}/program/opengl/areaHashCRC64TFragmentShader.glsl
 %{_libdir}/%{name}/program/opengl/areaScaleFastFragmentShader.glsl
 %{_libdir}/%{name}/program/opengl/areaScaleFragmentShader.glsl
-%{_libdir}/%{name}/program/opengl/backgroundFragmentShader.glsl
-%{_libdir}/%{name}/program/opengl/backgroundVertexShader.glsl
 %{_libdir}/%{name}/program/opengl/basicFragmentShader.glsl
 %{_libdir}/%{name}/program/opengl/basicVertexShader.glsl
 %{_libdir}/%{name}/program/opengl/blendedTextureFragmentShader.glsl
@@ -3620,11 +3615,7 @@ fi
 %{_libdir}/%{name}/program/opengl/combinedTextureFragmentShader.glsl
 %{_libdir}/%{name}/program/opengl/combinedTextureVertexShader.glsl
 %{_libdir}/%{name}/program/opengl/combinedVertexShader.glsl
-%{_libdir}/%{name}/program/opengl/commonFragmentShader.glsl
-%{_libdir}/%{name}/program/opengl/commonVertexShader.glsl
 %{_libdir}/%{name}/program/opengl/convolutionFragmentShader.glsl
-%{_libdir}/%{name}/program/opengl/debugFragmentShader.glsl
-%{_libdir}/%{name}/program/opengl/debugVertexShader.glsl
 %{_libdir}/%{name}/program/opengl/diffTextureFragmentShader.glsl
 %{_libdir}/%{name}/program/opengl/dissolveFragmentShader.glsl
 %{_libdir}/%{name}/program/opengl/dumbVertexShader.glsl
@@ -3646,8 +3637,6 @@ fi
 %{_libdir}/%{name}/program/opengl/maskedTextureFragmentShader.glsl
 %{_libdir}/%{name}/program/opengl/maskedTextureVertexShader.glsl
 %{_libdir}/%{name}/program/opengl/maskFragmentShader.glsl
-%{_libdir}/%{name}/program/opengl/pickingFragmentShader.glsl
-%{_libdir}/%{name}/program/opengl/pickingVertexShader.glsl
 %{_libdir}/%{name}/program/opengl/radialGradientFragmentShader.glsl
 %{_libdir}/%{name}/program/opengl/radialMultiColorGradientFragmentShader.glsl
 %{_libdir}/%{name}/program/opengl/radialTwoColorGradientFragmentShader.glsl
@@ -3655,30 +3644,12 @@ fi
 %{_libdir}/%{name}/program/opengl/rectangularTwoColorGradientFragmentShader.glsl
 %{_libdir}/%{name}/program/opengl/reflectionFragmentShader.glsl
 %{_libdir}/%{name}/program/opengl/reflectionVertexShader.glsl
-%{_libdir}/%{name}/program/opengl/renderTextureFragmentShader.glsl
-%{_libdir}/%{name}/program/opengl/renderTextureVertexShader.glsl
 %{_libdir}/%{name}/program/opengl/replaceColorFragmentShader.glsl
 %{_libdir}/%{name}/program/opengl/rippleFragmentShader.glsl
-%{_libdir}/%{name}/program/opengl/screenTextFragmentShader.glsl
-%{_libdir}/%{name}/program/opengl/screenTextVertexShader.glsl
-%{_libdir}/%{name}/program/opengl/shape3DFragmentShaderBatch.glsl
-%{_libdir}/%{name}/program/opengl/shape3DFragmentShaderBatchScroll.glsl
-%{_libdir}/%{name}/program/opengl/shape3DFragmentShader.glsl
-%{_libdir}/%{name}/program/opengl/shape3DFragmentShaderV300.glsl
-%{_libdir}/%{name}/program/opengl/shape3DVertexShaderBatch.glsl
-%{_libdir}/%{name}/program/opengl/shape3DVertexShaderBatchScroll.glsl
-%{_libdir}/%{name}/program/opengl/shape3DVertexShader.glsl
-%{_libdir}/%{name}/program/opengl/shape3DVertexShaderV300.glsl
 %{_libdir}/%{name}/program/opengl/solidFragmentShader.glsl
 %{_libdir}/%{name}/program/opengl/staticFragmentShader.glsl
-%{_libdir}/%{name}/program/opengl/symbolFragmentShader.glsl
-%{_libdir}/%{name}/program/opengl/symbolVertexShader.glsl
-%{_libdir}/%{name}/program/opengl/textFragmentShaderBatch.glsl
-%{_libdir}/%{name}/program/opengl/textFragmentShader.glsl
 %{_libdir}/%{name}/program/opengl/textureFragmentShader.glsl
 %{_libdir}/%{name}/program/opengl/textureVertexShader.glsl
-%{_libdir}/%{name}/program/opengl/textVertexShaderBatch.glsl
-%{_libdir}/%{name}/program/opengl/textVertexShader.glsl
 %{_libdir}/%{name}/program/opengl/transformedTextureVertexShader.glsl
 %{_libdir}/%{name}/program/opengl/vortexFragmentShader.glsl
 %{_libdir}/%{name}/program/opengl/vortexGeometryShader.glsl
@@ -3708,8 +3679,11 @@ fi
 %dir %{_datadir}/%{name}/share/config
 %{_datadir}/%{name}/share/config/images_breeze.zip
 %{_datadir}/%{name}/share/config/images_breeze_dark.zip
+%{_datadir}/%{name}/share/config/images_breeze_svg.zip
 %{_datadir}/%{name}/share/config/images_colibre.zip
+%{_datadir}/%{name}/share/config/images_colibre_svg.zip
 %{_datadir}/%{name}/share/config/images_elementary.zip
+%{_datadir}/%{name}/share/config/images_elementary_svg.zip
 %{_datadir}/%{name}/share/config/images_karasa_jaga.zip
 %{_datadir}/%{name}/share/config/images_sifr.zip
 %{_datadir}/%{name}/share/config/images_sifr_dark.zip
@@ -3826,6 +3800,7 @@ fi
 %dir %{_datadir}/%{name}/share/wordbook
 %{_datadir}/%{name}/share/wordbook/en-GB.dic
 %{_datadir}/%{name}/share/wordbook/en-US.dic
+%{_datadir}/%{name}/share/wordbook/hu_AkH11.dic
 %{_datadir}/%{name}/share/wordbook/sl.dic
 %{_datadir}/%{name}/share/wordbook/technical.dic
 

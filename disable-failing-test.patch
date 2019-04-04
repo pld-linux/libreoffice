@@ -3,7 +3,7 @@
 @@ -32,18 +32,6 @@ $(eval $(call gb_Module_add_l10n_targets
  ))
  
- ifneq ($(OS),IOS)
+ ifneq ($(OS),iOS)
 -ifeq ($(ENABLE_FIREBIRD_SDBC),TRUE)
 -# remove if we have a be file for this
 -ifeq ($(ENDIANNESS),little)
