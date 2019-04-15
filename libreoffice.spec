@@ -15,7 +15,7 @@
 %bcond_without	kde4		# KDE4 L&F packages
 %bcond_without	kde5		# KDE5 L&F packages
 %bcond_without	gtk		# GTK2 L&F
-%bcond_with	gtk3		# GTK3 L&F (experimental)
+%bcond_without	gtk3		# GTK3 L&F
 %bcond_without	qt5		# QT5 L&F
 %bcond_with	mono		# enable compilation of mono bindings
 %bcond_without	mozilla		# without mozilla components
@@ -352,21 +352,51 @@ LibreOffice productivity suite - KDE 5 Interface.
 %description libs-kde5 -l pl.UTF-8
 Pakiet biurowy LibreOffice - Interfejs KDE 5.
 
-%package libs-gtk
-Summary:	LibreOffice GTK+ Interface
-Summary(pl.UTF-8):	Interfejs GTK+ dla LibreOffice
+%package libs-gtk-common
+Summary:	Common files for LibreOffice GTK+ Interface
+Summary(pl.UTF-8):	Pakiet wspólny dla interfejsów GTK+ dla LibreOffice
 Group:		X11/Libraries
 Requires:	%{name}-core = %{version}-%{release}
+%if "%{_rpmversion}" >= "5"
+BuildArch:	noarch
+%endif
+
+%description libs-gtk-common
+Common files for LibreOffice GTK+ Interface.
+
+%description libs-gtk-common -l pl.UTF-8
+Pakiet wspólny dla interfejsów GTK+ dla LibreOffice.
+
+%package libs-gtk2
+Summary:	LibreOffice GTK+ 2 Interface
+Summary(pl.UTF-8):	Interfejs GTK+ 2 dla LibreOffice
+Group:		X11/Libraries
+Requires:	%{name}-core = %{version}-%{release}
+Requires:	%{name}-libs-gtk-common = %{version}-%{release}
+Obsoletes:	libreoffice-libs-gtk < 6.2.3.1-2
 Obsoletes:	openoffice-i18n-en
 Obsoletes:	openoffice-i18n-en-gtk
 Obsoletes:	openoffice-libs-gtk
 Obsoletes:	openoffice.org-libs-gtk
 
-%description libs-gtk
-LibreOffice productivity suite - GTK+ Interface.
+%description libs-gtk2
+LibreOffice productivity suite - GTK+ 2 Interface.
 
-%description libs-gtk -l pl.UTF-8
-Pakiet biurowy LibreOffice - Interfejs GTK+.
+%description libs-gtk2 -l pl.UTF-8
+Pakiet biurowy LibreOffice - Interfejs GTK+ 2.
+
+%package libs-gtk3
+Summary:	LibreOffice GTK+ 3 Interface
+Summary(pl.UTF-8):	Interfejs GTK+ 3 dla LibreOffice
+Group:		X11/Libraries
+Requires:	%{name}-core = %{version}-%{release}
+Requires:	%{name}-libs-gtk-common = %{version}-%{release}
+
+%description libs-gtk3
+LibreOffice productivity suite - GTK+ 3 Interface.
+
+%description libs-gtk3 -l pl.UTF-8
+Pakiet biurowy LibreOffice - Interfejs GTK+ 3.
 
 %package libs-qt5
 Summary:	LibreOffice Qt5 Interface
@@ -3924,10 +3954,21 @@ fi
 %endif
 
 %if %{with gtk} || %{with gtk3}
-%files libs-gtk
+%files libs-gtk-common
 %defattr(644,root,root,755)
-%attr(755,root,root) %{_libdir}/%{name}/program/libvclplug_gtk*.so
 %{_datadir}/%{name}/share/registry/gnome.xcd
+%endif
+
+%if %{with gtk}
+%files libs-gtk2
+%defattr(644,root,root,755)
+%attr(755,root,root) %{_libdir}/%{name}/program/libvclplug_gtklo.so
+%endif
+
+%if %{with gtk3}
+%files libs-gtk3
+%defattr(644,root,root,755)
+%attr(755,root,root) %{_libdir}/%{name}/program/libvclplug_gtk3lo.so
 %endif
 
 %if %{with qt5}
