@@ -13,8 +13,10 @@
 # Conditional build:
 %bcond_without	java		# without Java support (disables help support)
 %bcond_without	kde4		# KDE4 L&F packages
+%bcond_without	kde5		# KDE5 L&F packages
 %bcond_without	gtk		# GTK2 L&F
 %bcond_with	gtk3		# GTK3 L&F (experimental)
+%bcond_without	qt5		# QT5 L&F
 %bcond_with	mono		# enable compilation of mono bindings
 %bcond_without	mozilla		# without mozilla components
 %bcond_without	i18n		# do not create i18n packages (extra build time)
@@ -46,7 +48,12 @@
 %undefine	with_system_hsqldb
 %endif
 
+%if %{with kde5}
+%define		with_qt5	1
+%endif
+
 %define		major_ver		6.2.3
+%define		qt5_ver			5.6
 
 Summary:	LibreOffice - powerful office suite
 Summary(pl.UTF-8):	LibreOffice - potężny pakiet biurowy
@@ -237,6 +244,22 @@ BuildRequires:	ant-apache-regexp
 BuildRequires:	jdk >= 1.4.0_00
 BuildRequires:	jre-X11
 %endif
+%if %{with kde5}
+BuildRequires:	kf5-kconfig-devel
+BuildRequires:	kf5-kcoreaddons-devel
+BuildRequires:	kf5-ki18n-devel
+BuildRequires:	kf5-kio-devel
+BuildRequires:	kf5-kwindowsystem-devel
+BuildRequires:	libxcb-devel
+%endif
+%if %{with qt5}
+BuildRequires:	Qt5Core-devel >= %{qt5_ver}
+BuildRequires:	Qt5Gui-devel >= %{qt5_ver}
+BuildRequires:	Qt5Network-devel >= %{qt5_ver}
+BuildRequires:	Qt5Widgets-devel >= %{qt5_ver}
+BuildRequires:	qt5-build >= %{qt5_ver}
+BuildRequires:	qt5-qmake >= %{qt5_ver}
+%endif
 # contains (dlopened) *.so libs
 BuildConflicts:	java-gcj-compat
 Requires:	%{name}-base = %{version}-%{release}
@@ -300,21 +323,34 @@ Do zalet LibreOffice można zaliczyć:
  - kontrola CVS,
  - infrastruktura służąca do komunikowania się w ramach projektu.
 
-%package libs-kde
-Summary:	LibreOffice KDE Interface
-Summary(pl.UTF-8):	Interfejs KDE dla LibreOffice
+%package libs-kde4
+Summary:	LibreOffice KDE 4 Interface
+Summary(pl.UTF-8):	Interfejs KDE 4 dla LibreOffice
 Group:		X11/Libraries
 Requires:	%{name}-core = %{version}-%{release}
+Obsoletes:	libreoffice-libs-kde < 6.2.3.1-2
 Obsoletes:	openoffice-i18n-en
 Obsoletes:	openoffice-i18n-en-kde
 Obsoletes:	openoffice-libs-kde
 Obsoletes:	openoffice.org-libs-kde
 
-%description libs-kde
-LibreOffice productivity suite - KDE Interface.
+%description libs-kde4
+LibreOffice productivity suite - KDE 4 Interface.
 
-%description libs-kde -l pl.UTF-8
-Pakiet biurowy LibreOffice - Interfejs KDE.
+%description libs-kde4 -l pl.UTF-8
+Pakiet biurowy LibreOffice - Interfejs KDE 4.
+
+%package libs-kde5
+Summary:	LibreOffice KDE 5 Interface
+Summary(pl.UTF-8):	Interfejs KDE 5 dla LibreOffice
+Group:		X11/Libraries
+Requires:	%{name}-core = %{version}-%{release}
+
+%description libs-kde5
+LibreOffice productivity suite - KDE 5 Interface.
+
+%description libs-kde5 -l pl.UTF-8
+Pakiet biurowy LibreOffice - Interfejs KDE 5.
 
 %package libs-gtk
 Summary:	LibreOffice GTK+ Interface
@@ -331,6 +367,18 @@ LibreOffice productivity suite - GTK+ Interface.
 
 %description libs-gtk -l pl.UTF-8
 Pakiet biurowy LibreOffice - Interfejs GTK+.
+
+%package libs-qt5
+Summary:	LibreOffice Qt5 Interface
+Summary(pl.UTF-8):	Interfejs Qt5 dla LibreOffice
+Group:		X11/Libraries
+Requires:	%{name}-core = %{version}-%{release}
+
+%description libs-qt5
+LibreOffice productivity suite - Qt5 Interface.
+
+%description libs-qt5 -l pl.UTF-8
+Pakiet biurowy LibreOffice - Interfejs Qt5.
 
 %package core
 Summary:	Core modules for LibreOffice
@@ -3006,6 +3054,8 @@ export PATH=$PATH:%{_libdir}/interbase/bin
 	--enable-scripting-beanshell \
 	--enable-scripting-javascript \
 	--%{?with_kde4:en}%{!?with_kde4:dis}able-kde4 \
+	--%{?with_kde5:en}%{!?with_kde5:dis}able-kde5 \
+	--%{?with_qt5:en}%{!?with_qt5:dis}able-qt5 \
 	--with-lang=%{?with_i18n:ALL} \
 %if %{with java}
 	--with-java \
@@ -3860,10 +3910,17 @@ fi
 %{_mandir}/man1/unopkg.1*
 
 %if %{with kde4}
-%files libs-kde
+%files libs-kde4
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_libdir}/%{name}/program/libvclplug_kde4*.so
 %attr(755,root,root) %{_libdir}/%{name}/program/libkde4be1lo.so
+%endif
+
+%if %{with kde5}
+%files libs-kde5
+%defattr(644,root,root,755)
+%attr(755,root,root) %{_libdir}/%{name}/program/libvclplug_kde5*.so
+%attr(755,root,root) %{_libdir}/%{name}/program/libkde5be1lo.so
 %endif
 
 %if %{with gtk} || %{with gtk3}
@@ -3871,6 +3928,12 @@ fi
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_libdir}/%{name}/program/libvclplug_gtk*.so
 %{_datadir}/%{name}/share/registry/gnome.xcd
+%endif
+
+%if %{with qt5}
+%files libs-qt5
+%defattr(644,root,root,755)
+%attr(755,root,root) %{_libdir}/%{name}/program/libvclplug_qt5*.so
 %endif
 
 %files base
