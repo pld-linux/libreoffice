@@ -217,9 +217,9 @@ BuildRequires:	poppler-cpp-devel >= 0.8.0
 BuildRequires:	poppler-devel >= 0.8.0
 BuildRequires:	portaudio-devel
 BuildRequires:	postgresql-devel
-BuildRequires:	python3 >= 3.3
-BuildRequires:	python3-devel >= 3.3
-BuildRequires:	python3-modules >= 3.3
+BuildRequires:	python3 >= 1:3.3
+BuildRequires:	python3-devel >= 1:3.3
+BuildRequires:	python3-modules >= 1:3.3
 BuildRequires:	redland-devel >= 1.0.16
 BuildRequires:	rpm-pythonprov
 BuildRequires:	rpmbuild(macros) >= 1.660
