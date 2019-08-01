@@ -52,7 +52,7 @@
 %define		with_qt5	1
 %endif
 
-%define		major_ver		6.2.3
+%define		major_ver		6.2.6
 %define		qt5_ver			5.6
 
 Summary:	LibreOffice - powerful office suite
@@ -63,13 +63,13 @@ Release:	2
 License:	GPL/LGPL
 Group:		X11/Applications
 Source0:	http://download.documentfoundation.org/libreoffice/src/%{major_ver}/%{name}-%{version}.tar.xz
-# Source0-md5:	317b0a49e4530e3024ef2387d1546052
+# Source0-md5:	ccb003ef8cec828041eb848a26a39588
 Source1:	http://download.documentfoundation.org/libreoffice/src/%{major_ver}/%{name}-dictionaries-%{version}.tar.xz
-# Source1-md5:	bc0df852dd2d8070183a9b1cc6eb5533
+# Source1-md5:	a114e6565b52243c13730326b00c13a7
 Source2:	http://download.documentfoundation.org/libreoffice/src/%{major_ver}/%{name}-help-%{version}.tar.xz
-# Source2-md5:	f0c202f99e2ce5da1b50cf272b328784
+# Source2-md5:	87d31410d3da2e980664bc44bb95ae84
 Source3:	http://download.documentfoundation.org/libreoffice/src/%{major_ver}/%{name}-translations-%{version}.tar.xz
-# Source3-md5:	d0ce31efd93d4f8e0d292cfc58c98c80
+# Source3-md5:	686ce1682614d4bdcaf4bedc37129aec
 
 
 # make (download|fetch) DO_FETCH_TARBALLS=1 WGET=wget
