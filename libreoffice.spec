@@ -52,30 +52,30 @@
 %define		with_qt5	1
 %endif
 
-%define		major_ver		6.2.6
+%define		major_ver		6.3.0
 %define		qt5_ver			5.6
 
 Summary:	LibreOffice - powerful office suite
 Summary(pl.UTF-8):	LibreOffice - potężny pakiet biurowy
 Name:		libreoffice
-Version:	%{major_ver}.1
-Release:	2
+Version:	%{major_ver}.4
+Release:	0.1
 License:	GPL/LGPL
 Group:		X11/Applications
 Source0:	http://download.documentfoundation.org/libreoffice/src/%{major_ver}/%{name}-%{version}.tar.xz
-# Source0-md5:	ccb003ef8cec828041eb848a26a39588
+# Source0-md5:	d24bd7e5116743196c67e7df4b18458f
 Source1:	http://download.documentfoundation.org/libreoffice/src/%{major_ver}/%{name}-dictionaries-%{version}.tar.xz
-# Source1-md5:	a114e6565b52243c13730326b00c13a7
+# Source1-md5:	81df66dd522a2c56a4f11b24247fb114
 Source2:	http://download.documentfoundation.org/libreoffice/src/%{major_ver}/%{name}-help-%{version}.tar.xz
-# Source2-md5:	87d31410d3da2e980664bc44bb95ae84
+# Source2-md5:	483f654eaa94f17c462494029d42334a
 Source3:	http://download.documentfoundation.org/libreoffice/src/%{major_ver}/%{name}-translations-%{version}.tar.xz
-# Source3-md5:	686ce1682614d4bdcaf4bedc37129aec
+# Source3-md5:	21459291d488ecd7e4e8fb0fdcc55aca
 
 
 # make (download|fetch) DO_FETCH_TARBALLS=1 WGET=wget
 # but not sure if all are needed?
-Source20:	http://dev-www.libreoffice.org/src/pdfium-3550.tar.bz2
-# Source20-md5:	f30752217c6eb4f895a03c4f3c8c835b
+Source20:	http://dev-www.libreoffice.org/src/pdfium-3794.tar.bz2
+# Source20-md5:	4c11c2a0c6a6469ba5c097c755e06fed
 Source21:	http://dev-www.libreoffice.org/src/17410483b5b5f267aa18b7e00b65e6e0-hsqldb_1_8_0.zip
 # Source21-md5:	17410483b5b5f267aa18b7e00b65e6e0
 Source22:	http://dev-www.libreoffice.org/src/CoinMP-1.7.6.tgz
@@ -90,8 +90,8 @@ Source26:	https://dev-www.libreoffice.org/extern/odfvalidator-1.2.0-incubating-S
 # Source26-md5:	52edf061bc1063dd624cf69170db4d5f
 Source27:	http://dev-www.libreoffice.org/src/a7983f859eafb2677d7ff386a023bc40-xsltml_2.1.2.zip
 # Source27-md5:	a7983f859eafb2677d7ff386a023bc40
-Source28:	https://dev-www.libreoffice.org/extern/49a64f3bcf20a7909ba2751349231d6652ded9cd2840e961b5164d09de3ffa63-opens___.ttf
-# Source28-md5:	8a1bf9fdd3ccd488d781956f73f2208d
+Source28:	https://dev-www.libreoffice.org/extern/884ed41809687c3e168fc7c19b16585149ff058eca79acbf3ee784f6630704cc-opens___.ttf
+# Source28-md5:	866ba2ca4188f1610b121dfd514a17e8
 
 Patch0:		disable-failing-test.patch
 
