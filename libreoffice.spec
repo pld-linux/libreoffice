@@ -12,7 +12,6 @@
 #
 # Conditional build:
 %bcond_without	java		# without Java support (disables help support)
-%bcond_without	kde4		# KDE4 L&F packages
 %bcond_without	kde5		# KDE5 L&F packages
 %bcond_without	gtk		# GTK2 L&F
 %bcond_without	gtk3		# GTK3 L&F
@@ -169,10 +168,6 @@ BuildRequires:	libwps-devel >= 0.3.0
 BuildRequires:	libzmf-devel
 BuildRequires:	lp_solve-devel
 BuildRequires:	silgraphite-devel
-%if %{with kde4}
-BuildRequires:	kde4-kdelibs-devel
-BuildRequires:	qt4-build
-%endif
 BuildRequires:	java-libxml
 BuildRequires:	java-sac
 %{?with_system_xalan:BuildRequires:	java-xalan}
@@ -323,28 +318,13 @@ Do zalet LibreOffice można zaliczyć:
  - kontrola CVS,
  - infrastruktura służąca do komunikowania się w ramach projektu.
 
-%package libs-kde4
-Summary:	LibreOffice KDE 4 Interface
-Summary(pl.UTF-8):	Interfejs KDE 4 dla LibreOffice
-Group:		X11/Libraries
-Requires:	%{name}-core = %{version}-%{release}
-Obsoletes:	libreoffice-libs-kde < 6.2.3.1-2
-Obsoletes:	openoffice-i18n-en
-Obsoletes:	openoffice-i18n-en-kde
-Obsoletes:	openoffice-libs-kde
-Obsoletes:	openoffice.org-libs-kde
-
-%description libs-kde4
-LibreOffice productivity suite - KDE 4 Interface.
-
-%description libs-kde4 -l pl.UTF-8
-Pakiet biurowy LibreOffice - Interfejs KDE 4.
-
 %package libs-kde5
 Summary:	LibreOffice KDE 5 Interface
 Summary(pl.UTF-8):	Interfejs KDE 5 dla LibreOffice
 Group:		X11/Libraries
 Requires:	%{name}-core = %{version}-%{release}
+Obsoletes:	libreoffice-libs-kde < 6.2.3.1-2
+Obsoletes:	libreoffice-libs-kde4 < 6.3.0-1
 
 %description libs-kde5
 LibreOffice productivity suite - KDE 5 Interface.
@@ -3083,7 +3063,6 @@ export PATH=$PATH:%{_libdir}/interbase/bin
 	--enable-report-builder \
 	--enable-scripting-beanshell \
 	--enable-scripting-javascript \
-	--%{?with_kde4:en}%{!?with_kde4:dis}able-kde4 \
 	--%{?with_kde5:en}%{!?with_kde5:dis}able-kde5 \
 	--%{?with_qt5:en}%{!?with_qt5:dis}able-qt5 \
 	--with-lang=%{?with_i18n:ALL} \
@@ -3938,13 +3917,6 @@ fi
 %{_mandir}/man1/lofromtemplate.1
 %{_mandir}/man1/libreoffice.1*
 %{_mandir}/man1/unopkg.1*
-
-%if %{with kde4}
-%files libs-kde4
-%defattr(644,root,root,755)
-%attr(755,root,root) %{_libdir}/%{name}/program/libvclplug_kde4*.so
-%attr(755,root,root) %{_libdir}/%{name}/program/libkde4be1lo.so
-%endif
 
 %if %{with kde5}
 %files libs-kde5
