@@ -3587,7 +3587,6 @@ fi
 %attr(755,root,root) %{_libdir}/%{name}/program/libpdfiumlo.so
 %attr(755,root,root) %{_libdir}/%{name}/program/libpricinglo.so
 %attr(755,root,root) %{_libdir}/%{name}/program/libprotocolhandlerlo.so
-%attr(755,root,root) %{_libdir}/%{name}/program/librecentfile.so
 %attr(755,root,root) %{_libdir}/%{name}/program/libsaxlo.so
 %attr(755,root,root) %{_libdir}/%{name}/program/libsblo.so
 %attr(755,root,root) %{_libdir}/%{name}/program/libscnlo.so
@@ -3804,6 +3803,7 @@ fi
 %{_datadir}/%{name}/share/config/images_karasa_jaga.zip
 %{_datadir}/%{name}/share/config/images_sifr.zip
 %{_datadir}/%{name}/share/config/images_sifr_dark.zip
+%{_datadir}/%{name}/share/config/images_sifr_svg.zip
 %{_datadir}/%{name}/share/config/images_tango.zip
 %dir %{_datadir}/%{name}/share/config/soffice.cfg
 %dir %{_datadir}/%{name}/share/config/soffice.cfg/cui
@@ -3893,6 +3893,14 @@ fi
 %{_datadir}/%{name}/share/registry/oo-ldap.xcd.sample
 %dir %{_datadir}/%{name}/share/registry/res
 %{_datadir}/%{name}/share/registry/res/fcfg_langpack_en-US.xcd
+
+%dir %{_datadir}/%{name}/share/theme_definitions
+%dir %{_datadir}/%{name}/share/theme_definitions/ios
+%{_datadir}/%{name}/share/theme_definitions/ios/*.svg
+%{_datadir}/%{name}/share/theme_definitions/ios/*.xml
+
+%dir %{_datadir}/%{name}/share/tipoftheday
+%{_datadir}/%{name}/share/tipoftheday/tipoftheday*.png
 
 %dir %{_datadir}/%{name}/share/template
 %dir %{_datadir}/%{name}/share/template/common
@@ -4051,6 +4059,7 @@ fi
 %attr(755,root,root) %{_bindir}/localc
 %attr(755,root,root) %{_bindir}/oocalc
 %attr(755,root,root) %{_libdir}/%{name}/program/scalc
+%attr(755,root,root) %{_libdir}/%{name}/program/opencltest
 %{_mandir}/man1/localc.1
 %{_desktopdir}/libreoffice-calc.desktop
 %{_iconsdir}/hicolor/*/apps/libreoffice-calc.png
