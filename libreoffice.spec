@@ -1,7 +1,7 @@
 # TODO:
 # - fix configure arguments (+ compare with FC)
 # - create CoinMP library package for PLD (https://projects.coin-or.org/CoinMP)
-# - new language packs: ca@valencia, fy, kab, kmr@latin, sr@latin
+# - new language packs: ca@valencia, kmr@latin, sr@latin
 #
 # NOTE - FIXME FOR 3.4.3 !!!:
 #	- normal build (i686) requires about 27 GB of disk space:
@@ -1140,6 +1140,24 @@ language.
 Ten pakiet dostarcza zasoby zawierające menu i okna dialogowe w języku
 dogri.
 
+%package i18n-dsb
+Summary:	LibreOffice - interface in Lower Sorbian language
+Summary(pl.UTF-8):	LibreOffice - interfejs w języku dolnołużyckim
+Group:		I18n
+Requires:	%{name}-core = %{version}-%{release}
+Obsoletes:	openoffice.org-i18n-dsb
+%if "%{_rpmversion}" >= "5"
+BuildArch:	noarch
+%endif
+
+%description i18n-dsb
+This package provides resources containing menus and dialogs in
+Lower Sorbian language.
+
+%description i18n-dsb -l pl.UTF-8
+Ten pakiet dostarcza zasoby zawierające menu i okna dialogowe w języku
+dolnołużyckim.
+
 %package i18n-dz
 Summary:	LibreOffice - interface in Dzongkha language
 Summary(pl.UTF-8):	Openoffice.org - interfejs w języku dżongkha
@@ -1363,6 +1381,28 @@ language.
 %description i18n-fr -l pl.UTF-8
 Ten pakiet dostarcza zasoby zawierające menu i okna dialogowe w języku
 francuskim.
+
+%package i18n-fy
+Summary:	LibreOffice - interface in Frisian language
+Summary(pl.UTF-8):	LibreOffice - interfejs w języku fryzyjskim 
+Group:		I18n
+Requires:	%{name}-core = %{version}-%{release}
+Obsoletes:	openoffice-i18n-fy
+Obsoletes:	openoffice-i18n-fy-gtk
+Obsoletes:	openoffice.org-i18n-fy
+Obsoletes:	openoffice.org-i18n-fy-gtk
+Obsoletes:	openoffice.org-i18n-fy-kde
+%if "%{_rpmversion}" >= "5"
+BuildArch:	noarch
+%endif
+
+%description i18n-fy
+This package provides resources containing menus and dialogs in
+Frisian language.
+
+%description i18n-fy -l pl.UTF-8
+Ten pakiet dostarcza zasoby zawierające menu i okna dialogowe w języku
+fryzyjskim.
 
 %package i18n-ga
 Summary:	LibreOffice - interface in Irish language
@@ -1666,6 +1706,24 @@ Georgian language.
 %description i18n-ka -l pl.UTF-8
 Ten pakiet dostarcza zasoby zawierające menu i okna dialogowe w języku
 gruzińskim.
+
+%package i18n-kab
+Summary:	LibreOffice - interface in Kabyle language
+Summary(pl.UTF-8):	LibreOffice - interfejs w języku kabylskim
+Group:		I18n
+Requires:	%{name}-core = %{version}-%{release}
+Obsoletes:	openoffice.org-i18n-kab
+%if "%{_rpmversion}" >= "5"
+BuildArch:	noarch
+%endif
+
+%description i18n-kab
+This package provides resources containing menus and dialogs in
+Kabyle language.
+
+%description i18n-kab -l pl.UTF-8
+Ten pakiet dostarcza zasoby zawierające menu i okna dialogowe w języku
+kabylskim.
 
 %package i18n-kk
 Summary:	LibreOffice - interface in Kazakh language
@@ -4348,6 +4406,9 @@ fi
 %files i18n-dgo -f dgo.lang
 %defattr(644,root,root,755)
 
+%files i18n-dsb -f dsb.lang
+%defattr(644,root,root,755)
+
 %files i18n-dz -f dz.lang
 %defattr(644,root,root,755)
 
@@ -4379,6 +4440,9 @@ fi
 %defattr(644,root,root,755)
 
 %files i18n-fr -f fr.lang
+%defattr(644,root,root,755)
+
+%files i18n-fy -f fy.lang
 %defattr(644,root,root,755)
 
 %files i18n-ga -f ga.lang
@@ -4424,6 +4488,9 @@ fi
 %defattr(644,root,root,755)
 
 %files i18n-ka -f ka.lang
+%defattr(644,root,root,755)
+
+%files i18n-kab -f kab.lang
 %defattr(644,root,root,755)
 
 %files i18n-kk -f kk.lang
