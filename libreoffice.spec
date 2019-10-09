@@ -252,6 +252,7 @@ BuildRequires:	Qt5Core-devel >= %{qt5_ver}
 BuildRequires:	Qt5Gui-devel >= %{qt5_ver}
 BuildRequires:	Qt5Network-devel >= %{qt5_ver}
 BuildRequires:	Qt5Widgets-devel >= %{qt5_ver}
+BuildRequires:	Qt5X11Extras-devel >= %{qt5_ver}
 BuildRequires:	qt5-build >= %{qt5_ver}
 BuildRequires:	qt5-qmake >= %{qt5_ver}
 %endif
