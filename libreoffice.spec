@@ -93,6 +93,7 @@ Source28:	https://dev-www.libreoffice.org/extern/884ed41809687c3e168fc7c19b16585
 # Source28-md5:	866ba2ca4188f1610b121dfd514a17e8
 
 Patch0:		disable-failing-test.patch
+Patch1:		mdds-1.5-orcus-0.15.patch
 
 URL:		http://www.documentfoundation.org/
 BuildRequires:	/usr/bin/getopt
@@ -158,7 +159,7 @@ BuildRequires:	libmspub-devel
 BuildRequires:	libmwaw-devel >= 0.3.0
 BuildRequires:	libnumbertext-devel >= 1.0.0
 BuildRequires:	libodfgen-devel >= 0.1.1
-BuildRequires:	liborcus-devel >= 0.14.0
+BuildRequires:	liborcus-devel >= 0.15.0
 BuildRequires:	libpagemaker-devel >= 0.0.2
 BuildRequires:	libstaroffice-devel
 BuildRequires:	libvisio-devel
@@ -192,7 +193,7 @@ BuildRequires:	libxml2-devel >= 2.0
 BuildRequires:	libxslt-devel
 BuildRequires:	libxslt-progs
 %{?with_access:%{?with_system_mdbtools:BuildRequires:	mdbtools-devel >= 0.6}}
-BuildRequires:	mdds-devel >= 1.4.1
+BuildRequires:	mdds-devel >= 1.5.0
 %{?with_mono:BuildRequires:	mono-csharp >= 1.2.3}
 %{?with_mono:BuildRequires:	mono-static >= 1.2.3}
 %{?with_system_myspell:BuildRequires:	myspell-devel}
@@ -3022,6 +3023,7 @@ dialogs.
 %prep
 %setup -q -a1 -a2 -a3
 %patch0 -p1
+%patch1 -p1
 
 for dir in *-%{version}; do
 	[ -f $dir/ChangeLog ] && mv $dir/ChangeLog ChangeLog-$dir
