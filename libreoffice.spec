@@ -94,6 +94,7 @@ Source28:	https://dev-www.libreoffice.org/extern/884ed41809687c3e168fc7c19b16585
 
 Patch0:		disable-failing-test.patch
 Patch1:		mdds-1.5-orcus-0.15.patch
+Patch2:		poppler-0.82.patch
 
 URL:		http://www.documentfoundation.org/
 BuildRequires:	/usr/bin/getopt
@@ -215,6 +216,7 @@ BuildRequires:	portaudio-devel
 BuildRequires:	postgresql-devel
 BuildRequires:	python3 >= 1:3.3
 BuildRequires:	python3-devel >= 1:3.3
+BuildRequires:	python3-lxml
 BuildRequires:	python3-modules >= 1:3.3
 BuildRequires:	redland-devel >= 1.0.16
 BuildRequires:	rpm-pythonprov
@@ -3024,6 +3026,7 @@ dialogs.
 %setup -q -a1 -a2 -a3
 %patch0 -p1
 %patch1 -p1
+%patch2 -p1
 
 for dir in *-%{version}; do
 	[ -f $dir/ChangeLog ] && mv $dir/ChangeLog ChangeLog-$dir
