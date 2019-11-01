@@ -58,7 +58,7 @@ Summary:	LibreOffice - powerful office suite
 Summary(pl.UTF-8):	LibreOffice - potężny pakiet biurowy
 Name:		libreoffice
 Version:	%{major_ver}.4
-Release:	2
+Release:	3
 License:	GPL/LGPL
 Group:		X11/Applications
 Source0:	http://download.documentfoundation.org/libreoffice/src/%{major_ver}/%{name}-%{version}.tar.xz
@@ -4012,7 +4012,11 @@ fi
 %if %{with gtk3}
 %files libs-gtk3
 %defattr(644,root,root,755)
+%attr(755,root,root) %{_libdir}/%{name}/program/liblibreofficekitgtk.so
 %attr(755,root,root) %{_libdir}/%{name}/program/libvclplug_gtk3lo.so
+%{_libdir}/girepository-1.0/LOKDocView-0.1.typelib
+# devel stuff?
+#%{_datadir}/gir-1.0/LOKDocView-0.1.gir
 %endif
 
 %if %{with qt5}
