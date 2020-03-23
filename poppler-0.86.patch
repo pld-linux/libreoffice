@@ -1,0 +1,14 @@
+--- libreoffice-6.3.0.4/sdext/source/pdfimport/xpdfwrapper/pdfioutdev_gpl.cxx~	2020-03-23 11:28:30.000000000 +0100
++++ libreoffice-6.3.0.4/sdext/source/pdfimport/xpdfwrapper/pdfioutdev_gpl.cxx	2020-03-23 11:31:46.670106683 +0100
+@@ -564,7 +564,11 @@
+ return;
+ 
+ #if POPPLER_CHECK_VERSION(0, 72, 0)
++#if POPPLER_CHECK_VERSION(0, 86, 0)
++    const char* pURI = static_cast<LinkURI*>(pAction)->getURI().c_str();
++#else
+     const char* pURI = static_cast<LinkURI*>(pAction)->getURI()->c_str();
++#endif
+ #else
+     const char* pURI = static_cast<LinkURI*>(pAction)->getURI()->getCString();
+ #endif
