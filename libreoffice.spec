@@ -95,6 +95,7 @@ Source28:	https://dev-www.libreoffice.org/extern/884ed41809687c3e168fc7c19b16585
 Patch0:		disable-failing-test.patch
 Patch1:		mdds-1.5-orcus-0.15.patch
 Patch2:		poppler-0.82.patch
+Patch3:		poppler-0.83.patch
 
 URL:		http://www.documentfoundation.org/
 BuildRequires:	/usr/bin/getopt
@@ -3027,6 +3028,7 @@ dialogs.
 %patch0 -p1
 %patch1 -p1
 %patch2 -p1
+%patch3 -p1
 
 for dir in *-%{version}; do
 	[ -f $dir/ChangeLog ] && mv $dir/ChangeLog ChangeLog-$dir
