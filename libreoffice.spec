@@ -133,8 +133,8 @@ BuildRequires:	glib2-devel >= 2.13.5
 BuildRequires:	gperf
 BuildRequires:	gpgme-c++-devel
 BuildRequires:	graphite2-devel >= 0.9.3
-BuildRequires:	gstreamer0.10-devel >= 0.10.0
-BuildRequires:	gstreamer0.10-plugins-base-devel >= 0.10.0
+BuildRequires:	gstreamer-devel >= 1.0
+BuildRequires:	gstreamer-plugins-base-devel >= 1.0
 %{?with_gtk:BuildRequires:	gtk+2-devel >= 2:2.10}
 %{?with_gtk3:BuildRequires:	gtk+3-devel}
 BuildRequires:	harfbuzz-icu-devel >= 0.9.42
@@ -3158,6 +3158,8 @@ export PATH=$PATH:%{_libdir}/interbase/bin
 	--enable-cups \
 	%{__enable_disable firebird firebird-sdbc} \
 	%{__enable_disable pgsql postgresql-sdbc} \
+	--enable-gstreamer-1-0 \
+	--disable-gstreamer-0-10 \
 	--disable-fetch-external
 
 # this limits processing some files but doesn't limit parallel build
