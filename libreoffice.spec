@@ -197,6 +197,7 @@ BuildRequires:	libxslt-progs
 BuildRequires:	mdds-devel >= 1.5.0
 %{?with_mono:BuildRequires:	mono-csharp >= 1.2.3}
 %{?with_mono:BuildRequires:	mono-static >= 1.2.3}
+BuildRequires:	mysql-devel
 BuildRequires:	mythes-devel
 BuildRequires:	nas-devel >= 1.7-1
 BuildRequires:	neon-devel
