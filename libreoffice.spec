@@ -34,7 +34,6 @@
 %bcond_with	system_hsqldb
 %bcond_with	system_agg		# with system agg
 %bcond_without	system_hunspell
-%bcond_without	system_myspell
 
 # this list is same as icedtea6
 %ifnarch i486 i586 i686 pentium3 pentium4 athlon %{x8664} aarch64
@@ -171,13 +170,10 @@ BuildRequires:	libwpg-devel >= 0.3.0
 BuildRequires:	libwps-devel >= 0.3.0
 BuildRequires:	libzmf-devel
 BuildRequires:	lp_solve-devel
-BuildRequires:	silgraphite-devel
 BuildRequires:	java-libxml
 BuildRequires:	java-sac
 %{?with_system_xalan:BuildRequires:	java-xalan}
-%{?with_system_xalan:BuildRequires:	java-xalan}
 BuildRequires:	libart_lgpl-devel
-BuildRequires:	libbonobo-devel >= 2.0
 BuildRequires:	libcdr-devel >= 0.0.8
 BuildRequires:	libcmis-devel >= 0.5
 BuildRequires:	libepubgen-devel >= 0.1.0
@@ -199,7 +195,6 @@ BuildRequires:	libxslt-progs
 BuildRequires:	mdds-devel >= 1.5.0
 %{?with_mono:BuildRequires:	mono-csharp >= 1.2.3}
 %{?with_mono:BuildRequires:	mono-static >= 1.2.3}
-%{?with_system_myspell:BuildRequires:	myspell-devel}
 BuildRequires:	mythes-devel
 BuildRequires:	nas-devel >= 1.7-1
 BuildRequires:	neon-devel
@@ -214,7 +209,6 @@ BuildRequires:	perl-devel
 BuildRequires:	pkgconfig
 BuildRequires:	poppler-cpp-devel >= 0.8.0
 BuildRequires:	poppler-devel >= 0.8.0
-BuildRequires:	portaudio-devel
 BuildRequires:	postgresql-devel
 BuildRequires:	python3 >= 1:3.3
 BuildRequires:	python3-devel >= 1:3.3
@@ -230,7 +224,6 @@ BuildRequires:	sed >= 4.0
 BuildRequires:	startup-notification-devel >= 0.5
 BuildRequires:	unixODBC-devel >= 2.2.12-2
 BuildRequires:	unzip
-BuildRequires:	vigra-devel
 BuildRequires:	xmlsec1-nss-devel >= 1.2.24
 BuildRequires:	xorg-font-font-adobe-utopia-type1
 BuildRequires:	xorg-lib-libX11-devel
