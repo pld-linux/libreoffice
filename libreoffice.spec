@@ -37,7 +37,7 @@
 %bcond_without	system_myspell
 
 # this list is same as icedtea6
-%ifnarch i486 i586 i686 pentium3 pentium4 athlon %{x8664}
+%ifnarch i486 i586 i686 pentium3 pentium4 athlon %{x8664} aarch64
 %undefine	with_java
 %endif
 
@@ -280,7 +280,7 @@ Requires:	%{name}-xsltfilter = %{version}-%{release}
 Obsoletes:	libreoffice-testtools
 Obsoletes:	openoffice.org
 Obsoletes:	openoffice.org-testtools
-ExclusiveArch:	%{ix86} %{x8664} ppc sparc sparcv9
+ExclusiveArch:	%{ix86} %{x8664} ppc sparc sparcv9 aarch64
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %define		specflags	-fno-strict-aliasing -O2
