@@ -24,6 +24,8 @@
 %bcond_with	msaccess	# with ms access import pieces
 %bcond_without	parallelbuild	# use greater number of jobs to speed up build (default: 1)
 %bcond_with     tests
+%bcond_without	firebird	# without Firebird-SDBC driver
+%bcond_without	pgsql		# without PostgreSQL-SDBC driver
 
 %bcond_without	system_beanshell
 %bcond_without	system_db		# without system (i.e. with internal) Berkeley DB
@@ -99,7 +101,7 @@ Patch4:		poppler-0.86.patch
 
 URL:		http://www.documentfoundation.org/
 BuildRequires:	/usr/bin/getopt
-BuildRequires:	Firebird-devel >= 3.0.0.0
+%{?with_firebird:BuildRequires:	Firebird-devel >= 3.0.0.0}
 BuildRequires:	GConf2-devel
 BuildRequires:	GLM
 BuildRequires:	ImageMagick
@@ -209,7 +211,7 @@ BuildRequires:	perl-devel
 BuildRequires:	pkgconfig
 BuildRequires:	poppler-cpp-devel >= 0.8.0
 BuildRequires:	poppler-devel >= 0.8.0
-BuildRequires:	postgresql-devel
+%{?with_pgsql:BuildRequires:	postgresql-devel}
 BuildRequires:	python3 >= 1:3.3
 BuildRequires:	python3-devel >= 1:3.3
 BuildRequires:	python3-lxml
@@ -264,7 +266,7 @@ Requires:	%{name}-graphicfilter = %{version}-%{release}
 Requires:	%{name}-impress = %{version}-%{release}
 Requires:	%{name}-math = %{version}-%{release}
 Requires:	%{name}-pdfimport = %{version}-%{release}
-Requires:	%{name}-postgresql = %{version}-%{release}
+%{?with_pgsql:Requires:	%{name}-postgresql = %{version}-%{release}}
 Requires:	%{name}-pyuno = %{version}-%{release}
 Requires:	%{name}-web = %{version}-%{release}
 Requires:	%{name}-wiki-publisher = %{version}-%{release}
@@ -3154,6 +3156,8 @@ export PATH=$PATH:%{_libdir}/interbase/bin
 	--enable-split-app-modules \
 	--enable-split-opt-features \
 	--enable-cups \
+	%{__enable_disable firebird firebird-sdbc} \
+	%{__enable_disable pgsql postgresql-sdbc} \
 	--disable-fetch-external
 
 # this limits processing some files but doesn't limit parallel build
@@ -3535,7 +3539,7 @@ fi
 %attr(755,root,root) %{_libdir}/%{name}/program/libexpwraplo.so
 %attr(755,root,root) %{_libdir}/%{name}/program/libfilelo.so
 %attr(755,root,root) %{_libdir}/%{name}/program/libfilterconfiglo.so
-%attr(755,root,root) %{_libdir}/%{name}/program/libfirebird_sdbclo.so
+%{?with_firebird:%attr(755,root,root) %{_libdir}/%{name}/program/libfirebird_sdbclo.so}
 %attr(755,root,root) %{_libdir}/%{name}/program/libflatlo.so
 %attr(755,root,root) %{_libdir}/%{name}/program/libforlo.so
 %attr(755,root,root) %{_libdir}/%{name}/program/libforuilo.so
@@ -4208,6 +4212,7 @@ fi
 %{_datadir}/%{name}/share/xslt/export/xhtml
 %{_desktopdir}/libreoffice-xsltfilter.desktop
 
+%if %{with pgsql}
 %files postgresql
 %defattr(644,root,root,755)
 %{_libdir}/%{name}/program/postgresql-sdbc.ini
@@ -4215,6 +4220,7 @@ fi
 %{_datadir}/%{name}/share/registry/postgresql.xcd
 %attr(755,root,root) %{_libdir}/%{name}/program/libpostgresql-sdbclo.so
 %attr(755,root,root) %{_libdir}/%{name}/program/libpostgresql-sdbc-impllo.so
+%endif
 
 %files ure
 %defattr(644,root,root,755)
