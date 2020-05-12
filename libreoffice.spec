@@ -3671,7 +3671,7 @@ fi
 %attr(755,root,root) %{_libdir}/%{name}/program/pagein*
 %attr(755,root,root) %{_libdir}/%{name}/program/senddoc
 %attr(755,root,root) %{_libdir}/%{name}/program/uri-encode
-%attr(755,root,root) %{_libdir}/%{name}/program/xid-fullscreen-on-all-monitors
+%{?with_gtk:%attr(755,root,root) %{_libdir}/%{name}/program/xid-fullscreen-on-all-monitors}
 
 %if %{with java}
 %attr(755,root,root) %{_libdir}/%{name}/program/libhsqldb.so
