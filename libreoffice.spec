@@ -3081,9 +3081,9 @@ export PATH=$PATH:%{_libdir}/interbase/bin
 	%{?with_system_beanshell:--with-system-beanshell} \
 	--with%{!?with_system_hsqldb:out}-system-hsqldb \
 	%{?with_system_hunspell:--with-system-hunspell --without-myspell-dicts} \
-	%{?with_system_qrcodegen:--with%{!?with_system_qrcodegen:out}-system-qrcodegen}} \
+	--with%{!?with_system_qrcodegen:out}-system-qrcodegen \
 	%{?with_system_libhnj:--with-system-altlinuxhyphen} \
-	%{?with_msaccess:--with%{!?with_system_mdbtools:out}-system-mdbtools}} \
+	%{?with_msaccess:--with%{!?with_system_mdbtools:out}-system-mdbtools} \
 	--enable-python=system \
         --with-external-dict-dir=%{_datadir}/myspell \
 	--with-external-tar=$(pwd)/ext_sources \
@@ -3094,7 +3094,7 @@ export PATH=$PATH:%{_libdir}/interbase/bin
 	--enable-report-builder \
 	--enable-scripting-beanshell \
 	--enable-scripting-javascript \
-	--%{?with_kde5:en}%{!?with_kde5:dis}able-kde5 \
+	--%{?with_kde5:en}%{!?with_kde5:dis}able-kf5 \
 	--%{?with_qt5:en}%{!?with_qt5:dis}able-qt5 \
 	--with-lang=%{?with_i18n:ALL} \
 %if %{with java}
