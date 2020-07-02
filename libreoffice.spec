@@ -1,7 +1,8 @@
 # TODO:
 # - fix configure arguments (+ compare with FC)
 # - create CoinMP library package for PLD (https://projects.coin-or.org/CoinMP)
-# - new language packs: ca@valencia, kmr@latin, sr@latin
+# - new language packs: ca@valencia, kmr@latin, sr@latin, szl
+# - create qrcodegen library package for PLD
 #
 # NOTE - FIXME FOR 3.4.3 !!!:
 #	- normal build (i686) requires about 27 GB of disk space:
@@ -13,7 +14,6 @@
 # Conditional build:
 %bcond_without	java		# without Java support (disables help support)
 %bcond_without	kde5		# KDE5 L&F packages
-%bcond_without	gtk		# GTK2 L&F
 %bcond_without	gtk3		# GTK3 L&F
 %bcond_without	qt5		# QT5 L&F
 %bcond_with	mono		# enable compilation of mono bindings
@@ -36,6 +36,7 @@
 %bcond_with	system_hsqldb
 %bcond_with	system_agg		# with system agg
 %bcond_without	system_hunspell
+%bcond_with	system_qrcodegen	# use system qrcodegen library (not in PLD yet)
 
 # this list is same as icedtea6
 %ifnarch i486 i586 i686 pentium3 pentium4 athlon %{x8664} aarch64
@@ -52,30 +53,30 @@
 %define		with_qt5	1
 %endif
 
-%define		major_ver		6.3.0
+%define		major_ver		6.4.5
 %define		qt5_ver			5.6
 
 Summary:	LibreOffice - powerful office suite
 Summary(pl.UTF-8):	LibreOffice - potężny pakiet biurowy
 Name:		libreoffice
-Version:	%{major_ver}.4
-Release:	4
+Version:	%{major_ver}.2
+Release:	1
 License:	GPL/LGPL
 Group:		X11/Applications
 Source0:	http://download.documentfoundation.org/libreoffice/src/%{major_ver}/%{name}-%{version}.tar.xz
-# Source0-md5:	d24bd7e5116743196c67e7df4b18458f
+# Source0-md5:	7305ed1b5774483ca9ca0d6906d8049a
 Source1:	http://download.documentfoundation.org/libreoffice/src/%{major_ver}/%{name}-dictionaries-%{version}.tar.xz
-# Source1-md5:	81df66dd522a2c56a4f11b24247fb114
+# Source1-md5:	f4a3d9dcca02542ec149057d869c8c64
 Source2:	http://download.documentfoundation.org/libreoffice/src/%{major_ver}/%{name}-help-%{version}.tar.xz
-# Source2-md5:	483f654eaa94f17c462494029d42334a
+# Source2-md5:	19da65b2748531e85740163fc9695f00
 Source3:	http://download.documentfoundation.org/libreoffice/src/%{major_ver}/%{name}-translations-%{version}.tar.xz
-# Source3-md5:	21459291d488ecd7e4e8fb0fdcc55aca
+# Source3-md5:	58771e45d87413f96a33e35d821a8122
 
 
 # make (download|fetch) DO_FETCH_TARBALLS=1 WGET=wget
 # but not sure if all are needed?
-Source20:	http://dev-www.libreoffice.org/src/pdfium-3794.tar.bz2
-# Source20-md5:	4c11c2a0c6a6469ba5c097c755e06fed
+Source20:	http://dev-www.libreoffice.org/src/pdfium-3963.tar.bz2
+# Source20-md5:	7688ac08e1292cf7e0d027f506f45c49
 Source21:	http://dev-www.libreoffice.org/src/17410483b5b5f267aa18b7e00b65e6e0-hsqldb_1_8_0.zip
 # Source21-md5:	17410483b5b5f267aa18b7e00b65e6e0
 Source22:	http://dev-www.libreoffice.org/src/CoinMP-1.7.6.tgz
@@ -92,12 +93,12 @@ Source27:	http://dev-www.libreoffice.org/src/a7983f859eafb2677d7ff386a023bc40-xs
 # Source27-md5:	a7983f859eafb2677d7ff386a023bc40
 Source28:	https://dev-www.libreoffice.org/extern/884ed41809687c3e168fc7c19b16585149ff058eca79acbf3ee784f6630704cc-opens___.ttf
 # Source28-md5:	866ba2ca4188f1610b121dfd514a17e8
+Source29:	https://dev-www.libreoffice.org/src/QR-Code-generator-1.4.0.tar.gz
+# Source29-md5:	0e81d36829be287ff27ae802e0587463
+Source30:	https://dev-www.libreoffice.org/extern/8249374c274932a21846fa7629c2aa9b-officeotron-0.7.4-master.jar
+# Source30-md5:	8249374c274932a21846fa7629c2aa9b
 
 Patch0:		disable-failing-test.patch
-Patch1:		mdds-1.5-orcus-0.15.patch
-Patch2:		poppler-0.82.patch
-Patch3:		poppler-0.83.patch
-Patch4:		poppler-0.86.patch
 
 URL:		http://www.documentfoundation.org/
 BuildRequires:	/usr/bin/getopt
@@ -135,7 +136,6 @@ BuildRequires:	gpgme-c++-devel
 BuildRequires:	graphite2-devel >= 0.9.3
 BuildRequires:	gstreamer-devel >= 1.0
 BuildRequires:	gstreamer-plugins-base-devel >= 1.0
-%{?with_gtk:BuildRequires:	gtk+2-devel >= 2:2.10}
 %{?with_gtk3:BuildRequires:	gtk+3-devel}
 BuildRequires:	harfbuzz-icu-devel >= 0.9.42
 %{?with_system_hunspell:BuildRequires:	hunspell-devel >=1.2.2}
@@ -227,7 +227,7 @@ BuildRequires:	sed >= 4.0
 BuildRequires:	startup-notification-devel >= 0.5
 BuildRequires:	unixODBC-devel >= 2.2.12-2
 BuildRequires:	unzip
-BuildRequires:	xmlsec1-nss-devel >= 1.2.24
+BuildRequires:	xmlsec1-nss-devel >= 1.2.28
 BuildRequires:	xorg-font-font-adobe-utopia-type1
 BuildRequires:	xorg-lib-libX11-devel
 BuildRequires:	xorg-lib-libXaw-devel
@@ -334,45 +334,13 @@ LibreOffice productivity suite - KDE 5 Interface.
 %description libs-kde5 -l pl.UTF-8
 Pakiet biurowy LibreOffice - Interfejs KDE 5.
 
-%package libs-gtk-common
-Summary:	Common files for LibreOffice GTK+ Interface
-Summary(pl.UTF-8):	Pakiet wspólny dla interfejsów GTK+ dla LibreOffice
-Group:		X11/Libraries
-Requires:	%{name}-core = %{version}-%{release}
-%if "%{_rpmversion}" >= "5"
-BuildArch:	noarch
-%endif
-
-%description libs-gtk-common
-Common files for LibreOffice GTK+ Interface.
-
-%description libs-gtk-common -l pl.UTF-8
-Pakiet wspólny dla interfejsów GTK+ dla LibreOffice.
-
-%package libs-gtk2
-Summary:	LibreOffice GTK+ 2 Interface
-Summary(pl.UTF-8):	Interfejs GTK+ 2 dla LibreOffice
-Group:		X11/Libraries
-Requires:	%{name}-core = %{version}-%{release}
-Requires:	%{name}-libs-gtk-common = %{version}-%{release}
-Obsoletes:	libreoffice-libs-gtk < 6.2.3.1-2
-Obsoletes:	openoffice-i18n-en
-Obsoletes:	openoffice-i18n-en-gtk
-Obsoletes:	openoffice-libs-gtk
-Obsoletes:	openoffice.org-libs-gtk
-
-%description libs-gtk2
-LibreOffice productivity suite - GTK+ 2 Interface.
-
-%description libs-gtk2 -l pl.UTF-8
-Pakiet biurowy LibreOffice - Interfejs GTK+ 2.
-
 %package libs-gtk3
 Summary:	LibreOffice GTK+ 3 Interface
 Summary(pl.UTF-8):	Interfejs GTK+ 3 dla LibreOffice
 Group:		X11/Libraries
 Requires:	%{name}-core = %{version}-%{release}
-Requires:	%{name}-libs-gtk-common = %{version}-%{release}
+Obsoletes:	libreoffice-libs-gtk-common < 6.4.5.2-1
+Obsoletes:	libreoffice-libs-gtk2 < 6.4.5.2-1
 
 %description libs-gtk3
 LibreOffice productivity suite - GTK+ 3 Interface.
@@ -3023,10 +2991,6 @@ dialogs.
 %prep
 %setup -q -a1 -a2 -a3
 %patch0 -p1
-%patch1 -p1
-%patch2 -p1
-%patch3 -p1
-%patch4 -p1
 
 for dir in *-%{version}; do
 	[ -f $dir/ChangeLog ] && mv $dir/ChangeLog ChangeLog-$dir
@@ -3044,6 +3008,8 @@ ln %{SOURCE25} ext_sources
 ln %{SOURCE26} ext_sources
 ln %{SOURCE27} ext_sources
 ln %{SOURCE28} ext_sources
+ln %{SOURCE29} ext_sources
+ln %{SOURCE30} ext_sources
 :> src.downloaded
 
 %build
@@ -3115,6 +3081,7 @@ export PATH=$PATH:%{_libdir}/interbase/bin
 	%{?with_system_beanshell:--with-system-beanshell} \
 	--with%{!?with_system_hsqldb:out}-system-hsqldb \
 	%{?with_system_hunspell:--with-system-hunspell --without-myspell-dicts} \
+	%{?with_system_qrcodegen:--with%{!?with_system_qrcodegen:out}-system-qrcodegen}} \
 	%{?with_system_libhnj:--with-system-altlinuxhyphen} \
 	%{?with_msaccess:--with%{!?with_system_mdbtools:out}-system-mdbtools}} \
 	--enable-python=system \
@@ -3141,7 +3108,6 @@ export PATH=$PATH:%{_libdir}/interbase/bin
 	--with-x \
 	--without-fonts \
 	--disable-epm \
-	--%{?with_gtk:en}%{!?with_gtk:dis}able-gtk \
 	--%{?with_gtk3:en}%{!?with_gtk3:dis}able-gtk3 \
 	--enable-dbus \
 	--with-system-openldap \
@@ -3160,7 +3126,6 @@ export PATH=$PATH:%{_libdir}/interbase/bin
 	%{__enable_disable firebird firebird-sdbc} \
 	%{__enable_disable pgsql postgresql-sdbc} \
 	--enable-gstreamer-1-0 \
-	--disable-gstreamer-0-10 \
 	--disable-fetch-external
 
 # this limits processing some files but doesn't limit parallel build
@@ -3521,7 +3486,6 @@ fi
 %attr(755,root,root) %{_libdir}/%{name}/program/libdbalo.so
 %attr(755,root,root) %{_libdir}/%{name}/program/libdbaselo.so
 %attr(755,root,root) %{_libdir}/%{name}/program/libdbaxmllo.so
-%attr(755,root,root) %{_libdir}/%{name}/program/libdbmmlo.so
 %attr(755,root,root) %{_libdir}/%{name}/program/libdbpool2.so
 %attr(755,root,root) %{_libdir}/%{name}/program/libdbtoolslo.so
 %attr(755,root,root) %{_libdir}/%{name}/program/libdbulo.so
@@ -3671,7 +3635,6 @@ fi
 %attr(755,root,root) %{_libdir}/%{name}/program/pagein*
 %attr(755,root,root) %{_libdir}/%{name}/program/senddoc
 %attr(755,root,root) %{_libdir}/%{name}/program/uri-encode
-%{?with_gtk:%attr(755,root,root) %{_libdir}/%{name}/program/xid-fullscreen-on-all-monitors}
 
 %if %{with java}
 %attr(755,root,root) %{_libdir}/%{name}/program/libhsqldb.so
@@ -3805,14 +3768,17 @@ fi
 %dir %{_datadir}/%{name}/share/config
 %{_datadir}/%{name}/share/config/images_breeze.zip
 %{_datadir}/%{name}/share/config/images_breeze_dark.zip
+%{_datadir}/%{name}/share/config/images_breeze_dark_svg.zip
 %{_datadir}/%{name}/share/config/images_breeze_svg.zip
 %{_datadir}/%{name}/share/config/images_colibre.zip
 %{_datadir}/%{name}/share/config/images_colibre_svg.zip
 %{_datadir}/%{name}/share/config/images_elementary.zip
 %{_datadir}/%{name}/share/config/images_elementary_svg.zip
 %{_datadir}/%{name}/share/config/images_karasa_jaga.zip
+%{_datadir}/%{name}/share/config/images_karasa_jaga_svg.zip
 %{_datadir}/%{name}/share/config/images_sifr.zip
 %{_datadir}/%{name}/share/config/images_sifr_dark.zip
+%{_datadir}/%{name}/share/config/images_sifr_dark_svg.zip
 %{_datadir}/%{name}/share/config/images_sifr_svg.zip
 %{_datadir}/%{name}/share/config/images_tango.zip
 %dir %{_datadir}/%{name}/share/config/soffice.cfg
@@ -3997,20 +3963,8 @@ fi
 %if %{with kde5}
 %files libs-kde5
 %defattr(644,root,root,755)
-%attr(755,root,root) %{_libdir}/%{name}/program/libvclplug_kde5*.so
-%attr(755,root,root) %{_libdir}/%{name}/program/libkde5be1lo.so
-%endif
-
-%if %{with gtk} || %{with gtk3}
-%files libs-gtk-common
-%defattr(644,root,root,755)
-%{_datadir}/%{name}/share/registry/gnome.xcd
-%endif
-
-%if %{with gtk}
-%files libs-gtk2
-%defattr(644,root,root,755)
-%attr(755,root,root) %{_libdir}/%{name}/program/libvclplug_gtklo.so
+%attr(755,root,root) %{_libdir}/%{name}/program/libvclplug_kf5*.so
+%attr(755,root,root) %{_libdir}/%{name}/program/libkf5be1lo.so
 %endif
 
 %if %{with gtk3}
@@ -4018,7 +3972,7 @@ fi
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_libdir}/%{name}/program/liblibreofficekitgtk.so
 %attr(755,root,root) %{_libdir}/%{name}/program/libvclplug_gtk3lo.so
-%{_libdir}/girepository-1.0/LOKDocView-0.1.typelib
+%{_datadir}/%{name}/share/registry/gnome.xcd
 # devel stuff?
 #%{_datadir}/gir-1.0/LOKDocView-0.1.gir
 %endif
@@ -4045,6 +3999,7 @@ fi
 %attr(755,root,root) %{_libdir}/%{name}/program/librptlo.so
 %attr(755,root,root) %{_libdir}/%{name}/program/librptuilo.so
 %attr(755,root,root) %{_libdir}/%{name}/program/librptxmllo.so
+%{_libdir}/%{name}/program/access2base.py
 %{_datadir}/%{name}/share/config/soffice.cfg/modules/dbapp/menubar
 %{_datadir}/%{name}/share/config/soffice.cfg/modules/dbapp/popupmenu
 %{_datadir}/%{name}/share/config/soffice.cfg/modules/dbapp/statusbar
