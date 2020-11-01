@@ -138,7 +138,7 @@ BuildRequires:	gstreamer-devel >= 1.0
 BuildRequires:	gstreamer-plugins-base-devel >= 1.0
 %{?with_gtk3:BuildRequires:	gtk+3-devel}
 BuildRequires:	harfbuzz-icu-devel >= 0.9.42
-%{?with_system_hunspell:BuildRequires:	hunspell-devel >=1.2.2}
+%{?with_system_hunspell:BuildRequires:	hunspell-devel >= 1.2.2}
 BuildRequires:	hyphen-devel
 %{?with_icecream:BuildRequires:	icecream}
 BuildRequires:	icu
