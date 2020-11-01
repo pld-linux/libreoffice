@@ -12,31 +12,31 @@
 #		SRPMS		0.4 GB
 #
 # Conditional build:
-%bcond_without	java		# without Java support (disables help support)
-%bcond_without	kde5		# KDE5 L&F packages
-%bcond_without	gtk3		# GTK3 L&F
-%bcond_without	qt5		# QT5 L&F
-%bcond_with	mono		# enable compilation of mono bindings
-%bcond_without	mozilla		# without mozilla components
-%bcond_without	i18n		# do not create i18n packages (extra build time)
-%bcond_with	ccache		# use ccache to speed up builds
-%bcond_with	icecream	# use icecream to speed up builds
-%bcond_with	msaccess	# with ms access import pieces
-%bcond_without	parallelbuild	# use greater number of jobs to speed up build (default: 1)
-%bcond_with     tests
-%bcond_without	firebird	# without Firebird-SDBC driver
-%bcond_without	pgsql		# without PostgreSQL-SDBC driver
+%bcond_without	java			# Java support (required for help support)
+%bcond_without	kde5			# KDE5 L&F packages
+%bcond_without	gtk3			# GTK3 L&F
+%bcond_without	qt5			# QT5 L&F
+%bcond_with	mono			# C# bindings
+%bcond_without	mozilla			# Mozilla components (NPAPI plugin)
+%bcond_without	i18n			# i18n packages creation (extra build time)
+%bcond_with	ccache			# use ccache to speed up builds
+%bcond_with	icecream		# use icecream to speed up builds
+%bcond_with	msaccess		# with MS Access import pieces
+%bcond_without	parallelbuild		# use greater number of jobs to speed up build (default: 1)
+%bcond_with	tests			# testsuite execution
+%bcond_without	firebird		# Firebird-SDBC driver
+%bcond_without	pgsql			# PostgreSQL-SDBC driver
 
-%bcond_without	system_beanshell
-%bcond_without	system_db		# without system (i.e. with internal) Berkeley DB
-%bcond_with	system_coinmp		# use system CoinMP library (not in PLD yet)
-%bcond_with	system_libhnj		# with system ALTLinuxhyph (NFY)
-%bcond_without	system_mdbtools		# with system mdbtools
-%bcond_without	system_xalan
-%bcond_with	system_hsqldb
-%bcond_with	system_agg		# with system agg
-%bcond_without	system_hunspell
-%bcond_with	system_qrcodegen	# use system qrcodegen library (not in PLD yet)
+%bcond_without	system_beanshell	# system Java BeanShell library
+%bcond_without	system_db		# system Berkeley DB
+%bcond_with	system_coinmp		# system CoinMP library (not in PLD yet)
+%bcond_with	system_libhnj		# system ALTLinuxhyph (NFY)
+%bcond_without	system_mdbtools		# system mdbtools
+%bcond_without	system_xalan		# system Java XAlan library
+%bcond_with	system_hsqldb		# system Java HSQLDB library
+%bcond_with	system_agg		# system agg library
+%bcond_without	system_hunspell		# system hunspell library
+%bcond_with	system_qrcodegen	# system qrcodegen library (not in PLD yet)
 
 # this list is same as icedtea6
 %ifnarch i486 i586 i686 pentium3 pentium4 athlon %{x8664} aarch64
@@ -53,8 +53,8 @@
 %define		with_qt5	1
 %endif
 
-%define		major_ver		6.4.5
-%define		qt5_ver			5.6
+%define		major_ver	6.4.5
+%define		qt5_ver		5.6
 
 Summary:	LibreOffice - powerful office suite
 Summary(pl.UTF-8):	LibreOffice - potężny pakiet biurowy
@@ -193,7 +193,7 @@ BuildRequires:	libsvg-devel >= 0.1.4
 BuildRequires:	libxml2-devel >= 2.0
 BuildRequires:	libxslt-devel
 BuildRequires:	libxslt-progs
-%{?with_access:%{?with_system_mdbtools:BuildRequires:	mdbtools-devel >= 0.6}}
+%{?with_msaccess:%{?with_system_mdbtools:BuildRequires:	mdbtools-devel >= 0.6}}
 BuildRequires:	mdds-devel >= 1.5.0
 %{?with_mono:BuildRequires:	mono-csharp >= 1.2.3}
 %{?with_mono:BuildRequires:	mono-static >= 1.2.3}
@@ -3085,7 +3085,7 @@ export PATH=$PATH:%{_libdir}/interbase/bin
 	%{?with_system_libhnj:--with-system-altlinuxhyphen} \
 	%{?with_msaccess:--with%{!?with_system_mdbtools:out}-system-mdbtools} \
 	--enable-python=system \
-        --with-external-dict-dir=%{_datadir}/myspell \
+	--with-external-dict-dir=%{_datadir}/myspell \
 	--with-external-tar=$(pwd)/ext_sources \
 	--with-junit=%{_javadir}/junit.jar \
 	--enable-ext-nlpsolver \
