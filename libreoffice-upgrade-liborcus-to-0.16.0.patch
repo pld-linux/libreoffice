@@ -64,12 +64,12 @@ diff --git a/download.lst b/download.lst
 index 6398a09..1f3b4b1 100644
 --- a/download.lst
 +++ b/download.lst
-@@ -204,8 +204,8 @@ export OPENLDAP_SHA256SUM := cdd6cffdebcd95161a73305ec13fc7a78e9707b46ca9f84fb89
+@@ -196,8 +196,8 @@
  export OPENLDAP_TARBALL := openldap-2.4.45.tgz
  export OPENSSL_SHA256SUM := 14cb464efe7ac6b54799b34456bd69558a749a4931ecfd9cf9f71d7881cac7bc
  export OPENSSL_TARBALL := openssl-1.0.2t.tar.gz
--export ORCUS_SHA256SUM := cfb2aa60825f2a78589ed030c07f46a1ee16ef8a2d1bf2279192fbc1ae5a5f61
--export ORCUS_TARBALL := liborcus-0.15.4.tar.bz2
+-export ORCUS_SHA256SUM := 0dd26f3f2e611c51df9ee02d6dbf08887989eaa417b73f6877cd0d94df795fc2
+-export ORCUS_TARBALL := liborcus-0.15.3.tar.gz
 +export ORCUS_SHA256SUM := 854c6ec167ace59baa2984e175bac7b5b2af91bfde4bb10d2088b87a51ed76ec
 +export ORCUS_TARBALL := liborcus-0.16.0.tar.bz2
  export OWNCLOUD_ANDROID_LIB_SHA256SUM := b18b3e3ef7fae6a79b62f2bb43cc47a5346b6330f6a383dc4be34439aca5e9fb
@@ -481,7 +481,7 @@ diff --git a/external/liborcus/ExternalProject_liborcus.mk b/external/liborcus/E
 index 38658cc..3671294 100644
 --- a/external/liborcus/ExternalProject_liborcus.mk
 +++ b/external/liborcus/ExternalProject_liborcus.mk
-@@ -123,8 +123,8 @@ $(call gb_ExternalProject_get_state_target,liborcus,build) :
+@@ -122,8 +122,8 @@
  		   $(MAKE) \
  		$(if $(filter MACOSX,$(OS)),\
  			&& $(PERL) $(SRCDIR)/solenv/bin/macosx-change-install-names.pl shl OOO \
@@ -491,7 +491,7 @@ index 38658cc..3671294 100644
 +				$(EXTERNAL_WORKDIR)/src/parser/.libs/liborcus-parser-0.16.0.dylib \
  		) \
  	)
- 	$(call gb_Trace_EndRange,liborcus,EXTERNAL)
+ 
 diff --git a/external/liborcus/Library_orcus-parser.mk b/external/liborcus/Library_orcus-parser.mk
 index d3cbddb..4e46591 100644
 --- a/external/liborcus/Library_orcus-parser.mk
@@ -575,7 +575,7 @@ index b298c71..00aea67 100644
  };
  
  class ScOrcusRefResolver : public orcus::spreadsheet::iface::import_reference_resolver
-@@ -71,20 +76,28 @@ class ScOrcusRefResolver : public orcus::spreadsheet::iface::import_reference_re
+@@ -81,20 +81,28 @@
  public:
      ScOrcusRefResolver( const ScOrcusGlobalSettings& rGS );
  
@@ -589,7 +589,7 @@ index b298c71..00aea67 100644
  {
      ScDocumentImport& mrDoc;
      const ScOrcusGlobalSettings& mrGlobalSettings;
--    SCTAB mnTab; //< negative if global, else >= 0 for sheet-local named expressions.
+-    SCTAB const mnTab; //< negative if global, else >= 0 for sheet-local named expressions.
 +    ScAddress maBasePos;
 +    OUString maName;
 +    OUString maExpr;

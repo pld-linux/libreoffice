@@ -53,30 +53,29 @@
 %define		with_qt5	1
 %endif
 
-%define		major_ver	6.4.5
+%define		major_ver	6.4.7
 %define		qt5_ver		5.6
 
 Summary:	LibreOffice - powerful office suite
 Summary(pl.UTF-8):	LibreOffice - potężny pakiet biurowy
 Name:		libreoffice
 Version:	%{major_ver}.2
-Release:	3
+Release:	1
 License:	GPL/LGPL
 Group:		X11/Applications
 Source0:	http://download.documentfoundation.org/libreoffice/src/%{major_ver}/%{name}-%{version}.tar.xz
-# Source0-md5:	7305ed1b5774483ca9ca0d6906d8049a
+# Source0-md5:	123a79615835b84e63db0e73616de42d
 Source1:	http://download.documentfoundation.org/libreoffice/src/%{major_ver}/%{name}-dictionaries-%{version}.tar.xz
-# Source1-md5:	f4a3d9dcca02542ec149057d869c8c64
+# Source1-md5:	83110d0469eac3c6eb02706f9c971d89
 Source2:	http://download.documentfoundation.org/libreoffice/src/%{major_ver}/%{name}-help-%{version}.tar.xz
-# Source2-md5:	19da65b2748531e85740163fc9695f00
+# Source2-md5:	12d7df4d251c3a12cc328b7386b85883
 Source3:	http://download.documentfoundation.org/libreoffice/src/%{major_ver}/%{name}-translations-%{version}.tar.xz
-# Source3-md5:	58771e45d87413f96a33e35d821a8122
-
+# Source3-md5:	4c56cbcfea204bd0ee0ad4ddc37c0283
 
 # make (download|fetch) DO_FETCH_TARBALLS=1 WGET=wget
 # but not sure if all are needed?
-Source20:	http://dev-www.libreoffice.org/src/pdfium-3963.tar.bz2
-# Source20-md5:	7688ac08e1292cf7e0d027f506f45c49
+Source20:	http://dev-www.libreoffice.org/src/pdfium-4137.tar.bz2
+# Source20-md5:	f9524b0fa40702d2891d0f8ae612adbf
 Source21:	http://dev-www.libreoffice.org/src/17410483b5b5f267aa18b7e00b65e6e0-hsqldb_1_8_0.zip
 # Source21-md5:	17410483b5b5f267aa18b7e00b65e6e0
 Source22:	http://dev-www.libreoffice.org/src/CoinMP-1.7.6.tgz
@@ -99,6 +98,7 @@ Source30:	https://dev-www.libreoffice.org/extern/8249374c274932a21846fa7629c2aa9
 # Source30-md5:	8249374c274932a21846fa7629c2aa9b
 
 Patch0:		disable-failing-test.patch
+Patch1:		%{name}-upgrade-liborcus-to-0.16.0.patch
 
 URL:		http://www.documentfoundation.org/
 BuildRequires:	/usr/bin/getopt
@@ -2794,6 +2794,8 @@ oraz narzędzie ui-previewer do sprawdzania wyglądu okien dialogowych.
 %prep
 %setup -q -a1 -a2 -a3
 %patch0 -p1
+# enable to use ixion+liborcus 0.16.x
+#patch1 -p1
 
 for dir in *-%{version}; do
 	[ -f $dir/ChangeLog ] && %{__mv} $dir/ChangeLog ChangeLog-$dir
@@ -2937,6 +2939,9 @@ export ARCH_FLAGS="$SAFE_CFLAGS -fno-omit-frame-pointer -fno-strict-aliasing"
 export ARCH_FLAGS_CC="$SAFE_CFLAGS -fno-omit-frame-pointer -fno-strict-aliasing"
 export ARCH_FLAGS_CXX="$SAFE_CFLAGS -fno-omit-frame-pointer -fno-strict-aliasing -fpermissive -fvisibility-inlines-hidden"
 export ARCH_FLAGS_OPT="$SAFE_CFLAGS"
+
+# UTF-8 locale to ensure gettext stdin/stdout handling
+export LC_ALL=C.UTF-8
 
 %{__make} -j1 verbose=true build-nocheck
 
