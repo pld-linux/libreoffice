@@ -1744,7 +1744,7 @@ BuildArch:	noarch
 This package provides resources containing menus and dialogs in
 Kurdish language.
 
-%description i18n-km -l pl.UTF-8
+%description i18n-kmr-Latn -l pl.UTF-8
 Ten pakiet dostarcza zasoby zawierające menu i okna dialogowe w języku
 kurdyjskim.
 
