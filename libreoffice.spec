@@ -475,6 +475,7 @@ skryptów w Pythonie w wewnętrznym module skryptów LibreOffice.
 
 %package pdfimport
 Summary:	PDF Importer for LibreOffice Draw
+Summary(pl.UTF-8):	Import dokumentów PDF dla LibreOffice Draw
 Group:		X11/Applications
 Requires:	%{name}-draw = %{version}-%{release}
 
@@ -482,8 +483,13 @@ Requires:	%{name}-draw = %{version}-%{release}
 The PDF Importer imports PDF into drawing documents to preserve layout
 and enable basic editing of PDF documents.
 
+%description pdfimport -l pl.UTF-8
+PDF Importer importuje dokumenty PDF do dokumentów rysunkowych,
+zachowując ich układ i pozwalając na podstawową edycję.
+
 %package wiki-publisher
 Summary:	Create Wiki articles on MediaWiki servers with LibreOffice
+Summary(pl.UTF-8):	Tworzenie artykułów Wiki na serwerach MediaWiki przy użyciu LibreOffice'a
 Group:		X11/Applications
 Requires:	%{name}-writer = %{version}-%{release}
 Requires:	java-commons-codec
@@ -496,7 +502,13 @@ Requires:	java-commons-logging
 The Wiki Publisher enables you to create Wiki articles on MediaWiki
 servers without having to know the syntax of the MediaWiki markup
 language. Publish your new and existing documents transparently with
-writer to a wiki page.
+Writer to a wiki page.
+
+%description wiki-publisher -l pl.UTF-8
+Wiki Publisher pozwala na tworzenie artykułów Wiki na serwerach
+MediaWiki bez potrzeby znajomości składni języka znaczników MediaWiki.
+Umożliwia publikowanie nowych i istniejących dokumentów na stronie
+wiki z poziomu Writera.
 
 %package base
 Summary:	Database frontend for LibreOffice
@@ -661,6 +673,7 @@ docbooka.
 
 %package postgresql
 Summary:	PostgreSQL connector for LibreOffice
+Summary(pl.UTF-8):	Łącznik z PostgreSQL dla LibreOffice
 Group:		X11/Applications
 Requires:	%{name}-core = %{version}-%{release}
 Requires:	postgresql-libs
@@ -669,8 +682,14 @@ Requires:	postgresql-libs
 A PostgreSQL connector for the database front-end for LibreOffice.
 Allows creation and management of PostgreSQL databases through a GUI.
 
+%description postgresql -l pl.UTF-8
+Łącznik z PostgreSQL dla frontendu bazodanowego LibreOffice. Pozwala
+na tworzenie i zarządzanie bazami danych PostgreSQL poprzez graficzny
+interfejs użytkownika.
+
 %package nlpsolver
 Summary:	Non-linear solver engine for LibreOffice Calc
+Summary(pl.UTF-8):	Silnik rozwiązywania problemów nieliniowych dla LibreOffice Calca
 Group:		X11/Applications
 Requires:	%{name}-calc = %{version}-%{release}
 Requires:	%{name}-core = %{version}-%{release}
@@ -682,9 +701,15 @@ A non-linear solver engine for Calc as an alternative to the default
 linear programming model when more complex, nonlinear programming is
 required.
 
+%description nlpsolver -l pl.UTF-8
+Silnik rozwiązywania problemów nieliniowych dla Calca, będący
+alternatywą dla domyślnego modelu programowania liniowego, kiedy
+wymagane jest bardziej złożone, nieliniowe programowanie.
+
 # FIXME
 %package ure
 Summary:	UNO Runtime Environment
+Summary(pl.UTF-8):	Środowisko uruchomieniowe UNO
 Group:		Libraries
 Obsoletes:	openoffice.org-ure
 
@@ -696,6 +721,15 @@ Intranet as well as in the Internet. UNO components may be implemented
 in and accessed from any programming language for which a UNO
 implementation (AKA language binding) and an appropriate bridge or
 adapter exists.
+
+%description ure -l pl.UTF-8
+UNO to model komponentów LibreOffice. Oferuje współpracę między
+językami programowania, innymi modelami komponentów i architekturami
+sprzętowymi - zarówno w ramach procesu, jak i między procesami, w
+intranecie, jak i w Internecie. Komponenty UNO mogą być implementowane
+i wykorzystywane z dowolnego języka, dla którego istnieje
+implementacja UNO (wiązanie języka) oraz istnieje odpowiedni pomost
+lub adapter.
 
 %package -n browser-plugin-%{name}
 Summary:	LibreOffice plugin for WWW browsers
@@ -2743,6 +2777,7 @@ bashowe uzupełnianie nazw dla LibreOffice.
 
 %package glade
 Summary:	Support for creating LibreOffice dialogs in glade
+Summary(pl.UTF-8):	Obsługa tworzenia okien dialogowych LibreOffice w glade
 Group:		Development/Libraries
 Requires:	%{name}-core = %{version}-%{release}
 Requires:	libgladeui
@@ -2751,6 +2786,10 @@ Requires:	libgladeui
 libreoffice-glade contains a catalog of LibreOffice-specific widgets
 for glade and ui-previewer tool to check the visual appearance of
 dialogs.
+
+%description glade -l pl.UTF-8
+Ten pakiet zawiera zbiór widżetów glade specyficznych dla LibreOffice
+oraz narzędzie ui-previewer do sprawdzania wyglądu okien dialogowych.
 
 %prep
 %setup -q -a1 -a2 -a3
