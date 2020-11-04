@@ -1,7 +1,6 @@
 # TODO:
 # - fix configure arguments (+ compare with FC)
 # - create CoinMP library package for PLD (https://projects.coin-or.org/CoinMP)
-# - new language packs: ca@valencia, kmr@latin, sr@latin, szl
 # - create qrcodegen library package for PLD
 #
 # NOTE - FIXME FOR 3.4.3 !!!:
@@ -2446,6 +2445,21 @@ Swahili language for Tanzania.
 Ten pakiet dostarcza zasoby zawierające menu i okna dialogowe w języku
 suahili dla Tanzanii.
 
+%package i18n-szl
+Summary:	LibreOffice - interface in Silesian language
+Summary(pl.UTF-8):	LibreOffice - interfejs w języku śląskim
+Group:		I18n
+Requires:	%{name}-core = %{version}-%{release}
+%{?noarchpackage}
+
+%description i18n-szl
+This package provides resources containing menus and dialogs in
+Silesian language.
+
+%description i18n-szl -l pl.UTF-8
+Ten pakiet dostarcza zasoby zawierające menu i okna dialogowe w języku
+śląskim.
+
 %package i18n-ta
 Summary:	LibreOffice - interface in Tamil language
 Summary(pl.UTF-8):	LibreOffice - interfejs w języku tamiskim
@@ -3028,81 +3042,44 @@ fi
 find_lang() {
 	local lang=$(echo $1 | sed -e 's/_/-/')
 	local langfn="$1"
+	local langtag=$(echo $1 | sed -e 's/ca_valencia/ca@valencia/;s/_Latn/@latin/')
 	echo "%%defattr(644,root,root,755)" > ${langfn}.lang
 
-	# help files
+	# help files # FIXME: local help is not enabled by default now
 	if [ -f file-lists/help_${langfn}_list.txt ]; then
 		cat file-lists/help_${langfn}_list.txt >> ${langfn}.lang
 	fi
 
 	lfile="file-lists/lang_${langfn}_list.txt"
 	if [ -f ${lfile} ]; then
-		lprefix=$(bin/openoffice-xlate-lang -p ${lang} 2>/dev/null || :)
-		longlang=$(bin/openoffice-xlate-lang -l ${lang} 2>/dev/null || :)
-		# share/*/${longlang}
-		if [ "x${longlang}" != "x" ] ; then
-			grep "^%%dir.*/${longlang}/\$" ${lfile} > tmp.lang || :
-		fi
-		# share/registry/res/${lang} (but en-US for en)
-		grep "^%%dir.*/res/${lang}[^/]*/\$" ${lfile} >> tmp.lang || :
-		# ... translate %dir into whole tree, handle special wordbook/english case
-		sed -e 's,^%%dir ,,;s,\(wordbook/english/\)$,\1soffice.dic,;s,/$,,' tmp.lang >> ${langfn}.lang || :
-		# share/autocorr/acor${somecodes}.dat (if exist)
-		grep '/autocorr/acor.*dat$' ${lfile} >> ${langfn}.lang || :
-		# user/config/* (if exist, without parent directory)
-		grep '/user/config/..*' ${lfile} >> ${langfn}.lang || :
-		grep "/licenses/LICENSE_${lang}" ${lfile} >> ${langfn}.lang || :
+		# share/autocorr/acor_${somecodes}.dat (if exist)  # FIXME: it's in common_list.txt now
+		grep "/autocorr/acor_.*${lang}.dat$" ${lfile} >> ${langfn}.lang || :
 		grep "/readmes/README_${lang}" ${lfile} >> ${langfn}.lang || :
-		grep "share/readme/LICENSE_${lang}" ${lfile} >> ${langfn}.lang || :
-		grep "share/readme/README_${lang}" ${lfile} >> ${langfn}.lang || :
-		# lib/openoffice.org/presers/config/*.so[cdegh]
-		grep "/presets/config/.*_${lang}\.so[cdegh]$" ${lfile} >> ${langfn}.lang || :
-		if [ "x${lprefix}" != "x" ] ; then
-			grep "/presets/config/${lprefix}.*\.so[cdegh]$" ${lfile} >> ${langfn}.lang || :
-		fi
-		# lib/openoffice.org/program/resource/*.res
-		grep "/program/resource/.*${lang}.res$" ${lfile} >> ${langfn}.lang || :
-		# lib/openoffice.org/share/autocorr/*.dat
-		grep "/share/autocorr/.*${lang}.dat$" ${lfile} >> ${langfn}.lang || :
+		## lib/openoffice.org/program/resource/*.res
+		#grep "/program/resource/.*${lang}.res$" ${lfile} >> ${langfn}.lang || :
 		grep -i "/share/autocorr/.*${lang}-${lang}.dat$" ${lfile} >> ${langfn}.lang || :
 		# lib/openoffice.org/share/autotext/$lang
 		grep "/share/autotext/${lang}$" ${lfile} >> ${langfn}.lang || :
 		grep "/share/autotext/${lang}/" ${lfile} >> ${langfn}.lang || :
 		# %{_datadir}/%{name}/share/registry/.*[_-]$lang.xcd
+		# %{_datadir}/%{name}/share/registry/res/.*[_-]$lang.xcd
 		grep "/share/registry/.*[_-]${lang}.xcd$" ${lfile} >> ${langfn}.lang || :
-		# %{_datadir}/%{name}/share/template/$lang
-		grep "/share/template/${lang}$" ${lfile} >> ${langfn}.lang || :
-		grep "/share/template/${lang}/" ${lfile} >> ${langfn}.lang || :
-		# %{_datadir}/%{name}/share/template/wizard/letter/lang
-		grep "/share/template/wizard/letter/${lang}$" ${lfile} >> ${langfn}.lang || :
-		grep "/share/template/wizard/letter/${lang}$" file-lists/common_list.txt >> ${langfn}.lang || :
-		grep "/share/template/wizard/letter/${lang}/" ${lfile} >> ${langfn}.lang || :
-		grep "/share/template/wizard/letter/${lang}/" file-lists/common_list.txt >> ${langfn}.lang || :
-		# %{_datadir}/%{name}/share/wordbook/$lang
-		grep "/share/wordbook/${lang}$" ${lfile} >> ${langfn}.lang || :
-		grep "/share/wordbook/${lang}/" ${lfile} >> ${langfn}.lang || :
-		# %{_datadir}/%{name}/share/samples/$lang
-		grep "/share/samples/${lang}$" ${lfile} >> ${langfn}.lang || :
-		grep "/share/samples/${lang}/" ${lfile} >> ${langfn}.lang || :
-		# %{_libdir}/%{name}/help/$lang
+		# %{_libdir}/%{name}/help/$lang # FIXME: no help in default build
 		grep "/help/${lang}$" ${lfile} >> ${langfn}.lang || :
 		grep "/help/${lang}/" ${lfile} >> ${langfn}.lang || :
-		# UI translations
-		grep "/soffice.cfg/[^/]*/ui/res/${lang}.zip" ${lfile} >> ${langfn}.lang || :
-		grep "/soffice.cfg/modules/[^/]*/ui/res/${lang}.zip" ${lfile} >> ${langfn}.lang || :
 		# Translations
-		if [ -d "$RPM_BUILD_ROOT%{_datadir}/%{name}/program/resource/${langfn}" ]; then
-			echo "%lang(${langfn}) %{_datadir}/%{name}/program/resource/${langfn}" >> ${langfn}.lang
+		if [ -d "$RPM_BUILD_ROOT%{_datadir}/%{name}/program/resource/${langtag}" ]; then
+			echo "%lang(${langtag}) %{_datadir}/%{name}/program/resource/${langtag}" >> ${langfn}.lang
 		fi
 		if [ -f "$RPM_BUILD_ROOT%{_datadir}/%{name}/share/wizards/resources_${langfn}.properties" ]; then
-			echo "%lang(${langfn}) %{_datadir}/%{name}/share/wizards/resources_${langfn}.properties" >> ${langfn}.lang
+			echo "%lang(${langtag}) %{_datadir}/%{name}/share/wizards/resources_${langfn}.properties" >> ${langfn}.lang
 		fi
 
 		for e in wiki-publisher nlpsolver ; do
 			for f in $RPM_BUILD_ROOT%{_datadir}/%{name}/share/extensions/$e/description-${lang}.txt \
 					$RPM_BUILD_ROOT%{_datadir}/%{name}/share/extensions/$e/locale/*_${langfn}.properties \
 					$RPM_BUILD_ROOT%{_datadir}/%{name}/share/extensions/$e/help/${lang} ; do
-				[ -e $f ] && echo "%lang(${langfn}) $f" | sed -e "s|$RPM_BUILD_ROOT||g" >> $e.lang || :
+				[ -e $f ] && echo "%lang(${langtag}) $f" | sed -e "s|$RPM_BUILD_ROOT||g" >> $e.lang || :
 			done
 		done
 	fi
@@ -4423,6 +4400,9 @@ fi
 %defattr(644,root,root,755)
 
 %files i18n-sw_TZ -f sw_TZ.lang
+%defattr(644,root,root,755)
+
+%files i18n-szl -f szl.lang
 %defattr(644,root,root,755)
 
 %files i18n-ta -f ta.lang
