@@ -162,7 +162,7 @@ BuildRequires:	libmspub-devel
 BuildRequires:	libmwaw-devel >= 0.3.0
 BuildRequires:	libnumbertext-devel >= 1.0.0
 BuildRequires:	libodfgen-devel >= 0.1.1
-BuildRequires:	liborcus-devel >= 0.15.0
+BuildRequires:	liborcus-devel >= 0.16.0
 BuildRequires:	libpagemaker-devel >= 0.0.2
 BuildRequires:	libstaroffice-devel
 BuildRequires:	libvisio-devel
@@ -2808,8 +2808,7 @@ oraz narzędzie ui-previewer do sprawdzania wyglądu okien dialogowych.
 %prep
 %setup -q -a1 -a2 -a3
 %patch0 -p1
-# enable to use ixion+liborcus 0.16.x
-#patch1 -p1
+%patch1 -p1
 
 for dir in *-%{version}; do
 	[ -f $dir/ChangeLog ] && %{__mv} $dir/ChangeLog ChangeLog-$dir
