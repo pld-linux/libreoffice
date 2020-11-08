@@ -1,7 +1,13 @@
 # TODO:
+# - -core/-ure dependency loop
 # - fix configure arguments (+ compare with FC)
 # - create CoinMP library package for PLD (https://projects.coin-or.org/CoinMP)
 # - create qrcodegen library package for PLD
+# - --enable-avahi for Impress remote control? (BR: avahi-devel >= 0.6.10)
+# - --enable-eot? (BR: libeot-devel >= 0.01)
+# - --enable-introspection? (BR: gobject-introspection-devel >= 1.32.0)
+# - --with-system-rhino?
+# - --with-system-ucpp?
 #
 # NOTE - FIXME FOR 3.4.3 !!!:
 #	- normal build (i686) requires about 27 GB of disk space:
@@ -15,26 +21,22 @@
 %bcond_without	kde5			# KDE5 L&F packages
 %bcond_without	gtk3			# GTK3 L&F
 %bcond_without	qt5			# QT5 L&F
-%bcond_with	mono			# C# bindings
+%bcond_with	mono			# C# bindings (mono not supported as of 6.4.x)
 %bcond_without	mozilla			# Mozilla components (NPAPI plugin)
 %bcond_without	i18n			# i18n packages creation (extra build time)
 %bcond_with	ccache			# use ccache to speed up builds
 %bcond_with	icecream		# use icecream to speed up builds
-%bcond_with	msaccess		# with MS Access import pieces
 %bcond_without	parallelbuild		# use greater number of jobs to speed up build (default: 1)
 %bcond_with	tests			# testsuite execution
 %bcond_without	firebird		# Firebird-SDBC driver
 %bcond_without	pgsql			# PostgreSQL-SDBC driver
 
+%bcond_with	system_agg		# system agg library (not supported as of 6.4.x, pdfium uses included version)
 %bcond_without	system_beanshell	# system Java BeanShell library
-%bcond_without	system_db		# system Berkeley DB
 %bcond_with	system_coinmp		# system CoinMP library (not in PLD yet)
-%bcond_with	system_libhnj		# system ALTLinuxhyph (NFY)
-%bcond_without	system_mdbtools		# system mdbtools
-%bcond_without	system_xalan		# system Java XAlan library
 %bcond_with	system_hsqldb		# system Java HSQLDB library
-%bcond_with	system_agg		# system agg library
 %bcond_without	system_hunspell		# system hunspell library
+%bcond_without	system_hyphen		# system ALTLinuxhyph
 %bcond_with	system_qrcodegen	# system qrcodegen library (not in PLD yet)
 
 # this list is same as icedtea6
@@ -44,7 +46,6 @@
 
 %if %{without java}
 %undefine	with_system_beanshell
-%undefine	with_system_xalan
 %undefine	with_system_hsqldb
 %endif
 
@@ -102,115 +103,116 @@ Patch1:		%{name}-upgrade-liborcus-to-0.16.0.patch
 URL:		http://www.documentfoundation.org/
 BuildRequires:	/usr/bin/getopt
 %{?with_firebird:BuildRequires:	Firebird-devel >= 3.0.0.0}
-BuildRequires:	GConf2-devel
 BuildRequires:	GLM
 BuildRequires:	ImageMagick
-BuildRequires:	OpenGL-GLU-devel
 BuildRequires:	OpenGL-devel
-%{?with_system_agg:BuildRequires:	agg-devel}
+%{?with_system_agg:BuildRequires:	agg-devel >= 2.3}
 BuildRequires:	atk-devel >= 1:1.9.0
-BuildRequires:	autoconf >= 2.51
+BuildRequires:	autoconf >= 2.68
 BuildRequires:	automake >= 1:1.9
 BuildRequires:	bash
-BuildRequires:	bison >= 1.875-4
+BuildRequires:	bison >= 2.0
 BuildRequires:	bluez-libs-devel
-BuildRequires:	boost-devel >= 1.35.0
-BuildRequires:	cairo-devel >= 1.2.0
+BuildRequires:	boost-devel >= 1.47
+BuildRequires:	cairo-devel >= 1.8.0
 %{?with_ccache:BuildRequires:	ccache}
 BuildRequires:	clucene-core-devel >= 2.3
 %{?with_system_coinmp:BuildRequires:	coinmp-devel}
-BuildRequires:	cppunit-devel >= 1.12.0
+BuildRequires:	cppunit-devel >= 1.14.0
 BuildRequires:	cups-devel
-BuildRequires:	curl-devel >= 7.9.8
-%{?with_system_db:BuildRequires:	db-devel}
-BuildRequires:	dbus-glib-devel >= 0.70
-BuildRequires:	flex
-BuildRequires:	fontconfig-devel >= 1.0.1
-BuildRequires:	freetype-devel >= 2.1
+BuildRequires:	curl-devel >= 7.19.4
+BuildRequires:	dconf-devel >= 0.15.2
+BuildRequires:	dbus-devel >= 0.60
+BuildRequires:	expat-devel
+BuildRequires:	flex >= 2.6.0
+BuildRequires:	fontconfig-devel >= 2.4.1
+# pkgconfig(freetype2) >= 9.9.3
+BuildRequires:	freetype-devel >= 1:2.2.0
 BuildRequires:	gdb
-BuildRequires:	glew-devel >= 1.10.0
-BuildRequires:	glib2-devel >= 2.13.5
+BuildRequires:	gettext-tools
+BuildRequires:	glib2-devel >= 1:2.38
 BuildRequires:	gperf
 BuildRequires:	gpgme-c++-devel
 BuildRequires:	graphite2-devel >= 0.9.3
 BuildRequires:	gstreamer-devel >= 1.0
 BuildRequires:	gstreamer-plugins-base-devel >= 1.0
-%{?with_gtk3:BuildRequires:	gtk+3-devel}
+%{?with_gtk3:BuildRequires:	gtk+3-devel >= 3.18}
 BuildRequires:	harfbuzz-icu-devel >= 0.9.42
 %{?with_system_hunspell:BuildRequires:	hunspell-devel >= 1.2.2}
-BuildRequires:	hyphen-devel
+%{?with_system_hyphen:BuildRequires:	hyphen-devel}
 %{?with_icecream:BuildRequires:	icecream}
 BuildRequires:	icu
 %{?with_system_beanshell:BuildRequires:	java-beanshell}
-BuildRequires:	java-commons-codec
-BuildRequires:	java-commons-httpclient
-BuildRequires:	java-commons-lang
-BuildRequires:	java-commons-logging
-BuildRequires:	java-flow-engine
+BuildRequires:	java-commons-logging >= 1.2
+BuildRequires:	java-flow-engine >= 0.9.2
+BuildRequires:	java-flute >= 1.3.0
 BuildRequires:	java-hamcrest
-%{?with_system_hsqldb:BuildRequires:	java-hsqldb}
-BuildRequires:	java-junit
-BuildRequires:	java-lucene
-BuildRequires:	java-lucene-contrib
-BuildRequires:	java-servletapi
+%{?with_system_hsqldb:BuildRequires:	java-hsqldb >= 1.8.0.9}
+%{?with_system_hsqldb:BuildRequires:	java-hsqldb < 1.8.1}
+BuildRequires:	java-junit >= 4
+BuildRequires:	java-libbase >= 1.0.0
+BuildRequires:	java-libfonts >= 1.0.0
+BuildRequires:	java-libformula >= 0.2.0
+BuildRequires:	java-liblayout >= 0.2.9
+BuildRequires:	java-libloader >= 1.0.0
+BuildRequires:	java-librepository >= 1.0.0
+BuildRequires:	java-libserializer >= 1.0.0
+BuildRequires:	java-libxml >= 1.0.0
+BuildRequires:	java-sac
+BuildRequires:	lcms2-devel >= 2
 BuildRequires:	libabw-devel >= 0.1.0
-BuildRequires:	libe-book-devel >= 0.0.2
+BuildRequires:	libcdr-devel >= 0.1
+BuildRequires:	libcmis-devel >= 0.5.2
+BuildRequires:	libe-book-devel >= 0.1
+BuildRequires:	libepoxy-devel >= 1.2
+BuildRequires:	libepubgen-devel >= 0.1.0
 BuildRequires:	libetonyek-devel >= 0.1.4
+BuildRequires:	libexttextcat-devel >= 3.4.1
 BuildRequires:	libfreehand-devel >= 0.1.0
-BuildRequires:	liblangtag-devel
-BuildRequires:	libmspub-devel
-BuildRequires:	libmwaw-devel >= 0.3.0
+BuildRequires:	libicu-devel >= 4.6
+BuildRequires:	libjpeg-devel
+BuildRequires:	liblangtag-devel >= 0.4.0
+BuildRequires:	libmspub-devel >= 0.1
+BuildRequires:	libmwaw-devel >= 0.3.1
 BuildRequires:	libnumbertext-devel >= 1.0.0
 BuildRequires:	libodfgen-devel >= 0.1.1
 BuildRequires:	liborcus-devel >= 0.16.0
 BuildRequires:	libpagemaker-devel >= 0.0.2
+BuildRequires:	libqxp-devel
+BuildRequires:	libraptor2-devel >= 2.0.7
+BuildRequires:	librevenge-devel >= 0.0.1
+BuildRequires:	librsvg-devel >= 2.14
 BuildRequires:	libstaroffice-devel
-BuildRequires:	libvisio-devel
+BuildRequires:	libstdc++-devel >= 6:7
+# for uuidgen
+BuildRequires:	libuuid
+BuildRequires:	libvisio-devel >= 0.1
 BuildRequires:	libwpd-devel >= 0.10.0
 BuildRequires:	libwpg-devel >= 0.3.0
-BuildRequires:	libwps-devel >= 0.3.0
-BuildRequires:	libzmf-devel
-BuildRequires:	lp_solve-devel
-BuildRequires:	java-libxml
-BuildRequires:	java-sac
-%{?with_system_xalan:BuildRequires:	java-xalan}
-BuildRequires:	libart_lgpl-devel
-BuildRequires:	libcdr-devel >= 0.0.8
-BuildRequires:	libcmis-devel >= 0.5
-BuildRequires:	libepubgen-devel >= 0.1.0
-BuildRequires:	libexttextcat-devel >= 3.4.1
-BuildRequires:	libgltf-devel < 0.2.0
-BuildRequires:	libgltf-devel >= 0.1.0
-%{?with_system_libhnj:BuildRequires:	libhnj-devel}
-BuildRequires:	libicu-devel >= 4.0
-BuildRequires:	libjpeg-devel
-BuildRequires:	libqxp-devel
-BuildRequires:	librsvg-devel >= 2.14
-BuildRequires:	libsndfile-devel
-BuildRequires:	libstdc++-devel >= 5:3.2.1
-BuildRequires:	libsvg-devel >= 0.1.4
+BuildRequires:	libwps-devel >= 0.4.10
 BuildRequires:	libxml2-devel >= 2.0
 BuildRequires:	libxslt-devel
 BuildRequires:	libxslt-progs
-%{?with_msaccess:%{?with_system_mdbtools:BuildRequires:	mdbtools-devel >= 0.6}}
+BuildRequires:	libzmf-devel
+BuildRequires:	lp_solve-devel >= 5.5
+BuildRequires:	make >= 3.82
 BuildRequires:	mdds-devel >= 1.5.0
 %{?with_mono:BuildRequires:	mono-csharp >= 1.2.3}
 %{?with_mono:BuildRequires:	mono-static >= 1.2.3}
-BuildRequires:	mysql-devel
-BuildRequires:	mythes-devel
-BuildRequires:	nas-devel >= 1.7-1
-BuildRequires:	neon-devel
-BuildRequires:	nspr-devel >= 1:4.6-0.20041030.3
+BuildRequires:	mysql-devel >= 5
+BuildRequires:	mythes-devel >= 1.2
+BuildRequires:	neon-devel >= 1.26.0
+BuildRequires:	nspr-devel >= 1:4.8
 BuildRequires:	nss-devel >= 1:3.10
 BuildRequires:	openldap-devel
-BuildRequires:	pam-devel
+BuildRequires:	openssl-devel
 BuildRequires:	pango-devel >= 1:1.17.3
 BuildRequires:	perl-Archive-Zip
-BuildRequires:	perl-base
-BuildRequires:	perl-devel
+BuildRequires:	perl-base >= 5
+BuildRequires:	perl-devel >= 5
 BuildRequires:	pkgconfig
-BuildRequires:	poppler-cpp-devel >= 0.8.0
-BuildRequires:	poppler-devel >= 0.8.0
+BuildRequires:	poppler-cpp-devel >= 0.12.0
+BuildRequires:	poppler-devel >= 0.12.0
 %{?with_pgsql:BuildRequires:	postgresql-devel}
 BuildRequires:	python3 >= 1:3.3
 BuildRequires:	python3-devel >= 1:3.3
@@ -219,33 +221,35 @@ BuildRequires:	python3-modules >= 1:3.3
 BuildRequires:	redland-devel >= 1.0.16
 BuildRequires:	rpm-pythonprov
 BuildRequires:	rpmbuild(macros) >= 1.752
-BuildRequires:	sablotron-devel
 BuildRequires:	sane-backends-devel
-BuildRequires:	saxon
 BuildRequires:	sed >= 4.0
 BuildRequires:	startup-notification-devel >= 0.5
+BuildRequires:	systemtap-sdt-devel
 BuildRequires:	unixODBC-devel >= 2.2.12-2
 BuildRequires:	unzip
 BuildRequires:	xmlsec1-nss-devel >= 1.2.28
 BuildRequires:	xorg-font-font-adobe-utopia-type1
+BuildRequires:	xorg-lib-libICE-devel
+BuildRequires:	xorg-lib-libSM-devel
 BuildRequires:	xorg-lib-libX11-devel
-BuildRequires:	xorg-lib-libXaw-devel
-BuildRequires:	xorg-lib-libXtst-devel
+BuildRequires:	xorg-lib-libXext-devel
+BuildRequires:	xorg-lib-libXinerama-devel
+BuildRequires:	xorg-lib-libXrandr-devel >= 1.2
+BuildRequires:	xorg-lib-libXrender-devel
 BuildRequires:	zip >= 3.0
 BuildRequires:	zlib-devel
 %if %{with java}
 BuildRequires:	ant >= 1.7.0
 BuildRequires:	ant-apache-regexp
-BuildRequires:	jdk >= 1.4.0_00
-BuildRequires:	jre-X11
+BuildRequires:	jdk >= 1.8
+BuildRequires:	jre-X11 >= 1.8
 %endif
 %if %{with kde5}
-BuildRequires:	kf5-kconfig-devel
-BuildRequires:	kf5-kcoreaddons-devel
-BuildRequires:	kf5-ki18n-devel
-BuildRequires:	kf5-kio-devel
-BuildRequires:	kf5-kwindowsystem-devel
-BuildRequires:	libxcb-devel
+BuildRequires:	kf5-kconfig-devel >= 5.0
+BuildRequires:	kf5-kcoreaddons-devel >= 5.0
+BuildRequires:	kf5-ki18n-devel >= 5.0
+BuildRequires:	kf5-kio-devel >= 5.0
+BuildRequires:	kf5-kwindowsystem-devel >= 5.0
 %endif
 %if %{with qt5}
 BuildRequires:	Qt5Core-devel >= %{qt5_ver}
@@ -253,8 +257,10 @@ BuildRequires:	Qt5Gui-devel >= %{qt5_ver}
 BuildRequires:	Qt5Network-devel >= %{qt5_ver}
 BuildRequires:	Qt5Widgets-devel >= %{qt5_ver}
 BuildRequires:	Qt5X11Extras-devel >= %{qt5_ver}
+BuildRequires:	libxcb-devel
 BuildRequires:	qt5-build >= %{qt5_ver}
 BuildRequires:	qt5-qmake >= %{qt5_ver}
+BuildRequires:	xcb-util-wm-devel
 %endif
 # contains (dlopened) *.so libs
 BuildConflicts:	java-gcj-compat
@@ -302,7 +308,6 @@ component APIs.
 
 Features of LibreOffice include:
  - Downloadable source code,
- - CVS control, and
  - Infrastructure for community involvement, including guidelines and
    discussion groups.
 
@@ -316,7 +321,6 @@ generacji, wykorzystując open-source'owe metody pracy.
 
 Do zalet LibreOffice można zaliczyć:
  - dostępny cały czas kod źródłowy,
- - kontrola CVS,
  - infrastruktura służąca do komunikowania się w ramach projektu.
 
 %package libs-kde5
@@ -338,6 +342,8 @@ Summary:	LibreOffice GTK+ 3 Interface
 Summary(pl.UTF-8):	Interfejs GTK+ 3 dla LibreOffice
 Group:		X11/Libraries
 Requires:	%{name}-core = %{version}-%{release}
+Requires:	glib2 >= 1:2.38
+Requires:	gtk+3 >= 3.18
 Obsoletes:	libreoffice-libs-gtk-common < 6.4.5.2-1
 Obsoletes:	libreoffice-libs-gtk2 < 6.4.5.2-1
 
@@ -352,6 +358,11 @@ Summary:	LibreOffice Qt5 Interface
 Summary(pl.UTF-8):	Interfejs Qt5 dla LibreOffice
 Group:		X11/Libraries
 Requires:	%{name}-core = %{version}-%{release}
+Requires:	Qt5Core >= %{qt5_ver}
+Requires:	Qt5Gui >= %{qt5_ver}
+Requires:	Qt5Network >= %{qt5_ver}
+Requires:	Qt5Widgets >= %{qt5_ver}
+Requires:	Qt5X11Extras >= %{qt5_ver}
 
 %description libs-qt5
 LibreOffice productivity suite - Qt5 Interface.
@@ -367,17 +378,37 @@ Requires(post,postun):	desktop-file-utils
 Requires(post,postun):	gtk-update-icon-cache
 Requires(post,postun):	shared-mime-info
 Requires:	%{name}-ure = %{version}-%{release}
-# libcups.so.2 is dlopened (in cupsmgr.cxx); maybe Suggests instead?
-Requires:	cups-lib
+%{?with_firebird:Requires:	Firebird-lib >= 3.0.0.0}
+Requires:	cairo >= 1.8.0
+Requires:	clucene-core >= 2.3
+Requires:	curl-libs >= 7.19.4
+Requires:	dconf >= 0.15.2
+Requires:	fontconfig >= 2.4.1
 Requires:	fonts-TTF-OpenSymbol
+Requires:	freetype >= 1:2.2.0
+Requires:	glib2 >= 1:2.38
+Requires:	graphite2 >= 0.9.3
+Requires:	harfbuzz-icu >= 0.9.42
 Requires:	hicolor-icon-theme
 %{?with_system_beanshell:Requires: java-beanshell}
 %{?with_system_hsqldb:Requires: java-hsqldb}
-Requires:	libstdc++ >= 5:3.2.1
+Requires:	libcmis >= 0.5.2
+Requires:	libepoxy >= 1.2
+Requires:	libexttextcat >= 3.4.1
+Requires:	liblangtag >= 0.4.0
+Requires:	libmwaw >= 0.3.1
+Requires:	libodfgen >= 0.1.1
+Requires:	libpagemaker >= 0.0.2
+Requires:	libraptor2 >= 2.0.7
+Requires:	librevenge >= 0.0.1
 Requires:	mktemp
-Requires:	saxon
+Requires:	neon >= 1.26.0
+Requires:	nspr >= 1:4.8
+Requires:	nss >= 1:3.10
+Requires:	redland >= 1.0.16
 Requires:	sed
-%{?with_system_xalan:Requires: xalan-j}
+Requires:	xmlsec1-nss >= 1.2.28
+Requires:	xorg-lib-libXrandr >= 1.2
 #Suggests: chkfontpath
 Obsoletes:	libreoffice-binfilter < 4.0.0.0
 Obsoletes:	libreoffice-i18n-kid
@@ -491,10 +522,7 @@ Summary:	Create Wiki articles on MediaWiki servers with LibreOffice
 Summary(pl.UTF-8):	Tworzenie artykułów Wiki na serwerach MediaWiki przy użyciu LibreOffice'a
 Group:		X11/Applications
 Requires:	%{name}-writer = %{version}-%{release}
-Requires:	java-commons-codec
-Requires:	java-commons-httpclient
-Requires:	java-commons-lang
-Requires:	java-commons-logging
+Requires:	java-commons-logging >= 1.2
 %{?noarchpackage}
 
 %description wiki-publisher
@@ -550,6 +578,7 @@ Requires(post,postun):	desktop-file-utils
 Requires(post,postun):	gtk-update-icon-cache
 Requires:	%{name}-core = %{version}-%{release}
 Requires:	hicolor-icon-theme
+Requires:	libwps >= 0.4.10
 Obsoletes:	openoffice.org-writer
 
 %description writer
@@ -581,6 +610,9 @@ Requires(post,postun):	desktop-file-utils
 Requires(post,postun):	gtk-update-icon-cache
 Requires:	%{name}-core = %{version}-%{release}
 Requires:	hicolor-icon-theme
+Requires:	libetonyek >= 0.1.4
+Requires:	libwps >= 0.4.10
+Requires:	lp_solve >= 5.5
 Obsoletes:	openoffice.org-calc
 
 %description calc
@@ -613,6 +645,7 @@ Requires(post,postun):	desktop-file-utils
 Requires(post,postun):	gtk-update-icon-cache
 Requires:	%{name}-core = %{version}-%{release}
 Requires:	hicolor-icon-theme
+Requires:	libetonyek >= 0.1.4
 Obsoletes:	libreoffice-presentation-minimizer < 4.2.0.0
 Obsoletes:	libreoffice-presenter-screen < 4.0.0.0-1
 Obsoletes:	openoffice.org-impress
@@ -2886,65 +2919,64 @@ ulimit -c unlimited || :
 
 export PATH=$PATH:%{_libdir}/interbase/bin
 %configure \
-	--with-vendor="%{distribution}" \
-	--with-extra-buildid="%{name}-%{epoch}:%{version}-%{release}" \
-	--enable-release-build \
-	--with-parallelism=$RPM_BUILD_NR_THREADS \
-	--disable-odk \
-	--with-system-libs \
-	%{?with_ccache:--with-gcc-speedup=ccache} \
-	%{!?with_system_coinmp:--without-system-coinmp} \
-	%{?with_icecream:--with-gcc-speedup=icecream} \
-	%{?with_system_agg:--with-system-agg} \
-	%{?with_system_beanshell:--with-system-beanshell} \
-	--with%{!?with_system_hsqldb:out}-system-hsqldb \
-	%{?with_system_hunspell:--with-system-hunspell --without-myspell-dicts} \
-	--with%{!?with_system_qrcodegen:out}-system-qrcodegen \
-	%{?with_system_libhnj:--with-system-altlinuxhyphen} \
-	%{?with_msaccess:--with%{!?with_system_mdbtools:out}-system-mdbtools} \
-	--enable-python=system \
-	--with-external-dict-dir=%{_datadir}/myspell \
-	--with-external-tar=$(pwd)/ext_sources \
-	--with-junit=%{_javadir}/junit.jar \
+	--enable-cups \
+	--enable-dbus \
+	--disable-epm \
 	--enable-ext-nlpsolver \
-	--enable-pdfimport \
 	--enable-ext-wiki-publisher \
+	--disable-fetch-external \
+	%{__enable_disable firebird firebird-sdbc} \
+	--enable-gio \
+	--enable-gstreamer-1-0 \
+	%{!?with_gtk3:--disable-gtk3} \
+	%{?with_kde5:--enable-kf5} \
+	--disable-odk \
+	--enable-pdfimport \
+	%{__enable_disable pgsql postgresql-sdbc} \
+	--enable-python=system \
+	%{?with_qt5:--enable-qt5} \
+	--enable-release-build \
 	--enable-report-builder \
 	--enable-scripting-beanshell \
 	--enable-scripting-javascript \
-	--%{?with_kde5:en}%{!?with_kde5:dis}able-kf5 \
-	--%{?with_qt5:en}%{!?with_qt5:dis}able-qt5 \
-	--with-lang=%{?with_i18n:ALL} \
-%if %{with java}
-	--with-java \
-	--with-jdk-home=$JAVA_HOME \
-	--with-ant-home=$ANT_HOME \
-%else
-	--without-java \
-%endif
-	--enable-gio \
-	--with-x \
-	--without-fonts \
-	--disable-epm \
-	--%{?with_gtk3:en}%{!?with_gtk3:dis}able-gtk3 \
-	--enable-dbus \
-	--with-system-openldap \
-%if 0%{?debug:1}
-	--enable-debug \
-	--enable-breakpad=yes \
-	--enable-symbols=FULL \
-%else
-	--enable-breakpad=no \
-	--disable-symbols \
-%endif
-	--with-build-version=%{version}-%{release} \
 	--enable-split-app-modules \
 	--enable-split-opt-features \
-	--enable-cups \
-	%{__enable_disable firebird firebird-sdbc} \
-	%{__enable_disable pgsql postgresql-sdbc} \
-	--enable-gstreamer-1-0 \
-	--disable-fetch-external
+	--with-build-version=%{version}-%{release} \
+	--with-external-dict-dir=%{_datadir}/myspell \
+	--with-external-tar=$(pwd)/ext_sources \
+	--with-extra-buildid="%{name}-%{epoch}:%{version}-%{release}" \
+	--without-fonts \
+	%{?with_ccache:--with-gcc-speedup=ccache} \
+	%{?with_icecream:--with-gcc-speedup=icecream} \
+	--with-junit=%{_javadir}/junit.jar \
+	--with-lang=%{?with_i18n:ALL} \
+	%{!?with_system_hunspell:--with-myspell-dicts} \
+	--with-parallelism=$RPM_BUILD_NR_THREADS \
+	--with-system-libs \
+	%{?with_system_agg:--with-system-agg} \
+	%{!?with_system_hyphen:--without-system-altlinuxhyph} \
+	%{!?with_system_beanshell:--without-system-beanshell} \
+	%{!?with_system_coinmp:--without-system-coinmp} \
+	%{?with_system_hsqldb:--with-system-hsqldb} \
+	%{!?with_system_hunspell:--without-system-hunspell} \
+	%{!?with_system_qrcodegen:--without-system-qrcodegen} \
+	--with-vendor="%{distribution}" \
+	--with-x \
+%if 0%{?debug:1}
+	--enable-breakpad \
+	--enable-debug \
+	--enable-symbols=FULL \
+%else
+	--disable-breakpad \
+	--disable-symbols \
+%endif
+%if %{with java}
+	--with-ant-home=$ANT_HOME \
+	--with-java \
+	--with-jdk-home=$JAVA_HOME \
+%else
+	--without-java
+%endif
 
 # this limits processing some files but doesn't limit parallel build
 # processes of main OOo build (since OOo uses it's own build system)
@@ -3266,7 +3298,6 @@ fi
 %attr(755,root,root) %{_libdir}/%{name}/program/libcppcanvaslo.so
 %attr(755,root,root) %{_libdir}/%{name}/program/libctllo.so
 %attr(755,root,root) %{_libdir}/%{name}/program/libcuilo.so
-%{!?with_system_db:%attr(755,root,root) %{_libdir}/%{name}/program/libdb-4.2.so}
 %attr(755,root,root) %{_libdir}/%{name}/program/libdbalo.so
 %attr(755,root,root) %{_libdir}/%{name}/program/libdbaselo.so
 %attr(755,root,root) %{_libdir}/%{name}/program/libdbaxmllo.so
@@ -3462,10 +3493,8 @@ fi
 %{_libdir}/%{name}/program/classes/query.jar
 %{_libdir}/%{name}/program/classes/report.jar
 %{_libdir}/%{name}/program/classes/sdbc_hsqldb.jar
-%{!?with_system_xalan:%{_libdir}/%{name}/program/classes/serializer.jar}
 %{_libdir}/%{name}/program/classes/table.jar
 %{_libdir}/%{name}/program/classes/unoil.jar
-%{!?with_system_xalan:%{_libdir}/%{name}/program/classes/xalan.jar}
 %{_libdir}/%{name}/program/classes/xmerge.jar
 %{_libdir}/%{name}/program/services/scriptproviderforbeanshell.rdb
 %{_libdir}/%{name}/program/services/scriptproviderforjavascript.rdb
