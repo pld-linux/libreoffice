@@ -60,7 +60,7 @@ Summary:	LibreOffice - powerful office suite
 Summary(pl.UTF-8):	LibreOffice - potężny pakiet biurowy
 Name:		libreoffice
 Version:	%{major_ver}.2
-Release:	2
+Release:	3
 License:	GPL/LGPL
 Group:		X11/Applications
 Source0:	http://download.documentfoundation.org/libreoffice/src/%{major_ver}/%{name}-%{version}.tar.xz
@@ -143,7 +143,7 @@ BuildRequires:	harfbuzz-icu-devel >= 0.9.42
 %{?with_icecream:BuildRequires:	icecream}
 BuildRequires:	icu
 %{?with_system_beanshell:BuildRequires:	java-beanshell}
-BuildRequires:	java-commons-logging >= 1.2
+BuildRequires:	java-commons-logging >= 1.1.2
 BuildRequires:	java-flow-engine >= 0.9.2
 BuildRequires:	java-flute >= 1.3.0
 BuildRequires:	java-hamcrest
@@ -201,7 +201,7 @@ BuildRequires:	mdds-devel >= 1.5.0
 %{?with_mono:BuildRequires:	mono-static >= 1.2.3}
 BuildRequires:	mysql-devel >= 5
 BuildRequires:	mythes-devel >= 1.2
-BuildRequires:	neon-devel >= 1.26.0
+BuildRequires:	neon-devel >= 0.26.0
 BuildRequires:	nspr-devel >= 1:4.8
 BuildRequires:	nss-devel >= 1:3.10
 BuildRequires:	openldap-devel
@@ -402,7 +402,7 @@ Requires:	libpagemaker >= 0.0.2
 Requires:	libraptor2 >= 2.0.7
 Requires:	librevenge >= 0.0.1
 Requires:	mktemp
-Requires:	neon >= 1.26.0
+Requires:	neon >= 0.26.0
 Requires:	nspr >= 1:4.8
 Requires:	nss >= 1:3.10
 Requires:	redland >= 1.0.16
@@ -522,7 +522,7 @@ Summary:	Create Wiki articles on MediaWiki servers with LibreOffice
 Summary(pl.UTF-8):	Tworzenie artykułów Wiki na serwerach MediaWiki przy użyciu LibreOffice'a
 Group:		X11/Applications
 Requires:	%{name}-writer = %{version}-%{release}
-Requires:	java-commons-logging >= 1.2
+Requires:	java-commons-logging >= 1.1.2
 %{?noarchpackage}
 
 %description wiki-publisher
