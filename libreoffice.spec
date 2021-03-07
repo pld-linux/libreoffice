@@ -523,7 +523,7 @@ Summary(pl.UTF-8):	Tworzenie artykułów Wiki na serwerach MediaWiki przy użyci
 Group:		X11/Applications
 Requires:	%{name}-writer = %{version}-%{release}
 Requires:	java-commons-logging >= 1.1.2
-%{?noarchpackage}
+BuildArch:	noarch
 
 %description wiki-publisher
 The Wiki Publisher enables you to create Wiki articles on MediaWiki
@@ -726,7 +726,7 @@ Group:		X11/Applications
 Requires:	%{name}-calc = %{version}-%{release}
 Requires:	%{name}-core = %{version}-%{release}
 Requires:	%{name}-ure = %{version}-%{release}
-%{?noarchpackage}
+BuildArch:	noarch
 
 %description nlpsolver
 A non-linear solver engine for Calc as an alternative to the default
@@ -792,7 +792,7 @@ Obsoletes:	openoffice-i18n-af-gtk
 Obsoletes:	openoffice.org-i18n-af
 Obsoletes:	openoffice.org-i18n-af-gtk
 Obsoletes:	openoffice.org-i18n-af-kde
-%{?noarchpackage}
+BuildArch:	noarch
 
 %description i18n-af
 This package provides resources containing menus and dialogs in
@@ -807,7 +807,7 @@ Summary:	LibreOffice - interface in Amharic language
 Summary(pl.UTF-8):	LibreOffice - interfejs w języku amharskim
 Group:		I18n
 Requires:	%{name}-core = %{version}-%{release}
-%{?noarchpackage}
+BuildArch:	noarch
 
 %description i18n-am
 This package provides resources containing menus and dialogs in
@@ -827,7 +827,7 @@ Obsoletes:	openoffice-i18n-ar-gtk
 Obsoletes:	openoffice.org-i18n-ar
 Obsoletes:	openoffice.org-i18n-ar-gtk
 Obsoletes:	openoffice.org-i18n-ar-kde
-%{?noarchpackage}
+BuildArch:	noarch
 
 %description i18n-ar
 This package provides resources containing menus and dialogs in Arabic
@@ -843,7 +843,7 @@ Summary(pl.UTF-8):	LibreOffice - interfejs w języku asamskim
 Group:		I18n
 Requires:	%{name}-core = %{version}-%{release}
 Obsoletes:	openoffice.org-i18n-as_IN
-%{?noarchpackage}
+BuildArch:	noarch
 
 %description i18n-as
 This package provides resources containing menus and dialogs in
@@ -859,7 +859,7 @@ Summary(pl.UTF-8):	LibreOffice - interfejs w języku asturyjskim
 Group:		I18n
 Requires:	%{name}-core = %{version}-%{release}
 Obsoletes:	openoffice.org-i18n-ast
-%{?noarchpackage}
+BuildArch:	noarch
 
 %description i18n-ast
 This package provides resources containing menus and dialogs in
@@ -875,7 +875,7 @@ Summary(pl.UTF-8):	LibreOffice - interfejs w języku białoruskim
 Group:		I18n
 Requires:	%{name}-core = %{version}-%{release}
 Obsoletes:	openoffice.org-i18n-be_BY
-%{?noarchpackage}
+BuildArch:	noarch
 
 %description i18n-be_BY
 This package provides resources containing menus and dialogs in
@@ -895,7 +895,7 @@ Obsoletes:	openoffice-i18n-bg-gtk
 Obsoletes:	openoffice.org-i18n-bg
 Obsoletes:	openoffice.org-i18n-bg-gtk
 Obsoletes:	openoffice.org-i18n-bg-kde
-%{?noarchpackage}
+BuildArch:	noarch
 
 %description i18n-bg
 This package provides resources containing menus and dialogs in
@@ -911,7 +911,7 @@ Summary(pl.UTF-8):	LibreOffice - interfejs w języku indyjskim bengalskim
 Group:		I18n
 Requires:	%{name}-core = %{version}-%{release}
 Obsoletes:	openoffice.org-i18n-bn_IN
-%{?noarchpackage}
+BuildArch:	noarch
 
 %description i18n-bn_IN
 This package provides resources containing menus and dialogs in Indian
@@ -927,7 +927,7 @@ Summary(pl.UTF-8):	LibreOffice - interfejs w języku bengalskim
 Group:		I18n
 Requires:	%{name}-core = %{version}-%{release}
 Obsoletes:	openoffice.org-i18n-bn
-%{?noarchpackage}
+BuildArch:	noarch
 
 %description i18n-bn
 This package provides resources containing menus and dialogs in Bangla
@@ -943,7 +943,7 @@ Summary(pl.UTF-8):	LibreOffice - interfejs w języku tybetańskim
 Group:		I18n
 Requires:	%{name}-core = %{version}-%{release}
 Obsoletes:	openoffice.org-i18n-bo
-%{?noarchpackage}
+BuildArch:	noarch
 
 %description i18n-bo
 This package provides resources containing menus and dialogs in
@@ -959,7 +959,7 @@ Summary(pl.UTF-8):	LibreOffice - interfejs w języku bretońskim
 Group:		I18n
 Requires:	%{name}-core = %{version}-%{release}
 Obsoletes:	openoffice.org-i18n-br
-%{?noarchpackage}
+BuildArch:	noarch
 
 %description i18n-br
 This package provides resources containing menus and dialogs in Breton
@@ -975,7 +975,7 @@ Summary(pl.UTF-8):	LibreOffice - interfejs w języku boro
 Group:		I18n
 Requires:	%{name}-core = %{version}-%{release}
 Obsoletes:	openoffice.org-i18n-brx
-%{?noarchpackage}
+BuildArch:	noarch
 
 %description i18n-brx
 This package provides resources containing menus and dialogs in Bodo
@@ -991,7 +991,7 @@ Summary(pl.UTF-8):	LibreOffice - interfejs w języku bośniackim
 Group:		I18n
 Requires:	%{name}-core = %{version}-%{release}
 Obsoletes:	openoffice.org-i18n-bs
-%{?noarchpackage}
+BuildArch:	noarch
 
 %description i18n-bs
 This package provides resources containing menus and dialogs in
@@ -1011,7 +1011,7 @@ Obsoletes:	openoffice-i18n-ca-gtk
 Obsoletes:	openoffice.org-i18n-ca
 Obsoletes:	openoffice.org-i18n-ca-gtk
 Obsoletes:	openoffice.org-i18n-ca-kde
-%{?noarchpackage}
+BuildArch:	noarch
 
 %description i18n-ca
 This package provides resources containing menus and dialogs in
@@ -1026,7 +1026,7 @@ Summary:	LibreOffice - interface in Catalan Valencian language
 Summary(pl.UTF-8):	LibreOffice - interfejs w języku katalońskim walenckim
 Group:		I18n
 Requires:	%{name}-core = %{version}-%{release}
-%{?noarchpackage}
+BuildArch:	noarch
 
 %description i18n-ca_XV
 This package provides resources containing menus and dialogs in
@@ -1046,7 +1046,7 @@ Obsoletes:	openoffice-i18n-cs-gtk
 Obsoletes:	openoffice.org-i18n-cs
 Obsoletes:	openoffice.org-i18n-cs-gtk
 Obsoletes:	openoffice.org-i18n-cs-kde
-%{?noarchpackage}
+BuildArch:	noarch
 
 %description i18n-cs
 This package provides resources containing menus and dialogs in Czech
@@ -1066,7 +1066,7 @@ Obsoletes:	openoffice-i18n-cy-gtk
 Obsoletes:	openoffice.org-i18n-cy
 Obsoletes:	openoffice.org-i18n-cy-gtk
 Obsoletes:	openoffice.org-i18n-cy-kde
-%{?noarchpackage}
+BuildArch:	noarch
 
 %description i18n-cy
 This package provides resources containing menus and dialogs in
@@ -1086,7 +1086,7 @@ Obsoletes:	openoffice-i18n-da-gtk
 Obsoletes:	openoffice.org-i18n-da
 Obsoletes:	openoffice.org-i18n-da-gtk
 Obsoletes:	openoffice.org-i18n-da-kde
-%{?noarchpackage}
+BuildArch:	noarch
 
 %description i18n-da
 This package provides resources containing menus and dialogs in Danish
@@ -1106,7 +1106,7 @@ Obsoletes:	openoffice-i18n-de-gtk
 Obsoletes:	openoffice.org-i18n-de
 Obsoletes:	openoffice.org-i18n-de-gtk
 Obsoletes:	openoffice.org-i18n-de-kde
-%{?noarchpackage}
+BuildArch:	noarch
 
 %description i18n-de
 This package provides resources containing menus and dialogs in German
@@ -1122,7 +1122,7 @@ Summary(pl.UTF-8):	LibreOffice - interfejs w języku dogri
 Group:		I18n
 Requires:	%{name}-core = %{version}-%{release}
 Obsoletes:	openoffice.org-i18n-dgo
-%{?noarchpackage}
+BuildArch:	noarch
 
 %description i18n-dgo
 This package provides resources containing menus and dialogs in Dogri
@@ -1138,7 +1138,7 @@ Summary(pl.UTF-8):	LibreOffice - interfejs w języku dolnołużyckim
 Group:		I18n
 Requires:	%{name}-core = %{version}-%{release}
 Obsoletes:	openoffice.org-i18n-dsb
-%{?noarchpackage}
+BuildArch:	noarch
 
 %description i18n-dsb
 This package provides resources containing menus and dialogs in
@@ -1154,7 +1154,7 @@ Summary(pl.UTF-8):	Openoffice.org - interfejs w języku dżongkha
 Group:		I18n
 Requires:	%{name}-core = %{version}-%{release}
 Obsoletes:	openoffice.org-i18n-dz
-%{?noarchpackage}
+BuildArch:	noarch
 
 %description i18n-dz
 This package provides resources containing menus and dialogs in
@@ -1174,7 +1174,7 @@ Obsoletes:	openoffice-i18n-el-gtk
 Obsoletes:	openoffice.org-i18n-el
 Obsoletes:	openoffice.org-i18n-el-gtk
 Obsoletes:	openoffice.org-i18n-el-kde
-%{?noarchpackage}
+BuildArch:	noarch
 
 %description i18n-el
 This package provides resources containing menus and dialogs in Greek
@@ -1190,7 +1190,7 @@ Summary(pl.UTF-8):	LibreOffice - interfejs w języku anglieskim dla Wielkiej Bry
 Group:		I18n
 Requires:	%{name}-core = %{version}-%{release}
 Obsoletes:	openoffice.org-i18n-en_GB
-%{?noarchpackage}
+BuildArch:	noarch
 
 %description i18n-en_GB
 This package provides resources containing menus and dialogs in
@@ -1206,7 +1206,7 @@ Summary(pl.UTF-8):	LibreOffice - interfejs w języku anglieskim dla Południowej
 Group:		I18n
 Requires:	%{name}-core = %{version}-%{release}
 Obsoletes:	openoffice.org-i18n-en_ZA
-%{?noarchpackage}
+BuildArch:	noarch
 
 %description i18n-en_ZA
 This package provides resources containing menus and dialogs in
@@ -1222,7 +1222,7 @@ Summary(pl.UTF-8):	LibreOffice - interfejs w języku esperanto
 Group:		I18n
 Requires:	%{name}-core = %{version}-%{release}
 Obsoletes:	openoffice.org-i18n-eo
-%{?noarchpackage}
+BuildArch:	noarch
 
 %description i18n-eo
 This package provides resources containing menus and dialogs in
@@ -1242,7 +1242,7 @@ Obsoletes:	openoffice-i18n-es-gtk
 Obsoletes:	openoffice.org-i18n-es
 Obsoletes:	openoffice.org-i18n-es-gtk
 Obsoletes:	openoffice.org-i18n-es-kde
-%{?noarchpackage}
+BuildArch:	noarch
 
 %description i18n-es
 This package provides resources containing menus and dialogs in
@@ -1262,7 +1262,7 @@ Obsoletes:	openoffice-i18n-et-gtk
 Obsoletes:	openoffice.org-i18n-et
 Obsoletes:	openoffice.org-i18n-et-gtk
 Obsoletes:	openoffice.org-i18n-et-kde
-%{?noarchpackage}
+BuildArch:	noarch
 
 %description i18n-et
 This package provides resources containing menus and dialogs in
@@ -1281,7 +1281,7 @@ Obsoletes:	openoffice-i18n-eu
 Obsoletes:	openoffice-i18n-eu-gtk
 Obsoletes:	openoffice-i18n-eu-kde
 Obsoletes:	openoffice.org-i18n-eu
-%{?noarchpackage}
+BuildArch:	noarch
 
 %description i18n-eu
 This package provides resources containing menus and dialogs in Basque
@@ -1300,7 +1300,7 @@ Obsoletes:	openoffice-i18n-fa
 Obsoletes:	openoffice-i18n-fa-gtk
 Obsoletes:	openoffice-i18n-fa-kde
 Obsoletes:	openoffice.org-i18n-fa
-%{?noarchpackage}
+BuildArch:	noarch
 
 %description i18n-fa
 This package provides resources containing menus and dialogs in
@@ -1320,7 +1320,7 @@ Obsoletes:	openoffice-i18n-fi-gtk
 Obsoletes:	openoffice.org-i18n-fi
 Obsoletes:	openoffice.org-i18n-fi-gtk
 Obsoletes:	openoffice.org-i18n-fi-kde
-%{?noarchpackage}
+BuildArch:	noarch
 
 %description i18n-fi
 This package provides resources containing menus and dialogs in
@@ -1340,7 +1340,7 @@ Obsoletes:	openoffice-i18n-fr-gtk
 Obsoletes:	openoffice.org-i18n-fr
 Obsoletes:	openoffice.org-i18n-fr-gtk
 Obsoletes:	openoffice.org-i18n-fr-kde
-%{?noarchpackage}
+BuildArch:	noarch
 
 %description i18n-fr
 This package provides resources containing menus and dialogs in French
@@ -1360,7 +1360,7 @@ Obsoletes:	openoffice-i18n-fy-gtk
 Obsoletes:	openoffice.org-i18n-fy
 Obsoletes:	openoffice.org-i18n-fy-gtk
 Obsoletes:	openoffice.org-i18n-fy-kde
-%{?noarchpackage}
+BuildArch:	noarch
 
 %description i18n-fy
 This package provides resources containing menus and dialogs in
@@ -1380,7 +1380,7 @@ Obsoletes:	openoffice-i18n-ga-gtk
 Obsoletes:	openoffice.org-i18n-ga
 Obsoletes:	openoffice.org-i18n-ga-gtk
 Obsoletes:	openoffice.org-i18n-ga-kde
-%{?noarchpackage}
+BuildArch:	noarch
 
 %description i18n-ga
 This package provides resources containing menus and dialogs in Irish
@@ -1395,7 +1395,7 @@ Summary:	LibreOffice - interface in Scottish Gaelic language
 Summary(pl.UTF-8):	LibreOffice - interfejs w języku gaelickim szkockim
 Group:		I18n
 Requires:	%{name}-core = %{version}-%{release}
-%{?noarchpackage}
+BuildArch:	noarch
 
 %description i18n-gd
 This package provides resources containing menus and dialogs in
@@ -1415,7 +1415,7 @@ Obsoletes:	openoffice-i18n-gl-gtk
 Obsoletes:	openoffice.org-i18n-gl
 Obsoletes:	openoffice.org-i18n-gl-gtk
 Obsoletes:	openoffice.org-i18n-gl-kde
-%{?noarchpackage}
+BuildArch:	noarch
 
 %description i18n-gl
 This package provides resources containing menus and dialogs in
@@ -1431,7 +1431,7 @@ Summary(pl.UTF-8):	LibreOffice - interfejs w języku gudźarati
 Group:		I18n
 Requires:	%{name}-core = %{version}-%{release}
 Obsoletes:	openoffice.org-i18n-gu
-%{?noarchpackage}
+BuildArch:	noarch
 
 %description i18n-gu
 This package provides resources containing menus and dialogs in
@@ -1446,7 +1446,7 @@ Summary:	LibreOffice - interface in Paraguayan Gujarati language
 Summary(pl.UTF-8):	LibreOffice - interfejs w języku paragwajskim gudźarati
 Group:		I18n
 Requires:	%{name}-core = %{version}-%{release}
-%{?noarchpackage}
+BuildArch:	noarch
 
 %description i18n-gug
 This package provides resources containing menus and dialogs in
@@ -1466,7 +1466,7 @@ Obsoletes:	openoffice-i18n-he-gtk
 Obsoletes:	openoffice.org-i18n-he
 Obsoletes:	openoffice.org-i18n-he-gtk
 Obsoletes:	openoffice.org-i18n-he-kde
-%{?noarchpackage}
+BuildArch:	noarch
 
 %description i18n-he
 This package provides resources containing menus and dialogs in Hebrew
@@ -1486,7 +1486,7 @@ Obsoletes:	openoffice-i18n-hi-gtk
 Obsoletes:	openoffice.org-i18n-hi-gtk
 Obsoletes:	openoffice.org-i18n-hi-kde
 Obsoletes:	openoffice.org-i18n-hi_IN
-%{?noarchpackage}
+BuildArch:	noarch
 
 %description i18n-hi
 This package provides resources containing menus and dialogs in Hindi
@@ -1506,7 +1506,7 @@ Obsoletes:	openoffice-i18n-hr-gtk
 Obsoletes:	openoffice.org-i18n-hr
 Obsoletes:	openoffice.org-i18n-hr-gtk
 Obsoletes:	openoffice.org-i18n-hr-kde
-%{?noarchpackage}
+BuildArch:	noarch
 
 %description i18n-hr
 This package provides resources containing menus and dialogs in
@@ -1526,7 +1526,7 @@ Obsoletes:	openoffice-i18n-hsb-gtk
 Obsoletes:	openoffice.org-i18n-hsb
 Obsoletes:	openoffice.org-i18n-hsb-gtk
 Obsoletes:	openoffice.org-i18n-hsb-kde
-%{?noarchpackage}
+BuildArch:	noarch
 
 %description i18n-hsb
 This package provides resources containing menus and dialogs in
@@ -1546,7 +1546,7 @@ Obsoletes:	openoffice-i18n-hu-gtk
 Obsoletes:	openoffice.org-i18n-hu
 Obsoletes:	openoffice.org-i18n-hu-gtk
 Obsoletes:	openoffice.org-i18n-hu-kde
-%{?noarchpackage}
+BuildArch:	noarch
 
 %description i18n-hu
 This package provides resources containing menus and dialogs in
@@ -1561,7 +1561,7 @@ Summary:	LibreOffice - interface in Indonesian language
 Summary(pl.UTF-8):	LibreOffice - interfejs w języku indonezyjskim
 Group:		I18n
 Requires:	%{name}-core = %{version}-%{release}
-%{?noarchpackage}
+BuildArch:	noarch
 
 %description i18n-id
 This package provides resources containing menus and dialogs in
@@ -1577,7 +1577,7 @@ Summary(pl.UTF-8):	LibreOffice - interfejs w języku islandzkim
 Group:		I18n
 Requires:	%{name}-core = %{version}-%{release}
 Obsoletes:	openoffice.org-i18n-is
-%{?noarchpackage}
+BuildArch:	noarch
 
 %description i18n-is
 This package provides resources containing menus and dialogs in
@@ -1597,7 +1597,7 @@ Obsoletes:	openoffice-i18n-it-gtk
 Obsoletes:	openoffice.org-i18n-it
 Obsoletes:	openoffice.org-i18n-it-gtk
 Obsoletes:	openoffice.org-i18n-it-kde
-%{?noarchpackage}
+BuildArch:	noarch
 
 %description i18n-it
 This package provides resources containing menus and dialogs in
@@ -1617,7 +1617,7 @@ Obsoletes:	openoffice-i18n-ja-gtk
 Obsoletes:	openoffice.org-i18n-ja
 Obsoletes:	openoffice.org-i18n-ja-gtk
 Obsoletes:	openoffice.org-i18n-ja-kde
-%{?noarchpackage}
+BuildArch:	noarch
 
 %description i18n-ja
 This package provides resources containing menus and dialogs in Japan
@@ -1633,7 +1633,7 @@ Summary(pl.UTF-8):	LibreOffice - interfejs w języku gruzińskim
 Group:		I18n
 Requires:	%{name}-core = %{version}-%{release}
 Obsoletes:	openoffice.org-i18n-ka
-%{?noarchpackage}
+BuildArch:	noarch
 
 %description i18n-ka
 This package provides resources containing menus and dialogs in
@@ -1649,7 +1649,7 @@ Summary(pl.UTF-8):	LibreOffice - interfejs w języku kabylskim
 Group:		I18n
 Requires:	%{name}-core = %{version}-%{release}
 Obsoletes:	openoffice.org-i18n-kab
-%{?noarchpackage}
+BuildArch:	noarch
 
 %description i18n-kab
 This package provides resources containing menus and dialogs in
@@ -1665,7 +1665,7 @@ Summary(pl.UTF-8):	LibreOffice - interfejs w języku kazachskim
 Group:		I18n
 Requires:	%{name}-core = %{version}-%{release}
 Obsoletes:	openoffice.org-i18n-kk
-%{?noarchpackage}
+BuildArch:	noarch
 
 %description i18n-kk
 This package provides resources containing menus and dialogs in Kazakh
@@ -1681,7 +1681,7 @@ Summary(pl.UTF-8):	LibreOffice - interfejs w języku khmerskim
 Group:		I18n
 Requires:	%{name}-core = %{version}-%{release}
 Obsoletes:	openoffice.org-i18n-km
-%{?noarchpackage}
+BuildArch:	noarch
 
 %description i18n-km
 This package provides resources containing menus and dialogs in Khmer
@@ -1696,7 +1696,7 @@ Summary:	LibreOffice - interface in Kurdisk language
 Summary(pl.UTF-8):	LibreOffice - interfejs w języku kurdyjskim
 Group:		I18n
 Requires:	%{name}-core = %{version}-%{release}
-%{?noarchpackage}
+BuildArch:	noarch
 
 %description i18n-kmr-Latn
 This package provides resources containing menus and dialogs in
@@ -1715,7 +1715,7 @@ Obsoletes:	openoffice-i18n-kn
 Obsoletes:	openoffice-i18n-kn-gtk
 Obsoletes:	openoffice-i18n-kn-kde
 Obsoletes:	openoffice.org-i18n-kn_IN
-%{?noarchpackage}
+BuildArch:	noarch
 
 %description i18n-kn_IN
 This package provides resources containing menus and dialogs in
@@ -1735,7 +1735,7 @@ Obsoletes:	openoffice-i18n-ko-gtk
 Obsoletes:	openoffice.org-i18n-ko
 Obsoletes:	openoffice.org-i18n-ko-gtk
 Obsoletes:	openoffice.org-i18n-ko-kde
-%{?noarchpackage}
+BuildArch:	noarch
 
 %description i18n-ko
 This package provides resources containing menus and dialogs in Korean
@@ -1751,7 +1751,7 @@ Summary(pl.UTF-8):	LibreOffice - interfejs w języku konkani
 Group:		I18n
 Requires:	%{name}-core = %{version}-%{release}
 Obsoletes:	openoffice.org-i18n-kok
-%{?noarchpackage}
+BuildArch:	noarch
 
 %description i18n-kok
 This package provides resources containing menus and dialogs in
@@ -1767,7 +1767,7 @@ Summary(pl.UTF-8):	LibreOffice - interfejs w języku kaszmirskim
 Group:		I18n
 Requires:	%{name}-core = %{version}-%{release}
 Obsoletes:	openoffice.org-i18n-ks
-%{?noarchpackage}
+BuildArch:	noarch
 
 %description i18n-ks
 This package provides resources containing menus and dialogs in
@@ -1783,7 +1783,7 @@ Summary(pl.UTF-8):	LibreOffice - interfejs w języku luksemburgskim
 Group:		I18n
 Requires:	%{name}-core = %{version}-%{release}
 Obsoletes:	openoffice.org-i18n-lb
-%{?noarchpackage}
+BuildArch:	noarch
 
 %description i18n-lb
 This package provides resources containing menus and dialogs in
@@ -1799,7 +1799,7 @@ Summary(pl.UTF-8):	LibreOffice - interfejs w języku laotańskim
 Group:		I18n
 Requires:	%{name}-core = %{version}-%{release}
 Obsoletes:	openoffice.org-i18n-lo
-%{?noarchpackage}
+BuildArch:	noarch
 
 %description i18n-lo
 This package provides resources containing menus and dialogs in Lao
@@ -1819,7 +1819,7 @@ Obsoletes:	openoffice-i18n-lt-gtk
 Obsoletes:	openoffice.org-i18n-lt
 Obsoletes:	openoffice.org-i18n-lt-gtk
 Obsoletes:	openoffice.org-i18n-lt-kde
-%{?noarchpackage}
+BuildArch:	noarch
 
 %description i18n-lt
 This package provides resources containing menus and dialogs in
@@ -1835,7 +1835,7 @@ Summary(pl.UTF-8):	LibreOffice - interfejs w języku łotewskim
 Group:		I18n
 Requires:	%{name}-core = %{version}-%{release}
 Obsoletes:	openoffice.org-i18n-lv
-%{?noarchpackage}
+BuildArch:	noarch
 
 %description i18n-lv
 This package provides resources containing menus and dialogs in
@@ -1851,7 +1851,7 @@ Summary(pl.UTF-8):	LibreOffice - interfejs w języku maithili
 Group:		I18n
 Requires:	%{name}-core = %{version}-%{release}
 Obsoletes:	openoffice.org-i18n-mai
-%{?noarchpackage}
+BuildArch:	noarch
 
 %description i18n-mai
 This package provides resources containing menus and dialogs in
@@ -1867,7 +1867,7 @@ Summary(pl.UTF-8):	LibreOffice - interfejs w języku macedońskim
 Group:		I18n
 Requires:	%{name}-core = %{version}-%{release}
 Obsoletes:	openoffice.org-i18n-mk
-%{?noarchpackage}
+BuildArch:	noarch
 
 %description i18n-mk
 This package provides resources containing menus and dialogs in
@@ -1883,7 +1883,7 @@ Summary(pl.UTF-8):	LibreOffice - interfejs w języku malajalamskim
 Group:		I18n
 Requires:	%{name}-core = %{version}-%{release}
 Obsoletes:	openoffice.org-i18n-ml_IN
-%{?noarchpackage}
+BuildArch:	noarch
 
 %description i18n-ml
 This package provides resources containing menus and dialogs in
@@ -1899,7 +1899,7 @@ Summary(pl.UTF-8):	LibreOffice - interfejs w języku manipuri
 Group:		I18n
 Requires:	%{name}-core = %{version}-%{release}
 Obsoletes:	openoffice.org-i18n-mni
-%{?noarchpackage}
+BuildArch:	noarch
 
 %description i18n-mni
 This package provides resources containing menus and dialogs in Meitei
@@ -1915,7 +1915,7 @@ Summary(pl.UTF-8):	LibreOffice - interfejs w języku marathi
 Group:		I18n
 Requires:	%{name}-core = %{version}-%{release}
 Obsoletes:	openoffice.org-i18n-mr_IN
-%{?noarchpackage}
+BuildArch:	noarch
 
 %description i18n-mr
 This package provides resources containing menus and dialogs in
@@ -1931,7 +1931,7 @@ Summary(pl.UTF-8):	LibreOffice - interfejs w języku mongolskim
 Group:		I18n
 Requires:	%{name}-core = %{version}-%{release}
 Obsoletes:	openoffice.org-i18n-mn
-%{?noarchpackage}
+BuildArch:	noarch
 
 %description i18n-mn
 This package provides resources containing menus and dialogs in
@@ -1947,7 +1947,7 @@ Summary(pl.UTF-8):	LibreOffice - interfejs w języku birmańskim
 Group:		I18n
 Requires:	%{name}-core = %{version}-%{release}
 Obsoletes:	openoffice.org-i18n-my
-%{?noarchpackage}
+BuildArch:	noarch
 
 %description i18n-my
 This package provides resources containing menus and dialogs in
@@ -1967,7 +1967,7 @@ Obsoletes:	openoffice-i18n-nb-gtk
 Obsoletes:	openoffice.org-i18n-nb
 Obsoletes:	openoffice.org-i18n-nb-gtk
 Obsoletes:	openoffice.org-i18n-nb-kde
-%{?noarchpackage}
+BuildArch:	noarch
 
 %description i18n-nb
 This package provides resources containing menus and dialogs in
@@ -1983,7 +1983,7 @@ Summary(pl.UTF-8):	LibreOffice - interfejs w języku nepalskim
 Group:		I18n
 Requires:	%{name}-core = %{version}-%{release}
 Obsoletes:	openoffice.org-i18n-ne
-%{?noarchpackage}
+BuildArch:	noarch
 
 %description i18n-ne
 This package provides resources containing menus and dialogs in Nepali
@@ -2003,7 +2003,7 @@ Obsoletes:	openoffice-i18n-nl-gtk
 Obsoletes:	openoffice.org-i18n-nl
 Obsoletes:	openoffice.org-i18n-nl-gtk
 Obsoletes:	openoffice.org-i18n-nl-kde
-%{?noarchpackage}
+BuildArch:	noarch
 
 %description i18n-nl
 This package provides resources containing menus and dialogs in Dutch
@@ -2023,7 +2023,7 @@ Obsoletes:	openoffice-i18n-nn-gtk
 Obsoletes:	openoffice.org-i18n-nn
 Obsoletes:	openoffice.org-i18n-nn-gtk
 Obsoletes:	openoffice.org-i18n-nn-kde
-%{?noarchpackage}
+BuildArch:	noarch
 
 %description i18n-nn
 This package provides resources containing menus and dialogs in
@@ -2039,7 +2039,7 @@ Summary(pl.UTF-8):	LibreOffice - interfejs w języku ndebele (południowym)
 Group:		I18n
 Requires:	%{name}-core = %{version}-%{release}
 Obsoletes:	openoffice.org-i18n-nr
-%{?noarchpackage}
+BuildArch:	noarch
 
 %description i18n-nr
 This package provides resources containing menus and dialogs in South
@@ -2059,7 +2059,7 @@ Obsoletes:	openoffice-i18n-nso-gtk
 Obsoletes:	openoffice.org-i18n-nso
 Obsoletes:	openoffice.org-i18n-nso-gtk
 Obsoletes:	openoffice.org-i18n-nso-kde
-%{?noarchpackage}
+BuildArch:	noarch
 
 %description i18n-nso
 This package provides resources containing menus and dialogs in
@@ -2075,7 +2075,7 @@ Summary(pl.UTF-8):	LibreOffice - interfejs w języku oksytańskim
 Group:		I18n
 Requires:	%{name}-core = %{version}-%{release}
 Obsoletes:	openoffice.org-i18n-oc
-%{?noarchpackage}
+BuildArch:	noarch
 
 %description i18n-oc
 This package provides resources containing menus and dialogs in
@@ -2091,7 +2091,7 @@ Summary(pl.UTF-8):	LibreOffice - interfejs w języku oromo
 Group:		I18n
 Requires:	%{name}-core = %{version}-%{release}
 Obsoletes:	openoffice.org-i18n-om
-%{?noarchpackage}
+BuildArch:	noarch
 
 %description i18n-om
 This package provides resources containing menus and dialogs in Oromo
@@ -2107,7 +2107,7 @@ Summary(pl.UTF-8):	LibreOffice - interfejs w języku orija
 Group:		I18n
 Requires:	%{name}-core = %{version}-%{release}
 Obsoletes:	openoffice.org-i18n-or_IN
-%{?noarchpackage}
+BuildArch:	noarch
 
 %description i18n-or
 This package provides resources containing menus and dialogs in Oriya
@@ -2123,7 +2123,7 @@ Summary(pl.UTF-8):	LibreOffice - interfejs w języku pendżabskim
 Group:		I18n
 Requires:	%{name}-core = %{version}-%{release}
 Obsoletes:	openoffice.org-i18n-pa_IN
-%{?noarchpackage}
+BuildArch:	noarch
 
 %description i18n-pa_IN
 This package provides resources containing menus and dialogs in
@@ -2143,7 +2143,7 @@ Obsoletes:	openoffice-i18n-pl-gtk
 Obsoletes:	openoffice.org-i18n-pl
 Obsoletes:	openoffice.org-i18n-pl-gtk
 Obsoletes:	openoffice.org-i18n-pl-kde
-%{?noarchpackage}
+BuildArch:	noarch
 
 %description i18n-pl
 This package provides resources containing menus and dialogs in Polish
@@ -2163,7 +2163,7 @@ Obsoletes:	openoffice-i18n-pt-gtk
 Obsoletes:	openoffice.org-i18n-pt
 Obsoletes:	openoffice.org-i18n-pt-gtk
 Obsoletes:	openoffice.org-i18n-pt-kde
-%{?noarchpackage}
+BuildArch:	noarch
 
 %description i18n-pt
 This package provides resources containing menus and dialogs in
@@ -2183,7 +2183,7 @@ Obsoletes:	openoffice-i18n-pt_BR-gtk
 Obsoletes:	openoffice.org-i18n-pt_BR
 Obsoletes:	openoffice.org-i18n-pt_BR-gtk
 Obsoletes:	openoffice.org-i18n-pt_BR-kde
-%{?noarchpackage}
+BuildArch:	noarch
 
 %description i18n-pt_BR
 This package provides resources containing menus and dialogs in
@@ -2199,7 +2199,7 @@ Summary(pl.UTF-8):	LibreOffice - interfejs w języku rumuńskim
 Group:		I18n
 Requires:	%{name}-core = %{version}-%{release}
 Obsoletes:	openoffice.org-i18n-ro
-%{?noarchpackage}
+BuildArch:	noarch
 
 %description i18n-ro
 This package provides resources containing menus and dialogs in
@@ -2219,7 +2219,7 @@ Obsoletes:	openoffice-i18n-ru-gtk
 Obsoletes:	openoffice.org-i18n-ru
 Obsoletes:	openoffice.org-i18n-ru-gtk
 Obsoletes:	openoffice.org-i18n-ru-kde
-%{?noarchpackage}
+BuildArch:	noarch
 
 %description i18n-ru
 This package provides resources containing menus and dialogs in
@@ -2235,7 +2235,7 @@ Summary(pl.UTF-8):	LibreOffice - interfejs w języku kinya-ruanda
 Group:		I18n
 Requires:	%{name}-core = %{version}-%{release}
 Obsoletes:	openoffice.org-i18n-rw
-%{?noarchpackage}
+BuildArch:	noarch
 
 %description i18n-rw
 This package provides resources containing menus and dialogs in
@@ -2251,7 +2251,7 @@ Summary(pl.UTF-8):	LibreOffice - interfejs w sanskrycie
 Group:		I18n
 Requires:	%{name}-core = %{version}-%{release}
 Obsoletes:	openoffice.org-i18n-sa_IN
-%{?noarchpackage}
+BuildArch:	noarch
 
 %description i18n-sa_IN
 This package provides resources containing menus and dialogs in
@@ -2267,7 +2267,7 @@ Summary(pl.UTF-8):	LibreOffice - interfejs w języku santali
 Group:		I18n
 Requires:	%{name}-core = %{version}-%{release}
 Obsoletes:	openoffice.org-i18n-sat
-%{?noarchpackage}
+BuildArch:	noarch
 
 %description i18n-sat
 This package provides resources containing menus and dialogs in
@@ -2283,7 +2283,7 @@ Summary(pl.UTF-8):	LibreOffice - interfejs w języku sindhi
 Group:		I18n
 Requires:	%{name}-core = %{version}-%{release}
 Obsoletes:	openoffice.org-i18n-sd
-%{?noarchpackage}
+BuildArch:	noarch
 
 %description i18n-sd
 This package provides resources containing menus and dialogs in Sindhi
@@ -2299,7 +2299,7 @@ Summary(pl.UTF-8):	LibreOffice - interfejs w języku syngaleskim
 Group:		I18n
 Requires:	%{name}-core = %{version}-%{release}
 Obsoletes:	openoffice.org-i18n-si
-%{?noarchpackage}
+BuildArch:	noarch
 
 %description i18n-si
 This package provides resources containing menus and dialogs in
@@ -2314,7 +2314,7 @@ Summary:	LibreOffice - interface in Sidama language
 Summary(pl.UTF-8):	LibreOffice - interfejs w języku sidamo
 Group:		I18n
 Requires:	%{name}-core = %{version}-%{release}
-%{?noarchpackage}
+BuildArch:	noarch
 
 %description i18n-sid
 This package provides resources containing menus and dialogs in Sidama
@@ -2334,7 +2334,7 @@ Obsoletes:	openoffice-i18n-sk-gtk
 Obsoletes:	openoffice.org-i18n-sk
 Obsoletes:	openoffice.org-i18n-sk-gtk
 Obsoletes:	openoffice.org-i18n-sk-kde
-%{?noarchpackage}
+BuildArch:	noarch
 
 %description i18n-sk
 This package provides resources containing menus and dialogs in Slovak
@@ -2354,7 +2354,7 @@ Obsoletes:	openoffice-i18n-sl-gtk
 Obsoletes:	openoffice.org-i18n-sl
 Obsoletes:	openoffice.org-i18n-sl-gtk
 Obsoletes:	openoffice.org-i18n-sl-kde
-%{?noarchpackage}
+BuildArch:	noarch
 
 %description i18n-sl
 This package provides resources containing menus and dialogs in
@@ -2369,7 +2369,7 @@ Summary:	LibreOffice - interface in Albanian language
 Summary(pl.UTF-8):	LibreOffice - interfejs w języku albańskim
 Group:		I18n
 Requires:	%{name}-core = %{version}-%{release}
-%{?noarchpackage}
+BuildArch:	noarch
 
 %description i18n-sq
 This package provides resources containing menus and dialogs in
@@ -2385,7 +2385,7 @@ Summary(pl.UTF-8):	LibreOffice - interfejs w języku serbskim
 Group:		I18n
 Requires:	%{name}-core = %{version}-%{release}
 Obsoletes:	openoffice.org-i18n-sr
-%{?noarchpackage}
+BuildArch:	noarch
 
 %description i18n-sr
 This package provides resources containing menus and dialogs in
@@ -2400,7 +2400,7 @@ Summary:	LibreOffice - interface in Serbian language
 Summary(pl.UTF-8):	LibreOffice - interfejs w języku serbskim
 Group:		I18n
 Requires:	%{name}-core = %{version}-%{release}
-%{?noarchpackage}
+BuildArch:	noarch
 
 %description i18n-sr-Latn
 This package provides resources containing menus and dialogs in
@@ -2416,7 +2416,7 @@ Summary(pl.UTF-8):	LibreOffice - interfejs w języku suazi (siswati)
 Group:		I18n
 Requires:	%{name}-core = %{version}-%{release}
 Obsoletes:	openoffice.org-i18n-ss
-%{?noarchpackage}
+BuildArch:	noarch
 
 %description i18n-ss
 This package provides resources containing menus and dialogs in Swati
@@ -2432,7 +2432,7 @@ Summary(pl.UTF-8):	LibreOffice - interfejs w języku południowym sotho
 Group:		I18n
 Requires:	%{name}-core = %{version}-%{release}
 Obsoletes:	openoffice.org-i18n-st
-%{?noarchpackage}
+BuildArch:	noarch
 
 %description i18n-st
 This package provides resources containing menus and dialogs in
@@ -2452,7 +2452,7 @@ Obsoletes:	openoffice-i18n-sv-gtk
 Obsoletes:	openoffice.org-i18n-sv
 Obsoletes:	openoffice.org-i18n-sv-gtk
 Obsoletes:	openoffice.org-i18n-sv-kde
-%{?noarchpackage}
+BuildArch:	noarch
 
 %description i18n-sv
 This package provides resources containing menus and dialogs in
@@ -2468,7 +2468,7 @@ Summary(pl.UTF-8):	LibreOffice - interfejs w języku suahili dla Tanzanii
 Group:		I18n
 Requires:	%{name}-core = %{version}-%{release}
 Obsoletes:	openoffice.org-i18n-sw_TZ
-%{?noarchpackage}
+BuildArch:	noarch
 
 %description i18n-sw_TZ
 This package provides resources containing menus and dialogs in
@@ -2483,7 +2483,7 @@ Summary:	LibreOffice - interface in Silesian language
 Summary(pl.UTF-8):	LibreOffice - interfejs w języku śląskim
 Group:		I18n
 Requires:	%{name}-core = %{version}-%{release}
-%{?noarchpackage}
+BuildArch:	noarch
 
 %description i18n-szl
 This package provides resources containing menus and dialogs in
@@ -2499,7 +2499,7 @@ Summary(pl.UTF-8):	LibreOffice - interfejs w języku tamiskim
 Group:		I18n
 Requires:	%{name}-core = %{version}-%{release}
 Obsoletes:	openoffice.org-i18n-ta_IN
-%{?noarchpackage}
+BuildArch:	noarch
 
 %description i18n-ta
 This package provides resources containing menus and dialogs in Tamil
@@ -2515,7 +2515,7 @@ Summary(pl.UTF-8):	LibreOffice - interfejs w języku telugu
 Group:		I18n
 Requires:	%{name}-core = %{version}-%{release}
 Obsoletes:	openoffice.org-i18n-te_IN
-%{?noarchpackage}
+BuildArch:	noarch
 
 %description i18n-te
 This package provides resources containing menus and dialogs in Telugu
@@ -2531,7 +2531,7 @@ Summary(pl.UTF-8):	LibreOffice - interfejs w języku tadżyckim
 Group:		I18n
 Requires:	%{name}-core = %{version}-%{release}
 Obsoletes:	openoffice.org-i18n-tg
-%{?noarchpackage}
+BuildArch:	noarch
 
 %description i18n-tg
 This package provides resources containing menus and dialogs in Tajik
@@ -2550,7 +2550,7 @@ Obsoletes:	openoffice-i18n-th
 Obsoletes:	openoffice-i18n-th-gtk
 Obsoletes:	openoffice-i18n-th-kde
 Obsoletes:	openoffice.org-i18n-th
-%{?noarchpackage}
+BuildArch:	noarch
 
 %description i18n-th
 This package provides resources containing menus and dialogs in Thai
@@ -2569,7 +2569,7 @@ Obsoletes:	openoffice-i18n-tn
 Obsoletes:	openoffice-i18n-tn-gtk
 Obsoletes:	openoffice-i18n-tn-kde
 Obsoletes:	openoffice.org-i18n-tn
-%{?noarchpackage}
+BuildArch:	noarch
 
 %description i18n-tn
 This package provides resources containing menus and dialogs in Tswana
@@ -2589,7 +2589,7 @@ Obsoletes:	openoffice-i18n-tr-gtk
 Obsoletes:	openoffice.org-i18n-tr
 Obsoletes:	openoffice.org-i18n-tr-gtk
 Obsoletes:	openoffice.org-i18n-tr-kde
-%{?noarchpackage}
+BuildArch:	noarch
 
 %description i18n-tr
 This package provides resources containing menus and dialogs in
@@ -2605,7 +2605,7 @@ Summary(pl.UTF-8):	LibreOffice - interfejs w języku tsonga
 Group:		I18n
 Requires:	%{name}-core = %{version}-%{release}
 Obsoletes:	openoffice.org-i18n-ts
-%{?noarchpackage}
+BuildArch:	noarch
 
 %description i18n-ts
 This package provides resources containing menus and dialogs in Tsonga
@@ -2621,7 +2621,7 @@ Summary(pl.UTF-8):	LibreOffice - interfejs w języku tatarskim
 Group:		I18n
 Requires:	%{name}-core = %{version}-%{release}
 Obsoletes:	openoffice.org-i18n-tt
-%{?noarchpackage}
+BuildArch:	noarch
 
 %description i18n-tt
 This package provides resources containing menus and dialogs in Tatar
@@ -2637,7 +2637,7 @@ Summary(pl.UTF-8):	LibreOffice - interfejs w języku ujgurskim
 Group:		I18n
 Requires:	%{name}-core = %{version}-%{release}
 Obsoletes:	openoffice.org-i18n-ug
-%{?noarchpackage}
+BuildArch:	noarch
 
 %description i18n-ug
 This package provides resources containing menus and dialogs in Uyghur
@@ -2657,7 +2657,7 @@ Obsoletes:	openoffice-i18n-uk-gtk
 Obsoletes:	openoffice.org-i18n-uk
 Obsoletes:	openoffice.org-i18n-uk-gtk
 Obsoletes:	openoffice.org-i18n-uk-kde
-%{?noarchpackage}
+BuildArch:	noarch
 
 %description i18n-uk
 This package provides resources containing menus and dialogs in
@@ -2673,7 +2673,7 @@ Summary(pl.UTF-8):	LibreOffice - interfejs w języku uzbeckim
 Group:		I18n
 Requires:	%{name}-core = %{version}-%{release}
 Obsoletes:	openoffice.org-i18n-uz
-%{?noarchpackage}
+BuildArch:	noarch
 
 %description i18n-uz
 This package provides resources containing menus and dialogs in Uzbek.
@@ -2688,7 +2688,7 @@ Summary(pl.UTF-8):	LibreOffice - interfejs w języku venda
 Group:		I18n
 Requires:	%{name}-core = %{version}-%{release}
 Obsoletes:	openoffice.org-i18n-ve
-%{?noarchpackage}
+BuildArch:	noarch
 
 %description i18n-ve
 This package provides resources containing menus and dialogs in Venda
@@ -2704,7 +2704,7 @@ Summary(pl.UTF-8):	LibreOffice - interfejs w języku wietnamskim
 Group:		I18n
 Requires:	%{name}-core = %{version}-%{release}
 Obsoletes:	openoffice.org-i18n-vi
-%{?noarchpackage}
+BuildArch:	noarch
 
 %description i18n-vi
 This package provides resources containing menus and dialogs in
@@ -2720,7 +2720,7 @@ Summary(pl.UTF-8):	LibreOffice - interfejs w języku khosa
 Group:		I18n
 Requires:	%{name}-core = %{version}-%{release}
 Obsoletes:	openoffice.org-i18n-xh
-%{?noarchpackage}
+BuildArch:	noarch
 
 %description i18n-xh
 This package provides resources containing menus and dialogs in Xhosa
@@ -2741,7 +2741,7 @@ Obsoletes:	openoffice-i18n-zh_CN-gtk
 Obsoletes:	openoffice.org-i18n-zh_CN
 Obsoletes:	openoffice.org-i18n-zh_CN-gtk
 Obsoletes:	openoffice.org-i18n-zh_CN-kde
-%{?noarchpackage}
+BuildArch:	noarch
 
 %description i18n-zh_CN
 This package provides resources containing menus and dialogs in
@@ -2762,7 +2762,7 @@ Obsoletes:	openoffice-i18n-zh_TW-gtk
 Obsoletes:	openoffice.org-i18n-zh_TW
 Obsoletes:	openoffice.org-i18n-zh_TW-gtk
 Obsoletes:	openoffice.org-i18n-zh_TW-kde
-%{?noarchpackage}
+BuildArch:	noarch
 
 %description i18n-zh_TW
 This package provides resources containing menus and dialogs in
@@ -2777,7 +2777,7 @@ Summary:	LibreOffice - interface in Venetian language
 Summary(pl.UTF-8):	LibreOffice - interfejs w języku Venetian
 Group:		I18n
 Requires:	%{name}-core = %{version}-%{release}
-%{?noarchpackage}
+BuildArch:	noarch
 
 %description i18n-vec
 This package provides resources containing menus and dialogs in
@@ -2797,7 +2797,7 @@ Obsoletes:	openoffice-i18n-zu-gtk
 Obsoletes:	openoffice.org-i18n-zu
 Obsoletes:	openoffice.org-i18n-zu-gtk
 Obsoletes:	openoffice.org-i18n-zu-kde
-%{?noarchpackage}
+BuildArch:	noarch
 
 %description i18n-zu
 This package provides resources containing menus and dialogs in Zulu
@@ -2814,7 +2814,7 @@ Group:		Applications/Shells
 Requires:	%{name}
 Requires:	bash-completion >= 2.0
 Obsoletes:	bash-completion-openoffice
-%{?noarchpackage}
+BuildArch:	noarch
 
 %description -n bash-completion-%{name}
 bash-completion for LibreOffice.
