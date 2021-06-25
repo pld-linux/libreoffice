@@ -99,6 +99,7 @@ Source30:	https://dev-www.libreoffice.org/extern/8249374c274932a21846fa7629c2aa9
 
 Patch0:		disable-failing-test.patch
 Patch1:		%{name}-upgrade-liborcus-to-0.16.0.patch
+Patch2:		gcc11.patch
 
 URL:		http://www.documentfoundation.org/
 BuildRequires:	/usr/bin/getopt
@@ -2842,6 +2843,7 @@ oraz narzędzie ui-previewer do sprawdzania wyglądu okien dialogowych.
 %setup -q -a1 -a2 -a3
 %patch0 -p1
 %patch1 -p1
+%patch2 -p1
 
 for dir in *-%{version}; do
 	[ -f $dir/ChangeLog ] && %{__mv} $dir/ChangeLog ChangeLog-$dir
