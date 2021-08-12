@@ -2937,6 +2937,8 @@ ulimit -c unlimited || :
 
 export PATH=$PATH:%{_libdir}/interbase/bin
 %configure \
+	ac_cv_prog_LO_CLANG_CC= \
+	ac_cv_prog_LO_CLANG_CXX= \
 	--enable-cups \
 	--enable-dbus \
 	--disable-epm \
