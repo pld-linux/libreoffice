@@ -57,6 +57,8 @@
 %define		major_ver	7.2.0
 %define		qt5_ver		5.6
 
+%define		use_jdk		openjdk11
+
 Summary:	LibreOffice - powerful office suite
 Summary(pl.UTF-8):	LibreOffice - potężny pakiet biurowy
 Name:		libreoffice
@@ -252,8 +254,9 @@ BuildRequires:	zlib-devel
 %if %{with java}
 BuildRequires:	ant >= 1.7.0
 BuildRequires:	ant-apache-regexp
-BuildRequires:	jdk >= 1.9
-BuildRequires:	jre >= 1.9
+BuildRequires:	openjdk11-jdk-base
+BuildRequires:	openjdk11-jre-base
+BuildRequires:	openjdk11-jre-base-X11
 %endif
 %if %{with kde5}
 BuildRequires:	kf5-kconfig-devel >= 5.0
