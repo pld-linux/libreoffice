@@ -33,6 +33,7 @@
 
 %bcond_with	system_agg		# system agg library (not supported as of 6.4.x, pdfium uses included version)
 %bcond_without	system_beanshell	# system Java BeanShell library
+%bcond_with	system_cmis		# system libcmis library (build fails)
 %bcond_with	system_coinmp		# system CoinMP library (not in PLD yet)
 %bcond_with	system_hsqldb		# system Java HSQLDB library
 %bcond_without	system_hunspell		# system hunspell library
@@ -53,29 +54,29 @@
 %define		with_qt5	1
 %endif
 
-%define		major_ver	6.4.7
+%define		major_ver	7.2.0
 %define		qt5_ver		5.6
 
 Summary:	LibreOffice - powerful office suite
 Summary(pl.UTF-8):	LibreOffice - potężny pakiet biurowy
 Name:		libreoffice
-Version:	%{major_ver}.2
-Release:	6
+Version:	%{major_ver}.3
+Release:	1
 License:	GPL/LGPL
 Group:		X11/Applications
 Source0:	http://download.documentfoundation.org/libreoffice/src/%{major_ver}/%{name}-%{version}.tar.xz
-# Source0-md5:	123a79615835b84e63db0e73616de42d
+# Source0-md5:	2e994b22a38dfd4e76d90552566ad533
 Source1:	http://download.documentfoundation.org/libreoffice/src/%{major_ver}/%{name}-dictionaries-%{version}.tar.xz
-# Source1-md5:	83110d0469eac3c6eb02706f9c971d89
+# Source1-md5:	a92d627c04334cb56f9b722e1e2be78c
 Source2:	http://download.documentfoundation.org/libreoffice/src/%{major_ver}/%{name}-help-%{version}.tar.xz
-# Source2-md5:	12d7df4d251c3a12cc328b7386b85883
+# Source2-md5:	70a9677a664e4ed0153524e803cea16e
 Source3:	http://download.documentfoundation.org/libreoffice/src/%{major_ver}/%{name}-translations-%{version}.tar.xz
-# Source3-md5:	4c56cbcfea204bd0ee0ad4ddc37c0283
+# Source3-md5:	30537a2522c857b024a8f7309bba4fdd
 
 # make (download|fetch) DO_FETCH_TARBALLS=1 WGET=wget
 # but not sure if all are needed?
-Source20:	http://dev-www.libreoffice.org/src/pdfium-4137.tar.bz2
-# Source20-md5:	f9524b0fa40702d2891d0f8ae612adbf
+Source20:	http://dev-www.libreoffice.org/src/pdfium-4500.tar.bz2
+# Source20-md5:	d9bc09c21cbbc7053b9678f2a9b761ae
 Source21:	http://dev-www.libreoffice.org/src/17410483b5b5f267aa18b7e00b65e6e0-hsqldb_1_8_0.zip
 # Source21-md5:	17410483b5b5f267aa18b7e00b65e6e0
 Source22:	http://dev-www.libreoffice.org/src/CoinMP-1.7.6.tgz
@@ -86,20 +87,26 @@ Source24:	http://dev-www.libreoffice.org/src/0168229624cfac409e766913506961a8-uc
 # Source24-md5:	0168229624cfac409e766913506961a8
 Source25:	http://dev-www.libreoffice.org/src/35c94d2df8893241173de1d16b6034c0-swingExSrc.zip
 # Source25-md5:	35c94d2df8893241173de1d16b6034c0
-Source26:	https://dev-www.libreoffice.org/extern/odfvalidator-1.2.0-incubating-SNAPSHOT-jar-with-dependencies-971c54fd38a968f5860014b44301872706f9e540.jar
-# Source26-md5:	52edf061bc1063dd624cf69170db4d5f
+Source26:	https://dev-www.libreoffice.org/extern/odfvalidator-0.9.0-RC2-SNAPSHOT-jar-with-dependencies-2726ab578664434a545f8379a01a9faffac0ae73.jar
+# Source26-md5:	80e162d2adfd99057d1e0c62c3883364
 Source27:	http://dev-www.libreoffice.org/src/a7983f859eafb2677d7ff386a023bc40-xsltml_2.1.2.zip
 # Source27-md5:	a7983f859eafb2677d7ff386a023bc40
-Source28:	https://dev-www.libreoffice.org/extern/884ed41809687c3e168fc7c19b16585149ff058eca79acbf3ee784f6630704cc-opens___.ttf
-# Source28-md5:	866ba2ca4188f1610b121dfd514a17e8
+Source28:	https://dev-www.libreoffice.org/extern/f543e6e2d7275557a839a164941c0a86e5f2c3f2a0042bfc434c88c6dde9e140-opens___.ttf
+# Source28-md5:	09c7414a011363c72248c7bf3a23d758
 Source29:	https://dev-www.libreoffice.org/src/QR-Code-generator-1.4.0.tar.gz
 # Source29-md5:	0e81d36829be287ff27ae802e0587463
 Source30:	https://dev-www.libreoffice.org/extern/8249374c274932a21846fa7629c2aa9b-officeotron-0.7.4-master.jar
 # Source30-md5:	8249374c274932a21846fa7629c2aa9b
+Source31:	https://dev-www.libreoffice.org/src/dtoa-20180411.tgz
+# Source31-md5:	4295bad62b2524793d8a7ba3e7385501
+Source32:	https://dev-www.libreoffice.org/src/skia-m90-45c57e116ee0ce214bdf78405a4762722e4507d9.tar.xz
+# Source32-md5:	76729a69e8ab04f49987c7aa701cadc4
+Source33:	https://dev-www.libreoffice.org/src/libcmis-0.5.2.tar.xz
+# Source33-md5:	3653bc54e1bcd17ae09a1a7086daa38b
+Source34:	skia-freetype2.11.patch
 
 Patch0:		disable-failing-test.patch
-Patch1:		%{name}-upgrade-liborcus-to-0.16.0.patch
-Patch2:		gcc11.patch
+Patch1:		pld-skia-patches.patch
 
 URL:		http://www.documentfoundation.org/
 BuildRequires:	/usr/bin/getopt
@@ -114,7 +121,8 @@ BuildRequires:	automake >= 1:1.9
 BuildRequires:	bash
 BuildRequires:	bison >= 2.0
 BuildRequires:	bluez-libs-devel
-BuildRequires:	boost-devel >= 1.47
+BuildRequires:	boost-devel >= 1.66
+BuildRequires:	box2d-devel
 BuildRequires:	cairo-devel >= 1.8.0
 %{?with_ccache:BuildRequires:	ccache}
 BuildRequires:	clucene-core-devel >= 2.3
@@ -137,7 +145,7 @@ BuildRequires:	gpgme-c++-devel
 BuildRequires:	graphite2-devel >= 0.9.3
 BuildRequires:	gstreamer-devel >= 1.0
 BuildRequires:	gstreamer-plugins-base-devel >= 1.0
-%{?with_gtk3:BuildRequires:	gtk+3-devel >= 3.18}
+%{?with_gtk3:BuildRequires:	gtk+3-devel >= 3.20}
 BuildRequires:	harfbuzz-icu-devel >= 0.9.42
 %{?with_system_hunspell:BuildRequires:	hunspell-devel >= 1.2.2}
 %{?with_system_hyphen:BuildRequires:	hyphen-devel}
@@ -175,7 +183,7 @@ BuildRequires:	libjpeg-devel
 BuildRequires:	liblangtag-devel >= 0.4.0
 BuildRequires:	libmspub-devel >= 0.1
 BuildRequires:	libmwaw-devel >= 0.3.1
-BuildRequires:	libnumbertext-devel >= 1.0.0
+BuildRequires:	libnumbertext-devel >= 1.0.6
 BuildRequires:	libodfgen-devel >= 0.1.1
 BuildRequires:	liborcus-devel >= 0.16.0
 BuildRequires:	libpagemaker-devel >= 0.0.2
@@ -202,7 +210,7 @@ BuildRequires:	mdds-devel >= 1.5.0
 %{?with_mono:BuildRequires:	mono-static >= 1.2.3}
 BuildRequires:	mysql-devel >= 5
 BuildRequires:	mythes-devel >= 1.2
-BuildRequires:	neon-devel >= 0.26.0
+BuildRequires:	neon-devel >= 0.31.2
 BuildRequires:	nspr-devel >= 1:4.8
 BuildRequires:	nss-devel >= 1:3.10
 BuildRequires:	openldap-devel
@@ -211,7 +219,7 @@ BuildRequires:	pango-devel >= 1:1.17.3
 BuildRequires:	perl-Archive-Zip
 BuildRequires:	perl-base >= 5
 BuildRequires:	perl-devel >= 5
-BuildRequires:	pkgconfig
+BuildRequires:	pkgconfig >= 1:0.9.0
 BuildRequires:	poppler-cpp-devel >= 0.12.0
 BuildRequires:	poppler-devel >= 0.12.0
 %{?with_pgsql:BuildRequires:	postgresql-devel}
@@ -226,6 +234,7 @@ BuildRequires:	sane-backends-devel
 BuildRequires:	sed >= 4.0
 BuildRequires:	startup-notification-devel >= 0.5
 BuildRequires:	systemtap-sdt-devel
+BuildRequires:	tar >= 1:1.22
 BuildRequires:	unixODBC-devel >= 2.2.12-2
 BuildRequires:	unzip
 BuildRequires:	xmlsec1-nss-devel >= 1.2.28
@@ -237,13 +246,14 @@ BuildRequires:	xorg-lib-libXext-devel
 BuildRequires:	xorg-lib-libXinerama-devel
 BuildRequires:	xorg-lib-libXrandr-devel >= 1.2
 BuildRequires:	xorg-lib-libXrender-devel
+BuildRequires:	xz
 BuildRequires:	zip >= 3.0
 BuildRequires:	zlib-devel
 %if %{with java}
 BuildRequires:	ant >= 1.7.0
 BuildRequires:	ant-apache-regexp
-BuildRequires:	jdk >= 1.8
-BuildRequires:	jre-X11 >= 1.8
+BuildRequires:	jdk >= 1.9
+BuildRequires:	jre >= 1.9
 %endif
 %if %{with kde5}
 BuildRequires:	kf5-kconfig-devel >= 5.0
@@ -344,7 +354,7 @@ Summary(pl.UTF-8):	Interfejs GTK+ 3 dla LibreOffice
 Group:		X11/Libraries
 Requires:	%{name}-core = %{version}-%{release}
 Requires:	glib2 >= 1:2.38
-Requires:	gtk+3 >= 3.18
+Requires:	gtk+3 >= 3.20
 Obsoletes:	libreoffice-libs-gtk-common < 6.4.5.2-1
 Obsoletes:	libreoffice-libs-gtk2 < 6.4.5.2-1
 
@@ -403,7 +413,7 @@ Requires:	libpagemaker >= 0.0.2
 Requires:	libraptor2 >= 2.0.7
 Requires:	librevenge >= 0.0.1
 Requires:	mktemp
-Requires:	neon >= 0.26.0
+Requires:	neon >= 0.31.2
 Requires:	nspr >= 1:4.8
 Requires:	nss >= 1:3.10
 Requires:	redland >= 1.0.16
@@ -2843,7 +2853,6 @@ oraz narzędzie ui-previewer do sprawdzania wyglądu okien dialogowych.
 %setup -q -a1 -a2 -a3
 %patch0 -p1
 %patch1 -p1
-%patch2 -p1
 
 for dir in *-%{version}; do
 	[ -f $dir/ChangeLog ] && %{__mv} $dir/ChangeLog ChangeLog-$dir
@@ -2863,7 +2872,14 @@ ln %{SOURCE27} ext_sources
 ln %{SOURCE28} ext_sources
 ln %{SOURCE29} ext_sources
 ln %{SOURCE30} ext_sources
+ln %{SOURCE31} ext_sources
+ln %{SOURCE32} ext_sources
+%if %{without system_cmis}
+ln %{SOURCE33} ext_sources
+%endif
 :> src.downloaded
+
+ln %{SOURCE34} external/skia
 
 %build
 # Make sure we have /proc mounted - otherwise idlc will fail later.
@@ -2889,9 +2905,6 @@ export CXX="%{__cxx}"
 export CPP="%{__cpp}"
 
 export IGNORE_MANIFEST_CHANGES=1
-export QT4INC="%{_includedir}/qt4"
-export QT4LIB="%{_libdir}"
-export QT4DIR="%{_libdir}/qt4"
 
 %if %{with java}
 export JAVA_HOME="%{java_home}"
@@ -2943,6 +2956,7 @@ export PATH=$PATH:%{_libdir}/interbase/bin
 	--enable-scripting-javascript \
 	--enable-split-app-modules \
 	--enable-split-opt-features \
+	--disable-zxing \
 	--with-build-version=%{version}-%{release} \
 	--with-external-dict-dir=%{_datadir}/myspell \
 	--with-external-tar=$(pwd)/ext_sources \
@@ -2958,6 +2972,7 @@ export PATH=$PATH:%{_libdir}/interbase/bin
 	%{?with_system_agg:--with-system-agg} \
 	%{!?with_system_hyphen:--without-system-altlinuxhyph} \
 	%{!?with_system_beanshell:--without-system-beanshell} \
+	%{__with_without system_cmis system-libcmis} \
 	%{!?with_system_coinmp:--without-system-coinmp} \
 	%{?with_system_hsqldb:--with-system-hsqldb} \
 	%{!?with_system_hunspell:--without-system-hunspell} \
@@ -3003,9 +3018,6 @@ rm -rf $RPM_BUILD_ROOT
 if [ ! -f makeinstall.stamp -o ! -d $RPM_BUILD_ROOT ]; then
 	%{__rm} -rf makeinstall.stamp installed.stamp $RPM_BUILD_ROOT
 
-	export QTINC="%{_includedir}/qt"
-	export QTLIB="%{_libdir}"
-	export QT4DIR="%{_libdir}/qt4"
 	export DESTDIR=$RPM_BUILD_ROOT
 	export TMP="%{tmpdir}"
 	export TMPDIR="%{tmpdir}"
@@ -3049,9 +3061,7 @@ if [ ! -f installed.stamp ]; then
 	%{__mv} $RPM_BUILD_ROOT%{_libdir}/%{name}/program/resource $RPM_BUILD_ROOT%{_datadir}/%{name}/program
 	ln -s ../../../share/%{name}/program/resource $RPM_BUILD_ROOT%{_libdir}/%{name}/program/resource
 
-	%{__rm} -r $RPM_BUILD_ROOT%{_desktopdir}/*.desktop \
-		$RPM_BUILD_ROOT%{_iconsdir}/{gnome,locolor} \
-		$RPM_BUILD_ROOT%{_datadir}/application-registry
+	%{__rm} -r $RPM_BUILD_ROOT%{_desktopdir}/*.desktop
 	for a in $RPM_BUILD_ROOT%{_datadir}/%{name}/share/xdg/*.desktop; do
 		cp $a $RPM_BUILD_ROOT%{_desktopdir}/libreoffice-$(basename "$a")
 	done
@@ -3330,12 +3340,7 @@ fi
 %attr(755,root,root) %{_libdir}/%{name}/program/libfps_officelo.so
 %attr(755,root,root) %{_libdir}/%{name}/program/libfrmlo.so
 %attr(755,root,root) %{_libdir}/%{name}/program/libfsstoragelo.so
-%attr(755,root,root) %{_libdir}/%{name}/program/libfwelo.so
-%attr(755,root,root) %{_libdir}/%{name}/program/libfwilo.so
 %attr(755,root,root) %{_libdir}/%{name}/program/libfwklo.so
-%attr(755,root,root) %{_libdir}/%{name}/program/libfwllo.so
-%attr(755,root,root) %{_libdir}/%{name}/program/libfwmlo.so
-%attr(755,root,root) %{_libdir}/%{name}/program/libgielo.so
 %attr(755,root,root) %{_libdir}/%{name}/program/libguesslanglo.so
 %attr(755,root,root) %{_libdir}/%{name}/program/libhelplinkerlo.so
 %{!?with_system_hunspell:%attr(755,root,root) %{_libdir}/%{name}/program/libhunspell.so}
@@ -3356,10 +3361,8 @@ fi
 %attr(755,root,root) %{_libdir}/%{name}/program/liblocaledata_others.so
 %attr(755,root,root) %{_libdir}/%{name}/program/libloglo.so
 %attr(755,root,root) %{_libdir}/%{name}/program/liblosessioninstalllo.so
-%attr(755,root,root) %{_libdir}/%{name}/program/libmcnttype.so
 %attr(755,root,root) %{_libdir}/%{name}/program/libmigrationoo2lo.so
 %attr(755,root,root) %{_libdir}/%{name}/program/libmigrationoo3lo.so
-%attr(755,root,root) %{_libdir}/%{name}/program/libmorklo.so
 %attr(755,root,root) %{_libdir}/%{name}/program/libmozbootstraplo.so
 %attr(755,root,root) %{_libdir}/%{name}/program/libmsfilterlo.so
 %attr(755,root,root) %{_libdir}/%{name}/program/libmsformslo.so
@@ -3390,6 +3393,7 @@ fi
 %attr(755,root,root) %{_libdir}/%{name}/program/libsduilo.so
 %attr(755,root,root) %{_libdir}/%{name}/program/libsfxlo.so
 %attr(755,root,root) %{_libdir}/%{name}/program/libsimplecanvaslo.so
+%attr(755,root,root) %{_libdir}/%{name}/program/libskialo.so
 %attr(755,root,root) %{_libdir}/%{name}/program/libslideshowlo.so
 %attr(755,root,root) %{_libdir}/%{name}/program/libsofficeapp.so
 %attr(755,root,root) %{_libdir}/%{name}/program/libsotlo.so
@@ -3491,6 +3495,7 @@ fi
 %{_libdir}/%{name}/program/classes/form.jar
 %{!?with_system_hsqldb:%{_libdir}/%{name}/program/classes/hsqldb.jar}
 %{_libdir}/%{name}/program/classes/js.jar
+%{_libdir}/%{name}/program/classes/libreoffice.jar
 %{_libdir}/%{name}/program/classes/officebean.jar
 %{_libdir}/%{name}/program/classes/query.jar
 %{_libdir}/%{name}/program/classes/report.jar
@@ -3508,53 +3513,27 @@ fi
 %dir %{_libdir}/%{name}/program/opencl
 %{_libdir}/%{name}/program/opencl/cl-test.ods
 %dir %{_libdir}/%{name}/program/opengl
-%{_libdir}/%{name}/program/opengl/areaHashCRC64TFragmentShader.glsl
-%{_libdir}/%{name}/program/opengl/areaScaleFastFragmentShader.glsl
-%{_libdir}/%{name}/program/opengl/areaScaleFragmentShader.glsl
 %{_libdir}/%{name}/program/opengl/basicFragmentShader.glsl
 %{_libdir}/%{name}/program/opengl/basicVertexShader.glsl
-%{_libdir}/%{name}/program/opengl/blendedTextureFragmentShader.glsl
-%{_libdir}/%{name}/program/opengl/blendedTextureVertexShader.glsl
-%{_libdir}/%{name}/program/opengl/combinedFragmentShader.glsl
-%{_libdir}/%{name}/program/opengl/combinedTextureFragmentShader.glsl
-%{_libdir}/%{name}/program/opengl/combinedTextureVertexShader.glsl
-%{_libdir}/%{name}/program/opengl/combinedVertexShader.glsl
-%{_libdir}/%{name}/program/opengl/convolutionFragmentShader.glsl
-%{_libdir}/%{name}/program/opengl/diffTextureFragmentShader.glsl
 %{_libdir}/%{name}/program/opengl/dissolveFragmentShader.glsl
-%{_libdir}/%{name}/program/opengl/dumbVertexShader.glsl
 %{_libdir}/%{name}/program/opengl/dummyVertexShader.glsl
 %{_libdir}/%{name}/program/opengl/fadeBlackFragmentShader.glsl
 %{_libdir}/%{name}/program/opengl/fadeFragmentShader.glsl
 %{_libdir}/%{name}/program/opengl/glitterFragmentShader.glsl
 %{_libdir}/%{name}/program/opengl/glitterVertexShader.glsl
-%{_libdir}/%{name}/program/opengl/greyscaleFragmentShader.glsl
 %{_libdir}/%{name}/program/opengl/honeycombFragmentShader.glsl
 %{_libdir}/%{name}/program/opengl/honeycombGeometryShader.glsl
 %{_libdir}/%{name}/program/opengl/honeycombVertexShader.glsl
-%{_libdir}/%{name}/program/opengl/invert50FragmentShader.glsl
-%{_libdir}/%{name}/program/opengl/linearGradientFragmentShader.glsl
 %{_libdir}/%{name}/program/opengl/linearMultiColorGradientFragmentShader.glsl
 %{_libdir}/%{name}/program/opengl/linearTwoColorGradientFragmentShader.glsl
-%{_libdir}/%{name}/program/opengl/lineFragmentShader.glsl
-%{_libdir}/%{name}/program/opengl/lineVertexShader.glsl
-%{_libdir}/%{name}/program/opengl/maskedTextureFragmentShader.glsl
-%{_libdir}/%{name}/program/opengl/maskedTextureVertexShader.glsl
-%{_libdir}/%{name}/program/opengl/maskFragmentShader.glsl
-%{_libdir}/%{name}/program/opengl/radialGradientFragmentShader.glsl
 %{_libdir}/%{name}/program/opengl/radialMultiColorGradientFragmentShader.glsl
 %{_libdir}/%{name}/program/opengl/radialTwoColorGradientFragmentShader.glsl
 %{_libdir}/%{name}/program/opengl/rectangularMultiColorGradientFragmentShader.glsl
 %{_libdir}/%{name}/program/opengl/rectangularTwoColorGradientFragmentShader.glsl
 %{_libdir}/%{name}/program/opengl/reflectionFragmentShader.glsl
 %{_libdir}/%{name}/program/opengl/reflectionVertexShader.glsl
-%{_libdir}/%{name}/program/opengl/replaceColorFragmentShader.glsl
 %{_libdir}/%{name}/program/opengl/rippleFragmentShader.glsl
-%{_libdir}/%{name}/program/opengl/solidFragmentShader.glsl
 %{_libdir}/%{name}/program/opengl/staticFragmentShader.glsl
-%{_libdir}/%{name}/program/opengl/textureFragmentShader.glsl
-%{_libdir}/%{name}/program/opengl/textureVertexShader.glsl
-%{_libdir}/%{name}/program/opengl/transformedTextureVertexShader.glsl
 %{_libdir}/%{name}/program/opengl/vortexFragmentShader.glsl
 %{_libdir}/%{name}/program/opengl/vortexGeometryShader.glsl
 %{_libdir}/%{name}/program/opengl/vortexVertexShader.glsl
@@ -3595,7 +3574,8 @@ fi
 %{_datadir}/%{name}/share/config/images_sifr_dark.zip
 %{_datadir}/%{name}/share/config/images_sifr_dark_svg.zip
 %{_datadir}/%{name}/share/config/images_sifr_svg.zip
-%{_datadir}/%{name}/share/config/images_tango.zip
+%{_datadir}/%{name}/share/config/images_sukapura.zip
+%{_datadir}/%{name}/share/config/images_sukapura_svg.zip
 %dir %{_datadir}/%{name}/share/config/soffice.cfg
 %dir %{_datadir}/%{name}/share/config/soffice.cfg/cui
 %{_datadir}/%{name}/share/config/soffice.cfg/cui/ui
@@ -3685,16 +3665,21 @@ fi
 %dir %{_datadir}/%{name}/share/registry/res
 %{_datadir}/%{name}/share/registry/res/fcfg_langpack_en-US.xcd
 
+%dir %{_datadir}/%{name}/share/skia
+%{_datadir}/%{name}/share/skia/skia_denylist_vulkan.xml
+
 %dir %{_datadir}/%{name}/share/theme_definitions
 %dir %{_datadir}/%{name}/share/theme_definitions/ios
 %{_datadir}/%{name}/share/theme_definitions/ios/*.svg
 %{_datadir}/%{name}/share/theme_definitions/ios/*.xml
 
 %dir %{_datadir}/%{name}/share/tipoftheday
-%{_datadir}/%{name}/share/tipoftheday/tipoftheday*.png
+%{_datadir}/%{name}/share/tipoftheday/*.gif
+%{_datadir}/%{name}/share/tipoftheday/*.png
 
 %dir %{_datadir}/%{name}/share/template
 %dir %{_datadir}/%{name}/share/template/common
+%{_datadir}/%{name}/share/template/common/draw
 %{_datadir}/%{name}/share/template/common/internal
 %{_datadir}/%{name}/share/template/common/officorr
 %{_datadir}/%{name}/share/template/common/offimisc
@@ -3709,6 +3694,9 @@ fi
 %{_datadir}/%{name}/share/template/common/wizard/letter
 %{_datadir}/%{name}/share/template/common/wizard/report
 %{_datadir}/%{name}/share/template/common/wizard/styles
+
+%dir %{_datadir}/%{name}/share/toolbarmode
+%{_datadir}/%{name}/share/toolbarmode/*.png
 
 %dir %{_datadir}/%{name}/share/wizards
 %{_datadir}/%{name}/share/wizards/resources_en_US.properties
@@ -3735,7 +3723,6 @@ fi
 %attr(755,root,root) %{_libdir}/%{name}/program/unopkg
 %attr(755,root,root) %{_libdir}/%{name}/program/unopkg.bin
 %{_libdir}/%{name}/program/bootstraprc
-%{_libdir}/%{name}/program/flat_logo.svg
 %{_libdir}/%{name}/program/fundamentalrc
 %{_libdir}/%{name}/program/intro.png
 %{_libdir}/%{name}/program/redirectrc
@@ -3755,7 +3742,6 @@ fi
 
 %{_datadir}/mime/packages/libreoffice.xml
 %{_iconsdir}/hicolor/*/mimetypes/libreoffice-*.png
-%{_iconsdir}/hicolor/*/mimetypes/libreoffice-*.svg
 %{_iconsdir}/hicolor/*/apps/libreoffice-main.png
 %{_iconsdir}/hicolor/*/apps/libreoffice-main.svg
 %{_iconsdir}/hicolor/*/apps/libreoffice-chart.png
@@ -3766,9 +3752,6 @@ fi
 %{_desktopdir}/libreoffice-startcenter.desktop
 %{_iconsdir}/hicolor/*/apps/libreoffice-startcenter.png
 %{_iconsdir}/hicolor/*/apps/libreoffice-startcenter.svg
-
-%{_datadir}/mime-info/libreoffice.keys
-%{_datadir}/mime-info/libreoffice.mime
 
 %{_mandir}/man1/loffice.1
 %{_mandir}/man1/lofromtemplate.1
@@ -3835,8 +3818,8 @@ fi
 %{_datadir}/%{name}/share/config/soffice.cfg/modules/dbtdata/popupmenu
 %{_datadir}/%{name}/share/config/soffice.cfg/modules/dbtdata/toolbar
 %{_datadir}/%{name}/share/registry/base.xcd
-%{_datadir}/appdata/libreoffice-base.appdata.xml
-%{_datadir}/appdata/org.libreoffice.kde.metainfo.xml
+%{_datadir}/metainfo/libreoffice-base.appdata.xml
+%{_datadir}/metainfo/org.libreoffice.kde.metainfo.xml
 
 %files calc
 %defattr(644,root,root,755)
@@ -3867,7 +3850,7 @@ fi
 %{_datadir}/%{name}/share/config/soffice.cfg/modules/scalc/toolbar
 %{_datadir}/%{name}/share/config/soffice.cfg/modules/scalc/ui
 %{_datadir}/%{name}/share/registry/calc.xcd
-%{_datadir}/appdata/libreoffice-calc.appdata.xml
+%{_datadir}/metainfo/libreoffice-calc.appdata.xml
 
 %files draw
 %defattr(644,root,root,755)
@@ -3884,7 +3867,7 @@ fi
 %{_datadir}/%{name}/share/config/soffice.cfg/modules/sdraw/toolbar
 %{_datadir}/%{name}/share/config/soffice.cfg/modules/sdraw/ui
 %{_datadir}/%{name}/share/registry/draw.xcd
-%{_datadir}/appdata/libreoffice-draw.appdata.xml
+%{_datadir}/metainfo/libreoffice-draw.appdata.xml
 
 %files emailmerge
 %defattr(644,root,root,755)
@@ -3917,7 +3900,7 @@ fi
 %{_datadir}/%{name}/share/config/soffice.cfg/modules/swriter/ui
 %{_datadir}/%{name}/share/config/soffice.cfg/writerperfect
 %{_datadir}/%{name}/share/registry/writer.xcd
-%{_datadir}/appdata/libreoffice-writer.appdata.xml
+%{_datadir}/metainfo/libreoffice-writer.appdata.xml
 
 %files impress
 %defattr(644,root,root,755)
@@ -3941,7 +3924,7 @@ fi
 %{_datadir}/%{name}/share/config/soffice.cfg/modules/simpress/ui
 %{_datadir}/%{name}/share/registry/impress.xcd
 %{_datadir}/%{name}/share/registry/ogltrans.xcd
-%{_datadir}/appdata/libreoffice-impress.appdata.xml
+%{_datadir}/metainfo/libreoffice-impress.appdata.xml
 
 %files math
 %defattr(644,root,root,755)
@@ -3973,7 +3956,6 @@ fi
 
 %files graphicfilter
 %defattr(644,root,root,755)
-%attr(755,root,root) %{_libdir}/%{name}/program/libflashlo.so
 %attr(755,root,root) %{_libdir}/%{name}/program/libsvgfilterlo.so
 %{_datadir}/%{name}/share/registry/graphicfilter.xcd
 %attr(755,root,root) %{_libdir}/%{name}/program/libgraphicfilterlo.so
@@ -3988,7 +3970,6 @@ fi
 %if %{with pgsql}
 %files postgresql
 %defattr(644,root,root,755)
-%{_libdir}/%{name}/program/postgresql-sdbc.ini
 %{_libdir}/%{name}/program/services/postgresql-sdbc.rdb
 %{_datadir}/%{name}/share/registry/postgresql.xcd
 %attr(755,root,root) %{_libdir}/%{name}/program/libpostgresql-sdbclo.so
