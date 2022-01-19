@@ -109,6 +109,7 @@ Source34:	skia-freetype2.11.patch
 
 Patch0:		disable-failing-test.patch
 Patch1:		pld-skia-patches.patch
+Patch2:		bison3.8.patch
 
 URL:		http://www.documentfoundation.org/
 BuildRequires:	/usr/bin/getopt
@@ -2856,6 +2857,7 @@ oraz narzędzie ui-previewer do sprawdzania wyglądu okien dialogowych.
 %setup -q -a1 -a2 -a3
 %patch0 -p1
 %patch1 -p1
+%patch2 -p1
 
 for dir in *-%{version}; do
 	[ -f $dir/ChangeLog ] && %{__mv} $dir/ChangeLog ChangeLog-$dir
