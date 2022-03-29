@@ -63,7 +63,7 @@ Summary:	LibreOffice - powerful office suite
 Summary(pl.UTF-8):	LibreOffice - potężny pakiet biurowy
 Name:		libreoffice
 Version:	%{major_ver}.3
-Release:	3
+Release:	4
 License:	GPL/LGPL
 Group:		X11/Applications
 Source0:	http://download.documentfoundation.org/libreoffice/src/%{major_ver}/%{name}-%{version}.tar.xz
@@ -110,7 +110,7 @@ Source34:	skia-freetype2.11.patch
 Patch0:		disable-failing-test.patch
 Patch1:		pld-skia-patches.patch
 Patch2:		bison3.8.patch
-
+Patch3:		kf5-detect.patch
 URL:		http://www.documentfoundation.org/
 BuildRequires:	/usr/bin/getopt
 %{?with_firebird:BuildRequires:	Firebird-devel >= 3.0.0.0}
@@ -2858,6 +2858,7 @@ oraz narzędzie ui-previewer do sprawdzania wyglądu okien dialogowych.
 %patch0 -p1
 %patch1 -p1
 %patch2 -p1
+%patch3 -p1
 
 for dir in *-%{version}; do
 	[ -f $dir/ChangeLog ] && %{__mv} $dir/ChangeLog ChangeLog-$dir
