@@ -293,9 +293,9 @@ Requires:	%{name}-web = %{version}-%{release}
 Requires:	%{name}-wiki-publisher = %{version}-%{release}
 Requires:	%{name}-writer = %{version}-%{release}
 Requires:	%{name}-xsltfilter = %{version}-%{release}
-Obsoletes:	libreoffice-testtools
-Obsoletes:	openoffice.org
-Obsoletes:	openoffice.org-testtools
+Obsoletes:	libreoffice-testtools < 3.5.0.3
+Obsoletes:	openoffice.org < 1:4
+Obsoletes:	openoffice.org-testtools < 1:4
 ExclusiveArch:	%{ix86} %{x8664} ppc sparc sparcv9 aarch64
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
@@ -426,71 +426,71 @@ Requires:	xmlsec1-nss >= 1.2.28
 Requires:	xorg-lib-libXrandr >= 1.2
 #Suggests: chkfontpath
 Obsoletes:	libreoffice-binfilter < 4.0.0.0
-Obsoletes:	libreoffice-i18n-kid
-Obsoletes:	libreoffice-i18n-ku
-Obsoletes:	libreoffice-i18n-ky
-Obsoletes:	libreoffice-i18n-ms
-Obsoletes:	libreoffice-i18n-pap
-Obsoletes:	libreoffice-i18n-ps
-Obsoletes:	libreoffice-i18n-qtz
-Obsoletes:	libreoffice-i18n-sc
-Obsoletes:	libreoffice-i18n-sh
-Obsoletes:	libreoffice-i18n-ti
-Obsoletes:	libreoffice-i18n-ur
+Obsoletes:	libreoffice-i18n-kid < 3.3.1.1-1
+Obsoletes:	libreoffice-i18n-ku < 4.2.0.4-1
+Obsoletes:	libreoffice-i18n-ky < 3.3.1.1-1
+Obsoletes:	libreoffice-i18n-ms < 3.3.1.1-1
+Obsoletes:	libreoffice-i18n-pap < 3.3.1.1-1
+Obsoletes:	libreoffice-i18n-ps < 3.3.1.1-1
+Obsoletes:	libreoffice-i18n-qtz < 4.0.1.2
+Obsoletes:	libreoffice-i18n-sc < 3.3.1.1-1
+Obsoletes:	libreoffice-i18n-sh < 4.2.0.4-1
+Obsoletes:	libreoffice-i18n-ti < 3.3.1.1-1
+Obsoletes:	libreoffice-i18n-ur < 3.3.1.1-1
 Obsoletes:	libreoffice-javafilter < 4.1.0.0
 Obsoletes:	libreoffice-report-builder < 4.1.0.0
-Obsoletes:	oooqs
-Obsoletes:	openoffice
-Obsoletes:	openoffice-i18n-fo
-Obsoletes:	openoffice-i18n-fo-gtk
-Obsoletes:	openoffice-i18n-ia
-Obsoletes:	openoffice-i18n-ia-gtk
-Obsoletes:	openoffice-i18n-id
-Obsoletes:	openoffice-i18n-id-gtk
-Obsoletes:	openoffice-i18n-la
-Obsoletes:	openoffice-i18n-la-gtk
-Obsoletes:	openoffice-i18n-med
-Obsoletes:	openoffice-i18n-med-gtk
-Obsoletes:	openoffice-i18n-mi
-Obsoletes:	openoffice-i18n-mi-gtk
-Obsoletes:	openoffice-i18n-ro
-Obsoletes:	openoffice-i18n-ro-gtk
-Obsoletes:	openoffice-libs
-Obsoletes:	openoffice.org-core
-Obsoletes:	openoffice.org-dirs
-Obsoletes:	openoffice.org-i18n-bn_BD
-Obsoletes:	openoffice.org-i18n-by
-Obsoletes:	openoffice.org-i18n-fo
-Obsoletes:	openoffice.org-i18n-fo-gtk
-Obsoletes:	openoffice.org-i18n-fo-kde
-Obsoletes:	openoffice.org-i18n-gu_IN
-Obsoletes:	openoffice.org-i18n-ia
-Obsoletes:	openoffice.org-i18n-ia-gtk
-Obsoletes:	openoffice.org-i18n-ia-kde
-Obsoletes:	openoffice.org-i18n-id
-Obsoletes:	openoffice.org-i18n-id-gtk
-Obsoletes:	openoffice.org-i18n-id-kde
-Obsoletes:	openoffice.org-i18n-kid
-Obsoletes:	openoffice.org-i18n-ky
-Obsoletes:	openoffice.org-i18n-la
-Obsoletes:	openoffice.org-i18n-la-gtk
-Obsoletes:	openoffice.org-i18n-la-kde
-Obsoletes:	openoffice.org-i18n-med
-Obsoletes:	openoffice.org-i18n-med-gtk
-Obsoletes:	openoffice.org-i18n-med-kde
-Obsoletes:	openoffice.org-i18n-mi
-Obsoletes:	openoffice.org-i18n-mi-gtk
-Obsoletes:	openoffice.org-i18n-mi-kde
-Obsoletes:	openoffice.org-i18n-ms
-Obsoletes:	openoffice.org-i18n-pap
-Obsoletes:	openoffice.org-i18n-ro
-Obsoletes:	openoffice.org-i18n-ro-gtk
-Obsoletes:	openoffice.org-i18n-ro-kde
-Obsoletes:	openoffice.org-i18n-sc
-Obsoletes:	openoffice.org-i18n-sw
-Obsoletes:	openoffice.org-i18n-sx
-Obsoletes:	openoffice.org-i18n-ti
-Obsoletes:	openoffice.org-i18n-ur
+Obsoletes:	oooqs < 2.1
+Obsoletes:	openoffice < 1:2
+Obsoletes:	openoffice-i18n-fo < 1:2
+Obsoletes:	openoffice-i18n-fo-gtk < 1:2
+Obsoletes:	openoffice-i18n-ia < 1:2
+Obsoletes:	openoffice-i18n-ia-gtk < 1:2
+Obsoletes:	openoffice-i18n-id < 1:2
+Obsoletes:	openoffice-i18n-id-gtk < 1:2
+Obsoletes:	openoffice-i18n-la < 1:2
+Obsoletes:	openoffice-i18n-la-gtk < 1:2
+Obsoletes:	openoffice-i18n-med < 1:2
+Obsoletes:	openoffice-i18n-med-gtk < 1:2
+Obsoletes:	openoffice-i18n-mi < 1:2
+Obsoletes:	openoffice-i18n-mi-gtk < 1:2
+Obsoletes:	openoffice-i18n-ro < 1:2
+Obsoletes:	openoffice-i18n-ro-gtk < 1:2
+Obsoletes:	openoffice-libs < 1:2
+Obsoletes:	openoffice.org-core < 1:4
+Obsoletes:	openoffice.org-dirs < 1:4
+Obsoletes:	openoffice.org-i18n-bn_BD < 1:4
+Obsoletes:	openoffice.org-i18n-by < 1:4
+Obsoletes:	openoffice.org-i18n-fo < 1:4
+Obsoletes:	openoffice.org-i18n-fo-gtk < 1:4
+Obsoletes:	openoffice.org-i18n-fo-kde < 1:4
+Obsoletes:	openoffice.org-i18n-gu_IN < 1:4
+Obsoletes:	openoffice.org-i18n-ia < 1:4
+Obsoletes:	openoffice.org-i18n-ia-gtk < 1:4
+Obsoletes:	openoffice.org-i18n-ia-kde < 1:4
+Obsoletes:	openoffice.org-i18n-id < 1:4
+Obsoletes:	openoffice.org-i18n-id-gtk < 1:4
+Obsoletes:	openoffice.org-i18n-id-kde < 1:4
+Obsoletes:	openoffice.org-i18n-kid < 1:4
+Obsoletes:	openoffice.org-i18n-ky < 1:4
+Obsoletes:	openoffice.org-i18n-la < 1:4
+Obsoletes:	openoffice.org-i18n-la-gtk < 1:4
+Obsoletes:	openoffice.org-i18n-la-kde < 1:4
+Obsoletes:	openoffice.org-i18n-med < 1:4
+Obsoletes:	openoffice.org-i18n-med-gtk < 1:4
+Obsoletes:	openoffice.org-i18n-med-kde < 1:4
+Obsoletes:	openoffice.org-i18n-mi < 1:4
+Obsoletes:	openoffice.org-i18n-mi-gtk < 1:4
+Obsoletes:	openoffice.org-i18n-mi-kde < 1:4
+Obsoletes:	openoffice.org-i18n-ms < 1:4
+Obsoletes:	openoffice.org-i18n-pap < 1:4
+Obsoletes:	openoffice.org-i18n-ro < 1:4
+Obsoletes:	openoffice.org-i18n-ro-gtk < 1:4
+Obsoletes:	openoffice.org-i18n-ro-kde < 1:4
+Obsoletes:	openoffice.org-i18n-sc < 1:4
+Obsoletes:	openoffice.org-i18n-sw < 1:4
+Obsoletes:	openoffice.org-i18n-sx < 1:4
+Obsoletes:	openoffice.org-i18n-ti < 1:4
+Obsoletes:	openoffice.org-i18n-ur < 1:4
 Obsoletes:	openoffice.org-libs < 1:2.1.0-0.m6.0.11
 
 %description core
@@ -506,7 +506,7 @@ Group:		Libraries
 Requires:	%{name}-core = %{version}-%{release}
 Requires:	python
 Provides:	pyuno
-Obsoletes:	openoffice.org-pyuno
+Obsoletes:	openoffice.org-pyuno < 1:4
 
 %description pyuno
 Cool Python bindings for the LibreOffice UNO component model. Allows
@@ -560,7 +560,7 @@ Requires(post,postun):	desktop-file-utils
 Requires(post,postun):	gtk-update-icon-cache
 Requires:	%{name}-core = %{version}-%{release}
 Requires:	hicolor-icon-theme
-Obsoletes:	openoffice.org-base
+Obsoletes:	openoffice.org-base < 1:4
 
 %description base
 GUI database frontend for LibreOffice. Allows creation and management
@@ -577,7 +577,7 @@ Group:		X11/Applications
 Requires(post,postun):	desktop-file-utils
 Requires:	%{name}-core = %{version}-%{release}
 Requires:	%{name}-writer = %{version}-%{release}
-Obsoletes:	openoffice.org-web
+Obsoletes:	openoffice.org-web < 1:4
 
 %description web
 Web publishing application of LibreOffice.
@@ -594,7 +594,7 @@ Requires(post,postun):	gtk-update-icon-cache
 Requires:	%{name}-core = %{version}-%{release}
 Requires:	hicolor-icon-theme
 Requires:	libwps >= 0.4.10
-Obsoletes:	openoffice.org-writer
+Obsoletes:	openoffice.org-writer < 1:4
 
 %description writer
 Wordprocessor application of LibreOffice.
@@ -608,7 +608,7 @@ Summary(pl.UTF-8):	Kompolent email mail merge dla LibreOffice
 Group:		X11/Applications
 Requires:	%{name}-pyuno = %{version}-%{release}
 Requires:	%{name}-writer = %{version}-%{release}
-Obsoletes:	openoffice.org-emailmerge
+Obsoletes:	openoffice.org-emailmerge < 1:4
 
 %description emailmerge
 Enables LibreOffice Writer module to enable mail merge to email.
@@ -628,7 +628,7 @@ Requires:	hicolor-icon-theme
 Requires:	libetonyek >= 0.1.4
 Requires:	libwps >= 0.4.10
 Requires:	lp_solve >= 5.5
-Obsoletes:	openoffice.org-calc
+Obsoletes:	openoffice.org-calc < 1:4
 
 %description calc
 Spreadsheet application of LibreOffice.
@@ -644,7 +644,7 @@ Requires(post,postun):	desktop-file-utils
 Requires(post,postun):	gtk-update-icon-cache
 Requires:	%{name}-core = %{version}-%{release}
 Requires:	hicolor-icon-theme
-Obsoletes:	openoffice.org-draw
+Obsoletes:	openoffice.org-draw < 1:4
 
 %description draw
 Drawing application of LibreOffice.
@@ -663,7 +663,7 @@ Requires:	hicolor-icon-theme
 Requires:	libetonyek >= 0.1.4
 Obsoletes:	libreoffice-presentation-minimizer < 4.2.0.0
 Obsoletes:	libreoffice-presenter-screen < 4.0.0.0-1
-Obsoletes:	openoffice.org-impress
+Obsoletes:	openoffice.org-impress < 1:4
 
 %description impress
 Presentation application of LibreOffice.
@@ -679,7 +679,7 @@ Requires(post,postun):	desktop-file-utils
 Requires(post,postun):	gtk-update-icon-cache
 Requires:	%{name}-core = %{version}-%{release}
 Requires:	hicolor-icon-theme
-Obsoletes:	openoffice.org-math
+Obsoletes:	openoffice.org-math < 1:4
 
 %description math
 Math editor of LibreOffice.
@@ -692,7 +692,7 @@ Summary:	Extra graphicfilter module for LibreOffice
 Summary(pl.UTF-8):	Dodatkowy moduł graphicfilter dla LibreOffice
 Group:		X11/Applications
 Requires:	%{name}-core = %{version}-%{release}
-Obsoletes:	openoffice.org-graphicfilter
+Obsoletes:	openoffice.org-graphicfilter < 1:4
 
 %description graphicfilter
 Graphicfilter module for LibreOffice, provides additional SVG and
@@ -707,7 +707,7 @@ Summary:	Extra xsltfilter module for LibreOffice
 Summary(pl.UTF-8):	Dodatkowy moduł xsltfilter dla LibreOffice
 Group:		X11/Applications
 Requires:	%{name}-core = %{version}-%{release}
-Obsoletes:	openoffice.org-xsltfilter
+Obsoletes:	openoffice.org-xsltfilter < 1:4
 
 %description xsltfilter
 xsltfilter module for LibreOffice, provides additional docbook and
@@ -758,7 +758,7 @@ wymagane jest bardziej złożone, nieliniowe programowanie.
 Summary:	UNO Runtime Environment
 Summary(pl.UTF-8):	Środowisko uruchomieniowe UNO
 Group:		Libraries
-Obsoletes:	openoffice.org-ure
+Obsoletes:	openoffice.org-ure < 1:4
 
 %description ure
 UNO is the component model of LibreOffice. UNO offers interoperability
@@ -785,7 +785,7 @@ Group:		X11/Applications
 Requires:	%{name}-core = %{version}-%{release}
 Requires:	browser-plugins >= 2.0
 Requires:	browser-plugins(%{_target_base_arch})
-Obsoletes:	browser-plugin-openoffice.org
+Obsoletes:	browser-plugin-openoffice.org < 1:4
 
 %description -n browser-plugin-%{name}
 LibreOffice plugin for WWW browsers.
@@ -802,11 +802,11 @@ Summary:	LibreOffice - interface in Afrikaans language
 Summary(pl.UTF-8):	LibreOffice - interfejs w języku afrykanerskim
 Group:		I18n
 Requires:	%{name}-core = %{version}-%{release}
-Obsoletes:	openoffice-i18n-af
-Obsoletes:	openoffice-i18n-af-gtk
-Obsoletes:	openoffice.org-i18n-af
-Obsoletes:	openoffice.org-i18n-af-gtk
-Obsoletes:	openoffice.org-i18n-af-kde
+Obsoletes:	openoffice-i18n-af < 1:2
+Obsoletes:	openoffice-i18n-af-gtk < 1:2
+Obsoletes:	openoffice.org-i18n-af < 1:4
+Obsoletes:	openoffice.org-i18n-af-gtk < 1:4
+Obsoletes:	openoffice.org-i18n-af-kde < 1:4
 BuildArch:	noarch
 
 %description i18n-af
@@ -837,11 +837,11 @@ Summary:	LibreOffice - interface in Arabic language
 Summary(pl.UTF-8):	LibreOffice - interfejs w języku arabskim
 Group:		I18n
 Requires:	%{name}-core = %{version}-%{release}
-Obsoletes:	openoffice-i18n-ar
-Obsoletes:	openoffice-i18n-ar-gtk
-Obsoletes:	openoffice.org-i18n-ar
-Obsoletes:	openoffice.org-i18n-ar-gtk
-Obsoletes:	openoffice.org-i18n-ar-kde
+Obsoletes:	openoffice-i18n-ar < 1:2
+Obsoletes:	openoffice-i18n-ar-gtk < 1:2
+Obsoletes:	openoffice.org-i18n-ar < 1:4
+Obsoletes:	openoffice.org-i18n-ar-gtk < 1:4
+Obsoletes:	openoffice.org-i18n-ar-kde < 1:4
 BuildArch:	noarch
 
 %description i18n-ar
@@ -857,7 +857,7 @@ Summary:	LibreOffice - interface in Assamese language
 Summary(pl.UTF-8):	LibreOffice - interfejs w języku asamskim
 Group:		I18n
 Requires:	%{name}-core = %{version}-%{release}
-Obsoletes:	openoffice.org-i18n-as_IN
+Obsoletes:	openoffice.org-i18n-as_IN < 1:4
 BuildArch:	noarch
 
 %description i18n-as
@@ -873,7 +873,7 @@ Summary:	LibreOffice - interface in Asturian language
 Summary(pl.UTF-8):	LibreOffice - interfejs w języku asturyjskim
 Group:		I18n
 Requires:	%{name}-core = %{version}-%{release}
-Obsoletes:	openoffice.org-i18n-ast
+Obsoletes:	openoffice.org-i18n-ast < 1:4
 BuildArch:	noarch
 
 %description i18n-ast
@@ -889,7 +889,7 @@ Summary:	LibreOffice - interface in Belarusian language
 Summary(pl.UTF-8):	LibreOffice - interfejs w języku białoruskim
 Group:		I18n
 Requires:	%{name}-core = %{version}-%{release}
-Obsoletes:	openoffice.org-i18n-be_BY
+Obsoletes:	openoffice.org-i18n-be_BY < 1:4
 BuildArch:	noarch
 
 %description i18n-be_BY
@@ -905,11 +905,11 @@ Summary:	LibreOffice - interface in Bulgarian language
 Summary(pl.UTF-8):	LibreOffice - interfejs w języku bułgarskim
 Group:		I18n
 Requires:	%{name}-core = %{version}-%{release}
-Obsoletes:	openoffice-i18n-bg
-Obsoletes:	openoffice-i18n-bg-gtk
-Obsoletes:	openoffice.org-i18n-bg
-Obsoletes:	openoffice.org-i18n-bg-gtk
-Obsoletes:	openoffice.org-i18n-bg-kde
+Obsoletes:	openoffice-i18n-bg < 1:2
+Obsoletes:	openoffice-i18n-bg-gtk < 1:2
+Obsoletes:	openoffice.org-i18n-bg < 1:4
+Obsoletes:	openoffice.org-i18n-bg-gtk < 1:4
+Obsoletes:	openoffice.org-i18n-bg-kde < 1:4
 BuildArch:	noarch
 
 %description i18n-bg
@@ -925,7 +925,7 @@ Summary:	LibreOffice - interface in Indian Bangla language
 Summary(pl.UTF-8):	LibreOffice - interfejs w języku indyjskim bengalskim
 Group:		I18n
 Requires:	%{name}-core = %{version}-%{release}
-Obsoletes:	openoffice.org-i18n-bn_IN
+Obsoletes:	openoffice.org-i18n-bn_IN < 1:4
 BuildArch:	noarch
 
 %description i18n-bn_IN
@@ -941,7 +941,7 @@ Summary:	LibreOffice - interface in Bangla language
 Summary(pl.UTF-8):	LibreOffice - interfejs w języku bengalskim
 Group:		I18n
 Requires:	%{name}-core = %{version}-%{release}
-Obsoletes:	openoffice.org-i18n-bn
+Obsoletes:	openoffice.org-i18n-bn < 1:4
 BuildArch:	noarch
 
 %description i18n-bn
@@ -957,7 +957,7 @@ Summary:	LibreOffice - interface in Tibetan language
 Summary(pl.UTF-8):	LibreOffice - interfejs w języku tybetańskim
 Group:		I18n
 Requires:	%{name}-core = %{version}-%{release}
-Obsoletes:	openoffice.org-i18n-bo
+Obsoletes:	openoffice.org-i18n-bo < 1:4
 BuildArch:	noarch
 
 %description i18n-bo
@@ -973,7 +973,7 @@ Summary:	LibreOffice - interface in Breton language
 Summary(pl.UTF-8):	LibreOffice - interfejs w języku bretońskim
 Group:		I18n
 Requires:	%{name}-core = %{version}-%{release}
-Obsoletes:	openoffice.org-i18n-br
+Obsoletes:	openoffice.org-i18n-br < 1:4
 BuildArch:	noarch
 
 %description i18n-br
@@ -989,7 +989,7 @@ Summary:	LibreOffice - interface in Bodo language
 Summary(pl.UTF-8):	LibreOffice - interfejs w języku boro
 Group:		I18n
 Requires:	%{name}-core = %{version}-%{release}
-Obsoletes:	openoffice.org-i18n-brx
+Obsoletes:	openoffice.org-i18n-brx < 1:4
 BuildArch:	noarch
 
 %description i18n-brx
@@ -1005,7 +1005,7 @@ Summary:	LibreOffice - interface in Bosnian language
 Summary(pl.UTF-8):	LibreOffice - interfejs w języku bośniackim
 Group:		I18n
 Requires:	%{name}-core = %{version}-%{release}
-Obsoletes:	openoffice.org-i18n-bs
+Obsoletes:	openoffice.org-i18n-bs < 1:4
 BuildArch:	noarch
 
 %description i18n-bs
@@ -1021,11 +1021,11 @@ Summary:	LibreOffice - interface in Catalan language
 Summary(pl.UTF-8):	LibreOffice - interfejs w języku katalońskim
 Group:		I18n
 Requires:	%{name}-core = %{version}-%{release}
-Obsoletes:	openoffice-i18n-ca
-Obsoletes:	openoffice-i18n-ca-gtk
-Obsoletes:	openoffice.org-i18n-ca
-Obsoletes:	openoffice.org-i18n-ca-gtk
-Obsoletes:	openoffice.org-i18n-ca-kde
+Obsoletes:	openoffice-i18n-ca < 1:2
+Obsoletes:	openoffice-i18n-ca-gtk < 1:2
+Obsoletes:	openoffice.org-i18n-ca < 1:4
+Obsoletes:	openoffice.org-i18n-ca-gtk < 1:4
+Obsoletes:	openoffice.org-i18n-ca-kde < 1:4
 BuildArch:	noarch
 
 %description i18n-ca
@@ -1056,11 +1056,11 @@ Summary:	LibreOffice - interface in Czech language
 Summary(pl.UTF-8):	LibreOffice - interfejs w języku czeskim
 Group:		I18n
 Requires:	%{name}-core = %{version}-%{release}
-Obsoletes:	openoffice-i18n-cs
-Obsoletes:	openoffice-i18n-cs-gtk
-Obsoletes:	openoffice.org-i18n-cs
-Obsoletes:	openoffice.org-i18n-cs-gtk
-Obsoletes:	openoffice.org-i18n-cs-kde
+Obsoletes:	openoffice-i18n-cs < 1:2
+Obsoletes:	openoffice-i18n-cs-gtk < 1:2
+Obsoletes:	openoffice.org-i18n-cs < 1:4
+Obsoletes:	openoffice.org-i18n-cs-gtk < 1:4
+Obsoletes:	openoffice.org-i18n-cs-kde < 1:4
 BuildArch:	noarch
 
 %description i18n-cs
@@ -1076,11 +1076,11 @@ Summary:	LibreOffice - interface in Cymraeg language
 Summary(pl.UTF-8):	LibreOffice - interfejs w języku walijskim
 Group:		I18n
 Requires:	%{name}-core = %{version}-%{release}
-Obsoletes:	openoffice-i18n-cy
-Obsoletes:	openoffice-i18n-cy-gtk
-Obsoletes:	openoffice.org-i18n-cy
-Obsoletes:	openoffice.org-i18n-cy-gtk
-Obsoletes:	openoffice.org-i18n-cy-kde
+Obsoletes:	openoffice-i18n-cy < 1:2
+Obsoletes:	openoffice-i18n-cy-gtk < 1:2
+Obsoletes:	openoffice.org-i18n-cy < 1:4
+Obsoletes:	openoffice.org-i18n-cy-gtk < 1:4
+Obsoletes:	openoffice.org-i18n-cy-kde < 1:4
 BuildArch:	noarch
 
 %description i18n-cy
@@ -1096,11 +1096,11 @@ Summary:	LibreOffice - interface in Danish language
 Summary(pl.UTF-8):	LibreOffice - interfejs w języku duńskim
 Group:		I18n
 Requires:	%{name}-core = %{version}-%{release}
-Obsoletes:	openoffice-i18n-da
-Obsoletes:	openoffice-i18n-da-gtk
-Obsoletes:	openoffice.org-i18n-da
-Obsoletes:	openoffice.org-i18n-da-gtk
-Obsoletes:	openoffice.org-i18n-da-kde
+Obsoletes:	openoffice-i18n-da < 1:2
+Obsoletes:	openoffice-i18n-da-gtk < 1:2
+Obsoletes:	openoffice.org-i18n-da < 1:4
+Obsoletes:	openoffice.org-i18n-da-gtk < 1:4
+Obsoletes:	openoffice.org-i18n-da-kde < 1:4
 BuildArch:	noarch
 
 %description i18n-da
@@ -1116,11 +1116,11 @@ Summary:	LibreOffice - interface in German language
 Summary(pl.UTF-8):	LibreOffice - interfejs w języku niemieckim
 Group:		I18n
 Requires:	%{name}-core = %{version}-%{release}
-Obsoletes:	openoffice-i18n-de
-Obsoletes:	openoffice-i18n-de-gtk
-Obsoletes:	openoffice.org-i18n-de
-Obsoletes:	openoffice.org-i18n-de-gtk
-Obsoletes:	openoffice.org-i18n-de-kde
+Obsoletes:	openoffice-i18n-de < 1:2
+Obsoletes:	openoffice-i18n-de-gtk < 1:2
+Obsoletes:	openoffice.org-i18n-de < 1:4
+Obsoletes:	openoffice.org-i18n-de-gtk < 1:4
+Obsoletes:	openoffice.org-i18n-de-kde < 1:4
 BuildArch:	noarch
 
 %description i18n-de
@@ -1136,7 +1136,7 @@ Summary:	LibreOffice - interface in Dogri language
 Summary(pl.UTF-8):	LibreOffice - interfejs w języku dogri
 Group:		I18n
 Requires:	%{name}-core = %{version}-%{release}
-Obsoletes:	openoffice.org-i18n-dgo
+Obsoletes:	openoffice.org-i18n-dgo < 1:4
 BuildArch:	noarch
 
 %description i18n-dgo
@@ -1152,7 +1152,7 @@ Summary:	LibreOffice - interface in Lower Sorbian language
 Summary(pl.UTF-8):	LibreOffice - interfejs w języku dolnołużyckim
 Group:		I18n
 Requires:	%{name}-core = %{version}-%{release}
-Obsoletes:	openoffice.org-i18n-dsb
+Obsoletes:	openoffice.org-i18n-dsb < 1:4
 BuildArch:	noarch
 
 %description i18n-dsb
@@ -1168,7 +1168,7 @@ Summary:	LibreOffice - interface in Dzongkha language
 Summary(pl.UTF-8):	Openoffice.org - interfejs w języku dżongkha
 Group:		I18n
 Requires:	%{name}-core = %{version}-%{release}
-Obsoletes:	openoffice.org-i18n-dz
+Obsoletes:	openoffice.org-i18n-dz < 1:4
 BuildArch:	noarch
 
 %description i18n-dz
@@ -1184,11 +1184,11 @@ Summary:	LibreOffice - interface in Greek language
 Summary(pl.UTF-8):	LibreOffice - interfejs w języku greckim
 Group:		I18n
 Requires:	%{name}-core = %{version}-%{release}
-Obsoletes:	openoffice-i18n-el
-Obsoletes:	openoffice-i18n-el-gtk
-Obsoletes:	openoffice.org-i18n-el
-Obsoletes:	openoffice.org-i18n-el-gtk
-Obsoletes:	openoffice.org-i18n-el-kde
+Obsoletes:	openoffice-i18n-el < 1:2
+Obsoletes:	openoffice-i18n-el-gtk < 1:2
+Obsoletes:	openoffice.org-i18n-el < 1:4
+Obsoletes:	openoffice.org-i18n-el-gtk < 1:4
+Obsoletes:	openoffice.org-i18n-el-kde < 1:4
 BuildArch:	noarch
 
 %description i18n-el
@@ -1204,7 +1204,7 @@ Summary:	LibreOffice - interface in English language for United Kingdom
 Summary(pl.UTF-8):	LibreOffice - interfejs w języku anglieskim dla Wielkiej Brytanii
 Group:		I18n
 Requires:	%{name}-core = %{version}-%{release}
-Obsoletes:	openoffice.org-i18n-en_GB
+Obsoletes:	openoffice.org-i18n-en_GB < 1:4
 BuildArch:	noarch
 
 %description i18n-en_GB
@@ -1220,7 +1220,7 @@ Summary:	LibreOffice - interface in English language for South Africa
 Summary(pl.UTF-8):	LibreOffice - interfejs w języku anglieskim dla Południowej Afryki
 Group:		I18n
 Requires:	%{name}-core = %{version}-%{release}
-Obsoletes:	openoffice.org-i18n-en_ZA
+Obsoletes:	openoffice.org-i18n-en_ZA < 1:4
 BuildArch:	noarch
 
 %description i18n-en_ZA
@@ -1236,7 +1236,7 @@ Summary:	LibreOffice - interface in Esperanto language
 Summary(pl.UTF-8):	LibreOffice - interfejs w języku esperanto
 Group:		I18n
 Requires:	%{name}-core = %{version}-%{release}
-Obsoletes:	openoffice.org-i18n-eo
+Obsoletes:	openoffice.org-i18n-eo < 1:4
 BuildArch:	noarch
 
 %description i18n-eo
@@ -1252,11 +1252,11 @@ Summary:	LibreOffice - interface in Spanish language
 Summary(pl.UTF-8):	LibreOffice - interfejs w języku hiszpańskim
 Group:		I18n
 Requires:	%{name}-core = %{version}-%{release}
-Obsoletes:	openoffice-i18n-es
-Obsoletes:	openoffice-i18n-es-gtk
-Obsoletes:	openoffice.org-i18n-es
-Obsoletes:	openoffice.org-i18n-es-gtk
-Obsoletes:	openoffice.org-i18n-es-kde
+Obsoletes:	openoffice-i18n-es < 1:2
+Obsoletes:	openoffice-i18n-es-gtk < 1:2
+Obsoletes:	openoffice.org-i18n-es < 1:4
+Obsoletes:	openoffice.org-i18n-es-gtk < 1:4
+Obsoletes:	openoffice.org-i18n-es-kde < 1:4
 BuildArch:	noarch
 
 %description i18n-es
@@ -1272,11 +1272,11 @@ Summary:	LibreOffice - interface in Estonian language
 Summary(pl.UTF-8):	LibreOffice - interfejs w języku estońskim
 Group:		I18n
 Requires:	%{name}-core = %{version}-%{release}
-Obsoletes:	openoffice-i18n-et
-Obsoletes:	openoffice-i18n-et-gtk
-Obsoletes:	openoffice.org-i18n-et
-Obsoletes:	openoffice.org-i18n-et-gtk
-Obsoletes:	openoffice.org-i18n-et-kde
+Obsoletes:	openoffice-i18n-et < 1:2
+Obsoletes:	openoffice-i18n-et-gtk < 1:2
+Obsoletes:	openoffice.org-i18n-et < 1:4
+Obsoletes:	openoffice.org-i18n-et-gtk < 1:4
+Obsoletes:	openoffice.org-i18n-et-kde < 1:4
 BuildArch:	noarch
 
 %description i18n-et
@@ -1292,10 +1292,10 @@ Summary:	LibreOffice - interface in Basque (Euskara) language
 Summary(pl.UTF-8):	LibreOffice - interfejs w języku baskijskim (euskera)
 Group:		I18n
 Requires:	%{name}-core = %{version}-%{release}
-Obsoletes:	openoffice-i18n-eu
-Obsoletes:	openoffice-i18n-eu-gtk
-Obsoletes:	openoffice-i18n-eu-kde
-Obsoletes:	openoffice.org-i18n-eu
+Obsoletes:	openoffice-i18n-eu < 1:2
+Obsoletes:	openoffice-i18n-eu-gtk < 1:2
+Obsoletes:	openoffice-i18n-eu-kde < 1:2
+Obsoletes:	openoffice.org-i18n-eu < 1:4
 BuildArch:	noarch
 
 %description i18n-eu
@@ -1311,10 +1311,10 @@ Summary:	LibreOffice - interface in Persian language
 Summary(pl.UTF-8):	LibreOffice - interfejs w języku perskim
 Group:		I18n
 Requires:	%{name}-core = %{version}-%{release}
-Obsoletes:	openoffice-i18n-fa
-Obsoletes:	openoffice-i18n-fa-gtk
-Obsoletes:	openoffice-i18n-fa-kde
-Obsoletes:	openoffice.org-i18n-fa
+Obsoletes:	openoffice-i18n-fa < 1:2
+Obsoletes:	openoffice-i18n-fa-gtk < 1:2
+Obsoletes:	openoffice-i18n-fa-kde < 1:2
+Obsoletes:	openoffice.org-i18n-fa < 1:4
 BuildArch:	noarch
 
 %description i18n-fa
@@ -1330,11 +1330,11 @@ Summary:	LibreOffice - interface in Finnish language
 Summary(pl.UTF-8):	LibreOffice - interfejs w języku fińskim
 Group:		I18n
 Requires:	%{name}-core = %{version}-%{release}
-Obsoletes:	openoffice-i18n-fi
-Obsoletes:	openoffice-i18n-fi-gtk
-Obsoletes:	openoffice.org-i18n-fi
-Obsoletes:	openoffice.org-i18n-fi-gtk
-Obsoletes:	openoffice.org-i18n-fi-kde
+Obsoletes:	openoffice-i18n-fi < 1:2
+Obsoletes:	openoffice-i18n-fi-gtk < 1:2
+Obsoletes:	openoffice.org-i18n-fi < 1:4
+Obsoletes:	openoffice.org-i18n-fi-gtk < 1:4
+Obsoletes:	openoffice.org-i18n-fi-kde < 1:4
 BuildArch:	noarch
 
 %description i18n-fi
@@ -1350,11 +1350,11 @@ Summary:	LibreOffice - interface in French language
 Summary(pl.UTF-8):	LibreOffice - interfejs w języku francuskim
 Group:		I18n
 Requires:	%{name}-core = %{version}-%{release}
-Obsoletes:	openoffice-i18n-fr
-Obsoletes:	openoffice-i18n-fr-gtk
-Obsoletes:	openoffice.org-i18n-fr
-Obsoletes:	openoffice.org-i18n-fr-gtk
-Obsoletes:	openoffice.org-i18n-fr-kde
+Obsoletes:	openoffice-i18n-fr < 1:2
+Obsoletes:	openoffice-i18n-fr-gtk < 1:2
+Obsoletes:	openoffice.org-i18n-fr < 1:4
+Obsoletes:	openoffice.org-i18n-fr-gtk < 1:4
+Obsoletes:	openoffice.org-i18n-fr-kde < 1:4
 BuildArch:	noarch
 
 %description i18n-fr
@@ -1370,11 +1370,11 @@ Summary:	LibreOffice - interface in Frisian language
 Summary(pl.UTF-8):	LibreOffice - interfejs w języku fryzyjskim 
 Group:		I18n
 Requires:	%{name}-core = %{version}-%{release}
-Obsoletes:	openoffice-i18n-fy
-Obsoletes:	openoffice-i18n-fy-gtk
-Obsoletes:	openoffice.org-i18n-fy
-Obsoletes:	openoffice.org-i18n-fy-gtk
-Obsoletes:	openoffice.org-i18n-fy-kde
+Obsoletes:	openoffice-i18n-fy < 1:2
+Obsoletes:	openoffice-i18n-fy-gtk < 1:2
+Obsoletes:	openoffice.org-i18n-fy < 1:4
+Obsoletes:	openoffice.org-i18n-fy-gtk < 1:4
+Obsoletes:	openoffice.org-i18n-fy-kde < 1:4
 BuildArch:	noarch
 
 %description i18n-fy
@@ -1390,11 +1390,11 @@ Summary:	LibreOffice - interface in Irish language
 Summary(pl.UTF-8):	LibreOffice - interfejs w języku irlandzkim
 Group:		I18n
 Requires:	%{name}-core = %{version}-%{release}
-Obsoletes:	openoffice-i18n-ga
-Obsoletes:	openoffice-i18n-ga-gtk
-Obsoletes:	openoffice.org-i18n-ga
-Obsoletes:	openoffice.org-i18n-ga-gtk
-Obsoletes:	openoffice.org-i18n-ga-kde
+Obsoletes:	openoffice-i18n-ga < 1:2
+Obsoletes:	openoffice-i18n-ga-gtk < 1:2
+Obsoletes:	openoffice.org-i18n-ga < 1:4
+Obsoletes:	openoffice.org-i18n-ga-gtk < 1:4
+Obsoletes:	openoffice.org-i18n-ga-kde < 1:4
 BuildArch:	noarch
 
 %description i18n-ga
@@ -1425,11 +1425,11 @@ Summary:	LibreOffice - interface in Galician language
 Summary(pl.UTF-8):	LibreOffice - interfejs w języku galicyjskim
 Group:		I18n
 Requires:	%{name}-core = %{version}-%{release}
-Obsoletes:	openoffice-i18n-gl
-Obsoletes:	openoffice-i18n-gl-gtk
-Obsoletes:	openoffice.org-i18n-gl
-Obsoletes:	openoffice.org-i18n-gl-gtk
-Obsoletes:	openoffice.org-i18n-gl-kde
+Obsoletes:	openoffice-i18n-gl < 1:2
+Obsoletes:	openoffice-i18n-gl-gtk < 1:2
+Obsoletes:	openoffice.org-i18n-gl < 1:4
+Obsoletes:	openoffice.org-i18n-gl-gtk < 1:4
+Obsoletes:	openoffice.org-i18n-gl-kde < 1:4
 BuildArch:	noarch
 
 %description i18n-gl
@@ -1445,7 +1445,7 @@ Summary:	LibreOffice - interface in Gujarati language
 Summary(pl.UTF-8):	LibreOffice - interfejs w języku gudźarati
 Group:		I18n
 Requires:	%{name}-core = %{version}-%{release}
-Obsoletes:	openoffice.org-i18n-gu
+Obsoletes:	openoffice.org-i18n-gu < 1:4
 BuildArch:	noarch
 
 %description i18n-gu
@@ -1476,11 +1476,11 @@ Summary:	LibreOffice - interface in Hebrew language
 Summary(pl.UTF-8):	LibreOffice - interfejs w języku hebrajskim
 Group:		I18n
 Requires:	%{name}-core = %{version}-%{release}
-Obsoletes:	openoffice-i18n-he
-Obsoletes:	openoffice-i18n-he-gtk
-Obsoletes:	openoffice.org-i18n-he
-Obsoletes:	openoffice.org-i18n-he-gtk
-Obsoletes:	openoffice.org-i18n-he-kde
+Obsoletes:	openoffice-i18n-he < 1:2
+Obsoletes:	openoffice-i18n-he-gtk < 1:2
+Obsoletes:	openoffice.org-i18n-he < 1:4
+Obsoletes:	openoffice.org-i18n-he-gtk < 1:4
+Obsoletes:	openoffice.org-i18n-he-kde < 1:4
 BuildArch:	noarch
 
 %description i18n-he
@@ -1496,11 +1496,11 @@ Summary:	LibreOffice - interface in Hindi language
 Summary(pl.UTF-8):	LibreOffice - interfejs w języku hindi
 Group:		I18n
 Requires:	%{name}-core = %{version}-%{release}
-Obsoletes:	openoffice-i18n-hi
-Obsoletes:	openoffice-i18n-hi-gtk
-Obsoletes:	openoffice.org-i18n-hi-gtk
-Obsoletes:	openoffice.org-i18n-hi-kde
-Obsoletes:	openoffice.org-i18n-hi_IN
+Obsoletes:	openoffice-i18n-hi < 1:2
+Obsoletes:	openoffice-i18n-hi-gtk < 1:2
+Obsoletes:	openoffice.org-i18n-hi-gtk < 1:4
+Obsoletes:	openoffice.org-i18n-hi-kde < 1:4
+Obsoletes:	openoffice.org-i18n-hi_IN < 1:4
 BuildArch:	noarch
 
 %description i18n-hi
@@ -1516,11 +1516,11 @@ Summary:	LibreOffice - interface in Croatian language
 Summary(pl.UTF-8):	LibreOffice - interfejs w języku chorwackim
 Group:		I18n
 Requires:	%{name}-core = %{version}-%{release}
-Obsoletes:	openoffice-i18n-hr
-Obsoletes:	openoffice-i18n-hr-gtk
-Obsoletes:	openoffice.org-i18n-hr
-Obsoletes:	openoffice.org-i18n-hr-gtk
-Obsoletes:	openoffice.org-i18n-hr-kde
+Obsoletes:	openoffice-i18n-hr < 1:2
+Obsoletes:	openoffice-i18n-hr-gtk < 1:2
+Obsoletes:	openoffice.org-i18n-hr < 1:4
+Obsoletes:	openoffice.org-i18n-hr-gtk < 1:4
+Obsoletes:	openoffice.org-i18n-hr-kde < 1:4
 BuildArch:	noarch
 
 %description i18n-hr
@@ -1536,11 +1536,11 @@ Summary:	LibreOffice - interface in Upper Sorbian language
 Summary(pl.UTF-8):	LibreOffice - interfejs w języku górnołużyckim
 Group:		I18n
 Requires:	%{name}-core = %{version}-%{release}
-Obsoletes:	openoffice-i18n-hsb
-Obsoletes:	openoffice-i18n-hsb-gtk
-Obsoletes:	openoffice.org-i18n-hsb
-Obsoletes:	openoffice.org-i18n-hsb-gtk
-Obsoletes:	openoffice.org-i18n-hsb-kde
+Obsoletes:	openoffice-i18n-hsb < 1:2
+Obsoletes:	openoffice-i18n-hsb-gtk < 1:2
+Obsoletes:	openoffice.org-i18n-hsb < 1:4
+Obsoletes:	openoffice.org-i18n-hsb-gtk < 1:4
+Obsoletes:	openoffice.org-i18n-hsb-kde < 1:4
 BuildArch:	noarch
 
 %description i18n-hsb
@@ -1556,11 +1556,11 @@ Summary:	LibreOffice - interface in Hungarian language
 Summary(pl.UTF-8):	LibreOffice - interfejs w języku węgierskim
 Group:		I18n
 Requires:	%{name}-core = %{version}-%{release}
-Obsoletes:	openoffice-i18n-hu
-Obsoletes:	openoffice-i18n-hu-gtk
-Obsoletes:	openoffice.org-i18n-hu
-Obsoletes:	openoffice.org-i18n-hu-gtk
-Obsoletes:	openoffice.org-i18n-hu-kde
+Obsoletes:	openoffice-i18n-hu < 1:2
+Obsoletes:	openoffice-i18n-hu-gtk < 1:2
+Obsoletes:	openoffice.org-i18n-hu < 1:4
+Obsoletes:	openoffice.org-i18n-hu-gtk < 1:4
+Obsoletes:	openoffice.org-i18n-hu-kde < 1:4
 BuildArch:	noarch
 
 %description i18n-hu
@@ -1591,7 +1591,7 @@ Summary:	LibreOffice - interface in Icelandic language
 Summary(pl.UTF-8):	LibreOffice - interfejs w języku islandzkim
 Group:		I18n
 Requires:	%{name}-core = %{version}-%{release}
-Obsoletes:	openoffice.org-i18n-is
+Obsoletes:	openoffice.org-i18n-is < 1:4
 BuildArch:	noarch
 
 %description i18n-is
@@ -1607,11 +1607,11 @@ Summary:	LibreOffice - interface in Italian language
 Summary(pl.UTF-8):	LibreOffice - interfejs w języku włoskim
 Group:		I18n
 Requires:	%{name}-core = %{version}-%{release}
-Obsoletes:	openoffice-i18n-it
-Obsoletes:	openoffice-i18n-it-gtk
-Obsoletes:	openoffice.org-i18n-it
-Obsoletes:	openoffice.org-i18n-it-gtk
-Obsoletes:	openoffice.org-i18n-it-kde
+Obsoletes:	openoffice-i18n-it < 1:2
+Obsoletes:	openoffice-i18n-it-gtk < 1:2
+Obsoletes:	openoffice.org-i18n-it < 1:4
+Obsoletes:	openoffice.org-i18n-it-gtk < 1:4
+Obsoletes:	openoffice.org-i18n-it-kde < 1:4
 BuildArch:	noarch
 
 %description i18n-it
@@ -1627,11 +1627,11 @@ Summary:	LibreOffice - interface in Japan language
 Summary(pl.UTF-8):	LibreOffice - interfejs w języku japońskim
 Group:		I18n
 Requires:	%{name}-core = %{version}-%{release}
-Obsoletes:	openoffice-i18n-ja
-Obsoletes:	openoffice-i18n-ja-gtk
-Obsoletes:	openoffice.org-i18n-ja
-Obsoletes:	openoffice.org-i18n-ja-gtk
-Obsoletes:	openoffice.org-i18n-ja-kde
+Obsoletes:	openoffice-i18n-ja < 1:2
+Obsoletes:	openoffice-i18n-ja-gtk < 1:2
+Obsoletes:	openoffice.org-i18n-ja < 1:4
+Obsoletes:	openoffice.org-i18n-ja-gtk < 1:4
+Obsoletes:	openoffice.org-i18n-ja-kde < 1:4
 BuildArch:	noarch
 
 %description i18n-ja
@@ -1647,7 +1647,7 @@ Summary:	LibreOffice - interface in Georgian language
 Summary(pl.UTF-8):	LibreOffice - interfejs w języku gruzińskim
 Group:		I18n
 Requires:	%{name}-core = %{version}-%{release}
-Obsoletes:	openoffice.org-i18n-ka
+Obsoletes:	openoffice.org-i18n-ka < 1:4
 BuildArch:	noarch
 
 %description i18n-ka
@@ -1663,7 +1663,7 @@ Summary:	LibreOffice - interface in Kabyle language
 Summary(pl.UTF-8):	LibreOffice - interfejs w języku kabylskim
 Group:		I18n
 Requires:	%{name}-core = %{version}-%{release}
-Obsoletes:	openoffice.org-i18n-kab
+Obsoletes:	openoffice.org-i18n-kab < 1:4
 BuildArch:	noarch
 
 %description i18n-kab
@@ -1679,7 +1679,7 @@ Summary:	LibreOffice - interface in Kazakh language
 Summary(pl.UTF-8):	LibreOffice - interfejs w języku kazachskim
 Group:		I18n
 Requires:	%{name}-core = %{version}-%{release}
-Obsoletes:	openoffice.org-i18n-kk
+Obsoletes:	openoffice.org-i18n-kk < 1:4
 BuildArch:	noarch
 
 %description i18n-kk
@@ -1695,7 +1695,7 @@ Summary:	LibreOffice - interface in Khmer language
 Summary(pl.UTF-8):	LibreOffice - interfejs w języku khmerskim
 Group:		I18n
 Requires:	%{name}-core = %{version}-%{release}
-Obsoletes:	openoffice.org-i18n-km
+Obsoletes:	openoffice.org-i18n-km < 1:4
 BuildArch:	noarch
 
 %description i18n-km
@@ -1726,10 +1726,10 @@ Summary:	LibreOffice - interface in Kannada language
 Summary(pl.UTF-8):	LibreOffice - interfejs w języku kannara
 Group:		I18n
 Requires:	%{name}-core = %{version}-%{release}
-Obsoletes:	openoffice-i18n-kn
-Obsoletes:	openoffice-i18n-kn-gtk
-Obsoletes:	openoffice-i18n-kn-kde
-Obsoletes:	openoffice.org-i18n-kn_IN
+Obsoletes:	openoffice-i18n-kn < 1:2
+Obsoletes:	openoffice-i18n-kn-gtk < 1:2
+Obsoletes:	openoffice-i18n-kn-kde < 1:2
+Obsoletes:	openoffice.org-i18n-kn_IN < 1:4
 BuildArch:	noarch
 
 %description i18n-kn_IN
@@ -1745,11 +1745,11 @@ Summary:	LibreOffice - interface in Korean language
 Summary(pl.UTF-8):	LibreOffice - interfejs w języku koreańskim
 Group:		I18n
 Requires:	%{name}-core = %{version}-%{release}
-Obsoletes:	openoffice-i18n-ko
-Obsoletes:	openoffice-i18n-ko-gtk
-Obsoletes:	openoffice.org-i18n-ko
-Obsoletes:	openoffice.org-i18n-ko-gtk
-Obsoletes:	openoffice.org-i18n-ko-kde
+Obsoletes:	openoffice-i18n-ko < 1:2
+Obsoletes:	openoffice-i18n-ko-gtk < 1:2
+Obsoletes:	openoffice.org-i18n-ko < 1:4
+Obsoletes:	openoffice.org-i18n-ko-gtk < 1:4
+Obsoletes:	openoffice.org-i18n-ko-kde < 1:4
 BuildArch:	noarch
 
 %description i18n-ko
@@ -1765,7 +1765,7 @@ Summary:	LibreOffice - interface in Konkani language
 Summary(pl.UTF-8):	LibreOffice - interfejs w języku konkani
 Group:		I18n
 Requires:	%{name}-core = %{version}-%{release}
-Obsoletes:	openoffice.org-i18n-kok
+Obsoletes:	openoffice.org-i18n-kok < 1:4
 BuildArch:	noarch
 
 %description i18n-kok
@@ -1781,7 +1781,7 @@ Summary:	LibreOffice - interface in Kashmiri language
 Summary(pl.UTF-8):	LibreOffice - interfejs w języku kaszmirskim
 Group:		I18n
 Requires:	%{name}-core = %{version}-%{release}
-Obsoletes:	openoffice.org-i18n-ks
+Obsoletes:	openoffice.org-i18n-ks < 1:4
 BuildArch:	noarch
 
 %description i18n-ks
@@ -1797,7 +1797,7 @@ Summary:	LibreOffice - interface in Luxembourgish language
 Summary(pl.UTF-8):	LibreOffice - interfejs w języku luksemburgskim
 Group:		I18n
 Requires:	%{name}-core = %{version}-%{release}
-Obsoletes:	openoffice.org-i18n-lb
+Obsoletes:	openoffice.org-i18n-lb < 1:4
 BuildArch:	noarch
 
 %description i18n-lb
@@ -1813,7 +1813,7 @@ Summary:	LibreOffice - interface in Lao language
 Summary(pl.UTF-8):	LibreOffice - interfejs w języku laotańskim
 Group:		I18n
 Requires:	%{name}-core = %{version}-%{release}
-Obsoletes:	openoffice.org-i18n-lo
+Obsoletes:	openoffice.org-i18n-lo < 1:4
 BuildArch:	noarch
 
 %description i18n-lo
@@ -1829,11 +1829,11 @@ Summary:	LibreOffice - interface in Lithuanian language
 Summary(pl.UTF-8):	LibreOffice - interfejs w języku litewskim
 Group:		I18n
 Requires:	%{name}-core = %{version}-%{release}
-Obsoletes:	openoffice-i18n-lt
-Obsoletes:	openoffice-i18n-lt-gtk
-Obsoletes:	openoffice.org-i18n-lt
-Obsoletes:	openoffice.org-i18n-lt-gtk
-Obsoletes:	openoffice.org-i18n-lt-kde
+Obsoletes:	openoffice-i18n-lt < 1:2
+Obsoletes:	openoffice-i18n-lt-gtk < 1:2
+Obsoletes:	openoffice.org-i18n-lt < 1:4
+Obsoletes:	openoffice.org-i18n-lt-gtk < 1:4
+Obsoletes:	openoffice.org-i18n-lt-kde < 1:4
 BuildArch:	noarch
 
 %description i18n-lt
@@ -1849,7 +1849,7 @@ Summary:	LibreOffice - interface in Latvian language
 Summary(pl.UTF-8):	LibreOffice - interfejs w języku łotewskim
 Group:		I18n
 Requires:	%{name}-core = %{version}-%{release}
-Obsoletes:	openoffice.org-i18n-lv
+Obsoletes:	openoffice.org-i18n-lv < 1:4
 BuildArch:	noarch
 
 %description i18n-lv
@@ -1865,7 +1865,7 @@ Summary:	LibreOffice - interface in Maithili language
 Summary(pl.UTF-8):	LibreOffice - interfejs w języku maithili
 Group:		I18n
 Requires:	%{name}-core = %{version}-%{release}
-Obsoletes:	openoffice.org-i18n-mai
+Obsoletes:	openoffice.org-i18n-mai < 1:4
 BuildArch:	noarch
 
 %description i18n-mai
@@ -1881,7 +1881,7 @@ Summary:	LibreOffice - interface in Macedonian language
 Summary(pl.UTF-8):	LibreOffice - interfejs w języku macedońskim
 Group:		I18n
 Requires:	%{name}-core = %{version}-%{release}
-Obsoletes:	openoffice.org-i18n-mk
+Obsoletes:	openoffice.org-i18n-mk < 1:4
 BuildArch:	noarch
 
 %description i18n-mk
@@ -1897,7 +1897,7 @@ Summary:	LibreOffice - interface in Malayalam language
 Summary(pl.UTF-8):	LibreOffice - interfejs w języku malajalamskim
 Group:		I18n
 Requires:	%{name}-core = %{version}-%{release}
-Obsoletes:	openoffice.org-i18n-ml_IN
+Obsoletes:	openoffice.org-i18n-ml_IN < 1:4
 BuildArch:	noarch
 
 %description i18n-ml
@@ -1913,7 +1913,7 @@ Summary:	LibreOffice - interface in Meitei language
 Summary(pl.UTF-8):	LibreOffice - interfejs w języku manipuri
 Group:		I18n
 Requires:	%{name}-core = %{version}-%{release}
-Obsoletes:	openoffice.org-i18n-mni
+Obsoletes:	openoffice.org-i18n-mni < 1:4
 BuildArch:	noarch
 
 %description i18n-mni
@@ -1929,7 +1929,7 @@ Summary:	LibreOffice - interface in Marathi language
 Summary(pl.UTF-8):	LibreOffice - interfejs w języku marathi
 Group:		I18n
 Requires:	%{name}-core = %{version}-%{release}
-Obsoletes:	openoffice.org-i18n-mr_IN
+Obsoletes:	openoffice.org-i18n-mr_IN < 1:4
 BuildArch:	noarch
 
 %description i18n-mr
@@ -1945,7 +1945,7 @@ Summary:	LibreOffice - interface in Mongolian language
 Summary(pl.UTF-8):	LibreOffice - interfejs w języku mongolskim
 Group:		I18n
 Requires:	%{name}-core = %{version}-%{release}
-Obsoletes:	openoffice.org-i18n-mn
+Obsoletes:	openoffice.org-i18n-mn < 1:4
 BuildArch:	noarch
 
 %description i18n-mn
@@ -1961,7 +1961,7 @@ Summary:	LibreOffice - interface in Burmese language
 Summary(pl.UTF-8):	LibreOffice - interfejs w języku birmańskim
 Group:		I18n
 Requires:	%{name}-core = %{version}-%{release}
-Obsoletes:	openoffice.org-i18n-my
+Obsoletes:	openoffice.org-i18n-my < 1:4
 BuildArch:	noarch
 
 %description i18n-my
@@ -1977,11 +1977,11 @@ Summary:	LibreOffice - interface in Norwegian Bokmaal language
 Summary(pl.UTF-8):	LibreOffice - interfejs w języku norweskim (odmiana Bokmaal)
 Group:		I18n
 Requires:	%{name}-core = %{version}-%{release}
-Obsoletes:	openoffice-i18n-nb
-Obsoletes:	openoffice-i18n-nb-gtk
-Obsoletes:	openoffice.org-i18n-nb
-Obsoletes:	openoffice.org-i18n-nb-gtk
-Obsoletes:	openoffice.org-i18n-nb-kde
+Obsoletes:	openoffice-i18n-nb < 1:2
+Obsoletes:	openoffice-i18n-nb-gtk < 1:2
+Obsoletes:	openoffice.org-i18n-nb < 1:4
+Obsoletes:	openoffice.org-i18n-nb-gtk < 1:4
+Obsoletes:	openoffice.org-i18n-nb-kde < 1:4
 BuildArch:	noarch
 
 %description i18n-nb
@@ -1997,7 +1997,7 @@ Summary:	LibreOffice - interface in Nepali language
 Summary(pl.UTF-8):	LibreOffice - interfejs w języku nepalskim
 Group:		I18n
 Requires:	%{name}-core = %{version}-%{release}
-Obsoletes:	openoffice.org-i18n-ne
+Obsoletes:	openoffice.org-i18n-ne < 1:4
 BuildArch:	noarch
 
 %description i18n-ne
@@ -2013,11 +2013,11 @@ Summary:	LibreOffice - interface in Dutch language
 Summary(pl.UTF-8):	LibreOffice - interfejs w języku holenderskim
 Group:		I18n
 Requires:	%{name}-core = %{version}-%{release}
-Obsoletes:	openoffice-i18n-nl
-Obsoletes:	openoffice-i18n-nl-gtk
-Obsoletes:	openoffice.org-i18n-nl
-Obsoletes:	openoffice.org-i18n-nl-gtk
-Obsoletes:	openoffice.org-i18n-nl-kde
+Obsoletes:	openoffice-i18n-nl < 1:2
+Obsoletes:	openoffice-i18n-nl-gtk < 1:2
+Obsoletes:	openoffice.org-i18n-nl < 1:4
+Obsoletes:	openoffice.org-i18n-nl-gtk < 1:4
+Obsoletes:	openoffice.org-i18n-nl-kde < 1:4
 BuildArch:	noarch
 
 %description i18n-nl
@@ -2033,11 +2033,11 @@ Summary:	LibreOffice - interface in Norwegian Nynorsk language
 Summary(pl.UTF-8):	LibreOffice - interfejs w języku norweskim (odmiana Nynorsk)
 Group:		I18n
 Requires:	%{name}-core = %{version}-%{release}
-Obsoletes:	openoffice-i18n-nn
-Obsoletes:	openoffice-i18n-nn-gtk
-Obsoletes:	openoffice.org-i18n-nn
-Obsoletes:	openoffice.org-i18n-nn-gtk
-Obsoletes:	openoffice.org-i18n-nn-kde
+Obsoletes:	openoffice-i18n-nn < 1:2
+Obsoletes:	openoffice-i18n-nn-gtk < 1:2
+Obsoletes:	openoffice.org-i18n-nn < 1:4
+Obsoletes:	openoffice.org-i18n-nn-gtk < 1:4
+Obsoletes:	openoffice.org-i18n-nn-kde < 1:4
 BuildArch:	noarch
 
 %description i18n-nn
@@ -2053,7 +2053,7 @@ Summary:	LibreOffice - interface in South Ndebele language
 Summary(pl.UTF-8):	LibreOffice - interfejs w języku ndebele (południowym)
 Group:		I18n
 Requires:	%{name}-core = %{version}-%{release}
-Obsoletes:	openoffice.org-i18n-nr
+Obsoletes:	openoffice.org-i18n-nr < 1:4
 BuildArch:	noarch
 
 %description i18n-nr
@@ -2069,11 +2069,11 @@ Summary:	LibreOffice - interface in Northern Sotho language
 Summary(pl.UTF-8):	LibreOffice - interfejs w języku ludu Soto
 Group:		I18n
 Requires:	%{name}-core = %{version}-%{release}
-Obsoletes:	openoffice-i18n-nso
-Obsoletes:	openoffice-i18n-nso-gtk
-Obsoletes:	openoffice.org-i18n-nso
-Obsoletes:	openoffice.org-i18n-nso-gtk
-Obsoletes:	openoffice.org-i18n-nso-kde
+Obsoletes:	openoffice-i18n-nso < 1:2
+Obsoletes:	openoffice-i18n-nso-gtk < 1:2
+Obsoletes:	openoffice.org-i18n-nso < 1:4
+Obsoletes:	openoffice.org-i18n-nso-gtk < 1:4
+Obsoletes:	openoffice.org-i18n-nso-kde < 1:4
 BuildArch:	noarch
 
 %description i18n-nso
@@ -2089,7 +2089,7 @@ Summary:	LibreOffice - interface in Occitan language
 Summary(pl.UTF-8):	LibreOffice - interfejs w języku oksytańskim
 Group:		I18n
 Requires:	%{name}-core = %{version}-%{release}
-Obsoletes:	openoffice.org-i18n-oc
+Obsoletes:	openoffice.org-i18n-oc < 1:4
 BuildArch:	noarch
 
 %description i18n-oc
@@ -2105,7 +2105,7 @@ Summary:	LibreOffice - interface in Oromo language
 Summary(pl.UTF-8):	LibreOffice - interfejs w języku oromo
 Group:		I18n
 Requires:	%{name}-core = %{version}-%{release}
-Obsoletes:	openoffice.org-i18n-om
+Obsoletes:	openoffice.org-i18n-om < 1:4
 BuildArch:	noarch
 
 %description i18n-om
@@ -2121,7 +2121,7 @@ Summary:	LibreOffice - interface in Oriya language
 Summary(pl.UTF-8):	LibreOffice - interfejs w języku orija
 Group:		I18n
 Requires:	%{name}-core = %{version}-%{release}
-Obsoletes:	openoffice.org-i18n-or_IN
+Obsoletes:	openoffice.org-i18n-or_IN < 1:4
 BuildArch:	noarch
 
 %description i18n-or
@@ -2137,7 +2137,7 @@ Summary:	LibreOffice - interface in Punjabi language
 Summary(pl.UTF-8):	LibreOffice - interfejs w języku pendżabskim
 Group:		I18n
 Requires:	%{name}-core = %{version}-%{release}
-Obsoletes:	openoffice.org-i18n-pa_IN
+Obsoletes:	openoffice.org-i18n-pa_IN < 1:4
 BuildArch:	noarch
 
 %description i18n-pa_IN
@@ -2153,11 +2153,11 @@ Summary:	LibreOffice - interface in Polish language
 Summary(pl.UTF-8):	LibreOffice - interfejs w języku polskim
 Group:		I18n
 Requires:	%{name}-core = %{version}-%{release}
-Obsoletes:	openoffice-i18n-pl
-Obsoletes:	openoffice-i18n-pl-gtk
-Obsoletes:	openoffice.org-i18n-pl
-Obsoletes:	openoffice.org-i18n-pl-gtk
-Obsoletes:	openoffice.org-i18n-pl-kde
+Obsoletes:	openoffice-i18n-pl < 1:2
+Obsoletes:	openoffice-i18n-pl-gtk < 1:2
+Obsoletes:	openoffice.org-i18n-pl < 1:4
+Obsoletes:	openoffice.org-i18n-pl-gtk < 1:4
+Obsoletes:	openoffice.org-i18n-pl-kde < 1:4
 BuildArch:	noarch
 
 %description i18n-pl
@@ -2173,11 +2173,11 @@ Summary:	LibreOffice - interface in Portuguese language
 Summary(pl.UTF-8):	LibreOffice - interfejs w języku portugalskim
 Group:		I18n
 Requires:	%{name}-core = %{version}-%{release}
-Obsoletes:	openoffice-i18n-pt
-Obsoletes:	openoffice-i18n-pt-gtk
-Obsoletes:	openoffice.org-i18n-pt
-Obsoletes:	openoffice.org-i18n-pt-gtk
-Obsoletes:	openoffice.org-i18n-pt-kde
+Obsoletes:	openoffice-i18n-pt < 1:2
+Obsoletes:	openoffice-i18n-pt-gtk < 1:2
+Obsoletes:	openoffice.org-i18n-pt < 1:4
+Obsoletes:	openoffice.org-i18n-pt-gtk < 1:4
+Obsoletes:	openoffice.org-i18n-pt-kde < 1:4
 BuildArch:	noarch
 
 %description i18n-pt
@@ -2193,11 +2193,11 @@ Summary:	LibreOffice - interface in Brazilian Portuguese language
 Summary(pl.UTF-8):	LibreOffice - interfejs w języku portugalskim dla Brazylii
 Group:		I18n
 Requires:	%{name}-core = %{version}-%{release}
-Obsoletes:	openoffice-i18n-pt_BR
-Obsoletes:	openoffice-i18n-pt_BR-gtk
-Obsoletes:	openoffice.org-i18n-pt_BR
-Obsoletes:	openoffice.org-i18n-pt_BR-gtk
-Obsoletes:	openoffice.org-i18n-pt_BR-kde
+Obsoletes:	openoffice-i18n-pt_BR < 1:2
+Obsoletes:	openoffice-i18n-pt_BR-gtk < 1:2
+Obsoletes:	openoffice.org-i18n-pt_BR < 1:4
+Obsoletes:	openoffice.org-i18n-pt_BR-gtk < 1:4
+Obsoletes:	openoffice.org-i18n-pt_BR-kde < 1:4
 BuildArch:	noarch
 
 %description i18n-pt_BR
@@ -2213,7 +2213,7 @@ Summary:	LibreOffice - interface in Romanian language
 Summary(pl.UTF-8):	LibreOffice - interfejs w języku rumuńskim
 Group:		I18n
 Requires:	%{name}-core = %{version}-%{release}
-Obsoletes:	openoffice.org-i18n-ro
+Obsoletes:	openoffice.org-i18n-ro < 1:4
 BuildArch:	noarch
 
 %description i18n-ro
@@ -2229,11 +2229,11 @@ Summary:	LibreOffice - interface in Russian language
 Summary(pl.UTF-8):	LibreOffice - interfejs w języku rosyjskim
 Group:		I18n
 Requires:	%{name}-core = %{version}-%{release}
-Obsoletes:	openoffice-i18n-ru
-Obsoletes:	openoffice-i18n-ru-gtk
-Obsoletes:	openoffice.org-i18n-ru
-Obsoletes:	openoffice.org-i18n-ru-gtk
-Obsoletes:	openoffice.org-i18n-ru-kde
+Obsoletes:	openoffice-i18n-ru < 1:2
+Obsoletes:	openoffice-i18n-ru-gtk < 1:2
+Obsoletes:	openoffice.org-i18n-ru < 1:4
+Obsoletes:	openoffice.org-i18n-ru-gtk < 1:4
+Obsoletes:	openoffice.org-i18n-ru-kde < 1:4
 BuildArch:	noarch
 
 %description i18n-ru
@@ -2249,7 +2249,7 @@ Summary:	LibreOffice - interface in Kinarwanda language
 Summary(pl.UTF-8):	LibreOffice - interfejs w języku kinya-ruanda
 Group:		I18n
 Requires:	%{name}-core = %{version}-%{release}
-Obsoletes:	openoffice.org-i18n-rw
+Obsoletes:	openoffice.org-i18n-rw < 1:4
 BuildArch:	noarch
 
 %description i18n-rw
@@ -2265,7 +2265,7 @@ Summary:	LibreOffice - interface in Sanskrit language
 Summary(pl.UTF-8):	LibreOffice - interfejs w sanskrycie
 Group:		I18n
 Requires:	%{name}-core = %{version}-%{release}
-Obsoletes:	openoffice.org-i18n-sa_IN
+Obsoletes:	openoffice.org-i18n-sa_IN < 1:4
 BuildArch:	noarch
 
 %description i18n-sa_IN
@@ -2281,7 +2281,7 @@ Summary:	LibreOffice - interface in Santali language
 Summary(pl.UTF-8):	LibreOffice - interfejs w języku santali
 Group:		I18n
 Requires:	%{name}-core = %{version}-%{release}
-Obsoletes:	openoffice.org-i18n-sat
+Obsoletes:	openoffice.org-i18n-sat < 1:4
 BuildArch:	noarch
 
 %description i18n-sat
@@ -2297,7 +2297,7 @@ Summary:	LibreOffice - interface in Sindhi language
 Summary(pl.UTF-8):	LibreOffice - interfejs w języku sindhi
 Group:		I18n
 Requires:	%{name}-core = %{version}-%{release}
-Obsoletes:	openoffice.org-i18n-sd
+Obsoletes:	openoffice.org-i18n-sd < 1:4
 BuildArch:	noarch
 
 %description i18n-sd
@@ -2313,7 +2313,7 @@ Summary:	LibreOffice - interface in Sinhala language
 Summary(pl.UTF-8):	LibreOffice - interfejs w języku syngaleskim
 Group:		I18n
 Requires:	%{name}-core = %{version}-%{release}
-Obsoletes:	openoffice.org-i18n-si
+Obsoletes:	openoffice.org-i18n-si < 1:4
 BuildArch:	noarch
 
 %description i18n-si
@@ -2344,11 +2344,11 @@ Summary:	LibreOffice - interface in Slovak language
 Summary(pl.UTF-8):	LibreOffice - interfejs w języku słowackim
 Group:		I18n
 Requires:	%{name}-core = %{version}-%{release}
-Obsoletes:	openoffice-i18n-sk
-Obsoletes:	openoffice-i18n-sk-gtk
-Obsoletes:	openoffice.org-i18n-sk
-Obsoletes:	openoffice.org-i18n-sk-gtk
-Obsoletes:	openoffice.org-i18n-sk-kde
+Obsoletes:	openoffice-i18n-sk < 1:2
+Obsoletes:	openoffice-i18n-sk-gtk < 1:2
+Obsoletes:	openoffice.org-i18n-sk < 1:4
+Obsoletes:	openoffice.org-i18n-sk-gtk < 1:4
+Obsoletes:	openoffice.org-i18n-sk-kde < 1:4
 BuildArch:	noarch
 
 %description i18n-sk
@@ -2364,11 +2364,11 @@ Summary:	LibreOffice - interface in Slovenian language
 Summary(pl.UTF-8):	LibreOffice - interfejs w języku słoweńskim
 Group:		I18n
 Requires:	%{name}-core = %{version}-%{release}
-Obsoletes:	openoffice-i18n-sl
-Obsoletes:	openoffice-i18n-sl-gtk
-Obsoletes:	openoffice.org-i18n-sl
-Obsoletes:	openoffice.org-i18n-sl-gtk
-Obsoletes:	openoffice.org-i18n-sl-kde
+Obsoletes:	openoffice-i18n-sl < 1:2
+Obsoletes:	openoffice-i18n-sl-gtk < 1:2
+Obsoletes:	openoffice.org-i18n-sl < 1:4
+Obsoletes:	openoffice.org-i18n-sl-gtk < 1:4
+Obsoletes:	openoffice.org-i18n-sl-kde < 1:4
 BuildArch:	noarch
 
 %description i18n-sl
@@ -2399,7 +2399,7 @@ Summary:	LibreOffice - interface in Serbian language
 Summary(pl.UTF-8):	LibreOffice - interfejs w języku serbskim
 Group:		I18n
 Requires:	%{name}-core = %{version}-%{release}
-Obsoletes:	openoffice.org-i18n-sr
+Obsoletes:	openoffice.org-i18n-sr < 1:4
 BuildArch:	noarch
 
 %description i18n-sr
@@ -2430,7 +2430,7 @@ Summary:	LibreOffice - interface in Swati language
 Summary(pl.UTF-8):	LibreOffice - interfejs w języku suazi (siswati)
 Group:		I18n
 Requires:	%{name}-core = %{version}-%{release}
-Obsoletes:	openoffice.org-i18n-ss
+Obsoletes:	openoffice.org-i18n-ss < 1:4
 BuildArch:	noarch
 
 %description i18n-ss
@@ -2446,7 +2446,7 @@ Summary:	LibreOffice - interface in Southern Sotho language
 Summary(pl.UTF-8):	LibreOffice - interfejs w języku południowym sotho
 Group:		I18n
 Requires:	%{name}-core = %{version}-%{release}
-Obsoletes:	openoffice.org-i18n-st
+Obsoletes:	openoffice.org-i18n-st < 1:4
 BuildArch:	noarch
 
 %description i18n-st
@@ -2462,11 +2462,11 @@ Summary:	LibreOffice - interface in Swedish language
 Summary(pl.UTF-8):	LibreOffice - interfejs w języku szwedzkim
 Group:		I18n
 Requires:	%{name}-core = %{version}-%{release}
-Obsoletes:	openoffice-i18n-sv
-Obsoletes:	openoffice-i18n-sv-gtk
-Obsoletes:	openoffice.org-i18n-sv
-Obsoletes:	openoffice.org-i18n-sv-gtk
-Obsoletes:	openoffice.org-i18n-sv-kde
+Obsoletes:	openoffice-i18n-sv < 1:2
+Obsoletes:	openoffice-i18n-sv-gtk < 1:2
+Obsoletes:	openoffice.org-i18n-sv < 1:4
+Obsoletes:	openoffice.org-i18n-sv-gtk < 1:4
+Obsoletes:	openoffice.org-i18n-sv-kde < 1:4
 BuildArch:	noarch
 
 %description i18n-sv
@@ -2482,7 +2482,7 @@ Summary:	LibreOffice - interface in Swahili language for Tanzania
 Summary(pl.UTF-8):	LibreOffice - interfejs w języku suahili dla Tanzanii
 Group:		I18n
 Requires:	%{name}-core = %{version}-%{release}
-Obsoletes:	openoffice.org-i18n-sw_TZ
+Obsoletes:	openoffice.org-i18n-sw_TZ < 1:4
 BuildArch:	noarch
 
 %description i18n-sw_TZ
@@ -2513,7 +2513,7 @@ Summary:	LibreOffice - interface in Tamil language
 Summary(pl.UTF-8):	LibreOffice - interfejs w języku tamiskim
 Group:		I18n
 Requires:	%{name}-core = %{version}-%{release}
-Obsoletes:	openoffice.org-i18n-ta_IN
+Obsoletes:	openoffice.org-i18n-ta_IN < 1:4
 BuildArch:	noarch
 
 %description i18n-ta
@@ -2529,7 +2529,7 @@ Summary:	LibreOffice - interface in Telugu language
 Summary(pl.UTF-8):	LibreOffice - interfejs w języku telugu
 Group:		I18n
 Requires:	%{name}-core = %{version}-%{release}
-Obsoletes:	openoffice.org-i18n-te_IN
+Obsoletes:	openoffice.org-i18n-te_IN < 1:4
 BuildArch:	noarch
 
 %description i18n-te
@@ -2545,7 +2545,7 @@ Summary:	LibreOffice - interface in Tajik language
 Summary(pl.UTF-8):	LibreOffice - interfejs w języku tadżyckim
 Group:		I18n
 Requires:	%{name}-core = %{version}-%{release}
-Obsoletes:	openoffice.org-i18n-tg
+Obsoletes:	openoffice.org-i18n-tg < 1:4
 BuildArch:	noarch
 
 %description i18n-tg
@@ -2561,10 +2561,10 @@ Summary:	LibreOffice - interface in Thai language
 Summary(pl.UTF-8):	LibreOffice - interfejs w języku tajskim
 Group:		I18n
 Requires:	%{name}-core = %{version}-%{release}
-Obsoletes:	openoffice-i18n-th
-Obsoletes:	openoffice-i18n-th-gtk
-Obsoletes:	openoffice-i18n-th-kde
-Obsoletes:	openoffice.org-i18n-th
+Obsoletes:	openoffice-i18n-th < 1:2
+Obsoletes:	openoffice-i18n-th-gtk < 1:2
+Obsoletes:	openoffice-i18n-th-kde < 1:2
+Obsoletes:	openoffice.org-i18n-th < 1:4
 BuildArch:	noarch
 
 %description i18n-th
@@ -2580,10 +2580,10 @@ Summary:	LibreOffice - interface in Tswana language
 Summary(pl.UTF-8):	LibreOffice - interfejs w języku tswana
 Group:		I18n
 Requires:	%{name}-core = %{version}-%{release}
-Obsoletes:	openoffice-i18n-tn
-Obsoletes:	openoffice-i18n-tn-gtk
-Obsoletes:	openoffice-i18n-tn-kde
-Obsoletes:	openoffice.org-i18n-tn
+Obsoletes:	openoffice-i18n-tn < 1:2
+Obsoletes:	openoffice-i18n-tn-gtk < 1:2
+Obsoletes:	openoffice-i18n-tn-kde < 1:2
+Obsoletes:	openoffice.org-i18n-tn < 1:4
 BuildArch:	noarch
 
 %description i18n-tn
@@ -2599,11 +2599,11 @@ Summary:	LibreOffice - interface in Turkish language
 Summary(pl.UTF-8):	LibreOffice - interfejs w języku tureckim
 Group:		I18n
 Requires:	%{name}-core = %{version}-%{release}
-Obsoletes:	openoffice-i18n-tr
-Obsoletes:	openoffice-i18n-tr-gtk
-Obsoletes:	openoffice.org-i18n-tr
-Obsoletes:	openoffice.org-i18n-tr-gtk
-Obsoletes:	openoffice.org-i18n-tr-kde
+Obsoletes:	openoffice-i18n-tr < 1:2
+Obsoletes:	openoffice-i18n-tr-gtk < 1:2
+Obsoletes:	openoffice.org-i18n-tr < 1:4
+Obsoletes:	openoffice.org-i18n-tr-gtk < 1:4
+Obsoletes:	openoffice.org-i18n-tr-kde < 1:4
 BuildArch:	noarch
 
 %description i18n-tr
@@ -2619,7 +2619,7 @@ Summary:	LibreOffice - interface in Tsonga language
 Summary(pl.UTF-8):	LibreOffice - interfejs w języku tsonga
 Group:		I18n
 Requires:	%{name}-core = %{version}-%{release}
-Obsoletes:	openoffice.org-i18n-ts
+Obsoletes:	openoffice.org-i18n-ts < 1:4
 BuildArch:	noarch
 
 %description i18n-ts
@@ -2635,7 +2635,7 @@ Summary:	LibreOffice - interface in Tatar language
 Summary(pl.UTF-8):	LibreOffice - interfejs w języku tatarskim
 Group:		I18n
 Requires:	%{name}-core = %{version}-%{release}
-Obsoletes:	openoffice.org-i18n-tt
+Obsoletes:	openoffice.org-i18n-tt < 1:4
 BuildArch:	noarch
 
 %description i18n-tt
@@ -2651,7 +2651,7 @@ Summary:	LibreOffice - interface in Uyghur language
 Summary(pl.UTF-8):	LibreOffice - interfejs w języku ujgurskim
 Group:		I18n
 Requires:	%{name}-core = %{version}-%{release}
-Obsoletes:	openoffice.org-i18n-ug
+Obsoletes:	openoffice.org-i18n-ug < 1:4
 BuildArch:	noarch
 
 %description i18n-ug
@@ -2667,11 +2667,11 @@ Summary:	LibreOffice - interface in Ukrainian language
 Summary(pl.UTF-8):	LibreOffice - interfejs w języku ukraińskim
 Group:		I18n
 Requires:	%{name}-core = %{version}-%{release}
-Obsoletes:	openoffice-i18n-uk
-Obsoletes:	openoffice-i18n-uk-gtk
-Obsoletes:	openoffice.org-i18n-uk
-Obsoletes:	openoffice.org-i18n-uk-gtk
-Obsoletes:	openoffice.org-i18n-uk-kde
+Obsoletes:	openoffice-i18n-uk < 1:2
+Obsoletes:	openoffice-i18n-uk-gtk < 1:2
+Obsoletes:	openoffice.org-i18n-uk < 1:4
+Obsoletes:	openoffice.org-i18n-uk-gtk < 1:4
+Obsoletes:	openoffice.org-i18n-uk-kde < 1:4
 BuildArch:	noarch
 
 %description i18n-uk
@@ -2687,7 +2687,7 @@ Summary:	LibreOffice - interface in Uzbek language
 Summary(pl.UTF-8):	LibreOffice - interfejs w języku uzbeckim
 Group:		I18n
 Requires:	%{name}-core = %{version}-%{release}
-Obsoletes:	openoffice.org-i18n-uz
+Obsoletes:	openoffice.org-i18n-uz < 1:4
 BuildArch:	noarch
 
 %description i18n-uz
@@ -2702,7 +2702,7 @@ Summary:	LibreOffice - interface in Venda language
 Summary(pl.UTF-8):	LibreOffice - interfejs w języku venda
 Group:		I18n
 Requires:	%{name}-core = %{version}-%{release}
-Obsoletes:	openoffice.org-i18n-ve
+Obsoletes:	openoffice.org-i18n-ve < 1:4
 BuildArch:	noarch
 
 %description i18n-ve
@@ -2718,7 +2718,7 @@ Summary:	LibreOffice - interface in Vietnamese language
 Summary(pl.UTF-8):	LibreOffice - interfejs w języku wietnamskim
 Group:		I18n
 Requires:	%{name}-core = %{version}-%{release}
-Obsoletes:	openoffice.org-i18n-vi
+Obsoletes:	openoffice.org-i18n-vi < 1:4
 BuildArch:	noarch
 
 %description i18n-vi
@@ -2734,7 +2734,7 @@ Summary:	LibreOffice - interface in Xhosa language
 Summary(pl.UTF-8):	LibreOffice - interfejs w języku khosa
 Group:		I18n
 Requires:	%{name}-core = %{version}-%{release}
-Obsoletes:	openoffice.org-i18n-xh
+Obsoletes:	openoffice.org-i18n-xh < 1:4
 BuildArch:	noarch
 
 %description i18n-xh
@@ -2750,12 +2750,12 @@ Summary:	LibreOffice - interface in Chinese language for China
 Summary(pl.UTF-8):	LibreOffice - interfejs w języku chińskim dla Chin
 Group:		I18n
 Requires:	%{name}-core = %{version}-%{release}
-Obsoletes:	openoffice-i18n-zh
-Obsoletes:	openoffice-i18n-zh_CN
-Obsoletes:	openoffice-i18n-zh_CN-gtk
-Obsoletes:	openoffice.org-i18n-zh_CN
-Obsoletes:	openoffice.org-i18n-zh_CN-gtk
-Obsoletes:	openoffice.org-i18n-zh_CN-kde
+Obsoletes:	openoffice-i18n-zh < 1:2
+Obsoletes:	openoffice-i18n-zh_CN < 1:2
+Obsoletes:	openoffice-i18n-zh_CN-gtk < 1:2
+Obsoletes:	openoffice.org-i18n-zh_CN < 1:4
+Obsoletes:	openoffice.org-i18n-zh_CN-gtk < 1:4
+Obsoletes:	openoffice.org-i18n-zh_CN-kde < 1:4
 BuildArch:	noarch
 
 %description i18n-zh_CN
@@ -2771,12 +2771,12 @@ Summary:	LibreOffice - interface in Chinese language for Taiwan
 Summary(pl.UTF-8):	LibreOffice - interfejs w języku chińskim dla Tajwanu
 Group:		I18n
 Requires:	%{name}-core = %{version}-%{release}
-Obsoletes:	openoffice-i18n-zh
-Obsoletes:	openoffice-i18n-zh_TW
-Obsoletes:	openoffice-i18n-zh_TW-gtk
-Obsoletes:	openoffice.org-i18n-zh_TW
-Obsoletes:	openoffice.org-i18n-zh_TW-gtk
-Obsoletes:	openoffice.org-i18n-zh_TW-kde
+Obsoletes:	openoffice-i18n-zh < 1:2
+Obsoletes:	openoffice-i18n-zh_TW < 1:2
+Obsoletes:	openoffice-i18n-zh_TW-gtk < 1:2
+Obsoletes:	openoffice.org-i18n-zh_TW < 1:4
+Obsoletes:	openoffice.org-i18n-zh_TW-gtk < 1:4
+Obsoletes:	openoffice.org-i18n-zh_TW-kde < 1:4
 BuildArch:	noarch
 
 %description i18n-zh_TW
@@ -2807,11 +2807,11 @@ Summary:	LibreOffice - interface in Zulu language
 Summary(pl.UTF-8):	LibreOffice - interfejs w języku zuluskim
 Group:		I18n
 Requires:	%{name}-core = %{version}-%{release}
-Obsoletes:	openoffice-i18n-zu
-Obsoletes:	openoffice-i18n-zu-gtk
-Obsoletes:	openoffice.org-i18n-zu
-Obsoletes:	openoffice.org-i18n-zu-gtk
-Obsoletes:	openoffice.org-i18n-zu-kde
+Obsoletes:	openoffice-i18n-zu < 1:2
+Obsoletes:	openoffice-i18n-zu-gtk < 1:2
+Obsoletes:	openoffice.org-i18n-zu < 1:4
+Obsoletes:	openoffice.org-i18n-zu-gtk < 1:4
+Obsoletes:	openoffice.org-i18n-zu-kde < 1:4
 BuildArch:	noarch
 
 %description i18n-zu
@@ -2828,7 +2828,7 @@ Summary(pl.UTF-8):	bashowe uzupełnianie nazw dla LibreOffice
 Group:		Applications/Shells
 Requires:	%{name}
 Requires:	bash-completion >= 2.0
-Obsoletes:	bash-completion-openoffice
+Obsoletes:	bash-completion-openoffice < 1:4
 BuildArch:	noarch
 
 %description -n bash-completion-%{name}
