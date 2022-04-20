@@ -54,7 +54,7 @@
 %define		with_qt5	1
 %endif
 
-%define		major_ver	7.2.0
+%define		major_ver	7.2.6
 %define		qt5_ver		5.6
 
 %define		use_jdk		openjdk11
@@ -62,18 +62,18 @@
 Summary:	LibreOffice - powerful office suite
 Summary(pl.UTF-8):	LibreOffice - potężny pakiet biurowy
 Name:		libreoffice
-Version:	%{major_ver}.3
-Release:	4
+Version:	%{major_ver}.2
+Release:	1
 License:	GPL/LGPL
 Group:		X11/Applications
 Source0:	http://download.documentfoundation.org/libreoffice/src/%{major_ver}/%{name}-%{version}.tar.xz
-# Source0-md5:	2e994b22a38dfd4e76d90552566ad533
+# Source0-md5:	9e8f5362f6296b4760353f4402640316
 Source1:	http://download.documentfoundation.org/libreoffice/src/%{major_ver}/%{name}-dictionaries-%{version}.tar.xz
-# Source1-md5:	a92d627c04334cb56f9b722e1e2be78c
+# Source1-md5:	7d30cd012a80d825bdf6b5c1fcb5dde3
 Source2:	http://download.documentfoundation.org/libreoffice/src/%{major_ver}/%{name}-help-%{version}.tar.xz
-# Source2-md5:	70a9677a664e4ed0153524e803cea16e
+# Source2-md5:	1661e10d0a866a6f6ba4d6b33958dbe1
 Source3:	http://download.documentfoundation.org/libreoffice/src/%{major_ver}/%{name}-translations-%{version}.tar.xz
-# Source3-md5:	30537a2522c857b024a8f7309bba4fdd
+# Source3-md5:	87f5abe3030562e93e6bee392c36656f
 
 # make (download|fetch) DO_FETCH_TARBALLS=1 WGET=wget
 # but not sure if all are needed?
@@ -109,9 +109,8 @@ Source34:	skia-freetype2.11.patch
 
 Patch0:		disable-failing-test.patch
 Patch1:		pld-skia-patches.patch
-Patch2:		bison3.8.patch
-Patch3:		kf5-detect.patch
-URL:		http://www.documentfoundation.org/
+Patch2:		%{name}-poppler.patch
+URL:		https://www.documentfoundation.org/
 BuildRequires:	/usr/bin/getopt
 %{?with_firebird:BuildRequires:	Firebird-devel >= 3.0.0.0}
 BuildRequires:	GLM
@@ -2858,7 +2857,6 @@ oraz narzędzie ui-previewer do sprawdzania wyglądu okien dialogowych.
 %patch0 -p1
 %patch1 -p1
 %patch2 -p1
-%patch3 -p1
 
 for dir in *-%{version}; do
 	[ -f $dir/ChangeLog ] && %{__mv} $dir/ChangeLog ChangeLog-$dir
@@ -4055,6 +4053,7 @@ fi
 %{_libdir}/%{name}/program/officehelper.py
 %{_libdir}/%{name}/program/pythonloader.py
 %{_libdir}/%{name}/program/pythonscript.py
+%{_libdir}/%{name}/program/scriptforge.py
 %{_libdir}/%{name}/program/uno.py
 %{_libdir}/%{name}/program/unohelper.py
 %{_libdir}/%{name}/program/services/pyuno.rdb
@@ -4485,6 +4484,5 @@ fi
 
 %files glade
 %defattr(644,root,root,755)
-%attr(755,root,root) %{_libdir}/%{name}/program/ui-previewer
 %dir %{_datadir}/%{name}/share/glade
 %{_datadir}/%{name}/share/glade/libreoffice-catalog.xml
