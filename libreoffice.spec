@@ -1050,6 +1050,21 @@ Catalan Valencian language.
 Ten pakiet dostarcza zasoby zawierające menu i okna dialogowe w języku
 katalońskim walenckim.
 
+%package i18n-ckb
+Summary:	LibreOffice - interface in Central Kurdish language
+Summary(pl.UTF-8):	LibreOffice - interfejs w języku kurdyjskim sorani
+Group:		I18n
+Requires:	%{name}-core = %{version}-%{release}
+BuildArch:	noarch
+
+%description i18n-ckb
+This package provides resources containing menus and dialogs in
+Central Kurdish language.
+
+%description i18n-ckb -l pl.UTF-8
+Ten pakiet dostarcza zasoby zawierające menu i okna dialogowe w języku
+kurdyjskim sorani.
+
 %package i18n-cs
 Summary:	LibreOffice - interface in Czech language
 Summary(pl.UTF-8):	LibreOffice - interfejs w języku czeskim
@@ -1363,6 +1378,21 @@ language.
 %description i18n-fr -l pl.UTF-8
 Ten pakiet dostarcza zasoby zawierające menu i okna dialogowe w języku
 francuskim.
+
+%package i18n-fur
+Summary:	LibreOffice - interface in Friulian language
+Summary(pl.UTF-8):	LibreOffice - interfejs w języku friulskim
+Group:		I18n
+Requires:	%{name}-core = %{version}-%{release}
+BuildArch:	noarch
+
+%description i18n-fur
+This package provides resources containing menus and dialogs in
+Friulian language.
+
+%description i18n-fur -l pl.UTF-8
+Ten pakiet dostarcza zasoby zawierające menu i okna dialogowe w języku
+friulskim.
 
 %package i18n-fy
 Summary:	LibreOffice - interface in Frisian language
@@ -3548,6 +3578,7 @@ fi
 %{_libdir}/%{name}/program/resource
 %dir %{_datadir}/%{name}/program
 %dir %{_datadir}/%{name}/program/resource
+%{_datadir}/%{name}/program/resource/common
 
 %dir %{_datadir}/%{name}/share
 %dir %{_datadir}/%{name}/share/labels
@@ -4174,6 +4205,9 @@ fi
 %files i18n-ca_XV -f ca_valencia.lang
 %defattr(644,root,root,755)
 
+%files i18n-ckb -f ckb.lang
+%defattr(644,root,root,755)
+
 %files i18n-cs -f cs.lang
 %defattr(644,root,root,755)
 
@@ -4223,6 +4257,9 @@ fi
 %defattr(644,root,root,755)
 
 %files i18n-fr -f fr.lang
+%defattr(644,root,root,755)
+
+%files i18n-fur -f fur.lang
 %defattr(644,root,root,755)
 
 %files i18n-fy -f fy.lang
