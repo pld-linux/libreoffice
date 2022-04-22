@@ -202,6 +202,7 @@ BuildRequires:	libwpd-devel >= 0.10.0
 BuildRequires:	libwpg-devel >= 0.3.0
 BuildRequires:	libwps-devel >= 0.4.10
 BuildRequires:	libxml2-devel >= 2.0
+BuildRequires:	libxml2-progs
 BuildRequires:	libxslt-devel
 BuildRequires:	libxslt-progs
 BuildRequires:	libzmf-devel
