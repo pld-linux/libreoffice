@@ -5,9 +5,9 @@
      CPPUNIT_TEST_SUITE(SdImportTest);
  
 -    CPPUNIT_TEST(testDocumentLayout);
+     CPPUNIT_TEST(testTdf142645);
+     CPPUNIT_TEST(testTdf142915);
      CPPUNIT_TEST(testTdf142913);
-     CPPUNIT_TEST(testTdf142590);
-     CPPUNIT_TEST(testCustomSlideShow);
 --- libreoffice-6.3.0.4/dbaccess/Module_dbaccess.mk~	2019-08-06 19:26:35.000000000 +0200
 +++ libreoffice-6.3.0.4/dbaccess/Module_dbaccess.mk	2019-08-09 09:06:37.432422956 +0200
 @@ -33,18 +33,6 @@
