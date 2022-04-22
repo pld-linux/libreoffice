@@ -231,6 +231,7 @@ BuildRequires:	python3-devel >= 1:3.3
 BuildRequires:	python3-lxml
 BuildRequires:	python3-modules >= 1:3.3
 BuildRequires:	redland-devel >= 1.0.16
+BuildRequires:	rpm-build >= 4.6
 BuildRequires:	rpm-pythonprov
 BuildRequires:	rpmbuild(macros) >= 1.752
 BuildRequires:	sane-backends-devel
