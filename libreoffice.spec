@@ -207,7 +207,7 @@ BuildRequires:	libxslt-devel
 BuildRequires:	libxslt-progs
 BuildRequires:	libzmf-devel
 BuildRequires:	lp_solve-devel >= 5.5
-BuildRequires:	make >= 3.82
+BuildRequires:	make >= 1:3.82
 BuildRequires:	mdds-devel >= 1.5.0
 %{?with_mono:BuildRequires:	mono-csharp >= 1.2.3}
 %{?with_mono:BuildRequires:	mono-static >= 1.2.3}
