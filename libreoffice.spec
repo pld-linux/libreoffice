@@ -2,12 +2,12 @@
 # - -core/-ure dependency loop
 # - fix configure arguments (+ compare with FC)
 # - create CoinMP library package for PLD (https://projects.coin-or.org/CoinMP)
-# - create qrcodegen library package for PLD
 # - --enable-avahi for Impress remote control? (BR: avahi-devel >= 0.6.10)
-# - --enable-eot? (BR: libeot-devel >= 0.01)
 # - --enable-introspection? (BR: gobject-introspection-devel >= 1.32.0)
 # - --with-system-rhino?
 # - --with-system-ucpp?
+# - system odfvalidator and officeotron?
+# - xapian-omega support for help?
 #
 # NOTE - FIXME FOR 3.4.3 !!!:
 #	- normal build (i686) requires about 27 GB of disk space:
@@ -28,6 +28,7 @@
 %bcond_with	icecream		# use icecream to speed up builds
 %bcond_without	parallelbuild		# use greater number of jobs to speed up build (default: 1)
 %bcond_with	tests			# testsuite execution
+%bcond_without	eot			# Embedded OpenType fonts support
 %bcond_without	firebird		# Firebird-SDBC driver
 %bcond_without	pgsql			# PostgreSQL-SDBC driver
 
@@ -38,7 +39,6 @@
 %bcond_with	system_hsqldb		# system Java HSQLDB library
 %bcond_without	system_hunspell		# system hunspell library
 %bcond_without	system_hyphen		# system ALTLinuxhyph
-%bcond_with	system_qrcodegen	# system qrcodegen library (not in PLD yet)
 
 # this list is same as icedtea6
 %ifnarch i486 i586 i686 pentium3 pentium4 athlon %{x8664} aarch64
@@ -95,8 +95,6 @@ Source27:	http://dev-www.libreoffice.org/src/a7983f859eafb2677d7ff386a023bc40-xs
 # Source27-md5:	a7983f859eafb2677d7ff386a023bc40
 Source28:	https://dev-www.libreoffice.org/extern/f543e6e2d7275557a839a164941c0a86e5f2c3f2a0042bfc434c88c6dde9e140-opens___.ttf
 # Source28-md5:	09c7414a011363c72248c7bf3a23d758
-Source29:	https://dev-www.libreoffice.org/src/QR-Code-generator-1.4.0.tar.gz
-# Source29-md5:	0e81d36829be287ff27ae802e0587463
 Source30:	https://dev-www.libreoffice.org/extern/8249374c274932a21846fa7629c2aa9b-officeotron-0.7.4-master.jar
 # Source30-md5:	8249374c274932a21846fa7629c2aa9b
 Source31:	https://dev-www.libreoffice.org/src/dtoa-20180411.tgz
@@ -175,6 +173,7 @@ BuildRequires:	libabw-devel >= 0.1.0
 BuildRequires:	libcdr-devel >= 0.1
 BuildRequires:	libcmis-devel >= 0.5.2
 BuildRequires:	libe-book-devel >= 0.1
+%{?with_eot:BuildRequires:	libeot-devel >= 0.01}
 BuildRequires:	libepoxy-devel >= 1.2
 BuildRequires:	libepubgen-devel >= 0.1.0
 BuildRequires:	libetonyek-devel >= 0.1.4
@@ -189,6 +188,7 @@ BuildRequires:	libnumbertext-devel >= 1.0.6
 BuildRequires:	libodfgen-devel >= 0.1.1
 BuildRequires:	liborcus-devel >= 0.16.0
 BuildRequires:	libpagemaker-devel >= 0.0.2
+BuildRequires:	libpng-devel
 BuildRequires:	libqxp-devel
 BuildRequires:	libraptor2-devel >= 2.0.7
 BuildRequires:	librevenge-devel >= 0.0.1
@@ -253,6 +253,7 @@ BuildRequires:	xorg-lib-libXrender-devel
 BuildRequires:	xz
 BuildRequires:	zip >= 3.0
 BuildRequires:	zlib-devel
+BuildRequires:	zxing-cpp-nu-devel
 %if %{with java}
 BuildRequires:	ant >= 1.7.0
 BuildRequires:	ant-apache-regexp
@@ -2906,7 +2907,6 @@ ln %{SOURCE25} ext_sources
 ln %{SOURCE26} ext_sources
 ln %{SOURCE27} ext_sources
 ln %{SOURCE28} ext_sources
-ln %{SOURCE29} ext_sources
 ln %{SOURCE30} ext_sources
 ln %{SOURCE31} ext_sources
 ln %{SOURCE32} ext_sources
@@ -2975,6 +2975,7 @@ export PATH=$PATH:%{_libdir}/interbase/bin
 	--enable-cups \
 	--enable-dbus \
 	--disable-epm \
+	%{?with_eot:--enable-eot} \
 	--enable-ext-nlpsolver \
 	--enable-ext-wiki-publisher \
 	--disable-fetch-external \
@@ -2994,7 +2995,6 @@ export PATH=$PATH:%{_libdir}/interbase/bin
 	--enable-scripting-javascript \
 	--enable-split-app-modules \
 	--enable-split-opt-features \
-	--disable-zxing \
 	--with-build-version=%{version}-%{release} \
 	--with-external-dict-dir=%{_datadir}/myspell \
 	--with-external-tar=$(pwd)/ext_sources \
@@ -3014,7 +3014,6 @@ export PATH=$PATH:%{_libdir}/interbase/bin
 	%{!?with_system_coinmp:--without-system-coinmp} \
 	%{?with_system_hsqldb:--with-system-hsqldb} \
 	%{!?with_system_hunspell:--without-system-hunspell} \
-	%{!?with_system_qrcodegen:--without-system-qrcodegen} \
 	--with-vendor="%{distribution}" \
 	--with-x \
 %if 0%{?debug:1}
