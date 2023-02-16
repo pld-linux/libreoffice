@@ -2860,7 +2860,7 @@ Summary:	bash-completion for LibreOffice
 Summary(pl.UTF-8):	bashowe uzupełnianie nazw dla LibreOffice
 Group:		Applications/Shells
 Requires:	%{name}
-Requires:	bash-completion >= 2.0
+Requires:	bash-completion >= 1:2.0
 Obsoletes:	bash-completion-openoffice < 1:4
 BuildArch:	noarch
 
