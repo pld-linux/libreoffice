@@ -2899,24 +2899,28 @@ for dir in *-%{version}; do
 done
 
 install -d ext_sources
-ln %{SOURCE20} ext_sources
-ln %{SOURCE21} ext_sources
-ln %{SOURCE22} ext_sources
-ln %{SOURCE23} ext_sources
-ln %{SOURCE24} ext_sources
-ln %{SOURCE25} ext_sources
-ln %{SOURCE26} ext_sources
-ln %{SOURCE27} ext_sources
-ln %{SOURCE28} ext_sources
-ln %{SOURCE30} ext_sources
-ln %{SOURCE31} ext_sources
-ln %{SOURCE32} ext_sources
+if cp -pl %{SOURCE20} ext_sources; then
+	l=l
+else
+	cp -p %{SOURCE20} ext_sources
+fi
+cp -p$l %{SOURCE21} ext_sources
+cp -p$l %{SOURCE22} ext_sources
+cp -p$l %{SOURCE23} ext_sources
+cp -p$l %{SOURCE24} ext_sources
+cp -p$l %{SOURCE25} ext_sources
+cp -p$l %{SOURCE26} ext_sources
+cp -p$l %{SOURCE27} ext_sources
+cp -p$l %{SOURCE28} ext_sources
+cp -p$l %{SOURCE30} ext_sources
+cp -p$l %{SOURCE31} ext_sources
+cp -p$l %{SOURCE32} ext_sources
 %if %{without system_cmis}
-ln %{SOURCE33} ext_sources
+cp -p$l %{SOURCE33} ext_sources
 %endif
 :> src.downloaded
 
-ln %{SOURCE34} external/skia
+cp -p$l %{SOURCE34} external/skia
 
 %build
 # Make sure we have /proc mounted - otherwise idlc will fail later.
