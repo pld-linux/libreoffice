@@ -31,6 +31,7 @@
 %bcond_without	eot			# Embedded OpenType fonts support
 %bcond_without	firebird		# Firebird-SDBC driver
 %bcond_without	pgsql			# PostgreSQL-SDBC driver
+%bcond_without	systemtap		# systemtap probes support
 
 %bcond_with	system_agg		# system agg library (not supported as of 6.4.x, pdfium uses included version)
 %bcond_without	system_beanshell	# system Java BeanShell library
@@ -237,7 +238,7 @@ BuildRequires:	rpmbuild(macros) >= 1.752
 BuildRequires:	sane-backends-devel
 BuildRequires:	sed >= 4.0
 BuildRequires:	startup-notification-devel >= 0.5
-BuildRequires:	systemtap-sdt-devel
+%{?with_systemtap:BuildRequires:	systemtap-sdt-devel}
 BuildRequires:	tar >= 1:1.22
 BuildRequires:	unixODBC-devel >= 2.2.12-2
 BuildRequires:	unzip
