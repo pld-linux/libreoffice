@@ -250,6 +250,7 @@ BuildRequires:	xorg-lib-libXext-devel
 BuildRequires:	xorg-lib-libXinerama-devel
 BuildRequires:	xorg-lib-libXrandr-devel >= 1.2
 BuildRequires:	xorg-lib-libXrender-devel
+BuildRequires:	xorg-lib-libXt-devel
 BuildRequires:	xz
 BuildRequires:	zip >= 3.0
 BuildRequires:	zlib-devel
