@@ -111,6 +111,7 @@ Patch1:		pld-skia-patches.patch
 Patch2:		%{name}-poppler.patch
 Patch3:		boost1.81.patch
 Patch4:		gpgme1.18.patch
+Patch5:		zxing1.4.patch
 URL:		https://www.documentfoundation.org/
 BuildRequires:	/usr/bin/getopt
 %{?with_firebird:BuildRequires:	Firebird-devel >= 3.0.0.0}
@@ -2896,6 +2897,7 @@ oraz narzędzie ui-previewer do sprawdzania wyglądu okien dialogowych.
 %patch2 -p1
 %patch3 -p1
 %patch4 -p1
+%patch5 -p1
 
 for dir in *-%{version}; do
 	[ -f $dir/ChangeLog ] && %{__mv} $dir/ChangeLog ChangeLog-$dir
