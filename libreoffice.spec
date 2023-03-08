@@ -55,7 +55,7 @@
 %define		with_qt5	1
 %endif
 
-%define		major_ver	7.2.6
+%define		major_ver	7.2.7
 %define		qt5_ver		5.6
 
 %define		use_jdk		openjdk11
@@ -64,17 +64,17 @@ Summary:	LibreOffice - powerful office suite
 Summary(pl.UTF-8):	LibreOffice - potężny pakiet biurowy
 Name:		libreoffice
 Version:	%{major_ver}.2
-Release:	3
+Release:	1
 License:	GPL/LGPL
 Group:		X11/Applications
 Source0:	http://download.documentfoundation.org/libreoffice/src/%{major_ver}/%{name}-%{version}.tar.xz
-# Source0-md5:	9e8f5362f6296b4760353f4402640316
+# Source0-md5:	47caa06bcfe227f9e53ab12f1c383124
 Source1:	http://download.documentfoundation.org/libreoffice/src/%{major_ver}/%{name}-dictionaries-%{version}.tar.xz
-# Source1-md5:	7d30cd012a80d825bdf6b5c1fcb5dde3
+# Source1-md5:	428940307203786085448757f900af37
 Source2:	http://download.documentfoundation.org/libreoffice/src/%{major_ver}/%{name}-help-%{version}.tar.xz
-# Source2-md5:	1661e10d0a866a6f6ba4d6b33958dbe1
+# Source2-md5:	0c34e4ca58c32626cb1cd9f42ff66762
 Source3:	http://download.documentfoundation.org/libreoffice/src/%{major_ver}/%{name}-translations-%{version}.tar.xz
-# Source3-md5:	87f5abe3030562e93e6bee392c36656f
+# Source3-md5:	e05999e7ffce14b4aee7129fad25f4b2
 
 # make (download|fetch) DO_FETCH_TARBALLS=1 WGET=wget
 # but not sure if all are needed?
@@ -112,6 +112,8 @@ Patch2:		%{name}-poppler.patch
 Patch3:		boost1.81.patch
 Patch4:		gpgme1.18.patch
 Patch5:		zxing1.4.patch
+# https://cgit.freedesktop.org/libreoffice/core/patch/?id=b7d63694985bbb1cf86eb71769feadb28ce68c17
+Patch6:		%{name}-poppler-22.09.0.patch
 URL:		https://www.documentfoundation.org/
 BuildRequires:	/usr/bin/getopt
 %{?with_firebird:BuildRequires:	Firebird-devel >= 3.0.0.0}
@@ -175,7 +177,7 @@ BuildRequires:	java-sac
 BuildRequires:	lcms2-devel >= 2
 BuildRequires:	libabw-devel >= 0.1.0
 BuildRequires:	libcdr-devel >= 0.1
-BuildRequires:	libcmis-devel >= 0.5.2
+%{?with_system_cmis:BuildRequires:	libcmis-devel >= 0.5.2}
 BuildRequires:	libe-book-devel >= 0.1
 %{?with_eot:BuildRequires:	libeot-devel >= 0.01}
 BuildRequires:	libepoxy-devel >= 1.2
@@ -414,7 +416,7 @@ Requires:	harfbuzz-icu >= 0.9.42
 Requires:	hicolor-icon-theme
 %{?with_system_beanshell:Requires: java-beanshell}
 %{?with_system_hsqldb:Requires: java-hsqldb}
-Requires:	libcmis >= 0.5.2
+%{?with_system_cmis:Requires:	libcmis >= 0.5.2}
 Requires:	libepoxy >= 1.2
 Requires:	libexttextcat >= 3.4.1
 Requires:	liblangtag >= 0.4.0
@@ -2898,6 +2900,7 @@ oraz narzędzie ui-previewer do sprawdzania wyglądu okien dialogowych.
 %patch3 -p1
 %patch4 -p1
 %patch5 -p1
+%patch6 -p1
 
 for dir in *-%{version}; do
 	[ -f $dir/ChangeLog ] && %{__mv} $dir/ChangeLog ChangeLog-$dir
