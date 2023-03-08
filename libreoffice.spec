@@ -5,7 +5,6 @@
 # - --enable-avahi for Impress remote control? (BR: avahi-devel >= 0.6.10)
 # - --enable-introspection? (BR: gobject-introspection-devel >= 1.32.0)
 # - --with-system-rhino?
-# - --with-system-ucpp?
 # - system odfvalidator and officeotron?
 # - xapian-omega support for help?
 #
@@ -86,8 +85,6 @@ Source22:	http://dev-www.libreoffice.org/src/CoinMP-1.7.6.tgz
 # Source22-md5:	1cce53bf4b40ae29790d2c5c9f8b1129
 Source23:	http://dev-www.libreoffice.org/src/798b2ffdc8bcfe7bca2cf92b62caf685-rhino1_5R5.zip
 # Source23-md5:	798b2ffdc8bcfe7bca2cf92b62caf685
-Source24:	http://dev-www.libreoffice.org/src/0168229624cfac409e766913506961a8-ucpp-1.3.2.tar.gz
-# Source24-md5:	0168229624cfac409e766913506961a8
 Source25:	http://dev-www.libreoffice.org/src/35c94d2df8893241173de1d16b6034c0-swingExSrc.zip
 # Source25-md5:	35c94d2df8893241173de1d16b6034c0
 Source26:	https://dev-www.libreoffice.org/extern/odfvalidator-0.9.0-RC2-SNAPSHOT-jar-with-dependencies-2726ab578664434a545f8379a01a9faffac0ae73.jar
@@ -245,6 +242,7 @@ BuildRequires:	sed >= 4.0
 BuildRequires:	startup-notification-devel >= 0.5
 %{?with_systemtap:BuildRequires:	systemtap-sdt-devel}
 BuildRequires:	tar >= 1:1.22
+BuildRequires:	ucpp
 BuildRequires:	unixODBC-devel >= 2.2.12-2
 BuildRequires:	unzip
 BuildRequires:	xmlsec1-nss-devel >= 1.2.28
@@ -2917,7 +2915,6 @@ fi
 cp -p$l %{SOURCE21} ext_sources
 cp -p$l %{SOURCE22} ext_sources
 cp -p$l %{SOURCE23} ext_sources
-cp -p$l %{SOURCE24} ext_sources
 cp -p$l %{SOURCE25} ext_sources
 cp -p$l %{SOURCE26} ext_sources
 cp -p$l %{SOURCE27} ext_sources
@@ -3029,6 +3026,7 @@ export PATH=$PATH:%{_libdir}/interbase/bin
 	%{!?with_system_coinmp:--without-system-coinmp} \
 	%{?with_system_hsqldb:--with-system-hsqldb} \
 	%{!?with_system_hunspell:--without-system-hunspell} \
+	--with-system-ucpp \
 	--with-vendor="%{distribution}" \
 	--with-x \
 %if 0%{?debug:1}
