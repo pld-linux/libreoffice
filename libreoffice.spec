@@ -63,7 +63,8 @@
 %define		qt5_ver		5.6
 %define		qt6_ver		6
 
-%define		use_jdk		openjdk11
+# jdk >= 9 required but use nearest LTS version
+%{?use_default_jdk:%use_default_jdk 11}
 
 Summary:	LibreOffice - powerful office suite
 Summary(pl.UTF-8):	LibreOffice - potężny pakiet biurowy
@@ -242,7 +243,7 @@ BuildRequires:	python3-modules >= 1:3.3
 BuildRequires:	redland-devel >= 1.0.16
 BuildRequires:	rpm-build >= 4.6
 BuildRequires:	rpm-pythonprov
-BuildRequires:	rpmbuild(macros) >= 1.752
+BuildRequires:	rpmbuild(macros) >= 2.021
 BuildRequires:	sane-backends-devel
 BuildRequires:	sed >= 4.0
 BuildRequires:	startup-notification-devel >= 0.5
@@ -267,9 +268,8 @@ BuildRequires:	zxing-cpp-nu-devel
 %if %{with java}
 BuildRequires:	ant >= 1.7.0
 BuildRequires:	ant-apache-regexp
-BuildRequires:	openjdk11-jdk-base
-BuildRequires:	openjdk11-jre-base
-BuildRequires:	openjdk11-jre-base-X11
+%buildrequires_jdk
+%{?use_jdk:BuildRequires:	%{use_jdk}-jre-base-X11}
 %endif
 %if %{with kde5}
 BuildRequires:	kf5-kconfig-devel >= 5.0
