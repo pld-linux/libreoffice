@@ -3,7 +3,6 @@
 # - fix configure arguments (+ compare with FC)
 # - create CoinMP library package for PLD (https://projects.coin-or.org/CoinMP)
 # - --enable-avahi for Impress remote control? (BR: avahi-devel >= 0.6.10)
-# - --enable-introspection? (BR: gobject-introspection-devel >= 1.32.0)
 # - --with-system-rhino?
 # - system odfvalidator and officeotron?
 # - xapian-omega support for help?
@@ -19,12 +18,15 @@
 %bcond_without	java			# Java support (required for help support)
 %bcond_without	kde5			# KDE5 L&F packages
 %bcond_without	gtk3			# GTK3 L&F
+%bcond_without	gtk4			# GTK4 L&F
 %bcond_without	qt5			# QT5 L&F
+%bcond_without	qt6			# QT6 L&F
 %bcond_with	mono			# C# bindings (mono not supported as of 6.4.x)
 %bcond_without	mozilla			# Mozilla components (NPAPI plugin)
 %bcond_without	i18n			# i18n packages creation (extra build time)
 %bcond_with	ccache			# use ccache to speed up builds
 %bcond_with	icecream		# use icecream to speed up builds
+%bcond_without	introspection		# GObject introspection files
 %bcond_without	parallelbuild		# use greater number of jobs to speed up build (default: 1)
 %bcond_with	tests			# testsuite execution
 %bcond_without	eot			# Embedded OpenType fonts support
@@ -50,12 +52,16 @@
 %undefine	with_system_hsqldb
 %endif
 
+%if %{without gtk3}
+%undefine	with_introspection
+%endif
 %if %{with kde5}
 %define		with_qt5	1
 %endif
 
-%define		major_ver	7.2.7
+%define		major_ver	7.5.1
 %define		qt5_ver		5.6
+%define		qt6_ver		6
 
 %define		use_jdk		openjdk11
 
@@ -67,18 +73,18 @@ Release:	1
 License:	GPL/LGPL
 Group:		X11/Applications
 Source0:	http://download.documentfoundation.org/libreoffice/src/%{major_ver}/%{name}-%{version}.tar.xz
-# Source0-md5:	47caa06bcfe227f9e53ab12f1c383124
+# Source0-md5:	5a48583c5a224d6932ee138fbc3c23ff
 Source1:	http://download.documentfoundation.org/libreoffice/src/%{major_ver}/%{name}-dictionaries-%{version}.tar.xz
-# Source1-md5:	428940307203786085448757f900af37
+# Source1-md5:	19a9eb99e64fa90c2a3a70fbafb11424
 Source2:	http://download.documentfoundation.org/libreoffice/src/%{major_ver}/%{name}-help-%{version}.tar.xz
-# Source2-md5:	0c34e4ca58c32626cb1cd9f42ff66762
+# Source2-md5:	0a1c39d42b120eff303bd787b266a159
 Source3:	http://download.documentfoundation.org/libreoffice/src/%{major_ver}/%{name}-translations-%{version}.tar.xz
-# Source3-md5:	e05999e7ffce14b4aee7129fad25f4b2
+# Source3-md5:	2b7a4abc1743551c742a3f07268e63a3
 
 # make (download|fetch) DO_FETCH_TARBALLS=1 WGET=wget
 # but not sure if all are needed?
-Source20:	http://dev-www.libreoffice.org/src/pdfium-4500.tar.bz2
-# Source20-md5:	d9bc09c21cbbc7053b9678f2a9b761ae
+Source20:	http://dev-www.libreoffice.org/src/pdfium-5408.tar.bz2
+# Source20-md5:	a8ae777e121a0fb63f4e8b6779d68ada
 Source21:	http://dev-www.libreoffice.org/src/17410483b5b5f267aa18b7e00b65e6e0-hsqldb_1_8_0.zip
 # Source21-md5:	17410483b5b5f267aa18b7e00b65e6e0
 Source22:	http://dev-www.libreoffice.org/src/CoinMP-1.7.6.tgz
@@ -97,59 +103,54 @@ Source30:	https://dev-www.libreoffice.org/extern/8249374c274932a21846fa7629c2aa9
 # Source30-md5:	8249374c274932a21846fa7629c2aa9b
 Source31:	https://dev-www.libreoffice.org/src/dtoa-20180411.tgz
 # Source31-md5:	4295bad62b2524793d8a7ba3e7385501
-Source32:	https://dev-www.libreoffice.org/src/skia-m90-45c57e116ee0ce214bdf78405a4762722e4507d9.tar.xz
-# Source32-md5:	76729a69e8ab04f49987c7aa701cadc4
+Source32:	https://dev-www.libreoffice.org/src/skia-m103-b301ff025004c9cd82816c86c547588e6c24b466.tar.xz
+# Source32-md5:	0a0013856ea701b3023ca4b00f147c72
 Source33:	https://dev-www.libreoffice.org/src/libcmis-0.5.2.tar.xz
 # Source33-md5:	3653bc54e1bcd17ae09a1a7086daa38b
-Source34:	skia-freetype2.11.patch
-
 Patch0:		disable-failing-test.patch
-Patch1:		pld-skia-patches.patch
-Patch2:		%{name}-poppler.patch
-Patch3:		boost1.81.patch
-Patch4:		gpgme1.18.patch
-Patch5:		zxing1.4.patch
-# https://cgit.freedesktop.org/libreoffice/core/patch/?id=b7d63694985bbb1cf86eb71769feadb28ce68c17
-Patch6:		%{name}-poppler-22.09.0.patch
 URL:		https://www.documentfoundation.org/
 BuildRequires:	/usr/bin/getopt
 %{?with_firebird:BuildRequires:	Firebird-devel >= 3.0.0.0}
 BuildRequires:	GLM
 BuildRequires:	ImageMagick
 BuildRequires:	OpenGL-devel
+BuildRequires:	abseil-cpp-devel
 %{?with_system_agg:BuildRequires:	agg-devel >= 2.3}
-BuildRequires:	atk-devel >= 1:1.9.0
+BuildRequires:	atk-devel >= 1:2.28.1
 BuildRequires:	autoconf >= 2.68
 BuildRequires:	automake >= 1:1.9
 BuildRequires:	bash
 BuildRequires:	bison >= 2.0
 BuildRequires:	bluez-libs-devel
 BuildRequires:	boost-devel >= 1.66
-BuildRequires:	box2d-devel
-BuildRequires:	cairo-devel >= 1.8.0
+BuildRequires:	box2d-devel >= 2.4.0
+BuildRequires:	cairo-devel >= 1.12.0
 %{?with_ccache:BuildRequires:	ccache}
 BuildRequires:	clucene-core-devel >= 2.3
 %{?with_system_coinmp:BuildRequires:	coinmp-devel}
 BuildRequires:	cppunit-devel >= 1.14.0
 BuildRequires:	cups-devel
-BuildRequires:	curl-devel >= 7.19.4
+BuildRequires:	curl-devel >= 7.68.0
 BuildRequires:	dconf-devel >= 0.15.2
 BuildRequires:	dbus-devel >= 0.60
+BuildRequires:	dragonbox-devel = 1.1.3
 BuildRequires:	expat-devel
 BuildRequires:	flex >= 2.6.0
 BuildRequires:	fontconfig-devel >= 2.4.1
-# pkgconfig(freetype2) >= 9.9.3
-BuildRequires:	freetype-devel >= 1:2.2.0
+# pkgconfig(freetype2) >= 21.0.15
+BuildRequires:	freetype-devel >= 1:2.8.1
 BuildRequires:	gdb
 BuildRequires:	gettext-tools
 BuildRequires:	glib2-devel >= 1:2.38
+#BuildRequires:	gobject-introspection-devel >= 1.32.0
 BuildRequires:	gperf
 BuildRequires:	gpgme-c++-devel
 BuildRequires:	graphite2-devel >= 0.9.3
 BuildRequires:	gstreamer-devel >= 1.0
 BuildRequires:	gstreamer-plugins-base-devel >= 1.0
 %{?with_gtk3:BuildRequires:	gtk+3-devel >= 3.20}
-BuildRequires:	harfbuzz-icu-devel >= 0.9.42
+%{?with_gtk4:BuildRequires:	gtk4-devel >= 4}
+BuildRequires:	harfbuzz-icu-devel >= 5.1.0
 %{?with_system_hunspell:BuildRequires:	hunspell-devel >= 1.2.2}
 %{?with_system_hyphen:BuildRequires:	hyphen-devel}
 %{?with_icecream:BuildRequires:	icecream}
@@ -175,35 +176,38 @@ BuildRequires:	lcms2-devel >= 2
 BuildRequires:	libabw-devel >= 0.1.0
 BuildRequires:	libcdr-devel >= 0.1
 %{?with_system_cmis:BuildRequires:	libcmis-devel >= 0.5.2}
-BuildRequires:	libe-book-devel >= 0.1
+BuildRequires:	libe-book-devel >= 0.1.2
 %{?with_eot:BuildRequires:	libeot-devel >= 0.01}
 BuildRequires:	libepoxy-devel >= 1.2
 BuildRequires:	libepubgen-devel >= 0.1.0
-BuildRequires:	libetonyek-devel >= 0.1.4
+BuildRequires:	libetonyek-devel >= 0.1.10
 BuildRequires:	libexttextcat-devel >= 3.4.1
 BuildRequires:	libfreehand-devel >= 0.1.0
 BuildRequires:	libicu-devel >= 4.6
 BuildRequires:	libjpeg-devel
 BuildRequires:	liblangtag-devel >= 0.4.0
 BuildRequires:	libmspub-devel >= 0.1
-BuildRequires:	libmwaw-devel >= 0.3.1
+BuildRequires:	libmwaw-devel >= 0.3.21
 BuildRequires:	libnumbertext-devel >= 1.0.6
 BuildRequires:	libodfgen-devel >= 0.1.1
-BuildRequires:	liborcus-devel >= 0.16.0
+BuildRequires:	liborcus-devel >= 0.17.2
+BuildRequires:	liborcus-devel < 0.18
 BuildRequires:	libpagemaker-devel >= 0.0.2
 BuildRequires:	libpng-devel
 BuildRequires:	libqxp-devel
 BuildRequires:	libraptor2-devel >= 2.0.7
 BuildRequires:	librevenge-devel >= 0.0.1
 BuildRequires:	librsvg-devel >= 2.14
-BuildRequires:	libstaroffice-devel
+BuildRequires:	libstaroffice-devel >= 0.0.7
 BuildRequires:	libstdc++-devel >= 6:7
+BuildRequires:	libtiff-devel >= 4
 # for uuidgen
 BuildRequires:	libuuid
 BuildRequires:	libvisio-devel >= 0.1
+BuildRequires:	libwebp-devel
 BuildRequires:	libwpd-devel >= 0.10.0
 BuildRequires:	libwpg-devel >= 0.3.0
-BuildRequires:	libwps-devel >= 0.4.10
+BuildRequires:	libwps-devel >= 0.4.12
 BuildRequires:	libxml2-devel >= 2.0
 BuildRequires:	libxml2-progs
 BuildRequires:	libxslt-devel
@@ -211,7 +215,8 @@ BuildRequires:	libxslt-progs
 BuildRequires:	libzmf-devel
 BuildRequires:	lp_solve-devel >= 5.5
 BuildRequires:	make >= 1:3.82
-BuildRequires:	mdds-devel >= 1.5.0
+BuildRequires:	mdds-devel >= 2.0.0
+BuildRequires:	mdds-devel < 2.1
 %{?with_mono:BuildRequires:	mono-csharp >= 1.2.3}
 %{?with_mono:BuildRequires:	mono-static >= 1.2.3}
 BuildRequires:	mysql-devel >= 5
@@ -219,8 +224,9 @@ BuildRequires:	mythes-devel >= 1.2
 BuildRequires:	neon-devel >= 0.31.2
 BuildRequires:	nspr-devel >= 1:4.8
 BuildRequires:	nss-devel >= 1:3.10
+BuildRequires:	openjpeg2-devel >= 2
 BuildRequires:	openldap-devel
-BuildRequires:	openssl-devel
+BuildRequires:	openssl-devel >= 0.9.8
 BuildRequires:	pango-devel >= 1:1.17.3
 BuildRequires:	perl-Archive-Zip
 BuildRequires:	perl-base >= 5
@@ -228,7 +234,7 @@ BuildRequires:	perl-devel >= 5
 BuildRequires:	pkgconfig >= 1:0.9.0
 BuildRequires:	poppler-cpp-devel >= 0.12.0
 BuildRequires:	poppler-devel >= 0.12.0
-%{?with_pgsql:BuildRequires:	postgresql-devel}
+%{?with_pgsql:BuildRequires:	postgresql-devel >= 9.0}
 BuildRequires:	python3 >= 1:3.3
 BuildRequires:	python3-devel >= 1:3.3
 BuildRequires:	python3-lxml
@@ -242,10 +248,9 @@ BuildRequires:	sed >= 4.0
 BuildRequires:	startup-notification-devel >= 0.5
 %{?with_systemtap:BuildRequires:	systemtap-sdt-devel}
 BuildRequires:	tar >= 1:1.22
-BuildRequires:	ucpp
 BuildRequires:	unixODBC-devel >= 2.2.12-2
 BuildRequires:	unzip
-BuildRequires:	xmlsec1-nss-devel >= 1.2.28
+BuildRequires:	xmlsec1-nss-devel >= 1.2.35
 BuildRequires:	xorg-font-font-adobe-utopia-type1
 BuildRequires:	xorg-lib-libICE-devel
 BuildRequires:	xorg-lib-libSM-devel
@@ -282,6 +287,16 @@ BuildRequires:	Qt5X11Extras-devel >= %{qt5_ver}
 BuildRequires:	libxcb-devel
 BuildRequires:	qt5-build >= %{qt5_ver}
 BuildRequires:	qt5-qmake >= %{qt5_ver}
+BuildRequires:	xcb-util-wm-devel
+%endif
+%if %{with qt6}
+BuildRequires:	Qt6Core-devel >= %{qt6_ver}
+BuildRequires:	Qt6Gui-devel >= %{qt6_ver}
+BuildRequires:	Qt6Network-devel >= %{qt6_ver}
+BuildRequires:	Qt6Widgets-devel >= %{qt6_ver}
+BuildRequires:	libxcb-devel
+BuildRequires:	qt6-build >= %{qt6_ver}
+BuildRequires:	qt6-qmake >= %{qt6_ver}
 BuildRequires:	xcb-util-wm-devel
 %endif
 # contains (dlopened) *.so libs
@@ -375,6 +390,20 @@ LibreOffice productivity suite - GTK+ 3 Interface.
 %description libs-gtk3 -l pl.UTF-8
 Pakiet biurowy LibreOffice - Interfejs GTK+ 3.
 
+%package libs-gtk4
+Summary:	LibreOffice GTK 4 Interface
+Summary(pl.UTF-8):	Interfejs GTK 4 dla LibreOffice
+Group:		X11/Libraries
+Requires:	%{name}-core = %{version}-%{release}
+Requires:	glib2 >= 1:2.38
+Requires:	gtk4 >= 4
+
+%description libs-gtk4
+LibreOffice productivity suite - GTK 4 Interface.
+
+%description libs-gtk4 -l pl.UTF-8
+Pakiet biurowy LibreOffice - Interfejs GTK 4.
+
 %package libs-qt5
 Summary:	LibreOffice Qt5 Interface
 Summary(pl.UTF-8):	Interfejs Qt5 dla LibreOffice
@@ -392,6 +421,18 @@ LibreOffice productivity suite - Qt5 Interface.
 %description libs-qt5 -l pl.UTF-8
 Pakiet biurowy LibreOffice - Interfejs Qt5.
 
+%package libs-qt6
+Summary:	LibreOffice Qt6 Interface
+Summary(pl.UTF-8):	Interfejs Qt6 dla LibreOffice
+Group:		X11/Libraries
+Requires:	%{name}-core = %{version}-%{release}
+
+%description libs-qt6
+LibreOffice productivity suite - Qt6 Interface.
+
+%description libs-qt6 -l pl.UTF-8
+Pakiet biurowy LibreOffice - Interfejs Qt6.
+
 %package core
 Summary:	Core modules for LibreOffice
 Summary(pl.UTF-8):	Podstawowe moduły dla LibreOffice
@@ -401,16 +442,16 @@ Requires(post,postun):	gtk-update-icon-cache
 Requires(post,postun):	shared-mime-info
 Requires:	%{name}-ure = %{version}-%{release}
 %{?with_firebird:Requires:	Firebird-lib >= 3.0.0.0}
-Requires:	cairo >= 1.8.0
+Requires:	cairo >= 1.12.0
 Requires:	clucene-core >= 2.3
-Requires:	curl-libs >= 7.19.4
+Requires:	curl-libs >= 7.68.0
 Requires:	dconf >= 0.15.2
 Requires:	fontconfig >= 2.4.1
 Requires:	fonts-TTF-OpenSymbol
-Requires:	freetype >= 1:2.2.0
+Requires:	freetype >= 1:2.8.1
 Requires:	glib2 >= 1:2.38
 Requires:	graphite2 >= 0.9.3
-Requires:	harfbuzz-icu >= 0.9.42
+Requires:	harfbuzz-icu >= 5.1.0
 Requires:	hicolor-icon-theme
 %{?with_system_beanshell:Requires: java-beanshell}
 %{?with_system_hsqldb:Requires: java-hsqldb}
@@ -418,18 +459,19 @@ Requires:	hicolor-icon-theme
 Requires:	libepoxy >= 1.2
 Requires:	libexttextcat >= 3.4.1
 Requires:	liblangtag >= 0.4.0
-Requires:	libmwaw >= 0.3.1
+Requires:	libmwaw >= 0.3.21
 Requires:	libodfgen >= 0.1.1
 Requires:	libpagemaker >= 0.0.2
 Requires:	libraptor2 >= 2.0.7
 Requires:	librevenge >= 0.0.1
+Requires:	libstaroffice >= 0.0.7
 Requires:	mktemp
 Requires:	neon >= 0.31.2
 Requires:	nspr >= 1:4.8
 Requires:	nss >= 1:3.10
 Requires:	redland >= 1.0.16
 Requires:	sed
-Requires:	xmlsec1-nss >= 1.2.28
+Requires:	xmlsec1-nss >= 1.2.35
 Requires:	xorg-lib-libXrandr >= 1.2
 #Suggests: chkfontpath
 Obsoletes:	libreoffice-binfilter < 4.0.0.0
@@ -600,7 +642,8 @@ Requires(post,postun):	desktop-file-utils
 Requires(post,postun):	gtk-update-icon-cache
 Requires:	%{name}-core = %{version}-%{release}
 Requires:	hicolor-icon-theme
-Requires:	libwps >= 0.4.10
+Requires:	libe-book >= 0.1.2
+Requires:	libwps >= 0.4.12
 Obsoletes:	openoffice.org-writer < 1:4
 
 %description writer
@@ -632,8 +675,8 @@ Requires(post,postun):	desktop-file-utils
 Requires(post,postun):	gtk-update-icon-cache
 Requires:	%{name}-core = %{version}-%{release}
 Requires:	hicolor-icon-theme
-Requires:	libetonyek >= 0.1.4
-Requires:	libwps >= 0.4.10
+Requires:	libetonyek >= 0.1.10
+Requires:	libwps >= 0.4.12
 Requires:	lp_solve >= 5.5
 Obsoletes:	openoffice.org-calc < 1:4
 
@@ -667,7 +710,7 @@ Requires(post,postun):	desktop-file-utils
 Requires(post,postun):	gtk-update-icon-cache
 Requires:	%{name}-core = %{version}-%{release}
 Requires:	hicolor-icon-theme
-Requires:	libetonyek >= 0.1.4
+Requires:	libetonyek >= 0.1.10
 Obsoletes:	libreoffice-presentation-minimizer < 4.2.0.0
 Obsoletes:	libreoffice-presenter-screen < 4.0.0.0-1
 Obsoletes:	openoffice.org-impress < 1:4
@@ -2893,12 +2936,6 @@ oraz narzędzie ui-previewer do sprawdzania wyglądu okien dialogowych.
 %prep
 %setup -q -a1 -a2 -a3
 %patch0 -p1
-%patch1 -p1
-%patch2 -p1
-%patch3 -p1
-%patch4 -p1
-%patch5 -p1
-%patch6 -p1
 
 for dir in *-%{version}; do
 	[ -f $dir/ChangeLog ] && %{__mv} $dir/ChangeLog ChangeLog-$dir
@@ -2926,8 +2963,6 @@ cp -p$l %{SOURCE32} ext_sources
 cp -p$l %{SOURCE33} ext_sources
 %endif
 :> src.downloaded
-
-cp -p$l %{SOURCE34} external/skia
 
 %build
 # Make sure we have /proc mounted - otherwise idlc will fail later.
@@ -2995,12 +3030,15 @@ export PATH=$PATH:%{_libdir}/interbase/bin
 	--enable-gio \
 	--enable-gstreamer-1-0 \
 	%{!?with_gtk3:--disable-gtk3} \
+	%{?with_gtk4:--enable-gtk4} \
+	%{?with_introspection:--enable-introspection} \
 	%{?with_kde5:--enable-kf5} \
 	--disable-odk \
 	--enable-pdfimport \
 	%{__enable_disable pgsql postgresql-sdbc} \
 	--enable-python=system \
 	%{?with_qt5:--enable-qt5} \
+	%{?with_qt6:--enable-qt6} \
 	--enable-release-build \
 	--enable-report-builder \
 	--enable-scripting-beanshell \
@@ -3026,7 +3064,7 @@ export PATH=$PATH:%{_libdir}/interbase/bin
 	%{!?with_system_coinmp:--without-system-coinmp} \
 	%{?with_system_hsqldb:--with-system-hsqldb} \
 	%{!?with_system_hunspell:--without-system-hunspell} \
-	--with-system-ucpp \
+	--without-system-libfixmath \
 	--with-vendor="%{distribution}" \
 	--with-x \
 %if 0%{?debug:1}
@@ -3055,7 +3093,8 @@ export ARCH_FLAGS_OPT="$SAFE_CFLAGS"
 # UTF-8 locale to ensure gettext stdin/stdout handling
 export LC_ALL=C.UTF-8
 
-%{__make} -j1 verbose=true build-nocheck
+%{__make} -j1 verbose=true build
+#-nocheck
 
 %if %{with tests}
 %{__make} -j1 verbose=true check
@@ -3338,6 +3377,7 @@ fi
 %attr(755,root,root) %{_libdir}/%{name}/program/libClp.so.1
 %attr(755,root,root) %{_libdir}/%{name}/program/libCoinMP.so.1
 %attr(755,root,root) %{_libdir}/%{name}/program/libCoinUtils.so.3
+%attr(755,root,root) %{_libdir}/%{name}/program/libLanguageToollo.so
 %attr(755,root,root) %{_libdir}/%{name}/program/libOsi.so.1
 %attr(755,root,root) %{_libdir}/%{name}/program/libOsiClp.so.1
 %attr(755,root,root) %{_libdir}/%{name}/program/libacclo.so
@@ -3374,6 +3414,7 @@ fi
 %attr(755,root,root) %{_libdir}/%{name}/program/libdict_ja.so
 %attr(755,root,root) %{_libdir}/%{name}/program/libdict_zh.so
 %attr(755,root,root) %{_libdir}/%{name}/program/libdlgprovlo.so
+%attr(755,root,root) %{_libdir}/%{name}/program/libdrawinglayercorelo.so
 %attr(755,root,root) %{_libdir}/%{name}/program/libdrawinglayerlo.so
 %attr(755,root,root) %{_libdir}/%{name}/program/libeditenglo.so
 %attr(755,root,root) %{_libdir}/%{name}/program/libembobj.so
@@ -3438,7 +3479,6 @@ fi
 %attr(755,root,root) %{_libdir}/%{name}/program/libsdbc2.so
 %attr(755,root,root) %{_libdir}/%{name}/program/libsdbtlo.so
 %attr(755,root,root) %{_libdir}/%{name}/program/libsddlo.so
-%attr(755,root,root) %{_libdir}/%{name}/program/libsdfiltlo.so
 %attr(755,root,root) %{_libdir}/%{name}/program/libsdlo.so
 %attr(755,root,root) %{_libdir}/%{name}/program/libsduilo.so
 %attr(755,root,root) %{_libdir}/%{name}/program/libsfxlo.so
@@ -3506,6 +3546,10 @@ fi
 %attr(755,root,root) %{_libdir}/%{name}/program/pagein*
 %attr(755,root,root) %{_libdir}/%{name}/program/senddoc
 %attr(755,root,root) %{_libdir}/%{name}/program/uri-encode
+
+# without system orcus
+%attr(755,root,root) %{_libdir}/%{name}/program/liborcus-0.17.so.0
+%attr(755,root,root) %{_libdir}/%{name}/program/liborcus-parser-0.17.so.0
 
 %if %{with java}
 %attr(755,root,root) %{_libdir}/%{name}/program/libhsqldb.so
@@ -3616,7 +3660,9 @@ fi
 %{_datadir}/%{name}/share/config/images_breeze_dark_svg.zip
 %{_datadir}/%{name}/share/config/images_breeze_svg.zip
 %{_datadir}/%{name}/share/config/images_colibre.zip
+%{_datadir}/%{name}/share/config/images_colibre_dark.zip
 %{_datadir}/%{name}/share/config/images_colibre_svg.zip
+%{_datadir}/%{name}/share/config/images_colibre_dark_svg.zip
 %{_datadir}/%{name}/share/config/images_elementary.zip
 %{_datadir}/%{name}/share/config/images_elementary_svg.zip
 %{_datadir}/%{name}/share/config/images_karasa_jaga.zip
@@ -3697,9 +3743,7 @@ fi
 %{_datadir}/%{name}/share/config/wizard
 %dir %{_datadir}/%{name}/share/dtd
 %{_datadir}/%{name}/share/dtd/officedocument
-%{_datadir}/%{name}/share/emojiconfig
 %dir %{_datadir}/%{name}/share/extensions
-%{_datadir}/%{name}/share/extensions/package.txt
 %{_datadir}/%{name}/share/filter
 %{_datadir}/%{name}/share/fonts
 %{_datadir}/%{name}/share/gallery
@@ -3732,6 +3776,7 @@ fi
 %dir %{_datadir}/%{name}/share/template/common
 %{_datadir}/%{name}/share/template/common/draw
 %{_datadir}/%{name}/share/template/common/internal
+%dir %{_datadir}/%{name}/share/template/common/l10n
 %{_datadir}/%{name}/share/template/common/officorr
 %{_datadir}/%{name}/share/template/common/offimisc
 %{_datadir}/%{name}/share/template/common/personal
@@ -3798,7 +3843,6 @@ fi
 %{_iconsdir}/hicolor/*/apps/libreoffice-chart.png
 %{_iconsdir}/hicolor/*/apps/libreoffice-chart.svg
 %{_iconsdir}/hicolor/*/apps/libreoffice-basic.svg
-%{_iconsdir}/hicolor/*/apps/libreoffice-extension.svg
 
 %{_desktopdir}/libreoffice-startcenter.desktop
 %{_iconsdir}/hicolor/*/apps/libreoffice-startcenter.png
@@ -3826,10 +3870,23 @@ fi
 #%{_datadir}/gir-1.0/LOKDocView-0.1.gir
 %endif
 
+%if %{with gtk4}
+%files libs-gtk4
+%defattr(644,root,root,755)
+%attr(755,root,root) %{_libdir}/%{name}/program/libavmediagtk.so
+%attr(755,root,root) %{_libdir}/%{name}/program/libvclplug_gtk4lo.so
+%endif
+
 %if %{with qt5}
 %files libs-qt5
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_libdir}/%{name}/program/libvclplug_qt5*.so
+%endif
+
+%if %{with qt6}
+%files libs-qt6
+%defattr(644,root,root,755)
+%attr(755,root,root) %{_libdir}/%{name}/program/libvclplug_qt6lo.so
 %endif
 
 %files base
@@ -4030,7 +4087,6 @@ fi
 %files ure
 %defattr(644,root,root,755)
 %dir %{_libdir}/%{name}
-%attr(755,root,root) %{_libdir}/%{name}/program/regmerge
 %attr(755,root,root) %{_libdir}/%{name}/program/regview
 %attr(755,root,root) %{_libdir}/%{name}/program/uno
 %attr(755,root,root) %{_libdir}/%{name}/program/uno.bin
@@ -4521,6 +4577,7 @@ fi
 
 %files i18n-zh_CN -f zh_CN.lang
 %defattr(644,root,root,755)
+%{_datadir}/%{name}/share/template/common/l10n/zh_CN_ott_normal.ott
 
 %files i18n-zh_TW -f zh_TW.lang
 %defattr(644,root,root,755)

@@ -1,16 +1,16 @@
---- libreoffice-6.0.0.3/sd/qa/unit/import-tests.cxx~	2018-01-24 21:31:03.000000000 +0100
-+++ libreoffice-6.0.0.3/sd/qa/unit/import-tests.cxx	2018-02-02 08:36:16.309008496 +0100
-@@ -171,7 +171,6 @@ public:
+--- libreoffice-7.5.1.2/sd/qa/unit/import-tests.cxx.orig	2023-03-09 20:09:43.192750947 +0100
++++ libreoffice-7.5.1.2/sd/qa/unit/import-tests.cxx	2023-03-09 20:11:34.780090894 +0100
+@@ -159,7 +159,6 @@ public:
  
      CPPUNIT_TEST_SUITE(SdImportTest);
  
 -    CPPUNIT_TEST(testDocumentLayout);
-     CPPUNIT_TEST(testTdf142645);
-     CPPUNIT_TEST(testTdf142915);
-     CPPUNIT_TEST(testTdf142913);
---- libreoffice-6.3.0.4/dbaccess/Module_dbaccess.mk~	2019-08-06 19:26:35.000000000 +0200
-+++ libreoffice-6.3.0.4/dbaccess/Module_dbaccess.mk	2019-08-09 09:06:37.432422956 +0200
-@@ -33,18 +33,6 @@
+     CPPUNIT_TEST(testTdf152434);
+     CPPUNIT_TEST(testConnectors);
+     CPPUNIT_TEST(testTdf153036_resizedConnectorL);
+--- libreoffice-7.5.1.2/dbaccess/Module_dbaccess.mk.orig	2023-03-09 20:09:43.192750947 +0100
++++ libreoffice-7.5.1.2/dbaccess/Module_dbaccess.mk	2023-03-09 20:12:12.233650210 +0100
+@@ -35,18 +35,6 @@ $(eval $(call gb_Module_add_targets,dbac
  ))
  
  ifneq ($(OS),iOS)
@@ -26,6 +26,6 @@
 -))
 -endif
 -
+ ifneq ($(filter SCRIPTING,$(BUILD_TYPE)),)
  $(eval $(call gb_Module_add_check_targets,dbaccess,\
  	CppunitTest_dbaccess_dialog_save \
- 	CppunitTest_dbaccess_empty_stdlib_save \
