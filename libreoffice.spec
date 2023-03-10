@@ -143,7 +143,7 @@ BuildRequires:	freetype-devel >= 1:2.8.1
 BuildRequires:	gdb
 BuildRequires:	gettext-tools
 BuildRequires:	glib2-devel >= 1:2.38
-#BuildRequires:	gobject-introspection-devel >= 1.32.0
+%{?with_introspection:BuildRequires:	gobject-introspection-devel >= 1.32.0}
 BuildRequires:	gperf
 BuildRequires:	gpgme-c++-devel
 BuildRequires:	graphite2-devel >= 0.9.3
