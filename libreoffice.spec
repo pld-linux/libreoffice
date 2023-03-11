@@ -3094,7 +3094,6 @@ export ARCH_FLAGS_OPT="$SAFE_CFLAGS"
 export LC_ALL=C.UTF-8
 
 %{__make} -j1 verbose=true build
-#-nocheck
 
 %if %{with tests}
 %{__make} -j1 verbose=true check
