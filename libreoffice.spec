@@ -2939,6 +2939,18 @@ dialogs.
 Ten pakiet zawiera zbiór widżetów glade specyficznych dla LibreOffice
 oraz narzędzie ui-previewer do sprawdzania wyglądu okien dialogowych.
 
+%package -n java-libreoffice
+Summary:	Library for embedding LibreOffice in Java applications
+Summary(pl.UTF-8):	Biblioteka do zagnieżdzania LibreOffice w aplikacjach Java
+Group:		Development/Libraries
+Requires:	%{name}-core = %{version}-%{release}
+
+%description -n java-libreoffice
+Library for embedding LibreOffice in Java applications.
+
+%description -n java-libreoffice -l pl.UTF-8
+Biblioteka do zagnieżdzania LibreOffice w aplikacjach Java.
+
 %prep
 %setup -q -a1 -a2 -a3
 %patch0 -p1
@@ -3557,7 +3569,6 @@ fi
 %if %{with java}
 %attr(755,root,root) %{_libdir}/%{name}/program/libhsqldb.so
 %attr(755,root,root) %{_libdir}/%{name}/program/libjdbclo.so
-%attr(755,root,root) %{_libdir}/%{name}/program/libofficebean.so
 %endif
 
 %if %{with mono}
@@ -3593,7 +3604,6 @@ fi
 %{!?with_system_hsqldb:%{_libdir}/%{name}/program/classes/hsqldb.jar}
 %{_libdir}/%{name}/program/classes/js.jar
 %{_libdir}/%{name}/program/classes/libreoffice.jar
-%{_libdir}/%{name}/program/classes/officebean.jar
 %{_libdir}/%{name}/program/classes/query.jar
 %{_libdir}/%{name}/program/classes/report.jar
 %{_libdir}/%{name}/program/classes/sdbc_hsqldb.jar
@@ -4597,3 +4607,10 @@ fi
 %defattr(644,root,root,755)
 %dir %{_datadir}/%{name}/share/glade
 %{_datadir}/%{name}/share/glade/libreoffice-catalog.xml
+
+%if %{with java}
+%files -n java-libreoffice
+%defattr(644,root,root,755)
+%attr(755,root,root) %{_libdir}/%{name}/program/libofficebean.so
+%{_libdir}/%{name}/program/classes/officebean.jar
+%endif
