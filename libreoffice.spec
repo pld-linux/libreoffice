@@ -3547,10 +3547,6 @@ fi
 %attr(755,root,root) %{_libdir}/%{name}/program/senddoc
 %attr(755,root,root) %{_libdir}/%{name}/program/uri-encode
 
-# without system orcus
-%attr(755,root,root) %{_libdir}/%{name}/program/liborcus-0.17.so.0
-%attr(755,root,root) %{_libdir}/%{name}/program/liborcus-parser-0.17.so.0
-
 %if %{with java}
 %attr(755,root,root) %{_libdir}/%{name}/program/libhsqldb.so
 %attr(755,root,root) %{_libdir}/%{name}/program/libjdbclo.so
