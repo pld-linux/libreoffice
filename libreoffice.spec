@@ -3084,7 +3084,7 @@ export PATH=$PATH:%{_libdir}/interbase/bin
 	--with-ant-home=$ANT_HOME \
 	--with-java \
 	--with-jdk-home=$JAVA_HOME \
-	--with-jvm-path=%{_jvmdir} \
+	--with-jvm-path=%{_libdir}/ \
 %else
 	--without-java
 %endif
