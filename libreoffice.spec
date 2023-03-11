@@ -109,6 +109,7 @@ Source32:	https://dev-www.libreoffice.org/src/skia-m103-b301ff025004c9cd82816c86
 Source33:	https://dev-www.libreoffice.org/src/libcmis-0.5.2.tar.xz
 # Source33-md5:	3653bc54e1bcd17ae09a1a7086daa38b
 Patch0:		disable-failing-test.patch
+Patch1:		jvm-path.patch
 URL:		https://www.documentfoundation.org/
 BuildRequires:	/usr/bin/getopt
 %{?with_firebird:BuildRequires:	Firebird-devel >= 3.0.0.0}
@@ -2941,6 +2942,7 @@ oraz narzędzie ui-previewer do sprawdzania wyglądu okien dialogowych.
 %prep
 %setup -q -a1 -a2 -a3
 %patch0 -p1
+%patch1 -p1
 
 for dir in *-%{version}; do
 	[ -f $dir/ChangeLog ] && %{__mv} $dir/ChangeLog ChangeLog-$dir

@@ -1,0 +1,14 @@
+--- libreoffice-7.5.1.2/jvmfwk/plugins/sunmajor/pluginlib/util.cxx.orig	2023-02-22 20:52:27.000000000 +0100
++++ libreoffice-7.5.1.2/jvmfwk/plugins/sunmajor/pluginlib/util.cxx	2023-03-11 21:48:38.572214374 +0100
+@@ -460,6 +460,11 @@
+         if(sHomeProperty.equals(sKey))
+         {
+             sVal = homePath + "/jre";
++            DirectoryItem jreDirItem;
++            if (DirectoryItem::get(homePath + "/jre", jreDirItem) == File::E_None)
++                sVal = homePath + "/jre";
++            else
++                sVal = homePath;
+         }
+ #endif
+ 
