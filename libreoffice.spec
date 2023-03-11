@@ -333,6 +333,8 @@ BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 %define		_noautostrip	.*%{_datadir}/.*
 %define		_noautochrpath	.*%{_datadir}/.*
 
+%define		_noautoreq_java	ClassDataVersion
+
 %description
 LibreOffice is an open-source project sponsored by Sun Microsystems
 and hosted by CollabNet. In October of 2000, Sun released the source
@@ -808,6 +810,9 @@ wymagane jest bardziej złożone, nieliniowe programowanie.
 Summary:	UNO Runtime Environment
 Summary(pl.UTF-8):	Środowisko uruchomieniowe UNO
 Group:		Libraries
+%if %{with java}
+%{?use_jdk:Suggests:	jre(%use_jdk)}
+%endif
 Obsoletes:	openoffice.org-ure < 1:4
 
 %description ure
