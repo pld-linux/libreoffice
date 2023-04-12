@@ -1,13 +1,13 @@
---- libreoffice-7.5.1.2/sd/qa/unit/import-tests.cxx.orig	2023-03-09 20:09:43.192750947 +0100
-+++ libreoffice-7.5.1.2/sd/qa/unit/import-tests.cxx	2023-03-09 20:11:34.780090894 +0100
-@@ -159,7 +159,6 @@ public:
+--- libreoffice-7.5.2.2/sd/qa/unit/import-tests.cxx.orig	2023-03-09 20:09:43.192750947 +0100
++++ libreoffice-7.5.2.2/sd/qa/unit/import-tests.cxx	2023-03-09 20:11:34.780090894 +0100
+@@ -82,7 +82,6 @@ public:
+     {
+     }
  
-     CPPUNIT_TEST_SUITE(SdImportTest);
- 
--    CPPUNIT_TEST(testDocumentLayout);
-     CPPUNIT_TEST(testTdf152434);
-     CPPUNIT_TEST(testConnectors);
-     CPPUNIT_TEST(testTdf153036_resizedConnectorL);
+-    void testDocumentLayout();
+     void testTdf152434();
+     void testStandardConnectors();
+     void testConnectors();
 --- libreoffice-7.5.1.2/dbaccess/Module_dbaccess.mk.orig	2023-03-09 20:09:43.192750947 +0100
 +++ libreoffice-7.5.1.2/dbaccess/Module_dbaccess.mk	2023-03-09 20:12:12.233650210 +0100
 @@ -35,18 +35,6 @@ $(eval $(call gb_Module_add_targets,dbac

@@ -59,7 +59,7 @@
 %define		with_qt5	1
 %endif
 
-%define		major_ver	7.5.1
+%define		major_ver	7.5.2
 %define		qt5_ver		5.6
 %define		qt6_ver		6
 
@@ -70,17 +70,17 @@ Summary:	LibreOffice - powerful office suite
 Summary(pl.UTF-8):	LibreOffice - potężny pakiet biurowy
 Name:		libreoffice
 Version:	%{major_ver}.2
-Release:	2
+Release:	1
 License:	GPL/LGPL
 Group:		X11/Applications
 Source0:	http://download.documentfoundation.org/libreoffice/src/%{major_ver}/%{name}-%{version}.tar.xz
-# Source0-md5:	5a48583c5a224d6932ee138fbc3c23ff
+# Source0-md5:	636a4fa94c7361d9d0fd0bf840783c27
 Source1:	http://download.documentfoundation.org/libreoffice/src/%{major_ver}/%{name}-dictionaries-%{version}.tar.xz
-# Source1-md5:	19a9eb99e64fa90c2a3a70fbafb11424
+# Source1-md5:	3a07567b1f23b8a68f79dff659de81d6
 Source2:	http://download.documentfoundation.org/libreoffice/src/%{major_ver}/%{name}-help-%{version}.tar.xz
-# Source2-md5:	0a1c39d42b120eff303bd787b266a159
+# Source2-md5:	4ed012102d394870279f6532f86d2e50
 Source3:	http://download.documentfoundation.org/libreoffice/src/%{major_ver}/%{name}-translations-%{version}.tar.xz
-# Source3-md5:	2b7a4abc1743551c742a3f07268e63a3
+# Source3-md5:	d1cb0b5a68927eb066cc3e1b66de8a1a
 
 # make (download|fetch) DO_FETCH_TARBALLS=1 WGET=wget
 # but not sure if all are needed?
@@ -3685,6 +3685,8 @@ fi
 %{_datadir}/%{name}/share/config/images_sifr_dark_svg.zip
 %{_datadir}/%{name}/share/config/images_sifr_svg.zip
 %{_datadir}/%{name}/share/config/images_sukapura.zip
+%{_datadir}/%{name}/share/config/images_sukapura_dark.zip
+%{_datadir}/%{name}/share/config/images_sukapura_dark_svg.zip
 %{_datadir}/%{name}/share/config/images_sukapura_svg.zip
 %dir %{_datadir}/%{name}/share/config/soffice.cfg
 %dir %{_datadir}/%{name}/share/config/soffice.cfg/cui
