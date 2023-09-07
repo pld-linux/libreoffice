@@ -70,7 +70,7 @@ Summary:	LibreOffice - powerful office suite
 Summary(pl.UTF-8):	LibreOffice - potężny pakiet biurowy
 Name:		libreoffice
 Version:	%{major_ver}.2
-Release:	2
+Release:	3
 License:	GPL/LGPL
 Group:		X11/Applications
 Source0:	http://download.documentfoundation.org/libreoffice/src/%{major_ver}/%{name}-%{version}.tar.xz
@@ -556,7 +556,7 @@ Summary:	Python bindings for LibreOffice
 Summary(pl.UTF-8):	Wiązania Pythona dla LibreOffice
 Group:		Libraries
 Requires:	%{name}-core = %{version}-%{release}
-Requires:	python
+Requires:	python3
 Provides:	pyuno
 Obsoletes:	openoffice.org-pyuno < 1:4
 
