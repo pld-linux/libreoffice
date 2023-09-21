@@ -70,7 +70,7 @@ Summary:	LibreOffice - powerful office suite
 Summary(pl.UTF-8):	LibreOffice - potężny pakiet biurowy
 Name:		libreoffice
 Version:	%{major_ver}.2
-Release:	3
+Release:	4
 License:	GPL/LGPL
 Group:		X11/Applications
 Source0:	http://download.documentfoundation.org/libreoffice/src/%{major_ver}/%{name}-%{version}.tar.xz
@@ -2928,7 +2928,6 @@ Summary:	Support for creating LibreOffice dialogs in glade
 Summary(pl.UTF-8):	Obsługa tworzenia okien dialogowych LibreOffice w glade
 Group:		Development/Libraries
 Requires:	%{name}-core = %{version}-%{release}
-Requires:	libgladeui
 
 %description glade
 libreoffice-glade contains a catalog of LibreOffice-specific widgets
