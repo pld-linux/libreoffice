@@ -113,7 +113,7 @@ Patch1:		jvm-path.patch
 URL:		https://www.documentfoundation.org/
 BuildRequires:	/usr/bin/getopt
 %{?with_firebird:BuildRequires:	Firebird-devel >= 3.0.0.0}
-BuildRequires:	GLM
+BuildRequires:	GLM-devel
 BuildRequires:	ImageMagick
 BuildRequires:	OpenGL-devel
 BuildRequires:	abseil-cpp-devel
