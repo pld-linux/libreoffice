@@ -1,0 +1,53 @@
+--- libreoffice-7.5.9.2/helpcompiler/source/HelpLinker.cxx.orig	2023-11-28 13:23:01.000000000 +0100
++++ libreoffice-7.5.9.2/helpcompiler/source/HelpLinker.cxx	2024-08-28 06:18:11.666316788 +0200
+@@ -815,7 +815,7 @@ static const HelpProcessingException* Gp
+ 
+ extern "C" {
+ 
+-static void StructuredXMLErrorFunction(SAL_UNUSED_PARAMETER void *, xmlErrorPtr error)
++static void StructuredXMLErrorFunction(SAL_UNUSED_PARAMETER void *, const xmlError *error)
+ {
+     std::string aErrorMsg = error->message;
+     std::string aXMLParsingFile;
+--- libreoffice-7.5.9.2/sax/source/fastparser/fastparser.cxx.orig	2023-11-28 13:23:01.000000000 +0100
++++ libreoffice-7.5.9.2/sax/source/fastparser/fastparser.cxx	2024-08-28 06:19:49.893307939 +0200
+@@ -579,7 +579,7 @@ Event& Entity::getEvent( CallbackType aT
+ OUString lclGetErrorMessage( xmlParserCtxtPtr ctxt, std::u16string_view sSystemId, sal_Int32 nLine )
+ {
+     const char* pMessage;
+-    xmlErrorPtr error = xmlCtxtGetLastError( ctxt );
++    const xmlError* error = xmlCtxtGetLastError( ctxt );
+     if( error && error->message )
+         pMessage = error->message;
+     else
+--- libreoffice-7.5.9.2/filter/source/xsltfilter/LibXSLTTransformer.cxx.orig	2023-11-28 13:23:01.000000000 +0100
++++ libreoffice-7.5.9.2/filter/source/xsltfilter/LibXSLTTransformer.cxx	2024-08-28 06:22:44.304452124 +0200
+@@ -333,7 +333,7 @@ namespace XSLT
+         }
+         else
+         {
+-            xmlErrorPtr lastErr = xmlGetLastError();
++            const xmlError* lastErr = xmlGetLastError();
+             OUString msg;
+             if (lastErr)
+                 msg = OStringToOUString(lastErr->message, RTL_TEXTENCODING_UTF8);
+--- libreoffice-7.5.9.2/unoxml/source/xpath/xpathapi.cxx.orig	2023-11-28 13:23:01.000000000 +0100
++++ libreoffice-7.5.9.2/unoxml/source/xpath/xpathapi.cxx	2024-08-28 06:28:58.787726580 +0200
+@@ -217,7 +217,7 @@ namespace XPath
+         return selectSingleNode(contextNode, expr);
+     }
+ 
+-    static OUString make_error_message(xmlErrorPtr pError)
++    static OUString make_error_message(const xmlError *pError)
+     {
+         OUStringBuffer buf;
+         if (pError) {
+@@ -263,7 +263,7 @@ namespace XPath
+             SAL_WARN("unoxml", "libxml2 error: " << str);
+         }
+ 
+-        static void structured_error_func(void *, xmlErrorPtr error)
++        static void structured_error_func(void *, const xmlError *error)
+         {
+             SAL_WARN("unoxml", "libxml2 error: " << make_error_message(error));
+         }

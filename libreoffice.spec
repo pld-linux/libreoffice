@@ -59,7 +59,7 @@
 %define		with_qt5	1
 %endif
 
-%define		major_ver	7.5.2
+%define		major_ver	7.5.9
 %define		qt5_ver		5.6
 %define		qt6_ver		6
 
@@ -70,22 +70,22 @@ Summary:	LibreOffice - powerful office suite
 Summary(pl.UTF-8):	LibreOffice - potężny pakiet biurowy
 Name:		libreoffice
 Version:	%{major_ver}.2
-Release:	4
+Release:	1
 License:	GPL/LGPL
 Group:		X11/Applications
 Source0:	http://download.documentfoundation.org/libreoffice/src/%{major_ver}/%{name}-%{version}.tar.xz
-# Source0-md5:	636a4fa94c7361d9d0fd0bf840783c27
+# Source0-md5:	65d54bfe6e09ade61d40888a1a40488d
 Source1:	http://download.documentfoundation.org/libreoffice/src/%{major_ver}/%{name}-dictionaries-%{version}.tar.xz
-# Source1-md5:	3a07567b1f23b8a68f79dff659de81d6
+# Source1-md5:	a354890a71a7c43f5fde0e6b6028cdaa
 Source2:	http://download.documentfoundation.org/libreoffice/src/%{major_ver}/%{name}-help-%{version}.tar.xz
-# Source2-md5:	4ed012102d394870279f6532f86d2e50
+# Source2-md5:	4e0f841364041142887c88bfe4431b7b
 Source3:	http://download.documentfoundation.org/libreoffice/src/%{major_ver}/%{name}-translations-%{version}.tar.xz
-# Source3-md5:	d1cb0b5a68927eb066cc3e1b66de8a1a
+# Source3-md5:	3935d5a6bad3ca4ba53e3e8ef8289162
 
 # make (download|fetch) DO_FETCH_TARBALLS=1 WGET=wget
 # but not sure if all are needed?
-Source20:	http://dev-www.libreoffice.org/src/pdfium-5408.tar.bz2
-# Source20-md5:	a8ae777e121a0fb63f4e8b6779d68ada
+Source20:	http://dev-www.libreoffice.org/src/pdfium-5778.tar.bz2
+# Source20-md5:	32a897e227d0d56f991e1beeb0f9af37
 Source21:	http://dev-www.libreoffice.org/src/17410483b5b5f267aa18b7e00b65e6e0-hsqldb_1_8_0.zip
 # Source21-md5:	17410483b5b5f267aa18b7e00b65e6e0
 Source22:	http://dev-www.libreoffice.org/src/CoinMP-1.7.6.tgz
@@ -106,10 +106,12 @@ Source31:	https://dev-www.libreoffice.org/src/dtoa-20180411.tgz
 # Source31-md5:	4295bad62b2524793d8a7ba3e7385501
 Source32:	https://dev-www.libreoffice.org/src/skia-m103-b301ff025004c9cd82816c86c547588e6c24b466.tar.xz
 # Source32-md5:	0a0013856ea701b3023ca4b00f147c72
-Source33:	https://dev-www.libreoffice.org/src/libcmis-0.5.2.tar.xz
-# Source33-md5:	3653bc54e1bcd17ae09a1a7086daa38b
+Source33:	https://dev-www.libreoffice.org/src/libcmis-0.6.1.tar.xz
+# Source33-md5:	4d6d131ae64f5d3122962ed39f9f209b
 Patch0:		disable-failing-test.patch
 Patch1:		jvm-path.patch
+Patch2:		%{name}-includes.patch
+Patch3:		%{name}-types.patch
 URL:		https://www.documentfoundation.org/
 BuildRequires:	/usr/bin/getopt
 %{?with_firebird:BuildRequires:	Firebird-devel >= 3.0.0.0}
@@ -177,7 +179,7 @@ BuildRequires:	java-sac
 BuildRequires:	lcms2-devel >= 2
 BuildRequires:	libabw-devel >= 0.1.0
 BuildRequires:	libcdr-devel >= 0.1
-%{?with_system_cmis:BuildRequires:	libcmis-devel >= 0.5.2}
+%{?with_system_cmis:BuildRequires:	libcmis-devel >= 0.6.1}
 BuildRequires:	libe-book-devel >= 0.1.2
 %{?with_eot:BuildRequires:	libeot-devel >= 0.01}
 BuildRequires:	libepoxy-devel >= 1.2
@@ -458,7 +460,7 @@ Requires:	harfbuzz-icu >= 5.1.0
 Requires:	hicolor-icon-theme
 %{?with_system_beanshell:Requires: java-beanshell}
 %{?with_system_hsqldb:Requires: java-hsqldb}
-%{?with_system_cmis:Requires:	libcmis >= 0.5.2}
+%{?with_system_cmis:Requires:	libcmis >= 0.6.1}
 Requires:	libepoxy >= 1.2
 Requires:	libexttextcat >= 3.4.1
 Requires:	liblangtag >= 0.4.0
@@ -2954,6 +2956,8 @@ Biblioteka do zagnieżdzania LibreOffice w aplikacjach Java.
 %setup -q -a1 -a2 -a3
 %patch0 -p1
 %patch1 -p1
+%patch2 -p1
+%patch3 -p1
 
 for dir in *-%{version}; do
 	[ -f $dir/ChangeLog ] && %{__mv} $dir/ChangeLog ChangeLog-$dir
@@ -3063,7 +3067,6 @@ export PATH=$PATH:%{_libdir}/interbase/bin
 	--enable-scripting-javascript \
 	--enable-split-app-modules \
 	--enable-split-opt-features \
-	--with-build-version=%{version}-%{release} \
 	--with-external-dict-dir=%{_datadir}/myspell \
 	--with-external-tar=$(pwd)/ext_sources \
 	--with-extra-buildid="%{name}-%{epoch}:%{version}-%{release}" \
