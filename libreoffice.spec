@@ -7,12 +7,11 @@
 # - system odfvalidator and officeotron?
 # - xapian-omega support for help?
 #
-# NOTE - FIXME FOR 3.4.3 !!!:
-#	- normal build (i686) requires about 27 GB of disk space:
-#		$BUILD_ROOT	7.0 GB
-#		BUILD		18  GB
-#		RPMS		1.8 GB
-#		SRPMS		0.4 GB
+# NOTE: normal build (x86_64) requires about ? GB of disk space:
+#	$BUILD_ROOT	? GB
+#	BUILD		9 GB
+#	RPMS		1.4 GB
+#	SRPMS		? GB
 #
 # Conditional build:
 %bcond_without	java			# Java support (required for help support)
@@ -59,7 +58,7 @@
 %define		with_qt5	1
 %endif
 
-%define		major_ver	7.5.9
+%define		major_ver	7.6.7
 %define		qt5_ver		5.6
 %define		qt6_ver		6
 
@@ -74,13 +73,13 @@ Release:	1
 License:	GPL/LGPL
 Group:		X11/Applications
 Source0:	http://download.documentfoundation.org/libreoffice/src/%{major_ver}/%{name}-%{version}.tar.xz
-# Source0-md5:	65d54bfe6e09ade61d40888a1a40488d
+# Source0-md5:	96b9685afc47e9cd61d0b70f7cf85af9
 Source1:	http://download.documentfoundation.org/libreoffice/src/%{major_ver}/%{name}-dictionaries-%{version}.tar.xz
-# Source1-md5:	a354890a71a7c43f5fde0e6b6028cdaa
+# Source1-md5:	c18d76ff8b261e3d22b6a0da0216c0e0
 Source2:	http://download.documentfoundation.org/libreoffice/src/%{major_ver}/%{name}-help-%{version}.tar.xz
-# Source2-md5:	4e0f841364041142887c88bfe4431b7b
+# Source2-md5:	43cf0788bea4f7af0b27382bdd35a190
 Source3:	http://download.documentfoundation.org/libreoffice/src/%{major_ver}/%{name}-translations-%{version}.tar.xz
-# Source3-md5:	3935d5a6bad3ca4ba53e3e8ef8289162
+# Source3-md5:	f552a0c0ed718c7ffdef71a10682aa65
 
 # make (download|fetch) DO_FETCH_TARBALLS=1 WGET=wget
 # but not sure if all are needed?
@@ -104,14 +103,13 @@ Source30:	https://dev-www.libreoffice.org/extern/8249374c274932a21846fa7629c2aa9
 # Source30-md5:	8249374c274932a21846fa7629c2aa9b
 Source31:	https://dev-www.libreoffice.org/src/dtoa-20180411.tgz
 # Source31-md5:	4295bad62b2524793d8a7ba3e7385501
-Source32:	https://dev-www.libreoffice.org/src/skia-m103-b301ff025004c9cd82816c86c547588e6c24b466.tar.xz
-# Source32-md5:	0a0013856ea701b3023ca4b00f147c72
+Source32:	https://dev-www.libreoffice.org/src/skia-m111-a31e897fb3dcbc96b2b40999751611d029bf5404.tar.xz
+# Source32-md5:	373dd6a480f29505217d59b9adce274d
 Source33:	https://dev-www.libreoffice.org/src/libcmis-0.6.1.tar.xz
 # Source33-md5:	4d6d131ae64f5d3122962ed39f9f209b
-Patch0:		disable-failing-test.patch
 Patch1:		jvm-path.patch
 Patch2:		%{name}-includes.patch
-Patch3:		%{name}-types.patch
+Patch3:		%{name}-qt6.patch
 URL:		https://www.documentfoundation.org/
 BuildRequires:	/usr/bin/getopt
 %{?with_firebird:BuildRequires:	Firebird-devel >= 3.0.0.0}
@@ -129,25 +127,26 @@ BuildRequires:	bluez-libs-devel
 BuildRequires:	boost-devel >= 1.66
 BuildRequires:	box2d-devel >= 2.4.0
 BuildRequires:	cairo-devel >= 1.12.0
-%{?with_ccache:BuildRequires:	ccache}
+%{?with_ccache:BuildRequires:	ccache >= 3.7.2}
 BuildRequires:	clucene-core-devel >= 2.3
 %{?with_system_coinmp:BuildRequires:	coinmp-devel}
 BuildRequires:	cppunit-devel >= 1.14.0
 BuildRequires:	cups-devel
 BuildRequires:	curl-devel >= 7.68.0
-BuildRequires:	dconf-devel >= 0.15.2
+BuildRequires:	dconf-devel >= 0.40.0
 BuildRequires:	dbus-devel >= 0.60
 BuildRequires:	dragonbox-devel = 1.1.3
 BuildRequires:	expat-devel
 BuildRequires:	flex >= 2.6.0
 BuildRequires:	fontconfig-devel >= 2.4.1
-# pkgconfig(freetype2) >= 21.0.15
+# pkgconfig(freetype2) >= 21.0.15 (for skia)
 BuildRequires:	freetype-devel >= 1:2.8.1
+BuildRequires:	frozen-devel
 BuildRequires:	gdb
 BuildRequires:	gettext-tools
 BuildRequires:	glib2-devel >= 1:2.38
 %{?with_introspection:BuildRequires:	gobject-introspection-devel >= 1.32.0}
-BuildRequires:	gperf
+BuildRequires:	gperf >= 3.1
 BuildRequires:	gpgme-c++-devel
 BuildRequires:	graphite2-devel >= 0.9.3
 BuildRequires:	gstreamer-devel >= 1.0
@@ -158,7 +157,7 @@ BuildRequires:	harfbuzz-icu-devel >= 5.1.0
 %{?with_system_hunspell:BuildRequires:	hunspell-devel >= 1.2.2}
 %{?with_system_hyphen:BuildRequires:	hyphen-devel}
 %{?with_icecream:BuildRequires:	icecream}
-BuildRequires:	icu
+BuildRequires:	icu >= 4.6
 %{?with_system_beanshell:BuildRequires:	java-beanshell}
 BuildRequires:	java-commons-logging >= 1.1.2
 BuildRequires:	java-flow-engine >= 0.9.2
@@ -189,13 +188,13 @@ BuildRequires:	libexttextcat-devel >= 3.4.1
 BuildRequires:	libfreehand-devel >= 0.1.0
 BuildRequires:	libicu-devel >= 4.6
 BuildRequires:	libjpeg-devel
-BuildRequires:	liblangtag-devel >= 0.4.0
+BuildRequires:	liblangtag-devel >= 0.5.5
 BuildRequires:	libmspub-devel >= 0.1
 BuildRequires:	libmwaw-devel >= 0.3.21
 BuildRequires:	libnumbertext-devel >= 1.0.6
 BuildRequires:	libodfgen-devel >= 0.1.1
-BuildRequires:	liborcus-devel >= 0.17.2
-BuildRequires:	liborcus-devel < 0.18
+BuildRequires:	liborcus-devel >= 0.18.0
+BuildRequires:	liborcus-devel < 0.19
 BuildRequires:	libpagemaker-devel >= 0.0.2
 BuildRequires:	libpng-devel
 BuildRequires:	libqxp-devel
@@ -211,16 +210,16 @@ BuildRequires:	libvisio-devel >= 0.1
 BuildRequires:	libwebp-devel
 BuildRequires:	libwpd-devel >= 0.10.0
 BuildRequires:	libwpg-devel >= 0.3.0
-BuildRequires:	libwps-devel >= 0.4.12
+BuildRequires:	libwps-devel >= 0.4.14
 BuildRequires:	libxml2-devel >= 2.0
 BuildRequires:	libxml2-progs
 BuildRequires:	libxslt-devel
 BuildRequires:	libxslt-progs
 BuildRequires:	libzmf-devel
 BuildRequires:	lp_solve-devel >= 5.5
-BuildRequires:	make >= 1:3.82
-BuildRequires:	mdds-devel >= 2.0.0
-BuildRequires:	mdds-devel < 2.1
+BuildRequires:	make >= 1:4.0
+BuildRequires:	mdds-devel >= 2.1.0
+BuildRequires:	mdds-devel < 2.2
 %{?with_mono:BuildRequires:	mono-csharp >= 1.2.3}
 %{?with_mono:BuildRequires:	mono-static >= 1.2.3}
 BuildRequires:	mysql-devel >= 5
@@ -236,8 +235,8 @@ BuildRequires:	perl-Archive-Zip
 BuildRequires:	perl-base >= 5
 BuildRequires:	perl-devel >= 5
 BuildRequires:	pkgconfig >= 1:0.9.0
-BuildRequires:	poppler-cpp-devel >= 0.12.0
-BuildRequires:	poppler-devel >= 0.12.0
+BuildRequires:	poppler-cpp-devel >= 0.14
+BuildRequires:	poppler-devel >= 0.14
 %{?with_pgsql:BuildRequires:	postgresql-devel >= 9.0}
 BuildRequires:	python3 >= 1:3.3
 BuildRequires:	python3-devel >= 1:3.3
@@ -450,7 +449,7 @@ Requires:	%{name}-ure = %{version}-%{release}
 Requires:	cairo >= 1.12.0
 Requires:	clucene-core >= 2.3
 Requires:	curl-libs >= 7.68.0
-Requires:	dconf >= 0.15.2
+Requires:	dconf >= 0.40.0
 Requires:	fontconfig >= 2.4.1
 Requires:	fonts-TTF-OpenSymbol
 Requires:	freetype >= 1:2.8.1
@@ -459,11 +458,12 @@ Requires:	graphite2 >= 0.9.3
 Requires:	harfbuzz-icu >= 5.1.0
 Requires:	hicolor-icon-theme
 %{?with_system_beanshell:Requires: java-beanshell}
-%{?with_system_hsqldb:Requires: java-hsqldb}
+%{?with_system_hsqldb:Requires: java-hsqldb >= 1.8.0.9}
+%{?with_system_hsqldb:Requires: java-hsqldb < 1.8.1}
 %{?with_system_cmis:Requires:	libcmis >= 0.6.1}
 Requires:	libepoxy >= 1.2
 Requires:	libexttextcat >= 3.4.1
-Requires:	liblangtag >= 0.4.0
+Requires:	liblangtag >= 0.5.5
 Requires:	libmwaw >= 0.3.21
 Requires:	libodfgen >= 0.1.1
 Requires:	libpagemaker >= 0.0.2
@@ -648,7 +648,7 @@ Requires(post,postun):	gtk-update-icon-cache
 Requires:	%{name}-core = %{version}-%{release}
 Requires:	hicolor-icon-theme
 Requires:	libe-book >= 0.1.2
-Requires:	libwps >= 0.4.12
+Requires:	libwps >= 0.4.14
 Obsoletes:	openoffice.org-writer < 1:4
 
 %description writer
@@ -681,7 +681,7 @@ Requires(post,postun):	gtk-update-icon-cache
 Requires:	%{name}-core = %{version}-%{release}
 Requires:	hicolor-icon-theme
 Requires:	libetonyek >= 0.1.10
-Requires:	libwps >= 0.4.12
+Requires:	libwps >= 0.4.14
 Requires:	lp_solve >= 5.5
 Obsoletes:	openoffice.org-calc < 1:4
 
@@ -2954,7 +2954,6 @@ Biblioteka do zagnieżdzania LibreOffice w aplikacjach Java.
 
 %prep
 %setup -q -a1 -a2 -a3
-%patch0 -p1
 %patch1 -p1
 %patch2 -p1
 %patch3 -p1
@@ -3435,6 +3434,7 @@ fi
 %attr(755,root,root) %{_libdir}/%{name}/program/libdict_ja.so
 %attr(755,root,root) %{_libdir}/%{name}/program/libdict_zh.so
 %attr(755,root,root) %{_libdir}/%{name}/program/libdlgprovlo.so
+%attr(755,root,root) %{_libdir}/%{name}/program/libdocmodello.so
 %attr(755,root,root) %{_libdir}/%{name}/program/libdrawinglayercorelo.so
 %attr(755,root,root) %{_libdir}/%{name}/program/libdrawinglayerlo.so
 %attr(755,root,root) %{_libdir}/%{name}/program/libeditenglo.so
@@ -3442,7 +3442,6 @@ fi
 %attr(755,root,root) %{_libdir}/%{name}/program/libemboleobj.so
 %attr(755,root,root) %{_libdir}/%{name}/program/libemfiolo.so
 %attr(755,root,root) %{_libdir}/%{name}/program/libevtattlo.so
-%attr(755,root,root) %{_libdir}/%{name}/program/libexpwraplo.so
 %attr(755,root,root) %{_libdir}/%{name}/program/libfilelo.so
 %attr(755,root,root) %{_libdir}/%{name}/program/libfilterconfiglo.so
 %{?with_firebird:%attr(755,root,root) %{_libdir}/%{name}/program/libfirebird_sdbclo.so}
@@ -4035,7 +4034,6 @@ fi
 %attr(755,root,root) %{_libdir}/%{name}/program/libOGLTranslo.so
 %attr(755,root,root) %{_libdir}/%{name}/program/libanimcorelo.so
 %attr(755,root,root) %{_libdir}/%{name}/program/libPresentationMinimizerlo.so
-%attr(755,root,root) %{_libdir}/%{name}/program/libPresenterScreenlo.so
 %attr(755,root,root) %{_libdir}/%{name}/program/libwpftimpresslo.so
 %{_mandir}/man1/loimpress.1
 %{_desktopdir}/libreoffice-impress.desktop
