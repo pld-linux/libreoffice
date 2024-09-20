@@ -1,4 +1,5 @@
 # TODO:
+# - kf6
 # - -core/-ure dependency loop
 # - fix configure arguments (+ compare with FC)
 # - create CoinMP library package for PLD (https://projects.coin-or.org/CoinMP)
@@ -9,7 +10,7 @@
 #
 # NOTE: normal build (x86_64) requires about ? GB of disk space:
 #	$BUILD_ROOT	? GB
-#	BUILD		9 GB
+#	BUILD		23 GB
 #	RPMS		1.4 GB
 #	SRPMS		? GB
 #
@@ -58,7 +59,7 @@
 %define		with_qt5	1
 %endif
 
-%define		major_ver	7.6.7
+%define		major_ver	24.2.6
 %define		qt5_ver		5.6
 %define		qt6_ver		6
 
@@ -73,29 +74,31 @@ Release:	1
 License:	GPL/LGPL
 Group:		X11/Applications
 Source0:	http://download.documentfoundation.org/libreoffice/src/%{major_ver}/%{name}-%{version}.tar.xz
-# Source0-md5:	96b9685afc47e9cd61d0b70f7cf85af9
+# Source0-md5:	2c5770df08fbc0d342cafa3c6b0ee836
 Source1:	http://download.documentfoundation.org/libreoffice/src/%{major_ver}/%{name}-dictionaries-%{version}.tar.xz
-# Source1-md5:	c18d76ff8b261e3d22b6a0da0216c0e0
+# Source1-md5:	ab9a580780730b126aadb78bf4644590
 Source2:	http://download.documentfoundation.org/libreoffice/src/%{major_ver}/%{name}-help-%{version}.tar.xz
-# Source2-md5:	43cf0788bea4f7af0b27382bdd35a190
+# Source2-md5:	aab0d37a570ffc92e9c64ab023af1f46
 Source3:	http://download.documentfoundation.org/libreoffice/src/%{major_ver}/%{name}-translations-%{version}.tar.xz
-# Source3-md5:	f552a0c0ed718c7ffdef71a10682aa65
+# Source3-md5:	d129d91d38d5e6e313ca04295bcfa551
 
 # make (download|fetch) DO_FETCH_TARBALLS=1 WGET=wget
 # but not sure if all are needed?
-Source20:	http://dev-www.libreoffice.org/src/pdfium-5778.tar.bz2
-# Source20-md5:	32a897e227d0d56f991e1beeb0f9af37
-Source21:	http://dev-www.libreoffice.org/src/17410483b5b5f267aa18b7e00b65e6e0-hsqldb_1_8_0.zip
+Source20:	https://dev-www.libreoffice.org/src/pdfium-6179.tar.bz2
+# Source20-md5:	f64375592b2efb2bb740c0fd2e76e12c
+Source21:	https://dev-www.libreoffice.org/src/17410483b5b5f267aa18b7e00b65e6e0-hsqldb_1_8_0.zip
 # Source21-md5:	17410483b5b5f267aa18b7e00b65e6e0
-Source22:	http://dev-www.libreoffice.org/src/CoinMP-1.7.6.tgz
-# Source22-md5:	1cce53bf4b40ae29790d2c5c9f8b1129
-Source23:	http://dev-www.libreoffice.org/src/798b2ffdc8bcfe7bca2cf92b62caf685-rhino1_5R5.zip
+Source22:	https://dev-www.libreoffice.org/src/CoinMP-1.8.4.tgz
+# Source22-md5:	dd85ff540997a95ebb233bb5ae7bcc61
+Source23:	https://dev-www.libreoffice.org/src/798b2ffdc8bcfe7bca2cf92b62caf685-rhino1_5R5.zip
 # Source23-md5:	798b2ffdc8bcfe7bca2cf92b62caf685
-Source25:	http://dev-www.libreoffice.org/src/35c94d2df8893241173de1d16b6034c0-swingExSrc.zip
+Source24:	https://dev-www.libreoffice.org/src/Java-WebSocket-1.5.4.tar.gz
+# Source24-md5:	32c9026234c63bba474568f561d74239
+Source25:	https://dev-www.libreoffice.org/src/35c94d2df8893241173de1d16b6034c0-swingExSrc.zip
 # Source25-md5:	35c94d2df8893241173de1d16b6034c0
 Source26:	https://dev-www.libreoffice.org/extern/odfvalidator-0.9.0-RC2-SNAPSHOT-jar-with-dependencies-2726ab578664434a545f8379a01a9faffac0ae73.jar
 # Source26-md5:	80e162d2adfd99057d1e0c62c3883364
-Source27:	http://dev-www.libreoffice.org/src/a7983f859eafb2677d7ff386a023bc40-xsltml_2.1.2.zip
+Source27:	https://dev-www.libreoffice.org/src/a7983f859eafb2677d7ff386a023bc40-xsltml_2.1.2.zip
 # Source27-md5:	a7983f859eafb2677d7ff386a023bc40
 Source28:	https://dev-www.libreoffice.org/extern/f543e6e2d7275557a839a164941c0a86e5f2c3f2a0042bfc434c88c6dde9e140-opens___.ttf
 # Source28-md5:	09c7414a011363c72248c7bf3a23d758
@@ -103,12 +106,11 @@ Source30:	https://dev-www.libreoffice.org/extern/8249374c274932a21846fa7629c2aa9
 # Source30-md5:	8249374c274932a21846fa7629c2aa9b
 Source31:	https://dev-www.libreoffice.org/src/dtoa-20180411.tgz
 # Source31-md5:	4295bad62b2524793d8a7ba3e7385501
-Source32:	https://dev-www.libreoffice.org/src/skia-m111-a31e897fb3dcbc96b2b40999751611d029bf5404.tar.xz
-# Source32-md5:	373dd6a480f29505217d59b9adce274d
+Source32:	https://dev-www.libreoffice.org/src/skia-m116-2ddcf183eb260f63698aa74d1bb380f247ad7ccd.tar.xz
+# Source32-md5:	8965c1a6344c5f80a0e4e9e8f38b82bf
 Source33:	https://dev-www.libreoffice.org/src/libcmis-0.6.1.tar.xz
 # Source33-md5:	4d6d131ae64f5d3122962ed39f9f209b
 Patch1:		jvm-path.patch
-Patch2:		%{name}-includes.patch
 Patch3:		%{name}-qt6.patch
 URL:		https://www.documentfoundation.org/
 BuildRequires:	/usr/bin/getopt
@@ -116,7 +118,7 @@ BuildRequires:	/usr/bin/getopt
 BuildRequires:	GLM-devel
 BuildRequires:	ImageMagick
 BuildRequires:	OpenGL-devel
-BuildRequires:	abseil-cpp-devel
+BuildRequires:	abseil-cpp-devel >= 20230125
 %{?with_system_agg:BuildRequires:	agg-devel >= 2.3}
 BuildRequires:	atk-devel >= 1:2.28.1
 BuildRequires:	autoconf >= 2.68
@@ -138,7 +140,7 @@ BuildRequires:	dbus-devel >= 0.60
 BuildRequires:	dragonbox-devel = 1.1.3
 BuildRequires:	expat-devel
 BuildRequires:	flex >= 2.6.0
-BuildRequires:	fontconfig-devel >= 2.4.1
+BuildRequires:	fontconfig-devel >= 2.12.0
 # pkgconfig(freetype2) >= 21.0.15 (for skia)
 BuildRequires:	freetype-devel >= 1:2.8.1
 BuildRequires:	frozen-devel
@@ -186,15 +188,15 @@ BuildRequires:	libepubgen-devel >= 0.1.0
 BuildRequires:	libetonyek-devel >= 0.1.10
 BuildRequires:	libexttextcat-devel >= 3.4.1
 BuildRequires:	libfreehand-devel >= 0.1.0
-BuildRequires:	libicu-devel >= 4.6
+BuildRequires:	libicu-devel >= 66
 BuildRequires:	libjpeg-devel
 BuildRequires:	liblangtag-devel >= 0.5.5
 BuildRequires:	libmspub-devel >= 0.1
 BuildRequires:	libmwaw-devel >= 0.3.21
 BuildRequires:	libnumbertext-devel >= 1.0.6
 BuildRequires:	libodfgen-devel >= 0.1.1
-BuildRequires:	liborcus-devel >= 0.18.0
-BuildRequires:	liborcus-devel < 0.19
+BuildRequires:	liborcus-devel >= 0.19.1
+BuildRequires:	liborcus-devel < 0.20
 BuildRequires:	libpagemaker-devel >= 0.0.2
 BuildRequires:	libpng-devel
 BuildRequires:	libqxp-devel
@@ -202,7 +204,7 @@ BuildRequires:	libraptor2-devel >= 2.0.7
 BuildRequires:	librevenge-devel >= 0.0.1
 BuildRequires:	librsvg-devel >= 2.14
 BuildRequires:	libstaroffice-devel >= 0.0.7
-BuildRequires:	libstdc++-devel >= 6:7
+BuildRequires:	libstdc++-devel >= 6:12
 BuildRequires:	libtiff-devel >= 4
 # for uuidgen
 BuildRequires:	libuuid
@@ -266,6 +268,7 @@ BuildRequires:	xorg-lib-libXt-devel
 BuildRequires:	xz
 BuildRequires:	zip >= 3.0
 BuildRequires:	zlib-devel
+BuildRequires:	zxcvbn-c-devel
 BuildRequires:	zxing-cpp-nu-devel
 %if %{with java}
 BuildRequires:	ant >= 1.7.0
@@ -450,7 +453,7 @@ Requires:	cairo >= 1.12.0
 Requires:	clucene-core >= 2.3
 Requires:	curl-libs >= 7.68.0
 Requires:	dconf >= 0.40.0
-Requires:	fontconfig >= 2.4.1
+Requires:	fontconfig >= 2.12.0
 Requires:	fonts-TTF-OpenSymbol
 Requires:	freetype >= 1:2.8.1
 Requires:	glib2 >= 1:2.38
@@ -1658,6 +1661,21 @@ Hungarian language.
 %description i18n-hu -l pl.UTF-8
 Ten pakiet dostarcza zasoby zawierające menu i okna dialogowe w języku
 węgierskim.
+
+%package i18n-hy
+Summary:	LibreOffice - interface in Armenian language
+Summary(pl.UTF-8):	LibreOffice - interfejs w języku armeńskim
+Group:		I18n
+Requires:	%{name}-core = %{version}-%{release}
+BuildArch:	noarch
+
+%description i18n-hy
+This package provides resources containing menus and dialogs in
+Armenian language.
+
+%description i18n-hy -l pl.UTF-8
+Ten pakiet dostarcza zasoby zawierające menu i okna dialogowe w języku
+armeńskim.
 
 %package i18n-id
 Summary:	LibreOffice - interface in Indonesian language
@@ -2955,7 +2973,6 @@ Biblioteka do zagnieżdzania LibreOffice w aplikacjach Java.
 %prep
 %setup -q -a1 -a2 -a3
 %patch1 -p1
-%patch2 -p1
 %patch3 -p1
 
 for dir in *-%{version}; do
@@ -2973,6 +2990,7 @@ fi
 cp -p$l %{SOURCE21} ext_sources
 cp -p$l %{SOURCE22} ext_sources
 cp -p$l %{SOURCE23} ext_sources
+cp -p$l %{SOURCE24} ext_sources
 cp -p$l %{SOURCE25} ext_sources
 cp -p$l %{SOURCE26} ext_sources
 cp -p$l %{SOURCE27} ext_sources
@@ -3007,6 +3025,7 @@ done
 export CC="%{__cc}"
 export CXX="%{__cxx}"
 export CPP="%{__cpp}"
+export CPPFLAGS="%{rpmcppflags} -I/usr/include/zxcvbn"
 
 export IGNORE_MANIFEST_CHANGES=1
 
@@ -3395,6 +3414,7 @@ fi
 %attr(755,root,root) %{_libdir}/%{name}/program/libCbcSolver.so.3
 %attr(755,root,root) %{_libdir}/%{name}/program/libCgl.so.1
 %attr(755,root,root) %{_libdir}/%{name}/program/libClp.so.1
+%attr(755,root,root) %{_libdir}/%{name}/program/libClpSolver.so.1
 %attr(755,root,root) %{_libdir}/%{name}/program/libCoinMP.so.1
 %attr(755,root,root) %{_libdir}/%{name}/program/libCoinUtils.so.3
 %attr(755,root,root) %{_libdir}/%{name}/program/libLanguageToollo.so
@@ -3532,7 +3552,6 @@ fi
 %attr(755,root,root) %{_libdir}/%{name}/program/libucpexpand1lo.so
 %attr(755,root,root) %{_libdir}/%{name}/program/libucpextlo.so
 %attr(755,root,root) %{_libdir}/%{name}/program/libucpfile1.so
-%attr(755,root,root) %{_libdir}/%{name}/program/libucpftp1.so
 %attr(755,root,root) %{_libdir}/%{name}/program/libucpgio1lo.so
 %attr(755,root,root) %{_libdir}/%{name}/program/libucphier1.so
 %attr(755,root,root) %{_libdir}/%{name}/program/libucpimagelo.so
@@ -3603,6 +3622,7 @@ fi
 %{_libdir}/%{name}/program/classes/commonwizards.jar
 %{_libdir}/%{name}/program/classes/form.jar
 %{!?with_system_hsqldb:%{_libdir}/%{name}/program/classes/hsqldb.jar}
+%{_libdir}/%{name}/program/classes/java_websocket.jar
 %{_libdir}/%{name}/program/classes/js.jar
 %{_libdir}/%{name}/program/classes/libreoffice.jar
 %{_libdir}/%{name}/program/classes/query.jar
@@ -3755,7 +3775,6 @@ fi
 %{_datadir}/%{name}/share/config/soffice.cfg/vcl/ui
 %dir %{_datadir}/%{name}/share/config/soffice.cfg/xmlsec
 %{_datadir}/%{name}/share/config/soffice.cfg/xmlsec/ui
-%{_datadir}/%{name}/share/config/webcast
 %{_datadir}/%{name}/share/config/wizard
 %dir %{_datadir}/%{name}/share/dtd
 %{_datadir}/%{name}/share/dtd/officedocument
@@ -4175,7 +4194,6 @@ fi
 %{_libdir}/%{name}/program/services/pyuno.rdb
 %{_libdir}/%{name}/program/services/scriptproviderforpython.rdb
 %{_datadir}/%{name}/share/registry/librelogo.xcd
-%{_datadir}/%{name}/share/registry/pyuno.xcd
 
 # python wizards
 %dir %{_libdir}/%{name}/program/wizards
@@ -4380,6 +4398,9 @@ fi
 %files i18n-hu -f hu.lang
 %defattr(644,root,root,755)
 
+%files i18n-hy -f hy.lang
+%defattr(644,root,root,755)
+
 %files i18n-id -f id.lang
 %defattr(644,root,root,755)
 
@@ -4391,6 +4412,7 @@ fi
 
 %files i18n-ja -f ja.lang
 %defattr(644,root,root,755)
+%{_datadir}/%{name}/share/template/common/l10n/ja_ott_normal.ott
 
 %files i18n-ka -f ka.lang
 %defattr(644,root,root,755)
