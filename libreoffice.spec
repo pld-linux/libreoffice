@@ -150,6 +150,7 @@ BuildRequires:	glib2-devel >= 1:2.38
 %{?with_introspection:BuildRequires:	gobject-introspection-devel >= 1.32.0}
 BuildRequires:	gperf >= 3.1
 BuildRequires:	gpgme-c++-devel
+BuildRequires:	gpgme-devel
 BuildRequires:	graphite2-devel >= 0.9.3
 BuildRequires:	gstreamer-devel >= 1.0
 BuildRequires:	gstreamer-plugins-base-devel >= 1.0
