@@ -179,6 +179,7 @@ BuildRequires:	java-libxml >= 1.0.0
 BuildRequires:	java-sac
 BuildRequires:	lcms2-devel >= 2
 BuildRequires:	libabw-devel >= 0.1.0
+BuildRequires:	libargon2-devel
 BuildRequires:	libcdr-devel >= 0.1
 %{?with_system_cmis:BuildRequires:	libcmis-devel >= 0.6.1}
 BuildRequires:	libe-book-devel >= 0.1.2
@@ -1458,7 +1459,7 @@ friulskim.
 
 %package i18n-fy
 Summary:	LibreOffice - interface in Frisian language
-Summary(pl.UTF-8):	LibreOffice - interfejs w języku fryzyjskim 
+Summary(pl.UTF-8):	LibreOffice - interfejs w języku fryzyjskim
 Group:		I18n
 Requires:	%{name}-core = %{version}-%{release}
 Obsoletes:	openoffice-i18n-fy < 1:2
