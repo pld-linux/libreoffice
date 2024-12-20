@@ -36,7 +36,7 @@
 
 %bcond_with	system_agg		# system agg library (not supported as of 6.4.x, pdfium uses included version)
 %bcond_without	system_beanshell	# system Java BeanShell library
-%bcond_with	system_cmis		# system libcmis library (build fails)
+%bcond_without	system_cmis		# system libcmis library (build fails)
 %bcond_with	system_coinmp		# system CoinMP library (not in PLD yet)
 %bcond_with	system_hsqldb		# system Java HSQLDB library
 %bcond_without	system_hunspell		# system hunspell library
@@ -70,7 +70,7 @@ Summary:	LibreOffice - powerful office suite
 Summary(pl.UTF-8):	LibreOffice - potężny pakiet biurowy
 Name:		libreoffice
 Version:	%{major_ver}.2
-Release:	1
+Release:	2
 License:	GPL/LGPL
 Group:		X11/Applications
 Source0:	http://download.documentfoundation.org/libreoffice/src/%{major_ver}/%{name}-%{version}.tar.xz
