@@ -59,7 +59,7 @@
 %define		with_qt5	1
 %endif
 
-%define		major_ver	24.2.6
+%define		major_ver	24.8.4
 %define		qt5_ver		5.6
 %define		qt6_ver		6
 
@@ -70,32 +70,30 @@ Summary:	LibreOffice - powerful office suite
 Summary(pl.UTF-8):	LibreOffice - potężny pakiet biurowy
 Name:		libreoffice
 Version:	%{major_ver}.2
-Release:	3
+Release:	1
 License:	GPL/LGPL
 Group:		X11/Applications
 Source0:	http://download.documentfoundation.org/libreoffice/src/%{major_ver}/%{name}-%{version}.tar.xz
-# Source0-md5:	2c5770df08fbc0d342cafa3c6b0ee836
+# Source0-md5:	0b46f3f278ee7eae48f573a3a633040a
 Source1:	http://download.documentfoundation.org/libreoffice/src/%{major_ver}/%{name}-dictionaries-%{version}.tar.xz
-# Source1-md5:	ab9a580780730b126aadb78bf4644590
+# Source1-md5:	822c4778330b5905a94570d546d5fd39
 Source2:	http://download.documentfoundation.org/libreoffice/src/%{major_ver}/%{name}-help-%{version}.tar.xz
-# Source2-md5:	aab0d37a570ffc92e9c64ab023af1f46
+# Source2-md5:	234b33373f2d815aba52063a7ba8dd10
 Source3:	http://download.documentfoundation.org/libreoffice/src/%{major_ver}/%{name}-translations-%{version}.tar.xz
-# Source3-md5:	d129d91d38d5e6e313ca04295bcfa551
+# Source3-md5:	c25154a3c0d7bfb33b8ae97ac4f826d5
 
 # make (download|fetch) DO_FETCH_TARBALLS=1 WGET=wget
 # but not sure if all are needed?
-Source20:	https://dev-www.libreoffice.org/src/pdfium-6179.tar.bz2
-# Source20-md5:	f64375592b2efb2bb740c0fd2e76e12c
+Source20:	https://dev-www.libreoffice.org/src/pdfium-6425.tar.bz2
+# Source20-md5:	0a35edc605b5ca20bc0561fd7ead8a5b
 Source21:	https://dev-www.libreoffice.org/src/17410483b5b5f267aa18b7e00b65e6e0-hsqldb_1_8_0.zip
 # Source21-md5:	17410483b5b5f267aa18b7e00b65e6e0
 Source22:	https://dev-www.libreoffice.org/src/CoinMP-1.8.4.tgz
 # Source22-md5:	dd85ff540997a95ebb233bb5ae7bcc61
-Source23:	https://dev-www.libreoffice.org/src/798b2ffdc8bcfe7bca2cf92b62caf685-rhino1_5R5.zip
-# Source23-md5:	798b2ffdc8bcfe7bca2cf92b62caf685
-Source24:	https://dev-www.libreoffice.org/src/Java-WebSocket-1.5.4.tar.gz
-# Source24-md5:	32c9026234c63bba474568f561d74239
-Source25:	https://dev-www.libreoffice.org/src/35c94d2df8893241173de1d16b6034c0-swingExSrc.zip
-# Source25-md5:	35c94d2df8893241173de1d16b6034c0
+Source23:	https://dev-www.libreoffice.org/src/rhino-1.7.14.zip
+# Source23-md5:	1dfed97583e27035db257a149c4f5810
+Source24:	https://dev-www.libreoffice.org/src/Java-WebSocket-1.5.6.tar.gz
+# Source24-md5:	0b29e30385fff51788c290e951ddede0
 Source26:	https://dev-www.libreoffice.org/extern/odfvalidator-0.9.0-RC2-SNAPSHOT-jar-with-dependencies-2726ab578664434a545f8379a01a9faffac0ae73.jar
 # Source26-md5:	80e162d2adfd99057d1e0c62c3883364
 Source27:	https://dev-www.libreoffice.org/src/a7983f859eafb2677d7ff386a023bc40-xsltml_2.1.2.zip
@@ -108,8 +106,8 @@ Source31:	https://dev-www.libreoffice.org/src/dtoa-20180411.tgz
 # Source31-md5:	4295bad62b2524793d8a7ba3e7385501
 Source32:	https://dev-www.libreoffice.org/src/skia-m116-2ddcf183eb260f63698aa74d1bb380f247ad7ccd.tar.xz
 # Source32-md5:	8965c1a6344c5f80a0e4e9e8f38b82bf
-Source33:	https://dev-www.libreoffice.org/src/libcmis-0.6.1.tar.xz
-# Source33-md5:	4d6d131ae64f5d3122962ed39f9f209b
+Source33:	https://dev-www.libreoffice.org/src/libcmis-0.6.2.tar.xz
+# Source33-md5:	61616df853bff53d0044a755b86f288c
 Patch1:		jvm-path.patch
 Patch3:		%{name}-qt6.patch
 URL:		https://www.documentfoundation.org/
@@ -126,7 +124,7 @@ BuildRequires:	automake >= 1:1.9
 BuildRequires:	bash
 BuildRequires:	bison >= 2.0
 BuildRequires:	bluez-libs-devel
-BuildRequires:	boost-devel >= 1.66
+BuildRequires:	boost-devel >= 1.69
 BuildRequires:	box2d-devel >= 2.4.0
 BuildRequires:	cairo-devel >= 1.12.0
 %{?with_ccache:BuildRequires:	ccache >= 3.7.2}
@@ -299,6 +297,8 @@ BuildRequires:	xcb-util-wm-devel
 %if %{with qt6}
 BuildRequires:	Qt6Core-devel >= %{qt6_ver}
 BuildRequires:	Qt6Gui-devel >= %{qt6_ver}
+BuildRequires:	Qt6Multimedia-devel >= %{qt6_ver}
+BuildRequires:	Qt6MultimediaWidgets-devel >= %{qt6_ver}
 BuildRequires:	Qt6Network-devel >= %{qt6_ver}
 BuildRequires:	Qt6Widgets-devel >= %{qt6_ver}
 BuildRequires:	libxcb-devel
@@ -2683,6 +2683,21 @@ language.
 Ten pakiet dostarcza zasoby zawierające menu i okna dialogowe w języku
 tajskim.
 
+%package i18n-tl
+Summary:	LibreOffice - interface in Tagalog language
+Summary(pl.UTF-8):	LibreOffice - interfejs w języku tagalskim
+Group:		I18n
+Requires:	%{name}-core = %{version}-%{release}
+BuildArch:	noarch
+
+%description i18n-tl
+This package provides resources containing menus and dialogs in
+Tagalog language.
+
+%description i18n-tl -l pl.UTF-8
+Ten pakiet dostarcza zasoby zawierające menu i okna dialogowe w języku
+tagalskim.
+
 %package i18n-tn
 Summary:	LibreOffice - interface in Tswana language
 Summary(pl.UTF-8):	LibreOffice - interfejs w języku tswana
@@ -2993,7 +3008,6 @@ cp -p$l %{SOURCE21} ext_sources
 cp -p$l %{SOURCE22} ext_sources
 cp -p$l %{SOURCE23} ext_sources
 cp -p$l %{SOURCE24} ext_sources
-cp -p$l %{SOURCE25} ext_sources
 cp -p$l %{SOURCE26} ext_sources
 cp -p$l %{SOURCE27} ext_sources
 cp -p$l %{SOURCE28} ext_sources
@@ -3106,6 +3120,7 @@ export PATH=$PATH:%{_libdir}/interbase/bin
 	%{?with_system_hsqldb:--with-system-hsqldb} \
 	%{!?with_system_hunspell:--without-system-hunspell} \
 	--without-system-libfixmath \
+	--without-system-rhino \
 	--with-vendor="%{distribution}" \
 	--with-x \
 %if 0%{?debug:1}
@@ -3436,7 +3451,6 @@ fi
 %attr(755,root,root) %{_libdir}/%{name}/program/libchartcontrollerlo.so
 %attr(755,root,root) %{_libdir}/%{name}/program/libchartcorelo.so
 %attr(755,root,root) %{_libdir}/%{name}/program/libcmdmaillo.so
-%attr(755,root,root) %{_libdir}/%{name}/program/libcollator_data.so
 %attr(755,root,root) %{_libdir}/%{name}/program/libcomphelper.so
 %attr(755,root,root) %{_libdir}/%{name}/program/libconfigmgrlo.so
 %attr(755,root,root) %{_libdir}/%{name}/program/libcppcanvaslo.so
@@ -3451,10 +3465,7 @@ fi
 %attr(755,root,root) %{_libdir}/%{name}/program/libdeployment.so
 %attr(755,root,root) %{_libdir}/%{name}/program/libdeploymentgui.so
 %attr(755,root,root) %{_libdir}/%{name}/program/libdeploymentmisclo.so
-%attr(755,root,root) %{_libdir}/%{name}/program/libdesktop_detectorlo.so
 %attr(755,root,root) %{_libdir}/%{name}/program/libdesktopbe1lo.so
-%attr(755,root,root) %{_libdir}/%{name}/program/libdict_ja.so
-%attr(755,root,root) %{_libdir}/%{name}/program/libdict_zh.so
 %attr(755,root,root) %{_libdir}/%{name}/program/libdlgprovlo.so
 %attr(755,root,root) %{_libdir}/%{name}/program/libdocmodello.so
 %attr(755,root,root) %{_libdir}/%{name}/program/libdrawinglayercorelo.so
@@ -3483,7 +3494,6 @@ fi
 %attr(755,root,root) %{_libdir}/%{name}/program/libi18nsearchlo.so
 %attr(755,root,root) %{_libdir}/%{name}/program/libi18nutil.so
 %attr(755,root,root) %{_libdir}/%{name}/program/libicglo.so
-%attr(755,root,root) %{_libdir}/%{name}/program/libindex_data.so
 %attr(755,root,root) %{_libdir}/%{name}/program/libldapbe2lo.so
 %attr(755,root,root) %{_libdir}/%{name}/program/liblnglo.so
 %attr(755,root,root) %{_libdir}/%{name}/program/liblnthlo.so
@@ -3541,7 +3551,6 @@ fi
 %attr(755,root,root) %{_libdir}/%{name}/program/libsvxlo.so
 %attr(755,root,root) %{_libdir}/%{name}/program/libswlo.so
 %attr(755,root,root) %{_libdir}/%{name}/program/libsysshlo.so
-%attr(755,root,root) %{_libdir}/%{name}/program/libtextconv_dict.so
 %attr(755,root,root) %{_libdir}/%{name}/program/libtextconversiondlgslo.so
 %attr(755,root,root) %{_libdir}/%{name}/program/libtextfdlo.so
 %attr(755,root,root) %{_libdir}/%{name}/program/libtklo.so
@@ -3924,6 +3933,7 @@ fi
 %files libs-qt6
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_libdir}/%{name}/program/libvclplug_qt6lo.so
+%attr(755,root,root) %{_libdir}/%{name}/program/libavmediaqt6.so
 %endif
 
 %files base
@@ -4026,11 +4036,11 @@ fi
 %attr(755,root,root) %{_libdir}/%{name}/program/libhwplo.so
 %attr(755,root,root) %{_libdir}/%{name}/program/liblwpftlo.so
 %attr(755,root,root) %{_libdir}/%{name}/program/libmswordlo.so
+%attr(755,root,root) %{_libdir}/%{name}/program/libsw_writerfilterlo.so
 %attr(755,root,root) %{_libdir}/%{name}/program/libswdlo.so
 %attr(755,root,root) %{_libdir}/%{name}/program/libswuilo.so
 %attr(755,root,root) %{_libdir}/%{name}/program/libt602filterlo.so
 %attr(755,root,root) %{_libdir}/%{name}/program/libwpftwriterlo.so
-%attr(755,root,root) %{_libdir}/%{name}/program/libwriterfilterlo.so
 %attr(755,root,root) %{_libdir}/%{name}/program/libvbaswobjlo.so
 %attr(755,root,root) %{_libdir}/%{name}/program/swriter
 %{_mandir}/man1/lowriter.1
@@ -4191,6 +4201,7 @@ fi
 %{_libdir}/%{name}/program/pythonloader.py
 %{_libdir}/%{name}/program/pythonscript.py
 %{_libdir}/%{name}/program/scriptforge.py
+%{_libdir}/%{name}/program/scriptforge.pyi
 %{_libdir}/%{name}/program/uno.py
 %{_libdir}/%{name}/program/unohelper.py
 %{_libdir}/%{name}/program/services/pyuno.rdb
@@ -4227,7 +4238,6 @@ fi
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_libdir}/%{name}/program/xpdfimport
 %{_datadir}/%{name}/share/registry/pdfimport.xcd
-%{_datadir}/%{name}/share/xpdfimport
 %attr(755,root,root) %{_libdir}/%{name}/program/libpdfimportlo.so
 
 %files wiki-publisher -f wiki-publisher.lang
@@ -4579,6 +4589,9 @@ fi
 %defattr(644,root,root,755)
 
 %files i18n-th -f th.lang
+%defattr(644,root,root,755)
+
+%files i18n-tl -f tl.lang
 %defattr(644,root,root,755)
 
 %files i18n-tn -f tn.lang
