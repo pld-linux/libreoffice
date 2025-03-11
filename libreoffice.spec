@@ -70,7 +70,7 @@ Summary:	LibreOffice - powerful office suite
 Summary(pl.UTF-8):	LibreOffice - potężny pakiet biurowy
 Name:		libreoffice
 Version:	%{major_ver}.2
-Release:	
+Release:	2
 License:	GPL/LGPL
 Group:		X11/Applications
 Source0:	http://download.documentfoundation.org/libreoffice/src/%{major_ver}/%{name}-%{version}.tar.xz
@@ -2989,8 +2989,8 @@ Biblioteka do zagnieżdzania LibreOffice w aplikacjach Java.
 
 %prep
 %setup -q -a1 -a2 -a3
-%patch1 -p1
-%patch3 -p1
+%patch -P 1 -p1
+%patch -P 3 -p1
 
 for dir in *-%{version}; do
 	[ -f $dir/ChangeLog ] && %{__mv} $dir/ChangeLog ChangeLog-$dir
