@@ -59,7 +59,7 @@
 %define		with_qt5	1
 %endif
 
-%define		major_ver	24.8.4
+%define		major_ver	25.2.5
 %define		qt5_ver		5.6
 %define		qt6_ver		6
 
@@ -70,30 +70,30 @@ Summary:	LibreOffice - powerful office suite
 Summary(pl.UTF-8):	LibreOffice - potężny pakiet biurowy
 Name:		libreoffice
 Version:	%{major_ver}.2
-Release:	6
+Release:	1
 License:	GPL/LGPL
 Group:		X11/Applications
 Source0:	http://download.documentfoundation.org/libreoffice/src/%{major_ver}/%{name}-%{version}.tar.xz
-# Source0-md5:	0b46f3f278ee7eae48f573a3a633040a
+# Source0-md5:	f215c051d230755251e32b4112459950
 Source1:	http://download.documentfoundation.org/libreoffice/src/%{major_ver}/%{name}-dictionaries-%{version}.tar.xz
-# Source1-md5:	822c4778330b5905a94570d546d5fd39
+# Source1-md5:	ad9f78b23c0d1321ba478d574416660f
 Source2:	http://download.documentfoundation.org/libreoffice/src/%{major_ver}/%{name}-help-%{version}.tar.xz
-# Source2-md5:	234b33373f2d815aba52063a7ba8dd10
+# Source2-md5:	f91a96cc0b3bc2f60d95e5cd5fc28630
 Source3:	http://download.documentfoundation.org/libreoffice/src/%{major_ver}/%{name}-translations-%{version}.tar.xz
-# Source3-md5:	c25154a3c0d7bfb33b8ae97ac4f826d5
+# Source3-md5:	a4425c16a73f098a3d6a57abca754abc
 
 # make (download|fetch) DO_FETCH_TARBALLS=1 WGET=wget
 # but not sure if all are needed?
-Source20:	https://dev-www.libreoffice.org/src/pdfium-6425.tar.bz2
-# Source20-md5:	0a35edc605b5ca20bc0561fd7ead8a5b
+Source20:	https://dev-www.libreoffice.org/src/pdfium-6764.tar.bz2
+# Source20-md5:	aad134bea732620ebe9f43c968ed7b10
 Source21:	https://dev-www.libreoffice.org/src/17410483b5b5f267aa18b7e00b65e6e0-hsqldb_1_8_0.zip
 # Source21-md5:	17410483b5b5f267aa18b7e00b65e6e0
 Source22:	https://dev-www.libreoffice.org/src/CoinMP-1.8.4.tgz
 # Source22-md5:	dd85ff540997a95ebb233bb5ae7bcc61
-Source23:	https://dev-www.libreoffice.org/src/rhino-1.7.14.zip
-# Source23-md5:	1dfed97583e27035db257a149c4f5810
-Source24:	https://dev-www.libreoffice.org/src/Java-WebSocket-1.5.6.tar.gz
-# Source24-md5:	0b29e30385fff51788c290e951ddede0
+Source23:	https://dev-www.libreoffice.org/src/rhino-1.7.15.zip
+# Source23-md5:	e3fcddf37c699c64c99934a5bf42d572
+Source24:	https://dev-www.libreoffice.org/src/Java-WebSocket-1.6.0.tar.gz
+# Source24-md5:	56c216500b28e5322fd00cdc1649513e
 Source26:	https://dev-www.libreoffice.org/extern/odfvalidator-0.9.0-RC2-SNAPSHOT-jar-with-dependencies-2726ab578664434a545f8379a01a9faffac0ae73.jar
 # Source26-md5:	80e162d2adfd99057d1e0c62c3883364
 Source27:	https://dev-www.libreoffice.org/src/a7983f859eafb2677d7ff386a023bc40-xsltml_2.1.2.zip
@@ -104,8 +104,8 @@ Source30:	https://dev-www.libreoffice.org/extern/8249374c274932a21846fa7629c2aa9
 # Source30-md5:	8249374c274932a21846fa7629c2aa9b
 Source31:	https://dev-www.libreoffice.org/src/dtoa-20180411.tgz
 # Source31-md5:	4295bad62b2524793d8a7ba3e7385501
-Source32:	https://dev-www.libreoffice.org/src/skia-m116-2ddcf183eb260f63698aa74d1bb380f247ad7ccd.tar.xz
-# Source32-md5:	8965c1a6344c5f80a0e4e9e8f38b82bf
+Source32:	https://dev-www.libreoffice.org/src/skia-m130-3c64459d5df2fa9794b277f0959ed8a92552bf4c.tar.xz
+# Source32-md5:	920149563f4e451ecb91bc9bd2cb37f6
 Source33:	https://dev-www.libreoffice.org/src/libcmis-0.6.2.tar.xz
 # Source33-md5:	61616df853bff53d0044a755b86f288c
 Patch1:		jvm-path.patch
@@ -3121,6 +3121,7 @@ export PATH=$PATH:%{_libdir}/interbase/bin
 	%{!?with_system_hunspell:--without-system-hunspell} \
 	--without-system-libfixmath \
 	--without-system-rhino \
+	--without-system-java-websocket \
 	--with-vendor="%{distribution}" \
 	--with-x \
 %if 0%{?debug:1}
@@ -3629,7 +3630,6 @@ fi
 %{_libdir}/%{name}/program/classes/ScriptProviderForBeanShell.jar
 %{_libdir}/%{name}/program/classes/ScriptProviderForJavaScript.jar
 %{_libdir}/%{name}/program/classes/ScriptProviderForJava.jar
-%{_libdir}/%{name}/program/classes/XMergeBridge.jar
 %{_libdir}/%{name}/program/classes/commonwizards.jar
 %{_libdir}/%{name}/program/classes/form.jar
 %{!?with_system_hsqldb:%{_libdir}/%{name}/program/classes/hsqldb.jar}
@@ -3641,7 +3641,6 @@ fi
 %{_libdir}/%{name}/program/classes/sdbc_hsqldb.jar
 %{_libdir}/%{name}/program/classes/table.jar
 %{_libdir}/%{name}/program/classes/unoil.jar
-%{_libdir}/%{name}/program/classes/xmerge.jar
 %{_libdir}/%{name}/program/services/scriptproviderforbeanshell.rdb
 %{_libdir}/%{name}/program/services/scriptproviderforjavascript.rdb
 %endif
