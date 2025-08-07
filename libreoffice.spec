@@ -860,6 +860,21 @@ Wtyczka LibreOffice dla przeglądarek WWW.
 
 Ta wtyczka umożliwia wyświetlanie dokumentów OOo wewnątrz stron.
 
+%package i18n-ab
+Summary:	LibreOffice - interface in Abkhaz language
+Summary(pl.UTF-8):	LibreOffice - interfejs w języku abchaskim
+Group:		I18n
+Requires:	%{name}-core = %{version}-%{release}
+BuildArch:	noarch
+
+%description i18n-ab
+This package provides resources containing menus and dialogs in
+Abkhaz language.
+
+%description i18n-ab -l pl.UTF-8
+Ten pakiet dostarcza zasoby zawierające menu i okna dialogowe w języku
+abchaskim.
+
 %package i18n-af
 Summary:	LibreOffice - interface in Afrikaans language
 Summary(pl.UTF-8):	LibreOffice - interfejs w języku afrykanerskim
@@ -2399,6 +2414,21 @@ Santali language.
 %description i18n-sat -l pl.UTF-8
 Ten pakiet dostarcza zasoby zawierające menu i okna dialogowe w języku
 santali.
+
+%package i18n-sat-Olck
+Summary:	LibreOffice - interface in Santali language (Ol Chiki script)
+Summary(pl.UTF-8):	LibreOffice - interfejs w języku santali (pismo ol ciki)
+Group:		I18n
+Requires:	%{name}-core = %{version}-%{release}
+BuildArch:	noarch
+
+%description i18n-sat-Olck
+This package provides resources containing menus and dialogs in
+Santali language (Ol Chiki script).
+
+%description i18n-sat-Olck -l pl.UTF-8
+Ten pakiet dostarcza zasoby zawierające menu i okna dialogowe w języku
+santali (pismo ol ciki).
 
 %package i18n-sd
 Summary:	LibreOffice - interface in Sindhi language
@@ -4274,6 +4304,9 @@ fi
 %endif
 
 %if %{with i18n}
+%files i18n-ab -f ab.lang
+%defattr(644,root,root,755)
+
 %files i18n-af -f af.lang
 %defattr(644,root,root,755)
 
@@ -4537,6 +4570,9 @@ fi
 %defattr(644,root,root,755)
 
 %files i18n-sat -f sat.lang
+%defattr(644,root,root,755)
+
+%files i18n-sat-Olck -f sat_Olck.lang
 %defattr(644,root,root,755)
 
 %files i18n-sd -f sd.lang
