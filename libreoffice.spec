@@ -59,7 +59,7 @@
 %define		with_qt5	1
 %endif
 
-%define		major_ver	25.2.5
+%define		major_ver	25.8.3
 %define		qt5_ver		5.6
 %define		qt6_ver		6
 
@@ -70,22 +70,22 @@ Summary:	LibreOffice - powerful office suite
 Summary(pl.UTF-8):	LibreOffice - potężny pakiet biurowy
 Name:		libreoffice
 Version:	%{major_ver}.2
-Release:	4
+Release:	1
 License:	GPL/LGPL
 Group:		X11/Applications
 Source0:	http://download.documentfoundation.org/libreoffice/src/%{major_ver}/%{name}-%{version}.tar.xz
-# Source0-md5:	f215c051d230755251e32b4112459950
+# Source0-md5:	530824a15eec82c4684c41276d300f97
 Source1:	http://download.documentfoundation.org/libreoffice/src/%{major_ver}/%{name}-dictionaries-%{version}.tar.xz
-# Source1-md5:	ad9f78b23c0d1321ba478d574416660f
+# Source1-md5:	bcab169d1814ad144b756a023d361cd7
 Source2:	http://download.documentfoundation.org/libreoffice/src/%{major_ver}/%{name}-help-%{version}.tar.xz
-# Source2-md5:	f91a96cc0b3bc2f60d95e5cd5fc28630
+# Source2-md5:	014ff6e15a06d1b07f9b7975b1dd3101
 Source3:	http://download.documentfoundation.org/libreoffice/src/%{major_ver}/%{name}-translations-%{version}.tar.xz
-# Source3-md5:	a4425c16a73f098a3d6a57abca754abc
+# Source3-md5:	a6288ba8fadbf5a09e9bba8570559c25
 
 # make (download|fetch) DO_FETCH_TARBALLS=1 WGET=wget
 # but not sure if all are needed?
-Source20:	https://dev-www.libreoffice.org/src/pdfium-6764.tar.bz2
-# Source20-md5:	aad134bea732620ebe9f43c968ed7b10
+Source20:	https://dev-www.libreoffice.org/src/pdfium-7012.tar.bz2
+# Source20-md5:	e361270fa97c6e64a933aae30e33cea6
 Source21:	https://dev-www.libreoffice.org/src/17410483b5b5f267aa18b7e00b65e6e0-hsqldb_1_8_0.zip
 # Source21-md5:	17410483b5b5f267aa18b7e00b65e6e0
 Source22:	https://dev-www.libreoffice.org/src/CoinMP-1.8.4.tgz
@@ -104,14 +104,15 @@ Source30:	https://dev-www.libreoffice.org/extern/8249374c274932a21846fa7629c2aa9
 # Source30-md5:	8249374c274932a21846fa7629c2aa9b
 Source31:	https://dev-www.libreoffice.org/src/dtoa-20180411.tgz
 # Source31-md5:	4295bad62b2524793d8a7ba3e7385501
-Source32:	https://dev-www.libreoffice.org/src/skia-m130-3c64459d5df2fa9794b277f0959ed8a92552bf4c.tar.xz
-# Source32-md5:	920149563f4e451ecb91bc9bd2cb37f6
+Source32:	https://dev-www.libreoffice.org/src/skia-m136-28685d899b0a35894743e2cedad4c9f525e90e1e.tar.xz
+# Source32-md5:	c760a79ca807077418eac7a1a2ed01dc
 Source33:	https://dev-www.libreoffice.org/src/libcmis-0.6.2.tar.xz
 # Source33-md5:	61616df853bff53d0044a755b86f288c
 Patch1:		jvm-path.patch
 Patch3:		%{name}-qt6.patch
 URL:		https://www.documentfoundation.org/
 BuildRequires:	/usr/bin/getopt
+BuildRequires:	COLAMD-devel
 %{?with_firebird:BuildRequires:	Firebird-devel >= 3.0.0.0}
 BuildRequires:	GLM-devel
 BuildRequires:	ImageMagick
@@ -195,8 +196,8 @@ BuildRequires:	libmspub-devel >= 0.1
 BuildRequires:	libmwaw-devel >= 0.3.21
 BuildRequires:	libnumbertext-devel >= 1.0.6
 BuildRequires:	libodfgen-devel >= 0.1.1
-BuildRequires:	liborcus-devel >= 0.19.1
-BuildRequires:	liborcus-devel < 0.20
+BuildRequires:	liborcus-devel >= 0.20.0
+BuildRequires:	liborcus-devel < 0.21
 BuildRequires:	libpagemaker-devel >= 0.0.2
 BuildRequires:	libpng-devel
 BuildRequires:	libqxp-devel
@@ -220,8 +221,8 @@ BuildRequires:	libxslt-progs
 BuildRequires:	libzmf-devel
 BuildRequires:	lp_solve-devel >= 5.5
 BuildRequires:	make >= 1:4.0
-BuildRequires:	mdds-devel >= 2.1.0
-BuildRequires:	mdds-devel < 2.2
+BuildRequires:	mdds-devel >= 3.0.0
+BuildRequires:	mdds-devel < 3.1
 %{?with_mono:BuildRequires:	mono-csharp >= 1.2.3}
 %{?with_mono:BuildRequires:	mono-static >= 1.2.3}
 BuildRequires:	mysql-devel >= 5
@@ -268,6 +269,7 @@ BuildRequires:	xorg-lib-libXt-devel
 BuildRequires:	xz
 BuildRequires:	zip >= 3.0
 BuildRequires:	zlib-devel
+BuildRequires:	zstd-devel
 BuildRequires:	zxcvbn-c-devel
 BuildRequires:	zxing-cpp-nu-devel
 %if %{with java}
@@ -286,7 +288,6 @@ BuildRequires:	kf5-kwindowsystem-devel >= 5.0
 %if %{with qt5}
 BuildRequires:	Qt5Core-devel >= %{qt5_ver}
 BuildRequires:	Qt5Gui-devel >= %{qt5_ver}
-BuildRequires:	Qt5Network-devel >= %{qt5_ver}
 BuildRequires:	Qt5Widgets-devel >= %{qt5_ver}
 BuildRequires:	Qt5X11Extras-devel >= %{qt5_ver}
 BuildRequires:	libxcb-devel
@@ -299,7 +300,6 @@ BuildRequires:	Qt6Core-devel >= %{qt6_ver}
 BuildRequires:	Qt6Gui-devel >= %{qt6_ver}
 BuildRequires:	Qt6Multimedia-devel >= %{qt6_ver}
 BuildRequires:	Qt6MultimediaWidgets-devel >= %{qt6_ver}
-BuildRequires:	Qt6Network-devel >= %{qt6_ver}
 BuildRequires:	Qt6Widgets-devel >= %{qt6_ver}
 BuildRequires:	libxcb-devel
 BuildRequires:	qt6-build >= %{qt6_ver}
@@ -3152,6 +3152,7 @@ export PATH=$PATH:%{_libdir}/interbase/bin
 	--without-system-libfixmath \
 	--without-system-rhino \
 	--without-system-java-websocket \
+	--with-system-zstd \
 	--with-vendor="%{distribution}" \
 	--with-x \
 %if 0%{?debug:1}
@@ -3468,7 +3469,6 @@ fi
 %attr(755,root,root) %{_libdir}/%{name}/program/libLanguageToollo.so
 %attr(755,root,root) %{_libdir}/%{name}/program/libOsi.so.1
 %attr(755,root,root) %{_libdir}/%{name}/program/libOsiClp.so.1
-%attr(755,root,root) %{_libdir}/%{name}/program/libacclo.so
 %attr(755,root,root) %{_libdir}/%{name}/program/libavmediagst*.so
 %attr(755,root,root) %{_libdir}/%{name}/program/libavmedialo.so
 %attr(755,root,root) %{_libdir}/%{name}/program/libbasctllo.so
@@ -3479,8 +3479,7 @@ fi
 %attr(755,root,root) %{_libdir}/%{name}/program/libcairocanvaslo.so
 %attr(755,root,root) %{_libdir}/%{name}/program/libcanvasfactorylo.so
 %attr(755,root,root) %{_libdir}/%{name}/program/libcanvastoolslo.so
-%attr(755,root,root) %{_libdir}/%{name}/program/libchartcontrollerlo.so
-%attr(755,root,root) %{_libdir}/%{name}/program/libchartcorelo.so
+%attr(755,root,root) %{_libdir}/%{name}/program/libchart2lo.so
 %attr(755,root,root) %{_libdir}/%{name}/program/libcmdmaillo.so
 %attr(755,root,root) %{_libdir}/%{name}/program/libcomphelper.so
 %attr(755,root,root) %{_libdir}/%{name}/program/libconfigmgrlo.so
@@ -3842,6 +3841,9 @@ fi
 %dir %{_datadir}/%{name}/share/theme_definitions/ios
 %{_datadir}/%{name}/share/theme_definitions/ios/*.svg
 %{_datadir}/%{name}/share/theme_definitions/ios/*.xml
+
+%dir %{_datadir}/%{name}/share/themes
+%{_datadir}/%{name}/share/themes/*.theme
 
 %dir %{_datadir}/%{name}/share/tipoftheday
 %{_datadir}/%{name}/share/tipoftheday/*.gif
@@ -4276,7 +4278,6 @@ fi
 %{_datadir}/%{name}/share/extensions/wiki-publisher/WikiEditor
 %{_datadir}/%{name}/share/extensions/wiki-publisher/filter
 %dir %{_datadir}/%{name}/share/extensions/wiki-publisher/help
-%{_datadir}/%{name}/share/extensions/wiki-publisher/license
 %{_datadir}/%{name}/share/extensions/wiki-publisher/registration
 %{_datadir}/%{name}/share/extensions/wiki-publisher/templates
 %{_datadir}/%{name}/share/extensions/wiki-publisher/*.xc*
