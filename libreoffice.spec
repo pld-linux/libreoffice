@@ -112,7 +112,6 @@ Patch1:		jvm-path.patch
 Patch3:		%{name}-qt6.patch
 URL:		https://www.documentfoundation.org/
 BuildRequires:	/usr/bin/getopt
-BuildRequires:	COLAMD-devel
 %{?with_firebird:BuildRequires:	Firebird-devel >= 3.0.0.0}
 BuildRequires:	GLM-devel
 BuildRequires:	ImageMagick
