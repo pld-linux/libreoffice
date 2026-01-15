@@ -59,7 +59,7 @@
 %define		with_qt5	1
 %endif
 
-%define		major_ver	25.8.3
+%define		major_ver	25.8.4
 %define		qt5_ver		5.6
 %define		qt6_ver		6
 
@@ -74,13 +74,13 @@ Release:	1
 License:	GPL/LGPL
 Group:		X11/Applications
 Source0:	http://download.documentfoundation.org/libreoffice/src/%{major_ver}/%{name}-%{version}.tar.xz
-# Source0-md5:	530824a15eec82c4684c41276d300f97
+# Source0-md5:	4207b73da25f6c21b941136f75ee1e25
 Source1:	http://download.documentfoundation.org/libreoffice/src/%{major_ver}/%{name}-dictionaries-%{version}.tar.xz
-# Source1-md5:	bcab169d1814ad144b756a023d361cd7
+# Source1-md5:	6eb5789e04ccbe82bb3e3236e1450626
 Source2:	http://download.documentfoundation.org/libreoffice/src/%{major_ver}/%{name}-help-%{version}.tar.xz
-# Source2-md5:	014ff6e15a06d1b07f9b7975b1dd3101
+# Source2-md5:	9e45a4dee0e56290788562bcbfa4eb4b
 Source3:	http://download.documentfoundation.org/libreoffice/src/%{major_ver}/%{name}-translations-%{version}.tar.xz
-# Source3-md5:	a6288ba8fadbf5a09e9bba8570559c25
+# Source3-md5:	38a6b691d21d234f5c79bce91b979646
 
 # make (download|fetch) DO_FETCH_TARBALLS=1 WGET=wget
 # but not sure if all are needed?
@@ -90,8 +90,8 @@ Source21:	https://dev-www.libreoffice.org/src/17410483b5b5f267aa18b7e00b65e6e0-h
 # Source21-md5:	17410483b5b5f267aa18b7e00b65e6e0
 Source22:	https://dev-www.libreoffice.org/src/CoinMP-1.8.4.tgz
 # Source22-md5:	dd85ff540997a95ebb233bb5ae7bcc61
-Source23:	https://dev-www.libreoffice.org/src/rhino-1.7.15.zip
-# Source23-md5:	e3fcddf37c699c64c99934a5bf42d572
+Source23:	https://dev-www.libreoffice.org/src/rhino-1.7.15.1.zip
+# Source23-md5:	b98c6c3ec884277f253028abf91d257b
 Source24:	https://dev-www.libreoffice.org/src/Java-WebSocket-1.6.0.tar.gz
 # Source24-md5:	56c216500b28e5322fd00cdc1649513e
 Source26:	https://dev-www.libreoffice.org/extern/odfvalidator-0.9.0-RC2-SNAPSHOT-jar-with-dependencies-2726ab578664434a545f8379a01a9faffac0ae73.jar
@@ -100,8 +100,8 @@ Source27:	https://dev-www.libreoffice.org/src/a7983f859eafb2677d7ff386a023bc40-x
 # Source27-md5:	a7983f859eafb2677d7ff386a023bc40
 Source28:	https://dev-www.libreoffice.org/extern/f543e6e2d7275557a839a164941c0a86e5f2c3f2a0042bfc434c88c6dde9e140-opens___.ttf
 # Source28-md5:	09c7414a011363c72248c7bf3a23d758
-Source30:	https://dev-www.libreoffice.org/extern/8249374c274932a21846fa7629c2aa9b-officeotron-0.7.4-master.jar
-# Source30-md5:	8249374c274932a21846fa7629c2aa9b
+Source30:	https://dev-www.libreoffice.org/extern/officeotron-0.8.4.jar
+# Source30-md5:	2b8e3177eafa12b43c34580c39150334
 Source31:	https://dev-www.libreoffice.org/src/dtoa-20180411.tgz
 # Source31-md5:	4295bad62b2524793d8a7ba3e7385501
 Source32:	https://dev-www.libreoffice.org/src/skia-m136-28685d899b0a35894743e2cedad4c9f525e90e1e.tar.xz
