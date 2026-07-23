@@ -108,6 +108,7 @@ Source33:	https://dev-www.libreoffice.org/src/libcmis-0.6.3.tar.xz
 # Source33-md5:	db918c32cc03c4b92e91b701477e876f
 Patch1:		jvm-path.patch
 Patch3:		%{name}-qt6.patch
+Patch4:		skia-i386-no-musttail.patch
 URL:		https://www.documentfoundation.org/
 BuildRequires:	/usr/bin/getopt
 %{?with_firebird:BuildRequires:	Firebird-devel >= 3.0.0.0}
@@ -3022,6 +3023,7 @@ Biblioteka do zagnieżdzania LibreOffice w aplikacjach Java.
 %setup -q -a1 -a2 -a3
 %patch -P 1 -p1
 %patch -P 3 -p1
+%patch -P 4 -p1
 
 for dir in *-%{version}; do
 	[ -f $dir/ChangeLog ] && %{__mv} $dir/ChangeLog ChangeLog-$dir

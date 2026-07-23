@@ -1,0 +1,21 @@
+Disable skcms [[clang::musttail]] on 32-bit x86 (i686).
+
+GCC 15 recognizes [[clang::musttail]], so skcms turns it on for GCC, but on
+i386 GCC cannot produce the guaranteed tail call for the 16-byte-aligned
+vector stage parameters and errors out with "cannot tail-call: tail call
+production failed". musttail is an optional, performance-only feature in
+skcms (it does not affect correctness); the header already disables it for
+arm/riscv/ppc/loongarch/wasm/windows for the same reason. Pre-defining
+SKCMS_HAS_MUSTTAIL=0 for INTEL (32-bit x86) takes that sanctioned fallback
+path, since skcms_internals.h guards every branch with
+!defined(SKCMS_HAS_MUSTTAIL).
+
+--- a/external/skia/Library_skia.mk
++++ b/external/skia/Library_skia.mk
+@@ -23,6 +23,7 @@
+     -DSK_USER_CONFIG_HEADER="<$(BUILDDIR)/config_host/config_skia.h>" \
+     $(if $(filter INTEL,$(CPUNAME)),$(if $(filter WNT,$(OS)),-DSK_CPU_SSE_LEVEL=SK_CPU_SSE_LEVEL_SSE2,-DSK_CPU_SSE_LEVEL=0)) \
+     $(if $(filter X86_64,$(CPUNAME)),-DSK_CPU_SSE_LEVEL=SK_CPU_SSE_LEVEL_SSE2) \
++    $(if $(filter INTEL,$(CPUNAME)),-DSKCMS_HAS_MUSTTAIL=0) \
+     -DSK_ENABLE_SKSL_IN_RASTER_PIPELINE \
+ ))
