@@ -59,7 +59,7 @@
 %define		with_qt5	1
 %endif
 
-%define		major_ver	25.8.4
+%define		major_ver	26.2.4
 %define		qt5_ver		5.6
 %define		qt6_ver		6
 
@@ -70,22 +70,22 @@ Summary:	LibreOffice - powerful office suite
 Summary(pl.UTF-8):	LibreOffice - potężny pakiet biurowy
 Name:		libreoffice
 Version:	%{major_ver}.2
-Release:	2
+Release:	1
 License:	GPL/LGPL
 Group:		X11/Applications
 Source0:	http://download.documentfoundation.org/libreoffice/src/%{major_ver}/%{name}-%{version}.tar.xz
-# Source0-md5:	4207b73da25f6c21b941136f75ee1e25
+# Source0-md5:	37824c911fecb2bbd038b5e4d04d8335
 Source1:	http://download.documentfoundation.org/libreoffice/src/%{major_ver}/%{name}-dictionaries-%{version}.tar.xz
-# Source1-md5:	6eb5789e04ccbe82bb3e3236e1450626
+# Source1-md5:	3e5dc8a8306ec4ea42dc41785966f762
 Source2:	http://download.documentfoundation.org/libreoffice/src/%{major_ver}/%{name}-help-%{version}.tar.xz
-# Source2-md5:	9e45a4dee0e56290788562bcbfa4eb4b
+# Source2-md5:	68226bbe36bd41d37c449780602cfe69
 Source3:	http://download.documentfoundation.org/libreoffice/src/%{major_ver}/%{name}-translations-%{version}.tar.xz
-# Source3-md5:	38a6b691d21d234f5c79bce91b979646
+# Source3-md5:	5508d97305c3b8ff905734754462201f
 
 # make (download|fetch) DO_FETCH_TARBALLS=1 WGET=wget
 # but not sure if all are needed?
-Source20:	https://dev-www.libreoffice.org/src/pdfium-7012.tar.bz2
-# Source20-md5:	e361270fa97c6e64a933aae30e33cea6
+Source20:	https://dev-www.libreoffice.org/src/pdfium-7471.tar.bz2
+# Source20-md5:	f033463720f125074ff29499ea562ff9
 Source21:	https://dev-www.libreoffice.org/src/17410483b5b5f267aa18b7e00b65e6e0-hsqldb_1_8_0.zip
 # Source21-md5:	17410483b5b5f267aa18b7e00b65e6e0
 Source22:	https://dev-www.libreoffice.org/src/CoinMP-1.8.4.tgz
@@ -100,14 +100,12 @@ Source27:	https://dev-www.libreoffice.org/src/a7983f859eafb2677d7ff386a023bc40-x
 # Source27-md5:	a7983f859eafb2677d7ff386a023bc40
 Source28:	https://dev-www.libreoffice.org/extern/f543e6e2d7275557a839a164941c0a86e5f2c3f2a0042bfc434c88c6dde9e140-opens___.ttf
 # Source28-md5:	09c7414a011363c72248c7bf3a23d758
-Source30:	https://dev-www.libreoffice.org/extern/officeotron-0.8.4.jar
-# Source30-md5:	2b8e3177eafa12b43c34580c39150334
-Source31:	https://dev-www.libreoffice.org/src/dtoa-20180411.tgz
-# Source31-md5:	4295bad62b2524793d8a7ba3e7385501
-Source32:	https://dev-www.libreoffice.org/src/skia-m136-28685d899b0a35894743e2cedad4c9f525e90e1e.tar.xz
-# Source32-md5:	c760a79ca807077418eac7a1a2ed01dc
-Source33:	https://dev-www.libreoffice.org/src/libcmis-0.6.2.tar.xz
-# Source33-md5:	61616df853bff53d0044a755b86f288c
+Source30:	https://dev-www.libreoffice.org/extern/officeotron-0.8.5.jar
+# Source30-md5:	ac68d24a4bfb4189bbbba272bec9d0c0
+Source32:	https://dev-www.libreoffice.org/src/skia-m142-f4ed99d2443962782cf5f8b4dd27179f131e7cbe.tar.xz
+# Source32-md5:	870636ca988fb01481c2818ebe22bb13
+Source33:	https://dev-www.libreoffice.org/src/libcmis-0.6.3.tar.xz
+# Source33-md5:	db918c32cc03c4b92e91b701477e876f
 Patch1:		jvm-path.patch
 Patch3:		%{name}-qt6.patch
 URL:		https://www.documentfoundation.org/
@@ -117,8 +115,9 @@ BuildRequires:	GLM-devel
 BuildRequires:	ImageMagick
 BuildRequires:	OpenGL-devel
 BuildRequires:	abseil-cpp-devel >= 20230125
+BuildRequires:	adobe-afdko >= 4.0.3
 %{?with_system_agg:BuildRequires:	agg-devel >= 2.3}
-BuildRequires:	atk-devel >= 1:2.28.1
+BuildRequires:	atk-devel >= 1:2.36
 BuildRequires:	autoconf >= 2.68
 BuildRequires:	automake >= 1:1.9
 BuildRequires:	bash
@@ -137,6 +136,7 @@ BuildRequires:	dconf-devel >= 0.40.0
 BuildRequires:	dbus-devel >= 0.60
 BuildRequires:	dragonbox-devel = 1.1.3
 BuildRequires:	expat-devel
+BuildRequires:	fast_float-devel >= 8.2.2
 BuildRequires:	flex >= 2.6.0
 BuildRequires:	fontconfig-devel >= 2.12.0
 # pkgconfig(freetype2) >= 21.0.15 (for skia)
@@ -152,7 +152,7 @@ BuildRequires:	gpgmepp-devel
 BuildRequires:	graphite2-devel >= 0.9.3
 BuildRequires:	gstreamer-devel >= 1.0
 BuildRequires:	gstreamer-plugins-base-devel >= 1.0
-%{?with_gtk3:BuildRequires:	gtk+3-devel >= 3.20}
+%{?with_gtk3:BuildRequires:	gtk+3-devel >= 3.24}
 %{?with_gtk4:BuildRequires:	gtk4-devel >= 4}
 BuildRequires:	harfbuzz-icu-devel >= 5.1.0
 %{?with_system_hunspell:BuildRequires:	hunspell-devel >= 1.2.2}
@@ -195,8 +195,8 @@ BuildRequires:	libmspub-devel >= 0.1
 BuildRequires:	libmwaw-devel >= 0.3.21
 BuildRequires:	libnumbertext-devel >= 1.0.6
 BuildRequires:	libodfgen-devel >= 0.1.1
-BuildRequires:	liborcus-devel >= 0.20.0
-BuildRequires:	liborcus-devel < 0.21
+BuildRequires:	liborcus-devel >= 0.21.0
+BuildRequires:	liborcus-devel < 0.22
 BuildRequires:	libpagemaker-devel >= 0.0.2
 BuildRequires:	libpng-devel
 BuildRequires:	libqxp-devel
@@ -220,6 +220,7 @@ BuildRequires:	libxslt-progs
 BuildRequires:	libzmf-devel
 BuildRequires:	lp_solve-devel >= 5.5
 BuildRequires:	make >= 1:4.0
+BuildRequires:	md4c-devel >= 0.5.3
 BuildRequires:	mdds-devel >= 3.0.0
 BuildRequires:	mdds-devel < 3.1
 %{?with_mono:BuildRequires:	mono-csharp >= 1.2.3}
@@ -275,7 +276,7 @@ BuildRequires:	zxing-cpp-nu-devel
 BuildRequires:	ant >= 1.7.0
 BuildRequires:	ant-apache-regexp
 %buildrequires_jdk
-%{?use_jdk:BuildRequires:	%{use_jdk}-jre-base-X11}
+%buildrequires_jre_x11
 %endif
 %if %{with kde5}
 BuildRequires:	kf5-kconfig-devel >= 5.0
@@ -388,7 +389,7 @@ Summary(pl.UTF-8):	Interfejs GTK+ 3 dla LibreOffice
 Group:		X11/Libraries
 Requires:	%{name}-core = %{version}-%{release}
 Requires:	glib2 >= 1:2.38
-Requires:	gtk+3 >= 3.20
+Requires:	gtk+3 >= 3.24
 Obsoletes:	libreoffice-libs-gtk-common < 6.4.5.2-1
 Obsoletes:	libreoffice-libs-gtk2 < 6.4.5.2-1
 
@@ -450,6 +451,7 @@ Requires(post,postun):	gtk-update-icon-cache
 Requires(post,postun):	shared-mime-info
 Requires:	%{name}-ure = %{version}-%{release}
 %{?with_firebird:Requires:	Firebird-lib >= 3.0.0.0}
+Requires:	adobe-afdko >= 4.0.3
 Requires:	cairo >= 1.12.0
 Requires:	clucene-core >= 2.3
 Requires:	curl-libs >= 7.68.0
@@ -3041,7 +3043,6 @@ cp -p$l %{SOURCE26} ext_sources
 cp -p$l %{SOURCE27} ext_sources
 cp -p$l %{SOURCE28} ext_sources
 cp -p$l %{SOURCE30} ext_sources
-cp -p$l %{SOURCE31} ext_sources
 cp -p$l %{SOURCE32} ext_sources
 %if %{without system_cmis}
 cp -p$l %{SOURCE33} ext_sources
@@ -3250,8 +3251,8 @@ if [ ! -f installed.stamp ]; then
 		ln -s lo$a $RPM_BUILD_ROOT%{_bindir}/oo$a
 	done
 
-	%{__rm} $RPM_BUILD_ROOT%{_datadir}/%{name}/share/extensions/nlpsolver/help/*.done
-	%{__rm} $RPM_BUILD_ROOT%{_datadir}/%{name}/share/extensions/wiki-publisher/help/*.done
+	%{__rm} $RPM_BUILD_ROOT%{_datadir}/%{name}/share/extensions/nlpsolver/help/{*.done,.dir}
+	%{__rm} $RPM_BUILD_ROOT%{_datadir}/%{name}/share/extensions/wiki-publisher/help/{*.done,.dir}
 	%{__rm} $RPM_BUILD_ROOT%{_libdir}/%{name}/program/classes/smoketest.jar
 
 	touch installed.stamp
@@ -3478,6 +3479,7 @@ fi
 %attr(755,root,root) %{_libdir}/%{name}/program/libcairocanvaslo.so
 %attr(755,root,root) %{_libdir}/%{name}/program/libcanvasfactorylo.so
 %attr(755,root,root) %{_libdir}/%{name}/program/libcanvastoolslo.so
+%attr(755,root,root) %{_libdir}/%{name}/program/libchart2apilo.so
 %attr(755,root,root) %{_libdir}/%{name}/program/libchart2lo.so
 %attr(755,root,root) %{_libdir}/%{name}/program/libcmdmaillo.so
 %attr(755,root,root) %{_libdir}/%{name}/program/libcomphelper.so
@@ -3981,7 +3983,6 @@ fi
 %attr(755,root,root) %{_libdir}/%{name}/program/libnumbertextlo.so
 %attr(755,root,root) %{_libdir}/%{name}/program/librptlo.so
 %attr(755,root,root) %{_libdir}/%{name}/program/librptuilo.so
-%attr(755,root,root) %{_libdir}/%{name}/program/librptxmllo.so
 %{_libdir}/%{name}/program/access2base.py
 %{_datadir}/%{name}/share/config/soffice.cfg/modules/dbapp/menubar
 %{_datadir}/%{name}/share/config/soffice.cfg/modules/dbapp/popupmenu
