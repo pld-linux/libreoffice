@@ -220,7 +220,7 @@ BuildRequires:	libxslt-devel
 BuildRequires:	libxslt-progs
 BuildRequires:	libzmf-devel
 BuildRequires:	lp_solve-devel >= 5.5
-BuildRequires:	make >= 1:4.0
+BuildRequires:	make >= 1:4.2
 BuildRequires:	md4c-devel >= 0.5.3
 BuildRequires:	mdds-devel >= 3.0.0
 BuildRequires:	mdds-devel < 3.1
@@ -249,7 +249,7 @@ BuildRequires:	python3-modules >= 1:3.3
 BuildRequires:	redland-devel >= 1.0.16
 BuildRequires:	rpm-build >= 4.6
 BuildRequires:	rpm-pythonprov
-BuildRequires:	rpmbuild(macros) >= 2.021
+BuildRequires:	rpmbuild(macros) >= 2.062
 BuildRequires:	sane-backends-devel
 BuildRequires:	sed >= 4.0
 BuildRequires:	startup-notification-devel >= 0.5
